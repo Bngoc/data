@@ -32,7 +32,7 @@ define('URL_PATH_IMG', '/images');  //custom by bqn
 define('PHP_SELF', $_SERVER["SCRIPT_NAME"]);
 
 // include necessary libs
-require_once SERVDIR . '/core/function/libgarena.php';
+require_once ROOT . '/core/function/libgarena.php';
 require_once SERVDIR . '/core/cn_core_web.php'; //libs
 require_once SERVDIR . '/core/security.php';
 require_once SERVDIR . '/core/db/flat_web.php';
