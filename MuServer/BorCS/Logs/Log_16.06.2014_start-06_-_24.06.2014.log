@@ -1,0 +1,12 @@
+[15:33:55]  Time out waiting for action. It took 2000 sec. Socket: 460; IP-Address: '113.167.79.80'.
+[18:07:26]  The program closes the user's request.
+[18:07:26]  # Process Info:
+[18:07:26]  - Physical Memory: 2152 KByte; (Default: 7532 KByte)
+[18:07:26]  - Virtual Memory: 5996 KByte; (Default: 5960 KByte)
+[18:07:26]  - Work Time: 8 day(s) 05:05:51.
+[18:07:27]  [TIOCP->RemoveIOPortAndThreads]  Completion of 16 working threads IOCP system.
+[18:07:27]  [TIOCP->RemoveIOPortAndThreads]  The successful closure of the handle IOCP.
+[18:07:27]  Removing UDP object. In the process...
+[18:07:28]  [TUDPContext->UDPThreadProc]  Thread exits: 0;
+[18:07:28]  Removing object UDP completed.
+[18:07:28]  ########## End of work program! ##########

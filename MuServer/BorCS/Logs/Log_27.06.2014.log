@@ -1,0 +1,20 @@
+[13:32:30]  ########## Start of work program! ##########
+[13:32:30]  Version: 1.0.10.1120; Build: 20.01.2012
+[13:32:30]  Windows Server 2003 Unknown Service Pack 1 64-bit
+[13:32:30]  CrashDump System! DbgHelp.dll 5.1 or later!
+[13:32:30]  CrashDump System! FolderPath: 'D:\MuServer\ConnectServer\';
+[13:32:30]  CrashDump System - Successfully installed.
+[13:32:30]  'BoR_Config.ini' file successfully loaded.
+[13:32:30]  Protocol version: 20050502; (0.98.* - 1.05.*)
+[13:32:30]  Active Servers: 3
+[13:32:30]  'BoR_ServerList.dat' file successfully loaded.
+[13:32:30]  Data from file 'BoR_WZ_ServerInfo.ini' load success.
+[13:32:30]  TCP Recv Socket Initialize Success. Port: 44405;
+[13:32:30]  Run I/O Completion Port System. (16 working threads)
+[13:32:30]  UDP Recv Socket Initialize Success. Port: 55557;
+[13:32:30]  # Current settings:
+[13:32:30]  - PortTCP: 44405;
+[13:32:30]  - PortUDP: 55557;
+[13:32:30]  - WriteLog: Enabled;
+[13:32:30]  - ProtocolMode: 2;
+[13:32:30]  - MultipleConnections: Enabled;

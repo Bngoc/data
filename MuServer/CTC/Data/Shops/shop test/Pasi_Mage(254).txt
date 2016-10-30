@@ -1,0 +1,40 @@
+// Pasi The Mage
+//Index Item	Lvl	Dur	Skill	Luck	Opt	Exc	Name
+7 	2 	7 	255 	0 	1 	1 	63	//Pad Helm
+7 	4 	7 	255 	0 	1 	1 	63	//Legendary Helm
+15 	3 	0 	255 	0 	0 	0 	0	//Fireball Spell
+15 	10	0 	255 	0 	0 	0 	0	//Power Wave Spell
+15 	1 	0 	255 	0 	0 	0 	0	//Meteorite Spell
+15 	5 	0 	255 	0 	0 	0 	0	//Teleport Spell
+8 	2 	7 	255 	0	1 	0 	0	//Pad Armor
+8 	4 	7 	255 	0 	1 	1 	63	//Legendary Armor
+15 	2 	0 	255 	0 	0 	0 	0	//Lightning Spell
+15 	6 	0 	255		0 	0 	0 	0	//Ice Spell
+15 	0 	0 	255 	0 	0 	0 	0	//Poison Spell
+9 	2 	7 	255 	0 	1 	1 	63	//Pad Pants
+9 	4 	7 	255 	0 	1 	1 	63	//Legendary Pants
+15 	4 	0 	255 	0 	0 	0 	0	//Flame Spell
+15 	8 	0 	255 	0 	0 	0 	0	//Evil Spirits Spell
+15 	9 	0 	255 	0 	0 	0 	0	//Hell Fire Spell
+15 	11 	0 	255 	0 	0 	0 	0	//Aqua Beam Spell
+10 	2 	7 	255 	0 	1 	1 	63	//Pad Gloves
+10 	4 	7 	255 	0 	1 	1 	63	//Legendary Gloves
+15 	12 	0 	255 	0 	0 	0 	0	//Blast Spell
+15 	13 	0 	255 	0 	0 	0 	0	//Scroll of Inferno
+15 	14 	0 	255 	0 	0 	0 	0	//Scroll of Mass Teleport
+15 	15 	0 	255 	0 	0 	0 	0	//Scroll of Mana Shield
+15 	16 	0 	255 	0 	0 	0 	0	//Scroll of Decay
+11 	2 	7 	255 	0 	1 	1 	63	//Pad Boots
+11 	4 	7 	255 	0 	1 	1 	63	//Legendary Boots
+15 	17 	0 	255 	0 	0 	0 	0	//Scroll of Ice Storm
+15 	18 	0 	255 	0 	0 	0 	0	//Scroll of Nova
+5 	1 	7 	255 	0 	1 	1 	63	//Angelic Staff
+
+5 	2 	7 	255 	0 	1 	1 	63	//Serpent Staff
+
+5 	4 	7 	255 	0 	1 	1 	63	//Gorgon Staff
+5 	5 	7 	255		0 	1 	1 	63	//Legendary Staff
+5 	0 	7 	255		0 	1 	1 	63	// Staff
+6	6	7 	255		0 	1 	0 	0
+
+end

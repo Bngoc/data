@@ -1,0 +1,19 @@
+[18:04:14]  - MaxConnections: 100;
+[18:04:14]  - WaitTime2Omission: 200;
+[18:04:14]  # Process Info:
+[18:04:14]  - Physical Memory: 7440 KByte; (Default: 7440 KByte)
+[18:04:14]  - Virtual Memory: 5964 KByte; (Default: 5964 KByte)
+[18:04:14]  - Work Time: 0 day(s) 00:00:00.
+[18:10:54]  Time out waiting for action. It took 200 sec. Socket: 388; IP-Address: '123.21.163.214'.
+[23:54:14]  Time out waiting for action. It took 200 sec. Socket: 420; IP-Address: '123.21.132.179'.
+[08:30:54]  Time out waiting for action. It took 200 sec. Socket: 420; IP-Address: '113.162.219.22'.
+[11:10:55]  Time out waiting for action. It took 200 sec. Socket: 492; IP-Address: '113.167.146.221'.
+[11:47:35]  Time out waiting for action. It took 200 sec. Socket: 420; IP-Address: '123.21.249.171'.
+[12:07:35]  Time out waiting for action. It took 200 sec. Socket: 420; IP-Address: '115.78.112.130'.
+[20:09:20]  [TIOCP->OnAccept] Attempt multiple reconnections! (Max: 10) IP-Address: 115.78.112.130;
+[20:24:15]  Time out waiting for action. It took 200 sec. Socket: 488; IP-Address: '123.21.147.100'.
+[20:49:55]  ServerCode: 4; Get the Statistics; The server is not active;
+[20:49:57]  ServerCode: 4; Get the Statistics; The server is not active;
+[20:49:58]  ServerCode: 4; Get the Statistics; The server is not active;
+[20:49:59]  ServerCode: 4; Get the Statistics; The server is not active;
+[20:50:00]  ServerCode: 4; Get the Statistics; The server is not active;

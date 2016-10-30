@@ -1,0 +1,106 @@
+//============================================================================
+//Drop Settings: Box of KUNDUN + 4 Drops
+//www.darksideofmu.com
+//============================================================================
+//	type,	index,	level,	skill,	exc,	option	name
+//============================================================================
+     
+// Rong den	  
+	7	16	0	0	1	1	//Helm
+	8	16	0	0	1	0	//Armor
+	9	16	0	0	1	1	//Pants
+	10	16	0	0	1	0	//Gloves
+	11	16	0	0	1	1	//Boots
+	
+// Rong Xanh
+	7	17	0	0	1	0	//Helm
+	8	17	0	0	1	1	//Armor
+	9	17	0	0	1	0	//Pants
+	10	17	0	0	1	1	//Gloves
+	11	17	0	0	1	0	//Boots
+		
+// Giai nhan
+	7	19	0	0	1	1	//Helm
+	8	19	0	0	1	0	//Armor
+	9	19	0	0	1	1	//Pants
+	10	19	0	0	1	0	//Gloves
+	11	19	0	0	1	1	//Boots
+		
+// Trieu hon
+	7	18	0	0	1	0	//Helm
+	8	18	0	0	1	1	//Armor
+	9	18	0	0	1	0	//Pants
+	10	18	0	0	1	1	//Gloves
+	11	18	0	0	1	0	//Boots
+		
+// Loi Phong
+	
+	8	20	0	0	1	1	//Armor
+	9	20	0	0	1	0	//Pants
+	10	20	0	0	1	1	//Gloves
+	11	20	0	0	1	0	//Boots
+	
+	
+	
+	
+// Hac Vuong
+	7	27	0	0	1	1	//Helm
+	8	27	0	0	1	0	//Armor
+	9	27	0	0	1	1	//Pants
+	10	27	0	0	1	0	//Gloves
+	11	27	0	0	1	1	//Boots
+	
+	
+	
+// Ma Phap
+	7	41	0	0	1	0	//Helm
+	8	41	0	0	1	1	//Armor
+	9	41	0	0	1	0	//Pants
+	10	41	0	0	1	1	//Gloves
+	11	41	0	0	1	0	//Boots
+	
+// Bach Ho
+
+	7	60	0	0	1	1	//Helm
+	8	60	0	0	1	0	//Armor
+	9	60	0	0	1	1	//Pants
+	
+	11	60	0	0	1	0	//Boots
+	
+
+//Rings+Pendant
+	13	21	0	0	1	1	//Ring of Fire
+	13	22	0	0	1	0	//Ring of Earth
+	13	23	0	0	1	1	//Ring of Wind
+	13	24	0	0	1	0	//Ring of Magic
+	13	25	0	0	1	1	//Ring of Ice	
+	
+	
+	
+// Nam dam bach ho
+	0	33	0	1	1	1	
+	
+
+// Sach quy kiem
+	5	22	0	1	1	1
+
+	
+// Kiem
+	0	13	0	1	1	1
+
+// QT
+	2	10	0	1	1	1
+
+	
+// cung no
+	4	6	0	1	1	1
+
+// gay
+	5	7	0	1	1	1	
+	
+// gay SM
+	5	17	0	1	1	1	
+
+
+// khien
+	6	11	0	1	1	1

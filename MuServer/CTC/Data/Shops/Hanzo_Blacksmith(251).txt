@@ -1,0 +1,38 @@
+//==Game Soft Studio * http://gs-studio.3dn.ru  ©20010 by mrbrooks, SkyMD ==
+//Index		Item	   	Level	  	 Durabil.	   	Skill	    	Luck		 Options	  	exe	   	 Name Item
+// Alex HERRERO LORENCIA
+// type index level
+//7 17 15 255 0 2 2 2// rongdo
+//8 17 15 255 0 2 2 2// ao rd
+//9 17 15 255 0 2 2 2//quan rd
+//10 17 15 255 0 2 2 2// chan rd
+//11 17 15 255 0 2 2 2// tay rd
+7 5 0 255 0 2 2 0// rong
+12 44 0 255 0 0 0 0 //Orb of Explosion
+12 47 0 255 0 0 0 0 //Orb of Sword Slash
+12 16 0 255 0 0 0 0 //Orb of Fire Slash
+12 19 0 255 0 0 0 0 //Orb of Death Stab
+12 7 0 255 0 0 0 0 //Orb of Twisting Slash
+12 12 0 255 0 0 0 0 //Orb of Rageful Blow
+12 13 0 255 0 0 0 0 //Orb of Impale
+12 14 0 255 0 0 0 0 //Orb of Greater Fortitude
+
+
+8 5 0 255 0 2 2 0// ao
+9 5 0 255 0 2 2 0//quan
+10 5 0 255 0 2 2 0// chan
+11 5 0 255 0 2 2 0// tay
+
+
+
+0 16 0 255 2 2 0 0// DESTRUCTION
+//13 64 0 0 0 0 0 0// mp SATAN MAS FUERTE
+
+12 16 0 0 0 0 0 0// chem lua
+6 11 0 255 2 2 0 0 // khien xa
+
+
+
+
+
+end

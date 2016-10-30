@@ -1,0 +1,99 @@
+//#############################################################################################################
+//Drop Settings: Salupan Boss Drops
+//www.darksideofmu.com
+//#############################################################################################################
+
+//=============================================================================================================
+//ItemDropRate	 	- Drop rate of item VS Zen [x/100]
+//ExRate		- Drop rate of excellent item [x/1000]
+//=============================================================================================================
+//	EventName		DropZen		NA	NA 	NA 	  NA 		ItemDropRate	ExRate
+//=============================================================================================================
+1	
+	"SalupanBossDrop"	50000000	0	0	 0	  0		90		900
+end
+
+//=============================================================================================================
+//Type			- Item.TXT index (section) of the Box
+//Index 		- Item.TXT id of the Item
+//minLvl		- Minimal Level of the Item (+1, +2 etc...)
+//maxLvl		- Maximum Level of the Item (+1, +2 etc...)
+//Skill			- Drop Item with Skill (0 - off,1 - on)
+//Luck			- Drop Item with Luck (0 - off,1 - on)
+//maxZ28		- Maximum Z28 option (1 = +4, 2 = +8, 3 = +12, etc...)
+//maxExOpt		- Maximum number of Exc option in item
+//=============================================================================================================
+//	Type	Index	minLvl	maxLvl	Skill	Luck	maxZ28	maxExOpt		
+//=============================================================================================================
+2
+	0	28	0	1	1	0	1	1	//Imperial Sword	LVL:139
+	0	34	0	1	1	0	1	1	//Imperial Sword	LVL:139
+	0	35	0	1	1	0	1	1	//Imperial Sword	LVL:139
+	2	16	0	2	1	1	1	2	//Frost mace		LVL:121
+	5	36	0	2	1	1	1	2	//sum			LVL:121
+	6	19	0	3	1	0	1	1	//Frost Barrier		LVL:99
+	6	20	0	4	1	1	1	2	//Guardian Shiled	LVL:106
+
+	7	45	0	5	1	0	1	2	//Faith Helm		LVL:104
+	7	46	0	5	1	0	1	2	//Faith Helm		LVL:104
+	7	49	0	5	1	0	1	2	//Faith Helm		LVL:104
+	7	50	0	5	1	0	1	2	//Faith Helm		LVL:104
+	7	51	0	6	1	1	1	1	//Paewang Mask		LVL:111
+	7	52	0	5	1	0	1	2	//Hades Helm		LVL:109
+	7	53	0	4	1	1	1	1	//Merlin Helm		LVL:112
+
+	8	45	0	2	1	0	1	1	//Hades Armor		LVL:129
+	8	46	0	2	1	1	1	1	//Hades Armor		LVL:129
+	8	47	0	2	1	0	1	2	//Hades Armor		LVL:129
+	8	48	0	3	1	1	1	2	//Phantom Armor		LVL:125
+	8	49	0	2	1	0	1	1	//Hades Armor		LVL:129
+	8	50	0	2	1	0	1	1	//Faith Armor		LVL:122
+	8	51	0	1	1	1	1	2	//Paewang Armor		LVL:132
+	8	52	0	2	1	0	1	1	//Hades Armor		LVL:129
+	8	53	0	3	1	1	1	2	//Merlin Armor		LVL:131
+
+	9	45	0	2	1	0	1	1	//Hades Armor		LVL:129
+	9	46	0	2	1	0	1	1	//Hades Armor		LVL:129
+	9	47	0	2	1	1	1	1	//Hades Armor		LVL:129
+	9	48	0	4	1	1	1	1	//Phantom Pants		LVL:125
+	9	49	0	2	1	1	1	1	//Hades Armor		LVL:129
+	9	50	0	5	1	0	1	2	//Faith Pants		LVL:122
+	9	51	0	6	1	1	1	1	//Paewang Pants		LVL:132
+	9	52	0	5	1	1	1	2	//Hades Pants		LVL:129
+	9	53	0	4	1	1	1	1	//Merlin Pants		LVL:131
+
+	9	45	0	2	1	1	1	1	//Hades Armor		LVL:129
+	9	46	0	2	1	1	1	1	//Hades Armor		LVL:129
+	9	47	0	2	1	1	1	1	//Hades Armor		LVL:129
+	10	48	0	3	1	1	1	2	//Phantom Gloves	LVL:125
+	10	49	0	2	1	1	1	1	//Hades Armor		LVL:129
+	10	50	0	2	1	1	1	1	//Faith Gloves		LVL:122
+	10	51	0	1	1	1	1	2	//Paewang Gloves	LVL:132
+	10	52	0	2	1	1	1	2	//Hades Gloves		LVL:129
+	10	53	0	3	1	1	1	1	//Merlin Gloves		LVL:131
+
+	11	48	0	4	1	1	1	2	//Phantom Boots		LVL:125
+	11	50	0	5	1	1	1	2	//Faith Boots		LVL:122
+	11	51	0	6	1	1	1	1	//Paewang Boots		LVL:132
+	11	52	0	5	1	1	1	2	//Hades Boots		LVL:129
+	11	53	0	4	1	1	1	1	//Merlin Boots		LVL:131
+
+//	7	73	0	0	1	1	1	1     // RF 380
+//	8	73	0	0	1	1	1	1
+	9	73	0	0	1	1	1	1
+	11	73	0	0	1	1	1	1
+	7	43	0	0	1	1	1	1
+	8	43	0	0	1	1	1	1
+	9	43	0	0	1	1	1	1
+	10	43	0	0	1	1	1	1
+	11	43	0	0	1	1	1	1
+
+	2	2	0	0	1	1	1	1
+	2	3	0	0	1	1	1	1
+	2	18	0	0	1	1	1	1
+	3	10	0	0	1	1	1	1
+	3	11	0	0	1	1	1	1
+	4	24	0	0	1	1	1	1
+	5	34	0	0	1	1	1	1
+
+end

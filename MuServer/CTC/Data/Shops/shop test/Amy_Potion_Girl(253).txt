@@ -1,0 +1,33 @@
+// Potion Girl
+//Index Item	Lvl	Dur	Skill	Luck	Opt	Exc	Name
+14 0 0 255 0 0 0 0 //Apple
+14 8 0 15 0 0 0 0 //Antidote
+14 1 0 150 0 0 0 0 //Small Healing Potion
+14 2 0 50 0 0 0 0 //Medium Healing Potion
+14 3 0 20 0 0 0 0 //Large Healing Potion
+14 4 0 150 0 0 0 0 //Small Mana Potion
+14 5 0 50 0 0 0 0 //Medium Mana Potion
+14 6 0 20 0 0 0 0 //Large Mana Potion
+
+7 17 7 255 0 1 7 63 //Dark Phoenix Helm
+7 18 7 255 0 1 7 63 //Grand Soul Helm
+7 19 7 255 0 1 7 63 //Divine Helm
+8 15 7 255 0 1 7 63 //Storm Crow Armor
+8 17 7 255 0 1 7 63 //Dark Phoenix Armor
+8 18 7 255 0 1 7 63 //Grand Soul Armor
+8 19 7 255 0 1 7 63 //Divine Armor
+9 15 7 255 0 1 7 63 //Storm Crow Pants
+9 19 7 255 0 1 7 63 //Divine Pants
+9 17 7 255 0 1 7 63 //Dark Phoenix Pants
+9 18 7 255 0 1 7 63 //Grand Soul Pants
+10 15 7 255 0 1 7 63 //Storm Crow Gloves
+10 19 7 255 0 1 7 63 //Divine Gloves
+10 17 7 255 0 1 7 63 //Dark Phoenix Gloves
+10 18 7 255 0 1 7 63 //Grand Soul Gloves
+11 15 7 255 0 1 7 63 //Storm Crow Boots
+11 19 7 255 0 1 0 63 //Divine Boots
+11 17 7 255 0 1 7 63 //Dark Phoenix Boots
+11 18 7 255 0 1 7 63 //Grand Soul Boots
+0 31 7 255 1 1 7 63 //Rune Blade
+0 17 7 255 1 1 7 63 //Dark Breaker
+end

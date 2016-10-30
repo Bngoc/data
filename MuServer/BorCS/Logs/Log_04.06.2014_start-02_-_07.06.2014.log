@@ -1,0 +1,19 @@
+[06:24:15]  Time out waiting for action. It took 200 sec. Socket: 504; IP-Address: '118.71.151.50'.
+[10:44:16]  Time out waiting for action. It took 200 sec. Socket: 544; IP-Address: '123.21.161.201'.
+[14:20:56]  Time out waiting for action. It took 200 sec. Socket: 532; IP-Address: '115.78.112.130'.
+[16:27:36]  Time out waiting for action. It took 200 sec. Socket: 500; IP-Address: '42.119.246.161'.
+[17:50:56]  Time out waiting for action. It took 200 sec. Socket: 500; IP-Address: '113.179.243.200'.
+[18:07:36]  Time out waiting for action. It took 200 sec. Socket: 500; IP-Address: '42.119.205.221'.
+[18:44:16]  Time out waiting for action. It took 200 sec. Socket: 544; IP-Address: '222.253.166.184'.
+[21:04:16]  Time out waiting for action. It took 200 sec. Socket: 504; IP-Address: '171.255.46.27'.
+[23:30:56]  Time out waiting for action. It took 200 sec. Socket: 500; IP-Address: '42.119.246.161'.
+[02:57:36]  Time out waiting for action. It took 200 sec. Socket: 500; IP-Address: '42.119.246.161'.
+[04:07:37]  Time out waiting for action. It took 200 sec. Socket: 500; IP-Address: '42.119.246.161'.
+[05:00:57]  Time out waiting for action. It took 200 sec. Socket: 500; IP-Address: '222.253.166.184'.
+[13:34:17]  Time out waiting for action. It took 200 sec. Socket: 504; IP-Address: '115.78.112.130'.
+[13:47:43]  [TIOCP->OnAccept] Attempt multiple reconnections! (Max: 10) IP-Address: 123.21.161.201;
+[13:49:09]  [TIOCP->OnAccept] Attempt multiple reconnections! (Max: 10) IP-Address: 115.78.112.130;
+[16:04:17]  Time out waiting for action. It took 200 sec. Socket: 536; IP-Address: '42.114.61.71'.
+[19:43:31]  'BoR_Config.ini' file successfully loaded.
+[19:44:18]  Time out waiting for action. It took 2000 sec. Socket: 388; IP-Address: '113.162.218.105'.
+[20:53:18]  Time out waiting for action. It took 2000 sec. Socket: 388; IP-Address: '113.22.87.254'.

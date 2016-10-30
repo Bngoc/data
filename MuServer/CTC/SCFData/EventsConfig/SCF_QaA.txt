@@ -1,0 +1,34 @@
+1
+//	Enabled		//MaxQuestions Per Round
+	1		3
+end
+
+2
+//	ID	Question									Answer
+	1	"Cau hoi 1 : Le hoi mung 10 thang 3 am lich hang nam la le hoi gi ?"		"A"
+	2	"Cau hoi 2 : Le hoi Den hung Duoc to chuc o tinh nao nuoc ta ?"			"B"
+	3	"Cau hoi 3 : Le hoi Thanh Giong Duoc to chuc o tinh nao nuoc ta ?"		"C"
+end
+
+3
+//	QID	Answers
+	1	"A) Den Hung"
+	1	"B) Chua Huong"
+	1	"C) Hoi Lim"
+	
+	2	"A) Ha Noi"
+	2	"B) Phu Tho"
+	2	"B) Bac Ninh"
+	
+	3	"A) Phu Tho"
+	3	"B) Hung Yen"
+	3	"C) Soc Son ( Ha noi )"
+end
+
+4
+//Rewards: Apply in BotReward (random reward)
+//	Zen	VipMoney	ItemType	ItemIndex	iLevel	iOpt	iLuck	iSkill	iDur	iExc	iAnc	iSock1	iSock2	iSock3	iSock4	iSock5	iJOH	iDays	ForeverFFFESerial
+	200000	0		13		64		0	0	0	0	0	0	0	0	0	0	0	0	0	7		0
+	200000	0		13		65		0	0	0	0	0	0	0	0	0	0	0	0	0	7		0
+	200000	0		13		67		0	0	0	0	0	0	0	0	0	0	0	0	0	7		0
+end

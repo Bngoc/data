@@ -1,0 +1,75 @@
+//======================================================================
+//Translated & Archives of Data by Ema Leto
+//Information of the file: White Wizard Event
+//======================================================================
+
+//Time Settings
+//============================================
+//Event		Event		Event
+//Start (Min)	Start (Min)	Duration (Min)
+//============================================
+0
+5		10		10
+end
+
+//Message Settings
+//=============================
+//Move		Minimum Maximum
+//Radius	Radius	Radius
+//=============================
+1
+15		3	6
+end
+
+//Monster Settings
+//===============================
+//Monster	Regen	Aggresive
+//===============================
+2
+135		0	1	//White Wizard
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+136		0	0	//Ogre Warrior of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+137		0	1	//Ogre Archer of Doom
+end
+
+//Event Schedules
+//=========================
+//Hours		Minutes
+//(24 Format)	(59 Format)
+//=========================
+3
+3		30
+5		30
+7		30
+11		30
+15		30
+19		30
+23		30
+end

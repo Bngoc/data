@@ -1,0 +1,15 @@
+//Lorenmarket 113 116
+
+//Shop chung
+
+
+12	130	0	255	0	0	0	0	//ao choang nho
+12	131	0	255	0	0	0	0	//canh SM nho
+
+12	133	0	255	0	0	0	0	//canh dw nho
+12	132	0	255	0	0	0	0	//canh f nho
+12	135	0	255	0	0	0	0	//canh RF nho
+12	134	0	255	0	0	0	0	//canh dk nho
+
+
+end

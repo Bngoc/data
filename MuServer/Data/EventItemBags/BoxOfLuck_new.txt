@@ -1,0 +1,126 @@
+//Box of Luck Drop
+//	type,	index,	level,	skill,	option
+	0	20	0	0	0	0	//Knight Blade
+	0	21	0	0	0	0	//Dark Reign Blade
+	0	22	0	0	0	0	//Bone Blade
+	0	23	0	0	0	0	//Blade of Explorer
+	0	26	0	0	0	0	//Flamberge
+	0	27	0	0	0	0	//Sword Bracker
+	0	28	0	0	0	0	//Imperial Sword
+	0	35	0	0	0	0	//Phoenix Soul Star
+
+	2	12	0	0	0	0	//Great Lord Scepter
+	2	13	0	0	0	0	//Scepter of Archangel
+	2	14	0	0	0	0	//Solay-u Sceptor
+	2	15	0	0	0	0	//Shining Scepter
+	2	16	0	0	0	0	//Frost mace
+	2	17	0	0	0	0	//Absolute Scepter
+	2	18	0	0	0	0	//Stryker Scepter
+
+	3	11	0	0	0	0	//Beuroba
+
+	4	20	0	0	0	0	//Arrow Viper Bow
+	4	21	0	0	0	0	//Silf Wind Bow
+	4	22	0	0	0	0	//Albatross Bow
+	4	23	0	0	0	0	//Stinger Bow
+	4	24	0	0	0	0	//Air Lyn Bow
+
+	5	12	0	0	0	0	//Grand Viper Staff
+	5	19	0	0	0	0	//Aura Staff
+	5	20	0	0	0	0	//Lilium Staff
+	5	30	0	0	0	0	//Deadly Staff
+	5	31	0	0	0	0	//Imperial Staff
+	5	32	0	0	0	0	//Merlin Staff
+	5	33	0	0	0	0	//Chroma ticks staff
+	5	34	0	0	0	0	//Raven Stick
+
+	6	17	0	0	0	0	//
+	6	18	0	0	0	0	//
+	6	19	0	0	0	0	//
+	6	20	0	0	0	0	//
+
+	7	29	0	0	0	0	//Dragon Knight Helm
+	7	30	0	0	0	0	//Venom Mist Helm
+	7	31	0	0	0	0	//Silfy Dray Helm
+	7	33	0	0	0	0	//Sunlight Helm
+	7	43	0	0	0	0	//
+	7	44	0	0	0	0	//
+	7	45	0	0	0	0	//
+	7	46	0	0	0	0	//
+	7	49	0	0	0	0	//
+	7	50	0	0	0	0	//
+	7	51	0	0	0	0	//
+	7	52	0	0	0	0	//
+	7	53	0	0	0	0	//
+	7	73	0	0	0	0	//
+
+	8	29	0	0	0	0	//Dragon Knight Armor
+	8	30	0	0	0	0	//Venom Mist Armor
+	8	31	0	0	0	0	//Silfy Dray Armor
+	8	32	0	0	0	0	//Volcano Armor
+	8	33	0	0	0	0	//Sunlight Armor
+	8	43	0	0	0	0	//
+	8	44	0	0	0	0	//
+	8	45	0	0	0	0	//
+	8	46	0	0	0	0	//
+	8	47	0	0	0	0	//
+	8	48	0	0	0	0	//
+	8	49	0	0	0	0	//
+	8	50	0	0	0	0	//
+	8	51	0	0	0	0	//
+	8	52	0	0	0	0	//
+	8	53	0	0	0	0	//
+	8	73	0	0	0	0	//
+
+	9	29	0	0	0	0	//Dragon Knight Pants
+	9	30	0	0	0	0	//Venom Mist Pants
+	9	31	0	0	0	0	//Silfy Dray Pants
+	9	32	0	0	0	0	//Volcano Pants
+	9	33	0	0	0	0	//Sunlight Pants
+	9	43	0	0	0	0	//
+	9	44	0	0	0	0	//
+	9	45	0	0	0	0	//
+	9	46	0	0	0	0	//
+	9	47	0	0	0	0	//
+	9	48	0	0	0	0	//
+	9	49	0	0	0	0	//
+	9	50	0	0	0	0	//
+	9	51	0	0	0	0	//
+	9	52	0	0	0	0	//
+	9	53	0	0	0	0	//
+	9	73	0	0	0	0	//
+
+	10	29	0	0	0	0	//Dragon Knight Gloves
+	10	30	0	0	0	0	//Venom Mist Gloves
+	10	31	0	0	0	0	//Silfy Dray Gloves
+	10	32	0	0	0	0	//Volcano Gloves
+	10	33	0	0	0	0	//Sunlight Gloves
+	10	43	0	0	0	0	//
+	10	44	0	0	0	0	//
+	10	45	0	0	0	0	//
+	10	46	0	0	0	0	//
+	10	47	0	0	0	0	//
+	10	48	0	0	0	0	//
+	10	49	0	0	0	0	//
+	10	50	0	0	0	0	//
+	10	51	0	0	0	0	//
+	10	52	0	0	0	0	//
+	10	53	0	0	0	0	//
+
+	11	29	0	0	0	0	//Dragon Knight Boots
+	11	30	0	0	0	0	//Venom Mist Boots
+	11	31	0	0	0	0	//Silfy Dray Boots
+	11	32	0	0	0	0	//Volcano Boots
+	11	33	0	0	0	0	//Sunlight Boots
+	11	43	0	0	0	0	//
+	11	44	0	0	0	0	//
+	11	45	0	0	0	0	//
+	11	46	0	0	0	0	//
+	11	47	0	0	0	0	//
+	11	48	0	0	0	0	//
+	11	49	0	0	0	0	//
+	11	50	0	0	0	0	//
+	11	51	0	0	0	0	//
+	11	52	0	0	0	0	//
+	11	53	0	0	0	0	//
+	11	73	0	0	0	0	//

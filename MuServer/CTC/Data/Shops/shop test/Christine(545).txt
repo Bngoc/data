@@ -1,0 +1,111 @@
+
+//Index	Item	Lvl	Dur	Skill	Luck	Opt	Exc	Name
+
+14	13	0	0	 0	 0	 0	0	// 
+14	14	0	0	 0	 0	 0	0	// soul
+14	16	0	0	 0	 0	 0	0	// life
+14	22	0	0	 0	 0	 0	0	// cre
+12	15	0	0	 0	 0	 0	0	// chaos
+14	31	0	0	 0	 0	 0	0	//
+14	41	0	0	 0	 0	 0	0	//
+14	42	0	0	 0	 0	 0	0	//
+13	14	0	0	 0	 0	 0	0	// loch
+13	52	0	0	 0	 0	 0	0	// condor 1
+13	53	0	0	 0	 0	 0	0	// condor 2
+
+14 11  8 0 0 0 0 0	//Box of Kundun +1
+14 11  9 0 0 0 0 0	//Box of Kundun +2
+14 11 10 0 0 0 0 0	//Box of Kundun +3
+14	43	0	0	 0	 0	 0	0	//
+14	44	0	0	 0	 0	 0	0	//
+14 11 11 0 0 0 0 0	//Box of Kundun +4
+14 11 12 0 0 0 0 0	//Box of Kundun +5
+14 52  0 0 0 0 0 0	//GM Box
+
+12 	45 	0 	255 	0 	0 	0 	0	//Five Shot
+12 	46 	0 	255 	0 	0 	0 	0	//Reduce Dmg Shield
+12  48  0 	255 	0 	0 	0 	0	//
+15	28	0	255		0	0	0	0	//
+15	29	0	255		0	0	0	0	//
+
+//////////// tra quest 1,2,3
+14 23 0 255 0 0 0 0 //Scroll of Emperor
+14 24 0 255 0 0 0 0 //Broken Sword
+14 25 0 255 0 0 0 0 //Tear Of Elf
+12 	44 	0 	255 	0 	0 	0 	0	//des
+12 	47 	0 	255 	0 	0 	0 	0	//flame
+14 26 0 255 0 0 0 0 //Soul of Wizard
+14 24 1 255 0 0 0 0 //Dark Stone
+14 23 1 255 0 0 0 0 //Ring of Honor
+13 14 1 255 0 0 0 0 //
+14 65 0 255 0 0 0 0 //Flame of Death Beam Knight
+14 66 0 255 0 0 0 0 //Horn of Hell Maine
+14 67 0 255 0 0 0 0 //Feather of Phoenix of Darkness
+
+14 68 0 255 0 0 0 0 //
+
+14	    32	    0 255 0 0 0 0 //       //PingChocolateBox
+
+14      11     	7 255 0 0 0 0 //        //Box of Heaven
+
+
+14	110	0	1	0	0	0	0              //Sign of Dimensions
+14	    33	    0 255 0 0 0 0 //   	      //RedChocolateBox
+14	    34	   	0 255 0 0 0 0 //      //BlueChocolateBox
+14      11      2 255 0 0 0 0 //	  	      //firecracker
+14      11      0 255 0 0 0 0 //   //BoxOfluck
+14	101	0	1	0	0	0	0              //Paper
+
+
+
+
+14      113     0 255 0 0 0 0 //     //Golden Key
+14      112    	0 255 0 0 0 0 //      //Silver Key
+14      121     0 255 0 0 0 0 //
+14      122     0 255 0 0 0 0 //
+12      32      0 255 0 0 0 0 //    //Red Ribbon Box
+12      33      0 255 0 0 0 0 //         //Green Ribbon Box
+12      34      0 255 0 0 0 0 //    //Blue Ribbon Box
+14      11      3 255 0 0 0 0 //        //BoxOfHeart
+14      100     0 255 0 0 0 0 //      //lucky coin
+14      11    	5 255 0 0 0 0 //      //SilverMedal
+14      11     	6 255 0 0 0 0 //   	      //GoldMedal
+14      157     0 255 0 0 0 0 //    	      //Green Box
+14      158     0 255 0 0 0 0 // 	      //Red box
+13 18 8 0 0 0 0 0 //Invisiblity Cloak +8
+
+14      141     0 255 0 0 0 0 //
+14      142     0 255 0 0 0 0 //
+14      143     0 255 0 0 0 0 //
+14      144     0 255 0 0 0 0 //
+
+14 19 7 0 0 0 0 0 //Devil Invitation+7
+14 28 7 0 0 0 0 0 //Lost Map +7
+
+14	51	1	1	0	0	0	0              //Sky Event Ticket
+14	51	2	1	0	0	0	0              //Sky Event Ticket
+14	51	3	1	0	0	0	0              //Sky Event Ticket
+14	51	4	1	0	0	0	0              //Sky Event Ticket
+14	51	5	1	0	0	0	0              //Sky Event Ticket
+
+   
+
+12	60	0	0	0	0	0	0   
+12	61	0	0	0	0	0	0  
+12	62	0	0	0	0	0	0  
+12	63	0	0	0	0	0	0  
+12	64	0	0	0	0	0	0  
+12	65	0	0	0	0	0	0  
+12	66	0	0	0	0	0	0  
+12	67	0	0	0	0	0	0  
+12	68	0	0	0	0	0	0  
+12	69	0	0	0	0	0	0  
+12	70	0	0	0	0	0	0  
+12	71	0	0	0	0	0	0  
+12	72	0	0	0	0	0	0  
+12	73	0	0	0	0	0	0 
+12	74	0	0	0	0	0	0 
+
+13	67	0	0	0	0	0	0
+
+end

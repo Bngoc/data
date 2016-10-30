@@ -1,0 +1,17 @@
+[23:59:30]  - MaxConnections: 1000;
+[23:59:30]  - WaitTime2Omission: 2000;
+[23:59:30]  # Process Info:
+[23:59:30]  - Physical Memory: 7612 KByte; (Default: 7612 KByte)
+[23:59:30]  - Virtual Memory: 5964 KByte; (Default: 5964 KByte)
+[23:59:30]  - Work Time: 0 day(s) 00:00:00.
+[05:57:18]  The program closes the user's request.
+[05:57:18]  # Process Info:
+[05:57:18]  - Physical Memory: 7812 KByte; (Default: 7612 KByte)
+[05:57:18]  - Virtual Memory: 5980 KByte; (Default: 5964 KByte)
+[05:57:18]  - Work Time: 0 day(s) 05:57:47.
+[05:57:20]  [TIOCP->RemoveIOPortAndThreads]  Completion of 16 working threads IOCP system.
+[05:57:20]  [TIOCP->RemoveIOPortAndThreads]  The successful closure of the handle IOCP.
+[05:57:20]  Removing UDP object. In the process...
+[05:57:20]  [TUDPContext->UDPThreadProc]  Thread exits: 0;
+[05:57:20]  Removing object UDP completed.
+[05:57:20]  ########## End of work program! ##########

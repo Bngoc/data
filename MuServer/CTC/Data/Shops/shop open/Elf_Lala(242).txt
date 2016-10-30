@@ -1,0 +1,56 @@
+// Elf Lala
+//Index Item	Lvl	Dur	Skill	Luck	Opt	Exc	Name
+
+13 0 0 255 0 0 0 0 //Guardian Angel
+13 1 0 255 0 0 0 0 //Imp
+13 2 0 255 0 0 0 0 //Horn of Uniria
+
+14 0 0 255 0 0 0 0 //Apple
+14 1 0 150 0 0 0 0 //Small Healing Potion
+14 2 0 50 0 0 0 0 //Medium Healing Potion
+14 3 0 20 0 0 0 0 //Large Healing Potion
+14 4 0 150 0 0 0 0 //Small Mana Potion
+14 5 0 50 0 0 0 0 //Medium Mana Potion
+14 6 0 20 0 0 0 0 //Large Mana Potion
+14 8 0 15 0 0 0 0 //Antidote
+4 	7 	1 	255 	0 	0 	0 	0	//Bolts
+4 	15 	1 	255 	0 	0 	0	0	//Arrows
+
+
+14 35 0 1 0 0 0 0 //Small SD Potion
+14 38 0 1 0 0 0 0 //Small AG Potion
+14 20 0 5 0 0 0 0 //Remedy of Love
+
+
+
+7 	10 	7 	255 	0 	1 	0 	0	//Vine Helm
+7 	11 	7 	255 	0 	1 	0 	0	//Silk Helm
+7 	12 	7 	255 	0 	1 	0 	0	//Wind Helm
+7 	13 	7 	255 	0 	1 	0 	0	//Spirit Helm
+
+8 	10 	7 	255 	0 	1 	0 	0	//Vine Armor
+8 	11 	7 	255 	0 	1 	0 	0	//Silk Armor
+8 	12 	7 	255 	0 	1 	0 	0	//Wind Armor
+8 	13 	7 	255 	0 	1 	0 	0	//Spirit Armor
+
+9 	10 	7 	255 	0 	1 	0 	0	//Vine Pants
+9 	11 	7 	255 	0 	1 	0 	0	//Silk Pants
+9 	12 	7 	255 	0 	1 	0 	0	//Wind Pants
+9 	13 	7 	255 	0 	1 	0 	0	//Spirit Pants
+
+10 	10 	7 	255 	0 	1 	0 	0	//Vine Gloves
+10 	11 	7 	255 	0 	1 	0 	0	//Silk Gloves
+10 	12 	7 	255 	0 	1 	0 	0	//Wind Gloves
+10 	13 	7 	255 	0 	1 	0 	0	//Spirit Gloves
+
+11 	10 	7 	255 	0 	1 	0 	0	//Vine Boots
+11 	11 	7 	255 	0 	1 	0 	0	//Silk Boots
+11 	12 	7 	255 	0 	1 	0 	0	//Wind Boots
+11 	13 	7 	255 	0 	1 	0 	0	//Spirit Boots
+
+14 19 1 255 0 0 0 0 //Devil Invitation+1
+14 19 2 255 0 0 0 0 //Devil Invitation+2
+13 	29 	0 	0 	 0	 0	 0	0	 // Armor of Guardsman
+14 9 0 255 0 0 0 0 //Alcohol
+
+end

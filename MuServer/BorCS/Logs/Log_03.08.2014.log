@@ -1,0 +1,20 @@
+[15:39:27]  ########## Start of work program! ##########
+[15:39:27]  Version: 1.0.10.1120; Build: 20.01.2012
+[15:39:27]  Windows XP Professional Service Pack 3 32-bit
+[15:39:27]  CrashDump System! DbgHelp.dll 5.1 or later!
+[15:39:27]  CrashDump System! FolderPath: 'D:\museason6.8\MuServer6.8\ConnectServer\';
+[15:39:27]  CrashDump System - Successfully installed.
+[15:39:27]  'BoR_Config.ini' file successfully loaded.
+[15:39:27]  Protocol version: 20050502; (0.98.* - 1.05.*)
+[15:39:27]  Active Servers: 6
+[15:39:27]  'BoR_ServerList.dat' file successfully loaded.
+[15:39:27]  Data from file 'BoR_WZ_ServerInfo.ini' load success.
+[15:39:27]  TCP Recv Socket Initialize Success. Port: 44405;
+[15:39:27]  Run I/O Completion Port System. (4 working threads)
+[15:39:27]  UDP Recv Socket Initialize Success. Port: 55557;
+[15:39:27]  # Current settings:
+[15:39:27]  - PortTCP: 44405;
+[15:39:27]  - PortUDP: 55557;
+[15:39:27]  - WriteLog: Enabled;
+[15:39:27]  - ProtocolMode: 2;
+[15:39:27]  - MultipleConnections: Enabled;

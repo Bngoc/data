@@ -1,0 +1,71 @@
+//============================================================================
+//Drop Settings: Silver Medals Drop
+//www.darksideofmu.com
+//============================================================================
+//	type,	index,	level,	skill,	exc,	option	name
+//============================================================================
+	0 	10	9	1	0	0	//Light Saber
+	0 	12	9	1	0	0	//Heliacal Sword
+	0 	11	9	1	0	0	//Legendary Sword
+	0 	15	9	1	0	0	//Giant Sword
+	0 	13	9	1	0	0	//Double Blade
+	1 	7	9	1	0	0	//Larkan Axe
+	1 	6	9	1	0	0	//Nikea Axe
+	2 	3	9	1	0	0	//Great Hammer
+	2	5	9	1	0	0	//Crystal Sword
+	3 	0	9	1	0	0	//Light Spear
+	3 	4	9	1	0	0	//Serpent Spear
+	3 	3	9	1	0	0	//Great Trident
+	3 	7	9	1	0	0	//Berdysh
+	4 	4	9	1	0	0	//Tiger Bow
+	4	5	9	1	0	0	//Silver Bow
+	4 	12	9	1	0	0	//Serpent Crossbow
+	4 	11	9	1	0	0	//Light Crossbow
+	5 	5	9	1	0	0	//Legendary Staff
+	5 	3	9	1	0	0	//Thunder Staff
+	5	15	9	1	0	0	//Violent Wind Staff
+	5	21	9	1	0	0	//Book of Sahamutt
+	5 	4	9	1	0	0	//Gorgon Staff
+	6 	7	9	1	0	0	//Spiked Shield
+	6 	5	9	1	0	0	//Dragon Slayer Shield
+	6 	9	9	1	0	0	//Plate Shield
+	6 	10	9	1	0	0	//Large Round Shield
+
+//Sets
+	7 	9	9	0	0	0	//Plate Helm
+	8 	9	9	0	0	0	//Plate Armor
+	9 	9	9	0	0	0	//Plate Pants
+	10 	9	9	0	0	0	//Plate Gloves
+	11	9	9	0	0	0	//Plate Boots
+	7 	13	9	0	0	0	//Spirit Helm
+	8 	13	9	0	0	0	//Spirit Armor
+	9 	13	9	0	0	0	//Spirit Pants
+	10	13	9	0	0	0	//Spirit Gloves
+	11 	13	9	0	0	0	//Spirit Boots
+	7 	7	9	0	0	0	//Sphinx Mask
+	8 	7	9	0	0	0	//Sphinx Armor
+	9 	7	9	0	0	0	//Sphinx Pants
+	10 	7	9	0	0	0	//Sphinx Gloves
+	11 	7	9	0	0	0	//Sphinx Boots
+	7 	34	9	0	0	0	//Ashcrow Mask
+	8 	34	9	0	0	0	//Ashcrow Armor
+	9 	34	9	0	0	0	//Ashcrow Pants
+	10 	34	9	0	0	0	//Ashcrow Gloves
+	11 	34	9	0	0	0	//Ashcrow Boots
+	7 	40	9	0	0	0	//Red Wing Mask
+	8 	40	9	0	0	0	//Red Wing Armor
+	9 	40	9	0	0	0	//Red Wing Pants
+	10 	40	9	0	0	0	//Red Wing Gloves
+	11 	40	9	0	0	0	//Red Wing Boots
+
+//Misc
+	13 	8	3	0	0	0	//Ring of Ice
+	13 	9	3	0	0	0	//Ring of Poison
+	13 	21	3	0	0	0	//Ring of Fire
+	13 	22	3	0	0	0	//Ring of Earth
+	13 	23	3	0	0	0	//Ring of Wind
+	13 	24	3	0	0	0	//Ring of Magic
+	13 	25	3	0	0	0	//Pedant of Ice
+	13 	26	3	0	0	0	//Pendant of Wind
+	13 	27	3	0	0	0	//Pendant of Water
+	13 	28	3	0	0	0	//Pendant of Ability

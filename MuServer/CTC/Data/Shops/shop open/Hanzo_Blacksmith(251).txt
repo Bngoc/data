@@ -1,0 +1,42 @@
+//Hanzo	The	Blacksmith
+//Index	Item	Lvl	Dur	Skill	Luck	Opt	Exc	Name
+
+7 5 7 255 0 1 0 0 //Leather Helm
+7 0 7 255 0 1 0 0 //Bronze Helm
+7 6 7 255 0 1 0 0 //Scale Helm
+7 8 7 255 0 1 0 0 //Brass Helm
+8 5 7 255 0 1 0 0 //Leather Armor
+8 0 7 255 0 1 0 0 //Bronze Armor
+8 6 7 255 0 1 0 0 //Scale Armor
+8 8 7 255 0 1 0 0 //Brass Armor
+9 0 7 255 0 1 0 0 //Bronze Pants
+9 6 7 255 0 1 0 0 //Scale Pants
+9 8 7 255 0 1 0 0 //Brass Pants
+9 5 7 255 0 1 0 0 //Leather Pants
+10 0 7 255 0 1 0 0 //Bronze Gloves
+10 6 7 255 0 1 0 0 //Scale Gloves
+10 8 7 255 0 1 0 0 //Brass Gloves
+10 5 7 255 0 1 0 0 //Leather Gloves
+
+11 0 7 255 0 1 0 0 //Bronze Boots
+11 6 7 255 0 1 0 0 //Scale Boots
+11 8 7 255 0 1 0 0 //Brass Boots
+11 5 7 255 0 1 0 0 //Leather Boots
+0 0 7 255 0 1 0 0 //Short Sword
+0 2 7 255 0 1 0 0 //Rapier
+0 4 7 255 1 1 0 0 //Sword Of Assassin
+0 3 7 255 1 1 0 0 //Katana
+
+
+2 2 7 255 1 1 0 0 //Flail
+2 1 7 255 1 1 0 0 //Morning Star
+12 7 0 255 0 0 0 0 //Twisting Splash
+12 12 0 255 0 0 0 0 //Rageful Blow
+12 19 0 255 0 0 0 0 //Death Stab
+12 14 0 255 0 0 0 0 //Greater Fortitude
+12 13 0 255 0 0 0 0 //Impale
+
+
+
+12 16 0 255 0 0 0 0 //Power Slash
+end

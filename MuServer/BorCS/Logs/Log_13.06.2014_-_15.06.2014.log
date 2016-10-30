@@ -1,0 +1,13 @@
+[01:48:10]  'BoR_Config.ini' file successfully loaded.
+[13:52:04]  Time out waiting for action. It took 2000 sec. Socket: 428; IP-Address: '117.3.65.150'.
+[21:15:54]  The program closes the user's request.
+[21:15:54]  # Process Info:
+[21:15:54]  - Physical Memory: 2104 KByte; (Default: 7516 KByte)
+[21:15:54]  - Virtual Memory: 5988 KByte; (Default: 5964 KByte)
+[21:15:54]  - Work Time: 2 day(s) 18:49:44.
+[21:15:56]  [TIOCP->RemoveIOPortAndThreads]  Completion of 16 working threads IOCP system.
+[21:15:56]  [TIOCP->RemoveIOPortAndThreads]  The successful closure of the handle IOCP.
+[21:15:56]  Removing UDP object. In the process...
+[21:15:56]  [TUDPContext->UDPThreadProc]  Thread exits: 1;
+[21:15:56]  Removing object UDP completed.
+[21:15:56]  ########## End of work program! ##########

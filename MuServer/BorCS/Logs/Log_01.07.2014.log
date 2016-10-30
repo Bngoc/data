@@ -1,0 +1,37 @@
+[00:54:35]  ########## Start of work program! ##########
+[00:54:35]  Version: 1.0.10.1120; Build: 20.01.2012
+[00:54:35]  Windows Server 2003 Unknown Service Pack 1 64-bit
+[00:54:35]  CrashDump System! DbgHelp.dll 5.1 or later!
+[00:54:35]  CrashDump System! FolderPath: 'D:\MuServer\ConnectServer\';
+[00:54:35]  CrashDump System - Successfully installed.
+[00:54:35]  'BoR_Config.ini' file successfully loaded.
+[00:54:35]  Protocol version: 20050502; (0.98.* - 1.05.*)
+[00:54:35]  Active Servers: 4
+[00:54:35]  'BoR_ServerList.dat' file successfully loaded.
+[00:54:35]  Data from file 'BoR_WZ_ServerInfo.ini' load success.
+[00:54:35]  TCP Recv Socket Initialize Success. Port: 44405;
+[00:54:35]  Run I/O Completion Port System. (16 working threads)
+[00:54:35]  UDP Recv Socket Initialize Success. Port: 55557;
+[00:54:35]  # Current settings:
+[00:54:35]  - PortTCP: 44405;
+[00:54:35]  - PortUDP: 55557;
+[00:54:35]  - WriteLog: Enabled;
+[00:54:35]  - ProtocolMode: 2;
+[00:54:35]  - MultipleConnections: Enabled;
+[00:54:35]  - MaxConnections: 1000;
+[00:54:35]  - WaitTime2Omission: 2000;
+[00:54:35]  # Process Info:
+[00:54:35]  - Physical Memory: 8188 KByte; (Default: 8188 KByte)
+[00:54:35]  - Virtual Memory: 6628 KByte; (Default: 6628 KByte)
+[00:54:35]  - Work Time: 0 day(s) 00:00:00.
+[00:56:47]  The program closes the user's request.
+[00:56:47]  # Process Info:
+[00:56:47]  - Physical Memory: 1936 KByte; (Default: 8188 KByte)
+[00:56:47]  - Virtual Memory: 6644 KByte; (Default: 6628 KByte)
+[00:56:47]  - Work Time: 0 day(s) 00:02:12.
+[00:56:49]  [TIOCP->RemoveIOPortAndThreads]  Completion of 16 working threads IOCP system.
+[00:56:49]  [TIOCP->RemoveIOPortAndThreads]  The successful closure of the handle IOCP.
+[00:56:49]  Removing UDP object. In the process...
+[00:56:49]  [TUDPContext->UDPThreadProc]  Thread exits: 2;
+[00:56:49]  Removing object UDP completed.
+[00:56:49]  ########## End of work program! ##########
