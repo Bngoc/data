@@ -1849,17 +1849,13 @@ function cn_config_load()
     // ---------------- S_custum by bqn -----
     // Detect self pathes
     $SN = dirname($_SERVER['SCRIPT_NAME']);
-
     $script_path = "http://" . $_SERVER['SERVER_NAME'] . (($SN == '/') ? '' : $SN);
 //    $script_path = "http://" . $_SERVER['SERVER_NAME'];
 
-    echo "1111 > " . $script_path . '<br>';
-
     //check http_script_dir
-    //$path_http_script_dir = $script_path;
-    //if (getoption('http_script_dir') != $path_http_script_dir)
-    //    setoption('http_script_dir', $path_http_script_dir);
-    setoption('http_script_dir', $script_path);
+    $path_http_script_dir = $script_path;
+    if (getoption('http_script_dir') != $path_http_script_dir)
+        setoption('http_script_dir', $path_http_script_dir);
 
 
     //check update_dir c://xampp/bqn/d
