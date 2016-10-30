@@ -3812,7 +3812,7 @@ function cn_db_installed()
                 setoption('#%site', $opt_result);
 
                 cn_throw_message('Saved successfully');
-                cn_relocation('/admin.php');
+                cn_relocation(getoption('http_script_dir').'/admin.php');
             }
         }
         echoheader('-@../skins/default.css', 'Install Database');
