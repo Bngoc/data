@@ -1,0 +1,5 @@
+﻿<?php die('Direct call - access denied'); ?>
+080041FC1E7A003F00D0000000000000|Nhẫn băng|40000|RingIce.jpg|
+090041FC1E7A003F00D0000000000000|Nhẫn độc|40000|RingPoison.jpg|
+0C0041FC1E7A003F00D0000000000000|Dây chuyền Sét|40000|PedalLighting.jpg|
+0D0041FC1E7A003F00D0000000000000|Dây chuyền Lửa|40000|PedalFire.jpg|

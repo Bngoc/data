@@ -1,0 +1,1541 @@
+Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
+0000100|0|1|Short Sword|1|3|NO|NO
+0000200|0|2|Rapier|1|3|Ceto|NO
+0000300|0|3|Katana|1|3|NO|NO
+0000400|0|4|Assassin Sword|1|3|NO|NO
+0000500|0|5|Blade|1|3|NO|NO
+0000600|0|6|Gladius|1|3|NO|NO
+0000700|0|7|Falchion|1|3|NO|NO
+0000800|0|8|Serpent Sword|1|3|NO|NO
+0000900|0|9|Salamandrer Sword|2|3|NO|NO
+0001000|0|10|Light Saber|2|4|NO|NO
+0001100|0|11|Legendary Sword|2|3|NO|NO
+0001200|0|12|Helical Sword|2|3|NO|NO
+0001300|0|13|Double Blade|1|3|NO|NO
+0001400|0|14|Lightning Sword|1|3|Hyon|NO
+0001500|0|15|Gigant Sword|2|3|NO|NO
+0001600|0|16|Destruction Sword|1|4|NO|NO
+0001700|0|17|Spirit Sword|2|4|NO|NO
+0001800|0|18|Thunder Blade|2|3|NO|NO
+0001900|0|19|Divine Sword|1|4|NO|NO
+0002000|0|20|Knight Sword|1|4|NO|NO
+0002100|0|21|BlackReign Blade|2|4|NO|NO
+0002200|0|22|Bone Sword|1|4|NO|NO
+0002300|0|23|Explosion Blade|2|4|NO|NO
+0002400|0|24|DayBreak Sword|2|4|NO|NO
+0002500|0|25|Fire Blade|2|4|NO|NO
+0002600|0|26|Flame Sword|1|4|NO|NO
+0002700|0|27|Bracker Sword|1|4|NO|NO
+0002800|0|28|Imperial Sword|1|4|NO|NO
+0003100|0|31|Rune Blade|2|4|NO|NO
+0003200|0|32|Sacred Glove|1|2|Vega's|Chamereuui's
+0003300|0|33|Holly Storm Claws|1|2|NO|NO
+0003400|0|34|Piercing Glove|1|2|NO|NO
+0003500|0|35|Majestic Sword|1|4|NO|NO
+0003600|0|36|Executioner Sword|2|4|NO|NO
+0003700|0|37|Viper Sword|2|4|NO|NO
+0003800|0|38|Tectonic Sword|2|4|NO|NO
+0003900|0|39|Kingdom Sword|2|4|NO|NO
+0004000|0|40|Illusion Eye Sword|1|4|NO|NO
+0004100|0|41|Ashbringer Sword|2|4|NO|NO
+0004200|0|42|Revenge Sword|1|4|NO|NO
+0004300|0|43|Emerald Sword|1|4|NO|NO
+0004400|0|44|Heaven Sword|1|4|NO|NO
+0004500|0|45|Regal Bone Blade|1|4|NO|NO
+0004600|0|46|Dismanttler Sword|1|4|NO|NO
+0004700|0|47|Hanna Sword|2|4|NO|NO
+0004800|0|48|Quantum Sword|1|4|NO|NO
+0004900|0|49|Swiss Sword|1|4|NO|NO
+0005000|0|50|Limpid Sword|1|4|NO|NO
+0005100|0|51|Archlord Sword|1|4|NO|NO
+0005200|0|52|Chaos Guard Sword|2|4|NO|NO
+0005300|0|53|Typhoon Sword|1|4|NO|NO
+0005400|0|54|Hunter Sword|1|4|NO|NO
+0005500|0|55|Hell Mine Sword|1|4|NO|NO
+0005600|0|56|Lionheart Sword|1|4|NO|NO
+0005700|0|57|Eudemons Sword|1|4|NO|NO
+0005800|0|58|Shahram Sword|1|4|NO|NO
+0005900|0|59|Might Sword|1|4|NO|NO
+0006000|0|60|Greatsword Sword|1|4|NO|NO
+0006100|0|61|Obsidian Sword|1|4|NO|NO
+0006200|0|62|Arcanite Sword|1|4|NO|NO
+0006300|0|63|Slayer Sword|1|4|NO|NO
+0006400|0|64|Rivendare Sword|1|4|NO|NO
+0006500|0|65|Protector Sword|1|4|NO|NO
+0006600|0|66|Venturian Sword|2|4|NO|NO
+0006700|0|67|Templarius Sword|1|4|NO|NO
+0006800|0|68|Skeleton Sword|1|4|NO|NO
+0006900|0|69|Silver Sword|1|4|NO|NO
+0100000|1|0|Small Axe|1|3|NO|NO
+0100100|1|1|Hand Axe|1|3|NO|NO
+0100200|1|2|Double Axe|1|3|NO|NO
+0100300|1|3|Tomahawk|1|3|NO|NO
+0100400|1|4|Elven Axe|1|3|NO|NO
+0100500|1|5|Battle Axe|2|3|NO|NO
+0100600|1|6|Nikea Axe|2|3|NO|NO
+0100700|1|7|Larkan Axe|2|3|NO|NO
+0100800|1|8|Crescent Axe|2|3|NO|NO
+0100900|1|9|Quarter Axe|2|3|NO|NO
+0101000|1|10|Gothic Axe|2|3|NO|NO
+0101200|1|12|Balanced Axe|2|3|NO|NO
+0101300|1|13|Throwing Axe|2|3|NO|NO
+0101400|1|14|Military Axe|2|3|NO|NO
+0101500|1|15|Beared Axe|2|3|NO|NO
+0101600|1|16|Crowbill Axe|2|3|NO|NO
+0101700|1|17|Hatchet Axe|2|3|NO|NO
+0101800|1|18|Spiked Axe|2|3|NO|NO
+0101900|1|19|Battlers Axe|2|3|NO|NO
+0102000|1|20|Voulge Axe|2|3|NO|NO
+0102100|1|21|Trident Axe|2|3|NO|NO
+0102200|1|22|War Pike Axe|2|3|NO|NO
+0102300|1|23|Durotar Axe|2|3|NO|NO
+0102400|1|24|Tanaris Axe|2|3|NO|NO
+0102500|1|25|Teldrassil Axe|2|3|NO|NO
+0102600|1|26|Tirisfal Glades Axe|2|3|NO|NO
+0102700|1|27|Forest Axe|2|3|NO|NO
+0102800|1|28|Herbalism Axe|2|3|NO|NO
+0102900|1|29|Shaman Axe|2|3|NO|NO
+0103000|1|30|Warlock Axe|2|3|NO|NO
+0103100|1|31|Paladin Axe|2|3|NO|NO
+0103200|1|32|Gnome Axe|2|3|NO|NO
+0200000|2|0|Mace|1|3|NO|NO
+0200100|2|1|Morning Star|1|3|Warrior|NO
+0200200|2|2|Flail|1|3|NO|NO
+0200300|2|3|WarHammer|2|3|NO|NO
+0200400|2|4|Crystal Morning|2|3|NO|NO
+0200500|2|5|Crystal Sword|2|4|NO|NO
+0200600|2|6|Dragon Axe|2|4|NO|NO
+0200700|2|7|Divine Mace|1|3|NO|NO
+0200800|2|8|Battle Scepter|1|3|NO|NO
+0200900|2|9|Master Scepter|1|3|NO|NO
+0201000|2|10|Great Scepter|1|4|NO|NO
+0201100|2|11|Lord Scepter|1|4|NO|NO
+0201200|2|12|Great Lord Scepter|1|4|NO|NO
+0201300|2|13|Divine Scepter|1|4|NO|NO
+0201400|2|14|Soley Scepter|1|4|NO|NO
+0201500|2|15|Shining Scepter|1|4|NO|NO
+0201600|2|16|Frost Mace|1|3|NO|NO
+0201700|2|17|Absolute Scepter|1|4|NO|NO
+0201800|2|18|Stryker Scepter|1|4|NO|NO
+0300000|3|0|Light Spear|2|4|NO|NO
+0300100|3|1|Spear|2|4|NO|NO
+0300200|3|2|Dragon Lance|2|4|NO|NO
+0300300|3|3|Great Trident|2|4|NO|NO
+0300400|3|4|Serpent Spear|2|4|NO|NO
+0300500|3|5|Double Poleaxe|2|4|NO|NO
+0300600|3|6|Halberd|2|4|NO|NO
+0300700|3|7|Berdysh|2|4|NO|NO
+0300800|3|8|Great Scythe|2|4|NO|NO
+0300900|3|9|Bill of Balrog|2|4|NO|NO
+0301000|3|10|Dragon Spear|2|4|NO|NO
+0301100|3|11|Beuroba Spear|2|4|NO|NO
+0400000|4|0|Short Bow|2|3|NO|NO
+0400100|4|1|Bows|2|3|NO|NO
+0400200|4|2|Elven Bow|2|3|NO|NO
+0400300|4|3|Battle Bow|2|3|NO|NO
+0400400|4|4|Tiger Bow|2|4|NO|NO
+0400500|4|5|Silver Bow|2|4|Gaion|NO
+0400600|4|6|Chaos Nature Bow|2|4|NO|NO
+0400700|4|7|Bolts|1|1|NO|NO
+0400800|4|8|CrossBow|2|2|NO|NO
+0400900|4|9|Golden CrossBow|2|2|Gaia|NO
+0401000|4|10|Arquebus CrossBow|2|2|NO|NO
+0401100|4|11|Light CrossBow|2|3|NO|NO
+0401200|4|12|Serpent Crossbow|2|3|NO|NO
+0401300|4|13|Legend CrossBow|2|3|NO|NO
+0401400|4|14|Aquas Gold CrossBow|2|3|NO|NO
+0401500|4|15|Arrows|1|1|NO|NO
+0401600|4|16|Saint CrossBow|2|4|NO|NO
+0401700|4|17|Gigant Bow|2|4|NO|NO
+0401800|4|18|Divine CrossBow|2|3|NO|NO
+0401900|4|19|Great Reign CrossBow|2|3|NO|NO
+0402000|4|20|Viper Bow|2|4|NO|NO
+0402100|4|21|Sylph Wind Bow|2|4|NO|NO
+0402200|4|22|Albatros Bow|2|4|NO|NO
+0402300|4|23|Dark Stinger Bow|2|4|NO|NO
+0402400|4|24|Atahar Bow|2|4|NO|NO
+0500000|5|0|Skull Staff|1|3|Apolo|NO
+0500100|5|1|Angelic Staff|2|3|NO|NO
+0500200|5|2|Serpent Staff|2|3|NO|NO
+0500300|5|3|Lightning Staff|2|4|NO|NO
+0500400|5|4|Gorgon Staff|2|4|NO|NO
+0500500|5|5|Legendary Staff|1|4|NO|NO
+0500600|5|6|Resurrection Staff|1|4|NO|NO
+0500700|5|7|Chaos Lightning Staff|2|4|NO|NO
+0500800|5|8|Unicorn Staff|2|4|NO|NO
+0500900|5|9|Dragon Staff|1|4|NO|NO
+0501000|5|10|Divine Staff|1|4|NO|NO
+0501100|5|11|Kundun Staff|1|4|NO|NO
+0501200|5|12|Viper Staff|1|4|NO|NO
+0501300|5|13|Platina Wing Staff|1|4|NO|NO
+0501400|5|14|Mistery Staff|1|4|NO|NO
+0501500|5|15|Violent Wind Staff|1|4|NO|NO
+0501600|5|16|Red Wing Staff|1|4|NO|NO
+0501700|5|17|Ancient Staff|1|4|NO|NO
+0501800|5|18|Black Rose Staff|1|4|NO|NO
+0501900|5|19|Aura Staff|1|4|NO|NO
+0502000|5|20|Lilium Staff|1|4|NO|NO
+0502100|5|21|Book of Sahamutt|1|2|NO|NO
+0502200|5|22|Book of Neil|1|2|NO|NO
+0502300|5|23|Book of Ghost Phantom|1|2|NO|NO
+0503000|5|30|Deadly Staff|1|4|NO|NO
+0503100|5|31|Imperial Staff|1|4|NO|NO
+0503200|5|32|Queen Staff|1|4|NO|NO
+0503300|5|33|Chroma Staff|1|4|NO|NO
+0503400|5|34|Raven Stick|1|4|NO|NO
+0503500|5|35|Artemis Staff|1|4|NO|NO
+0503600|5|36|Amaranth Staff|1|4|NO|NO
+0503700|5|37|Dynasty Staff|1|4|NO|NO
+0503900|5|39|Archment Staff|1|4|NO|NO
+0504000|5|40|Shovel Staff|1|4|NO|NO
+0504200|5|42|Scourge Staff|1|4|NO|NO
+0504300|5|43|Scourgelord Staff|1|4|NO|NO
+0504400|5|44|Azzinoth Staff|1|4|NO|NO
+0504500|5|45|Thunderfury Staff|1|4|NO|NO
+0504600|5|46|Windseeker Staff|1|4|NO|NO
+0504700|5|47|Ragnaros Staff|1|4|NO|NO
+0504800|5|48|Divine Stick of Archangel|1|4|NO|NO
+0600000|6|0|Round Shield|2|2|NO|NO
+0600100|6|1|Horn Shield|2|2|NO|NO
+0600200|6|2|Kite Shield|2|2|NO|NO
+0600300|6|3|Fairy Shield|2|2|NO|NO
+0600400|6|4|Buckler Shield|2|2|NO|NO
+0600500|6|5|Dragon Slayer Shield|2|2|NO|NO
+0600600|6|6|Skull Shield|2|2|Hera|NO
+0600700|6|7|Spike Shield|2|2|NO|NO
+0600800|6|8|Tower Shield|2|2|NO|NO
+0600900|6|9|Plate Shield|2|2|Eplete|NO
+0601000|6|10|Big Round Shield|2|2|NO|NO
+0601100|6|11|Serpent Shield|2|2|NO|NO
+0601200|6|12|Bronze Shield|2|2|NO|NO
+0601300|6|13|Dragon Shield|2|2|NO|NO
+0601400|6|14|Legendary Shield|2|3|NO|NO
+0601500|6|15|Grand Soul Shield|2|3|NO|NO
+0601600|6|16|Elemental Shield|2|2|NO|NO
+0601700|6|17|Crimson Glory Shiled|2|2|NO|NO
+0601800|6|18|Salamander Shield|2|2|NO|NO
+0601900|6|19|Frost Shiled|2|2|NO|NO
+0602000|6|20|Guardian Shiled|2|2|NO|NO
+0602100|6|21|Cross Shiled|2|2|NO|NO
+0602300|6|23|Union Shield|2|3|NO|NO
+0602400|6|24|Dynasty Shield|2|3|NO|NO
+0602500|6|25|Darknut Shield|2|3|NO|NO
+0602600|6|26|Kaito Shield|2|3|NO|NO
+0602700|6|27|Guard Shield|2|3|NO|NO
+0602800|6|28|Emerald Shield|2|3|NO|NO
+0602900|6|29|Gunzbound Shield|2|3|NO|NO
+0603000|6|30|Flyff Shield|2|3|NO|NO
+0603100|6|31|Pirates Shield|2|3|NO|NO
+0603200|6|32|Priston Shield|2|3|NO|NO
+0603300|6|33|Ragnarok Shield|2|3|NO|NO
+0603400|6|34|Shaiya Shield|2|3|NO|NO
+0603500|6|35|Arcanus Shield|2|3|NO|NO
+0603600|6|36|DarkSoldier Shield|2|3|NO|NO
+0700000|7|0|Bronze Helm|2|2|NO|NO
+0700100|7|1|Dragon Helm|2|2|Hyon|Vicious
+0700200|7|2|Pad Helm|2|2|Apolo|NO
+0700300|7|3|Legendary Helm|2|2|Anubis|Isis
+0700400|7|4|Bone Helm|2|2|NO|NO
+0700500|7|5|Leather Helm|2|2|Warrior|NO
+0700600|7|6|Scale Helm|2|2|Eplete|NO
+0700700|7|7|Sphinx Helm|2|2|Hera|NO
+0700800|7|8|Brass Helm|2|2|NO|NO
+0700900|7|9|Plate Helm|2|2|NO|NO
+0701000|7|10|Vine Helm|2|2|Ceto|NO
+0701100|7|11|Silk Helm|2|2|Gaia|NO
+0701200|7|12|Wind Helm|2|2|Odin|NO
+0701300|7|13|Spirit Helm|2|2|NO|NO
+0701400|7|14|Guardian Helm|2|2|NO|Aruane
+0701500|7|15|Unicorn Helm (No Visual)|2|2|NO|NO
+0701600|7|16|Black Dragon Helm|2|2|NO|NO
+0701700|7|17|Phoenix Helm|2|2|NO|NO
+0701800|7|18|Grand Soul Helm|2|2|NO|NO
+0701900|7|19|Holysprit Helm|2|2|NO|NO
+0702000|7|20|Thunder Helm (No Visual)|2|2|NO|NO
+0702100|7|21|Great Dragon Helm|2|2|NO|NO
+0702200|7|22|Black Soul Helm|2|2|NO|NO
+0702300|7|23|Hurricane Helm (No Visual)|2|2|NO|NO
+0702400|7|24|Red Spirit Helm|2|2|NO|NO
+0702500|7|25|Round Helm|2|2|NO|NO
+0702600|7|26|Adamantine Helm|2|2|Agnis|NO
+0702700|7|27|Dark Steel Helm|2|2|NO|NO
+0702800|7|28|Dark Master Helm|2|2|NO|NO
+0702900|7|29|Dragon Knight Helm|2|2|NO|NO
+0703000|7|30|Venom Mist Helm|2|2|NO|NO
+0703100|7|31|Sylpid Ray Helm|2|2|NO|NO
+0703200|7|32|Volcano Helm (No Visual)|2|2|NO|NO
+0703300|7|33|Sunlight Helm|2|2|NO|NO
+0703400|7|34|Ashcrow Helm|2|2|NO|NO
+0703500|7|35|Eclips Helm|2|2|NO|NO
+0703600|7|36|Iris Helm|2|2|NO|NO
+0703700|7|37|Valiant Helm (No Visual)|2|2|NO|NO
+0703800|7|38|Glorius Helm|2|2|NO|NO
+0703900|7|39|Mistery Helm|2|2|NO|NO
+0704000|7|40|Red Wing Helm|2|2|Krono|Semeden
+0704100|7|41|Ancient Helm|2|2|NO|NO
+0704200|7|42|Black Rose Helm|2|2|NO|NO
+0704300|7|43|Aura Helm|2|2|NO|NO
+0704400|7|44|Lilium Helm|2|2|NO|NO
+0704500|7|45|Titan Helm|2|2|NO|NO
+0704600|7|46|Brave Helm|2|2|NO|NO
+0704700|7|47|Phantom Helm (No Visual)|2|2|NO|NO
+0704800|7|48|Destroyer Helm (No Visual)|2|2|NO|NO
+0704900|7|49|Seraphim Helm|2|2|NO|NO
+0705000|7|50|Divine Helm|2|2|NO|NO
+0705100|7|51|Kings Helm|2|2|NO|NO
+0705200|7|52|Hades Helm|2|2|NO|NO
+0705300|7|53|Queen Helm|2|2|NO|NO
+0705400|7|54|No Item Display|2|2|NO|NO
+0705500|7|55|No Item Display|2|2|NO|NO
+0705600|7|56|No Item Display|2|2|NO|NO
+0705700|7|57|No Item Display|2|2|NO|NO
+0705800|7|58|No Item Display|2|2|NO|NO
+0705900|7|59|No Item Display|2|2|NO|NO
+0706000|7|60|No Item Display|2|2|NO|NO
+0706100|7|61|No Item Display|2|2|NO|NO
+0706200|7|62|No Item Display|2|2|NO|NO
+0706300|7|63|No Item Display|2|2|NO|NO
+0706400|7|64|No Item Display|2|2|NO|NO
+0706500|7|65|No Item Display|2|2|NO|NO
+0706600|7|66|No Item Display|2|2|NO|NO
+0706700|7|67|No Item Display|2|2|NO|NO
+0706800|7|68|No Item Display|2|2|NO|NO
+0706900|7|69|No Item Display|2|2|NO|NO
+0707000|7|70|No Item Display|2|2|NO|NO
+0707100|7|71|No Item Display|2|2|NO|NO
+0707200|7|72|No Item Display|2|2|NO|NO
+0707300|7|73|No Item Display|2|2|NO|NO
+0707400|7|74|Storm Hard V1 Helm|2|2|NO|NO
+0707500|7|75|Aramis Helm|2|2|Eden|NO
+0707600|7|76|Darkness Skull Helm|2|2|NO|NO
+0707700|7|77|Gohan Helm|2|2|NO|NO
+0707800|7|78|Proteus Helm|2|2|NO|NO
+0707900|7|79|Plutonium Helm|2|2|NO|NO
+0708000|7|80|Gogeta SSJ5 Helm|2|2|NO|NO
+0708100|7|81|Gogeta SSJ4 Helm|2|2|NO|NO
+0708200|7|82|No Item Display|2|2|NO|NO
+0708300|7|83|Vegeta SSJ2 Helm|2|2|NO|NO
+0708400|7|84|Vegeta Helm|2|2|NO|NO
+0708500|7|85|Trunks Helm|2|2|NO|NO
+0708600|7|86|Majin Boo Helm|2|2|NO|NO
+0708700|7|87|Goku SSJ4 Helm|2|2|NO|NO
+0708800|7|88|Goku SSJ2 Helm|2|2|NO|NO
+0708900|7|89|Vegeta JR Helm|2|2|NO|NO
+0709000|7|90|Ginyu Helm|2|2|NO|NO
+0709100|7|91|Conqueror Helm|2|2|NO|NO
+0709200|7|92|Sacred v1 Helm|2|2|NO|NO
+0709300|7|93|Venture Helm|2|2|Gosen|NO
+0709400|7|94|No Item Display|2|2|NO|NO
+0709500|7|95|Piercing V1 Helm|2|2|NO|NO
+0709600|7|96|No Item Display|2|2|NO|NO
+0709700|7|97|No Item Display|2|2|NO|NO
+0709800|7|98|Zilant Helm|2|2|NO|NO
+0709900|7|99|Morph Helm|2|2|NO|NO
+0710000|7|100|Ninja Gaiden Helm|2|2|NO|NO
+0710100|7|101|King of Dragon Helm|2|2|NO|NO
+0710200|7|102|No Item Display|2|2|NO|NO
+0710300|7|103|Platinum Helm|2|2|NO|NO
+0710400|7|104|No Item Display|2|2|NO|NO
+0710500|7|105|Chaos Helm|2|2|NO|NO
+0710600|7|106|Hannibal Helm|2|2|NO|NO
+0710700|7|107|King Skull Helm|2|2|Taroseu's|NO
+0710800|7|108|Balgass Helm|2|2|NO|NO
+0710900|7|109|Monarch Helm|2|2|Areli|NO
+0711000|7|110|Tutankamon Helm|2|2|NO|NO
+0711100|7|111|Pallas Helm|2|2|NO|NO
+0711200|7|112|Sacred v2 Helm|2|2|NO|NO
+0711300|7|113|No Item Display|2|2|NO|NO
+0711400|7|114|Valkyrias Helm|2|2|NO|NO
+0711500|7|115|Black Fenrir Helm|2|2|Ruben|NO
+0711600|7|116|Thunder Heavy Helm|2|2|NO|NO
+0711700|7|117|Alien Helm|2|2|NO|NO
+0711800|7|118|Midgard Helm|2|2|NO|NO
+0711900|7|119|Thunder Skull Helm|2|2|NO|NO
+0712000|7|120|High Shamal Helm|2|2|Esto|NO
+0712100|7|121|Quarter Master Helm|2|2|Sihem|NO
+0712200|7|122|Kentauros Helm|2|2|NO|NO
+0712300|7|123|DarkBone Helm|2|2|NO|NO
+0712400|7|124|Thanatos Helm|2|2|Het|NO
+0712500|7|125|Insect Queen Helm|2|2|NO|NO
+0712600|7|126|Regal Dragon Knight Helm|2|2|Ultimate|NO
+0712700|7|127|Antaras Helm|2|2|NO|NO
+0712800|7|128|Cyrious Helm|2|2|NO|NO
+0712900|7|129|Piercing v2 Helm|2|2|NO|NO
+0713000|7|130|Doom Helm|2|2|NO|NO
+0713100|7|131|Centaurus Helm|2|2|Hebro|NO
+0713200|7|132|Tectonic Helm|2|2|NO|NO
+0713300|7|133|Arcane Helm|2|2|NO|NO
+0713400|7|134|Shadow Helm|2|2|Moros's|NO
+0713500|7|135|Charmant Helm|2|2|NO|NO
+0713600|7|136|Astral Helm|2|2|Pio|NO
+0713700|7|137|Impulse Helm|2|2|Eufrat|NO
+0713800|7|138|Eternity Helm|2|2|NO|NO
+0713900|7|139|Quirinus Helm|2|2|NO|NO
+0714000|7|140|Agamemnon Helm|2|2|Army's|NO
+0714100|7|141|Drakon Helm|2|2|NO|NO
+0714200|7|142|Rhapsody Helm|2|2|NO|NO
+0714300|7|143|Vegeta SSJ4 Helm|2|2|NO|NO
+0714400|7|144|Cell Helm|2|2|NO|NO
+0714500|7|145|Bloody Soldier Helm|2|2|NO|NO
+0714600|7|146|Century Helm|2|2|Karm|NO
+0714700|7|147|Falch Helm|2|2|Ohad|NO
+0714800|7|148|Dark Dimention Helm|2|2|NO|NO
+0714900|7|149|BloodThirsty Helm|2|2|NO|NO
+0715000|7|150|Regal Titan Helm|2|2|NO|NO
+0715100|7|151|Hell Red Helm|2|2|NO|NO
+0715200|7|152|Death Helm|2|2|NO|NO
+0715300|7|153|Aiakos Helm|2|2|NO|NO
+0715400|7|154|Storm Hard v2 Helm|2|2|NO|NO
+0715500|7|155|Andromeda Helm|2|2|NO|NO
+0715600|7|156|Shina Helm|2|2|NO|NO
+0715700|7|157|Death Cancer Helm|2|2|NO|NO
+0715800|7|158|Hyoga Helm|2|2|NO|NO
+0715900|7|159|Aldebaran Helm|2|2|NO|NO
+0716000|7|160|Sagittarius Helm|2|2|NO|NO
+0705900|7|59|Sacred Helm|2|2|Vega's|NO
+0706000|7|60|Storm Hard Helm|2|2|NO|NO
+0706100|7|61|Piercing Helm|2|2|NO|NO
+0800000|8|0|Bronze Armor|2|2|Hyperio|NO
+0800100|8|1|Dragon Armor|2|3|NO|Vicious
+0800200|8|2|Pad Armor|2|2|Apolo|NO
+0800300|8|3|Legendary Armor|2|2|Anubis|Isis
+0800400|8|4|Bone Armor|2|2|Evis|NO
+0800500|8|5|Leather Armor|2|3|Warrior|NO
+0800600|8|6|Scale Armor|2|2|Eplete|NO
+0800700|8|7|Sphinx Armor|2|3|Hera|NO
+0800800|8|8|Brass Armor|2|2|Garuda|NO
+0800900|8|9|Plate Armor|2|2|Kantata|NO
+0801000|8|10|Vine Armor|2|2|NO|NO
+0801100|8|11|Silk Armor|2|2|Gaia|NO
+0801200|8|12|Wind Armor|2|2|Odin|NO
+0801300|8|13|Spirit Armor|2|2|Argon|NO
+0801400|8|14|Guardian Armor|2|2|Gywen|Aruane
+0801500|8|15|Unicorn Armor|2|3|Gaion|Muren
+0801600|8|16|Black Dragon Armor|2|3|NO|NO
+0801700|8|17|Phoenix Armor|2|3|NO|NO
+0801800|8|18|Grand Soul Armor|2|3|NO|NO
+0801900|8|19|Holysprit Armor|2|2|NO|NO
+0802000|8|20|Thunder Armor|2|3|NO|NO
+0802100|8|21|Great Dragon Armor|2|3|NO|NO
+0802200|8|22|Black Soul Armor|2|3|NO|NO
+0802300|8|23|Hurricane Armor|2|3|NO|NO
+0802400|8|24|Red Spirit Armor|2|2|NO|NO
+0802500|8|25|Round Armor|2|3|NO|NO
+0802600|8|26|Adamantine Armor|2|3|Agnis|NO
+0802700|8|27|Dark Steel Armor|2|3|NO|NO
+0802800|8|28|Dark Master Armor|2|3|NO|NO
+0802900|8|29|Dragon Knight Armor|2|3|NO|NO
+0803000|8|30|Venom Mist Armor|2|3|NO|NO
+0803100|8|31|Sylpid Ray Armor|2|3|NO|NO
+0803200|8|32|Volcano Armor|2|3|NO|NO
+0803300|8|33|Sunlight Armor|2|3|NO|NO
+0803400|8|34|Ashcrow Armor|2|3|NO|NO
+0803500|8|35|Eclips Armor|2|3|NO|NO
+0803600|8|36|Iris Armor|2|3|NO|NO
+0803700|8|37|Valiant Armor|2|3|NO|NO
+0803800|8|38|Glorius Armor|2|3|NO|NO
+0803900|8|39|Mistery Armor|2|2|NO|NO
+0804000|8|40|Red Wing Armor|2|2|NO|Semeden
+0804100|8|41|Ancient Armor|2|2|NO|NO
+0804200|8|42|Black Rose Armor|2|2|NO|NO
+0804300|8|43|Aura Armor|2|2|NO|NO
+0804400|8|44|Lilium Armor|2|2|NO|NO
+0804500|8|45|Titan Armor|2|3|NO|NO
+0804600|8|46|Brave Armor|2|3|NO|NO
+0804700|8|47|Phantom Armor|2|3|NO|NO
+0804800|8|48|Destroyer Armor|2|3|NO|NO
+0804900|8|49|Seraphim Armor|2|2|NO|NO
+0805000|8|50|Divine Armor|2|2|NO|NO
+0805100|8|51|Kings Armor|2|3|NO|NO
+0805200|8|52|Hades Armor|2|3|NO|NO
+0805300|8|53|Queen Armor|2|3|NO|NO
+0805400|8|54|No Item Display|2|2|NO|NO
+0805500|8|55|No Item Display|2|2|NO|NO
+0805600|8|56|No Item Display|2|2|NO|NO
+0805700|8|57|No Item Display|2|2|NO|NO
+0805800|8|58|No Item Display|2|2|NO|NO
+0805900|8|59|No Item Display|2|2|NO|NO
+0806000|8|60|No Item Display|2|2|NO|NO
+0806100|8|61|No Item Display|2|2|NO|NO
+0806200|8|62|No Item Display|2|2|NO|NO
+0806300|8|63|No Item Display|2|2|NO|NO
+0806400|8|64|No Item Display|2|2|NO|NO
+0806500|8|65|No Item Display|2|2|NO|NO
+0806600|8|66|No Item Display|2|2|NO|NO
+0806700|8|67|No Item Display|2|2|NO|NO
+0806800|8|68|No Item Display|2|2|NO|NO
+0806900|8|69|No Item Display|2|2|NO|NO
+0807000|8|70|No Item Display|2|2|NO|NO
+0807100|8|71|No Item Display|2|2|NO|NO
+0807200|8|72|No Item Display|2|2|NO|NO
+0807300|8|73|No Item Display|2|2|NO|NO
+0807400|8|74|Storm Hard V1 Armor|2|3|NO|NO
+0807500|8|75|Aramis Armor|2|3|Eden|NO
+0807600|8|76|Darkness Skull Armor|2|3|NO|NO
+0807700|8|77|Gohan Armor|2|3|NO|NO
+0807800|8|78|Proteus Armor|2|3|NO|NO
+0807900|8|79|Plutonium Armor|2|3|NO|NO
+0808000|8|80|Gogeta SSJ5 Armor|2|3|NO|NO
+0808100|8|81|Gogeta SSJ4 Armor|2|3|NO|NO
+0808200|8|82|No Item Display|2|3|NO|NO
+0808300|8|83|Vegeta SSJ2 Armor|2|3|NO|NO
+0808400|8|84|Vegeta Armor|2|3|NO|NO
+0808500|8|85|Trunks Armor|2|3|NO|NO
+0808600|8|86|Majin Boo Armor|2|3|NO|NO
+0808700|8|87|Goku SSJ4 Armor|2|3|NO|NO
+0808800|8|88|Goku SSJ2 Armor|2|3|NO|NO
+0808900|8|89|Vegeta JR Armor|2|3|NO|NO
+0809000|8|90|Ginyu Armor|2|3|NO|NO
+0809100|8|91|Conqueror Armor|2|3|NO|NO
+0809200|8|92|Sacred v1 Armor|2|3|NO|NO
+0809300|8|93|Venture Armor|2|3|Gosen|NO
+0809400|8|94|No Item Display|2|3|NO|NO
+0809500|8|95|Piercing V1 Armor|2|3|NO|NO
+0809600|8|96|No Item Display|2|3|NO|NO
+0809700|8|97|No Item Display|2|3|NO|NO
+0809800|8|98|Zilant Armor|2|3|NO|NO
+0809900|8|99|Morph Armor|2|3|NO|NO
+0810000|8|100|Ninja Gaiden Armor|2|3|NO|NO
+0810100|8|101|King of Dragon Armor|2|3|NO|NO
+0810200|8|102|No Item Display|2|3|NO|NO
+0810300|8|103|Platinum Armor|2|3|NO|NO
+0810400|8|104|No Item Display|2|3|NO|NO
+0810500|8|105|Chaos Armor|2|3|NO|NO
+0810600|8|106|Hannibal Armor|2|3|NO|NO
+0810700|8|107|King Skull Armor|2|3|Taroseu's|NO
+0810800|8|108|Balgass Armor|2|3|NO|NO
+0810900|8|109|Monarch Armor|2|3|Areli|NO
+0811000|8|110|Tutankamon Armor|2|3|NO|NO
+0811100|8|111|Pallas Armor|2|3|NO|NO
+0811200|8|112|Sacred v2 Armor|2|3|NO|NO
+0811300|8|113|No Item Display|2|3|NO|NO
+0811400|8|114|Valkyrias Armor|2|3|NO|NO
+0811500|8|115|Black Fenrir Armor|2|3|Ruben|NO
+0811600|8|116|Thunder Heavy Armor|2|3|NO|NO
+0811700|8|117|Alien Armor|2|3|NO|NO
+0811800|8|118|Midgard Armor|2|3|NO|NO
+0811900|8|119|Thunder Skull Armor|2|3|NO|NO
+0812000|8|120|High Shamal Armor|2|3|Esto|NO
+0812100|8|121|Quarter Master Armor|2|3|Sihem|NO
+0812200|8|122|Kentauros Armor|2|3|NO|NO
+0812300|8|123|DarkBone Armor|2|3|NO|NO
+0812400|8|124|Thanatos Armor|2|3|Het|NO
+0812500|8|125|Insect Queen Armor|2|3|NO|NO
+0812600|8|126|Regal Dragon Knight Armor|2|3|Ultimate|NO
+0812700|8|127|Antaras Armor|2|3|NO|NO
+0812800|8|128|Cyrious Armor|2|3|NO|NO
+0812900|8|129|Piercing v2 Armor|2|3|NO|NO
+0813000|8|130|Doom Armor|2|3|NO|NO
+0813100|8|131|Centaurus Armor|2|3|Hebro|NO
+0813200|8|132|Tectonic Armor|2|3|NO|NO
+0813300|8|133|Arcane Armor|2|3|NO|NO
+0813400|8|134|Shadow Armor|2|3|Moros's|NO
+0813500|8|135|Charmant Armor|2|3|NO|NO
+0813600|8|136|Astral Armor|2|3|Pio|NO
+0813700|8|137|Impulse Armor|2|3|Eufrat|NO
+0813800|8|138|Eternity Armor|2|3|NO|NO
+0813900|8|139|Quirinus Armor|2|3|NO|NO
+0814000|8|140|Agamemnon Armor|2|3|Army's|NO
+0814100|8|141|Drakon Armor|2|3|NO|NO
+0814200|8|142|Rhapsody Armor|2|3|NO|NO
+0814300|8|143|Vegeta SSJ4 Armor|2|3|NO|NO
+0814400|8|144|Cell Armor|2|3|NO|NO
+0814500|8|145|Bloody Soldier Armor|2|3|NO|NO
+0814600|8|146|Century Armor|2|3|Karm|NO
+0814700|8|147|Falch Armor|2|3|Ohad|NO
+0814800|8|148|Dark Dimention Armor|2|3|NO|NO
+0814900|8|149|BloodThirsty Armor|2|3|NO|NO
+0815000|8|150|Regal Titan Armor|2|3|NO|NO
+0815100|8|151|Hell Red Armor|2|3|NO|NO
+0815200|8|152|Death Armor|2|3|NO|NO
+0815300|8|153|Aiakos Armor|2|3|NO|NO
+0815400|8|154|Storm Hard v2 Armor|2|3|NO|NO
+0815500|8|155|Andromeda Armor|2|3|NO|NO
+0815600|8|156|Shina Armor|2|3|NO|NO
+0815700|8|157|Death Cancer Armor|2|3|NO|NO
+0815800|8|158|Hyoga Armor|2|3|NO|NO
+0815900|8|159|Aldebaran Armor|2|3|NO|NO
+0816000|8|160|Sagittarius Armor|2|3|NO|NO
+0805900|8|59|Sacred Armor|2|3|Vega's|Chamereuui's
+0806000|8|60|Storm Hard Armor|2|3|NO|NO
+0806100|8|61|Piercing Armor|2|3|NO|NO
+0900000|9|0|Bronze Pants|2|2|Hyperio|NO
+0900100|9|1|Dragon Pants|2|2|NO|Vicious
+0900200|9|2|Pad Pants|2|2|Apolo|NO
+0900300|9|3|Legendary Pants|2|2|NO|Isis
+0900400|9|4|Bone Pants|2|2|Evis|NO
+0900500|9|5|Leather Pants|2|2|Warrior|NO
+0900600|9|6|Scale Pants|2|2|Eplete|NO
+0900700|9|7|Sphinx Pants|2|2|Hera|NO
+0900800|9|8|Brass Pants|2|2|Garuda|NO
+0900900|9|9|Plate Pants|2|2|NO|NO
+0901000|9|10|Vine Pants|2|2|Ceto|NO
+0901100|9|11|Silk Pants|2|2|Gaia|NO
+0901200|9|12|Wind Pants|2|2|Odin|NO
+0901300|9|13|Spirit Pants|2|2|Argon|NO
+0901400|9|14|Guardian Pants|2|2|NO|Aruane
+0901500|9|15|Unicorn Pants|2|2|Gaion|Muren
+0901600|9|16|Black Dragon Pants|2|2|NO|NO
+0901700|9|17|Phoenix Pants|2|2|NO|NO
+0901800|9|18|Grand Soul Pants|2|2|NO|NO
+0901900|9|19|Holysprit Pants|2|2|NO|NO
+0902000|9|20|Thunder Pants|2|2|NO|NO
+0902100|9|21|Great Dragon Pants|2|2|NO|NO
+0902200|9|22|Black Soul Pants|2|2|NO|NO
+0902300|9|23|Hurricane Pants|2|2|NO|NO
+0902400|9|24|Red Spirit Pants|2|2|NO|NO
+0902500|9|25|Round Pants|2|2|NO|NO
+0902600|9|26|Adamantine Pants|2|2|Agnis|Browii
+0902700|9|27|Dark Steel Pants|2|2|NO|NO
+0902800|9|28|Dark Master Pants|2|2|NO|NO
+0902900|9|29|Dragon Knight Pants|2|2|NO|NO
+0903000|9|30|Venom Mist Pants|2|2|NO|NO
+0903100|9|31|Sylpid Ray Pants|2|2|NO|NO
+0903200|9|32|Volcano Pants|2|2|NO|NO
+0903300|9|33|Sunlight Pants|2|2|NO|NO
+0903400|9|34|Ashcrow Pants|2|2|NO|NO
+0903500|9|35|Eclips Pants|2|2|NO|NO
+0903600|9|36|Iris Pants|2|2|NO|NO
+0903700|9|37|Flame Pants|2|2|NO|NO
+0903800|9|38|Glorius Pants|2|2|NO|NO
+0903900|9|39|Mistery Pants|2|2|NO|NO
+0904000|9|40|Red Wing Pants|2|2|Krono|NO
+0904100|9|41|Ancient Pants|2|2|NO|NO
+0904200|9|42|Black Rose Pants|2|2|NO|NO
+0904300|9|43|Aura Pants|2|2|NO|NO
+0904400|9|44|Lilium Pants|2|2|NO|NO
+0904500|9|45|Titan Pants|2|2|NO|NO
+0904600|9|46|Brave Pants|2|2|NO|NO
+0904700|9|47|Phantom Pants|2|2|NO|NO
+0904800|9|48|Destroyer Pants|2|2|NO|NO
+0904900|9|49|Seraphim Pants|2|2|NO|NO
+0905000|9|50|Divine Pants|2|2|NO|NO
+0905100|9|51|Kings Pants|2|2|NO|NO
+0905200|9|52|Hades Pants|2|2|NO|NO
+0905300|9|53|Queen Pants|2|2|NO|NO
+0905400|9|54|No Item Display|2|2|NO|NO
+0905500|9|55|No Item Display|2|2|NO|NO
+0905600|9|56|No Item Display|2|2|NO|NO
+0905700|9|57|No Item Display|2|2|NO|NO
+0905800|9|58|No Item Display|2|2|NO|NO
+0905900|9|59|No Item Display|2|2|NO|NO
+0906000|9|60|No Item Display|2|2|NO|NO
+0906100|9|61|No Item Display|2|2|NO|NO
+0906200|9|62|No Item Display|2|2|NO|NO
+0906300|9|63|No Item Display|2|2|NO|NO
+0906400|9|64|No Item Display|2|2|NO|NO
+0906500|9|65|No Item Display|2|2|NO|NO
+0906600|9|66|No Item Display|2|2|NO|NO
+0906700|9|67|No Item Display|2|2|NO|NO
+0906800|9|68|No Item Display|2|2|NO|NO
+0906900|9|69|No Item Display|2|2|NO|NO
+0907000|9|70|No Item Display|2|2|NO|NO
+0907100|9|71|No Item Display|2|2|NO|NO
+0907200|9|72|No Item Display|2|2|NO|NO
+0907300|9|73|No Item Display|2|2|NO|NO
+0907400|9|74|Storm Hard V1 Pants|2|2|NO|NO
+0907500|9|75|Aramis Pants|2|2|Eden|NO
+0907600|9|76|Darkness Skull Pants|2|2|NO|NO
+0907700|9|77|Gohan Pants|2|2|NO|NO
+0907800|9|78|Proteus Pants|2|2|NO|NO
+0907900|9|79|Plutonium Pants|2|2|NO|NO
+0908000|9|80|Gogeta SSJ5 Pants|2|2|NO|NO
+0908100|9|81|Gogeta SSJ4 Pants|2|2|NO|NO
+0908200|9|82|No Item Display|2|2|NO|NO
+0908300|9|83|Vegeta SSJ2 Pants|2|2|NO|NO
+0908400|9|84|Vegeta Pants|2|2|NO|NO
+0908500|9|85|Trunks Pants|2|2|NO|NO
+0908600|9|86|Majin Boo Pants|2|2|NO|NO
+0908700|9|87|Goku SSJ4 Pants|2|2|NO|NO
+0908800|9|88|Goku SSJ2 Pants|2|2|NO|NO
+0908900|9|89|Vegeta JR Pants|2|2|NO|NO
+0909000|9|90|Ginyu Pants|2|2|NO|NO
+0909100|9|91|Conqueror Pants|2|2|NO|NO
+0909200|9|92|Sacred v1 Pants|2|2|NO|NO
+0909300|9|93|Venture Pants|2|2|Gosen|NO
+0909400|9|94|No Item Display|2|2|NO|NO
+0909500|9|95|Piercing V1 Pants|2|2|NO|NO
+0909600|9|96|No Item Display|2|2|NO|NO
+0909700|9|97|No Item Display|2|2|NO|NO
+0909800|9|98|Zilant Pants|2|2|NO|NO
+0909900|9|99|Morph Pants|2|2|NO|NO
+0910000|9|100|Ninja Gaiden Pants|2|2|NO|NO
+0910100|9|101|King of Dragon Pants|2|2|NO|NO
+0910200|9|102|No Item Display|2|2|NO|NO
+0910300|9|103|Platinum Pants|2|2|NO|NO
+0910400|9|104|No Item Display|2|2|NO|NO
+0910500|9|105|Chaos Pants|2|2|NO|NO
+0910600|9|106|Hannibal Pants|2|2|NO|NO
+0910700|9|107|King Skull Pants|2|2|Taroseu's|NO
+0910800|9|108|Balgass Pants|2|2|NO|NO
+0910900|9|109|Monarch Pants|2|2|Areli|NO
+0911000|9|110|Tutankamon Pants|2|2|NO|NO
+0911100|9|111|Pallas Pants|2|2|NO|NO
+0911200|9|112|Sacred v2 Pants|2|2|NO|NO
+0911300|9|113|No Item Display|2|2|NO|NO
+0911400|9|114|Valkyrias Pants|2|2|NO|NO
+0911500|9|115|Black Fenrir Pants|2|2|Ruben|NO
+0911600|9|116|Thunder Heavy Pants|2|2|NO|NO
+0911700|9|117|Alien Pants|2|2|NO|NO
+0911800|9|118|Midgard Pants|2|2|NO|NO
+0911900|9|119|Thunder Skull Pants|2|2|NO|NO
+0912000|9|120|High Shamal Pants|2|2|Esto|NO
+0912100|9|121|Quarter Master Pants|2|2|Sihem|NO
+0912200|9|122|Kentauros Pants|2|2|NO|NO
+0912300|9|123|DarkBone Pants|2|2|NO|NO
+0912400|9|124|Thanatos Pants|2|2|Het|NO
+0912500|9|125|Insect Queen Pants|2|2|NO|NO
+0912600|9|126|Regal Dragon Knight Pants|2|2|Ultimate|NO
+0912700|9|127|Antaras Pants|2|2|NO|NO
+0912800|9|128|Cyrious Pants|2|2|NO|NO
+0912900|9|129|Piercing v2 Pants|2|2|NO|NO
+0913000|9|130|Doom Pants|2|2|NO|NO
+0913100|9|131|Centaurus Pants|2|2|Hebro|NO
+0913200|9|132|Tectonic Pants|2|2|NO|NO
+0913300|9|133|Arcane Pants|2|2|NO|NO
+0913400|9|134|Shadow Pants|2|2|Moros's|NO
+0913500|9|135|Charmant Pants|2|2|NO|NO
+0913600|9|136|Astral Pants|2|2|Pio|NO
+0913700|9|137|Impulse Pants|2|2|Eufrat|NO
+0913800|9|138|Eternity Pants|2|2|NO|NO
+0913900|9|139|Quirinus Pants|2|2|NO|NO
+0914000|9|140|Agamemnon Pants|2|2|Army's|NO
+0914100|9|141|Drakon Pants|2|2|NO|NO
+0914200|9|142|Rhapsody Pants|2|2|NO|NO
+0914300|9|143|Vegeta SSJ4 Pants|2|2|NO|NO
+0914400|9|144|Cell Pants|2|2|NO|NO
+0914500|9|145|Bloody Soldier Pants|2|2|NO|NO
+0914600|9|146|Century Pants|2|2|Karm|NO
+0914700|9|147|Falch Pants|2|2|Ohad|NO
+0914800|9|148|Dark Dimention Pants|2|2|NO|NO
+0914900|9|149|BloodThirsty Pants|2|2|NO|NO
+0915000|9|150|Regal Titan Pants|2|2|NO|NO
+0915100|9|151|Hell Red Pants|2|2|NO|NO
+0915200|9|152|Death Pants|2|2|NO|NO
+0915300|9|153|Aiakos Pants|2|2|NO|NO
+0915400|9|154|Storm Hard v2 Pants|2|2|NO|NO
+0915500|9|155|Andromeda Pants|2|2|NO|NO
+0915600|9|156|Shina Pants|2|2|NO|NO
+0915700|9|157|Death Cancer Pants|2|2|NO|NO
+0915800|9|158|Hyoga Pants|2|2|NO|NO
+0915900|9|159|Aldebaran Pants|2|2|NO|NO
+0916000|9|160|Sagittarius Pants|2|2|NO|NO
+0905900|9|59|Sacred Pants|2|2|Vega's|Chamereuui's
+0906000|9|60|Storm Hard Pants|2|2|NO|NO
+0906100|9|61|Piercing Pants|2|2|NO|NO
+1000000|10|0|Bronze Gloves|2|2|NO|NO
+1000100|10|1|Dragon Gloves|2|2|Hyon|NO
+1000200|10|2|Pad Gloves|2|2|Apolo|NO
+1000300|10|3|Legendary Gloves|2|2|Anubis|NO
+1000400|10|4|Bone Gloves|2|2|NO|NO
+1000500|10|5|Leather Gloves|2|2|Warrior|NO
+1000600|10|6|Scale Gloves|2|2|NO|NO
+1000700|10|7|Sphinx Gloves|2|2|Hera|NO
+1000800|10|8|Brass Gloves|2|2|Garuda|NO
+1000900|10|9|Plate Gloves|2|2|Kantata|NO
+1001000|10|10|Vine Gloves|2|2|Ceto|NO
+1001100|10|11|Silk Gloves|2|2|Gaia|NO
+1001200|10|12|Wind Gloves|2|2|Odin|NO
+1001300|10|13|Spirit Gloves|2|2|Argon|NO
+1001400|10|14|Guardian Gloves|2|2|Gywen|NO
+1001500|10|15|Unicorn Gloves|2|2|NO|Muren
+1001600|10|16|Black Dragon Gloves|2|2|NO|NO
+1001700|10|17|Phoenix Gloves|2|2|NO|NO
+1001800|10|18|Grand Soul Gloves|2|2|NO|NO
+1001900|10|19|Holysprit Gloves|2|2|NO|NO
+1002000|10|20|Thunder Gloves|2|2|NO|NO
+1002100|10|21|Great Dragon Gloves|2|2|NO|NO
+1002200|10|22|Black Soul Gloves|2|2|NO|NO
+1002300|10|23|Hurricane Gloves Gloves|2|2|Muren|NO
+1002400|10|24|Red Spirit Gloves|2|2|NO|NO
+1002500|10|25|Round Gloves|2|2|NO|NO
+1002600|10|26|Adamantine Gloves|2|2|NO|Browii
+1002700|10|27|Dark Steel Gloves|2|2|NO|NO
+1002800|10|28|Dark Master Gloves|2|2|NO|NO
+1002900|10|29|Dragon Knight Gloves|2|2|NO|NO
+1003000|10|30|Venom Mist Gloves|2|2|NO|NO
+1003100|10|31|Sylpid Ray Gloves|2|2|NO|NO
+1003200|10|32|Volcano Gloves|2|2|NO|NO
+1003300|10|33|Sunlight Gloves|2|2|NO|NO
+1003400|10|34|Ashcrow Gloves|2|2|NO|NO
+1003500|10|35|Eclips Gloves|2|2|NO|NO
+1003600|10|36|Iris Gloves|2|2|NO|NO
+1003700|10|37|Flame Gloves|2|2|NO|NO
+1003800|10|38|Glorius Gloves|2|2|NO|NO
+1003900|10|39|MisteryGloves|2|2|NO|NO
+1004000|10|40|Red Wing Gloves|2|2|Krono|Semeden
+1004100|10|41|Ancient Gloves|2|2|NO|NO
+1004200|10|42|Black Rose Gloves|2|2|NO|NO
+1004300|10|43|Aura Gloves|2|2|NO|NO
+1004400|10|44|Lilium Gloves|2|2|NO|NO
+1004500|10|45|Titan Gloves|2|2|NO|NO
+1004600|10|46|Brave Gloves|2|2|NO|NO
+1004700|10|47|Phantom Gloves|2|2|NO|NO
+1004800|10|48|Destroyer Gloves|2|2|NO|NO
+1004900|10|49|Seraphim Gloves|2|2|NO|NO
+1005000|10|50|Divine Gloves|2|2|NO|NO
+1005100|10|51|Kings Gloves|2|2|NO|NO
+1005200|10|52|Hades Gloves|2|2|NO|NO
+1005300|10|53|Queen Gloves|2|2|NO|NO
+1005400|10|54|No Item Display|2|2|NO|NO
+1005500|10|55|No Item Display|2|2|NO|NO
+1005600|10|56|No Item Display|2|2|NO|NO
+1005700|10|57|No Item Display|2|2|NO|NO
+1005800|10|58|No Item Display|2|2|NO|NO
+1005900|10|59|No Item Display|2|2|NO|NO
+1006000|10|60|No Item Display|2|2|NO|NO
+1006100|10|61|No Item Display|2|2|NO|NO
+1006200|10|62|No Item Display|2|2|NO|NO
+1006300|10|63|No Item Display|2|2|NO|NO
+1006400|10|64|No Item Display|2|2|NO|NO
+1006500|10|65|No Item Display|2|2|NO|NO
+1006600|10|66|No Item Display|2|2|NO|NO
+1006700|10|67|No Item Display|2|2|NO|NO
+1006800|10|68|No Item Display|2|2|NO|NO
+1006900|10|69|No Item Display|2|2|NO|NO
+1007000|10|70|No Item Display|2|2|NO|NO
+1007100|10|71|No Item Display|2|2|NO|NO
+1007200|10|72|No Item Display|2|2|NO|NO
+1007300|10|73|No Item Display|2|2|NO|NO
+1007400|10|74|Storm Hard V1 Gloves (NO)|2|2|NO|NO
+1007500|10|75|Aramis Gloves|2|2|Eden|NO
+1007600|10|76|Darkness Skull Gloves|2|2|NO|NO
+1007700|10|77|Gohan Gloves|2|2|NO|NO
+1007800|10|78|Proteus Gloves|2|2|NO|NO
+1007900|10|79|Plutonium Gloves|2|2|NO|NO
+1008000|10|80|Gogeta SSJ5 Gloves|2|2|NO|NO
+1008100|10|81|Gogeta SSJ4 Gloves|2|2|NO|NO
+1008200|10|82|No Item Display|2|2|NO|NO
+1008300|10|83|Vegeta SSJ2 Gloves|2|2|NO|NO
+1008400|10|84|Vegeta Gloves|2|2|NO|NO
+1008500|10|85|Trunks Gloves|2|2|NO|NO
+1008600|10|86|Majin Boo Gloves|2|2|NO|NO
+1008700|10|87|Goku SSJ4 Gloves|2|2|NO|NO
+1008800|10|88|Goku SSJ2 Gloves|2|2|NO|NO
+1008900|10|89|Vegeta JR Gloves|2|2|NO|NO
+1009000|10|90|Ginyu Gloves|2|2|NO|NO
+1009100|10|91|Conqueror Gloves|2|2|NO|NO
+1009200|10|92|Sacred v1 Gloves (NO)|2|2|NO|NO
+1009300|10|93|Venture Gloves|2|2|Gosen|NO
+1009400|10|94|No Item Display|2|2|NO|NO
+1009500|10|95|Piercing V1 Gloves (NO)|2|2|NO|NO
+1009600|10|96|No Item Display|2|2|NO|NO
+1009700|10|97|No Item Display|2|2|NO|NO
+1009800|10|98|Zilant Gloves|2|2|NO|NO
+1009900|10|99|Morph Gloves|2|2|NO|NO
+1010000|10|100|Ninja Gaiden Gloves|2|2|NO|NO
+1010100|10|101|King of Dragon Gloves|2|2|NO|NO
+1010200|10|102|No Item Display|2|2|NO|NO
+1010300|10|103|Platinum Gloves|2|2|NO|NO
+1010400|10|104|No Item Display|2|2|NO|NO
+1010500|10|105|Chaos Gloves|2|2|NO|NO
+1010600|10|106|Hannibal Gloves|2|2|NO|NO
+1010700|10|107|King Skull Gloves|2|2|Taroseu's|NO
+1010800|10|108|Balgass  Gloves|2|2|NO|NO
+1010900|10|109|Monarch  Gloves|2|2|Areli|NO
+1011000|10|110|Tutankamon  Gloves|2|2|NO|NO
+1011100|10|111|Pallas Gloves|2|2|NO|NO
+1011200|10|112|Sacred v2 Gloves (NO)|2|2|NO|NO
+1011300|10|113|No Item Display|2|2|NO|NO
+1011400|10|114|Valkyrias Gloves|2|2|NO|NO
+1011500|10|115|Black Fenrir Gloves|2|2|Ruben|NO
+1011600|10|116|Thunder Heavy Gloves|2|2|NO|NO
+1011700|10|117|Alien Gloves|2|2|NO|NO
+1011800|10|118|Midgard Gloves|2|2|NO|NO
+1011900|10|119|Thunder Skull Gloves|2|2|NO|NO
+1012000|10|120|High Shamal Gloves|2|2|Esto|NO
+1012100|10|121|Quarter Master Gloves|2|2|Sihem|NO
+1012200|10|122|Kentauros Gloves|2|2|NO|NO
+1012300|10|123|DarkBone Gloves|2|2|NO|NO
+1012400|10|124|Thanatos Gloves|2|2|Het|NO
+1012500|10|125|Insect Queen Gloves|2|2|NO|NO
+1012600|10|126|Regal Dragon Knight Gloves|2|2|Ultimate|NO
+1012700|10|127|Antaras Gloves|2|2|NO|NO
+1012800|10|128|Cyrious Gloves|2|2|NO|NO
+1012900|10|129|Piercing v2 Gloves (NO)|2|2|NO|NO
+1013000|10|130|Doom Gloves|2|2|NO|NO
+1013100|10|131|Centaurus Gloves|2|2|Hebro|NO
+1013200|10|132|Tectonic Gloves|2|2|NO|NO
+1013300|10|133|Arcane Gloves|2|2|NO|NO
+1013400|10|134|Shadow Gloves|2|2|Moros's|NO
+1013500|10|135|Charmant Gloves|2|2|NO|NO
+1013600|10|136|Astral Gloves|2|2|Pio|NO
+1013700|10|137|Impulse Gloves|2|2|Eufrat|NO
+1013800|10|138|Eternity Gloves|2|2|NO|NO
+1013900|10|139|Quirinus Gloves|2|2|NO|NO
+1014000|10|140|Agamemnon Gloves|2|2|Army's|NO
+1014100|10|141|Drakon Gloves|2|2|NO|NO
+1014200|10|142|Rhapsody Gloves|2|2|NO|NO
+1014300|10|143|Vegeta SSJ4 Gloves|2|2|NO|NO
+1014400|10|144|Cell Gloves|2|2|NO|NO
+1014500|10|145|Bloody Soldier Gloves|2|2|NO|NO
+1014600|10|146|Century Gloves|2|2|Karm|NO
+1014700|10|147|Falch Gloves|2|2|Ohad|NO
+1014800|10|148|Dark Dimention Gloves|2|2|NO|NO
+1014900|10|149|BloodThirsty Gloves|2|2|NO|NO
+1015000|10|150|Regal Titan Gloves|2|2|NO|NO
+1015100|10|151|Hell Red Gloves|2|2|NO|NO
+1015200|10|152|Death Gloves|2|2|NO|NO
+1015300|10|153|Aiakos Gloves|2|2|NO|NO
+1015400|10|154|Storm Hard v2 Gloves (NO)|2|2|NO|NO
+1015500|10|155|Andromeda Gloves|2|2|NO|NO
+1015600|10|156|Shina Gloves|2|2|NO|NO
+1015700|10|157|Death Cancer Gloves|2|2|NO|NO
+1015800|10|158|Hyoga Gloves|2|2|NO|NO
+1015900|10|159|Aldebaran Gloves|2|2|NO|NO
+1016000|10|160|Sagittarius Gloves|2|2|NO|NO
+1012800|10|128|Seed Spear 5 (LIGTHING)|1|1|NO|NO
+1100000|11|0|Bronze Boots|2|2|Hyperio|NO
+1100100|11|1|Dragon Boots|2|2|Hyon|NO
+1100200|11|2|Pad Boots|2|2|NO|NO
+1100300|11|3|Legendary Boots|2|2|NO|Isis
+1100400|11|4|Bone Boots|2|2|Evis|NO
+1100500|11|5|Leather Boots|2|2|Warrior|NO
+1100600|11|6|Scale Boots|2|2|NO|NO
+1100700|11|7|Sphinx Boots|2|2|Hera|NO
+1100800|11|8|Brass Boots|2|2|NO|NO
+1100900|11|9|Plate Boots|2|2|Kantata|NO
+1101000|11|10|Vine Boots|2|2|Ceto|NO
+1101100|11|11|Silk Boots|2|2|NO|NO
+1101200|11|12|Wind Boots|2|2|Odin|NO
+1101300|11|13|Spirit Boots|2|2|NO|NO
+1101400|11|14|Guardian Boots|2|2|Gywen|Aruane
+1101500|11|15|Unicorn Boots|2|2|Gaion|NO
+1101600|11|16|Black Dragon Boots|2|2|NO|NO
+1101700|11|17|Phoenix Boots|2|2|NO|NO
+1101800|11|18|Grand Soul Boots|2|2|NO|NO
+1101900|11|19|Holysprit Boots|2|2|NO|NO
+1102000|11|20|Thunder Boots|2|2|NO|NO
+1102100|11|21|Great Dragon Boots|2|2|NO|NO
+1102200|11|22|Black Soul Boots|2|2|NO|NO
+1102300|11|23|Hurricane Boots|2|2|NO|NO
+1102400|11|24|Red Spirit Boots|2|2|NO|NO
+1102500|11|25|Round Boots|2|2|NO|NO
+1102600|11|26|Adamantine Boots|2|2|NO|Browii
+1102700|11|27|Dark Steel Boots|2|2|NO|NO
+1102800|11|28|Dark Master Boots|2|2|NO|NO
+1102900|11|29|Dragon Knight Boots|2|2|NO|NO
+1103000|11|30|Venom Mist Boots|2|2|NO|NO
+1103100|11|31|Sylpid Ray Boots|2|2|NO|NO
+1103200|11|32|Volcano Boots|2|2|NO|NO
+1103300|11|33|Sunlight Boots|2|2|NO|NO
+1103400|11|34|Ashcrow Boots|2|2|NO|NO
+1103500|11|35|Eclips Boots|2|2|NO|NO
+1103600|11|36|Iris Boots|2|2|NO|NO
+1103700|11|37|Flame Boots|2|2|NO|NO
+1103800|11|38|Glorius Boots|2|2|NO|NO
+1103900|11|39|Mistery Boots|2|2|NO|NO
+1104000|11|40|Red Wing Boots|2|2|NO|Semeden
+1104100|11|41|Ancient Boots|2|2|NO|NO
+1104200|11|42|Black Rose Boots|2|2|NO|NO
+1104300|11|43|Aura Boots|2|2|NO|NO
+1104400|11|44|Lilium Boots|2|2|NO|NO
+1104500|11|45|Titan Boots|2|2|NO|NO
+1104600|11|46|Brave Boots|2|2|NO|NO
+1104700|11|47|Phantom Boots|2|2|NO|NO
+1104800|11|48|Destroyer Boots|2|2|NO|NO
+1104900|11|49|Seraphim Boots|2|2|NO|NO
+1105000|11|50|Divine Boots|2|2|NO|NO
+1105100|11|51|Kings Boots|2|2|NO|NO
+1105200|11|52|Hades Boots|2|2|NO|NO
+1105300|11|53|Queen Boots|2|2|NO|NO
+1105400|11|54|No Item Display|2|2|NO|NO
+1105500|11|55|No Item Display|2|2|NO|NO
+1105600|11|56|No Item Display|2|2|NO|NO
+1105700|11|57|No Item Display|2|2|NO|NO
+1105800|11|58|No Item Display|2|2|NO|NO
+1105900|11|59|No Item Display|2|2|NO|NO
+1106000|11|60|No Item Display|2|2|NO|NO
+1106100|11|61|No Item Display|2|2|NO|NO
+1106200|11|62|No Item Display|2|2|NO|NO
+1106300|11|63|No Item Display|2|2|NO|NO
+1106400|11|64|No Item Display|2|2|NO|NO
+1106500|11|65|No Item Display|2|2|NO|NO
+1106600|11|66|No Item Display|2|2|NO|NO
+1106700|11|67|No Item Display|2|2|NO|NO
+1106800|11|68|No Item Display|2|2|NO|NO
+1106900|11|69|No Item Display|2|2|NO|NO
+1107000|11|70|No Item Display|2|2|NO|NO
+1107100|11|71|No Item Display|2|2|NO|NO
+1107200|11|72|No Item Display|2|2|NO|NO
+1107300|11|73|No Item Display|2|2|NO|NO
+1107400|11|74|Storm Hard V1 Boots|2|2|NO|NO
+1107500|11|75|Aramis Boots|2|2|Eden|NO
+1107600|11|76|Darkness Skull Boots|2|2|NO|NO
+1107700|11|77|Gohan Boots|2|2|NO|NO
+1107800|11|78|Proteus Boots|2|2|NO|NO
+1107900|11|79|Plutonium Boots|2|2|NO|NO
+1108000|11|80|Gogeta SSJ5 Boots|2|2|NO|NO
+1108100|11|81|Gogeta SSJ4 Boots|2|2|NO|NO
+1108200|11|82|No Item Display|2|2|NO|NO
+1108300|11|83|Vegeta SSJ2 Boots|2|2|NO|NO
+1108400|11|84|Vegeta Boots|2|2|NO|NO
+1108500|11|85|Trunks Boots|2|2|NO|NO
+1108600|11|86|Majin Boo Boots|2|2|NO|NO
+1108700|11|87|Goku SSJ4 Boots|2|2|NO|NO
+1108800|11|88|Goku SSJ2 Boots|2|2|NO|NO
+1108900|11|89|Vegeta JR Boots|2|2|NO|NO
+1109000|11|90|Ginyu Boots|2|2|NO|NO
+1109100|11|91|Conqueror Boots|2|2|NO|NO
+1109200|11|92|Sacred v1 Boots|2|2|NO|NO
+1109300|11|93|Venture Boots|2|2|Gosen|NO
+1109400|11|94|No Item Display|2|2|NO|NO
+1109500|11|95|Piercing V1 Boots|2|2|NO|NO
+1109600|11|96|No Item Display|2|2|NO|NO
+1109700|11|97|No Item Display|2|2|NO|NO
+1109800|11|98|Zilant Boots|2|2|NO|NO
+1109900|11|99|Morph Boots|2|2|NO|NO
+1110000|11|100|Ninja Gaiden Boots|2|2|NO|NO
+1110100|11|101|King of Dragon Boots|2|2|NO|NO
+1110200|11|102|No Item Display|2|2|NO|NO
+1110300|11|103|Platinum Boots|2|2|NO|NO
+1110400|11|104|No Item Display|2|2|NO|NO
+1110500|11|105|Chaos Boots|2|2|NO|NO
+1110600|11|106|Hannibal Boots|2|2|NO|NO
+1110700|11|107|King Skull Boots|2|2|Taroseu's|NO
+1110800|11|108|Balgass Boots|2|2|NO|NO
+1110900|11|109|Monarch Boots|2|2|Areli|NO
+1111000|11|110|Tutankamon Boots|2|2|NO|NO
+1111100|11|111|Pallas Boots|2|2|NO|NO
+1111200|11|112|Sacred v2 Boots|2|2|NO|NO
+1111300|11|113|No Item Display|2|2|NO|NO
+1111400|11|114|Valkyrias Boots|2|2|NO|NO
+1111500|11|115|Black Fenrir Boots|2|2|Ruben|NO
+1111600|11|116|Thunder Heavy Boots|2|2|NO|NO
+1111700|11|117|Alien Boots|2|2|NO|NO
+1111800|11|118|Midgard Boots|2|2|NO|NO
+1111900|11|119|Thunder Skull Boots|2|2|NO|NO
+1112000|11|120|High Shamal Boots|2|2|Esto|NO
+1112100|11|121|Quarter Master Boots|2|2|Sihem|NO
+1112200|11|122|Kentauros Boots|2|2|NO|NO
+1112300|11|123|DarkBone Boots|2|2|NO|NO
+1112400|11|124|Thanatos Boots|2|2|Het|NO
+1112500|11|125|Insect Queen Boots|2|2|NO|NO
+1112600|11|126|Regal Dragon Knight Boots|2|2|Ultimate|NO
+1112700|11|127|Antaras Boots|2|2|NO|NO
+1112800|11|128|Cyrious Boots|2|2|NO|NO
+1112900|11|129|Piercing v2 Boots|2|2|NO|NO
+1113000|11|130|Doom Boots|2|2|NO|NO
+1113100|11|131|Centaurus Boots|2|2|Hebro|NO
+1113200|11|132|Tectonic Boots|2|2|NO|NO
+1113300|11|133|Arcane Boots|2|2|NO|NO
+1113400|11|134|Shadow Boots|2|2|Moros's|NO
+1113500|11|135|Charmant Boots|2|2|NO|NO
+1113600|11|136|Astral Boots|2|2|Pio|NO
+1113700|11|137|Impulse Boots|2|2|Eufrat|NO
+1113800|11|138|Eternity Boots|2|2|NO|NO
+1113900|11|139|Quirinus Boots|2|2|NO|NO
+1114000|11|140|Agamemnon Boots|2|2|Army's|NO
+1114100|11|141|Drakon Boots|2|2|NO|NO
+1114200|11|142|Rhapsody Boots|2|2|NO|NO
+1114300|11|143|Vegeta SSJ4 Boots|2|2|NO|NO
+1114400|11|144|Cell Boots|2|2|NO|NO
+1114500|11|145|Bloody Soldier Boots|2|2|NO|NO
+1114600|11|146|Century Boots|2|2|Karm|NO
+1114700|11|147|Falch Boots|2|2|Ohad|NO
+1114800|11|148|Dark Dimention Boots|2|2|NO|NO
+1114900|11|149|BloodThirsty Boots|2|2|NO|NO
+1115000|11|150|Regal Titan Boots|2|2|NO|NO
+1115100|11|151|Hell Red Boots|2|2|NO|NO
+1115200|11|152|Death Boots|2|2|NO|NO
+1115300|11|153|Aiakos Boots|2|2|NO|NO
+1115400|11|154|Storm Hard v2 Boots|2|2|NO|NO
+1115500|11|155|Andromeda Boots|2|2|NO|NO
+1115600|11|156|Shina Boots|2|2|NO|NO
+1115700|11|157|Death Cancer Boots|2|2|NO|NO
+1115800|11|158|Hyoga Boots|2|2|NO|NO
+1115900|11|159|Aldebaran Boots|2|2|NO|NO
+1116000|11|160|Sagittarius Boots|2|2|NO|NO
+1105900|11|59|Sacred Boots|2|2|Chamereuui's|NO
+1106000|11|60|Storm Hard Boots|2|2|NO|NO
+1106100|11|61|Piercing Boots|2|2|NO|NO
+1200700|12|7|Orb of Twisting Slash|1|1|NO|NO
+1200800|12|8|Orb of Healing|1|1|NO|NO
+1200900|12|9|Orb of Advanced Defense|1|1|NO|NO
+1201000|12|10|Orb of Advanced Damage|1|1|NO|NO
+1201100|12|11|Summoning Goblin|1|1|NO|NO
+1201101|12|11|Summoning Stone Golem|1|1|NO|NO
+1201102|12|11|Summoning Assassin|1|1|NO|NO
+1201103|12|11|Summoning Bali|1|1|NO|NO
+1201104|12|11|Summoning Soldier|1|1|NO|NO
+1201105|12|11|Summoning Yeti|1|1|NO|NO
+1201106|12|11|Summoning Dark Knight|1|1|NO|NO
+1201200|12|12|Orb of Hell Blast|1|1|NO|NO
+1201300|12|13|Orb of Impaling|1|1|NO|NO
+1201400|12|14|Orb of Inner Strength|1|1|NO|NO
+1201500|12|15|Jewel of Chaos|1|1|NO|NO
+1201600|12|16|Orb of Fire Slash|1|1|NO|NO
+1201700|12|17|Orb of Penetration|1|1|NO|NO
+1201800|12|18|Orb of Freezing Arrow|1|1|NO|NO
+1201900|12|19|Orb of Death Stab|1|1|NO|NO
+1202100|12|21|Scroll Of Fire Burst|1|2|NO|NO
+1202200|12|22|Scroll Of Summon|1|2|NO|NO
+1202300|12|23|Scroll Of Critical DMG|1|2|NO|NO
+1202400|12|24|Scroll Of Eletric Spark|1|2|NO|NO
+1202500|12|25|Scroll Of Scrifice|1|2|NO|NO
+1202600|12|26|Jewel of Secret|1|1|NO|NO
+1202601|12|26|Red Crystal|1|1|NO|NO
+1202602|12|26|Blue Crystal|1|1|NO|NO
+1202603|12|26|Darck Crystal|1|1|NO|NO
+1202604|12|26|Box Of Treasure|1|1|NO|NO
+1202605|12|26|Box Of Surprise|1|1|NO|NO
+1203000|12|30|Bles Mix +10|1|1|NO|NO
+1203001|12|30|Bles Mix +20|1|1|NO|NO
+1203002|12|30|Bles Mix +30|1|1|NO|NO
+1203100|12|31|Soul Mix +10|1|1|NO|NO
+1203101|12|31|Soul Mix +20|1|1|NO|NO
+1203102|12|31|Soul Mix +30|1|1|NO|NO
+1203200|12|32|Red GiftBox|1|1|NO|NO
+1203300|12|33|Green GiftBox|1|1|NO|NO
+1203400|12|34|Blue GiftBox|1|1|NO|NO
+1203500|12|35|Scroll Of Triple Burst|1|1|NO|NO
+1203600|12|36|Wings of Storm|4|3|NO|NO
+1203700|12|37|Wings of Eternal|4|3|NO|NO
+1203800|12|38|Wings of Illusion|4|3|NO|NO
+1203900|12|39|Wings of Ruin|4|3|NO|NO
+1204000|12|40|Cape of Emperor|2|3|NO|NO
+1204400|12|44|Orb of Exploit|1|1|NO|NO
+1204500|12|45|Orb of Five Shots|1|1|NO|NO
+1204600|12|46|Orb of Recovery|1|1|NO|NO
+1204700|12|47|Orb of Flame Strike|1|1|NO|NO
+1204800|12|48|Scroll Of Birds|1|2|NO|NO
+1206000|12|60|Seed (FIRE)|1|1|NO|NO
+1206100|12|61|Seed (WATER)|1|1|NO|NO
+1206200|12|62|Seed (ICE)|1|1|NO|NO
+1206300|12|63|Seed (WIND)|1|1|NO|NO
+1206400|12|64|Seed (LIGTHING)|1|1|NO|NO
+1206500|12|65|Seed (GROUND)|1|1|NO|NO
+1207000|12|70|Spear 1 (EMPTY)|1|1|NO|NO
+1207100|12|71|Spear 2 (EMPTY)|1|1|NO|NO
+1207200|12|72|Spear 3 (EMPTY)|1|1|NO|NO
+1207300|12|73|Spear 4 (EMPTY)|1|1|NO|NO
+1207400|12|74|Spear 5 (EMPTY)|1|1|NO|NO
+1210000|12|100|Seed Spear 1 (FIRE)|1|1|NO|NO
+1210100|12|101|Seed Spear 1 (WATER)|1|1|NO|NO
+1210200|12|102|Seed Spear 1 (ICE)|1|1|NO|NO
+1210300|12|103|Seed Spear 1 (WIND)|1|1|NO|NO
+1210400|12|104|Seed Spear 1 (LIGTHING)|1|1|NO|NO
+1210500|12|105|Seed Spear 1 (GROUND)|1|1|NO|NO
+1210600|12|106|Seed Spear 2 (FIRE)|1|1|NO|NO
+1210700|12|107|Seed Spear 2 (WATER)|1|1|NO|NO
+1210800|12|108|Seed Spear 2 (ICE)|1|1|NO|NO
+1210900|12|109|Seed Spear 2 (WIND)|1|1|NO|NO
+1211000|12|110|Seed Spear 2 (LIGTHING)|1|1|NO|NO
+1211100|12|111|Seed Spear 2 (GROUND)|1|1|NO|NO
+1211200|12|112|Seed Spear 3 (FIRE)|1|1|NO|NO
+1211300|12|113|Seed Spear 3 (WATER)|1|1|NO|NO
+1211400|12|114|Seed Spear 3 (ICE)|1|1|NO|NO
+1211500|12|115|Seed Spear 3 (WIND)|1|1|NO|NO
+1211600|12|116|Seed Spear 3 (LIGTHING)|1|1|NO|NO
+1211700|12|117|Seed Spear 3 (GROUND)|1|1|NO|NO
+1211800|12|118|Seed Spear 4 (FIRE)|1|1|NO|NO
+1211900|12|119|Seed Spear 4 (WATER)|1|1|NO|NO
+1212000|12|120|Seed Spear 4 (ICE)|1|1|NO|NO
+1212100|12|121|Seed Spear 4 (WIND)|1|1|NO|NO
+1212200|12|122|Seed Spear 4 (LIGTHING)|1|1|NO|NO
+1212300|12|123|Seed Spear 4 (GROUND)|1|1|NO|NO
+1212400|12|124|Seed Spear 5 (FIRE)|1|1|NO|NO
+1212500|12|125|Seed Spear 5 (WATER)|1|1|NO|NO
+1212600|12|126|Seed Spear 5 (ICE)|1|1|NO|NO
+1212700|12|127|Seed Spear 5 (WIND)|1|1|NO|NO
+1212900|12|129|Seed Spear 5 (GROUND)|1|1|NO|NO
+1204300|12|43|Wings of Dimension|4|3|NO|NO
+1205000|12|50|Lord of the Cape|2|3|NO|NO
+1200300|12|3|Wings of Spirits|5|3|NO|NO
+1200400|12|4|Wings of Soul|5|3|NO|NO
+1200500|12|5|Wings of Dragon|3|3|NO|NO
+1200600|12|6|Wings of Darkness|4|3|NO|NO
+1204200|12|42|Wings of Despair|4|3|NO|NO
+1204900|12|49|Cloak of Warrior|2|3|NO|NO
+1200000|12|0|Wings of Elf|4|3|NO|NO
+1200100|12|1|Wings of Angel|4|3|NO|NO
+1200200|12|2|Wings of Satan|4|3|NO|NO
+1204100|12|41|Wings of Curse|4|3|NO|NO
+1213400|12|134|Small Wings of Satan|3|2|NO|NO
+1213300|12|133|Small Wings of Heaven|3|2|NO|NO
+1213100|12|131|Small Wings of Curse|3|2|NO|NO
+1213200|12|132|Small Wings of Elf|3|2|NO|NO
+1213000|12|130|Small Cape of Lord|2|2|NO|NO
+1213500|12|135|Small Cloak of Warrior|2|2|NO|NO
+1300000|13|0|Angel|1|1|NO|NO
+1300100|13|1|Satan|1|1|NO|NO
+1300200|13|2|Unilla|1|1|NO|NO
+1300300|13|3|Dinorant|1|1|NO|NO
+1300400|13|4|Dark Horse|1|1|NO|NO
+1300500|13|5|Dark Raven|1|1|NO|NO
+1300700|13|7|Archer|1|1|NO|NO
+1300701|13|7|Sperman|1|1|NO|NO
+1300800|13|8|Ring of Ice|1|1|Warrior|Silrion
+1300900|13|9|Ring of Poison|1|1|Kantata|Agnis
+1301000|13|10|Ring of Transform in Dragonin|1|1|NO|NO
+1301001|13|10|Ring of Transform in Gigant|1|1|NO|NO
+1301002|13|10|Ring of Transform in Skeleton|1|1|NO|NO
+1301003|13|10|Ring of Transform in Bull|1|1|NO|NO
+1301004|13|10|Ring of Transform in Linch|1|1|NO|NO
+1301005|13|10|Ring of Transform in Death Cow|1|1|NO|NO
+1301100|13|11|Guardian|1|1|NO|NO
+1301101|13|11|Life Stone|1|1|NO|NO
+1301200|13|12|Pendant of Lightining|1|1|Eplete|NO
+1301300|13|13|Pendant of Fire|1|1|Garuda|NO
+1301400|13|14|Lochs Feather|1|2|NO|NO
+1301401|13|14|Crest of Monarch|1|2|NO|NO
+1301500|13|15|Strengh Fruit|1|1|NO|NO
+1301501|13|15|Agility Fruit|1|1|NO|NO
+1301502|13|15|Energy Fruit|1|1|NO|NO
+1301503|13|15|Stamina Fruit|1|1|NO|NO
+1301504|13|15|Command Fruit|1|1|NO|NO
+1301601|13|16|Blood Scroll +1|1|2|NO|NO
+1301602|13|16|Blood Scroll +2|1|2|NO|NO
+1301603|13|16|Blood Scroll +3|1|2|NO|NO
+1301604|13|16|Blood Scroll +4|1|2|NO|NO
+1301605|13|16|Blood Scroll +5|1|2|NO|NO
+1301606|13|16|Blood Scroll +6|1|2|NO|NO
+1301607|13|16|Blood Scroll +7|1|2|NO|NO
+1301608|13|16|Blood Scroll +8|1|2|NO|NO
+1301701|13|17|Blood Bone +1|1|2|NO|NO
+1301702|13|17|Blood Bone +2|1|2|NO|NO
+1301703|13|17|Blood Bone +3|1|2|NO|NO
+1301704|13|17|Blood Bone +4|1|2|NO|NO
+1301705|13|17|Blood Bone +5|1|2|NO|NO
+1301706|13|17|Blood Bone +6|1|2|NO|NO
+1301707|13|17|Blood Bone +7|1|2|NO|NO
+1301708|13|17|Blood Bone +8|1|2|NO|NO
+1301801|13|18|Invitacion BC +1|2|2|NO|NO
+1301802|13|18|Invitacion BC +2|2|2|NO|NO
+1301803|13|18|Invitacion BC +3|2|2|NO|NO
+1301804|13|18|Invitacion BC +4|2|2|NO|NO
+1301805|13|18|Invitacion BC +5|2|2|NO|NO
+1301806|13|18|Invitacion BC +6|2|2|NO|NO
+1301807|13|18|Invitacion BC +7|2|2|NO|NO
+1301808|13|18|Invitacion BC +8|2|2|NO|NO
+1301900|13|19|Divine Staf of Archangel|1|2|NO|NO
+1301901|13|19|Divine Sword of Archangel|1|2|NO|NO
+1301902|13|19|Divine CrossBow of Archangel|1|2|NO|NO
+1302000|13|20|Ring of Wizardry|1|1|NO|NO
+1302001|13|20|Ring of Warrior lvl 40|1|1|NO|NO
+1302002|13|20|Ring of Warrior lvl 80|1|1|NO|NO
+1302100|13|21|Ring of Fire|1|1|Anubis|Muren
+1302200|13|22|Ring of Earth|1|1|Ceto|Vicious
+1302300|13|23|Ring of Wind|1|1|Kantata|Silrion
+1302400|13|24|Ring of Magic|1|1|Apolo|Krono
+1302500|13|25|Pendant of Ice|1|1|Apolo|Browii
+1302600|13|26|Pendant of Wind|1|1|Evis|Silrion
+1302700|13|27|Pendant of Water|1|1|Gaion|NO
+1302800|13|28|Pendant of Ability|1|1|Gywen|Andy
+1302900|13|29|Invitacion CC|2|2|NO|NO
+1303100|13|31|Dark Spirit Of Horse|1|1|NO|NO
+1303101|13|31|Dark Spirit Of Raven|1|1|NO|NO
+1303200|13|32|Fenrir Armor|1|1|NO|NO
+1303300|13|33|Divine Guardian|1|1|NO|NO
+1303400|13|34|Claw of Beast|1|1|NO|NO
+1303500|13|35|Fragment of Horn|1|1|NO|NO
+1303600|13|36|Broken Horn|2|2|NO|NO
+1303700|13|37|Fenrir|2|2|NO|NO
+1303800|13|38|MoonStone Ring|1|1|NO|NO
+1303900|13|39|Defensive Ring|1|1|NO|NO
+1304000|13|40|Agility Ring|1|1|NO|NO
+1304100|13|41|Damage Ring|1|1|NO|NO
+1304200|13|42|Ring Of GM|1|1|NO|NO
+1304300|13|43|Seal Of Rise|1|1|NO|NO
+1304400|13|44|Seal Of Wind|1|1|NO|NO
+1304500|13|45|Seal Of Maintenance|1|1|NO|NO
+1304600|13|46|Devil Square Ticket|1|1|NO|NO
+1304700|13|47|Blood Castle Ticket|1|1|NO|NO
+1304800|13|48|Kalima Ticket (JPN)|1|1|NO|NO
+1304901|13|49|Old Pergamin +1|1|1|NO|NO
+1304902|13|49|Old Pergamin +2|1|1|NO|NO
+1304903|13|49|Old Pergamin +3|1|1|NO|NO
+1304904|13|49|Old Pergamin +4|1|1|NO|NO
+1304905|13|49|Old Pergamin +5|1|1|NO|NO
+1304906|13|49|Old Pergamin +6|1|1|NO|NO
+1305001|13|50|Illusion Blood +1|1|2|NO|NO
+1305002|13|50|Illusion Blood +2|1|2|NO|NO
+1305003|13|50|Illusion Blood +3|1|2|NO|NO
+1305004|13|50|Illusion Blood +4|1|2|NO|NO
+1305005|13|50|Illusion Blood +5|1|2|NO|NO
+1305006|13|50|Illusion Blood +6|1|2|NO|NO
+1305101|13|51|Illusion Pergamin +1|2|2|NO|NO
+1305102|13|51|Illusion Pergamin +2|2|2|NO|NO
+1305103|13|51|Illusion Pergamin +3|2|2|NO|NO
+1305104|13|51|Illusion Pergamin +4|2|2|NO|NO
+1305105|13|51|Illusion Pergamin +5|2|2|NO|NO
+1305106|13|51|Illusion Pergamin +6|2|2|NO|NO
+1305200|13|52|Flame Of Condor|1|2|NO|NO
+1305300|13|53|Feather Of Condor|1|2|NO|NO
+1305400|13|54|Reset Fruit Strengh|1|1|NO|NO
+1305500|13|55|Reset Fruit Agility|1|1|NO|NO
+1305600|13|56|Reset Fruit Energy|1|1|NO|NO
+1305700|13|57|Reset Fruit Stamina|1|1|NO|NO
+1305800|13|58|Reset Fruit Command|1|1|NO|NO
+1305900|13|59|Seal Of Mobility|1|1|NO|NO
+1306000|13|60|Indulgence|1|2|NO|NO
+1306100|13|61|Illusion Temple Ticket|1|1|NO|NO
+1306200|13|62|Seal Of Healing|1|1|NO|NO
+1306300|13|63|Seal Of Divinity|1|1|NO|NO
+1306400|13|64|Devil|1|1|NO|NO
+1306500|13|65|Hade|1|1|NO|NO
+1306600|13|66|Mountain Village Invitation|1|1|NO|NO
+1306700|13|67|Rudolf|1|1|NO|NO
+1306800|13|68|SnowMan Ring|1|1|NO|NO
+1306900|13|69|Talisman Of Resurrection|1|1|NO|NO
+1307000|13|70|Talisman Of Mobility|1|1|NO|NO
+1307100|13|71|Sword/BluntObject/Window|2|3|NO|NO
+1307200|13|72|Staff|2|3|NO|NO
+1307300|13|73|Bow/Crossbow|2|3|NO|NO
+1307400|13|74|Scepter|2|3|NO|NO
+1307500|13|75|Sticks|2|3|NO|NO
+1307600|13|76|Panda Ring|1|1|NO|NO
+1308000|13|80|Panda|1|1|NO|NO
+1308100|13|81|Guardian Amulet|1|1|NO|NO
+1308200|13|82|Protection Amulet|1|1|NO|NO
+1308300|13|83|Talisman Of Satan Wing (JPN)|1|1|NO|NO
+1308400|13|84|Talisman Of Heaven Wing (JPN)|1|1|NO|NO
+1308500|13|85|Talisman Of Elf Wing (JPN)|1|1|NO|NO
+1308600|13|86|Talisman Of Curse Wing (JPN)|1|1|NO|NO
+1308700|13|87|Talisman Of Lord Cape (JPN)|1|1|NO|NO
+1308800|13|88|Talisman Of Dragon Wing (JPN)|1|1|NO|NO
+1308900|13|89|Talisman Of Soul Wing (JPN)|1|1|NO|NO
+1309000|13|90|Talisman Of Spirit Wing (JPN)|1|1|NO|NO
+1309100|13|91|Talisman Of Despair Wing (JPN)|1|1|NO|NO
+1309200|13|92|Talisman Of Darknes Wing (JPN)|1|1|NO|NO
+1309300|13|93|Seal Of Master Ascension (JPN)|1|1|NO|NO
+1309400|13|94|Seal Of Master Wealth (JPN)|1|1|NO|NO
+1309500|13|95|Gladiator Glory|1|1|NO|NO
+1309600|13|96|Seal Of Strength (JPN)|1|1|NO|NO
+1309700|13|97|Mageom Sakaerikteo Card|1|1|NO|NO
+1309800|13|98|Dakeurodeu Character Cards|1|1|NO|NO
+1309900|13|99|Character Slot Key|1|1|NO|NO
+1310900|13|109|Sapphire Ring|1|1|NO|NO
+1311000|13|110|Ruby Ring|1|1|NO|NO
+1311100|13|111|Topaz Ring|1|1|NO|NO
+1311200|13|112|Amethyst Ring|1|1|NO|NO
+1311300|13|113|Ruby Necklace|1|1|NO|NO
+1311400|13|114|Emerald Necklace|1|1|NO|NO
+1311500|13|115|Sapphire Necklace|1|1|NO|NO
+1311600|13|116|Plenty Of Tension|1|1|NO|NO
+1311700|13|117|Small Elixir Of Energy|1|1|NO|NO
+1311800|13|118|Small Elixir Of Vitality|1|1|NO|NO
+1311900|13|119|MedIun Elixir of Vitality|1|1|NO|NO
+1312000|13|120|Large Elixir Of Vitality|1|1|NO|NO
+1312100|13|121|Free Ticket|1|1|NO|NO
+1312200|13|122|Skeleton Ring|1|1|NO|NO
+1312300|13|123|Skeleton|1|1|NO|NO
+1303000|13|30|Cape of Lord|2|3|NO|NO
+1400000|14|0|Apple|1|1|NO|NO
+1400100|14|1|Small Healing Potion|1|1|NO|NO
+1400200|14|2|Healing Potion|1|1|NO|NO
+1400300|14|3|Large Healing Potion|1|1|NO|NO
+1400400|14|4|Small Mana Potion|1|1|NO|NO
+1400500|14|5|Mana Potion|1|1|NO|NO
+1400600|14|6|Large Mana Potion|1|1|NO|NO
+1400700|14|7|Potion Of Bles|1|1|NO|NO
+1400701|14|7|Potion Of Soul|1|1|NO|NO
+1400800|14|8|Antidoto|1|1|NO|NO
+1400900|14|9|Vino|1|2|NO|NO
+1400901|14|9|Olivas|1|2|NO|NO
+1401000|14|10|Town Portal Scroll|1|2|NO|NO
+1401100|14|11|Box Of Luck|1|1|NO|NO
+1401101|14|11|Star|1|1|NO|NO
+1401102|14|11|FireCracker|1|1|NO|NO
+1401103|14|11|Heart Of Love|1|1|NO|NO
+1401105|14|11|Silver Medal|1|1|NO|NO
+1401106|14|11|Gold Medal|1|1|NO|NO
+1401107|14|11|Box Of Heaven|1|1|NO|NO
+1401108|14|11|Kundun +1|1|1|NO|NO
+1401109|14|11|Kundun +2|1|1|NO|NO
+1401110|14|11|Kundun +3|1|1|NO|NO
+1401111|14|11|Kundun +4|1|1|NO|NO
+1401112|14|11|Kundun +5|1|1|NO|NO
+1401113|14|11|Heart Of Lord|1|1|NO|NO
+1401300|14|13|Jewel of Bles|1|1|NO|NO
+1401400|14|14|Jewel of Soul|1|1|NO|NO
+1401600|14|16|Jewel of Life|1|1|NO|NO
+1401701|14|17|Devils Eye +1|1|1|NO|NO
+1401702|14|17|Devils Eye +2|1|1|NO|NO
+1401703|14|17|Devils Eye +3|1|1|NO|NO
+1401704|14|17|Devils Eye +4|1|1|NO|NO
+1401705|14|17|Devils Eye +5|1|1|NO|NO
+1401706|14|17|Devils Eye +6|1|1|NO|NO
+1401707|14|17|Devils Eye +7|1|1|NO|NO
+1401801|14|18|Devils Key +1|1|1|NO|NO
+1401802|14|18|Devils Key +2|1|1|NO|NO
+1401803|14|18|Devils Key +3|1|1|NO|NO
+1401804|14|18|Devils Key +4|1|1|NO|NO
+1401805|14|18|Devils Key +5|1|1|NO|NO
+1401806|14|18|Devils Key +6|1|1|NO|NO
+1401807|14|18|Devils Key +7|1|1|NO|NO
+1401901|14|19|Invitacion DS +1|1|1|NO|NO
+1401902|14|19|Invitacion DS +2|1|1|NO|NO
+1401903|14|19|Invitacion DS +3|1|1|NO|NO
+1401904|14|19|Invitacion DS +4|1|1|NO|NO
+1401905|14|19|Invitacion DS +5|1|1|NO|NO
+1401906|14|19|Invitacion DS +6|1|1|NO|NO
+1401907|14|19|Invitacion DS +7|1|1|NO|NO
+1402000|14|20|Remedy of Love|1|1|NO|NO
+1402103|14|21|Sign Of Lord|1|1|NO|NO
+1402200|14|22|Jewel of Creation|1|1|NO|NO
+1402300|14|23|Scroll Of The Emperor|1|1|NO|NO
+1402301|14|23|Ring Of Honor|1|1|NO|NO
+1402400|14|24|Broken Sword|1|2|NO|NO
+1402401|14|24|Dark Stone|1|2|NO|NO
+1402500|14|25|Tear Of Elf|1|1|NO|NO
+1402600|14|26|Soul Of Wizard|1|1|NO|NO
+1402700|14|27|Ancient Metal|1|1|NO|NO
+1402801|14|28|Lost Map +1|1|1|NO|NO
+1402802|14|28|Lost Map +2|1|1|NO|NO
+1402803|14|28|Lost Map +3|1|1|NO|NO
+1402804|14|28|Lost Map +4|1|1|NO|NO
+1402805|14|28|Lost Map +5|1|1|NO|NO
+1402806|14|28|Lost Map +6|1|1|NO|NO
+1402807|14|28|Lost Map +7|1|1|NO|NO
+1402901|14|29|Sign of Kundum +1|1|1|NO|NO
+1402902|14|29|Sign of Kundum +2|1|1|NO|NO
+1402903|14|29|Sign of Kundum +3|1|1|NO|NO
+1402904|14|29|Sign of Kundum +4|1|1|NO|NO
+1402905|14|29|Sign of Kundum +5|1|1|NO|NO
+1402906|14|29|Sign of Kundum +6|1|1|NO|NO
+1402907|14|29|Sign of Kundum +7|1|1|NO|NO
+1403100|14|31|Jewel of Guardian|1|1|NO|NO
+1403200|14|32|Pink Ribbon|1|1|NO|NO
+1403201|14|32|Pink Candy|1|1|NO|NO
+1403300|14|33|Red Ribbon|1|1|NO|NO
+1403301|14|33|Orange Candy|1|1|NO|NO
+1403400|14|34|Blue Ribbon|1|1|NO|NO
+1403401|14|34|Blue Candy|1|1|NO|NO
+1403500|14|35|Small SD Potion|1|1|NO|NO
+1403600|14|36|Medium SD Potion|1|1|NO|NO
+1403700|14|37|Large SD Potion|1|1|NO|NO
+1403800|14|38|Small AG Potion|1|1|NO|NO
+1403900|14|39|Medium AG Potion|1|1|NO|NO
+1404000|14|40|Large AG Potion|1|1|NO|NO
+1404100|14|41|Jewel of Stone|1|1|NO|NO
+1404200|14|42|Jewel of Harmony|1|1|NO|NO
+1404300|14|43|Jewel of Lower Refining|1|1|NO|NO
+1404400|14|44|Jewel of Higher Refining|1|1|NO|NO
+1404500|14|45|Head Of Jack|1|1|NO|NO
+1404600|14|46|Blessing Of Jack|1|2|NO|NO
+1404700|14|47|Scare Of Jack|1|2|NO|NO
+1404800|14|48|Surprise Of Jack|1|2|NO|NO
+1404900|14|49|Food Of Jack|1|1|NO|NO
+1405000|14|50|Caliz Of Jack|1|1|NO|NO
+1405100|14|51|Start Of Jack|1|1|NO|NO
+1405200|14|52|Box Of GM|1|1|NO|NO
+1405400|14|54|Book of Rargle|1|1|NO|NO
+1405500|14|55|Green Chaos|1|1|NO|NO
+1405600|14|56|Red Chaos|1|1|NO|NO
+1405700|14|57|Purple Chaos|1|1|NO|NO
+1405800|14|58|Rare Item Ticket 1 (JPN)|1|1|NO|NO
+1405900|14|59|Rare Item Ticket 2 (JPN)|1|1|NO|NO
+1406000|14|60|Rare Item Ticket 3 (JPN)|1|1|NO|NO
+1406100|14|61|Rare Item Ticket 4 (JPN)|1|1|NO|NO
+1406200|14|62|Rare Item Ticket 5 (JPN)|1|1|NO|NO
+1406300|14|63|Width Gruel|1|1|NO|NO
+1406500|14|65|Stone Of Flame|1|1|NO|NO
+1406600|14|66|Horn Of Flame|1|2|NO|NO
+1406700|14|67|Feather Of Flame|1|2|NO|NO
+1406800|14|68|Eye of Abyss|1|2|NO|NO
+1407000|14|70|Elite Healing Potion|1|1|NO|NO
+1407100|14|71|Elite Mana Potion|1|1|NO|NO
+1407200|14|72|Scroll Of Quickness|2|2|NO|NO
+1407300|14|73|Scroll Of Protection|2|2|NO|NO
+1407400|14|74|Scroll Of Wrath|2|2|NO|NO
+1407500|14|75|Scroll Of Wizardry|2|2|NO|NO
+1407600|14|76|Scroll Of Health|2|2|NO|NO
+1407700|14|77|Scroll Of Mana|2|2|NO|NO
+1407800|14|78|Leap Of Strength (JPN)|1|2|NO|NO
+1407900|14|79|Leap Of Quickness (JPN)|1|2|NO|NO
+1408000|14|80|Leap Of Health (JPN)|1|2|NO|NO
+1408100|14|81|Leap Of Energy (JPN)|1|2|NO|NO
+1408200|14|82|Leap Of Control (JPN)|1|2|NO|NO
+1408300|14|83|Rare Item Ticket 6 (JPN)|1|1|NO|NO
+1408400|14|84|Cherry Blossom Box|1|1|NO|NO
+1408500|14|85|Cherry Wine|1|2|NO|NO
+1408600|14|86|Cherry Dumpling|1|1|NO|NO
+1408700|14|87|Cherry Petal|1|1|NO|NO
+1408800|14|88|Cherry Blossom Black|1|2|NO|NO
+1408900|14|89|Cherry Blossom Pink|1|2|NO|NO
+1409000|14|90|Cherry Blossom Gold|1|2|NO|NO
+1409100|14|91|Summoner Character Card (JPN)|1|1|NO|NO
+1409200|14|92|Chaos Card Gold (JPN)|1|1|NO|NO
+1409300|14|93|Chaos Card Rare (JPN)|1|1|NO|NO
+1409400|14|94|Med.Elite Healing Potion (JPN)|1|1|NO|NO
+1409500|14|95|Chaos Card Mini (JPN)|1|1|NO|NO
+1409600|14|96|Unsuitable Union|1|1|NO|NO
+1409700|14|97|Scroll Of Battle|2|2|NO|NO
+1409800|14|98|Scroll Of Strengthener|2|2|NO|NO
+1409900|14|99|Width Gruel X-Mas|1|1|NO|NO
+1410000|14|100|Coin Of Fortune|1|1|NO|NO
+1410100|14|101|Guy Paper|1|1|NO|NO
+1410200|14|102|Gaion Order|1|1|NO|NO
+1410300|14|103|Sekeuromikon Piece +1|1|1|NO|NO
+1410400|14|104|Sekeuromikon Piece +2|1|1|NO|NO
+1410500|14|105|Sekeuromikon Piece +3|1|1|NO|NO
+1410600|14|106|Sekeuromikon Piece +4|1|1|NO|NO
+1410700|14|107|Sekeuromikon Piece +5|1|1|NO|NO
+1410800|14|108|Sekeuromikon Piece +6|1|1|NO|NO
+1410900|14|109|Sekeuromikon|1|1|NO|NO
+1411000|14|110|Dimension Marker|1|1|NO|NO
+1411100|14|111|Dopplegoer Spectrum|1|1|NO|NO
+1411200|14|112|Silver Key|1|1|NO|NO
+1411300|14|113|Gold Key|1|1|NO|NO
+1411400|14|114|Initializing the Master Skill|1|1|NO|NO
+1411500|14|115|Stat-Tuning|1|1|NO|NO
+1411600|14|116|Character Before the Service|1|1|NO|NO
+1411700|14|117|Change Service Kaerikteomyeong|1|1|NO|NO
+1411800|14|118|Server Before the Service|1|1|NO|NO
+1411900|14|119|Premium Package|1|1|NO|NO
+1412000|14|120|Goblin Gold|1|1|NO|NO
+1412100|14|121|Sealed Gold Box|1|1|NO|NO
+1412200|14|122|Sealed Silver Box|1|1|NO|NO
+1412300|14|123|Gold Box|1|1|NO|NO
+1412400|14|124|Silver Box|1|1|NO|NO
+1412500|14|125|Package Box|1|1|NO|NO
+1412600|14|126|30 Days Jeongaekgwon|1|1|NO|NO
+1412700|14|127|90 Days Jeongaekgwon|1|1|NO|NO
+1412800|14|128|30 Days Jeongaekgwon Point|1|1|NO|NO
+1412900|14|129|90 Days Jeongaekgwon Point|1|1|NO|NO
+1413000|14|130|3 Hours Jeongryanggwon|1|1|NO|NO
+1413100|14|131|5 Hours Jeongryanggwon|1|1|NO|NO
+1413200|14|132|10 Hours Jeongryanggwon|1|1|NO|NO
+1413300|14|133|Elite SD recovery potion|1|1|NO|NO
+1413400|14|134|Package Box A|1|1|NO|NO
+1413500|14|135|Package Box B|1|1|NO|NO
+1413600|14|136|Package Box C|1|1|NO|NO
+1413700|14|137|Package Box D|1|1|NO|NO
+1413800|14|138|Package Box E|1|1|NO|NO
+1413900|14|139|Package Box F|1|1|NO|NO
+1414000|14|140|Scroll Of Healing|2|2|NO|NO
+1414100|14|141|Winning Jewelry Box|1|1|NO|NO
+1414200|14|142|Sophisticated Jewelry Box|1|1|NO|NO
+1414300|14|143|Metal Jewelry Box|1|1|NO|NO
+1414400|14|144|Old Jewelry Box|1|1|NO|NO
+1500000|15|0|Poison Scroll|1|2|NO|NO
+1500100|15|1|Meteor Scroll|1|2|NO|NO
+1500200|15|2|Lightning Scrol|1|2|NO|NO
+1500300|15|3|Fireball Scroll|1|2|NO|NO
+1500400|15|4|Flame Scroll|1|2|NO|NO
+1500500|15|5|Teleport Scroll|1|2|NO|NO
+1500600|15|6|Ice Scroll|1|2|NO|NO
+1500700|15|7|Twister Scroll|1|2|NO|NO
+1500800|15|8|Evil Spirits Scrol|1|2|NO|NO
+1500900|15|9|Hell Fire Scroll|1|2|NO|NO
+1501000|15|10|Power Wave Scroll|1|2|NO|NO
+1501100|15|11|Aqua Beam Scroll|1|2|NO|NO
+1501200|15|12|Blast Scroll|1|2|NO|NO
+1501300|15|13|Inferno Scroll|1|2|NO|NO
+1501400|15|14|Mass Teleport|1|2|NO|NO
+1501500|15|15|Mana Shield Scroll|1|2|NO|NO
+1501600|15|16|Decay Scroll|1|2|NO|NO
+1501700|15|17|Ice Storm Scroll|1|2|NO|NO
+1501800|15|18|Nova Scroll|1|2|NO|NO
+1501900|15|19|Scroll of Chain Lighting|1|2|NO|NO
+1502000|15|20|Scroll of Drain Life|1|2|NO|NO
+1502100|15|21|Scroll of Shock Light|1|2|NO|NO
+1502200|15|22|Scroll of Reflection DMG|1|2|NO|NO
+1502300|15|23|Scroll of Berserker|1|2|NO|NO
+1502400|15|24|Scroll of Sleep|1|2|NO|NO
+1502500|15|25|Scroll of MagicSpeed Up|1|2|NO|NO
+1502600|15|26|Scroll of Weakness|1|2|NO|NO
+1502700|15|27|Scroll of Innovation|1|2|NO|NO
+1502800|15|28|Scroll of Magic Circle|1|2|NO|NO
+1502900|15|29|Scroll Gigantic Storm|1|2|NO|NO
