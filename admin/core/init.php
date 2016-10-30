@@ -35,6 +35,7 @@ define('URL_PATH', dirname($_SERVER['SCRIPT_NAME']) . '/admin');  //custom by bq
 define('PHP_SELF', $_SERVER["SCRIPT_NAME"]);
 
 // include necessary libs
+require_once ROOT . '/core/function/libgarena.php';
 require_once SERVDIR . '/core/cn_modify_admin.php'; //libs
 require_once SERVDIR . '/core/security.php';
 require_once SERVDIR . '/core/news.php';
