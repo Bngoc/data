@@ -1854,6 +1854,8 @@ function cn_config_load()
     $script_path = "http://" . $_SERVER['SERVER_NAME'] . (($SN == '/') ? '' : $SN);
 //    $script_path = "http://" . $_SERVER['SERVER_NAME'];
 
+    echo "1111 > " . $script_path . '<br>';
+
     //check http_script_dir
     //$path_http_script_dir = $script_path;
     //if (getoption('http_script_dir') != $path_http_script_dir)
