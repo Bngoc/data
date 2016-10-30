@@ -7,6 +7,8 @@
  // kiem ten dang ky --- doi ten nhan vat
  
  
+ // 1433 ---> connect sql server
+ 
  Alter TABLE [dbo].[MEMB_INFO] ADD [acl] [smallint] NOT NULL DEFAULT (2)
  Alter TABLE [dbo].[MEMB_INFO] ADD [ban_login] [int] NOT NULL DEFAULT (0)
  Alter TABLE [dbo].[MEMB_INFO] ADD [num_login] [smallint] NOT NULL DEFAULT (0)
