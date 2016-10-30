@@ -41,7 +41,7 @@ function cn_writelog($content, $info = '', $user = '')
 
     $date = date("Y-m-d H:i:s", $time);
 
-    if (!file_exists($ul = cn_path_construct(SERVDIR, '/admin/log/system/') . 'error_dump.log')) {
+    if (!file_exists($ul = cn_path_construct(ROOT, '/admin/log/system/') . 'error_dump.log')) {
         fclose(fopen($ul, 'w+'));
     }
     if ($fd = @fopen($ul, "a")) {

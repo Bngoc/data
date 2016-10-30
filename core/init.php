@@ -21,7 +21,7 @@ define('VERSION_ID', 203);
 define('VERSION_NAME', 'News v.' . VERSION . 'c');
 
 define('SERVDIR', dirname(dirname(__FILE__)));
-//define('ROOT', dirname(dirname(dirname(__FILE__))));
+define('ROOT', dirname(__FILE__));
 define('MODULE_DIR', SERVDIR . '/core/modules'); // nhan xu li
 define('SKIN', SERVDIR . '/cdata'); // chua html
 define('MODULE_ADM', SERVDIR . '/admin'); // chua ADMIN
