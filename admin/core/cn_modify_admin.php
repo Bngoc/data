@@ -1528,6 +1528,7 @@ function cn_config_load()
 
     $conf_path = cn_path_construct(ROOT, 'gifnoc') . 'gifnoc.php';
     $cfg = cn_touch_get($conf_path); //doc or tao file
+
     if (!$cfg) {
         if (defined('XXXXXXXX_NEWS')) {
             echo 'Sorry, but news not available by technical reason.';
@@ -1538,7 +1539,7 @@ function cn_config_load()
 
         }
     }
-
+die('1111');
     date_default_timezone_set("UTC"); //HKEY_LOCAL_MACHINE\\SYSTEM\CurrentControlSet\Control\TimeZoneInformation
     $shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
     $time_bias = -($shell->RegRead("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation\\ActiveTimeBias")) / 60;

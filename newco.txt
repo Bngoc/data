@@ -1,11 +1,4 @@
 //----------------Web-------------------------
- // top 50 >>>> ?
- // topmonth >>>>> ?
- // event kem theo reset - reset Vip
- // ko luu mcache 
- // uy thac online =>[ # map, doi char] ===> ket thuc uy thac online
- // kiem ten dang ky --- doi ten nhan vat
- 
  
  // 1433 ---> connect sql server
  
