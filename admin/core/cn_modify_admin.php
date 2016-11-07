@@ -1519,11 +1519,14 @@ function cn_load_skin()
 // Since 2.0: @bootstrap Make & load configuration file ==>
 function cn_config_load()
 {
+    //chmod(ROOT. '/core/cashshop', 0777);
+    //chmod(ROOT. '/gifnoc', 0777);
     global $_CN_access;
     //checking permission for load config
-    $conf_dir = cn_path_construct(SERVDIR, 'cdata');
+    $conf_dir = cn_path_construct(SERVDIR, 'gifnoc');
     if (!is_dir($conf_dir) || !is_writable($conf_dir)) {
-        return false;
+        die('Permissions and CHMOD for gifnoc');
+        //return false;
     }
 
     $conf_path = cn_path_construct(ROOT, 'gifnoc') . 'gifnoc.php';
