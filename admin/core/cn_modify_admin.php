@@ -1520,15 +1520,14 @@ function cn_load_skin()
 function cn_config_load()
 {
     //chmod(ROOT. '/core/cashshop', 0777);
-    //chmod(ROOT. '/gifnoc', 0777);
+    //chmod(ROOT. '\gifnoc', 0777);
     global $_CN_access;
     //checking permission for load config
-    $conf_dir = cn_path_construct(SERVDIR, 'gifnoc');
+    $conf_dir = cn_path_construct(ROOT, 'gifnoc');
     if (!is_dir($conf_dir) || !is_writable($conf_dir)) {
         die('Permissions and CHMOD for gifnoc');
         //return false;
     }
-
     $conf_path = cn_path_construct(ROOT, 'gifnoc') . 'gifnoc.php';
     $cfg = cn_touch_get($conf_path); //doc or tao file
 
@@ -1542,12 +1541,11 @@ function cn_config_load()
 
         }
     }
-die('1111');
+
     date_default_timezone_set("UTC"); //HKEY_LOCAL_MACHINE\\SYSTEM\CurrentControlSet\Control\TimeZoneInformation
-    $shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
+	$shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
     $time_bias = -($shell->RegRead("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation\\ActiveTimeBias")) / 60;
-
-
+	
     // make site section
     $cfg['%site'] = isset($cfg['%site']) ? $cfg['%site'] : array();
 
