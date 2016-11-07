@@ -1545,7 +1545,7 @@ function cn_config_load()
     date_default_timezone_set("UTC"); //HKEY_LOCAL_MACHINE\\SYSTEM\CurrentControlSet\Control\TimeZoneInformation
 	$shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
     $time_bias = -($shell->RegRead("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation\\ActiveTimeBias")) / 60;
-	
+
     // make site section
     $cfg['%site'] = isset($cfg['%site']) ? $cfg['%site'] : array();
 
