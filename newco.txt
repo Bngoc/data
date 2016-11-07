@@ -1,13 +1,8 @@
 //----------------Web-------------------------
- // top 50 >>>> ?
- // topmonth >>>>> ?
- // event kem theo reset - reset Vip
- // ko luu mcache 
- // uy thac online =>[ # map, doi char] ===> ket thuc uy thac online
- // kiem ten dang ky --- doi ten nhan vat
  
  
- // 1433 ---> connect sql server
+ 1. 1433 ---> connect sql server
+ 2. chmod thu muc data.....
  
  Alter TABLE [dbo].[MEMB_INFO] ADD [acl] [smallint] NOT NULL DEFAULT (2)
  Alter TABLE [dbo].[MEMB_INFO] ADD [ban_login] [int] NOT NULL DEFAULT (0)
