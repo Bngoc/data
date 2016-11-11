@@ -17,7 +17,7 @@ cn_snippet_messages();
                         </td>
                     </tr>
                     <tr>
-                        <td>Localhost</td>
+                        <td>Server Name</td>
                         <td><input type="text" id="nameLocal" placeholder="(local)" name="nameLocal" value="<?php echo REQ('nameLocal', 'POST'); ?>"/></td>
                     </tr>
                     <tr>

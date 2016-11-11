@@ -46,7 +46,7 @@ cn_snippet_bc();
                     if ($opt_vars[0] == 'label') echo cn_htmlspecialchars($opt_vars['var']);
                     elseif ($opt_vars[0] == 'text') echo '<input type="text" name="config[' . $opt_id . ']" style="width: 400px;" value="' . cn_htmlspecialchars($opt_vars['var']) . '"/>';
                     elseif ($opt_vars[0] == 'int') echo '<input type="text" name="config[' . $opt_id . ']" size="28" value="' . intval($opt_vars['var']) . '"/>';
-                    elseif ($opt_vars[0] == 'password') echo '<input type="password" name="config[' . $opt_id . ']" size="28" value="' . $opt_vars['var'] . '"/>';
+                    elseif ($opt_vars[0] == 'password') echo '<input type="password" name="config[' . $opt_id . ']" size="28" value=""/>';
                     elseif ($opt_vars[0] == 'Y/N') echo '<input type="checkbox" name="config[' . $opt_id . ']" ' . ($opt_vars['var'] ? 'checked="checked"' : '') . ' value="Y"/>';
                     elseif ($opt_vars[0] == 'select') {
                         echo '<select name="config[' . $opt_id . ']"/>';

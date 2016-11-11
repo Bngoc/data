@@ -351,7 +351,11 @@ function board_sysconf()
             } elseif ($var[0] == 'int') {
                 $opt_result[$id] = intval($post_cfg[$id]);
             } elseif ($var[0] == 'password') {
-                $opt_result[$id] = $post_cfg[$id];
+                if ($post_cfg[$id]) {
+                    $opt_result[$id] = $post_cfg[$id];
+                } else {
+                    $opt_result[$id] = getoption($id);
+                }
             } elseif ($var[0] == 'Y/N') {
                 $opt_result[$id] = (isset($post_cfg[$id]) && 'Y' == $post_cfg[$id]) ? 1 : 0;
             } elseif (isset($post_cfg[$id])) {
@@ -1763,7 +1767,6 @@ function board_iswebshop()
 
 function board_logs()
 {
-
     $log_read = $logs = array();
 
     $skip = FALSE;
@@ -1829,13 +1832,14 @@ function board_logs()
                 }
             }
         }
-            foreach ($logs_shop as $lf) {
-                if (preg_match('/log_(.*)\.txt/i', $lf, $c)) {
-                    if (isset($all_shop[$c[1]])) {
-                        $all_shop[$c[1]]['log'] = 'log_' . $c[1];
-                    }
+
+        foreach ($logs_shop as $lf) {
+            if (preg_match('/log_(.*)\.txt/i', $lf, $c)) {
+                if (isset($all_shop[$c[1]])) {
+                    $all_shop[$c[1]]['log'] = 'log_' . $c[1];
                 }
             }
+        }
     }
 
     if ($st < 0) $st = 0;
@@ -1877,20 +1881,17 @@ function board_logs()
         }
     } // --- character log section ---
     elseif ($section === 'character') {
-
-        // ------------------
         $sub = REQ('sub', "GETPOST");
 
         list($dir, $action) = GET('dir, action', 'GPG');
 
-        if(isset($action)) {
-            unlink(cn_path_construct(SERVDIR, 'log/modules/'.$dir) . $action .'.txt');
-            cn_relocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub, 'section='.$section));
+        if (isset($action)) {
+            unlink(cn_path_construct(SERVDIR, 'log/modules/' . $dir) . $action . '.txt');
+            cn_relocation(cn_url_modify(array('reset'), 'mod=' . REQ('mod'), 'opt=' . REQ('opt'), 'sub=' . $sub, 'section=' . $section));
         }
 //
 //        // Save data
 //        if (request_type('POST')) {
-//
 //        }
 //
 //        $options = $options_list[$sub];
@@ -1907,40 +1908,41 @@ function board_logs()
 //            unset($options[$id][1]);
 //        }
 
+        if ($dir && $sub) {
+            if (!file_exists($ul = cn_path_construct(SERVDIR, 'log/modules/' . $dir) . $sub . '.txt')) {
+                fclose(fopen($ul, 'w+'));
+            }
 
-        if (!file_exists($ul = cn_path_construct(SERVDIR, 'log/modules/'.$dir) . $sub .'.txt')) {
-            fclose(fopen($ul, 'w+'));
+            $r = fopen($ul, 'r');
+            do {
+                $n++;
+                $v = trim(fgets($r));
+                if (!$v) break;
+                if ($n <= $st) continue;
+
+                //list($date, $msg) = explode('|', $v, 2);
+
+                //$logs[] = array('msg' => $msg, 'date' => date('Y-m-d H:i:s', intval($date)));
+                $log_data = explode('|', $v);
+                $tempBefore = explode('_', $log_data[2]);
+                $tempAfter = explode('_', $log_data[3]);
+                $gcoinDG = $tempBefore[0] - $tempAfter[0];
+                $vpointDG = $tempBefore[1] - $tempAfter[1];
+
+                $log_read[] = array(
+                    'account' => $log_data[0],
+                    'content' => $log_data[1],
+                    'gc_vp_before' => number_format($tempBefore[0], 0, ',', '.') . ' - ' . number_format($tempBefore[1], 0, ',', '.'),
+                    'gc_vp_after' => number_format($tempAfter[0], 0, ',', '.') . ' - ' . number_format($tempAfter[1], 0, ',', '.'),
+                    'gc_vp_gd' => number_format($gcoinDG, 0, ',', '.') . ' - ' . number_format($vpointDG, 0, ',', '.'),
+                    'time' => $log_data[4]
+                );
+
+                if ($n >= $over) break;
+            } while (!feof($r));
+
+            fclose($r);
         }
-
-        $r = fopen($ul, 'r');
-        do {
-            $n++;
-            $v = trim(fgets($r));
-            if (!$v) break;
-            if ($n <= $st) continue;
-
-            //list($date, $msg) = explode('|', $v, 2);
-
-            //$logs[] = array('msg' => $msg, 'date' => date('Y-m-d H:i:s', intval($date)));
-            $log_data = explode('|', $v);
-            $tempBefore = explode('_', $log_data[2]);
-            $tempAfter = explode('_', $log_data[3]);
-            $gcoinDG = $tempBefore[0] - $tempAfter[0];
-            $vpointDG = $tempBefore[1] - $tempAfter[1];
-
-            $log_read[] = array (
-                'account' => $log_data[0],
-                'content' => $log_data[1],
-                'gc_vp_before' => number_format($tempBefore[0], 0, ',', '.') . ' - ' .number_format($tempBefore[1], 0, ',', '.'),
-                'gc_vp_after' => number_format($tempAfter[0], 0, ',', '.') . ' - ' .number_format($tempAfter[1], 0, ',', '.'),
-                'gc_vp_gd' => number_format($gcoinDG, 0, ',', '.') . ' - ' .number_format($vpointDG, 0, ',', '.'),
-                'time' => $log_data[4]
-            );
-
-            if ($n >= $over) break;
-        } while (!feof($r));
-
-        fclose($r);
     }
     //disable pagination
     if (count($log_read) <= $st || count($log_read) <= $num) $isfin = true;

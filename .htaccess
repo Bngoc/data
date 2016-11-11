@@ -19,3 +19,10 @@ php_value mbstring.http_output UTF-8
 php_value mbstring.internal_encoding UTF-8
 php_value mbstring.substitute_character none
 php_value mbstring.script_encoding auto
+
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+RewriteRule ^(.*)\.html$ $1.php [R=301,L]

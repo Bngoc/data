@@ -176,9 +176,9 @@ list($errors_result) = _GL('errors_result');
         </tr>
         <tr>
             <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;"
-                   onclick="getId('capchaWeb').src='/admin/captcha.php?page=web&r='+Math.random(); return(false);">
+                   onclick="getId('capchaWeb').src='<?php echo getoption('http_script_dir'); ?>/admin/captcha.php?page=web&r='+Math.random(); return(false);">
                     Refresh code</a></td>
-            <td colspan="" class="bizwebform_col_2" style="padding-left:20px;"><div class="vertical-img"><img src="/admin/captcha.php?cap=web" id="capchaWeb" alt=""></div></td>
+            <td colspan="" class="bizwebform_col_2" style="padding-left:20px;"><div class="vertical-img"><img src="<?php echo getoption('http_script_dir'); ?>/admin/captcha.php?cap=web" id="capchaWeb" alt=""></div></td>
             <td class="bizwebform_col_3"></td>
         </tr>
         <tr>

@@ -27,7 +27,7 @@ cn_snippet_bc();
             </td>
         </tr>
         <tr>
-            <td><b>Localhost:</b><br>&nbsp;<i>example: http://mysite.com/news.php</i></td>
+            <td><b>Server Name:</b><br>&nbsp;<i>example: http://mysite.com/news.php</i></td>
             <td colspan="3"><input type="text" name="localhost" value="<?php //echo $localhost; ?>"></td>
         </tr>
         <tr>

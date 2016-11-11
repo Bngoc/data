@@ -32,13 +32,18 @@ A>
 			3.7 
 				--> edit binlding 	- wwww.omidev.info
 									-  omidev.info
-			3.8 add permission ... IUSR ...?
+			3.8 add permission ... IUSR ... X Full
 	 
-	 4. truy cap vao  ...../admin.php
+	4
+		
+	5. truy cap vao  ...../admin.php
 		-> php_com_dotnet.dll
+		
 	 
 	 
  B>
+	0. chay odbc
+		-> x86 Or x64
 	1. attach db them vao (detact huy)
 		->  them 3 ? 4 
 			-> permission -> user Full
@@ -47,6 +52,59 @@ A>
 		-> open port 1433 .... lien quan rang ... inbound oubount
 	
 	2. run sql 	
+ 
+	3. Allow remote connect to this server [sql server]
+ 
+ 
+ C> 
+	1. Hex main + Hex main config	
+		-> connect
+		-> AVCKeyGenerater..... serial....
+		-> connect.mu
+		-> connect 
+		-> BufTimeControl
+		-> mu.exe
+	2. 
+ 
+ D> 
+	1.open port
+		--> Connecting to SQL Server remotely on AWS involves 3 main factors: 
+			AWS --> Windows Security --> SQL Server Settings/Security. 
+
+			Connections can easily fail because each area has specific requirements. I'll go through the check-list:
+
+			AWS:
+			1. In AWS management console, go to Security Groups, click on the group that applies to your windows server, make sure MS SQL TCP port 1433 is open to 0.0.0.0 or your specific client IP. If not, you'll need to add it. 
+			2. Note the Public IP of your server
+
+			WINDOWS:
+			1. RDP to the Amazon Windows server, Start > Administrative Tools > Local Security Policy
+			2. Click Windows Firewall with Advanced Security, Windows Firewall Properties, Click the "Public Profile" tab, set Firewall State to "ON", Inbound to Block, Outbound to Allow (or block depending on your application). OK.
+			3. Expand the Windows Firewall (on the left Pane), R-Click the Inbound Rule, Click New Rule.
+			4. Click Port option, Next > , for TCP, enter 1433 Next >, Allow the connection, Next >, Next > , give it a name (SQL-PORT-ACCESS)
+
+			SQL-SERVER:
+			1. Login to SQL Server with SSMS (SQL Server Management Studio) using the default windows authentication. 
+			2. On the left-pane, R-click the top server listing (with the database icon, the very first listing), and select "Properties"
+			3. Properties window, click Security on the left pane, choose the "SQL Server and Windows Auth"
+			4. Click Connections, check the "Allow Remote Connections" option ... Click OK.
+			5. Open the SQL Configuration Manager, Start > Programs > Microsoft SQL Server > Configuration Tools > SQL Server Configuration Manager
+			6. SQL Server Network Configuration (Expand), select Protocols for MSSQL, R-Click TCP , select Properties (TCP should be enabled)
+			7. Click IP Addresses tab, check that IP1 is enabled, Dynamic Ports is 0, TCP port is 1433
+			8. Scroll all the way down to IPAll section, Enter 0 in TCP Dynamic Ports, and 1433 in TCP Port. OK...
+			9. Back on the left pane, click, SQL Server Services, R-Click the SQL Server option, and select "Restart".
+			(NOTE: Unlike earlier comments posted here, SQL Browser server does not impact connectivity, browser service only lists available servers, if you have your specific connection parms, no need to start or worry about the browser)
+
+			TESTING:
+			You don't have go to your remote client to test, start by trying to connect from the same SSMS window on the server. This reduces all the other things that can go wrong at first, if you can connect here, you have some confirmation that it works. If it doesn't work from your own server, the issues are related to Windows security and SQL security and setup. So, under the Object Explorer (SQL server Management Studio), click "Connect" > Database Engine... In the Server name:, enter your PUBLIC IP, a comma, then 1433. Example, if your public IP is 54.4.4.4 , enter 54.4.4.4,1433, select the authentication as "SQL Server", enter the login user and password. If you're using "sa", remember to change the password. If your connection works locally, then you can try your remote client connection. At this point you know your SQL server and user settings are correct. Next, try using SSMS on another computer. If that fails, probably the firewall needs a 2nd look... 
+
+			Good place to understand issues, is the SQL logs easily accessible from SSMS, on the left pane, expand Management, then SQL Server Logs, current log will list any problems.
+
+			So, those are all the parts involved -- miss one and you'll be frustrated, but start by reducing the pieces when testing.
+
+			I was able to connect to AWS Windows Server, running SQL Express, from a Windows Mobile device... it works like a charm. 
+			Good Luck!
+
  
  
  Alter TABLE [dbo].[MEMB_INFO] ADD [acl] [smallint] NOT NULL DEFAULT (2)

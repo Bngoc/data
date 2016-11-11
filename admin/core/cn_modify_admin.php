@@ -3842,7 +3842,7 @@ function cn_check_conncet()
                 $database_ = "Driver={SQL Server};Server={$localhost};Database={$d_base}";
                 $connect_mssql = $db_new->Connect($database_, $databaseuser, $databsepassword);
                 if (!$connect_mssql) {
-                    die('0|Kết nối với SQL Server lỗi!! Hãy kiểm tra lại ODBC tồn tại hoặc User - Pass không đúng.');
+                    die('0|Kết nối với SQL Server lỗi!! Hãy kiểm tra lại ODBC hoặc User - Pass không đúng.');
                 }
             } else if ($type_connect == 'mssql') { // config sau
                 if (extension_loaded('mssql')) echo('');
@@ -3913,7 +3913,7 @@ function cn_require_install()
 //                // Greets page
 //                cn_relocation("http://cutephp.com/thanks.php?referer=" . urlencode(base64_encode('http://' . $_SERVER['SERVER_NAME'] . PHP_SELF)));
                 cn_throw_message('Tạo thành công tài khoản Admin');
-                cn_relocation("/admin.php");
+                cn_relocation(getoption('http_script_dir')."/admin.php");
             }
         }
 

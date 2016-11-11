@@ -55,7 +55,7 @@ list($errors_result, $regusername, $regemail) = _GL('errors_result, regusername,
             <td width=85><a href="#" style="border-bottom: 1px dotted #000080;"
                             onclick="getId('capcha').src='/admin/captcha.php?r='+Math.random(); return(false);">Refresh
                     code</a></td>
-            <td colspan="2"><img src="/admin/captcha.php" id="capcha" alt=""></td>
+            <td colspan="2"><img src="<?php echo getoption('http_script_dir'); ?>/admin/captcha.php" id="capcha" alt=""></td>
         </tr>
 
         <tr>

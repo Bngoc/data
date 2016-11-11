@@ -1573,7 +1573,7 @@ function cn_config_load()
 {
     global $_CN_access;
     //checking permission for load config
-    $conf_dir = cn_path_construct(SERVDIR, 'cdata');
+    $conf_dir = cn_path_construct(ROOT, 'gifnoc');
     if (!is_dir($conf_dir) || !is_writable($conf_dir)) {
         return false;
     }
