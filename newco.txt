@@ -33,7 +33,7 @@ A>
 				--> edit binlding 	- wwww.omidev.info
 									-  omidev.info
 			3.8 add permission ... IUSR ... X Full
-	 
+			3.9 dri .. browser enabled 
 	4
 		
 	5. truy cap vao  ...../admin.php
