@@ -29,7 +29,9 @@ if (($user=member_get()) && defined('AREA') && AREA == 'ADMIN') {
     if (test($_init_modules[$_module]['acl'])) {
         // Request module
         $_mod_cfg = $_init_modules[$_module];
-        include MODULE_DIR . '/' . $_mod_cfg['path'] . '.php';
+        if ($callPath = MODULE_DIR . '/' . $_mod_cfg['path'] . '.php') {
+            include $callPath;
+        }
     } else {
         if($user['acl'] == ACL_LEVEL_BANNED) {
             global $_SESS;
