@@ -4008,6 +4008,11 @@ function cn_checkDisk()
     echo '</div>';
 }
 
+function echoArr($arr){
+	echo '<pre>';
+	var_dump($arr);
+	echo '</pre>';
+}
 
 $name_function = '';
 if (isset($_REQUEST['name_function'])) {
