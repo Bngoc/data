@@ -20,10 +20,9 @@ function db_installed_check()
     }
 
     $result = $db_new->Execute("SELECT * FROM Account_Info WHERE [AdLevel]=1");
-//    $result = $db_new->Execute("SELECT COUNT(*) as numCount FROM Account_Info");
-
-    if ($result) {
-//    if ($result->RecordCount()) {
+    //$result = $db_new->Execute("SELECT COUNT(*) as numCount FROM Account_Info WHERE [AdLevel]=1");
+    //if ($result->numCount) {
+    if ($result->RecordCount()) {
         return true;
     } else {
         cn_require_install();

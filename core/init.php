@@ -8,7 +8,7 @@ if (DEV_DEBUG) {
 } else {
     error_reporting(E_ALL ^ E_NOTICE);
 }
-
+//error_reporting(E_ERROR | E_PARSE);
 
 // definitions
 define('BQN_MU', microtime(true));

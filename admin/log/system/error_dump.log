@@ -60,3 +60,5 @@ info	"2016-11-07 08:13:31"	UNKNOWN	127.0.0.1	/data/admin.php	"'User buingoc119 (
 error	"2016-11-07 08:15:16"	UNKNOWN	127.0.0.1	/data/admin.php	"SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting"
 error	"2016-11-07 08:15:29"	UNKNOWN	127.0.0.1	/data/admin.php	"SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting"
 info	"2016-11-07 08:16:15"	UNKNOWN	127.0.0.1	/data/admin.php	"'User buingoc119 (127.0.0.1) login failed"
+error	"2016-11-21 03:24:16"	UNKNOWN	54.255.148.200	/admin.php	"INSERT INTO [Account_Info] (AdLevel,UserAcc,Pwd,Email,Lastdate,Time_At,Ban,NumLogin) VALUES (1,'Buingoc','96768216545c539b71475cb58bef9a801decb2e94428695a98897a49f9d536c4','ngocbq02@wru.vn',1479698656,GETDATE(),0,1)"
+error	"2016-11-21 03:24:45"	UNKNOWN	54.255.148.200	/admin.php	"INSERT INTO [Account_Info] (AdLevel,UserAcc,Pwd,Email,Lastdate,Time_At,Ban,NumLogin) VALUES (1,'buingoc','96768216545c539b71475cb58bef9a801decb2e94428695a98897a49f9d536c4','ngocbq02@wru.vn',1479698685,GETDATE(),0,1)"
