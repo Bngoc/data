@@ -9,8 +9,7 @@ define('DEV_DEBUG', false); // for visual detect errors
 if (DEV_DEBUG) {
     ini_set('display_errors', '1');
     error_reporting(E_ALL | E_STRICT);
-}
-else {
+} else {
     error_reporting(E_ALL ^ E_NOTICE);
 }
 
