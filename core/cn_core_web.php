@@ -1658,6 +1658,9 @@ function cn_character()
     $member = member_get();
     $show_reponse = view_character($member['user_name']);
     $arr_class = cn_template_class();
+    if (!$arr_class){
+        die('Err. Bạn chưa thiết lập các thông số nhân vật!');
+    }
     //$key_class = array_keys($arr_class);
     //img character in folder /images/class/ ...gif
     $img_character = array('dw' => 'DarkWizard', 'dk' => 'DarkKnight', 'elf' => 'FairyElf', 'mg' => 'MagicGladiator', 'dl' => 'DarkLord', 'sum' => 'Summoner', 'rf' => 'RageFighter',);
