@@ -5,18 +5,16 @@ if (substr(PHP_VERSION, 0, 5) < '4.1.0') {
     die('PHP Version is ' . PHP_VERSION . ', need great than PHP &gt;= 4.1.0 to start cutenews');
 }
 
-/*
+
 define('DEV_DEBUG', false); // for visual detect errors
-if (DEV_DEBUG)
-{
+if (DEV_DEBUG) {
     ini_set('display_errors', '1');
     error_reporting(E_ALL | E_STRICT);
 }
-else 
-{
+else {
     error_reporting(E_ALL ^ E_NOTICE);
 }
-*/
+
 
 // definitions
 define('BQN_MU', microtime(true));

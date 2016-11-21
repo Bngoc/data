@@ -21,6 +21,7 @@ A>
 			3.2. running PHP 5.5.x
 				--> x86 setup / vcredist_x86.exe
 				--> x64 setup / vcredist_x64.exe
+				==> cv9 cho hdh php x86 + vc9 x86
 			3.4 them moi truong cho thu muc chua giai nen 3.1
 			3.5 Handler Mappings
 				--> Add module Mappings
