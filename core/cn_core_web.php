@@ -1884,7 +1884,6 @@ function cn_template_uythacrs()
 
 function cn_template_uythacrsvip()
 {
-
     // No in cache
     if ($_uythac_rsvip = mcache_get('#uythacrsvip')) {
         return $_uythac_rsvip;
