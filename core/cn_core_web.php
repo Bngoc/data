@@ -441,6 +441,17 @@ function cn_load_session()
     }
 }
 
+function cn_cookie_restore()
+{
+    $xb64d = xxtea_decrypt(base64_decode(strtr($_COOKIE['session'], '-_.', '=/+')), CRYPT_SALT);
+
+    if ($xb64d) {
+        return unserialize($xb64d);
+    }
+
+    return false;
+}
+
 // Since 1.5.1: Validate email
 function check_email($email)
 {
