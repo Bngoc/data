@@ -30,6 +30,7 @@ if (($user=member_get()) && defined('AREA') && AREA == 'ADMIN') {
         // Request module
         $_mod_cfg = $_init_modules[$_module];
         if ($callPath = MODULE_DIR . '/' . $_mod_cfg['path'] . '.php') {
+			die($callPath);
             include $callPath;
         }
     } else {
