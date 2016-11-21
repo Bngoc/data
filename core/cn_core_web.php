@@ -433,23 +433,7 @@ function cn_snippet_bc_re($home_ = 'Home', $_name_bread = null, $sep = '&gt;')
 
 function cn_load_session()
 {
-    //session_name('CUTENEWS_SESSION');
     @session_start();
-
-    if (isset($_COOKIE['session']) && ($users = cn_cookie_restore())) {
-        $_SESSION['user_Gamer'] = $users;
-    }
-}
-
-function cn_cookie_restore()
-{
-    $xb64d = xxtea_decrypt(base64_decode(strtr($_COOKIE['session'], '-_.', '=/+')), CRYPT_SALT);
-
-    if ($xb64d) {
-        return unserialize($xb64d);
-    }
-
-    return false;
 }
 
 // Since 1.5.1: Validate email
@@ -1648,6 +1632,11 @@ function cn_sort_menu()
     $get_per_page = '';
     if ($per_page) $get_per_page = '&per_page=' . $per_page;
     $bc = mcache_get('.menu');
+
+    if (!$bc) {
+        return '';
+    }
+
     $result = '<select class="sel-p" onchange="document.location.href=this.value">';
 
     foreach ($bc as $key => $item) {
@@ -1659,6 +1648,7 @@ function cn_sort_menu()
     }
     $result .= "</select>";
     return $result;
+
     //echo $result;
 }
 
@@ -2353,31 +2343,6 @@ function cn_touch($fn, $php_safe = FALSE)
 
     return $fn;
 }
-
-/*
-// Since 2.0: Save whole config
-function cn_config_save($cfg = null)
-{
-    if ($cfg === null){
-        $cfg = mcache_get('config');
-    }
-
-    $fn = cn_path_construct(ROOT,'gifnoc').'gifnoc.php';
-
-    $dest = $fn.'-'.mt_rand().'.bak'; echo "pppppppppppppppppppppp => $fn => $dest <br>";
-	//unlink($fn); // xoa file hien tai
-    //save all config
-    $fx = fopen($dest, 'w+');
-    fwrite($fx, "<?php die(); ?>\n" . base64_encode(serialize($cfg)) );
-
-    fclose($fx);
-	//unlink($fn); // xoa file hien tai
-	rename($dest, $fn); //bat len .....
-
-    mcache_set('config', $cfg);
-    return $cfg;
-}
-*/
 
 // Since 2.0: Write default input=hidden fields
 function cn_form_open($fields)
