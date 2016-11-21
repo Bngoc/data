@@ -29,7 +29,7 @@ if (($user=member_get()) && defined('AREA') && AREA == 'ADMIN') {
     if (test($_init_modules[$_module]['acl'])) {
         // Request module
         $_mod_cfg = $_init_modules[$_module];
-        if ($callPath = MODULE_DIR . '/' . $_mod_cfg['path'] . '.php') {
+        if (file_exists($callPath = MODULE_DIR . '/' . $_mod_cfg['path'] . '.php')) {
             include $callPath;
         }
     } else {
