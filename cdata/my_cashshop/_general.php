@@ -28,7 +28,7 @@ cn_snippet_messages();
                         <input type="hidden" name="Item" value="<?php echo $key; ?>">
                         <table style="width: 150px;height: 170px;">
                             <tr class="h-ww" style="height: 105px;cursor: pointer;">
-                                <td class="h-w" style="background-image: url(images/round.gif)" align="middle"
+                                <td class="h-w" align="middle"
                                     valign="top"><img
                                         align="middle" <?php if ($raw['image_mh']) echo 'style="width: 80%;"'; else echo 'style=""'; ?>
                                         src="./images/<?php if ($raw['image_mh']) {

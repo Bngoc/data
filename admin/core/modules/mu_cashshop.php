@@ -17,7 +17,7 @@ function cashshop_invoke()
         'cashshop:weapons:action:Wea' => 'Đao - Kiếm',
         'cashshop:scepters:action:Sce' => 'Quyền trượng',
         'cashshop:staffs:action:Sta' => 'Gậy',
-        'cashshop:spears:action:Spa' => 'Thương - Giáo',
+        'cashshop:spears:action:Spe' => 'Thương - Giáo',
         'cashshop:fenrir:action:Fen' => 'Linh hồn Sói Tinh',
         'cashshop:eventticket:action:Tic' => 'Vé sự kiện',
         'cashshop:orther:action:Ocas' => 'Các loại khác'
