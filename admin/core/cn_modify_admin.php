@@ -1851,9 +1851,8 @@ function cn_config_load()
     // ---------------- S_custum by bqn -----
     // Detect self pathes
     $SN = dirname($_SERVER['SCRIPT_NAME']);
-    $script_path = "http://" . $_SERVER['SERVER_NAME'] . (($SN == '/') ? '' : $SN);
+    $script_path = "http://" . $_SERVER['SERVER_NAME'] . (($SN != '/') ? '' : $SN);
 //    $script_path = "http://" . $_SERVER['SERVER_NAME'];
-
     //check http_script_dir
     $path_http_script_dir = $script_path;
     if (getoption('http_script_dir') != $path_http_script_dir)
