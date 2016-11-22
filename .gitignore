@@ -2,3 +2,7 @@
 /gifnoc/gifnoc.php
 /MuServer/
 /gifnoc/*.bak
+/DB/
+/admin/log/system/*
+/admin/log/character/*
+/admin/log/shop/*
