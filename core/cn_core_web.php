@@ -771,9 +771,11 @@ function cn_logout($relocation = PHP_SELF)
 // Since 2.0: Show register form
 function cn_register_form($admin = TRUE)
 {
-    global $_SESS;
+    if (isset($_SESSION['user_Gamer'])) {
+        return false;
+    }
 
-    //$flatDb = new FlatDB();
+    global $_SESS;
 
     // Restore active status
     if (isset($_GET['lostpass']) && $_GET['lostpass']) {

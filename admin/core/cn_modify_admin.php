@@ -709,6 +709,9 @@ function cn_login()
 // Since 2.0: Show register form
 function cn_register_form($admin = TRUE)
 {
+    if (isset($_SESSION['mu_Account'])) {
+        return false;
+    }
     // Restore active status
     if (isset($_GET['lostpass']) && $_GET['lostpass']) {
         $d_string = base64_decode($_GET['lostpass']);

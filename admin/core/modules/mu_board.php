@@ -65,7 +65,7 @@ function board_invoke()
         'group' => 'group.png',
         'locale' => 'locale.png',
         'script' => 'script.png',
-        'comments' => 'comments.png',
+        'ischaracter' => 'ischaracter.png',
     );
 
     // More dashboard images

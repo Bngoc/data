@@ -54,26 +54,20 @@ function cashshop_invoke()
 
     $images = array
     (
-        'personal' => 'user.gif',
-        'userman' => 'users.gif',
-        'sysconf' => 'options.gif',
-        'category' => 'category.png',
-        'templates' => 'template.png',
-        'backup' => 'archives.gif',
-        'archives' => 'arch.png',
-        'media' => 'images.gif',
-        'intwiz' => 'wizard.gif',
-        'logs' => 'list.png',
-        'selfchk' => 'check.png',
-        'ipban' => 'block.png',
-        'widgets' => 'widgets.png',
-        'wreplace' => 'replace.png',
-        'morefields' => 'more.png',
-        'maint' => 'settings.png',
-        'group' => 'group.png',
-        'locale' => 'locale.png',
-        'script' => 'script.png',
-        'comments' => 'comments.png',
+        'acient' => 'acient.png',
+        'armor' => 'armor.png',
+        'spears' => 'spears.png',
+        'shields' => 'shields.png',
+        'crossbows' => 'crossbows.png',
+        'weapons' => 'weapons.png',
+        'scepters' => 'scepters.png',
+        'staffs' => 'staffs.png',
+        'wings' => 'wings.png',
+        'ringpendants' => 'ringpendants.png',
+        'orther' => 'orther.png',
+        'eventticket' => 'eventticket.png',
+        'fenrir' => 'fenrir.png',
+        'warehouse' => 'warehouse.png'
     );
 
     // More dashboard images
@@ -103,9 +97,6 @@ function cashshop_invoke()
 
     $greeting_message = 'Have a nice day!';
     cn_assign('dashboard, username, greeting_message', $dashboard, $member['user_Account'], $greeting_message);
-//    cn_assign('dashboard, username, greeting_message', $dashboard, $nameset, $greeting_message);
-
-    //echo exec_tpl('header');
     echo exec_tpl('com_cashshop/general');
 
     echofooter();
@@ -138,7 +129,6 @@ function cashshop_action()
     //$files = scan_dir(cn_path_construct(ROOT ,'core','cashshop'), 'txt');
     //$_grps = getoption('#items_data'); //?
 
-
     if (REQ('__item', 'GPG') == 'change-item') {
         foreach ($__data as $key => $raw) $s_temp[] = $raw['code32'];
         $s_data = cn_read_file($path = cn_path_construct(ROOT, 'core', 'cashshop') . 'shop_' . $opt . '.php');
@@ -164,10 +154,7 @@ function cashshop_action()
     }
     //$s_data=cn_read_file($path = cn_path_construct(ROOT,'core','cashshop').'shop_'.$opt.'.php'); //shop_acient
     //list($item_read, $get_paging) = cn_arr_pagina($s_data, 'mod=cashshop', $page, $per_page);
-
-
     //list($item_read, $get_paging) = cn_arr_pagina($s_data, cn_url_modify('mod=cashshop', 'do=action', "opt=".$opt), $page, $per_page);
-
 
     if (request_type('POST')) {
         cn_dsi_check();
@@ -216,39 +203,20 @@ function cashshop_action()
                 $__data[$_id]['price'] = $txt_price;
                 $__data[$_id]['image_mh'] = $txt_image;
 
-                //print_r($__data);
                 cn_throw_message($message);
 
                 //cn_relocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'do=action'));
             }
 
             if (!$is_cancel) {
-                //list($categories) = cn_category_struct($categories_call);
-                //list($categories_call) = cn_category_struct($categories_call);
-
                 setoption('#item_shop' . $opt, $__data);
-
             }
             $txt_image = $txt_name = $txt_price = $txt_code32 = $_id = '';
         } elseif (!$is_delete) {
-            //if(!$is_cancel)
             cn_throw_message('Empty Code Item', 'e');
-            //$category_name = $category_icon = $category_memo = $category_acl= $category_parent = $category_id = $category_description ='';
         }
     }
-    /*
-      $cfg['items_data'][$key] = array
-            (
-                'Image' => $image,
-                'G' => $group,
-                'ID' => $id,
-                'Name' => $name,
-                'X' => $x,
-                'Y' => $y,
-                'SET1' => $set1,
-                'SET2' => $set2,
-            );
-        */
+
     if (isset($__data))
         foreach ($__data as $key => $raw)
             $set_data[$key] = cn_item_info($raw['code32'], $raw['name'], $raw['price'], $raw['image_mh']);

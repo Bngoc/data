@@ -59,26 +59,20 @@ function cshop_invoke()
 
     $images = array
     (
-        'personal' => 'user.gif',
-        'userman' => 'users.gif',
-        'sysconf' => 'options.gif',
-        'category' => 'category.png',
-        'templates' => 'template.png',
-        'backup' => 'archives.gif',
-        'archives' => 'arch.png',
-        'media' => 'images.gif',
-        'intwiz' => 'wizard.gif',
-        'logs' => 'list.png',
-        'selfchk' => 'check.png',
-        'ipban' => 'block.png',
-        'widgets' => 'widgets.png',
-        'wreplace' => 'replace.png',
-        'morefields' => 'more.png',
-        'maint' => 'settings.png',
-        'group' => 'group.png',
-        'locale' => 'locale.png',
-        'script' => 'script.png',
-        'comments' => 'comments.png',
+        'acient' => 'acient.png',
+        'armor' => 'armor.png',
+        'spears' => 'spears.png',
+        'shields' => 'shields.png',
+        'crossbows' => 'crossbows.png',
+        'weapons' => 'weapons.png',
+        'scepters' => 'scepters.png',
+        'staffs' => 'staffs.png',
+        'wings' => 'wings.png',
+        'ringpendants' => 'ringpendants.png',
+        'orther' => 'orther.png',
+        'eventticket' => 'eventticket.png',
+        'fenrir' => 'fenrir.png',
+        'warehouse' => 'warehouse.png'
     );
 
     // More dashboard images
@@ -105,9 +99,7 @@ function cshop_invoke()
 
         $cshop_board[$id] = $item;
     }
-
-
-    //cn_character();
+    
     $member = member_get();
 
     //$meta_draft = db_index_meta_load('draft');
