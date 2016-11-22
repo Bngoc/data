@@ -3813,7 +3813,7 @@ function cn_db_installed()
                 setoption('#%site', $opt_result);
 
                 cn_throw_message('Saved successfully');
-                cn_relocation(getoption('http_script_dir').'admin.php');
+                cn_relocation(getoption('http_script_dir').'/admin.php');
             }
         }
         echoheader('-@../skins/default.css', 'Install Database');
@@ -3911,7 +3911,7 @@ function cn_require_install()
 //                // Greets page
 //                cn_relocation("http://cutephp.com/thanks.php?referer=" . urlencode(base64_encode('http://' . $_SERVER['SERVER_NAME'] . PHP_SELF)));
                 cn_throw_message('Tạo thành công tài khoản Admin');
-                cn_relocation(getoption('http_script_dir')."admin.php");
+                cn_relocation(getoption('http_script_dir')."/admin.php");
             }
         }
 
