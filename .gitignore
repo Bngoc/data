@@ -4,5 +4,5 @@
 /gifnoc/*.bak
 /DB/
 /admin/log/system/*
-/admin/log/character/*
-/admin/log/shop/*
+/admin/log/modules/character/*
+/admin/log/modules/shop/*
