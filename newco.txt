@@ -34,6 +34,7 @@ A>
 						Module: FastCGImodule
 						Executable: C:\thu muc giai nen\php-cgi.exe
 						Name: FastCGI
+				--> date.timezone ='Asia/Bangkok'
 			3.6 add site ... thu muc chua data ...
 			3.7 
 				--> edit binlding 	- wwww.omidev.info
@@ -46,7 +47,9 @@ A>
 			
 			3.11
 				access ????
-			
+			3.12
+				gifnoc
+					iusr +  iis_iusrs ---> modify
 			
 	4. CO ERR TAT - MO DEBUG INIT.PHP [BOTH]
 		IIS -> Edit Feature Settings…
