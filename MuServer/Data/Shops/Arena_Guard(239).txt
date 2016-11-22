@@ -1,9 +1,0 @@
-//Arena  Guard 72 164
-//Shop chung
-14 3 0 100 0 0 0 0 //binh mau to
-14 6 0 100 0 0 0 0 //binh phep to
-14 8 0 100 0 0 0 0 //giai doc
-
-
-
-end

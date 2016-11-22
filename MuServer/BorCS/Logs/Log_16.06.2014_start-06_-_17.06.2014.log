@@ -1,8 +1,0 @@
-[12:57:47]  - MaxConnections: 1000;
-[12:57:47]  - WaitTime2Omission: 2000;
-[12:57:47]  # Process Info:
-[12:57:47]  - Physical Memory: 7532 KByte; (Default: 7532 KByte)
-[12:57:47]  - Virtual Memory: 5960 KByte; (Default: 5960 KByte)
-[12:57:47]  - Work Time: 0 day(s) 00:00:00.
-[17:57:47]  Time out waiting for action. It took 2000 sec. Socket: 412; IP-Address: '113.163.6.177'.
-[22:57:47]  Time out waiting for action. It took 2000 sec. Socket: 464; IP-Address: '123.27.40.180'.

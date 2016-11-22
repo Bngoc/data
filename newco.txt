@@ -131,8 +131,8 @@ A>
  Alter TABLE [dbo].[MEMB_INFO] ADD [ban_login] [int] NOT NULL DEFAULT (0)
  Alter TABLE [dbo].[MEMB_INFO] ADD [num_login] [smallint] NOT NULL DEFAULT (0)
  
- ALTER TABLE [dbo].[Character] ADD [PhutUyThacOn_dutru] [int] NOT NULL DEFAULT (0) ///save -> minute # date online
- ALTER TABLE [dbo].[Character] ADD [PhutUyThacOff_dutru] [int] NOT NULL DEFAULT (0) ///save -> minute # date offline
+ ALTER TABLE [dbo].[Character] ADD [PhutUyThacOn_dutru] [int] NOT NULL DEFAULT (0)
+ ALTER TABLE [dbo].[Character] ADD [PhutUyThacOff_dutru] [int] NOT NULL DEFAULT (0)
  ALTER TABLE [dbo].[Character] ADD [uythaconline_time] [int] NOT NULL DEFAULT (0)
  ALTER TABLE [dbo].[Character] ADD [UyThacOnline_Daily] [int] NOT NULL DEFAULT (0)
  ALTER TABLE [dbo].[Character] ADD [UyThacOffline_Daily] [int] NOT NULL DEFAULT (0)

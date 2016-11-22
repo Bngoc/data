@@ -99,7 +99,7 @@ function cshop_invoke()
 
         $cshop_board[$id] = $item;
     }
-    
+
     $member = member_get();
 
     //$meta_draft = db_index_meta_load('draft');
