@@ -101,7 +101,7 @@ img.right {
 #nonLogin .box_login {
     background: none repeat scroll 0 0 #F4F4F4;
     border: 1px solid #C6C6C6;
-    width: 220px;
+    width: 230px;
     border-radius: 0 5px 5px 5px;
     left: -115px;
     padding: 10px;
@@ -121,8 +121,8 @@ img.right {
 
 .user-inner ul li {
     float: left;
-    height: 36px;
-    position: relative;
+    /*height: 36px;
+    position: relative;*/
     margin-right: 160px;
 }
 
@@ -131,7 +131,7 @@ img.right {
     border-top: 1px solid #E6E6E6;
     border-left: 1px solid #E6E6E6;
     position: absolute;
-    width: 125px;
+    /*width: 125px;*/
     z-index: 99;
     height: 24px;
     top: 6px;
@@ -150,7 +150,7 @@ img.right {
 
 .user-inner div.pao a {
     float: left;
-    width: 82%;
+    width: 100%;
 }
 
 .user-inner ul li a span {
@@ -160,7 +160,7 @@ img.right {
 
 .down {
     background: url(../images/up-down.png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-    float: left;
+    float: right;
     height: 15px;
     margin: 6px 0 5px 9px;
     width: 15px;
@@ -168,12 +168,17 @@ img.right {
 
 .downup {
     background: url(../images/up-down.png) no-repeat scroll 0 -15px rgba(0, 0, 0, 0);
-    float: left;
+    float: right;
     height: 15px;
     width: 15px;
     margin: 6px 0 5px 9px;
 }
 
+.box-iframe {
+	margin:0 auto;
+	padding: 5px;
+	float: left;
+}
 .box_login {
     display: none;
     line-height: normal;
@@ -245,6 +250,25 @@ div.box_login1 .fotgetPass a:hover span {
     line-height: 28px;
 }
 
+#gp_bar  ul.top-showInfo {
+    margin: 0 auto;
+    /* top: 11px; */
+    padding: 12px;
+    position: relative;
+	width: 75%;
+}
+
+#gp_bar  ul.top-showInfo  li{ 
+	 display: inline;
+    padding: 0 8px;
+    color: #d4ddfe;
+    font-size: 11px;
+    text-transform: none;
+    text-align: initial;
+}
+#gp_bar  ul.top-showInfo  li  img{ 
+	padding:1px;
+}
 .Login_ {
     margin-right: 50px;
     float: right;

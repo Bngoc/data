@@ -8,7 +8,6 @@ $skin_prefix = "";
 // Skin MENU
 // ********************************************************************************
 
-$skin_top = cn_get_top() . '<div style="clear:both;"></div>';
 $skin_menu = cn_get_menu() . '<div style="clear:both;"></div>';
 $skin_menu_none = cn_get_menu_none() . '<div style="clear:both;"></div>';
 $setpath_default = getoption('http_script_dir');
@@ -137,29 +136,6 @@ $skin_header = <<<HTML
 {top}
 </div>
 
-	<!-- div id="gp_bar">
-	{topmenu}
-	
-	 
-	<div id="gp_bar_content"></div> 
-	<div class="Login_">
-		<div class="dn">Login</div>  
-		<div class="lw">Quen mat khau</div> 
-	</div>
-	<div class="Login1">
-		<div class="t">
-			<ul>
-			<li> Doi pass</li>
-			<li> Doi dien thoai</li>
-			<li> xxxxxxxxxxx</li>
-			<li> xxxxxxxxxxxxx</li>
-			<li>xxxxxxxxxxxx </li>
-			</ul>
-		</div>  
-		
-	</div>
-	
-	</div>--> <!-- gp_bar //-->
 	
 <div id="wrapper">
 	
@@ -356,5 +332,39 @@ $abccc = <<<HTML
 	
 		</div> 
 	<!-- ===================END COMMENT==================== -->          
+HTML;
+
+$skin_top = <<<HTML
+    <ul class="top-showInfo">
+        <li>{nameVpoint}</li>
+        <li>{nameGcoin}</li>
+        <li>{nameGcKm}</li>
+        <li>{nameBule}</li>
+        <li>{nameChaos}</li>
+        <li>{nameCreate}</li>
+        <li>{nameBank}</li>
+    </ul>
+    <div class="user-inner">
+        <div id="nonLogin">
+            <ul>
+                <li class="lg-normal">
+                    <div class="pao divbox">
+                        <a href="#">
+                             <span>{userName}<i class="down downup"></i></span>
+                        </a>
+                    </div>
+                </li>
+                <li class="box_login showbox" style="display: none;">
+                    <div class="box-iframe box_1">{changePass}</div>
+                    <div class="box-iframe box_2">{changeTel}</div>
+                    <div class="box-iframe box_3">{changeEmail}</div>
+                    <div class="box-iframe box_4">{changePwd}</div>
+                    <div class="box-iframe box_5">{changeSecret}</div>
+                    <div class="box-iframe box_5">{changeQA}</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
 HTML;
 ?>

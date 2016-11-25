@@ -193,7 +193,6 @@ function char_info_char()
 
 function char_reset()
 {
-
     $member = member_get();
     list($sub) = GET('sub', 'GPG');
 
