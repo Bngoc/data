@@ -85,8 +85,16 @@ A>
 		-> BufTimeControl
 		-> mu.exe
 	2. 
- 
- D> 
+
+ D> cau hinh tren /admin.php
+    1. time zone  (0 -> +7)
+    2. allow regiter
+    3. character
+    4. cashshop
+    5.
+
+
+ E>
 	1.open port
 		--> Connecting to SQL Server remotely on AWS involves 3 main factors: 
 			AWS --> Windows Security --> SQL Server Settings/Security. 

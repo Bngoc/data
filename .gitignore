@@ -6,3 +6,5 @@
 /admin/log/system/*
 /admin/log/modules/character/*
 /admin/log/modules/shop/*
+.htaccess
+web.config

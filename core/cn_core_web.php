@@ -646,9 +646,14 @@ function cn_login_form($admin = TRUE)
 
 function cn_login()
 {
+    if (isset($_SESSION['timeOutLogin']) && $_SESSION['timeOutLogin'] < ctime()) {
+        cn_logout();
+    }
+    if (isset($_SESSION['timeOutLogin'])) {
+        $_SESSION['timeOutLogin'] = ctime() + 300;
+    }
     // Get logged username
     $logged_username = isset($_SESSION['user_Gamer']) ? $_SESSION['user_Gamer'] : FALSE;
-
 
     // Check user exists. If user logged, but not exists, logout now
     //if ($logged_username && !db_user_by_name($logged_username))
@@ -709,14 +714,12 @@ function cn_login()
                             $member['pass_web'] = '';
                         }
 
-                        //if (in_array("e10adc3949ba59abbe56e057f20f883e", $compares)){
                         if (in_array(trim($member['pass_web']), $compares)) {
-                            //if ("e10adc3949ba59abbe56e057f20f883e" == $compares[0]){
-
                             $is_logged = true;
 
                             // set user to session
                             $_SESSION['user_Gamer'] = $username;
+                            $_SESSION['timeOutLogin'] = ctime() + 300;
                             point_tax($username);
                             //----------------------------------------
 
@@ -955,51 +958,6 @@ function cn_register_form($admin = TRUE)
     return TRUE;
 }
 
-// loi
-function cn_get_top()
-{
-    //hook('core/cn_get_menu_none', 344);
-    $ghp = '
-	<div class="user-inner">
-		<div id="nonLogin" style="display:block;">
-			<ul><li class="lg-normal">
-					<div class="pao divbox">
-						<a href="#">
-							 <span>Đăng Nhập</span>
-							 <i class="down downup"></i>
-						</a>
-					</div>
-					<form method="post" action="./" >
-						<input name="action" value="dologin" type="hidden" />
-						<div class="box_login showbox" style="display: block;">
-							<div class="box_login1">
-							 <div class="loginUser">
-								 <label>Username</label><!--loginUser-->
-								 <span><input placeholder="Account" name="Account" id="" type="text" maxlength="10" /></span>
-							 </div>
-							 <div class="loginPass">
-								 <label>Mật mã</label><!--loginPass-->
-								 <span><input placeholder="Password" name="Password" id="" type="password" maxlength="10" /></span>
-							 </div>
-							 <div class="fotgetPass">
-								 <a href="?register&lostpass"><span>Quên mật khẩu</span></a>
-								 <a href="?register"><span>Đăng ký</span></a>
-							 </div>
-							 <div class="btnEnter">
-								 <a href="./">Đăng Nhập</a>
-							 </div>
-							</div>
-
-						</div>
-					</form>
-				</li>
-			</ul>
-		</div>
-	</div>
-';
-    return $ghp;
-}
-
 // Since 2.0: Make 'Top menu'
 function cn_get_menu()
 {
@@ -1066,52 +1024,29 @@ function cn_get_menu()
 // Since 2.0: Make 'Top menu'
 function cn_get_menu_none()
 {
-    $modules = hook('core/cn_get_menu_none', array                    // acl	name	title	app
-    (
-        'auto_money' => array('Cd', 'qlink_depoisit.png', 'VTC'),
-        'cash_shop' => array('Cc', 'qlink_cashshop.png', 'shop_orther'),
-        //'acc_manager'   		=> array('Can', 'XXXXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXX', 'source,year,mon,day,sort,dir'), //can => add; new cvn => view
+    // acl	name	title	app
+    $modules = hook('core/cn_get_menu_none',
+        array(
+            'auto_money' => array('Cd', 'qlink_depoisit.png', 'VTC'),
+            'cash_shop' => array('Cc', 'qlink_cashshop.png', 'shop_orther'),
+            //'acc_manager'   		=> array('Can', 'XXXXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXX', 'source,year,mon,day,sort,dir'), //can => add; new cvn => view
     ));
 
-    if (getoption('main_site'))
-        $modules['my_site'] = getoption('main_site');
+    if (getoption('main_site')) $modules['my_site'] = getoption('main_site');
 
     $mod = REQ('mod', 'GPG');
 
-
-    $result = '
-	<!-- start loginbx -->   
-					<div class="loginbx">
-							<div class="loginbx_n"></div>
-							<div class="loginbx_c">
-								<div class="loginbx_content">';
-    /*
-									<form name="l" method="post" action="">
-										<input name="login" value="login" type="hidden">
-										<div class="login_info">
-											<input value="USER ID" name="Account" id="login_username" type="text" maxlength="10" />
-											<div class="pad_2px"></div>
-											<input value="PASSWORD" name="Password" id="login_password" type="password" maxlength="10" />
-										</div>
-										<div class="signin_btn"><input src="http://localhost/bqn/data/images/signin_btn.gif" alt="" type="image" /></div>
-										<div class="clear"></div>
-										<div class="login_text">
-											» <a href="'.PHP_SELF.'?mod=acc_manager&action=lostinfo" ;"><strong>Quên mật khẩu</strong></a>
-											<br />
-											» <a href="#register"><strong>Đăng ký tài khoản</strong></a>
-										</div>
-									</form>
-								*/
-    $result .= cn_login_form() . '
-								</div>              
-								                
-							</div>
-							<div class="loginbx_s"></div>
-						</div>						
-					<!-- end loginbx -->
-					<div class="clear"></div>
-					<div class="quicklink">';
-
+    $result = '<div class="loginbx"> <!-- start loginbx --> 
+                    <div class="loginbx_n"></div>
+                    <div class="loginbx_c">
+                        <div class="loginbx_content">'
+                            . cn_login_form() .
+                        '</div>              
+                    </div>
+                    <div class="loginbx_s"></div>
+                </div><!-- end loginbx -->			
+            <div class="clear"></div>
+            <div class="quicklink">';
 
     foreach ($modules as $mod_key => $var) {
         if (!is_array($var)) {
@@ -1144,7 +1079,7 @@ function cn_get_menu_none()
             if ($actions) $action .= '&amp;' . join('&amp;', $actions);
         }
 
-        $result .= '<div class="quicklink_item"><a href="' . PHP_SELF . '?mod=' . $mod_key . $action . '"><img src="http://localhost/bqn/data/images/' . cn_htmlspecialchars($name) . '" alt="Nạp thẻ VTC" /></a></div>';
+        $result .= '<div class="quicklink_item"><a href="' . PHP_SELF . '?mod=' . $mod_key . $action . '"><img src="'. getoption('http_script_dir'). '/images/' . cn_htmlspecialchars($name) . '" alt="Nạp thẻ VTC" /></a></div>';
     }
 
     $result .= "</div>";
@@ -1169,14 +1104,23 @@ function echoheader($image, $header_text, $bread_crumbs = false)
     if (isset($_SESSION['user_Gamer'])) {
         $skin_header = preg_replace("/{menu}/", $skin_menu, $skin_header);
         $skin_header = preg_replace("/{top}/", $skin_top, $skin_header);
+
+        $member = member_get();
+        $_blank_var = view_bank($member['user_name']);
+
+        $matches[0] = '<img src="' . getoption('http_script_dir') . '/images/icon-1.png" /> ' . number_format($_blank_var[0]['vp'], 0, ',', '.') . ' Vpoint';
+        $matches[1] = '<img src="' . getoption('http_script_dir') . '/images/icon-2.png" /> ' . number_format($_blank_var[0]['gc'], 0, ',', '.') . ' Gcoin';;
+        $matches[2] = '<img src="' . getoption('http_script_dir') . '/images/icon-3.png" /> ' . number_format($_blank_var[0]['gc_km'], 0, ',', '.') . ' Gcoin KM';;
+        $matches[3] = '<img src="' . getoption('http_script_dir') . '/images/icon-4.png" /> ' . number_format($_blank_var[0]['blue'], 0, ',', '.') . ' Blue';;
+        $matches[4] = '<img src="' . getoption('http_script_dir') . '/images/icon-5.png" /> ' . number_format($_blank_var[0]['chaos'], 0, ',', '.') . ' Chaos';;
+        $matches[5] = '<img src="' . getoption('http_script_dir') . '/images/icon-6.png" /> ' . number_format($_blank_var[0]['cre'], 0, ',', '.') . ' Cre';;
+        $matches[6] = '<img src="' . getoption('http_script_dir') . '/images/icon-7.png" /> ' . number_format($_blank_var[0]['bank'], 0, ',', '.') . ' Zen';;
+        $tempTop = ['{nameVpoint}', '{nameGcoin}', '{nameGcKm}', '{nameBule}', '{nameChaos}', '{nameCreate}', '{nameBank}'];
+        $skin_header = str_replace($tempTop, $matches, $skin_header);
     } else {
-        /*$skin_header = preg_replace("/{top}/", '
-			<marquee scrollamount="2" width="80%" height="45" align="center" style="font-size:14px;color: #49FF00;
-    padding-top: 14px;
-    MARGIN:0 40% 0 10%;">chào mừng các bạn ghé thăm trang</marquee>',$skin_header);*/
+        $skin_header = preg_replace("/{top}/", '<marquee scrollamount="9" width="80%" height="45" align="center" style="font-size:14px;color: rgb(200, 128, 35);; padding-top: 12px; font-style: oblique; MARGIN:0 40% 0 10%;">Chào mừng các bạn ghé thăm trang MuOnline</marquee>',$skin_header);
         $skin_header = preg_replace("/{menu}/", $skin_menu_none, $skin_header);
     }
-
 
     //$skin_header = get_skin($skin_header);
     $skin_header = str_replace('{title}', ($header_text ? $header_text . ' / ' : '') . 'MuOnline', $skin_header);
@@ -3888,7 +3832,7 @@ function CheckSlotInventory($inventory, $itemX, $itemY)
             $i++;
             continue;
         } else {
-            $item = GetCode($item);
+            $item_ = GetCode($item);
             $item_data = $items_data[$item_['group'] . "." . $item_['id']];
             $y = 0;
             while ($y < $item_data['Y']) {

@@ -1175,13 +1175,26 @@ function findNewNameTrue(id) {
 var mouse_is_inside = false;
 
 $(document).ready(function () {
-    $('.box_login, .pao').hover(
+
+    $('.pao').click(function () {
+        if ($('.box_login').is(":hidden")) {
+            $('.box_login').slideDown('slow');
+            $("i.down").toggleClass("downup");
+        } else {
+            $('.box_login').slideUp('slow');
+            $("i.down").toggleClass("downup");
+        }
+    });
+
+    $('.box_login').hover(
         function () {
             mouse_is_inside = true;
         }, function () {
             mouse_is_inside = false;
+            $('.box_login').hide();
+            $("i.down").removeClass("downup");
+            $("i.down").addClass("down");
         });
-
 
     $("body").mouseup(function () {
         if (!mouse_is_inside) {
@@ -1190,17 +1203,10 @@ $(document).ready(function () {
             $("i.down").addClass("down");
         }
     });
-});
-//Dang nhap even click
-$(document).ready(function () {
-    $('.pao').click(function () {
-        if ($('.box_login').is(":hidden")) {
-            $('.box_login').slideDown('slow');
-            $("i.down").toggleClass("downup");
-        }
-        else {
-            $('.box_login').slideUp('slow');
-            $("i.down").toggleClass("downup");
-        }
-    });
+    // if (!mouse_is_inside){
+    //     alert(111);
+    //     $('.box_login').hide();
+    //     $("i.down").removeClass("downup");
+    //     $("i.down").addClass("down");
+    // }
 });
