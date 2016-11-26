@@ -26,7 +26,7 @@ $skin_header = <<<HTML
 <meta name="description" content="<?php //echo \$description ?>"/>
 <meta name="keywords" content="<?php //echo \$keywords ?>" />
 
-<link rel="shortcut icon" href="http://localhost/bqn/data/images/webzen.ico" type="image/x-icon" />
+<link rel="shortcut icon" type="image/ico" href="$setpath_default/images/favicon.ico"/>
 <!-- <link rel="stylesheet" type="text/css" href="http://localhost/bqn/data/library/common.css" /> -->
 
 <link rel="stylesheet" href="$setpath_default/skins/style.css" type="text/css" />
@@ -133,7 +133,9 @@ $skin_header = <<<HTML
 </div>
 -->
 <div id="gp_bar">
-{top}
+    <div class="w-menu-top">
+        {top}
+    </div>
 </div>
 
 	
@@ -335,36 +337,36 @@ $abccc = <<<HTML
 HTML;
 
 $skin_top = <<<HTML
-    <ul class="top-showInfo">
-        <li>{nameVpoint}</li>
-        <li>{nameGcoin}</li>
-        <li>{nameGcKm}</li>
-        <li>{nameBule}</li>
-        <li>{nameChaos}</li>
-        <li>{nameCreate}</li>
-        <li>{nameBank}</li>
-    </ul>
-    <div class="user-inner">
-        <div id="nonLogin">
-            <ul>
-                <li class="lg-normal">
-                    <div class="pao divbox">
-                        <a href="#">
-                             <span>{userName}<i class="down downup"></i></span>
-                        </a>
-                    </div>
-                </li>
-                <li class="box_login showbox" style="display: none;">
-                    <div class="box-iframe box_1">{changePass}</div>
-                    <div class="box-iframe box_2">{changeTel}</div>
-                    <div class="box-iframe box_3">{changeEmail}</div>
-                    <div class="box-iframe box_4">{changePwd}</div>
-                    <div class="box-iframe box_5">{changeSecret}</div>
-                    <div class="box-iframe box_5">{changeQA}</div>
-                </li>
-            </ul>
+        <ul class="top-showInfo">
+            <li>{nameVpoint}</li>
+            <li>{nameGcoin}</li>
+            <li>{nameGcKm}</li>
+            <li>{nameBule}</li>
+            <li>{nameChaos}</li>
+            <li>{nameCreate}</li>
+            <li>{nameBank}</li>
+        </ul>
+        <div class="user-inner">
+            <div id="nonLogin">
+                <ul>
+                    <li class="lg-normal">
+                        <div class="pao divbox">
+                            <a href="#">
+                                 {userImg}<span>{userName}<i class="down downup"></i></span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="box_login showbox" style="display: none;">
+                        <div class="box-iframe box_1">{changePass}</div>
+                        <div class="box-iframe box_1">{changeTel}</div>
+                        <div class="box-iframe box_1">{changeEmail}</div>
+                        <div class="box-iframe box_1">{changePwd}</div>
+                        <div class="box-iframe box_1">{changeSecret}</div>
+                        <div class="box-iframe box_1">{changeQA}</div>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
     <div style="clear:both;"></div>
 HTML;
 ?>

@@ -94,28 +94,122 @@ img.right {
     font-weight: bold;
 }
 
+#sidebar h2 {
+    font-family: 'Georgia', 'Lucida Grande', Arial, Verdana, Sans-Serif;
+    font-size: 20px;
+    margin: 0;
+    padding: 0px 5px 0px 0px;
+    width: 210px;
+    background: url(../images/sidebar-h2-bg.gif) bottom left repeat-x;
+    color: #b7905e;
+}
+
+#gp_bar {
+    height: 50px;
+    background: url(../images/bg_gpbar.png) repeat-x top center;
+    /*background: #2009D0;*/
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+}
+
+#gp_bar_content {
+    width: 958px;
+    margin: 0 auto;
+    text-align: center;
+    color: #dbdbdb;
+}
+
+#gp_bar_left, #gp_bar_right {
+    float: left;
+}
+
+#gp_bar_left {
+    width: 30%;
+    text-align: left;
+}
+
+.gp_bar_logo {
+    margin-top: 4px;
+}
+
+#gp_bar_right {
+    width: 70%;
+    text-align: right;
+}
+
+.gp_bar_item {
+    float: right;
+    margin-left: 23px;
+    margin-top: 18px;
+}
+
+.w-menu-top {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+}
+
+@media screen and (max-width: 1024px){
+    .w-menu-top{
+        width: 96%;
+        margin: 0 auto;
+        padding: 0;
+        position: relative;
+    }
+}
+@media screen and (min-width: 1024px){
+    .w-menu-top{
+        width: 80%;
+        margin: 0 auto;
+        padding: 0;
+        position: relative;
+    }
+}
+@media screen and (min-width: 1624px){
+    .w-menu-top{
+        width: 70%;
+        margin: 0 auto;
+        padding: 0;
+        position: relative;
+    }
+}
+@media screen and (min-width: 2024px){
+    .w-menu-top{
+        width: 45%;
+        margin: 0 auto;
+        padding: 0;
+        position: relative;
+    }
+}
 .user-inner {
     float: right;
 }
 
 #nonLogin .box_login {
-    background: none repeat scroll 0 0 #F4F4F4;
-    border: 1px solid #C6C6C6;
-    width: 230px;
+    background: none repeat scroll 0 0 rgba(244, 244, 244, 0.95);
+    border: 1px dashed  #0fa211;
+    width: 275px;
     border-radius: 0 5px 5px 5px;
-    left: -115px;
     padding: 10px;
     position: absolute;
-    top: 30px;
+    top: 35px;
+    right: 0;
     z-index: 19999;
+    text-align: center;
 }
 
 .user-inner #nonLogin ul {
     float: right;
     list-style: none;
     margin: 0;
-    position: absolute;
-    right: 42px;
+    position: relative;
+    right: 2%;
     top: 0;
 }
 
@@ -123,18 +217,18 @@ img.right {
     float: left;
     /*height: 36px;
     position: relative;*/
-    margin-right: 160px;
+    /*margin-right: 160px;*/
 }
 
 .pao {
     border-right: 1px solid #E6E6E6;
     border-top: 1px solid #E6E6E6;
     border-left: 1px solid #E6E6E6;
-    position: absolute;
+    position: relative;
     /*width: 125px;*/
     z-index: 99;
     height: 24px;
-    top: 6px;
+    top: 9px;
     border-radius: 5px 5px 0 0;
 }
 
@@ -175,9 +269,12 @@ img.right {
 }
 
 .box-iframe {
-	margin:0 auto;
-	padding: 5px;
-	float: left;
+    margin: 2px;
+    padding: 9px 6px 1px 1px;
+    width: 45%;
+    float: left;
+    color: #22bdbd;
+    border: 1px dashed;
 }
 .box_login {
     display: none;
@@ -250,15 +347,15 @@ div.box_login1 .fotgetPass a:hover span {
     line-height: 28px;
 }
 
-#gp_bar  ul.top-showInfo {
+#gp_bar ul.top-showInfo {
     margin: 0 auto;
-    /* top: 11px; */
-    padding: 12px;
+    top: 9px;
+    padding: 0px 12px 0px 6px;
     position: relative;
-	width: 75%;
+    float: left;
 }
 
-#gp_bar  ul.top-showInfo  li{ 
+#gp_bar ul.top-showInfo li{
 	 display: inline;
     padding: 0 8px;
     color: #d4ddfe;
@@ -266,9 +363,18 @@ div.box_login1 .fotgetPass a:hover span {
     text-transform: none;
     text-align: initial;
 }
-#gp_bar  ul.top-showInfo  li  img{ 
+#gp_bar ul.top-showInfo li img{
 	padding:1px;
 }
+
+#gp_bar .user-inner .pao a img.icon-Userimg {
+    float: left;
+    padding: 3px 6px 1px 0px;
+}
+.box-iframe.box_1:hover, .box-iframe.box_1 a:hover {
+    color: blue;
+}
+
 .Login_ {
     margin-right: 50px;
     float: right;
@@ -974,60 +1080,6 @@ h2 {
 
 h2.pagetitle {
     font-size: 20px;
-}
-
-#sidebar h2 {
-    font-family: 'Georgia', 'Lucida Grande', Arial, Verdana, Sans-Serif;
-    font-size: 20px;
-    margin: 0;
-    padding: 0px 5px 0px 0px;
-    width: 210px;
-    background: url(../images/sidebar-h2-bg.gif) bottom left repeat-x;
-    color: #b7905e;
-}
-
-#gp_bar {
-    height: 50px;
-    background: url(../images/bg_gpbar.png) repeat-x top center;
-    /*background: #2009D0;*/
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    position: fixed;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 8pt;
-    font-weight: bold;
-}
-
-#gp_bar_content {
-    width: 958px;
-    margin: 0 auto;
-    text-align: center;
-    color: #dbdbdb;
-}
-
-#gp_bar_left, #gp_bar_right {
-    float: left;
-}
-
-#gp_bar_left {
-    width: 30%;
-    text-align: left;
-}
-
-.gp_bar_logo {
-    margin-top: 4px;
-}
-
-#gp_bar_right {
-    width: 70%;
-    text-align: right;
-}
-
-.gp_bar_item {
-    float: right;
-    margin-left: 23px;
-    margin-top: 18px;
 }
 
 h3 {

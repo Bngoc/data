@@ -963,14 +963,14 @@ function cn_get_menu()
 {
     $modules = hook('core/cn_get_menu', array                    // acl	name	title	app
     (
-        'char_manager' => array('Cd', 'Nhân Vật'),
-        'event' => array('Cc', 'Event'),
-        'blank_money' => array('Cc', 'Blank - Money'),
-        'cash_shop' => array('Can', 'Cash Shop', NULL, 'source,year,mon,day,sort,dir'), //can => add; new cvn => view
-        'relax' => array('Com', 'Giải Trí'),
-        'ranking' => array('', 'Xếp Hạng'),
-        'transaction' => array('Can', 'Giao dịch'),
-        'logout' => array('', 'Logout', 'logout'),
+        'char_manager' => array('Cd', 'Nhân Vật', null, null, 'Q', ''),
+        'event' => array('Cc', 'Event', null, null, 'q', ''),
+        'blank_money' => array('Cc', 'Blank - Money', null, null, ']', ''),
+        'cash_shop' => array('Can', 'Cash Shop', NULL, 'source,year,mon,day,sort,dir', 'D', ''), //can => add; new cvn => view
+        'relax' => array('Com', 'Giải Trí', null, null, 'M', ''),
+        'ranking' => array('', 'Xếp Hạng', null, null, 'R', ''),
+        'transaction' => array('Can', 'Giao dịch', null, null, '1', ''),
+        'logout' => array('', 'Logout', 'logout', null, 'X', '')
     ));
 
     if (getoption('main_site'))
@@ -990,6 +990,8 @@ function cn_get_menu()
         $name = isset($var[1]) ? $var[1] : '';
         $title = isset($var[2]) ? $var[2] : '';
         $app = isset($var[3]) ? $var[3] : '';
+        $iconText = isset($var[4]) ? $var[4] : '';
+        $infoText = isset($var[5]) ? $var[5] : '';
 
         //if ($acl && !test($acl))
         //  continue;
@@ -1009,11 +1011,11 @@ function cn_get_menu()
             if ($actions) $action .= '&amp;' . join('&amp;', $actions);
         }
 
-        $result .= '<li class = "' . $select . '"><a href="' . PHP_SELF . '?mod=' . $mod_key . $action . '"><span class="ca-icon">I</span>
-                            <div class="ca-content">
-                                <h2 class="ca-main">' . cn_htmlspecialchars($name) . '</h2>
-                                <h3 class="ca-sub">Advanced use of technology</h3>
-                            </div></a></li>';
+        $result .= '<li class = "' . $select . '"><a href="' . PHP_SELF . '?mod=' . $mod_key . $action . '">
+                        <span class="ca-icon">'. $iconText .'</span>
+                            <div class="ca-content"><h2 class="ca-main">' . cn_htmlspecialchars($name) . '</h2>
+                            <h3 class="ca-sub">'. $infoText .'</h3> </div>
+                        </a></li>';
     }
 
     $result .= "</ul>";
@@ -1108,7 +1110,7 @@ function echoheader($image, $header_text, $bread_crumbs = false)
         $member = member_get();
         $_blank_var = view_bank($member['user_name']);
 
-        $matches[0] = '<img src="' . getoption('http_script_dir') . '/images/icon-1.png" /> ' . number_format($_blank_var[0]['vp'], 0, ',', '.') . ' Vpoint';
+
         $matches[1] = '<img src="' . getoption('http_script_dir') . '/images/icon-2.png" /> ' . number_format($_blank_var[0]['gc'], 0, ',', '.') . ' Gcoin';;
         $matches[2] = '<img src="' . getoption('http_script_dir') . '/images/icon-3.png" /> ' . number_format($_blank_var[0]['gc_km'], 0, ',', '.') . ' Gcoin KM';;
         $matches[3] = '<img src="' . getoption('http_script_dir') . '/images/icon-4.png" /> ' . number_format($_blank_var[0]['blue'], 0, ',', '.') . ' Blue';;
@@ -1117,8 +1119,25 @@ function echoheader($image, $header_text, $bread_crumbs = false)
         $matches[6] = '<img src="' . getoption('http_script_dir') . '/images/icon-7.png" /> ' . number_format($_blank_var[0]['bank'], 0, ',', '.') . ' Zen';;
         $tempTop = ['{nameVpoint}', '{nameGcoin}', '{nameGcKm}', '{nameBule}', '{nameChaos}', '{nameCreate}', '{nameBank}'];
         $skin_header = str_replace($tempTop, $matches, $skin_header);
+
+        $userName[0] = '<img class="icon-Userimg" src="' . getoption('http_script_dir') . '/images/user-Name.png" />';
+        $userName[1] = $_SESSION['user_Gamer'];
+        $skin_header = str_replace(['{userImg}', '{userName}'], $userName, $skin_header);
+
+        $boxArrInfo = [
+            '{changePass}' => ['change-pass', 'Đổi pass-Game'],
+            '{changeTel}' => ['change-tel', 'Đổi Sđt'],
+            '{changeEmail}' => ['change-email', 'Đổi Email'],
+            '{changePwd}' => ['change-pwd', 'Đổi pass-Web'],
+            '{changeSecret}' => ['change-secret', 'Đổi Mã Bí mật'],
+            '{changeQA}' => ['change-qa', 'Đổi Câu Trả Lời']
+        ];
+        foreach ($boxArrInfo as $jk => $its){
+            $tmpHtml = '<a href="' . PHP_SELF . '?mod=manger_account&amp;'. $its[0] . '"><div><img src="' . getoption('http_script_dir') . '/images/'. $its[0] .'.png" /></div><div>'. $its[1] .'</div></a>';
+            $skin_header = str_replace($jk, $tmpHtml, $skin_header);
+        }
     } else {
-        $skin_header = preg_replace("/{top}/", '<marquee scrollamount="9" width="80%" height="45" align="center" style="font-size:14px;color: rgb(200, 128, 35);; padding-top: 12px; font-style: oblique; MARGIN:0 40% 0 10%;">Chào mừng các bạn ghé thăm trang MuOnline</marquee>',$skin_header);
+        $skin_header = preg_replace("/{top}/", '<marquee scrollamount="9" height="45" align="center" style="font-size:14px;color: rgb(200, 128, 35); padding-top: 12px; font-style: oblique;">Chào mừng các bạn ghé thăm trang MuOnline</marquee>',$skin_header);
         $skin_header = preg_replace("/{menu}/", $skin_menu_none, $skin_header);
     }
 
@@ -1183,7 +1202,7 @@ function msg_info($title, $go_back = null)
     echocomtent_here($str_, cn_snippet_bc_re("Home", "Permission check"));
 
     echofooter();
-    DIE();
+    die();
 }
 
 // Since 2.0: Short message form

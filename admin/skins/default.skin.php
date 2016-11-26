@@ -22,7 +22,7 @@ $skin_header = <<<HTML
 	 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<!--<base href ="$setpath_default">-->
     <meta name="robots" content="noindex" />
-    <link rel="shortcut icon" type="image/ico" href="$setpath_default/admin/skins/images/favicon.ico"/>
+    <link rel="shortcut icon" type="image/ico" href="$setpath_default/images/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="$setpath_default/admin/skins/default.css">
 	<!--<link rel="stylesheet" href="$setpath_default/admin/images/css.css" type="text/css">-->
 	<script type="text/javascript" src="$setpath_default/js/jquery-2.1.0.min.js"></script>
