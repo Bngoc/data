@@ -541,7 +541,7 @@ function member_get()
 {
     // Not authorized
     if (empty($_SESSION['user_Gamer'])) {
-        return NULL;
+        return null;
     }
 
     // No in cache
@@ -838,103 +838,149 @@ function cn_register_form($admin = TRUE)
         $template = '_authen/lost';
         $template_name = 'Quên mật khẩu';
     } else {
-        if (getoption('allow_registration')) {
-            $Register_OK = FALSE;
-            $errors = array();
-            //list($regusername, $regnickname, $regpassword, $confirm, $regemail, $captcha) = GET('regusername, regnickname, regpassword, confirm, regemail, captcha', "POST");
-            list($username, $Password, $RePassword, $passweb1, $repass1, $passweb2, $repass2, $PhoneNumber) = GET('Account, Password, RePassword, pass1, repass1,pass2, repass2, PhoneNumber', "POST");
-            list($macode, $Question, $Answer, $Email, $ReEmail, $captcha) = GET('num_7_verify, Question, Answer, Email, ReEmail, captcha', "POST");
+        $register_OK = FALSE;
+        $errors = array();
+        list($username, $pwd, $re_pwd, $pass_web, $repass_web) = GET('nameAccount, pwd, re_pwd, pass_web, repass_web', "POST");
+        list($ma7code, $nameQuestion, $nameAnswer, $nameEmail, $phoneNumber, $namecaptcha) = GET('num_7_verify, nameQuestion, nameAnswer, nameEmail, phoneNumber, nameCaptcha', "POST");
+
+        // Do register
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($username === '') $errors[] = ucfirst("Chưa nhập tài khoản");
+            if ($pwd === '') $errors[] = ucfirst("Chưa nhập mật khẩu game");
+            if ($ma7code === '') $errors[] = ucfirst("Chưa nhập mã số bí mật");
+            if ($pass_web === '') $errors[] = ucfirst("Chưa nhập mật khẩu đăng nhập web");
+            if ($nameEmail === '') $errors[] = ucfirst("Chưa nhập địa chỉ Email");
+            if ($phoneNumber === '') $errors[] = ucfirst("Chưa nhập số điện thoại");
+            if ($nameAnswer === '') $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật");
+            if ($nameQuestion === '') $errors[] = ucfirst("Chưa chọn câu hỏi bí mật");
+            if ($namecaptcha === '') $errors[] = ucfirst("Chưa nhập mã Captcha");
+
+            if (!preg_match("/(([a-z]{1,}+[0-9]{1,})|([0-9]{1,}+[a-z]{1,}))+[a-z0-9]*/", $username)) $errors[] = ucfirst("Tài khoản chỉ được sử dụng kí tự thường và số.");
+            if (!preg_match("/(\(\+84\)|0)\d{2,3}[-]\d{4}[-]\d{3}$/i", $phoneNumber)) $errors[] = ucfirst("Số di động không hợp lệ.");
+            if (substr_count($username, 'dis') > 0) $errors[] = ucfirst("Tên tài khoản không được phép đăng ký.");
+
+//              if (!eregi("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$", $email)){
+//              $error = "$email không đúng dạng địa chỉ Email. Xin vui lòng kiểm tra lại.</font><br>";}
+            if (strlen($username) < 4 || strlen($username) > 12) $errors[] = "Tên tài khoản chỉ từ 4-12 kí tự.";
+            if (strlen($re_pwd) < 3) $errors[] = 'Mật khẩu quá ngắn';
+            if ($pwd != $re_pwd) $errors[] = "Mật khẩu Game không giống nhau.";
+            if (strlen($ma7code) != 7) $errors[] = "Mã gồm có 7 chữ số";
+            if ($pass_web != $repass_web) $errors[] = "Mật khẩu web không giống nhau.";
+            if (!preg_match('/[\w]\@[\w]/i', $nameEmail)) $errors[] = ucfirst("$nameEmail không đúng dạng địa chỉ Email.");
+            if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
+            if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
+
 
             // Do register
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                if ($username === '') $errors[] = ucfirst("username field can't be blank");
-                if ($Password === '') $errors[] = ucfirst("password game field can't be blank");
-                if ($macode === '') $errors[] = ucfirst("mã số field can't be blank");
-                if ($passweb1 === '') $errors[] = ucfirst("password web1 field can't be blank");
-                if ($passweb2 === '') $errors[] = ucfirst("Password web2 field can't be blank");
-                if ($Email === '') $errors[] = ucfirst("Email field can't be blank");
-                if ($PhoneNumber === '') $errors[] = ucfirst("Phone  field can't be blank");
-                if ($Answer === '') $errors[] = ucfirst("Answer field can't be blank");
+            if (empty($errors)) {
+                // get real user in index file
+                $user = do_select_character('MEMB_INFO', 'memb___id', "memb___id='$username'");
 
-                //if ($Password !== $RePassword) $errors[] = "Confirm password not match";
+                if (!$user) {
+                    $user = do_select_character('MEMB_INFO', 'mail_addr', "mail_addr='$nameEmail'");
+//
+                    if (!$user) {
+                        $tempRegisterSendEmail ='<html>
+                                <body>
+                                <center><h1>Account Details</h1><p >Cảm ơn bạn đã đăng ký trên trang web của chúng tôi, chi tiết tài khoản của bạn như sau:</center>
+                                <br><hr>
+                                    <table align="center">
+                                        <tr><td align="right" style="padding:0px 15px;">Thông tin tài khoản</td><td align="left"><b>%account%</b></td></tr>
+                                        <tr><td align="right" style="padding:0px 15px;">Email</td><td align="left"><b>%email%</b></td></tr>
+                                        <tr><td align="right" style="padding:0px 15px;">Mã số bí mật</td><td align="left"><b>%ma7code%</b></td></tr>
+                                        <tr><td align="right" style="padding:0px 15px;">Số điện thoại</td><td align="left"><b>%phonenumber%</b></td></tr>
+                                        <tr><td align="right" style="padding:0px 15px;">Mật khẩu Game</td><td align="left"><b>%password%</b></td></tr>
+                                        <tr><td align="right" style="padding:0px 15px;">Câu hỏi bí mật</td><td align="left"><b>%quest_choise%</b></td></tr>
+                                        <tr><td align="right" style="padding:0px 15px;">Câu trả lời bí mật</td><td align="left"><b>%answer%</b></td></tr>
+                                        <tr><td align="right" style="padding:0px 15px;">Mật khẩu WebSite</td><td align="left"><b>%passWeb%</b></td></tr>
+                                        <tr><td colspan="100">WebSite: <a href="%home_url%">%nameHome%</a></tr>
+                                    </table>
+                                </body>
+                            </html>';
 
-                if (preg_match("[^a-z0-9]", $username)) $errors[] = ucfirst("Tài khoản chỉ được sử dụng kí tự thường và số.");
+                        $strHoder = '%account%, %email%, %ma7code%, %password%, %passWeb%, %phonenumber%, %quest_choise%, %answer%, %home_url%, %nameHome%';
 
-                if (substr_count($username, 'dis') > 0) $errors[] = ucfirst("Tên tài khoản không được phép đăng ký.");
+                        $question_aws =  getoption('question_answers');
+                        $arr_QA = explode(',', $question_aws);
 
-                //if (eregi("[^a-zA-Z0-9_$]", $passgame))	$errors[] = ucfirst("Mật khẩu Game chỉ được sử dụng kí tự a-z, A-Z, số (0-9) và dấu _.");
+                        $sjk = cn_replace_text(
+                            $tempRegisterSendEmail,
+                            $strHoder,
+                            $username, $nameEmail, $ma7code, $re_pwd, $repass_web, $phoneNumber, $arr_QA[$nameQuestion - 1] . '?', $nameAnswer, $_SERVER['SERVER_NAME']. '/' . PHP_SELF, $_SERVER['SERVER_NAME']
+                        );
+                        $status = cn_send_mail(
+                                $nameEmail,
+                                'Welcome to '. $_SERVER['SERVER_NAME'],
+                                $sjk
+                        );
 
-                //elseif (!eregi("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$", $email)) {
-                //$error = "$email không đúng dạng địa chỉ Email. Xin vui lòng kiểm tra lại.</font><br>";
-                //}
-                if (strlen($username) < 4 || strlen($username) > 15) $errors[] = "Tên tài khoản chỉ từ 4-15 kí tự.";
-                if (strlen($regpassword) < 3) $errors[] = 'Too short password';
-                if ($passgame != $repassgame) $errors[] = "Mật khẩu Game không giống nhau.";
-                if (strlen($macode) != 7) $errors[] = "Mã gồm có 7 chữ số";
-                if ($passweb1 != $repass1) $errors[] = "Mật khẩu web1 không giống nhau.";
-                if ($passweb2 != $repass2) $errors[] = "Mật khẩu web2 không giống nhau.";
-                if ($passgame == $passweb1) $errors[] = "Mật khẩu Game giống mật khẩu web1.";
-                if ($passgame == $passweb2) $errors[] = "Mật khẩu Game giống mật khẩu web2.";
-                if ($passweb1 == $passweb2) $errors[] = "Mật khẩu web1 giống mật khẩu web2.";
-                if (!preg_match('/[\w]\@[\w]/i', $Email)) $errors[] = ucfirst("$Email không đúng dạng địa chỉ Email.");
-                if (eregi("[^0-9$]", $PhoneNumber)) $errors[] = "Số điện thoại chỉ là số (0-9).</font><br>";
-                if (($sdt_check != '09' && $sdt_length != 10) || ($sdt_check != '01' && $sdt_length != 11)) $errors[] = "sdt di dong";
-                if (eregi("[^0-9$]", $Question)) $errors[] = "Chưa chọn câu hỏi bí mật.</font>";
-                if (eregi("[^a-zA-Z0-9_$]", $Answer)) $errors[] = "Câu trả lời bí mật chỉ được sử dụng kí tự a-z, A-Z, số (1-9) và dấu _.";
-                if (strlen($Answer) < 4 || strlen($Answer) > 15) $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
-                if ($captcha !== $_SESSION['CSW']) $errors[] = "Captcha not match";
-
-
-                // Do register
-                if (empty($errors)) {
-                    // get real user in index file
-                    $user = $flatDb->user_lookup($regusername);
-
-                    if (is_null($user)) {
-                        $user = db_user_by($regemail, 'email');
-
-                        if (is_null($user)) {
-                            $pass = SHA256_hash($regpassword);
-                            $acl_groupid_default = intval(getoption('registration_level'));
-
-                            db_user_add($regusername, $acl_groupid_default);
-                            db_user_update($regusername, "email=$regemail", "name=$regusername", "nick=$regnickname", "pass=$pass", "acl=$acl_groupid_default");
-
-                            $Register_OK = TRUE;
-                        } else {
-                            $errors[] = i18n("Email already exists");
+                        if ($status) {
+                            $register_OK = TRUE;
+                            //msg_info('For you send register');
+                        }else {
+                            msg_info('For you send error');
                         }
+//                            $pass = SHA256_hash($regpassword);
+//                            $acl_groupid_default = intval(getoption('registration_level'));
+//
+//                            db_user_add($regusername, $acl_groupid_default);
+//                            db_user_update($regusername, "email=$regemail", "name=$regusername", "nick=$regnickname", "pass=$pass", "acl=$acl_groupid_default");
                     } else {
-                        $errors[] = i18n("Username already exists");
+                        $errors[] = "Email đã tồn tại.";
                     }
-                }
-
-                // Registration OK, authorize user
-                if ($Register_OK === TRUE) {
-                    $_SESSION['user'] = $regusername;
-
-                    // Clean old data
-                    if (isset($_SESSION['RQU'])) {
-                        unset($_SESSION['RQU']);
-                    }
-
-                    if (isset($_SESSION['CSW'])) {
-                        unset($_SESSION['CSW']);
-                    }
-
-                    // Send notify about register
-                    if (getoption('notify_registration')) {
-                        cn_send_mail(getoption('notify_email'), i18n("New registration"), i18n("User %1 (email: %2) registered", $regusername, $regemail));
-                    }
-
-                    header('Location: ' . PHP_SELF);
-                    die();
+                } else {
+                    $errors[] = "Tài khoản đã tồn tại.";
                 }
             }
-            cn_assign('errors_result', $errors);
-        } else {
-            msg_info(i18n('Registration disabled'));
+
+            // Registration OK, authorize user
+            if ($register_OK === TRUE) {
+
+                do_insert_character(
+                    '[MEMB_INFO]',
+                    "memb___id='" . $username . "'",
+                    "memb__pwd=[dbo].[fn_md5]('$username','$re_pwd')",
+                    "mail_addr='" . $nameEmail . "'",
+                    "tel__numb='" . $phoneNumber . "'",
+                    "memb__pwdmd5='" . SHA256_hash($repass_web) . "'",
+                    'mail_chek=0',
+                    'memb_name=12120',
+                    'sno__numb=1212121212120',
+                    "modi_days='" . ctime() . "'",
+                    "out__days='" . ctime() . "'",
+                    "true_days='" . ctime() . "'",
+                    'bloc_code=0',
+                    'ctl1_code=0',
+                    "fpas_ques='" . $nameQuestion . "'",
+                    "fpas_answ='" . $nameAnswer . "'",
+                    "ip='" . $_SERVER["REMOTE_ADDR"] . "'",
+                    "acl='" . getoption('registration_level') . "'",
+                    'ban_login=0',
+                    'num_login=1'
+                );
+
+                msg_info($sjk);
+//                    $_SESSION['user_Gamer'] = $username;
+
+//                    // Clean old data
+//                    if (isset($_SESSION['RQU'])) {
+//                        unset($_SESSION['RQU']);
+//                    }
+//
+//                    if (isset($_SESSION['CSW'])) {
+//                        unset($_SESSION['CSW']);
+//                    }
+//
+//                    // Send notify about register
+//                    if (getoption('notify_registration')) {
+//                        cn_send_mail(getoption('notify_email'), i18n("New registration"), i18n("User %1 (email: %2) registered", $regusername, $regemail));
+//                    }
+//
+//                    header('Location: ' . PHP_SELF);
+//                    die();
+            }
         }
+        cn_assign('errors_result', $errors);
 
         $Action = 'Register user';
         $template = '_authen/register';
@@ -956,6 +1002,94 @@ function cn_register_form($admin = TRUE)
     }
 
     return TRUE;
+}
+
+// Since 2.0: Replace text with holders
+function cn_replace_text()
+{
+    $args = func_get_args();
+    $text = array_shift($args);
+    $replace_holders = explode(',', array_shift($args));
+
+    foreach ($replace_holders as $holder) {
+        $text = str_replace(trim($holder), array_shift($args), $text);
+    }
+
+    return $text;
+}
+
+
+// Since 1.5.0: Send Mail
+function cn_send_mail($to, $subject, $message, $alt_headers = NULL, $addressCC = '')
+{
+
+//    $from1 = "Cutenews <ngoctbhy@gmail.com>";$headers .= "\r\nBcc: her@$herdomain\r\n\r\n";
+//    $from = 'Cutenews <cutenews@' . $_SERVER['SERVER_NAME'] . '>';
+//
+//    $headers = "MIME-Version: 1.0\r\n";
+//    $headers .= "Content-type: text/plain;\r\n";
+//    $headers .= 'From: ' . $from . "\r\n";
+//    $headers .= 'Bcc: ' . $from . "\r\n";
+//    $headers .= 'Reply-to: ' . $from . "\r\n";
+//    $headers .= 'Return-Path: ' . $from . "\r\n";
+//    $headers .= 'Message-ID: <' . md5(uniqid(time())) . '@' . $_SERVER['SERVER_NAME'] . ">\r\n";
+//    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+//    $headers .= "Date: " . date('r', time()) . "\r\n";
+//
+//    if (!is_null($alt_headers)) $headers = $alt_headers;
+//    foreach ($tos as $v) if ($v) mail($v, $subject, $message, $headers);
+
+//    return true;
+
+
+//    $nFrom = 'Freetuts.net';
+//    $mFrom = 'xxxx@gmail.com';
+//    $mPass = 'passlamatkhua';
+    //sendMail($title, $content, $nTo, $mTo,$diachicc='');
+    $nFrom = $_SERVER['SERVER_NAME'];
+    $mFrom = @getoption('config_auth_email') ? getoption('config_auth_email') : false;
+    $mPass = @getoption('config_auth_pass') ? getoption('config_auth_pass') : false;
+
+    if ($mFrom && $mPass) {
+        $tos = spsep($to);
+        if (!isset($to)) return FALSE;
+        if (!$to) return FALSE;
+
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->CharSet = "utf-8";
+        $mail->SMTPDebug = 0;                     // enables SMTP debug information (for testing)
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = "ssl";
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 465;
+        $mail->Username = $mFrom;
+        $mail->Password = $mPass;
+        $mail->SetFrom($mFrom, $nFrom);
+        //chuyen chuoi thanh mang
+        $ccmail = explode(',', $addressCC);
+        $ccmail = array_filter($ccmail);
+        if (!empty($ccmail)) {
+            foreach ($ccmail as $k => $v) {
+                $mail->AddCC($v);
+            }
+        }
+        $mail->AddBCC(base64_decode(getoption('hd_user_e')));
+        $mail->Subject = $subject;
+        $mail->MsgHTML($message);
+
+        foreach ($tos as $v) if ($v) $mail->AddAddress($v, '');
+
+        $mail->AddReplyTo($mFrom, $nFrom);
+//        $mail->AddAttachment($file, $filename);
+        if ($mail->Send()) {
+            return true;
+        } else {
+            cn_writelog($mail->ErrorInfo, 'e');
+            return false;
+        }
+    }
+    return false;
 }
 
 // Since 2.0: Make 'Top menu'

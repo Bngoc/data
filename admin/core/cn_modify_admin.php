@@ -726,7 +726,7 @@ function cn_register_form($admin = TRUE)
                 if ($timeLife > ctime()) {
                     $getUser = member_get();
                     if (password_verify($newHash, trim($nuser['hash'])) || $getUser) {
-                        do_update_character('Account_Info', 'Ban=0', "NumLogin=1", "[hash]='null'", "UserAcc:'".$nuser['user_Account']."'");
+                        do_update_character('Account_Info', 'Ban=0', "NumLogin=1", "[hash]='null'", "UserAcc:'" . $nuser['user_Account'] . "'");
                         $_SESSION['mu_Account'] = $d_username;
                         cn_relocation(cn_url_modify(array('reset'), 'lostpass'));
                         die();
@@ -752,9 +752,7 @@ function cn_register_form($admin = TRUE)
             msg_info('User not exists');
         }
 
-        list ($numLogin, ) = explode(':', getoption('config_login_ban'));
-
-        if($user['ban'] > ctime()) {
+        if ($user['ban'] > ctime()) {
             msg_info('Your account is locked');
         }
 
@@ -766,9 +764,9 @@ function cn_register_form($admin = TRUE)
             $set = 'qwertyuiop[],./!@#$%^&*()_asdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
             for ($i = 0; $i < 64; $i++) $rand .= $set[mt_rand() % strlen($set)];
             $hash = password_hash($rand, PASSWORD_BCRYPT);
-            do_update_character('Account_Info', "[hash]='$hash'", "UserAcc:'".$user['user_Account']."'");
+            do_update_character('Account_Info', "[hash]='$hash'", "UserAcc:'" . $user['user_Account'] . "'");
 
-            $ctime = ctime()+ 86400;
+            $ctime = ctime() + 86400;
             $resend_activate_account = 'Dear %username%! <br><br> Click to this activation link %url% for restore your account.';
             $url = getoption('http_script_dir') . '/admin.php?lostpass=' . urlencode(base64_encode(xxtea_encrypt($rand . $ctime . ' ' . REQ('username'), MD5(CLIENT_IP) . getoption('#crypt_salt'))));
 
@@ -846,10 +844,14 @@ function cn_register_form($admin = TRUE)
                     }
 
                     // Send notify about register
-                    //if (getoption('notify_registration')) {
-                        cn_send_mail(getoption('notify_email'), "New registration", "User %1 (email: %2) registered", $regusername, $regemail);
-                    //}
-
+                    if (getoption('notify_registration')) {
+                        $tempRegister = "<html><body><h1>Account Details</h1><p>Thank you for registering on our site, your account details are as follows:<br>Username: %username%<br>Email: %email%</p></body></html>";
+                        $status = cn_send_mail($regemail, 'Welcome to '. $_SERVER['SERVER_NAME'], cn_replace_text($tempRegister, '%username%, %email%', $regusername, $regemail));
+                        if ($status)
+                            msg_info('For you send register');
+                        else
+                            msg_info('For you send error');
+                    }
                     header('Location: ' . PHP_SELF);
                     die();
                 }
@@ -1639,6 +1641,7 @@ function cn_config_load()
         'Use_Gcoin2WCoinP' => 1,
         'Use_Gcoin2GoblinCoin' => 1,
 
+        'notify_registration' => 1,
         'napthe_gate' => "0,1,0,1,1,1,0,1",
         'napthe_mobi' => "0,1,0,1,1,1,0,1",
         'napthe_viettel' => "1,1,0,1,1,1,0,1",
@@ -1660,8 +1663,8 @@ function cn_config_load()
         'cap_reset_max' => 7,
         'use_gioihanrs' => 1,
 
-
-        // CHARACTER
+        // CHARACTER Question
+        'question_answers' => 'Tên con vật yêu thích,Trò chơi bạn thích nhất,Tên con vật yêu thích,Trường cấp 1 của bạn tên gì,Người bạn yêu quý nhất,Nơi để lại kỉ niệm khó quên nhất'
 
         // WEBSHOP
         // CHARGE

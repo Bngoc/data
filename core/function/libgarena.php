@@ -25,6 +25,8 @@ function cn_writelog($content, $info = '', $user = '')
     $member = 'UNKNOWN';
     if (!isset($user)) {
         $member = member_get()['mu_Account'];
+        if(!$member)
+            $member = member_get()['mu_Gamer'];
     }
 
     if (($time = $_SERVER['REQUEST_TIME']) == '') {

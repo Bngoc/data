@@ -348,6 +348,7 @@ function checkAnswerTrue(id) {
         document.getElementById('AnswerID').innerHTML = '<img style="margin-right:10px" src="/images/checkbullet.gif">';
     }
 }
+
 function checkPhoneNumber(id) {
     document.getElementById('PhoneNumberID').innerHTML = "<div style='padding:2px;'><img src=/images/spinner_grey.gif /></div>"
     setTimeout("isNumberPhone('" + id + "')", 1000);

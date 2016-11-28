@@ -64,6 +64,7 @@ var notify_str_xd = 'không xác định.';
 var arr_error = new Array();
 var index = 0;
 var index_error = 0;
+
 function idpasswdCheck(idchk) {
     var char_cnt, int_cnt;
     char_cnt = 0;
@@ -145,11 +146,10 @@ function check_symbol(value) {
     }
 }
 function IsMatchingCode(str) { //IsMatchingCode
-    var myRegExp = /[a-z][0-9]/;
-    var illegalChars = /[\W_]/;
-    //return myRegExp.test(str); // c1
-    if (str.search(myRegExp) == -1) return false;
-    else return true;
+    var myRegExp = /(([a-z]{1,}[0-9]{1,})|([0-9]{1,}[a-z]{1,}))[a-z0-9]{0,}/;
+    return myRegExp.test(str); // c1
+    // if (str.search(myRegExp) == -1) return false;
+    // else return true;
 }
 
 function check_cap(value) {
@@ -174,20 +174,6 @@ function updateRangeValue() {
     intNumberValue.innerHTML = point_dutru.value;
 }
 
-//updateRangeValue();
-/*
- $(function() {
- $(".but").on("click",function() {
- var id=this.id;
- var fldId=id.substring(0,id.length-3);
- var inc=id.substring(id.length-3)=="inc";
- var fld = $("#"+fldId);
- var val = +fld.val();
- if (inc)val++;else {if(val < 1) val = 0; else val--;}
- fld.val(val);
- });
- });
- */
 function _getpoint() {
 //$(".txt-add-sub").on("input change", function() {
     //do something
@@ -285,7 +271,7 @@ function cap_char(str) {
 function isAlphabetKey(evt, id) {
     var charCode = (evt.which) ? evt.which : event.keyCode
     if ((charCode >= 48 && charCode <= 57) || (charCode >= 97 && charCode <= 122)) {
-        document.getElementById(id).innerHTML = notify_img_apccet;
+        //document.getElementById(id).innerHTML = notify_img_apccet;
         return true;
     }
     else {
@@ -296,11 +282,13 @@ function isAlphabetKey(evt, id) {
 function isNumKey(evt, id) {
     var charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode >= 48 && charCode <= 57) {
-        document.getElementById(id).innerHTML = notify_img_apccet;
+        document.getElementById(id).innerHTML = '';//notify_img_apccet;
+        //arr_error[id] = 0;
         return true;
     }
     else {
         document.getElementById(id).innerHTML = notify_img_deline + '<span style="color:#FF0000">Chỉ được sử dụng số!</span>';
+        arr_error[id] = 1;
         return false;
     }
 }
@@ -311,7 +299,7 @@ function ischeckEmail(value) {
         return false;
     else return true;
 }
-function Vali_num_(value, num) {
+function vali_num7(value, num) {
     if (num)
         var pattern_ = '^[0-9]{' + num + '}$';
     else
@@ -322,6 +310,7 @@ function Vali_num_(value, num) {
     else
         return false;
 }
+
 function proce_notify_err(str_val, str_smg_default) {
     var html_err_ = '';
 
@@ -331,8 +320,26 @@ function proce_notify_err(str_val, str_smg_default) {
         html_err_ = cap_char(notify_str_xd);
 
     return notify_img_deline + '<span style="color:#FF0000">' + html_err_ + '</span>';
-
 }
+
+function covertStrBool(str_val, bool, number) {
+    var img_notify = '';
+    if (number == 1) {
+        img_notify  = notify_img_load;
+    }else if (number == 2) {
+        img_notify  = notify_img_deline;
+    }else if (number == 3){
+        img_notify  = notify_img_apccet;
+    }
+    var html_err_ = cap_char(str_val);
+    var color_text = '';
+    if (!bool){
+        color_text = '#FF0000';
+    }
+
+    return img_notify + '<span style="color:'+ color_text +'">' + html_err_ + '</span>';
+}
+
 function dataSize(varData) {
     var i, ch;
     var size;
@@ -349,17 +356,6 @@ function dataSize(varData) {
 }
 
 
-function log_out(B) {
-    var A = document.getElementsByTagName("html")[0];
-    A.style.filter = "progid:DXImageTransform.Microsoft.BasicImage(grayscale=1)";
-    if (confirm(B)) return true
-    else {
-        A.style.filter = "";
-        return false
-    }
-}
-
-
 function menuLayer_open(idname) {
     document.getElementById(idname).style.display = "block";
 }
@@ -369,86 +365,72 @@ function menuLayer_close(idname) {
 
 //function validateFormOnSubmit(contact) {
 function validateFormOnSubmit() {
-    //for(var i = 0; arr_error.length; i++)
-    alert(arr_error['UserID']);
-    return false;
-    //if(index > 0) {alert("Vui lòng kiểm tra lại thông tin đăng ký!");alert(index); return false;}
-    //else return true;
-    /*
-     reason = "";
-     reason += validateName(contact.name);
-     reason += validateEmail(contact.email);
-     reason += validatePhone(contact.phone);
-     reason += validatePet(contact.pet);
-     reason += validateNumber(contact.number);
-     reason += validateDisclaimer(contact.disclaimer);
+    var checkValiFormRegist = false;
+    for (var key in arr_error){
+        if (arr_error[key]) {
+            checkValiFormRegist = true;
+            break;
+        }
+    }
 
-     //console.log(reason);
-     if (reason.length > 0) {
-
-     return false;
-     } else {
-     alert("Test alert"); // Show some loading image and submit form
-     //submitFormAjax();
-     }
-     */
+    if(checkValiFormRegist) {
+        alert('Vui lòng kiểm tra lại thông tin đăng ký!');
+        return false;
+    }
 }
-
 
 function findNewUser(value, id, notify_smg) {
     var test_ = 'user_account';
-    arr_error[id] = 0;
-    var html_err = proce_notify_err(notify_smg);
+
     document.getElementById(id).innerHTML = notify_img_load;
     if (value.length < 4) {
-        alert("Tên tài khoản tối thiểu 4 kí tự.");
-        getId(id).innerHTML = html_err;
+        getId(id).innerHTML = covertStrBool("Tối thiểu 4 kí tự.", false, 2);
         arr_error[id] = 1;
         //index++;
-        //return false;
+        return false;
     }
     else if (check_symbol(value)) {
-        alert("Tên tài khoản không được sử dụng ký tự đặc biệt.");
-        getId(id).innerHTML = html_err;
+        getId(id).innerHTML = covertStrBool("Không sử dụng ký tự đặc biệt.", false, 2);
         arr_error[id] = 1;
         //index++;
-        //return false;
+        return false;
     }
     else if (!IsMatchingCode(value)) {
-        alert("Tài khoản được sử dụng ký tự thường và số. \n VD: myaccount90");
-        getId(id).innerHTML = html_err;
+        getId(id).innerHTML = covertStrBool("Sử dụng ký tự thường và số.", false, 2);
         arr_error[id] = 1;
         //index++;
-        //return false;
+        return false;
     }
     else {
         //setTimeout("proce_user_from('"+value+"','"+test_+"','"+id+"','tài khoản')", 300);
         proce_user_from(value, test_, id, notify_smg);
         //if(!proce_user_from(value,test_,id,notify_smg))
-        {
+        // {
             //getId(id).innerHTML=proce_notify_err(notify_smg);
             //getId(id).innerHTML="klklkljoio";
             //alert(notify_smg);
             //alert("Tên đăng nhập không hợp lệ.\nTên đăng nhập chỉ được bao gồm chữ và số, không được dùng ký tự đặc biệt, không được dùng chữ HOA.");
-            //return false;
-        }
+            // return false;
+        // }
     }
 }
 function check_num(value, num, id, notify_smg) {
     document.getElementById(id).innerHTML = notify_img_load;
-    if (!Vali_num_(value, num)) {
-        getId(id).innerHTML = proce_notify_err(notify_smg);
-        alert("Mã gồm có " + num + " chữ số.");
+    if (!vali_num7(value, num)) {
+        getId(id).innerHTML = covertStrBool("Mã gồm có " + num + " chữ số.", false, 2);// proce_notify_err(notify_smg);
+        arr_error[id] = 1;
         return false;
     }
     else {
         getId(id).innerHTML = notify_img_apccet;
+        arr_error[id] = 0;
         return true;
     }
 }
 function checkEmail(value, id) {
     var test_ = 'user_email';
     document.getElementById(id).innerHTML = notify_img_load;
+
     setTimeout("proce_user_from('" + value + "','" + test_ + "','" + id + "','email')", 300);
 }
 
@@ -492,9 +474,8 @@ function proce_user_from(value, act, id, str_smg) { // kt findNewUserTrue
             }
             else if (act == 'user_email') {
                 if (!ischeckEmail(value)) {
-                    //getId(id).innerHTML=proce_notify_err(str_smg);
-                    getId(id).innerHTML = html_err;
-                    alert("Vui lòng nhập một địa chỉ email hợp lệ.");
+                    getId(id).innerHTML = covertStrBool('Địa chỉ email hợp lệ.', false, 2); //html_err;
+                    arr_error[id] = 1;
                     return false;
                 }
                 action = 'checkid';
@@ -504,7 +485,7 @@ function proce_user_from(value, act, id, str_smg) { // kt findNewUserTrue
                 if (!ischeckEmail(value)) {
                     //getId(id).innerHTML=proce_notify_err(str_smg);
                     getId(id).innerHTML = html_err;
-                    alert("Please provide a valid email address.");
+                    //alert("Please provide a valid email address.");
                     return false;
                 }
                 action = 'checkid';
@@ -514,7 +495,7 @@ function proce_user_from(value, act, id, str_smg) { // kt findNewUserTrue
                 if (!ischeckEmail(value)) {
                     //getId(id).innerHTML=proce_notify_err(str_smg);
                     getId(id).innerHTML = html_err;
-                    alert("Please provide a valid email address.");
+                    //alert("Please provide a valid email address.");
                     return false;
                 }
                 action = 'checkid';
@@ -524,7 +505,7 @@ function proce_user_from(value, act, id, str_smg) { // kt findNewUserTrue
                 if (!ischeckEmail(value)) {
                     //getId(id).innerHTML=proce_notify_err(str_smg);
                     getId(id).innerHTML = html_err;
-                    alert("Please provide a valid email address.");
+                    //alert("Please provide a valid email address.");
                     return false;
                 }
                 action = 'checkname';
@@ -589,16 +570,16 @@ function proce_user_from(value, act, id, str_smg) { // kt findNewUserTrue
             //eval(cells[i].innerHTML);
 
             var str_ = xmlhttp.responseText;
-            alert(str_);
+            //alert(str_);
             if (xmlhttp.responseText != 'OK') {
                 index++;
-                alert(str_);
+                //alert(str_);
                 arr_error[id] = 1;
                 getId(id).innerHTML = proce_notify_err(str_, '');
             }
             else {
                 index--;
-                alert("ok");
+                //alert("ok");
                 arr_error[id] = 0;
                 getId(id).innerHTML = notify_img_apccet;
             }
@@ -654,187 +635,301 @@ function pwd_strength(id_value, id_color, id_notify) {
     }
 }
 
-function verify_valida(value, name_source, id_smg, str_notify, bool) {
+function verify_valida(value, name_source, id_smg, str_notify) {
+    if (val_source1 = document.getElementsByName(name_source)) {
+        var val_source = val_source1[0].value;
 
-    var val_source = document.getElementsByName(name_source)[0].value;
-    if (val_source) {
         notify_ = typeof str_notify !== 'undefined' ? str_notify : '';
-        bool = typeof bool !== 'undefined' ? bool : true;
         if (value) {
             if (value != val_source) {
                 getId(id_smg).innerHTML = proce_notify_err(notify_, "không giống nhau!");
-                if (bool) alert("Vui lòng kiểm tra lại " + str_notify + " của bạn.");
-            }
-            else
+                arr_error[id_smg] = 1;
+            } else {
                 getId(id_smg).innerHTML = notify_img_apccet;
+                arr_error[id_smg] = 0;
+            }
         }
     }
 }
 
-function valid_multi(value, id_smg, str_notify) {
-    var illegalChars = /[\W_]/; // allow only letters and numbers
-
+function valid_pass(value, id_smg, str_notify) {
+    arr_error[id_smg] = 1;
     if (value == "") {
         getId(id_smg).innerHTML = proce_notify_err("Bạn chưa nhập", str_notify);
+    }else if(value.length < 6) {
+        getId(id_smg).innerHTML = covertStrBool('Mật khẩu dài hơn 6 kí tự', false, 2);
+    }else {
+        getId(id_smg).innerHTML = '';
+        arr_error[id_smg] = 0;
+    }
+}
+
+function checkPhoneNumber(value, id) {
+    getId(id).innerHTML = notify_img_load;
+    setTimeout("isNumberPhone('" + value + "', '"+ id +"')", 500);
+}
+function isNumberPhone(value, id) {
+    arr_error[id] = 1;
+    var dff = /(\(\+84\)|0)\d{2,3}[-]\d{4}[-]\d{3}$/;
+    var pattern = new RegExp(dff);
+    if (pattern.test(value)) {
+        getId(id).innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
+        arr_error[id] = 0;
+        return true;
+    }else {
+        getId(id).innerHTML = notify_img_deline + '<span style="color:#FF0000">Số điện thoại không hợp lệ</span>';
         return false;
     }
-    else if (illegalChars.test(value)) {
-        getId(id_smg).innerHTML = proce_notify_err(str_notify, "có chứa ký tự đặc biệt.");
-        return false;
-    }
-    else if ((value.search(/[a-zA-Z]+/) == -1) || (value.search(/[0-9]+/) == -1)) {
-        getId(id_smg).innerHTML = proce_notify_err(str_notify, "có ít nhất một chữ số.");
-        return false;
-    }
-    else {
-        getId(id_smg).innerHTML = notify_img_apccet;
-        //return true;
-    }
 }
 
-function checkPassword(id, value) {
-    document.getElementById(id).innerHTML = notify_img_load;
-    //setTimeout("checkPasswordTrue('"+id+"','"+value+"')", 300);
-    setTimeout("valid_Password('" + id + "','" + value + "')", 300);
-}
-function checkPasswordTrue(id, value) {
+function renderPhoneTel(value, id) {
 
+    var spaceTemp = '-';
 
-    if (!NumACheck(document.frmRegister.Password.value)) {
-        document.getElementById('Password').innerHTML = '<img style="margin-right:5px" src="images/alert_icon.gif"><span style="color:#FF0000">Mật khẩu không hợp lệ</span>';
-        document.frmRegister.Password.focus();
-        document.frmRegister.Password.value = "";
-        alert("Mật khẩu không được sử dụng dấu cách.");
-        return false;
-    }
-    if (Specialcheck(document.frmRegister.Password.value)) {
-        document.getElementById('Password').innerHTML = notify_img_deline + '<span style="color:#FF0000">Mật khẩu không hợp lệ</span>';
-        document.frmRegister.Password.focus();
-        document.frmRegister.Password.value = "";
-        alert("Mật khẩu không được sử dụng ký tự đặc biệt.");
-        return false;
-    }
-    else
-        document.getElementById('Password').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-}
+    if (value.length) {
+        var textFirst = value.charAt(0);
+        var checkText = '';
+        var checkTextbool = false;
+        if (textFirst == '0') {
+            checkTextbool = true;
+            checkText = '0';
+        } else if (textFirst == '+' || textFirst == '(') {
+            checkText = '+';
+            value = value.replace(/\(\+84\)/g, '0');
+        } else {
+            getId(id).value = '';
+            return false;
+        }
 
+        var cloneValue = value.replace(/\-/g, '');
+        var result = checkText;
+        var text7 = text73 = '';
 
-function RecheckPassword(id) {
-    document.getElementById('RePassword').innerHTML = notify_img_load;
-    setTimeout("RecheckPasswordTrue('" + id + "')", 500);
-}
-function RecheckPasswordTrue(id) {
-    if ((document.frmRegister.Password.value) != (document.frmRegister.RePassword.value)) {
-        document.getElementById('RePassword').innerHTML = notify_img_deline + '<span style="color:#FF0000">Mật khẩu không giống nhau</span>';
-        document.getElementById('Password').innerHTML = notify_img_deline + '<span style="color:#FF0000">Vui lòng điền lại mật khẩu</span>';
-        alert("Vui lòng kiểm tra lại mật khẩu của bạn");
-        document.frmRegister.Password.focus();
-        document.frmRegister.Password.value = "";
-        document.frmRegister.RePassword.value = "";
-        //return false;
-    }
-    else
-        document.getElementById('RePassword').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-}
+        if (cloneValue.length > 1) {
+            var chekbool = false;
 
+            var textSecc = cloneValue.charAt(1);
+            if (textSecc == '1') {
+                chekbool = true;
+                if (cloneValue.length >= 2) result += cloneValue.charAt(1);
+                if (cloneValue.length >= 3) result += cloneValue.charAt(2);
+                if (cloneValue.length >= 4) result += cloneValue.charAt(3) + spaceTemp;
+            } else if (textSecc == '8' || textSecc == '9') {
+                if (cloneValue.length >= 2) result += cloneValue.charAt(1);
+                if (cloneValue.length >= 3) result += cloneValue.charAt(2) + spaceTemp;
+            } else {
+                if (!checkTextbool) {
+                    result = result.replace(/\+/, '(+84)');
+                }
+                getId(id).value = result;
+                return false;
+            }
 
-function checkEmail1111(value, id) {
-    document.getElementById(id).innerHTML = notify_img_load;
-    setTimeout("checkEmailTrue('" + id + "','" + value + "','Email')", 1000);
-}
-function checkEmailTrue(id, value, str_smg) {
-    var hj = proce_notify_err(str_smg);
-    if (!ischeckEmail(value)) {
-        getId(id).innerHTML = proce_notify_err(str_smg);
-        //document.frmRegister.Password.focus();
-        //document.frmRegister.Password.value = "";
+            if (chekbool && cloneValue.length > 4) {
+                if (cloneValue.length >= 5) text7 += cloneValue.charAt(4);
+                if (cloneValue.length >= 6) text7 += cloneValue.charAt(5);
+                if (cloneValue.length >= 7) text7 += cloneValue.charAt(6);
+                if (cloneValue.length >= 8) text7 += cloneValue.charAt(7) + spaceTemp;
+                if (cloneValue.length >= 9) text73 += cloneValue.charAt(8)
+                if (cloneValue.length >= 10) text73 += cloneValue.charAt(9)
+                if (cloneValue.length >= 11) text73 += cloneValue.charAt(10)
+                if (cloneValue.length >= 12) {
+                }
+            }
 
-        alert("Please provide a valid email address.");
-        return false;
-    }
-    var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-    xmlhttp.open("GET", 'checkForm.php?action=checkid&check=check_email&id=' + value, false);
-    xmlhttp.send(null);
-    document.getElementById(id).innerHTML = xmlhttp.responseText;
-    cells = id.getElementsByTagName("script");
-    for (var i = 0; i < cells.length; i++) {
-        eval(cells[i].innerHTML);
+            if (!chekbool && cloneValue.length > 3) {
+                if (cloneValue.length >= 4) text7 += cloneValue.charAt(3);
+                if (cloneValue.length >= 5) text7 += cloneValue.charAt(4);
+                if (cloneValue.length >= 6) text7 += cloneValue.charAt(5);
+                if (cloneValue.length >= 7) text7 += cloneValue.charAt(6) + spaceTemp;
+                if (cloneValue.length >= 8) text7 += cloneValue.charAt(7)
+                if (cloneValue.length >= 9) text7 += cloneValue.charAt(8)
+                if (cloneValue.length >= 10) text7 += cloneValue.charAt(9)
+                if (cloneValue.length >= 11) {
+                }
+            }
+        }
+        if (!checkTextbool) {
+            result = result.replace(/\+/, '(+84)');
+        }
+
+        getId(id).value = result + text7 + text73;
     }
 }
 
+// function checkPhoneNumber(value, id) {
+//     getId(id).innerHTML = notify_img_load;
+//     setTimeout("isNumberPhone('" + value + "', '"+ id +"')", 500);
+// }
+// function isNumberPhone(value, id) {
+//     arr_error[id] = 1;
+//     if (((value / value) != 1) && (value != 0)) {
+//         getId(id).innerHTML = notify_img_deline + '<span style="color:#FF0000">Số điện thoại không hợp lệ</span>';
+//         getId(id).focus();
+//         getId(id).value = "";
+//     } else if (value.length < 9) {
+//         getId(id).innerHTML = notify_img_deline + '<span style="color:#FF0000">Số điện thoại không hợp lệ</span>';
+//         getId(id).focus();
+//         getId(id).value = "";
+//     } else {
+//         arr_error[id] = 0;
+//         getId(id).innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
+//     }
+// }
 
-function RecheckEmail(id) {
-    document.getElementById('RecheckEmail').innerHTML = notify_img_load;
-    setTimeout("RecheckEmailTrue('" + id + "')", 1500);
+function checkQuestion(value, id) {
+    getId(id).innerHTML = notify_img_load;
+    setTimeout("checkQuestionTrue('" + value + "', '"+ id +"')", 100);
 }
-function RecheckEmailTrue(id) {
-    if ((document.frmRegister.Email.value) != (document.frmRegister.ReEmail.value)) {
-        document.getElementById('RecheckEmail').innerHTML = notify_img_deline + '<span style="color:#FF0000">Email không giống nhau</span>';
-        document.getElementById('checkEmailID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Vui lòng điền lại Email</span>';
-        alert("Vui lòng kiểm tra lại Email của bạn");
-        document.frmRegister.Email.focus();
-        document.frmRegister.Email.value = "";
-        document.frmRegister.ReEmail.value = "";
-        //return false;
+function checkQuestionTrue(value, id) {
+    arr_error[id] = 1;
+    if (value == '') {
+        getId(id).innerHTML = notify_img_deline + '<span style="color:#FF0000">Hãy chọn một câu hỏi</span>';
+    } else {
+        arr_error[id] = 0;
+        getId(id).innerHTML = '';
     }
-    else
-        document.getElementById('RecheckEmail').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-}
-
-function checkQuestion(id) {
-    document.getElementById('checkQuestionID').innerHTML = notify_img_load;
-    setTimeout("checkQuestionTrue('" + id + "')", 100);
-}
-function checkQuestionTrue(id) {
-    if (document.frmRegister.Question.value == '') {
-        document.getElementById('checkQuestionID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Hãy chọn  một câu hỏi</span>';
-        alert("Hãy chọn  một câu hỏi");
-    }
-    else
-        document.getElementById('checkQuestionID').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-}
-
-function checkAnswer(id) {
-    document.getElementById('AnswerID').innerHTML = notify_img_load;
-    setTimeout("checkAnswerTrue('" + id + "')", 1000);
-}
-function checkAnswerTrue(id) {
-    if (Specialcheck(document.frmRegister.Answer.value)) {
-        document.getElementById('AnswerID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Câu trả lời bí mật không hợp lệ</span>';
-        document.frmRegister.Answer.focus();
-        document.frmRegister.Answer.value = "";
-        alert("Câu trả lời bí mật không được sử dụng ký tự đặc biệt.");
-        return false;
-    }
-    else if (document.frmRegister.Answer.value.length < 4) {
-        document.getElementById('AnswerID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Câu trả lời cần có ít nhất 4 ký tự</span>';
-        alert("Câu trả lời bí mật cần có ít nhất 4 ký tự");
-    }
-    else
-        document.getElementById('AnswerID').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
 }
 
+function checkAnswer(value, id) {
+    getId(id).innerHTML = "<div style='padding:2px;'><img src=/images/spinner_grey.gif /></div>"
+    setTimeout("checkAnswerTrue('" + value + "', '"+ id +"')", 100);
+}
+function checkAnswerTrue(value, id) {
+    arr_error[id] = 1;
+    if (value.length < 4) {
+        getId(id).innerHTML = '<img style="margin-right:5px" src="/images/alert_icon.gif"><span style="color:#FF0000">Câu trả lời cần có 4 ký tự</span>';
+    } else if (value.length > 15) {
+        getId(id).innerHTML = '<img style="margin-right:5px" src="/images/alert_icon.gif"><span style="color:#FF0000">Câu trả lời tối đa 15 ký tự</span>';
+    } else {
+        arr_error[id] = 0;
+        getId(id).innerHTML = '';
+    }
+}
 
-function checkPhoneNumber(id) {
-    document.getElementById('PhoneNumberID').innerHTML = notify_img_load;
-    setTimeout("isNumberPhone('" + id + "')", 1000);
-}
-function isNumberPhone(contents) {
-    if (((contents / contents) != 1) && (contents != 0)) {
-        document.getElementById('PhoneNumberID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Số điện thoại không hợp lệ</span>';
-        document.frmRegister.PhoneNumber.focus();
-        document.frmRegister.PhoneNumber.value = "";
-        alert('Số điện thoại không hợp lệ');
+function checkCaptcha(value, id) {
+    arr_error[id] = 1;
+    if (value.length == '') {
+        getId(id).innerHTML = '<img style="margin-right:5px" src="/images/alert_icon.gif"><span style="color:#FF0000">Chưa nhập mã Captcha</span>';
+    } else {
+        arr_error[id] = 0;
+        getId(id).innerHTML = '';
     }
-    else if (document.frmRegister.PhoneNumber.value.length < 9) {
-        document.getElementById('PhoneNumberID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Số điện thoại không hợp lệ</span>';
-        document.frmRegister.PhoneNumber.focus();
-        document.frmRegister.PhoneNumber.value = "";
-        alert('Số điện thoại không hợp lệ');
-    }
-    else
-        document.getElementById('PhoneNumberID').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
 }
+
+
+// function checkPassword(id, value) {
+//     document.getElementById(id).innerHTML = notify_img_load;
+//     //setTimeout("checkPasswordTrue('"+id+"','"+value+"')", 300);
+//     setTimeout("valid_Password('" + id + "','" + value + "')", 300);
+// }
+// function checkPasswordTrue(id, value) {
+//
+//
+//     if (!NumACheck(document.frmRegister.Password.value)) {
+//         document.getElementById('Password').innerHTML = '<img style="margin-right:5px" src="images/alert_icon.gif"><span style="color:#FF0000">Mật khẩu không hợp lệ</span>';
+//         document.frmRegister.Password.focus();
+//         document.frmRegister.Password.value = "";
+//         alert("Mật khẩu không được sử dụng dấu cách.");
+//         return false;
+//     }
+//     if (Specialcheck(document.frmRegister.Password.value)) {
+//         document.getElementById('Password').innerHTML = notify_img_deline + '<span style="color:#FF0000">Mật khẩu không hợp lệ</span>';
+//         document.frmRegister.Password.focus();
+//         document.frmRegister.Password.value = "";
+//         alert("Mật khẩu không được sử dụng ký tự đặc biệt.");
+//         return false;
+//     }
+//     else
+//         document.getElementById('Password').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
+// }
+
+//
+// function RecheckPassword(id) {
+//     document.getElementById('RePassword').innerHTML = notify_img_load;
+//     setTimeout("RecheckPasswordTrue('" + id + "')", 500);
+// }
+// function RecheckPasswordTrue(id) {
+//     if ((document.frmRegister.Password.value) != (document.frmRegister.RePassword.value)) {
+//         document.getElementById('RePassword').innerHTML = notify_img_deline + '<span style="color:#FF0000">Mật khẩu không giống nhau</span>';
+//         document.getElementById('Password').innerHTML = notify_img_deline + '<span style="color:#FF0000">Vui lòng điền lại mật khẩu</span>';
+//         alert("Vui lòng kiểm tra lại mật khẩu của bạn");
+//         document.frmRegister.Password.focus();
+//         document.frmRegister.Password.value = "";
+//         document.frmRegister.RePassword.value = "";
+//         //return false;
+//     }
+//     else
+//         document.getElementById('RePassword').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
+// }
+
+//
+// function checkEmail1111(value, id) {
+//     document.getElementById(id).innerHTML = notify_img_load;
+//     setTimeout("checkEmailTrue('" + id + "','" + value + "','Email')", 1000);
+// }
+// // function checkEmailTrue(id, value, str_smg) {
+//     var hj = proce_notify_err(str_smg);
+//     if (!ischeckEmail(value)) {
+//         getId(id).innerHTML = proce_notify_err(str_smg);
+//         //document.frmRegister.Password.focus();
+//         //document.frmRegister.Password.value = "";
+//
+//         alert("Please provide a valid email address.");
+//         return false;
+//     }
+//     var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+//     xmlhttp.open("GET", 'checkForm.php?action=checkid&check=check_email&id=' + value, false);
+//     xmlhttp.send(null);
+//     document.getElementById(id).innerHTML = xmlhttp.responseText;
+//     cells = id.getElementsByTagName("script");
+//     for (var i = 0; i < cells.length; i++) {
+//         eval(cells[i].innerHTML);
+//     }
+// }
+
+
+// function RecheckEmail(id) {
+//     document.getElementById('RecheckEmail').innerHTML = notify_img_load;
+//     setTimeout("RecheckEmailTrue('" + id + "')", 1500);
+// }
+// function RecheckEmailTrue(id) {
+//     if ((document.frmRegister.Email.value) != (document.frmRegister.ReEmail.value)) {
+//         document.getElementById('RecheckEmail').innerHTML = notify_img_deline + '<span style="color:#FF0000">Email không giống nhau</span>';
+//         document.getElementById('checkEmailID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Vui lòng điền lại Email</span>';
+//         alert("Vui lòng kiểm tra lại Email của bạn");
+//         document.frmRegister.Email.focus();
+//         document.frmRegister.Email.value = "";
+//         document.frmRegister.ReEmail.value = "";
+//         //return false;
+//     }
+//     else
+//         document.getElementById('RecheckEmail').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
+// }
+
+
+// function checkAnswer(id) {
+//     document.getElementById('AnswerID').innerHTML = notify_img_load;
+//     setTimeout("checkAnswerTrue('" + id + "')", 1000);
+// }
+// function checkAnswerTrue(id) {
+//     if (Specialcheck(document.frmRegister.Answer.value)) {
+//         document.getElementById('AnswerID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Câu trả lời bí mật không hợp lệ</span>';
+//         document.frmRegister.Answer.focus();
+//         document.frmRegister.Answer.value = "";
+//         alert("Câu trả lời bí mật không được sử dụng ký tự đặc biệt.");
+//         return false;
+//     }
+//     else if (document.frmRegister.Answer.value.length < 4) {
+//         document.getElementById('AnswerID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Câu trả lời cần có ít nhất 4 ký tự</span>';
+//         alert("Câu trả lời bí mật cần có ít nhất 4 ký tự");
+//     }
+//     else
+//         document.getElementById('AnswerID').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
+// }
+
+
+
 
 
 function CheckFormRegister() {
@@ -1203,10 +1298,5 @@ $(document).ready(function () {
             $("i.down").addClass("down");
         }
     });
-    // if (!mouse_is_inside){
-    //     alert(111);
-    //     $('.box_login').hide();
-    //     $("i.down").removeClass("downup");
-    //     $("i.down").addClass("down");
-    // }
+
 });

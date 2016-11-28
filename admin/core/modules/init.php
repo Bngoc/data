@@ -21,7 +21,7 @@ $_init_modules = hook('modules/init_modules', array
 // Required module not exist
 if (!isset($_init_modules[$_module])) {
     // external module chk
-    $_module = hook('modules/init', 'editconfig', $_module);//exit();
+    $_module = hook('modules/init', 'editconfig', $_module);
 }
 
 // Check restrictions, if user is authorized

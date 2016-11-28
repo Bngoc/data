@@ -7,13 +7,14 @@ April 26, 2014
 
 class phptextClass
 {
-//    public $path_Url = '';
-//    public $nameSession = '';
+
+    public $path_Url = '';
+    public $nameSession = '';
 
     public function phptext($text, $textColor, $backgroundColor = '', $fontSize, $imgWidth, $imgHeight, $dir, $fileName)
     {
         /* settings */
-        $font = SERVDIR . '/core/captcha/font/Heineken.ttf';/*define font*/
+        $font = $this->path_Url . '/core/captcha/font/Heineken.ttf';/*define font*/
         $textColor = $this->hexToRGB($textColor);
 
         $im = imagecreatetruecolor($imgWidth, $imgHeight);
@@ -41,8 +42,8 @@ class phptextClass
     {
         /* Settings */
         $text = $this->random();
-        $font =SERVDIR . '/core/captcha/font/monofont.ttf';/* font */
-//        var_dump(SERVDIR);die;
+        $font = $this->path_Url . '/core/captcha/font/monofont.ttf';/* font */
+//                var_dump($this->path_Url);die;
         $textColor = $this->hexToRGB($textColor);
         $fontSize = $imgHeight * 0.75;
 
@@ -75,10 +76,9 @@ class phptextClass
 
         header("Content-type: image/jpeg"); /* defining the image type to be shown in browser widow */
         imagejpeg($im, NULL, 90);/* Showing image */
-//        var_dump($im);die;
         imagedestroy($im);/* Destroying image instance */
         if (isset($_SESSION)) {
-            $_SESSION['captcha_code'] = $text;/* set random text in session for captcha validation*/
+            $_SESSION['captcha_web'] = $text;/* set random text in session for captcha validation*/
         }
     }
 

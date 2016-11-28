@@ -2093,7 +2093,7 @@ a img {
     font-size: 10pt;
     width: 90%;
     height: 19px;
-    padding: 3px 0 0 3px;
+    padding: 3px 0 0 9px;
     margin-left: 10px;
 }
 
@@ -2110,10 +2110,10 @@ a img {
     color: #a97933;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 9pt;
-    width: 195px;
+    width: 185px;
     height: 22px;
     padding: 0px 0 0 3px;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 /* *************** BACK TO TOP ****************** */
@@ -2191,9 +2191,9 @@ a img {
 
 #pwd_color {
     border: 1px solid gray;
-    padding: 2px;
+    padding: 1px;
     background: red;
-    margin: 0 0 6px 0;
+    margin: 0px 12px 4px 10px;
 }
 
 .bcitem a {

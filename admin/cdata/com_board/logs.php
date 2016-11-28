@@ -19,9 +19,32 @@ $i = 0;
             href="<?php echo cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs', 'section=character'); ?>">Character</a></li>
 </ul>
 <?php if (!$section) { ?>
+    <div style="clear:both;"></div>
+    <a style="float: right; margin: 5px;top: 37px; right: 8px; position: absolute;" href="8329892839293">Xóa Log</a>
+    <table id="comparison" style="overflow-x:auto; border-collapse: collapse; display: table; border: 1px solid blue;" width="100%" cellspacing="1" cellpadding="3">
+        <th style="border: 1px solid blue; width: 2%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">#</th>
+        <th style="border: 1px solid blue; width: 5%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">Status</th>
+        <th style="border: 1px solid blue; width: 8%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">Time</th>
+        <th style="border: 1px solid blue; width: 8%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">Name</th>
+        <th style="border: 1px solid blue; width: 7%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">IP</th>
+        <th style="border: 1px solid blue; width: 15%;padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">URL</th>
+        <th style="border: 1px solid blue; padding: 5px; font-weight: 600; align="left" bgcolor="#ffffcc">Error</th>
+        <?php
+        foreach ($log_read as $k => $item){?>
+        <tr style="background:<?php echo ($k%2 ? '#BFB6B3' : '#FFFFFF');?>">
+            <td style="border: 1px solid #ddd; overflow-x: scroll" align="middle"><?php echo $k + 1; ?></td>
+            <td style="border: 1px solid #ddd; overflow-x: scroll"><?php echo $item['status']; ?></td>
+            <td style="border: 1px solid #ddd; overflow-x: scroll"><?php echo $item['time']; ?></td>
+            <td style="border: 1px solid #ddd; overflow-x: scroll"><?php echo $item['name']; ?></td>
+            <td style="border: 1px solid #ddd; overflow-x: scroll"><?php echo $item['ip']; ?></td>
+            <td style="border: 1px solid #ddd; overflow-x: scroll"><?php echo $item['url']; ?></td>
+            <td style="border: 1px solid #ddd; overflow-x: scroll"><?php echo $item['error']; ?></td>
 
-
+        </tr>
+        <?php }?>
+    </table>
 <?php } else { ?>
+    <div style="clear:both;"></div>
     <table class="std-table" width="100%">
         <table width="100%" cellspacing="1" cellpadding="3" border="0" bgcolor="#0000ff">
             <tr>

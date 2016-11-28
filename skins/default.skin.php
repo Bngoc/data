@@ -37,7 +37,7 @@ $skin_header = <<<HTML
 <!--link media="all" href="/images/widget43.css" type="text/css" rel="stylesheet" /> -->
 
 	<script type="text/javascript" src="$setpath_default/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript" src="$setpath_default/library/vietvbb_topx.js"></script>
+<!--<script type="text/javascript" src="$setpath_default/library/vietvbb_topx.js"></script>-->
 <!--<script type="text/javascript" src="$setpath_default/library/wz_tooltip.js"></script>-->
 <script type="text/javascript" src="$setpath_default/library/jsCheckForm.js"></script>
 <!--	
@@ -65,7 +65,7 @@ $skin_header = <<<HTML
 
 -->
     <title>{title}</title>
-    <script type="text/javascript" src="$setpath_default/skins/cute.js"></script>
+    <!--<script type="text/javascript" src="$setpath_default/skins/cute.js"></script>-->
     {CustomJS}
     <style type="text/css"><!-- {CustomStyle} --></style>
 	<script type="text/javascript">
@@ -143,7 +143,7 @@ $skin_header = <<<HTML
 	
   		<div id="page_wrapper1">
     		<div id="page_wrapper2">		
-    		<script language="JavaScript" type="text/javascript" src="http://localhost/bqn/data/images/stmenu.js"></script>
+    		<!--<script language="JavaScript" type="text/javascript" src="http://localhost/bqn/data/images/stmenu.js"></script>-->
 		
 		 
          
@@ -289,9 +289,9 @@ $skin_footer = <<<HTML
 <!--
 	<script type="text/javascript" src="library/jsGeneralFunction.js"></script>
 	<!-- <script type="text/javascript" src="library/jsCheckForm.js"></script> -->
-	<script type="text/javascript" src="$setpath_default/library/Common.js"></script>
-	<script type="text/javascript" src="$setpath_default/library/jsWarehouse.js"></script>
-	<script type="text/javascript" src="$setpath_default/library/jsToolTip.js"></script>	
+	<!--<script type="text/javascript" src="$setpath_default/library/Common.js"></script>-->
+	<!--<script type="text/javascript" src="$setpath_default/library/jsWarehouse.js"></script>-->
+	<!--<script type="text/javascript" src="$setpath_default/library/jsToolTip.js"></script>	-->
 
 <div style="clear:both;"></div>
 <div id="footer" style="float:left"> 

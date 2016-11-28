@@ -1,7 +1,7 @@
 <?php
 ob_start();
 
-define('DEV_DEBUG', false); // for visual detect errors
+define('DEV_DEBUG', true); // for visual detect errors
 if (DEV_DEBUG) {
     ini_set('display_errors', '1');
     error_reporting(E_ALL | E_STRICT);
@@ -33,6 +33,8 @@ require_once ROOT . '/core/function/libgarena.php';
 require_once SERVDIR . '/core/cn_core_web.php'; //libs
 require_once SERVDIR . '/core/security.php';
 require_once SERVDIR . '/core/db/flat_web.php';
+require_once SERVDIR . '/core/class.phpmailer.php';
+require_once SERVDIR . '/core/class.smtp.php';
 //require_once MODULE_ADM . '/core/captcha/phptextClass.php';
 
 
@@ -89,10 +91,10 @@ cn_load_session(); //load session_start
 cn_relocation_db_new();
 // 2.0.3 checking existing configuration
 //if ($is_config)
-{
+//{
     //cn_load_plugins();
     //cn_online_counter();
-}
+//}
 
 //db_installed_check();
 
@@ -100,5 +102,4 @@ cn_relocation_db_new();
 
 // load modules
 include SERVDIR . '/core/modules/init.php';
-
 //hook('init/finally');

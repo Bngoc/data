@@ -171,6 +171,7 @@ function board_sysconf()
             'date_adjust' => array('int', 'Time adjustment|in hours; eg. : +3 hours =180 minutes; -2 hours = -120 minutes'),
 
             'allow_registration' => array('Y/N', 'Allow self-Registration|allow users to register automatically'),
+            'notify_registration' => array('Y/N', 'Allow Send Email Registration|allow send email for users to register'),
             'registration_level' => array('select', 'Self-registration level', $grps),
             'config_time_logout' => array('int', 'Second Time Auto Logout After |eg: 900 (Automatic Logout after 15 minutes)'),
             'config_login_ban' => array('text', 'Limit the number of login attempts - Minute Time Blocks |eg: 5:360 (user block after failed 5 login template within 6 hours)'),
@@ -241,6 +242,7 @@ function board_sysconf()
             'hide_captcha' => array('Y/N', 'Hide captcha source path from visitors'),
             'disable_pagination' => array('Y/N', 'Disable pagination|Use it to disable pagination'),
             'mon_list' => array('text', 'Month list|comma separated, 12 variables'),
+            'question_answers' => array('text', 'Câu hỏi|Liệt kê các câu hỏi ngăn cách nhau bằng dấu \',\''),
 
 
             'vptogc' => array('int', 'Công thức Gcoin = X% Vpoint|VD: X = 80 => [Gcoin = 80% Vpoint]'),
@@ -1853,25 +1855,41 @@ function board_logs()
             $r = fopen($path, 'r');
             if ($r) {
                 do {
+                    $n++;
                     $v = trim(fgets($r));
+                    $tempLine = str_replace("\t", "|", $v);
 
-                    if ($v == '') {
-                        $skip = FALSE;
-                        continue;
-                    } elseif ($skip) continue;
+//                    if ($v == '') {
+//                        $skip = FALSE;
+//                        continue;
+//                    } elseif ($skip) continue;
+//
+//                    // Catch
+//                    if (preg_match('/^\[(\d+)\] (.*)$/', $v, $c)) {
+//                        $n++;
+//
+//                        // Skip some logs
+//                        if ($n >= $st) {
+//                            list(, $msg) = explode('|', $c[2], 2);
+//                            $logs[] = array('msg' => $msg, 'date' => date('Y-m-d H:i:s', $c[1]));
+//                        }
+//
+//                        $skip = TRUE;
+//                    }
 
-                    // Catch
-                    if (preg_match('/^\[(\d+)\] (.*)$/', $v, $c)) {
-                        $n++;
+                    if (!$tempLine) break;
+                    if ($n <= $st) continue;
 
-                        // Skip some logs
-                        if ($n >= $st) {
-                            list(, $msg) = explode('|', $c[2], 2);
-                            $logs[] = array('msg' => $msg, 'date' => date('Y-m-d H:i:s', $c[1]));
-                        }
+                    $log_data = explode('|', $tempLine);
 
-                        $skip = TRUE;
-                    }
+                    $log_read[] = array(
+                        'status' => $log_data[0],
+                        'time' => $log_data[1],
+                        'name' => $log_data[2],
+                        'ip' => $log_data[3],
+                        'url' => $log_data[4],
+                        'error' => $log_data[5]
+                    );
 
                     if ($n > $over) break;
                 } while (!feof($r));

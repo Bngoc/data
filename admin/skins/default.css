@@ -202,6 +202,7 @@ select, textarea, input, button {
     min-height: 100px;
     margin: 20px 0.5%;
     loat: left;
+    position: relative;
 }
 
 #contents .breadcrumbs {
