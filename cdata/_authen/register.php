@@ -28,8 +28,7 @@ list($errors_result) = _GL('errors_result');
                                                 value="<?php echo isset($_POST['nameAccount']) ? $_POST['nameAccount'] : ''; ?>"
                                                 onkeypress="isAlphabetKey(event, 'userID');"
                                                 onkeyup="findNewUser(this.value, 'userID', 'tài khoản');"
-                                                type="text" placeholder="eg. myaccount90" maxlength="12" required
-                                                pattern="[a-z0-9]+"/>
+                                                type="text" placeholder="eg. myaccount90" maxlength="10" required />
                 <span id="error_noti"></span></td>
             <td class="bizwebform_col_3" id="userID"></td>
         </tr>
@@ -173,7 +172,7 @@ list($errors_result) = _GL('errors_result');
             <td colspan="3" style="text-align:center">
                 <input type="hidden" value="register" name="register"/>
                 <input type="image" src="<?php echo URL_PATH_IMG ?>/dangky.png" style="padding-right:10px">
-                <img style="cursor:pointer" onclick="document.getElementById('frmRegister').reset();" border="0"
+                <img style="cursor:pointer" onclick="document.getElementById('formRegist').reset();" border="0"
                      src="<?php echo URL_PATH_IMG ?>/cancel.png" style="padding-left:10px">
             </td>
         </tr>

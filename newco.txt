@@ -91,7 +91,7 @@ A>
     2. allow regiter
     3. character
     4. cashshop
-    5.
+    
 
 
  E>
@@ -138,6 +138,12 @@ A>
  Alter TABLE [dbo].[MEMB_INFO] ADD [acl] [smallint] NOT NULL DEFAULT (2)
  Alter TABLE [dbo].[MEMB_INFO] ADD [ban_login] [int] NOT NULL DEFAULT (0)
  Alter TABLE [dbo].[MEMB_INFO] ADD [num_login] [smallint] NOT NULL DEFAULT (0)
+ 
+ 
+ ALTER TABLE [dbo].[MEMB_INFO] ADD [token_regist] VARCHAR (255) NULL
+ Alter TABLE [dbo].[MEMB_INFO] ADD [date_resgit_email] [int] NULL DEFAULT (0)
+ ALTER TABLE [dbo].[MEMB_INFO] ALTER COLUMN [memb__pwdmd5] nvarchar(100) NOT NULL
+
  
  ALTER TABLE [dbo].[Character] ADD [PhutUyThacOn_dutru] [int] NOT NULL DEFAULT (0)
  ALTER TABLE [dbo].[Character] ADD [PhutUyThacOff_dutru] [int] NOT NULL DEFAULT (0)

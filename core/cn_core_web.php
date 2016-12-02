@@ -676,6 +676,7 @@ function cn_login()
         if ($action == 'dologin') {
             if ($username && $password) {
                 $errors_fa = false;
+                $username = trim(htmlentities($username));
 
                 if (kiemtra_acc($username)) {
                     cn_throw_message("Tài khoản không tồn tại.", 'e');
@@ -684,20 +685,8 @@ function cn_login()
                 if (kiemtra_block_acc($username)) {
                     cn_throw_message("Tài khoản đang bị khóa.", 'e');
                     $errors_fa = true;
-                }/*
-				if(kiemtra_ranking($username)){
-					cn_throw_message( "NoRanking.", 'e');
-					$errors_fa = true;
-				}
-				if(kiemtra_GM($username)){
-					cn_throw_message( "NoGM.", 'e');
-					$errors_fa = true;
-				}
-				if(kiemtra_loggame($username)){
-					cn_throw_message( "Tài khoản phải vào Game tạo ít nhất 1 nhân vật mới có thể đăng nhập.", 'e');
-					$errors_fa = true;
-				}
-				*/
+                }
+
                 if (!$errors_fa) {
                     $member = db_user_by_name($username);
                     //if(is_array($member)){
@@ -778,7 +767,40 @@ function cn_register_form($admin = TRUE)
         return false;
     }
 
-    global $_SESS;
+    // Active register
+    if (isset($_GET['verifiregist']) && $_GET['verifiregist']) {
+
+        $d_string = base64_decode($_GET['verifiregist']);
+        $d_string = xxtea_decrypt($d_string, MD5(CLIENT_IP) . getoption('#crypt_salt'));
+        $newHash = substr($d_string, 0, 64);
+        $d_string = trim(strtolower(substr($d_string, 64)));
+
+        if ($d_string) {
+            $user = do_select_character('MEMB_INFO', 'memb___id,token_regist,date_resgit_email,mail_chek', "memb___id='$d_string'");
+
+            if ($user) {
+                if ($newHash != trim($user[0][1])) msg_info('Đường dẫn không hợp lệ.');
+                if (trim($user[0][3])) msg_info('Tài khoản đã được kích hoạt.', 'index.php');
+
+                if (ctime() > $user[0][2]){
+                    $statusDelete = do_delete_char("DELETE FROM MEMB_INFO WHERE memb___id ='". $d_string ."'");
+                    if ($statusDelete){
+                        msg_info('Bạn có thể sử dụng lại email để đăng ký.', 'index.php?register');
+                    } else {
+                        msg_info('Đã hết hạn kích hoạt tài khoản.');
+                    }
+                }
+
+                $statusUp = do_update_character('MEMB_INFO', 'mail_chek=1', "acl=". ACL_LEVEL_JOURNALIST , "memb___id:'" . $d_string . "'");
+                if ($statusUp) {
+                    msg_info('Tài khoản đã được kích hoạt....', 'index.php');
+                }
+            } else {
+                msg_info('Fail: Tài khoản không được xác thực');
+            }
+        }
+        cn_relocation($_SERVER['SERVER_NAME']);
+    }
 
     // Restore active status
     if (isset($_GET['lostpass']) && $_GET['lostpass']) {
@@ -788,12 +810,12 @@ function cn_register_form($admin = TRUE)
         $d_string = substr($d_string, 64);
 
         if ($d_string) {
-            list(, $d_username) = explode(' ', $d_string, 2);
+            list($ctime, $d_username) = explode(' ', $d_string, 2);
 
             // All OK: authorize user
-            $_SESSION['user'] = $d_username;
+            //$_SESSION['user_Gamer'] = $d_username;
 
-            cn_relocation(cn_url_modify('lostpass'));
+            //cn_relocation(cn_url_modify('lostpass'));
             die();
         }
 
@@ -801,31 +823,42 @@ function cn_register_form($admin = TRUE)
     }
 
     // Resend activation
-    //if (request_type('POST') && isset($_POST['register']) && isset($_POST['lostpass']))
-    if (isset($_POST['register']) && isset($_POST['lostpass'])) {
-        $user = db_user_by_name(REQ('username'));
+    if (request_type('POST') && isset($_POST['registerweb']) && isset($_POST['lostpassweb'])) {
 
-        if (is_null($user)) {
-            msg_info('User not exists');
+        $username = trim(strtolower(htmlentities(htmlspecialchars(REQ('usernameWeb')))));
+        $emailweb = trim(strtolower(htmlentities(REQ('emailWeb'))));
+        $user = do_select_character('MEMB_INFO', 'memb___id,mail_addr,memb__pwdmd5', "memb___id='$username'");
+
+        if (!$user) {
+            msg_info('Tài khoản không tồn tại');
         }
 
-        $email = isset($user['email']) ? $user['email'] : '';
+        $email = isset($user[0][1]) ? trim($user[0][1]) : '';
 
         // Check user name & mail
-        if ($user && $email && $email == REQ('email')) {
-            $rand = '';
-            $set = 'qwertyuiop[],./!@#$%^&*()_asdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-            for ($i = 0; $i < 64; $i++) $rand .= $set[mt_rand() % strlen($set)];
+        if ($user && $email && $email == $emailweb) {
+            $rand = $user[0][2];
 
-            $secret = str_replace(' ', '', REQ('secret'));
+            $ctime = ctime() + 86400;
+            $url = getoption('http_script_dir') . '?lostpass=' . urlencode(base64_encode(xxtea_encrypt($rand . $ctime . ' ' . $username, MD5(CLIENT_IP) . getoption('#crypt_salt'))));
 
-            $url = getoption('http_script_dir') . '?lostpass=' . urlencode(base64_encode(xxtea_encrypt($rand . $secret . ' ' . REQ('username'), MD5(CLIENT_IP) . getoption('#crypt_salt'))));
-            cn_send_mail($user['email'], i18n('Resend activation link'), cn_replace_text(cn_get_template('resend_activate_account', 'mail'), '%username%, %url%, %secret%', $user['name'], $url, $secret));
+            $tmpHtmlEmailForgrot = 'Hi {username}, <br>
+                <p>Click vào link dưới đây để xác nhận thay đổi mật khẩu</p>
+                <a style="padding: 5px; color: red; background-color: blue; margin: 5px; cursor: pointer" href="{url}">Reset your password</a><br><hr>
+                <i><em>Lưu ý: Xác nhận trong vòng 24h.</em></i>
+            ';
 
-            msg_info('For you send activate link');
+            $strHoderFotgot = '{username}, {url}';
+            $checkemailforgot = cn_send_mail($email, 'Resend activation link', cn_replace_text($tmpHtmlEmailForgrot, $strHoderFotgot, $username, $url));
+
+            if ($checkemailforgot) {
+                msg_info('Vui lòng kiểm tra lại email', 'index.php');
+            } else {
+                msg_info('Err, Gửi email thất bại, hãy thử lại sau');
+            }
         }
 
-        msg_info('Enter required field: email');
+        msg_info('Địa chỉ email không xác thực.');
     }
 
     // is not registration form
@@ -842,6 +875,9 @@ function cn_register_form($admin = TRUE)
         $errors = array();
         list($username, $pwd, $re_pwd, $pass_web, $repass_web) = GET('nameAccount, pwd, re_pwd, pass_web, repass_web', "POST");
         list($ma7code, $nameQuestion, $nameAnswer, $nameEmail, $phoneNumber, $namecaptcha) = GET('num_7_verify, nameQuestion, nameAnswer, nameEmail, phoneNumber, nameCaptcha', "POST");
+
+        $username = strtolower($username);
+        $nameEmail = strtolower($nameEmail);
 
         // Do register
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -861,7 +897,7 @@ function cn_register_form($admin = TRUE)
 
 //              if (!eregi("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$", $email)){
 //              $error = "$email không đúng dạng địa chỉ Email. Xin vui lòng kiểm tra lại.</font><br>";}
-            if (strlen($username) < 4 || strlen($username) > 12) $errors[] = "Tên tài khoản chỉ từ 4-12 kí tự.";
+            if (strlen($username) < 4 || strlen($username) > 10) $errors[] = "Tên tài khoản chỉ từ 4-10 kí tự.";
             if (strlen($re_pwd) < 3) $errors[] = 'Mật khẩu quá ngắn';
             if ($pwd != $re_pwd) $errors[] = "Mật khẩu Game không giống nhau.";
             if (strlen($ma7code) != 7) $errors[] = "Mã gồm có 7 chữ số";
@@ -873,18 +909,14 @@ function cn_register_form($admin = TRUE)
 
             // Do register
             if (empty($errors)) {
-                // get real user in index file
                 $user = do_select_character('MEMB_INFO', 'memb___id', "memb___id='$username'");
-
                 if (!$user) {
                     $user = do_select_character('MEMB_INFO', 'mail_addr', "mail_addr='$nameEmail'");
-//
                     if (!$user) {
-                        $tempRegisterSendEmail ='<html>
-                                <body>
-                                <center><h1>Account Details</h1><p >Cảm ơn bạn đã đăng ký trên trang web của chúng tôi, chi tiết tài khoản của bạn như sau:</center>
-                                <br><hr>
-                                    <table align="center">
+                        $tempRegisterSendEmail ='
+                                <h1 style="padding: 0;">Thông tin tài khoàn</h1><p style="float: left; margin: 0 0 3px 0;">Cảm ơn bạn đã đăng ký trên trang web của chúng tôi, chi tiết tài khoản của bạn như sau:
+                                <hr style="float: left; width: 100%;">
+                                    <table align="left" style="line-height: 17px; padding: 5px 0; color: blue;">
                                         <tr><td align="right" style="padding:0px 15px;">Thông tin tài khoản</td><td align="left"><b>%account%</b></td></tr>
                                         <tr><td align="right" style="padding:0px 15px;">Email</td><td align="left"><b>%email%</b></td></tr>
                                         <tr><td align="right" style="padding:0px 15px;">Mã số bí mật</td><td align="left"><b>%ma7code%</b></td></tr>
@@ -893,38 +925,48 @@ function cn_register_form($admin = TRUE)
                                         <tr><td align="right" style="padding:0px 15px;">Câu hỏi bí mật</td><td align="left"><b>%quest_choise%</b></td></tr>
                                         <tr><td align="right" style="padding:0px 15px;">Câu trả lời bí mật</td><td align="left"><b>%answer%</b></td></tr>
                                         <tr><td align="right" style="padding:0px 15px;">Mật khẩu WebSite</td><td align="left"><b>%passWeb%</b></td></tr>
-                                        <tr><td colspan="100">WebSite: <a href="%home_url%">%nameHome%</a></tr>
+                                        <tr><td align="right" style="padding: 0px 15px">WebSite: <td align="left"><a href="%home_url%">%nameHome%</a></td></tr>
                                     </table>
-                                </body>
-                            </html>';
+                                    <div style="clear:both;"></div><hr><br>';
 
-                        $strHoder = '%account%, %email%, %ma7code%, %password%, %passWeb%, %phonenumber%, %quest_choise%, %answer%, %home_url%, %nameHome%';
+                        $tempRegister = '<p style="float: left; padding: 0; margin: 0;">Vui lòng kích vào nút dưới đây để xác nhận tài khoản của bạn trên %nameHome%</p><div style="clear:both"></div>
+                                    <a href="%verificationLink%" target="_blank" style="float: left; margin: 10px;cursor: pointer; padding:1em; font-weight:bold; background-color:blue; color:#fff;">VERIFY EMAIL</a></br>';
+
+                        $strHoder = '%account%, %email%, %ma7code%, %password%, %passWeb%, %phonenumber%, %quest_choise%, %answer%, %nameHome%';
 
                         $question_aws =  getoption('question_answers');
                         $arr_QA = explode(',', $question_aws);
 
-                        $sjk = cn_replace_text(
+                        $rand = '';
+                        $set = 'qwertyuiop[],./!@#$%^&*()_asdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+                        for ($i = 0; $i < 64; $i++) $rand .= $set[mt_rand() % strlen($set)];
+                        $token = urlencode(base64_encode(xxtea_encrypt($rand . ' ' . $username, MD5(CLIENT_IP) . getoption('#crypt_salt'))));
+                        $url = getoption('http_script_dir') . '?verifiregist=' . $token;
+
+                        $stetemp = cn_replace_text(
                             $tempRegisterSendEmail,
                             $strHoder,
-                            $username, $nameEmail, $ma7code, $re_pwd, $repass_web, $phoneNumber, $arr_QA[$nameQuestion - 1] . '?', $nameAnswer, $_SERVER['SERVER_NAME']. '/' . PHP_SELF, $_SERVER['SERVER_NAME']
+                            $username, $nameEmail, $ma7code, $re_pwd, $repass_web, $phoneNumber, $arr_QA[$nameQuestion - 1] . '?', $nameAnswer, $_SERVER['SERVER_NAME']
                         );
+
+                        $stetem1 = cn_replace_text(
+                            $tempRegister,
+                            '%nameHome%, %verificationLink%',
+                            $_SERVER['SERVER_NAME'], $url
+                        );
+
                         $status = cn_send_mail(
                                 $nameEmail,
                                 'Welcome to '. $_SERVER['SERVER_NAME'],
-                                $sjk
+                                cn_replace_text($stetemp, '%home_url%', $_SERVER['SERVER_NAME']) . $stetem1
                         );
 
                         if ($status) {
                             $register_OK = TRUE;
                             //msg_info('For you send register');
                         }else {
-                            msg_info('For you send error');
+                            msg_info('Err, Xin lỗi không thể gửi email xác nhận tài khoản!');
                         }
-//                            $pass = SHA256_hash($regpassword);
-//                            $acl_groupid_default = intval(getoption('registration_level'));
-//
-//                            db_user_add($regusername, $acl_groupid_default);
-//                            db_user_update($regusername, "email=$regemail", "name=$regusername", "nick=$regnickname", "pass=$pass", "acl=$acl_groupid_default");
                     } else {
                         $errors[] = "Email đã tồn tại.";
                     }
@@ -936,48 +978,37 @@ function cn_register_form($admin = TRUE)
             // Registration OK, authorize user
             if ($register_OK === TRUE) {
 
-                do_insert_character(
+                $checkStatusDB = do_insert_character(
                     '[MEMB_INFO]',
                     "memb___id='" . $username . "'",
-                    "memb__pwd=[dbo].[fn_md5]('$username','$re_pwd')",
+                    "memb__pwd='". md5($re_pwd) ."'",
                     "mail_addr='" . $nameEmail . "'",
                     "tel__numb='" . $phoneNumber . "'",
                     "memb__pwdmd5='" . SHA256_hash($repass_web) . "'",
                     'mail_chek=0',
                     'memb_name=12120',
                     'sno__numb=1212121212120',
-                    "modi_days='" . ctime() . "'",
-                    "out__days='" . ctime() . "'",
-                    "true_days='" . ctime() . "'",
+                    "modi_days='" . date("Y-m-d H:i:s", ctime()) . "'",
+                    "out__days='" . date("Y-m-d H:i:s", ctime()) . "'",
+                    "true_days='" . date("Y-m-d H:i:s", ctime()) . "'",
                     'bloc_code=0',
                     'ctl1_code=0',
                     "fpas_ques='" . $nameQuestion . "'",
                     "fpas_answ='" . $nameAnswer . "'",
                     "ip='" . $_SERVER["REMOTE_ADDR"] . "'",
                     "acl='" . getoption('registration_level') . "'",
+                    "token_regist='" . $rand . "'",
+                    "date_resgit_email='" . (ctime() + 86400). "'",
                     'ban_login=0',
                     'num_login=1'
                 );
-
-                msg_info($sjk);
-//                    $_SESSION['user_Gamer'] = $username;
-
-//                    // Clean old data
-//                    if (isset($_SESSION['RQU'])) {
-//                        unset($_SESSION['RQU']);
-//                    }
-//
-//                    if (isset($_SESSION['CSW'])) {
-//                        unset($_SESSION['CSW']);
-//                    }
-//
-//                    // Send notify about register
-//                    if (getoption('notify_registration')) {
-//                        cn_send_mail(getoption('notify_email'), i18n("New registration"), i18n("User %1 (email: %2) registered", $regusername, $regemail));
-//                    }
-//
-//                    header('Location: ' . PHP_SELF);
-//                    die();
+                $stetemp = cn_replace_text($stetemp, '%home_url%', 'index.php');
+                $stetemp .= '<p style="float: left; color: red"><i>Vui lòng check email để xác nhận tài khoản.</i></p>';
+                if ($checkStatusDB) {
+                    msg_info($stetemp, 'index.php');
+                } else{
+                    msg_info('Err, Không thể tạo được tài khoản mới!');
+                }
             }
         }
         cn_assign('errors_result', $errors);

@@ -15,12 +15,12 @@ $i = 0;
 <ul class="sysconf_top">
     <li<?php if (!$section) echo ' class="selected"'; ?>><a href="<?php echo cn_url_modify('section'); ?>">System</a>
     </li>
-    <li<?php if ($section === 'character') echo ' class="selected"'; ?>><a
-            href="<?php echo cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs', 'section=character'); ?>">Character</a></li>
+    <li<?php if ($section === 'character') echo ' class="selected"'; ?>>
+        <a href="<?php echo cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs', 'section=character'); ?>">Character</a></li>
 </ul>
 <?php if (!$section) { ?>
     <div style="clear:both;"></div>
-    <a style="float: right; margin: 5px;top: 37px; right: 8px; position: absolute;" href="8329892839293">Xóa Log</a>
+    <a style="float: right; margin: 5px;top: 37px; right: 8px; position: absolute;" href="<?php echo cn_url_modify('section', 'isdel=islog-systems'); ?>">Xóa Log</a>
     <table id="comparison" style="overflow-x:auto; border-collapse: collapse; display: table; border: 1px solid blue;" width="100%" cellspacing="1" cellpadding="3">
         <th style="border: 1px solid blue; width: 2%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">#</th>
         <th style="border: 1px solid blue; width: 5%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">Status</th>

@@ -1770,6 +1770,7 @@ function board_iswebshop()
 function board_logs()
 {
     $log_read = $logs = array();
+    $sub = REQ('sub', "GETPOST");
 
     $skip = FALSE;
     $num = 30;
@@ -1850,6 +1851,13 @@ function board_logs()
 
     // --- System section ---
     if (!$section) {
+
+        $isdel = REQ('isdel');
+        if (isset($isdel) && $isdel == 'islog-systems') {
+            unlink(cn_path_construct(SERVDIR, 'log/system'). 'error_dump.log');
+            cn_relocation(cn_url_modify(array('reset'), 'mod=' . REQ('mod'), 'opt=' . REQ('opt'), 'sub=' . $sub, 'section'));
+        }
+
         $path = cn_path_construct(SERVDIR, 'log/system') . 'error_dump.log';
         if (file_exists($path)) {
             $r = fopen($path, 'r');
@@ -1899,7 +1907,6 @@ function board_logs()
         }
     } // --- character log section ---
     elseif ($section === 'character') {
-        $sub = REQ('sub', "GETPOST");
 
         list($dir, $action) = GET('dir, action', 'GPG');
 

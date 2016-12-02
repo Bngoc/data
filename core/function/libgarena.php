@@ -30,7 +30,7 @@ function cn_writelog($content, $info = '', $user = '')
     }
 
     if (($time = $_SERVER['REQUEST_TIME']) == '') {
-        $time = time();
+        $time = ctime();
     }
 
     if (($remote_addr = $_SERVER['REMOTE_ADDR']) == '') {
@@ -41,7 +41,7 @@ function cn_writelog($content, $info = '', $user = '')
         $request_uri = "REQUEST_URI_UNKNOWN";
     }
 
-    $date = date("Y-m-d H:i:s", $time);
+    $date = date("Y-m-d H:i:s a", $time);
 
     if (!file_exists($ul = cn_path_construct(ROOT, '/admin/log/system/') . 'error_dump.log')) {
         fclose(fopen($ul, 'w+'));
@@ -58,4 +58,10 @@ function cn_writelog($content, $info = '', $user = '')
 //    else {
 //        return array(status => false, message => 'Unable to open log '.$logfile.'!');
 //    }
+}
+
+function echoArr($arr){
+    echo '<pre>';
+    var_dump($arr);
+    echo '</pre>';
 }

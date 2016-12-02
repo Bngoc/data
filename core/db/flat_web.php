@@ -574,8 +574,7 @@ function do_update_character()
 
     if (strlen($gr_col) > 1)
         $val_up_col = substr($gr_col, 0, -1);
-    if (strlen($gr_cont) > 5)
-        $val_up_cont = substr($gr_cont, 0, -5);
+    if (strlen($gr_cont) > 5) $val_up_cont = substr($gr_cont, 0, -5);
 
     if ($val_up_col && $val_up_cont && $user_table) {
         $check = $db_new->Execute("UPDATE $user_table SET $val_up_col WHERE $val_up_cont") or cn_writelog("UPDATE $user_table SET $val_up_col WHERE $val_up_cont", 'e');
@@ -583,6 +582,25 @@ function do_update_character()
             return TRUE;
     }
     return FALSE;
+}
+
+
+/**
+ * @param $myQuery
+ * @return bool
+ */
+function do_delete_char($myQuery){
+    global $db_new;
+
+    if ($myQuery) {
+        $myQuery = trim($myQuery);
+        $check = $db_new->Execute("$myQuery") or cn_writelog("$myQuery", 'e');
+        if ($check) {
+            return true;
+        }
+    } else return false;
+
+    return false;
 }
 
 function do_selc_char($account, $character)
@@ -757,6 +775,7 @@ function kiemtra_block_acc($account)
 
     if (!empty($account)) {
         $sql_blockacc_check = $db_new->Execute("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$account' AND bloc_code='1'");
+        if (!$sql_blockacc_check) return false;
         $blockacc_check = $sql_blockacc_check->numrows();
         if ($blockacc_check > 0)
             return true;/// "Tài khoản đang bị khóa.";
@@ -768,6 +787,7 @@ function kiemtra_ques_ans($account, $question, $answer)
 {
     global $db_new;
     $sql_ques_ans_check = $db_new->Execute("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$account' AND fpas_ques='$question' AND fpas_answ='$answer'");
+    if (!$sql_ques_ans_check) return '';
     $ques_ans_check = $sql_ques_ans_check->numrows();
     if ($ques_ans_check <= 0) {
         echo "Câu hỏi hoặc câu trả lời bí mật không đúng.";
@@ -775,20 +795,20 @@ function kiemtra_ques_ans($account, $question, $answer)
     }
 }
 
-function kiemtra_pass($account, $password)
-{
-    global $db_new;
-    if ($server_md5 == 1) {
-        $sql_pw_check = $db_new->Execute("SELECT * FROM MEMB_INFO WHERE memb__pwd=[dbo].[fn_md5]('$password','$account') AND memb___id='$account'");
-    } else {
-        $sql_pw_check = $db_new->Execute("SELECT * FROM MEMB_INFO WHERE memb__pwd='$password' AND memb___id='$account'");
-    }
-    $pw_check = $sql_pw_check->numrows();
-    if ($pw_check <= 0) {
-        echo "Mật khẩu không đúng.";
-        exit();
-    }
-}
+//function kiemtra_pass($account, $password)
+//{
+//    global $db_new;
+//    if ($server_md5 == 1) {
+//        $sql_pw_check = $db_new->Execute("SELECT * FROM MEMB_INFO WHERE memb__pwd=[dbo].[fn_md5]('$password','$account') AND memb___id='$account'");
+//    } else {
+//        $sql_pw_check = $db_new->Execute("SELECT * FROM MEMB_INFO WHERE memb__pwd='$password' AND memb___id='$account'");
+//    }
+//    $pw_check = $sql_pw_check->numrows();
+//    if ($pw_check <= 0) {
+//        echo "Mật khẩu không đúng.";
+//        exit();
+//    }
+//}
 
 function kiemtra_char($account, $character)
 {
