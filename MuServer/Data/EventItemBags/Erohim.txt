@@ -1,0 +1,102 @@
+//#############################################################################################################
+//Drop Settings: Erohim Drops
+//www.darksideofmu.com
+//#############################################################################################################
+
+//=============================================================================================================
+//ItemDropRate	 	- Drop rate of item VS Zen [x/100]
+//ExRate		- Drop rate of excellent item [x/1000]
+//=============================================================================================================
+//	EventName		DropZen		NA	NA 	NA 	  NA 		ItemDropRate	ExRate
+//=============================================================================================================
+1	
+	"ErohimBossDrop"	10000000	0	0	 0	  0		80		900
+end
+
+//=============================================================================================================
+//Type			- Item.TXT index (section) of the Box
+//Index 		- Item.TXT id of the Item
+//minLvl		- Minimal Level of the Item (+1, +2 etc...)
+//maxLvl		- Maximum Level of the Item (+1, +2 etc...)
+//Skill			- Drop Item with Skill (0 - off,1 - on)
+//Luck			- Drop Item with Luck (0 - off,1 - on)
+//maxZ28		- Maximum Z28 option (1 = +4, 2 = +8, 3 = +12, etc...)
+//maxExOpt		- Maximum number of Exc option in item
+//=============================================================================================================
+//	Type	Index	minLvl	maxLvl	Skill	Luck	maxZ28	maxExOpt		
+//=============================================================================================================
+2
+	0	16	6	7	1	1	1	0	//Excellent Sword of Destruction
+	0	31	6	7	1	1	1	0	//Excellent Rune Blade
+	0	17	6	7	1	1	1	0	//Excellent Spirit Sword
+	0	18	6	7	1	1	1	0	//Excellent Thunder Blade
+
+	2	5	6	7	1	1	0	0	//Excellent Crystal Sword
+	2	10	6	7	1	1	0	0	//Excellent Great Scepter
+	2	7	6	7	1	1	0	0	//Excellent Elemental Mace
+	3	9	6	7	1	1	0	0	//Excellent Bill of Balrog
+	3	10	6	7	1	1	0	0	//Excellent Dragon Spear
+	4	16	6	7	1	1	0	0	//Excellent Saint Crossbow
+	4	17	6	7	1	1	0	0	//Excellent Celestial Bow
+	4	19	6	7	1	1	0	0	//Excellent GreatRain Crossbow
+	5	21	6	7	1	1	0	0	//Excellent Book of Sahamutt
+	5	8	6	7	1	1	0	0	//Excellent Unicorn Staff
+	5	18	6	7	1	1	0	0	//Excellent Black Rose Staff
+	5	9	6	7	1	1	0	0	//Excellent Crystal Staff
+	5	36	0	2	1	1	0	0	//Merlin Staff		LVL:130
+
+	6	14	6	7	1	1	0	0	//Excellent Legendary Shield
+	6	12	6	7	1	1	0	0	//Excellent Bronze Shield
+	6	13	6	7	1	1	0	0	//Excellent Chaos Dragon Shield
+
+	13	23	0	1	1	1	1	0	//Ring of Wind
+	13	27	0	2	1	1	1	0	//Pendant of Water
+	13	24	0	3	1	1	1	0	//Ring of Magic
+	13	28	0	4	1	1	1	0	//Pendant of Ability
+
+	7	21	6	7	1	1	0	0	//Red Phoenix Helm
+									//Hurricane Helmet [MG]
+	7	22	6	7	1	1	1	0	//DaRK Side Helm
+	7	28	6	7	1	1	1	0	//Adamantine Mask
+	7	24	6	7	1	1	2	0	//Nature Helmet
+	7	40	6	7	1	1	1	0	//Red Wing Helmet	56	[Summoner]
+
+	8	21	6	7	1	1	0	0	//Red Phoenix Armor
+	8	22	6	7	1	1	0	0	//DaRK Side Armor
+	8	23	6	7	1	1	0	0	//Hurricane Armor
+	8	24	6	7	1	1	0	0	//Nature Armor
+	8	28	6	7	1	1	0	0	//Adamantine Armor
+	8	40	6	7	1	1	0	0	//Red Wing Armor	56	[Summoner]
+
+	9	21	6	7	1	0	1	0	//Red Phoenix Pants
+	9	22	6	7	1	0	1	0	//DaRK Side Pants
+	9	23	6	7	1	0	1	0	//Hurricane Pants
+	9	24	6	7	1	0	1	0	//Nature Pants
+	9	28	6	7	1	0	2	0	//Adamantine Pants
+	9	40	6	7	1	0	1	0	//Red Wing Pants	56	[Summoner]
+
+	10	21	6	7	1	0	0	0	//Red Phoenix Gloves
+	10	22	6	7	1	0	0	0	//DaRK Side Gloves
+	10	23	6	7	1	0	0	0	//Hurricane Gloves
+	10	24	6	7	1	0	0	0	//Nature Gloves
+	10	28	6	7	1	0	0	0	//Adamantine Gloves
+	10	40	6	7	1	0	0	0	//Red Wing Gloves	56	[Summoner]
+
+	11	21	6	7	1	1	1	0	//Red Phoenix Boots
+	11	22	6	7	1	1	1	0	//DaRK Side Boots
+	11	23	6	7	1	1	1	0	//Hurricane Boots
+	11	24	6	7	1	1	1	0	//Nature Boots
+	11	28	6	7	1	1	1	0	//Adamantine Boots
+	11	40	6	7	1	1	2	0	//Red Wing Boots	56	[Summoner]
+
+	7	61	6	7	1	1	1	0	//Red Phoenix Boots
+	8	61	6	7	1	1	0	0	//DaRK Side Boots
+	9	73	6	7	1	1	2	0	//Hurricane Boots
+	11	73	6	7	1	1	1	0	//Nature Boots
+
+	7	61	6	7	1	1	0	0	//Red Phoenix Boots
+	8	61	6	7	1	1	0	0	//DaRK Side Boots
+	9	73	6	7	1	1	0	0	//Hurricane Boots
+	11	73	6	7	1	1	0	0	//Nature Boots
+
+end

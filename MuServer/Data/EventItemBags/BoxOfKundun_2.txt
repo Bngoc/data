@@ -1,0 +1,103 @@
+//============================================================================
+//Drop Settings: Box of KUNDUN + 2 Drops
+//www.darksideofmu.com
+//============================================================================
+//	type,	index,	level,	skill,	exc,	option	name
+//============================================================================
+
+// sphin
+
+	7	7	0	0	1	1	//Helm
+	8	7	0	0	1	0	//Armor
+	9	7	0	0	1	1	//Pants
+	10	7	0	0	1	0	//Gloves
+	11	7	0	0	1	1	//Boots
+
+//	spirit
+
+	7	13	0	0	1	0	//Helm
+	8	13	0	0	1	1	//Armor
+	9	13	0	0	1	0	//Pants
+	10	13	0	0	1	1	//Gloves
+	11	13	0	0	1	0	//Boots
+
+
+
+//Brass set
+	7	8	0	0	1	1	//Helm
+	8	8	0	0	1	1	//Armor
+	9	8	0	0	1	1	//Pants
+	10	8	0	0	1	0	//Gloves
+	11	8	0	0	1	1	//Boots
+//Plate   Set
+	7	9	0	0	1	0	//Helm
+	8	9	0	0	1	1	//Armor
+	9	9	0	0	1	0	//Pants
+	10	9	0	0	1	1	//Gloves
+	11	9	0	0	1	0	//Boots
+
+//Wind set
+	7	12	0	0	1	1	//Helm
+	8	12	0	0	1	0	//Armor
+	9	12	0	0	1	1	//Pants
+	10	12	0	0	1	0	//Gloves
+	11	12	0	0	1	1	//Boots
+
+//Light set
+	7	25	0	0	1	0	//Helm
+	8	25	0	0	1	1	//Armor
+	9	25	0	0	1	0	//Pants
+	10	25	0	0	1	1	//Gloves
+	11	25	0	0	1	0	//Boots	
+
+
+	
+//=========================================================================================
+
+//Sword
+	0	5	0	1	1	1	//Blade
+	0	6	0	1	1	0	//Gladius
+	0	7	0	1	1	1	//Falchion
+	0	8	0	1	1	0	//Serpent Sword
+
+//Axes
+	1	2	0	1	1	1	//Double Axe
+	1	3	0	1	1	0	//Tomahawk
+	1	4	0	1	1	1	//Elven Axe
+
+//Blunt weapons
+	2	3	0	1	1	0	//Great Hammer
+	2	4	0	1	1	1	//Crystal Morning Star
+
+//Spears
+	3	4	0	1	1	1	//Serpent Spear
+	3	5	0	1	1	0	//Double Poleaxe
+	3	6	0	1	1	1	//Halberd
+	3	7	0	1	1	0	//Berdysh
+	
+//Bows & Crossbows
+	4	2	0	1	1	1	//Elven Bow
+	4	3	0	1	1	0	//Battle Bow
+	4	10	0	1	1	1	//Arquebus
+	4	11	0	1	1	0	//Light Crossbow
+	4	12	0	1	1	1	//Serpent Crossbow
+
+//Staffs
+	5	2	0	1	1	0	//Serpent Staff
+	5	3	0	1	1	1	//Thunder Staff
+	5	4	0	1	1	0	//Gorgon Staff
+
+
+//Shields
+	6	2	0	1	1	1	//Kite Shield
+	6	6	0	1	1	0	//Skull Shield
+	6	7	0	1	1	1	//Spiked Shield
+	
+// qt
+
+	2	8	0	1	1	1
+// gay sm
+
+	5	15	0	1	1	1
+	
+	

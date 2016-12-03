@@ -1,0 +1,304 @@
+//Bot Data
+//BotIndex	Class	Name		Map	X	Y	Dir	OnlyVip
+1
+0		50	"BotTrader"	0	123	125	3	0
+end
+
+//BotPet Items
+//Slot:
+//0 = Weapon
+//1 = Shield
+//2 = Helm
+//3 = Armor
+//4 = Pants
+//5 = Gloves
+//6 = Boots
+//7 = Wings
+//8 = Pet
+//BotIndex	Slot	Type	Index	Level	Opt
+2
+0		3	8	7	9	1
+0		4	9	7	9	1
+0		5	10	7	9	1
+0		6	11	7	9	1
+0		7	12	250	0	0
+end
+
+//Mix Data
+//MixIndex TradeMixName SuccessRate	Zen	VipMoney
+3
+2	"Mix Wings4 DK" 	30 	0 0
+3	"Mix Wings4 DW"	30	0 0
+4	"Mix Wings4 Ef"	30	0 0
+5	"Mix Wings4 MG"	30	0 0
+6	"Mix Wings4 DL"	30	0 0
+17	"Mix Wings4 RF"	30	0 0
+7 	"Mix Wings4 SM"	30	0 0
+
+8 	"Mix Wings2.5 DK"	30	0 0
+19 	"Mix Wings2.5 MG"	30	0 0
+9 	"Mix Wings2.5 DW"	30	0 0
+18	"Mix Wings2.5 Sum"	30	0 0
+10 	"Mix Wings2.5 ELF"	30	0 0
+11	"Mix Wings2.5 DL"	30	0 0
+16	"Mix Wings2.5 RF"	30	0 0
+
+20	"Conqueror Wing" 	30 	0 0
+22	"Conqueror Wing" 	30 	0 0
+25	"Angel Devil Wing"	30	0 0
+27	"Angel Devil Wing"	30	0 0
+29	"soihk"		100	0 0	
+
+30	"Mix Wings4 DK" 	100 	0 0
+31	"Mix Wings4 DW"	100	0 0
+32	"Mix Wings4 Ef"	100	0 0
+33	"Mix Wings4 MG"	100	0 0
+34	"Mix Wings4 DL"	100	0 0
+35	"Mix Wings4 RF"	100	0 0
+36 	"Mix Wings4 SM"	100	0 0
+end
+
+//Req Items
+//MixIndex 	Type Index MinLevel MinOpt NeedLuck NeedSkill NeedExc NeededDurability
+4
+
+//////////////////////////////////////////// Mix Wing 4
+
+// Wing 4 DK
+2 	12	36	9	0	0	0	0	0 // Wing 3 DK
+2 	12	15	0	0	0	0	0	0 // Chaos
+2	14	180	0	0	0	0	0	0 // Long Vu Cap 4
+2	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+2	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+
+// Wing 4 DW
+3	12	37	9	0	0	0	0	0 // Wing 3 DW
+3	12	15	0	0	0	0	0	0 // Chaos
+3	14	180	0	0	0	0	0	0 // Long Vu Cap 4
+3	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+3	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+
+
+// Wing 4 Ef
+4	12	38	9	0	0	0	0	0 // Wing 3 Ef
+4	12	15	0	0	0	0	0	0 // Chaos
+4	14	180	0	0	0	0	0	0 // Long Vu Cap 4
+4	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+4	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+
+
+// Wing 4 MG
+5	12	39	9	0	0	0	0	0 // Wing 3 MG
+5	12	15	0	0	0	0	0	0 // Chaos
+5	14	180	0	0	0	0	0	0 // Long Vu Cap  4
+5	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+5	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+
+
+// Wing 4 DL
+6	12	40	9	0	0	0	0	0 // Wing 3 DL
+6	12	15	0	0	0	0	0	0 // Chaos
+6	14	180	0	0	0	0	0	0 // Long Vu Cap 4
+6	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+6	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+
+
+// Wing 4 RF
+17	12	50	9	0	0	0	0	0 // Wing 3 RF
+17	12	15	0	0	0	0	0	0 // Chaos
+17	14	180	0	0	0	0	0	0 // Long Vu Cap 4
+17	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+17	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+
+
+// Wing 4 SM
+7	12	43	9	0	0	0	0	0 // Wing 3 SM
+7	12	15	0	0	0	0	0	0 // Chaos
+7	14	180	0	0	0	0	0	0 // Long Vu Cap 4
+7	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+7	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+
+
+//Wing 2.5 DK
+8	12	5	9	0	0	0	0	0 // Wing 2 DK
+8	12	15	0	0	0	0	0	0 // Chaos
+8	14	177	0	0	0	0	0	0 // Leather Hell Maine
+8	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+8	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+//Wing 2.5 MG
+19	12	6	9	0	0	0	0	0 // Wing 2 DK
+19	12	15	0	0	0	0	0	0 // Chaos
+19	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+19	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+19	14	177	0	0	0	0	0	0 // Leather Hell Maine
+//Wing 2.5 DW
+9	12	4	9	0	0	0	0	0 // Wing 2 DW
+9	12	15	0	0	0	0	0	0 // Chaos
+9	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+9	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+9	14	178	0	0	0	0	0	0 // Phoenix of Flame
+//Wing 2.5 Sum
+18	12	42	9	0	0	0	0	0 // Wing 2 Sum
+18	12	15	0	0	0	0	0	0 // Chaos
+18	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+18	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+18	14	178	0	0	0	0	0	0 // Phoenix of Flame
+//Wing 2.5 ELF
+10	12	3	9	0	0	0	0	0 // Wing 2 ELF
+10	12	15	0	0	0	0	0	0 // Chaos
+10	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+10	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+10	14	179	0	0	0	0	0	0 // Death Beam Knight Soul
+//Wing 2.5 DL
+11	13	30	9	0	0	0	0	0 // Wing 2 DL
+11	12	15	0	0	0	0	0	0 // Chaos
+11	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+11	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+11	14	176	0	0	0	0	0	0 // King Bone Death
+//Wing 2.5 RF
+16	12	49	9	0	0	0	0	0 // Wing 2 RF
+16	12	15	0	0	0	0	0	0 // Chaos
+16	12	30	2	0	0	0	0	0 //Jewel of Bless Compresse
+16	12	31	2	0	0	0	0	0 //Jewel of Soul Compresse
+16	14	176	0	0	0	0	0	0 // King Bone Death
+
+//Wing Ex Season 8
+//Conqueror Wing
+20	12	246	15	0	0	0	0	0 //Cloak of Death
+20	12	136	0	0	0	0	0	0 //Jewel of Life Bundle
+20	12	137	0	0	0	0	0	0 //Jewel of Creation Bundle
+20	12	138	0	0	0	0	0	0 //Jewel of Guardian Bundle
+20	12	140	0	0	0	0	0	0 //Jewel of Harmony Bundle
+20	12	141	0	0	0	0	0	0 //Jewel of Chaos Bundle
+20	12	30	0	0	0	0	0	0 //Jewel of Bless Compresse
+20	12	31	0	0	0	0	0	0 //Jewel of Soul Compresse
+//Conqueror Wing
+22	12	247	15	0	0	0	0	0 //Wings of Chaos
+22	12	136	0	0	0	0	0	0 //Jewel of Life Bundle
+22	12	137	0	0	0	0	0	0 //Jewel of Creation Bundle
+22	12	138	0	0	0	0	0	0 //Jewel of Guardian Bundle
+22	12	140	0	0	0	0	0	0 //Jewel of Harmony Bundle
+22	12	141	0	0	0	0	0	0 //Jewel of Chaos Bundle
+22	12	30	0	0	0	0	0	0 //Jewel of Bless Compresse
+22	12	31	0	0	0	0	0	0 //Jewel of Soul Compresse
+//Angel Devil Wing
+25	12	248	15	0	0	0	0	0 //Wings of Power
+25	12	136	0	0	0	0	0	0 //Jewel of Life Bundle
+25	12	137	0	0	0	0	0	0 //Jewel of Creation Bundle
+25	12	138	0	0	0	0	0	0 //Jewel of Guardian Bundle
+25	12	140	0	0	0	0	0	0 //Jewel of Harmony Bundle
+25	12	141	0	0	0	0	0	0 //Jewel of Chaos Bundle
+25	12	30	0	0	0	0	0	0 //Jewel of Bless Compresse
+25	12	31	0	0	0	0	0	0 //Jewel of Soul Compresse
+
+//Angel Devil Wing
+27	12	249	15	0	0	0	0	0 //Wings of Life
+27	12	136	0	0	0	0	0	0 //Jewel of Life Bundle
+27	12	137	0	0	0	0	0	0 //Jewel of Creation Bundle
+27	12	138	0	0	0	0	0	0 //Jewel of Guardian Bundle
+27	12	140	0	0	0	0	0	0 //Jewel of Harmony Bundle
+27	12	141	0	0	0	0	0	0 //Jewel of Chaos Bundle
+27	12	30	0	0	0	0	0	0 //Jewel of Bless Compresse
+27	12	31	0	0	0	0	0	0 //Jewel of Soul Compresse
+
+//soihk
+//MixIndex Type 	Index MinLevel MinOpt NeedLuck NeedSkill NeedExc NeededDurability
+29	13	37	0	0	0	0	0	0	//soithuong
+29	13	37	0	0	0	0	0	0	//soithuong
+29	13	37	0	0	0	0	0	0	//soithuong
+29	12	15	0	0	0	0	0	0	//choas
+
+//wing4 mg
+30	14	153	0	255	0	0	0	0	//bongmai
+30	12	15	0	0	0	0	0	0	//choas
+
+//4 dw
+31	14	153	0	255	0	0	0	0	//bongmai
+31	14	13	0	0	0	0	0	0	//bles
+
+//4 dk
+32	14	153	0	255	0	0	0	0	//bongmai
+32	14	14	0	0	0	0	0	0	//suol
+
+//4elf
+33	14	153	0	255	0	0	0	0	//bongmai
+33	14	16	0	0	0	0	0	0	//life
+
+//4sum
+34	14	153	0	255	0	0	0	0	//bongmai
+34	14	22	0	0	0	0	0	0	//cre
+
+//4rf
+35	14	153	0	255	0	0	0	0	//bongmai
+35	13	4	0	0	0	0	0	0	//choas
+
+
+end
+//////////////////////////////////////////////////////////////////////
+//Success							    //
+//////////////////////////////////////////////////////////////////////
+// Luck and Skills is Percent 0 to 100				    //
+// 								    //
+//								    //
+//////////////////////////////////////////////////////////////////////
+//MixIndex 	Type	Index 	LevelMin	LevelMax	OptMin	OptMax 	Luck	Skill	Exc	Durability
+5
+2		12 	241	0      2      0   7   1   1   0  255	//Wings 4 Dk
+3		12 	240	0      2      0   7   1   1   0  255	//Wings 4 Dw
+4		12 	242	0      2      0   7   1   1   0  255	//Wings 4 ELF
+5		12 	243	0      2      0   7   1   1   0  255	//Wings 4 MG
+6		12 	244	0      2      0   7   1   1   0  255	//Wings 4 DL
+17		12 	244	0      2      0   7   1   1   0  255	//Wings 4 RF
+7		12 	245	0      2      0   7   1   1   0  255	//Wings 4 SM
+
+8		12 	247	0      2      0   7   1   1   0  255	//Wings 2.5 DK
+19		12 	247	0      2      0   7   1   1   0  255	//Wings 2.5 MG
+9		12 	248	0      2      0   7   1   1   0  255	//Wings 2.5 DW
+18		12 	248	0      2      0   7   1   1   0  255	//Wings 2.5 Sum
+10		12 	249	0      2      0   7   1   1   0  255	//Wings 2.5 ELF
+11		12 	246	0      2      0   7   1   1   0  255	//Wings 2.5 DL
+16		12 	246	0      2      0   7   1   1   0  255	//Wings 2.5 RF
+
+20		12 	250	0      2      0   7   1   1   0  255	//Conqueror Wing
+22		12 	250	0      2      0   7   1   1   0  255	//Conqueror Wing
+25		12 	251 	0      2      0   7   1   1   0  255	//Angel Devil Wing
+27		12 	251	0      2      0   7   1   1   0  255	//Angel Devil Wing
+29		13	37	0      0      0   0   0   0	 1 255	//soihk
+
+32		12 	241	0      2      0   7   1   1   0  255	//Wings 4 Dk
+31		12 	240	0      2      0   7   1   1   0  255	//Wings 4 Dw
+33		12 	242	0      2      0   7   1   1   0  255	//Wings 4 ELF
+30		12 	243	0      2      0   7   1   1   0  255	//Wings 4 MG
+35		12 	244	0      2      0   7   1   1   0  255	//Wings 4 RF
+34		12 	245	0      2      0   7   1   1   0  255	//Wings 4 SM
+end
+
+//Bot Mix Asociation
+//BotIndex	MixIndex
+6
+0	2
+0	3
+0   	4
+0   	5
+0   	6
+0   	7
+0	8
+0	9
+0	10
+0	11
+0	16
+0	17
+0	18
+0	19
+0	20
+0	22
+0	25
+0	27
+0	29
+0	30
+0	31
+0	32
+0	33
+0	34
+0	35
+end

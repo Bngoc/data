@@ -1,0 +1,18 @@
+1
+10	"W Coin (C)"	
+13	"Đặc biệt"	
+22	"Bùa"	
+23	"Thú"	
+25	"Vé sự kiện"	
+26	"Thuốc"	
+11	"W Coin (P)"	
+27	"Đặc biệt"	
+29	"Bùa"	
+30	"Thú"	
+32	"Vé sự kiện"	
+46	"Thuốc"	
+33	"Đặc biệt"	
+20	"Điểm Goblin"	
+34	"Bùa"	
+45	"Đặc biệt"	
+end

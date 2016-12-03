@@ -1,0 +1,50 @@
+//==============================================================================
+//#Version 97W [97 + 98 + 99 item codes included]
+//#www.titanstech.com
+//------------------------------------------------------------------------------
+//Revised 11 Aug, 2005			
+//==============================================================================
+//shop2 - [Lorencia] Wizard Shop
+//
+// Pasi The Mage
+//Index Item	Lvl	Dur	Skill	Luck	Opt	Exc	Name
+15 	3 	0 	255 	0 	0 	0 	0	//Fireball Spell
+15 	10	0 	255 	0 	0 	0 	0	//Power Wave Spell
+15 	2 	0 	255 	0 	0 	0 	0	//Lightning Spell
+15 	1 	0 	255 	0 	0 	0 	0	//Meteorite Spell
+15 	5 	0 	255 	0 	0 	0 	0	//Teleport Spell
+15 	6 	0 	255	0 	0 	0 	0	//Ice Spell
+15 	0 	0 	255 	0 	0 	0 	0	//Poison Spell
+15 	4 	0 	255 	0 	0 	0 	0	//Flame Spell
+15 	8 	0 	255 	0 	0 	0 	0	//Evil Spirits Spell
+15 	9 	0 	255 	0 	0 	0 	0	//Hell Fire Spell
+15 	11 	0 	255 	0 	0 	0 	0	//Aqua Beam Spell
+15 	12 	0 	255 	0 	0 	0 	0	//Blast Spell
+15 	13 	0 	255 	0 	0 	0 	0	//Scroll of Inferno
+15 	14 	0 	255 	0 	0 	0 	0	//Scroll of Mass Teleport
+15 	15 	0 	255 	0 	0 	0 	0	//Scroll of Mana Shield
+15 	16 	0 	255 	0 	0 	0 	0	//Scroll of Decay
+15 	17 	0 	255 	0 	0 	0 	0	//Scroll of Ice Storm
+15 	18 	0 	255 	0 	0 	0 	0	//Scroll of Nova
+15 	28 	0 	255 	0 	0 	0 	0	//Scroll of Electic Storm
+15 	29 	0 	255 	0 	0 	0 	0	//Scroll of Lighting Storm
+//7 	2 	6 	255 	0 	1 	0 	0	//Pad Helm
+//8 	2 	6 	255 	0	1 	0 	0	//Pad Armor
+//9 	2 	6 	255 	0 	1 	0 	0	//Pad Pants
+//10 	2 	6 	255 	0 	1 	0 	0	//Pad Gloves
+//11 	2 	6 	255 	0 	1 	0 	0	//Pad Boots
+7 	4 	6 	255 	0 	1 	0 	0	//Bone Helm
+8 	4	6 	255 	0 	1 	0 	0	//Bone Armor
+9 	4 	6 	255 	0 	1 	0 	0	//Bone Pants
+10 	4 	6 	255 	0 	1 	0 	0	//Bone Gloves
+11 	4 	6 	255 	0 	1 	0 	0	//Bone Boots
+7	7	6	0	0	1	0	0	//Sphinix helm
+8	7	6	0	0	1	0	0	//Sphinix armor
+9	7	6	0	0	1	0	0	//Sphinix pants
+10	7	6	0	0	1	0	0	//Sphinix Gloves
+11	7	6	0	0	1	0	0	//Sphinix Boots
+5	3	4	255	0	1	0	0	//Thunder staff
+5	0	4	255	0	1	0	0	//Skull Staff
+5 	1 	4 	255 	0 	1 	0 	0	//Angelic Staff
+5 	2 	4 	255 	0 	1 	0 	0	//Serpent Staff
+end

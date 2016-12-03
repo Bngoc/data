@@ -1,0 +1,42 @@
+//HSOP IONMUONLINE
+//EBELANT
+
+
+7 	39 	0 	0 	1 	0 	1 	0	//Mistery Helm
+7 	40 	0 	0 	1 	0 	1 	0	//Red Wing Helm
+7 	41 	0	0 	1 	0 	1 	0	//Ancient Helm
+7 	42 	0 	0 	1 	0 	1 	0	//Black Rose Helm
+8 	39 	0 	0 	1 	0 	1 	0	//Mistery Armor
+8 	40 	0	0 	1 	0 	1 	0	//Red Wing Armor
+8 	41 	0 	0 	1 	0 	1 	0	//Ancient Armor
+8 	42 	0	0 	1 	0 	1 	0	//Black Rose Armor
+9 	42 	0 	0 	1 	0 	1 	0	//Black Rose Pants
+9 	39 	0 	0 	1 	0 	1 	0	//Red Wing Pants 
+9 	40 	0 	0 	1 	0 	1 	0	//Ancient Pants
+9 	41 	0 	0 	1 	0 	1 	0	//Black Rose Pants 
+10 	42 	0	0 	1 	0 	1 	0	//Black Rose Gloves
+10 	39 	0 	0 	1 	0 	1 	0	//Mistery Gloves
+10 	40 	0 	0 	1 	0 	1 	0	//Red Wing Gloves 
+10 	41 	0 	0 	1 	0 	1 	0	//Ancient Gloves
+11 	42 	0	0 	1 	0 	1 	0	//Black Rose Boots
+11 	39 	0 	0 	1 	0 	1 	0	//Mistery Boots
+11 	40	0	0 	1 	0 	1 	0	//Red Wing Boots
+11 	41 	0 	0 	1 	0 	1 	0	//Ancient Boots
+15 3 0 0 0 0 0 0 //Scroll of Fire Ball
+15 10 0 0 0 0 0 0 //Scroll of Power Wave
+15 1 0 0 0 0 0 0 //Scroll of Meteorite
+15 7 0 0 0 0 0 0 //Scroll of Ice
+15 19 0 255 0 0 0 0 //Scroll of Drain Life
+15 20 0 255 0 0 0 0 //Scroll of Chain Lighting
+15 21 0 255 0 0 0 0 //Scroll of Electric Surge
+15 22 0 255 0 0 0 0 //Scroll of Damage Reflex
+15 23 0 255 0 0 0 0 //Scroll of Night
+15 24 0 255 0 0 0 0 //Scroll of Sleep
+15 25 0 255 0 0 0 0 //Scroll of MagicSpeed Up
+15 26 0 255 0 0 0 0 //Scroll of MagicDefense Up
+15 27 0 255 0 0 0 0 //Scroll of Red Storm
+5 21 0 255 0 0 0 0 //Book of Sahamutt
+5 22 0 255 0 0 0 0 //Book of Neil
+5 23 0 255 0 0 0 0 //Book of Ghost Phantom
+
+end

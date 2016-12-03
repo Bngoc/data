@@ -1,0 +1,36 @@
+// Devias Wizard
+//Index Item	Lvl	Dur	Skill	Luck	Opt	Exc	Name
+8 23 7 255 0 1 0 0 //Hurricane Armor
+7 38 7 255 0 1 0 0 //Glorious Mask
+7 36 7 255 0 1 0 0 //Iris Helm
+7 34 7 255 0 1 0 0 //Ashcrow Helm
+8 38 7 255 0 1 0 0 //Glorious Armor
+8 36 7 255 0 1 0 0 //Iris Armor
+8 34 7 255 0 1 0 0 //Ashcrow Armor
+9 23 7 255 0 1 0 0 //Hurricane Pants
+10 23 7 255 0 1 0 0 //Hurricane Gloves
+9 38 7 255 0 1 0 0 //Glorious Pants
+9 36 7 255 0 1 0 0 //Iris Pants
+9 34 7 255 0 1 0 0 //Ashcrow Pants
+11 23 7 255 0 1 0 0 //Hurricane Boots
+10 38 7 255 0 1 0 0 //Glorious Gloves
+10 36 7 255 0 1 0 0 //Iris Gloves
+10 34 7 255 0 1 0 0 //Ashcrow Gloves
+0 25 0 255 1 1 0 0 //dancer Blade
+11 38 7 255 0 1 0 0 //Glorious
+11 36 7 255 0 1 0 0 //Iris Boots
+
+11 34 7 255 0 1 0 0 //Ashow Boots
+2 12 0 255 1 1 0 0 //Great Lord Scepter
+4 20 0 255 1 1 0 0 //Arrow Viper Bow
+3 10 0 255 1 1 0 0 //Dragon Spear
+14 0 0 255 0 0 0 0 //Apple
+14 8 0 15 0 0 0 0 //Antidote
+14 1 0 150 0 0 0 0 //Small Healing Potion
+14 2 0 50 0 0 0 0 //Medium Healing Potion
+14 3 0 20 0 0 0 0 //Large Healing Potion
+14 4 0 150 0 0 0 0 //Small Mana Potion
+14 5 0 50 0 0 0 0 //Medium Mana Potion
+14 6 0 20 0 0 0 0 //Large Mana Potion
+
+end

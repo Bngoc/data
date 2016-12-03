@@ -1,0 +1,96 @@
+//============================================================================
+//Drop Settings: Box of KUNDUN + 1 Drops
+//www.darksideofmu.com
+//============================================================================
+//	type,	index,	level,	skill,	exc,	option	name
+//============================================================================
+//Pad   Set
+	7	2	0	0	1	0	//Helm
+	8	2	0	0	1	1	//Armor
+	9	2	0	0	1	0	//Pants
+	10	2	0	0	1	1	//Gloves
+	11	2	0	0	1	0	//Boots
+
+//Bone  Set
+	7	4	0	0	1	1	//Helm
+	8	4	0	0	1	0	//Armor
+	9	4	0	0	1	1	//Pants
+	10	4	0	0	1	0	//Gloves
+	11	4	0	0	1	2	//Boots
+
+//Leather set
+	7	5	0	0	1	0	//Helm
+	8	5	0	0	1	1	//Armor
+	9	5	0	0	1	0	//Pants
+	10	5	0	0	1	1	//Gloves
+	11	5	0	0	1	0	//Boots
+
+//Vine  Set
+	7	10	0	0	1	1	//Helm
+	8	10	0	0	1	0	//Armor
+	9	10	0	0	1	1	//Pants
+	10	10	0	0	1	0	//Gloves
+	11	10	0	0	1	1	//Boots
+
+//Sword
+	0	0	0	1	1	1	//Kris
+	0	1	0	1	1	0	//Short Sword
+	0	2	0	1	1	1	//Rapier
+	0	3	0	1	1	0	//Katana
+	0	4	0	1	1	1	//Sword of Assassin
+
+//Axes
+	1	0	0	1	1	0	//Small Axe
+	1	1	0	1	1	1	//Hand Axe
+
+//Blunt weapons
+	2	0	0	1	1	0	//Mace
+	2	1	0	1	1	1	//Morning Star
+	2	2	0	1	1	0	//Flail
+
+//Bows & Crossbows
+	4	0	0	1	1	1	//Short Bow
+	4	1	0	1	1	0	//Bow
+	4	8	0	1	1	1	//Crossbow
+	4	9	0	1	1	0	//Golden Crossbow
+
+//Staffs
+	5	0	0	1	1	1	//Skull Staff
+	5	1	0	1	1	0	//Angelic Staff
+	
+//Shields
+	6	0	0	1	1	1	//Small Shield
+	6	1	0	1	1	0	//Horn Shield
+	6	3	0	1	1	1	//Elven Shield
+	6	4	0	1	1	0	//Buckler
+
+//Bronze set
+	7	0	0	0	1	1	//Helm
+	8	0	0	0	1	0	//Armor
+	9	0	0	0	1	1	//Pants
+	10	0	0	0	1	0	//Gloves
+	11	0	0	0	1	1	//Boots
+
+//Scale set
+	7	6	0	0	1	0	//Helm
+	8	6	0	0	1	1	//Armor
+	9	6	0	0	1	0	//Pants
+	10	6	0	0	1	1	//Gloves
+	11	6	0	0	1	0	//Boots
+
+
+
+//Silk  Set
+	7	11	0	0	1	1	//Helm
+	8	11	0	0	1	0	//Armor
+	9	11	0	0	1	1	//Pants
+	10	11	0	0	1	0	//Gloves
+	11	11	0	0	1	1	//Boots
+
+//Mistery Set
+	7	39	0	0	1	0	//Helm
+	8	39	0	0	1	1	//Armor
+	9	39	0	0	1	0	//Pants
+	10	39	0	0	1	1	//Gloves
+	11	39	0	0	1	0	//Boots
+

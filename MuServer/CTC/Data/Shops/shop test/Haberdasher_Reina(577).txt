@@ -1,0 +1,58 @@
+//==============================================================================
+//www.titanstech.com
+//------------------------------------------------------------------------------
+//Revised 11 Aug, 2005			
+//==============================================================================
+//shop5 - Lorencia Potion Girl - [Stadium Guard]
+//
+//[ID][NUM][LVL][DUR][S][L][Z28][EXC]
+
+14 0 0 255 0 0 0 0 //Apple
+14 8 0 15 0 0 0 0 //Antidote
+14 1 0 150 0 0 0 0 //Small Healing Potion
+14 2 0 50 0 0 0 0 //Medium Healing Potion
+14 3 13 30 0 0 0 0 //Large Healing Potion
+14 4 0 150 0 0 0 0 //Small Mana Potion
+14 5 0 50 0 0 0 0 //Medium Mana Potion
+14 6 13 30 0 0 0 0 //Large Mana Potion
+
+13 	1 	10 	255 	0 	0 	0	0	// Imp
+13 	0 	13 	255 	0 	0 	0 	0	// Guardian Angel
+4 	7 	0 	255 	0 	0 	0 	0	// Bolts
+4 	7 	1 	255 	0 	0 	0 	0	// Bolts
+4 	7 	2 	255 	0 	0 	0 	0	// Bolts
+4 	15 	0 	255 	0 	0 	0 	0	// Arrows
+4 	15 	1 	255 	0 	0 	0 	0	// Arrows
+4 	15 	2 	255 	0 	0 	0 	0	// Arrows
+13 10 0 255 0 0 0 0 //Budge Dragon Transformation Ring
+13 10 1 255 0 0 0 0 //Giant Transformation Ring
+13 10 2 255 0 0 0 0 //Skeleton Transformation Ring
+13 10 3 255 0 0 0 0 //Thunder Lich Transformation Ring
+13 10 4 255 0 0 0 0 //Poison Bull Transformation Ring
+13 10 5 255 0 0 0 0 //Death Cow Transformation Ring
+13 8 13 255 0 0 4 63 //Ring of Ice
+13 9 13 255 0 0 4 63 //Ring of Poison
+13 21 13 255 0 0 4 63 //Ring of Fire
+13 22 13 255 0 0 4 63 //Ring of Earth
+13 23 13 255 0 0 4 63 //Ring of Wind
+13 24 13 255 0 0 4 63 //Ring of Magic
+13 12 13 255 0 0 4 63 //Pendant of Lightning
+13 13 13 255 0 0 4 63 //Pendant of Fire
+13 25 13 255 0 0 4 63 //Pendant of Ice
+13 26 13 255 0 0 4 63 //Pendant of Wind
+13 27 13 255 0 0 4 63 //Pendant of Water
+13 28 13 255 0 0 4 63 //Pendant of Ability
+13 49 3 255 0 0 0 0 //S3 Scrool
+13 49 4 255 0 0 0 0 //S3 Scrool
+13 49 5 255 0 0 0 0 //S3 Scrool
+13 50 3 255 0 0 0 0 //S3 Potion
+13 50 4 255 0 0 0 0 //S3 Potion
+13 50 5 255 0 0 0 0 //S3 Potion
+13 51 1 255 0 0 0 0 //Illusion Teachers Platform
+13 51 2 255 0 0 0 0 //Illusion Teachers Platform
+14 10 0 255 0 0 0 0 //Town Portal Scroll
+13 29 0 255 0 0 0 0 //Armor of Guardman
+
+13 	7 	0 	1 	0 	0 	0	0	// Contract (Summon)
+13 	7 	1 	1 	0 	0 	0 	0	// Contract (Summon)
+end

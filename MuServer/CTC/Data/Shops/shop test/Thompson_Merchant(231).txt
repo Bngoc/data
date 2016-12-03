@@ -1,0 +1,36 @@
+// Thompson Kennel
+//Index Item	Lvl	Dur	Skill	Luck	Opt	Exc	Name
+
+7 22 7 255 0 1 7 63 //Dark Soul Helm
+7 35 7 255 0 1 7 63 //Eclips Helm
+8 37 7 255 0 1 7 63 //Valiant Armor
+7 28 7 255 0 1 7 63 //Dark Master Mask
+8 22 7 255 0 1 7 63 //Dark Soul Armor
+8 35 7 255 0 1 7 63 //Eclips Armor
+8 28 7 255 0 1 7 63 //Dark Master Armor
+9 37 7 255 0 1 7 63 //Valiant Pants
+9 22 7 255 0 1 7 63 //Dark Soul Pants
+9 35 7 255 0 1 7 63 //Eclips Pants
+10 37 7 255 0 1 7 63 //Valiant Gloves
+9 28 7 255 0 1 7 63 //Dark Master Pants
+10 22 7 255 0 1 7 63 //Dark Soul Gloves
+10 35 7 255 0 1 7 63 //Eclips Gloves
+11 37 7 255 0 1 7 63 //Valiant Boots
+10 28 7 255 0 1 7 63 //Dark Master Gloves
+11 22 7 255 0 1 7 63 //Dark Soul Boots
+11 35 7 255 0 1 7 63 //Eclips Boots
+5 13 0 255 0 1 7 63 //Platina Wing Staff
+2 15 0 255 1 1 7 63 //Shining Scepter
+11 28 7 255 0 1 7 63 //Dark Master Boots
+0 24 0 255 1 1 7 63 //DayBreak
+4 22 0 255 1 1 7 63 //Albatross Bow
+
+14 0 0 255 0 0 0 0 //Apple
+14 8 0 15 0 0 0 0 //Antidote
+14 1 0 150 0 0 0 0 //Small Healing Potion
+14 2 0 50 0 0 0 0 //Medium Healing Potion
+14 3 0 20 0 0 0 0 //Large Healing Potion
+14 4 0 150 0 0 0 0 //Small Mana Potion
+14 5 0 50 0 0 0 0 //Medium Mana Potion
+14 6 0 20 0 0 0 0 //Large Mana Potion
+end

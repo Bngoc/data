@@ -1,0 +1,5 @@
+//BYTE	BYTE	BYTE	BYTE	BYTE	BYTE	BYTE	BYTE	BYTE	BYTE	
+//btItemCodeType	btItemCodeIndex	btItemCodeLevel	btSkillOption	btAddOption	btLuckOption	btExOption	X	Y	Scale	
+1										
+
+end										

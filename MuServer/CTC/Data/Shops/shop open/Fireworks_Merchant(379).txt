@@ -1,0 +1,36 @@
+// Fireworks Girl
+//Index Item	Lvl	Dur	Skill	Luck	Opt	Exc	Name
+0 1 7 255 1 1 0 0 //Kris
+0 11 7 255 1 1 0 0 //Legendary Sword
+0 15 7 255 1 1 0 0 //Giant Sword
+0 12 7 255 1 1 0 0 //Heliacal Sword
+0 14 7 255 1 1 0 0 //Lightning Sword
+2 5 7 255 1 1 0 0 //Crystal Sword
+0 16 7 255 1 1 0 0 //Sword of Destruction
+1 4 7 255 1 1 0 0 //Fairy Axe
+1 5 7 255 1 1 0 0 //Battle Axe
+1 6 7 255 1 1 0 0 //Nikkea Axe
+1 7 7 255 1 1 0 0 //Larkan Axe
+1 8 7 255 1 1 0 0 //Crescent Axe
+3 3 7 255 1 1 0 0 //Great Trident
+3 9 7 255 1 1 0 0 //Bill of Balrog
+3 8 7 255 1 1 0 0 //Great Scythe
+3 4 7 255 1 1 0 0 //Serpent Spear
+3 0 7 255 1 1 0 0 //Light Spear
+2 9 7 255 1 1 0 0 //Master Scepter
+0 0 7 255 1 1 0 0 //Kris
+14 0 0 255 0 0 0 0 //Apple
+14 8 0 15 0 0 0 0 //Antidote
+14 1 0 150 0 0 0 0 //Small Healing Potion
+14 2 0 50 0 0 0 0 //Medium Healing Potion
+14 3 0 20 0 0 0 0 //Large Healing Potion
+14 4 0 150 0 0 0 0 //Small Mana Potion
+14 5 0 50 0 0 0 0 //Medium Mana Potion
+14 6 0 20 0 0 0 0 //Large Mana Potion
+
+14 20 0 0 0 0 0 0 	//Sentimental Charm	[1]	[1x1]	[2]
+4 7  3 255 1 1 2 0 	//Arrows +3		[2]	[1x1]	[2]
+4 15 3 255 1 1 2 0 	//Bolts +3		[3]	[1x1]	[2]
+
+
+end

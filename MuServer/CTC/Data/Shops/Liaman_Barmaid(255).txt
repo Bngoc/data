@@ -1,0 +1,80 @@
+//==============================================================================
+//www.titanstech.com
+//------------------------------------------------------------------------------
+//Revised 11 Aug, 2005			
+//==============================================================================
+//shop1 - Map 1	Lorencia Bar
+//
+//Potions
+14 	6 	15 	244 	0 	0 	0 	0	//Large Mana Potion
+14 	3 	15 	244 	0 	0 	0 	0	//Large Healing Potion
+//14 	8 	0 	100 	0 	0 	0 	0	//Large Remedy Potion
+//Misc
+13 9 0 255 0 0 2 1 //Poison Ring
+13 8 0 255 0 0 2 1 //Ice Ring
+
+13 13 0 255 0 0 2 1 //Fire Necklace
+13 12 0 255 0 0 2 1 //Lightning Necklace
+
+14 	28 	1 	255 	0 	0 	0	0 	//Lost Map +1
+14 	28 	2 	255 	0 	0 	0	0 	//Lost Map +2
+14 	28 	3 	255 	0 	0 	0	0 	//Lost Map +3
+14 	28 	4 	255 	0 	0 	0	0 	//Lost Map +4
+14 	28 	5 	255 	0 	0 	0	0 	//Lost Map +5
+14 	28 	6 	255 	0 	0 	0	0 	//Lost Map +6
+14 	28 	7 	255 	0 	0	0	0 	//Lost Map +7
+14 	19 	1 	255 	0 	0 	0	0 	//Devil Invitation+1
+14 	19 	2 	255 	0 	0 	0	0 	 //Devil Invitation+2
+14 	19 	3 	255 	0 	0 	0	0 	 //Devil Invitation+3
+14 	19 	4 	255 	0 	0 	0	0 	 //Devil Invitation+4
+14 	19 	5 	255 	0 	0 	0 	0	 //Devil Invitation+5
+14 	19 	6 	255 	0 	0 	0 	0	 //Devil Invitation+6
+14 	19 	7 	255 	0 	0 	0 	0	 //Devil Invitation+7
+13 	18 	2 	255 	0 	0 	0 	0	 //Invisiblity Cloak +2
+13 	18 	3 	255 	0 	0 	0	0 	 //Invisiblity Cloak +3
+13 	18 	4 	255 	0 	0 	0	0 	 //Invisiblity Cloak +4
+13 	18 	5 	255 	0 	0 	0	0 	 //Invisiblity Cloak +5
+13 	18 	6 	255 	0 	0 	0	0 	 //Invisiblity Cloak +6
+13 	18 	7 	255 	0 	0 	0	0 	 //Invisiblity Cloak +7
+13 	18 	8 	255 	0 	0 	0	0 	 //Invisiblity Cloak +8
+13 	51 	1 	255 	0 	0 	0	0 	 //Illusion Teachers Platform
+13 	51 	2 	255 	0 	0 	0	0 	 //Illusion Teachers Platform
+13 	51 	3 	255 	0 	0 	0	0 	 //Illusion Teachers Platform
+13 	51 	4 	255 	0 	0 	0	0 	 //Illusion Teachers Platform
+13 	51 	5 	255 	0 	0 	0	0 	 //Illusion Teachers Platform
+13 	51 	6 	255 	0 	0 	0 	0	 //Illusion Teachers Platform
+
+13 16 7 255 0 0 0 0 //Scrool of Archangel +7
+13 16 8 255 0 0 0 0 //Scrool of Archangel +8
+
+13 17 7 255 0 0 0 0 //Blood Bone +7
+13 17 8 255 0 0 0 0 //Blood Bone +8
+
+14 18 6 255 0 0 0 0 //Devil Key +6
+14 18 7 255 0 0 0 0 //Devil Key +7
+
+14 17 6 255 0 0 0 0 //Devil Eye +6
+14 17 7 255 0 0 0 0 //Devil Eye +7
+14 	51	 1	255	 0 	0 	0 	0		//Sky Event Invitation
+14 	51	 2	255	 0 	0 	0 	0		//Sky Event Invitation
+14 	51	 3	255	 0 	0 	0 	0		//Sky Event Invitation
+14 	51	 4	255	 0 	0 	0 	0		//Sky Event Invitation
+14 	51	 5	255	 0 	0 	0 	0		//Sky Event Invitation
+
+
+
+14 	26 	0 	255 	0 	0 	0	0 	 	//Soul of Wizard
+14 	23 	1 	255 	0 	0 	0	0 	 	//Ring of Honor
+14 	24 	1 	255 	0 	0 	0	0 		//Dark Stone
+14 	24 	0 	255 	0 	0 	0	0 	 	//Broken Sword
+14 	66 	0 	255 	0 	0 	0	0 	 	//Horn of Hell Maine
+14 	65 	0 	255 	0 	0 	0	0 	 	//Flame of Death Beam Knight
+14 	67 	0 	255 	0 	0 	0	0 		//Feather of Phoenix of Darkness
+14 	68 	0 	1 	0 	0 	0	0 		//Santa Village Invitation
+14 	25 	0 	255 	0 	0 	0	0 		//Tear Of Elf
+14 	23 	0 	255 	0 	0 	0	0 		//Scroll of Emperor
+14 	101 	1 	1 	0 	0 	0	0 		//"Piece of paper"
+14 	102 	1 	1 	0 	0 	0	0 		// "Guy on the order"
+
+end
+
