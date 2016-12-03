@@ -64,6 +64,11 @@ A>
  B>
 	0. chay odbc
 		-> x86 Or x64
+		==> TitanLinkServer.exe not renpoding
+			===> Port=55970		Port=55906	Port=55962		Port=55960		Port=55999	Port=55557	
+			===> ServerODBC=MuOnline 
+			===> ServerODBC=MuOnlineJoinDB
+		
 	1. attach db them vao (detact huy)
 		->  them 3 ? 4 
 			-> permission -> user Full
@@ -74,6 +79,7 @@ A>
 	2. run sql 	
  
 	3. Allow remote connect to this server [sql server]
+ 
  
  
  C> 
