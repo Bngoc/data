@@ -668,7 +668,7 @@ function do_selc_char($account, $character)
 
 /**
  * @param  name
- * return array info manger Account
+ * return array info manager Account
  * return bool exits name in Account_info
  */
 function db_membget_account($clause, $colClause ='[UserAcc]', $ischek = FALSE)

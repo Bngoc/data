@@ -74,8 +74,7 @@ function char_invoke()
 
     echoheader('-@my_char/style.css', "Character");
 
-    $images = array
-    (
+    $images = array (
         'info_char' => 'info_char.gif',
         'reset' => 'reset.png',
         'resetvip' => 'resetvip.png',
@@ -108,15 +107,12 @@ function char_invoke()
     foreach ($char_board as $id => $name) {
         list($mod, $opt, $acl) = explode(':', $id, 3);
 
-        //if (!test($acl))
-        {
+        //if (!test($acl)) {
             // unset($char_board[$id]);
             //continue;
-        }
+        //}
 
-        $item = array
-        (
-            //'name' => i18n($name),
+        $item = array (
             'name' => $name,
             'img' => isset($images[$opt]) ? $images[$opt] : 'home.gif',
             'mod' => $mod,
@@ -126,31 +122,8 @@ function char_invoke()
         $char_board[$id] = $item;
     }
 
+    cn_assign('dashboard', $char_board);
 
-    //cn_character();
-    $member = member_get();
-
-    //$meta_draft = db_index_meta_load('draft');
-    //$drafts =isset($meta_draft['locs'])? intval(array_sum($meta_draft['locs'])):false;
-
-    //if ($drafts && test('Cvn'))
-    //{
-    //$greeting_message = i18n('News in draft: %1', '<a href="'.cn_url_modify('mod=editnews', 'source=draft').'"><b>'.$drafts.'</b></a>');
-    //}
-    //else
-    //{
-    //$greeting_message = i18n('Have a nice day!');
-    //}
-
-    //$nameset = $accc_;
-
-
-    $greeting_message = 'Have a nice day!';
-    //cn_assign('dashboard, username, greeting_message', $dashboard, $member['name'], $greeting_message);
-    cn_assign('dashboard, username, greeting_message', $char_board, $member['user_name'], $greeting_message);
-
-    //echo exec_tpl('header');
-    //echo exec_tpl('my_dashboard/general');
     echocomtent_here(exec_tpl('my_char/general'), cn_snippet_bc_re());
     echofooter();
 }
@@ -159,8 +132,8 @@ function char_default()
 {
     $arr_shop = mcache_get('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('my_char/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('my_char/default'), cn_snippet_bc_re());
+    echoheader('defaults/style.css', "Error - $name__");
+    echocomtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
     echofooter();
 }
 

@@ -65,7 +65,7 @@ $skin_header = <<<HTML
 
 -->
     <title>{title}</title>
-    <!--<script type="text/javascript" src="$setpath_default/skins/cute.js"></script>-->
+    <script type="text/javascript" src="$setpath_default/skins/cute.js"></script>
     {CustomJS}
     <style type="text/css"><!-- {CustomStyle} --></style>
 	<script type="text/javascript">

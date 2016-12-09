@@ -472,6 +472,37 @@ function cn_get_message($area, $method = 's') // s-show, c-count
     return null;
 }
 
+// Since 2.0; HTML show errors
+function cn_messages_show($arrNotify, $notify)
+{
+    $delay = 7500;
+    $result = '';
+    if (empty($arrNotify))
+        return $result;
+
+    $type = 'notify';
+    if ($notify == 'e') {
+        $type = 'error';
+    } elseif ($notify == 'w') {
+        $type = 'warnings';
+    }
+
+    $result .= '<div class="cn_' . $type . '_list">';
+
+    foreach ($arrNotify as $msg) {
+        $NID = 'notify_' . time() . mt_rand();
+        $result .= '<div class="cn_' . $type . '_item" id="' . $NID . '"><div><b>' . date('H:i:s', ctime()) . '</b> ' . $msg . '</div></div>';
+        $result .= '<script>notify_auto_hide("' . $NID . '", ' . $delay . ');</script>';
+
+        $delay += 1000;
+    }
+    $result .= '</div>';
+
+
+    if ($result) {
+        echo '<div class="cn_notify_overall">' . $result . '</div>';
+    }
+}
 
 // Since 2.0; HTML show errors
 function cn_snippet_messages($area = 'new')
@@ -812,14 +843,23 @@ function cn_register_form($admin = TRUE)
         if ($d_string) {
             list($ctime, $d_username) = explode(' ', $d_string, 2);
 
-            // All OK: authorize user
-            //$_SESSION['user_Gamer'] = $d_username;
+            if ($ctime <ctime()) {
+                msg_info('Đã hết hạn xác nhận quên mật khẩu.', 'index.html');
+            }
 
-            //cn_relocation(cn_url_modify('lostpass'));
-            die();
+            $d_username = strtolower($d_username);
+            $user = do_select_character('MEMB_INFO', 'memb___id', "memb___id='$d_username'");
+
+            // All OK: authorize user
+            if(isset($user)) {
+                //cn_throw_message('Vui lòng thay đổi mật khẩu', 'e');
+                $_SESSION['user_ChangePwd'] = true;
+                $_SESSION['user_Gamer'] = $d_username;
+                cn_relocation(cn_url_modify(array('reset'), 'mod=manager_account', 'opt=change_pwd'));
+            }
         }
 
-        msg_info('Fail: invalid string');
+        msg_info('Fail: Không xác nhận thay đổi mật khẩu.');
     }
 
     // Resend activation
@@ -830,7 +870,7 @@ function cn_register_form($admin = TRUE)
         $user = do_select_character('MEMB_INFO', 'memb___id,mail_addr,memb__pwdmd5', "memb___id='$username'");
 
         if (!$user) {
-            msg_info('Tài khoản không tồn tại');
+            msg_info('Tài khoản hoặc địa chỉ email không đúng.');
         }
 
         $email = isset($user[0][1]) ? trim($user[0][1]) : '';
@@ -856,9 +896,11 @@ function cn_register_form($admin = TRUE)
             } else {
                 msg_info('Err, Gửi email thất bại, hãy thử lại sau');
             }
+        } else {
+            msg_info('Tài khoản hoặc địa chỉ email không đúng.');
         }
 
-        msg_info('Địa chỉ email không xác thực.');
+        msg_info('Tài khoản hoặc địa chỉ email không xác thực.');
     }
 
     // is not registration form
@@ -981,7 +1023,7 @@ function cn_register_form($admin = TRUE)
                 $checkStatusDB = do_insert_character(
                     '[MEMB_INFO]',
                     "memb___id='" . $username . "'",
-                    "memb__pwd='". md5($re_pwd) ."'",
+                    "memb__pwd='". $re_pwd ."'",
                     "mail_addr='" . $nameEmail . "'",
                     "tel__numb='" . $phoneNumber . "'",
                     "memb__pwdmd5='" . SHA256_hash($repass_web) . "'",
@@ -1290,15 +1332,15 @@ function echoheader($image, $header_text, $bread_crumbs = false)
         $skin_header = str_replace(['{userImg}', '{userName}'], $userName, $skin_header);
 
         $boxArrInfo = [
-            '{changePass}' => ['change-pass', 'Đổi pass-Game'],
-            '{changeTel}' => ['change-tel', 'Đổi Sđt'],
-            '{changeEmail}' => ['change-email', 'Đổi Email'],
-            '{changePwd}' => ['change-pwd', 'Đổi pass-Web'],
-            '{changeSecret}' => ['change-secret', 'Đổi Mã Bí mật'],
-            '{changeQA}' => ['change-qa', 'Đổi Câu Trả Lời']
+            '{changePass}' => ['change_pass', 'Đổi pass-Game'],
+            '{changeTel}' => ['change_tel', 'Đổi Sđt'],
+            '{changeEmail}' => ['change_email', 'Đổi Email'],
+            '{changePwd}' => ['change_pwd', 'Đổi pass-Web'],
+            '{changeSecret}' => ['change_secret', 'Đổi Mã Bí mật'],
+            '{changeQA}' => ['change_qa', 'Đổi Câu Trả Lời']
         ];
         foreach ($boxArrInfo as $jk => $its){
-            $tmpHtml = '<a href="' . PHP_SELF . '?mod=manger_account&amp;'. $its[0] . '"><div><img src="' . getoption('http_script_dir') . '/images/'. $its[0] .'.png" /></div><div>'. $its[1] .'</div></a>';
+            $tmpHtml = '<a href="' . PHP_SELF . '?mod=manager_account&amp;opt='. $its[0] . '"><div><img height="20" width="20" src="' . getoption('http_script_dir') . '/images/'. $its[0] .'.png" /></div><div>'. $its[1] .'</div></a>';
             $skin_header = str_replace($jk, $tmpHtml, $skin_header);
         }
     } else {
@@ -1338,7 +1380,6 @@ function echocomtent_here($echocomtent, $path_c = '', $bread_crumbs = true)
 function echofooter()
 {
     global $skin_footer, $lang_content_type, $skin_menu, $config_adminemail, $config_admin;
-
 
     //$skin_footer = get_skin($skin_footer);
     //$skin_footer = str_replace("{content-type}", $lang_content_type, $skin_footer);

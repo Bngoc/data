@@ -1,141 +1,165 @@
 ﻿<?php if (!defined('BQN_MU')) die('Access restricted');
 
-add_hook('index/invoke_module', '*cshop_invoke');
+add_hook('index/invoke_module', '*manager_invoke');
 
 //=====================================================================================================================
-function cshop_invoke()
+function manager_invoke()
 {
-    $cshop_board = array
-    (
-        'cash_shop:acient:__buy_s1:Csc' => 'Set thần',
-        'cash_shop:armor:__buy_s1:Cp' => 'Giáp trụ',
-        'cash_shop:spears:__buy_s1:Ciw' => 'Thương - Giáo',
-        'cash_shop:shields:__buy_s1:Cg' => 'Khiên',
-        'cash_shop:crossbows:__buy_s1:Cb' => 'Cung - nỏ',
-        'cash_shop:weapons:__buy_s1:Com' => 'Dao - kiếm',
-        'cash_shop:scepters:__buy_s1:Com' => 'Quyền trượng',
-        'cash_shop:staffs:__buy_s1:Ca' => 'Gậy',
-        'cash_shop:wings:__buy_s1:Ct' => 'Cánh',
-        'cash_shop:ringpendants:__buy_s1:Cc' => 'Trang sức',
-        'cash_shop:fenrir:__buy_s1:Cmm' => 'Linh hồn sói tinh',
-        'cash_shop:eventticket:__buy_s1:Cum' => 'Vé sự kiện',
-        'cash_shop:orther:__buy_s1:Cbi' => 'Các loại khác',
-        'cash_shop:warehouse:__what_:Cbi' => 'Thùng đồ',
+    $cManger_account = array (
+        'manager_account:change_pass:Csc' => 'Đổi pass-Game',
+        'manager_account:change_tel:Cp' => 'Đổi Sđt',
+        'manager_account:change_email:Ciw' => 'Đổi Email',
+        'manager_account:change_pwd:Cg' => 'Đổi pass-Web',
+        'manager_account:change_secret:Cb' => 'Đổi Mã Bí mật',
+        'manager_account:change_qa:Com' => 'Đổi Câu Trả Lời'
     );
 
     // Call dashboard extend
-    $cshop_board = hook('cshop_board', $cshop_board);
+    $cManger_account = hook('manager_account', $cManger_account);
 
     // Exec
     $mod = REQ('mod', 'GETPOST');
     $opt = REQ('opt', 'GETPOST');
-    $token = REQ('token', 'GETPOST');
 
-    cn_bc_add('Cash shop', cn_url_modify(array('reset'), 'mod=' . $mod));
+    cn_bc_add('Manger Account', cn_url_modify(array('reset'), 'mod=' . $mod));
 
-    foreach ($cshop_board as $id => $_t) {
-        list($dl, $do, $_token, $acl_module) = explode(':', $id);
-        if (function_exists("shop_$_token"))
-            cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'token=' . md5($_token . $do), 'opt=' . $do), $do);
+    foreach ($cManger_account as $id => $_t) {
+        list($dl, $do, $acl_module) = explode(':', $id);
+
+        if (function_exists("manager_$do")) cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
     }
-    //$token == $_token = md5($_token.$do)
+
     // Request module
-    foreach ($cshop_board as $id => $_t) {
-        list($dl, $do, $token_, $acl_module) = explode(':', $id);
-        $_token = md5($token_ . $do);
+    foreach ($cManger_account as $id => $_t) {
+        list($dl, $do, $acl_module) = explode(':', $id);
 
-        if ($dl == $mod && $do == $opt && $token == $_token && function_exists("shop_$token_")) {
-            cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'token=' . $_token, 'opt=' . $opt));
-            die(call_user_func("shop_$token_"));
+        if ($dl == $mod && $do == $opt && function_exists("manager_$do")) {
+            cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt));
+            die(call_user_func("manager_$do"));
         }
-        //else{
-        if ($dl == $mod && $do == $opt && $token == $_token && !function_exists("shop_$token_")) {
-            cn_bc_add('Lỗi dữ liệu', cn_url_modify(array('reset'), 'mod=' . $mod, 'token=' . $_token, 'opt=' . $opt));
-            die(call_user_func("shop_default"));
+
+        if ($dl == $mod && $do == $opt && !function_exists("manager_$do")) {
+            cn_bc_add('Lỗi dữ liệu', cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt));
+            die(call_user_func("manager_default"));
         }
     }
 
-    echoheader('-@my_cashshop/style.css', "Character");
+    echoheader('-@my_account/style.css', "Manger Account");
 
-    $images = array
-    (
-        'acient' => 'acient.png',
-        'armor' => 'armor.png',
-        'spears' => 'spears.png',
-        'shields' => 'shields.png',
-        'crossbows' => 'crossbows.png',
-        'weapons' => 'weapons.png',
-        'scepters' => 'scepters.png',
-        'staffs' => 'staffs.png',
-        'wings' => 'wings.png',
-        'ringpendants' => 'ringpendants.png',
-        'orther' => 'orther.png',
-        'eventticket' => 'eventticket.png',
-        'fenrir' => 'fenrir.png',
-        'warehouse' => 'warehouse.png'
+    $images = array (
+        'change_pass' => 'change_pass.png',
+        'change_tel' => 'change_tel.png',
+        'change_email' => 'change_email.png',
+        'change_pwd' => 'change_pwd.png',
+        'change_secret' => 'change_secret.png',
+        'change_qa' => 'change_qa.png'
     );
 
     // More dashboard images
     $images = hook('extend_dashboard_images', $images);
 
-    foreach ($cshop_board as $id => $name) {
-        list($mod, $opt, $token, $acl) = explode(':', $id, 4);
+    foreach ($cManger_account as $id => $name) {
+        list($mod, $opt, $acl) = explode(':', $id, 3);
 
-        //if (!test($acl))
-        {
-            // unset($cshop_board[$id]);
-            //continue;
+        if (!test($acl)) {
+            unset($cManger_account[$id]);
+            continue;
         }
 
         $item = array (
             'name' => $name,
             'img' => isset($images[$opt]) ? $images[$opt] : 'home.gif',
             'mod' => $mod,
-            'opt' => $opt,
-            'token' => md5($token . $opt),
+            'opt' => $opt
         );
 
-        $cshop_board[$id] = $item;
+        $cManger_account[$id] = $item;
     }
 
-    $member = member_get();
-
-    //$meta_draft = db_index_meta_load('draft');
-    //$drafts =isset($meta_draft['locs'])? intval(array_sum($meta_draft['locs'])):false;
-
-    //if ($drafts && test('Cvn'))
-    //{
-    //$greeting_message = i18n('News in draft: %1', '<a href="'.cn_url_modify('mod=editnews', 'source=draft').'"><b>'.$drafts.'</b></a>');
-    //}
-    //else
-    //{
-    //$greeting_message = i18n('Have a nice day!');
-    //}
-
-    //$nameset = $accc_;
-
-
-    $greeting_message = 'Have a nice day!';
-    //cn_assign('dashboard, username, greeting_message', $dashboard, $member['name'], $greeting_message);
-    cn_assign('dashboard, username, greeting_message', $cshop_board, $member['user_name'], $greeting_message);
-
-    //echo exec_tpl('header');
-    //echo exec_tpl('my_dashboard/general');
-    echocomtent_here(exec_tpl('my_cashshop/general'), cn_snippet_bc_re());
+    cn_assign('dashboard', $cManger_account);
+    echocomtent_here(exec_tpl('my_account/general'), cn_snippet_bc_re());
     echofooter();
 }
 
-function shop_default()
+function manager_default()
 {
     $arr_shop = mcache_get('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
     echoheader('-@defaults/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
+    echocomtent_here(exec_tpl('-@defaults/default'), cn_snippet_bc_re());
     echofooter();
 }
 
+function manager_change_pass() {
+
+}
+
+function manager_change_tel() {}
+function manager_change_email() {}
+
+function manager_change_pwd() {
+    if (isset($_SESSION['user_ChangePwd']) &&  $_SESSION['user_ChangePwd']) {
+        $isAuthEmail = true;
+    }
+    $isAuthEmail = isset($isAuthEmail) ? $isAuthEmail : false;
+    $errors = array();
+
+    // Do change pass-web
+    if (request_type('POST')) {
+
+        list($nameEmail, $pass_web, $repass_web, $namecaptcha) = GET('cnameEmail, cpass_web, crepass_web, cnameCaptcha', "POST");
+
+        $nameEmail = strtolower($nameEmail);
+
+        if ($pass_web === '') $errors[] = ucfirst("Chưa nhập mật khẩu đăng nhập web");
+        if ($nameEmail === '' && !$isAuthEmail) $errors[] = ucfirst("Chưa nhập địa chỉ Email");
+        if ($namecaptcha === '') $errors[] = ucfirst("Chưa nhập mã Captcha");
+
+        if ($pass_web != $repass_web) $errors[] = "Mật khẩu web không giống nhau.";
+        if (!$isAuthEmail && !preg_match('/[\w]\@[\w]/i', $nameEmail)) $errors[] = ucfirst("$nameEmail không đúng dạng địa chỉ Email.");
+        if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
+
+        $user = do_select_character('MEMB_INFO', 'memb___id,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");
+
+        if (!$isAuthEmail && $user[0][1] != $nameEmail){
+            $errors[] = 'Email không đúng.';
+        }
+
+        if (empty($errors)) {
+            $statusUp = do_update_character('MEMB_INFO', "memb__pwdmd5='" . SHA256_hash($repass_web) . "'", "memb___id:'" . $_SESSION['user_Gamer'] . "'");
+
+            if ($statusUp) {
+                $user = do_select_character('MEMB_INFO', 'memb___id,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");
+
+                $changePassWebEmail = 'Hi {username}, <br>
+                    <p>Change your password</p>
+                    <hr>
+                    <p>Website Password: {pass_web} </p>
+                ';
+
+                $strHoderFotgot = '{username}, {pass_web}';
+                $checkemailforgot = cn_send_mail($user[0][1], 'Detail change pass-web', cn_replace_text($changePassWebEmail, $strHoderFotgot, $user[0][0], $repass_web));
+
+                cn_throw_message('Bạn đã thay đổi mật khẩu Web thành công.');
+            }
+        }
+    }
+
+    cn_assign('isAuthEmail, errors_result', $isAuthEmail , $errors);
+
+    echoheader('-@my_account/style.css', "Đổi pass-Web");
+    echocomtent_here(exec_tpl('-@my_account/_changePassWeb'), cn_snippet_bc_re());
+    echofooter();
+}
+
+function manager_change_secret() {}
+function manager_change_qa() {}
+
+
+/*
 function shop___buy_s1()
 {
+    //$opt = REQ('opt', 'GETPOST');	
     list($page, $per_page, $token, $opt, $sub) = GET('page, per_page, token, opt, sub', 'GPG');
 
     $page = intval($page);
@@ -248,11 +272,12 @@ function shop___buy_s1()
     cn_assign('list_item, token, opt', $list_item, $token, $opt);
     cn_assign('per_page', $per_page);
 
-    echoheader('-@my_char/style.css', "Cửa hàng $name_shop - $name_shop");                                //???????????????????
+    echoheader('my_char/style.css', "Cửa hàng $name_shop - $name_shop");                                //???????????????????
     echocomtent_here(exec_tpl('my_cashshop/_general'), cn_snippet_bc_re());
     echofooter();
 }
 
+/*
 function shop___what_()
 {
     $member = member_get();
@@ -329,7 +354,7 @@ function shop___what_()
     //echo $show_warehouse;
     cn_assign('show_warehouse', $show_warehouse);
 
-    echoheader('-@my_char/style.css', "Thùng đồ - Warehouse");
+    echoheader('my_char/style.css', "Thùng đồ - Warehouse");                                //???????????????????
     echocomtent_here(exec_tpl('my_cashshop/_warehouse'), cn_snippet_bc_re());
     echofooter();
 }

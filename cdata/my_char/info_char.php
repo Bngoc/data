@@ -6,7 +6,6 @@ cn_snippet_messages();
 ?>
 
 <!-------------------------------------------------- -->
-
 <div class="sub_ranking">
     <?php if ($showchar){
     foreach ($showchar as $kr => $val) { ?>
@@ -65,7 +64,7 @@ cn_snippet_messages();
 		</tr>
 	</table>
 	
-		<div class=" floatcontainer forumbit_nopost" id="<?php echo $kr; ?>" style="display:none;">
+		<div class="floatcontainer forumbit_nopost" id="<?php echo $kr; ?>" style="display:none;">
                         <div class="forumhead foruminfo topx-tip-head" style="margin-top:0px;">
                             <h2>
                                 <span class="forumtitle">Thông tin</span>

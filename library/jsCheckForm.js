@@ -1286,14 +1286,14 @@ $(document).ready(function () {
             mouse_is_inside = true;
         }, function () {
             mouse_is_inside = false;
-            $('.box_login').hide();
+            $('.box_login').hide(600);
             $("i.down").removeClass("downup");
             $("i.down").addClass("down");
         });
 
     $("body").mouseup(function () {
         if (!mouse_is_inside) {
-            $('.box_login').hide();
+            $('.box_login').hide(500);
             $("i.down").removeClass("downup");
             $("i.down").addClass("down");
         }

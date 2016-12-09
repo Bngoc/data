@@ -69,7 +69,7 @@ list($errors_result) = _GL('errors_result');
             </td>
             <td class="bizwebform_col_3" id="err_num7"></td>
         </tr>
-        </tr>
+        <tr>
         <td class="bizwebform_col_1">Mật khẩu Web <span class="required">*</span></td>
         <td class="bizwebform_col_2"><input class="bizwebform" class="txt_160" name="pass_web" type="password"
                                             id="pass1"

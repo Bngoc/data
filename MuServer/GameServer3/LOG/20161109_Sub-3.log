@@ -1,0 +1,1052 @@
+20:53:20 [SCF Connect] - .\SCF_Connect.ini file is Loaded
+20:53:20 [SCF Common] - ..\SCFData\SCF_Common.ini file is Loaded
+20:53:20 [SCF MasterSkillTreeData][Skill][0] Type:300 [0,0,1,1,0,1,20,-536870912,1076368506,1,1,1,1,1,1]
+20:53:20 [SCF MasterSkillTreeData][Skill][1] Type:301 [0,0,1,1,0,1,20,-1610612736,1082339696,4,4,4,4,4,4]
+20:53:20 [SCF MasterSkillTreeData][Skill][2] Type:302 [0,0,1,2,0,1,20,536870912,1082129326,6,6,6,6,6,6]
+20:53:20 [SCF MasterSkillTreeData][Skill][3] Type:303 [0,0,1,2,0,1,20,-2147483648,1073542594,7,7,7,7,7,7]
+20:53:20 [SCF MasterSkillTreeData][Skill][4] Type:304 [0,0,1,2,0,1,20,1073741824,1072902963,8,8,8,8,8,8]
+20:53:20 [SCF MasterSkillTreeData][Skill][5] Type:305 [300,0,1,3,0,1,20,-536870912,1076368506,9,9,9,9,9,9]
+20:53:20 [SCF MasterSkillTreeData][Skill][6] Type:306 [302,0,1,3,0,1,20,1073741824,1072902963,10,10,10,10,10,10]
+20:53:20 [SCF MasterSkillTreeData][Skill][7] Type:307 [303,0,1,3,0,1,20,1073741824,1072902963,11,11,11,11,11,11]
+20:53:20 [SCF MasterSkillTreeData][Skill][8] Type:308 [304,0,1,3,0,1,20,1073741824,1072902963,12,12,12,12,12,12]
+20:53:20 [SCF MasterSkillTreeData][Skill][9] Type:309 [0,0,1,4,0,1,20,0,1078853632,14,14,14,14,14,14]
+20:53:20 [SCF MasterSkillTreeData][Skill][10] Type:310 [307,0,1,4,0,1,20,1073741824,1072902963,15,15,15,15,15,15]
+20:53:20 [SCF MasterSkillTreeData][Skill][11] Type:311 [308,0,1,4,0,1,20,1073741824,1072902963,16,16,16,16,16,16]
+20:53:20 [SCF MasterSkillTreeData][Skill][12] Type:312 [305,0,1,5,0,1,20,-536870912,1076368506,17,17,17,17,17,17]
+20:53:20 [SCF MasterSkillTreeData][Skill][13] Type:313 [309,0,1,5,0,1,20,1073741824,1072902963,18,18,18,18,18,18]
+20:53:20 [SCF MasterSkillTreeData][Skill][14] Type:325 [0,0,2,1,0,1,20,536870912,1082129326,37,37,37,37,37,37]
+20:53:20 [SCF MasterSkillTreeData][Skill][15] Type:326 [22,0,2,2,22,1,20,-536870912,1075057786,0,41,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][16] Type:327 [23,0,2,2,23,1,20,536870912,1075398574,0,42,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][17] Type:328 [19,0,2,2,19,1,20,536870912,1075398574,0,43,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][18] Type:329 [20,0,2,2,20,1,20,536870912,1075398574,0,44,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][19] Type:330 [41,0,2,3,41,1,20,536870912,1075398574,0,45,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][20] Type:331 [42,0,2,3,42,1,20,-536870912,1075057786,0,46,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][21] Type:332 [330,0,2,4,41,1,20,1073741824,1072902963,0,49,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][22] Type:333 [331,0,2,4,42,1,20,1073741824,1072902963,0,50,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][23] Type:334 [0,0,2,4,0,1,20,1610612736,1079613030,51,51,52,52,52,52]
+20:53:20 [SCF MasterSkillTreeData][Skill][24] Type:335 [0,0,2,4,0,1,20,-536870912,1075057786,0,52,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][25] Type:336 [43,0,2,5,43,1,20,-536870912,1075057786,0,53,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][26] Type:337 [232,0,2,5,232,1,20,-536870912,1075057786,0,54,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][27] Type:338 [334,0,2,5,0,1,20,1610612736,1079613030,55,55,56,56,56,56]
+20:53:20 [SCF MasterSkillTreeData][Skill][28] Type:347 [0,0,3,1,0,1,20,0,1082758697,73,73,73,73,73,73]
+20:53:20 [SCF MasterSkillTreeData][Skill][29] Type:348 [0,0,3,2,0,1,20,-1073741824,1075947765,0,77,0,77,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][30] Type:349 [0,0,3,2,0,1,20,-536870912,1075057786,0,78,0,78,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][31] Type:350 [0,0,3,2,0,1,20,536870912,1075398574,0,79,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][32] Type:351 [0,0,3,2,0,1,20,536870912,1075398574,0,80,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][33] Type:352 [348,0,3,3,0,1,20,-536870912,1076302970,0,81,0,81,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][34] Type:353 [349,0,3,3,0,1,10,0,1072693248,0,82,0,82,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][35] Type:354 [350,0,3,3,0,1,20,1073741824,1072902963,0,83,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][36] Type:355 [351,0,3,3,0,1,20,1073741824,1072902963,0,84,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][37] Type:356 [48,0,3,4,48,1,20,-2147483648,1073542594,0,85,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][38] Type:357 [0,0,3,4,0,1,20,-1610612736,1075634503,86,86,86,86,86,86]
+20:53:20 [SCF MasterSkillTreeData][Skill][39] Type:358 [0,0,3,4,0,1,20,536870912,1075988398,87,87,87,87,87,87]
+20:53:20 [SCF MasterSkillTreeData][Skill][40] Type:359 [0,0,3,4,0,1,20,-536870912,1078302801,88,88,88,88,88,88]
+20:53:20 [SCF MasterSkillTreeData][Skill][41] Type:360 [356,0,3,5,48,1,20,-2147483648,1073542594,0,89,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][42] Type:361 [0,0,3,5,0,1,20,-536870912,1075057786,0,90,0,90,91,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][43] Type:362 [359,0,3,5,0,1,20,-536870912,1078302801,92,92,92,92,92,92]
+20:53:20 [SCF MasterSkillTreeData][Skill][44] Type:378 [5,0,2,2,5,1,20,536870912,1075398574,41,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][45] Type:379 [3,0,2,2,3,1,20,536870912,1075398574,42,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][46] Type:380 [233,0,2,2,233,1,20,1073741824,1072902963,43,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][47] Type:381 [14,378,2,3,14,1,20,-536870912,1075057786,45,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][48] Type:382 [13,379,2,3,13,1,20,-536870912,1075057786,46,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][49] Type:383 [380,0,2,3,233,1,20,1073741824,1072902963,47,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][50] Type:384 [1,0,2,3,1,1,20,536870912,1075398574,48,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][51] Type:385 [9,0,2,4,9,1,20,-536870912,1075057786,49,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][52] Type:386 [385,0,2,4,0,1,20,-536870912,1075057786,50,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][53] Type:387 [38,384,2,4,38,1,20,-536870912,1075057786,52,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][54] Type:388 [10,0,2,5,10,1,20,536870912,1075398574,54,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][55] Type:389 [7,0,2,5,7,1,20,536870912,1075398574,56,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][56] Type:397 [0,0,3,2,0,1,20,-536870912,1075057786,77,0,0,79,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][57] Type:398 [0,0,3,2,0,1,20,-1073741824,1075947765,78,0,0,80,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][58] Type:399 [0,0,3,2,0,1,20,536870912,1075842908,79,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][59] Type:400 [397,0,3,3,0,1,10,0,1072693248,81,0,0,83,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][60] Type:401 [398,0,3,3,0,1,20,-536870912,1076302970,82,0,0,84,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][61] Type:402 [399,0,3,3,0,1,20,-536870912,1076368506,83,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][62] Type:403 [16,0,3,4,16,1,20,-2147483648,1073542594,85,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][63] Type:404 [403,0,3,5,16,1,20,536870912,1075842908,89,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][64] Type:405 [0,0,3,5,0,1,20,-536870912,1075057786,90,0,0,89,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][65] Type:413 [26,0,2,2,26,1,20,-536870912,1075057786,0,0,41,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][66] Type:414 [24,0,2,2,24,1,20,-536870912,1075057786,0,0,43,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][67] Type:415 [30,0,2,2,30,1,20,-1610612736,1078860185,0,0,44,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][68] Type:416 [52,0,2,3,52,1,20,-536870912,1075057786,0,0,45,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][69] Type:417 [27,0,2,3,27,1,20,-536870912,1075057786,0,0,46,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][70] Type:418 [414,0,2,3,24,10,10,0,1072693248,0,0,47,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][71] Type:419 [415,0,2,3,30,1,20,-1610612736,1078860185,0,0,48,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][72] Type:420 [28,0,2,4,28,1,20,-536870912,1075057786,0,0,49,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][73] Type:421 [0,0,2,4,0,1,20,-536870912,1075057786,0,0,51,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][74] Type:422 [420,0,2,5,28,1,20,-536870912,1075057786,0,0,53,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][75] Type:423 [417,0,2,5,27,1,20,-536870912,1075057786,0,0,54,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][76] Type:424 [51,0,2,5,51,1,20,-536870912,1075057786,0,0,55,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][77] Type:435 [0,0,3,2,0,1,20,-536870912,1075057786,0,0,77,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][78] Type:436 [0,0,3,2,0,1,20,536870912,1075398574,0,0,78,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][79] Type:437 [0,0,3,2,0,1,20,536870912,1075842908,0,0,79,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][80] Type:438 [435,0,3,3,0,1,10,0,1072693248,0,0,81,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][81] Type:439 [436,0,3,3,0,1,20,-536870912,1076302970,0,0,82,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][82] Type:440 [437,0,3,3,0,1,20,536870912,1077022556,0,0,83,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][83] Type:441 [77,0,3,5,77,1,20,1073741824,1072902963,0,0,89,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][84] Type:442 [0,0,3,5,0,1,20,-536870912,1075057786,0,0,90,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][85] Type:448 [0,0,2,2,0,1,20,536870912,1075398574,0,0,0,0,0,41]
+20:53:20 [SCF MasterSkillTreeData][Skill][86] Type:449 [0,0,2,2,0,1,20,536870912,1075398574,0,0,0,0,0,42]
+20:53:20 [SCF MasterSkillTreeData][Skill][87] Type:450 [0,0,2,2,0,1,20,536870912,1075398574,0,0,0,0,0,43]
+20:53:20 [SCF MasterSkillTreeData][Skill][88] Type:451 [448,0,2,3,0,1,20,-2147483648,1073542594,0,0,0,0,0,45]
+20:53:20 [SCF MasterSkillTreeData][Skill][89] Type:452 [449,0,2,3,0,1,20,1073741824,1072902963,0,0,0,0,0,46]
+20:53:20 [SCF MasterSkillTreeData][Skill][90] Type:453 [450,0,2,3,0,1,20,-2147483648,1073542594,0,0,0,0,0,47]
+20:53:20 [SCF MasterSkillTreeData][Skill][91] Type:454 [219,0,2,3,219,1,20,1073741824,1072902963,0,0,0,0,0,48]
+20:53:20 [SCF MasterSkillTreeData][Skill][92] Type:455 [215,0,2,4,215,1,20,-536870912,1075057786,0,0,0,0,0,49]
+20:53:20 [SCF MasterSkillTreeData][Skill][93] Type:456 [230,0,2,4,230,1,20,-536870912,1075057786,0,0,0,0,0,50]
+20:53:20 [SCF MasterSkillTreeData][Skill][94] Type:457 [0,0,2,5,0,1,20,-536870912,1075057786,0,0,0,0,0,53]
+20:53:20 [SCF MasterSkillTreeData][Skill][95] Type:458 [214,0,2,5,214,1,20,-536870912,1075057786,0,0,0,0,0,55]
+20:53:20 [SCF MasterSkillTreeData][Skill][96] Type:465 [0,0,3,2,0,1,20,-536870912,1075057786,0,0,0,0,0,77]
+20:53:20 [SCF MasterSkillTreeData][Skill][97] Type:466 [0,0,3,2,0,1,20,536870912,1075398574,0,0,0,0,0,78]
+20:53:20 [SCF MasterSkillTreeData][Skill][98] Type:467 [465,0,3,3,0,1,20,-536870912,1076302970,0,0,0,0,0,81]
+20:53:20 [SCF MasterSkillTreeData][Skill][99] Type:468 [466,0,3,3,0,1,10,0,1072693248,0,0,0,0,0,82]
+20:53:20 [SCF MasterSkillTreeData][Skill][100] Type:469 [218,0,3,4,218,1,20,-2147483648,1073542594,0,0,0,0,0,85]
+20:53:20 [SCF MasterSkillTreeData][Skill][101] Type:470 [469,0,3,5,0,1,20,-2147483648,1073542594,0,0,0,0,0,89]
+20:53:20 [SCF MasterSkillTreeData][Skill][102] Type:471 [0,0,3,5,0,1,20,-536870912,1075057786,0,0,0,0,0,90]
+20:53:20 [SCF MasterSkillTreeData][Skill][103] Type:479 [22,0,2,2,22,1,20,-536870912,1075057786,0,0,0,41,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][104] Type:480 [3,0,2,2,3,1,20,536870912,1075398574,0,0,0,42,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][105] Type:481 [41,0,2,2,41,1,20,536870912,1075398574,0,0,0,43,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][106] Type:482 [56,0,2,2,56,1,20,536870912,1075398574,0,0,0,44,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][107] Type:483 [5,0,2,3,5,1,20,536870912,1075398574,0,0,0,45,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][108] Type:484 [13,480,2,3,13,1,20,-536870912,1075057786,0,0,0,46,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][109] Type:485 [481,482,2,3,0,1,20,-536870912,1075057786,0,0,0,48,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][110] Type:486 [14,483,2,4,14,1,20,-536870912,1075057786,0,0,0,49,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][111] Type:487 [9,0,2,4,9,1,20,-536870912,1075057786,0,0,0,50,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][112] Type:488 [447,0,2,4,0,1,20,-536870912,1075057786,0,0,0,51,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][113] Type:489 [7,0,2,5,7,1,20,536870912,1075398574,0,0,0,53,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][114] Type:490 [55,0,2,5,55,1,20,-536870912,1075057786,0,0,0,54,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][115] Type:508 [61,0,2,2,61,1,20,-536870912,1075057786,0,0,0,0,41,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][116] Type:509 [60,0,2,2,60,1,20,536870912,1075398574,0,0,0,0,42,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][117] Type:510 [0,0,2,2,0,1,20,-536870912,1076368506,0,0,0,0,43,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][118] Type:511 [64,0,2,3,64,1,20,536870912,1075398574,0,0,0,0,46,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][119] Type:512 [62,510,2,3,62,1,20,-536870912,1075057786,0,0,0,0,47,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][120] Type:513 [0,0,2,3,0,1,20,-536870912,1075057786,0,0,0,0,48,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][121] Type:514 [508,0,2,4,61,1,20,1073741824,1072902963,0,0,0,0,49,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][122] Type:515 [511,0,2,4,64,1,20,536870912,1075842908,0,0,0,0,50,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][123] Type:516 [512,0,2,4,62,1,20,1073741824,1072902963,0,0,0,0,51,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][124] Type:517 [515,0,2,5,64,1,20,-2147483648,1073542594,0,0,0,0,54,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][125] Type:518 [78,0,2,5,78,1,20,-536870912,1075057786,0,0,0,0,55,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][126] Type:526 [0,0,3,2,0,1,20,536870912,1075398574,0,0,0,0,77,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][127] Type:527 [0,0,3,2,0,1,20,-536870912,1075057786,0,0,0,0,78,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][128] Type:528 [0,0,3,2,0,1,20,536870912,1075842908,0,0,0,0,79,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][129] Type:529 [0,0,3,2,0,1,20,536870912,1075398574,0,0,0,0,80,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][130] Type:530 [526,0,3,3,0,1,20,-2147483648,1073542594,0,0,0,0,81,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][131] Type:531 [527,0,3,3,0,1,20,-536870912,1076302970,0,0,0,0,82,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][132] Type:532 [528,0,3,3,0,1,20,-536870912,1076368506,0,0,0,0,83,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][133] Type:533 [529,0,3,3,0,1,20,0,1078139945,0,0,0,0,84,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][134] Type:534 [530,0,3,5,0,1,20,1073741824,1072902963,0,0,0,0,89,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][135] Type:535 [0,0,3,5,0,1,20,-536870912,1076368506,0,0,0,0,90,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][136] Type:578 [0,0,1,1,0,1,20,-536870912,1076368506,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][137] Type:579 [0,0,1,1,0,1,20,0,1081080791,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][138] Type:580 [0,0,1,2,0,1,20,-536870912,1081290915,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][139] Type:581 [0,0,1,2,0,1,20,-2147483648,1073542594,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][140] Type:582 [0,0,1,2,0,1,20,1073741824,1072902963,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][141] Type:583 [578,0,1,3,0,1,20,-536870912,1076368506,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][142] Type:584 [580,0,1,3,0,1,20,1073741824,1072902963,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][143] Type:585 [581,0,1,3,0,1,20,1073741824,1072902963,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][144] Type:586 [582,0,1,3,0,1,20,1073741824,1072902963,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][145] Type:587 [0,0,1,4,0,1,20,1073741824,1077992161,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][146] Type:588 [585,0,1,4,0,1,20,1073741824,1072902963,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][147] Type:589 [586,0,1,4,0,1,20,1073741824,1072902963,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][148] Type:590 [583,0,1,5,0,1,20,-536870912,1076368506,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][149] Type:591 [587,0,1,5,0,1,20,1073741824,1072902963,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][150] Type:599 [0,0,2,1,0,1,20,-2147483648,1080661524,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][151] Type:551 [0,0,2,2,260,1,20,-536870912,1075057786,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][152] Type:552 [0,0,2,2,261,1,20,-536870912,1075057786,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][153] Type:554 [551,0,2,3,260,1,20,1073741824,1072902963,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][154] Type:555 [552,0,2,3,261,1,20,1073741824,1072902963,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][155] Type:600 [0,0,2,4,0,1,20,1073741824,1078662922,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][156] Type:557 [0,0,2,4,0,1,20,-536870912,1075057786,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][157] Type:558 [262,0,2,5,262,1,20,-536870912,1075057786,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][158] Type:559 [263,0,2,5,263,1,20,-536870912,1075057786,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][159] Type:601 [600,0,2,5,0,1,20,1073741824,1078662922,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][160] Type:560 [264,0,2,5,264,1,20,-536870912,1075057786,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][161] Type:603 [0,0,3,1,0,1,20,0,1081374761,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][162] Type:568 [0,0,3,2,0,1,20,-536870912,1075057786,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][163] Type:569 [268,0,3,2,268,1,20,-536870912,1075057786,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][164] Type:571 [568,0,3,3,0,1,20,1073741824,1072902963,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][165] Type:572 [569,0,3,3,268,1,20,-536870912,1075057786,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][166] Type:573 [267,0,3,4,267,1,20,-536870912,1076302970,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][167] Type:604 [0,0,3,4,0,1,20,-1610612736,1075634503,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][168] Type:605 [0,0,3,4,0,1,20,536870912,1075988398,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][169] Type:606 [0,0,3,4,0,1,20,-536870912,1078302801,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][170] Type:607 [0,0,3,5,0,1,20,-536870912,1075057786,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skill][171] Type:608 [606,0,3,5,0,1,20,-536870912,1078302801,0,0,0,0,0,0]
+20:53:20 [SCF MasterSkillTreeData][Skills: 172] - ..\SCFData\Skills\SCF_SkillTreeData.txt file is Loaded
+20:53:20 [SCF Character] - ..\SCFData\SCF_Character.ini file is Loaded
+[Quest S5] (Spider Hunt!) Load : Index 0, SubInfoCount 1
+[Quest S5] (Dispose of the Town Plunderers!) Load : Index 1, SubInfoCount 4
+[Quest S5] (Boss of predator treatment!) Load : Index 2, SubInfoCount 4
+[Quest S5] (Monster Supply Route in Devias!) Load : Index 3, SubInfoCount 2
+[Quest S5] (Attack on the Supply Corps!) Load : Index 4, SubInfoCount 2
+[Quest S5] (Inland Supply Route!) Load : Index 5, SubInfoCount 2
+[Quest S5] (Dungeon Sweep!) Load : Index 6, SubInfoCount 2
+[Quest S5] (and asked the elders of the Elbe!) Load : Index 7, SubInfoCount 2
+[Quest S5] (Situation at the Dungeon (1)) Load : Index 8, SubInfoCount 2
+[Quest S5] (Situation at the Dungeon (2)) Load : Index 9, SubInfoCount 2
+[Quest S5] (Situation at the Dungeon (3)) Load : Index 10, SubInfoCount 2
+[Quest S5] (Situation at the Dungeon (4)) Load : Index 11, SubInfoCount 2
+[Quest S5] (Situation at the Dungeon (5)) Load : Index 12, SubInfoCount 2
+[Quest S5] (Situation at the Dungeon (6)) Load : Index 13, SubInfoCount 2
+[Quest S5] (Continuing Requests for Help (1)) Load : Index 14, SubInfoCount 2
+[Quest S5] (Continuing Requests for Help (2)) Load : Index 15, SubInfoCount 2
+[Quest S5] (Continuing Requests for Help (3)) Load : Index 16, SubInfoCount 2
+[Quest S5] (Continuing Requests for Help (4)) Load : Index 17, SubInfoCount 2
+[Quest S5] (Continuing Attacks on Barriers (1)) Load : Index 18, SubInfoCount 2
+[Quest S5] (Continuing Attacks on Barriers (2)) Load : Index 19, SubInfoCount 2
+[Quest S5] (Continuing Attacks on Barriers (3)) Load : Index 20, SubInfoCount 2
+[Quest S5] (Clearing a Path to Icarus) Load : Index 21, SubInfoCount 2
+[Quest S5] (Clearing a Path to Icarus) Load : Index 22, SubInfoCount 2
+[Quest S5] (Advancement of the Reconnaissance Party (1)) Load : Index 23, SubInfoCount 1
+[Quest S5] (Advancement of the Reconnaissance Party (1)) Load : Index 24, SubInfoCount 1
+[Quest S5] (Advancement of the Reconnaissance Party (2)) Load : Index 25, SubInfoCount 1
+[Quest S5] (Advancement of the Reconnaissance Party (2)) Load : Index 26, SubInfoCount 1
+[Quest S5] (Advancement of the Reconnaissance Party (3)) Load : Index 27, SubInfoCount 1
+[Quest S5] (Advancement of the Reconnaissance Party (3)) Load : Index 28, SubInfoCount 1
+[Quest S5] (Road to Floating Castle (1)) Load : Index 29, SubInfoCount 1
+[Quest S5] (Road to Floating Castle (1)) Load : Index 30, SubInfoCount 1
+[Quest S5] (Road to Floating Castle (2)) Load : Index 31, SubInfoCount 1
+[Quest S5] (Road to Floating Castle (2)) Load : Index 32, SubInfoCount 1
+[Quest S5] (Road to Floating Castle (3)) Load : Index 33, SubInfoCount 1
+[Quest S5] (Road to Floating Castle (3)) Load : Index 34, SubInfoCount 1
+[Quest S5] (The Beginning of Requests) Load : Index 35, SubInfoCount 4
+[Quest S5] (Conquer the Dungeon! (1)) Load : Index 36, SubInfoCount 8
+[Quest S5] (Conquer the Dungeon! (2)) Load : Index 37, SubInfoCount 8
+[Quest S5] (Conquer the Dungeon! (3)) Load : Index 38, SubInfoCount 8
+[Quest S5] (Conquer the Dungeon! (4)) Load : Index 39, SubInfoCount 8
+[Quest S5] (Conquer the Dungeon! (5)) Load : Index 40, SubInfoCount 8
+[Quest S5] (Conquer the Dungeon! (6)) Load : Index 41, SubInfoCount 10
+[Quest S5] (The mission of reconnaissance troops (1)) Load : Index 42, SubInfoCount 6
+[Quest S5] (The mission of reconnaissance troops (2)) Load : Index 43, SubInfoCount 6
+[Quest S5] (The mission of reconnaissance troops (3)) Load : Index 44, SubInfoCount 6
+[Quest S5] (The mission of reconnaissance troops (4)) Load : Index 45, SubInfoCount 4
+[Quest S5] (Put the Lost Tower to Sleep! (1)) Load : Index 46, SubInfoCount 8
+[Quest S5] (Put the Lost Tower to Sleep! (2)) Load : Index 47, SubInfoCount 6
+[Quest S5] (Put the Lost Tower to Sleep! (3)) Load : Index 48, SubInfoCount 6
+[Quest S5] (Put the Lost Tower to Sleep! (4)) Load : Index 49, SubInfoCount 6
+[Quest S5] (Put the Lost Tower to Sleep! (5)) Load : Index 50, SubInfoCount 6
+[Quest S5] (Put the Lost Tower to Sleep! (6)) Load : Index 51, SubInfoCount 6
+[Quest S5] (Random Quest (1)) Load : Index 52, SubInfoCount 72
+[Quest S5] (Random Quest (2)) Load : Index 53, SubInfoCount 72
+[Quest S5] (Random Quest (3)) Load : Index 54, SubInfoCount 72
+[Quest S5] (Rage of Vepars) Load : Index 55, SubInfoCount 1
+[Quest S5] (End the Spread of Death Trees) Load : Index 56, SubInfoCount 1
+[Quest S5] (Eliminate Splinter Wolves) Load : Index 57, SubInfoCount 1
+[Quest S5] (Eliminate Blood Assasins) Load : Index 58, SubInfoCount 1
+[Quest S5] (Eliminate Sapi-Duos) Load : Index 59, SubInfoCount 1
+[Quest S5] (Eliminate Plundering Silver Valkyries) Load : Index 60, SubInfoCount 1
+[Quest S5] (Rebels of the Forest) Load : Index 61, SubInfoCount 1
+[Quest S5] (Wipe Out the Elusive Iron Riders) Load : Index 62, SubInfoCount 1
+[Quest S5] (Assault of Burning Lava Giants) Load : Index 63, SubInfoCount 1
+[Quest S5] (Lurkers in the Dark) Load : Index 64, SubInfoCount 1
+[Quest S5] (Mercenary Guild Office?) Load : Index 65, SubInfoCount 3
+[Quest S5] (Checking The Letter of Request) Load : Index 66, SubInfoCount 1
+[Quest S5] (Completion of the Request) Load : Index 67, SubInfoCount 1
+[Quest S5] (Request from the Underwater Temple) Load : Index 68, SubInfoCount 1
+[Quest S5] (Change of the Underwater Temple) Load : Index 69, SubInfoCount 2
+[Quest S5] (Keeping the peace of the hero) Load : Index 70, SubInfoCount 2
+[Quest S5] (Find General Goods Merchant Zyro) Load : Index 71, SubInfoCount 1
+[Quest S5] (Ladies appetite for collecting) Load : Index 72, SubInfoCount 2
+[Quest S5] (Ladies appetite for collecting) Load : Index 73, SubInfoCount 2
+[Quest S5] (Call from the Gens) Load : Index 74, SubInfoCount 1
+[Quest S5] (Expanding businesses) Load : Index 75, SubInfoCount 2
+[Quest S5] (Glory to the Gens) Load : Index 76, SubInfoCount 1
+[Quest S5] (Request from the priestess) Load : Index 77, SubInfoCount 1
+[Quest S5] (A taint of insanity) Load : Index 78, SubInfoCount 2
+[Quest S5] (Shadow of Evil) Load : Index 79, SubInfoCount 2
+[Quest S5] (Request from the merchant Zyro) Load : Index 80, SubInfoCount 1
+[Quest S5] (Secure war supplies (1)) Load : Index 81, SubInfoCount 2
+[Quest S5] (Secure war supplies (2)) Load : Index 82, SubInfoCount 2
+[Quest S5] (Call from the Gens) Load : Index 83, SubInfoCount 1
+[Quest S5] (Progress of the business) Load : Index 84, SubInfoCount 2
+[Quest S5] (Glory to the Gens) Load : Index 85, SubInfoCount 1
+[Quest S5] (Request from the mercenary guild) Load : Index 86, SubInfoCount 1
+[Quest S5] (Hidden history of the rebellion) Load : Index 87, SubInfoCount 2
+[Quest S5] (Put the past behind) Load : Index 88, SubInfoCount 2
+[Quest S5] (Heroic Qualities) Load : Index 89, SubInfoCount 3
+[Quest S5] (Heroic Courage) Load : Index 90, SubInfoCount 3
+[Quest S5] (Heroic Fighting Spirit) Load : Index 91, SubInfoCount 3
+[Quest S5] (Heroic Mentality) Load : Index 92, SubInfoCount 3
+[Quest S5] (Heroic Tenacy) Load : Index 93, SubInfoCount 3
+[Quest S5] (Final Test to Becomen a Hero) Load : Index 94, SubInfoCount 3
+20:53:20 [SCF GensCloseMap] - ..\SCFData\SCF_GensPvP.ini file is Loaded
+20:53:20 [SCF ExtraExp] - .\SCF_ExtraExp.ini file is Loaded
+20:53:20 [SCF Skills] - ..\SCFData\Skills\SCF_Skills.ini file is Loaded
+20:53:20 [SCF Commands] - ..\SCFData\SCF_Commands.ini file is Loaded
+20:53:20 [SCF Items] - ..\SCFData\Items\SCF_Items.ini file is Loaded
+20:53:21 [SCF ChaosMachine] - ..\SCFData\Items\SCF_ChaosMachine.ini file is Loaded
+20:53:21 [SCF SocketOptions] - ..\SCFData\Items\SCF_SocketOptions.ini file is Loaded
+20:53:21 [SCF SocketOptions] - ..\SCFData\Items\SCF_SocketOptions.txt file is Loaded
+20:53:21 [ItemDropLoadScript][Items: 36] - ..\SCFData\Items\SCF_ItemDropRate.txt file is Loaded
+20:53:21 [ItemDropLoadScript] Item Shuffle completed, Items:36, Runs: 3
+20:53:21 [News System] Enabled: 0 / Total News Sections: 0 [0] / Time Interval (min): 0 
+20:53:21 [SCF Raklion] - ..\SCFData\EventsConfig\SCF_RaklionEvent.ini file is Loaded
+20:53:21 [Illusion Temple](1) Sync Open Time. [36] min remain. Notice: [5] min
+20:53:21 [Illusion Temple](1) SetState CLOSED
+20:53:21 [Illusion Temple](2) Sync Open Time. [36] min remain. Notice: [5] min
+20:53:21 [Illusion Temple](2) SetState CLOSED
+20:53:21 [Illusion Temple](3) Sync Open Time. [36] min remain. Notice: [5] min
+20:53:21 [Illusion Temple](3) SetState CLOSED
+20:53:21 [Illusion Temple](4) Sync Open Time. [36] min remain. Notice: [5] min
+20:53:21 [Illusion Temple](4) SetState CLOSED
+20:53:21 [Illusion Temple](5) Sync Open Time. [36] min remain. Notice: [5] min
+20:53:21 [Illusion Temple](5) SetState CLOSED
+20:53:21 [Illusion Temple](6) Sync Open Time. [36] min remain. Notice: [5] min
+20:53:21 [Illusion Temple](6) SetState CLOSED
+20:53:21 [SCF HappyHour] - ..\SCFData\EventsConfig\SCF_HappyHourEvent.ini file is Loaded
+20:53:21 [SCF GreenEvent] - ..\SCFData\EventsConfig\SCF_GreenEvent.ini file is Loaded
+20:53:21 [SCF BlueEvent] - ..\SCFData\EventsConfig\SCF_BlueEvent.ini file is Loaded
+20:53:21 [SCF SummerEvent] - ..\SCFData\EventsConfig\SCF_SummerEvent.ini file is Loaded
+20:53:21 [SCF Imperial Guardian] - ..\SCFData\EventsConfig\SCF_ImperialGuardian.ini file is Loaded
+20:53:21 [SCF Marry] - ..\SCFData\SCF_Marry.ini file is Loaded
+20:53:21 [SCF HalloweenEvent] - ..\SCFData\EventsConfig\SCF_HalloweenEvent.ini file is Loaded
+20:53:21 (Option) Christmas NPC speaks
+20:53:21 (Option) Happy-new-year NPC speaks
+20:53:21 [SCF XMasEvent] - ..\SCFData\EventsConfig\SCF_XMasEvent.ini file is Loaded
+20:53:21 [SCF SkyEvent] - ..\SCFData\EventsConfig\SCF_SkyEvent.ini file is Loaded
+20:53:21 [SCF HitAndUp] - ..\SCFData\EventsConfig\SCF_HitAndUpEvent.ini file is Loaded
+20:53:21 [SCF VIPSystem] - .\SCF_VIP.ini file is Loaded
+20:53:21 [SCF ResetSystem] - .\SCF_Reset.ini file is Loaded
+20:53:21 [SCF ResetSystem] - .\SCF_ResetMasters.ini file is Loaded
+20:53:21 [SCF PvPSystem] - .\SCF_PvPSystem.ini file is Loaded
+20:53:21 [SCF PvPSystem] PVP System Enabled
+20:53:21 [SCF PvPSystem] PK Limit Free Server
+20:53:21 (Option) Required time to decrease Murderer-level : 30(min)
+20:53:21 (Option) No dropping item when killed by Murderer
+20:53:21 [SCF BossAttack] - ..\SCFData\EventsConfig\SCF_BossAttack.ini file is Loaded
+20:53:21 [Swamp Event] - ..\SCFData\EventsConfig\SCF_SwampEvent.ini file is Loaded
+20:53:21 [Anti-AFK System] Enabled: 0 / Warnings: 5 / Interval (min): 20
+20:53:21 [SCF Warehouse] - ..\SCFData\SCF_Warehouse.ini file is Loaded
+20:53:21 [BotPet] - ..\SCFData\SCFBots\SCF_BotPet.txt file is Loaded
+20:53:21 [BotStore] - ..\SCFData\SCFBots\SCF_BotStore.txt file is Loaded
+20:53:21 [BotBuffer] - ..\SCFData\SCFBots\SCF_BotBuffer.txt file is Loaded
+20:53:21 [BotAlchemist] - ..\SCFData\SCFBots\SCF_BotAlchemist.txt file is Loaded
+20:53:21 [BotTrader] - ..\SCFData\SCFBots\SCF_BotTrader.txt file is Loaded
+20:53:21 [BotHider] - ..\SCFData\SCFBots\SCF_BotHideAndSeek.txt file is Loaded
+20:53:21 [SCF HideAndSeek] - ..\SCFData\EventsConfig\SCF_HideAndSeekEvent.ini file is Loaded
+20:53:21 [RainItemEvent] - ..\SCFData\EventsConfig\SCF_RainItemEventPosition.txt file is Loaded
+20:53:21 [BotRacer] - ..\SCFData\SCFBots\SCF_BotRacer.txt file is Loaded
+20:53:21 [SCF Racer] - ..\SCFData\EventsConfig\SCF_Racer.ini file is Loaded
+20:53:21 [BotReward] - ..\SCFData\SCFBots\SCF_BotReward.txt file is Loaded
+20:53:21 [BotWarper] - ..\SCFData\SCFBots\SCF_BotWarper.txt file is Loaded
+20:53:21 [TopPlayer] - ..\SCFData\EventsConfig\SCF_TitanRank.txt file is Loaded
+20:53:21 [TitanLottery] - ..\SCFData\EventsConfig\SCF_TitanLottery.txt file is Loaded
+20:53:21 [QaA] - ..\SCFData\EventsConfig\SCF_QaA.txt file is Loaded
+20:53:21 [SCFCherryBlossom] - ..\SCFData\EventsConfig\SCF_CherryBlossom.ini file is Loaded
+20:53:21 [SCFCherryBlossom] - ..\SCFData\EventsConfig\SCF_CherryBlossom.txt file is Loaded
+20:53:21 [GMSystem] Loaded: ADMIN[32] [exp:31-12-2013][cmd:1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+20:53:21 [GMSystem] Loaded: CONG_CHUA[32] [exp:31-12-2013][cmd:1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+20:53:21 [GMSystem] Loaded: Gm_Event[32] [exp:31-12-2013][cmd:1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+20:53:21 [GMSystem] - .\SCF_GMSystem.txt file is Loaded
+20:53:21 [SCFLuckyPenny] - ..\SCFData\EventsConfig\SCF_LuckyPenny.ini file is Loaded
+20:53:21 [SCFLuckyPenny] - ..\SCFData\EventsConfig\SCF_LuckyPenny.txt file is Loaded
+20:53:21 [CJewel][Load][0] Item:7368(14,200) Set:[255,0,0]/[0,15,100]
+20:53:21 [CJewel][Load][1] Item:7369(14,201) Set:[0,0,255]/[0,15,100]
+20:53:21 [CJewel][Load][2] Item:7370(14,202) Set:[0,0,0]/[0,15,100]
+20:53:21 [CJewel][Load][3] Item:7371(14,203) Set:[0,0,0]/[0,15,100]
+20:53:21 [CJewel][Load][4] Item:7372(14,204) Set:[0,0,0]/[0,15,100]
+20:53:21 [CJewel][Load][5] Item:7373(14,205) Set:[0,0,0]/[0,15,100]
+20:53:21 [CJewel][Load][6] Item:7374(14,206) Set:[0,116,0]/[0,15,100]
+20:53:21 [CJewel][Load][7] Item:7375(14,207) Set:[255,255,0]/[0,15,100]
+20:53:21 [CJewel][Load][8] Item:7376(14,208) Set:[0,0,255]/[0,15,100]
+20:53:21 [CJewel][Load][9] Item:7377(14,209) Set:[255,255,100]/[0,15,100]
+20:53:21 [CJewel][Load][10] Item:7378(14,210) Set:[0,0,255]/[0,15,100]
+20:53:21 [CJewel][Load][11] Item:7379(14,211) Set:[0,0,0]/[0,15,100]
+20:53:21 [CJewel][Success][0] Item:7368(14,200) [1,0,0,0,0,0,0,0]
+20:53:21 [CJewel][Success][1] Item:7369(14,201) [0,1,0,0,0,0,0,0]
+20:53:21 [CJewel][Success][2] Item:7370(14,202) [0,0,1,0,0,0,0,0]
+20:53:21 [CJewel][Success][3] Item:7371(14,203) [0,0,0,1,0,0,0,0]
+20:53:21 [CJewel][Success][4] Item:7372(14,204) [0,0,0,0,7,0,0,0]
+20:53:21 [CJewel][Success][5] Item:7373(14,205) [0,0,0,0,0,1,0,0]
+20:53:21 [CJewel][Success][6] Item:7374(14,206) [0,0,0,0,0,0,3,0]
+20:53:21 [CJewel][Success][7] Item:7375(14,207) [14,2,1,1,63,1,5,0]
+20:53:21 [CJewel][Success][8] Item:7376(14,208) [0,0,0,0,8,0,0,0]
+20:53:21 [CJewel][Success][9] Item:7377(14,209) [14,2,1,1,63,1,5,0]
+20:53:21 [CJewel][Success][10] Item:7378(14,210) [0,0,0,0,8,0,0,0]
+20:53:21 [CJewel][Success][11] Item:7379(14,211) [14,2,1,1,63,1,5,0]
+20:53:21 [CJewel][Fail][0] Item:7368(14,200) [0,0,0,1,1,1,0,1]
+20:53:21 [CJewel][Fail][1] Item:7369(14,201) [0,0,0,1,1,1,0,1]
+20:53:21 [CJewel][Fail][2] Item:7370(14,202) [0,0,0,1,1,1,0,1]
+20:53:21 [CJewel][Fail][3] Item:7371(14,203) [0,0,0,1,1,1,0,1]
+20:53:21 [CJewel][Fail][4] Item:7372(14,204) [0,0,0,1,1,1,0,1]
+20:53:21 [CJewel][Fail][5] Item:7373(14,205) [0,0,0,1,1,1,0,1]
+20:53:21 [CJewel][Fail][6] Item:7374(14,206) [0,0,0,1,1,1,0,1]
+20:53:21 [CJewel][Fail][7] Item:7375(14,207) [0,0,0,1,1,1,0,1]
+20:53:21 [CJewel][Fail][8] Item:7376(14,208) [0,0,0,1,1,1,0,1]
+20:53:21 [CJewel][Fail][9] Item:7377(14,209) [0,0,0,1,1,1,0,1]
+20:53:21 [CJewel][Fail][10] Item:7378(14,210) [0,0,0,1,1,1,0,1]
+20:53:21 [CJewel][Fail][11] Item:7379(14,211) [0,0,0,1,1,1,0,1]
+20:53:21 [Custom Jewels] - ..\SCFData\CrystalEdition\SCF_CustomJewels.txt file is Loaded
+20:53:21 [Custom Wings] - ..\SCFData\CrystalEdition\SCF_CustomWings.txt file is Loaded
+20:53:21 [BotVipShop] - ..\SCFData\CrystalEdition\BotVipShop\SCF_BotVipShop.txt file is Loaded
+[CrystalWall] Loaded Successfull!
+[BlackList] Loaded Successfull!
+20:53:21 [SCF Configs] All INIS are Loaded!
+[..\Data\Gate_Settings\Gate.txt] Gate information data load complete.
+20:53:22 [Item System][LOAD][Season 4] Socket Items Loaded: 55
+(..\Data\lang\Kor\Skill(kor).txt) Skill information data load complete
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 1(0,1) Req Lvl: 4 Mix Item: Short Sword
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 0(0,0) Req Lvl: 4 Mix Item: Kris
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 2(0,2) Req Lvl: 4 Mix Item: Rapier
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4(0,4) Req Lvl: 4 Mix Item: Sword of Assassin
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 512(1,0) Req Lvl: 4 Mix Item: Small Axe
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 513(1,1) Req Lvl: 4 Mix Item: Hand Axe
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 514(1,2) Req Lvl: 4 Mix Item: Double Axe
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 1024(2,0) Req Lvl: 4 Mix Item: Mace
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 1025(2,1) Req Lvl: 4 Mix Item: Morning Star
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 1026(2,2) Req Lvl: 4 Mix Item: Flail
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 1541(3,5) Req Lvl: 4 Mix Item: Double Poleaxe
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 1538(3,2) Req Lvl: 4 Mix Item: Dragon Lance
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 1542(3,6) Req Lvl: 4 Mix Item: Halberd
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 1537(3,1) Req Lvl: 4 Mix Item: Spear
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 1539(3,3) Req Lvl: 4 Mix Item: Giant Trident
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 2048(4,0) Req Lvl: 4 Mix Item: Short Bow
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 2056(4,8) Req Lvl: 4 Mix Item: Crossbow
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 2049(4,1) Req Lvl: 4 Mix Item: Bow
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 2057(4,9) Req Lvl: 4 Mix Item: Golden Crossbow
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 2050(4,2) Req Lvl: 4 Mix Item: Elven Bow
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 2058(4,10) Req Lvl: 4 Mix Item: Arquebus
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 2051(4,3) Req Lvl: 4 Mix Item: Battle Bow
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 2059(4,11) Req Lvl: 4 Mix Item: Light Crossbow
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 2560(5,0) Req Lvl: 4 Mix Item: Skull Staff
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 2561(5,1) Req Lvl: 4 Mix Item: Angelic Staff
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 2562(5,2) Req Lvl: 4 Mix Item: Serpent Staff
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3072(6,0) Req Lvl: 4 Mix Item: Round Shield
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3076(6,4) Req Lvl: 4 Mix Item: Buckler
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3073(6,1) Req Lvl: 4 Mix Item: Horn Shield
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3074(6,2) Req Lvl: 4 Mix Item: Kite Shield
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3078(6,6) Req Lvl: 4 Mix Item: Skull Shield
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3082(6,10) Req Lvl: 4 Mix Item: Large Round Shiled
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3075(6,3) Req Lvl: 4 Mix Item: Elven Shield
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3081(6,9) Req Lvl: 4 Mix Item: Plate Shiled
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3079(6,7) Req Lvl: 4 Mix Item: Spiked Shileld
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3589(7,5) Req Lvl: 4 Mix Item: Leather Helm
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3584(7,0) Req Lvl: 4 Mix Item: Bronze Helm
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3590(7,6) Req Lvl: 4 Mix Item: Scale Helm
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3592(7,8) Req Lvl: 4 Mix Item: Brass Helm
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3586(7,2) Req Lvl: 4 Mix Item: Pad Helm
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3588(7,4) Req Lvl: 4 Mix Item: Bone Helm
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3591(7,7) Req Lvl: 4 Mix Item: Sphinx Helm
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3594(7,10) Req Lvl: 4 Mix Item: Vine Helm
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3595(7,11) Req Lvl: 4 Mix Item: Silk Helm
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 3596(7,12) Req Lvl: 4 Mix Item: Helm of Wind
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4101(8,5) Req Lvl: 4 Mix Item: Leather Armor
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4096(8,0) Req Lvl: 4 Mix Item: Bronze Armor
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4102(8,6) Req Lvl: 4 Mix Item: Scale Armor
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4104(8,8) Req Lvl: 4 Mix Item: Brass Armor
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4098(8,2) Req Lvl: 4 Mix Item: Pad Armor
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4100(8,4) Req Lvl: 4 Mix Item: Bone Armor
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4103(8,7) Req Lvl: 4 Mix Item: Sphinx Armor
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4106(8,10) Req Lvl: 4 Mix Item: Vine Armor
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4107(8,11) Req Lvl: 4 Mix Item: Silk Armor
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4108(8,12) Req Lvl: 4 Mix Item: Armor of Wind
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4613(9,5) Req Lvl: 4 Mix Item: Leather Pants
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4608(9,0) Req Lvl: 4 Mix Item: Bronze Pants
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4614(9,6) Req Lvl: 4 Mix Item: Scale Pants
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4616(9,8) Req Lvl: 4 Mix Item: Brass Pants
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4610(9,2) Req Lvl: 4 Mix Item: Pad Pants
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4612(9,4) Req Lvl: 4 Mix Item: Bone Pants
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4615(9,7) Req Lvl: 4 Mix Item: Sphinx Pants
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4618(9,10) Req Lvl: 4 Mix Item: Vine Pants
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4619(9,11) Req Lvl: 4 Mix Item: Silk Pants
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 4620(9,12) Req Lvl: 4 Mix Item: Pants of Wind
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5125(10,5) Req Lvl: 4 Mix Item: Leather Gloves
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5120(10,0) Req Lvl: 4 Mix Item: Bronze Gauntlets
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5126(10,6) Req Lvl: 4 Mix Item: Scale Gauntlets
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5128(10,8) Req Lvl: 4 Mix Item: Brass Gauntlets
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5122(10,2) Req Lvl: 4 Mix Item: Pad Gloves
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5124(10,4) Req Lvl: 4 Mix Item: Bone Gloves
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5127(10,7) Req Lvl: 4 Mix Item: Sphinx Gauntlets
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5130(10,10) Req Lvl: 4 Mix Item: Vine Gloves
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5131(10,11) Req Lvl: 4 Mix Item: Silk Gloves
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5132(10,12) Req Lvl: 4 Mix Item: Gauntlets of Wind
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5637(11,5) Req Lvl: 4 Mix Item: Leather Boots
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5632(11,0) Req Lvl: 4 Mix Item: Bronze Boots
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5638(11,6) Req Lvl: 4 Mix Item: Scale Boots
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5640(11,8) Req Lvl: 4 Mix Item: Brass Boots
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5634(11,2) Req Lvl: 4 Mix Item: Pad Boots
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5636(11,4) Req Lvl: 4 Mix Item: Bone Boots
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5639(11,7) Req Lvl: 4 Mix Item: Sphinx Boots
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5642(11,10) Req Lvl: 4 Mix Item: Vine Boots
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5643(11,11) Req Lvl: 4 Mix Item: Silk Boots
+20:53:22 [JewelOfHarmony][Smelt Load] ID: 5644(11,12) Req Lvl: 4 Mix Item: Boots of Wind
+20:53:22 [ItemAddOption][Load][1] 14,46 [1,10,0,10,1800]
+20:53:22 [ItemAddOption][Load][1] 14,47 [2,25,0,10,1800]
+20:53:22 [ItemAddOption][Load][1] 14,48 [3,100,0,10,1800]
+20:53:22 [ItemAddOption][Load][1] 14,49 [4,500,0,10,1800]
+20:53:22 [ItemAddOption][Load][1] 14,50 [5,500,0,10,1800]
+20:53:22 [ItemAddOption][Load][1] 14,72 [1,15,0,0,1800]
+20:53:22 [ItemAddOption][Load][1] 14,73 [3,60,0,0,1800]
+20:53:22 [ItemAddOption][Load][1] 14,74 [14,30,0,0,1800]
+20:53:22 [ItemAddOption][Load][1] 14,75 [15,30,0,0,1800]
+20:53:22 [ItemAddOption][Load][1] 14,76 [4,200,0,0,1800]
+20:53:22 [ItemAddOption][Load][1] 14,77 [5,300,0,0,1800]
+20:53:22 [ItemAddOption][Load][1] 14,78 [9,50,0,0,864000]
+20:53:22 [ItemAddOption][Load][1] 14,79 [10,50,0,0,864000]
+20:53:22 [ItemAddOption][Load][1] 14,80 [11,50,0,0,864000]
+20:53:22 [ItemAddOption][Load][1] 14,81 [12,50,0,0,864000]
+20:53:22 [ItemAddOption][Load][1] 14,82 [13,50,0,0,864000]
+20:53:22 [ItemAddOption][Load][1] 14,85 [5,700,0,10,1800]
+20:53:22 [ItemAddOption][Load][1] 14,86 [4,700,0,10,1800]
+20:53:22 [ItemAddOption][Load][1] 14,87 [2,40,0,10,1800]
+20:53:22 [ItemAddOption][Load][1] 14,97 [55,20,0,0,1800]
+20:53:22 [ItemAddOption][Load][1] 14,98 [56,20,0,0,1800]
+20:53:22 [ItemAddOption][Load][1] 14,140 [53,3,4,100,1800]
+20:53:22 [ItemAddOption][Load][2] 13,41 [2,20,0,0,0]
+20:53:22 [ItemAddOption][Load][2] 13,43 [6,150,0,0,1800]
+20:53:22 [ItemAddOption][Load][2] 13,44 [6,200,7,150,1800]
+20:53:22 [ItemAddOption][Load][2] 13,45 [8,0,0,0,1800]
+20:53:22 [ItemAddOption][Load][2] 13,59 [16,0,0,0,1800]
+20:53:22 [ItemAddOption][Load][2] 13,123 [51,20,1,10,0]
+20:53:22 [ItemAddOption][Load][2] 13,62 [53,5,0,0,1800]
+20:53:22 [ItemAddOption][Load][2] 13,63 [54,5,0,0,1800]
+20:53:22 [ItemAddOption][Load][2] 13,64 [51,40,1,10,0]
+20:53:22 [ItemAddOption][Load][2] 13,65 [52,30,4,50,0]
+20:53:22 [ItemAddOption][Load][2] 13,76 [64,50,2,30,0]
+20:53:22 [ItemAddOption][Load][2] 13,80 [6,150,3,50,0]
+20:53:22 [ItemAddOption][Load][2] 13,81 [8,0,62,0,604800]
+20:53:22 [ItemAddOption][Load][2] 13,82 [63,0,0,0,1800]
+20:53:22 [ItemAddOption][Load][2] 13,93 [6,150,0,0,1800]
+20:53:22 [ItemAddOption][Load][2] 13,94 [6,100,7,150,1800]
+20:53:22 [ItemAddOption][Load][2] 13,95 [60,20,61,1,3600]
+20:53:22 [ItemAddOption][Load][2] 13,96 [2,50,3,60,1800]
+20:53:22 [ItemAddOption][Load][2] 13,103 [68,10,0,0,1800]
+20:53:22 [ItemAddOption][Load][2] 13,104 [66,1,0,0,1800]
+20:53:22 [ItemAddOption][Load][2] 13,105 [67,10,0,0,1800]
+20:53:22 [ItemAddOption][Load][2] 13,106 [64,50,3,50,0]
+20:53:22 [ItemAddOption][Load][2] 13,109 [53,5,51,4,0]
+20:53:22 [ItemAddOption][Load][2] 13,110 [53,5,4,4,0]
+20:53:22 [ItemAddOption][Load][2] 13,111 [53,5,64,40,0]
+20:53:22 [ItemAddOption][Load][2] 13,112 [53,5,52,4,0]
+20:53:22 [ItemAddOption][Load][2] 13,113 [53,5,56,10,0]
+20:53:22 [ItemAddOption][Load][2] 13,114 [53,5,1,7,0]
+20:53:22 [ItemAddOption][Load][2] 13,115 [53,5,0,0,0]
+20:53:22 [ItemAddOption][Load][2] 13,116 [7,150,0,0,1800]
+20:53:22 [ItemAddOption][Load][2] 13,117 [69,100,0,0,21600]
+20:53:22 [ItemAddOption][Load][2] 13,118 [69,100,0,0,86400]
+20:53:22 [ItemAddOption][Load][2] 13,119 [69,100,0,0,604800]
+20:53:22 [ItemAddOption][Load][2] 13,120 [69,100,0,0,2592000]
+20:53:22 [ItemAddOption][Load][2] 13,128 [55,10,0,0,-10]
+20:53:22 [ItemAddOption][Load][2] 13,129 [56,10,0,0,-10]
+20:53:22 [ItemAddOption][Load][2] 13,130 [4,50,0,0,-10]
+20:53:22 [ItemAddOption][Load][2] 13,131 [5,50,0,0,-10]
+20:53:22 [ItemAddOption][Load][2] 13,132 [4,150,70,50,-10]
+20:53:22 [ItemAddOption][Load][2] 13,133 [5,150,69,50,-10]
+20:53:22 [ItemAddOption][Load][2] 13,134 [7,20,0,0,-10]
+[Quest] (Find the 'Scroll of Emperor'!) Load : Index 0, SubInfoCount 2
+[Quest] (Three Treasures of Mu) Load : Index 1, SubInfoCount 4
+[Quest] (Gain'Hero status) Load : Index 2, SubInfoCount 2
+[Quest] (Secret of'Dark Stone') Load : Index 3, SubInfoCount 1
+[Quest] (Certificate of Strength!) Load : Index 4, SubInfoCount 9
+[Quest] (Infiltration of Barracks of Ballgass!) Load : Index 5, SubInfoCount 3
+[Quest] (Infiltration of Refuge!) Load : Index 6, SubInfoCount 1
+20:53:22 [Quest] [SetQuestItem] Scroll of the Emperor 1: [14,23]
+20:53:22 [Quest] [SetQuestItem] Scroll of the Emperor 1: [14,23]
+20:53:22 [Quest] [SetQuestItem] Broken Sword 1: [14,24]
+20:53:22 [Quest] [SetQuestItem] Tear of Elf 1: [14,25]
+20:53:22 [Quest] [SetQuestItem] Soul Shard of Wizard 1: [14,26]
+20:53:22 [Quest] [SetQuestItem] Churchill's Eyes 1: [14,68]
+20:53:22 [Quest] [SetQuestItem] Scroll of the Emperor 1: [14,23]
+20:53:22 [Quest] [SetQuestItem] Scroll of the Emperor 1: [14,23]
+20:53:22 [Quest] [SetQuestItem] Broken Sword 1: [14,24]
+20:53:22 [Quest] [SetQuestItem] Flame of Death Beam Knight 1: [14,65]
+20:53:22 [Quest] [SetQuestItem] Horn of Hell Maine 1: [14,66]
+20:53:22 [Quest] [SetQuestItem] Feather of Phoenix of Darkn 1: [14,67]
+20:53:22 [Quest] [SetQuestItem] Flame of Death Beam Knight 1: [14,65]
+20:53:22 [Quest] [SetQuestItem] Horn of Hell Maine 1: [14,66]
+20:53:22 [Quest] [SetQuestItem] Feather of Phoenix of Darkn 1: [14,67]
+20:53:22 [Quest] [SetQuestItem] Flame of Death Beam Knight 1: [14,65]
+20:53:22 [Quest] [SetQuestItem] Horn of Hell Maine 1: [14,66]
+20:53:22 [Quest] [SetQuestItem] Feather of Phoenix of Darkn 1: [14,67]
+[Monster Element] - ..\Data\Monsters\MonsterSkillElement.txt file is Loaded
+[Monster Skill Unit] - Found SkillElement (1)(Stern)
+[Monster Skill Unit] - Found SkillElement (45)(General Attack)
+[Monster Skill Unit] - Found SkillElement (45)(General Attack)
+[Monster Skill Unit] - Found SkillElement (7)(Push)
+[Monster Skill Unit] - Found SkillElement (11)(Duration)
+[Monster Skill Unit] - Found SkillElement (45)(General Attack)
+[Monster Skill Unit] - Found SkillElement (17)(Direction)
+[Monster Skill Unit] - Found SkillElement (23)(Direct Land Hit)
+[Monster Skill Unit] - Found SkillElement (45)(General Attack)
+[Monster Skill Unit] - Found SkillElement (3)(MP Reduction)
+[Monster Skill Unit] - Found SkillElement (45)(General Attack)
+[Monster Skill Unit] - Found SkillElement (16)(Summon)
+[Monster Skill Unit] - Found SkillElement (13)(Treatment)
+[Monster Skill Unit] - Found SkillElement (43)(Stern 2)
+[Monster Skill Unit] - Found SkillElement (45)(General Attack)
+[Monster Skill Unit] - Found SkillElement (17)(Direction)
+[Monster Skill Unit] - Found SkillElement (45)(General Attack)
+[Monster Skill Unit] - Found SkillElement (3)(MP Reduction)
+[Monster Skill Unit] - Found SkillElement (4)(AG Reduce)
+[Monster Skill Unit] - Found SkillElement (45)(General Attack)
+[Monster Skill Unit] - Found SkillElement (44)(Shift 2)
+[Monster Skill Unit] - Found SkillElement (45)(General Attack)
+[Monster Skill Unit] - Found SkillElement (44)(Shift 2)
+[Monster Skill Unit] - Found SkillElement (1)(Stern)
+[Monster Skill Unit] - Found SkillElement (17)(Direction)
+[Monster Skill Unit] - Found SkillElement (45)(General Attack)
+[Monster Skill Unit] - Found SkillElement (44)(Shift 2)
+[Monster Skill Unit] - Found SkillElement (1)(Stern)
+[Monster Skill Unit] - Found SkillElement (1)(Stern)
+[Monster Skill Unit] - Found SkillElement (45)(General Attack)
+[Monster Skill Unit] - Found SkillElement (24)(Kentauros - Multi Sh)
+[Monster Skill Unit] - Found SkillElement (25)(Persona - Demon)
+[Monster Skill Unit] - Found SkillElement (26)(Twin Tail - General)
+[Monster Skill Unit] - Found SkillElement (27)(Twin Tail - Dock)
+[Monster Skill Unit] - Found SkillElement (28)(Dreadfear - ???)
+[Monster Skill Unit] - Found SkillElement (29)(Night Mare - Dock)
+[Monster Skill Unit] - Found SkillElement (30)(Night Mare - ??? - S)
+[Monster Skill Unit] - Found SkillElement (31)(Night Mare - ??? - G)
+[Monster Skill Unit] - Found SkillElement (32)(Night Mare - ??? - G )
+[Monster Skill Unit] - Found SkillElement (33)(Night Mare - ??? - S!)
+[Monster Skill Unit] - Found SkillElement (34)(Night Mare - Warp)
+[Monster Skill Unit] - Found SkillElement (35)(Maya - Pressure - Ge#)
+[Monster Skill Unit] - Found SkillElement (36)(Maya - Pressure - Pu$)
+[Monster Skill Unit] - Found SkillElement (37)(Maya - Pressure - Du%)
+[Monster Skill Unit] - Found SkillElement (38)(Maya - Power - Gener&)
+[Monster Skill Unit] - Found SkillElement (39)(Maya - Ice Storm - S')
+[Monster Skill Unit] - Found SkillElement (40)(Maya - Ice Storm - G()
+[Monster Skill Unit] - Found SkillElement (41)(Maya - Broken shower))
+[Monster Skill Unit] - Found SkillElement (42)(Maya - Broken shower*)
+[Monster Skill Unit] - Found SkillElement (1)(Stern)
+[Monster Skill Unit] - Found SkillElement (8)(Dock)
+[Monster Skill Unit] - Found SkillElement (1)(Stern)
+[Monster Skill Unit] - Found SkillElement (43)(Stern 2)
+[Monster Skill Unit] - Found SkillElement (44)(Shift 2)
+[Monster Skill Unit] - Found SkillElement (45)(General Attack)
+[Monster Skill Unit] - Found SkillElement (46)(Kulreotin - dokguseu.)
+[Monster Skill Unit] - Found SkillElement (47)(Blow)
+[Monster Skill Unit] - Found SkillElement (48)(Serupan - dokguseul)
+[Monster Skill Unit] - Found SkillElement (49)(Serupan - Frost Stor1)
+[Monster Skill Unit] - Found SkillElement (50)(Serupan - Frost Shoc2)
+[Monster Skill Unit] - Found SkillElement (51)(Serupan - fall)
+[Monster Skill Unit] - Found SkillElement (52)(Serupan - summons)
+[Monster Skill Unit] - Found SkillElement (53)(Serupan - Treatment)
+[Monster Skill Unit] - Found SkillElement (54)(Serupan - icing)
+[Monster Skill Unit] - Found SkillElement (55)(Serupan - teleportat7)
+[Monster Skill Unit] - Found SkillElement (56)(Serupan - Invincible8)
+[Monster Skill Unit] - Found SkillElement (57)(Serupan - gwangpokhw9)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (58)(Medic HP)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (59)(Shield Defense)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (61)(Attack Poison)
+[Monster Skill Unit] - Found SkillElement (9)(Ice)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (62)(Stern)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - Found SkillElement (60)(Attack General)
+[Monster Skill Unit] - ..\Data\Monsters\MonsterSkillUnit.txt file is Loaded
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=49) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/513)
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=68) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/551)
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=69) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/552)
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=70) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/553)
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=71) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/556)
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=72) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/557)
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=73) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/558)
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=74) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/559)
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=72) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/560)
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=75) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/562)
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=76) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/563)
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=77) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/565)
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=78) 
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=79) 
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=80) 
+20:53:22 [Monster SkillUnit] FindSkillUnit() Error - (UnitNumber=81) 
+[Monster Manager] - Invalid SkillInfo : MIndex(NewName/566)
+[Monster Skill Manager] - ..\Data\Monsters\MonsterSkill.txt file is Loaded
+[Monster AI Element] - ..\Data\Monsters\MonsterAIElement.txt file is Loaded
+[Monster AI MovePath] - ..\Data\Monsters\MovePath_35.dat file is Loaded
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Avoid]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> General 1]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> Avoid]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> Avoid]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> Avoid]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> General 2]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> General 3]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Treatment]
+[Monster AI Automata] Loaded Transition Desc . [General -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [General -> Treatment]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Treatment]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Treatment]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General]
+[Monster AI Automata] Loaded Transition Desc . [Treatment -> General 1]
+[Monster AI Automata] Loaded Transition Desc . [Treatment -> General 2]
+[Monster AI Automata] Loaded Transition Desc . [Treatment -> General 3]
+[Monster AI Automata] Loaded Transition Desc . [Summon -> General 1]
+[Monster AI Automata] Loaded Transition Desc . [Summon -> General 2]
+[Monster AI Automata] Loaded Transition Desc . [Summon -> General 3]
+[Monster AI Automata] Loaded Transition Desc . [General -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [General -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [General -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General 1]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General 2]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General 3]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General]
+[Monster AI Automata] Loaded Transition Desc . [Invisible -> General 1]
+[Monster AI Automata] Loaded Transition Desc . [Invisible -> General 2]
+[Monster AI Automata] Loaded Transition Desc . [Invisible -> General 3]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Avoid]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> General 1]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> Avoid]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> Avoid]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> General 2]
+[Monster AI Automata] Loaded Transition Desc . [Avoid -> General 3]
+[Monster AI Automata] Loaded Transition Desc . [General -> Invisible]
+[Monster AI Automata] Loaded Transition Desc . [General -> Invisible]
+[Monster AI Automata] Loaded Transition Desc . [General -> Invisible]
+[Monster AI Automata] Loaded Transition Desc . [Invisible -> Invisible]
+[Monster AI Automata] Loaded Transition Desc . [Invisible -> Invisible]
+[Monster AI Automata] Loaded Transition Desc . [Invisible -> Invisible]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [General -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General 1]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General 2]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Summon -> Invisible]
+[Monster AI Automata] Loaded Transition Desc . [Invisible -> Warp]
+[Monster AI Automata] Loaded Transition Desc . [Warp -> AI]
+[Monster AI Automata] Loaded Transition Desc . [AI -> Go]
+[Monster AI Automata] Loaded Transition Desc . [AI -> Go]
+[Monster AI Automata] Loaded Transition Desc . [AI -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General 1]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General 2]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Summon -> Invisible]
+[Monster AI Automata] Loaded Transition Desc . [Invisible -> Warp]
+[Monster AI Automata] Loaded Transition Desc . [Warp -> AI]
+[Monster AI Automata] Loaded Transition Desc . [AI -> Go]
+[Monster AI Automata] Loaded Transition Desc . [AI -> Go]
+[Monster AI Automata] Loaded Transition Desc . [AI -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> General]
+[Monster AI Automata] Loaded Transition Desc . [General -> General]
+[Monster AI Automata] Loaded Transition Desc . [General -> General]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General 1]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General 2]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [AI -> Go]
+[Monster AI Automata] Loaded Transition Desc . [AI -> Go]
+[Monster AI Automata] Loaded Transition Desc . [AI -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General 1]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General 2]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Summon -> Invisible]
+[Monster AI Automata] Loaded Transition Desc . [Invisible -> Warp]
+[Monster AI Automata] Loaded Transition Desc . [Warp -> AI]
+[Monster AI Automata] Loaded Transition Desc . [AI -> Go]
+[Monster AI Automata] Loaded Transition Desc . [AI -> Go]
+[Monster AI Automata] Loaded Transition Desc . [AI -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Treatment]
+[Monster AI Automata] Loaded Transition Desc . [General -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [General -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [General -> Treatment]
+[Monster AI Automata] Loaded Transition Desc . [General -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Treatment]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Summon]
+[Monster AI Automata] Loaded Transition Desc . [Go -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Treatment]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Go]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> Attack]
+[Monster AI Automata] Loaded Transition Desc . [Attacks -> General]
+[Monster AI Automata] Loaded Transition Desc . [Treatment -> General 1]
+[Monster AI Automata] Loaded Transition Desc . [Treatment -> General 2]
+[Monster AI Automata] Loaded Transition Desc . [Treatment -> General 3]
+[Monster AI Automata] Loaded Transition Desc . [Summon -> General 1]
+[Monster AI Automata] Loaded Transition Desc . [Summon -> General 2]
+[Monster AI Automata] Loaded Transition Desc . [Summon -> General 3]
+[Monster AI Automata] - ..\Data\Monsters\MonsterAutomata.txt file is Loaded
+[Monster AI Unit] - ..\Data\Monsters\MonsterAIUnit.txt file is Loaded
+[Monster AI Rule] - ..\Data\Monsters\MonsterAIRule.txt file is Loaded
+[Monster AI Group] - ..\Data\Monsters\MonsterAIGroup.txt file is Loaded
+20:53:22 [Skill Addition Info] [Infinity Arrow] Skill Time[600], UseLevel[220], Arrow MP Consumption +0[5] +1[7] +2[10]
+20:53:22 [Skill Addition Info] [Fire Scream] Use(1) : Explosion Distance(2) - Rate(3000), MaxAttack_SameSerial(3), SerialInitCount(100), Check Serial(1)
+20:53:22 [Kanturu] - ..\Data\Events\Kanturu.dat file is Loaded
+20:53:22 [Kanturu][BattleStanby] ..\Data\Events\Kanturu.dat file is Loaded
+20:53:22 [Kanturu][BattleOfMaya] IceStorm Using Rate Load: 60
+20:53:22 [Kanturu][BattleOfMaya] ..\Data\Events\Kanturu.dat file is Loaded
+20:53:22 [Kanturu][BattleOfNightmare]  ..\Data\Events\Kanturu.dat file is Loaded
+20:53:22 [Kanturu][TowerOfRefinement] ..\Data\Events\Kanturu.dat file is Loaded
+20:53:22 [Kanturu][MonsterSetBase] - ..\Data\Monsters\KanturuMonsterSetBase.txt file is Loaded
+20:53:22 [DevilSquare] Closed
+20:53:22 [DevilSquare] Sync Open Time. [65]min remain
+20:53:22 [DevilSquare][0][Mob] Loaded ID:17 S:0 E:0
+20:53:22 [DevilSquare][0][Mob] Loaded ID:15 S:0 E:0
+20:53:22 [DevilSquare][0][Mob] Loaded ID:5 S:5 E:0
+20:53:22 [DevilSquare][0][Mob] Loaded ID:13 S:5 E:0
+20:53:22 [DevilSquare][0][Mob] Loaded ID:8 S:12 E:0
+20:53:22 [DevilSquare][0][Mob] Loaded ID:36 S:12 E:0
+20:53:22 [DevilSquare][1][Mob] Loaded ID:10 S:0 E:1
+20:53:22 [DevilSquare][1][Mob] Loaded ID:39 S:0 E:1
+20:53:22 [DevilSquare][1][Mob] Loaded ID:34 S:5 E:1
+20:53:22 [DevilSquare][1][Mob] Loaded ID:41 S:5 E:1
+20:53:22 [DevilSquare][1][Mob] Loaded ID:40 S:12 E:1
+20:53:22 [DevilSquare][1][Mob] Loaded ID:35 S:12 E:1
+20:53:22 [DevilSquare][2][Mob] Loaded ID:41 S:0 E:2
+20:53:22 [DevilSquare][2][Mob] Loaded ID:37 S:0 E:2
+20:53:22 [DevilSquare][2][Mob] Loaded ID:35 S:5 E:2
+20:53:22 [DevilSquare][2][Mob] Loaded ID:180 S:5 E:2
+20:53:22 [DevilSquare][2][Mob] Loaded ID:64 S:12 E:2
+20:53:22 [DevilSquare][2][Mob] Loaded ID:65 S:12 E:2
+20:53:22 [DevilSquare][3][Mob] Loaded ID:64 S:0 E:3
+20:53:22 [DevilSquare][3][Mob] Loaded ID:65 S:0 E:3
+20:53:22 [DevilSquare][3][Mob] Loaded ID:60 S:5 E:3
+20:53:22 [DevilSquare][3][Mob] Loaded ID:294 S:5 E:3
+20:53:22 [DevilSquare][3][Mob] Loaded ID:57 S:12 E:3
+20:53:22 [DevilSquare][3][Mob] Loaded ID:70 S:12 E:3
+20:53:22 [DevilSquare][4][Mob] Loaded ID:294 S:0 E:4
+20:53:22 [DevilSquare][4][Mob] Loaded ID:60 S:0 E:4
+20:53:22 [DevilSquare][4][Mob] Loaded ID:71 S:5 E:4
+20:53:22 [DevilSquare][4][Mob] Loaded ID:190 S:5 E:4
+20:53:22 [DevilSquare][4][Mob] Loaded ID:61 S:12 E:4
+20:53:22 [DevilSquare][4][Mob] Loaded ID:73 S:12 E:4
+20:53:22 [DevilSquare][5][Mob] Loaded ID:290 S:0 E:5
+20:53:22 [DevilSquare][5][Mob] Loaded ID:57 S:0 E:5
+20:53:22 [DevilSquare][5][Mob] Loaded ID:70 S:5 E:5
+20:53:22 [DevilSquare][5][Mob] Loaded ID:293 S:5 E:5
+20:53:22 [DevilSquare][5][Mob] Loaded ID:74 S:12 E:5
+20:53:22 [DevilSquare][5][Mob] Loaded ID:292 S:12 E:5
+20:53:22 [DevilSquare][6][Mob] Loaded ID:434 S:0 E:6
+20:53:22 [DevilSquare][6][Mob] Loaded ID:435 S:0 E:6
+20:53:22 [DevilSquare][6][Mob] Loaded ID:438 S:5 E:6
+20:53:22 [DevilSquare][6][Mob] Loaded ID:439 S:5 E:6
+20:53:22 [DevilSquare][6][Mob] Loaded ID:436 S:12 E:6
+20:53:22 [DevilSquare][6][Mob] Loaded ID:437 S:12 E:6
+20:53:22 [DevilSquare][0][Boss] Loaded ID:18 S:15 XY:119-150/80-115
+20:53:22 [DevilSquare][0][Boss] Loaded ID:18 S:15 XY:119-150/80-115
+20:53:22 [DevilSquare][0][Boss] Loaded ID:18 S:15 XY:119-150/80-115
+20:53:22 [DevilSquare][0][Boss] Loaded ID:18 S:15 XY:119-150/80-115
+20:53:22 [DevilSquare][0][Boss] Loaded ID:18 S:15 XY:119-150/80-115
+20:53:22 [DevilSquare][1][Boss] Loaded ID:49 S:15 XY:121-151/152-184
+20:53:22 [DevilSquare][1][Boss] Loaded ID:49 S:15 XY:121-151/152-184
+20:53:22 [DevilSquare][1][Boss] Loaded ID:49 S:15 XY:121-151/152-184
+20:53:22 [DevilSquare][1][Boss] Loaded ID:49 S:15 XY:121-151/152-184
+20:53:22 [DevilSquare][1][Boss] Loaded ID:49 S:15 XY:121-151/152-184
+20:53:22 [DevilSquare][2][Boss] Loaded ID:67 S:15 XY:49-79/138-173
+20:53:22 [DevilSquare][2][Boss] Loaded ID:67 S:15 XY:49-79/138-173
+20:53:22 [DevilSquare][2][Boss] Loaded ID:67 S:15 XY:49-79/138-173
+20:53:22 [DevilSquare][2][Boss] Loaded ID:67 S:15 XY:49-79/138-173
+20:53:22 [DevilSquare][2][Boss] Loaded ID:67 S:15 XY:49-79/138-173
+20:53:22 [DevilSquare][3][Boss] Loaded ID:66 S:15 XY:53-83/74-109
+20:53:22 [DevilSquare][3][Boss] Loaded ID:66 S:15 XY:53-83/74-109
+20:53:22 [DevilSquare][3][Boss] Loaded ID:66 S:15 XY:53-83/74-109
+20:53:22 [DevilSquare][3][Boss] Loaded ID:66 S:15 XY:53-83/74-109
+20:53:22 [DevilSquare][3][Boss] Loaded ID:66 S:15 XY:53-83/74-109
+20:53:22 [DevilSquare][4][Boss] Loaded ID:291 S:15 XY:120-150/80-115
+20:53:22 [DevilSquare][4][Boss] Loaded ID:291 S:15 XY:120-150/80-115
+20:53:22 [DevilSquare][4][Boss] Loaded ID:291 S:15 XY:120-150/80-115
+20:53:22 [DevilSquare][4][Boss] Loaded ID:291 S:15 XY:120-150/80-115
+20:53:22 [DevilSquare][4][Boss] Loaded ID:291 S:15 XY:120-150/80-115
+20:53:22 [DevilSquare][5][Boss] Loaded ID:197 S:15 XY:122-151/152-184
+20:53:22 [DevilSquare][5][Boss] Loaded ID:197 S:15 XY:122-151/152-184
+20:53:22 [DevilSquare][5][Boss] Loaded ID:197 S:15 XY:122-151/152-184
+20:53:22 [DevilSquare][5][Boss] Loaded ID:197 S:15 XY:122-151/152-184
+20:53:22 [DevilSquare][5][Boss] Loaded ID:197 S:15 XY:122-151/152-184
+20:53:22 [DevilSquare][6][Boss] Loaded ID:440 S:15 XY:54-79/138-173
+20:53:22 [DevilSquare][6][Boss] Loaded ID:440 S:15 XY:54-79/138-173
+20:53:22 [DevilSquare][6][Boss] Loaded ID:440 S:15 XY:54-79/138-173
+20:53:22 [DevilSquare][6][Boss] Loaded ID:440 S:15 XY:54-79/138-173
+20:53:22 [DevilSquare][6][Boss] Loaded ID:440 S:15 XY:54-79/138-173
+..\Data\Events\DevilSquare.dat file load!
+..\Data\Events\BloodCastle.dat file load!
+[Option] ChaosEvent = 1
+[Option] ChaosEventServer = 127.0.0.1
+..\Data\Events\RingAttackEvent.dat file load!
+20:53:22 [Ring Event] Sync Start Time. [86] min remain (START HOUR:22, MIN:20)
+..\Data\Events\ChaosCastle.dat file load!
+[DOTH] ..\Data\Events\EventManagement23456789.dat file load!
+20:53:22 [Option Reload] MaxUser Settings: 70
+Guild creation option 1
+Guild delete option 1
+Above level 100 can create guild
+20:53:22 (Option) Trade off
+[Option] Chaos Machine State: ChaosBox = 1
+20:53:22 (Option) Monster HP 100% Down
+20:53:22 [Option] Auto Looting Time Set : 60
+20:53:22 (Option) Item drop rate : 25 %
+20:53:22 (Option) Connect Server IP(127.0.0.1) / PORT(55557)
+User Object Size = 6440
+20:53:24 [CashShop][OptionLoad] - CashShop Option Load Begin
+20:53:24 [CashShop][ShopOption] - Shop Option Reload '..\Data\CashShop\CashShopOption.dat'
+20:53:24 [CashShop][Load Cash Item List] - Add List - (14/53) Level:0, Dur:1, Skill:0, Luck:0, Add:0, Ex:0, X:0, Y:0, Scale:50
+20:53:24 [CashShop][Load Cash Item List] - Add List - (14/54) Level:0, Dur:1, Skill:0, Luck:0, Add:0, Ex:0, X:0, Y:0, Scale:50
+20:53:24 [CashShop][Load Cash Item List] - Add List - (13/43) Level:0, Dur:0, Skill:0, Luck:0, Add:0, Ex:0, X:0, Y:0, Scale:50
+20:53:24 [CashShop][Load Cash Item List] - Add List - (13/44) Level:0, Dur:0, Skill:0, Luck:0, Add:0, Ex:0, X:0, Y:0, Scale:50
+20:53:24 [CashShop][Load Cash Item List] - Add List - (13/45) Level:0, Dur:0, Skill:0, Luck:0, Add:0, Ex:0, X:0, Y:0, Scale:50
+20:53:24 [CashShop][Load Cash Item List] - Add List - (13/46) Level:0, Dur:10, Skill:0, Luck:0, Add:0, Ex:0, X:0, Y:0, Scale:50
+20:53:24 [CashShop][Load Cash Item List] - Add List - (13/47) Level:0, Dur:10, Skill:0, Luck:0, Add:0, Ex:0, X:0, Y:0, Scale:50
+20:53:24 [CashShop][Load Cash Item List] - Add List - (13/48) Level:0, Dur:0, Skill:0, Luck:0, Add:0, Ex:0, X:0, Y:0, Scale:50
+20:53:24 [CashShop][Load Cash Item List] - Complete! - Total:8
+20:53:24 [CashShop] Request Cash Branch Item List to ShopServer.
+20:53:24 [CashShop] Request Cash Item List to ShopServer.
+20:53:24 [CashShop] Request Cash Package Item List to ShopServer.
+20:53:24 [CashShop][OptionLoad] - CashShop Option Load finish
+Shop data load complete
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Shield Setting!
+20:53:27 [MonsterAdd][Icarus] Phoenix Boss Monster Setting!!
+error : Monster location setting error .\user.cpp 4422
+error-L2: Pos:6922, class:0, map:41, x:62, y:113
+error : Monster location setting error .\user.cpp 4422
+error-L2: Pos:6923, class:0, map:41, x:62, y:113
+error : Monster location setting error .\user.cpp 4422
+error-L2: Pos:6924, class:0, map:41, x:62, y:113
+error : Monster location setting error .\user.cpp 4422
+error-L2: Pos:6925, class:0, map:41, x:62, y:113
+error : Monster location setting error .\user.cpp 4422
+error-L2: Pos:6926, class:0, map:41, x:62, y:113
+error : Monster location setting error .\user.cpp 4422
+error-L2: Pos:6927, class:0, map:41, x:62, y:113
+error : Monster location setting error .\user.cpp 4422
+error-L2: Pos:6928, class:0, map:41, x:62, y:113
+error : Monster location sett

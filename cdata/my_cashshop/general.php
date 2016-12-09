@@ -2,13 +2,11 @@
 
 list($dashboard, $username, $greeting_message) = _GL('dashboard, username, greeting_message');
 
-//cn_snippet_bc();
 ?>
-
 
 <div class="wrapper">
 
-    <h2 style="margin-top: 0;"><?php //echo i18n('Site options'); ?></h2>
+    <h2 style="margin-top: 0;"><?php echo 'Site options'; ?></h2>
     <div class="options">
         <?php foreach ($dashboard as $id => $item) { ?>
 
@@ -24,7 +22,6 @@ list($dashboard, $username, $greeting_message) = _GL('dashboard, username, greet
     </div>
 
     <div style="clear: both"></div>
-
 
 </div>
 <!-------------------------------------------------- -->
