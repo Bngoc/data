@@ -28,8 +28,9 @@ function char_invoke()
         'char_manager:changename:Clc' => 'Đổi tên nhận vật',
         'char_manager:script:Csr' => 'Chuyển nhân vật',
         'char_manager:selfchk1:Cpc' => 'Xóa đồ nhân vật',
-        'char_manager:selfchkư:Cpc' => 'Làm nhiệm vụ cấp 1',
-        'char_manager:selfchkds:Cpc' => 'Làm nhiệm vụ cấp 220',
+        'char_manager:level1:Cpc' => 'Làm nhiệm vụ cấp 1',
+        'char_manager:level2:Cpc' => 'Làm nhiệm vụ cấp 220',
+        'char_manager:level3:Cpc' => 'Làm nhiệm vụ cấp Master',
         'char_manager:selfchkưd:Cpc' => 'Nhiệm vụ ngẫu nhiên',
         'char_manager:selfchkd:Cpc' => 'Đổi điểm Phúc Duyên',
     );
@@ -43,7 +44,6 @@ function char_invoke()
 
 
     // Top level (dashboard)
-    //cn_bc_add('Home', cn_url_modify(array('reset','jh=lkl'))); //??????????????????????????????????????????
     cn_bc_add('Nhân vật', cn_url_modify(array('reset'), 'mod=' . $mod));
 
     foreach ($char_board as $id => $_t) {
@@ -91,6 +91,10 @@ function char_invoke()
         'rspoint' => 'rspoint.png',
         'changeclass' => 'changeclass.png',
         'changename' => 'changename.png',
+        'level1' => 'level-1.png',
+        'level2' => 'level-2.png',
+        'level3' => 'level-3.png',
+
         'widgets' => 'widgets.png',
         'wreplace' => 'replace.png',
         'morefields' => 'more.png',
@@ -98,7 +102,9 @@ function char_invoke()
         'group' => 'group.png',
         'locale' => 'locale.png',
         'script' => 'script.png',
-        'comments' => 'comments.png',
+        'comments' => 'comments.png'
+
+
     );
 
     // More dashboard images
@@ -3643,7 +3649,6 @@ function char_changeclass()
             $sub = array_keys($showchar)[0];
     }
 
-
     $cn_false = $is_cname = false;
     $gcoin_ = $_blank_var[0]['gc'];
     $vpoint_ = $_blank_var[0]['vp'];
@@ -3792,6 +3797,18 @@ function char_changeclass()
     echocomtent_here(exec_tpl('my_char/changeclass'), cn_snippet_bc_re());
     echofooter();
 }
+
+function char_level1(){
+die('11111');
+    // nv nao...
+    // l2-l3 -> ?
+    // phi //?
+}
+
+function char_level2(){}
+
+function char_level3(){}
+
 
 //function char_()
 //{

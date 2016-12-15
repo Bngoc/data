@@ -490,7 +490,7 @@ function cn_messages_show($arrNotify, $notify)
     $result .= '<div class="cn_' . $type . '_list">';
 
     foreach ($arrNotify as $msg) {
-        $NID = 'notify_' . time() . mt_rand();
+        $NID = 'notify_' . ctime() . mt_rand();
         $result .= '<div class="cn_' . $type . '_item" id="' . $NID . '"><div><b>' . date('H:i:s', ctime()) . '</b> ' . $msg . '</div></div>';
         $result .= '<script>notify_auto_hide("' . $NID . '", ' . $delay . ');</script>';
 
@@ -523,7 +523,7 @@ function cn_snippet_messages($area = 'new')
         if ($messages) {
             $result .= '<div class="cn_' . $type . '_list">';
             foreach ($messages as $msg) {
-                $NID = 'notify_' . time() . mt_rand();
+                $NID = 'notify_' . ctime() . mt_rand();
                 $result .= '<div class="cn_' . $type . '_item" id="' . $NID . '"><div><b>' . date('H:i:s', ctime()) . '</b> ' . $msg . '</div></div>';
                 $result .= '<script>notify_auto_hide("' . $NID . '", ' . $delay . ');</script>';
 
@@ -889,7 +889,7 @@ function cn_register_form($admin = TRUE)
             ';
 
             $strHoderFotgot = '{username}, {url}';
-            $checkemailforgot = cn_send_mail($email, 'Resend activation link', cn_replace_text($tmpHtmlEmailForgrot, $strHoderFotgot, $username, $url));
+            $checkemailforgot = cn_send_mail($email, 'Resend activation link', cn_replace_text($tmpHtmlEmailForgrot, $strHoderFotgot, substr($username, 0, -4) . '****', $url));
 
             if ($checkemailforgot) {
                 msg_info('Vui lòng kiểm tra lại email', 'index.php');
@@ -1029,6 +1029,7 @@ function cn_register_form($admin = TRUE)
                     "memb__pwdmd5='" . SHA256_hash($repass_web) . "'",
                     'mail_chek=0',
                     'memb_name=12120',
+                    //"sno__numb='". $ma7code ."'",
                     'sno__numb=1212121212120',
                     "modi_days='" . date("Y-m-d H:i:s", ctime()) . "'",
                     "out__days='" . date("Y-m-d H:i:s", ctime()) . "'",
@@ -1296,7 +1297,6 @@ function cn_get_menu_none()
     return $result;
 }
 
-
 // Displays header skin
 // $image = img@custom_style_tpl
 function echoheader($image, $header_text, $bread_crumbs = false)
@@ -1316,7 +1316,6 @@ function echoheader($image, $header_text, $bread_crumbs = false)
 
         $member = member_get();
         $_blank_var = view_bank($member['user_name']);
-
 
         $matches[1] = '<img src="' . getoption('http_script_dir') . '/images/icon-2.png" /> ' . number_format($_blank_var[0]['gc'], 0, ',', '.') . ' Gcoin';;
         $matches[2] = '<img src="' . getoption('http_script_dir') . '/images/icon-3.png" /> ' . number_format($_blank_var[0]['gc_km'], 0, ',', '.') . ' Gcoin KM';;

@@ -444,7 +444,7 @@ function cn_snippet_messages($area = 'new')
         if ($messages) {
             $result .= '<div class="cn_' . $type . '_list">';
             foreach ($messages as $msg) {
-                $NID = 'notify_' . time() . mt_rand();
+                $NID = 'notify_' . ctime() . mt_rand();
                 $result .= '<div class="cn_' . $type . '_item" id="' . $NID . '"><div><b>' . date('H:i:s', ctime()) . '</b> ' . $msg . '</div></div>';
                 $result .= '<script>notify_auto_hide("' . $NID . '", ' . $delay . ');</script>';
 
@@ -1590,16 +1590,11 @@ function cn_config_load()
         'mon_list' => 'January,February,March,April,May,June,July,August,September,October,November,December',
         'week_list' => 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
 
-
-        // EDITCONFIG
-
-        'opensite' => 1,
-        'title' => "MU Online Season 6,MU Online Season 6.3",
-        'reload_type' => 0,
+        //SEO
         'description' => "Mu Online Season 6, Mu Online Season 6.3",
         'keywords' => "Mu Online,MuOnline,Mu Season 6.3,Mu Season 6,MuSeason6,Mu Season 5,MuSeason5,MuVietNam,Mu Viet Nam,Mu Mien Phi,Mu Top Viet Nam,Game Online,Online Game,Game Hay",
-        'passtransfer' => "c0UNtcant123",
 
+        // EDITCONFIG
         'Use_WebShop' => 1,
         'Use_NapVpoint' => 1,
         'Use_ChuyenVpoint' => 1,
@@ -1666,10 +1661,6 @@ function cn_config_load()
         // CHARACTER Question
         'question_answers' => 'Tên con vật yêu thích,Trò chơi bạn thích nhất,Tên con vật yêu thích,Trường cấp 1 của bạn tên gì,Người bạn yêu quý nhất,Nơi để lại kỉ niệm khó quên nhất'
 
-        // WEBSHOP
-        // CHARGE
-        // MONEY
-        // EVENT
     );
 
     // Set default values

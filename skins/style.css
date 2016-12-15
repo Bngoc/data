@@ -15,7 +15,7 @@ html, body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10pt;
     line-height: 18px;
-    cursor: url('images/mu.cur'), auto;
+    cursor: url('/images/mu.cur'), auto;
 }
 
 a img {
@@ -24,32 +24,33 @@ a img {
 
 a:active {
     outline: none;
-    cursor: url('images/mu2.cur'), auto;
+    cursor: url('/images/mu2.cur'), auto;
 }
 
 a:focus {
     outline: none;
     -moz-outline-style: none;
-    cursor: url('images/mu2.cur'), auto;
+    cursor: url('/images/mu2.cur'), auto;
 }
 
 a:link {
     color: #7e9291;
     text-decoration: none;
-    cursor: url('images/mu2.cur'), auto;
+    cursor: url('/images/mu2.cur'), auto;
 }
 
 a:visited {
     color: #7e9291;
     text-decoration: none;
-    cursor: url('images/mu2.cur'), auto;
+    cursor: url('/images/mu2.cur'), auto;
 }
 
 a:hover {
     color: #7e9291;
     text-decoration: underline;
-    cursor: url('images/mu2.cur'), auto;
+    cursor: url('/images/mu2.cur'), auto;
 }
+
 
 .center {
     margin: 0 auto;
@@ -100,7 +101,7 @@ img.right {
     margin: 0;
     padding: 0px 5px 0px 0px;
     width: 210px;
-    background: url(../images/sidebar-h2-bg.gif) bottom left repeat-x;
+    /*background: url(/images/sidebar-h2-bg.gif) bottom left repeat-x;*/
     color: #b7905e;
 }
 
@@ -1808,12 +1809,6 @@ select {
     text-align: center;
 }
 
-#wp-calendar td.pad:hover { /* Doesn't work in IE */
-    background-color: #uAiMGyhGg) iI;
-}
-
-/* End Calendar */
-
 /* Begin Various Tags & Classes */
 acronym, abbr, span.caps {
     cursor: help;
@@ -1829,7 +1824,7 @@ blockquote {
     padding-left: 50px;
     min-height: 30px;
     color: #999999;
-    background: #uAiMGyhGg) iI url(../images/blockquote-bg.jpg) top left no-repeat;
+    background: url(../images/blockquote-bg.jpg) top left no-repeat;
     font-style: italic;
     width: 85%;
 }
@@ -2211,7 +2206,7 @@ a img {
     background: #008AA9;
     border: solid 1px #008AA9;
     color: #FFFFFF;
-    font-family: bold 20px Arial, Helvetica, sans-serif;
+    font-family: bold Arial, Helvetica, sans-serif;
     font-size: 12pt;
     height: 25px;
     padding: 3px 0 0 3px;

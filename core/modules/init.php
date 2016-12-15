@@ -9,6 +9,9 @@ $_module = REQ('mod', 'GPG');
 $_init_modules = hook('modules/init_modules', array
 (
     'home' => array('path' => 'home', 'acl' => ''),
+    'guide' => array('path' => '_guide', 'acl' => ''),
+    'screenshots' => array('path' => '_screenshots', 'acl' => ''),
+    'information' => array('path' => '_information', 'acl' => ''),
     'manager_account' => array('path' => '_account', 'acl' => 'Can'),
     'char_manager' => array('path' => '_dashboard', 'acl' => 'Cd'),
     'event' => array('path' => '_event', 'acl' => 'Cc'),

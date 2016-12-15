@@ -12,6 +12,9 @@ $skin_menu = cn_get_menu() . '<div style="clear:both;"></div>';
 $skin_menu_none = cn_get_menu_none() . '<div style="clear:both;"></div>';
 $setpath_default = getoption('http_script_dir');
 
+$description = getoption('description');
+$keywords = getoption('keywords');
+
 // ********************************************************************************
 // Skin HEADER
 // ********************************************************************************
@@ -23,8 +26,8 @@ $skin_header = <<<HTML
 
 <meta http-equiv="imagetoolbar" content="no" />
 <meta http-equiv="content-script-type" content="text/javascript" />
-<meta name="description" content="<?php //echo \$description ?>"/>
-<meta name="keywords" content="<?php //echo \$keywords ?>" />
+<meta name="description" content="$description"/>
+<meta name="keywords" content="$keywords" />
 
 <link rel="shortcut icon" type="image/ico" href="$setpath_default/images/favicon.ico"/>
 <!-- <link rel="stylesheet" type="text/css" href="http://localhost/bqn/data/library/common.css" /> -->
@@ -54,7 +57,7 @@ $skin_header = <<<HTML
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 -->
-
+<script type="text/javascript" src="$setpath_default/images/main.js"></script>
 <!--
 <script type="text/javascript">
     jQuery(function() { jQuery(document).pngFix(); });
@@ -141,101 +144,18 @@ $skin_header = <<<HTML
 	
 <div id="wrapper">
 	
-  		<div id="page_wrapper1">
-    		<div id="page_wrapper2">		
-    		<!--<script language="JavaScript" type="text/javascript" src="http://localhost/bqn/data/images/stmenu.js"></script>-->
-		
-		 
-         
+    <div id="page_wrapper1">
+        <div id="page_wrapper2">		
+    		<script language="JavaScript" type="text/javascript" src="$setpath_default/images/stmenu.js"></script>
 		
 		<div class="clear"></div>  
-		<div id="main_header"></div>
-		
-		<!-- <div id="menu"><script type="text/javascript" language="JavaScript1.2" src="http://localhost/bqn/data/images/menubody.js"></script>   	</div>-->
-   <!-- ------------------------ -->
-   <div class="unem">
-   <div class="menu-1">
-		<ul>
-			<li class="c1"><img src = "../data/images/m1.png" />
-				<ul class="ul">
-					<li> thong bao</li>
-					<li> tin tuc - su kien</li>
-					<li> thong bao tuyen dung</li>
-				</ul>
-			</li>
-			<li class="c1"><img src = "../data/images/m2.png" />
-				<ul class="ul">
-					<li> Cot truyen</li>
-					<li> tinh nang</li>
-					<li> nhan vat</li>
-				</ul>
-			</li>
-			<li class="c1"><img src = "../data/images/m3.png" />
-				<ul class="ul">
-					<li align="left" valign="middle" style="color: rgb(179, 152, 87); font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 13px; line-height: normal; font-family: Verdana; text-decoration: none; height: auto; border-style: none; background-image: none; background-color: transparent;"><span><img src="../data/images/lmenu_arrow.png" /></span>Đăng&nbsp;nhập</li>
-					<li align="left" valign="middle" style="color: rgb(179, 152, 87); font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 13px; line-height: normal; font-family: Verdana; text-decoration: none; height: auto; border-style: none; background-image: none; background-color: transparent;"><span><img src="../data/images/lmenu_arrow.png" /></span>Đăng&nbsp;ký&nbsp;tài&nbsp;khoản</li>
-				</ul>
-			</li>
-			<li class="c1"><img src = "../data/images/m4.png" />
-				<ul class="ul">
-					<li> Dang ky</li>
-					<li> dan nhap</li>
-				</ul>
-			</li>
-			<li class="c1"><img src = "../data/images/m5.png" />
-				<ul class="ul">
-					<li> Dang ky</li>
-					<li> dan nhap</li>
-				</ul>
-			</li>
-			
-		</ul>
-		
-   </div>
-   </div>
+		<div id="main_header"><script type="text/javascript">flashWrite('$setpath_default/images/allods_effect.swf',958,270,'','','transparent')</script></div>
+		 <div id="menu"><script type="text/javascript" src="$setpath_default/images/menubody.js"></script></div>
+   
    <div class="clear"></div>  
-   <!-- ------------------------ -->
-   <!-- <ul class="nav nav-pills">
-    <li class="active"><a href="#">Home</a></li>
-    <li><a href="#">Profile</a></li>
-    <li class="dropdown">
-        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Messages <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li><a href="#">Inbox</a></li>
-            <li><a href="#">Drafts</a></li>
-            <li><a href="#">Sent Items</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Trash</a></li>
-        </ul>
-    </li>
-    <li class="dropdown pull-right">
-        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Settings</a></li>
-        </ul>
-    </li>
-</ul> -->
-<!--
-	 <div class="btn-group">
-    <button type="button" class="btn btn-primary">Button</button>
-    <button type="button" class="btn btn-primary">Another Button</button>
-    <div class="btn-group">
-        <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">Dropdown <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-        </ul>
-    </div>
-</div>
-	 -->
+ 
 	<div id="main">
 		<!-- ================START LEFTCOL=================-->
-		 
 		<div id="leftcol">
 			<div id="leftcol-anchor"></div>
 			<div id="anchor">

@@ -8,14 +8,6 @@ cn_snippet_messages();
 ?>
 
 <div class="panel">
-    <!--<table style="width: 100%" cellpadding="2">
-		<tr>
-			<td colspan="3" class="sub_title_1st" style="text-transform:uppercase;"><?php //echo $tilte ?><br/></td>
-		</tr>
-		<tr>
-			<td colspan="3"><div class="vertical-img"><img src="<?php //echo $img_url; ?>/vertical-separator.jpg" width="640" height="1px" /></div><br/></td>
-		</tr>
-	</table> -->
     <table style="width: 100%">
         <tr>
             <td colspan=4><br></td>

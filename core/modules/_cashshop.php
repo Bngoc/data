@@ -248,7 +248,7 @@ function shop___buy_s1()
     cn_assign('list_item, token, opt', $list_item, $token, $opt);
     cn_assign('per_page', $per_page);
 
-    echoheader('-@my_char/style.css', "Cửa hàng $name_shop - $name_shop");                                //???????????????????
+    echoheader('-@my_cashshop/style.css', "Cửa hàng $name_shop - $name_shop");                                //???????????????????
     echocomtent_here(exec_tpl('my_cashshop/_general'), cn_snippet_bc_re());
     echofooter();
 }

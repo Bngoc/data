@@ -2387,7 +2387,7 @@ function cn_snippet_messages($area = 'new')
         if ($messages) {
             $result .= '<div class="cn_' . $type . '_list">';
             foreach ($messages as $msg) {
-                $NID = 'notify_' . time() . mt_rand();
+                $NID = 'notify_' . ctime() . mt_rand();
                 $result .= '<div class="cn_' . $type . '_item" id="' . $NID . '"><div><b>' . date('H:i:s', ctime()) . '</b> ' . $msg . '</div></div>';
                 $result .= '<script>notify_auto_hide("' . $NID . '", ' . $delay . ');</script>';
 

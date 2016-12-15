@@ -293,6 +293,15 @@ function isNumKey(evt, id) {
     }
 }
 
+function verifyEmail(value, id){
+    if (!ischeckEmail(value)) {
+        getId(id).innerHTML = covertStrBool('Địa chỉ email không hợp lệ.', false, 2);
+        return false;
+    } else{
+        getId(id).innerHTML = notify_img_apccet;
+    }
+}
+
 function ischeckEmail(value) {
     var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if (!filter.test(value))
@@ -402,16 +411,7 @@ function findNewUser(value, id, notify_smg) {
         return false;
     }
     else {
-        //setTimeout("proce_user_from('"+value+"','"+test_+"','"+id+"','tài khoản')", 300);
         proce_user_from(value, test_, id, notify_smg);
-        //if(!proce_user_from(value,test_,id,notify_smg))
-        // {
-            //getId(id).innerHTML=proce_notify_err(notify_smg);
-            //getId(id).innerHTML="klklkljoio";
-            //alert(notify_smg);
-            //alert("Tên đăng nhập không hợp lệ.\nTên đăng nhập chỉ được bao gồm chữ và số, không được dùng ký tự đặc biệt, không được dùng chữ HOA.");
-            // return false;
-        // }
     }
 }
 function check_num(value, num, id, notify_smg) {
@@ -442,39 +442,12 @@ function proce_user_from(value, act, id, str_smg) { // kt findNewUserTrue
         var html_err = proce_notify_err(str_smg);
         if (value) {
             if (act == 'user_account') {
-                /*
-                 if(value.length < 4){
-                 alert("Tên tài khoản tối thiểu 4 kí tự.");
-                 alert(id);
-                 arr_error[id]++;
-                 index++;
-                 return false;
-                 }
-                 if(check_symbol(value)){
-                 getId(id).innerHTML=html_err;
-                 alert("Tên tài khoản không được sử dụng ký tự đặc biệt.");
-                 index++;
-                 return false;
-                 }
-                 if(!IsMatchingCode(value)){
-                 getId(id).innerHTML=html_err;
-                 alert("Tài khoản được sử dụng ký tự thường và số. \n VD: myaccount90");
-                 index++;
-                 return false;
-                 }
-                 */
-                /*
-                 if(check_cap(abc)){
-                 getId(id).innerHTML=html_err;
-                 alert("Tên tài khoản không được viết HOA.");
-                 return false;
-                 }*/
                 action = 'checkid';
                 check_ = 'check_user';
             }
             else if (act == 'user_email') {
                 if (!ischeckEmail(value)) {
-                    getId(id).innerHTML = covertStrBool('Địa chỉ email hợp lệ.', false, 2); //html_err;
+                    getId(id).innerHTML = covertStrBool('Địa chỉ email không hợp lệ.', false, 2); //html_err;
                     arr_error[id] = 1;
                     return false;
                 }
@@ -483,9 +456,7 @@ function proce_user_from(value, act, id, str_smg) { // kt findNewUserTrue
             }
             else if (act == 'user_character') {
                 if (!ischeckEmail(value)) {
-                    //getId(id).innerHTML=proce_notify_err(str_smg);
                     getId(id).innerHTML = html_err;
-                    //alert("Please provide a valid email address.");
                     return false;
                 }
                 action = 'checkid';
@@ -493,9 +464,7 @@ function proce_user_from(value, act, id, str_smg) { // kt findNewUserTrue
             }
             else if (act == 'user_character') {
                 if (!ischeckEmail(value)) {
-                    //getId(id).innerHTML=proce_notify_err(str_smg);
                     getId(id).innerHTML = html_err;
-                    //alert("Please provide a valid email address.");
                     return false;
                 }
                 action = 'checkid';
@@ -503,9 +472,7 @@ function proce_user_from(value, act, id, str_smg) { // kt findNewUserTrue
             }
             else if (act == 'user_character') {
                 if (!ischeckEmail(value)) {
-                    //getId(id).innerHTML=proce_notify_err(str_smg);
                     getId(id).innerHTML = html_err;
-                    //alert("Please provide a valid email address.");
                     return false;
                 }
                 action = 'checkname';
@@ -516,82 +483,23 @@ function proce_user_from(value, act, id, str_smg) { // kt findNewUserTrue
             }
         }
 
-
         if (value && action && check_) {
-            /*
-             $.ajax({  //Make the Ajax Request
-             type: "GET",
-             url: "checkForm.php",  //file name
-             data: 'action='+action+'&check='+check_+'&id='+value, // username="+ username,  //data
-             success: function(server_response){
-             alert(server_response);
-             //$(id).ajaxComplete(function(event, request){
-             getId(id).ajaxComplete(function(event, request){
-             if(server_response !== 'OK'){ //if ajax_check_username.php return value "0"
-             getId(id).html(proce_notify_err(xmlhttp.responseText,''));
-             //add this image to the span with id "availability_status"
-             }
-             else  //if(server_response == '1'){//if it returns "1"
-             getId(id).html(notify_img_apccet);
-
-             });
-             }
-             });
-             */
-
-
             var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-
-
-            /*
-             xmlhttp.onreadystatechange = function() {
-             if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-             //alert(xmlhttp); // Here is the response
-             var str_ = xmlhttp.responseText;
-             //alert(str_);
-             if(xmlhttp.responseText != "OK"){
-
-             alert(xmlhttp.responseText);
-             getId(id).innerHTML=proce_notify_err(str_,'');
-             }
-             else{
-             alert("ok");
-             getId(id).innerHTML=notify_img_apccet;
-             }
-             }
-             */
             xmlhttp.open("GET", 'checkForm.php?action=' + action + '&check=' + check_ + '&id=' + value, false);
             xmlhttp.send();
 
-
-            //getId(id).innerHTML=xmlhttp.responseText;
-            //cells = id.getElementsByTagName("script");
-            //for (var i = 0; i < cells.length; i++)
-            //eval(cells[i].innerHTML);
-
             var str_ = xmlhttp.responseText;
-            //alert(str_);
             if (xmlhttp.responseText != 'OK') {
                 index++;
-                //alert(str_);
                 arr_error[id] = 1;
                 getId(id).innerHTML = proce_notify_err(str_, '');
-            }
-            else {
+            } else {
                 index--;
-                //alert("ok");
                 arr_error[id] = 0;
                 getId(id).innerHTML = notify_img_apccet;
             }
         }
-
     }
-    /*else{
-     getId(id).innerHTML=html_err;
-     alert("Tên đăng nhập không hợp lệ.\nTên đăng nhập chỉ được bao gồm chữ và số, không được dùng ký tự đặc biệt, không được dùng chữ HOA.");
-     return false;
-     }
-     */
 }
 
 function pwd_strength(id_value, id_color, id_notify) {
@@ -756,26 +664,6 @@ function renderPhoneTel(value, id) {
         getId(id).value = result + text7 + text73;
     }
 }
-
-// function checkPhoneNumber(value, id) {
-//     getId(id).innerHTML = notify_img_load;
-//     setTimeout("isNumberPhone('" + value + "', '"+ id +"')", 500);
-// }
-// function isNumberPhone(value, id) {
-//     arr_error[id] = 1;
-//     if (((value / value) != 1) && (value != 0)) {
-//         getId(id).innerHTML = notify_img_deline + '<span style="color:#FF0000">Số điện thoại không hợp lệ</span>';
-//         getId(id).focus();
-//         getId(id).value = "";
-//     } else if (value.length < 9) {
-//         getId(id).innerHTML = notify_img_deline + '<span style="color:#FF0000">Số điện thoại không hợp lệ</span>';
-//         getId(id).focus();
-//         getId(id).value = "";
-//     } else {
-//         arr_error[id] = 0;
-//         getId(id).innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-//     }
-// }
 
 function checkQuestion(value, id) {
     getId(id).innerHTML = notify_img_load;
@@ -1243,7 +1131,6 @@ function CheckFormChangeName() {
     return true;
 }
 
-
 function findNewName(id) {
     document.getElementById('NewNameID').innerHTML = notify_img_load;
     setTimeout("findNewNameTrue('" + id + "')", 1500);
@@ -1273,10 +1160,10 @@ $(document).ready(function () {
 
     $('.pao').click(function () {
         if ($('.box_login').is(":hidden")) {
-            $('.box_login').slideDown('slow');
+            $('.box_login').slideDown('fast');
             $("i.down").toggleClass("downup");
         } else {
-            $('.box_login').slideUp('slow');
+            $('.box_login').slideUp('fast');
             $("i.down").toggleClass("downup");
         }
     });

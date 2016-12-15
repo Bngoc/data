@@ -298,8 +298,11 @@ function board_sysconf()
             'config_gc2wc' => array('text', 'Frontend upload dir|Frontend path for uploads'),
             'config_gc2wcp' => array('text', 'Frontend upload dir|Frontend path for uploads'),
             'config_gc2gob' => array('text', 'Frontend upload dir|Frontend path for uploads'),
+        ),
+        'SEO' => array(
+            'description' => array('text', 'Descriptions for site'),
+            'keywords' => array('text', 'Keywords for website')
         )
-
     );
 
     // System help

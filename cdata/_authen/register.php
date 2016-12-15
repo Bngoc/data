@@ -139,7 +139,6 @@ list($errors_result) = _GL('errors_result');
             </td>
             <td class="bizwebform_col_3" id="answerID"></td>
         </tr>
-
         <tr>
             <td colspan="3" class="sub_title_1st">MÃ XÁC NHẬN</td>
         </tr>
