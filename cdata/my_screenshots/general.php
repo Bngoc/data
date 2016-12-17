@@ -1,5 +1,5 @@
 <?php
-list($dashboard) = _GL('dashboard');
+list($dashboard) = _GL('errors_result');
 
 ?>
 

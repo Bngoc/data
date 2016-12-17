@@ -1,25 +1,22 @@
+<?php
+
+list($sub, $options) = _GL('sub, options');
+
+?>
+
+<ul class="sysconf_top">
+  <?php foreach ($options as $ID => $ol) { ?>
+    <li <?php echo 'id="'. $ID .'"';
+    if ($sub == $ID) echo 'class="selected"'; ?>>
+      <a id="callAjax" href="javascript:void(0)" idContent="sub-content" fhref="<?php echo cn_url_modify('mod=guide', 'opt=quaivat', "sub=$ID"); ?>"><?php echo ucfirst($ol); ?></a>
+    </li>
+  <?php } ?>
+</ul>
+<div class="clear"></div>
+<hr><br>
+
 <div class="sub_guide">
-<div align="right">
-  <select onChange="ajax_load(this.value,'noidung')" name="Select1" style="COLOR: #fff; BORDER-TOP-STYLE: solid; BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; BACKGROUND-COLOR: #333333; BORDER-BOTTOM-STYLE: solid">
-    <option value="index2.php?module=guide&page=Lorencia" selected="selected">Lorencia</option>
-    <option value="index2.php?module=guide&page=Noria">Noria</option>
-    <option value="index2.php?module=guide&page=Devias">Devias</option>
-    <option value="index2.php?module=guide&page=Dungeon">Dungeon</option>
-    <option value="index2.php?module=guide&page=LostTower">Lost Tower</option>
-    <option value="index2.php?module=guide&page=Atlans">Atlans</option>
-    <option value="index2.php?module=guide&page=Aida">Aida</option>
-    <option value="index2.php?module=guide&page=Tarkan">Tarkan</option>
-    <option value="index2.php?module=guide&page=Icarus">Icarus</option>
-    <option value="index2.php?module=guide&page=Kanturu">Kanturu</option>
-    <option value="index2.php?module=guide&page=Elbeland">Elbeland</option>
-    <option value="index2.php?module=guide&page=Raklion">Raklion</option>
-    <option value="index2.php?module=guide&page=Calmness">Swamp of Calmness</option>
-    <option value="index2.php?module=guide&page=Kalima">Kalima</option>
-    <option value="index2.php?module=guide&page=Crywolf">Pháo Đài Sói</option>
-  </select>
-</div>
-<br>
-<div id="noidung">
+<div id="sub-content">
   <table cellspacing="0" cellpadding="10" align="center" border="1">
     <tbody>
       <tr>

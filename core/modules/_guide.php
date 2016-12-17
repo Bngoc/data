@@ -91,163 +91,184 @@ function guide_default()
 }
 
 function guide_cottruyen() {
-    $errors = array();
-
-    // Do change pass-game
-    if (request_type('POST')) {
-        list($nameQuestion, $nameAnswer, $pwd, $re_pwd, $namecaptcha) = GET('cnameQuestion, cnameAnswer, cpwd, cre_pwd, cnameCaptcha', "POST");
-
-        $nameAnswer = strtolower($nameAnswer);
-
-        if ($pwd === '') $errors[] = ucfirst("Chưa nhập mật khẩu game.");
-        if ($nameAnswer === '') $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật.");
-        if ($nameQuestion === '') $errors[] = ucfirst("Chưa chọn câu hỏi bí mật.");
-        if ($namecaptcha === '') $errors[] = ucfirst("Chưa nhập mã Captcha.");
-
-        if (strlen($re_pwd) < 3) $errors[] = 'Mật khẩu quá ngắn';
-        if ($pwd != $re_pwd) $errors[] = "Mật khẩu Game không giống nhau.";
-        if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
-        if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
-
-
-        $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='". $_SESSION['user_Gamer'] ."'");
-
-        if (trim($user[0][1]) != $nameQuestion){
-            $errors[] = 'Câu hỏi không đúng.';
-        }
-        if (trim($user[0][2]) != $nameAnswer){
-            $errors[] = 'Câu trả lời không đúng.';
-        }
-
-        if (empty($errors)) {
-            $statusUp = do_update_character('MEMB_INFO', "memb__pwd='". $re_pwd ."'", "memb___id:'". $_SESSION['user_Gamer'] ."'");
-
-            if ($statusUp) {
-                $changePassWebEmail = 'Hi {username}, <br><p>Change your password</p><hr><p>Mật khẩu Game mới: {pass_game} </p>';
-                $strHoderFotgot = '{username}, {pass_game}';
-
-                $checkemailforgot = cn_send_mail($user[0][3], 'Thay đổi mật khẩu Game', cn_replace_text($changePassWebEmail, $strHoderFotgot, substr($user[0][0], 0, -4) . '****', $re_pwd));
-                cn_throw_message('Bạn đã thay đổi mật khẩu Game thành công.');
-            }
-        }
-    }
-
-    cn_assign('errors_result', $errors);
-
-    echoheader('-@my_account/style.css', "Thay đổi mật khẩu Game");
+    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_cottruyen'), cn_snippet_bc_re());
     echofooter();
 }
 
 function guide_tinhnang() {
-    $errors = array();
+    $sub = REQ('sub', "GETPOST");
 
-    // Do change pass-game
+    $options_list = array
+    (
+        'old-features' => array
+        (
+            'nenngoc' => 'Hệ thống nén ngọc',
+            'giacuong' => 'Gia cường Items',
+            'tinhluyen' => 'Tinh luyện',
+            'mayphatron' => 'Máy pha trộn',
+            'taoquaidieu' => 'Tạo quái điểu',
+            'taoaochoang' => 'Tạo áo choàng chúa tể',
+            'taothunuoi' => 'Tạo thú nuôi',
+            'nangcapdovat' => 'Nâng cấp đồ vật',
+            'taocanh' => 'Tạo cánh',
+            'chaosvua' => 'Kết hợp Chaos Vua'
+        ),
+        'new-features' => array
+        (
+            'khamngoc' => 'Hệ thống khảm ngọc',
+            'masterlevel' => 'Master Level',
+            'canhcap3' => 'Cánh cấp 3'
+        )
+    );
 
+    if (!isset($options_list[$sub])) {
+        $sub = 'old-features';
+    }
 
-//    cn_assign('errors_result', $errors);
+    if(request_type('POST')){
+        if (isset($_REQUEST['show'])){
+            $show = $_REQUEST['show'];
+            return exec_tpl('-@my_guide/tinhnang/'.$show);
+            //return 1;
+        }
+    }
 
-    echoheader('-@my_account/style.css', "Thay đổi mật khẩu Game");
+    $options = $options_list[$sub];
+    cn_assign('sub, options, options_list', $sub, $options, $options_list);
+
+    echoheader('-@my_guide/style.css@my_guide/customjs.js', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_tinhnang'), cn_snippet_bc_re());
     echofooter();
 }
 
 function guide_nhanvat() {
-    $errors = array();
+    $options = array
+    (
+        'chuate' => 'Chúa tể',
+        'phuthuy' => 'Phù thủy',
+        'tiennu' => 'Tiên nữ',
+        'dausi' => 'Đấu sĩ',
+        'chienbinh' => 'Chiến binh',
+        'thuatsi' => 'Thuật sĩ',
+        'rageFighter' => 'Rage Fighter',
+        'tuyetchieumoi' => 'Tuyệt chiêu mới',
+    );
 
-    // Do change pass-game
+    if(request_type('POST')){
+        if (isset($_REQUEST['sub'])){
+            $sub = $_REQUEST['sub'];
+            return exec_tpl('-@my_guide/character/'.$sub);
+        }
+    }
 
+    if (!isset($sub)) {
+        $sub = 'chuate';
+    }
+    cn_assign('sub, options', $sub, $options);
 
-//    cn_assign('errors_result', $errors);
-
-    echoheader('-@my_account/style.css', "Thay đổi mật khẩu Game");
+    echoheader('-@my_guide/style.css@my_guide/customjs.js', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_nhanvat'), cn_snippet_bc_re());
     echofooter();
 }
 
 function guide_nhiemvu() {
-    $errors = array();
-
-    // Do change pass-game
-
-
-//    cn_assign('errors_result', $errors);
-
-    echoheader('-@my_account/style.css', "Thay đổi mật khẩu Game");
+    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_nhiemvu'), cn_snippet_bc_re());
     echofooter();
 }
 
 function guide_thuhotro() {
-    $errors = array();
-
-    // Do change pass-game
-
-
-//    cn_assign('errors_result', $errors);
-
-    echoheader('-@my_account/style.css', "Thay đổi mật khẩu Game");
+    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_thuhotro'), cn_snippet_bc_re());
     echofooter();
 }
 function guide_quaivat() {
-    $errors = array();
+    $options = array
+    (
+        'lorencia' => 'Lorencia',
+        'noria' => 'Noria',
+        'devias' => 'Devias',
+        'dungeon' => 'Dungeon',
+        'elbeland' => 'Elbeland',
+        'lostTower' => 'Lost Tower',
+        'atlans' => 'Atlans',
+        'aida' => 'Aida',
+        'tarkan' => 'Tarkan',
+        'icarus' => 'Icarus',
+        'kanturu' => 'Kanturu',
+        'raklion' => 'Raklion',
+        'calmness' => 'Swamp of Calmness',
+        'kalima' => 'Kalima',
+        'crywolf' => 'Crywolf'
+    );
 
-    // Do change pass-game
+    if(request_type('POST')){
+        if (isset($_REQUEST['sub'])){
+            $sub = $_REQUEST['sub'];
+            return exec_tpl('-@my_guide/monster/'.$sub);
+        }
+    }
 
+    if (!isset($sub)) {
+        $sub = 'lorencia';
+    }
+    cn_assign('sub, options', $sub, $options);
 
-//    cn_assign('errors_result', $errors);
-
-    echoheader('-@my_account/style.css', "Thay đổi mật khẩu Game");
+    echoheader('-@my_guide/style.css@my_guide/customjs.js', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_quaivat'), cn_snippet_bc_re());
     echofooter();
 }
+
 function guide_items() {
-    $errors = array();
-
-    // Do change pass-game
-
-
-//    cn_assign('errors_result', $errors);
-
-    echoheader('-@my_account/style.css', "Thay đổi mật khẩu Game");
+    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_items'), cn_snippet_bc_re());
     echofooter();
 }
+
 function guide_npc() {
-    $errors = array();
-
-    // Do change pass-game
-
-
-//    cn_assign('errors_result', $errors);
-
-    echoheader('-@my_account/style.css', "Thay đổi mật khẩu Game");
+    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_npc'), cn_snippet_bc_re());
     echofooter();
 }
+
+function guide_thucuoi() {
+    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
+    echocomtent_here(exec_tpl('-@my_guide/_thucuoi'), cn_snippet_bc_re());
+    echofooter();
+}
+
 function guide_banghoi() {
-    $errors = array();
-
-    // Do change pass-game
-
-
-//    cn_assign('errors_result', $errors);
-
-    echoheader('-@my_account/style.css', "Thay đổi mật khẩu Game");
+    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_banghoi'), cn_snippet_bc_re());
     echofooter();
 }
 
 function guide_sukiengame() {
-    $errors = array();
+    $options = array
+    (
+        'blood' => 'Lâu đài máu',
+        'devil' => 'Quảng Trường Quỷ',
+        'chaoscastle' => 'Hỗn Nguyên Lâu',
+        'thuthach' => 'Vùng Đất Thử Thách',
+        'ctc' => 'Công Thành Chiến',
+        'bld' => 'Bạch Long Điện',
+        'pds' => 'Pháo Đài Sói',
+    );
 
-    // Do change pass-game
+    if(request_type('POST')){
+        if (isset($_REQUEST['sub'])){
+            $sub = $_REQUEST['sub'];
+            return exec_tpl('-@my_guide/eventgame/'.$sub);
+        }
+    }
 
+    if (!isset($sub)) {
+        $sub = 'blood';
+    }
+    cn_assign('sub, options', $sub, $options);
 
-//    cn_assign('errors_result', $errors);
-
-    echoheader('-@my_account/style.css', "Thay đổi mật khẩu Game");
+    echoheader('-@my_guide/style.css@my_guide/customjs.js', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_sukiengame'), cn_snippet_bc_re());
     echofooter();
 }
