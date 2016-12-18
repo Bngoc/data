@@ -473,6 +473,7 @@ function char_reset()
                 cn_throw_message("Bạn đang là Sát thủ. Phải rửa tội trước khi Reset.", 'e');
                 $errors_false = true;
             }
+            echo '$inventory3=> ' . $inventory3;
             if ($inventory3 != $shop_empty || $inventory3 != strtolower($shop_empty)) {
                 cn_throw_message("Cửa hàng cá nhân có vật phẩm. Vui lòng bỏ ra khỏi cửa hàng cá nhân để tránh bị mất đồ.", 'e');
                 $errors_false = true;
