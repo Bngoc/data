@@ -2,8 +2,6 @@
 /gifnoc/gifnoc.php
 /gifnoc/*.bak
 /DB/
-/admin/log/system/*
-/admin/log/modules/character/*
-/admin/log/modules/shop/*
+/admin/log/*
 .htaccess
 web.config
