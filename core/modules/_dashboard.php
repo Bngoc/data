@@ -462,7 +462,7 @@ function char_reset()
     //-----------------------------------------------
     if (request_type('POST')) {
         if (REQ('action_rs')) {
-            $default_class = do_select_character('DefaultClassType', $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Inventory', "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3");
+            $default_class = do_select_character('DefaultClassType', $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,CAST(Inventory AS image)', "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3");
 
             $errors_false = false;
 
