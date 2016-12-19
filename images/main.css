@@ -16,19 +16,22 @@
 
 .news_n {
     background: url(../images/bgnews_n.png) no-repeat top center;
-    width: 538px;
+    width: 100%;
     height: 12px;
+    background-size: cover;
 }
 
 .news_c {
     background: url(../images/bgnews_c.png) repeat-y top center;
-    width: 538px;
+    width: 100%;
+    background-size: cover;
 }
 
 .news_s {
     background: url(../images/bgnews_s.png) no-repeat bottom center;
-    width: 538px;
+    width: 100%;
     height: 12px;
+    background-size: cover;
 }
 
 .news_content {
@@ -77,18 +80,18 @@
 
 .newsitem_n {
     background: url(../images/newsitem_n.png) no-repeat top center;
-    width: 505px;
+    background-size: cover;
     height: 12px;
 }
 
 .newsitem_c {
     background: url(../images/newsitem_c.png) repeat-y top center;
-    width: 505px;
+    background-size: contain;
 }
 
 .newsitem_s {
     background: url(../images/newsitem_s.png) no-repeat top center;
-    width: 505px;
+    background-size: cover;
     height: 12px;
 }
 

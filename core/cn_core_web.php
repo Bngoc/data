@@ -1309,6 +1309,14 @@ function echoheader($image, $header_text, $bread_crumbs = false)
     $image = isset($customs[0]) ? $customs[0] : '';
     $custom_style = isset($customs[1]) ? $customs[1] : false;
     $custom_js = isset($customs[2]) ? $customs[2] : false;
+    // No - Forum
+//    if (isset($_SESSION['isSessionForum'])) {
+//        $skin_header = preg_replace("/{content}/", '---------------------------------------', $skin_header);
+//        $skin_header = preg_replace("/{top}/", '<marquee scrollamount="9" height="45" align="center" style="font-size:14px;color: rgb(200, 128, 35); padding-top: 12px; font-style: oblique;">Chào mừng các bạn ghé thăm trang MuOnline</marquee>', $skin_header);
+//        // xoa .....
+//    } else {
+//        $skin_header = preg_replace("/{content}/", '', $skin_header);
+//    }
 
     if (isset($_SESSION['user_Gamer'])) {
         $skin_header = preg_replace("/{menu}/", $skin_menu, $skin_header);
@@ -1338,12 +1346,12 @@ function echoheader($image, $header_text, $bread_crumbs = false)
             '{changeSecret}' => ['change_secret', 'Đổi Mã Bí mật'],
             '{changeQA}' => ['change_qa', 'Đổi Câu Trả Lời']
         ];
-        foreach ($boxArrInfo as $jk => $its){
-            $tmpHtml = '<a href="' . PHP_SELF . '?mod=manager_account&amp;opt='. $its[0] . '"><div><img height="20" width="20" src="' . getoption('http_script_dir') . '/images/'. $its[0] .'.png" /></div><div>'. $its[1] .'</div></a>';
+        foreach ($boxArrInfo as $jk => $its) {
+            $tmpHtml = '<a href="' . PHP_SELF . '?mod=manager_account&amp;opt=' . $its[0] . '"><div><img height="20" width="20" src="' . getoption('http_script_dir') . '/images/' . $its[0] . '.png" /></div><div>' . $its[1] . '</div></a>';
             $skin_header = str_replace($jk, $tmpHtml, $skin_header);
         }
     } else {
-        $skin_header = preg_replace("/{top}/", '<marquee scrollamount="9" height="45" align="center" style="font-size:14px;color: rgb(200, 128, 35); padding-top: 12px; font-style: oblique;">Chào mừng các bạn ghé thăm trang MuOnline</marquee>',$skin_header);
+        $skin_header = preg_replace("/{top}/", '<marquee scrollamount="9" height="45" align="center" style="font-size:14px;color: rgb(200, 128, 35); padding-top: 12px; font-style: oblique;">Chào mừng các bạn ghé thăm trang MuOnline</marquee>', $skin_header);
         $skin_header = preg_replace("/{menu}/", $skin_menu_none, $skin_header);
     }
 
@@ -1365,6 +1373,7 @@ function echoheader($image, $header_text, $bread_crumbs = false)
     $skin_header = str_replace("{CustomJS}", $custom_js, $skin_header);
 
     echo $skin_header;
+
 }
 
 function echocomtent_here($echocomtent, $path_c = '', $bread_crumbs = true)

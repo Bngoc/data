@@ -5,19 +5,22 @@
 
 #mainsub_n {
     background: url(../images/bgmainsub_n.png) no-repeat top center;
-    width: 748px;
+    width: 100%;
     height: 12px;
+    background-size: cover;
 }
 
 #mainsub_c {
     background: url(../images/bgmainsub_c.png) repeat-y top center;
-    width: 748px;
+    width: 100%;
+    background-size: contain;
 }
 
 #mainsub_s {
     background: url(../images/bgmainsub_s.png) no-repeat bottom center;
-    width: 748px;
+    width: 100%;
     height: 12px;
+    background-size: cover;
 }
 
 #mainsub_content {
@@ -33,36 +36,39 @@
 
 #mainsub_inner_n {
     background: url(../images/mainsub_inner_n.png) no-repeat top center;
-    width: 710px;
+    width: 100%;;
     height: 12px;
 }
 
 #mainsub_inner_c {
     background: url(../images/mainsub_inner_c.png) repeat-y top center;
-    width: 710px;
+    width: 100%;
+    background-size: contain;
 }
 
 #mainsub_inner_s {
     background: url(../images/mainsub_inner_s.png) no-repeat top center;
-    width: 710px;
+    width: 100%;
     height: 12px;
+    background-size: contain;
 }
 
 #mainsub_ranking_n {
     background: url(../images/rankingitem_n.png) no-repeat top center;
-    width: 710px;
+    width: 100%;
     height: 12px;
     margin-top: 8px;
+    background-size: contain;
 }
 
 #mainsub_ranking_c {
     background: url(../images/rankingitem_c.png) repeat-y top center;
-    width: 710px;
+    width: 100%;
 }
 
 #mainsub_ranking_s {
     background: url(../images/rankingitem_s.png) no-repeat top center;
-    width: 710px;
+    width: 100%;;
     height: 12px;
 }
 
@@ -110,18 +116,18 @@
 
 #mainsub_innersolid_n {
     background: url(../images/mainsub_innersolid_n.png) no-repeat top center;
-    width: 710px;
+    width: 100%;;
     height: 12px;
 }
 
 #mainsub_innersolid_c {
     background: url(../images/mainsub_innersolid_c.png) repeat-y top center;
-    width: 710px;
+    width: 100%;;
 }
 
 #mainsub_innersolid_s {
     background: url(../images/mainsub_innersolid_s.png) no-repeat top center;
-    width: 710px;
+    width: 100%;;
     height: 12px;
 }
 

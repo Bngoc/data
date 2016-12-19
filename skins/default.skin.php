@@ -154,7 +154,7 @@ $skin_header = <<<HTML
    
    <div class="clear"></div>  
  
-	<div id="main">
+	<div id="main">{content}
 		<!-- ================START LEFTCOL=================-->
 		<div id="leftcol">
 			<div id="leftcol-anchor"></div>
@@ -196,7 +196,6 @@ $skin_footer = <<<HTML
 	</div> <!-- end main -->
 	
 		<div class="clear"></div>       
-		
 		</div> <!-- page_wrapper2 -->
       
 	</div> <!-- page_wrapper1 -->

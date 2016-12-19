@@ -484,11 +484,12 @@ div.box_login1 .fotgetPass a:hover span {
 }
 
 #main {
-    width: 958px;
+    width: 980px;
     margin: 0 auto;
     text-align: center;
     margin-top: 16px;
     padding-bottom: 95px;
+    display: flex;
 }
 
 /* padding-bottom is the distance between the main content and the bottom edge of bgvisual_bottom */
@@ -498,18 +499,21 @@ div.box_login1 .fotgetPass a:hover span {
 }
 
 #leftcol {
-    width: 208px;
+    /*width: 208px;*/
+    width: 21%;
     color: #ababab;
 }
 
 #maincol {
-    width: 542px;
+    /*width: 542px;*/
+    width: 72%;
     color: #261904;
 }
 
 /* used in homepage */
 #rightcol {
-    width: 208px;
+    float: right;
+    width: 28%;
     color: #cccccc;
 }
 
@@ -517,8 +521,11 @@ div.box_login1 .fotgetPass a:hover span {
 
 #mainsubcol {
     text-align: left;
-    width: 750px;
+    /*width: 750px;*/
     color: #261904;
+    width: 79%;
+    color: #261904;
+    position: relative;
 }
 
 /* #mainsubcol is the 2nd col in subpage */
@@ -715,8 +722,9 @@ div.box_login1 .fotgetPass a:hover span {
 
 .loginbx_s {
     background: url(../images/loginbx_s.png) no-repeat top center;
-    width: 208px;
+    width: 100%;
     height: 12px;
+    background-size: cover;
 }
 
 .quicklink {

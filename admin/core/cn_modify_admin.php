@@ -3714,7 +3714,6 @@ function cn_relocation($url)
 function cn_db_init()
 {
     include ROOT . '/core/db/flat_web.php';
-//    include SERVDIR . '/core/db/coreflat.php';
 }
 
 // bqn relocation => $db + server

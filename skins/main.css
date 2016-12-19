@@ -16,19 +16,22 @@
 
 .news_n {
     background: url(../images/bgnews_n.png) no-repeat top center;
-    width: 538px;
+    width: 100%;
     height: 12px;
+    background-size: cover;
 }
 
 .news_c {
     background: url(../images/bgnews_c.png) repeat-y top center;
-    width: 538px;
+    width: 100%;
+    background-size: contain;
 }
 
 .news_s {
     background: url(../images/bgnews_s.png) no-repeat bottom center;
-    width: 538px;
+    width: 100%;
     height: 12px;
+    background-size: cover;
 }
 
 .news_content {
@@ -77,18 +80,18 @@
 
 .newsitem_n {
     background: url(../images/newsitem_n.png) no-repeat top center;
-    width: 505px;
+    background-size: cover;
     height: 12px;
 }
 
 .newsitem_c {
     background: url(../images/newsitem_c.png) repeat-y top center;
-    width: 505px;
+    background-size: cover;
 }
 
 .newsitem_s {
     background: url(../images/newsitem_s.png) no-repeat top center;
-    width: 505px;
+    background-size: cover;
     height: 12px;
 }
 
@@ -196,7 +199,8 @@
 /* =========== RIGHT COL CONTENT =========== */
 #serverclock {
     background: url(../images/bg_serverclock.png) no-repeat top center;
-    width: 208px;
+    width: 100%;
+    background-size: cover;
     height: 75px;
     margin-bottom: 2px;
     color: #ffffff;
@@ -354,4 +358,18 @@
 /*********************** end pagination ***************** */
 ._info {
     background: rgba(7, 43, 43, 0.62);
+}
+
+div#server_info {
+    width: 100%;
+    position: relative;
+    display: block;
+}
+.custom-info-server{
+    display: block;
+    list-style-type: none;
+}
+.custom-info-server li {
+    margin-left: 25px;
+    list-style-type: circle;
 }

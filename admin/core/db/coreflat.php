@@ -18,9 +18,7 @@ function db_installed_check()
     }
 
     $result = $dbSa->Execute("SELECT * FROM Admin WHERE [AdLevel]=1");
-//    $result = $dbSa->Execute("SELECT COUNT(*) as numCount FROM Admin");
 
-//    if ($result) {
     if ($result->RecordCount()) {
         return true;
     } else {
