@@ -1,4 +1,0 @@
-DATETIME,ERRORLEVEL,TAG,VALUE,LINE,FILE
-"2015-09-21 11:39:53",ERROR,DB,1,46,"C:\xampp\htdocs\forum\register.php"
-"2015-09-21 11:42:58",DEBUG,DB,1,46,"C:\xampp\htdocs\forum\register.php"
-"2015-09-21 13:45:10",DEBUG,DB,1,46,"C:\xampp\htdocs\forum\register.php"

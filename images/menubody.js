@@ -35,11 +35,11 @@ stm_aix("p2i19", "p1i1", [], 194, 2);
 stm_aix("p2i18", "p1i4", [0, "Sự kiện Game", "", "", -1, -1, 0, "?mod=guide&opt=sukiengame", "_self", "", "", "", "icon_arrow.png", 25, 4], 194, 36);
 stm_ep();
 
-stm_aix("p0i2", "p0i0", [0, "", "", "", -1, -1, 0, "/Forum/LoginForum.aspx", "_self", "", "", "", "", 0, 0, 0, "", "", 0, 0, 0, 0, 1, "#993366", 1, "#e1ecf6", 1, "m3.png", "m3_over.png"], 221, 35);
+stm_aix("p0i2", "p0i0", [0, "", "", "", -1, -1, 0, "/forum/", "_self", "", "", "", "", 0, 0, 0, "", "", 0, 0, 0, 0, 1, "#993366", 1, "#e1ecf6", 1, "m3.png", "m3_over.png"], 221, 35);
 stm_bpx("p3", "p1", [1, 4, 35]);
-stm_aix("p3i0", "p2i0", [0, "Đăng ký tài khoản", "", "", -1, -1, 0, "/forum/"], 194, 34);
+stm_aix("p3i0", "p2i0", [0, "Đăng ký tài khoản", "", "", -1, -1, 0, "/forum/register.php"], 194, 34);
 stm_aix("p3i1", "p1i1", [], 194, 2);
-stm_aix("p3i6", "p2i18", [0, "Đăng nhập", "", "", -1, -1, 0, "/forum/LoginForum.aspx", "_self"], 194, 36);
+stm_aix("p3i6", "p2i18", [0, "Đăng nhập", "", "", -1, -1, 0, "/forum/login.php?do=login", "_self"], 194, 36);
 stm_ep();
 
 stm_aix("p0i3", "p0i0", [0, "", "", "", -1, -1, 0, "?mod=ranking&opt=character", "_self", "", "", "", "", 0, 0, 0, "", "", 0, 0, 0, 0, 1, "#993366", 1, "#e1ecf6", 1, "m4.png", "m4_over.png"], 205, 35);

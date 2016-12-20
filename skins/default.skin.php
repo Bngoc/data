@@ -154,7 +154,7 @@ $skin_header = <<<HTML
    
    <div class="clear"></div>  
  
-	<div id="main">{content}
+	<div id="main">
 		<!-- ================START LEFTCOL=================-->
 		<div id="leftcol">
 			<div id="leftcol-anchor"></div>

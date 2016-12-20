@@ -1309,14 +1309,6 @@ function echoheader($image, $header_text, $bread_crumbs = false)
     $image = isset($customs[0]) ? $customs[0] : '';
     $custom_style = isset($customs[1]) ? $customs[1] : false;
     $custom_js = isset($customs[2]) ? $customs[2] : false;
-    // No - Forum
-//    if (isset($_SESSION['isSessionForum'])) {
-//        $skin_header = preg_replace("/{content}/", '---------------------------------------', $skin_header);
-//        $skin_header = preg_replace("/{top}/", '<marquee scrollamount="9" height="45" align="center" style="font-size:14px;color: rgb(200, 128, 35); padding-top: 12px; font-style: oblique;">Chào mừng các bạn ghé thăm trang MuOnline</marquee>', $skin_header);
-//        // xoa .....
-//    } else {
-//        $skin_header = preg_replace("/{content}/", '', $skin_header);
-//    }
 
     if (isset($_SESSION['user_Gamer'])) {
         $skin_header = preg_replace("/{menu}/", $skin_menu, $skin_header);

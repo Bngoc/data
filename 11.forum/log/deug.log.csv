@@ -1,2 +1,0 @@
-DATETIME,ERRORLEVEL,TAG,VALUE,LINE,FILE
-"2015-09-21 11:34:47",DEBUG,DB,"SELECT * FROM users WHERE username = '123' AND password = '123';",38,"C:\xampp\htdocs\forum\login.php"
