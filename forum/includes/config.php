@@ -53,14 +53,15 @@ $config['Database']['force_sql_mode'] = false;
 	//
 	//	Note: If you are using IIS 7+ and MySQL is on the same machine, you 
 	//	need to use 127.0.0.1 instead of localhost
-$config['MasterServer']['servername'] = 'localhost';
-$config['MasterServer']['port'] = 3306;
+	//WIN-K15OBAU55NH\SQLEXPRESS
+$config['MasterServer']['servername'] = 'WIN-K15OBAU55NH\SQLEXPRESS';
+$config['MasterServer']['port'] = 1433;
 
 	//	****** MASTER DATABASE USERNAME & PASSWORD ******
 	//	This is the username and password you use to access MySQL.
 	//	These must be obtained through your webhost.
-$config['MasterServer']['username'] = 'root';
-$config['MasterServer']['password'] = '';
+$config['MasterServer']['username'] = 'sa';
+$config['MasterServer']['password'] = 'emNgockt93';
 
 	//	****** MASTER DATABASE PERSISTENT CONNECTIONS ******
 	//	This option allows you to turn persistent connections to MySQL on or off.
@@ -74,10 +75,10 @@ $config['MasterServer']['usepconnect'] = 0;
 	//	If you have multiple database backends, this is the information for your slave
 	//	server. If you are not 100% sure you need to fill in this information,
 	//	do not change any of the values here.
-$config['SlaveServer']['servername'] = 'localhost';
-$config['SlaveServer']['port'] = 3306;
-$config['SlaveServer']['username'] = 'root';
-$config['SlaveServer']['password'] = '';
+$config['SlaveServer']['servername'] = 'WIN-K15OBAU55NH\SQLEXPRESS';
+$config['SlaveServer']['port'] = 1433; //3306
+$config['SlaveServer']['username'] = 'sa';
+$config['SlaveServer']['password'] = 'emNgockt93';
 $config['SlaveServer']['usepconnect'] = 0;
 
 
