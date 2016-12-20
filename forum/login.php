@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -104,7 +104,7 @@ if ($_POST['do'] == 'login')
 	));
 
 	// can the user login?
-	//$strikes = verify_strike_status($vbulletin->GPC['vb_login_username']);
+	$strikes = verify_strike_status($vbulletin->GPC['vb_login_username']);
 
 	if ($vbulletin->GPC['vb_login_username'] == '')
 	{
@@ -172,7 +172,6 @@ if ($_POST['do'] == 'login')
 else if ($_GET['do'] == 'login')
 {
 	// add consistency with previous behavior
-
 	exec_header_redirect(fetch_seo_url('forumhome|nosession', array()));
 }
 

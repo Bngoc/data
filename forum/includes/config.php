@@ -23,7 +23,7 @@
 	//	This is the type of the database server on which your vBulletin database will be located.
 	//	Valid options are mysql and mysqli, for slave support add _slave.  Try to use mysqli if you are using PHP 5 and MySQL 4.1+
 	// for slave options just append _slave to your preferred database type.
-$config['Database']['dbtype'] = 'mysqli';//mysqli
+$config['Database']['dbtype'] = 'mysqli';
 
 	//	****** DATABASE NAME ******
 	//	This is the name of the database where your vBulletin will be located.
@@ -37,7 +37,7 @@ $config['Database']['tableprefix'] = '';
 	//	****** TECHNICAL EMAIL ADDRESS ******
 	//	If any database errors occur, they will be emailed to the address specified here.
 	//	Leave this blank to not send any emails when there is a database error.
-$config['Database']['technicalemail'] = 'ngoctbhy@gmail.com';
+$config['Database']['technicalemail'] = 'ngoctbhy@example.com';
 
 	//	****** FORCE EMPTY SQL MODE ******
 	// New versions of MySQL (4.1+) have introduced some behaviors that are
@@ -53,7 +53,6 @@ $config['Database']['force_sql_mode'] = false;
 	//
 	//	Note: If you are using IIS 7+ and MySQL is on the same machine, you 
 	//	need to use 127.0.0.1 instead of localhost
-	//WIN-K15OBAU55NH\SQLEXPRESS
 $config['MasterServer']['servername'] = 'localhost';
 $config['MasterServer']['port'] = 3306;
 
@@ -75,9 +74,9 @@ $config['MasterServer']['usepconnect'] = 0;
 	//	If you have multiple database backends, this is the information for your slave
 	//	server. If you are not 100% sure you need to fill in this information,
 	//	do not change any of the values here.
-$config['SlaveServer']['servername'] = 'localhost';
-$config['SlaveServer']['port'] = 3306; //3306
-$config['SlaveServer']['username'] = 'root';
+$config['SlaveServer']['servername'] = '';
+$config['SlaveServer']['port'] = 3306;
+$config['SlaveServer']['username'] = '';
 $config['SlaveServer']['password'] = '';
 $config['SlaveServer']['usepconnect'] = 0;
 

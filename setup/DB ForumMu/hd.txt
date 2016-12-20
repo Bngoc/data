@@ -1,0 +1,6 @@
+Acc : Administrator
+Pass: hjhjhj
+
+///
+	sua db: banng setting:
+		thay doi localhost thay domain
