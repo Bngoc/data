@@ -104,7 +104,7 @@ if ($_POST['do'] == 'login')
 	));
 
 	// can the user login?
-	//$strikes = verify_strike_status($vbulletin->GPC['vb_login_username']);
+	$strikes = verify_strike_status($vbulletin->GPC['vb_login_username']);
 
 	if ($vbulletin->GPC['vb_login_username'] == '')
 	{
