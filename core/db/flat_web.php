@@ -20,8 +20,6 @@ function db_installed_check()
     }
 
     $result = $db_new->Execute("SELECT * FROM Account_Info WHERE [AdLevel]=1");
-    //$result = $db_new->Execute("SELECT COUNT(*) as numCount FROM Account_Info WHERE [AdLevel]=1");
-    //if ($result->numCount) {
     if ($result->RecordCount()) {
         return true;
     } else {
@@ -1352,4 +1350,91 @@ function top50()
 	}
 } //else echo "Error
 */
+
+// --------------------------Forum--------------------------------//
+/**
+ * @param $orther
+ * @return array|bool
+ */
+function do_select_ortherForum($orther)
+{
+    global $db_Forum;
+
+    if ($orther) {
+        $orther = trim($orther);
+        $check = $db_Forum->Execute("$orther") or cn_writelog("$orther", 'e');
+        if ($check) {
+            while ($row = $check->fetchrow()) {
+                $rs_data[] = $row;
+            }
+        }
+    } else return FALSE;
+    return isset($rs_data) ? $rs_data : array();
+}
+
+/**
+ * @param $orther
+ * @return bool
+ */
+function do_update_ortherForum($orther)
+{
+    global $db_Forum;
+    $gr_col = $gr_cont = '';
+    $args = func_get_args();            //1.name, 2.email="user_email", 3.nick="$user_nic", 4.pass="24242424ggsgsgs"
+    $user_table = array_shift($args);        // get name array frist
+
+    if (!$user_table) //1. name //table update/
+        return FALSE;
+
+    foreach ($args as $v) {  //$v = [email=user_email] >, >=, <>, <, <=, (= :)
+        if (strpos($v, '=') !== false)
+            $gr_col .= "$v,";
+        elseif (strpos($v, ':') !== false) {
+            $df = str_replace(':', '=', $v);
+            $gr_cont .= "$df AND ";
+        } elseif (strpos($v, '>') !== false)
+            $gr_cont .= "$v AND ";
+        elseif (strpos($v, '>=') !== false)
+            $gr_cont .= "$v AND ";
+        elseif (strpos($v, '<>') !== false)
+            $gr_cont .= "$v AND ";
+        elseif (strpos($v, '<') !== false)
+            $gr_cont .= "$v AND ";
+        elseif (strpos($v, '<=') !== false)
+            $gr_cont .= "$df AND ";
+
+        //else continue;
+    }
+
+    if (strlen($gr_col) > 1)
+        $val_up_col = substr($gr_col, 0, -1);
+    if (strlen($gr_cont) > 5) $val_up_cont = substr($gr_cont, 0, -5);
+
+    if ($val_up_col && $val_up_cont && $user_table) {
+        $check = $db_Forum->Execute("UPDATE $user_table SET $val_up_col WHERE $val_up_cont") or cn_writelog("UPDATE $user_table SET $val_up_col WHERE $val_up_cont", 'e');
+        if ($check)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+/**
+ * @param $myQuery
+ * @return bool
+ */
+function do_delete_ortherForum($myQuery)
+{
+    global $db_Forum;
+
+    if ($myQuery) {
+        $myQuery = trim($myQuery);
+        $check = $db_Forum->Execute("$myQuery") or cn_writelog("$myQuery", 'e');
+        if ($check) {
+            return true;
+        }
+    } else return false;
+
+    return false;
+}
+
 ?>

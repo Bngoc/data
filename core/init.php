@@ -1,7 +1,8 @@
 <?php
 ob_start();
 
-define('DEV_DEBUG', false); // for visual detect errors
+// for visual detect errors
+define('DEV_DEBUG', false);
 if (DEV_DEBUG) {
     ini_set('display_errors', '1');
     error_reporting(E_ALL | E_STRICT);
@@ -12,7 +13,6 @@ if (DEV_DEBUG) {
 
 // definitions
 define('BQN_MU', microtime(true));
-///define('EXEC_TIME ',     microtime(true));
 define('VERSION', '2.0.3');
 define('VERSION_ID', 203);
 define('VERSION_NAME', 'News v.' . VERSION . 'c');
@@ -37,26 +37,6 @@ require_once SERVDIR . '/core/class.phpmailer.php';
 require_once SERVDIR . '/core/class.smtp.php';
 //require_once MODULE_ADM . '/core/captcha/phptextClass.php';
 
-
-//echo '$_SERVER[PHP_SELF] ->in init: ' . $_SERVER['PHP_SELF'] . '<br />';
-//echo 'Dirname($_SERVER[PHP_SELF] -> in init: ' . dirname($_SERVER['PHP_SELF']) . '<br>';
-
-
-//echo 'ROOT: '. ROOT .'<br>';
-//echo 'SERVDIR: '. MODULE_ADM .'<br>';
-/*
- * echo 'SKIN: '. SKIN .'<br>';
-echo "URLS: ". URL_PATH. "<br>";
-echo "BQN_MU: ". BQN_MU. "<br>";
-echo "00000000000\$_SERVER['SCRIPT_NAME']00000000000000000000: ". $_SERVER['SCRIPT_NAME']. "<br>";
-*/
-/*
-if (!DEV_DEBUG)
-{
-    // catch errors
-    set_error_handler("user_error_handler");
-}
-*/
 // create cutenews caches
 $_CN_SESS_CACHE = array();
 /*
@@ -78,17 +58,17 @@ $_CN_access = array
 
 // v2.0 init sections
 //$is_config = cn_config_load();
-cn_config_load();                //set default......
-/*
-cn_lang_init();
-cn_db_init(); //database
-*/
-
-
-cn_parse_url(); // get url
+//set default......
+cn_config_load();
+// get url
+cn_parse_url();
 cn_detect_user_ip();
-cn_load_session(); //load session_start
+//load session_start
+cn_load_session();
 cn_relocation_db_new();
+// connect to forum
+cn_connect_forum();
+
 // 2.0.3 checking existing configuration
 //if ($is_config)
 //{
@@ -97,8 +77,6 @@ cn_relocation_db_new();
 //}
 
 //db_installed_check();
-
-//
 
 // load modules
 include SERVDIR . '/core/modules/init.php';

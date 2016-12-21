@@ -1,6 +1,6 @@
 ﻿<?php
 
-list($dashboard, $username, $greeting_message) = _GL('dashboard, username, greeting_message');
+list($dataNotifyForum, $get_paging) = _GL('dataNotifyForum, get_paging');
 cn_snippet_messages();
 //cn_snippet_bc();
 ?>
@@ -11,47 +11,45 @@ cn_snippet_messages();
 
         <div id="news_wrapper">
             <div id="news">
-
                 <div class="news_n"></div>
                 <div class="news_c">
                     <div class="news_content">
-                        <div class="title_newshome">
-
-                            <div class="clear"></div>
-                        </div>
-
+                        <div class="title_newshome">erlkelkrler</div>
+                        <div class="clear"></div>
                         <div id="mainhome_content">
                             <div class="newsitem" style="padding: 0px;">
                                 <div class="newsitem_n"></div>
                                 <div class="newsitem_c">
-                                    <div class="post" style="padding-left: 20px;">
+                                    <div class="postForum">
                                         <div class="entry">
-                                            <img src="./images/post_old.gif"><a href="">flelekjmglkemjgleklg</a>
+                                            <?php
+                                            if ($dataNotifyForum) {
+                                                foreach ($dataNotifyForum as $key => $item) {
+                                                    echo '<div class="row-notify"><span class="topx-content-tab"><img src = "/images/post_new.gif" border = "0">&nbsp;';
+//                                                    echo '<b class="nofify-Forum">'. $item['keywords'] .'</b>';
+                                                    echo '<i class="time-nofify-Forum time-'. rand(1,3) .'">'. date('d-m-Y h:i A', $item['lastpost']) .'</i>&nbsp;';
+                                                    echo '<a class="overtext" href="'. cn_url_modify(array('reset')) .'/forum/showthread.php?'. $item['threadid'] . '-'. $item['urlForum'] .'&amp;goto=newpost" >' . $item['title'];
+                                                    echo '</a></span> <div class="col-right"><a href="/forum/member.php?'. $item['postuserid'] .'-'. $item['postusername'] .'">'. $item['titleUser'] .'</a></div></div>';
+                                                }
+                                            }else {
+                                                echo '<div class="no-notify-forum">Chưa có thông báo mới nhất từ forum!</div>';
+                                            }?>
+
                                         </div>
+                                        <?php echo $get_paging; ?>
                                     </div>
-
                                 </div>
-
                                 <div class="newsitem_s"></div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
-
                 <div class="news_s"></div>
                 <div class="clear"></div>
-
             </div>
         </div> <!-- news_wrapper //-->
-
-
     </div>
-
-
 </div>   <!--  maincol //-->
-
 
 <script type="text/javascript">
 
@@ -90,7 +88,6 @@ cn_snippet_messages();
 </script>
 
 <div id="rightcol">
-
     <div id="server_info">
         <div class="news_n"></div>
         <ul class="news_c custom-info-server">
@@ -135,11 +132,8 @@ cn_snippet_messages();
             </div>
         </div>
     </div>
-
-
 </div> <!-- rightcol //-->
-</div> <!--  //-->  </div> <!--  //-->
-<div class="clear"></div>  
+<div class="clear"></div>
 
 
 

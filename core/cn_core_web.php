@@ -17,9 +17,9 @@
 	$get_paging= $paging->Load();
 	*/
 
+// PRE 1 2 3 ... 4 5 6 7 8 9 10 ... 13 14 NEXT 	// 14 PAGE
 class pagintion_temp
-{ // PRE 1 2 3 ... 4 5 6 7 8 9 10 ... 13 14 NEXT 	// 14 PAGE
-
+{
     public $total; // TONG SO PAGE
     public $per_page = 10; // SỐ RECORD TRÊN 1 TRANG default = 10
     public $adjacents = 3; // SỐ PAGE  CENTER
@@ -35,6 +35,7 @@ class pagintion_temp
     private $next;
     private $lastpage;
     private $lpm1;
+    private $variablesParam = '&amp;';
 
     public function Load()
     {
@@ -52,6 +53,8 @@ class pagintion_temp
         $this->lastpage = ceil($this->total / $this->per_page); //lastpage.
         $this->lpm1 = $this->lastpage - 1; //last page minus 1
 
+        if ($this->url_modify == '') $this->variablesParam = '?';
+
         /* CREATE THE PAGINATION */
 
         $pagination = "";
@@ -59,7 +62,7 @@ class pagintion_temp
             $pagination .= "<div class='$this->class_pagination'> <ul>";
 
             if ($this->page > 1) {
-                $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->prev . " class='page-link prev' title='Prev'>Prev</a></li>";
+                $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->prev . " class='page-link prev' title='Prev'>Prev</a></li>";
             } elseif ($this->page == 1)
                 $pagination .= "<li><a rel='nofollow' href='' class='$this->class_active' title='Prev'>Prev</a></li>";
 
@@ -68,7 +71,7 @@ class pagintion_temp
                     if ($counter == $this->page)
                         $pagination .= "<li><a rel='nofollow' href='#' class='$this->class_active' title='Page number $counter'>$counter</a></li>";
                     else
-                        $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='page-link' title='Page number $counter'>$counter</a></li>";
+                        $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='page-link' title='Page number $counter'>$counter</a></li>";
                 }
             } elseif ($this->lastpage > 5 + ($this->adjacents * 2)) { //enough pages to hide some so trang >11
                 //close to beginning; only hide later pages
@@ -77,42 +80,42 @@ class pagintion_temp
                         if ($counter == $this->page)
                             $pagination .= "<li><a rel='nofollow' href='#' class='$this->class_active' title='Page number $counter'>$counter</a></li>";
                         else
-                            $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='page-link' title='Page number $counter'>$counter</a></li>";
+                            $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='page-link' title='Page number $counter'>$counter</a></li>";
                     }
 
                     $pagination .= "<li>...</li>";
-                    $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lpm1 . " class='page-link' title='Page number $this->lpm1'>$this->lpm1</a></li>";
-                    $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lastpage . " class='page-link' title='Page number $this->lastpage'>$this->lastpage</a></li>";
+                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lpm1 . " class='page-link' title='Page number $this->lpm1'>$this->lpm1</a></li>";
+                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lastpage . " class='page-link' title='Page number $this->lastpage'>$this->lastpage</a></li>";
                 } //in middle; hide some front and some back
                 elseif ($this->lastpage - ($this->adjacents * 2) > $this->page && $this->page > ($this->adjacents * 2)) { // so tr - 6 > hientai  hienta > 6
 
-                    $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 1 . " class='page-link' title='1'>1</a></li>";        // trang dau 1
-                    $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 2 . " class='page-link' title='2'>2</a></li>";        // trang thu 2
+                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 1 . " class='page-link' title='1'>1</a></li>";        // trang dau 1
+                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 2 . " class='page-link' title='2'>2</a></li>";        // trang thu 2
                     $pagination .= "<li>...</li>";
                     for ($counter = $this->page - $this->adjacents; $counter <= $this->page + $this->adjacents; $counter++) { // 1 2 3 hientai 5 6 7  (tong 7)
 
                         if ($counter == $this->page)
                             $pagination .= "<li><a rel='nofollow' href='#' class='$this->class_active' title='Page number $counter'>$counter</a></li>";
                         else
-                            $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='page-link' title='Page number $counter'>$counter</a></li>";
+                            $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='page-link' title='Page number $counter'>$counter</a></li>";
                     }
 
                     $pagination .= "<li>...</li>";
 
-                    $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lpm1 . " class='page-link' title='Page number $this->lpm1'>$this->lpm1</a></li>"; // trang cuoi - 1
-                    $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lastpage . " class='page-link' title='Page number $this->lastpage'>$this->lastpage</a></li>";  // trang cuoi
+                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lpm1 . " class='page-link' title='Page number $this->lpm1'>$this->lpm1</a></li>"; // trang cuoi - 1
+                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lastpage . " class='page-link' title='Page number $this->lastpage'>$this->lastpage</a></li>";  // trang cuoi
 
                 } //close to end; only hide early pages
                 else {
-                    $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 1 . " class='page-link' title='1'>1</a></li>";
-                    $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 2 . " class='page-link' title='2'>2</a></li>";
+                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 1 . " class='page-link' title='1'>1</a></li>";
+                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 2 . " class='page-link' title='2'>2</a></li>";
                     $pagination .= "<li>...</li>";
 
                     for ($counter = $this->lastpage - (2 + ($this->adjacents * 2)); $counter <= $this->lastpage; $counter++) {  // chi so = tong - 8; chi so < tong class="$this->class_active"
                         if ($counter == $this->page) {
                             $pagination .= "<li><a rel='nofollow' href='#' class='$this->class_active' title='Page number $counter'>$counter</a></li>";
                         } else {
-                            $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='page-link' title='Page number $counter'>$counter</a></li>";
+                            $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='page-link' title='Page number $counter'>$counter</a></li>";
                         }
                     }
                 }
@@ -120,7 +123,7 @@ class pagintion_temp
 
             //next button
             if (($this->page >= 1) && $this->page < $this->lastpage) {
-                $pagination .= "<li><a href=" . $this->url_modify . '&amp;' . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->next . " class='page-link' title='Next'>Next</a></li>";
+                $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->next . " class='page-link' title='Next'>Next</a></li>";
             } elseif ($this->page == $this->lastpage) {
                 $pagination .= "<li><a rel='nofollow' href='' class='$this->class_active' title='Next'>Next</a></li>";
             }
@@ -131,10 +134,20 @@ class pagintion_temp
     }
 }
 
-
+/**
+ * @param $array
+ * @param $_url
+ * @param $page
+ * @param $per_page
+ * @param int $adjacents
+ * @param string $name_per_page
+ * @param string $name_page
+ * @param string $class_active
+ * @param string $class_pagination
+ * @return array
+ */
 function cn_arr_pagina($array, $_url, $page, $per_page, $adjacents = 3, $name_per_page = 'per_page', $name_page = 'page', $class_active = 'current', $class_pagination = 'light-theme simple-pagination pagination')
 {
-
     //$paging-> total = $total = count($array); // TONG SO PAGE
     //$paging-> cn_url_modify = $cn_url_modify;
     $arr = array();
@@ -143,8 +156,8 @@ function cn_arr_pagina($array, $_url, $page, $per_page, $adjacents = 3, $name_pe
     $paging->class_pagination = $class_pagination;// ĐẶT CLASS CHO THÀNH PHẦN PHÂN TRANG THEO Ý MUỐN
     $paging->class_active = $class_active; // TEN CLASS Active
     $paging->page = $page;        // TRANG
-    $paging->total = $total = count($array);; // TONG SO PAGE
-    $paging->per_page = $per_page; // SỐ RECORD TRÊN 1 TRANG default = 10
+    $paging->total = $total = count($array); // TONG SO RECODE
+    $paging->per_page = $per_page; // SỐ RECODE TRÊN 1 TRANG default = 10
     $paging->adjacents = $adjacents; // SỐ PAGE  CENTER DEFAULT = 3
     $paging->name_page = $name_page; // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
     $paging->name_per_page = $name_per_page; // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
@@ -169,6 +182,34 @@ function cn_arr_pagina($array, $_url, $page, $per_page, $adjacents = 3, $name_pe
     return array($arr, $get_paging);
 }
 
+/**
+ * @param $countArray
+ * @param $_url
+ * @param $page
+ * @param $per_page
+ * @param int $adjacents
+ * @param string $name_per_page
+ * @param string $name_page
+ * @param string $class_active
+ * @param string $class_pagination
+ * @return string
+ */
+function cn_countArr_pagination($countArray, $_url, $page, $per_page, $adjacents = 3, $name_per_page = 'per_page', $name_page = 'page', $class_active = 'current', $class_pagination = 'light-theme simple-pagination pagination')
+{
+    $paging = new pagintion_temp();
+
+    $paging->class_pagination = $class_pagination;// ĐẶT CLASS CHO THÀNH PHẦN PHÂN TRANG THEO Ý MUỐN
+    $paging->class_active = $class_active; // TEN CLASS Active
+    $paging->page = $page;        // TRANG
+    $paging->total = $countArray; // TONG SO RECODE
+    $paging->per_page = $per_page; // SỐ RECODE TRÊN 1 TRANG default = 10
+    $paging->adjacents = $adjacents; // SỐ PAGE  CENTER DEFAULT = 3
+    $paging->name_page = $name_page; // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
+    $paging->name_per_page = $name_per_page; // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
+    $paging->url_modify = $_url; //	THÔNG SỐ SUA URL VOI FUNCTION CN_URL_MODIFY
+
+    return $paging->Load();
+}
 
 function cn_url_modify()
 {
@@ -2567,13 +2608,67 @@ function cn_relocation_db_new()
         if (!$connect_mssql) die('Ket noi voi SQL Server loi! Hay kiem tra lai ODBC ton tai hoac User & Pass SQL dung.');
     } else if ($type_connect == 'mssql') { // config sau
         if (extension_loaded('mssql')) echo('');
-        else Die('Loi! Khong the load thu vien php_mssql.dll. Hay cho phep su dung php_mssql.dll trong php.ini');
+        else die('Loi! Khong the load thu vien php_mssql.dll. Hay cho phep su dung php_mssql.dll trong php.ini');
         $db_new = ADONewConnection('mssql');
         $connect_mssql = $db_new->Connect($localhost, $databaseuser, $databsepassword, $d_base);
         if (!$connect_mssql) die('Loi! Khong the ket noi SQL Server');
     }
 }
 
+
+/**
+ * return global
+ */
+function cn_connect_forum()
+{
+    require_once ROOT . '/forum/includes/config.php';
+    global $db_Forum;
+    if (isset($config['Database']['dbtype'])) {
+        include_once(ROOT . '/admin/adodb/adodb.inc.php');
+
+        $dbType = $config['Database']['dbtype'];
+        $dbname = $config['Database']['dbname'];
+        $tableprefix = $config['Database']['tableprefix'];
+        $dbservername = @$config['MasterServer']['servername'] ? $config['MasterServer']['servername'] : '';
+        $dbport = @$config['MasterServer']['port'] ? $config['MasterServer']['port'] : '';
+        $dbusername = @$config['MasterServer']['username'] ? $config['MasterServer']['username'] : '';
+        $dbpassword = @$config['MasterServer']['password'] ? $config['MasterServer']['password'] : '';
+
+        if (!$dbservername) $dbservername = @$config['SlaveServer']['servername'] ? $config['SlaveServer']['servername'] : '';
+        if (!$dbusername) $dbusername = @$config['SlaveServer']['username'] ? $config['SlaveServer']['username'] : '';
+        if (!$dbpassword) $dbpassword = @$config['SlaveServer']['password'] ? $config['SlaveServer']['password'] : '';
+        if (!$dbport) $dbport = @$config['SlaveServer']['port'] ? $config['SlaveServer']['port'] : '';
+
+        if ($dbservername && $dbname && $dbusername) {
+            switch ($dbType) {
+                case 'mysqli':
+                    if (extension_loaded('mysqli')) echo('');
+                    else die('Loi! Khong the load thu vien php_mysqli.dll. Hay cho phep su dung php_mssql.dll trong php.ini');
+                    $db_Forum = ADONewConnection('mysqli');
+                    //$db->Connect($server, $userid, $password, $database);
+                    $connect_mssql = $db_Forum->Connect($dbservername, $dbusername, $dbpassword, $dbname);
+                    if (!$connect_mssql) die('Ket noi voi MYSQLI loi! Hay kiem tra lai MYSQLI ton tai hoac User & Pass SQL dung.');
+                    break;
+                case 'mysql':
+                    if (extension_loaded('mysql')) echo('');
+                    else die('Loi! Khong the load thu vien php_mysql.dll. Hay cho phep su dung php_mssql.dll trong php.ini');
+                    $db_Forum = ADONewConnection('mysql');
+                    //$db->Connect($server, $userid, $password, $database);
+                    $connect_mssql = $db_Forum->Connect($dbservername, $dbusername, $dbpassword, $dbname);
+                    if (!$connect_mssql) die('Ket noi voi MYSQLI loi! Hay kiem tra lai MYSQLI ton tai hoac User & Pass SQL dung.');
+                    break;
+                case 'odbc':
+                    $db_Forum = ADONewConnection('odbc');
+                    $database_ = "Driver={SQL Server};Server={$dbservername};Database={$dbname}";
+                    $connect_mssql = $db_Forum->Connect($database_, $dbusername, $dbpassword, $dbname);
+                    if (!$connect_mssql) die('Ket noi voi SQL Server loi! Hay kiem tra lai ODBC ton tai hoac User & Pass SQL dung.');
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
 
 // Since 2.0: Add message
 function cn_throw_message($msg, $area = 'n')
@@ -2586,7 +2681,6 @@ function cn_throw_message($msg, $area = 'n')
     mcache_set('msg:stor', $es);
     return FALSE;
 }
-
 
 // Since 2.0.3
 function cn_user_email_as_site($user_email, $username)
@@ -4001,8 +4095,7 @@ function CheckSlotWarehouse($warehouse, $itemX, $itemY)
             $i++;
         }
     }
-    echo "<br><br><br>3454 --------- items = $items <br>";//exit();
-    echo "<br><br><br>3454 --------- items = $itemsm <br>";//exit();
+
     $y = 0;
     while ($y < $itemY) {
         $x = 0;

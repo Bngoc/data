@@ -169,14 +169,14 @@ $skin_header = <<<HTML
 				</div>
 				<!-- ------------------------------------------- --><!-- ------------------------------------------- -->
 
-				<div class="quicklink">
+				<!--<div class="quicklink">
 					<div class="quicklink_item"><a href="" onclick="MM_nbGroup('down','group1','Foro','',1)" onmouseover="MM_nbGroup('over','Foro','images/qlink_depoisit-over.png','',1)" onmouseout="MM_nbGroup('out')"><img src="images/11.png" alt="Foro" name="Foro" border="0" id="Home" onload=""></a></div>
 					<div class="quicklink_item"><a href="" onclick="MM_nbGroup('down','group1','22','',1)" onmouseover="MM_nbGroup('over','22','images/diendan.png','',1)" onmouseout="MM_nbGroup('out')"><img src="images/22.png" alt="Foro" name="22" border="0" id="Home" onload=""></a></div>
 					<div class="quicklink_item"><a href="" onclick="MM_nbGroup('down','group1','33','',1)" onmouseover="MM_nbGroup('over','33','images/dangky1.png','',1)" onmouseout="MM_nbGroup('out')"><img src="images/33.png" alt="Foro" name="33" border="0" id="Home" onload=""></a></div>
-					<!--div class="quicklink_item"><a href="/"><img src="/images/qlink_depoisit.png" alt="Webshop phụ kiện" /></a></div-->
+					&lt;!&ndash;div class="quicklink_item"><a href="/"><img src="/images/qlink_depoisit.png" alt="Webshop phụ kiện" /></a></div&ndash;&gt;
 					<div class="quicklink_item"><a href="" onclick="MM_nbGroup('down','group1','44','',1)" onmouseover="MM_nbGroup('over','44','images/qlink_cashshop.png','',1)" onmouseout="MM_nbGroup('out')"><img src="images/44.png" alt="Foro" name="44" border="0" id="Home" onload=""></a></div>
 					<div class="quicklink_item"><a href="" onclick="MM_nbGroup('down','group1','55','',1)" onmouseover="MM_nbGroup('over','55','images/ws.png','',1)" onmouseout="MM_nbGroup('out')"><img src="images/55.png" alt="Foro" name="55" border="0" id="Home" onload=""></a></div>        				
-				</div>
+				</div>-->
 		
 				<div class="hotrotructuyen"></div>
 				

@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0
 || # ---------------------------------------------------------------- # ||
-|| # All PHP code in this file is ©2000-2012 vBulletin Solutions Inc. # ||
+|| # All PHP code in this file is ï¿½2000-2012 vBulletin Solutions Inc. # ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -76,7 +76,7 @@ $config['MasterServer']['usepconnect'] = 0;
 	//	do not change any of the values here.
 $config['SlaveServer']['servername'] = '';
 $config['SlaveServer']['port'] = 3306;
-$config['SlaveServer']['username'] = '';
+$config['SlaveServer']['username'] = 'root';
 $config['SlaveServer']['password'] = '';
 $config['SlaveServer']['usepconnect'] = 0;
 

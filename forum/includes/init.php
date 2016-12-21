@@ -152,8 +152,8 @@ switch (strtolower($vbulletin->config['Database']['dbtype']))
 	default:
 	{
 	// this is not implemented fully yet
-	//	$db = 'vB_Database_' . $vbulletin->config['Database']['dbtype'];
-	//	$db = new $db($vbulletin);
+		$db = 'vB_Database_' . $vbulletin->config['Database']['dbtype'];
+		$db = new $db($vbulletin);
 		die('Fatal error: Database class not found');
 	}
 }
