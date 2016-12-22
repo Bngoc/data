@@ -3797,7 +3797,7 @@ function char_deleinventory()
     $itemInfo = array();
     for ($jk = 0; $jk < $lenghtInventoryDel; $jk += 32){
        $strItem = substr($inventoryDele, $jk, 32);
-
+echo '$strItem =-> ' . $strItem . '<br>';
         $itemInfo = cn_analysis_code32($strItem, '', '', '');
     }
 
