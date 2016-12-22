@@ -259,9 +259,9 @@ function shop___what_()
     $accc_ = $member['user_name'];
     $warehouse_ = do_select_character('warehouse', 'Items,Money,pw,AccountID', "AccountID='$accc_'");
 
-    $item_list = substr(strtoupper(bin2hex($warehouse_[0][0])), 0, 3840);
-    $money = $warehouse_[0][1];
-    $password = $warehouse_[0][2];
+    $item_list = substr(strtoupper(bin2hex($warehouse_[0]['Items'])), 0, 3840);
+    $money = $warehouse_[0]['Money'];
+    $password = $warehouse_[0]['pw'];
     //$accountid_ = $warehouse_[0][3]; //??
 
     $show_warehouse = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:57px; padding-left:25px; height:628px; background-image: url(/images/warehouse.jpg)'>";
