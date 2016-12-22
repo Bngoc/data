@@ -646,7 +646,7 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     }
 
     $items_data = getoption('#items_data');
-
+echoArr($items_data);
     if (!in_array($group . '.' . $id, array_keys($items_data))) return false;
 
     $item_read = $items_data[$group . '.' . $id];
@@ -677,7 +677,7 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     if ($ancient == 5) $ancient_set = $item_read['SET1'];
     else if ($ancient == 10) $ancient_set = $item_read['SET2'];
 
-    //Sử lí màu Tên Item
+    //Xử lí màu Tên Item
     $color = 'while'; // White -> Normal Item
     if (($option > 1) || ($luck != '')) $color = '#8CB0EA';
     if ($item_level > 6) $color = '#F4CB3F';
@@ -762,5 +762,6 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
         'code32' => $string,
         'image_mh' => $image_mh,
     );
+    echoArr($output);
     return $output;
 }
