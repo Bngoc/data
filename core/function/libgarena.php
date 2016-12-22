@@ -646,7 +646,6 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     }
 
     $items_data = getoption('#items_data');
-echoArr($items_data);
     if (!in_array($group . '.' . $id, array_keys($items_data))) return false;
 
     $item_read = $items_data[$group . '.' . $id];
