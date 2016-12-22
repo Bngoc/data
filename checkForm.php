@@ -42,7 +42,7 @@ if ($action) {
     //$notify_deline = '<img style="margin-right:5px" src="images/alert_icon.gif"><span style="color:#FF0000">'.$notify.'</span>';
 
     if ($user_table && $user_cont && $user_col && $id) {
-        $xyz = do_select_character($user_table, $user_col, "$user_cont='$id'", ''); ///// viettttttttttttttttttttttttttttttttt
+        $xyz = do_select_character($user_table, $user_col, "$user_cont='$id'", '');
 
         if (!$xyz) {
             if ($check_ == "check_finduser") { // tim kiem character ko co
@@ -60,56 +60,4 @@ if ($action) {
         echo $re_str;
     }
 }
-
-/*
-$action = $_GET['action'];
-$id = $_GET['id'];
-
-
-$form_data = "action={$action}&id={$id}&account=".$_SESSION['mu_Account']."&passtransfer={$passtransfer}";
-$show_reponse = @file_get_contents( $server_url."/checkForm.php?".$form_data );
-echo $show_reponse;
-
-
-
-$action = $_GET['action'];
-$account = $_GET['account'];
-$id = $_GET['id'];
-$passtransfer = $_GET['passtransfer'];
-
-if ($passtransfer == $transfercode) {
-	switch ($action) {
-		case 'checkid':
-			$sql_username_check = $db->Execute("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$id'"); 
-			$username_check = $sql_username_check->numrows();
-			if ($username_check > 0) echo '<img style="margin-right:5px" src="images/alert_icon.gif"><span style="color:#FF0000">Tên tài khoản đã có người sử dụng</span>';
-			else echo '<img style="margin-right:10px" src="images/checkbullet.gif">';
-			break;
-		case 'checkemail':
-			$sql_email_check = $db->Execute("SELECT mail_addr FROM MEMB_INFO WHERE mail_addr='$id'");
-			$email_check = $sql_email_check->numrows();
-			if ($email_check > 0) echo '<img style="margin-right:5px" src="images/alert_icon.gif"><span style="color:#FF0000">Email đã có người sử dụng</span>';
-			else echo '<img style="margin-right:10px" src="images/checkbullet.gif">';
-			break;
-		case 'finduser':
-			$sql_user_check = $db->Execute("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$id'");
-			$user_check = $sql_user_check->numrows();
-			if ($user_check == 0) echo '<img style="margin-right:5px" src="images/alert_icon.gif"><span style="color:#FF0000">Tài khoản này không tồn tại</span>';
-			else echo '<img style="margin-right:10px" src="images/checkbullet.gif">';
-			break;
-		case 'findanswer':
-			$sql_answ_check = $db->Execute("SELECT fpas_answ FROM MEMB_INFO WHERE memb___id='$account'");
-			$answ_check = $sql_answ_check->fetchrow();
-			if ($answ_check[0] != $id) echo '<img style="margin-right:5px" src="images/alert_icon.gif"><span style="color:#FF0000">Câu trả lời bí mật không đúng</span>';
-			else echo '<img style="margin-right:10px" src="images/checkbullet.gif">';
-			break;
-		case 'checkname':
-			$sql_charname_check = $db->Execute("SELECT Name FROM Character WHERE Name='$id'"); 
-			$charname_check = $sql_charname_check->numrows();
-			if ($charname_check > 0) echo '<img style="margin-right:5px" src="images/alert_icon.gif"><span style="color:#FF0000">Tên nhân vật đã có người sử dụng</span>';
-			else echo '<img style="margin-right:10px" src="images/checkbullet.gif">';
-			break;
-	}
-} else echo "Error";
-*/
 ?>

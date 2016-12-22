@@ -112,7 +112,6 @@ function db_user_by($eid, $match = 'id')
 // Since 2.0: Get user by id
 function db_user_by_name($name)//, $index = FALSE)
 {
-
     global $dbSa;
 
     $username = strip_tags($name);

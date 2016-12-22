@@ -27,7 +27,7 @@ function char_invoke()
         'char_manager:maint:Cmt' => 'Khóa đồ - Bảo vệ đồ',
         'char_manager:changename:Clc' => 'Đổi tên nhận vật',
         'char_manager:script:Csr' => 'Chuyển nhân vật',
-        'char_manager:selfchk1:Cpc' => 'Xóa đồ nhân vật',
+        'char_manager:deleinventory:Cpc' => 'Xóa đồ nhân vật',
         'char_manager:level1:Cpc' => 'Làm nhiệm vụ cấp 1',
         'char_manager:level2:Cpc' => 'Làm nhiệm vụ cấp 220',
         'char_manager:level3:Cpc' => 'Làm nhiệm vụ cấp Master',
@@ -94,6 +94,7 @@ function char_invoke()
         'level1' => 'level-1.png',
         'level2' => 'level-2.png',
         'level3' => 'level-3.png',
+        'deleinventory' => 'cancel-inventory.png',
 
         'widgets' => 'widgets.png',
         'wreplace' => 'replace.png',
@@ -188,54 +189,6 @@ function char_reset()
 
     $_blank_var = view_bank($accc_ = $member['user_name']);
 
-    /*
-	$set_cls = false;
-	if($show_reponse){
-		foreach($show_reponse as $od => $do){
-			if ( !empty( $do[0])){
-
-				if(!$set_cls){
-					$sub_ = $do[0];
-					$set_cls = true;
-				}
-
-				$showchar[$do[0]] = array(
-					//'char_image' => $Char_Image,
-					'name' => $do[0],
-					'class' => $do[1],
-					'level' => $do[2],
-					//'str' => $do[3],
-					//'dex' => $do[4],
-					//'vit' => $do[5],
-					//'ene' => $do[6],
-					//'com' => $do[7],
-					'reset' => $do[8],
-					'relife' => $do[9],
-					//'point' => $do[10],
-					//'point_dutru' => $do[11],
-					//'uythac' => $do[12],
-					//'point_uythac' => $do[13],
-					//'pcpoint' => $do[14],
-					'accountId' => $do[15],
-					'resetInDay' => $do[16],
-					'money' => $do[17],
-					'top_50' => $do[18],
-					'Resets_Time' => $do[19],
-					'shop' => $do[21],
-				);
-			}
-		}
-	}
-	else{
-		msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.");
-	}
-
-    if (!$sub) $sub = $sub_;
-    else{
-		if(!in_array($sub,array_keys($showchar)))
-			$sub = $sub_;
-    };
-	*/
     if (!$sub) $sub = array_keys($showchar)[0];
     else {
         if (!in_array($sub, array_keys($showchar)))
@@ -247,7 +200,7 @@ function char_reset()
     $rs_inday = $showchar[$sub]['resetInDay'];
     $rs_top_50 = $showchar[$sub]['top_50'];
     $Resets_Time = $showchar[$sub]['Resets_Time'];
-    $inventory = $showchar[$sub]['shop_inventory'];
+    //$inventory = $showchar[$sub]['shop_inventory'];
     $reset_rs = $showchar[$sub]['reset'];
     $relife_vl = $showchar[$sub]['relife'];
     $class_ = $showchar[$sub]['class'];
@@ -3810,6 +3763,133 @@ function char_level2(){}
 
 function char_level3(){}
 
+function char_deleinventory()
+{
+    list($sub, $nameClass) = GET('sub, nameClass', 'GPG');
+    $nameClass = strtolower($nameClass);
+
+    // kiem chu va so ......????
+//    $_blank_var = view_bank($accc_ = $member['user_name']);
+    $showchar = cn_character();
+
+
+
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+    }
+
+    $inventory = $showchar[$sub]['shop_inventory'];
+    echo "ssss=-> " . $inventory . '<br>';
+    // All - 12 - 64 (8*8) - 32 (4*8) [108-76]
+    $inventoryRaw = strtoupper(bin2hex($inventory));
+    $inventoryTemp = substr($inventoryRaw, 0, 76*32);
+    $inventoryDele = substr($inventoryRaw, 76 * 32, 32 * 32);
+
+//    echo "$inventoryRaw =-> " .$inventoryRaw. '<br>';
+    echo "ddd =-> " .$inventoryDele. '<br>';
+//    echoArr($showchar); die;
+    $member = member_get();
+
+    $lenghtInventoryDel = strlen($inventoryDele);
+
+    $itemInfo = array();
+    for ($jk = 0; $jk < $lenghtInventoryDel; $jk += 32){
+       $strItem = substr($inventoryDele, $jk, 32);
+
+        $itemInfo = cn_analysis_code32($strItem, '', '', '');
+    }
+
+echoArr($itemInfo);
+//    $accc_ = $member['user_name'];
+//    $warehouse_ = do_select_character('warehouse', 'Items,Money,pw,AccountID', "AccountID='$accc_'");
+
+    $item_list = $inventoryDele;
+//    $item_list = substr(strtoupper(bin2hex($warehouse_[0][0])), 0, 3840);
+    $money = 0;
+    $password = 0;
+    //$accountid_ = $warehouse_[0][3]; //??
+
+    $show_warehouse = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:57px; padding-left:25px; height:628px; background-image: url(images/warehouse.jpg)'>";
+    $i = -1;
+    $x = -1;
+
+    while ($i < 119) {
+        $i++;
+        $x++;
+        if ($x == 8) $x = 0;
+        $item32 = cn_item_info(substr($item_list, $i * 32, 32), '', '', '');
+        if (!$item32) continue;
+
+        if ($item32['name']) {
+            if (!$item32['y']) $itemy = 1;
+            else $itemy = $item32['y'];
+
+            if (!$item32['x']) $itemx = 1;
+            else $itemx = $item32['x'];
+
+            $show_warehouse .= "<div style='margin-top:" . (floor($i / 8) * 32) . "px; 
+											margin-left:" . ($x * 32) . "px; position:absolute;
+											width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px;
+											cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>
+									<img src='images/items/" . $item32['image'] . ".gif' 
+											style=\"height:" . (32 * $itemy - $itemy - 1) . "px;
+											width:" . (32 * $itemx) . "px;\" 
+											onMouseOut='UnTip()' onMouseOver=\"topxTip(document.getElementById('iditem" . $i . "').innerHTML)\">
+								</div>";
+            $show_warehouse .= "<div class='floatcontainer forumbit_nopost' id='iditem$i' style='display:none;background: rgba(0, 128, 0, 0.15);'>'" . $item32['info'] . "'</div>";
+
+            //onmouseover="topxTip(document.getElementById('tip_10261').innerHTML)" onmouseout="UnTip()"
+            //onMouseOut='hidetip()' onMouseOver=\"showtip('".$item32['info']."')\">
+        }
+    }
+
+    if ($password != NULL AND $password != 0) $wwname = "<font color='#A42725'>Hòm đồ (Đóng)</font>";
+    else $wwname = "<font color='#ffffff'>Hòm đồ (Mở)</font>";
+    if ($money < 100000) $color = "#F7DDAA";
+    else if ($money >= 100000 and $money < 1000000) $color = "#3CA445";
+    else if ($money >= 1000000 and $money < 10000000) $color = "#D2A154";
+    else $color = "#A42725";
+
+    $show_warehouse .= "<div style='margin-top:-42px; position:absolute; text-align:center; width:256px; border:0px;'>" . $wwname . "</div>";
+    $show_warehouse .= "<div id='zzen2' style='margin-top:100px; margin-left:-20px; position:absolute; border:0px; width:0px; height:0px;'></div>";
+    $show_warehouse .= "<div align=right style='position:absolute; color:" . $color . "; margin-top:502px; width:200px; margin-right:37px; margin-left:50px; border:0px;'>" . $money . "</div>";
+    //$show_warehouse	.=	"<div style='margin-top:565px; margin-left:36px; position:absolute; width:57px; cursor:pointer; height:47px;'><img alt='Rút Zen' onmousemove='return overlib(\"Rút Zen từ Hòm đồ\");' onclick='get_zen2(\"1\")' onmouseout='return nd();' src='images/insert_zen.jpg'></div>";
+    //$show_warehouse	.=	"<div style='margin-top:565px; margin-left:100px; position:absolute; width:59px; cursor:pointer; height:47px;'><img alt='Gửi Zen' onmousemove='return overlib(\"Gửi Zen vào Hòm đồ\");' onclick='get_zen2(\"2\")' onmouseout='return nd();' src='images/get_zen.jpg'></div>";
+    $show_warehouse .= "<div style='margin-top:565px; margin-left:36px; position:absolute; width:57px; height:47px;'><img src='images/insert_zen.jpg'></div>";
+    $show_warehouse .= "<div style='margin-top:565px; margin-left:100px; position:absolute; width:59px; height:47px;'><img src='images/get_zen.jpg'></div>";
+
+    if ($password != NULL AND $password != 0) {
+        $type = 1;
+        $echo_t = "Mở khóa Hòm đồ";
+        $imgl = "images/lock_on.jpg";
+    } else {
+        $type = 0;
+        $echo_t = "Khóa Hòm đồ";
+        $imgl = "images/lock_off.jpg";
+    }
+    //$show_warehouse	.=	"<div style='margin-top:565px; margin-left:166px; position:absolute; width:57px; cursor:pointer; height:47px;'><img alt='Lock' onmousemove='return overlib(\"".$echo_t."\");' onmouseout='return nd();' onclick='lock_t2(\"".$type."\");' src='".$imgl."'></div>";
+    $show_warehouse .= "<div style='margin-top:565px; margin-left:166px; position:absolute; width:57px; height:47px;'><img src='" . $imgl . "'></div>";
+    $show_warehouse .= "</div>";
+
+    if (request_type('POST')) {
+        if (REQ('action_inventory')) {
+            die('action_inventory');
+//            //cn_dsi_check();
+//
+//            $errors_false = false;
+        }
+    }
+
+    //echo $show_warehouse;
+    cn_assign('sub, show_warehouse, showchar', $sub, $show_warehouse, $showchar);
+
+    echoheader('-@my_char/style.css', "Thùng đồ bán - Shop Inventory");
+    echocomtent_here(exec_tpl('my_char/inventory'), cn_snippet_bc_re());
+    echofooter();
+}
+
 
 //function char_()
 //{
@@ -4003,3 +4083,4 @@ function checkGcoinVpoint($gcRoot, $vpRoot, $parVpoint) {
 
     return array($get_gc, $sms_gc, $get_vp, $sms_vp, $cn_false);
 }
+

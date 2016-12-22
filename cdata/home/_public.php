@@ -1,6 +1,6 @@
 ﻿<?php
 
-list($dataNotifyForum, $get_paging) = _GL('dataNotifyForum, get_paging');
+list($dataNotifyForum, $get_paging, $result_RankingTop10) = _GL('dataNotifyForum, get_paging, result_RankingTop10');
 cn_snippet_messages();
 //cn_snippet_bc();
 ?>
@@ -27,7 +27,7 @@ cn_snippet_messages();
                                                 foreach ($dataNotifyForum as $key => $item) {
                                                     echo '<div class="row-notify"><span class="topx-content-tab"><img src = "/images/post_new.gif" border = "0">&nbsp;';
 //                                                    echo '<b class="nofify-Forum">'. $item['keywords'] .'</b>';
-                                                    echo '<i class="time-nofify-Forum time-'. rand(1,3) .'">'. date('d-m-Y h:i A', $item['lastpost']) .'</i>&nbsp;';
+                                                    echo '<i class="time-nofify-Forum time-'. $item['nameColor'] .'">'. date('d-m-Y h:i A', $item['lastpost']) .'</i>&nbsp;';
                                                     echo '<a class="overtext" href="'. cn_url_modify(array('reset')) .'/forum/showthread.php?'. $item['threadid'] . '-'. $item['urlForum'] .'&amp;goto=newpost" >' . $item['title'];
                                                     echo '</a></span> <div class="col-right"><a href="/forum/member.php?'. $item['postuserid'] .'-'. $item['postusername'] .'">'. $item['titleUser'] .'</a></div></div>';
                                                 }
@@ -107,27 +107,17 @@ cn_snippet_messages();
     <div class="facebook">
         <div class="facebook_content">
             <div class="ranking_list">
-                <div class="ranking_sub">
-                    <p class="left_sub">TT</p>
-                    <p class="right_center">Character</p>
-                    <p class="right_sub">Reset</p>
-                </div>
-
-                <table>
-                    <colgroup>
-                        <col width="26px;">
-                        <col width="">
-                    </colgroup>
-                    <tbody>
-                    <?php if (!is_array($char) && !is_object($char)) settype($char, 'array');
-                    foreach ($char as $char) { ?>
-                        <tr style="height:20px">
-                            <th><?php echo $char[stt] ?></th>
-                            <td style="float:left; font-size:11px"><?php echo $char[name] ?></td>
-                            <th><b><?php echo $char[reset] ?></b></th>
-                        </tr>
-                    <?php } ?>
-                    </tbody>
+                <table class="ranking_sub">
+                    <tr>
+                        <th class="title-ranking">TT</th>
+                        <th class="title-ranking">Character</th>
+                        <th class="title-ranking">RL/RS</th>
+                    </tr>
+                    <?php if ($result_RankingTop10) {
+                        foreach ($result_RankingTop10 as $key => $its) { 
+                            echo '<tr><td><img src="/images/rankingTop15/'. ($key + 1) .'.gif" alt="'. ($key + 1) .'.gif"></td><td>'. $its['Name'] .'</td><td>'. $its['Relifes'] .'/'. $its['Resets'] .'</td></tr>';
+                         }
+                    }?>
                 </table>
             </div>
         </div>

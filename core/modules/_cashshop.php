@@ -329,7 +329,7 @@ function shop___what_()
     //echo $show_warehouse;
     cn_assign('show_warehouse', $show_warehouse);
 
-    echoheader('-@my_char/style.css', "Thùng đồ - Warehouse");
+    echoheader('-@my_cashshop/style.css', "Thùng đồ - Warehouse");
     echocomtent_here(exec_tpl('my_cashshop/_warehouse'), cn_snippet_bc_re());
     echofooter();
 }

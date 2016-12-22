@@ -7,7 +7,6 @@ define('ACL_LEVEL_JOURNALIST', 3);
 define('ACL_LEVEL_COMMENTER', 4);
 define('ACL_LEVEL_BANNED', 5);
 
-
 /**
  * @return bool
  */
@@ -27,6 +26,7 @@ function db_installed_check()
     }
 }
 
+// bo -- chua dung ???????????
 function view_info_char($account)
 {
     global $db_new;
@@ -55,20 +55,20 @@ function view_info_char($account)
                     }
                     if ($query_info_char->numrows() != 0) {
                         $info_char = $query_info_char->fetchrow();
-                        $class[] = $info_char[0];
-                        $level[] = $info_char[1];
-                        $str[] = $info_char[2];
-                        $dex[] = $info_char[3];
-                        $vit[] = $info_char[4];
-                        $ene[] = $info_char[5];
-                        $com[] = $info_char[6];
-                        $reset[] = $info_char[7];
-                        $relife[] = $info_char[8];
-                        $point[] = $info_char[9];
-                        $point_dutru[] = $info_char[10];
-                        $uythac[] = $info_char[11];
-                        $point_uythac[] = $info_char[12];
-                        $pcpoint[] = $info_char[13];
+                        $class[] = $info_char['Class'];
+                        $level[] = $info_char['cLevel'];
+                        $str[] = $info_char['Strength'];
+                        $dex[] = $info_char['Dexterity'];
+                        $vit[] = $info_char['Vitality'];
+                        $ene[] = $info_char['Energy'];
+                        $com[] = $info_char['Leadership'];
+                        $reset[] = $info_char['Resets'];
+                        $relife[] = $info_char['Relifes'];
+                        $point[] = $info_char['LevelUpPoint'];
+                        $point_dutru[] = $info_char['pointdutru'];
+                        $uythac[] = $info_char['uythacoffline_stat'];
+                        $point_uythac[] = $info_char['PointUyThac'];
+                        $pcpoint[] = $info_char['SCFPCPoints'];
                     }
 
                     $str_ .= "$row[$i]|$class[$i]|$level[$i]|$str[$i]|$dex[$i]|$vit[$i]|$ene[$i]|$com[$i]|$reset[$i]|$relife[$i]|$point[0]|$point_dutru[0]|$uythac[0]|$point_uythac[0]|$pcpoint[0]||";
@@ -81,76 +81,40 @@ function view_info_char($account)
 
 function view_character($account)
 {
-
     global $db_new;
-    //$str_ = ''; //////////////////////////////////////////////////
     if (!empty($account)) {
         kiemtra_acc($account);
 
-        $result = $db_new->Execute("SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'");
-        if ($result === false) return 'Error'; /////////////////////////////////////////
-        if ($result->numrows() != 0) {
-            $row = $result->fetchrow();
-            //$coun_row =count($row);
-            //for ($i=0; $i< $coun_row; $i++) {
+        $result = $db_new->Execute($myQuery = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'") or cn_writelog($myQuery, 'e');
 
-            foreach ($row as $i => $vl) {
-                if (!empty($row[$i])) {
-                    switch (getoption('server_type')) {
-                        case "scf":
-                            $query_info_char = $db_new->Execute("SELECT Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,SCFPCPoints,AccountID,NoResetInDay,Money,Top50,Resets_Time,UyThac,CAST(Inventory AS image),PkLevel,PkCount,MapNumber,IsThuePoint,TimeThuePoint FROM Character WHERE Name='$vl'");
-                            if ($query_info_char === false) continue;
-                            break;
-                        case "ori":
-                            $query_info_char = $db_new->Execute("SELECT Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,PCPoints,AccountID,NoResetInDay,Money,Top50,Resets_Time,UyThac,CAST(Inventory AS image),PkLevel,PkCount,MapNumber,IsThuePoint,TimeThuePoint FROM Character WHERE Name='$vl'");
-                            if ($query_info_char === false) continue;
-                            break;
-                        default:
-                            $query_info_char = $db_new->Execute("SELECT Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,SCFPCPoints,AccountID,NoResetInDay,Money,Top50,Resets_Time,UyThac,CAST(Inventory AS image),PkLevel,PkCount,MapNumber,IsThuePoint,TimeThuePoint FROM Character WHERE Name='$vl'");
-                            if ($query_info_char === false) continue;
-                            break;
-                    }
-                    //if($query_info_char -> numrows() != 0){
-                    $info_char = $query_info_char->fetchrow();
-                    //}
+        if ($result) {
+            if ($result->numrows() != 0) {
+                $row = $result->fetchrow();
 
-                    //------------------------------------------
-                    /*
-                    $array = array();
-                    while ($row = $query_info_char->fetchrow()) {
-                      foreach ($row as $key => $value) {
-                              echo "96 ............ key = $key >>>>>.<<<<<<value = $value <br>";
-                        $array[$key][] = $value;
-                      }
-                    }
-                    //$df = array_keys($info_char);
-                    $df[] = mysql_fetch_field($info_char, 0);
-                    foreach ($df as $key) {
-                        echo "96 ............ key = $key >>>>>.<<<<<<value = value <br>";
-                    }
-                    *
-                    foreach ($info_char as $keyvalue) {
-                        foreach ($keyvalue as $key => $value){
-                            echo "96 ............ key = $key >>>>>.<<<<<<value = $value <br>";
-                            $array[$key][] = $value;
+                foreach ($row as $i => $vl) {
+                    if (!empty($row[$i])) {
+                        switch (getoption('server_type')) {
+                            case "scf":
+                                $query_info_char = $db_new->Execute("SELECT Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,SCFPCPoints,AccountID,NoResetInDay,Money,Top50,Resets_Time,UyThac,Inventory AS image,PkLevel,PkCount,MapNumber,IsThuePoint,TimeThuePoint FROM Character WHERE Name='$vl'");
+                                if ($query_info_char === false) continue;
+                                break;
+                            case "ori":
+                                $query_info_char = $db_new->Execute("SELECT Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,PCPoints,AccountID,NoResetInDay,Money,Top50,Resets_Time,UyThac,Inventory AS image,PkLevel,PkCount,MapNumber,IsThuePoint,TimeThuePoint FROM Character WHERE Name='$vl'");
+                                if ($query_info_char === false) continue;
+                                break;
+                            default:
+                                $query_info_char = $db_new->Execute("SELECT Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,SCFPCPoints,AccountID,NoResetInDay,Money,Top50,Resets_Time,UyThac,Inventory AS image,PkLevel,PkCount,MapNumber,IsThuePoint,TimeThuePoint FROM Character WHERE Name='$vl'");
+                                if ($query_info_char === false) continue;
+                                break;
                         }
-                    }
-                    */
-                    //------------------------------------------
 
-                    $info_char_[] = $info_char;
+                        $info_char_[] = $query_info_char->fetchrow();
+                    }
                 }
             }
         }
     }
-    //-------------------------------------
-    //foreach ($info_char_ as $k)
-    //foreach ($k as $key => $value)
-    //{
-    //echo "96 ............  $key >>>>>.<<<<<< $value <br>";
-    //$array[$key][] = $value;
-    //}
-    //-------------------------------------
+
     return isset($info_char_) ? $info_char_ : array();
 }
 
@@ -162,7 +126,7 @@ function view_bank($account)
 
         if ($result)
             foreach ($result as $key => $var)
-                $_data[] = Array('bank' => $var[0], 'vp' => $var[1], 'chaos' => $var[2], 'cre' => $var[3], 'blue' => $var[4], 'gc' => $var[5], 'gc_km' => $var[6],);
+                $_data[] = Array('bank' => $var['bank'], 'vp' => $var['vpoint'], 'chaos' => $var['jewel_chao'], 'cre' => $var['jewel_cre'], 'blue' => $var['jewel_blue'], 'gc' => $var['gcoin'], 'gc_km' => $var['gcoin_km']);
     }
 
     return isset($_data) ? $_data : array();
@@ -280,15 +244,28 @@ function db_user_by_name($name)
 {
     if ($name) {
         $name = strtolower($name);
-        $username = strip_tags($name); //??????????????????
+        $username = strip_tags($name);
         $username = mssql_real_escape_string($username);
-        //$username = mysqli_real_escape_string($db_new,$username);
 
         //$result_rows = do_select_character('MEMB_INFO','memb___id','memb__pwd','tel__numb','phon_numb','mail_addr','fpas_ques','fpas_answ','memb__pwd2','memb__pwdmd5','acl','ban_login','num_login','pass2',"memb___id:'$username'",'');
         $result_rows = do_select_character('MEMB_INFO', 'memb___id,memb__pwd,tel__numb,phon_numb,mail_addr,fpas_ques,fpas_answ,memb__pwd2,memb__pwdmd5,acl,ban_login,num_login,pass2', "memb___id='$username'");
         if ($result_rows) {
             foreach ($result_rows as $sd => $ds) {
-                $pdata = Array('user_name' => $ds[0], 'pass_game' => $ds[1], 'tel_num' => $ds[2], 'phon_num' => $ds[3], 'email' => $ds[4], 'question' => $ds[5], 'answer' => $ds[6], 'pass_verify' => $ds[7], 'pass_web' => $ds[8], 'acl' => $ds[9], 'ban_login' => $ds[10], 'num_login' => $ds[11], 'pass2' => $ds[12],);
+                $pdata = Array(
+                    'user_name' => $ds['memb___id'],
+                    'pass_game' => $ds['memb__pwd'],
+                    'tel_num' => $ds['tel__numb'],
+                    'phon_num' => $ds['phon_numb'],
+                    'email' => $ds['mail_addr'],
+                    'question' => $ds['fpas_ques'],
+                    'answer' => $ds['fpas_answ'],
+                    'pass_verify' => $ds['memb__pwd2'],
+                    'pass_web' => $ds['memb__pwdmd5'],
+                    'acl' => $ds['acl'],
+                    'ban_login' => $ds['ban_login'],
+                    'num_login' => $ds['num_login'],
+                    'pass2' => $ds['pass2']
+                );
             }
         }
     }
@@ -304,7 +281,7 @@ function do_select_orther($orther = '')
 
     if ($orther) {
         $orther = trim($orther);
-        $check = $db_new->Execute("$orther") or cn_writelog("$orther", 'e');
+        $check = $db_new->Execute("$orther") or cn_writelog($orther, 'e');
         if ($check) {
             while ($row = $check->fetchrow()) {
                 $rs_data[] = $row;
@@ -340,8 +317,6 @@ function do_select_character($table, $col, $where = '', $orther = '')
     } else $str_where = $where;
 
     if ($orther) $orther = trim($orther);
-
-    //$db_new->SetFetchMode(ADODB_FETCH_ASSOC);
 
     if ($str_col && $table) {
         $check = $db_new->Execute("SELECT $str_col FROM $table $str_where $orther") or cn_writelog("SELECT $str_col FROM $table $str_where $orther", 'e');
@@ -592,7 +567,7 @@ function do_delete_char($myQuery){
 
     if ($myQuery) {
         $myQuery = trim($myQuery);
-        $check = $db_new->Execute("$myQuery") or cn_writelog("$myQuery", 'e');
+        $check = $db_new->Execute("$myQuery") or cn_writelog($myQuery, 'e');
         if ($check) {
             return true;
         }
@@ -640,18 +615,18 @@ function do_selc_char($account, $character)
         if ($sql_class_check === false) $class_stat = array();
         $class_stat = $sql_class_check->fetchrow() or $class_stat = array();
         if ($class_stat) {
-            $arr_class['Strength'] = $class_stat[0];
-            $arr_class['Dexterity'] = $class_stat[1];
-            $arr_class['Vitality'] = $class_stat[2];
-            $arr_class['Energy'] = $class_stat[3];
-            $arr_class['Life'] = $class_stat[4];
-            $arr_class['MaxLife'] = $class_stat[5];
-            $arr_class['Mana'] = $class_stat[6];
-            $arr_class['MaxMana'] = $class_stat[7];
-            $arr_class['MapNumber'] = $class_stat[8];
-            $arr_class['MapPosX'] = $class_stat[9];
-            $arr_class['MapPosY'] = $class_stat[10];
-            $arr_class['Leadership'] = $class_stat[11];
+            $arr_class['Strength'] = $class_stat['Strength'];
+            $arr_class['Dexterity'] = $class_stat['Dexterity'];
+            $arr_class['Vitality'] = $class_stat['Vitality'];
+            $arr_class['Energy'] = $class_stat['Energy'];
+            $arr_class['Life'] = $class_stat['Life'];
+            $arr_class['MaxLife'] = $class_stat['MaxLife'];
+            $arr_class['Mana'] = $class_stat['Mana'];
+            $arr_class['MaxMana'] = $class_stat['MaxMana'];
+            $arr_class['MapNumber'] = $class_stat['MapNumber'];
+            $arr_class['MapPosX'] = $class_stat['MapPosX'];
+            $arr_class['MapPosY'] = $class_stat['MapPosY'];
+            $arr_class['Leadership'] = $class_stat['Leadership'];
         }
     }
 
@@ -1362,7 +1337,7 @@ function do_select_ortherForum($orther)
 
     if ($orther) {
         $orther = trim($orther);
-        $check = $db_Forum->Execute("$orther") or cn_writelog("$orther", 'e');
+        $check = $db_Forum->Execute("$orther") or cn_writelog($orther, 'e');
         if ($check) {
             while ($row = $check->fetchrow()) {
                 $rs_data[] = $row;
@@ -1428,7 +1403,7 @@ function do_delete_ortherForum($myQuery)
 
     if ($myQuery) {
         $myQuery = trim($myQuery);
-        $check = $db_Forum->Execute("$myQuery") or cn_writelog("$myQuery", 'e');
+        $check = $db_Forum->Execute("$myQuery") or cn_writelog($myQuery, 'e');
         if ($check) {
             return true;
         }

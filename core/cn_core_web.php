@@ -729,9 +729,9 @@ function cn_login()
 
     // Check user exists. If user logged, but not exists, logout now
     //if ($logged_username && !db_user_by_name($logged_username))
-    {
+    //{
         //cn_logout();
-    }
+    //}
 
     $is_logged = false;
 
@@ -1878,10 +1878,9 @@ function cn_character()
     //img character in folder /images/class/ ...gif
     $img_character = array('dw' => 'DarkWizard', 'dk' => 'DarkKnight', 'elf' => 'FairyElf', 'mg' => 'MagicGladiator', 'dl' => 'DarkLord', 'sum' => 'Summoner', 'rf' => 'RageFighter',);
     if ($show_reponse) {
-
         foreach ($show_reponse as $od => $do) {
-            if (!empty($do[0])) {
-                $ho = array_search($do[1], $arr_class);
+            if (!empty($do['Name'])) {
+                $ho = array_search($do['Class'], $arr_class);
                 $Class = '';
                 $isClass = '';
                 $Char_Image = 'default';
@@ -1893,48 +1892,48 @@ function cn_character()
                     if (array_key_exists($char_img[1], $img_character)) $Char_Image = $img_character[$char_img[1]];
                 }
 
-                if (date('d', ctime()) != date('d', $do[19])) {
-                    $do[16] = 0;
+                if (date('d', ctime()) != date('d', $do['Resets_Time'])) {
+                    $do['NoResetInDay'] = 0;
                     //do_update_character('Character','NoResetInDay=0',"Name:'$do[0]'");
                 }
 
-                $showchar[$do[0]] = array(
+                $showchar[$do['Name']] = array(
                     'char_image' => $Char_Image,
                     'cclass' => $Class,
                     //'name' => $do[0],
-                    'class' => $do[1],
-                    'level' => $do[2],
-                    'str' => $do[3],
-                    'dex' => $do[4],
-                    'vit' => $do[5],
-                    'ene' => $do[6],
-                    'com' => $do[7],
-                    'reset' => $do[8],
-                    'relife' => $do[9],
-                    'point' => $do[10],
-                    'point_dutru' => $do[11],
-                    'status_off' => $do[12],
-                    'point_uythac' => $do[13],
-                    'pcpoint' => $do[14],
-                    'accountId' => $do[15],
-                    'resetInDay' => $do[16],
-                    'money' => $do[17],
-                    'top_50' => $do[18],
-                    'Resets_Time' => $do[19],
-                    'status_on' => $do[20],
-                    'shop_inventory' => $do[21],
-                    'PkLevel' => $do[22],
-                    'PkCount' => $do[23],
-                    'MapNumber' => $do[24],
-                    'IsThuePoint' => $do[25],
-                    'TimeThuePoint' => $do[26],
+                    'class' => $do['Class'],
+                    'level' => $do['cLevel'],
+                    'str' => $do['Strength'],
+                    'dex' => $do['Dexterity'],
+                    'vit' => $do['Vitality'],
+                    'ene' => $do['Energy'],
+                    'com' => $do['Leadership'],
+                    'reset' => $do['Resets'],
+                    'relife' => $do['Relifes'],
+                    'point' => $do['LevelUpPoint'],
+                    'point_dutru' => $do['pointdutru'],
+                    'status_off' => $do['uythacoffline_stat'],
+                    'point_uythac' => $do['PointUyThac'],
+                    'pcpoint' => $do['SCFPCPoints'],
+                    'accountId' => $do['AccountID'],
+                    'resetInDay' => $do['NoResetInDay'],
+                    'money' => $do['Money'],
+                    'top_50' => $do['Top50'],
+                    'Resets_Time' => $do['Resets_Time'],
+                    'status_on' => $do['UyThac'],
+                    'shop_inventory' => $do['image'],
+                    'PkLevel' => $do['PkLevel'],
+                    'PkCount' => $do['PkCount'],
+                    'MapNumber' => $do['MapNumber'],
+                    'IsThuePoint' => $do['IsThuePoint'],
+                    'TimeThuePoint' => $do['TimeThuePoint'],
                     'isClass' => $isClass,
                 );
                 //$showchar_[$do[0]] = $showchar;PkLevel, PkCount
             }
         }
     } else {
-        msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này."); //Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.
+        msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.");
     }
 
     return isset($showchar) ? $showchar : array();
@@ -1943,45 +1942,17 @@ function cn_character()
 
 function cn_template_class()
 {
-
-    // Not authorized
-    //if (empty($_SESSION['user_Gamer'])){
-    //return NULL;
-    //}
-
     // No in cache
     if ($class = mcache_get('#class')) {
-        //exit("ok mcache class");
         return $class;
     }
-    /*
-	$arr_class = cn_get_template_by('class');
-	$index = 0;
-	$arr_key_rs = array_keys($arr_rs);
-	for($id = 0; $id < count($arr_class); $id = $id + 2){
-	foreach($arr_class as $key => $val){
 
-		$class[$val] =  $arr_class[$id];  		// ma code
-		$class[$index]['id_2'] =  $arr_class[$id+1];
-	}
-	*
-	//exit("no mcache class");
-   $class = cn_get_template_by('class');
-	$post = array();$kkf = 0;
-    foreach ($class as $id => $v) {
-		if($kkf % 2 == 0)
-			$post[] = array('name' => $v, 'var' => $class[$id."_name"]);
-		++$kkf;
-	}
-	*/
     mcache_set('#class', $class = cn_get_template_by('class'));
-//foreach($post as $gh => $h) echo "1951 ===== class $gh => " .$h['name']." == ".$h['var']."<br>";
     return $class;
 }
 
 function cn_template_reset()
 {
-
     // No in cache
     if ($_reset = mcache_get('#reset')) {
         return $_reset;
@@ -1996,15 +1967,17 @@ function cn_template_reset()
     //$index = 0;
     $options_rs = array();
     for ($id = 0; $id < count($reset); $id += 9) {
-        $options_rs[] = array('reset' => $reset[$key_rs[$id]]
-        , 'level' => $reset[$key_rs[$id + 1]]
-        , 'zen' => $reset[$key_rs[$id + 2]]
-        , 'chaos' => $reset[$key_rs[$id + 3]]
-        , 'cre' => $reset[$key_rs[$id + 4]]
-        , 'blue' => $reset[$key_rs[$id + 5]]
-        , 'point' => $reset[$key_rs[$id + 6]]
-        , 'command' => $reset[$key_rs[$id + 7]]
-        , 'time' => $reset[$key_rs[$id + 8]]);
+        $options_rs[] = array(
+            'reset' => $reset[$key_rs[$id]],
+            'level' => $reset[$key_rs[$id + 1]],
+            'zen' => $reset[$key_rs[$id + 2]],
+            'chaos' => $reset[$key_rs[$id + 3]],
+            'cre' => $reset[$key_rs[$id + 4]],
+            'blue' => $reset[$key_rs[$id + 5]],
+            'point' => $reset[$key_rs[$id + 6]],
+            'command' => $reset[$key_rs[$id + 7]],
+            'time' => $reset[$key_rs[$id + 8]]
+        );
         //++$index;
     }
     mcache_set('#reset', $options_rs);
@@ -2195,6 +2168,19 @@ function cn_template_httt()
     mcache_set('#hotro_tanthu', $options_httt);
 
     return $options_httt;
+}
+
+// Since 2.0: Get template (if not exists, create from defaults)
+function cn_get_template_by($template_name = '')
+{
+    $templates = getoption('#temp_basic');
+    $template_name = strtolower($template_name);
+
+    // User template not exists in config... get from defaults
+    if (isset($templates[$template_name])) {
+        return $templates[$template_name];
+    }
+    return false;
 }
 
 /*
@@ -2404,27 +2390,6 @@ function cn_point_trust()
     return isset($trust) ? $trust : array();
 }
 
-// Since 2.0: Get template (if not exists, create from defaults)
-function cn_get_template_by($template_name = '')
-{
-    $templates = getoption('#temp_basic');
-    $template_name = strtolower($template_name);
-
-    // User template not exists in config... get from defaults
-    if (isset($templates[$template_name])) {
-        return $templates[$template_name]; // array
-    }
-
-    //$list = cn_template_list();
-    //if(isset($list[$template_name][$subtemplate]))
-    {
-        //  return $list[$template_name][$subtemplate];
-    }
-
-    return false;
-}
-
-
 // Since 2.0: Read serialized array from php-safe file (or create file)
 function cn_touch_get($target)
 {
@@ -2444,30 +2409,7 @@ function cn_touch_get($target)
             $fc = $data;
         }
     }
-    /*
-	//------------------------------------
-	foreach($fc as $f =>$val){
-		if(!is_array($val))
-			echo "\$f$f <-----> $val \$val<br>";
-		else{
-			echo "array =====>$f <=====<br>";
-			foreach($val as $f1 =>$val_){
-				if(!is_array($val_))
-					echo "----------->\$f1 => $val_ <br>";
-				else{
-					echo "arary --------------------> $f1 --------------------------<br>";
-					//foreach($val1 as $f11 =>$val11){
-						//echo "$f11 => $val11 <br>";
-						//foreach($val11['config_pk'] as $f111 =>$val111)
-						//echo "$f111 => $val111 <br>";
-						//}
-				}
 
-			}
-	   }
-	}
-	//-----------------------------------------
-	*/
     return $fc;
 }
 
@@ -2518,9 +2460,7 @@ function getoption($opt_name = '', $var_name = '')
         return $cfg;
     } else if ($opt_name[0] == '@') {
         if (!empty($var_name)) {
-
             $opt_name_ = substr($opt_name, 1);
-
             return isset($cfg[$opt_name_][$var_name]) ? $cfg[$opt_name_][$var_name] : FALSE;
         } else {
             $opt_name_arr = spsep(substr($opt_name, 1), '/');
@@ -2539,7 +2479,6 @@ function getoption($opt_name = '', $var_name = '')
         return isset($cfg['%site'][$opt_name]) ? $cfg['%site'][$opt_name] : FALSE;
     }
 }
-
 
 // Since 2.0: Create file
 function cn_touch($fn, $php_safe = FALSE)
@@ -2605,13 +2544,16 @@ function cn_relocation_db_new()
         $db_new = ADONewConnection('odbc');
         $database_ = "Driver={SQL Server};Server={$localhost};Database={$d_base}";
         $connect_mssql = $db_new->Connect($database_, $databaseuser, $databsepassword);
+        $db_new->SetFetchMode(ADODB_ASSOC_CASE);
         if (!$connect_mssql) die('Ket noi voi SQL Server loi! Hay kiem tra lai ODBC ton tai hoac User & Pass SQL dung.');
     } else if ($type_connect == 'mssql') { // config sau
         if (extension_loaded('mssql')) echo('');
         else die('Loi! Khong the load thu vien php_mssql.dll. Hay cho phep su dung php_mssql.dll trong php.ini');
         $db_new = ADONewConnection('mssql');
         $connect_mssql = $db_new->Connect($localhost, $databaseuser, $databsepassword, $d_base);
+        $db_new->SetFetchMode(ADODB_ASSOC_CASE);
         if (!$connect_mssql) die('Loi! Khong the ket noi SQL Server');
+        //$conn->ErrorMsg()
     }
 }
 

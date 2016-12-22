@@ -738,8 +738,9 @@ quicklink_item {
 
 .facebook {
     background: url(../images/facebookbg_allods.png) no-repeat top center;
-    width: 208px;
-    height: 330px;
+    background-size: cover;
+    width: 100%;
+    min-height: 340px;
 }
 
 .facebook_content {
@@ -776,8 +777,8 @@ quicklink_item {
 }
 
 .facebook_content div.ranking_list table {
-    width: 184px;
-    margin: 5px 13px;
+    padding: 5px 10px;
+    width: 100%;
 }
 
 .facebook_content div.ranking_list table tr th {
