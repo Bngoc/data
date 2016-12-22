@@ -1,4 +1,5 @@
 Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
+0000000|0|0|Kris|1|2|NO|NO|
 0000100|0|1|Short Sword|1|3|NO|NO
 0000200|0|2|Rapier|1|3|Ceto|NO
 0000300|0|3|Katana|1|3|NO|NO

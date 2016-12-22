@@ -264,7 +264,7 @@ function shop___what_()
     $password = $warehouse_[0][2];
     //$accountid_ = $warehouse_[0][3]; //??
 
-    $show_warehouse = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:57px; padding-left:25px; height:628px; background-image: url(images/warehouse.jpg)'>";
+    $show_warehouse = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:57px; padding-left:25px; height:628px; background-image: url(/images/warehouse.jpg)'>";
     $i = -1;
     $x = -1;
 

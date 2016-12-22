@@ -123,13 +123,15 @@ function echoArr($arr){
 
 function cn_analysis_code32($string, $title, $price, $image_mh)
 {
+
     if ($string == 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF' ||
         $string == 'ffffffffffffffffffffffffffffffff' || strlen($string) != 32) {
         return '';
     }
     // analysis Item 32
     $id = hexdec(substr($string, 0, 2));                // Item ID
-    $group = (hexdec(substr($string, 18, 2)) / 16);     // Item Type
+    $group = hexdec(substr($string, 18, 2));            // Item Type
+    $group = $group / 16;                               // Item Type
     $option = hexdec(substr($string, 2, 2));            // Item Level/Skill/Option Data
     $durability = hexdec(substr($string, 4, 2));        // Item Durability
     $serial = substr($string, 6, 8);                    // Item SKey
@@ -464,7 +466,7 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     }
 
     $arrHarmony = array(
-      16 => '2',
+        16 => '2',
         17 => '3',
         18 => '4',
         19 => '5',
@@ -646,33 +648,13 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     }
 
     $items_data = getoption('#items_data');
-    if (!in_array($group . '.' . $id, array_keys($items_data))) return false;
+    if (!isset($items_data[$group . '.' . $id])) return array();
+    //if (!in_array($group . '.' . $id, array_keys($items_data))) return array();
+    //$rendeImg = renderImageItencode($group, $id);
 
     $item_read = $items_data[$group . '.' . $id];
 
-    //$item_read = ItemsData($id,$group,$item_level);
-    // Tra ID và Group Item để lấy thông tin từ Items_Data.txt
-
-    //'id' => $_item['ID'],
-    //'group' => $_item['G'],
-    // 'title' => $title,
-    //'name' => $_item['Name'],
-    //'price' => $price,
-    //'image' => $_item['Image'],
-    //'x' => $_item['X'],
-    //'y' => $_item['Y'],
-    //'set1' => $_item['SET1'],
-    //'set2' => $_item['SET2'],
-
-    //$item_image = $item_read['Image'];
-    //$item_image = $item_read['Image'];
-    //$item_image = $item_read['Image'];
-
-    //$item_image = $item_read['Image'];
     $item_name = $item_read['Name'];
-    //$item_x = $item_read['X'];
-    //$item_y = $item_read['Y'];
-
     if ($ancient == 5) $ancient_set = $item_read['SET1'];
     else if ($ancient == 10) $ancient_set = $item_read['SET2'];
 
@@ -713,22 +695,6 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     if ($item_socket != '') {
         $color = '#AA1EAA';
     }
-    //if ($nocolor) $color = '#F4CB3F';
-    // Sử lí thông tin Item
-    /*
-	switch ($ExclAnci) {
-		case 1:
-			if (file_exists('images/items/EXE/'.$item_image.'.gif')) $item_image = "EXE/".$item_image;
-			else $item_image = $item_image;
-			break;
-		case 2:
-			if (file_exists('images/items/ANC/'.$item_image.'.gif')) $item_image = "ANC/".$item_image;
-			else $item_image = $item_image;
-			break;
-		default: $item_image = $item_image; break;
-	}
-	*/
-    //$item_image = ItemImage($id,$group,$ExclAnci,$item_level);
 
     if ($item_level == 0 || $durability == 0) $item_level = '';
     else $item_level = ' +' . $item_level;
@@ -748,7 +714,7 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
         . $item_socket . '</span></strong></center></div>';
     $output = array(
         'info' => $item_info,
-        'name' => $item_name . "<font color=maroon> <i>(" . $title . ") </i></font>",// $item_read['Name'],
+        'name' => $item_name . "<font color=maroon> <i>(". $title .") </i></font>",// $item_read['Name'],
         'image' => $item_read['Image'],
         'x' => $item_read['X'],
         'y' => $item_read['Y'],
@@ -761,6 +727,24 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
         'code32' => $string,
         'image_mh' => $image_mh,
     );
-    echoArr($output);
     return $output;
+}
+
+function renderImageItencode($group, $id){
+    $group = (string)$group;
+    $id = (string)$id;
+
+    if (empty($group) || empty($id)) return '';
+
+    $strGroup = $strId = '';
+    if (strlen($group) == 1) $strGroup = '0'. $group . '0';
+    else if (strlen($group) == 2) $strGroup = $group . '0';
+    else if (strlen($group) == 3) $strGroup = $group;
+
+    if (strlen($id) == 1) $strId = '0'. $group . '00';
+    else if (strlen($id) == 2) $strId = $group . '00';
+    else if (strlen($id) == 3) $strId = $group . '0';
+    else if (strlen($id) == 4) $strId = $group;
+
+    return $strGroup.$strId;
 }
