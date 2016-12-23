@@ -694,7 +694,7 @@ function db_membget_account($clause, $colClause ='[UserAcc]', $ischek = FALSE)
 }
 
 function rankingCharaterTop(){
-    $myQueryRankingTop = "SELECT Top 50 [Name] FROM Character ORDER BY relifes DESC, resets DESC , cLevel DESC";
+    $myQueryRankingTop = "SELECT Top 125 [Name] FROM Character ORDER BY relifes DESC, resets DESC , cLevel DESC";
     $resultRankingTop = do_select_orther($myQueryRankingTop);
 
     if ($resultRankingTop) {
@@ -707,7 +707,6 @@ function rankingCharaterTop(){
         $chekUpdate = do_update_orther($myQueryUpdate);
         //if (!$chekUpdate) cn_writelog($myQueryUpdate, 'e');
     }
-    echoArr($resultRankingTop);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------

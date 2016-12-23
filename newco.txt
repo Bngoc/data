@@ -96,20 +96,27 @@
     3. character
     4. cashshop
     
- [*] E> Cau hinh ranking top50 Table character
-		1. Path file update RankingTopAutoUpdate => [add arguments (optional)]
-			==> -f <patch> /core/rankingTopAutoUpdate.php
-			EX: -f  C:\wamp\www\bqn\data\core\rankingTopAutoUpdate.php
-		2. pacth php.exe => [program/srcipt]	
+ [*] E> Cau hinh ranking top50 Table character [Task scheduler for Win]
+		1. pacth php.exe => [program/srcipt]	
 			==> <patch> /php/php5.5.12/php.exe
-			EX: C:\wamp\bin\php\php5.5.12\php.exe
-		3. start in
+				EX: C:\wamp\bin\php\php5.5.12\php.exe
+		2. Path file update RankingTopAutoUpdate => [add arguments (optional)]
+			==> -f <patch> /core/rankingTopAutoUpdate.php
+				EX: -f  C:\wamp\www\bqn\data\core\rankingTopAutoUpdate.php
+		3. start in (optional)
 			=-> <pacth>\core\
 			EX: C:\wamp\www\bqn\data\core\
 		4. Triggers => Set time
 			HD 		-=> video kem theo
-			Video 	-=> "/setup/config RankingTopAutoUpdate.
-			
+			Video 	-=> "/setup/config RankingTopAutoUpdate.wmv
+
+		5. security
+		    5.1> IIS
+		        C1. IIS -> URL Rewrite -> Add rules -> request bloking (Block access -> URL Path; Block request -> Matches the..; Pttern ... -> /core/rankingTopAutoUpdate.php; How to ..-> Abort Requset) ... HD ==> https://www.iis.net/learn/extensions/url-rewrite-module/request-blocking-rule-template
+		        C2. IIS -> request feltring - > URL -> Deny sequence ...  /core/rankingTopAutoUpdate.php
+		    5.2> PHP Apache ....
+		        -> .htaccess deny file
+
  Z>
 	1.open port
 		--> Connecting to SQL Server remotely on AWS involves 3 main factors: 
