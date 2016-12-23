@@ -1,5 +1,4 @@
-A>
- 
+ [*] A>
 	 1. 1433 ---> connect sql server
 	 2. IIS
 		-> chmod thu muc data.....
@@ -59,15 +58,14 @@ A>
 	5. truy cap vao  ...../admin.php
 		-> php_com_dotnet.dll
 		
-	 
-	 
- B>
+
+ [*] B>
 	0. chay odbc
 		-> x86 Or x64
 		==> TitanLinkServer.exe not renpoding
-			===> Port=55970		Port=55906	Port=55962		Port=55960		Port=55999	Port=55557	
-			===> ServerODBC=MuOnline 
-			===> ServerODBC=MuOnlineJoinDB
+			Fix -==> Port=55970		Port=55906	Port=55962		Port=55960		Port=55999	Port=55557
+			Fix -==> ServerODBC=MuOnline
+			Fix -==> ServerODBC=MuOnlineJoinDB
 		
 	1. attach db them vao (detact huy)
 		->  them 3 ? 4 
@@ -79,28 +77,40 @@ A>
 	2. run sql 	
  
 	3. Allow remote connect to this server [sql server]
+
  
  
- 
- C> 
+ [*] C>
 	1. Hex main + Hex main config	
-		-> connect
-		-> AVCKeyGenerater..... serial....
-		-> connect.mu
-		-> connect 
-		-> BufTimeControl
-		-> mu.exe
+		Keyword serach -=> connect
+		Keyword serach -=> AVCKeyGenerater..... serial....
+		keyword serach -=> connect.mu
+		keyword serach -=> connect
+		keyword serach -=> BufTimeControl
+		keyword serach -=> mu.exe
 	2. 
 
- D> cau hinh tren /admin.php
+ [*] D> cau hinh tren /admin.php
     1. time zone  (0 -> +7)
     2. allow regiter
     3. character
     4. cashshop
     
-
-
- E>
+ [*] E> Cau hinh ranking top50 Table character
+		1. Path file update RankingTopAutoUpdate => [add arguments (optional)]
+			==> -f <patch> /core/rankingTopAutoUpdate.php
+			EX: -f  C:\wamp\www\bqn\data\core\rankingTopAutoUpdate.php
+		2. pacth php.exe => [program/srcipt]	
+			==> <patch> /php/php5.5.12/php.exe
+			EX: C:\wamp\bin\php\php5.5.12\php.exe
+		3. start in
+			=-> <pacth>\core\
+			EX: C:\wamp\www\bqn\data\core\
+		4. Triggers => Set time
+			HD 		-=> video kem theo
+			Video 	-=> "/setup/config RankingTopAutoUpdate.
+			
+ Z>
 	1.open port
 		--> Connecting to SQL Server remotely on AWS involves 3 main factors: 
 			AWS --> Windows Security --> SQL Server Settings/Security. 

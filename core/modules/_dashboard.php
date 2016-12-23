@@ -27,7 +27,7 @@ function char_invoke()
         'char_manager:maint:Cmt' => 'Khóa đồ - Bảo vệ đồ',
         'char_manager:changename:Clc' => 'Đổi tên nhận vật',
         'char_manager:script:Csr' => 'Chuyển nhân vật',
-        'char_manager:deleinventory:Cpc' => 'Xóa đồ nhân vật',
+        'char_manager:delepersonalSotre:Cpc' => 'Xóa đồ cửa hàng cá nhân',
         'char_manager:level1:Cpc' => 'Làm nhiệm vụ cấp 1',
         'char_manager:level2:Cpc' => 'Làm nhiệm vụ cấp 220',
         'char_manager:level3:Cpc' => 'Làm nhiệm vụ cấp Master',
@@ -94,7 +94,7 @@ function char_invoke()
         'level1' => 'level-1.png',
         'level2' => 'level-2.png',
         'level3' => 'level-3.png',
-        'deleinventory' => 'cancel-inventory.png',
+        'delepersonalSotre' => 'dele-personalSotre.png',
 
         'widgets' => 'widgets.png',
         'wreplace' => 'replace.png',
@@ -3763,7 +3763,7 @@ function char_level2(){}
 
 function char_level3(){}
 
-function char_deleinventory()
+function char_delepersonalSotre()
 {
     list($sub, $nameClass) = GET('sub, nameClass', 'GPG');
     $nameClass = strtolower($nameClass);
@@ -3818,25 +3818,27 @@ function char_deleinventory()
             }
         }
     }
-    $wwname = "<font color='#ffffff'>Hòm đồ cá nhân</font>";
+    $wwname = "<font color='#ffffff'>Cửa hàng cá nhân</font>";
     $show_warehouse .= "<div style='margin-top:-42px; position:absolute; text-align:center; width:256px; border:0px;'>" . $wwname . "</div>";
     $show_warehouse .= "<div style='margin-top:565px; margin-left:166px; position:absolute; width:57px; height:47px;'><img src='" . 0 . "'></div>";
     $show_warehouse .= "</div>";
 
     if (request_type('POST')) {
-        if (REQ('action_inventory')) {
-            die('action_inventory');
-//            //cn_dsi_check();
+        if (REQ('action_personalSotre')) {
+            die('action_personalSotre');
+
 //
 //            $errors_false = false;
+             $changeInventory = '';
+            for($id = 0; $id < 1024; $id++) $changeInventory .= 'F';
         }
     }
 
     //echo $show_warehouse;
     cn_assign('sub, show_warehouse, showchar', $sub, $show_warehouse, $showchar);
 
-    echoheader('-@my_char/style.css', "Thùng đồ bán - Shop Inventory");
-    echocomtent_here(exec_tpl('my_char/inventory'), cn_snippet_bc_re());
+    echoheader('-@my_char/style.css', "Xóa cửa hàng cá nhân - Personal Store");
+    echocomtent_here(exec_tpl('my_char/personalSotre'), cn_snippet_bc_re());
     echofooter();
 }
 

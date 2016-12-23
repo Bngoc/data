@@ -37,7 +37,7 @@ function home_invoke()
     }
 
     //Ranking top 10
-    $result_RankingTop10 = do_select_orther("SELECT TOP 10 [AccountID],[Name],[cLevel],[Class],[Resets],[Relifes] FROM [MuOnline].[dbo].[Character] ORDER BY Relifes desc, Resets desc, cLevel desc");
+    $result_RankingTop10 = do_select_orther("SELECT TOP 10 [Name], [AccountID],[cLevel],[Class],[Resets],[Relifes] FROM [MuOnline].[dbo].[Character] ORDER BY Relifes desc, Resets desc, cLevel desc");
 
     cn_assign('dataNotifyForum, get_paging, result_RankingTop10', @$item_read ? $item_read : array(), @$get_paging ? $get_paging : '', $result_RankingTop10);
 

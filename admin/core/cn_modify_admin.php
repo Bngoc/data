@@ -3794,12 +3794,14 @@ function cn_relocation_db()
         $db_new = ADONewConnection('odbc');
         $database_ = "Driver={SQL Server};Server={$localhost};Database={$d_base}";
         $connect_mssql = $db_new->Connect($database_, $databaseuser, $databsepassword);
+        $db_new->SetFetchMode(ADODB_ASSOC_CASE);
         if (!$connect_mssql) die('Kết nối với SQL Server lỗi!! Hãy kiểm tra lại ODBC tồn tại hoặc User - Pass không đúng.');
     } else if ($type_connect == 'mssql') {
         if (extension_loaded('mssql')) echo('');
         else Die('Lỗi! Không thể load thư viện php_mssql.dll. Hãy cho phép sử dụng php_mssql.dll trong php.ini');
         $db_new = &ADONewConnection('mssql');
         $connect_mssql = $db_new->Connect($localhost, $databaseuser, $databsepassword, $d_base);
+        $db_new->SetFetchMode(ADODB_ASSOC_CASE);
         if (!$connect_mssql) die('Lỗi! Không thể kết nối SQL Server!');
     } else {
         die ('Lỗi! Không thể kết nối SQL Server!');

@@ -291,6 +291,21 @@ function do_select_orther($orther = '')
     return isset($rs_data) ? $rs_data : array();
 }
 
+/**
+ * @param string $orther
+ * @return bool
+ */
+function do_update_orther($orther = '')
+{
+    global $db_new;
+
+    if ($orther) {
+        $orther = trim($orther);
+        $check = $db_new->Execute("$orther") or cn_writelog($orther, 'e');
+        if ($check) return true;
+    } else return FALSE;
+}
+
 //'table','abc, abc2, ...','a1=1 and ab = 2 or ad =12,...',' orther ',
 function do_select_character($table, $col, $where = '', $orther = '')
 {
@@ -661,16 +676,16 @@ function db_membget_account($clause, $colClause ='[UserAcc]', $ischek = FALSE)
             }
         }
         $result = [
-            'id' => $usx[0][0],
-            'user_Account' => trim($usx[0][1]),
-            'pass' => $usx[0][2],
-            'acl' => $usx[0][3],
-            'ban' => $usx[0][5],
-            'numLogin' => $usx[0][6],
-            'email' => $usx[0][4],
-            'lastDate' => $usx[0][7],
-            'time_At' => $usx[0][8],
-            'hash' => $usx[0][9]
+            'id' => $usx[0]['id'],
+            'user_Account' => trim($usx[0]['UserAcc']),
+            'pass' => $usx[0]['Pwd'],
+            'acl' => $usx[0]['AdLevel'],
+            'ban' => $usx[0]['Ban'],
+            'numLogin' => $usx[0]['NumLogin'],
+            'email' => $usx[0]['Email'],
+            'lastDate' => $usx[0]['Lastdate'],
+            'time_At' => $usx[0]['Time_At'],
+            'hash' => $usx[0]['hash']
         ];
 
         return $result;
@@ -678,7 +693,24 @@ function db_membget_account($clause, $colClause ='[UserAcc]', $ischek = FALSE)
     return null;
 }
 
-//-------------------------------------	
+function rankingCharaterTop(){
+    $myQueryRankingTop = "SELECT Top 50 [Name] FROM Character ORDER BY relifes DESC, resets DESC , cLevel DESC";
+    $resultRankingTop = do_select_orther($myQueryRankingTop);
+
+    if ($resultRankingTop) {
+        do_update_character('Character', 'Top50=0', 'Top50>0');
+        $myQueryUpdate = 'UPDATE Character SET top50 = CASE Name';
+        foreach ($resultRankingTop as $key => $items) {
+            $myQueryUpdate .= ' WHEN \'' . $items['Name'] . '\' THEN ' . ($key + 1);
+        }
+        $myQueryUpdate .= ' END';
+        $chekUpdate = do_update_orther($myQueryUpdate);
+        //if (!$chekUpdate) cn_writelog($myQueryUpdate, 'e');
+    }
+    echoArr($resultRankingTop);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------
 function kiemtra_cardnumber($card_num)
 {
     if (preg_match("[^a-zA-Z0-9$]", $card_num)) {
