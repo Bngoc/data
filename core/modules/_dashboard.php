@@ -3780,7 +3780,8 @@ function char_delepersonalSotre()
     // All - 12 - 64 (8*8) - 32 (4*8) [108-76]
     $inventoryRaw = strtoupper(bin2hex($inventory));
     $inventoryDele = substr($inventoryRaw, 76 * 32, 32 * 32);
-
+echo '1 -> ' . $inventoryRaw . '<br>';
+echo '2 -> ' . $inventoryDele . '<br>';
     $isCheckAction = false;
     if (request_type('POST')) {
         if (REQ('action_personalSotre')) {
