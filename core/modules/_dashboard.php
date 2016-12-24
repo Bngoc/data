@@ -3777,9 +3777,14 @@ function char_delepersonalSotre()
     }
 
     $inventory = $showchar[$sub]['shop_inventory'];
-    // All - 12 - 64 (8*8) - 32 (4*8) [108-76]
+    // All - 12 - 64 (8*8) - 32 (4*8) [last]
+    //Session > 6.
+    $ceilInventoryShopPresonal = 1024; // 32*32
     $inventoryRaw = strtoupper(bin2hex($inventory));
-    $inventoryDele = substr($inventoryRaw, 76 * 32, 32 * 32);
+    //$inventoryDele = substr($inventoryRaw, 76 * 32, 32 * 32);
+    $inventoryDele = substr($inventoryRaw, (-1)*$ceilInventoryShopPresonal);
+
+
 echo '1 -> ' . $inventoryRaw . '<br>';
 echo '2 -> ' . $inventoryDele . '<br>';
     $isCheckAction = false;
@@ -3796,9 +3801,9 @@ echo '2 -> ' . $inventoryDele . '<br>';
 
             if(!$errors_false) {
                 $changeInventory = '';
-                for ($id = 0; $id < 1024; $id++) $changeInventory .= 'F';
+                for ($id = 0; $id < $ceilInventoryShopPresonal; $id++) $changeInventory .= 'F';
 
-                $newInventory = substr($inventoryRaw, 0, 76*32) . $changeInventory;
+                $newInventory = substr($inventoryRaw, 0, (-1)*$ceilInventoryShopPresonal) . $changeInventory;
                 $checkUpdate = do_update_character('Character', "Inventory=0x". $newInventory, "Name:'". $sub ."'");
                 if($checkUpdate) {
                     cn_throw_message('Đã xóa thành công cửa hàng cá nhân.');
