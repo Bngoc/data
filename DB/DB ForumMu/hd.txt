@@ -1,0 +1,9 @@
+Acc : Administrator
+pass: emngockt93
+Pass.old: hjhjhj -> 38fddeae7c02dd527dacac49cc9cb6f7
+
+ Table: user
+
+///
+	sua db: banng setting:
+		thay doi localhost thay domain
