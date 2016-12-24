@@ -3664,7 +3664,7 @@ function char_changeclass()
             $errors_false = false;
 
             if(!isset($infoClass['class_'.$nameClass.'_1'])) {
-                cn_throw_message("Lỗi hệ thống khi thay đổi giới tính, vui long liên hệ với admin", 'e');
+                cn_throw_message("Lỗi hệ thống khi thay đổi giới tính, vui lòng liên hệ với admin", 'e');
             }
 
             if (!$check_change) {
@@ -3765,14 +3765,10 @@ function char_level3(){}
 
 function char_delepersonalSotre()
 {
-    list($sub, $nameClass) = GET('sub, nameClass', 'GPG');
-    $nameClass = strtolower($nameClass);
+    list($sub) = GET('sub', 'GPG');
 
-    // kiem chu va so ......????
-//    $_blank_var = view_bank($accc_ = $member['user_name']);
+    $sub = htmlentities($sub);
     $showchar = cn_character();
-
-
 
     if (!$sub) {
         $sub = array_keys($showchar)[0];
@@ -3783,25 +3779,48 @@ function char_delepersonalSotre()
     $inventory = $showchar[$sub]['shop_inventory'];
     // All - 12 - 64 (8*8) - 32 (4*8) [108-76]
     $inventoryRaw = strtoupper(bin2hex($inventory));
-    $inventoryTemp = substr($inventoryRaw, 0, 76*32);
     $inventoryDele = substr($inventoryRaw, 76 * 32, 32 * 32);
 
-//    echo "$inventoryRaw =-> " .$inventoryRaw. '<br>';
-//    echo "ddd =-> " .$inventoryDele. '<br>';
-//    echoArr($showchar); die;
-    $member = member_get();
+    $isCheckAction = false;
+    if (request_type('POST')) {
+        if (REQ('action_personalSotre')) {
+            cn_dsi_check(true);
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
 
-    $lenghtInventoryDel = strlen($inventoryDele);
+            $errors_false = false;
+            if ($verifyCaptcha != $_SESSION['captcha_web']){
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
 
-    $itemInfo = array();
-    for ($jk = 0; $jk < $lenghtInventoryDel; $jk += 32){
-       $strItem = substr($inventoryDele, $jk, 32);
-        $itemInfo[] = cn_analysis_code32($strItem, '', '', '');
+            if(!$errors_false) {
+                $changeInventory = '';
+                for ($id = 0; $id < 1024; $id++) $changeInventory .= 'F';
+
+                $newInventory = substr($inventoryRaw, 0, 76*32) . $changeInventory;
+                $checkUpdate = do_update_character('Character', "Inventory=0x". $newInventory, "Name:'". $sub ."'");
+                if($checkUpdate) {
+                    cn_throw_message('Đã xóa thành công cửa hàng cá nhân.');
+                    $isCheckAction = true;
+                } else {
+                    cn_throw_message('Err, Lỗi xử lý xóa cửa hàng cá nhân.', 'e');
+                }
+            }
+        }
+    }
+
+    if (!$isCheckAction) {
+        $lenghtInventoryDel = strlen($inventoryDele);
+        $itemInfo = array();
+        for ($jk = 0; $jk < $lenghtInventoryDel; $jk += 32) {
+            $strItem = substr($inventoryDele, $jk, 32);
+            $itemInfo[] = cn_analysis_code32($strItem, '', '', '');
+        }
     }
     $x = -1;
     $show_warehouse = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:57px; padding-left:25px; height:343px; background-image: url(/images/inventory.jpg)'>";
 
-    if ($itemInfo) {
+    if ($itemInfo && !$isCheckAction) {
         foreach ($itemInfo as $i => $item32) {
             ++$x;
             $i += 1 ;
@@ -3820,19 +3839,9 @@ function char_delepersonalSotre()
     }
     $wwname = "<font color='#ffffff'>Cửa hàng cá nhân</font>";
     $show_warehouse .= "<div style='margin-top:-42px; position:absolute; text-align:center; width:256px; border:0px;'>" . $wwname . "</div>";
-    $show_warehouse .= "<div style='margin-top:565px; margin-left:166px; position:absolute; width:57px; height:47px;'><img src='" . 0 . "'></div>";
     $show_warehouse .= "</div>";
 
-    if (request_type('POST')) {
-        if (REQ('action_personalSotre')) {
-            die('action_personalSotre');
 
-//
-//            $errors_false = false;
-             $changeInventory = '';
-            for($id = 0; $id < 1024; $id++) $changeInventory .= 'F';
-        }
-    }
 
     //echo $show_warehouse;
     cn_assign('sub, show_warehouse, showchar', $sub, $show_warehouse, $showchar);

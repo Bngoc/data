@@ -748,3 +748,96 @@ function renderImageItencode($group, $id){
 
     return $strGroup.$strId;
 }
+
+// Since 2.0: Check CSRF challenge
+function cn_dsi_check($isWeb = false)
+{
+    list($key, $dsi) = GET('__signature_key, __signature_dsi', 'GETPOST');
+
+    if (empty($key) && empty($dsi)) {
+        list($dsi_inline) = GET('__signature_dsi_inline', 'GETPOST');
+
+        if ($dsi_inline) {
+            list($dsi, $key) = explode('.', $dsi_inline, 2);
+        } else {
+            die('CSRF attempt! No data');
+        }
+
+        // cn_url_modify
+        unset($_GET['__signature_dsi_inline']);
+    } else {
+        // cn_url_modify
+        unset($_GET['__signature_key'], $_GET['__signature_dsi']);
+    }
+
+    $member = member_get();
+
+    list(, $username) = explode('-', $key, 2);
+    // Get signature
+    if (!$isWeb) {
+        if ($member['user_Account'] !== $username) die('CSRF attempt! Username invalid');
+        $signature = MD5($key . $member['pass'] . MD5(getoption('#crypt_salt')));
+    } else {
+        if ($member['user_name'] !== $username) die('CSRF attempt! Username invalid');
+        $signature = MD5($key . $member['pass_web'] . MD5(getoption('#crypt_salt')));
+    }
+
+    if ($dsi !== $signature)
+        die('CSRF attempt! Signatures not match');
+}
+
+// Since 2.0: convert all GET to hidden fields
+function cn_snippet_get_hidden($ADD = array())
+{
+    $hid = '';
+    $GET = $_GET + $ADD;
+    foreach ($GET as $k => $v) {
+        if ($v !== '') {
+            $hid .= '<input type="hidden" name="' . cn_htmlspecialchars($k) . '" value="' . cn_htmlspecialchars($v) . '" />';
+        }
+    }
+
+    return $hid;
+}
+// Since 2.0: Write default input=hidden fields
+function cn_form_open($fields)
+{
+    $fields = explode(',', $fields);
+    foreach ($fields as $field) {
+        $_field = REQ(trim($field), 'GPG');
+        echo '<input type="hidden" name="' . trim($field) . '" value="' . cn_htmlspecialchars($_field) . '" />';
+    }
+
+    cn_snippet_digital_signature();
+}
+
+// Since 2.0: Generate CSRF stamp (only for members)
+// @Param: type = std (input hidden), a (inline in a)
+function cn_snippet_digital_signature($type = 'std')
+{
+    $member = member_get();
+
+    if (isset($member['user_Account'])) $ischeckSession = false;
+    else if (isset($member['user_name'])) $ischeckSession = true;
+    else return false;
+
+    // Is not member - is fatal error
+    if (is_null($member)) die("Exception with generating signature");
+
+    // Make signature
+    if (!$ischeckSession) {
+        $sign_extr = MD5(time() . mt_rand()) . '-' . $member['user_Account'];
+        $signature = MD5($sign_extr . $member['pass'] . MD5(getoption('#crypt_salt')));
+    } else{
+        $sign_extr = MD5(time() . mt_rand()) . '-' . $member['user_name'];
+        $signature = MD5($sign_extr . $member['pass_web'] . MD5(getoption('#crypt_salt')));
+    }
+    if ($type == 'std') {
+        echo '<input type="hidden" name="__signature_key" value="' . cn_htmlspecialchars($sign_extr) . '" />';
+        echo '<input type="hidden" name="__signature_dsi" value="' . cn_htmlspecialchars($signature) . '" />';
+    } elseif ($type == 'a') {
+        return '__signature_dsi_inline=' . $signature . '.' . urlencode($sign_extr);
+    }
+
+    return FALSE;
+}

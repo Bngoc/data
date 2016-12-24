@@ -214,7 +214,7 @@ function cn_modify_s2bb_youtube($t)
         $yt_url = $c[1];
 
     if ($yt_url)
-        return '<iframe width="640" height="360" src="http://www.youtube.com/embed/' . $yt_url . '?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>';
+        return '<iframe width="100%" height="360" src="http://www.youtube.com/embed/' . $yt_url . '?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>';
 
     return $t;
 }

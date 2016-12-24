@@ -51,7 +51,7 @@ if ($action) {
                 $re_str = $notify_accept;
         } else {
             if ($check_ == "check_finduser") { // tim thay character
-                if ($xyz[0][0] == $id)
+                if ($xyz[0][$user_cont] == $id)
                     $re_str = $notify_accept;
                 else $re_str = $notify_deline;
             } else

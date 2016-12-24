@@ -49,7 +49,7 @@ cn_snippet_messages();
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="<?php //echo $img_url; ?>/vertical-separator.jpg" width="640"
+                <div class="vertical-img"><img src="<?php //echo $img_url; ?>/vertical-separator.jpg" width="100%"
                                                height="1px"/></div>
                 <br/></td>
         </tr>
@@ -106,7 +106,7 @@ cn_snippet_messages();
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="<?php //echo $img_url; ?>/vertical-separator.jpg" width="640"
+                <div class="vertical-img"><img src="<?php //echo $img_url; ?>/vertical-separator.jpg" width="100%"
                                                height="1px"/></div>
                 <br/></td>
         </tr>
@@ -144,7 +144,7 @@ cn_snippet_messages();
     </tr>
     <tr>
         <td colspan="3">
-            <div class="vertical-img"><img src="<?php //echo $img_url; ?>/vertical-separator.jpg" width="640"
+            <div class="vertical-img"><img src="<?php //echo $img_url; ?>/vertical-separator.jpg" width="100%"
                                            height="1px"/></div>
             <br/></td>
     </tr>
@@ -193,7 +193,7 @@ cn_snippet_messages();
     </tr>
     <tr>
         <td colspan="3">
-            <div class="vertical-img"><img src="<?php //echo $img_url; ?>/vertical-separator.jpg" width="640"
+            <div class="vertical-img"><img src="<?php //echo $img_url; ?>/vertical-separator.jpg" width="100%"
                                            height="1px"/></div>
             <br/></td>
     </tr>
@@ -271,7 +271,7 @@ cn_snippet_messages();
     </tr>
     <tr>
         <td colspan="3">
-            <div class="vertical-img"><img src="<?php //echo $img_url; ?>/vertical-separator.jpg" width="640"
+            <div class="vertical-img"><img src="<?php //echo $img_url; ?>/vertical-separator.jpg" width="100%"
                                            height="1px"/></div>
             <br/></td>
     </tr>

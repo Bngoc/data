@@ -253,6 +253,7 @@ function db_user_by_name($name)
             foreach ($result_rows as $sd => $ds) {
                 $pdata = Array(
                     'user_name' => $ds['memb___id'],
+                    'pass_web' => $ds['memb__pwdmd5'],
                     'pass_game' => $ds['memb__pwd'],
                     'tel_num' => $ds['tel__numb'],
                     'phon_num' => $ds['phon_numb'],
@@ -260,7 +261,6 @@ function db_user_by_name($name)
                     'question' => $ds['fpas_ques'],
                     'answer' => $ds['fpas_answ'],
                     'pass_verify' => $ds['memb__pwd2'],
-                    'pass_web' => $ds['memb__pwdmd5'],
                     'acl' => $ds['acl'],
                     'ban_login' => $ds['ban_login'],
                     'num_login' => $ds['num_login'],
@@ -694,7 +694,7 @@ function db_membget_account($clause, $colClause ='[UserAcc]', $ischek = FALSE)
 }
 
 function rankingCharaterTop(){
-    $myQueryRankingTop = "SELECT Top 125 [Name] FROM Character ORDER BY relifes DESC, resets DESC , cLevel DESC";
+    $myQueryRankingTop = "SELECT Top 125 [Name] FROM Character ORDER BY relifes DESC, resets DESC, cLevel DESC";
     $resultRankingTop = do_select_orther($myQueryRankingTop);
 
     if ($resultRankingTop) {

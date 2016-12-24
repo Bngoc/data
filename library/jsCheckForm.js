@@ -382,7 +382,7 @@ function validateFormOnSubmit() {
         }
     }
 
-    if(checkValiFormRegist) {
+    if(!checkValiFormRegist) {
         alert('Vui lòng kiểm tra lại thông tin đăng ký!');
         return false;
     }

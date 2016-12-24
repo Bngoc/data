@@ -360,20 +360,6 @@ function spsep($separated_string, $seps = ',')
     return $ss;
 }
 
-// Since 2.0: convert all GET to hidden fields
-function cn_snippet_get_hidden($ADD = array())
-{
-    $hid = '';
-    $GET = $_GET + $ADD;
-    foreach ($GET as $k => $v) {
-        if ($v !== '') {
-            $hid .= '<input type="hidden" name="' . cn_htmlspecialchars($k) . '" value="' . cn_htmlspecialchars($v) . '" />';
-        }
-    }
-
-    return $hid;
-}
-
 // Since 2.0: Cutenews HtmlSpecialChars
 function cn_htmlspecialchars($_str)
 {
@@ -702,18 +688,7 @@ function test($requested_acl, $requested_user = NULL, $is_self = FALSE)
 // Since 2.0: Show login form
 function cn_login_form($admin = TRUE)
 {
-    //if ($admin)
-    {
-        //  echoheader("user", "Please Login");
-    }
-
-    //echo exec_tpl('_authen/login');
     return exec_tpl('_authen/login');
-
-    if ($admin) {
-        //echofooter();
-        //die();
-    }
 }
 
 function cn_login()
@@ -761,7 +736,6 @@ function cn_login()
 
                 if (!$errors_fa) {
                     $member = db_user_by_name($username);
-                    //if(is_array($member)){
                     if ($member) {
 
                         $ban_time = isset($member['ban_login']) ? (int)$member['ban_login'] : 0;
@@ -781,11 +755,8 @@ function cn_login()
                             // set user to session
                             $_SESSION['user_Gamer'] = $username;
                             $_SESSION['timeOutLogin'] = ctime() + 300;
-                            point_tax($username);
-                            //----------------------------------------
+                    point_tax($username);
 
-                            //----------------------------------------
-                            //exit();
                             // save last login status, clear ban
                             //db_user_update($username, 'lts='.time(), 'ban=0');
                             do_update_character('MEMB_INFO', 'ban_login=0', "memb___id:'$username'");
@@ -802,7 +773,6 @@ function cn_login()
                     }
                 }
             } else {
-                //alert_message("Enter login or password");
                 cn_throw_message('Enter login or password', 'e');
             }
         }
@@ -851,10 +821,10 @@ function cn_register_form($admin = TRUE)
             $user = do_select_character('MEMB_INFO', 'memb___id,token_regist,date_resgit_email,mail_chek', "memb___id='$d_string'");
 
             if ($user) {
-                if ($newHash != trim($user[0][1])) msg_info('Đường dẫn không hợp lệ.');
-                if (trim($user[0][3])) msg_info('Tài khoản đã được kích hoạt.', 'index.php');
+                if ($newHash != trim($user[0]['token_regist'])) msg_info('Đường dẫn không hợp lệ.');
+                if (trim($user[0]['mail_check'])) msg_info('Tài khoản đã được kích hoạt.', 'index.php');
 
-                if (ctime() > $user[0][2]){
+                if (ctime() > $user[0]['date_resgit_email']){
                     $statusDelete = do_delete_char("DELETE FROM MEMB_INFO WHERE memb___id ='". $d_string ."'");
                     if ($statusDelete){
                         msg_info('Bạn có thể sử dụng lại email để đăng ký.', 'index.php?register');
@@ -914,11 +884,11 @@ function cn_register_form($admin = TRUE)
             msg_info('Tài khoản hoặc địa chỉ email không đúng.');
         }
 
-        $email = isset($user[0][1]) ? trim($user[0][1]) : '';
+        $email = isset($user[0]['mail_addr']) ? trim($user[0]['mail_addr']) : '';
 
         // Check user name & mail
         if ($user && $email && $email == $emailweb) {
-            $rand = $user[0][2];
+            $rand = $user[0]['memb__pwdmd5'];
 
             $ctime = ctime() + 86400;
             $url = getoption('http_script_dir') . '?lostpass=' . urlencode(base64_encode(xxtea_encrypt($rand . $ctime . ' ' . $username, MD5(CLIENT_IP) . getoption('#crypt_salt'))));
@@ -1137,30 +1107,6 @@ function cn_replace_text()
 // Since 1.5.0: Send Mail
 function cn_send_mail($to, $subject, $message, $alt_headers = NULL, $addressCC = '')
 {
-
-//    $from1 = "Cutenews <ngoctbhy@gmail.com>";$headers .= "\r\nBcc: her@$herdomain\r\n\r\n";
-//    $from = 'Cutenews <cutenews@' . $_SERVER['SERVER_NAME'] . '>';
-//
-//    $headers = "MIME-Version: 1.0\r\n";
-//    $headers .= "Content-type: text/plain;\r\n";
-//    $headers .= 'From: ' . $from . "\r\n";
-//    $headers .= 'Bcc: ' . $from . "\r\n";
-//    $headers .= 'Reply-to: ' . $from . "\r\n";
-//    $headers .= 'Return-Path: ' . $from . "\r\n";
-//    $headers .= 'Message-ID: <' . md5(uniqid(time())) . '@' . $_SERVER['SERVER_NAME'] . ">\r\n";
-//    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-//    $headers .= "Date: " . date('r', time()) . "\r\n";
-//
-//    if (!is_null($alt_headers)) $headers = $alt_headers;
-//    foreach ($tos as $v) if ($v) mail($v, $subject, $message, $headers);
-
-//    return true;
-
-
-//    $nFrom = 'Freetuts.net';
-//    $mFrom = 'xxxx@gmail.com';
-//    $mPass = 'passlamatkhua';
-    //sendMail($title, $content, $nTo, $mTo,$diachicc='');
     $nFrom = $_SERVER['SERVER_NAME'];
     $mFrom = @getoption('config_auth_email') ? getoption('config_auth_email') : false;
     $mPass = @getoption('config_auth_pass') ? getoption('config_auth_pass') : false;
@@ -1289,11 +1235,7 @@ function cn_get_menu_none()
 
     $result = '<div class="loginbx"> <!-- start loginbx --> 
                     <div class="loginbx_n"></div>
-                    <div class="loginbx_c">
-                        <div class="loginbx_content">'
-                            . cn_login_form() .
-                        '</div>              
-                    </div>
+                    <div class="loginbx_c"><div class="loginbx_content">'. cn_login_form() .'</div></div>
                     <div class="loginbx_s"></div>
                 </div><!-- end loginbx -->			
             <div class="clear"></div>
@@ -1310,8 +1252,6 @@ function cn_get_menu_none()
         $title = isset($var[2]) ? $var[2] : '';
         $app = isset($var[3]) ? $var[3] : '';
 
-        //print "F_cn_url_modify 575 get \$acl: $acl <br>";
-        //print "F_cn_url_modify 576 get \$mod_key: $mod_key <br>";
         //if ($acl && !test($acl))
         //  continue;
 
@@ -1472,7 +1412,6 @@ function msg_err($title, $go_back = null)
     DIE();
 }
 
-
 // Since 1.5.3: Set cache variable
 function mcache_set($name, $var)
 {
@@ -1487,7 +1426,6 @@ function mcache_get($name)
     global $_CN_SESS_CACHE;
     return isset($_CN_SESS_CACHE[$name]) ? $_CN_SESS_CACHE[$name] : FALSE;
 }
-
 
 // Since 1.5.0: Add hook to system
 function add_hook($hook, $func)
@@ -1507,11 +1445,9 @@ function add_hook($hook, $func)
     if ($prior) array_unshift($_HOOKS[$hook], $func); else $_HOOKS[$hook][] = $func;
 }
 
-
 // Since 1.5.0: Cascade Hooks
 function hook($hook, $args = null)
 {
-
     global $_HOOKS;
 
     // Plugin hooks
@@ -2493,16 +2429,6 @@ function cn_touch($fn, $php_safe = FALSE)
     }
 
     return $fn;
-}
-
-// Since 2.0: Write default input=hidden fields
-function cn_form_open($fields)
-{
-    $fields = explode(',', $fields);
-    foreach ($fields as $field) {
-        $_field = REQ(trim($field), 'GPG');
-        echo '<input type="hidden" name="' . trim($field) . '" value="' . cn_htmlspecialchars($_field) . '" />';
-    }
 }
 
 // Since 1.5.0: Force relocation

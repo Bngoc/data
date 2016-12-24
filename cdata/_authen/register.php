@@ -18,7 +18,7 @@ list($errors_result) = _GL('errors_result');
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG ?>/vertical-separator.jpg" width="640"
+                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG ?>/vertical-separator.jpg" width="100%"
                                                height="1px"/></div>
             </td>
         </tr>
@@ -56,7 +56,7 @@ list($errors_result) = _GL('errors_result');
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG ?>/vertical-separator.jpg" width="640"
+                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG ?>/vertical-separator.jpg" width="100%"
                                                height="1px"/></div>
             </td>
         <tr>
@@ -109,7 +109,7 @@ list($errors_result) = _GL('errors_result');
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG ?>/vertical-separator.jpg" width="640"
+                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG ?>/vertical-separator.jpg" width="100%"
                                                height="1px"/></div>
             </td>
         </tr>
@@ -144,7 +144,7 @@ list($errors_result) = _GL('errors_result');
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG ?>/vertical-separator.jpg" width="640"
+                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG ?>/vertical-separator.jpg" width="100%"
                                                height="1px"/></div>
             </td>
         </tr>
@@ -160,7 +160,7 @@ list($errors_result) = _GL('errors_result');
         </tr>
         <tr>
             <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
-            <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="nameCaptcha"
+            <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="nameCaptcha" required
                                                 onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
             <td class="bizwebform_col_3" id="msg_Captcha"></td>
         </tr>

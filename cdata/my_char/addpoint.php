@@ -18,7 +18,7 @@ cn_snippet_messages();
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="640"
+                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
                                                height="1px"/></div>
                 <br/></td>
         </tr>
@@ -72,7 +72,7 @@ cn_snippet_messages();
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="640"
+                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
                                                height="1px"/></div>
                 <br/></td>
         </tr>
@@ -163,7 +163,7 @@ cn_snippet_messages();
 '<table style="width: 100%" cellpadding="2">
 		<tr><td colspan="3" style="padding:20px; text-align:center"></td></tr>
 		<tr><td colspan="3" class="">CONFIG<br/></td></tr>
-		<tr><td colspan="3"><div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="640" height="1px" /></div><br/></td></tr>
+		<tr><td colspan="3"><div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%" height="1px" /></div><br/></td></tr>
 		<tr><td colspan="3">...........................cmd .....</td></tr>
 	</table>';
 ?>

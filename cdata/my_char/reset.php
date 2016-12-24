@@ -21,7 +21,7 @@ if ($notify_rs_ok) echo $notify_rs_ok;
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="640"
+                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
                                                height="1px"/></div>
                 <br/></td>
         </tr>
@@ -75,7 +75,7 @@ if ($notify_rs_ok) echo $notify_rs_ok;
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="640"
+                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
                                                height="1px"/></div>
                 <br/></td>
         </tr>
@@ -118,7 +118,7 @@ if ($notify_rs_ok) echo $notify_rs_ok;
     </tr>
     <tr>
         <td colspan="3">
-            <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="640"
+            <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
                                            height="1px"/></div>
             <br/></td>
     </tr>
@@ -172,7 +172,7 @@ if ($notify_rs_ok) echo $notify_rs_ok;
     </tr>
     <tr>
         <td colspan="3">
-            <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="640"
+            <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
                                            height="1px"/></div>
             <br/></td>
     </tr>
@@ -316,7 +316,7 @@ if (getoption('hotrotanthu') == 1) { ?>
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="640"
+                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
                                                height="1px"/></div>
                 <br/></td>
         </tr>
