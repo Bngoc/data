@@ -563,7 +563,6 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
 
     foreach ($arrHarmony as $key => $its) {
         foreach ($its as $k => $val) {
-            echo 'k ===> ' . $k . '<br>';
             if ($k == $harmony) {
                 $item_harmony .= $val;
                 break;
