@@ -648,7 +648,7 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     }
 
     $items_data = getoption('#items_data');
-    if (!isset($items_data[$group . '.' . $id])) return array();
+    //if (!isset($items_data[$group . '.' . $id])) return array();
     //if (!in_array($group . '.' . $id, array_keys($items_data))) return array();
     //$rendeImg = renderImageItencode($group, $id);
 
