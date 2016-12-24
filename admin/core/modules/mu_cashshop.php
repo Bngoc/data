@@ -196,7 +196,7 @@ function cashshop_action()
 
             //add to array
             if (!empty($_id)) {
-                //$item_read[$_id] = cn_item_info($txt_code32, $txt_name, $txt_price);
+                //$item_read[$_id] = cn_analysis_code32($txt_code32, $txt_name, $txt_price);
 
                 $__data[$_id]['code32'] = $txt_code32;
                 $__data[$_id]['name'] = $txt_name;
@@ -219,7 +219,7 @@ function cashshop_action()
 
     if (isset($__data))
         foreach ($__data as $key => $raw)
-            $set_data[$key] = cn_item_info($raw['code32'], $raw['name'], $raw['price'], $raw['image_mh']);
+            $set_data[$key] = cn_analysis_code32($raw['code32'], $raw['name'], $raw['price'], $raw['image_mh']);
 
     $items_data = getoption('#items_data');
     $key_items_data = array_keys($items_data);

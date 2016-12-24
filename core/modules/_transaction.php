@@ -173,7 +173,7 @@ function transaction___buy_gd()
 
     if ($item_)
         foreach ($item_ as $key => $var) {
-            $list_item[$key] = cn_item_info($var['code32'], $var['name'], $var['price'], $var['image_mh']);
+            $list_item[$key] = cn_analysis_code32($var['code32'], $var['name'], $var['price'], $var['image_mh']);
         }
     $member = member_get();
     $accc_ = $member['user_name'];
@@ -301,7 +301,7 @@ function shop___what_(){
 		$i++;
 		$x++;
 		if ( $x == 8 ) $x = 0;	
-		$item32 = cn_item_info(substr($item_list, $i*32,32),'','','');
+		$item32 = cn_analysis_code32(substr($item_list, $i*32,32),'','','');
 		if(!$item32) continue;
 		
 		if($item32['name']){
@@ -372,7 +372,7 @@ function shop_acient(){
 	foreach($item_ as $ak => $var){
 		echo "150 opt = $opt -> $ak => $var[code32]-> $var[name] -> $var[price] -> $var[image_mh] <br>";
 	
-		$list_item[] = cn_item_info($var['code32'], $var['name'], $var['price'], $var['image_mh']);
+		$list_item[] = cn_analysis_code32($var['code32'], $var['name'], $var['price'], $var['image_mh']);
 	}
 	cn_assign('item_', $list_item);
 	echoheader('my_char/style.css', "Error"); 								//???????????????????
