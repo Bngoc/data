@@ -284,16 +284,16 @@ function shop___what_()
                 if (!$item32['x']) $itemx = 1;
                 else $itemx = $item32['x'];
 
-                $show_warehouse .= "<div style='margin-top:" . (floor($i / 8) * 32) . "px;
-											margin-left:" . ($x * 32) . "px; position:absolute;
-											width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px;
+                $show_warehouse .= "<div style='margin-top:". (floor($i / 8) * 32) ."px;
+											margin-left:". ($x * 32) ."px; position:absolute;
+											width:". ($itemx * 32) ."px; height:" . ($itemy * 32) ."px;
 											cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>
-									<img src='images/items/" . $item32['image'] . ".gif'
-											style=\"height:" . (32 * $itemy - $itemy - 1) . "px;
-											width:" . (32 * $itemx) . "px;\"
-											onMouseOut='UnTip()' onMouseOver=\"topxTip(document.getElementById('iditem" . $i . "').innerHTML)\">
+									<img src='images/items/". (@$item32['image'] ? $item32['image'] : 'SinFoto') .".gif'
+											style=\"height:". (32 * $itemy - $itemy - 1) ."px;
+											width:". (32 * $itemx) . "px;\"
+											onMouseOut='UnTip()' onMouseOver=\"topxTip(document.getElementById('iditem". $i ."').innerHTML)\">
 								</div>";
-                $show_warehouse .= "<div class='floatcontainer forumbit_nopost' id='iditem$i' style='display:none;background: rgba(0, 128, 0, 0.15);'>'" . $item32['info'] . "'</div>";
+                $show_warehouse .= "<div class='floatcontainer forumbit_nopost' id='iditem$i' style='display:none;background: rgba(0, 128, 0, 0.15);'>'". $item32['info'] ."'</div>";
 
             }
         }
