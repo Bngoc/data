@@ -3823,7 +3823,7 @@ function char_delepersonalSotre()
     if ($itemInfo && !$isCheckAction) {
         foreach ($itemInfo as $i => $item32) {
             ++$x;
-            $i += 1 ;
+            //$i = 1 ;
             if ($x == 8) $x = 0;
             if (isset($item32['name'])) {
                 if (!$item32['y']) $itemy = 1;
