@@ -3817,13 +3817,13 @@ function char_delepersonalSotre()
             $itemInfo[] = cn_analysis_code32($strItem, '', '', '');
         }
     }
+    echoArr($itemInfo);
     $x = -1;
     $show_warehouse = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:57px; padding-left:25px; height:343px; background-image: url(/images/inventory.jpg)'>";
 
     if ($itemInfo && !$isCheckAction) {
         foreach ($itemInfo as $i => $item32) {
             ++$x;
-            //$i = 1 ;
             if ($x == 8) $x = 0;
             if (isset($item32['name'])) {
                 if (!$item32['y']) $itemy = 1;
