@@ -3784,9 +3784,6 @@ function char_delepersonalSotre()
     //$inventoryDele = substr($inventoryRaw, 76 * 32, 32 * 32);
     $inventoryDele = substr($inventoryRaw, (-1)*$ceilInventoryShopPresonal);
 
-
-echo '1 -> ' . $inventoryRaw . '<br>';
-echo '2 -> ' . $inventoryDele . '<br>';
     $isCheckAction = false;
     if (request_type('POST')) {
         if (REQ('action_personalSotre')) {
@@ -3823,7 +3820,7 @@ echo '2 -> ' . $inventoryDele . '<br>';
             $itemInfo[] = cn_analysis_code32($strItem, '', '', '');
         }
     }
-    echoArr($itemInfo);
+
     $x = -1;
     $show_warehouse = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:57px; padding-left:25px; height:343px; background-image: url(/images/inventory.jpg)'>";
 

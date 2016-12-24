@@ -262,27 +262,29 @@ function shop___what_()
     $item_list = substr(strtoupper(bin2hex($warehouse_[0]['Items'])), 0, 3840);
     $money = $warehouse_[0]['Money'];
     $password = $warehouse_[0]['pw'];
-    //$accountid_ = $warehouse_[0][3]; //??
 
-    $show_warehouse = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:57px; padding-left:25px; height:628px; background-image: url(/images/warehouse.jpg)'>";
-    $i = -1;
+    $lenghtWarehouse = $item_list;
+    $ListItemInfo = array();
+    for ($jk = 0; $jk < $lenghtWarehouse; $jk += 32) {
+        $strItem = substr($lenghtWarehouse, $jk, 32);
+        $ListItemInfo[] = cn_analysis_code32($strItem, '', '', '');
+    }
+
     $x = -1;
+    $show_warehouse = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:57px; padding-left:25px; height:628px; background-image: url(/images/warehouse.jpg)'>";
 
-    while ($i < 119) {
-        $i++;
-        $x++;
-        if ($x == 8) $x = 0;
-        $item32 = cn_item_info(substr($item_list, $i * 32, 32), '', '', '');
-        if (!$item32) continue;
+    if ($ListItemInfo) {
+        foreach ($ListItemInfo as $i => $item32) {
+            ++$x;
+            if ($x == 8) $x = 0;
+            if (isset($item32['name'])) {
+                if (!$item32['y']) $itemy = 1;
+                else $itemy = $item32['y'];
 
-        if ($item32['name']) {
-            if (!$item32['y']) $itemy = 1;
-            else $itemy = $item32['y'];
+                if (!$item32['x']) $itemx = 1;
+                else $itemx = $item32['x'];
 
-            if (!$item32['x']) $itemx = 1;
-            else $itemx = $item32['x'];
-
-            $show_warehouse .= "<div style='margin-top:" . (floor($i / 8) * 32) . "px; 
+                $show_warehouse .= "<div style='margin-top:" . (floor($i / 8) * 32) . "px; 
 											margin-left:" . ($x * 32) . "px; position:absolute;
 											width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px;
 											cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>
@@ -291,12 +293,45 @@ function shop___what_()
 											width:" . (32 * $itemx) . "px;\" 
 											onMouseOut='UnTip()' onMouseOver=\"topxTip(document.getElementById('iditem" . $i . "').innerHTML)\">
 								</div>";
-            $show_warehouse .= "<div class='floatcontainer forumbit_nopost' id='iditem$i' style='display:none;background: rgba(0, 128, 0, 0.15);'>'" . $item32['info'] . "'</div>";
+                $show_warehouse .= "<div class='floatcontainer forumbit_nopost' id='iditem$i' style='display:none;background: rgba(0, 128, 0, 0.15);'>'" . $item32['info'] . "'</div>";
 
-            //onmouseover="topxTip(document.getElementById('tip_10261').innerHTML)" onmouseout="UnTip()"
-            //onMouseOut='hidetip()' onMouseOver=\"showtip('".$item32['info']."')\">
+            }
         }
     }
+
+//    $show_warehouse = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:57px; padding-left:25px; height:628px; background-image: url(/images/warehouse.jpg)'>";
+//    $i = -1;
+//    $x = -1;
+//
+//    while ($i < 119) {
+//        $i++;
+//        $x++;
+//        if ($x == 8) $x = 0;
+//        $item32 = cn_item_info(substr($item_list, $i * 32, 32), '', '', '');
+//        if (!$item32) continue;
+//
+//        if ($item32['name']) {
+//            if (!$item32['y']) $itemy = 1;
+//            else $itemy = $item32['y'];
+//
+//            if (!$item32['x']) $itemx = 1;
+//            else $itemx = $item32['x'];
+//
+//            $show_warehouse .= "<div style='margin-top:" . (floor($i / 8) * 32) . "px;
+//											margin-left:" . ($x * 32) . "px; position:absolute;
+//											width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px;
+//											cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>
+//									<img src='images/items/" . $item32['image'] . ".gif'
+//											style=\"height:" . (32 * $itemy - $itemy - 1) . "px;
+//											width:" . (32 * $itemx) . "px;\"
+//											onMouseOut='UnTip()' onMouseOver=\"topxTip(document.getElementById('iditem" . $i . "').innerHTML)\">
+//								</div>";
+//            $show_warehouse .= "<div class='floatcontainer forumbit_nopost' id='iditem$i' style='display:none;background: rgba(0, 128, 0, 0.15);'>'" . $item32['info'] . "'</div>";
+//
+//            //onmouseover="topxTip(document.getElementById('tip_10261').innerHTML)" onmouseout="UnTip()"
+//            //onMouseOut='hidetip()' onMouseOver=\"showtip('".$item32['info']."')\">
+//        }
+//    }
 
     if ($password != NULL AND $password != 0) $wwname = "<font color='#A42725'>Hòm đồ (Đóng)</font>";
     else $wwname = "<font color='#ffffff'>Hòm đồ (Mở)</font>";

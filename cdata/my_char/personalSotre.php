@@ -7,7 +7,7 @@ cn_snippet_messages();
 
 <table style="width: 100%" cellpadding="2">
     <form action="<?php echo PHP_SELF; ?>" method="GET">
-        <?php cn_snippet_get_hidden(); ?>
+        <?php echo cn_snippet_get_hidden(); ?>
         <tr>
             <td colspan="3" class="">THÔNG TIN HÒM ĐỒ CÁ NHÂN<br/></td>
         </tr>
