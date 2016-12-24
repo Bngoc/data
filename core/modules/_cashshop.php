@@ -262,11 +262,11 @@ function shop___what_()
     $item_list = substr(strtoupper(bin2hex($warehouse_[0]['Items'])), 0, 3840);
     $money = $warehouse_[0]['Money'];
     $password = $warehouse_[0]['pw'];
-echo $item_list;
+
     $lenghtWarehouse = strlen($item_list);
     $ListItemInfo = array();
     for ($jk = 0; $jk < $lenghtWarehouse; $jk += 32) {
-        $strItem = substr($lenghtWarehouse, $jk, 32);
+        $strItem = substr($item_list, $jk, 32);
         $ListItemInfo[] = cn_analysis_code32($strItem, '', '', '');
     }
 
