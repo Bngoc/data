@@ -125,7 +125,8 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
 {
 
     if ($string == 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF' ||
-        $string == 'ffffffffffffffffffffffffffffffff' || strlen($string) != 32) {
+        $string == 'ffffffffffffffffffffffffffffffff' || strlen($string) != 32
+    ) {
         return '';
     }
     // analysis Item 32
@@ -145,11 +146,31 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     $socket_slot[3] = hexdec(substr($string, 28, 2));    // Socket data
     $socket_slot[4] = hexdec(substr($string, 30, 2));    // Socket data
 
+    $output = array(
+        'info' => '',
+        'name' => '',
+        'image' => '',
+        'x' => '',
+        'y' => '',
+        'set1' => '',
+        'set2' => '',
+        'id' => '',
+        'group' => '',
+        'title' => '',
+        'price' => '',
+        'code32' => '',
+        'image_mh' => ''
+    );
+    $items_data = getoption('#items_data');
+    if (!isset($items_data[$group . '.' . $id])) return $output;
+    //if (!in_array($group . '.' . $id, array_keys($items_data))) return array();
+    //$rendeImg = renderImageItencode($group, $id);
+
     // Điều chỉnh Item Thần
     if ($ancient == 4) $ancient = 5;
     if ($ancient == 9) $ancient = 10;
     // Kiểm tra Item có tuyệt chiêu
-    if ($option < 128){
+    if ($option < 128) {
         $skill = '';
     } else {
         $skill = '<font color=#8CB0EA>Vũ khí có tuyệt chiêu</font><br>';
@@ -160,7 +181,7 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     $option = $option - $item_level * 8;
 
     // Kiểm tra Item luck
-    if ($option < 4){
+    if ($option < 4) {
         $luck = '';
     } else {
         $luck = '<font color=#8CB0EA>May Mắn (Tỉ lệ ép Ngọc Tâm Linh + 25%)<br>May Mắn (Sát thương tối đa + 5%)</font><br>';
@@ -458,174 +479,74 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     foreach ($socket_slot as $key => $val) {
         if ($val) {
             if ($val == 255) {
-                $item_socket .= '<br>Socket '. ($key + 1) .': (Chưa khảm dòng socket)';
+                $item_socket .= '<br>Socket ' . ($key + 1) . ': (Chưa khảm dòng socket)';
             } else {
-                $item_socket .= '<br>Socket '. ($key + 1) .': '. $socket_type[$val];
+                $item_socket .= '<br>Socket ' . ($key + 1) . ': ' . $socket_type[$val];
             }
         }
     }
 
     $arrHarmony = array(
-        16 => '2',
-        17 => '3',
-        18 => '4',
-        19 => '5',
-        20 => '6',
-        21 => '7',
-        22 => '9',
-        23 => '11',
-        24 => '12',
-        25 => '14',
-        26 => '15',
-        27 => '16',
-        28 => '17',
-        29 => '20',
-        30 => '100000',
-        31 => '110000',
-        32 => '3',
-        33 => '4',
-        34 => '5',
-        35 => '6',
-        36 => '7',
-        37 => '8',
-        38 => '10',
-        39 => '12',
-        40 => '14',
-        41 => '17',
-        42 => '20',
-        43 => '23',
-        44 => '26',
-        45 => '29',
-        46 => '100000',
-        47 => '110000',
-        48 => '6',
-        49 => '8',
-        50 => '10',
-        51 => '12',
-        52 => '14',
-        53 => '16',
-        54 => '20',
-        55 => '23',
-        56 => '26',
-        57 => '29',
-        58 => '32',
-        59 => '35',
-        60 => '37',
-        61 => '40',
-        62 => '100000',
-        63 => '110000',
-        64 => '6',
-        65 => '8',
-        66 => '10',
-        67 => '12',
-        68 => '14',
-        69 => '16',
-        70 => '20',
-        71 => '23',
-        72 => '26',
-        73 => '29',
-        74 => '32',
-        75 => '35',
-        76 => '37',
-        77 => '40',
-        78 => '100000',
-        79 => '110000',
-        80 => '0',
-        81 => '0',
-        82 => '0',
-        83 => '0',
-        84 => '0',
-        85 => '0',
-        86 => '7',
-        87 => '8',
-        88 => '9',
-        89 => '11',
-        90 => '12',
-        91 => '14',
-        92 => '16',
-        93 => '19',
-        94 => '0',
-        95 => '0',
-        96 => '0',
-        97 => '0',
-        98 => '0',
-        99 => '0',
-        100 => '0',
-        101 => '0',
-        102 => '12',
-        103 => '14',
-        104 => '16',
-        105 => '18',
-        106 => '20',
-        107 => '22',
-        108 => '24',
-        109 => '30',
-        110 => '0',
-        111 => '0',
-        112 => '0',
-        113 => '0',
-        114 => '0',
-        115 => '0',
-        116 => '0',
-        117 => '0',
-        118 => '0',
-        119 => '0',
-        120 => '0',
-        121 => '12',
-        122 => '14',
-        123 => '16',
-        124 => '18',
-        125 => '22',
-        126 => '0',
-        127 => '0',
-        128 => '0',
-        129 => '0',
-        130 => '0',
-        131 => '0',
-        132 => '0',
-        133 => '0',
-        134 => '0',
-        135 => '0',
-        136 => '0',
-        137 => '5',
-        138 => '7',
-        139 => '9',
-        140 => '11',
-        141 => '14',
-        142 => '0',
-        143 => '0',
-        144 => '0',
-        145 => '0',
-        146 => '0',
-        147 => '0',
-        148 => '0',
-        149 => '0',
-        150 => '0',
-        151 => '0',
-        152 => '0',
-        153 => '3',
-        154 => '5',
-        155 => '7',
-        156 => '9',
-        157 => '10',
-        158 => '0',
-        159 => '0',
-        160 => '0',
-        161 => '0',
-        162 => '0',
-        163 => '0',
-        164 => '0',
-        165 => '0',
-        166 => '0',
-        167 => '0',
-        168 => '0',
-        169 => '0',
-        170 => '0',
-        171 => '0',
-        172 => '0',
-        173 => '10',
-        174 => '0',
-        175 => '0'
+        0 => array(
+            16 => '2', 17 => '3', 17 => '3', 18 => '4',
+            19 => '5', 20 => '6', 21 => '7', 22 => '9',
+            23 => '11', 24 => '12', 25 => '14', 26 => '15',
+            27 => '16', 28 => '17', 29 => '20', 30 => '100000', 31 => '110000'
+        ),
+        1 => array(
+            32 => '3', 33 => '4', 34 => '5', 35 => '6',
+            36 => '7', 37 => '8', 38 => '10', 39 => '12',
+            40 => '14', 41 => '17', 42 => '20', 43 => '23',
+            44 => '26', 45 => '29', 46 => '100000', 47 => '110000'
+        ),
+        2 => array(
+            48 => '6', 49 => '8', 50 => '10', 51 => '12',
+            52 => '14', 53 => '16', 54 => '20', 55 => '23',
+            56 => '26', 57 => '29', 58 => '32', 59 => '35',
+            60 => '37', 61 => '40', 62 => '100000', 63 => '110000'
+        ),
+        3 => array(
+            64 => '6', 65 => '8', 66 => '10', 67 => '12',
+            68 => '14', 69 => '16', 70 => '20', 71 => '23',
+            72 => '26', 73 => '29', 74 => '32', 75 => '35',
+            76 => '37', 77 => '40', 78 => '100000', 79 => '110000'
+        ),
+        4 => array(
+            80 => '0', 81 => '0', 82 => '0', 83 => '0',
+            84 => '0', 85 => '0', 86 => '7', 87 => '8',
+            88 => '9', 89 => '11', 90 => '12', 91 => '14',
+            92 => '16', 93 => '19', 94 => '0', 95 => '0'
+        ),
+        5 => array(
+            96 => '0', 97 => '0', 98 => '0', 99 => '0',
+            100 => '0', 101 => '0', 102 => '12', 103 => '14',
+            104 => '16', 105 => '18', 106 => '20', 107 => '22',
+            108 => '24', 109 => '30', 110 => '0', 111 => '0'
+        ),
+        6 => array(
+            112 => '0', 113 => '0', 114 => '0', 115 => '0',
+            116 => '0', 117 => '0', 118 => '0', 119 => '0',
+            120 => '0', 121 => '12', 122 => '14', 123 => '16',
+            124 => '18', 125 => '22', 126 => '0', 127 => '0'
+        ),
+        7 => array(
+            128 => '0', 129 => '0', 130 => '0', 131 => '0',
+            132 => '0', 133 => '0', 134 => '0', 135 => '0',
+            136 => '0', 137 => '5', 138 => '7', 139 => '9',
+            140 => '11', 141 => '14', 142 => '0', 143 => '0'
+        ),
+        8 => array(
+            144 => '0', 145 => '0', 146 => '0', 147 => '0',
+            148 => '0', 149 => '0', 150 => '0', 151 => '0',
+            152 => '0', 153 => '3', 154 => '5', 155 => '7',
+            156 => '9', 157 => '10', 158 => '0', 159 => '0'
+        ),
+        9 => array(
+            160 => '0', 161 => '0', 162 => '0', 163 => '0',
+            164 => '0', 165 => '0', 166 => '0', 167 => '0',
+            168 => '0', 169 => '0', 170 => '0', 171 => '0',
+            172 => '0', 173 => '10', 174 => '0', 175 => '0'
+        )
     );
 
     $item_harmony = '';
@@ -640,17 +561,15 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     else if ($harmony < 160) $item_harmony .= 'Tỷ lệ SD + ';
     else if ($harmony < 176) $item_harmony .= 'Tỷ lệ loại bỏ SD + ';
 
-    foreach ($arrHarmony as $key => $val) {
-        if ($val == $harmony){
-            $item_harmony .= $val;
-            break;
+    foreach ($arrHarmony as $key => $its) {
+        foreach ($its as $k => $val) {
+            echo 'k ===> ' . $k . '<br>';
+            if ($k == $harmony) {
+                $item_harmony .= $val;
+                break;
+            }
         }
     }
-
-    $items_data = getoption('#items_data');
-    //if (!isset($items_data[$group . '.' . $id])) return array();
-    //if (!in_array($group . '.' . $id, array_keys($items_data))) return array();
-    //$rendeImg = renderImageItencode($group, $id);
 
     $item_read = $items_data[$group . '.' . $id];
 
@@ -667,29 +586,24 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
         $color = '#8CB0EA';
         if ($iopx1 == 1) {
             $item_name .= ' + Tấn công';
-            //$ExclAnci = 1;
         }
         if ($iopx2 == 1) {
             $item_name .= ' + Phòng thủ';
-            //$ExclAnci = 1;
         }
         if ($iopx3 == 1) {
             $item_name .= ' Hoàng Kim';
             $color = '#F4CB3F';
-            //$ExclAnci = 1;
         }
     } else if ($item_exc != '') {//Item Excellent
         //Item Harmony
         if ($harmony > 0) $item_name = 'Tử Âm ' . $item_name;
         $item_name = 'Hoàn Hảo ' . $item_name;
         $color = '#2FF387';
-        //$ExclAnci = 1;
     }
     // Item Thần
     if ($ancient > 0) {
         $item_name = 'Item Thần' . ' ' . $ancient_set . ' ' . $item_name;
         $color = '#2347F3';
-        //$ExclAnci = 2;
     }
     // Item Socket
     if ($item_socket != '') {
@@ -703,30 +617,24 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     if ($harmony > 0) $item_harmony = '<font color=#C8C800>' . $item_harmony . '</font><br>'; else $item_harmony = '';
     $item_exc = '<font color=#2FF387>' . $item_exc . '</font><br>';
     $item_socket = '<font color=#AA1EAA>' . $item_socket . '</font><br>';
-    $item_info = '<div class="_info" style="padding: 10px;"><center><strong><span style=color:#FFFEFE; font-size: 13px;><font color=' . $color . '>' . $item_name . $item_level . '</font><br>'
-        . $serial
-        . $durability
-        . $luck
-        . $skill
-        . $item_option
-        . $item_harmony
-        . $item_exc
-        . $item_socket . '</span></strong></center></div>';
-    $output = array(
-        'info' => $item_info,
-        'name' => $item_name . "<font color=maroon> <i>(". $title .") </i></font>",// $item_read['Name'],
-        'image' => $item_read['Image'],
-        'x' => $item_read['X'],
-        'y' => $item_read['Y'],
-        'set1' => $item_read['SET1'],
-        'set2' => $item_read['SET2'],
-        'id' => $item_read['ID'],
-        'group' => $item_read['G'],
-        'title' => $title,
-        'price' => $price,
-        'code32' => $string,
-        'image_mh' => $image_mh,
-    );
+    $item_info = '<div class="_info" style="padding: 10px;"><center><strong><span style=color:#FFFEFE; font-size: 13px;>';
+    $item_info .= '<font color=' . $color . '>' . $item_name . $item_level . '</font><br>'
+        . $serial . $durability . $luck . $skill . $item_option . $item_harmony . $item_exc . $item_socket . '</span></strong></center></div>';
+
+    $output['info'] = $item_info;
+    $output['name'] = $item_name . "<font color=maroon> <i>(" . $title . ") </i></font>";
+    $output['image'] = $item_read['Image'];
+    $output['x'] = $item_read['X'];
+    $output['y'] = $item_read['Y'];
+    $output['set1'] = $item_read['SET1'];
+    $output['set2'] = $item_read['SET2'];
+    $output['id'] = $item_read['ID'];
+    $output['group'] = $item_read['G'];
+    $output['title'] = $title;
+    $output['price'] = $price;
+    $output['code32'] = $string;
+    $output['image_mh'] = $image_mh;
+
     return $output;
 }
 
