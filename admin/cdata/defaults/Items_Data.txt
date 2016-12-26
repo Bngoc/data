@@ -67,6 +67,25 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0006700|0|67|Templarius Sword|1|4|NO|NO
 0006800|0|68|Skeleton Sword|1|4|NO|NO
 0006900|0|69|Silver Sword|1|4|NO|NO
+|0|100|Flame of Narsil|1|4|NO|NO
+|0|101|Hellfire Sword|1|4|NO|NO
+|0|102|Emperor Sword|1|4|NO|NO
+|0|103|Sword of Omen|1|4|NO|NO
+|0|104|Royal Claws|3|1|NO|NO
+|0|105|Moon Blade|2|4|NO|NO
+|0|106|xCyclone Sword|1|4|NO|NO
+|0|107|xAsura|2|4|NO|NO
+|0|108|xBlast Breaker|2|4|NO|NO
+|0|109|Glory Breaker|2|4|NO|NO
+|0|110|Egypt Master Sword|2|4|NO|NO
+|0|111|Thunder Slasher|2|4|NO|NO
+|0|112|Ice Lord Sword|2|4|NO|NO
+|0|113|Nakata Sword|2|4|NO|NO
+|0|114|Aszmhodeus Keeper|2|4|NO|NO
+|0|115|Star Stabber|2|4|NO|NO
+|0|116|Ceremony Sword|2|4|NO|NO
+|0|117|Sword of xLIANGx|2|4|NO|NO
+//---------------------------------
 0100000|1|0|Small Axe|1|3|NO|NO
 0100100|1|1|Hand Axe|1|3|NO|NO
 0100200|1|2|Double Axe|1|3|NO|NO
@@ -99,6 +118,9 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0103000|1|30|Warlock Axe|2|3|NO|NO
 0103100|1|31|Paladin Axe|2|3|NO|NO
 0103200|1|32|Gnome Axe|2|3|NO|NO
+|1|100|Axe of Werewolf|2|3|NO|NO
+|1|101|Dwarven Hatchet|2|3|NO|NO
+//---------------------------------
 0200000|2|0|Mace|1|3|NO|NO
 0200100|2|1|Morning Star|1|3|Warrior|NO
 0200200|2|2|Flail|1|3|NO|NO
@@ -118,6 +140,18 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0201600|2|16|Frost Mace|1|3|NO|NO
 0201700|2|17|Absolute Scepter|1|4|NO|NO
 0201800|2|18|Stryker Scepter|1|4|NO|NO
+|2|100|Divine Crusher|2|4|NO|NO
+|2|101|Haste Bringer|2|4|NO|NO
+|2|102|Skull Crusher|3|4|NO|NO
+|2|103|Steelspark Scepter|1|4|NO|NO
+|2|104|Torturer's Mercy|1|3|NO|NO
+|2|105|Imperial Scepter|2|4|NO|NO
+|2|106|xThunderBolt|1|4|NO|NO
+|2|107|xHorn of Steel|1|4|NO|NO
+|2|108|Magma Forged Mace|1|2|NO|NO
+|2|109|Puidedrac's Soul Ripper|2|4|NO|NO
+|2|110|Hexa Scepter|1|3|NO|NO
+//---------------------------------
 0300000|3|0|Light Spear|2|4|NO|NO
 0300100|3|1|Spear|2|4|NO|NO
 0300200|3|2|Dragon Lance|2|4|NO|NO
@@ -130,6 +164,9 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0300900|3|9|Bill of Balrog|2|4|NO|NO
 0301000|3|10|Dragon Spear|2|4|NO|NO
 0301100|3|11|Beuroba Spear|2|4|NO|NO
+|3|100|The Phoenix Spear|3|4|NO|NO
+|3|101|Scythe of Sin|2|4|NO|NO
+//---------------------------------
 0400000|4|0|Short Bow|2|3|NO|NO
 0400100|4|1|Bows|2|3|NO|NO
 0400200|4|2|Elven Bow|2|3|NO|NO
@@ -155,6 +192,11 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0402200|4|22|Albatros Bow|2|4|NO|NO
 0402300|4|23|Dark Stinger Bow|2|4|NO|NO
 0402400|4|24|Atahar Bow|2|4|NO|NO
+|4|100|Arrowsong Bow|1|2|NO|NO
+|4|101|Astral Light Bow|1|2|NO|NO
+|4|102|Angelic xBow|1|2|NO|NO
+|4|103|Devil xCrossbow|1|2|NO|NO
+//---------------------------------
 0500000|5|0|Skull Staff|1|3|Apolo|NO
 0500100|5|1|Angelic Staff|2|3|NO|NO
 0500200|5|2|Serpent Staff|2|3|NO|NO
@@ -196,6 +238,18 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0504600|5|46|Windseeker Staff|1|4|NO|NO
 0504700|5|47|Ragnaros Staff|1|4|NO|NO
 0504800|5|48|Divine Stick of Archangel|1|4|NO|NO
+|5|100|Pharaoh Staff|1|3|NO|NO
+|5|101|Ember Stone Staff|2|4|NO|NO
+|5|102|Spire of Defiance|2|4|NO|NO
+|5|103|Shaman Stick|1|3|NO|NO
+|5|104|Arcane Stick|1|3|NO|NO
+|5|105|Cerberus xStaff|1|3|NO|NO
+|5|106|Miracle xStaff|1|3|NO|NO
+|5|107|Summon Spirit xStick|1|3|NO|NO
+|5|108|Santa's Staff|1|4|NO|NO
+|5|109|Fog Staff|2|4|NO|NO
+|5|110|Dark Witcher Stick|2|4|NO|NO
+//---------------------------------
 0600000|6|0|Round Shield|2|2|NO|NO
 0600100|6|1|Horn Shield|2|2|NO|NO
 0600200|6|2|Kite Shield|2|2|NO|NO
@@ -232,6 +286,18 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0603400|6|34|Shaiya Shield|2|3|NO|NO
 0603500|6|35|Arcanus Shield|2|3|NO|NO
 0603600|6|36|DarkSoldier Shield|2|3|NO|NO
+|6|100|Cerberus xShield|2|2|NO|NO
+|6|101|Embisyeon xShield|2|2|NO|NO
+|6|102|Hell Knight xShield|2|2|NO|NO
+|6|103|Lazy Wing xShield|2|2|NO|NO
+|6|104|Enchanter Shield|2|2|NO|NO
+|6|105|Raven Lord Shield|2|2|NO|NO
+|6|106|Mask Shield|2|2|NO|NO
+|6|107|Gladiator Shield|2|2|NO|NO
+|6|108|Royal Wizzard Shield|2|3|NO|NO
+|6|109|Frost Lord Shield|2|2|NO|NO
+|6|110|Magical Blocker|2|2|NO|NO
+//---------------------------------
 0700000|7|0|Bronze Helm|2|2|NO|NO
 0700100|7|1|Dragon Helm|2|2|Hyon|Vicious
 0700200|7|2|Pad Helm|2|2|Apolo|NO
@@ -291,9 +357,9 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0705600|7|56|No Item Display|2|2|NO|NO
 0705700|7|57|No Item Display|2|2|NO|NO
 0705800|7|58|No Item Display|2|2|NO|NO
-0705900|7|59|No Item Display|2|2|NO|NO
-0706000|7|60|No Item Display|2|2|NO|NO
-0706100|7|61|No Item Display|2|2|NO|NO
+0705900|7|59|Sacred Helm|2|2|Vega's|NO
+0706000|7|60|Storm Hard Helm|2|2|NO|NO
+0706100|7|61|Piercing Helm|2|2|NO|NO
 0706200|7|62|No Item Display|2|2|NO|NO
 0706300|7|63|No Item Display|2|2|NO|NO
 0706400|7|64|No Item Display|2|2|NO|NO
@@ -393,9 +459,8 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0715800|7|158|Hyoga Helm|2|2|NO|NO
 0715900|7|159|Aldebaran Helm|2|2|NO|NO
 0716000|7|160|Sagittarius Helm|2|2|NO|NO
-0705900|7|59|Sacred Helm|2|2|Vega's|NO
-0706000|7|60|Storm Hard Helm|2|2|NO|NO
-0706100|7|61|Piercing Helm|2|2|NO|NO
+
+//---------------------------------
 0800000|8|0|Bronze Armor|2|2|Hyperio|NO
 0800100|8|1|Dragon Armor|2|3|NO|Vicious
 0800200|8|2|Pad Armor|2|2|Apolo|NO
@@ -455,21 +520,21 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0805600|8|56|No Item Display|2|2|NO|NO
 0805700|8|57|No Item Display|2|2|NO|NO
 0805800|8|58|No Item Display|2|2|NO|NO
-0805900|8|59|No Item Display|2|2|NO|NO
-0806000|8|60|No Item Display|2|2|NO|NO
-0806100|8|61|No Item Display|2|2|NO|NO
-0806200|8|62|No Item Display|2|2|NO|NO
-0806300|8|63|No Item Display|2|2|NO|NO
-0806400|8|64|No Item Display|2|2|NO|NO
-0806500|8|65|No Item Display|2|2|NO|NO
-0806600|8|66|No Item Display|2|2|NO|NO
-0806700|8|67|No Item Display|2|2|NO|NO
-0806800|8|68|No Item Display|2|2|NO|NO
-0806900|8|69|No Item Display|2|2|NO|NO
-0807000|8|70|No Item Display|2|2|NO|NO
-0807100|8|71|No Item Display|2|2|NO|NO
-0807200|8|72|No Item Display|2|2|NO|NO
-0807300|8|73|No Item Display|2|2|NO|NO
+0805900|8|59|Sacred Armor|2|3|Vega's|Chamereuui's
+0806000|8|60|Storm Hard Armor|2|3|NO|NO
+0806100|8|61|Piercing Armor|2|3|NO|NO
+|8|62|Scale Armor|2|2|NO|NO
+|8|63|Silk Armor|2|2|NO|NO
+|8|64|Sphinx Armor|2|3|NO|NO
+|8|65|Wind Armor|2|2|NO|NO
+|8|66|Dark Soul Armor|2|3|NO|NO
+|8|67|Dragon Armor|2|3|NO|NO
+|8|68|SU Armor|2|2|NO|NO
+|8|69|Legendary Armor|2|2|NO|NO
+|8|70|Red Wing Armor|2|2|NO|NO
+|8|71|Atlantis Armor|2|3|NO|NO
+|8|72|Storm Hard Armor|2|3|NO|NO
+|8|73|Phoenix Soul Armor|2|3|NO|NO
 0807400|8|74|Storm Hard V1 Armor|2|3|NO|NO
 0807500|8|75|Aramis Armor|2|3|Eden|NO
 0807600|8|76|Darkness Skull Armor|2|3|NO|NO
@@ -557,9 +622,7 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0815800|8|158|Hyoga Armor|2|3|NO|NO
 0815900|8|159|Aldebaran Armor|2|3|NO|NO
 0816000|8|160|Sagittarius Armor|2|3|NO|NO
-0805900|8|59|Sacred Armor|2|3|Vega's|Chamereuui's
-0806000|8|60|Storm Hard Armor|2|3|NO|NO
-0806100|8|61|Piercing Armor|2|3|NO|NO
+//---------------------------------
 0900000|9|0|Bronze Pants|2|2|Hyperio|NO
 0900100|9|1|Dragon Pants|2|2|NO|Vicious
 0900200|9|2|Pad Pants|2|2|Apolo|NO
@@ -619,21 +682,21 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0905600|9|56|No Item Display|2|2|NO|NO
 0905700|9|57|No Item Display|2|2|NO|NO
 0905800|9|58|No Item Display|2|2|NO|NO
-0905900|9|59|No Item Display|2|2|NO|NO
-0906000|9|60|No Item Display|2|2|NO|NO
-0906100|9|61|No Item Display|2|2|NO|NO
-0906200|9|62|No Item Display|2|2|NO|NO
-0906300|9|63|No Item Display|2|2|NO|NO
-0906400|9|64|No Item Display|2|2|NO|NO
-0906500|9|65|No Item Display|2|2|NO|NO
-0906600|9|66|No Item Display|2|2|NO|NO
-0906700|9|67|No Item Display|2|2|NO|NO
-0906800|9|68|No Item Display|2|2|NO|NO
-0906900|9|69|No Item Display|2|2|NO|NO
-0907000|9|70|No Item Display|2|2|NO|NO
-0907100|9|71|No Item Display|2|2|NO|NO
-0907200|9|72|No Item Display|2|2|NO|NO
-0907300|9|73|No Item Display|2|2|NO|NO
+0905900|9|59|Sacred Pants|2|2|Vega's|Chamereuui's
+0906000|9|60|Storm Hard Pants|2|2|NO|NO
+0906100|9|61|Piercing Pants|2|2|NO|NO
+|9|62|Scale Pants|2|2|NO|NO
+|9|63|Silk Pants|2|2|NO|NO
+|9|64|Sphinx Pants|2|2|NO|NO
+|9|65|Wind Pants|2|2|NO|NO
+|9|66|Dark Soul Pants|2|2|NO|NO
+|9|67|Dragon Pants|2|2|NO|NO
+|9|68|SU Pants|2|2|NO|NO
+|9|69|Legendary Pants|2|2|NO|NO
+|9|70|Red Wing Pants|2|2|NO|NO
+|9|71|Atlantis Pants|2|2|NO|NO
+|9|72|Storm Hard Pants|2|2|NO|NO
+|9|73|Phoenix Soul Pants|2|2|NO|NO
 0907400|9|74|Storm Hard V1 Pants|2|2|NO|NO
 0907500|9|75|Aramis Pants|2|2|Eden|NO
 0907600|9|76|Darkness Skull Pants|2|2|NO|NO
@@ -721,9 +784,7 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0915800|9|158|Hyoga Pants|2|2|NO|NO
 0915900|9|159|Aldebaran Pants|2|2|NO|NO
 0916000|9|160|Sagittarius Pants|2|2|NO|NO
-0905900|9|59|Sacred Pants|2|2|Vega's|Chamereuui's
-0906000|9|60|Storm Hard Pants|2|2|NO|NO
-0906100|9|61|Piercing Pants|2|2|NO|NO
+//---------------------------------
 1000000|10|0|Bronze Gloves|2|2|NO|NO
 1000100|10|1|Dragon Gloves|2|2|Hyon|NO
 1000200|10|2|Pad Gloves|2|2|Apolo|NO
@@ -853,6 +914,7 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1012600|10|126|Regal Dragon Knight Gloves|2|2|Ultimate|NO
 1012700|10|127|Antaras Gloves|2|2|NO|NO
 1012800|10|128|Cyrious Gloves|2|2|NO|NO
+//1012800|10|128|Seed Spear 5 (LIGTHING)|1|1|NO|NO
 1012900|10|129|Piercing v2 Gloves (NO)|2|2|NO|NO
 1013000|10|130|Doom Gloves|2|2|NO|NO
 1013100|10|131|Centaurus Gloves|2|2|Hebro|NO
@@ -885,7 +947,7 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1015800|10|158|Hyoga Gloves|2|2|NO|NO
 1015900|10|159|Aldebaran Gloves|2|2|NO|NO
 1016000|10|160|Sagittarius Gloves|2|2|NO|NO
-1012800|10|128|Seed Spear 5 (LIGTHING)|1|1|NO|NO
+//---------------------------------
 1100000|11|0|Bronze Boots|2|2|Hyperio|NO
 1100100|11|1|Dragon Boots|2|2|Hyon|NO
 1100200|11|2|Pad Boots|2|2|NO|NO
@@ -945,9 +1007,9 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1105600|11|56|No Item Display|2|2|NO|NO
 1105700|11|57|No Item Display|2|2|NO|NO
 1105800|11|58|No Item Display|2|2|NO|NO
-1105900|11|59|No Item Display|2|2|NO|NO
-1106000|11|60|No Item Display|2|2|NO|NO
-1106100|11|61|No Item Display|2|2|NO|NO
+1105900|11|59|Sacred Boots|2|2|Chamereuui's|NO
+1106000|11|60|Storm Hard Boots|2|2|NO|NO
+1106100|11|61|Piercing Boots|2|2|NO|NO
 1106200|11|62|No Item Display|2|2|NO|NO
 1106300|11|63|No Item Display|2|2|NO|NO
 1106400|11|64|No Item Display|2|2|NO|NO
@@ -1047,20 +1109,19 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1115800|11|158|Hyoga Boots|2|2|NO|NO
 1115900|11|159|Aldebaran Boots|2|2|NO|NO
 1116000|11|160|Sagittarius Boots|2|2|NO|NO
-1105900|11|59|Sacred Boots|2|2|Chamereuui's|NO
-1106000|11|60|Storm Hard Boots|2|2|NO|NO
-1106100|11|61|Piercing Boots|2|2|NO|NO
+//---------------------------------
+1200000|12|0|Wings of Elf|4|3|NO|NO
+1200100|12|1|Wings of Angel|4|3|NO|NO
+1200200|12|2|Wings of Satan|4|3|NO|NO
+1200300|12|3|Wings of Spirits|5|3|NO|NO
+1200400|12|4|Wings of Soul|5|3|NO|NO
+1200500|12|5|Wings of Dragon|3|3|NO|NO
+1200600|12|6|Wings of Darkness|4|3|NO|NO
 1200700|12|7|Orb of Twisting Slash|1|1|NO|NO
 1200800|12|8|Orb of Healing|1|1|NO|NO
 1200900|12|9|Orb of Advanced Defense|1|1|NO|NO
 1201000|12|10|Orb of Advanced Damage|1|1|NO|NO
 1201100|12|11|Summoning Goblin|1|1|NO|NO
-1201101|12|11|Summoning Stone Golem|1|1|NO|NO
-1201102|12|11|Summoning Assassin|1|1|NO|NO
-1201103|12|11|Summoning Bali|1|1|NO|NO
-1201104|12|11|Summoning Soldier|1|1|NO|NO
-1201105|12|11|Summoning Yeti|1|1|NO|NO
-1201106|12|11|Summoning Dark Knight|1|1|NO|NO
 1201200|12|12|Orb of Hell Blast|1|1|NO|NO
 1201300|12|13|Orb of Impaling|1|1|NO|NO
 1201400|12|14|Orb of Inner Strength|1|1|NO|NO
@@ -1075,17 +1136,8 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1202400|12|24|Scroll Of Eletric Spark|1|2|NO|NO
 1202500|12|25|Scroll Of Scrifice|1|2|NO|NO
 1202600|12|26|Jewel of Secret|1|1|NO|NO
-1202601|12|26|Red Crystal|1|1|NO|NO
-1202602|12|26|Blue Crystal|1|1|NO|NO
-1202603|12|26|Darck Crystal|1|1|NO|NO
-1202604|12|26|Box Of Treasure|1|1|NO|NO
-1202605|12|26|Box Of Surprise|1|1|NO|NO
-1203000|12|30|Bles Mix +10|1|1|NO|NO
-1203001|12|30|Bles Mix +20|1|1|NO|NO
-1203002|12|30|Bles Mix +30|1|1|NO|NO
-1203100|12|31|Soul Mix +10|1|1|NO|NO
-1203101|12|31|Soul Mix +20|1|1|NO|NO
-1203102|12|31|Soul Mix +30|1|1|NO|NO
+1203000|12|30|Bles Mix +XX|1|1|NO|NO
+1203102|12|31|Soul Mix +XX|1|1|NO|NO
 1203200|12|32|Red GiftBox|1|1|NO|NO
 1203300|12|33|Green GiftBox|1|1|NO|NO
 1203400|12|34|Blue GiftBox|1|1|NO|NO
@@ -1095,11 +1147,16 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1203800|12|38|Wings of Illusion|4|3|NO|NO
 1203900|12|39|Wings of Ruin|4|3|NO|NO
 1204000|12|40|Cape of Emperor|2|3|NO|NO
+1204100|12|41|Wings of Curse|4|3|NO|NO
+1204200|12|42|Wings of Despair|4|3|NO|NO
+1204300|12|43|Wings of Dimension|4|3|NO|NO
 1204400|12|44|Orb of Exploit|1|1|NO|NO
 1204500|12|45|Orb of Five Shots|1|1|NO|NO
 1204600|12|46|Orb of Recovery|1|1|NO|NO
 1204700|12|47|Orb of Flame Strike|1|1|NO|NO
 1204800|12|48|Scroll Of Birds|1|2|NO|NO
+1204900|12|49|Cloak of Warrior|2|3|NO|NO
+1205000|12|50|Lord of the Cape|2|3|NO|NO
 1206000|12|60|Seed (FIRE)|1|1|NO|NO
 1206100|12|61|Seed (WATER)|1|1|NO|NO
 1206200|12|62|Seed (ICE)|1|1|NO|NO
@@ -1140,24 +1197,56 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1212600|12|126|Seed Spear 5 (ICE)|1|1|NO|NO
 1212700|12|127|Seed Spear 5 (WIND)|1|1|NO|NO
 1212900|12|129|Seed Spear 5 (GROUND)|1|1|NO|NO
-1204300|12|43|Wings of Dimension|4|3|NO|NO
-1205000|12|50|Lord of the Cape|2|3|NO|NO
-1200300|12|3|Wings of Spirits|5|3|NO|NO
-1200400|12|4|Wings of Soul|5|3|NO|NO
-1200500|12|5|Wings of Dragon|3|3|NO|NO
-1200600|12|6|Wings of Darkness|4|3|NO|NO
-1204200|12|42|Wings of Despair|4|3|NO|NO
-1204900|12|49|Cloak of Warrior|2|3|NO|NO
-1200000|12|0|Wings of Elf|4|3|NO|NO
-1200100|12|1|Wings of Angel|4|3|NO|NO
-1200200|12|2|Wings of Satan|4|3|NO|NO
-1204100|12|41|Wings of Curse|4|3|NO|NO
-1213400|12|134|Small Wings of Satan|3|2|NO|NO
-1213300|12|133|Small Wings of Heaven|3|2|NO|NO
+1213000|12|130|Small Cape of Lord|2|2|NO|NO
 1213100|12|131|Small Wings of Curse|3|2|NO|NO
 1213200|12|132|Small Wings of Elf|3|2|NO|NO
-1213000|12|130|Small Cape of Lord|2|2|NO|NO
+1213300|12|133|Small Wings of Heaven|3|2|NO|NO
+1213400|12|134|Small Wings of Satan|3|2|NO|NO
 1213500|12|135|Small Cloak of Warrior|2|2|NO|NO
+|12|136|Jewel of Life Bundle|1|1|NO|NO
+|12|137|Jewel of Creation Bundle|1|1|NO|NO
+|12|138|Jewel of Guardian Bundle|1|1|NO|NO
+|12|139|Gemstone Bundle|1|1|NO|NO
+|12|140|Jewel of Harmony Bundle|1|1|NO|NO
+|12|141|Jewel of Chaos Bundle|1|1|NO|NO
+|12|142|Lower Refining Stone Bundle|1|1|NO|NO
+|12|143|Higher Refining Stone Bundle|1|1|NO|NO
+|12|200|Demonic Wings|4|2|NO|NO
+|12|201|Heaven Wings|5|2|NO|NO
+|12|202|Red Spirit Wings|5|4|NO|NO
+|12|203|Thunder Wings|4|2|NO|NO
+|12|204|Raven Wings|5|2|NO|NO
+|12|205|Eternal Wings|4|4|NO|NO
+|12|206|Heptameron Wings|4|3|NO|NO
+|12|207|Bloody Wings|5|4|NO|NO
+|12|208|Triple Wings|4|3|NO|NO
+|12|209|Mephisto Wings|4|3|NO|NO
+|12|210|Dragon Skin Wings|5|3|NO|NO
+|12|211|Asgard Wings|5|3|NO|NO
+|12|212|Gothic Wings|3|3|NO|NO
+|12|213|Cave Dweller Wings|5|3|NO|NO
+|12|214|Fallen Shaman Wings|4|3|NO|NO
+|12|215|Minion Wings|4|3|NO|NO
+|12|216|Kundun Mantle|5|3|NO|NO
+|12|217|Puidedrac Wings|5|3|NO|NO
+|12|218|Aszmhodeus Wings|5|3|NO|NO
+|12|219|xWings of Chaos|4|2|NO|NO
+|12|220|xWings of Life|4|3|NO|NO
+|12|221|xWings of Power|4|2|NO|NO
+|12|222|xWings of Isis|4|2|NO|NO
+|12|223|xCloak of Death|3|2|NO|NO
+|12|224|xEagle Wings|5|3|NO|NO
+|12|225|xGrand Duke Wings|5|3|NO|NO
+|12|226|xDarth Wings|4|3|NO|NO
+|12|227|xBlader Wings|2|2|NO|NO
+|12|228|xWings of A'rashi|5|2|NO|NO
+|12|229|xWings of Phoenix|5|3|NO|NO
+|12|230|Enchanted Wings of Wonder|4|3|NO|NO
+|12|231|Magical Wings|2|2|NO|NO
+|12|232|Supreme Wings|5|3|NO|NO
+|12|233|Wing of Angel and Devil|3|3|NO|NO
+|12|234|Conqueror Wings|3|3|NO|NO
+//---------------------------------
 1300000|13|0|Angel|1|1|NO|NO
 1300100|13|1|Satan|1|1|NO|NO
 1300200|13|2|Unilla|1|1|NO|NO
@@ -1165,17 +1254,10 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1300400|13|4|Dark Horse|1|1|NO|NO
 1300500|13|5|Dark Raven|1|1|NO|NO
 1300700|13|7|Archer|1|1|NO|NO
-1300701|13|7|Sperman|1|1|NO|NO
 1300800|13|8|Ring of Ice|1|1|Warrior|Silrion
 1300900|13|9|Ring of Poison|1|1|Kantata|Agnis
 1301000|13|10|Ring of Transform in Dragonin|1|1|NO|NO
-1301001|13|10|Ring of Transform in Gigant|1|1|NO|NO
-1301002|13|10|Ring of Transform in Skeleton|1|1|NO|NO
-1301003|13|10|Ring of Transform in Bull|1|1|NO|NO
-1301004|13|10|Ring of Transform in Linch|1|1|NO|NO
-1301005|13|10|Ring of Transform in Death Cow|1|1|NO|NO
 1301100|13|11|Guardian|1|1|NO|NO
-1301101|13|11|Life Stone|1|1|NO|NO
 1301200|13|12|Pendant of Lightining|1|1|Eplete|NO
 1301300|13|13|Pendant of Fire|1|1|Garuda|NO
 1301400|13|14|Lochs Feather|1|2|NO|NO
@@ -1185,30 +1267,9 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1301502|13|15|Energy Fruit|1|1|NO|NO
 1301503|13|15|Stamina Fruit|1|1|NO|NO
 1301504|13|15|Command Fruit|1|1|NO|NO
-1301601|13|16|Blood Scroll +1|1|2|NO|NO
-1301602|13|16|Blood Scroll +2|1|2|NO|NO
-1301603|13|16|Blood Scroll +3|1|2|NO|NO
-1301604|13|16|Blood Scroll +4|1|2|NO|NO
-1301605|13|16|Blood Scroll +5|1|2|NO|NO
-1301606|13|16|Blood Scroll +6|1|2|NO|NO
-1301607|13|16|Blood Scroll +7|1|2|NO|NO
-1301608|13|16|Blood Scroll +8|1|2|NO|NO
-1301701|13|17|Blood Bone +1|1|2|NO|NO
-1301702|13|17|Blood Bone +2|1|2|NO|NO
-1301703|13|17|Blood Bone +3|1|2|NO|NO
-1301704|13|17|Blood Bone +4|1|2|NO|NO
-1301705|13|17|Blood Bone +5|1|2|NO|NO
-1301706|13|17|Blood Bone +6|1|2|NO|NO
-1301707|13|17|Blood Bone +7|1|2|NO|NO
-1301708|13|17|Blood Bone +8|1|2|NO|NO
-1301801|13|18|Invitacion BC +1|2|2|NO|NO
-1301802|13|18|Invitacion BC +2|2|2|NO|NO
-1301803|13|18|Invitacion BC +3|2|2|NO|NO
-1301804|13|18|Invitacion BC +4|2|2|NO|NO
-1301805|13|18|Invitacion BC +5|2|2|NO|NO
-1301806|13|18|Invitacion BC +6|2|2|NO|NO
-1301807|13|18|Invitacion BC +7|2|2|NO|NO
-1301808|13|18|Invitacion BC +8|2|2|NO|NO
+1301608|13|16|Blood Scroll +X|1|2|NO|NO
+1301708|13|17|Blood Bone +X|1|2|NO|NO
+1301808|13|18|Invitacion BC +X|2|2|NO|NO
 1301900|13|19|Divine Staf of Archangel|1|2|NO|NO
 1301901|13|19|Divine Sword of Archangel|1|2|NO|NO
 1301902|13|19|Divine CrossBow of Archangel|1|2|NO|NO
@@ -1224,6 +1285,7 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1302700|13|27|Pendant of Water|1|1|Gaion|NO
 1302800|13|28|Pendant of Ability|1|1|Gywen|Andy
 1302900|13|29|Invitacion CC|2|2|NO|NO
+1303000|13|30|Cape of Lord|2|3|NO|NO
 1303100|13|31|Dark Spirit Of Horse|1|1|NO|NO
 1303101|13|31|Dark Spirit Of Raven|1|1|NO|NO
 1303200|13|32|Fenrir Armor|1|1|NO|NO
@@ -1243,24 +1305,9 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1304600|13|46|Devil Square Ticket|1|1|NO|NO
 1304700|13|47|Blood Castle Ticket|1|1|NO|NO
 1304800|13|48|Kalima Ticket (JPN)|1|1|NO|NO
-1304901|13|49|Old Pergamin +1|1|1|NO|NO
-1304902|13|49|Old Pergamin +2|1|1|NO|NO
-1304903|13|49|Old Pergamin +3|1|1|NO|NO
-1304904|13|49|Old Pergamin +4|1|1|NO|NO
-1304905|13|49|Old Pergamin +5|1|1|NO|NO
-1304906|13|49|Old Pergamin +6|1|1|NO|NO
-1305001|13|50|Illusion Blood +1|1|2|NO|NO
-1305002|13|50|Illusion Blood +2|1|2|NO|NO
-1305003|13|50|Illusion Blood +3|1|2|NO|NO
-1305004|13|50|Illusion Blood +4|1|2|NO|NO
-1305005|13|50|Illusion Blood +5|1|2|NO|NO
-1305006|13|50|Illusion Blood +6|1|2|NO|NO
-1305101|13|51|Illusion Pergamin +1|2|2|NO|NO
-1305102|13|51|Illusion Pergamin +2|2|2|NO|NO
-1305103|13|51|Illusion Pergamin +3|2|2|NO|NO
-1305104|13|51|Illusion Pergamin +4|2|2|NO|NO
-1305105|13|51|Illusion Pergamin +5|2|2|NO|NO
-1305106|13|51|Illusion Pergamin +6|2|2|NO|NO
+1304901|13|49|Old Pergamin +X|1|1|NO|NO
+1305005|13|50|Illusion Blood +X|1|2|NO|NO
+1305106|13|51|Illusion Pergamin +X|2|2|NO|NO
 1305200|13|52|Flame Of Condor|1|2|NO|NO
 1305300|13|53|Feather Of Condor|1|2|NO|NO
 1305400|13|54|Reset Fruit Strengh|1|1|NO|NO
@@ -1321,7 +1368,28 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1312100|13|121|Free Ticket|1|1|NO|NO
 1312200|13|122|Skeleton Ring|1|1|NO|NO
 1312300|13|123|Skeleton|1|1|NO|NO
-1303000|13|30|Cape of Lord|2|3|NO|NO
+|13|124|Paid Channel Access Ticket|1|1|NO|NO
+|13|125|1|1|Open Access Ticket to Doppel|0|0|NO|NO
+|13|126|Open Access Ticket to Varka|1|1|NO|NO
+|13|127|Open Access Ticket to Varkama|1|1|NO|NO
+|13|128|Maejo per phase|1|1|NO|NO
+|13|129|Goat Statues|1|1|NO|NO
+|13|130|Ohkeucham|1|1|NO|NO
+|13|131|Meyipeulcham|1|1|NO|NO
+|13|132|Goldeunohkeucham|1|2|NO|NO
+|13|133|Goldeunmeyipeulcham|1|2|NO|NO
+|13|134|Old shoe|1|1|NO|NO
+|13|135|Lucky ticket 1st Armor|1|1|NO|NO
+|13|136|1st Lucky Pants Tickets|1|1|NO|NO
+|13|137|Lucky ticket 1st Helm|1|1|NO|NO
+|13|138|Lucky Glove 1st ticket|1|1|NO|NO
+|13|139|Boots 1st Lucky Ticket|1|1|NO|NO
+|13|140|Lucky ticket 2nd Armor|1|1|NO|NO
+|13|141|2nd Lucky Pants Tickets|1|1|NO|NO
+|13|142|Lucky ticket 2nd Helm|1|1|NO|NO
+|13|143|Lucky Glove 2nd ticket|1|1|NO|NO
+|13|144|Boots 2nd Lucky Ticket|1|1|NO|NO
+//---------------------------------
 1400000|14|0|Apple|1|1|NO|NO
 1400100|14|1|Small Healing Potion|1|1|NO|NO
 1400200|14|2|Healing Potion|1|1|NO|NO
@@ -1329,49 +1397,20 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1400400|14|4|Small Mana Potion|1|1|NO|NO
 1400500|14|5|Mana Potion|1|1|NO|NO
 1400600|14|6|Large Mana Potion|1|1|NO|NO
-1400700|14|7|Potion Of Bles|1|1|NO|NO
-1400701|14|7|Potion Of Soul|1|1|NO|NO
-1400800|14|8|Antidoto|1|1|NO|NO
-1400900|14|9|Vino|1|2|NO|NO
+|14|7|Potion|1|1|NO|NO
+|14|8|Antidoto|1|1|NO|NO
+|14|9|Vino|1|2|NO|NO
 1400901|14|9|Olivas|1|2|NO|NO
 1401000|14|10|Town Portal Scroll|1|2|NO|NO
 1401100|14|11|Box Of Luck|1|1|NO|NO
-1401101|14|11|Star|1|1|NO|NO
-1401102|14|11|FireCracker|1|1|NO|NO
-1401103|14|11|Heart Of Love|1|1|NO|NO
-1401105|14|11|Silver Medal|1|1|NO|NO
-1401106|14|11|Gold Medal|1|1|NO|NO
-1401107|14|11|Box Of Heaven|1|1|NO|NO
-1401108|14|11|Kundun +1|1|1|NO|NO
-1401109|14|11|Kundun +2|1|1|NO|NO
-1401110|14|11|Kundun +3|1|1|NO|NO
-1401111|14|11|Kundun +4|1|1|NO|NO
-1401112|14|11|Kundun +5|1|1|NO|NO
-1401113|14|11|Heart Of Lord|1|1|NO|NO
+|14|12|Cuore del drago|1|1|NO|NO
 1401300|14|13|Jewel of Bles|1|1|NO|NO
 1401400|14|14|Jewel of Soul|1|1|NO|NO
+1401500|14|15|Zen|1|1|NO|NO
 1401600|14|16|Jewel of Life|1|1|NO|NO
-1401701|14|17|Devils Eye +1|1|1|NO|NO
-1401702|14|17|Devils Eye +2|1|1|NO|NO
-1401703|14|17|Devils Eye +3|1|1|NO|NO
-1401704|14|17|Devils Eye +4|1|1|NO|NO
-1401705|14|17|Devils Eye +5|1|1|NO|NO
-1401706|14|17|Devils Eye +6|1|1|NO|NO
-1401707|14|17|Devils Eye +7|1|1|NO|NO
-1401801|14|18|Devils Key +1|1|1|NO|NO
-1401802|14|18|Devils Key +2|1|1|NO|NO
-1401803|14|18|Devils Key +3|1|1|NO|NO
-1401804|14|18|Devils Key +4|1|1|NO|NO
-1401805|14|18|Devils Key +5|1|1|NO|NO
-1401806|14|18|Devils Key +6|1|1|NO|NO
-1401807|14|18|Devils Key +7|1|1|NO|NO
-1401901|14|19|Invitacion DS +1|1|1|NO|NO
-1401902|14|19|Invitacion DS +2|1|1|NO|NO
-1401903|14|19|Invitacion DS +3|1|1|NO|NO
-1401904|14|19|Invitacion DS +4|1|1|NO|NO
-1401905|14|19|Invitacion DS +5|1|1|NO|NO
-1401906|14|19|Invitacion DS +6|1|1|NO|NO
-1401907|14|19|Invitacion DS +7|1|1|NO|NO
+1401707|14|17|Devils Eye +X|1|1|NO|NO
+1401807|14|18|Devils Key +X|1|1|NO|NO
+1401907|14|19|Invitacion DS +X|1|1|NO|NO
 1402000|14|20|Remedy of Love|1|1|NO|NO
 1402103|14|21|Sign Of Lord|1|1|NO|NO
 1402200|14|22|Jewel of Creation|1|1|NO|NO
@@ -1382,20 +1421,8 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1402500|14|25|Tear Of Elf|1|1|NO|NO
 1402600|14|26|Soul Of Wizard|1|1|NO|NO
 1402700|14|27|Ancient Metal|1|1|NO|NO
-1402801|14|28|Lost Map +1|1|1|NO|NO
-1402802|14|28|Lost Map +2|1|1|NO|NO
-1402803|14|28|Lost Map +3|1|1|NO|NO
-1402804|14|28|Lost Map +4|1|1|NO|NO
-1402805|14|28|Lost Map +5|1|1|NO|NO
-1402806|14|28|Lost Map +6|1|1|NO|NO
-1402807|14|28|Lost Map +7|1|1|NO|NO
-1402901|14|29|Sign of Kundum +1|1|1|NO|NO
-1402902|14|29|Sign of Kundum +2|1|1|NO|NO
-1402903|14|29|Sign of Kundum +3|1|1|NO|NO
-1402904|14|29|Sign of Kundum +4|1|1|NO|NO
-1402905|14|29|Sign of Kundum +5|1|1|NO|NO
-1402906|14|29|Sign of Kundum +6|1|1|NO|NO
-1402907|14|29|Sign of Kundum +7|1|1|NO|NO
+1402807|14|28|Lost Map +X|1|1|NO|NO
+1402907|14|29|Sign of Kundum +X|1|1|NO|NO
 1403100|14|31|Jewel of Guardian|1|1|NO|NO
 1403200|14|32|Pink Ribbon|1|1|NO|NO
 1403201|14|32|Pink Candy|1|1|NO|NO
@@ -1468,12 +1495,7 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1410000|14|100|Coin Of Fortune|1|1|NO|NO
 1410100|14|101|Guy Paper|1|1|NO|NO
 1410200|14|102|Gaion Order|1|1|NO|NO
-1410300|14|103|Sekeuromikon Piece +1|1|1|NO|NO
-1410400|14|104|Sekeuromikon Piece +2|1|1|NO|NO
-1410500|14|105|Sekeuromikon Piece +3|1|1|NO|NO
-1410600|14|106|Sekeuromikon Piece +4|1|1|NO|NO
-1410700|14|107|Sekeuromikon Piece +5|1|1|NO|NO
-1410800|14|108|Sekeuromikon Piece +6|1|1|NO|NO
+1410800|14|108|Sekeuromikon Piece +X|1|1|NO|NO
 1410900|14|109|Sekeuromikon|1|1|NO|NO
 1411000|14|110|Dimension Marker|1|1|NO|NO
 1411100|14|111|Dopplegoer Spectrum|1|1|NO|NO
@@ -1510,6 +1532,40 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1414200|14|142|Sophisticated Jewelry Box|1|1|NO|NO
 1414300|14|143|Metal Jewelry Box|1|1|NO|NO
 1414400|14|144|Old Jewelry Box|1|1|NO|NO
+|14|145|Rare Item Ticket 7|1|1|NO|NO
+|14|146|Rare Item Ticket 8|1|1|NO|NO
+|14|147|Rare Item Ticket 9|1|1|NO|NO
+|14|148|Rare Item Ticket 10|1|1|NO|NO
+|14|149|Rare Item Ticket 11|1|1|NO|NO
+|14|150|Rare Item Ticket 12|1|1|NO|NO
+|14|151|1 level referral|1|2|NO|NO
+|14|152|1 level confirmation of referral|1|2|NO|NO
+|14|153|Stardust|1|1|NO|NO
+|14|154|Kalteuseok|1|1|NO|NO
+|14|155|Armor of Tantalus|2|2|NO|NO
+|14|156|Ashes of the butcher sticks|1|3|NO|NO
+|14|157|Green box|1|1|NO|NO
+|14|158|Red box|1|1|NO|NO
+|14|159|Borabit sangja|1|1|NO|NO
+|14|160|Extension of the jewelry|1|1|NO|NO
+|14|161|Rise of the jewelry|162|1|1|Magic Backpack|1|1|NO|NO
+|14|163|Vault Expansion Certif|1|1|NO|NO
+|14|164|°í´ëÀÇÁ¶°¢»ó|1|2|NO|NO
+|14|165|¸¶¹ýÀÇ¿Ê°¨|1|1|NO|NO
+|14|166|°ø°£ÀÇ¿Ê°¨|1|1|NO|NO
+|14|169|RageFighter Character Card|1|1|NO|NO
+|14|200|Jewel of Kings|2|2|NO|NO
+|14|201|Jewel of Impurity|1|1|NO|NO
+|14|202|Jewel of Reflection|1|1|NO|NO
+|14|203|Jewel of Decadence|1|1|NO|NO
+|14|204|Jewel of Afterlife|1|1|NO|NO
+|14|205|Jewel of Youth|1|1|NO|NO
+|14|206|Jewel of Luck|1|1|NO|NO
+|14|207|Jewel of Skill|1|1|NO|NO
+|14|208|Jewel of The Monks|1|1|NO|NO
+|14|209|Jewel of Templars|1|1|NO|NO
+|14|210|Jewel of Pharaohs|1|1|NO|NO
+//---------------------------------
 1500000|15|0|Poison Scroll|1|2|NO|NO
 1500100|15|1|Meteor Scroll|1|2|NO|NO
 1500200|15|2|Lightning Scrol|1|2|NO|NO
@@ -1540,3 +1596,10 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1502700|15|27|Scroll of Innovation|1|2|NO|NO
 1502800|15|28|Scroll of Magic Circle|1|2|NO|NO
 1502900|15|29|Scroll Gigantic Storm|1|2|NO|NO
+|15|30|Scroll of Chain Drive|1|2||
+|15|31|Scroll of Dark Side|1|2||
+|15|32|Scroll of Dragon Lore|1|2||
+|15|33|Scroll of Dragon Slayer|1|2||
+|15|34|Scroll of Red Armor Ignore|1|2||
+|15|35|Scroll of Fitness|1|2||
+|15|36|Defense success rate increase|1|2||

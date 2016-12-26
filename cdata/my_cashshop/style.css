@@ -1,42 +1,7 @@
-/*
-.box-phantrang{  
-	overflow:hidden;
-	float:right;
-	padding-top: 15px;
-}
-.box-phantrang a{
-	width:20px; 
-	height:20px;
-}
-.box-phantrang a:link{
-	display:block; 
-	background:#e1e1e1; 
-	color:#000; 
-	border:solid 1px #a9a9a9; 
-	text-align:center; 
-	line-height:20px;
-	text-decoration:none;
-}
-.box-phantrang a:visited
-{
-	display:block; 
-	background:#e1e1e1; 
-	color:#000; 
-	border:solid 1px #a9a9a9; 
-	text-align:center; 
-	line-height:20px;
-	text-decoration:none;
-}
-.box-phantrang a:hover{ color:#230a32; background:#cfcfcf; border:solid 1px #eaeaea}
-.box-phantrang .active a:link,.box-phantrang .active a:visited,.box-phantrang .active a:hover{display:block; color:#000; background:#66ff66; border:solid 1px #feead6; cursor:default}
-.box-phantrang ul{ list-style-type:none}
-.box-phantrang li{ float:left; margin-right:7px;}
-.box-phantrang li img{ text-align:center; background-size:100%; height:20px; width:20px;}
-*/
 #tbl_ranking {
     clear: both;
     width: 100%;
-    background: url('./images/t_notice.gif') left top repeat-x;
+    background: url('/images/t_notice.gif') left top repeat-x;
     font-family: Arial;
     font-size: 12px;;
     color: #000000;
@@ -46,7 +11,7 @@
 #tbl_ranking thead th {
     height: 32px;
     padding: 0;
-    background: url('./images/t_ranking_line.gif') 0 9px no-repeat;
+    background: url('/images/t_ranking_line.gif') 0 9px no-repeat;
     font-size: 12px;
     font-weight: bold;
     color: #f1eddf;
@@ -54,24 +19,24 @@
 }
 
 #tbl_ranking thead th.lbg {
-    background: url('./images/t_notice_l.gif') left top no-repeat;
+    background: url('/images/t_notice_l.gif') left top no-repeat;
     vertical-align: middle;
 }
 
 #tbl_ranking thead th.rbg {
-    background: url('./images/t_notice_r.gif') right top no-repeat;
+    background: url('/images/t_notice_r.gif') right top no-repeat;
 }
 
 #tbl_ranking thead th.rbg span {
     display: block;
     height: 23px;
     padding: 9px 0 0 0;
-    background: url('./images/t_ranking_line.gif') 0 9px no-repeat;
+    background: url('/images/t_ranking_line.gif') 0 9px no-repeat;
 }
 
 #tbl_ranking tbody td {
     padding: 7px 0 10px;
-    background: url('./images/tbl_dotline.gif') left bottom repeat-x;
+    background: url('/images/tbl_dotline.gif') left bottom repeat-x;
     text-align: center;
 }
 
@@ -97,21 +62,6 @@
     vertical-align: middle;
 }
 
-#ranking_search #input_search input.input_character {
-    width: 136px;
-    height: 15px;
-    padding: 3px 0 0 0;
-    background: #fff url('./images/search_input_character.gif') 2px 5px no-repeat;
-    border: none;
-}
-
-#ranking_search #input_search input.input_guild {
-    width: 136px;
-    height: 15px;
-    padding: 3px 0 0 0;
-    background: #fff url('./images/search_input_guild.gif') 2px 5px no-repeat;
-    border: none;
-}
 
 #ranking_search #input_search input.on {
     background-image: none;
@@ -143,7 +93,7 @@
     display: block;
     height: 18px;
     padding: 0 0 0 9px;
-    background: url('./images/ico_selectdown_search.gif') right center no-repeat;
+    background: url('/images/ico_selectdown_search.gif') right center no-repeat;
     font-size: 10px;
     color: #fff;
     line-height: 18px;
@@ -429,4 +379,23 @@ tr.unabled {
 th.rbg, th.lbg {
     padding: 8px 0;
     color: white;
+}
+.col-left{
+    text-align: left;
+    padding-right: 5px;
+    margin-top: 12px;
+    padding-top: 7px;
+    float: left;
+}
+.col-left span{
+    float: left;
+}
+.col-left a{
+    display: block;
+    float: inherit;
+    padding: 0px 3px;
+}
+.col-right{
+    float: right;
+    display: block;
 }

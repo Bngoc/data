@@ -1,13 +1,14 @@
 ﻿<?php
 
-list($sub, $showchar, $show_warehouse) = _GL('sub, showchar, show_warehouse');
+list($sub, $showchar, $show_warehouse, $check_change) = _GL('sub, showchar, show_warehouse, check_change');
 cn_snippet_messages();
 ?>
 
 
-<table style="width: 100%" cellpadding="2">
-    <form action="<?php echo PHP_SELF; ?>" method="GET">
-        <?php echo cn_snippet_get_hidden(); ?>
+
+<form action="<?php echo PHP_SELF; ?>" method="GET">
+    <?php echo cn_snippet_get_hidden(); ?>
+    <table style="width: 100%" cellpadding="2">
         <tr>
             <td colspan="3" class="">THÔNG TIN HÒM ĐỒ CÁ NHÂN<br/></td>
         </tr>
@@ -39,11 +40,13 @@ cn_snippet_messages();
             </td>
             <td class="bizwebform_col_3"></td>
         </tr>
-    </form>
+    </table>
+</form>
 
-    <form id="verify" action="<?php echo PHP_SELF; ?>" method="POST"  onSubmit="return validateFormOnSubmit();">
-        <?php echo cn_form_open('mod, opt, sub'); ?>
-        <input type="hidden" value="action_personalSotre" name="action_personalSotre"/>
+<form id="verify" action="<?php echo PHP_SELF; ?>" method="POST"  onSubmit="return validateFormOnSubmit(true);">
+    <?php echo cn_form_open('mod, opt, sub'); ?>
+    <input type="hidden" value="action_personalSotre" name="action_personalSotre"/>
+    <table width="100%">
         <tr>
             <td colspan="3" class="">MÃ XÁC NHẬN</td>
         </tr>
@@ -79,7 +82,25 @@ cn_snippet_messages();
                      onclick="document.getElementById('verify').reset();" style="padding-left:10px">
             </td>
         </tr>
-    </form>
-</table>
+    </table>
+</form>
 
+<table width="100%">
+    <tr>
+        <td class="pd-bottom10 pd-top10">
+            <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
+                                           height="1px"/></div>
+            <i class="mg-top5"><b>Lưu ý:</b> Nhân vật phải đổi trước khi thực hiện thao tác.</i>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <?php if ($check_change) {
+            echo '- Nhân vật '. $sub . '<font color =red> đã đổi</font>';
+        } else {
+            echo '- Nhân vật '. $sub . '<font color =red> chưa đổi</font>';
+        }?>
+        </td>
+    </tr>
+</table>
 

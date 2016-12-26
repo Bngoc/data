@@ -132,6 +132,7 @@ function view_bank($account)
     return isset($_data) ? $_data : array();
 }
 
+// bo qua ....
 function view_warehouse($account)
 {
     global $db_new;
@@ -209,8 +210,6 @@ function point_tax($acc = '')
     global $db_new;
     $str_ = '';
     if(!empty($account)){
-        if (getoption('type_acc') == 1) kiemtra_kituso($account);
-        else kiemtra_kitudacbiet($account);
 
         kiemtra_kitudacbiet($password);
 

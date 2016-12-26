@@ -213,7 +213,7 @@ function transaction___buy_gd()
                             $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
                             $item_code = substr_replace($item_code, dechex($i * 16), 18, 2);
                             $leng_item_code = strlen($item_code);
-                            $item_data = GetCode($item_code);
+                            $item_data = getCodeItem($item_code);
                             if (($item_data['id'] == 15 || $item_data['id'] == 20 || $item_data['id'] == 23 || $item_data['id'] == 32 || $item_data['id'] == 37 || $item_data['id'] == 47 || $item_data['id'] == 48) && ($i == 7)) {
                                 continue;
                             } else {
@@ -237,7 +237,7 @@ function transaction___buy_gd()
                         $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0][0]));
                         $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
                         $leng_item_code = strlen($item_code);
-                        $item_data = GetCode($item_code);
+                        $item_data = getCodeItem($item_code);
                         $items = $items_data[$item_data['group'] . "." . $item_data['id']];
                         if (!$items) {
                             //cn_throw_message("[Error - line 251] Gặp sự cố trên Server. Vui thông báo cho admin",'e');

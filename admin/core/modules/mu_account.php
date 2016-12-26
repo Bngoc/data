@@ -276,7 +276,6 @@ function board_sysconf()
 //            'passcard' => array('password', 'Mật khẩu để vào trang CardPhone|comments will be opened in PopUp window'),
 //            'passcode' => array('password', "Mật khẩu để vào trang ViewCard|only if 'Show Comments In PopUp' is enabled"),
             'server_type' => array('select', 'Loại Server đang sử dụng|if yes, comments will be shown under the story', array("scf" => "SCF", "original" => "Original")),
-            'type_acc' => array('select', 'Qui định khi tạo Tài khoản|if yes, comments will be shown under the story', array(1 => "Sử dụng Chữ & Số", 0 => "Chỉ sử dụng số")),
         ),
         'Napthe' => array
         (

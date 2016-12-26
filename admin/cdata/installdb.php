@@ -42,15 +42,6 @@ cn_snippet_messages();
                         </td>
                     </tr>
                     <tr>
-                        <td>Qui định khi tạo Tài khoản</td>
-                        <td>
-                            <select name="type_acc">
-                                <option value="1">Sử dụng Chữ &amp; Số</option>
-                                <option value="0" selected="selected">Chỉ sử dụng số</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
                         <td>&nbsp;</td>
                         <td><input type="submit" value="Create connect Database"/>
                         <input type="button" onclick="checkConnect()" value="Check Connect"/></td>

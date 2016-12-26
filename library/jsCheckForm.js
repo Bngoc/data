@@ -372,8 +372,7 @@ function menuLayer_close(idname) {
     document.getElementById(idname).style.display = "none";
 }
 
-//function validateFormOnSubmit(contact) {
-function validateFormOnSubmit() {
+function validateFormOnSubmit($op) {
     var checkValiFormRegist = false;
     for (var key in arr_error){
         if (arr_error[key]) {
@@ -385,6 +384,12 @@ function validateFormOnSubmit() {
     if(!checkValiFormRegist) {
         alert('Vui lòng kiểm tra lại thông tin đăng ký!');
         return false;
+    }
+    if($op){
+        var verifyDel = confirm("Bạn có chắc muốn xóa cửa hàng cá nhân không?");
+        if (!verifyDel){
+            return false;
+        }
     }
 }
 

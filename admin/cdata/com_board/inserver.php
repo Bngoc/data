@@ -81,21 +81,6 @@ cn_snippet_bc();
             </td>
         </tr>
         <tr>
-            <td bgcolor="#F7F6F4" rowspan=2><b>Qui định khi tạo Tài khoản:</b><br>&nbsp;<i>example:
-                    http://mysite.com/news.php</i></td>
-            <td bgcolor="#F7F6F4" colspan="3"><input name="type_acc" type="radio"
-                                                     value="0" <?php //if($type_acc=='0') echo "checked='checked'"; ?>>Sử
-                dụng Chữ & Số
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor="#F7F6F4" colspan="3"><input name="type_acc" type="radio"
-                                                     value="1" <?php //if($type_acc=='1') echo "checked='checked'"; ?>>Chỉ
-                sử dụng Số
-            </td>
-        </tr>
-
-        <tr>
             <td>Kiểu hiển thị Thời gian:</td>
             <td><input type="text" name="datedisplay" value="<?php //echo $datedisplay; ?>"></td>
         </tr>

@@ -1298,6 +1298,7 @@ function echoheader($image, $header_text, $bread_crumbs = false)
         $member = member_get();
         $_blank_var = view_bank($member['user_name']);
 
+        $matches[0] = '<img src="' . getoption('http_script_dir') . '/images/icon-1.png" /> ' . number_format($_blank_var[0]['vp'], 0, ',', '.') . ' Vpoint';;
         $matches[1] = '<img src="' . getoption('http_script_dir') . '/images/icon-2.png" /> ' . number_format($_blank_var[0]['gc'], 0, ',', '.') . ' Gcoin';;
         $matches[2] = '<img src="' . getoption('http_script_dir') . '/images/icon-3.png" /> ' . number_format($_blank_var[0]['gc_km'], 0, ',', '.') . ' Gcoin KM';;
         $matches[3] = '<img src="' . getoption('http_script_dir') . '/images/icon-4.png" /> ' . number_format($_blank_var[0]['blue'], 0, ',', '.') . ' Blue';;
@@ -2459,7 +2460,6 @@ function cn_relocation_db_new()
     $passadmin = getoption('passadmin');
     $passcard = getoption('passcard');
     $server_type = getoption('server_type');
-    $type_acc = getoption('type_acc');
 
     $config_admin = "BUI NGOC";
     $config_adminemail = "ngoctbhy@gmail.com";
@@ -2562,95 +2562,78 @@ function cn_user_email_as_site($user_email, $username)
     }
 }
 
-
-function GetCode($string = '')
-{
-    $output = array();
-    // Phân tich Mã Item 32 số
-    $id = hexdec(substr($string, 0, 2));    // Item ID
-    $group = hexdec(substr($string, 18, 2));    // Item Type
-    $group = $group / 16;
-    $option = hexdec(substr($string, 2, 2));    // Item Level/Skill/Option Data
-    $level = floor($option / 8);
-    $output = array(
-        'id' => $id,
-        'group' => $group,
-        'level' => $level,
-    );
-    return $output;
-}
-
-function CheckSlotWarehouse($warehouse, $itemX, $itemY)
-{
-    $items_data = getoption('#items_data');
-
-    $items = str_repeat('0', 120);
-    $itemsm = str_repeat('1', 120);
-    $i = 0;
-    while ($i < 120) {
-        $item = substr($warehouse, $i * 32, 32);
-        if ($item == "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" || $item == "ffffffffffffffffffffffffffffffff") {
-            $i++;
-            continue;
-        } else {
-            $item32 = GetCode($item);
-            echo "3441 ---ref x = $itemX ---ref y = $itemY >>><<< group =" . $item32['group'] . "=> id=" . $item32['id'] . "<br>";
-            $item_data = $items_data[$item32['group'] . '.' . $item32['id']];
-            echo "3443 ---ref x = " . $item_data['X'] . " ---ref y = " . $item_data['Y'] . "<br>";
-            $y = 0;
-            while ($y < $item_data['Y']) {
-                $x = 0;
-                while ($x < $item_data['X']) {
-                    $items = substr_replace($items, '1', ($i + $x) + ($y * 8), 1);
-                    $x++;
-                }
-                $y++;
-            }
-            $i++;
-        }
-    }
-
-    $y = 0;
-    while ($y < $itemY) {
-        $x = 0;
-        while ($x < $itemX) {
-            $x++;
-            $spacerq[$x + (8 * $y)] = true;
-        }
-        $y++;
-    }
-    print_r($spacerq);
-
-    $walked = 0;
-    $i = 0;
-    while ($i < 120) {
-        if (isset($spacerq[$i])) {
-            $itemsm = substr_replace($itemsm, '0', $i - 1, 1);
-            $last = $i;
-            $walked++;
-        }
-        if ($walked == count($spacerq)) $i = 119;
-        $i++;
-    }
-    //echo "<br>3454 --------- items = $itemsm <br>";//exit();0111111101111111011111110
-    $useforlength = substr($itemsm, 0, $last);
-    $findslotlikethis = str_replace('++', '+', str_replace('1', '+[0-1]+', $useforlength));
-
-    echo "<br>3454 --------- items = $itemsm last = $last useforlength = $useforlength <br> findslotlikethis = $findslotlikethis<br>";//exit();
-    $i = 0;
-    $nx = 0;
-    $ny = 0;
-    while ($i < 120) {
-        if ($nx == 8) {
-            $ny++;
-            $nx = 0;
-        }
-        if ((preg_match('/^' . $findslotlikethis . '/', substr($items, $i, strlen($useforlength)))) && ($itemX + $nx < 9) && ($itemY + $ny < 16)) return $i;
-        $i++;
-        $nx++;
-    }
-    return 3840;
-}
+//
+//function CheckSlotWarehouse($warehouse, $itemX, $itemY)
+//{
+//    $items_data = getoption('#items_data');
+//
+//    $items = str_repeat('0', 120);
+//    $itemsm = str_repeat('1', 120);
+//    $i = 0;
+//    while ($i < 120) {
+//        $item = substr($warehouse, $i * 32, 32);
+//        if ($item == "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" || $item == "ffffffffffffffffffffffffffffffff") {
+//            $i++;
+//            continue;
+//        } else {
+//            $item32 = getCodeItem($item);
+//            echo "3441 ---ref x = $itemX ---ref y = $itemY >>><<< group =" . $item32['group'] . "=> id=" . $item32['id'] . "<br>";
+//            $item_data = $items_data[$item32['group'] . '.' . $item32['id']];
+//            echo "3443 ---ref x = " . $item_data['X'] . " ---ref y = " . $item_data['Y'] . "<br>";
+//            $y = 0;
+//            while ($y < $item_data['Y']) {
+//                $x = 0;
+//                while ($x < $item_data['X']) {
+//                    $items = substr_replace($items, '1', ($i + $x) + ($y * 8), 1);
+//                    $x++;
+//                }
+//                $y++;
+//            }
+//            $i++;
+//        }
+//    }
+//
+//    $y = 0;
+//    while ($y < $itemY) {
+//        $x = 0;
+//        while ($x < $itemX) {
+//            $x++;
+//            $spacerq[$x + (8 * $y)] = true;
+//        }
+//        $y++;
+//    }
+//    print_r($spacerq);
+//
+//    $walked = 0;
+//    $i = 0;
+//    while ($i < 120) {
+//        if (isset($spacerq[$i])) {
+//            $itemsm = substr_replace($itemsm, '0', $i - 1, 1);
+//            $last = $i;
+//            $walked++;
+//        }
+//        if ($walked == count($spacerq)) $i = 119;
+//        $i++;
+//    }
+//    //echo "<br>3454 --------- items = $itemsm <br>";//exit();0111111101111111011111110
+//    $useforlength = substr($itemsm, 0, $last);
+//    $findslotlikethis = str_replace('++', '+', str_replace('1', '+[0-1]+', $useforlength));
+//
+//    echo "<br>3454 --------- items = $itemsm last = $last useforlength = $useforlength <br> findslotlikethis = $findslotlikethis<br>";//exit();
+//    $i = 0;
+//    $nx = 0;
+//    $ny = 0;
+//    while ($i < 120) {
+//        if ($nx == 8) {
+//            $ny++;
+//            $nx = 0;
+//        }
+//        if ((preg_match('/^' . $findslotlikethis . '/', substr($items, $i, strlen($useforlength)))) && ($itemX + $nx < 9) && ($itemY + $ny < 16)) return $i;
+//        $i++;
+//        $nx++;
+//    }
+//    return 3840;
+//}
 
 function CheckSlotInventory($inventory, $itemX, $itemY)
 {
@@ -2664,7 +2647,7 @@ function CheckSlotInventory($inventory, $itemX, $itemY)
             $i++;
             continue;
         } else {
-            $item_ = GetCode($item);
+            $item_ = getCodeItem($item);
             $item_data = $items_data[$item_['group'] . "." . $item_['id']];
             $y = 0;
             while ($y < $item_data['Y']) {

@@ -3784,29 +3784,47 @@ function char_delepersonalSotre()
     //$inventoryDele = substr($inventoryRaw, 76 * 32, 32 * 32);
     $inventoryDele = substr($inventoryRaw, (-1)*$ceilInventoryShopPresonal);
 
+    $check_change = false;
+    if (check_changecls($_SESSION['user_Gamer'], $sub)) {
+        $check_change = true;
+    }
+
+    $checkExistItem =  mcache_get("#existItem");
+
     $isCheckAction = false;
     if (request_type('POST')) {
         if (REQ('action_personalSotre')) {
-            cn_dsi_check(true);
-            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if (empty($checkExistItem)) {
+                cn_throw_message("Cửa hàng cá nhân không có vật phẩm nào.", 'e');
+            } else {
+                cn_dsi_check(true);
+                list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
 
-            $errors_false = false;
-            if ($verifyCaptcha != $_SESSION['captcha_web']){
-                cn_throw_message("Captcah không đúng.", 'e');
-                $errors_false = true;
-            }
+                $errors_false = false;
+                if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                    cn_throw_message("Captcah không đúng.", 'e');
+                    $errors_false = true;
+                }
+                if (!$check_change) {
+                    cn_throw_message("Đổi nhân vật " . $sub . "  trước khi thực hiện thac tác này.", 'e');
+                    $errors_false = true;
+                }
 
-            if(!$errors_false) {
-                $changeInventory = '';
-                for ($id = 0; $id < $ceilInventoryShopPresonal; $id++) $changeInventory .= 'F';
 
-                $newInventory = substr($inventoryRaw, 0, (-1)*$ceilInventoryShopPresonal) . $changeInventory;
-                $checkUpdate = do_update_character('Character', "Inventory=0x". $newInventory, "Name:'". $sub ."'");
-                if($checkUpdate) {
-                    cn_throw_message('Đã xóa thành công cửa hàng cá nhân.');
-                    $isCheckAction = true;
-                } else {
-                    cn_throw_message('Err, Lỗi xử lý xóa cửa hàng cá nhân.', 'e');
+                if (!$errors_false) {
+                    $changeInventory = '';
+                    for ($id = 0; $id < $ceilInventoryShopPresonal; $id++) $changeInventory .= 'F';
+
+                    $newInventory = substr($inventoryRaw, 0, (-1) * $ceilInventoryShopPresonal) . $changeInventory;
+                    $checkUpdate = do_update_character('Character', "Inventory=0x" . $newInventory, "Name:'" . $sub . "'");
+                    if ($checkUpdate) {
+                        cn_throw_message('Đã xóa thành công cửa hàng cá nhân.');
+                        $isCheckAction = true;
+                        #Remove exist tItem
+                        mcache_set('#existItem', 0);
+                    } else {
+                        cn_throw_message('Err, Lỗi xử lý xóa cửa hàng cá nhân.', 'e');
+                    }
                 }
             }
         }
@@ -3826,6 +3844,9 @@ function char_delepersonalSotre()
 
     if ($itemInfo && !$isCheckAction) {
         foreach ($itemInfo as $i => $item32) {
+            //Set item exist
+            mcache_set('#existItem', 1);
+
             ++$x;
             if ($x == 8) $x = 0;
             if (isset($item32['name'])) {
@@ -3844,10 +3865,7 @@ function char_delepersonalSotre()
     $show_warehouse .= "<div style='margin-top:-42px; position:absolute; text-align:center; width:256px; border:0px;'>" . $wwname . "</div>";
     $show_warehouse .= "</div>";
 
-
-
-    //echo $show_warehouse;
-    cn_assign('sub, show_warehouse, showchar', $sub, $show_warehouse, $showchar);
+    cn_assign('sub, show_warehouse, showchar, check_change', $sub, $show_warehouse, $showchar, $check_change);
 
     echoheader('-@my_char/style.css', "Xóa cửa hàng cá nhân - Personal Store");
     echocomtent_here(exec_tpl('my_char/personalSotre'), cn_snippet_bc_re());

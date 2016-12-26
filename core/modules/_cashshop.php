@@ -55,8 +55,6 @@ function cshop_invoke()
         }
     }
 
-    echoheader('-@my_cashshop/style.css', "Character");
-
     $images = array
     (
         'acient' => 'acient.png',
@@ -81,11 +79,10 @@ function cshop_invoke()
     foreach ($cshop_board as $id => $name) {
         list($mod, $opt, $token, $acl) = explode(':', $id, 4);
 
-        //if (!test($acl))
-        {
+        //if (!test($acl)){
             // unset($cshop_board[$id]);
             //continue;
-        }
+        //}
 
         $item = array (
             'name' => $name,
@@ -98,29 +95,8 @@ function cshop_invoke()
         $cshop_board[$id] = $item;
     }
 
-    $member = member_get();
-
-    //$meta_draft = db_index_meta_load('draft');
-    //$drafts =isset($meta_draft['locs'])? intval(array_sum($meta_draft['locs'])):false;
-
-    //if ($drafts && test('Cvn'))
-    //{
-    //$greeting_message = i18n('News in draft: %1', '<a href="'.cn_url_modify('mod=editnews', 'source=draft').'"><b>'.$drafts.'</b></a>');
-    //}
-    //else
-    //{
-    //$greeting_message = i18n('Have a nice day!');
-    //}
-
-    //$nameset = $accc_;
-
-
-    $greeting_message = 'Have a nice day!';
-    //cn_assign('dashboard, username, greeting_message', $dashboard, $member['name'], $greeting_message);
-    cn_assign('dashboard, username, greeting_message', $cshop_board, $member['user_name'], $greeting_message);
-
-    //echo exec_tpl('header');
-    //echo exec_tpl('my_dashboard/general');
+    cn_assign('dashboard', $cshop_board);
+    echoheader('-@my_cashshop/style.css', "Character");
     echocomtent_here(exec_tpl('my_cashshop/general'), cn_snippet_bc_re());
     echofooter();
 }
@@ -140,7 +116,7 @@ function shop___buy_s1()
 
     $page = intval($page);
     if (!$page) $page = 0;
-    if (intval($per_page) == 0) $per_page = 15;
+    if (intval($per_page) == 0) $per_page = 12;
     if ($opt == 'eventticket' || $opt == 'orther') $per_page = 21;
 
     $list_item = array();
@@ -156,6 +132,7 @@ function shop___buy_s1()
     /// kiem tra khi character open warehouse => ???????????
     if (request_type('POST')) {
         if ($token == md5('__buy_s1' . $opt) && $id_item = REQ('Item')) {
+            cn_dsi_check(true);
 
             $errors_false = false;
 
@@ -175,51 +152,61 @@ function shop___buy_s1()
                 } else {
                     $items_data = getoption('#items_data');
                     $warehouse_ = do_select_character('warehouse', $arr_cls = 'Items', "AccountID='$accc_'");
-                    $warehouse = substr(strtoupper(bin2hex($warehouse_[0][0])), 0, 3840);
+                    $warehouse = substr(strtoupper(bin2hex($warehouse_[0]['Items'])), 0, 3840);
                     $item_code = $list_item[$id_item]['code32'];
 
                     if ($opt == "armor") {
                         for ($i = 7; $i <= 11; $i++) {
                             $serial = do_select_orther('EXEC WZ_GetItemSerial');
-                            $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0][0]));
+
+                            $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                             $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
                             $item_code = substr_replace($item_code, dechex($i * 16), 18, 2);
                             $leng_item_code = strlen($item_code);
-                            $item_data = GetCode($item_code);
+                            $item_data = getCodeItem($item_code);
                             if (($item_data['id'] == 15 || $item_data['id'] == 20 || $item_data['id'] == 23 || $item_data['id'] == 32 || $item_data['id'] == 37 || $item_data['id'] == 47 || $item_data['id'] == 48) && ($i == 7)) {
                                 continue;
                             } else {
-                                $items = $items_data[$item_data['group'] . "." . $item_data['id']];
-                                if (!$items) {
-                                    //cn_throw_message("[Error - line 251] Gặp sự cố trên Server. Vui thông báo cho admin",'e');
-                                    //$errors_false = true;
-                                    msg_info('[Error - line 251] Gặp sự cố trên Server. Vui thông báo cho admin.', cn_url_modify(array('reset'), 'mod=' . REQ('mod'), 'token=' . REQ('token'), 'opt=' . REQ('opt')));
-                                }
-                                $slot = CheckSlotWarehouse($warehouse, $items['X'], $items['Y']);
-
-                                if ($slot == 3840) {
-                                    cn_throw_message("Không đủ chỗ trống trong Hòm đồ", 'e');
+                                if (!isset($items_data[$item_data['group'] . "." . $item_data['id']])) {
+                                    cn_throw_message("Vật phẩm này không có trong danh sách giao bán.",'e');
                                     $errors_false = true;
-                                } else $warehouse = substr_replace($warehouse, $item_code, $slot * 32, $leng_item_code);
+                                    break;
+                                } else {
+                                    $items = $items_data[$item_data['group'] . "." . $item_data['id']];
+                                    $slot = CheckSlotWarehouse($warehouse, $items['X'], $items['Y']);
+
+                                    if ($slot == 3840) {
+                                        cn_throw_message("Không đủ chỗ trống trong Hòm đồ", 'e');
+                                        $errors_false = true;
+                                        break;
+                                    } else {
+                                        echo '$slot=-> '. $slot . '<br>';
+                                        $warehouse = substr_replace($warehouse, $item_code, $slot * 32, $leng_item_code);
+                                    }
+                                }
                             }
                         }
                     } else {
                         $serial = do_select_orther('EXEC WZ_GetItemSerial');
-                        $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0][0]));
+                        $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                         $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
                         $leng_item_code = strlen($item_code);
-                        $item_data = GetCode($item_code);
-                        $items = $items_data[$item_data['group'] . "." . $item_data['id']];
-                        if (!$items) {
-                            //cn_throw_message("[Error - line 251] Gặp sự cố trên Server. Vui thông báo cho admin",'e');
-                            //$errors_false = true;
-                            msg_info('[Error - line 251] Gặp sự cố trên Server. Vui thông báo cho admin.', cn_url_modify(array('reset'), 'mod=' . REQ('mod'), 'token=' . REQ('token'), 'opt=' . REQ('opt')));
-                        }
-                        $slot = CheckSlotWarehouse($warehouse, $items['X'], $items['Y']);
-                        if ($slot == 3840) {
-                            cn_throw_message("Không đủ chỗ trống trong Hòm đồ", 'e');
+                        $item_data = getCodeItem($item_code);
+
+                        if (!isset($items_data[$item_data['group'] . "." . $item_data['id']])) {
+                            cn_throw_message("Vật phẩm này không có trong danh sách giao bán.",'e');
                             $errors_false = true;
-                        } else $warehouse = substr_replace($warehouse, $item_code, $slot * 32, $leng_item_code);
+                        } else {
+                            $items = $items_data[$item_data['group'] . "." . $item_data['id']];
+                            $slot = CheckSlotWarehouse($warehouse, $items['X'], $items['Y']);
+                            if ($slot == 3840) {
+                                cn_throw_message("Không đủ chỗ trống trong Hòm đồ", 'e');
+                                $errors_false = true;
+                            } else {
+                                echo '$slot=-> '. $slot . '<br>';
+                                $warehouse = substr_replace($warehouse, $item_code, $slot * 32, $leng_item_code);
+                            }
+                        }
                     }
                 }
             }
@@ -245,10 +232,14 @@ function shop___buy_s1()
     $arr_shop = mcache_get('.breadcrumbs');
     $name_shop = array_pop($arr_shop)['name'];
 
-    cn_assign('list_item, token, opt', $list_item, $token, $opt);
-    cn_assign('per_page', $per_page);
 
-    echoheader('-@my_cashshop/style.css', "Cửa hàng $name_shop - $name_shop");                                //???????????????????
+    list($list_itemNew, $echoPagination) = cn_arr_pagina($list_item, cn_url_modify(array('reset'), 'mod=cash_shop', "token=$token", "opt=$opt", 'page', "per_page=$per_page"), $page, $per_page);
+//    $echoPagination = cn_countArr_pagination(count($list_item), cn_url_modify(array('reset'), 'mod=cash_shop', "token=$token", "opt=$opt", 'page', "per_page=$per_page"), $page, $per_page);
+
+    cn_assign('list_item, token, opt', $list_itemNew, $token, $opt);
+    cn_assign('per_page, echoPagination', $per_page, $echoPagination);
+
+    echoheader('-@my_cashshop/style.css', "Cửa hàng $name_shop - $name_shop");
     echocomtent_here(exec_tpl('my_cashshop/_general'), cn_snippet_bc_re());
     echofooter();
 }
@@ -284,17 +275,19 @@ function shop___what_()
                 if (!$item32['x']) $itemx = 1;
                 else $itemx = $item32['x'];
 
-                $show_warehouse .= "<div style='margin-top:". (floor($i / 8) * 32) ."px;
-											margin-left:". ($x * 32) ."px; position:absolute;
-											width:". ($itemx * 32) ."px; height:" . ($itemy * 32) ."px;
-											cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>
-									<img src='images/items/". (@$item32['image'] ? $item32['image'] : 'SinFoto') .".gif'
+                $show_warehouse .= "<div style='margin-top:" . (floor($i / 8) * 32) . "px;
+											margin-left:" . ($x * 32) . "px; position:absolute;
+											width:". ($itemx * 32) ."px; height:". ($itemy * 32) ."px;
+											cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>";
+
+                $show_warehouse .= "<img src='images/items/". (@$item32['image'] ? $item32['image'] : 'SinFoto') .".gif'
 											style=\"height:". (32 * $itemy - $itemy - 1) ."px;
-											width:". (32 * $itemx) . "px;\"
-											onMouseOut='UnTip()' onMouseOver=\"topxTip(document.getElementById('iditem". $i ."').innerHTML)\">
-								</div>";
-                if($item32['image']) {
-                    $show_warehouse .= "<div class='floatcontainer forumbit_nopost' id='iditem$i' style='display:none;background: rgba(0, 128, 0, 0.15);'>'" . $item32['info'] . "'</div>";
+											 width:" . (32 * $itemx) . "px;";
+                if ($item32['image']) {
+                    $show_warehouse .= "onMouseOut='UnTip()' onMouseOver=\"topxTip(document.getElementById('iditem". $i ."').innerHTML) /></div>";
+                    $show_warehouse .= "<div class='floatcontainer forumbit_nopost' id='iditem$i' style='display:none; background: rgba(0, 128, 0, 0.15);'>". $item32['info'] ."</div>";
+                } else {
+                    $show_warehouse .= " /></div>";
                 }
             }
         }
@@ -310,8 +303,6 @@ function shop___what_()
     $show_warehouse .= "<div style='margin-top:-42px; position:absolute; text-align:center; width:256px; border:0px;'>" . $wwname . "</div>";
     $show_warehouse .= "<div id='zzen2' style='margin-top:100px; margin-left:-20px; position:absolute; border:0px; width:0px; height:0px;'></div>";
     $show_warehouse .= "<div align=right style='position:absolute; color:" . $color . "; margin-top:502px; width:200px; margin-right:37px; margin-left:50px; border:0px;'>" . $money . "</div>";
-    //$show_warehouse	.=	"<div style='margin-top:565px; margin-left:36px; position:absolute; width:57px; cursor:pointer; height:47px;'><img alt='Rút Zen' onmousemove='return overlib(\"Rút Zen từ Hòm đồ\");' onclick='get_zen2(\"1\")' onmouseout='return nd();' src='images/insert_zen.jpg'></div>";
-    //$show_warehouse	.=	"<div style='margin-top:565px; margin-left:100px; position:absolute; width:59px; cursor:pointer; height:47px;'><img alt='Gửi Zen' onmousemove='return overlib(\"Gửi Zen vào Hòm đồ\");' onclick='get_zen2(\"2\")' onmouseout='return nd();' src='images/get_zen.jpg'></div>";
     $show_warehouse .= "<div style='margin-top:565px; margin-left:36px; position:absolute; width:57px; height:47px;'><img src='images/insert_zen.jpg'></div>";
     $show_warehouse .= "<div style='margin-top:565px; margin-left:100px; position:absolute; width:59px; height:47px;'><img src='images/get_zen.jpg'></div>";
 

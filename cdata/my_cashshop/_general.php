@@ -1,7 +1,7 @@
 ﻿<?php
 $index = 0;
 list($list_item, $token, $opt) = _GL('list_item, token, opt');
-list($per_page) = _GL('per_page');
+list($per_page, $echoPagination) = _GL('per_page, echoPagination');
 
 
 cn_snippet_messages();
@@ -60,11 +60,12 @@ cn_snippet_messages();
     </table>
 
     <?php
-    echo '<div style="text-align: left;padding-right: 5px;margin-top: 12px;padding-top: 7px;">
-		Entries on page:';
+    echo '<div class="col-left"><span>Entries on page: </span>';
     foreach (array(12, 16, 24, 40, 60) as $_per_page) {
         echo ' <a href="' . cn_url_modify('mod=cash_shop', "token=$token", "opt=$opt", 'page', "per_page=$_per_page") . '" ' . ($per_page == $_per_page ? 'class="b"' : '') . '>' . $_per_page . '</a>';
     }
-    echo '</div></div>';
+    echo '</div>';
+    echo "<div class=\"col-right pd-right5\">$echoPagination;</div>";
     ?>
-    <!-------------------------------------------------- -->
+
+</div>

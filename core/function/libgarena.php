@@ -51,15 +51,7 @@ function cn_writelog($content, $info = '', $user = '')
     if ($fd = @fopen($ul, "a")) {
         $result = fputcsv($fd, array($status, $date, $member, $remote_addr, $request_uri, $content), "\t");
         fclose($fd);
-
-//        if($result > 0)
-//            return array(status => true);
-//        else
-//            return array(status => false, message => 'Unable to write to '.$logfile.'!');
     }
-//    else {
-//        return array(status => false, message => 'Unable to open log '.$logfile.'!');
-//    }
 }
 
 function ewConvertToUtf8($str)
@@ -637,23 +629,176 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     return $output;
 }
 
+function getCodeItem($string = '')
+{
+    $output = array('id' => '', 'group' => '', 'level' => '', 'serial' => '');
+    if (empty($string) || strlen($string) != 32) {
+        return $output;
+    }
+    // Phân tich Mã Item 32 số
+    $id = hexdec(substr($string, 0, 2));    // Item ID
+    $group = hexdec(substr($string, 18, 2));    // Item Type
+    $group = $group / 16;
+    $option = hexdec(substr($string, 2, 2));    // Item Level/Skill/Option Data
+    $level = floor($option / 8);
+
+    $serial = substr($string, 6, 8);
+
+    $output['id'] = $id;
+    $output['group'] = $group;
+    $output['level'] = $level;
+    $output['serial'] = $serial;
+
+    return $output;
+}
+
+function CheckSlotWarehouse($warehouse, $itemX, $itemY)
+{
+    $items_data = getoption('#items_data');
+//
+//    $items = str_repeat('0', 120);
+//    $itemsm = str_repeat('1', 120);
+//    $i = 0;
+//    while ($i < 120) {
+//        $item = substr($warehouse, $i * 32, 32);
+//        if ($item == "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" || $item == "ffffffffffffffffffffffffffffffff") {
+//            $i++;
+//            continue;
+//        } else {
+//            $item32 = getCodeItem($item);
+//            echo "3441 ---ref x = $itemX ---ref y = $itemY >>><<< group =" . $item32['group'] . "=> id=" . $item32['id'] . "<br>";
+//            $item_data = $items_data[$item32['group'] . '.' . $item32['id']];
+//            echo "3443 ---ref x = " . $item_data['X'] . " ---ref y = " . $item_data['Y'] . "<br>";
+//            $y = 0;
+//            while ($y < $item_data['Y']) {
+//                $x = 0;
+//                while ($x < $item_data['X']) {
+//                    $items = substr_replace($items, '1', ($i + $x) + ($y * 8), 1);
+//                    $x++;
+//                }
+//                $y++;
+//            }
+//            $i++;
+//        }
+//    }
+//
+//    $y = 0;
+//    while ($y < $itemY) {
+//        $x = 0;
+//        while ($x < $itemX) {
+//            $x++;
+//            $spacerq[$x + (8 * $y)] = true;
+//        }
+//        $y++;
+//    }
+//    print_r($spacerq);
+//
+//    $walked = 0;
+//    $i = 0;
+//    while ($i < 120) {
+//        if (isset($spacerq[$i])) {
+//            $itemsm = substr_replace($itemsm, '0', $i - 1, 1);
+//            $last = $i;
+//            $walked++;
+//        }
+//        if ($walked == count($spacerq)) $i = 119;
+//        $i++;
+//    }
+//    //echo "<br>3454 --------- items = $itemsm <br>";//exit();0111111101111111011111110
+//    $useforlength = substr($itemsm, 0, $last);
+//    $findslotlikethis = str_replace('++', '+', str_replace('1', '+[0-1]+', $useforlength));
+//
+//    echo "<br>3454 --------- items = $itemsm last = $last useforlength = $useforlength <br> findslotlikethis = $findslotlikethis<br>";//exit();
+//    $i = 0;
+//    $nx = 0;
+//    $ny = 0;
+//    while ($i < 120) {
+//        if ($nx == 8) {
+//            $ny++;
+//            $nx = 0;
+//        }
+//        if ((preg_match('/^' . $findslotlikethis . '/', substr($items, $i, strlen($useforlength)))) && ($itemX + $nx < 9) && ($itemY + $ny < 16)) return $i;
+//        $i++;
+//        $nx++;
+//    }
+//
+
+    $a = array();
+    for($c = 0; $c < 8; $c++){
+        for($r = 0; $r < 15; $r++) {
+            $a[$r][$c] = 0;
+        }
+    }
+
+    $lenghtwarehouse = strlen($warehouse);
+    $_idY = $_idX = 0;
+    for ($c = 0; $c < $lenghtwarehouse; $c += 32) {
+        $res = substr($warehouse, $c, 32);
+
+        if ($_idY % 8 == 0) {
+            if ($_idY > 0) ++$_idX;
+            $_idY = 0;
+        }
+            $item32 = getCodeItem($res);
+            if (isset($items_data[$item32['group'] . '.' . $item32['id']])) {
+                $item_data = $items_data[$item32['group'] . '.' . $item32['id']];
+
+//                if ($a[$_idX][$_idY] != 1) {
+                    for ($jt = 0; $jt < $item_data['X']; $jt++) {
+                        for ($it = 0; $it < $item_data['Y']; $it++) {
+                            $a[$_idX + $it][$_idY + $jt] = 1;
+                        }
+                    }
+                }
+//            }
+        ++$_idY;
+    }
+
+    $xX = $itemX;
+    $yY = $itemY;
+
+    for($i = 0; $i < 15; $i++){
+        for($j = 0; $j < 8; $j++){
+            $checkXY = false;
+            if(($j + $yY) <= 8 && ($i + $xX) <= 15) {
+
+                for ($_y = 0; $_y < $yY; $_y++) {
+                    for ($x = 0; $x < $xX; $x++) {
+                        if ($a[$i + $x][$j + $_y] == 0) {
+                            $checkXY = true;
+                        } else{
+                            $checkXY = false;
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+            if (isset($checkXY) && $checkXY){
+                $result = $i*8 + (@$j ? 1 : 0) + $j;
+                return $result;
+            }
+        }
+    }
+
+    return 3840;
+}
+
+
 function renderImageItencode($group, $id){
     $group = (string)$group;
     $id = (string)$id;
 
-    if (empty($group) || empty($id)) return '';
-
     $strGroup = $strId = '';
-    if (strlen($group) == 1) $strGroup = '0'. $group . '0';
-    else if (strlen($group) == 2) $strGroup = $group . '0';
-    else if (strlen($group) == 3) $strGroup = $group;
+    if (strlen($group) == 1) $strGroup = '0'. $group;
+    else if (strlen($group) == 2) $strGroup = $group;
 
-    if (strlen($id) == 1) $strId = '0'. $group . '00';
-    else if (strlen($id) == 2) $strId = $group . '00';
-    else if (strlen($id) == 3) $strId = $group . '0';
-    else if (strlen($id) == 4) $strId = $group;
+    if (strlen($id) == 1) $strId = '00'. $id;
+    else if (strlen($id) == 2) $strId = '0'. $id;
+    else if (strlen($id) == 3) $strId = $id;
 
-    return $strGroup.$strId;
+    return (string)$strGroup.$strId .'00';
 }
 
 // Since 2.0: Check CSRF challenge
@@ -685,7 +830,7 @@ function cn_dsi_check($isWeb = false)
         if ($member['user_Account'] !== $username) die('CSRF attempt! Username invalid');
         $signature = MD5($key . $member['pass'] . MD5(getoption('#crypt_salt')));
     } else {
-        if ($member['user_name'] !== $username) die('CSRF attempt! Username invalid');
+        if ($member['user_name'] !== $username) die('CSRF attempt! Username invalid ...');
         $signature = MD5($key . $member['pass_web'] . MD5(getoption('#crypt_salt')));
     }
 

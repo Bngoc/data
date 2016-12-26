@@ -1551,14 +1551,11 @@ function cn_load_skin()
 // Since 2.0: @bootstrap Make & load configuration file ==>
 function cn_config_load()
 {
-    //chmod(ROOT. '/core/cashshop', 0777);
-    //chmod(ROOT. '\gifnoc', 0777);
     global $_CN_access;
     //checking permission for load config
     $conf_dir = cn_path_construct(ROOT, 'gifnoc');
     if (!is_dir($conf_dir) || !is_writable($conf_dir)) {
         die('Permissions and CHMOD for gifnoc');
-        //return false;
     }
     $conf_path = cn_path_construct(ROOT, 'gifnoc') . 'gifnoc.php';
     $cfg = cn_touch_get($conf_path); //doc or tao file
@@ -1581,8 +1578,7 @@ function cn_config_load()
     // make site section
     $cfg['%site'] = isset($cfg['%site']) ? $cfg['%site'] : array();
 
-    $default_conf = array
-    (
+    $default_conf = array(
         'skin' => 'default',
         'frontend_encoding' => 'UTF-8',
         'useutf8' => 1,
@@ -1697,8 +1693,6 @@ function cn_config_load()
         }
     }
 
-    // phan quyen
-
     // Set basic groups
     if (!isset($cfg['grp'])) {
         $cfg['grp'] = array();
@@ -1735,124 +1729,28 @@ function cn_config_load()
 
     foreach ($Items_Data as $key => $line) {
         $line_ = trim($line);
-        //echo "1448 ID = $_id => linr = $line <br>";
-        list($image, $group, $id, $name, $x, $y, $set1, $set2) = explode('|', $line_);
-        //$key = intval($key);
+        $lineComment = substr($line_, 0, 2);
+        if (empty($line_) || $lineComment == '//') continue;
+
+        list($image, $group, $id, $name, $x, $y, $set1, $set2) = explode('|', $line_, 8);
         $key = $group . "." . $id;
-        //echo "1448 ID = \$_id => linr = $line key = $key<br>";
         // Is empty row
-        if (empty($cfg['items_data'][$key])) {
-            $cfg['items_data'][$key] = array
-            (
-                'Image' => $image,
+        if (!isset($cfg['items_data'][$key])) {
+            $cfg['items_data'][$key] = array(
+                'Image' => @$image ? $image : renderImageItencode((string)$group, (string)$id),
                 'G' => $group,
                 'ID' => $id,
                 'Name' => $name,
                 'X' => $x,
                 'Y' => $y,
-                'SET1' => $set1,
-                'SET2' => $set2,
+                'SET1' => @$set1 ? $set1 : '',
+                'SET2' => @$set2 ? $set2 : ''
             );
         }
     }
 
-    // Admin has ALL privilegies
-    //$cfg['grp'][1]['A'] = $_CN_access['C'].','.$_CN_access['N'].','.$_CN_access['M'];
-
-    /*
-	//---------------------------start--------------------------------------
-    // Make default groups
-    $funcdef = file(cn_path_construct(SKIN,'defaults').'404isweb.php');
-
-    //$tbasic = getoption('#temp_basic');
-	////$tbasic['hash']=isset($tbasic['hash'])?$tbasic['hash']:'';
-
-	//echo " cn_modufy 1447 \$tbasic => $tbasic => \$tbaic[hase] => ".$tbasic['hash'] ."<br>";
-	if (!isset($cfg['temp_basic'])){
-      $cfg['temp_basic'] = array();
-    }
-
-	$cfg['temp_basic']['hash'] = isset($cfg['temp_basic']['hash']) ? $cfg['temp_basic']['hash'] : array();
-
-	echo " cn_modufy 1447 \$tbasic =\$tbaic[hase] => ".$cfg['temp_basic']['hash'] ."<br>";
-
-    if ($cfg['temp_basic']['hash'] !== ($nhash = md5(join(',', $funcdef))))
-    {
-	//exit();
-	$template_vars_name = array();
-	//$cfg_ = array();
-    foreach ($funcdef as $line){
-		$line = preg_replace("/\s+/","", $line); //remove all space
-		$line_ = trim($line);
-
-		if (count($line) === 0 || $line === ''){// || preg_match('/\s/', $line[0])){
-			continue;
-		}
-
-        if ($line_[0] === '#'){
-			//$current_tpl_name = trim(substr($line, 1));
-            //$templates[ $current_tpl_name ] = array();
-            continue;
-        }
-		if ($line_[0] == '*'){
-			$_tpl_var = trim(substr($line, 1));
-			//if ($_tpl_var) $cfg[$template_vars][$_tpl_var] = ''; // lay ten *
-			if ($_tpl_var) {
-				if (!isset($cfg['temp_basic'][$_tpl_var])) $cfg['temp_basic'][$_tpl_var] = array();
-				$template_vars_name =$_tpl_var;
-			}
-			//echo "cn_modify 1434 \$_tpl_var => $_tpl_var <br>";
-			continue;
-		}
-		else if ($line_[0] !== '@'){//preg_match('/\s/', $line[0]) && $line_[0] !== ''){
-			//echo "cn_modify 1434 \$line_[0] => $line_[0] <br>";
-			list($name_, $value_) = explode('=', $line);
-			//echo "cn_modify 1441 \$name_ => $name_ <br>";
-			//echo "cn_modify 1441 \$value_ => $value_ <br>";
-			//if (!isset($cfg[$template_vars][$name_]))
-			if (!isset($cfg['temp_basic'][$_tpl_var][$name_]))
-			{
-				//$template_vars[$name_] = $value_;
-				$cfg['temp_basic'][$_tpl_var][$name_] = $value_;
-			}
-		}
-		else if ($line_[0] == '@'){
-			{
-			//foreach($template_vars[$_tpl_var] as $f1 => $g1)
-					//foreach($g as $f1 => $g1)
-				//	echo "cn_modify 1446 ".$f1 ."=>". $g1 ."	<br>";
-				//mcache_set('config', $_tpl_var);
-				//$set_config_vars  = getoption('#'.$_tpl_var);
-				//$set_config_vars['hash']=isset($set_config_vars['hash'])?$set_config_vars['hash']:'';
-				//if ($tbasic['hash'] !== ($nhash = md5(join(',', $config))))
-				{
-					//$set_config_vars['hash'] = md5(join(',', $config));
-					//$set_config_vars = $template_vars;
-					//setoption('#'.$_tpl_var, $template_vars);
-				//$cfg['%site'] = isset($cfg['%site']) ? $cfg['%site'] : array();
-					//if (!getoption('#'.$_tpl_var))
-						//setoption('#'.$_tpl_var, $template_vars);
-
-					//$set_config_vars = array();
-					//$template_vars = array();
-					//$_tpl_var ='';
-				//mcache_set('config', $cfg);
-					continue;
-				}
-			}
-		}
-    }
-	$cfg['temp_basic']['hash'] = $nhash;
-    //$tbasic['templates'] = $cfg_;
-	echo " cn_modufy 1520 \$tbasic =\$tbaic[hase] => ".$cfg['temp_basic']['hash'] ."================> $nhash <br>";
-    //setoption('#temp_basic', $tbasic);
-    	// SET .....
-	}
-	*/
-
     // Set config
     mcache_set('config', $cfg);
-
 
     // SET PHAN QUYEN
     if (!getoption('#grp')) {
@@ -1860,10 +1758,6 @@ function cn_config_load()
     }
     if (!getoption('#items_data')) {
         setoption("#items_data", $cfg['items_data']);
-    }
-    //if (!getoption('#temp_basic') || ($cfg['temp_basic']['hash'] !== $nhash))
-    {
-        //setoption("#temp_basic", $cfg['temp_basic']);
     }
 
     // Make crypt-salt [after config sync]
@@ -1894,216 +1788,47 @@ function cn_config_load()
         setoption('uploads_ext', $path_uploads_ext);
     // ---------------- E_custum by bqn -----
 
-
-    // SET .....
-    //foreach($template_vars_name as $val_name)
-    //if (!getoption('@'.$val_name))
-    //setoption("@".$val_name, $cfg[$val_name]);
-
-    return TRUE;
+    return true;
 }
 
 // Since 2.0: Decode "defaults/templates" to list
 function cn_template_list()
 {
-
-    /*
-//---------------------------start--------------------------------------
-    // Make default groups
-    $funcdef = file(cn_path_construct(SKIN,'defaults').'404isweb.php');
-
-    $tbasic = getoption('#temp_basic');
-	$tbasic['hash']=isset($tbasic['hash'])?$tbasic['hash']:'';
-
-	//echo " cn_modufy 1447 \$tbasic => $tbasic => \$tbaic[hase] => ".$tbasic['hash'] ."<br>";
-	//if (!isset($cfg['temp_basic']))
-    //{
-      //  $cfg['temp_basic'] = array();
-    //}
-//	$cfg['temp_basic']['hash'] = isset($cfg['temp_basic']['hash']) ? $cfg['temp_basic']['hash'] : array();
-
-    if ($tbasic['hash'] !== ($nhash = md5(join(',', $funcdef))))
-
-    {
-	$template_vars_name = array();
-	$cfg_ = array();
-    foreach ($funcdef as $line)
-    {
-        $line = trim($line);
-        if ($line[0] === '#')
-        {
-			//$current_tpl_name = trim(substr($line, 1));
-            //$templates[ $current_tpl_name ] = array();
-            continue;
-        }
-		else if ($line[0] == '*'){
-			$_tpl_var = trim(substr($line, 1));
-			//if ($_tpl_var) $cfg[$template_vars][$_tpl_var] = ''; // lay ten *
-			if ($_tpl_var) {
-				if (!isset($cfg_[$_tpl_var])) $cfg_[$_tpl_var] = array();
-				$template_vars_name =$_tpl_var;
-			}
-			//echo "cn_modify 1434 \$_tpl_var => $_tpl_var <br>";
-			continue;
-		}
-		else if ($line[0] !== '@' && $line[0] !== ''){//preg_match('/\s/', $line[0]) && $line[0] !== ''){
-
-			list($name_, $value_) = explode('=', $line);
-			//echo "cn_modify 1441 \$name_ => $name_ <br>";
-			//echo "cn_modify 1441 \$value_ => $value_ <br>";
-			//if (!isset($cfg[$template_vars][$name_]))
-			if (!isset($cfg_[$_tpl_var][$name_]))
-			{
-				//$template_vars[$name_] = $value_;
-				$cfg_[$_tpl_var][$name_] = $value_;
-			}
-		}
-		else if ($line[0] == '@'){
-			{
-			//foreach($template_vars[$_tpl_var] as $f1 => $g1)
-					//foreach($g as $f1 => $g1)
-				//	echo "cn_modify 1446 ".$f1 ."=>". $g1 ."	<br>";
-				//mcache_set('config', $_tpl_var);
-				//$set_config_vars  = getoption('#'.$_tpl_var);
-				//$set_config_vars['hash']=isset($set_config_vars['hash'])?$set_config_vars['hash']:'';
-				//if ($tbasic['hash'] !== ($nhash = md5(join(',', $config))))
-				{
-					//$set_config_vars['hash'] = md5(join(',', $config));
-					//$set_config_vars = $template_vars;
-					//setoption('#'.$_tpl_var, $template_vars);
-				//$cfg['%site'] = isset($cfg['%site']) ? $cfg['%site'] : array();
-					//if (!getoption('#'.$_tpl_var))
-						//setoption('#'.$_tpl_var, $template_vars);
-
-					//$set_config_vars = array();
-					//$template_vars = array();
-					//$_tpl_var ='';
-				//mcache_set('config', $cfg);
-					continue;
-				}
-			}
-		}
-
-    }
-	$tbasic['hash'] = $nhash;
-    $tbasic['templates'] = $cfg_;
-
-    setoption('#temp_basic', $tbasic);
-    }
-*/
     $config = file(cn_path_construct(SKIN, 'defaults') . 'character.tpl');
 
-    //$templates  = getoption('#temp_basic');
-    //$templates['hash']=isset($tbasic['hash'])?$tbasic['hash']:'';
-
-    //$tbasic  = getoption('#temp_basic');
-    //$tbasic['hash']=isset($tbasic['hash'])?$tbasic['hash']:'';
-
-    // template file is changed
-    //if ($tbasic['hash'] !== ($nhash = md5(join(',', $config))))
-    {
-        //$templates        = array();
-        //$current_tpl_name = $_tpl_var = '';
-
-        foreach ($config as $line) {
-            //$line = preg_replace("/\s+/","", $line); //remove all space
-            $line_ = trim($line);
-
-            if (count($line_) === 0 || $line_ === '') {// || preg_match('/\s/', $line[0])){
-                continue;
-            }
-
-            if ($line_[0] === '#') {
-                //$current_tpl_name = trim(substr($line, 1));
-                //$templates[ $current_tpl_name ] = array();
-                continue;
-            }
-            if ($line_[0] == '*') {
-                $_tpl_var = trim(substr($line_, 1));
-                //if ($_tpl_var) $cfg[$template_vars][$_tpl_var] = ''; // lay ten *
-                if ($_tpl_var) {
-                    if (!isset($templates[$_tpl_var])) $templates[$_tpl_var] = array();
-                    $template_vars_name = $_tpl_var;
-                }
-                continue;
-            } else if ($line_[0] !== '@') {//preg_match('/\s/', $line[0]) && $line_[0] !== ''){
-                list($name_, $value_get) = explode('=', $line_);
-                $value_ = str_replace('_', ' ', $value_get);
-                //$value_new = explode("_", $value_get);
-                //$value_ ='';
-                //foreach($value_new as $str_) $value_ .= $str_.' ';
-                //if (!isset($cfg[$template_vars][$name_]))
-                if (!isset($templates[$_tpl_var][$name_])) {
-                    //$template_vars[$name_] = $value_;
-                    $templates[$_tpl_var][$name_] = $value_;
-                }
-            } else if ($line_[0] == '@') {
-                {
-                    //foreach($template_vars[$_tpl_var] as $f1 => $g1)
-                    //foreach($g as $f1 => $g1)
-                    //	echo "cn_modify 1446 ".$f1 ."=>". $g1 ."	<br>";
-                    //mcache_set('config', $_tpl_var);
-                    //$set_config_vars  = getoption('#'.$_tpl_var);
-                    //$set_config_vars['hash']=isset($set_config_vars['hash'])?$set_config_vars['hash']:'';
-                    //if ($tbasic['hash'] !== ($nhash = md5(join(',', $config))))
-                    {
-                        //$set_config_vars['hash'] = md5(join(',', $config));
-                        //$set_config_vars = $template_vars;
-                        //setoption('#'.$_tpl_var, $template_vars);
-                        //$cfg['%site'] = isset($cfg['%site']) ? $cfg['%site'] : array();
-                        //if (!getoption('#'.$_tpl_var))
-                        //setoption('#'.$_tpl_var, $template_vars);
-
-                        //$set_config_vars = array();
-                        //$template_vars = array();
-                        //$_tpl_var ='';
-                        //mcache_set('config', $cfg);
-                        continue;
-                    }
-                }
-            }
-            //------------------------------------------
-            /*  if ($line[0] == '#')
-            {
-                $current_tpl_name = trim(substr($line, 1));
-                $templates[ $current_tpl_name ] = array();
-                continue;
-            }
-
-            // Subtemplate markers
-            if ($line[0] == '*')
-            {
-                $_tpl_var = trim(substr($line, 1));
-                if ($_tpl_var) $template_vars[$_tpl_var] = '';
-            }
-            // Subtemplate codes
-            elseif (preg_match('/\s/', $line[0]) || $line[0] === '')
-            {
-                if(isset($templates[ $current_tpl_name ][$_tpl_var]))
-                {
-                    $templates[ $current_tpl_name ][$_tpl_var] .= substr($line, 1);
-                }
-                else
-                {
-                    $templates[ $current_tpl_name ][$_tpl_var] = substr($line, 1);
-                }
-            }
-			*/
+    foreach ($config as $line) {
+        $line_ = trim($line);
+        $lineComent = substr($line_, 0, 2);
+        if (count($line_) === 0 || $line_ === '' || $lineComent == '//') {// || preg_match('/\s/', $line[0])){
+            continue;
         }
 
-        // set <change hash> var and parsed templates
-        //$templates['hash'] = $nhash;
-        //$tbasic['hash'] = $nhash;
-        //$tbasic['templates'] = $templates;
-        //setoption('#temp_basic', $tbasic);
-
-        setoption('#temp_basic', $templates);
+        if ($line_[0] === '#') {
+            continue;
+        }
+        if ($line_[0] == '*') {
+            $_tpl_var = trim(substr($line_, 1));
+            //if ($_tpl_var) $cfg[$template_vars][$_tpl_var] = ''; // lay ten *
+            if ($_tpl_var) {
+                if (!isset($templates[$_tpl_var])) $templates[$_tpl_var] = array();
+                $template_vars_name = $_tpl_var;
+            }
+            continue;
+        } else if ($line_[0] !== '@') {//preg_match('/\s/', $line[0]) && $line_[0] !== ''){
+            list($name_, $value_get) = explode('=', $line_);
+            $value_ = str_replace('_', ' ', $value_get);
+            if (!isset($templates[$_tpl_var][$name_])) {
+                $templates[$_tpl_var][$name_] = $value_;
+            }
+        } else if ($line_[0] == '@') {
+            continue;
+        }
     }
 
-    //return isset($tbasic['templates'])?$tbasic['templates']:array();
+    setoption('#temp_basic', $templates);
+
     return isset($templates) ? $templates : array();
 }
-
 
 // Since 2.0: Get template (if not exists, create from defaults)
 function cn_get_template_byarr($template_name = '')//$subtemplate='')
@@ -2138,46 +1863,18 @@ function cn_bc_menu($name, $url, $opt)
 function cn_sort_menu($opt)
 {
     $bc = mcache_get('.menu');
-    //$result = '<div id="mainsub_title......" class="......."><span class="bcitem"><a href="'.PHP_SELF.'"></a></span>';
     $result = '<select class="sel-p" onchange="document.location.href=this.value">';
-    //if(is_array($bc)) $result .='<span class="bcsep"> '.$sep.' </span>';
-    //echo "1961 ................ result = $result ---- bc =$bc <br>";
-    //$ls = array();
-    //if (is_array($bc)) {
-    //$result .='<span class="bcsep-------"> $sep. </span>';
     foreach ($bc as $key => $item) {
         $check = strpos($item['url'], $opt);
-        //if(is_null($_name_bread)){
-        //if($key != (count($bc)-1))// && is_null($_name_bread))
-        //$ls[] = '<span class="bcitem"><a href="'.$item['url'].'">'.cn_htmlspecialchars($item['name']).'</a></span>';
         $result .= '<option value="' . $item['url'] . '"';
         if ($check !== false) $result .= 'selected';
-        //if ($sub == $name)
-
         $result .= '>' . cn_htmlspecialchars($item['name']) . '</option>';
-        //else
-        //$ls[] .= '<span class="bcitem">'.cn_htmlspecialchars($item['name']).'</span>';
-        //}
-        //else
-        //$ls[] = '<span class="bcitem"><a href="'.$item['url'].'">'.cn_htmlspecialchars($item['name']).'</a></span>';
-
     }
-    //}
-    //if($ls)
-    //$result .= join(' <span class="bcsep">'.$sep.'</span> ', $ls);
-
-    //else
-    //$result .= '<span class="bcsep"> '.$sep.' </span>';
-
-    //if(!is_null($_name_bread) && $_name_bread)
-    //$result .= '<span class="bcsep"> '.$sep.' </span><span class="bcitem">'.cn_htmlspecialchars($_name_bread). '</span>';
-
 
     $result .= "</select>";
 
     echo $result;
 }
-
 
 // Since 2.0: Read serialized array from php-safe file (or create file)
 function cn_touch_get($target)
@@ -2198,56 +1895,9 @@ function cn_touch_get($target)
             $fc = $data;
         }
     }
-    // ---------------------------------------------
-    /*
-   foreach($fc as $f =>$val){
-		if(!is_array($val))
-			echo "\$f$f <-----> $val \$val<br>";
-		else{
-			echo "array =====>$f <=====<br>";
-			foreach($val as $f1 =>$val1){
-				if(!is_array($val1))
-					echo "----------->$f1 => $val1 <br>";
-				else{
-					echo "arary --------------------> $f1 --------------------------<br>";
-					//foreach($val1 as $f11 =>$val11){
-						//echo "$f11 => $val11 <br>";
-						//foreach($val11['config_pk'] as $f111 =>$val111)
-						//echo "$f111 => $val111 <br>";
-						//}
-				}
 
-			}
-	   }
-	}
-	/*
-		echo "sssssssssssssssss1505ssssssssssssss =>". getoption('#config_resetvip'). "<br>";
-		$df = cn_get_template('class_dw_1_name', 'config_class');
-
-			echo "array =========> 1910 null =>". $df. "<br>";
-
-	$foro = getoption('#temp_basic');
-
-	 foreach ($foro as $id => $_t)
-    {
-		echo "ssssssss------------------------------------------------>sssssss $id ==> <br>";
-        $all_tpls[ $id ] = $id;
-    }
-
-	$foro_ = $foro['config_class']['class_dw_1'];
-
-	echo "ssssssssss 1573 => $foro <=>". $foro_. "<br>";
-
-	foreach($foro_ as $f => $g)
-	//foreach($g[$f] as $f1 => $aa)
-		echo "1529 ==>".$f ." =>". $g. "<br>";
-
-	//exit();
-   // ---------------------------------------------
-   */
     return $fc;
 }
-
 
 // Since 2.0: Read file (or create file)
 function cn_read_file($target)
@@ -2285,7 +1935,7 @@ function cn_read_file($target)
  */
 function cn_check_code32($code32)
 {
-    if ($code32 == 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF' || $code32 == 'ffffffffffffffffffffffffffffffff' || $code32 == '') {
+    if ($code32 == 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF' || $code32 == 'ffffffffffffffffffffffffffffffff' || $code32 == '' || strlen($code32) != 32) {
         return false;
     }
 
@@ -2325,7 +1975,6 @@ function cn_config_save($cfg = null)
     $fn = cn_path_construct(ROOT, 'gifnoc') . 'gifnoc.php';
     $dest = $fn . '-' . mt_rand() . '.bak';
 
-    //unlink($fn); // xoa file hien tai
     //save all config
     $fx = fopen($dest, 'w+');
     fwrite($fx, "<?php die(); ?>\n" . base64_encode(serialize($cfg)));
@@ -2375,10 +2024,7 @@ function cn_relocation_db()
 //    $passcode = getoption('passcode');
 //    $passadmin = getoption('passadmin');
 //    $passcard = getoption('passcard');
-
-
-    $server_type = getoption('server_type');
-    $type_acc = getoption('type_acc');
+//    $server_type = getoption('server_type');
 
     $config_admin = "BUI NGOC";
     $config_adminemail = "ngoctbhy@gmail.com";
@@ -2411,7 +2057,7 @@ function cn_db_installed()
         // Submit
         if (request_type('POST')) {
 
-            list($type_connect, $nameLocal, $nameSql, $pwdDb, $nameSaveDb, $server_type, $type_acc, $actionSave) = GET('type_connect, nameLocal, nameSql, pwdDb, nameSaveDb, server_type, type_acc, actionSave', 'GPG');
+            list($type_connect, $nameLocal, $nameSql, $pwdDb, $nameSaveDb, $server_type, $actionSave) = GET('type_connect, nameLocal, nameSql, pwdDb, nameSaveDb, server_type, actionSave', 'GPG');
 
             if (!$type_connect) {
                 cn_throw_message('Enter username', 'e');
@@ -2444,7 +2090,6 @@ function cn_db_installed()
                 $opt_result['d_base'] = $nameSaveDb;
 
                 $opt_result['server_type'] = $server_type;
-                $opt_result['type_acc'] = $type_acc;
 
                 setoption('#%site', $opt_result);
 

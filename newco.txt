@@ -20,6 +20,7 @@
 				--> extension=php_curl.dll
 				--> extension=php_fileinfo.dll
 				--> extension=php_sockets.dll
+				--> extension=php_mysqli.dll
 			3.1. php-CGI.exe
 				--> X86 setup / php-5.6.27-nts-Win32-VC11-x86 =>  http://windows.php.net/downloads/releases/php-5.6.27-nts-Win32-VC11-x86.zip
 			3.2. running PHP 5.5.x
@@ -78,9 +79,17 @@
  
 	3. Allow remote connect to this server [sql server]
 
+ [*] C> Cau hinh cho forum
+	-> Vao duong dan dan <pacth>/data/forum/includes/config.php
+		-> mo = notepad++ thay doi cho phu hop
  
- 
- [*] C>
+ [*] D> cau hinh tren /admin.php
+    1. time zone  (0 -> +7)
+    2. allow regiter
+    3. character
+    4. cashshop	
+	
+ [*] E>
 	1. Hex main + Hex main config	
 		Keyword serach -=> connect
 		Keyword serach -=> AVCKeyGenerater..... serial....
@@ -90,13 +99,9 @@
 		keyword serach -=> mu.exe
 	2. 
 
- [*] D> cau hinh tren /admin.php
-    1. time zone  (0 -> +7)
-    2. allow regiter
-    3. character
-    4. cashshop
+
     
- [*] E> Cau hinh ranking top50 Table character [Task scheduler for Win]
+ [*] F> Cau hinh ranking top50 Table character [Task scheduler for Win]
 		1. pacth php.exe => [program/srcipt]	
 			==> <patch> /php/php5.5.12/php.exe
 				EX: C:\wamp\bin\php\php5.5.12\php.exe
@@ -116,7 +121,7 @@
 		        C2. IIS -> request feltring - > URL -> Deny sequence ...  /core/rankingTopAutoUpdate.php
 		    5.2> PHP Apache ....
 		        -> .htaccess deny file
-
+		
  Z>
 	1.open port
 		--> Connecting to SQL Server remotely on AWS involves 3 main factors: 
