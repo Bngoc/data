@@ -152,6 +152,7 @@ function shop___buy_s1()
                 } else {
                     $items_data = getoption('#items_data');
                     $warehouse_ = do_select_character('warehouse', $arr_cls = 'Items', "AccountID='$accc_'");
+                    $warehouse = '';
                     $warehouse = substr(strtoupper(bin2hex($warehouse_[0]['Items'])), 0, 3840);
                     $item_code = $list_item[$id_item]['code32'];
 

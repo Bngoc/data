@@ -776,7 +776,8 @@ function CheckSlotWarehouse($warehouse, $itemX, $itemY)
             }
 
             if (isset($checkXY) && $checkXY){
-                $result = $i*8 + (@$j ? 1 : 0) + $j;
+                $result = $i*8 + 1 + $j;
+//                $result = $i*8 + (@$j ? 1 : 0) + $j;
                 return $result;
             }
         }
