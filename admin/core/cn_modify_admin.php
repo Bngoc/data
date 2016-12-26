@@ -1711,8 +1711,7 @@ function cn_config_load()
 
         // Is empty row
         if (empty($cfg['grp'][$id])) {
-            $cfg['grp'][$id] = array
-            (
+            $cfg['grp'][$id] = array(
                 'N' => $name,
                 'G' => $group,
                 '#' => TRUE,
