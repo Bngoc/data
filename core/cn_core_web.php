@@ -1284,12 +1284,10 @@ function cn_get_menu_none()
 function menuTopMoney($opt = '')
 {
     global $skin_menu_TopMoney, $skin_menu_TopAccount;
-    $skin_menu_TopSample = '';
 
     if (isset($_SESSION['user_Gamer'])) {
-        $member = member_get();
-        $_blank_var = view_bank($member['user_name']);
-
+        $_blank_var = view_bank($_SESSION['user_Gamer']);
+        
         $matches[0] = '<img src="' . getoption('http_script_dir') . '/images/icon-1.png" /> ' . number_format($_blank_var[0]['vp'], 0, ',', '.') . ' Vpoint';;
         $matches[1] = '<img src="' . getoption('http_script_dir') . '/images/icon-2.png" /> ' . number_format($_blank_var[0]['gc'], 0, ',', '.') . ' Gcoin';;
         $matches[2] = '<img src="' . getoption('http_script_dir') . '/images/icon-3.png" /> ' . number_format($_blank_var[0]['gc_km'], 0, ',', '.') . ' Gcoin KM';;
@@ -1318,9 +1316,9 @@ function menuTopMoney($opt = '')
         }
 
         if($opt){
-            $skin_menu_TopSample =  $skin_menu_TopMoney;
+            $skin_menu_TopSample = $skin_menu_TopMoney;
         } else {
-            $skin_menu_TopSample =  $skin_menu_TopAccount;
+            $skin_menu_TopSample = $skin_menu_TopAccount;
         }
         // opt in true return skin menu top money
         if (empty($opt)) {

@@ -13,7 +13,8 @@ $(document).ready(function () {
                 url: 'index.php',
                 data: $('form.form-'+ itemID).serialize(),
                 success: function (data) {
-                    $(".top-showInfo").html(data['megit nuTop']);
+                    $('.top-showInfo').remove();
+                    $(".w-menu-top").prepend(data['menuTop']);
                     $("#msg-Show").html(data['msgAction']);
                 }
             });

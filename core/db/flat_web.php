@@ -121,12 +121,21 @@ function view_character($account)
 function view_bank($account)
 {
     if (!empty($account)) {
-        $_data = array();
         $result = do_select_character('MEMB_INFO', 'bank,vpoint,jewel_chao,jewel_cre,jewel_blue,gcoin,gcoin_km', "memb___id='$account'", '');
 
-        if ($result)
-            foreach ($result as $key => $var)
-                $_data[] = Array('bank' => $var['bank'], 'vp' => $var['vpoint'], 'chaos' => $var['jewel_chao'], 'cre' => $var['jewel_cre'], 'blue' => $var['jewel_blue'], 'gc' => $var['gcoin'], 'gc_km' => $var['gcoin_km']);
+        if ($result) {
+            foreach ($result as $key => $var) {
+                $_data[] = Array(
+                    'bank' => $var['bank'],
+                    'vp' => $var['vpoint'],
+                    'chaos' => $var['jewel_chao'],
+                    'cre' => $var['jewel_cre'],
+                    'blue' => $var['jewel_blue'],
+                    'gc' => $var['gcoin'],
+                    'gc_km' => $var['gcoin_km']
+                );
+            }
+        }
     }
 
     return isset($_data) ? $_data : array();

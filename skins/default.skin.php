@@ -181,10 +181,7 @@ $skin_footer_web = <<<HTML
 </div> <!-- wrapper -->
     <script type="text/javascript" src="$setpath_default/library/wz_tooltip.js"></script>
 	<!--<script type="text/javascript" src="$setpath_default/library/jsToolTip.js"></script>	-->
-    
     <script type="text/javascript" src="$setpath_default/library/jsCheckForm.js"></script>
-
-
 
 <div style="clear:both;"></div>
 <div id="footer" style="float:left"> 
@@ -204,32 +201,32 @@ HTML;
 
 $skin_content_web = <<<HTML
 	<!-- ===================START COMMENT==================== -->
-		<div id="mainsubcol_content">
+    <div id="mainsubcol_content">
 
-			<div id="mainsub_n"></div>
-			<div id="mainsub_c">
-				<div id="mainsub_content">
-					<div id="mainsub_title">
-						<font color="#d1a151">{paths_c}</font>
-						{paths_menu}
-					</div>
-					
-					<div id="mainsub_ranking_n"></div>
-					<div id="mainsub_ranking_c">
-						<div id="mainsub_inner_content"> 
-							<!-- ================ CONTENT HERE ================ -->
-							{content_here}
-							<!-- ================ CONTENT HERE ================ //-->
-						</div>                  
-					</div>
-					<div id="mainsub_ranking_s"></div>					
-					<div class="clear"></div>              	
-				</div>              
-			</div>
-			<div id="mainsub_s"></div>
-			<div class="clear"></div>
-	
-		</div> 
+        <div id="mainsub_n"></div>
+        <div id="mainsub_c">
+            <div id="mainsub_content">
+                <div id="mainsub_title">
+                    <font color="#d1a151">{paths_c}</font>
+                    {paths_menu}
+                </div>
+                
+                <div id="mainsub_ranking_n"></div>
+                <div id="mainsub_ranking_c">
+                    <div id="mainsub_inner_content"> 
+                        <!-- ================ CONTENT HERE ================ -->
+                        {content_here}
+                        <!-- ================ CONTENT HERE ================ //-->
+                    </div>                  
+                </div>
+                <div id="mainsub_ranking_s"></div>					
+                <div class="clear"></div>              	
+            </div>              
+        </div>
+        <div id="mainsub_s"></div>
+        <div class="clear"></div>
+
+    </div> 
 	<!-- ===================END COMMENT==================== -->          
 HTML;
 
@@ -238,15 +235,15 @@ HTML;
 // ********************************************************************************
 
 $skin_menu_TopMoney = <<<HTML
-        <ul class="top-showInfo">
-            <li>{nameVpoint}</li>
-            <li>{nameGcoin}</li>
-            <li>{nameGcKm}</li>
-            <li>{nameBule}</li>
-            <li>{nameChaos}</li>
-            <li>{nameCreate}</li>
-            <li>{nameBank}</li>
-        </ul>
+    <ul class="top-showInfo">
+        <li>{nameVpoint}</li>
+        <li>{nameGcoin}</li>
+        <li>{nameGcKm}</li>
+        <li>{nameBule}</li>
+        <li>{nameChaos}</li>
+        <li>{nameCreate}</li>
+        <li>{nameBank}</li>
+    </ul>
 HTML;
 
 // ********************************************************************************
@@ -254,27 +251,27 @@ HTML;
 // ********************************************************************************
 
 $skin_menu_TopAccount = <<<HTML
-        <div class="user-inner">
-            <div id="nonLogin">
-                <ul>
-                    <li class="lg-normal">
-                        <div class="pao divbox">
-                            <a href="#">
-                                 {userImg}<span>{userName}<i class="down downup"></i></span>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="box_login showbox" style="display: none;">
-                        <div class="box-iframe box_1">{changePass}</div>
-                        <div class="box-iframe box_1">{changeTel}</div>
-                        <div class="box-iframe box_1">{changeEmail}</div>
-                        <div class="box-iframe box_1">{changePwd}</div>
-                        <div class="box-iframe box_1">{changeSecret}</div>
-                        <div class="box-iframe box_1">{changeQA}</div>
-                    </li>
-                </ul>
-            </div>
+    <div class="user-inner">
+        <div id="nonLogin">
+            <ul>
+                <li class="lg-normal">
+                    <div class="pao divbox">
+                        <a href="#">
+                             {userImg}<span>{userName}<i class="down downup"></i></span>
+                        </a>
+                    </div>
+                </li>
+                <li class="box_login showbox" style="display: none;">
+                    <div class="box-iframe box_1">{changePass}</div>
+                    <div class="box-iframe box_1">{changeTel}</div>
+                    <div class="box-iframe box_1">{changeEmail}</div>
+                    <div class="box-iframe box_1">{changePwd}</div>
+                    <div class="box-iframe box_1">{changeSecret}</div>
+                    <div class="box-iframe box_1">{changeQA}</div>
+                </li>
+            </ul>
         </div>
+    </div>
     <div style="clear:both;"></div>
 HTML;
 ?>
