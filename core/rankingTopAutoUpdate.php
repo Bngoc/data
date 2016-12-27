@@ -16,5 +16,8 @@ require_once SERVDIR . '/core/db/flat_web.php';
 
 cn_config_load();
 cn_relocation_db_new();
+// Call Excuete update Ranking Top50 with Task scheduler
 rankingCharaterTop();
+// Call excute update point -10% and -5%
+onoff_PointCharacter();
 ?>

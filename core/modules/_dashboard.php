@@ -42,7 +42,6 @@ function char_invoke()
     $mod = REQ('mod', 'GETPOST');
     $opt = REQ('opt', 'GETPOST');
 
-
     // Top level (dashboard)
     cn_bc_add('Nhân vật', cn_url_modify(array('reset'), 'mod=' . $mod));
 
@@ -52,27 +51,21 @@ function char_invoke()
             cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
     }
 
-
     // Request module
     foreach ($char_board as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
 
-
-        //if (test($acl_module) && $dl == $mod && $do == $opt && function_exists("dashboard_$opt"))
-        if ($dl == $mod && $do == $opt && function_exists("char_$opt")) {
+        if (test($acl_module) && $dl == $mod && $do == $opt && function_exists("char_$opt")) {
+//        if ($dl == $mod && $do == $opt && function_exists("char_$opt")) {
             cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt));
-
             die(call_user_func("char_$opt"));
-
         }
-        //else{
+
         if ($dl == $mod && $do == $opt && !function_exists("char_$opt")) {
             cn_bc_add('Lỗi dữ liệu', cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt));
             die(call_user_func("char_default"));
         }
     }
-
-    echoheader('-@my_char/style.css', "Character");
 
     $images = array (
         'info_char' => 'info_char.gif',
@@ -104,8 +97,6 @@ function char_invoke()
         'locale' => 'locale.png',
         'script' => 'script.png',
         'comments' => 'comments.png'
-
-
     );
 
     // More dashboard images
@@ -130,7 +121,7 @@ function char_invoke()
     }
 
     cn_assign('dashboard', $char_board);
-
+    echoheader('-@my_char/style.css', "Character");
     echocomtent_here(exec_tpl('my_char/general'), cn_snippet_bc_re());
     echofooter();
 }
@@ -299,13 +290,13 @@ function char_reset()
         $str_zen = number_format((float)$zen_acc_char, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(abs($get_zen)), 0, ",", ".") . " Zen)</font>";
     }
     if (0 <= $get_chao = $show_blank_chao - (isset($chao) ? $chao : 0)) $str_chao = $show_blank_chao . " (Đủ Chaos)"; else {
-        $str_chao = $show_blank_chao . '<font color =red> (Thiếu ' . $get_chao . ' Chaos)</font>';
+        $str_chao = $show_blank_chao . '<font color =red> (Thiếu ' . abs($get_chao) . ' Chaos)</font>';
     }
     if (0 <= $get_cre = $show_blank_cre - (isset($cre) ? $cre : 0)) $str_cre = "$show_blank_cre (Đủ Creation)"; else {
-        $str_cre = $show_blank_cre . '<font color =red> (Thiếu ' . $get_cre . ' Creation)</font>';
+        $str_cre = $show_blank_cre . '<font color =red> (Thiếu ' . abs($get_cre) . ' Creation)</font>';
     }
     if (0 <= $get_blue = $show_blank_blue - (isset($blue) ? $blue : 0)) $str_blue = "$show_blank_blue (Đủ Blue)"; else {
-        $str_blue = $show_blank_blue . '<font color =red> (Thiếu ' . $get_blue . ' Blue)</font>';
+        $str_blue = $show_blank_blue . '<font color =red> (Thiếu ' . abs($get_blue) . ' Blue)</font>';
     }
 
     if (getoption('hotrotanthu')) {
@@ -315,7 +306,7 @@ function char_reset()
             if ($g_lv != 0) $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
         } else {
             $thieu_lever = ABS($test_vl);
-            $str_lever = "$level_acc_char <font color =red>(Thiếu $thieu_lever level)</font>";
+            $str_lever = "$level_acc_char <font color =red>(Thiếu abs($thieu_lever)  level)</font>";
             if ($g_lv != 0) $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
         }
     } else {
@@ -323,7 +314,7 @@ function char_reset()
             $str_lever = "$level_acc_char (Đủ level).";
         else {
             $f_lv = ABS($abc_level);
-            $str_lever = "$level_acc_char <font color =red>(Thiếu $f_lv level)</font>";
+            $str_lever = "$level_acc_char <font color =red>(Thiếu abs($f_lv) level)</font>";
         }
     }
 

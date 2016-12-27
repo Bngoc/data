@@ -701,6 +701,9 @@ function db_membget_account($clause, $colClause ='[UserAcc]', $ischek = FALSE)
     return null;
 }
 
+/**
+ * return Query SQL auto update ranking column Top50
+ */
 function rankingCharaterTop(){
     $myQueryRankingTop = "SELECT Top 125 [Name] FROM Character ORDER BY relifes DESC, resets DESC, cLevel DESC";
     $resultRankingTop = do_select_orther($myQueryRankingTop);
@@ -716,6 +719,47 @@ function rankingCharaterTop(){
         //if (!$chekUpdate) cn_writelog($myQueryUpdate, 'e');
     }
 }
+
+function onoff_PointCharacter()
+{
+    $checkResultOnOff = do_select_orther("SELECT AccountID, [Name], [Uythac], [uythacoffline_stat], [PhutUyThacOn_dutru], [PhutUyThacOff_dutru], [PointUyThac]  FROM Character WHERE Uythac = 0 OR uythacoffline_stat = 0");
+    $itemID = '';
+
+    foreach ($checkResultOnOff as $k => $items) {
+//        $myQueryUpdate = 'UPDATE Character SET PhutUyThacOn_dutru = Uythac, PhutUyThacOff_dutru = uythacoffline_stat, PointUyThac = CASE';
+        $myQueryUpdate = 'UPDATE Character SET';
+
+        $itemID .= '\'' . $items['Name'] . '\',';
+        if ($items['Uythac'] == 0 && $items['uythacoffline_stat'] == 1) {
+            // Status OFF
+            $myQueryUpdate .= ' PhutUyThacOn_dutru = CASE';
+            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=1 THEN ' . (($items['PhutUyThacOn_dutru'] > 0) ? floor($items['PhutUyThacOn_dutru'] * (0.95)) : 0);
+            $myQueryUpdate .= ' END, PointUyThac = CASE';
+            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=1 THEN ' . (($items['PointUyThac'] >0) ? floor($items['PointUyThac'] * (0.9)) : 0);
+        } else if ($items['Uythac'] == 1 && $items['uythacoffline_stat'] == 0) {
+            //Status ON
+            $myQueryUpdate .= ' PhutUyThacOff_dutru = CASE';
+            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=1 AND uythacoffline_stat=0 THEN ' . (($items['PhutUyThacOff_dutru'] > 0) ? floor($items['PhutUyThacOff_dutru'] * (0.95)) : 0);
+            $myQueryUpdate .= ' END, PointUyThac = CASE';
+            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=1 AND uythacoffline_stat=0 THEN ' . (($items['PointUyThac'] >0) ? floor($items['PointUyThac'] * (0.9)) : 0);
+        } else if ($items['Uythac'] == 0 && $items['uythacoffline_stat'] == 0) {
+            //None
+            $myQueryUpdate .= ' PhutUyThacOn_dutru = CASE';
+            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=0 THEN ' . (($items['PhutUyThacOn_dutru'] > 0) ? floor($items['PhutUyThacOn_dutru'] * (0.95)) : 0);
+            $myQueryUpdate .= ' END, PhutUyThacOff_dutru = CASE';
+            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=0 THEN ' . (($items['PhutUyThacOff_dutru'] > 0) ? floor($items['PhutUyThacOff_dutru'] * (0.95)) : 0);
+
+            $myQueryUpdate .= ' END, PointUyThac = CASE';
+            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=0 THEN ' . (($items['PointUyThac'] >0) ? floor($items['PointUyThac'] * (0.9)) : 0);
+        }
+
+        $myQueryUpdate .= ' END WHERE Name =\'' . $items['Name'] . '\'';
+        echo $myQueryUpdate;
+        $chekUpdate = do_update_orther($myQueryUpdate);
+//        if (!$chekUpdate) cn_writelog($myQueryUpdate, 'e');
+    }
+}
+
 
 //-------------------------------------------------------------------------------------------------------------------------------
 function kiemtra_cardnumber($card_num)
