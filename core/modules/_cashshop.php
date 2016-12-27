@@ -291,7 +291,7 @@ function shop___what_()
 											style='height:". (32 * $itemy - $itemy - 1) ."px;
 											 width:". (32 * $itemx) ."px;'";
                 if ($item32['image']) {
-                    $show_warehouse .= " onMouseOut='UnTip()' onMouseOver='topxTip(document.getElementById('iditem". $i ."').innerHTML') /></div>";
+                    $show_warehouse .= ' onMouseOut="UnTip()" onMouseOver="topxTip(document.getElementById(\'iditem'.$i.'\').innerHTML)" /></div>';
                     $show_warehouse .= "<div class='floatcontainer forumbit_nopost' id='iditem$i' style='display:none; background: rgba(0, 128, 0, 0.15);'>". $item32['info'] ."</div>";
                 } else {
                     $show_warehouse .= " /></div>";
