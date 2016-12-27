@@ -1287,7 +1287,7 @@ function menuTopMoney($opt = '')
 
     if (isset($_SESSION['user_Gamer'])) {
         $_blank_var = view_bank($_SESSION['user_Gamer']);
-        
+
         $matches[0] = '<img src="' . getoption('http_script_dir') . '/images/icon-1.png" /> ' . number_format($_blank_var[0]['vp'], 0, ',', '.') . ' Vpoint';;
         $matches[1] = '<img src="' . getoption('http_script_dir') . '/images/icon-2.png" /> ' . number_format($_blank_var[0]['gc'], 0, ',', '.') . ' Gcoin';;
         $matches[2] = '<img src="' . getoption('http_script_dir') . '/images/icon-3.png" /> ' . number_format($_blank_var[0]['gc_km'], 0, ',', '.') . ' Gcoin KM';;
@@ -2203,18 +2203,18 @@ function cn_point_trust()
 
     if ($show_reponse) {
         foreach ($show_reponse as $od => $do) {
-            if (!empty($sub = $do[0])) {
+            if (!empty($sub = $do['Name'])) {
                 $arr_trust = do_select_character('Character', 'UyThac,uythaconline_time,PhutUyThacOn_dutru,uythacoffline_stat,uythacoffline_time,PhutUyThacOff_dutru,PointUyThac,UyThacOnline_Daily,UyThacOffline_Daily', "Name='$sub'", '');
 
                 $check_trust = false;
                 $ctime = ctime();
-                $status_online = $arr_trust[0][0];
-                $status_offline = $arr_trust[0][3];
-                $trust_point = $arr_trust[0][6];
-                $_time_on_begin = $arr_trust[0][1];
-                $_time_off_begin = $arr_trust[0][4];
-                $point_pt_on = $arr_trust[0][2];
-                $point_pt_off = $arr_trust[0][5];
+                $status_online = $arr_trust[0]['UyThac'];
+                $status_offline = $arr_trust[0]['uythacoffline_stat'];
+                $trust_point = $arr_trust[0]['PointUyThac'];
+                $_time_on_begin = $arr_trust[0]['uythaconline_time'];
+                $_time_off_begin = $arr_trust[0]['uythacoffline_time'];
+                $point_pt_on = $arr_trust[0]['PhutUyThacOn_dutru'];
+                $point_pt_off = $arr_trust[0]['PhutUyThacOff_dutru'];
 
                 $time_begin_on = date("Y-M-d", $_time_on_begin);
                 $time_begin_off = date("Y-M-d", $_time_off_begin);
@@ -2337,8 +2337,8 @@ function cn_point_trust()
                 $trust[$sub]['phut_on_dutru'] = $point_pt_on;
                 $trust[$sub]['phut_off_dutru'] = $point_pt_off;
                 $trust[$sub]['pointuythac'] = $trust_point;
-                $trust[$sub]['online_daily'] = isset($daily_trust) ? $daily_trust : $arr_trust[0][7];
-                $trust[$sub]['offline_daily'] = isset($daily_trust) ? $daily_trust : $arr_trust[0][8];
+                $trust[$sub]['online_daily'] = isset($daily_trust) ? $daily_trust : $arr_trust[0]['UyThacOnline_Daily'];
+                $trust[$sub]['offline_daily'] = isset($daily_trust) ? $daily_trust : $arr_trust[0]['UyThacOffline_Daily'];
             }
         }
     } else {
