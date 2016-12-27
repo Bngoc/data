@@ -1,0 +1,751 @@
+Initialized log instance
+Initializing Servers...
+[AllowList] Loaded Successfull!
+[DataServer1] Initializing database connection
+[DataServer1] [DB] Connection Successfull!
+[DataServer1] Connected to MuOnline@MuOnline database
+[DataServer1] Initialized database connection
+[DataServer1] Initializing IOCP system connection
+[DataServer1] Server Listen OK. Port: 55960
+[DataServer1] Initialized IOCP system connection
+[DataServer2] Initializing database connection
+[DataServer2] [DB] Connection Successfull!
+[DataServer2] Connected to MuOnline@MuOnline database
+[DataServer2] Initialized database connection
+[DataServer2] Initializing IOCP system connection
+[DataServer2] Server Listen OK. Port: 55962
+[DataServer2] Initialized IOCP system connection
+[JoinServer] Initializing database connection
+[JoinServer] [DB] Connection Successfull!
+[JoinServer] Connected to MuOnline@MuOnlineJoinDB database
+[JoinServer] Initialized database connection
+[JoinServer] Initializing IOCP system connection
+[JoinServer] Server Listen OK. Port: 55970
+[JoinServer] Initialized IOCP system connection
+[ExtraServer] Initializing database connection
+[ExtraServer] [DB] Connection Successfull!
+[ExtraServer] Connected to MuOnline@MuOnline database
+[ExtraServer] Initialized database connection
+[ExtraServer] Initializing IOCP system connection
+[ExtraServer] Server Listen OK. Port: 55999
+[ExtraServer] Initialized IOCP system connection
+[WzExDB] Initializing database connection
+[WzExDB] [DB] Connection Successfull!
+[WzExDB] Connected to MuOnline@MuOnline database
+[WzExDB] Initialized database connection
+[WzExDB] Initializing IOCP system connection
+[WzExDB] Server Listen OK. Port: 55906
+[WzExDB] Initialized IOCP system connection
+23:02:49 SELECT * FROM Guild WHERE Number = G_Union
+23:02:49 SELECT * FROM Guild WHERE Number <> G_Union
+23:02:49 SELECT G_Mark FROM Guild WHERE G_Name = 'abc'
+23:02:49 [WzExDB] [ExDB][AddGuild] Guild [abc] Create Guild Master: [knight]
+23:02:49 SELECT * FROM GuildMember WHERE G_Name = 'abc'
+[WzExDB] [MuOnlineDB] GuildData Loaded in 203 msec
+[PostServer] Initializing IOCP system connection
+[PostServer] Server Listen OK. Port: 55998
+[PostServer] Initialized IOCP system connection
+Servers initialization in 889 msec
+[JoinServer] connect : [0][127.0.0.1]
+[DataServer1] connect : [0][127.0.0.1]
+[DataServer2] connect : [0][127.0.0.1]
+[WzExDB] connect : [0][127.0.0.1]
+23:03:06 [WzExDB] [ExDB][ExDB] GameServer with ServerCode[1] connected.
+[PostServer] connect : [0][127.0.0.1]
+[ExtraServer] connect : [0][127.0.0.1]
+23:03:06 SELECT ItemCount FROM GameServerInfo WHERE Number=0
+23:03:06 SELECT ItemCount FROM GameServerInfo WHERE Number=0
+[JoinServer] GameServer connected Sub-2 PORT : 55903 CODE : 1
+[PostServer] [PostServer][0] Connection Success: Server Code 1
+23:05:42 SELECT * FROM MEMB_INFO WHERE memb___id='ngoc119'
+[Object] User ngoc119 has join
+23:05:42 EXEC WZ_CONNECT_MEMB 'ngoc119','Sub-2','45.122.232.61'
+23:05:45 SELECT Id FROM AccountCharacter WHERE Id='ngoc119'
+23:05:45 SELECT * FROM AccountCharacter WHERE Id='ngoc119'
+23:05:45 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='eewe'
+23:05:45 SELECT Inventory FROM Character WHERE Name='eewe'
+23:05:45 SELECT G_Status FROM GuildMember WHERE Name='eewe'
+23:05:45 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='Yoyo'
+23:05:45 SELECT Inventory FROM Character WHERE Name='Yoyo'
+23:05:45 SELECT G_Status FROM GuildMember WHERE Name='Yoyo'
+23:05:45 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'ngoc119'
+23:05:45 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='ngoc119' AND BotLife < BotMaxLife
+23:05:45 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='ngoc119'
+23:05:56 SELECT * FROM AccountCharacter WHERE Id='ngoc119'
+23:05:56 WZ_CreateCharacter 'ngoc119', '12345ujh', '0'
+23:05:56 UPDATE AccountCharacter SET GameID3='12345ujh' WHERE Id='ngoc119'
+23:05:56 INSERT INTO SCFS5Quest (AccountID, Name) VALUES ('ngoc119','12345ujh')
+23:06:04 DELETE FROM MuOnline.dbo.SCFS5Quest WHERE Name = '12345ujh' and AccountID= 'ngoc119'
+23:06:04 DELETE FROM Character WHERE AccountID='ngoc119' AND Name='12345ujh'
+23:06:04 SELECT * FROM AccountCharacter WHERE Id='ngoc119'
+23:06:04 UPDATE AccountCharacter SET GameID3=NULL WHERE Id='ngoc119'
+23:06:15 SELECT * FROM AccountCharacter WHERE Id='ngoc119'
+23:06:15 WZ_CreateCharacter 'ngoc119', '565j', '16'
+23:06:15 UPDATE AccountCharacter SET GameID3='565j' WHERE Id='ngoc119'
+23:06:15 INSERT INTO SCFS5Quest (AccountID, Name) VALUES ('ngoc119','565j')
+23:06:23 DELETE FROM MuOnline.dbo.SCFS5Quest WHERE Name = '565j' and AccountID= 'ngoc119'
+23:06:23 DELETE FROM Character WHERE AccountID='ngoc119' AND Name='565j'
+23:06:23 SELECT * FROM AccountCharacter WHERE Id='ngoc119'
+23:06:23 UPDATE AccountCharacter SET GameID3=NULL WHERE Id='ngoc119'
+23:07:53 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='Yoyo' AND AccountID='ngoc119'
+23:07:53 SELECT Inventory from Character where Name='Yoyo'
+23:07:53 SELECT MagicList from Character where Name='Yoyo'
+23:07:53 SELECT Quest from Character where Name='Yoyo'
+23:07:53 UPDATE AccountCharacter SET GameIDC='Yoyo' WHERE Id='ngoc119'
+23:07:53 SELECT * FROM OptionData WHERE Name='Yoyo'
+23:07:53 SELECT SkillKey from OptionData where Name='Yoyo'
+23:07:53 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'Yoyo'
+23:07:53 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'Yoyo'
+23:07:53 SELECT Name FROM MuOnline.dbo.Character WHERE Name = 'Yoyo' and AccountID = 'ngoc119'
+23:07:53 SELECT SCFMasterSkill FROM MuOnline.dbo.Character where Name = 'Yoyo' and AccountID = 'ngoc119'
+23:07:53 SELECT Data FROM MuOnline.dbo.OfficialHelper where Name = 'Yoyo'
+23:07:53 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'Yoyo' and AccountID = 'ngoc119'
+23:07:53 [WzExDB] [ExDB][Guild Member Info Request] Member [Yoyo].
+23:07:53 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='Yoyo'
+23:07:53 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+23:07:53 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'Yoyo' and AccountID = 'ngoc119'
+23:07:53 [WzExDB] [ExDB][Friend List Request] Name[Yoyo].
+23:07:53 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'Yoyo'
+23:07:53 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 15
+23:07:53 [WzExDB] [ExDB][Friend List Send] Name[Yoyo].
+23:07:53 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+23:07:53 SELECT FriendName FROM T_WaitFriend where GUID=15
+[WzExDB] [ExDB][Mail List Request] Name[Yoyo].
+23:07:53 [WzExDB] [ExDB][Mail List Send] Name[Yoyo].
+23:07:53 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=15
+23:07:53 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+23:08:07 EXEC WZ_GetItemSerial
+23:08:07 EXEC WZ_GetItemSerial
+23:08:09 EXEC WZ_GetItemSerial
+23:08:11 EXEC WZ_GetItemSerial
+23:08:12 EXEC WZ_GetItemSerial
+23:08:14 EXEC WZ_GetItemSerial
+23:08:23 EXEC WZ_GetItemSerial
+23:09:20 EXEC WZ_GetItemSerial
+23:09:28 EXEC WZ_GetItemSerial
+23:09:31 EXEC WZ_GetItemSerial
+23:09:34 EXEC WZ_GetItemSerial
+23:09:36 EXEC WZ_GetItemSerial
+23:09:37 EXEC WZ_GetItemSerial
+23:09:40 EXEC WZ_GetItemSerial
+23:09:43 EXEC WZ_GetItemSerial
+23:09:46 EXEC WZ_GetItemSerial
+23:09:53 EXEC WZ_GetItemSerial
+23:09:55 EXEC WZ_GetItemSerial
+23:10:02 EXEC WZ_GetItemSerial
+23:10:09 EXEC WZ_GetItemSerial
+23:10:13 EXEC WZ_GetItemSerial
+23:10:15 EXEC WZ_GetItemSerial
+23:10:45 EXEC WZ_GetItemSerial
+23:10:47 EXEC WZ_GetItemSerial
+23:10:47 EXEC WZ_GetItemSerial
+23:10:53 EXEC WZ_GetItemSerial
+23:10:59 EXEC WZ_GetItemSerial
+23:11:01 EXEC WZ_GetItemSerial
+23:11:09 EXEC WZ_GetItemSerial
+23:11:14 EXEC WZ_GetItemSerial
+23:11:23 EXEC WZ_GetItemSerial
+23:11:28 EXEC WZ_GetItemSerial
+23:11:47 EXEC WZ_GetItemSerial
+23:11:59 EXEC WZ_GetItemSerial
+23:12:04 EXEC WZ_GetItemSerial
+23:12:05 EXEC WZ_GetItemSerial
+23:12:09 EXEC WZ_GetItemSerial
+23:12:17 EXEC WZ_GetItemSerial
+23:12:17 EXEC WZ_GetItemSerial
+23:12:17 EXEC WZ_GetItemSerial
+23:12:17 EXEC WZ_GetItemSerial
+23:12:18 EXEC WZ_GetItemSerial
+23:12:21 EXEC WZ_GetItemSerial
+23:12:22 EXEC WZ_GetItemSerial
+23:12:47 EXEC WZ_GetItemSerial
+23:12:53 EXEC WZ_GetItemSerial
+23:12:53 EXEC WZ_GetItemSerial
+23:12:55 EXEC WZ_GetItemSerial
+23:12:59 EXEC WZ_GetItemSerial
+23:13:00 EXEC WZ_GetItemSerial
+23:13:02 EXEC WZ_GetItemSerial
+23:13:17 EXEC WZ_GetItemSerial
+23:13:25 EXEC WZ_GetItemSerial
+23:13:27 EXEC WZ_GetItemSerial
+23:13:32 EXEC WZ_GetItemSerial
+23:13:34 EXEC WZ_GetItemSerial
+23:13:37 EXEC WZ_GetItemSerial
+23:13:42 EXEC WZ_GetItemSerial
+23:13:46 EXEC WZ_GetItemSerial
+23:13:47 EXEC WZ_GetItemSerial
+23:13:53 EXEC WZ_GetItemSerial
+23:13:59 EXEC WZ_GetItemSerial
+23:14:03 EXEC WZ_GetItemSerial
+23:14:10 EXEC WZ_GetItemSerial
+23:14:20 EXEC WZ_GetItemSerial
+23:14:23 EXEC WZ_GetItemSerial
+23:14:35 EXEC WZ_GetItemSerial
+23:14:35 EXEC WZ_GetItemSerial
+23:14:48 EXEC WZ_GetItemSerial
+23:14:58 EXEC WZ_GetItemSerial
+23:14:58 EXEC WZ_GetItemSerial
+23:15:11 EXEC WZ_GetItemSerial
+23:15:13 EXEC WZ_GetItemSerial
+23:15:15 EXEC WZ_GetItemSerial
+23:15:16 EXEC WZ_GetItemSerial
+23:15:18 EXEC WZ_GetItemSerial
+23:15:19 EXEC WZ_GetItemSerial
+23:15:34 EXEC WZ_GetItemSerial
+23:15:34 UPDATE Character SET cLevel=398,Class=2,LevelUpPoint=0, Experience=443398572, Strength=18000, Dexterity=18000, Vitality=15000, Energy=30000, Money=379340764, Life=16350, MaxLife=42126, Mana=26260, MaxMana=18116, MapNumber=34, MapPosX=195, MapPosY=82, MapDir=7, PkCount=0, PkLevel=3, PkTime=696694, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:15:34 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:15:35 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:15:35 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:15:43 EXEC WZ_GetItemSerial
+23:15:45 EXEC WZ_GetItemSerial
+23:16:03 EXEC WZ_GetItemSerial
+23:16:03 EXEC WZ_GetItemSerial
+23:16:13 EXEC WZ_GetItemSerial
+23:16:19 EXEC WZ_GetItemSerial
+23:16:34 EXEC WZ_GetItemSerial
+23:16:34 EXEC WZ_GetItemSerial
+23:16:38 EXEC WZ_GetItemSerial
+23:16:43 EXEC WZ_GetItemSerial
+23:16:45 EXEC WZ_GetItemSerial
+23:16:52 EXEC WZ_GetItemSerial
+23:17:17 EXEC WZ_GetItemSerial
+23:17:17 EXEC WZ_GetItemSerial
+23:17:20 EXEC WZ_GetItemSerial
+23:17:21 EXEC WZ_GetItemSerial
+23:17:21 EXEC WZ_GetItemSerial
+23:17:26 EXEC WZ_GetItemSerial
+23:17:32 EXEC WZ_GetItemSerial
+23:17:42 EXEC WZ_GetItemSerial
+23:17:44 EXEC WZ_GetItemSerial
+23:17:44 EXEC WZ_GetItemSerial
+23:17:54 EXEC WZ_GetItemSerial
+23:17:57 EXEC WZ_GetItemSerial
+23:17:58 EXEC WZ_GetItemSerial
+23:18:00 EXEC WZ_GetItemSerial
+23:18:10 EXEC WZ_GetItemSerial
+23:18:11 EXEC WZ_GetItemSerial
+23:18:11 EXEC WZ_GetItemSerial
+23:18:14 EXEC WZ_GetItemSerial
+23:18:25 EXEC WZ_GetItemSerial
+23:18:28 EXEC WZ_GetItemSerial
+23:18:28 EXEC WZ_GetItemSerial
+23:18:39 EXEC WZ_GetItemSerial
+23:18:41 EXEC WZ_GetItemSerial
+23:18:45 EXEC WZ_GetItemSerial
+23:18:47 EXEC WZ_GetItemSerial
+23:18:52 EXEC WZ_GetItemSerial
+23:18:58 EXEC WZ_GetItemSerial
+23:19:01 EXEC WZ_GetItemSerial
+23:19:02 EXEC WZ_GetItemSerial
+23:19:05 EXEC WZ_GetItemSerial
+23:19:06 EXEC WZ_GetItemSerial
+23:19:07 EXEC WZ_GetItemSerial
+23:19:12 EXEC WZ_GetItemSerial
+23:19:12 EXEC WZ_GetItemSerial
+23:19:19 EXEC WZ_GetItemSerial
+23:19:27 EXEC WZ_GetItemSerial
+23:19:30 EXEC WZ_GetItemSerial
+23:19:34 EXEC WZ_GetItemSerial
+23:19:38 EXEC WZ_GetItemSerial
+23:19:51 EXEC WZ_GetItemSerial
+23:19:51 EXEC WZ_GetItemSerial
+23:19:56 EXEC WZ_GetItemSerial
+23:19:59 EXEC WZ_GetItemSerial
+23:20:06 EXEC WZ_GetItemSerial
+23:20:10 EXEC WZ_GetItemSerial
+23:20:14 EXEC WZ_GetItemSerial
+23:20:16 EXEC WZ_GetItemSerial
+23:20:16 EXEC WZ_GetItemSerial
+23:20:23 EXEC WZ_GetItemSerial
+23:20:23 EXEC WZ_GetItemSerial
+23:20:29 EXEC WZ_GetItemSerial
+23:20:31 EXEC WZ_GetItemSerial
+23:20:41 EXEC WZ_GetItemSerial
+23:20:41 EXEC WZ_GetItemSerial
+23:20:45 EXEC WZ_GetItemSerial
+23:20:59 EXEC WZ_GetItemSerial
+23:20:59 EXEC WZ_GetItemSerial
+23:21:00 EXEC WZ_GetItemSerial
+23:21:01 EXEC WZ_GetItemSerial
+23:21:05 EXEC WZ_GetItemSerial
+23:21:05 EXEC WZ_GetItemSerial
+23:21:06 EXEC WZ_GetItemSerial
+23:21:12 EXEC WZ_GetItemSerial
+23:21:13 EXEC WZ_GetItemSerial
+23:21:14 EXEC WZ_GetItemSerial
+23:21:15 EXEC WZ_GetItemSerial
+23:21:21 EXEC WZ_GetItemSerial
+23:21:27 EXEC WZ_GetItemSerial
+23:21:29 EXEC WZ_GetItemSerial
+23:21:35 EXEC WZ_GetItemSerial
+23:21:38 EXEC WZ_GetItemSerial
+23:21:44 EXEC WZ_GetItemSerial
+23:21:47 EXEC WZ_GetItemSerial
+23:21:54 EXEC WZ_GetItemSerial
+23:22:13 EXEC WZ_GetItemSerial
+23:22:23 EXEC WZ_GetItemSerial
+23:22:29 EXEC WZ_GetItemSerial
+23:22:57 EXEC WZ_GetItemSerial
+23:23:00 EXEC WZ_GetItemSerial
+23:23:06 EXEC WZ_GetItemSerial
+23:23:18 EXEC WZ_GetItemSerial
+23:23:25 EXEC WZ_GetItemSerial
+23:23:28 EXEC WZ_GetItemSerial
+23:23:29 EXEC WZ_GetItemSerial
+23:23:40 EXEC WZ_GetItemSerial
+23:23:40 EXEC WZ_GetItemSerial
+23:23:47 EXEC WZ_GetItemSerial
+23:23:55 EXEC WZ_GetItemSerial
+23:23:58 EXEC WZ_GetItemSerial
+23:24:04 EXEC WZ_GetItemSerial
+23:24:06 EXEC WZ_GetItemSerial
+23:24:09 EXEC WZ_GetItemSerial
+23:24:09 EXEC WZ_GetItemSerial
+23:24:12 EXEC WZ_GetItemSerial
+23:24:14 EXEC WZ_GetItemSerial
+23:24:25 EXEC WZ_GetItemSerial
+23:24:26 EXEC WZ_GetItemSerial
+23:24:30 EXEC WZ_GetItemSerial
+23:24:30 EXEC WZ_GetItemSerial
+23:24:33 EXEC WZ_GetItemSerial
+23:24:38 EXEC WZ_GetItemSerial
+23:24:43 EXEC WZ_GetItemSerial
+23:24:49 EXEC WZ_GetItemSerial
+23:24:53 EXEC WZ_GetItemSerial
+23:24:55 EXEC WZ_GetItemSerial
+23:25:06 EXEC WZ_GetItemSerial
+23:25:06 EXEC WZ_GetItemSerial
+23:25:11 EXEC WZ_GetItemSerial
+23:25:13 EXEC WZ_GetItemSerial
+23:25:23 EXEC WZ_GetItemSerial
+23:25:24 EXEC WZ_GetItemSerial
+23:25:26 EXEC WZ_GetItemSerial
+23:25:35 UPDATE Character SET cLevel=398,Class=2,LevelUpPoint=0, Experience=706921865, Strength=18000, Dexterity=18000, Vitality=15000, Energy=30000, Money=605446835, Life=16270, MaxLife=42126, Mana=28960, MaxMana=18116, MapNumber=34, MapPosX=198, MapPosY=86, MapDir=2, PkCount=0, PkLevel=3, PkTime=697295, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:25:35 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:25:35 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:25:35 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:25:42 EXEC WZ_GetItemSerial
+23:25:42 EXEC WZ_GetItemSerial
+23:25:42 EXEC WZ_GetItemSerial
+23:25:45 EXEC WZ_GetItemSerial
+23:25:48 EXEC WZ_GetItemSerial
+23:25:56 EXEC WZ_GetItemSerial
+23:25:57 EXEC WZ_GetItemSerial
+23:26:02 EXEC WZ_GetItemSerial
+23:26:03 EXEC WZ_GetItemSerial
+23:26:03 EXEC WZ_GetItemSerial
+23:26:04 EXEC WZ_GetItemSerial
+23:26:05 EXEC WZ_GetItemSerial
+23:26:12 EXEC WZ_GetItemSerial
+23:26:17 EXEC WZ_GetItemSerial
+23:26:19 EXEC WZ_GetItemSerial
+23:26:29 EXEC WZ_GetItemSerial
+23:26:37 EXEC WZ_GetItemSerial
+23:26:40 EXEC WZ_GetItemSerial
+23:26:46 EXEC WZ_GetItemSerial
+23:26:47 EXEC WZ_GetItemSerial
+23:26:50 EXEC WZ_GetItemSerial
+23:27:08 EXEC WZ_GetItemSerial
+23:27:08 EXEC WZ_GetItemSerial
+23:27:14 EXEC WZ_GetItemSerial
+23:27:26 EXEC WZ_GetItemSerial
+23:27:26 EXEC WZ_GetItemSerial
+23:27:46 EXEC WZ_GetItemSerial
+23:27:46 EXEC WZ_GetItemSerial
+23:27:49 EXEC WZ_GetItemSerial
+23:27:53 EXEC WZ_GetItemSerial
+23:27:57 EXEC WZ_GetItemSerial
+23:27:58 EXEC WZ_GetItemSerial
+23:27:59 EXEC WZ_GetItemSerial
+23:28:00 EXEC WZ_GetItemSerial
+23:28:12 EXEC WZ_GetItemSerial
+23:28:23 EXEC WZ_GetItemSerial
+23:28:29 EXEC WZ_GetItemSerial
+23:28:34 EXEC WZ_GetItemSerial
+23:28:35 EXEC WZ_GetItemSerial
+23:28:44 EXEC WZ_GetItemSerial
+23:28:44 EXEC WZ_GetItemSerial
+23:28:47 EXEC WZ_GetItemSerial
+23:28:49 EXEC WZ_GetItemSerial
+23:28:56 EXEC WZ_GetItemSerial
+23:29:01 EXEC WZ_GetItemSerial
+23:29:02 EXEC WZ_GetItemSerial
+23:29:02 EXEC WZ_GetItemSerial
+23:29:03 EXEC WZ_GetItemSerial
+23:29:18 EXEC WZ_GetItemSerial
+23:29:26 EXEC WZ_GetItemSerial
+23:29:27 EXEC WZ_GetItemSerial
+23:29:27 EXEC WZ_GetItemSerial
+23:29:31 EXEC WZ_GetItemSerial
+23:29:32 EXEC WZ_GetItemSerial
+23:29:40 EXEC WZ_GetItemSerial
+23:29:41 EXEC WZ_GetItemSerial
+23:29:47 EXEC WZ_GetItemSerial
+23:29:48 EXEC WZ_GetItemSerial
+23:29:55 EXEC WZ_GetItemSerial
+23:30:02 EXEC WZ_GetItemSerial
+23:30:05 EXEC WZ_GetItemSerial
+23:30:11 EXEC WZ_GetItemSerial
+23:30:11 EXEC WZ_GetItemSerial
+23:30:24 EXEC WZ_GetItemSerial
+23:30:29 EXEC WZ_GetItemSerial
+23:30:30 EXEC WZ_GetItemSerial
+23:30:34 EXEC WZ_GetItemSerial
+23:30:39 EXEC WZ_GetItemSerial
+23:30:46 EXEC WZ_GetItemSerial
+23:30:52 EXEC WZ_GetItemSerial
+23:30:53 EXEC WZ_GetItemSerial
+23:31:07 EXEC WZ_GetItemSerial
+23:31:07 EXEC WZ_GetItemSerial
+23:31:20 EXEC WZ_GetItemSerial
+23:31:21 EXEC WZ_GetItemSerial
+23:31:21 EXEC WZ_GetItemSerial
+23:31:27 EXEC WZ_GetItemSerial
+23:31:35 EXEC WZ_GetItemSerial
+23:31:36 EXEC WZ_GetItemSerial
+23:31:36 EXEC WZ_GetItemSerial
+23:31:36 EXEC WZ_GetItemSerial
+23:31:40 EXEC WZ_GetItemSerial
+23:31:50 EXEC WZ_GetItemSerial
+23:31:53 EXEC WZ_GetItemSerial
+23:32:05 EXEC WZ_GetItemSerial
+23:32:16 EXEC WZ_GetItemSerial
+23:32:17 EXEC WZ_GetItemSerial
+23:32:20 EXEC WZ_GetItemSerial
+23:32:20 EXEC WZ_GetItemSerial
+23:32:34 EXEC WZ_GetItemSerial
+23:32:37 EXEC WZ_GetItemSerial
+23:32:38 EXEC WZ_GetItemSerial
+23:32:51 EXEC WZ_GetItemSerial
+23:32:53 EXEC WZ_GetItemSerial
+23:32:55 EXEC WZ_GetItemSerial
+23:32:55 EXEC WZ_GetItemSerial
+23:33:01 EXEC WZ_GetItemSerial
+23:33:07 EXEC WZ_GetItemSerial
+23:33:07 EXEC WZ_GetItemSerial
+23:33:09 EXEC WZ_GetItemSerial
+23:33:16 EXEC WZ_GetItemSerial
+23:33:18 EXEC WZ_GetItemSerial
+23:33:21 EXEC WZ_GetItemSerial
+23:33:22 EXEC WZ_GetItemSerial
+23:33:26 EXEC WZ_GetItemSerial
+23:33:28 EXEC WZ_GetItemSerial
+23:33:29 EXEC WZ_GetItemSerial
+23:33:40 EXEC WZ_GetItemSerial
+23:33:41 EXEC WZ_GetItemSerial
+23:33:43 EXEC WZ_GetItemSerial
+23:33:45 EXEC WZ_GetItemSerial
+23:33:53 EXEC WZ_GetItemSerial
+23:33:56 EXEC WZ_GetItemSerial
+23:34:05 EXEC WZ_GetItemSerial
+23:34:11 EXEC WZ_GetItemSerial
+23:34:18 EXEC WZ_GetItemSerial
+23:34:22 EXEC WZ_GetItemSerial
+23:34:22 EXEC WZ_GetItemSerial
+23:34:26 EXEC WZ_GetItemSerial
+23:34:32 EXEC WZ_GetItemSerial
+23:34:36 EXEC WZ_GetItemSerial
+23:34:38 EXEC WZ_GetItemSerial
+23:34:38 EXEC WZ_GetItemSerial
+23:34:40 EXEC WZ_GetItemSerial
+23:34:45 EXEC WZ_GetItemSerial
+23:34:47 EXEC WZ_GetItemSerial
+23:34:48 EXEC WZ_GetItemSerial
+23:34:52 EXEC WZ_GetItemSerial
+23:35:01 EXEC WZ_GetItemSerial
+23:35:09 EXEC WZ_GetItemSerial
+23:35:12 EXEC WZ_GetItemSerial
+23:35:16 EXEC WZ_GetItemSerial
+23:35:16 EXEC WZ_GetItemSerial
+23:35:24 EXEC WZ_GetItemSerial
+23:35:27 EXEC WZ_GetItemSerial
+23:35:27 EXEC WZ_GetItemSerial
+23:35:30 EXEC WZ_GetItemSerial
+23:35:32 EXEC WZ_GetItemSerial
+23:35:33 EXEC WZ_GetItemSerial
+23:35:35 UPDATE Character SET cLevel=398,Class=2,LevelUpPoint=0, Experience=974016660, Strength=18000, Dexterity=18000, Vitality=15000, Energy=30000, Money=840734574, Life=16350, MaxLife=42126, Mana=28960, MaxMana=18116, MapNumber=34, MapPosX=198, MapPosY=86, MapDir=0, PkCount=0, PkLevel=3, PkTime=697895, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:35:35 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:35:35 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:35:35 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:35:38 EXEC WZ_GetItemSerial
+23:35:52 EXEC WZ_GetItemSerial
+23:36:03 EXEC WZ_GetItemSerial
+23:36:11 EXEC WZ_GetItemSerial
+23:36:11 EXEC WZ_GetItemSerial
+23:36:18 EXEC WZ_GetItemSerial
+23:36:32 EXEC WZ_GetItemSerial
+23:36:46 EXEC WZ_GetItemSerial
+23:36:50 EXEC WZ_GetItemSerial
+23:36:56 EXEC WZ_GetItemSerial
+23:37:09 EXEC WZ_GetItemSerial
+23:37:10 EXEC WZ_GetItemSerial
+23:37:14 EXEC WZ_GetItemSerial
+23:37:14 EXEC WZ_GetItemSerial
+23:37:17 EXEC WZ_GetItemSerial
+23:37:29 EXEC WZ_GetItemSerial
+23:37:33 EXEC WZ_GetItemSerial
+23:37:33 EXEC WZ_GetItemSerial
+23:37:34 EXEC WZ_GetItemSerial
+23:37:45 EXEC WZ_GetItemSerial
+23:37:50 EXEC WZ_GetItemSerial
+23:37:59 EXEC WZ_GetItemSerial
+23:37:59 EXEC WZ_GetItemSerial
+23:37:59 EXEC WZ_GetItemSerial
+23:38:07 EXEC WZ_GetItemSerial
+23:38:07 EXEC WZ_GetItemSerial
+23:38:10 EXEC WZ_GetItemSerial
+23:38:12 EXEC WZ_GetItemSerial
+23:38:14 EXEC WZ_GetItemSerial
+23:38:18 EXEC WZ_GetItemSerial
+23:38:19 EXEC WZ_GetItemSerial
+23:38:35 EXEC WZ_GetItemSerial
+23:38:35 EXEC WZ_GetItemSerial
+23:38:45 EXEC WZ_GetItemSerial
+23:38:50 EXEC WZ_GetItemSerial
+23:38:51 EXEC WZ_GetItemSerial
+23:38:52 EXEC WZ_GetItemSerial
+23:38:58 EXEC WZ_GetItemSerial
+23:39:03 EXEC WZ_GetItemSerial
+23:39:03 EXEC WZ_GetItemSerial
+23:39:04 EXEC WZ_GetItemSerial
+23:39:04 EXEC WZ_GetItemSerial
+23:39:04 EXEC WZ_GetItemSerial
+23:39:05 EXEC WZ_GetItemSerial
+23:39:05 EXEC WZ_GetItemSerial
+23:39:15 EXEC WZ_GetItemSerial
+23:39:15 EXEC WZ_GetItemSerial
+23:39:19 EXEC WZ_GetItemSerial
+23:39:19 EXEC WZ_GetItemSerial
+23:39:20 EXEC WZ_GetItemSerial
+23:39:21 EXEC WZ_GetItemSerial
+23:39:22 EXEC WZ_GetItemSerial
+23:39:33 EXEC WZ_GetItemSerial
+23:39:34 EXEC WZ_GetItemSerial
+23:39:37 EXEC WZ_GetItemSerial
+23:39:56 EXEC WZ_GetItemSerial
+23:39:56 EXEC WZ_GetItemSerial
+23:40:19 EXEC WZ_GetItemSerial
+23:40:20 EXEC WZ_GetItemSerial
+23:40:34 EXEC WZ_GetItemSerial
+23:40:38 EXEC WZ_GetItemSerial
+23:40:38 EXEC WZ_GetItemSerial
+23:40:39 EXEC WZ_GetItemSerial
+23:40:51 EXEC WZ_GetItemSerial
+23:40:52 EXEC WZ_GetItemSerial
+23:40:52 EXEC WZ_GetItemSerial
+23:40:57 EXEC WZ_GetItemSerial
+23:40:58 EXEC WZ_GetItemSerial
+23:41:07 EXEC WZ_GetItemSerial
+23:41:08 EXEC WZ_GetItemSerial
+23:41:23 EXEC WZ_GetItemSerial
+23:41:23 EXEC WZ_GetItemSerial
+23:41:26 EXEC WZ_GetItemSerial
+23:41:27 EXEC WZ_GetItemSerial
+23:41:30 EXEC WZ_GetItemSerial
+23:41:42 EXEC WZ_GetItemSerial
+23:41:48 EXEC WZ_GetItemSerial
+23:41:58 EXEC WZ_GetItemSerial
+23:41:59 EXEC WZ_GetItemSerial
+23:41:59 EXEC WZ_GetItemSerial
+23:42:06 EXEC WZ_GetItemSerial
+23:42:06 EXEC WZ_GetItemSerial
+23:42:14 EXEC WZ_GetItemSerial
+23:42:20 EXEC WZ_GetItemSerial
+23:42:33 EXEC WZ_GetItemSerial
+23:42:54 EXEC WZ_GetItemSerial
+23:43:06 EXEC WZ_GetItemSerial
+23:43:08 EXEC WZ_GetItemSerial
+23:43:08 EXEC WZ_GetItemSerial
+23:43:09 EXEC WZ_GetItemSerial
+23:43:09 EXEC WZ_GetItemSerial
+23:43:10 EXEC WZ_GetItemSerial
+23:43:26 EXEC WZ_GetItemSerial
+23:43:27 EXEC WZ_GetItemSerial
+23:43:39 EXEC WZ_GetItemSerial
+23:43:39 EXEC WZ_GetItemSerial
+23:43:46 EXEC WZ_GetItemSerial
+23:43:46 EXEC WZ_GetItemSerial
+23:43:54 EXEC WZ_GetItemSerial
+23:44:07 EXEC WZ_GetItemSerial
+23:44:20 EXEC WZ_GetItemSerial
+23:44:24 EXEC WZ_GetItemSerial
+23:44:25 EXEC WZ_GetItemSerial
+23:44:32 EXEC WZ_GetItemSerial
+23:44:41 EXEC WZ_GetItemSerial
+23:44:43 EXEC WZ_GetItemSerial
+23:44:48 EXEC WZ_GetItemSerial
+23:44:49 EXEC WZ_GetItemSerial
+23:44:55 EXEC WZ_GetItemSerial
+23:44:59 EXEC WZ_GetItemSerial
+23:45:15 EXEC WZ_GetItemSerial
+23:45:17 EXEC WZ_GetItemSerial
+23:45:20 EXEC WZ_GetItemSerial
+23:45:29 EXEC WZ_GetItemSerial
+23:45:32 EXEC WZ_GetItemSerial
+23:45:33 EXEC WZ_GetItemSerial
+23:45:35 UPDATE Character SET cLevel=398,Class=2,LevelUpPoint=0, Experience=1238878185, Strength=18000, Dexterity=18000, Vitality=15000, Energy=30000, Money=1054032943, Life=16290, MaxLife=42126, Mana=22660, MaxMana=18116, MapNumber=34, MapPosX=191, MapPosY=82, MapDir=1, PkCount=0, PkLevel=3, PkTime=698495, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:45:35 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:45:35 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:45:35 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:45:45 EXEC WZ_GetItemSerial
+23:45:45 EXEC WZ_GetItemSerial
+23:45:46 EXEC WZ_GetItemSerial
+23:45:48 EXEC WZ_GetItemSerial
+23:45:49 EXEC WZ_GetItemSerial
+23:46:15 EXEC WZ_GetItemSerial
+23:46:25 EXEC WZ_GetItemSerial
+23:46:29 EXEC WZ_GetItemSerial
+23:46:41 EXEC WZ_GetItemSerial
+23:46:59 EXEC WZ_GetItemSerial
+23:47:05 EXEC WZ_GetItemSerial
+23:47:11 EXEC WZ_GetItemSerial
+23:47:24 EXEC WZ_GetItemSerial
+23:47:30 EXEC WZ_GetItemSerial
+23:47:38 EXEC WZ_GetItemSerial
+23:47:57 EXEC WZ_GetItemSerial
+23:47:57 EXEC WZ_GetItemSerial
+23:48:05 EXEC WZ_GetItemSerial
+23:48:06 EXEC WZ_GetItemSerial
+23:48:21 EXEC WZ_GetItemSerial
+23:48:23 EXEC WZ_GetItemSerial
+23:48:58 EXEC WZ_GetItemSerial
+23:49:06 EXEC WZ_GetItemSerial
+23:49:07 EXEC WZ_GetItemSerial
+23:49:10 EXEC WZ_GetItemSerial
+23:49:20 EXEC WZ_GetItemSerial
+23:49:20 EXEC WZ_GetItemSerial
+23:49:21 EXEC WZ_GetItemSerial
+23:49:39 EXEC WZ_GetItemSerial
+23:49:44 EXEC WZ_GetItemSerial
+23:49:47 EXEC WZ_GetItemSerial
+23:49:50 EXEC WZ_GetItemSerial
+23:49:57 EXEC WZ_GetItemSerial
+23:49:58 EXEC WZ_GetItemSerial
+23:50:14 EXEC WZ_GetItemSerial
+23:50:16 EXEC WZ_GetItemSerial
+23:50:22 EXEC WZ_GetItemSerial
+23:50:25 EXEC WZ_GetItemSerial
+23:50:29 EXEC WZ_GetItemSerial
+23:50:30 EXEC WZ_GetItemSerial
+23:50:44 EXEC WZ_GetItemSerial
+23:50:58 EXEC WZ_GetItemSerial
+23:51:01 EXEC WZ_GetItemSerial
+23:51:11 EXEC WZ_GetItemSerial
+23:51:21 EXEC WZ_GetItemSerial
+23:51:25 EXEC WZ_GetItemSerial
+23:51:26 EXEC WZ_GetItemSerial
+23:51:26 EXEC WZ_GetItemSerial
+23:51:34 EXEC WZ_GetItemSerial
+23:51:40 EXEC WZ_GetItemSerial
+23:51:51 EXEC WZ_GetItemSerial
+23:51:52 EXEC WZ_GetItemSerial
+23:52:14 EXEC WZ_GetItemSerial
+23:52:20 EXEC WZ_GetItemSerial
+23:52:22 EXEC WZ_GetItemSerial
+23:52:26 EXEC WZ_GetItemSerial
+23:52:30 EXEC WZ_GetItemSerial
+23:52:31 EXEC WZ_GetItemSerial
+23:52:43 EXEC WZ_GetItemSerial
+23:52:44 EXEC WZ_GetItemSerial
+23:52:44 EXEC WZ_GetItemSerial
+23:52:44 EXEC WZ_GetItemSerial
+23:52:45 EXEC WZ_GetItemSerial
+23:52:58 EXEC WZ_GetItemSerial
+23:53:01 EXEC WZ_GetItemSerial
+23:53:08 EXEC WZ_GetItemSerial
+23:53:14 EXEC WZ_GetItemSerial
+23:53:14 EXEC WZ_GetItemSerial
+23:53:15 EXEC WZ_GetItemSerial
+23:53:20 EXEC WZ_GetItemSerial
+23:53:29 EXEC WZ_GetItemSerial
+23:53:44 EXEC WZ_GetItemSerial
+23:53:45 EXEC WZ_GetItemSerial
+23:53:45 EXEC WZ_GetItemSerial
+23:53:57 EXEC WZ_GetItemSerial
+23:53:57 EXEC WZ_GetItemSerial
+23:54:00 EXEC WZ_GetItemSerial
+23:54:02 EXEC WZ_GetItemSerial
+23:54:02 EXEC WZ_GetItemSerial
+23:54:12 EXEC WZ_GetItemSerial
+23:54:21 EXEC WZ_GetItemSerial
+23:54:27 EXEC WZ_GetItemSerial
+23:54:27 EXEC WZ_GetItemSerial
+23:54:28 EXEC WZ_GetItemSerial
+23:54:36 EXEC WZ_GetItemSerial
+23:54:43 EXEC WZ_GetItemSerial
+23:54:43 EXEC WZ_GetItemSerial
+23:54:50 EXEC WZ_GetItemSerial
+23:54:57 EXEC WZ_GetItemSerial
+23:54:57 EXEC WZ_GetItemSerial
+23:54:57 EXEC WZ_GetItemSerial
+23:54:57 EXEC WZ_GetItemSerial
+23:54:59 EXEC WZ_GetItemSerial
+23:55:14 EXEC WZ_GetItemSerial
+23:55:14 EXEC WZ_GetItemSerial
+23:55:17 EXEC WZ_GetItemSerial
+23:55:27 EXEC WZ_GetItemSerial
+23:55:27 EXEC WZ_GetItemSerial
+23:55:27 EXEC WZ_GetItemSerial
+23:55:34 EXEC WZ_GetItemSerial
+23:55:36 UPDATE Character SET cLevel=398,Class=2,LevelUpPoint=0, Experience=1506291756, Strength=18000, Dexterity=18000, Vitality=15000, Energy=30000, Money=1257136205, Life=16350, MaxLife=42126, Mana=28960, MaxMana=18116, MapNumber=34, MapPosX=197, MapPosY=86, MapDir=4, PkCount=0, PkLevel=3, PkTime=699096, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:55:36 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:55:36 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:55:36 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:55:43 EXEC WZ_GetItemSerial
+23:55:52 EXEC WZ_GetItemSerial
+23:55:59 EXEC WZ_GetItemSerial
+23:56:02 EXEC WZ_GetItemSerial
+23:56:10 EXEC WZ_GetItemSerial
+23:56:13 EXEC WZ_GetItemSerial
+23:56:17 EXEC WZ_GetItemSerial
+23:56:20 EXEC WZ_GetItemSerial
+23:56:23 EXEC WZ_GetItemSerial
+23:56:27 EXEC WZ_GetItemSerial
+23:56:30 EXEC WZ_GetItemSerial
+23:56:31 EXEC WZ_GetItemSerial
+23:56:34 EXEC WZ_GetItemSerial
+23:56:41 EXEC WZ_GetItemSerial
+23:56:50 EXEC WZ_GetItemSerial
+23:57:04 EXEC WZ_GetItemSerial
+23:57:08 EXEC WZ_GetItemSerial
+23:57:16 EXEC WZ_GetItemSerial
+23:57:17 EXEC WZ_GetItemSerial
+23:57:18 EXEC WZ_GetItemSerial
+23:57:22 EXEC WZ_GetItemSerial
+23:57:27 EXEC WZ_GetItemSerial
+23:57:32 EXEC WZ_GetItemSerial
+23:57:33 EXEC WZ_GetItemSerial
+23:57:39 EXEC WZ_GetItemSerial
+23:57:46 EXEC WZ_GetItemSerial
+23:57:47 EXEC WZ_GetItemSerial
+23:57:48 EXEC WZ_GetItemSerial
+23:57:49 EXEC WZ_GetItemSerial
+23:58:07 EXEC WZ_GetItemSerial
+23:58:10 EXEC WZ_GetItemSerial
+23:58:12 EXEC WZ_GetItemSerial
+23:58:15 EXEC WZ_GetItemSerial
+23:58:31 EXEC WZ_GetItemSerial
+23:58:32 EXEC WZ_GetItemSerial
+23:58:34 EXEC WZ_GetItemSerial
+23:58:44 EXEC WZ_GetItemSerial
+23:58:45 EXEC WZ_GetItemSerial
+23:58:58 EXEC WZ_GetItemSerial
+23:58:58 EXEC WZ_GetItemSerial
+23:58:58 EXEC WZ_GetItemSerial
+23:59:01 EXEC WZ_GetItemSerial
+23:59:06 EXEC WZ_GetItemSerial
+23:59:12 EXEC WZ_GetItemSerial
+23:59:14 EXEC WZ_GetItemSerial
+23:59:18 EXEC WZ_GetItemSerial
+23:59:19 EXEC WZ_GetItemSerial
+23:59:22 EXEC WZ_GetItemSerial
+23:59:25 EXEC WZ_GetItemSerial
+23:59:25 EXEC WZ_GetItemSerial
+23:59:30 EXEC WZ_GetItemSerial
+23:59:45 EXEC WZ_GetItemSerial
+23:59:53 EXEC WZ_GetItemSerial
+23:59:58 EXEC WZ_GetItemSerial
+23:59:58 EXEC WZ_GetItemSerial
+00:00:13 EXEC WZ_GetItemSerial
+00:00:33 EXEC WZ_GetItemSerial
+00:00:37 EXEC WZ_GetItemSerial

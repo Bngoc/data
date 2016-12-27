@@ -1,0 +1,284 @@
+01:05:07  ..\Data\EventItemBags\BoxOfLuck.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\Deathking.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\GoldenTitan.txt Item Load Complete
+01:05:07  [StarOfXMas] Eventitemnum = 7179,EventItemLevel = 1, EventItemDropRate = 10, ItemDropRate = 50, ExItemDropRate = 700
+01:05:07  ..\Data\EventItemBags\StarOfXMas.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\FireCracker.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\HeartOfLove.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\GoldMedal.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\SilverMedal.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\BoxOfKundun_1.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\BoxOfKundun_2.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\BoxOfKundun_3.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\BoxOfKundun_4.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\BoxOfKundun_5.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\RingEvent.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\FriendShip.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\DarkLordHeart.txt Item Load Complete
+01:05:07  [KundunBossDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 70, ExItemDropRate = 600
+01:05:07  ..\Data\EventItemBags\Kundun.txt Item Load Complete
+01:05:07  [ErohimBossDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 70, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\Erohim.txt Item Load Complete
+01:05:07  [CastleDeepDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 10, ExItemDropRate = 200
+01:05:07  ..\Data\EventItemBags\CastleDeepBox.txt Item Load Complete
+01:05:07  [Castle Siege Mix] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\LordMix.txt Item Load Complete
+01:05:07  [Hiden Treasure Box] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 100, ExItemDropRate = 100
+01:05:07  ..\Data\EventItemBags\HiddenTreasureBox.txt Item Load Complete
+01:05:07  [RedRibbonBox] Eventitemnum = 6176,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:05:07  ..\Data\EventItemBags\RedRibbonBox.txt Item Load Complete
+01:05:07  [GreenRibbonBox] Eventitemnum = 6177,EventItemLevel = 0, EventItemDropRate = 50, ItemDropRate = 65, ExItemDropRate = 650
+01:05:07  ..\Data\EventItemBags\GreenRibbonBox.txt Item Load Complete
+01:05:07  [BlueRibbonBox] Eventitemnum = 6178,EventItemLevel = 0, EventItemDropRate = 30, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\BlueRibbonBox.txt Item Load Complete
+01:05:07  [PinkChocolateBox] Eventitemnum = 7200,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:05:07  ..\Data\EventItemBags\PinkChocolateBox.txt Item Load Complete
+01:05:07  [RedChocolateBox] Eventitemnum = 7201,EventItemLevel = 0, EventItemDropRate = 50, ItemDropRate = 65, ExItemDropRate = 650
+01:05:07  ..\Data\EventItemBags\RedChocolateBox.txt Item Load Complete
+01:05:07  [BlueChocolateBox] Eventitemnum = 7202,EventItemLevel = 0, EventItemDropRate = 30, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\BlueChocolateBox.txt Item Load Complete
+01:05:07  [LightPurpleBox] Eventitemnum = 7200,EventItemLevel = 1, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:05:07  ..\Data\EventItemBags\LightPurpleCandyBox.txt Item Load Complete
+01:05:07  [VermilionBox] Eventitemnum = 7201,EventItemLevel = 1, EventItemDropRate = 50, ItemDropRate = 65, ExItemDropRate = 650
+01:05:07  ..\Data\EventItemBags\VermilionCandyBox.txt Item Load Complete
+01:05:07  [DeepBlueBox] Eventitemnum = 7202,EventItemLevel = 1, EventItemDropRate = 30, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\DeepBlueCandyBox.txt Item Load Complete
+01:05:07  [DearkElfDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 900
+01:05:07  ..\Data\EventItemBags\CrywolfDarkElf.txt Item Load Complete
+01:05:07  [BalgassBossDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 70, ExItemDropRate = 700
+01:05:07  ..\Data\EventItemBags\CrywolfBossMonster.txt Item Load Complete
+01:05:07  [MayaHandDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 850
+01:05:07  ..\Data\EventItemBags\KanturuMayaHand.txt Item Load Complete
+01:05:07  [NightmareBossDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 70, ExItemDropRate = 700
+01:05:07  ..\Data\EventItemBags\KanturuNightmare.txt Item Load Complete
+01:05:07  [HalloweenPumpkin] Eventitemnum = 7213,EventItemLevel = 0, EventItemDropRate = 100, ItemDropRate = 80, ExItemDropRate = 0
+01:05:07  ..\Data\EventItemBags\HallowinDay.txt Item Load Complete
+01:05:07  [SalupanBossDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 90, ExItemDropRate = 700
+01:05:07  ..\Data\EventItemBags\Selupan.txt Item Load Complete
+01:05:07  [BlueEventMob] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 40, ExItemDropRate = 100
+01:05:07  ..\Data\EventItemBags\BlueEvent.txt Item Load Complete
+01:05:07  [BossAttackDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 40, ExItemDropRate = 200
+01:05:07  ..\Data\EventItemBags\BossAttack.txt Item Load Complete
+01:05:07  [GreenMysteryBox] Eventitemnum = 7223,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 50, ExItemDropRate = 500
+01:05:07  ..\Data\EventItemBags\GreenMysteryBox.txt Item Load Complete
+01:05:07  [RedMysteryBox] Eventitemnum = 7224,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 65, ExItemDropRate = 650
+01:05:07  ..\Data\EventItemBags\RedMysteryBox.txt Item Load Complete
+01:05:07  [PurpleMysteryBox] Eventitemnum = 7225,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\PurpleMysteryBox.txt Item Load Complete
+01:05:07  [CherryBlossomBox] Eventitemnum = 7252,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 65, ExItemDropRate = 650
+01:05:07  ..\Data\EventItemBags\CherryBlossomBox.txt Item Load Complete
+01:05:07  [GMBox] Eventitemnum = 7220,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 100, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\GMBox.txt Item Load Complete
+01:05:07  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\IGuardian_Karane(Sunday_Boss2).txt Item Load Complete
+01:05:07  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\IGuardian_SubJerent(Sunday_Boss1).txt Item Load Complete
+01:05:07  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\IGuardian_Deasuler(Monday).txt Item Load Complete
+01:05:07  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\IGuardian_Vermont(Tuesday).txt Item Load Complete
+01:05:07  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\IGuardian_Kato(Wednesday).txt Item Load Complete
+01:05:07  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\IGuardian_Gallia(Thuesday).txt Item Load Complete
+01:05:07  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\IGuardian_Sub_Commander(Friday).txt Item Load Complete
+01:05:07  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\IGuardian_Raymond(Saturday).txt Item Load Complete
+01:05:07  [DoubleGoerBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\DGoer_Terrible_Butcher(Boss).txt Item Load Complete
+01:05:07  [DoubleGoerBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\DGoer_Mad_Butcher(Boss).txt Item Load Complete
+01:05:07  [DoubleGoerBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\DGoer_Ice_Walker(Boss).txt Item Load Complete
+01:05:07  [DoubleGoerTreasure] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\DGoer_Treasure.txt Item Load Complete
+01:05:07  [FortunePouchtMob] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\FortunePouch.txt Item Load Complete
+01:05:07  [SantaMob] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 90, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\XMas_Santa.txt Item Load Complete
+01:05:07  [DoubleGoerTreasure] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\DGoer_SilverTreasure.txt Item Load Complete
+01:05:07  [Medusa] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 800, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\Medusa.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\Winning_Jewelry_Box_1.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\Winning_Jewelry_Box_2.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\Winning_Jewelry_Box_3.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\Winning_Jewelry_Box_4.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\Winning_Jewelry_Box_5.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\Winning_Jewelry_Box_6.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\Winning_Jewelry_Box_7.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\Winning_Jewelry_Box_8.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\Winning_Jewelry_Box_9.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\Winning_Jewelry_Box_10.txt Item Load Complete
+01:05:07  [ElegantJewerlyBox] Eventitemnum = 7200,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:05:07  ..\Data\EventItemBags\Elegant_Jewelry_Box.txt Item Load Complete
+01:05:07  [MetalJewerlyBox] Eventitemnum = 7200,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:05:07  ..\Data\EventItemBags\Metal_Jewelry_Box.txt Item Load Complete
+01:05:07  [OldJewerlyBox] Eventitemnum = 7200,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:05:07  ..\Data\EventItemBags\Old_Jewelry_Box.txt Item Load Complete
+01:05:07  [GoldBox] Eventitemnum = 7200,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:05:07  ..\Data\EventItemBags\Gold_Box.txt Item Load Complete
+01:05:07  [SilverBox] Eventitemnum = 7200,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:05:07  ..\Data\EventItemBags\Silver_Box.txt Item Load Complete
+01:05:07  [SummerEventMob] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 70, ExItemDropRate = 100
+01:05:07  ..\Data\EventItemBags\SummerEvent.txt Item Load Complete
+01:05:07  [HalloweenPK] Eventitemnum = 7213,EventItemLevel = 0, EventItemDropRate = 100, ItemDropRate = 800, ExItemDropRate = 0
+01:05:07  ..\Data\EventItemBags\HalloweenPKEvent.txt Item Load Complete
+01:05:07  [HellMainDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 70, ExItemDropRate = 700
+01:05:07  ..\Data\EventItemBags\HellMain.txt Item Load Complete
+01:05:07  ..\Data\EventItemBags\Illusion.txt Item Load Complete
+01:05:07  [GreenBox] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\GreenBox.txt Item Load Complete
+01:05:07  [RedBox] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\RedBox.txt Item Load Complete
+01:05:07  [PurpleBox] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:05:07  ..\Data\EventItemBags\PurpleBox.txt Item Load Complete
+01:05:07  [ImperialEvilStatue] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 90, ExItemDropRate = 0
+01:05:07  ..\Data\EventItemBags\IGuardian_Statue.txt Item Load Complete
+01:05:07  [CWPedestalReward] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 100, ExItemDropRate = 0
+01:05:07  ..\Data\EventItemBags\CrywolfPedestalReward.txt Item Load Complete
+01:05:07  [BlueEventMob] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 40, ExItemDropRate = 100
+01:05:07  ..\Data\EventItemBags\BlueEvent.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\BoxOfLuck.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\Deathking.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\GoldenTitan.txt Item Load Complete
+01:12:17  [StarOfXMas] Eventitemnum = 7179,EventItemLevel = 1, EventItemDropRate = 10, ItemDropRate = 50, ExItemDropRate = 700
+01:12:17  ..\Data\EventItemBags\StarOfXMas.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\FireCracker.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\HeartOfLove.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\GoldMedal.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\SilverMedal.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\BoxOfKundun_1.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\BoxOfKundun_2.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\BoxOfKundun_3.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\BoxOfKundun_4.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\BoxOfKundun_5.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\RingEvent.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\FriendShip.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\DarkLordHeart.txt Item Load Complete
+01:12:17  [KundunBossDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 70, ExItemDropRate = 600
+01:12:17  ..\Data\EventItemBags\Kundun.txt Item Load Complete
+01:12:17  [ErohimBossDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 70, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\Erohim.txt Item Load Complete
+01:12:17  [CastleDeepDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 10, ExItemDropRate = 200
+01:12:17  ..\Data\EventItemBags\CastleDeepBox.txt Item Load Complete
+01:12:17  [Castle Siege Mix] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\LordMix.txt Item Load Complete
+01:12:17  [Hiden Treasure Box] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 100, ExItemDropRate = 100
+01:12:17  ..\Data\EventItemBags\HiddenTreasureBox.txt Item Load Complete
+01:12:17  [RedRibbonBox] Eventitemnum = 6176,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:12:17  ..\Data\EventItemBags\RedRibbonBox.txt Item Load Complete
+01:12:17  [GreenRibbonBox] Eventitemnum = 6177,EventItemLevel = 0, EventItemDropRate = 50, ItemDropRate = 65, ExItemDropRate = 650
+01:12:17  ..\Data\EventItemBags\GreenRibbonBox.txt Item Load Complete
+01:12:17  [BlueRibbonBox] Eventitemnum = 6178,EventItemLevel = 0, EventItemDropRate = 30, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\BlueRibbonBox.txt Item Load Complete
+01:12:17  [PinkChocolateBox] Eventitemnum = 7200,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:12:17  ..\Data\EventItemBags\PinkChocolateBox.txt Item Load Complete
+01:12:17  [RedChocolateBox] Eventitemnum = 7201,EventItemLevel = 0, EventItemDropRate = 50, ItemDropRate = 65, ExItemDropRate = 650
+01:12:17  ..\Data\EventItemBags\RedChocolateBox.txt Item Load Complete
+01:12:17  [BlueChocolateBox] Eventitemnum = 7202,EventItemLevel = 0, EventItemDropRate = 30, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\BlueChocolateBox.txt Item Load Complete
+01:12:17  [LightPurpleBox] Eventitemnum = 7200,EventItemLevel = 1, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:12:17  ..\Data\EventItemBags\LightPurpleCandyBox.txt Item Load Complete
+01:12:17  [VermilionBox] Eventitemnum = 7201,EventItemLevel = 1, EventItemDropRate = 50, ItemDropRate = 65, ExItemDropRate = 650
+01:12:17  ..\Data\EventItemBags\VermilionCandyBox.txt Item Load Complete
+01:12:17  [DeepBlueBox] Eventitemnum = 7202,EventItemLevel = 1, EventItemDropRate = 30, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\DeepBlueCandyBox.txt Item Load Complete
+01:12:17  [DearkElfDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 900
+01:12:17  ..\Data\EventItemBags\CrywolfDarkElf.txt Item Load Complete
+01:12:17  [BalgassBossDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 70, ExItemDropRate = 700
+01:12:17  ..\Data\EventItemBags\CrywolfBossMonster.txt Item Load Complete
+01:12:17  [MayaHandDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 850
+01:12:17  ..\Data\EventItemBags\KanturuMayaHand.txt Item Load Complete
+01:12:17  [NightmareBossDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 70, ExItemDropRate = 700
+01:12:17  ..\Data\EventItemBags\KanturuNightmare.txt Item Load Complete
+01:12:17  [HalloweenPumpkin] Eventitemnum = 7213,EventItemLevel = 0, EventItemDropRate = 100, ItemDropRate = 80, ExItemDropRate = 0
+01:12:17  ..\Data\EventItemBags\HallowinDay.txt Item Load Complete
+01:12:17  [SalupanBossDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 90, ExItemDropRate = 700
+01:12:17  ..\Data\EventItemBags\Selupan.txt Item Load Complete
+01:12:17  [BlueEventMob] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 40, ExItemDropRate = 100
+01:12:17  ..\Data\EventItemBags\BlueEvent.txt Item Load Complete
+01:12:17  [BossAttackDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 40, ExItemDropRate = 200
+01:12:17  ..\Data\EventItemBags\BossAttack.txt Item Load Complete
+01:12:17  [GreenMysteryBox] Eventitemnum = 7223,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 50, ExItemDropRate = 500
+01:12:17  ..\Data\EventItemBags\GreenMysteryBox.txt Item Load Complete
+01:12:17  [RedMysteryBox] Eventitemnum = 7224,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 65, ExItemDropRate = 650
+01:12:17  ..\Data\EventItemBags\RedMysteryBox.txt Item Load Complete
+01:12:17  [PurpleMysteryBox] Eventitemnum = 7225,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\PurpleMysteryBox.txt Item Load Complete
+01:12:17  [CherryBlossomBox] Eventitemnum = 7252,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 65, ExItemDropRate = 650
+01:12:17  ..\Data\EventItemBags\CherryBlossomBox.txt Item Load Complete
+01:12:17  [GMBox] Eventitemnum = 7220,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 100, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\GMBox.txt Item Load Complete
+01:12:17  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\IGuardian_Karane(Sunday_Boss2).txt Item Load Complete
+01:12:17  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\IGuardian_SubJerent(Sunday_Boss1).txt Item Load Complete
+01:12:17  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\IGuardian_Deasuler(Monday).txt Item Load Complete
+01:12:17  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\IGuardian_Vermont(Tuesday).txt Item Load Complete
+01:12:17  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\IGuardian_Kato(Wednesday).txt Item Load Complete
+01:12:17  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\IGuardian_Gallia(Thuesday).txt Item Load Complete
+01:12:17  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\IGuardian_Sub_Commander(Friday).txt Item Load Complete
+01:12:17  [ImperialGuardianBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\IGuardian_Raymond(Saturday).txt Item Load Complete
+01:12:17  [DoubleGoerBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\DGoer_Terrible_Butcher(Boss).txt Item Load Complete
+01:12:17  [DoubleGoerBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\DGoer_Mad_Butcher(Boss).txt Item Load Complete
+01:12:17  [DoubleGoerBoss] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\DGoer_Ice_Walker(Boss).txt Item Load Complete
+01:12:17  [DoubleGoerTreasure] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\DGoer_Treasure.txt Item Load Complete
+01:12:17  [FortunePouchtMob] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\FortunePouch.txt Item Load Complete
+01:12:17  [SantaMob] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 90, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\XMas_Santa.txt Item Load Complete
+01:12:17  [DoubleGoerTreasure] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\DGoer_SilverTreasure.txt Item Load Complete
+01:12:17  [Medusa] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 800, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\Medusa.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\Winning_Jewelry_Box_1.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\Winning_Jewelry_Box_2.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\Winning_Jewelry_Box_3.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\Winning_Jewelry_Box_4.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\Winning_Jewelry_Box_5.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\Winning_Jewelry_Box_6.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\Winning_Jewelry_Box_7.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\Winning_Jewelry_Box_8.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\Winning_Jewelry_Box_9.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\Winning_Jewelry_Box_10.txt Item Load Complete
+01:12:17  [ElegantJewerlyBox] Eventitemnum = 7200,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:12:17  ..\Data\EventItemBags\Elegant_Jewelry_Box.txt Item Load Complete
+01:12:17  [MetalJewerlyBox] Eventitemnum = 7200,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:12:17  ..\Data\EventItemBags\Metal_Jewelry_Box.txt Item Load Complete
+01:12:17  [OldJewerlyBox] Eventitemnum = 7200,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:12:17  ..\Data\EventItemBags\Old_Jewelry_Box.txt Item Load Complete
+01:12:17  [GoldBox] Eventitemnum = 7200,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:12:17  ..\Data\EventItemBags\Gold_Box.txt Item Load Complete
+01:12:17  [SilverBox] Eventitemnum = 7200,EventItemLevel = 0, EventItemDropRate = 70, ItemDropRate = 50, ExItemDropRate = 500
+01:12:17  ..\Data\EventItemBags\Silver_Box.txt Item Load Complete
+01:12:17  [SummerEventMob] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 70, ExItemDropRate = 100
+01:12:17  ..\Data\EventItemBags\SummerEvent.txt Item Load Complete
+01:12:17  [HalloweenPK] Eventitemnum = 7213,EventItemLevel = 0, EventItemDropRate = 100, ItemDropRate = 800, ExItemDropRate = 0
+01:12:17  ..\Data\EventItemBags\HalloweenPKEvent.txt Item Load Complete
+01:12:17  [HellMainDrop] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 70, ExItemDropRate = 700
+01:12:17  ..\Data\EventItemBags\HellMain.txt Item Load Complete
+01:12:17  ..\Data\EventItemBags\Illusion.txt Item Load Complete
+01:12:17  [GreenBox] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\GreenBox.txt Item Load Complete
+01:12:17  [RedBox] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\RedBox.txt Item Load Complete
+01:12:17  [PurpleBox] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 80, ExItemDropRate = 800
+01:12:17  ..\Data\EventItemBags\PurpleBox.txt Item Load Complete
+01:12:17  [ImperialEvilStatue] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 90, ExItemDropRate = 0
+01:12:17  ..\Data\EventItemBags\IGuardian_Statue.txt Item Load Complete
+01:12:17  [CWPedestalReward] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 100, ExItemDropRate = 0
+01:12:17  ..\Data\EventItemBags\CrywolfPedestalReward.txt Item Load Complete
+01:12:17  [BlueEventMob] Eventitemnum = 0,EventItemLevel = 0, EventItemDropRate = 0, ItemDropRate = 40, ExItemDropRate = 100
+01:12:17  ..\Data\EventItemBags\BlueEvent.txt Item Load Complete

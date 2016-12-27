@@ -1,0 +1,63 @@
+Initialized log instance
+Initializing Servers...
+[AllowList] Loaded Successfull!
+[DataServer1] Initializing database connection
+[DataServer1] [DB] Connection Successfull!
+[DataServer1] Connected to MuOnline@MuOnline database
+[DataServer1] Initialized database connection
+[DataServer1] Initializing IOCP system connection
+[DataServer1] Server Listen OK. Port: 55960
+[DataServer1] Initialized IOCP system connection
+[DataServer2] Initializing database connection
+[DataServer2] [DB] Connection Successfull!
+[DataServer2] Connected to MuOnline@MuOnline database
+[DataServer2] Initialized database connection
+[DataServer2] Initializing IOCP system connection
+[DataServer2] Server Listen OK. Port: 55962
+[DataServer2] Initialized IOCP system connection
+[JoinServer] Initializing database connection
+[JoinServer] [DB] Connection Successfull!
+[JoinServer] Connected to MuOnline@MuOnlineJoinDB database
+[JoinServer] Initialized database connection
+[JoinServer] Initializing IOCP system connection
+[JoinServer] Server Listen OK. Port: 55970
+[JoinServer] Initialized IOCP system connection
+[ExtraServer] Initializing database connection
+[ExtraServer] [DB] Connection Successfull!
+[ExtraServer] Connected to MuOnline@MuOnline database
+[ExtraServer] Initialized database connection
+[ExtraServer] Initializing IOCP system connection
+[ExtraServer] Server Listen OK. Port: 55999
+[ExtraServer] Initialized IOCP system connection
+[WzExDB] Initializing database connection
+[WzExDB] [DB] Connection Successfull!
+[WzExDB] Connected to MuOnline@MuOnline database
+[WzExDB] Initialized database connection
+[WzExDB] Initializing IOCP system connection
+[WzExDB] Server Listen OK. Port: 55906
+[WzExDB] Initialized IOCP system connection
+13:12:44 SELECT * FROM Guild WHERE Number = G_Union
+13:12:44 SELECT * FROM Guild WHERE Number <> G_Union
+13:12:44 SELECT G_Mark FROM Guild WHERE G_Name = 'abc'
+13:12:44 [WzExDB] [ExDB][AddGuild] Guild [abc] Create Guild Master: [knight]
+13:12:44 SELECT * FROM GuildMember WHERE G_Name = 'abc'
+[WzExDB] [MuOnlineDB] GuildData Loaded in 109 msec
+[PostServer] Initializing IOCP system connection
+[PostServer] Server Listen OK. Port: 55998
+[PostServer] Initialized IOCP system connection
+Servers initialization in 842 msec
+[JoinServer] connect : [0][127.0.0.1]
+[DataServer1] connect : [0][127.0.0.1]
+[DataServer2] connect : [0][127.0.0.1]
+[WzExDB] connect : [0][127.0.0.1]
+13:12:53 [WzExDB] [ExDB][ExDB] GameServer with ServerCode[1] connected.
+[PostServer] connect : [0][127.0.0.1]
+[ExtraServer] connect : [0][127.0.0.1]
+13:12:53 SELECT ItemCount FROM GameServerInfo WHERE Number=0
+13:12:53 SELECT ItemCount FROM GameServerInfo WHERE Number=0
+[JoinServer] GameServer connected Sub-2 PORT : 55903 CODE : 1
+[PostServer] [PostServer][0] Connection Success: Server Code 1
+17:12:44 EXEC MuOnline.dbo.SCF_GENSRANKINGUPDATE 1
+17:12:45 EXEC MuOnline.dbo.SCF_GENSRANKINGUPDATE 2
+21:12:44 EXEC MuOnline.dbo.SCF_GENSRANKINGUPDATE 1
+21:12:44 EXEC MuOnline.dbo.SCF_GENSRANKINGUPDATE 2

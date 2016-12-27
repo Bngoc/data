@@ -1,0 +1,6 @@
+23:34:51  [MuItemShop Category] - ..\SCFData\PointsShops\WzShop\SCF_CashShop_Category.txt file is Loaded
+23:34:51  [MuItemShop Package] - ..\SCFData\PointsShops\WzShop\SCF_CashShop_Package.txt file is Loaded
+23:34:51  [MuItemShop Product] - ..\SCFData\PointsShops\WzShop\SCF_CashShop_Product.txt file is Loaded
+23:41:57  [MuItemShop Category] - ..\SCFData\PointsShops\WzShop\SCF_CashShop_Category.txt file is Loaded
+23:41:57  [MuItemShop Package] - ..\SCFData\PointsShops\WzShop\SCF_CashShop_Package.txt file is Loaded
+23:41:57  [MuItemShop Product] - ..\SCFData\PointsShops\WzShop\SCF_CashShop_Product.txt file is Loaded

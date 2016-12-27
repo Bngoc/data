@@ -1,0 +1,1196 @@
+Initialized log instance
+Initializing Servers...
+[AllowList] Loaded Successfull!
+[DataServer1] Initializing database connection
+[DataServer1] [DB] Connection Successfull!
+[DataServer1] Connected to MuOnline@MuOnline database
+[DataServer1] Initialized database connection
+[DataServer1] Initializing IOCP system connection
+[DataServer1] Server Listen OK. Port: 55960
+[DataServer1] Initialized IOCP system connection
+[DataServer2] Initializing database connection
+[DataServer2] [DB] Connection Successfull!
+[DataServer2] Connected to MuOnline@MuOnline database
+[DataServer2] Initialized database connection
+[DataServer2] Initializing IOCP system connection
+[DataServer2] Server Listen OK. Port: 55962
+[DataServer2] Initialized IOCP system connection
+[JoinServer] Initializing database connection
+[JoinServer] [DB] Connection Successfull!
+[JoinServer] Connected to MuOnline@MuOnlineJoinDB database
+[JoinServer] Initialized database connection
+[JoinServer] Initializing IOCP system connection
+[JoinServer] Server Listen OK. Port: 55970
+[JoinServer] Initialized IOCP system connection
+[ExtraServer] Initializing database connection
+[ExtraServer] [DB] Connection Successfull!
+[ExtraServer] Connected to MuOnline@MuOnline database
+[ExtraServer] Initialized database connection
+[ExtraServer] Initializing IOCP system connection
+[ExtraServer] Server Listen OK. Port: 55999
+[ExtraServer] Initialized IOCP system connection
+[WzExDB] Initializing database connection
+[WzExDB] [DB] Connection Successfull!
+[WzExDB] Connected to MuOnline@MuOnline database
+[WzExDB] Initialized database connection
+[WzExDB] Initializing IOCP system connection
+[WzExDB] Server Listen OK. Port: 55906
+[WzExDB] Initialized IOCP system connection
+14:37:21 SELECT * FROM Guild WHERE Number = G_Union
+14:37:22 SELECT * FROM Guild WHERE Number <> G_Union
+14:37:22 SELECT G_Mark FROM Guild WHERE G_Name = 'abc'
+14:37:22 [WzExDB] [ExDB][AddGuild] Guild [abc] Create Guild Master: [knight]
+14:37:22 SELECT * FROM GuildMember WHERE G_Name = 'abc'
+[WzExDB] [MuOnlineDB] GuildData Loaded in 156 msec
+[PostServer] Initializing IOCP system connection
+[PostServer] Server Listen OK. Port: 55998
+[PostServer] Initialized IOCP system connection
+Servers initialization in 1170 msec
+[JoinServer] connect : [0][127.0.0.1]
+[DataServer1] connect : [0][127.0.0.1]
+[DataServer2] connect : [0][127.0.0.1]
+[WzExDB] connect : [0][127.0.0.1]
+14:37:40 [WzExDB] [ExDB][ExDB] GameServer with ServerCode[1] connected.
+[PostServer] connect : [0][127.0.0.1]
+[ExtraServer] connect : [0][127.0.0.1]
+[JoinServer] GameServer connected Sub-2 PORT : 55903 CODE : 1
+[PostServer] [PostServer][0] Connection Success: Server Code 1
+14:37:40 SELECT ItemCount FROM GameServerInfo WHERE Number=0
+14:37:40 SELECT ItemCount FROM GameServerInfo WHERE Number=0
+Initialized log instance
+Initializing Servers...
+[AllowList] Loaded Successfull!
+[DataServer1] Initializing database connection
+[DataServer1] [DB] Connection Successfull!
+[DataServer1] Connected to MuOnline@MuOnline database
+[DataServer1] Initialized database connection
+[DataServer1] Initializing IOCP system connection
+[DataServer1] Server Listen OK. Port: 55960
+[DataServer1] Initialized IOCP system connection
+[DataServer2] Initializing database connection
+[DataServer2] [DB] Connection Successfull!
+[DataServer2] Connected to MuOnline@MuOnline database
+[DataServer2] Initialized database connection
+[DataServer2] Initializing IOCP system connection
+[DataServer2] Server Listen OK. Port: 55962
+[DataServer2] Initialized IOCP system connection
+[JoinServer] Initializing database connection
+[JoinServer] [DB] Connection Successfull!
+[JoinServer] Connected to MuOnline@MuOnlineJoinDB database
+[JoinServer] Initialized database connection
+[JoinServer] Initializing IOCP system connection
+[JoinServer] Server Listen OK. Port: 55970
+[JoinServer] Initialized IOCP system connection
+[ExtraServer] Initializing database connection
+[ExtraServer] [DB] Connection Successfull!
+[ExtraServer] Connected to MuOnline@MuOnline database
+[ExtraServer] Initialized database connection
+[ExtraServer] Initializing IOCP system connection
+[ExtraServer] Server Listen OK. Port: 55999
+[ExtraServer] Initialized IOCP system connection
+[WzExDB] Initializing database connection
+[WzExDB] [DB] Connection Successfull!
+[WzExDB] Connected to MuOnline@MuOnline database
+[WzExDB] Initialized database connection
+[WzExDB] Initializing IOCP system connection
+[WzExDB] Server Listen OK. Port: 55906
+[WzExDB] Initialized IOCP system connection
+17:35:49 SELECT * FROM Guild WHERE Number = G_Union
+17:35:49 SELECT * FROM Guild WHERE Number <> G_Union
+17:35:49 SELECT G_Mark FROM Guild WHERE G_Name = 'abc'
+17:35:49 [WzExDB] [ExDB][AddGuild] Guild [abc] Create Guild Master: [knight]
+17:35:49 SELECT * FROM GuildMember WHERE G_Name = 'abc'
+[WzExDB] [MuOnlineDB] GuildData Loaded in 94 msec
+[PostServer] Initializing IOCP system connection
+[PostServer] Server Listen OK. Port: 55998
+[PostServer] Initialized IOCP system connection
+Servers initialization in 780 msec
+[JoinServer] connect : [0][127.0.0.1]
+[DataServer1] connect : [0][127.0.0.1]
+[DataServer2] connect : [0][127.0.0.1]
+[WzExDB] connect : [0][127.0.0.1]
+17:36:02 [WzExDB] [ExDB][ExDB] GameServer with ServerCode[2] connected.
+[PostServer] connect : [0][127.0.0.1]
+[ExtraServer] connect : [0][127.0.0.1]
+[JoinServer] GameServer connected Sub-3 PORT : 55905 CODE : 2
+[PostServer] [PostServer][0] Connection Success: Server Code 2
+17:36:02 SELECT ItemCount FROM GameServerInfo WHERE Number=0
+17:36:02 SELECT ItemCount FROM GameServerInfo WHERE Number=0
+17:36:30 SELECT * FROM MEMB_INFO WHERE memb___id='ngoc119'
+[Object] User ngoc119 has join
+17:36:30 EXEC WZ_CONNECT_MEMB 'ngoc119','Sub-3','118.70.177.23'
+17:36:34 SELECT Id FROM AccountCharacter WHERE Id='ngoc119'
+17:36:34 SELECT * FROM AccountCharacter WHERE Id='ngoc119'
+17:36:34 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='eewe'
+17:36:34 SELECT Inventory FROM Character WHERE Name='eewe'
+17:36:34 SELECT G_Status FROM GuildMember WHERE Name='eewe'
+17:36:34 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='Yoyo'
+17:36:34 SELECT Inventory FROM Character WHERE Name='Yoyo'
+17:36:34 SELECT G_Status FROM GuildMember WHERE Name='Yoyo'
+17:36:34 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjnhk'
+17:36:34 SELECT Inventory FROM Character WHERE Name='kjnhk'
+17:36:34 SELECT G_Status FROM GuildMember WHERE Name='kjnhk'
+17:36:34 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'ngoc119'
+17:36:34 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='ngoc119' AND BotLife < BotMaxLife
+17:36:34 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='ngoc119'
+17:36:38 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='Yoyo' AND AccountID='ngoc119'
+17:36:38 SELECT Inventory from Character where Name='Yoyo'
+17:36:38 SELECT MagicList from Character where Name='Yoyo'
+17:36:38 SELECT Quest from Character where Name='Yoyo'
+17:36:38 UPDATE AccountCharacter SET GameIDC='Yoyo' WHERE Id='ngoc119'
+17:36:38 SELECT * FROM OptionData WHERE Name='Yoyo'
+17:36:38 [WzExDB] [ExDB][Guild Member Info Request] Member [Yoyo].
+17:36:38 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='Yoyo'
+17:36:38 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'Yoyo'
+17:36:38 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+17:36:38 SELECT Data FROM MuOnline.dbo.OfficialHelper where Name = 'Yoyo'
+17:36:38 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'Yoyo' and AccountID = 'ngoc119'
+17:36:38 [WzExDB] [ExDB][Friend List Request] Name[Yoyo].
+17:36:38 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'Yoyo'
+17:36:38 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'Yoyo' and AccountID = 'ngoc119'
+17:36:38 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 15
+17:36:38 [WzExDB] [ExDB][Friend List Send] Name[Yoyo].
+17:36:38 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+17:36:38 SELECT FriendName FROM T_WaitFriend where GUID=15
+[WzExDB] [ExDB][Mail List Request] Name[Yoyo].
+17:36:38 [WzExDB] [ExDB][Mail List Send] Name[Yoyo].
+17:36:38 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=15
+17:36:38 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+17:36:38 SELECT SkillKey from OptionData where Name='Yoyo'
+17:36:38 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'Yoyo'
+17:36:38 SELECT Name FROM MuOnline.dbo.Character WHERE Name = 'Yoyo' and AccountID = 'ngoc119'
+17:36:38 SELECT SCFMasterSkill FROM MuOnline.dbo.Character where Name = 'Yoyo' and AccountID = 'ngoc119'
+17:37:07 SELECT Name FROM OptionData WHERE Name='Yoyo'
+17:37:07 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='Yoyo'
+17:37:07 UPDATE OptionData SET SkillKey=? where Name='Yoyo'
+17:37:13 UPDATE Character SET cLevel=277,Class=2,LevelUpPoint=2535, Experience=232636804, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1998378899, Life=41294, MaxLife=63360, Mana=19353, MaxMana=23976, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=1, PkCount=0, PkLevel=3, PkTime=154099, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+17:37:13 EXEC WZ_DISCONNECT_MEMB 'ngoc119'
+17:37:14 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+17:37:14 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+17:37:14 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+[Player] ngoc119 has been deleted
+Initialized log instance
+Initializing Servers...
+[AllowList] Loaded Successfull!
+[DataServer1] Initializing database connection
+[DataServer1] [DB] Connection Successfull!
+[DataServer1] Connected to MuOnline@MuOnline database
+[DataServer1] Initialized database connection
+[DataServer1] Initializing IOCP system connection
+[DataServer1] Server Listen OK. Port: 55960
+[DataServer1] Initialized IOCP system connection
+[DataServer2] Initializing database connection
+[DataServer2] [DB] Connection Successfull!
+[DataServer2] Connected to MuOnline@MuOnline database
+[DataServer2] Initialized database connection
+[DataServer2] Initializing IOCP system connection
+[DataServer2] Server Listen OK. Port: 55962
+[DataServer2] Initialized IOCP system connection
+[JoinServer] Initializing database connection
+[JoinServer] [DB] Connection Successfull!
+[JoinServer] Connected to MuOnline@MuOnlineJoinDB database
+[JoinServer] Initialized database connection
+[JoinServer] Initializing IOCP system connection
+[JoinServer] Server Listen OK. Port: 55970
+[JoinServer] Initialized IOCP system connection
+[ExtraServer] Initializing database connection
+[ExtraServer] [DB] Connection Successfull!
+[ExtraServer] Connected to MuOnline@MuOnline database
+[ExtraServer] Initialized database connection
+[ExtraServer] Initializing IOCP system connection
+[ExtraServer] Server Listen OK. Port: 55999
+[ExtraServer] Initialized IOCP system connection
+[WzExDB] Initializing database connection
+[WzExDB] [DB] Connection Successfull!
+[WzExDB] Connected to MuOnline@MuOnline database
+[WzExDB] Initialized database connection
+[WzExDB] Initializing IOCP system connection
+[WzExDB] Server Listen OK. Port: 55906
+[WzExDB] Initialized IOCP system connection
+22:37:29 SELECT * FROM Guild WHERE Number = G_Union
+22:37:29 SELECT * FROM Guild WHERE Number <> G_Union
+22:37:29 SELECT G_Mark FROM Guild WHERE G_Name = 'abc'
+22:37:29 [WzExDB] [ExDB][AddGuild] Guild [abc] Create Guild Master: [knight]
+22:37:29 SELECT * FROM GuildMember WHERE G_Name = 'abc'
+[WzExDB] [MuOnlineDB] GuildData Loaded in 63 msec
+[PostServer] Initializing IOCP system connection
+[PostServer] Server Listen OK. Port: 55998
+[PostServer] Initialized IOCP system connection
+Servers initialization in 733 msec
+[JoinServer] connect : [0][127.0.0.1]
+[JoinServer] GameServer connected Sub-3 PORT : 55905 CODE : 2
+[DataServer1] connect : [0][127.0.0.1]
+22:37:36 SELECT ItemCount FROM GameServerInfo WHERE Number=0
+[DataServer2] connect : [0][127.0.0.1]
+22:37:36 SELECT ItemCount FROM GameServerInfo WHERE Number=0
+[WzExDB] connect : [0][127.0.0.1]
+22:37:36 [WzExDB] [ExDB][ExDB] GameServer with ServerCode[2] connected.
+[PostServer] connect : [0][127.0.0.1]
+[PostServer] [PostServer][0] Connection Success: Server Code 2
+[ExtraServer] connect : [0][127.0.0.1]
+22:52:46 SELECT * FROM MEMB_INFO WHERE memb___id='ngoc119'
+[Object] User ngoc119 has join
+22:52:46 EXEC WZ_CONNECT_MEMB 'ngoc119','Sub-3','45.122.232.61'
+22:52:46 SELECT Id FROM AccountCharacter WHERE Id='ngoc119'
+22:52:46 SELECT * FROM AccountCharacter WHERE Id='ngoc119'
+22:52:46 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='eewe'
+22:52:46 SELECT Inventory FROM Character WHERE Name='eewe'
+22:52:46 SELECT G_Status FROM GuildMember WHERE Name='eewe'
+22:52:46 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='Yoyo'
+22:52:46 SELECT Inventory FROM Character WHERE Name='Yoyo'
+22:52:46 SELECT G_Status FROM GuildMember WHERE Name='Yoyo'
+22:52:46 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjnhk'
+22:52:46 SELECT Inventory FROM Character WHERE Name='kjnhk'
+22:52:46 SELECT G_Status FROM GuildMember WHERE Name='kjnhk'
+22:52:46 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'ngoc119'
+22:52:46 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='ngoc119' AND BotLife < BotMaxLife
+22:52:46 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='ngoc119'
+22:53:00 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='Yoyo' AND AccountID='ngoc119'
+22:53:00 SELECT Inventory from Character where Name='Yoyo'
+22:53:00 SELECT MagicList from Character where Name='Yoyo'
+22:53:00 SELECT Quest from Character where Name='Yoyo'
+22:53:00 UPDATE AccountCharacter SET GameIDC='Yoyo' WHERE Id='ngoc119'
+22:53:00 SELECT * FROM OptionData WHERE Name='Yoyo'
+22:53:00 [WzExDB] [ExDB][Guild Member Info Request] Member [Yoyo].
+22:53:00 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='Yoyo'
+22:53:00 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'Yoyo'
+22:53:00 SELECT SkillKey from OptionData where Name='Yoyo'
+22:53:00 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'Yoyo'
+22:53:00 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+22:53:00 SELECT Data FROM MuOnline.dbo.OfficialHelper where Name = 'Yoyo'
+22:53:00 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'Yoyo' and AccountID = 'ngoc119'
+22:53:00 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'Yoyo' and AccountID = 'ngoc119'
+22:53:00 SELECT Name FROM MuOnline.dbo.Character WHERE Name = 'Yoyo' and AccountID = 'ngoc119'
+22:53:00 SELECT SCFMasterSkill FROM MuOnline.dbo.Character where Name = 'Yoyo' and AccountID = 'ngoc119'
+22:53:00 [WzExDB] [ExDB][Friend List Request] Name[Yoyo].
+22:53:00 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'Yoyo'
+22:53:00 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 15
+22:53:00 [WzExDB] [ExDB][Friend List Send] Name[Yoyo].
+22:53:00 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+22:53:00 SELECT FriendName FROM T_WaitFriend where GUID=15
+[WzExDB] [ExDB][Mail List Request] Name[Yoyo].
+22:53:00 [WzExDB] [ExDB][Mail List Send] Name[Yoyo].
+22:53:00 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=15
+22:53:00 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+22:53:15 EXEC WZ_GetItemSerial
+22:53:15 UPDATE Character SET cLevel=278,Class=2,LevelUpPoint=2541, Experience=234448940, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1998378899, Life=41304, MaxLife=63370, Mana=24028, MaxMana=23996, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=1, PkCount=0, PkLevel=3, PkTime=173060, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:53:15 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:53:15 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:53:15 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:53:18 EXEC WZ_GetItemSerial
+22:53:18 EXEC WZ_GetItemSerial
+22:53:19 EXEC WZ_GetItemSerial
+22:53:34 UPDATE Character SET cLevel=279,Class=2,LevelUpPoint=2547, Experience=238733080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1998378899, Life=41314, MaxLife=63380, Mana=24068, MaxMana=24016, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=4, PkCount=0, PkLevel=3, PkTime=173080, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:53:34 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:53:34 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:53:34 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:53:35 EXEC WZ_GetItemSerial
+22:53:35 EXEC WZ_GetItemSerial
+22:53:36 EXEC WZ_GetItemSerial
+22:53:54 UPDATE Character SET cLevel=280,Class=2,LevelUpPoint=2553, Experience=243190080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1998378899, Life=41324, MaxLife=63390, Mana=24088, MaxMana=24036, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=4, PkCount=0, PkLevel=3, PkTime=173099, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:53:54 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:53:54 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:53:54 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:53:55 EXEC WZ_GetItemSerial
+22:53:55 EXEC WZ_GetItemSerial
+22:53:55 EXEC WZ_GetItemSerial
+22:53:55 EXEC WZ_GetItemSerial
+22:54:05 UPDATE Character SET cLevel=281,Class=2,LevelUpPoint=2559, Experience=247826000, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1998378899, Life=41344, MaxLife=63400, Mana=24108, MaxMana=24056, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=6, PkCount=0, PkLevel=3, PkTime=173110, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:54:05 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:54:05 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:54:05 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:54:05 EXEC WZ_GetItemSerial
+22:54:17 EXEC WZ_GetItemSerial
+22:54:41 UPDATE Character SET cLevel=282,Class=2,LevelUpPoint=2565, Experience=252646900, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1998378899, Life=41354, MaxLife=63410, Mana=24128, MaxMana=24076, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=4, PkCount=0, PkLevel=3, PkTime=173146, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:54:41 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:54:41 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:54:41 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:54:42 EXEC WZ_GetItemSerial
+22:54:43 EXEC WZ_GetItemSerial
+22:54:54 EXEC WZ_GetItemSerial
+22:54:54 EXEC WZ_GetItemSerial
+22:54:55 UPDATE Character SET cLevel=283,Class=2,LevelUpPoint=2571, Experience=257658840, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1998378899, Life=41364, MaxLife=63420, Mana=24168, MaxMana=24096, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=4, PkCount=0, PkLevel=3, PkTime=173160, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:54:55 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:54:55 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:54:55 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:55:04 EXEC WZ_GetItemSerial
+22:56:04 UPDATE Character SET cLevel=284,Class=2,LevelUpPoint=2577, Experience=262867880, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1998378899, Life=41394, MaxLife=63430, Mana=24188, MaxMana=24116, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=2, PkCount=0, PkLevel=3, PkTime=173229, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:56:04 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:56:04 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:56:04 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:56:05 EXEC WZ_GetItemSerial
+22:56:05 EXEC WZ_GetItemSerial
+22:56:06 EXEC WZ_GetItemSerial
+22:56:06 EXEC WZ_GetItemSerial
+22:56:19 UPDATE Character SET cLevel=285,Class=2,LevelUpPoint=2583, Experience=268280080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41404, MaxLife=63440, Mana=24308, MaxMana=24136, MapNumber=6, MapPosX=88, MapPosY=65, MapDir=3, PkCount=0, PkLevel=3, PkTime=173244, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:56:19 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:56:19 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:56:19 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:56:20 EXEC WZ_GetItemSerial
+22:56:20 EXEC WZ_GetItemSerial
+22:56:32 UPDATE Character SET cLevel=286,Class=2,LevelUpPoint=2589, Experience=273901500, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41414, MaxLife=63450, Mana=24328, MaxMana=24156, MapNumber=6, MapPosX=89, MapPosY=64, MapDir=3, PkCount=0, PkLevel=3, PkTime=173257, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:56:32 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:56:32 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:56:32 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:56:33 EXEC WZ_GetItemSerial
+22:56:40 EXEC WZ_GetItemSerial
+22:56:48 UPDATE Character SET cLevel=287,Class=2,LevelUpPoint=2595, Experience=279738200, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41434, MaxLife=63460, Mana=24358, MaxMana=24176, MapNumber=6, MapPosX=86, MapPosY=66, MapDir=3, PkCount=0, PkLevel=3, PkTime=173273, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:56:48 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:56:48 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:56:48 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:56:49 EXEC WZ_GetItemSerial
+22:56:49 EXEC WZ_GetItemSerial
+22:56:50 EXEC WZ_GetItemSerial
+22:56:50 EXEC WZ_GetItemSerial
+22:56:53 EXEC WZ_GetItemSerial
+22:56:53 EXEC WZ_GetItemSerial
+22:57:03 UPDATE Character SET cLevel=288,Class=2,LevelUpPoint=2601, Experience=285796240, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41444, MaxLife=63470, Mana=24378, MaxMana=24196, MapNumber=6, MapPosX=86, MapPosY=63, MapDir=3, PkCount=0, PkLevel=3, PkTime=173288, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:57:03 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:57:03 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:57:03 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:57:03 EXEC WZ_GetItemSerial
+22:57:08 EXEC WZ_GetItemSerial
+22:57:18 UPDATE Character SET cLevel=289,Class=2,LevelUpPoint=2607, Experience=292081680, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41454, MaxLife=63480, Mana=24408, MaxMana=24216, MapNumber=6, MapPosX=87, MapPosY=61, MapDir=3, PkCount=0, PkLevel=3, PkTime=173303, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:57:18 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:57:18 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:57:18 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:57:22 EXEC WZ_GetItemSerial
+22:57:23 EXEC WZ_GetItemSerial
+22:57:25 EXEC WZ_GetItemSerial
+22:57:27 EXEC WZ_GetItemSerial
+22:57:34 UPDATE Character SET cLevel=290,Class=2,LevelUpPoint=2613, Experience=298600580, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41464, MaxLife=63490, Mana=24448, MaxMana=24236, MapNumber=6, MapPosX=87, MapPosY=67, MapDir=3, PkCount=0, PkLevel=3, PkTime=173319, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:57:34 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:57:34 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:57:34 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:57:35 EXEC WZ_GetItemSerial
+22:57:35 EXEC WZ_GetItemSerial
+22:57:36 EXEC WZ_GetItemSerial
+22:57:39 EXEC WZ_GetItemSerial
+22:57:40 EXEC WZ_GetItemSerial
+22:57:51 EXEC WZ_GetItemSerial
+22:57:52 UPDATE Character SET cLevel=291,Class=2,LevelUpPoint=2619, Experience=305359000, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41484, MaxLife=63500, Mana=24468, MaxMana=24256, MapNumber=6, MapPosX=87, MapPosY=62, MapDir=3, PkCount=0, PkLevel=3, PkTime=173337, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:57:52 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:57:52 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:57:52 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:57:53 EXEC WZ_GetItemSerial
+22:57:53 EXEC WZ_GetItemSerial
+22:57:55 EXEC WZ_GetItemSerial
+22:58:07 UPDATE Character SET cLevel=292,Class=2,LevelUpPoint=2625, Experience=312363000, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41574, MaxLife=63510, Mana=24488, MaxMana=24276, MapNumber=6, MapPosX=88, MapPosY=62, MapDir=3, PkCount=0, PkLevel=3, PkTime=173353, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:58:07 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:58:07 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:58:07 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:58:08 EXEC WZ_GetItemSerial
+22:58:08 EXEC WZ_GetItemSerial
+22:58:09 EXEC WZ_GetItemSerial
+22:58:11 EXEC WZ_GetItemSerial
+22:58:24 EXEC WZ_GetItemSerial
+22:58:25 UPDATE Character SET cLevel=293,Class=2,LevelUpPoint=2631, Experience=319618640, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41594, MaxLife=63520, Mana=24518, MaxMana=24296, MapNumber=6, MapPosX=91, MapPosY=63, MapDir=0, PkCount=0, PkLevel=3, PkTime=173370, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:58:25 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:58:25 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:58:25 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:58:26 EXEC WZ_GetItemSerial
+22:58:26 EXEC WZ_GetItemSerial
+22:58:26 EXEC WZ_GetItemSerial
+22:58:39 EXEC WZ_GetItemSerial
+22:58:45 EXEC WZ_GetItemSerial
+22:58:47 EXEC WZ_GetItemSerial
+22:58:52 UPDATE Character SET cLevel=294,Class=2,LevelUpPoint=2637, Experience=327131980, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41604, MaxLife=63530, Mana=24538, MaxMana=24316, MapNumber=6, MapPosX=89, MapPosY=64, MapDir=3, PkCount=0, PkLevel=3, PkTime=173397, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:58:52 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:58:52 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:58:52 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:58:53 EXEC WZ_GetItemSerial
+22:58:53 EXEC WZ_GetItemSerial
+22:58:54 EXEC WZ_GetItemSerial
+22:59:02 EXEC WZ_GetItemSerial
+22:59:11 EXEC WZ_GetItemSerial
+22:59:14 EXEC WZ_GetItemSerial
+22:59:15 UPDATE Character SET cLevel=295,Class=2,LevelUpPoint=2643, Experience=334909080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41614, MaxLife=63540, Mana=24578, MaxMana=24336, MapNumber=6, MapPosX=87, MapPosY=59, MapDir=0, PkCount=0, PkLevel=3, PkTime=173420, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:59:15 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:59:15 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:59:15 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:59:22 EXEC WZ_GetItemSerial
+22:59:28 EXEC WZ_GetItemSerial
+22:59:33 EXEC WZ_GetItemSerial
+22:59:34 UPDATE Character SET cLevel=296,Class=2,LevelUpPoint=2649, Experience=342956000, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41634, MaxLife=63550, Mana=24608, MaxMana=24356, MapNumber=6, MapPosX=91, MapPosY=66, MapDir=4, PkCount=0, PkLevel=3, PkTime=173440, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:59:34 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:59:34 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:59:34 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:59:37 EXEC WZ_GetItemSerial
+22:59:50 EXEC WZ_GetItemSerial
+22:59:52 EXEC WZ_GetItemSerial
+22:59:53 EXEC WZ_GetItemSerial
+22:59:55 UPDATE Character SET cLevel=297,Class=2,LevelUpPoint=2655, Experience=351278800, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41644, MaxLife=63560, Mana=24708, MaxMana=24376, MapNumber=6, MapPosX=91, MapPosY=66, MapDir=4, PkCount=0, PkLevel=3, PkTime=173460, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+22:59:55 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+22:59:55 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+22:59:55 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+22:59:56 EXEC WZ_GetItemSerial
+23:00:03 EXEC WZ_GetItemSerial
+23:00:04 EXEC WZ_GetItemSerial
+23:00:08 EXEC WZ_GetItemSerial
+23:00:09 EXEC WZ_GetItemSerial
+23:00:09 EXEC WZ_GetItemSerial
+23:00:12 EXEC WZ_GetItemSerial
+23:00:21 UPDATE Character SET cLevel=298,Class=2,LevelUpPoint=2661, Experience=359883540, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41664, MaxLife=63570, Mana=24748, MaxMana=24396, MapNumber=6, MapPosX=92, MapPosY=64, MapDir=6, PkCount=0, PkLevel=3, PkTime=173486, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:00:21 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:00:21 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:00:21 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:00:22 EXEC WZ_GetItemSerial
+23:00:22 EXEC WZ_GetItemSerial
+23:00:24 EXEC WZ_GetItemSerial
+23:00:25 EXEC WZ_GetItemSerial
+23:00:26 EXEC WZ_GetItemSerial
+23:00:27 EXEC WZ_GetItemSerial
+23:00:33 EXEC WZ_GetItemSerial
+23:00:38 EXEC WZ_GetItemSerial
+23:00:41 EXEC WZ_GetItemSerial
+23:00:41 EXEC WZ_GetItemSerial
+23:00:42 UPDATE Character SET cLevel=299,Class=2,LevelUpPoint=2667, Experience=368776280, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=41674, MaxLife=63580, Mana=24768, MaxMana=24416, MapNumber=6, MapPosX=87, MapPosY=66, MapDir=2, PkCount=0, PkLevel=3, PkTime=173508, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:00:42 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:00:42 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:00:42 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:00:45 EXEC WZ_GetItemSerial
+23:00:56 EXEC WZ_GetItemSerial
+23:00:58 EXEC WZ_GetItemSerial
+23:01:07 EXEC WZ_GetItemSerial
+23:01:07 EXEC WZ_GetItemSerial
+23:01:11 UPDATE Character SET cLevel=300,Class=2,LevelUpPoint=2673, Experience=377963080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43384, MaxLife=63590, Mana=26498, MaxMana=24436, MapNumber=6, MapPosX=92, MapPosY=64, MapDir=3, PkCount=0, PkLevel=3, PkTime=173536, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:01:11 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:01:11 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:01:11 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:01:12 EXEC WZ_GetItemSerial
+23:01:12 EXEC WZ_GetItemSerial
+23:01:13 EXEC WZ_GetItemSerial
+23:01:16 EXEC WZ_GetItemSerial
+23:01:17 EXEC WZ_GetItemSerial
+23:01:19 EXEC WZ_GetItemSerial
+23:01:24 EXEC WZ_GetItemSerial
+23:01:42 UPDATE Character SET cLevel=301,Class=2,LevelUpPoint=2679, Experience=387450000, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1999998000, Life=43394, MaxLife=63600, Mana=26518, MaxMana=24456, MapNumber=6, MapPosX=89, MapPosY=62, MapDir=0, PkCount=0, PkLevel=3, PkTime=173567, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:01:42 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:01:42 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:01:42 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:01:42 EXEC WZ_GetItemSerial
+23:01:43 EXEC WZ_GetItemSerial
+23:01:44 EXEC WZ_GetItemSerial
+23:01:58 EXEC WZ_GetItemSerial
+23:01:59 EXEC WZ_GetItemSerial
+23:01:59 EXEC WZ_GetItemSerial
+23:01:59 EXEC WZ_GetItemSerial
+23:01:59 EXEC WZ_GetItemSerial
+23:02:13 UPDATE Character SET cLevel=302,Class=2,LevelUpPoint=2685, Experience=397243100, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43404, MaxLife=63610, Mana=26538, MaxMana=24476, MapNumber=6, MapPosX=89, MapPosY=66, MapDir=0, PkCount=0, PkLevel=3, PkTime=173599, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:02:13 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:02:13 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:02:13 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:02:14 EXEC WZ_GetItemSerial
+23:02:14 EXEC WZ_GetItemSerial
+23:02:15 EXEC WZ_GetItemSerial
+23:02:15 EXEC WZ_GetItemSerial
+23:02:16 EXEC WZ_GetItemSerial
+23:02:17 EXEC WZ_GetItemSerial
+23:02:29 EXEC WZ_GetItemSerial
+23:02:30 EXEC WZ_GetItemSerial
+23:02:30 UPDATE Character SET cLevel=303,Class=2,LevelUpPoint=2691, Experience=407348440, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43434, MaxLife=63620, Mana=26568, MaxMana=24496, MapNumber=6, MapPosX=91, MapPosY=66, MapDir=0, PkCount=0, PkLevel=3, PkTime=173615, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:02:30 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:02:30 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:02:30 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:02:31 EXEC WZ_GetItemSerial
+23:02:38 UPDATE Character SET cLevel=303,Class=2,LevelUpPoint=2691, Experience=408231420, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43434, MaxLife=63620, Mana=26568, MaxMana=24496, MapNumber=6, MapPosX=90, MapPosY=65, MapDir=0, PkCount=0, PkLevel=3, PkTime=173623, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:02:38 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:02:38 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:02:38 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:02:44 EXEC WZ_GetItemSerial
+23:02:44 EXEC WZ_GetItemSerial
+23:02:44 EXEC WZ_GetItemSerial
+23:02:46 EXEC WZ_GetItemSerial
+23:02:47 EXEC WZ_GetItemSerial
+23:02:47 EXEC WZ_GetItemSerial
+23:02:59 EXEC WZ_GetItemSerial
+23:02:59 EXEC WZ_GetItemSerial
+23:02:59 UPDATE Character SET cLevel=304,Class=2,LevelUpPoint=2697, Experience=417772080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43444, MaxLife=63630, Mana=26608, MaxMana=24516, MapNumber=6, MapPosX=91, MapPosY=64, MapDir=0, PkCount=0, PkLevel=3, PkTime=173645, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:02:59 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:02:59 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:02:59 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:03:01 EXEC WZ_GetItemSerial
+23:03:18 EXEC WZ_GetItemSerial
+23:03:30 UPDATE Character SET cLevel=305,Class=2,LevelUpPoint=2703, Experience=428520080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43454, MaxLife=63640, Mana=26638, MaxMana=24536, MapNumber=6, MapPosX=92, MapPosY=63, MapDir=0, PkCount=0, PkLevel=3, PkTime=173675, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:03:30 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:03:30 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:03:30 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:03:31 EXEC WZ_GetItemSerial
+23:03:31 EXEC WZ_GetItemSerial
+23:03:32 EXEC WZ_GetItemSerial
+23:03:32 EXEC WZ_GetItemSerial
+23:03:40 EXEC WZ_GetItemSerial
+23:03:40 EXEC WZ_GetItemSerial
+23:03:49 EXEC WZ_GetItemSerial
+23:03:50 EXEC WZ_GetItemSerial
+23:03:53 EXEC WZ_GetItemSerial
+23:03:55 EXEC WZ_GetItemSerial
+23:03:56 EXEC WZ_GetItemSerial
+23:04:02 UPDATE Character SET cLevel=306,Class=2,LevelUpPoint=2709, Experience=439598500, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43474, MaxLife=63650, Mana=26658, MaxMana=24556, MapNumber=6, MapPosX=89, MapPosY=65, MapDir=0, PkCount=0, PkLevel=3, PkTime=173707, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:04:02 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:04:02 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:04:02 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:04:04 EXEC WZ_GetItemSerial
+23:04:10 EXEC WZ_GetItemSerial
+23:04:12 EXEC WZ_GetItemSerial
+23:04:18 EXEC WZ_GetItemSerial
+23:04:27 EXEC WZ_GetItemSerial
+23:04:33 UPDATE Character SET cLevel=307,Class=2,LevelUpPoint=2715, Experience=451013400, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43484, MaxLife=63660, Mana=26678, MaxMana=24576, MapNumber=6, MapPosX=89, MapPosY=62, MapDir=0, PkCount=0, PkLevel=3, PkTime=173738, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:04:33 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:04:33 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:04:33 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:04:33 EXEC WZ_GetItemSerial
+23:04:34 EXEC WZ_GetItemSerial
+23:04:35 EXEC WZ_GetItemSerial
+23:04:42 EXEC WZ_GetItemSerial
+23:04:47 EXEC WZ_GetItemSerial
+23:04:51 EXEC WZ_GetItemSerial
+23:04:53 EXEC WZ_GetItemSerial
+23:04:53 EXEC WZ_GetItemSerial
+23:05:03 EXEC WZ_GetItemSerial
+23:05:05 UPDATE Character SET cLevel=308,Class=2,LevelUpPoint=2721, Experience=462770840, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43494, MaxLife=63670, Mana=26698, MaxMana=24596, MapNumber=6, MapPosX=88, MapPosY=63, MapDir=0, PkCount=0, PkLevel=3, PkTime=173771, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:05:05 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:05:05 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:05:05 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:05:05 EXEC WZ_GetItemSerial
+23:05:07 EXEC WZ_GetItemSerial
+23:05:07 EXEC WZ_GetItemSerial
+23:05:14 EXEC WZ_GetItemSerial
+23:05:14 EXEC WZ_GetItemSerial
+23:05:21 EXEC WZ_GetItemSerial
+23:05:28 EXEC WZ_GetItemSerial
+23:05:34 UPDATE Character SET cLevel=309,Class=2,LevelUpPoint=2727, Experience=474876880, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43504, MaxLife=63680, Mana=26738, MaxMana=24616, MapNumber=6, MapPosX=90, MapPosY=64, MapDir=0, PkCount=0, PkLevel=3, PkTime=173800, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:05:34 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:05:34 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:05:34 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:05:35 EXEC WZ_GetItemSerial
+23:05:36 EXEC WZ_GetItemSerial
+23:05:41 EXEC WZ_GetItemSerial
+23:05:44 EXEC WZ_GetItemSerial
+23:05:50 EXEC WZ_GetItemSerial
+23:05:51 EXEC WZ_GetItemSerial
+23:05:55 EXEC WZ_GetItemSerial
+23:05:56 EXEC WZ_GetItemSerial
+23:06:01 EXEC WZ_GetItemSerial
+23:06:06 UPDATE Character SET cLevel=310,Class=2,LevelUpPoint=2733, Experience=487337580, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43524, MaxLife=63690, Mana=26838, MaxMana=24636, MapNumber=6, MapPosX=89, MapPosY=67, MapDir=0, PkCount=0, PkLevel=3, PkTime=173831, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:06:06 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:06:06 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:06:06 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:06:10 EXEC WZ_GetItemSerial
+23:06:15 EXEC WZ_GetItemSerial
+23:06:20 EXEC WZ_GetItemSerial
+23:06:31 EXEC WZ_GetItemSerial
+23:06:32 EXEC WZ_GetItemSerial
+23:06:34 EXEC WZ_GetItemSerial
+23:06:46 UPDATE Character SET cLevel=311,Class=2,LevelUpPoint=2739, Experience=500159000, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1999999500, Life=43534, MaxLife=63700, Mana=26878, MaxMana=24656, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=0, PkCount=0, PkLevel=3, PkTime=173871, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:06:46 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:06:46 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:06:46 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:06:46 EXEC WZ_GetItemSerial
+23:06:48 EXEC WZ_GetItemSerial
+23:06:48 EXEC WZ_GetItemSerial
+23:06:50 EXEC WZ_GetItemSerial
+23:07:03 EXEC WZ_GetItemSerial
+23:07:04 EXEC WZ_GetItemSerial
+23:07:04 EXEC WZ_GetItemSerial
+23:07:05 EXEC WZ_GetItemSerial
+23:07:06 EXEC WZ_GetItemSerial
+23:07:18 UPDATE Character SET cLevel=312,Class=2,LevelUpPoint=2745, Experience=513347200, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43554, MaxLife=63710, Mana=26898, MaxMana=24676, MapNumber=6, MapPosX=89, MapPosY=64, MapDir=0, PkCount=0, PkLevel=3, PkTime=173903, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:07:18 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:07:18 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:07:18 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:07:18 EXEC WZ_GetItemSerial
+23:07:21 EXEC WZ_GetItemSerial
+23:07:23 EXEC WZ_GetItemSerial
+23:07:35 EXEC WZ_GetItemSerial
+23:07:36 EXEC WZ_GetItemSerial
+23:07:36 EXEC WZ_GetItemSerial
+23:07:52 EXEC WZ_GetItemSerial
+23:07:55 UPDATE Character SET cLevel=313,Class=2,LevelUpPoint=2751, Experience=526908240, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43564, MaxLife=63720, Mana=26928, MaxMana=24696, MapNumber=6, MapPosX=88, MapPosY=66, MapDir=4, PkCount=0, PkLevel=3, PkTime=173940, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:07:55 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:07:55 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:07:55 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:07:57 EXEC WZ_GetItemSerial
+23:08:06 EXEC WZ_GetItemSerial
+23:08:06 EXEC WZ_GetItemSerial
+23:08:07 EXEC WZ_GetItemSerial
+23:08:14 EXEC WZ_GetItemSerial
+23:08:22 EXEC WZ_GetItemSerial
+23:08:23 EXEC WZ_GetItemSerial
+23:08:28 EXEC WZ_GetItemSerial
+23:08:29 UPDATE Character SET cLevel=314,Class=2,LevelUpPoint=2757, Experience=540848180, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43574, MaxLife=63730, Mana=26958, MaxMana=24716, MapNumber=6, MapPosX=90, MapPosY=64, MapDir=0, PkCount=0, PkLevel=3, PkTime=173974, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:08:29 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:08:29 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:08:29 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:08:37 EXEC WZ_GetItemSerial
+23:08:43 EXEC WZ_GetItemSerial
+23:08:44 EXEC WZ_GetItemSerial
+23:08:49 EXEC WZ_GetItemSerial
+23:08:53 EXEC WZ_GetItemSerial
+23:08:54 EXEC WZ_GetItemSerial
+23:08:58 EXEC WZ_GetItemSerial
+23:08:58 EXEC WZ_GetItemSerial
+23:08:58 EXEC WZ_GetItemSerial
+23:09:08 EXEC WZ_GetItemSerial
+23:09:09 EXEC WZ_GetItemSerial
+23:09:10 UPDATE Character SET cLevel=315,Class=2,LevelUpPoint=2763, Experience=555173080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43594, MaxLife=63740, Mana=26978, MaxMana=24736, MapNumber=6, MapPosX=87, MapPosY=65, MapDir=0, PkCount=0, PkLevel=3, PkTime=174015, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:09:10 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:09:10 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:09:10 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:09:12 EXEC WZ_GetItemSerial
+23:09:24 EXEC WZ_GetItemSerial
+23:09:29 EXEC WZ_GetItemSerial
+23:09:34 EXEC WZ_GetItemSerial
+23:09:43 EXEC WZ_GetItemSerial
+23:09:48 EXEC WZ_GetItemSerial
+23:09:49 UPDATE Character SET cLevel=316,Class=2,LevelUpPoint=2769, Experience=569889000, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43604, MaxLife=63750, Mana=27008, MaxMana=24756, MapNumber=6, MapPosX=90, MapPosY=63, MapDir=7, PkCount=0, PkLevel=3, PkTime=174054, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:09:49 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:09:49 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:09:49 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:09:55 EXEC WZ_GetItemSerial
+23:09:56 EXEC WZ_GetItemSerial
+23:09:57 EXEC WZ_GetItemSerial
+23:10:04 EXEC WZ_GetItemSerial
+23:10:14 EXEC WZ_GetItemSerial
+23:10:16 EXEC WZ_GetItemSerial
+23:10:19 EXEC WZ_GetItemSerial
+23:10:31 UPDATE Character SET cLevel=317,Class=2,LevelUpPoint=2775, Experience=585002000, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43704, MaxLife=63760, Mana=27038, MaxMana=24776, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=5, PkCount=0, PkLevel=3, PkTime=174096, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:10:31 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:10:31 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:10:31 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:10:32 EXEC WZ_GetItemSerial
+23:10:33 EXEC WZ_GetItemSerial
+23:10:34 EXEC WZ_GetItemSerial
+23:10:36 EXEC WZ_GetItemSerial
+23:10:43 EXEC WZ_GetItemSerial
+23:10:44 EXEC WZ_GetItemSerial
+23:10:48 EXEC WZ_GetItemSerial
+23:10:48 EXEC WZ_GetItemSerial
+23:10:51 EXEC WZ_GetItemSerial
+23:10:53 EXEC WZ_GetItemSerial
+23:10:58 EXEC WZ_GetItemSerial
+23:10:59 EXEC WZ_GetItemSerial
+23:11:04 EXEC WZ_GetItemSerial
+23:11:06 EXEC WZ_GetItemSerial
+23:11:08 EXEC WZ_GetItemSerial
+23:11:08 EXEC WZ_GetItemSerial
+23:11:14 UPDATE Character SET cLevel=318,Class=2,LevelUpPoint=2781, Experience=600518140, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43714, MaxLife=63770, Mana=27068, MaxMana=24796, MapNumber=6, MapPosX=89, MapPosY=64, MapDir=0, PkCount=0, PkLevel=3, PkTime=174140, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:11:14 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:11:14 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:11:14 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:11:20 EXEC WZ_GetItemSerial
+23:11:24 EXEC WZ_GetItemSerial
+23:11:31 EXEC WZ_GetItemSerial
+23:11:34 EXEC WZ_GetItemSerial
+23:11:39 EXEC WZ_GetItemSerial
+23:11:39 EXEC WZ_GetItemSerial
+23:11:40 EXEC WZ_GetItemSerial
+23:11:45 EXEC WZ_GetItemSerial
+23:11:46 EXEC WZ_GetItemSerial
+23:11:55 EXEC WZ_GetItemSerial
+23:11:55 UPDATE Character SET cLevel=319,Class=2,LevelUpPoint=2787, Experience=616443480, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43724, MaxLife=63780, Mana=27088, MaxMana=24816, MapNumber=6, MapPosX=87, MapPosY=66, MapDir=0, PkCount=0, PkLevel=3, PkTime=174180, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:11:55 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:11:55 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:11:55 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:11:56 EXEC WZ_GetItemSerial
+23:12:00 EXEC WZ_GetItemSerial
+23:12:03 EXEC WZ_GetItemSerial
+23:12:12 EXEC WZ_GetItemSerial
+23:12:15 EXEC WZ_GetItemSerial
+23:12:22 EXEC WZ_GetItemSerial
+23:12:26 EXEC WZ_GetItemSerial
+23:12:27 EXEC WZ_GetItemSerial
+23:12:30 EXEC WZ_GetItemSerial
+23:12:30 EXEC WZ_GetItemSerial
+23:12:33 EXEC WZ_GetItemSerial
+23:12:35 EXEC WZ_GetItemSerial
+23:12:37 UPDATE Character SET cLevel=320,Class=2,LevelUpPoint=2793, Experience=632784080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43744, MaxLife=63790, Mana=27118, MaxMana=24836, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=0, PkCount=0, PkLevel=3, PkTime=174222, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:12:37 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:12:37 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:12:37 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:12:38 UPDATE Character SET cLevel=320,Class=2,LevelUpPoint=2793, Experience=632784080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43734, MaxLife=63790, Mana=23518, MaxMana=24836, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=0, PkCount=0, PkLevel=3, PkTime=174224, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:12:38 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:12:38 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:12:38 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:12:41 EXEC WZ_GetItemSerial
+23:12:46 EXEC WZ_GetItemSerial
+23:12:56 EXEC WZ_GetItemSerial
+23:12:57 EXEC WZ_GetItemSerial
+23:13:03 EXEC WZ_GetItemSerial
+23:13:03 EXEC WZ_GetItemSerial
+23:13:03 EXEC WZ_GetItemSerial
+23:13:03 EXEC WZ_GetItemSerial
+23:13:14 EXEC WZ_GetItemSerial
+23:13:18 UPDATE Character SET cLevel=321,Class=2,LevelUpPoint=2799, Experience=649546000, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43754, MaxLife=63800, Mana=27148, MaxMana=24856, MapNumber=6, MapPosX=88, MapPosY=68, MapDir=0, PkCount=0, PkLevel=3, PkTime=174263, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:13:18 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:13:18 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:13:18 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:13:21 EXEC WZ_GetItemSerial
+23:13:36 EXEC WZ_GetItemSerial
+23:13:36 EXEC WZ_GetItemSerial
+23:13:46 EXEC WZ_GetItemSerial
+23:13:53 EXEC WZ_GetItemSerial
+23:13:54 EXEC WZ_GetItemSerial
+23:14:01 EXEC WZ_GetItemSerial
+23:14:01 EXEC WZ_GetItemSerial
+23:14:02 EXEC WZ_GetItemSerial
+23:14:07 UPDATE Character SET cLevel=322,Class=2,LevelUpPoint=2805, Experience=666735300, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43764, MaxLife=63810, Mana=27248, MaxMana=24876, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=0, PkCount=0, PkLevel=3, PkTime=174313, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:14:07 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:14:07 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:14:07 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:14:09 EXEC WZ_GetItemSerial
+23:14:10 EXEC WZ_GetItemSerial
+23:14:16 EXEC WZ_GetItemSerial
+23:14:17 EXEC WZ_GetItemSerial
+23:14:23 EXEC WZ_GetItemSerial
+23:14:30 EXEC WZ_GetItemSerial
+23:14:30 EXEC WZ_GetItemSerial
+23:14:36 EXEC WZ_GetItemSerial
+23:14:47 EXEC WZ_GetItemSerial
+23:14:51 UPDATE Character SET cLevel=323,Class=2,LevelUpPoint=2811, Experience=684358040, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43774, MaxLife=63820, Mana=27288, MaxMana=24896, MapNumber=6, MapPosX=88, MapPosY=63, MapDir=0, PkCount=0, PkLevel=3, PkTime=174356, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:14:51 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:14:51 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:14:51 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:14:51 EXEC WZ_GetItemSerial
+23:14:52 EXEC WZ_GetItemSerial
+23:14:56 EXEC WZ_GetItemSerial
+23:15:01 EXEC WZ_GetItemSerial
+23:15:02 EXEC WZ_GetItemSerial
+23:15:16 EXEC WZ_GetItemSerial
+23:15:19 EXEC WZ_GetItemSerial
+23:15:22 EXEC WZ_GetItemSerial
+23:15:32 EXEC WZ_GetItemSerial
+23:15:34 EXEC WZ_GetItemSerial
+23:15:34 EXEC WZ_GetItemSerial
+23:15:39 EXEC WZ_GetItemSerial
+23:15:40 UPDATE Character SET cLevel=324,Class=2,LevelUpPoint=2817, Experience=702420280, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43784, MaxLife=63830, Mana=27308, MaxMana=24916, MapNumber=6, MapPosX=88, MapPosY=63, MapDir=3, PkCount=0, PkLevel=3, PkTime=174405, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:15:40 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:15:40 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:15:40 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:15:41 EXEC WZ_GetItemSerial
+23:15:42 EXEC WZ_GetItemSerial
+23:15:53 EXEC WZ_GetItemSerial
+23:15:53 EXEC WZ_GetItemSerial
+23:15:54 EXEC WZ_GetItemSerial
+23:16:03 EXEC WZ_GetItemSerial
+23:16:10 EXEC WZ_GetItemSerial
+23:16:13 EXEC WZ_GetItemSerial
+23:16:17 EXEC WZ_GetItemSerial
+23:16:29 EXEC WZ_GetItemSerial
+23:16:31 UPDATE Character SET cLevel=325,Class=2,LevelUpPoint=2823, Experience=720928080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43824, MaxLife=63840, Mana=27328, MaxMana=24936, MapNumber=6, MapPosX=93, MapPosY=65, MapDir=0, PkCount=0, PkLevel=3, PkTime=174457, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:16:31 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:16:31 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:16:31 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:16:33 EXEC WZ_GetItemSerial
+23:16:35 EXEC WZ_GetItemSerial
+23:16:37 EXEC WZ_GetItemSerial
+23:16:47 EXEC WZ_GetItemSerial
+23:16:48 EXEC WZ_GetItemSerial
+23:16:49 EXEC WZ_GetItemSerial
+23:17:01 EXEC WZ_GetItemSerial
+23:17:18 EXEC WZ_GetItemSerial
+23:17:22 UPDATE Character SET cLevel=326,Class=2,LevelUpPoint=2829, Experience=739887500, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43834, MaxLife=63850, Mana=27368, MaxMana=24956, MapNumber=6, MapPosX=91, MapPosY=63, MapDir=0, PkCount=0, PkLevel=3, PkTime=174508, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:17:22 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:17:22 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:17:22 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:17:22 EXEC WZ_GetItemSerial
+23:17:23 EXEC WZ_GetItemSerial
+23:17:23 EXEC WZ_GetItemSerial
+23:17:24 EXEC WZ_GetItemSerial
+23:17:39 EXEC WZ_GetItemSerial
+23:17:40 EXEC WZ_GetItemSerial
+23:17:40 EXEC WZ_GetItemSerial
+23:17:49 EXEC WZ_GetItemSerial
+23:17:54 EXEC WZ_GetItemSerial
+23:17:55 EXEC WZ_GetItemSerial
+23:17:57 EXEC WZ_GetItemSerial
+23:18:06 EXEC WZ_GetItemSerial
+23:18:07 EXEC WZ_GetItemSerial
+23:18:08 EXEC WZ_GetItemSerial
+23:18:08 EXEC WZ_GetItemSerial
+23:18:10 EXEC WZ_GetItemSerial
+23:18:21 UPDATE Character SET cLevel=327,Class=2,LevelUpPoint=2835, Experience=759304600, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43844, MaxLife=63860, Mana=27388, MaxMana=24976, MapNumber=6, MapPosX=89, MapPosY=66, MapDir=4, PkCount=0, PkLevel=3, PkTime=174566, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:18:21 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:18:21 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:18:21 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:18:24 EXEC WZ_GetItemSerial
+23:18:33 EXEC WZ_GetItemSerial
+23:18:37 EXEC WZ_GetItemSerial
+23:18:41 EXEC WZ_GetItemSerial
+23:18:50 EXEC WZ_GetItemSerial
+23:18:57 EXEC WZ_GetItemSerial
+23:18:59 EXEC WZ_GetItemSerial
+23:19:06 EXEC WZ_GetItemSerial
+23:19:12 UPDATE Character SET cLevel=328,Class=2,LevelUpPoint=2841, Experience=779185440, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43854, MaxLife=63870, Mana=27418, MaxMana=24996, MapNumber=6, MapPosX=88, MapPosY=65, MapDir=0, PkCount=0, PkLevel=3, PkTime=174617, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:19:12 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:19:12 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:19:12 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:19:13 EXEC WZ_GetItemSerial
+23:19:14 EXEC WZ_GetItemSerial
+23:19:17 EXEC WZ_GetItemSerial
+23:19:24 EXEC WZ_GetItemSerial
+23:19:28 EXEC WZ_GetItemSerial
+23:19:29 EXEC WZ_GetItemSerial
+23:19:30 EXEC WZ_GetItemSerial
+23:19:30 EXEC WZ_GetItemSerial
+23:19:42 EXEC WZ_GetItemSerial
+23:19:42 EXEC WZ_GetItemSerial
+23:19:44 EXEC WZ_GetItemSerial
+23:19:59 EXEC WZ_GetItemSerial
+23:19:59 EXEC WZ_GetItemSerial
+23:20:03 UPDATE Character SET cLevel=329,Class=2,LevelUpPoint=2847, Experience=799536080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43864, MaxLife=63880, Mana=27438, MaxMana=25016, MapNumber=6, MapPosX=87, MapPosY=65, MapDir=0, PkCount=0, PkLevel=3, PkTime=174668, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:20:03 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:20:03 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:20:03 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:20:12 EXEC WZ_GetItemSerial
+23:20:14 EXEC WZ_GetItemSerial
+23:20:14 EXEC WZ_GetItemSerial
+23:20:15 EXEC WZ_GetItemSerial
+23:20:16 EXEC WZ_GetItemSerial
+23:20:29 EXEC WZ_GetItemSerial
+23:20:31 EXEC WZ_GetItemSerial
+23:20:34 EXEC WZ_GetItemSerial
+23:20:34 EXEC WZ_GetItemSerial
+23:20:44 EXEC WZ_GetItemSerial
+23:20:45 EXEC WZ_GetItemSerial
+23:20:53 EXEC WZ_GetItemSerial
+23:20:59 EXEC WZ_GetItemSerial
+23:21:00 EXEC WZ_GetItemSerial
+23:21:01 UPDATE Character SET cLevel=330,Class=2,LevelUpPoint=2853, Experience=820362580, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43874, MaxLife=63890, Mana=27468, MaxMana=25036, MapNumber=6, MapPosX=89, MapPosY=65, MapDir=3, PkCount=0, PkLevel=3, PkTime=174726, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:21:01 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:21:01 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:21:01 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:21:06 EXEC WZ_GetItemSerial
+23:21:13 EXEC WZ_GetItemSerial
+23:21:16 EXEC WZ_GetItemSerial
+23:21:23 EXEC WZ_GetItemSerial
+23:21:30 EXEC WZ_GetItemSerial
+23:21:30 EXEC WZ_GetItemSerial
+23:21:34 EXEC WZ_GetItemSerial
+23:21:38 EXEC WZ_GetItemSerial
+23:21:46 EXEC WZ_GetItemSerial
+23:21:46 EXEC WZ_GetItemSerial
+23:21:48 EXEC WZ_GetItemSerial
+23:21:48 EXEC WZ_GetItemSerial
+23:21:49 EXEC WZ_GetItemSerial
+23:22:03 UPDATE Character SET cLevel=331,Class=2,LevelUpPoint=2859, Experience=841671000, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43884, MaxLife=63900, Mana=27508, MaxMana=25056, MapNumber=6, MapPosX=87, MapPosY=64, MapDir=0, PkCount=0, PkLevel=3, PkTime=174788, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:22:03 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:22:03 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:22:03 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:22:03 EXEC WZ_GetItemSerial
+23:22:12 EXEC WZ_GetItemSerial
+23:22:12 EXEC WZ_GetItemSerial
+23:22:20 EXEC WZ_GetItemSerial
+23:22:27 EXEC WZ_GetItemSerial
+23:22:35 EXEC WZ_GetItemSerial
+23:22:35 EXEC WZ_GetItemSerial
+23:22:35 EXEC WZ_GetItemSerial
+23:22:39 UPDATE Character SET cLevel=331,Class=2,LevelUpPoint=2859, Experience=855298013, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43884, MaxLife=63900, Mana=27508, MaxMana=25056, MapNumber=6, MapPosX=88, MapPosY=63, MapDir=5, PkCount=0, PkLevel=3, PkTime=174824, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:22:39 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:22:39 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:22:39 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:22:42 EXEC WZ_GetItemSerial
+23:22:45 EXEC WZ_GetItemSerial
+23:22:51 EXEC WZ_GetItemSerial
+23:22:51 EXEC WZ_GetItemSerial
+23:22:52 EXEC WZ_GetItemSerial
+23:22:52 EXEC WZ_GetItemSerial
+23:23:04 UPDATE Character SET cLevel=332,Class=2,LevelUpPoint=2865, Experience=863467400, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43904, MaxLife=63910, Mana=27538, MaxMana=25076, MapNumber=6, MapPosX=87, MapPosY=63, MapDir=0, PkCount=0, PkLevel=3, PkTime=174850, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:23:04 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:23:04 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:23:04 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:23:06 EXEC WZ_GetItemSerial
+23:23:06 EXEC WZ_GetItemSerial
+23:23:07 EXEC WZ_GetItemSerial
+23:23:14 EXEC WZ_GetItemSerial
+23:23:22 EXEC WZ_GetItemSerial
+23:23:33 EXEC WZ_GetItemSerial
+23:23:36 EXEC WZ_GetItemSerial
+23:23:37 EXEC WZ_GetItemSerial
+23:23:38 EXEC WZ_GetItemSerial
+23:23:38 EXEC WZ_GetItemSerial
+23:23:55 EXEC WZ_GetItemSerial
+23:23:56 EXEC WZ_GetItemSerial
+23:23:57 EXEC WZ_GetItemSerial
+23:24:06 EXEC WZ_GetItemSerial
+23:24:07 EXEC WZ_GetItemSerial
+23:24:08 UPDATE Character SET cLevel=333,Class=2,LevelUpPoint=2871, Experience=885757840, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43914, MaxLife=63920, Mana=27558, MaxMana=25096, MapNumber=6, MapPosX=88, MapPosY=63, MapDir=2, PkCount=0, PkLevel=3, PkTime=174913, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:24:08 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:24:08 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:24:08 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:24:11 EXEC WZ_GetItemSerial
+23:24:31 EXEC WZ_GetItemSerial
+23:24:33 EXEC WZ_GetItemSerial
+23:24:34 EXEC WZ_GetItemSerial
+23:24:45 EXEC WZ_GetItemSerial
+23:24:49 EXEC WZ_GetItemSerial
+23:24:56 EXEC WZ_GetItemSerial
+23:24:58 EXEC WZ_GetItemSerial
+23:24:59 EXEC WZ_GetItemSerial
+23:25:10 UPDATE Character SET cLevel=334,Class=2,LevelUpPoint=2877, Experience=908548380, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43924, MaxLife=63930, Mana=27578, MaxMana=25116, MapNumber=6, MapPosX=88, MapPosY=65, MapDir=0, PkCount=0, PkLevel=3, PkTime=174975, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:25:10 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:25:10 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:25:10 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:25:12 EXEC WZ_GetItemSerial
+23:25:12 EXEC WZ_GetItemSerial
+23:25:21 EXEC WZ_GetItemSerial
+23:25:22 EXEC WZ_GetItemSerial
+23:25:24 EXEC WZ_GetItemSerial
+23:25:34 EXEC WZ_GetItemSerial
+23:25:37 EXEC WZ_GetItemSerial
+23:25:40 EXEC WZ_GetItemSerial
+23:25:44 EXEC WZ_GetItemSerial
+23:25:45 EXEC WZ_GetItemSerial
+23:25:52 EXEC WZ_GetItemSerial
+23:25:52 EXEC WZ_GetItemSerial
+23:25:53 EXEC WZ_GetItemSerial
+23:26:00 EXEC WZ_GetItemSerial
+23:26:08 UPDATE Character SET cLevel=335,Class=2,LevelUpPoint=2883, Experience=931845080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43934, MaxLife=63940, Mana=27698, MaxMana=25136, MapNumber=6, MapPosX=90, MapPosY=63, MapDir=0, PkCount=0, PkLevel=3, PkTime=175033, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:26:08 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:26:08 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:26:08 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:26:09 EXEC WZ_GetItemSerial
+23:26:09 EXEC WZ_GetItemSerial
+23:26:09 EXEC WZ_GetItemSerial
+23:26:18 EXEC WZ_GetItemSerial
+23:26:24 EXEC WZ_GetItemSerial
+23:26:24 EXEC WZ_GetItemSerial
+23:26:32 EXEC WZ_GetItemSerial
+23:26:33 EXEC WZ_GetItemSerial
+23:26:48 EXEC WZ_GetItemSerial
+23:26:55 EXEC WZ_GetItemSerial
+23:26:55 EXEC WZ_GetItemSerial
+23:27:01 EXEC WZ_GetItemSerial
+23:27:02 EXEC WZ_GetItemSerial
+23:27:04 EXEC WZ_GetItemSerial
+23:27:09 EXEC WZ_GetItemSerial
+23:27:11 EXEC WZ_GetItemSerial
+23:27:15 UPDATE Character SET cLevel=336,Class=2,LevelUpPoint=2889, Experience=955654000, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43944, MaxLife=63950, Mana=27718, MaxMana=25156, MapNumber=6, MapPosX=87, MapPosY=66, MapDir=3, PkCount=0, PkLevel=3, PkTime=175100, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:27:15 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:27:15 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:27:15 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:27:35 EXEC WZ_GetItemSerial
+23:27:37 EXEC WZ_GetItemSerial
+23:27:42 EXEC WZ_GetItemSerial
+23:27:46 EXEC WZ_GetItemSerial
+23:27:55 EXEC WZ_GetItemSerial
+23:27:56 EXEC WZ_GetItemSerial
+23:28:08 EXEC WZ_GetItemSerial
+23:28:10 EXEC WZ_GetItemSerial
+23:28:10 EXEC WZ_GetItemSerial
+23:28:21 EXEC WZ_GetItemSerial
+23:28:24 UPDATE Character SET cLevel=337,Class=2,LevelUpPoint=2895, Experience=979981200, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43984, MaxLife=63960, Mana=27738, MaxMana=25176, MapNumber=6, MapPosX=90, MapPosY=65, MapDir=0, PkCount=0, PkLevel=3, PkTime=175170, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:28:24 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:28:24 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:28:24 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:28:25 EXEC WZ_GetItemSerial
+23:28:27 EXEC WZ_GetItemSerial
+23:28:31 EXEC WZ_GetItemSerial
+23:28:43 EXEC WZ_GetItemSerial
+23:28:47 EXEC WZ_GetItemSerial
+23:28:50 EXEC WZ_GetItemSerial
+23:28:55 EXEC WZ_GetItemSerial
+23:28:56 EXEC WZ_GetItemSerial
+23:28:57 EXEC WZ_GetItemSerial
+23:29:01 EXEC WZ_GetItemSerial
+23:29:06 EXEC WZ_GetItemSerial
+23:29:08 EXEC WZ_GetItemSerial
+23:29:19 EXEC WZ_GetItemSerial
+23:29:25 EXEC WZ_GetItemSerial
+23:29:30 UPDATE Character SET cLevel=338,Class=2,LevelUpPoint=2901, Experience=1004832740, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43994, MaxLife=63970, Mana=27758, MaxMana=25196, MapNumber=6, MapPosX=88, MapPosY=64, MapDir=0, PkCount=0, PkLevel=3, PkTime=175236, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:29:30 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:29:30 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:29:30 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:29:46 EXEC WZ_GetItemSerial
+23:29:46 EXEC WZ_GetItemSerial
+23:29:47 EXEC WZ_GetItemSerial
+23:29:55 EXEC WZ_GetItemSerial
+23:29:55 EXEC WZ_GetItemSerial
+23:30:02 EXEC WZ_GetItemSerial
+23:30:24 EXEC WZ_GetItemSerial
+23:30:28 EXEC WZ_GetItemSerial
+23:30:30 EXEC WZ_GetItemSerial
+23:30:31 EXEC WZ_GetItemSerial
+23:30:34 EXEC WZ_GetItemSerial
+23:30:54 UPDATE Character SET cLevel=338,Class=2,LevelUpPoint=2901, Experience=1028125494, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=43994, MaxLife=63970, Mana=27758, MaxMana=25196, MapNumber=6, MapPosX=89, MapPosY=61, MapDir=0, PkCount=0, PkLevel=3, PkTime=175319, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:30:54 EXEC WZ_DISCONNECT_MEMB 'ngoc119'
+23:30:54 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:30:54 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:30:54 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+[Player] ngoc119 has been deleted
+23:50:19 SELECT * FROM MEMB_INFO WHERE memb___id='ngoc119'
+[Object] User ngoc119 has join
+23:50:19 EXEC WZ_CONNECT_MEMB 'ngoc119','Sub-3','45.122.232.61'
+23:50:20 SELECT Id FROM AccountCharacter WHERE Id='ngoc119'
+23:50:20 SELECT * FROM AccountCharacter WHERE Id='ngoc119'
+23:50:20 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='eewe'
+23:50:20 SELECT Inventory FROM Character WHERE Name='eewe'
+23:50:20 SELECT G_Status FROM GuildMember WHERE Name='eewe'
+23:50:20 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='Yoyo'
+23:50:20 SELECT Inventory FROM Character WHERE Name='Yoyo'
+23:50:20 SELECT G_Status FROM GuildMember WHERE Name='Yoyo'
+23:50:20 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjnhk'
+23:50:20 SELECT Inventory FROM Character WHERE Name='kjnhk'
+23:50:20 SELECT G_Status FROM GuildMember WHERE Name='kjnhk'
+23:50:20 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'ngoc119'
+23:50:20 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='ngoc119' AND BotLife < BotMaxLife
+23:50:21 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='ngoc119'
+23:50:23 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='Yoyo' AND AccountID='ngoc119'
+23:50:23 SELECT Inventory from Character where Name='Yoyo'
+23:50:23 SELECT MagicList from Character where Name='Yoyo'
+23:50:23 SELECT Quest from Character where Name='Yoyo'
+23:50:23 UPDATE AccountCharacter SET GameIDC='Yoyo' WHERE Id='ngoc119'
+23:50:23 SELECT * FROM OptionData WHERE Name='Yoyo'
+23:50:23 [WzExDB] [ExDB][Guild Member Info Request] Member [Yoyo].
+23:50:23 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='Yoyo'
+23:50:23 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'Yoyo'
+23:50:23 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+23:50:23 [WzExDB] [ExDB][Friend List Request] Name[Yoyo].
+23:50:23 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'Yoyo'
+23:50:23 SELECT Data FROM MuOnline.dbo.OfficialHelper where Name = 'Yoyo'
+23:50:23 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'Yoyo' and AccountID = 'ngoc119'
+23:50:23 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'Yoyo' and AccountID = 'ngoc119'
+23:50:23 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 15
+23:50:23 SELECT SkillKey from OptionData where Name='Yoyo'
+23:50:23 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'Yoyo'
+23:50:23 SELECT Name FROM MuOnline.dbo.Character WHERE Name = 'Yoyo' and AccountID = 'ngoc119'
+23:50:23 [WzExDB] [ExDB][Friend List Send] Name[Yoyo].
+23:50:23 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+23:50:23 SELECT FriendName FROM T_WaitFriend where GUID=15
+23:50:23 SELECT SCFMasterSkill FROM MuOnline.dbo.Character where Name = 'Yoyo' and AccountID = 'ngoc119'
+[WzExDB] [ExDB][Mail List Request] Name[Yoyo].
+23:50:23 [WzExDB] [ExDB][Mail List Send] Name[Yoyo].
+23:50:23 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=15
+23:50:23 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+23:52:18 UPDATE Character SET cLevel=339,Class=2,LevelUpPoint=2907, Experience=1030214680, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=44004, MaxLife=63980, Mana=27808, MaxMana=25216, MapNumber=6, MapPosX=92, MapPosY=74, MapDir=3, PkCount=0, PkLevel=3, PkTime=176604, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:52:18 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:52:18 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:52:18 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:52:19 EXEC WZ_GetItemSerial
+23:52:19 EXEC WZ_GetItemSerial
+23:52:20 EXEC WZ_GetItemSerial
+23:52:31 EXEC WZ_GetItemSerial
+23:52:31 EXEC WZ_GetItemSerial
+23:52:37 EXEC WZ_GetItemSerial
+23:52:50 EXEC WZ_GetItemSerial
+23:52:50 EXEC WZ_GetItemSerial
+23:52:51 EXEC WZ_GetItemSerial
+23:52:53 EXEC WZ_GetItemSerial
+23:52:59 EXEC WZ_GetItemSerial
+23:53:01 EXEC WZ_GetItemSerial
+23:53:03 EXEC WZ_GetItemSerial
+23:53:04 EXEC WZ_GetItemSerial
+23:53:07 EXEC WZ_GetItemSerial
+23:53:14 EXEC WZ_GetItemSerial
+23:53:14 EXEC WZ_GetItemSerial
+23:53:18 EXEC WZ_GetItemSerial
+23:53:30 EXEC WZ_GetItemSerial
+23:53:33 EXEC WZ_GetItemSerial
+23:53:34 EXEC WZ_GetItemSerial
+23:53:46 EXEC WZ_GetItemSerial
+23:53:47 EXEC WZ_GetItemSerial
+23:54:00 UPDATE Character SET cLevel=340,Class=2,LevelUpPoint=2913, Experience=1056133080, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=44014, MaxLife=63990, Mana=27838, MaxMana=25236, MapNumber=6, MapPosX=93, MapPosY=83, MapDir=2, PkCount=0, PkLevel=3, PkTime=176705, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:54:00 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:54:00 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:54:00 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:54:01 EXEC WZ_GetItemSerial
+23:54:01 EXEC WZ_GetItemSerial
+23:54:01 EXEC WZ_GetItemSerial
+23:54:01 EXEC WZ_GetItemSerial
+23:54:29 EXEC WZ_GetItemSerial
+23:54:29 EXEC WZ_GetItemSerial
+23:54:44 EXEC WZ_GetItemSerial
+23:54:58 EXEC WZ_GetItemSerial
+23:54:58 EXEC WZ_GetItemSerial
+23:55:00 EXEC WZ_GetItemSerial
+23:55:11 EXEC WZ_GetItemSerial
+23:55:12 EXEC WZ_GetItemSerial
+23:55:12 EXEC WZ_GetItemSerial
+23:55:13 EXEC WZ_GetItemSerial
+23:55:26 EXEC WZ_GetItemSerial
+23:55:37 EXEC WZ_GetItemSerial
+23:55:39 EXEC WZ_GetItemSerial
+23:55:39 EXEC WZ_GetItemSerial
+23:55:39 UPDATE Character SET cLevel=341,Class=2,LevelUpPoint=2919, Experience=1082594000, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=44024, MaxLife=64000, Mana=27858, MaxMana=25256, MapNumber=6, MapPosX=92, MapPosY=84, MapDir=2, PkCount=0, PkLevel=3, PkTime=176804, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:55:39 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:55:39 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:55:39 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:55:39 EXEC WZ_GetItemSerial
+23:55:52 EXEC WZ_GetItemSerial
+23:55:52 EXEC WZ_GetItemSerial
+23:56:06 EXEC WZ_GetItemSerial
+23:56:06 EXEC WZ_GetItemSerial
+23:56:21 EXEC WZ_GetItemSerial
+23:56:21 EXEC WZ_GetItemSerial
+23:56:21 EXEC WZ_GetItemSerial
+23:56:34 EXEC WZ_GetItemSerial
+23:56:34 EXEC WZ_GetItemSerial
+23:56:36 EXEC WZ_GetItemSerial
+23:56:48 EXEC WZ_GetItemSerial
+23:56:49 EXEC WZ_GetItemSerial
+23:56:49 EXEC WZ_GetItemSerial
+23:56:50 EXEC WZ_GetItemSerial
+23:57:02 EXEC WZ_GetItemSerial
+23:57:02 EXEC WZ_GetItemSerial
+23:57:02 EXEC WZ_GetItemSerial
+23:57:15 EXEC WZ_GetItemSerial
+23:57:15 EXEC WZ_GetItemSerial
+23:57:15 EXEC WZ_GetItemSerial
+23:57:15 EXEC WZ_GetItemSerial
+23:57:15 EXEC WZ_GetItemSerial
+23:57:16 UPDATE Character SET cLevel=342,Class=2,LevelUpPoint=2925, Experience=1109603500, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1999999500, Life=44124, MaxLife=64010, Mana=27878, MaxMana=25276, MapNumber=6, MapPosX=94, MapPosY=86, MapDir=4, PkCount=0, PkLevel=3, PkTime=176901, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:57:16 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:57:16 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:57:16 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:57:17 EXEC WZ_GetItemSerial
+23:57:28 EXEC WZ_GetItemSerial
+23:57:29 EXEC WZ_GetItemSerial
+23:57:30 EXEC WZ_GetItemSerial
+23:57:41 EXEC WZ_GetItemSerial
+23:57:42 EXEC WZ_GetItemSerial
+23:57:43 EXEC WZ_GetItemSerial
+23:57:56 EXEC WZ_GetItemSerial
+23:57:57 EXEC WZ_GetItemSerial
+23:57:58 EXEC WZ_GetItemSerial
+23:58:10 EXEC WZ_GetItemSerial
+23:58:11 EXEC WZ_GetItemSerial
+23:58:11 EXEC WZ_GetItemSerial
+23:58:12 EXEC WZ_GetItemSerial
+23:58:24 EXEC WZ_GetItemSerial
+23:58:24 EXEC WZ_GetItemSerial
+23:58:25 EXEC WZ_GetItemSerial
+23:58:25 EXEC WZ_GetItemSerial
+23:58:26 EXEC WZ_GetItemSerial
+23:58:39 EXEC WZ_GetItemSerial
+23:58:52 EXEC WZ_GetItemSerial
+23:58:52 EXEC WZ_GetItemSerial
+23:58:53 EXEC WZ_GetItemSerial
+23:58:53 EXEC WZ_GetItemSerial
+23:59:05 UPDATE Character SET cLevel=343,Class=2,LevelUpPoint=2931, Experience=1137167640, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=44134, MaxLife=64020, Mana=27898, MaxMana=25296, MapNumber=6, MapPosX=92, MapPosY=82, MapDir=7, PkCount=0, PkLevel=3, PkTime=177011, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+23:59:05 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+23:59:05 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+23:59:05 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+23:59:06 EXEC WZ_GetItemSerial
+23:59:06 EXEC WZ_GetItemSerial
+23:59:06 EXEC WZ_GetItemSerial
+23:59:08 EXEC WZ_GetItemSerial
+23:59:20 EXEC WZ_GetItemSerial
+23:59:20 EXEC WZ_GetItemSerial
+23:59:21 EXEC WZ_GetItemSerial
+23:59:50 EXEC WZ_GetItemSerial
+00:00:03 EXEC WZ_GetItemSerial
+00:00:04 EXEC WZ_GetItemSerial
+00:00:04 EXEC WZ_GetItemSerial
+00:00:04 EXEC WZ_GetItemSerial
+00:00:04 EXEC WZ_GetItemSerial
+00:00:04 EXEC WZ_GetItemSerial
+00:00:05 UPDATE Character SET cLevel=343,Class=2,LevelUpPoint=2931, Experience=1154240940, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=44134, MaxLife=64020, Mana=26998, MaxMana=25296, MapNumber=6, MapPosX=92, MapPosY=85, MapDir=5, PkCount=0, PkLevel=3, PkTime=177070, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+00:00:05 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+00:00:05 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+00:00:05 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+00:00:05 EXEC WZ_GetItemSerial
+00:00:17 EXEC WZ_GetItemSerial
+00:00:18 EXEC WZ_GetItemSerial
+00:00:18 EXEC WZ_GetItemSerial
+00:00:18 EXEC WZ_GetItemSerial
+00:00:20 EXEC WZ_GetItemSerial

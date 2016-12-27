@@ -1,0 +1,4 @@
+01:42:06  [bqngoc][lost][45.122.232.61] ClientHack Detected : Editing MagicSpeed [2014/2355]
+01:42:26  [bqngoc][lost][45.122.232.61] ClientHack Detected : Editing MagicSpeed [2014/2355]
+01:42:57  [bqngoc][lost][45.122.232.61] ClientHack Detected : Editing MagicSpeed [2014/2355]
+01:43:16  [bqngoc][lost][45.122.232.61] ClientHack Detected : Editing MagicSpeed [2014/2355]

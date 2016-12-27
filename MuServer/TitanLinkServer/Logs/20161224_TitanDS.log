@@ -1,0 +1,1895 @@
+Initialized log instance
+Initializing Servers...
+[AllowList] Loaded Successfull!
+[DataServer1] Initializing database connection
+[DataServer1] [DB] Connection Successfull!
+[DataServer1] Connected to MuOnline@MuOnline database
+[DataServer1] Initialized database connection
+[DataServer1] Initializing IOCP system connection
+[DataServer1] Server Listen OK. Port: 55960
+[DataServer1] Initialized IOCP system connection
+[DataServer2] Initializing database connection
+[DataServer2] [DB] Connection Successfull!
+[DataServer2] Connected to MuOnline@MuOnline database
+[DataServer2] Initialized database connection
+[DataServer2] Initializing IOCP system connection
+[DataServer2] Server Listen OK. Port: 55962
+[DataServer2] Initialized IOCP system connection
+[JoinServer] Initializing database connection
+[JoinServer] [DB] Connection Successfull!
+[JoinServer] Connected to MuOnline@MuOnlineJoinDB database
+[JoinServer] Initialized database connection
+[JoinServer] Initializing IOCP system connection
+[JoinServer] Server Listen OK. Port: 55970
+[JoinServer] Initialized IOCP system connection
+[ExtraServer] Initializing database connection
+[ExtraServer] [DB] Connection Successfull!
+[ExtraServer] Connected to MuOnline@MuOnline database
+[ExtraServer] Initialized database connection
+[ExtraServer] Initializing IOCP system connection
+[ExtraServer] Server Listen OK. Port: 55999
+[ExtraServer] Initialized IOCP system connection
+[WzExDB] Initializing database connection
+[WzExDB] [DB] Connection Successfull!
+[WzExDB] Connected to MuOnline@MuOnline database
+[WzExDB] Initialized database connection
+[WzExDB] Initializing IOCP system connection
+[WzExDB] Server Listen OK. Port: 55906
+[WzExDB] Initialized IOCP system connection
+13:17:09 SELECT * FROM Guild WHERE Number = G_Union
+13:17:09 SELECT * FROM Guild WHERE Number <> G_Union
+13:17:09 SELECT G_Mark FROM Guild WHERE G_Name = 'abc'
+13:17:09 [WzExDB] [ExDB][AddGuild] Guild [abc] Create Guild Master: [knight]
+13:17:09 SELECT * FROM GuildMember WHERE G_Name = 'abc'
+[WzExDB] [MuOnlineDB] GuildData Loaded in 78 msec
+[PostServer] Initializing IOCP system connection
+[PostServer] Server Listen OK. Port: 55998
+[PostServer] Initialized IOCP system connection
+Servers initialization in 827 msec
+[JoinServer] connect : [0][127.0.0.1]
+[DataServer1] connect : [0][127.0.0.1]
+[DataServer2] connect : [0][127.0.0.1]
+[WzExDB] connect : [0][127.0.0.1]
+13:17:41 SELECT ItemCount FROM GameServerInfo WHERE Number=0
+13:17:41 SELECT ItemCount FROM GameServerInfo WHERE Number=0
+[JoinServer] GameServer connected Sub-3 PORT : 55905 CODE : 2
+13:17:41 [WzExDB] [ExDB][ExDB] GameServer with ServerCode[2] connected.
+[PostServer] connect : [0][127.0.0.1]
+[PostServer] [PostServer][0] Connection Success: Server Code 2
+[ExtraServer] connect : [0][127.0.0.1]
+13:21:06 SELECT * FROM MEMB_INFO WHERE memb___id='test123'
+[Object] User test123 has join
+13:21:06 EXEC WZ_CONNECT_MEMB 'test123','Sub-3','45.122.232.61'
+13:21:07 SELECT Id FROM AccountCharacter WHERE Id='test123'
+13:21:07 INSERT INTO AccountCharacter (Id) VALUES ('test123')
+13:21:07 SELECT * FROM AccountCharacter WHERE Id='test123'
+13:21:07 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+13:21:07 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+13:21:07 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+13:21:15 SELECT * FROM AccountCharacter WHERE Id='test123'
+13:21:15 WZ_CreateCharacter 'test123', 'rreer', '16'
+13:21:16 UPDATE AccountCharacter SET GameID1='rreer' WHERE Id='test123'
+13:21:16 INSERT INTO SCFS5Quest (AccountID, Name) VALUES ('test123','rreer')
+13:21:18 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='rreer' AND AccountID='test123'
+13:21:18 SELECT Inventory from Character where Name='rreer'
+13:21:18 SELECT MagicList from Character where Name='rreer'
+13:21:18 SELECT Quest from Character where Name='rreer'
+13:21:18 UPDATE AccountCharacter SET GameIDC='rreer' WHERE Id='test123'
+13:21:18 SELECT * FROM OptionData WHERE Name='rreer'
+13:21:18 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'rreer'
+13:21:18 [WzExDB] [ExDB][Guild Member Info Request] Member [rreer].
+13:21:18 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='rreer'
+13:21:18 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+13:21:18 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'rreer'
+13:21:18 [WzExDB] [ExDB][Friend List Request] Name[rreer].
+13:21:18 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'rreer'
+13:21:18 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'rreer' and AccountID = 'test123'
+13:21:18 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'rreer' and AccountID = 'test123'
+13:21:18 WZ_UserGuidCreate 'rreer'
+13:21:18 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'rreer'
+13:21:18 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 18
+13:21:18 [WzExDB] [ExDB][Friend List Send] Name[rreer].
+13:21:18 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+13:21:18 SELECT FriendName FROM T_WaitFriend where GUID=18
+[WzExDB] [ExDB][Mail List Request] Name[rreer].
+13:21:18 [WzExDB] [ExDB][Mail List Send] Name[rreer].
+13:21:18 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=18
+13:21:18 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+13:21:34 SELECT MuItemShopList FROM MuOnline.dbo.MEMB_INFO where memb___id = 'test123'
+13:21:34 SELECT MuItemShopGiftList FROM MuOnline.dbo.MEMB_INFO where memb___id = 'test123'
+13:21:34 SELECT MuItemShopGiftMsg FROM MuOnline.dbo.MEMB_INFO where memb___id = 'test123'
+13:21:34 SELECT WCoin,WCoinP,GoblinCoin FROM MuOnline.dbo.MEMB_INFO where memb___id= 'test123'
+13:21:50 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:21:50 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:21:50 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:21:52 UPDATE warehouse SET Money=0, pw=0, DbVersion=3 WHERE AccountID='test123'
+13:21:52 UPDATE warehouse SET Items=? WHERE AccountID='test123'
+13:21:52 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:22:23 UPDATE Character SET cLevel=2,Class=16,LevelUpPoint=5, Experience=100, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1120, MaxLife=1120, Mana=205, MaxMana=205, MapNumber=0, MapPosX=174, MapPosY=128, MapDir=2, PkCount=0, PkLevel=3, PkTime=311609, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:22:23 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:22:23 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:22:23 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:22:23 EXEC WZ_GetItemSerial
+13:22:24 UPDATE Character SET cLevel=3,Class=16,LevelUpPoint=10, Experience=440, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1140, MaxLife=1140, Mana=210, MaxMana=210, MapNumber=0, MapPosX=174, MapPosY=128, MapDir=1, PkCount=0, PkLevel=3, PkTime=311610, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:22:24 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:22:24 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:22:24 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:22:27 UPDATE Character SET cLevel=4,Class=16,LevelUpPoint=15, Experience=1080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1160, MaxLife=1160, Mana=215, MaxMana=215, MapNumber=0, MapPosX=173, MapPosY=128, MapDir=0, PkCount=0, PkLevel=3, PkTime=311613, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:22:27 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:22:27 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:22:27 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:22:28 EXEC WZ_GetItemSerial
+13:22:39 UPDATE Character SET cLevel=5,Class=16,LevelUpPoint=20, Experience=2080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1180, MaxLife=1180, Mana=220, MaxMana=220, MapNumber=0, MapPosX=179, MapPosY=128, MapDir=2, PkCount=0, PkLevel=3, PkTime=311625, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:22:40 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:22:40 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:22:40 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:22:40 EXEC WZ_GetItemSerial
+13:22:43 UPDATE Character SET cLevel=6,Class=16,LevelUpPoint=25, Experience=3500, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1200, MaxLife=1200, Mana=225, MaxMana=225, MapNumber=0, MapPosX=179, MapPosY=128, MapDir=1, PkCount=0, PkLevel=3, PkTime=311629, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:22:43 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:22:43 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:22:43 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:22:44 EXEC WZ_GetItemSerial
+13:22:48 UPDATE Character SET cLevel=7,Class=16,LevelUpPoint=30, Experience=5400, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1220, MaxLife=1220, Mana=230, MaxMana=230, MapNumber=0, MapPosX=179, MapPosY=128, MapDir=1, PkCount=0, PkLevel=3, PkTime=311634, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:22:48 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:22:48 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:22:48 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:22:52 UPDATE Character SET cLevel=8,Class=16,LevelUpPoint=35, Experience=7840, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1240, MaxLife=1240, Mana=235, MaxMana=235, MapNumber=0, MapPosX=179, MapPosY=128, MapDir=3, PkCount=0, PkLevel=3, PkTime=311638, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:22:52 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:22:52 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:22:52 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:22:59 UPDATE Character SET cLevel=9,Class=16,LevelUpPoint=40, Experience=10880, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1260, MaxLife=1260, Mana=240, MaxMana=240, MapNumber=0, MapPosX=179, MapPosY=128, MapDir=2, PkCount=0, PkLevel=3, PkTime=311645, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:22:59 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:22:59 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:22:59 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:23:00 EXEC WZ_GetItemSerial
+13:23:00 EXEC WZ_GetItemSerial
+13:23:02 UPDATE Character SET cLevel=10,Class=16,LevelUpPoint=45, Experience=14580, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1280, MaxLife=1280, Mana=245, MaxMana=245, MapNumber=0, MapPosX=179, MapPosY=128, MapDir=4, PkCount=0, PkLevel=3, PkTime=311648, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:23:02 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:23:02 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:23:02 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:23:03 UPDATE Character SET cLevel=11,Class=16,LevelUpPoint=50, Experience=19000, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1300, MaxLife=1300, Mana=250, MaxMana=250, MapNumber=0, MapPosX=179, MapPosY=128, MapDir=0, PkCount=0, PkLevel=3, PkTime=311649, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:23:03 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:23:03 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:23:03 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:23:03 EXEC WZ_GetItemSerial
+13:23:08 UPDATE Character SET cLevel=12,Class=16,LevelUpPoint=55, Experience=24200, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1320, MaxLife=1320, Mana=255, MaxMana=255, MapNumber=0, MapPosX=179, MapPosY=128, MapDir=3, PkCount=0, PkLevel=3, PkTime=311654, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:23:08 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:23:08 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:23:08 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:23:09 EXEC WZ_GetItemSerial
+13:23:10 UPDATE Character SET cLevel=13,Class=16,LevelUpPoint=60, Experience=30240, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1340, MaxLife=1340, Mana=260, MaxMana=260, MapNumber=0, MapPosX=179, MapPosY=128, MapDir=5, PkCount=0, PkLevel=3, PkTime=311656, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:23:10 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:23:10 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:23:10 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:23:14 UPDATE Character SET cLevel=14,Class=16,LevelUpPoint=65, Experience=37180, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1360, MaxLife=1360, Mana=265, MaxMana=265, MapNumber=0, MapPosX=179, MapPosY=128, MapDir=7, PkCount=0, PkLevel=3, PkTime=311660, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:23:14 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:23:14 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:23:14 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:23:15 UPDATE Character SET cLevel=15,Class=16,LevelUpPoint=70, Experience=45080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1380, MaxLife=1380, Mana=270, MaxMana=270, MapNumber=0, MapPosX=179, MapPosY=128, MapDir=5, PkCount=0, PkLevel=3, PkTime=311661, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:23:15 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:23:15 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:23:15 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:23:18 UPDATE Character SET cLevel=16,Class=16,LevelUpPoint=75, Experience=54000, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1400, MaxLife=1400, Mana=275, MaxMana=275, MapNumber=0, MapPosX=179, MapPosY=128, MapDir=2, PkCount=0, PkLevel=3, PkTime=311664, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:23:18 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:23:18 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:23:18 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:23:19 EXEC WZ_GetItemSerial
+13:23:23 UPDATE Character SET cLevel=17,Class=16,LevelUpPoint=80, Experience=64000, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1420, MaxLife=1420, Mana=280, MaxMana=280, MapNumber=0, MapPosX=181, MapPosY=127, MapDir=2, PkCount=0, PkLevel=3, PkTime=311669, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:23:23 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:23:23 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:23:23 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:23:24 EXEC WZ_GetItemSerial
+13:23:52 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:23:52 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:23:52 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:23:53 UPDATE warehouse SET Money=0, pw=0, DbVersion=3 WHERE AccountID='test123'
+13:23:53 UPDATE warehouse SET Items=? WHERE AccountID='test123'
+13:23:53 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:24:13 UPDATE Character SET cLevel=18,Class=16,LevelUpPoint=85, Experience=75140, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1440, MaxLife=1440, Mana=285, MaxMana=285, MapNumber=0, MapPosX=177, MapPosY=126, MapDir=5, PkCount=0, PkLevel=3, PkTime=311719, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:24:13 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:24:13 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:24:13 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:24:14 EXEC WZ_GetItemSerial
+13:24:26 UPDATE Character SET cLevel=19,Class=16,LevelUpPoint=90, Experience=87480, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1460, MaxLife=1460, Mana=290, MaxMana=290, MapNumber=0, MapPosX=179, MapPosY=125, MapDir=3, PkCount=0, PkLevel=3, PkTime=311732, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:24:26 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:24:26 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:24:26 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:24:29 UPDATE Character SET cLevel=20,Class=16,LevelUpPoint=95, Experience=101080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1480, MaxLife=1480, Mana=295, MaxMana=295, MapNumber=0, MapPosX=180, MapPosY=125, MapDir=4, PkCount=0, PkLevel=3, PkTime=311735, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:24:29 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:24:29 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:24:29 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:24:34 UPDATE Character SET cLevel=21,Class=16,LevelUpPoint=100, Experience=116000, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1500, MaxLife=1500, Mana=300, MaxMana=300, MapNumber=0, MapPosX=180, MapPosY=125, MapDir=2, PkCount=0, PkLevel=3, PkTime=311740, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:24:34 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:24:34 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:24:34 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:24:35 EXEC WZ_GetItemSerial
+13:24:39 UPDATE Character SET cLevel=22,Class=16,LevelUpPoint=105, Experience=132300, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=0, Life=1520, MaxLife=1520, Mana=305, MaxMana=305, MapNumber=0, MapPosX=179, MapPosY=125, MapDir=4, PkCount=0, PkLevel=3, PkTime=311745, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:24:39 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:24:39 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:24:39 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:24:47 UPDATE Character SET cLevel=23,Class=16,LevelUpPoint=110, Experience=150040, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=30292, Life=1540, MaxLife=1540, Mana=310, MaxMana=310, MapNumber=0, MapPosX=180, MapPosY=127, MapDir=3, PkCount=0, PkLevel=3, PkTime=311753, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:24:47 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:24:47 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:24:47 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:24:57 UPDATE Character SET cLevel=24,Class=16,LevelUpPoint=115, Experience=169280, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=44362, Life=1560, MaxLife=1560, Mana=315, MaxMana=315, MapNumber=0, MapPosX=181, MapPosY=126, MapDir=2, PkCount=0, PkLevel=3, PkTime=311763, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:24:57 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:24:57 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:24:57 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:24:58 EXEC WZ_GetItemSerial
+13:25:04 UPDATE Character SET cLevel=25,Class=16,LevelUpPoint=120, Experience=190080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=44362, Life=1580, MaxLife=1580, Mana=320, MaxMana=320, MapNumber=0, MapPosX=181, MapPosY=126, MapDir=7, PkCount=0, PkLevel=3, PkTime=311770, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:25:04 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:25:04 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:25:04 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:25:23 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:25:23 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:25:23 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:25:31 UPDATE warehouse SET Money=0, pw=0, DbVersion=3 WHERE AccountID='test123'
+13:25:31 UPDATE warehouse SET Items=? WHERE AccountID='test123'
+13:25:31 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:27:32 SELECT Name FROM OptionData WHERE Name='rreer'
+13:27:32 INSERT INTO OptionData (Name, GameOption, Qkey, Wkey, Ekey, Rkey, ChatWindow) VALUES ('rreer', 9, 0, 255, 255, 255, 38)
+13:27:32 UPDATE OptionData SET SkillKey=? where Name='rreer'
+13:27:38 UPDATE Character SET cLevel=25,Class=16,LevelUpPoint=120, Experience=190080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=60158, Life=1580, MaxLife=1580, Mana=320, MaxMana=320, MapNumber=0, MapPosX=148, MapPosY=140, MapDir=0, PkCount=0, PkLevel=3, PkTime=311924, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:27:38 EXEC WZ_DISCONNECT_MEMB 'test123'
+13:27:38 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:27:38 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:27:38 UPDATE Character SET Quest=? WHERE Name='rreer'
+[Player] test123 has been deleted
+13:31:26 SELECT * FROM MEMB_INFO WHERE memb___id='test123'
+[Object] User test123 has join
+13:31:26 EXEC WZ_CONNECT_MEMB 'test123','Sub-3','45.122.232.61'
+13:31:27 SELECT Id FROM AccountCharacter WHERE Id='test123'
+13:31:27 SELECT * FROM AccountCharacter WHERE Id='test123'
+13:31:27 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='rreer'
+13:31:27 SELECT Inventory FROM Character WHERE Name='rreer'
+13:31:27 SELECT G_Status FROM GuildMember WHERE Name='rreer'
+13:31:27 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+13:31:27 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+13:31:27 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+13:31:30 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='rreer' AND AccountID='test123'
+13:31:30 SELECT Inventory from Character where Name='rreer'
+13:31:30 SELECT MagicList from Character where Name='rreer'
+13:31:30 SELECT Quest from Character where Name='rreer'
+13:31:30 UPDATE AccountCharacter SET GameIDC='rreer' WHERE Id='test123'
+13:31:30 SELECT * FROM OptionData WHERE Name='rreer'
+13:31:30 SELECT SkillKey from OptionData where Name='rreer'
+13:31:30 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'rreer'
+13:31:30 [WzExDB] [ExDB][Guild Member Info Request] Member [rreer].
+13:31:30 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='rreer'
+13:31:30 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'rreer'
+13:31:30 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+13:31:30 [WzExDB] [ExDB][Friend List Request] Name[rreer].
+13:31:30 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'rreer'
+13:31:30 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'rreer' and AccountID = 'test123'
+13:31:30 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'rreer' and AccountID = 'test123'
+13:31:30 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 18
+13:31:30 [WzExDB] [ExDB][Friend List Send] Name[rreer].
+13:31:30 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+13:31:30 SELECT FriendName FROM T_WaitFriend where GUID=18
+[WzExDB] [ExDB][Mail List Request] Name[rreer].
+13:31:30 [WzExDB] [ExDB][Mail List Send] Name[rreer].
+13:31:30 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=18
+13:31:30 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+13:31:53 SELECT Name FROM OptionData WHERE Name='rreer'
+13:31:53 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='rreer'
+13:31:53 UPDATE OptionData SET SkillKey=? where Name='rreer'
+13:31:59 UPDATE Character SET cLevel=25,Class=16,LevelUpPoint=120, Experience=190080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=60158, Life=1580, MaxLife=1580, Mana=320, MaxMana=320, MapNumber=0, MapPosX=147, MapPosY=138, MapDir=4, PkCount=0, PkLevel=3, PkTime=312185, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:31:59 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:31:59 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:31:59 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:31:59 SELECT Id FROM AccountCharacter WHERE Id='test123'
+13:31:59 SELECT * FROM AccountCharacter WHERE Id='test123'
+13:31:59 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='rreer'
+13:31:59 SELECT Inventory FROM Character WHERE Name='rreer'
+13:31:59 SELECT G_Status FROM GuildMember WHERE Name='rreer'
+13:31:59 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+13:31:59 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+13:31:59 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+13:32:02 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='rreer' AND AccountID='test123'
+13:32:02 SELECT Inventory from Character where Name='rreer'
+13:32:02 SELECT MagicList from Character where Name='rreer'
+13:32:02 SELECT Quest from Character where Name='rreer'
+13:32:02 UPDATE AccountCharacter SET GameIDC='rreer' WHERE Id='test123'
+13:32:02 SELECT * FROM OptionData WHERE Name='rreer'
+13:32:02 [WzExDB] [ExDB][Guild Member Info Request] Member [rreer].
+13:32:02 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='rreer'
+13:32:02 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'rreer'
+13:32:02 SELECT SkillKey from OptionData where Name='rreer'
+13:32:02 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'rreer'
+13:32:02 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+13:32:02 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'rreer' and AccountID = 'test123'
+13:32:02 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'rreer' and AccountID = 'test123'
+13:32:02 [WzExDB] [ExDB][Friend List Request] Name[rreer].
+13:32:02 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'rreer'
+13:32:02 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 18
+13:32:02 [WzExDB] [ExDB][Friend List Send] Name[rreer].
+13:32:02 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+13:32:02 SELECT FriendName FROM T_WaitFriend where GUID=18
+[WzExDB] [ExDB][Mail List Request] Name[rreer].
+13:32:02 [WzExDB] [ExDB][Mail List Send] Name[rreer].
+13:32:02 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=18
+13:32:02 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+13:32:06 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:32:06 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:32:06 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:32:09 UPDATE warehouse SET Money=0, pw=0, DbVersion=3 WHERE AccountID='test123'
+13:32:09 UPDATE warehouse SET Items=? WHERE AccountID='test123'
+13:32:09 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:41:16 UPDATE Character SET cLevel=25,Class=16,LevelUpPoint=120, Experience=190080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=60158, Life=1580, MaxLife=1580, Mana=320, MaxMana=320, MapNumber=0, MapPosX=146, MapPosY=144, MapDir=3, PkCount=0, PkLevel=3, PkTime=312742, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:41:16 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:41:16 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:41:16 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:41:20 SELECT Name FROM OptionData WHERE Name='rreer'
+13:41:20 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='rreer'
+13:41:20 UPDATE OptionData SET SkillKey=? where Name='rreer'
+13:41:25 UPDATE Character SET cLevel=25,Class=16,LevelUpPoint=120, Experience=190080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=60158, Life=1580, MaxLife=1580, Mana=320, MaxMana=320, MapNumber=0, MapPosX=146, MapPosY=135, MapDir=1, PkCount=0, PkLevel=3, PkTime=312751, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:41:25 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:41:25 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:41:25 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:41:25 SELECT Id FROM AccountCharacter WHERE Id='test123'
+13:41:25 SELECT * FROM AccountCharacter WHERE Id='test123'
+13:41:25 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='rreer'
+13:41:25 SELECT Inventory FROM Character WHERE Name='rreer'
+13:41:25 SELECT G_Status FROM GuildMember WHERE Name='rreer'
+13:41:25 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+13:41:25 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+13:41:25 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+13:41:28 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='rreer' AND AccountID='test123'
+13:41:28 SELECT Inventory from Character where Name='rreer'
+13:41:28 SELECT MagicList from Character where Name='rreer'
+13:41:28 SELECT Quest from Character where Name='rreer'
+13:41:28 UPDATE AccountCharacter SET GameIDC='rreer' WHERE Id='test123'
+13:41:28 SELECT * FROM OptionData WHERE Name='rreer'
+13:41:28 [WzExDB] [ExDB][Guild Member Info Request] Member [rreer].
+13:41:28 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='rreer'
+13:41:28 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'rreer'
+13:41:28 SELECT SkillKey from OptionData where Name='rreer'
+13:41:28 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'rreer'
+13:41:28 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+13:41:28 [WzExDB] [ExDB][Friend List Request] Name[rreer].
+13:41:28 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'rreer'
+13:41:28 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 18
+13:41:28 [WzExDB] [ExDB][Friend List Send] Name[rreer].
+13:41:28 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+13:41:28 SELECT FriendName FROM T_WaitFriend where GUID=18
+13:41:28 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'rreer' and AccountID = 'test123'
+13:41:28 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'rreer' and AccountID = 'test123'
+[WzExDB] [ExDB][Mail List Request] Name[rreer].
+13:41:28 [WzExDB] [ExDB][Mail List Send] Name[rreer].
+13:41:28 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=18
+13:41:28 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+13:41:35 SELECT Name FROM OptionData WHERE Name='rreer'
+13:41:35 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='rreer'
+13:41:35 UPDATE OptionData SET SkillKey=? where Name='rreer'
+13:41:42 UPDATE Character SET cLevel=25,Class=16,LevelUpPoint=120, Experience=190080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=60158, Life=1580, MaxLife=1580, Mana=320, MaxMana=320, MapNumber=0, MapPosX=146, MapPosY=135, MapDir=3, PkCount=0, PkLevel=3, PkTime=312767, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:41:42 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:41:42 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:41:42 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:41:42 SELECT Id FROM AccountCharacter WHERE Id='test123'
+13:41:42 SELECT * FROM AccountCharacter WHERE Id='test123'
+13:41:42 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='rreer'
+13:41:42 SELECT Inventory FROM Character WHERE Name='rreer'
+13:41:42 SELECT G_Status FROM GuildMember WHERE Name='rreer'
+13:41:42 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+13:41:42 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+13:41:42 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+13:42:12 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='rreer' AND AccountID='test123'
+13:42:12 SELECT Inventory from Character where Name='rreer'
+13:42:12 SELECT MagicList from Character where Name='rreer'
+13:42:12 SELECT Quest from Character where Name='rreer'
+13:42:12 UPDATE AccountCharacter SET GameIDC='rreer' WHERE Id='test123'
+13:42:12 SELECT * FROM OptionData WHERE Name='rreer'
+13:42:12 [WzExDB] [ExDB][Guild Member Info Request] Member [rreer].
+13:42:12 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='rreer'
+13:42:12 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'rreer'
+13:42:12 SELECT SkillKey from OptionData where Name='rreer'
+13:42:12 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'rreer'
+13:42:12 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+13:42:12 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'rreer' and AccountID = 'test123'
+13:42:12 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'rreer' and AccountID = 'test123'
+13:42:12 [WzExDB] [ExDB][Friend List Request] Name[rreer].
+13:42:12 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'rreer'
+13:42:12 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 18
+13:42:12 [WzExDB] [ExDB][Friend List Send] Name[rreer].
+13:42:12 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+13:42:12 SELECT FriendName FROM T_WaitFriend where GUID=18
+[WzExDB] [ExDB][Mail List Request] Name[rreer].
+13:42:12 [WzExDB] [ExDB][Mail List Send] Name[rreer].
+13:42:12 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=18
+13:42:12 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+13:43:08 SELECT Name FROM OptionData WHERE Name='rreer'
+13:43:08 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='rreer'
+13:43:08 UPDATE OptionData SET SkillKey=? where Name='rreer'
+13:43:14 UPDATE Character SET cLevel=25,Class=16,LevelUpPoint=120, Experience=190080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=60158, Life=1580, MaxLife=1580, Mana=320, MaxMana=320, MapNumber=0, MapPosX=156, MapPosY=128, MapDir=7, PkCount=0, PkLevel=3, PkTime=312860, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:43:14 EXEC WZ_DISCONNECT_MEMB 'test123'
+13:43:14 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:43:14 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:43:14 UPDATE Character SET Quest=? WHERE Name='rreer'
+[Player] test123 has been deleted
+13:44:10 SELECT * FROM MEMB_INFO WHERE memb___id='test'
+[JoinServer]  Account doesn't exist - ID : test
+13:44:15 SELECT * FROM MEMB_INFO WHERE memb___id='test123'
+[Object] User test123 has join
+13:44:15 EXEC WZ_CONNECT_MEMB 'test123','Sub-3','45.122.232.61'
+13:44:15 SELECT Id FROM AccountCharacter WHERE Id='test123'
+13:44:15 SELECT * FROM AccountCharacter WHERE Id='test123'
+13:44:15 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='rreer'
+13:44:15 SELECT Inventory FROM Character WHERE Name='rreer'
+13:44:15 SELECT G_Status FROM GuildMember WHERE Name='rreer'
+13:44:15 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+13:44:15 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+13:44:15 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+13:44:17 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='rreer' AND AccountID='test123'
+13:44:17 SELECT Inventory from Character where Name='rreer'
+13:44:17 SELECT MagicList from Character where Name='rreer'
+13:44:17 SELECT Quest from Character where Name='rreer'
+13:44:17 UPDATE AccountCharacter SET GameIDC='rreer' WHERE Id='test123'
+13:44:17 SELECT * FROM OptionData WHERE Name='rreer'
+13:44:17 [WzExDB] [ExDB][Guild Member Info Request] Member [rreer].
+13:44:17 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='rreer'
+13:44:17 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'rreer'
+13:44:17 SELECT SkillKey from OptionData where Name='rreer'
+13:44:17 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'rreer'
+13:44:17 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+13:44:17 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'rreer' and AccountID = 'test123'
+13:44:17 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'rreer' and AccountID = 'test123'
+13:44:17 [WzExDB] [ExDB][Friend List Request] Name[rreer].
+13:44:17 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'rreer'
+13:44:17 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 18
+13:44:17 [WzExDB] [ExDB][Friend List Send] Name[rreer].
+13:44:17 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+13:44:17 SELECT FriendName FROM T_WaitFriend where GUID=18
+[WzExDB] [ExDB][Mail List Request] Name[rreer].
+13:44:17 [WzExDB] [ExDB][Mail List Send] Name[rreer].
+13:44:17 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=18
+13:44:17 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+13:44:47 SELECT Name FROM OptionData WHERE Name='rreer'
+13:44:47 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='rreer'
+13:44:47 UPDATE OptionData SET SkillKey=? where Name='rreer'
+13:44:53 UPDATE Character SET cLevel=25,Class=16,LevelUpPoint=120, Experience=190080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=60158, Life=1580, MaxLife=1580, Mana=320, MaxMana=320, MapNumber=0, MapPosX=152, MapPosY=132, MapDir=1, PkCount=0, PkLevel=3, PkTime=312959, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+13:44:53 UPDATE Character SET Inventory=? WHERE Name='rreer'
+13:44:53 UPDATE Character SET MagicList=? WHERE Name='rreer'
+13:44:53 UPDATE Character SET Quest=? WHERE Name='rreer'
+13:44:53 SELECT Id FROM AccountCharacter WHERE Id='test123'
+13:44:53 SELECT * FROM AccountCharacter WHERE Id='test123'
+13:44:53 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='rreer'
+13:44:53 SELECT Inventory FROM Character WHERE Name='rreer'
+13:44:53 SELECT G_Status FROM GuildMember WHERE Name='rreer'
+13:44:53 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+13:44:53 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+13:44:53 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+13:44:59 SELECT * FROM AccountCharacter WHERE Id='test123'
+13:44:59 WZ_CreateCharacter 'test123', 'gerer', '32'
+13:44:59 UPDATE AccountCharacter SET GameID2='gerer' WHERE Id='test123'
+13:44:59 INSERT INTO SCFS5Quest (AccountID, Name) VALUES ('test123','gerer')
+13:45:00 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='gerer' AND AccountID='test123'
+13:45:00 SELECT Inventory from Character where Name='gerer'
+13:45:00 SELECT MagicList from Character where Name='gerer'
+13:45:00 SELECT Quest from Character where Name='gerer'
+13:45:00 UPDATE AccountCharacter SET GameIDC='gerer' WHERE Id='test123'
+13:45:00 SELECT * FROM OptionData WHERE Name='gerer'
+13:45:00 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'gerer'
+13:45:00 [WzExDB] [ExDB][Guild Member Info Request] Member [gerer].
+13:45:00 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='gerer'
+13:45:00 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'gerer'
+13:45:00 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+13:45:00 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'gerer' and AccountID = 'test123'
+13:45:00 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'gerer' and AccountID = 'test123'
+13:45:00 [WzExDB] [ExDB][Friend List Request] Name[gerer].
+13:45:00 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'gerer'
+13:45:00 WZ_UserGuidCreate 'gerer'
+13:45:00 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'gerer'
+13:45:00 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 19
+13:45:00 [WzExDB] [ExDB][Friend List Send] Name[gerer].
+13:45:00 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+13:45:00 SELECT FriendName FROM T_WaitFriend where GUID=19
+[WzExDB] [ExDB][Mail List Request] Name[gerer].
+13:45:00 [WzExDB] [ExDB][Mail List Send] Name[gerer].
+13:45:00 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=19
+13:45:00 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+13:45:18 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:45:18 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:45:18 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+13:45:19 UPDATE warehouse SET Money=0, pw=0, DbVersion=3 WHERE AccountID='test123'
+13:45:19 UPDATE warehouse SET Items=? WHERE AccountID='test123'
+13:45:19 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:37 UPDATE Character SET cLevel=2,Class=32,LevelUpPoint=5, Experience=100, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=810, MaxLife=810, Mana=315, MaxMana=315, MapNumber=3, MapPosX=153, MapPosY=116, MapDir=7, PkCount=0, PkLevel=3, PkTime=313003, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:45:37 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:37 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:45:37 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:45:38 EXEC WZ_GetItemSerial
+13:45:39 UPDATE Character SET cLevel=3,Class=32,LevelUpPoint=10, Experience=440, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=820, MaxLife=820, Mana=330, MaxMana=330, MapNumber=3, MapPosX=152, MapPosY=116, MapDir=0, PkCount=0, PkLevel=3, PkTime=313005, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:45:39 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:39 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:45:39 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:45:40 EXEC WZ_GetItemSerial
+13:45:40 EXEC WZ_GetItemSerial
+13:45:42 UPDATE Character SET cLevel=4,Class=32,LevelUpPoint=15, Experience=1080, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=554, Life=830, MaxLife=830, Mana=345, MaxMana=345, MapNumber=3, MapPosX=151, MapPosY=117, MapDir=6, PkCount=0, PkLevel=3, PkTime=313008, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:45:43 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:43 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:45:43 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:45:43 EXEC WZ_GetItemSerial
+13:45:45 UPDATE Character SET cLevel=5,Class=32,LevelUpPoint=20, Experience=2080, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=554, Life=840, MaxLife=840, Mana=360, MaxMana=360, MapNumber=3, MapPosX=149, MapPosY=119, MapDir=6, PkCount=0, PkLevel=3, PkTime=313011, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:45:45 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:45 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:45:45 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:45:47 UPDATE Character SET cLevel=6,Class=32,LevelUpPoint=25, Experience=3500, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=1641, Life=850, MaxLife=850, Mana=375, MaxMana=375, MapNumber=3, MapPosX=148, MapPosY=119, MapDir=7, PkCount=0, PkLevel=3, PkTime=313013, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:45:47 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:47 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:45:47 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:45:49 UPDATE Character SET cLevel=7,Class=32,LevelUpPoint=30, Experience=5400, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=1641, Life=860, MaxLife=860, Mana=390, MaxMana=390, MapNumber=3, MapPosX=146, MapPosY=121, MapDir=6, PkCount=0, PkLevel=3, PkTime=313015, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:45:49 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:50 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:45:50 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:45:50 UPDATE Character SET cLevel=8,Class=32,LevelUpPoint=35, Experience=7840, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=1641, Life=870, MaxLife=870, Mana=405, MaxMana=405, MapNumber=3, MapPosX=146, MapPosY=122, MapDir=6, PkCount=0, PkLevel=3, PkTime=313016, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:45:50 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:50 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:45:50 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:45:52 UPDATE Character SET cLevel=9,Class=32,LevelUpPoint=40, Experience=10880, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=6957, Life=880, MaxLife=880, Mana=420, MaxMana=420, MapNumber=3, MapPosX=144, MapPosY=121, MapDir=2, PkCount=0, PkLevel=3, PkTime=313018, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:45:52 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:52 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:45:52 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:45:54 UPDATE Character SET cLevel=10,Class=32,LevelUpPoint=45, Experience=14580, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=12560, Life=890, MaxLife=890, Mana=435, MaxMana=435, MapNumber=3, MapPosX=144, MapPosY=119, MapDir=1, PkCount=0, PkLevel=3, PkTime=313019, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:45:54 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:54 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:45:54 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:45:54 UPDATE Character SET cLevel=11,Class=32,LevelUpPoint=50, Experience=19000, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=12560, Life=900, MaxLife=900, Mana=450, MaxMana=450, MapNumber=3, MapPosX=144, MapPosY=119, MapDir=0, PkCount=0, PkLevel=3, PkTime=313020, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:45:54 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:54 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:45:54 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:45:55 EXEC WZ_GetItemSerial
+13:45:55 UPDATE Character SET cLevel=12,Class=32,LevelUpPoint=55, Experience=24200, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=12560, Life=910, MaxLife=910, Mana=465, MaxMana=465, MapNumber=3, MapPosX=144, MapPosY=119, MapDir=3, PkCount=0, PkLevel=3, PkTime=313021, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:45:55 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:55 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:45:55 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:45:56 EXEC WZ_GetItemSerial
+13:45:58 EXEC WZ_GetItemSerial
+13:45:58 UPDATE Character SET cLevel=13,Class=32,LevelUpPoint=60, Experience=30240, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=23049, Life=920, MaxLife=920, Mana=480, MaxMana=480, MapNumber=3, MapPosX=142, MapPosY=119, MapDir=1, PkCount=0, PkLevel=3, PkTime=313024, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:45:58 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:45:58 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:45:58 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:45:59 EXEC WZ_GetItemSerial
+13:46:06 UPDATE Character SET cLevel=14,Class=32,LevelUpPoint=65, Experience=37180, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=36558, Life=930, MaxLife=930, Mana=495, MaxMana=495, MapNumber=3, MapPosX=145, MapPosY=121, MapDir=5, PkCount=0, PkLevel=3, PkTime=313032, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:46:06 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:46:06 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:46:06 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:46:08 UPDATE Character SET cLevel=15,Class=32,LevelUpPoint=70, Experience=45080, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=36558, Life=940, MaxLife=940, Mana=510, MaxMana=510, MapNumber=3, MapPosX=144, MapPosY=121, MapDir=7, PkCount=0, PkLevel=3, PkTime=313034, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:46:08 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:46:08 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:46:08 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:46:09 EXEC WZ_GetItemSerial
+13:46:11 UPDATE Character SET cLevel=16,Class=32,LevelUpPoint=75, Experience=54000, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=45182, Life=950, MaxLife=950, Mana=525, MaxMana=525, MapNumber=3, MapPosX=144, MapPosY=120, MapDir=7, PkCount=0, PkLevel=3, PkTime=313037, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:46:11 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:46:11 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:46:11 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:46:11 EXEC WZ_GetItemSerial
+13:46:12 EXEC WZ_GetItemSerial
+13:46:14 EXEC WZ_GetItemSerial
+13:46:14 UPDATE Character SET cLevel=17,Class=32,LevelUpPoint=80, Experience=64000, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=45182, Life=960, MaxLife=960, Mana=540, MaxMana=540, MapNumber=3, MapPosX=143, MapPosY=120, MapDir=5, PkCount=0, PkLevel=3, PkTime=313040, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:46:14 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:46:14 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:46:14 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:46:49 SELECT Name FROM OptionData WHERE Name='gerer'
+13:46:49 INSERT INTO OptionData (Name, GameOption, Qkey, Wkey, Ekey, Rkey, ChatWindow) VALUES ('gerer', 9, 0, 255, 255, 255, 38)
+13:46:49 UPDATE OptionData SET SkillKey=? where Name='gerer'
+13:46:55 UPDATE Character SET cLevel=17,Class=32,LevelUpPoint=80, Experience=68305, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=52801, Life=960, MaxLife=960, Mana=540, MaxMana=540, MapNumber=3, MapPosX=175, MapPosY=112, MapDir=0, PkCount=0, PkLevel=3, PkTime=313081, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:46:55 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:46:55 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:46:55 UPDATE Character SET Quest=? WHERE Name='gerer'
+13:46:55 SELECT Id FROM AccountCharacter WHERE Id='test123'
+13:46:55 SELECT * FROM AccountCharacter WHERE Id='test123'
+13:46:55 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='rreer'
+13:46:55 SELECT Inventory FROM Character WHERE Name='rreer'
+13:46:55 SELECT G_Status FROM GuildMember WHERE Name='rreer'
+13:46:55 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='gerer'
+13:46:55 SELECT Inventory FROM Character WHERE Name='gerer'
+13:46:55 SELECT G_Status FROM GuildMember WHERE Name='gerer'
+13:46:55 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+13:46:55 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+13:46:55 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+13:47:24 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='gerer' AND AccountID='test123'
+13:47:24 SELECT Inventory from Character where Name='gerer'
+13:47:24 SELECT MagicList from Character where Name='gerer'
+13:47:24 SELECT Quest from Character where Name='gerer'
+13:47:24 UPDATE AccountCharacter SET GameIDC='gerer' WHERE Id='test123'
+13:47:24 SELECT * FROM OptionData WHERE Name='gerer'
+13:47:24 [WzExDB] [ExDB][Guild Member Info Request] Member [gerer].
+13:47:24 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='gerer'
+13:47:24 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'gerer'
+13:47:24 SELECT SkillKey from OptionData where Name='gerer'
+13:47:24 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'gerer'
+13:47:24 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+13:47:24 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'gerer' and AccountID = 'test123'
+13:47:24 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'gerer' and AccountID = 'test123'
+13:47:24 [WzExDB] [ExDB][Friend List Request] Name[gerer].
+13:47:24 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'gerer'
+13:47:24 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 19
+13:47:24 [WzExDB] [ExDB][Friend List Send] Name[gerer].
+13:47:24 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+13:47:24 SELECT FriendName FROM T_WaitFriend where GUID=19
+[WzExDB] [ExDB][Mail List Request] Name[gerer].
+13:47:24 [WzExDB] [ExDB][Mail List Send] Name[gerer].
+13:47:24 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=19
+13:47:24 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+13:47:33 SELECT Name FROM OptionData WHERE Name='gerer'
+13:47:33 UPDATE OptionData SET GameOption=9, Qkey=0, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='gerer'
+13:47:33 UPDATE OptionData SET SkillKey=? where Name='gerer'
+13:47:40 UPDATE Character SET cLevel=17,Class=32,LevelUpPoint=80, Experience=68305, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=52801, Life=960, MaxLife=960, Mana=540, MaxMana=540, MapNumber=3, MapPosX=175, MapPosY=112, MapDir=7, PkCount=0, PkLevel=3, PkTime=313126, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+13:47:40 EXEC WZ_DISCONNECT_MEMB 'test123'
+13:47:40 UPDATE Character SET Inventory=? WHERE Name='gerer'
+13:47:40 UPDATE Character SET MagicList=? WHERE Name='gerer'
+13:47:40 UPDATE Character SET Quest=? WHERE Name='gerer'
+[Player] test123 has been deleted
+14:01:09 SELECT * FROM MEMB_INFO WHERE memb___id='test123'
+[Object] User test123 has join
+14:01:09 EXEC WZ_CONNECT_MEMB 'test123','Sub-3','45.122.232.61'
+14:01:09 SELECT Id FROM AccountCharacter WHERE Id='test123'
+14:01:09 SELECT * FROM AccountCharacter WHERE Id='test123'
+14:01:09 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='rreer'
+14:01:09 SELECT Inventory FROM Character WHERE Name='rreer'
+14:01:09 SELECT G_Status FROM GuildMember WHERE Name='rreer'
+14:01:09 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='gerer'
+14:01:09 SELECT Inventory FROM Character WHERE Name='gerer'
+14:01:09 SELECT G_Status FROM GuildMember WHERE Name='gerer'
+14:01:09 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+14:01:09 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+14:01:09 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+14:01:12 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='gerer' AND AccountID='test123'
+14:01:12 SELECT Inventory from Character where Name='gerer'
+14:01:12 SELECT MagicList from Character where Name='gerer'
+14:01:12 SELECT Quest from Character where Name='gerer'
+14:01:12 UPDATE AccountCharacter SET GameIDC='gerer' WHERE Id='test123'
+14:01:12 SELECT * FROM OptionData WHERE Name='gerer'
+14:01:12 [WzExDB] [ExDB][Guild Member Info Request] Member [gerer].
+14:01:12 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='gerer'
+14:01:12 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'gerer'
+14:01:12 SELECT SkillKey from OptionData where Name='gerer'
+14:01:12 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'gerer'
+14:01:12 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+14:01:12 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'gerer' and AccountID = 'test123'
+14:01:12 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'gerer' and AccountID = 'test123'
+14:01:12 [WzExDB] [ExDB][Friend List Request] Name[gerer].
+14:01:12 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'gerer'
+14:01:12 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 19
+14:01:12 [WzExDB] [ExDB][Friend List Send] Name[gerer].
+14:01:12 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+14:01:12 SELECT FriendName FROM T_WaitFriend where GUID=19
+[WzExDB] [ExDB][Mail List Request] Name[gerer].
+14:01:12 [WzExDB] [ExDB][Mail List Send] Name[gerer].
+14:01:12 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=19
+14:01:12 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+14:01:27 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+14:01:27 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+14:01:27 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+14:01:28 UPDATE warehouse SET Money=0, pw=0, DbVersion=3 WHERE AccountID='test123'
+14:01:28 UPDATE warehouse SET Items=? WHERE AccountID='test123'
+14:01:28 UPDATE Character SET Inventory=? WHERE Name='gerer'
+14:01:38 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+14:01:38 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+14:01:38 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+14:02:06 UPDATE warehouse SET Money=40000, pw=0, DbVersion=3 WHERE AccountID='test123'
+14:02:06 UPDATE warehouse SET Items=? WHERE AccountID='test123'
+14:02:06 UPDATE Character SET Inventory=? WHERE Name='gerer'
+14:02:13 SELECT Name FROM OptionData WHERE Name='gerer'
+14:02:13 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='gerer'
+14:02:13 UPDATE OptionData SET SkillKey=? where Name='gerer'
+14:02:19 UPDATE Character SET cLevel=17,Class=32,LevelUpPoint=80, Experience=68305, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=12801, Life=960, MaxLife=960, Mana=540, MaxMana=540, MapNumber=3, MapPosX=172, MapPosY=96, MapDir=6, PkCount=0, PkLevel=3, PkTime=314005, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'gerer'
+14:02:19 UPDATE Character SET Inventory=? WHERE Name='gerer'
+14:02:19 UPDATE Character SET MagicList=? WHERE Name='gerer'
+14:02:19 UPDATE Character SET Quest=? WHERE Name='gerer'
+14:02:19 SELECT Id FROM AccountCharacter WHERE Id='test123'
+14:02:19 SELECT * FROM AccountCharacter WHERE Id='test123'
+14:02:19 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='rreer'
+14:02:19 SELECT Inventory FROM Character WHERE Name='rreer'
+14:02:19 SELECT G_Status FROM GuildMember WHERE Name='rreer'
+14:02:19 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='gerer'
+14:02:19 SELECT Inventory FROM Character WHERE Name='gerer'
+14:02:19 SELECT G_Status FROM GuildMember WHERE Name='gerer'
+14:02:19 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+14:02:19 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+14:02:19 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+14:02:21 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='rreer' AND AccountID='test123'
+14:02:21 SELECT Inventory from Character where Name='rreer'
+14:02:21 SELECT MagicList from Character where Name='rreer'
+14:02:21 SELECT Quest from Character where Name='rreer'
+14:02:21 UPDATE AccountCharacter SET GameIDC='rreer' WHERE Id='test123'
+14:02:21 SELECT * FROM OptionData WHERE Name='rreer'
+14:02:21 [WzExDB] [ExDB][Guild Member Info Request] Member [rreer].
+14:02:21 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='rreer'
+14:02:21 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'rreer'
+14:02:21 SELECT SkillKey from OptionData where Name='rreer'
+14:02:21 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'rreer'
+14:02:21 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+14:02:21 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'rreer' and AccountID = 'test123'
+14:02:21 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'rreer' and AccountID = 'test123'
+14:02:21 [WzExDB] [ExDB][Friend List Request] Name[rreer].
+14:02:21 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'rreer'
+14:02:21 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 18
+14:02:21 [WzExDB] [ExDB][Friend List Send] Name[rreer].
+14:02:21 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+14:02:21 SELECT FriendName FROM T_WaitFriend where GUID=18
+[WzExDB] [ExDB][Mail List Request] Name[rreer].
+14:02:21 [WzExDB] [ExDB][Mail List Send] Name[rreer].
+14:02:21 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=18
+14:02:21 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+14:02:28 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+14:02:28 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+14:02:28 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+14:02:58 UPDATE warehouse SET Money=90000, pw=0, DbVersion=3 WHERE AccountID='test123'
+14:02:58 UPDATE warehouse SET Items=? WHERE AccountID='test123'
+14:02:58 UPDATE Character SET Inventory=? WHERE Name='rreer'
+14:03:06 SELECT Name FROM OptionData WHERE Name='rreer'
+14:03:06 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='rreer'
+14:03:06 UPDATE OptionData SET SkillKey=? where Name='rreer'
+14:03:12 UPDATE Character SET cLevel=25,Class=16,LevelUpPoint=120, Experience=190080, Strength=28, Dexterity=20, Vitality=25, Energy=10, Money=10158, Life=1580, MaxLife=1580, Mana=320, MaxMana=320, MapNumber=0, MapPosX=145, MapPosY=143, MapDir=2, PkCount=0, PkLevel=3, PkTime=314058, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'rreer'
+14:03:12 UPDATE Character SET Inventory=? WHERE Name='rreer'
+14:03:12 UPDATE Character SET MagicList=? WHERE Name='rreer'
+14:03:12 UPDATE Character SET Quest=? WHERE Name='rreer'
+14:03:12 SELECT Id FROM AccountCharacter WHERE Id='test123'
+14:03:12 SELECT * FROM AccountCharacter WHERE Id='test123'
+14:03:12 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='rreer'
+14:03:12 SELECT Inventory FROM Character WHERE Name='rreer'
+14:03:12 SELECT G_Status FROM GuildMember WHERE Name='rreer'
+14:03:12 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='gerer'
+14:03:12 SELECT Inventory FROM Character WHERE Name='gerer'
+14:03:12 SELECT G_Status FROM GuildMember WHERE Name='gerer'
+14:03:12 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+14:03:12 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+14:03:12 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+14:03:19 DELETE FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'rreer' and AccountID= 'test123'
+14:03:19 DELETE FROM Character WHERE AccountID='test123' AND Name='rreer'
+14:03:19 SELECT * FROM AccountCharacter WHERE Id='test123'
+14:03:19 UPDATE AccountCharacter SET GameID1=NULL WHERE Id='test123'
+14:03:24 DELETE FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'gerer' and AccountID= 'test123'
+14:03:24 DELETE FROM Character WHERE AccountID='test123' AND Name='gerer'
+14:03:24 SELECT * FROM AccountCharacter WHERE Id='test123'
+14:03:24 UPDATE AccountCharacter SET GameID2=NULL WHERE Id='test123'
+14:04:11 SELECT * FROM AccountCharacter WHERE Id='test123'
+14:04:11 WZ_CreateCharacter 'test123', 'jhbjk', '0'
+14:04:11 UPDATE AccountCharacter SET GameID1='jhbjk' WHERE Id='test123'
+14:04:11 INSERT INTO SCFS5Quest (AccountID, Name) VALUES ('test123','jhbjk')
+14:04:16 SELECT * FROM AccountCharacter WHERE Id='test123'
+14:04:16 WZ_CreateCharacter 'test123', 'kjjnkn', '32'
+14:04:16 UPDATE AccountCharacter SET GameID2='kjjnkn' WHERE Id='test123'
+14:04:16 INSERT INTO SCFS5Quest (AccountID, Name) VALUES ('test123','kjjnkn')
+14:04:17 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='jhbjk' AND AccountID='test123'
+14:04:17 SELECT Inventory from Character where Name='jhbjk'
+14:04:17 SELECT MagicList from Character where Name='jhbjk'
+14:04:17 SELECT Quest from Character where Name='jhbjk'
+14:04:17 UPDATE AccountCharacter SET GameIDC='jhbjk' WHERE Id='test123'
+14:04:17 SELECT * FROM OptionData WHERE Name='jhbjk'
+14:04:17 [WzExDB] [ExDB][Guild Member Info Request] Member [jhbjk].
+14:04:17 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='jhbjk'
+14:04:17 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'jhbjk'
+14:04:17 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'jhbjk'
+14:04:17 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+14:04:17 [WzExDB] [ExDB][Friend List Request] Name[jhbjk].
+14:04:17 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'jhbjk'
+14:04:17 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'jhbjk' and AccountID = 'test123'
+14:04:17 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'jhbjk' and AccountID = 'test123'
+14:04:17 WZ_UserGuidCreate 'jhbjk'
+14:04:17 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'jhbjk'
+14:04:17 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 20
+14:04:17 [WzExDB] [ExDB][Friend List Send] Name[jhbjk].
+14:04:17 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+14:04:17 SELECT FriendName FROM T_WaitFriend where GUID=20
+[WzExDB] [ExDB][Mail List Request] Name[jhbjk].
+14:04:18 [WzExDB] [ExDB][Mail List Send] Name[jhbjk].
+14:04:18 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=20
+14:04:18 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+14:04:27 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+14:04:27 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+14:04:27 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+14:04:43 UPDATE warehouse SET Money=89981, pw=0, DbVersion=3 WHERE AccountID='test123'
+14:04:43 UPDATE warehouse SET Items=? WHERE AccountID='test123'
+14:04:43 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:05:09 UPDATE warehouse SET Money=89981 WHERE AccountID='test123'
+14:05:41 UPDATE warehouse SET Money=89981 WHERE AccountID='test123'
+14:06:15 UPDATE warehouse SET Money=89981 WHERE AccountID='test123'
+14:06:39 UPDATE warehouse SET Money=89981 WHERE AccountID='test123'
+14:07:01 UPDATE Character SET cLevel=2,Class=0,LevelUpPoint=5, Experience=100, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=610, MaxLife=610, Mana=620, MaxMana=620, MapNumber=0, MapPosX=173, MapPosY=128, MapDir=1, PkCount=0, PkLevel=3, PkTime=314287, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:07:01 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:07:01 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:07:01 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:07:06 UPDATE Character SET cLevel=3,Class=0,LevelUpPoint=10, Experience=440, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=620, MaxLife=620, Mana=640, MaxMana=640, MapNumber=0, MapPosX=173, MapPosY=129, MapDir=3, PkCount=0, PkLevel=3, PkTime=314292, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:07:06 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:07:06 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:07:06 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:07:14 UPDATE Character SET cLevel=4,Class=0,LevelUpPoint=15, Experience=1080, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=630, MaxLife=630, Mana=660, MaxMana=660, MapNumber=0, MapPosX=180, MapPosY=126, MapDir=7, PkCount=0, PkLevel=3, PkTime=314300, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:07:14 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:07:14 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:07:14 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:07:15 EXEC WZ_GetItemSerial
+14:07:16 UPDATE Character SET cLevel=5,Class=0,LevelUpPoint=20, Experience=2080, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=640, MaxLife=640, Mana=680, MaxMana=680, MapNumber=0, MapPosX=180, MapPosY=126, MapDir=2, PkCount=0, PkLevel=3, PkTime=314302, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:07:16 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:07:16 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:07:16 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:07:23 UPDATE Character SET cLevel=6,Class=0,LevelUpPoint=25, Experience=3500, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=650, MaxLife=650, Mana=700, MaxMana=700, MapNumber=0, MapPosX=180, MapPosY=126, MapDir=3, PkCount=0, PkLevel=3, PkTime=314309, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:07:23 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:07:23 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:07:23 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:07:28 UPDATE Character SET cLevel=7,Class=0,LevelUpPoint=30, Experience=5400, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=660, MaxLife=660, Mana=720, MaxMana=720, MapNumber=0, MapPosX=180, MapPosY=126, MapDir=1, PkCount=0, PkLevel=3, PkTime=314314, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:07:28 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:07:28 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:07:28 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:07:37 UPDATE Character SET cLevel=8,Class=0,LevelUpPoint=35, Experience=7840, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=670, MaxLife=670, Mana=740, MaxMana=740, MapNumber=0, MapPosX=180, MapPosY=126, MapDir=3, PkCount=0, PkLevel=3, PkTime=314323, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:07:37 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:07:37 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:07:37 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:07:38 UPDATE Character SET cLevel=9,Class=0,LevelUpPoint=40, Experience=10880, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=680, MaxLife=680, Mana=760, MaxMana=760, MapNumber=0, MapPosX=180, MapPosY=126, MapDir=5, PkCount=0, PkLevel=3, PkTime=314324, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:07:38 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:07:38 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:07:38 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:07:39 UPDATE Character SET cLevel=10,Class=0,LevelUpPoint=45, Experience=14580, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=690, MaxLife=690, Mana=780, MaxMana=780, MapNumber=0, MapPosX=180, MapPosY=126, MapDir=4, PkCount=0, PkLevel=3, PkTime=314325, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:07:39 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:07:39 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:07:39 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:07:45 UPDATE Character SET cLevel=11,Class=0,LevelUpPoint=50, Experience=19000, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=700, MaxLife=700, Mana=800, MaxMana=800, MapNumber=0, MapPosX=180, MapPosY=126, MapDir=0, PkCount=0, PkLevel=3, PkTime=314331, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:07:45 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:07:45 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:07:45 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:07:46 EXEC WZ_GetItemSerial
+14:07:47 UPDATE Character SET cLevel=12,Class=0,LevelUpPoint=55, Experience=24200, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=710, MaxLife=710, Mana=820, MaxMana=820, MapNumber=0, MapPosX=180, MapPosY=126, MapDir=5, PkCount=0, PkLevel=3, PkTime=314333, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:07:47 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:07:47 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:07:47 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:07:48 EXEC WZ_GetItemSerial
+14:07:50 UPDATE Character SET cLevel=13,Class=0,LevelUpPoint=60, Experience=30240, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=720, MaxLife=720, Mana=840, MaxMana=840, MapNumber=0, MapPosX=180, MapPosY=126, MapDir=0, PkCount=0, PkLevel=3, PkTime=314336, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:07:50 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:07:50 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:07:50 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:10:56 UPDATE Character SET cLevel=13,Class=0,LevelUpPoint=60, Experience=30240, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=720, MaxLife=720, Mana=840, MaxMana=840, MapNumber=0, MapPosX=168, MapPosY=128, MapDir=0, PkCount=0, PkLevel=3, PkTime=314522, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:10:56 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:10:56 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:10:56 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:14:02 SELECT Name FROM OptionData WHERE Name='jhbjk'
+14:14:02 INSERT INTO OptionData (Name, GameOption, Qkey, Wkey, Ekey, Rkey, ChatWindow) VALUES ('jhbjk', 9, 255, 255, 255, 255, 38)
+14:14:02 UPDATE OptionData SET SkillKey=? where Name='jhbjk'
+14:14:07 UPDATE Character SET cLevel=13,Class=0,LevelUpPoint=60, Experience=30240, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=720, MaxLife=720, Mana=840, MaxMana=840, MapNumber=0, MapPosX=153, MapPosY=130, MapDir=0, PkCount=0, PkLevel=3, PkTime=314713, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+14:14:07 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+14:14:07 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+14:14:07 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+14:14:08 SELECT Id FROM AccountCharacter WHERE Id='test123'
+14:14:08 SELECT * FROM AccountCharacter WHERE Id='test123'
+14:14:08 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+14:14:08 SELECT Inventory FROM Character WHERE Name='jhbjk'
+14:14:08 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+14:14:08 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjjnkn'
+14:14:08 SELECT Inventory FROM Character WHERE Name='kjjnkn'
+14:14:08 SELECT G_Status FROM GuildMember WHERE Name='kjjnkn'
+14:14:08 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+14:14:08 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+14:14:08 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+14:22:00 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='kjjnkn' AND AccountID='test123'
+14:22:00 SELECT Inventory from Character where Name='kjjnkn'
+14:22:00 SELECT MagicList from Character where Name='kjjnkn'
+14:22:00 SELECT Quest from Character where Name='kjjnkn'
+14:22:00 UPDATE AccountCharacter SET GameIDC='kjjnkn' WHERE Id='test123'
+14:22:00 SELECT * FROM OptionData WHERE Name='kjjnkn'
+14:22:00 [WzExDB] [ExDB][Guild Member Info Request] Member [kjjnkn].
+14:22:00 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='kjjnkn'
+14:22:00 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'kjjnkn'
+14:22:00 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'kjjnkn'
+14:22:00 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+14:22:00 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'kjjnkn' and AccountID = 'test123'
+14:22:00 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'kjjnkn' and AccountID = 'test123'
+14:22:00 [WzExDB] [ExDB][Friend List Request] Name[kjjnkn].
+14:22:00 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'kjjnkn'
+14:22:00 WZ_UserGuidCreate 'kjjnkn'
+14:22:00 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'kjjnkn'
+14:22:00 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 21
+14:22:00 [WzExDB] [ExDB][Friend List Send] Name[kjjnkn].
+14:22:00 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+14:22:00 SELECT FriendName FROM T_WaitFriend where GUID=21
+[WzExDB] [ExDB][Mail List Request] Name[kjjnkn].
+14:22:00 [WzExDB] [ExDB][Mail List Send] Name[kjjnkn].
+14:22:00 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=21
+14:22:00 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+14:22:01 UPDATE Character SET cLevel=1,Class=32,LevelUpPoint=0, Experience=0, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=80, MaxLife=800, Mana=30, MaxMana=300, MapNumber=3, MapPosX=182, MapPosY=117, MapDir=0, PkCount=0, PkLevel=3, PkTime=0, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+14:22:01 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+14:22:01 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+14:22:01 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+14:22:24 UPDATE Character SET cLevel=1,Class=32,LevelUpPoint=0, Experience=0, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=530, MaxLife=800, Mana=300, MaxMana=300, MapNumber=3, MapPosX=180, MapPosY=122, MapDir=4, PkCount=0, PkLevel=3, PkTime=315210, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+14:22:24 EXEC WZ_DISCONNECT_MEMB 'test123'
+14:22:24 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+14:22:24 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+14:22:24 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+[Player] test123 has been deleted
+14:24:06 SELECT * FROM MEMB_INFO WHERE memb___id='test123'
+[Object] User test123 has join
+14:24:06 EXEC WZ_CONNECT_MEMB 'test123','Sub-3','45.122.232.61'
+14:24:06 SELECT Id FROM AccountCharacter WHERE Id='test123'
+14:24:06 SELECT * FROM AccountCharacter WHERE Id='test123'
+14:24:06 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+14:24:06 SELECT Inventory FROM Character WHERE Name='jhbjk'
+14:24:06 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+14:24:06 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjjnkn'
+14:24:06 SELECT Inventory FROM Character WHERE Name='kjjnkn'
+14:24:06 SELECT G_Status FROM GuildMember WHERE Name='kjjnkn'
+14:24:06 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+14:24:06 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+14:24:06 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+14:24:09 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='kjjnkn' AND AccountID='test123'
+14:24:09 SELECT Inventory from Character where Name='kjjnkn'
+14:24:09 SELECT MagicList from Character where Name='kjjnkn'
+14:24:09 SELECT Quest from Character where Name='kjjnkn'
+14:24:09 UPDATE AccountCharacter SET GameIDC='kjjnkn' WHERE Id='test123'
+14:24:09 SELECT * FROM OptionData WHERE Name='kjjnkn'
+14:24:09 [WzExDB] [ExDB][Guild Member Info Request] Member [kjjnkn].
+14:24:09 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='kjjnkn'
+14:24:09 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'kjjnkn'
+14:24:09 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'kjjnkn'
+14:24:09 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+14:24:09 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'kjjnkn' and AccountID = 'test123'
+14:24:09 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'kjjnkn' and AccountID = 'test123'
+14:24:09 [WzExDB] [ExDB][Friend List Request] Name[kjjnkn].
+14:24:09 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'kjjnkn'
+14:24:09 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 21
+14:24:09 [WzExDB] [ExDB][Friend List Send] Name[kjjnkn].
+14:24:09 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+14:24:09 SELECT FriendName FROM T_WaitFriend where GUID=21
+[WzExDB] [ExDB][Mail List Request] Name[kjjnkn].
+14:24:09 [WzExDB] [ExDB][Mail List Send] Name[kjjnkn].
+14:24:09 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=21
+14:24:09 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+14:24:26 UPDATE Character SET cLevel=2,Class=32,LevelUpPoint=5, Experience=100, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=810, MaxLife=810, Mana=315, MaxMana=315, MapNumber=3, MapPosX=154, MapPosY=116, MapDir=3, PkCount=0, PkLevel=3, PkTime=315332, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+14:24:26 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+14:24:26 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+14:24:26 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+14:24:28 UPDATE Character SET cLevel=3,Class=32,LevelUpPoint=10, Experience=440, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=820, MaxLife=820, Mana=330, MaxMana=330, MapNumber=3, MapPosX=155, MapPosY=118, MapDir=7, PkCount=0, PkLevel=3, PkTime=315334, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+14:24:28 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+14:24:28 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+14:24:28 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+14:24:29 EXEC WZ_GetItemSerial
+14:27:00 UPDATE Character SET cLevel=4,Class=32,LevelUpPoint=15, Experience=1080, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=830, MaxLife=830, Mana=345, MaxMana=345, MapNumber=3, MapPosX=159, MapPosY=121, MapDir=2, PkCount=0, PkLevel=3, PkTime=315486, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+14:27:00 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+14:27:00 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+14:27:00 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+14:27:02 UPDATE Character SET cLevel=5,Class=32,LevelUpPoint=20, Experience=2080, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=840, MaxLife=840, Mana=360, MaxMana=360, MapNumber=3, MapPosX=157, MapPosY=119, MapDir=6, PkCount=0, PkLevel=3, PkTime=315488, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+14:27:02 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+14:27:02 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+14:27:02 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+14:27:03 EXEC WZ_GetItemSerial
+14:28:35 UPDATE Character SET cLevel=6,Class=32,LevelUpPoint=25, Experience=3500, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=850, MaxLife=850, Mana=375, MaxMana=375, MapNumber=3, MapPosX=153, MapPosY=113, MapDir=5, PkCount=0, PkLevel=3, PkTime=315581, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+14:28:35 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+14:28:35 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+14:28:35 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+14:28:36 EXEC WZ_GetItemSerial
+14:28:47 UPDATE Character SET cLevel=7,Class=32,LevelUpPoint=30, Experience=5400, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=860, MaxLife=860, Mana=390, MaxMana=390, MapNumber=3, MapPosX=154, MapPosY=117, MapDir=4, PkCount=0, PkLevel=3, PkTime=315593, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+14:28:47 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+14:28:47 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+14:28:47 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+14:28:48 EXEC WZ_GetItemSerial
+14:28:51 UPDATE Character SET cLevel=8,Class=32,LevelUpPoint=35, Experience=7840, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=870, MaxLife=870, Mana=405, MaxMana=405, MapNumber=3, MapPosX=154, MapPosY=117, MapDir=2, PkCount=0, PkLevel=3, PkTime=315597, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+14:28:51 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+14:28:51 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+14:28:51 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+14:28:52 EXEC WZ_GetItemSerial
+14:29:24 SELECT Name FROM OptionData WHERE Name='kjjnkn'
+14:29:24 INSERT INTO OptionData (Name, GameOption, Qkey, Wkey, Ekey, Rkey, ChatWindow) VALUES ('kjjnkn', 9, 255, 255, 255, 255, 38)
+14:29:24 UPDATE OptionData SET SkillKey=? where Name='kjjnkn'
+14:29:30 UPDATE Character SET cLevel=8,Class=32,LevelUpPoint=35, Experience=7840, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=870, MaxLife=870, Mana=405, MaxMana=405, MapNumber=3, MapPosX=173, MapPosY=113, MapDir=0, PkCount=0, PkLevel=3, PkTime=315636, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+14:29:30 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+14:29:30 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+14:29:30 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+14:29:30 SELECT Id FROM AccountCharacter WHERE Id='test123'
+14:29:30 SELECT * FROM AccountCharacter WHERE Id='test123'
+14:29:30 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+14:29:30 SELECT Inventory FROM Character WHERE Name='jhbjk'
+14:29:30 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+14:29:30 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjjnkn'
+14:29:30 SELECT Inventory FROM Character WHERE Name='kjjnkn'
+14:29:30 SELECT G_Status FROM GuildMember WHERE Name='kjjnkn'
+14:29:30 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+14:29:30 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+14:29:30 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+14:32:41 EXEC WZ_DISCONNECT_MEMB 'test123'
+[Player] test123 has been deleted
+14:33:00 SELECT * FROM MEMB_INFO WHERE memb___id='ngoc119'
+[JoinServer]  Wrong Password - ID : ngoc119
+14:33:05 SELECT * FROM MEMB_INFO WHERE memb___id='ngoc119'
+[Object] User ngoc119 has join
+14:33:05 EXEC WZ_CONNECT_MEMB 'ngoc119','Sub-3','45.122.232.61'
+14:33:06 SELECT Id FROM AccountCharacter WHERE Id='ngoc119'
+14:33:06 SELECT * FROM AccountCharacter WHERE Id='ngoc119'
+14:33:06 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='eewe'
+14:33:06 SELECT Inventory FROM Character WHERE Name='eewe'
+14:33:06 SELECT G_Status FROM GuildMember WHERE Name='eewe'
+14:33:06 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='Yoyo'
+14:33:06 SELECT Inventory FROM Character WHERE Name='Yoyo'
+14:33:06 SELECT G_Status FROM GuildMember WHERE Name='Yoyo'
+14:33:06 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjnhk'
+14:33:06 SELECT Inventory FROM Character WHERE Name='kjnhk'
+14:33:06 SELECT G_Status FROM GuildMember WHERE Name='kjnhk'
+14:33:06 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'ngoc119'
+14:33:06 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='ngoc119' AND BotLife < BotMaxLife
+14:33:06 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='ngoc119'
+14:33:09 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='Yoyo' AND AccountID='ngoc119'
+14:33:09 SELECT Inventory from Character where Name='Yoyo'
+14:33:09 SELECT MagicList from Character where Name='Yoyo'
+14:33:09 SELECT Quest from Character where Name='Yoyo'
+14:33:09 UPDATE AccountCharacter SET GameIDC='Yoyo' WHERE Id='ngoc119'
+14:33:09 SELECT * FROM OptionData WHERE Name='Yoyo'
+14:33:09 SELECT SkillKey from OptionData where Name='Yoyo'
+14:33:09 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'Yoyo'
+14:33:09 SELECT Name FROM MuOnline.dbo.Character WHERE Name = 'Yoyo' and AccountID = 'ngoc119'
+14:33:09 [WzExDB] [ExDB][Guild Member Info Request] Member [Yoyo].
+14:33:09 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='Yoyo'
+14:33:09 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'Yoyo'
+14:33:09 SELECT SCFMasterSkill FROM MuOnline.dbo.Character where Name = 'Yoyo' and AccountID = 'ngoc119'
+14:33:09 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+14:33:09 SELECT Data FROM MuOnline.dbo.OfficialHelper where Name = 'Yoyo'
+14:33:09 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'Yoyo' and AccountID = 'ngoc119'
+14:33:09 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'Yoyo' and AccountID = 'ngoc119'
+14:33:09 [WzExDB] [ExDB][Friend List Request] Name[Yoyo].
+14:33:09 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'Yoyo'
+14:33:09 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 15
+14:33:09 [WzExDB] [ExDB][Friend List Send] Name[Yoyo].
+14:33:09 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+14:33:09 SELECT FriendName FROM T_WaitFriend where GUID=15
+[WzExDB] [ExDB][Mail List Request] Name[Yoyo].
+14:33:09 [WzExDB] [ExDB][Mail List Send] Name[Yoyo].
+14:33:09 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=15
+14:33:09 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+14:33:36 EXEC WZ_GetItemSerial
+14:33:39 EXEC WZ_GetItemSerial
+14:33:51 EXEC WZ_GetItemSerial
+14:33:56 EXEC WZ_GetItemSerial
+14:33:56 EXEC WZ_GetItemSerial
+14:34:23 EXEC WZ_GetItemSerial
+14:34:24 EXEC WZ_GetItemSerial
+14:34:25 EXEC WZ_GetItemSerial
+14:34:38 EXEC WZ_GetItemSerial
+14:34:38 EXEC WZ_GetItemSerial
+14:34:47 EXEC WZ_GetItemSerial
+14:34:47 EXEC WZ_GetItemSerial
+14:34:51 EXEC WZ_GetItemSerial
+14:34:51 EXEC WZ_GetItemSerial
+14:34:52 EXEC WZ_GetItemSerial
+14:34:54 EXEC WZ_GetItemSerial
+14:35:00 EXEC WZ_GetItemSerial
+14:35:01 EXEC WZ_GetItemSerial
+14:35:08 EXEC WZ_GetItemSerial
+14:35:09 UPDATE Character SET cLevel=372,Class=2,LevelUpPoint=3105, Experience=-2089931496, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=44604, MaxLife=64310, Mana=28938, MaxMana=25876, MapNumber=6, MapPosX=96, MapPosY=82, MapDir=5, PkCount=0, PkLevel=3, PkTime=315975, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+14:35:09 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+14:35:09 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+14:35:09 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+14:35:13 EXEC WZ_GetItemSerial
+14:35:23 EXEC WZ_GetItemSerial
+14:35:27 EXEC WZ_GetItemSerial
+14:35:35 EXEC WZ_GetItemSerial
+14:35:41 EXEC WZ_GetItemSerial
+14:35:42 EXEC WZ_GetItemSerial
+14:35:57 EXEC WZ_GetItemSerial
+14:35:59 EXEC WZ_GetItemSerial
+14:36:04 EXEC WZ_GetItemSerial
+14:36:04 EXEC WZ_GetItemSerial
+14:36:05 EXEC WZ_GetItemSerial
+14:36:12 EXEC WZ_GetItemSerial
+14:36:33 EXEC WZ_GetItemSerial
+14:36:34 EXEC WZ_GetItemSerial
+14:36:41 EXEC WZ_GetItemSerial
+14:36:46 EXEC WZ_GetItemSerial
+14:36:48 EXEC WZ_GetItemSerial
+14:37:02 EXEC WZ_GetItemSerial
+14:37:11 EXEC WZ_GetItemSerial
+14:37:11 EXEC WZ_GetItemSerial
+14:37:16 EXEC WZ_GetItemSerial
+14:37:16 EXEC WZ_GetItemSerial
+14:37:26 EXEC WZ_GetItemSerial
+14:37:29 EXEC WZ_GetItemSerial
+14:37:29 EXEC WZ_GetItemSerial
+14:37:31 EXEC WZ_GetItemSerial
+14:37:44 EXEC WZ_GetItemSerial
+14:37:44 EXEC WZ_GetItemSerial
+14:37:44 EXEC WZ_GetItemSerial
+14:37:45 EXEC WZ_GetItemSerial
+14:37:46 UPDATE Character SET cLevel=373,Class=2,LevelUpPoint=3111, Experience=-2042910256, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=44614, MaxLife=64320, Mana=28968, MaxMana=25896, MapNumber=6, MapPosX=92, MapPosY=84, MapDir=6, PkCount=0, PkLevel=3, PkTime=316132, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+14:37:46 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+14:37:46 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+14:37:46 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+14:37:47 EXEC WZ_GetItemSerial
+14:37:57 EXEC WZ_GetItemSerial
+14:37:58 EXEC WZ_GetItemSerial
+14:38:08 EXEC WZ_GetItemSerial
+14:38:12 EXEC WZ_GetItemSerial
+14:38:26 EXEC WZ_GetItemSerial
+14:38:27 EXEC WZ_GetItemSerial
+14:38:51 EXEC WZ_GetItemSerial
+14:38:51 EXEC WZ_GetItemSerial
+14:38:51 EXEC WZ_GetItemSerial
+14:38:54 EXEC WZ_GetItemSerial
+14:38:55 EXEC WZ_GetItemSerial
+14:38:56 EXEC WZ_GetItemSerial
+14:38:59 EXEC WZ_GetItemSerial
+14:39:05 EXEC WZ_GetItemSerial
+14:39:05 EXEC WZ_GetItemSerial
+14:39:08 EXEC WZ_GetItemSerial
+14:39:12 EXEC WZ_GetItemSerial
+14:39:22 EXEC WZ_GetItemSerial
+14:39:29 EXEC WZ_GetItemSerial
+14:39:36 EXEC WZ_GetItemSerial
+14:39:38 EXEC WZ_GetItemSerial
+14:39:44 EXEC WZ_GetItemSerial
+14:39:45 EXEC WZ_GetItemSerial
+14:39:46 EXEC WZ_GetItemSerial
+14:39:51 EXEC WZ_GetItemSerial
+14:39:58 EXEC WZ_GetItemSerial
+14:40:05 EXEC WZ_GetItemSerial
+14:40:05 EXEC WZ_GetItemSerial
+14:40:06 EXEC WZ_GetItemSerial
+14:40:13 EXEC WZ_GetItemSerial
+14:40:13 EXEC WZ_GetItemSerial
+14:40:27 EXEC WZ_GetItemSerial
+14:40:27 EXEC WZ_GetItemSerial
+14:40:32 UPDATE Character SET cLevel=374,Class=2,LevelUpPoint=3117, Experience=-1995146516, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=44634, MaxLife=64330, Mana=28998, MaxMana=25916, MapNumber=6, MapPosX=96, MapPosY=83, MapDir=4, PkCount=0, PkLevel=3, PkTime=316298, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+14:40:32 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+14:40:32 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+14:40:32 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+14:40:33 EXEC WZ_GetItemSerial
+14:40:34 EXEC WZ_GetItemSerial
+14:40:42 EXEC WZ_GetItemSerial
+14:40:42 EXEC WZ_GetItemSerial
+14:40:47 EXEC WZ_GetItemSerial
+14:40:47 EXEC WZ_GetItemSerial
+14:40:56 EXEC WZ_GetItemSerial
+14:41:01 EXEC WZ_GetItemSerial
+14:41:10 EXEC WZ_GetItemSerial
+14:41:11 EXEC WZ_GetItemSerial
+14:41:16 EXEC WZ_GetItemSerial
+14:41:24 EXEC WZ_GetItemSerial
+14:41:25 EXEC WZ_GetItemSerial
+14:41:30 EXEC WZ_GetItemSerial
+14:41:31 EXEC WZ_GetItemSerial
+14:41:32 EXEC WZ_GetItemSerial
+14:41:39 EXEC WZ_GetItemSerial
+14:41:45 EXEC WZ_GetItemSerial
+14:41:59 EXEC WZ_GetItemSerial
+14:42:01 EXEC WZ_GetItemSerial
+14:42:09 EXEC WZ_GetItemSerial
+14:42:10 EXEC WZ_GetItemSerial
+14:42:14 EXEC WZ_GetItemSerial
+14:42:14 EXEC WZ_GetItemSerial
+14:42:14 EXEC WZ_GetItemSerial
+14:42:23 EXEC WZ_GetItemSerial
+14:42:28 EXEC WZ_GetItemSerial
+14:42:28 EXEC WZ_GetItemSerial
+14:42:37 EXEC WZ_GetItemSerial
+14:42:43 EXEC WZ_GetItemSerial
+14:42:43 EXEC WZ_GetItemSerial
+14:42:45 UPDATE Character SET cLevel=374,Class=2,LevelUpPoint=3117, Experience=-1955531359, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=2000000000, Life=44634, MaxLife=64330, Mana=27198, MaxMana=25916, MapNumber=6, MapPosX=92, MapPosY=84, MapDir=2, PkCount=0, PkLevel=3, PkTime=316431, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+14:42:45 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+14:42:45 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+14:42:45 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+14:42:49 EXEC WZ_GetItemSerial
+14:42:50 EXEC WZ_GetItemSerial
+14:42:50 EXEC WZ_GetItemSerial
+14:42:51 EXEC WZ_GetItemSerial
+14:43:18 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='ngoc119'
+14:43:18 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='ngoc119'
+14:43:18 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='ngoc119'
+14:43:36 UPDATE warehouse SET Money=999999998, pw=0, DbVersion=3 WHERE AccountID='ngoc119'
+14:43:36 UPDATE warehouse SET Items=? WHERE AccountID='ngoc119'
+14:43:36 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+14:47:31 UPDATE Character SET cLevel=374,Class=2,LevelUpPoint=3117, Experience=-1953680641, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1999998000, Life=44634, MaxLife=64330, Mana=28998, MaxMana=25916, MapNumber=3, MapPosX=176, MapPosY=94, MapDir=3, PkCount=0, PkLevel=3, PkTime=316717, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+14:47:31 EXEC WZ_DISCONNECT_MEMB 'ngoc119'
+14:47:31 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+14:47:31 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+14:47:31 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+[Player] ngoc119 has been deleted
+15:03:10 SELECT * FROM MEMB_INFO WHERE memb___id='ngoc119'
+[Object] User ngoc119 has join
+15:03:10 EXEC WZ_CONNECT_MEMB 'ngoc119','Sub-3','45.122.232.61'
+15:03:10 SELECT Id FROM AccountCharacter WHERE Id='ngoc119'
+15:03:10 SELECT * FROM AccountCharacter WHERE Id='ngoc119'
+15:03:10 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='eewe'
+15:03:10 SELECT Inventory FROM Character WHERE Name='eewe'
+15:03:10 SELECT G_Status FROM GuildMember WHERE Name='eewe'
+15:03:10 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='Yoyo'
+15:03:10 SELECT Inventory FROM Character WHERE Name='Yoyo'
+15:03:10 SELECT G_Status FROM GuildMember WHERE Name='Yoyo'
+15:03:10 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjnhk'
+15:03:10 SELECT Inventory FROM Character WHERE Name='kjnhk'
+15:03:10 SELECT G_Status FROM GuildMember WHERE Name='kjnhk'
+15:03:10 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'ngoc119'
+15:03:10 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='ngoc119' AND BotLife < BotMaxLife
+15:03:10 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='ngoc119'
+15:03:12 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='Yoyo' AND AccountID='ngoc119'
+15:03:12 SELECT Inventory from Character where Name='Yoyo'
+15:03:12 SELECT MagicList from Character where Name='Yoyo'
+15:03:12 SELECT Quest from Character where Name='Yoyo'
+15:03:12 UPDATE AccountCharacter SET GameIDC='Yoyo' WHERE Id='ngoc119'
+15:03:12 SELECT * FROM OptionData WHERE Name='Yoyo'
+15:03:12 [WzExDB] [ExDB][Guild Member Info Request] Member [Yoyo].
+15:03:12 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='Yoyo'
+15:03:12 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'Yoyo'
+15:03:12 SELECT SkillKey from OptionData where Name='Yoyo'
+15:03:12 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'Yoyo'
+15:03:12 SELECT Name FROM MuOnline.dbo.Character WHERE Name = 'Yoyo' and AccountID = 'ngoc119'
+15:03:12 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+15:03:12 SELECT Data FROM MuOnline.dbo.OfficialHelper where Name = 'Yoyo'
+15:03:12 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'Yoyo' and AccountID = 'ngoc119'
+15:03:12 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'Yoyo' and AccountID = 'ngoc119'
+15:03:12 SELECT SCFMasterSkill FROM MuOnline.dbo.Character where Name = 'Yoyo' and AccountID = 'ngoc119'
+15:03:12 [WzExDB] [ExDB][Friend List Request] Name[Yoyo].
+15:03:12 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'Yoyo'
+15:03:12 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 15
+15:03:12 [WzExDB] [ExDB][Friend List Send] Name[Yoyo].
+15:03:12 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+15:03:12 SELECT FriendName FROM T_WaitFriend where GUID=15
+[WzExDB] [ExDB][Mail List Request] Name[Yoyo].
+15:03:12 [WzExDB] [ExDB][Mail List Send] Name[Yoyo].
+15:03:12 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=15
+15:03:12 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+15:03:23 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='ngoc119'
+15:03:23 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='ngoc119'
+15:03:23 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='ngoc119'
+15:03:40 UPDATE warehouse SET Money=999999998, pw=0, DbVersion=3 WHERE AccountID='ngoc119'
+15:03:40 UPDATE warehouse SET Items=? WHERE AccountID='ngoc119'
+15:03:40 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+15:12:55 UPDATE Character SET cLevel=374,Class=2,LevelUpPoint=3117, Experience=-1953680641, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1999987000, Life=44644, MaxLife=64330, Mana=29008, MaxMana=25916, MapNumber=3, MapPosX=174, MapPosY=96, MapDir=0, PkCount=0, PkLevel=3, PkTime=318241, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+15:12:55 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+15:12:55 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+15:12:55 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+15:22:55 UPDATE Character SET cLevel=374,Class=2,LevelUpPoint=3117, Experience=-1953680641, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1999987000, Life=44644, MaxLife=64330, Mana=29008, MaxMana=25916, MapNumber=3, MapPosX=174, MapPosY=96, MapDir=0, PkCount=0, PkLevel=3, PkTime=318841, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+15:22:55 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+15:22:55 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+15:22:55 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+15:32:56 UPDATE Character SET cLevel=374,Class=2,LevelUpPoint=3117, Experience=-1953680641, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1999987000, Life=44644, MaxLife=64330, Mana=29008, MaxMana=25916, MapNumber=3, MapPosX=174, MapPosY=96, MapDir=0, PkCount=0, PkLevel=3, PkTime=319442, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+15:32:56 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+15:32:56 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+15:32:56 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+15:40:28 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='ngoc119'
+15:40:28 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='ngoc119'
+15:40:28 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='ngoc119'
+15:40:40 UPDATE warehouse SET Money=999999998, pw=0, DbVersion=3 WHERE AccountID='ngoc119'
+15:40:40 UPDATE warehouse SET Items=? WHERE AccountID='ngoc119'
+15:40:40 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+15:42:56 UPDATE Character SET cLevel=374,Class=2,LevelUpPoint=3117, Experience=-1953680641, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1999987000, Life=44644, MaxLife=64330, Mana=29008, MaxMana=25916, MapNumber=3, MapPosX=175, MapPosY=96, MapDir=0, PkCount=0, PkLevel=3, PkTime=320042, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+15:42:56 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+15:42:56 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+15:42:56 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+15:52:09 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='ngoc119'
+15:52:09 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='ngoc119'
+15:52:09 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='ngoc119'
+15:52:17 UPDATE warehouse SET Money=999999998, pw=0, DbVersion=3 WHERE AccountID='ngoc119'
+15:52:17 UPDATE warehouse SET Items=? WHERE AccountID='ngoc119'
+15:52:17 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+15:52:56 UPDATE Character SET cLevel=374,Class=2,LevelUpPoint=3117, Experience=-1953680641, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1999976000, Life=44644, MaxLife=64330, Mana=29008, MaxMana=25916, MapNumber=3, MapPosX=175, MapPosY=95, MapDir=0, PkCount=0, PkLevel=3, PkTime=320642, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+15:52:56 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+15:52:56 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+15:52:56 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+16:02:57 UPDATE Character SET cLevel=374,Class=2,LevelUpPoint=3117, Experience=-1953680641, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1999976000, Life=44644, MaxLife=64330, Mana=29008, MaxMana=25916, MapNumber=3, MapPosX=175, MapPosY=95, MapDir=0, PkCount=0, PkLevel=3, PkTime=321243, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+16:02:57 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+16:02:57 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+16:02:57 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+16:09:47 SELECT Name FROM OptionData WHERE Name='Yoyo'
+16:09:47 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='Yoyo'
+16:09:47 UPDATE OptionData SET SkillKey=? where Name='Yoyo'
+16:09:52 UPDATE Character SET cLevel=374,Class=2,LevelUpPoint=3117, Experience=-1953680641, Strength=3018, Dexterity=8019, Vitality=3015, Energy=14030, Money=1999976000, Life=44644, MaxLife=64330, Mana=29008, MaxMana=25916, MapNumber=3, MapPosX=175, MapPosY=95, MapDir=5, PkCount=0, PkLevel=3, PkTime=321658, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'Yoyo'
+16:09:52 EXEC WZ_DISCONNECT_MEMB 'ngoc119'
+16:09:52 UPDATE Character SET Inventory=? WHERE Name='Yoyo'
+16:09:52 UPDATE Character SET MagicList=? WHERE Name='Yoyo'
+16:09:52 UPDATE Character SET Quest=? WHERE Name='Yoyo'
+[Player] ngoc119 has been deleted
+16:10:07 SELECT * FROM MEMB_INFO WHERE memb___id='test123'
+[Object] User test123 has join
+16:10:07 EXEC WZ_CONNECT_MEMB 'test123','Sub-3','45.122.232.61'
+16:10:08 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:10:08 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:10:08 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+16:10:08 SELECT Inventory FROM Character WHERE Name='jhbjk'
+16:10:08 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+16:10:08 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjjnkn'
+16:10:08 SELECT Inventory FROM Character WHERE Name='kjjnkn'
+16:10:08 SELECT G_Status FROM GuildMember WHERE Name='kjjnkn'
+16:10:08 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:10:08 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:10:08 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+16:10:12 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='kjjnkn' AND AccountID='test123'
+16:10:12 SELECT Inventory from Character where Name='kjjnkn'
+16:10:12 SELECT MagicList from Character where Name='kjjnkn'
+16:10:12 SELECT Quest from Character where Name='kjjnkn'
+16:10:12 UPDATE AccountCharacter SET GameIDC='kjjnkn' WHERE Id='test123'
+16:10:12 SELECT * FROM OptionData WHERE Name='kjjnkn'
+16:10:12 [WzExDB] [ExDB][Guild Member Info Request] Member [kjjnkn].
+16:10:12 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='kjjnkn'
+16:10:12 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'kjjnkn'
+16:10:12 SELECT SkillKey from OptionData where Name='kjjnkn'
+16:10:12 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'kjjnkn'
+16:10:12 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+16:10:12 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'kjjnkn' and AccountID = 'test123'
+16:10:12 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'kjjnkn' and AccountID = 'test123'
+16:10:12 [WzExDB] [ExDB][Friend List Request] Name[kjjnkn].
+16:10:12 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'kjjnkn'
+16:10:12 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 21
+16:10:12 [WzExDB] [ExDB][Friend List Send] Name[kjjnkn].
+16:10:12 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+16:10:12 SELECT FriendName FROM T_WaitFriend where GUID=21
+[WzExDB] [ExDB][Mail List Request] Name[kjjnkn].
+16:10:12 [WzExDB] [ExDB][Mail List Send] Name[kjjnkn].
+16:10:12 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=21
+16:10:12 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+16:10:38 SELECT Name FROM OptionData WHERE Name='kjjnkn'
+16:10:38 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='kjjnkn'
+16:10:38 UPDATE OptionData SET SkillKey=? where Name='kjjnkn'
+16:10:44 UPDATE Character SET cLevel=8,Class=32,LevelUpPoint=35, Experience=7840, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=870, MaxLife=870, Mana=405, MaxMana=405, MapNumber=3, MapPosX=173, MapPosY=107, MapDir=2, PkCount=0, PkLevel=3, PkTime=321710, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+16:10:44 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+16:10:44 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+16:10:44 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+16:10:44 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:10:44 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:10:44 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+16:10:44 SELECT Inventory FROM Character WHERE Name='jhbjk'
+16:10:44 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+16:10:44 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjjnkn'
+16:10:44 SELECT Inventory FROM Character WHERE Name='kjjnkn'
+16:10:44 SELECT G_Status FROM GuildMember WHERE Name='kjjnkn'
+16:10:44 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:10:44 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:10:44 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+16:11:45 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='kjjnkn' AND AccountID='test123'
+16:11:45 SELECT Inventory from Character where Name='kjjnkn'
+16:11:45 SELECT MagicList from Character where Name='kjjnkn'
+16:11:45 SELECT Quest from Character where Name='kjjnkn'
+16:11:45 UPDATE AccountCharacter SET GameIDC='kjjnkn' WHERE Id='test123'
+16:11:45 SELECT * FROM OptionData WHERE Name='kjjnkn'
+16:11:45 [WzExDB] [ExDB][Guild Member Info Request] Member [kjjnkn].
+16:11:45 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='kjjnkn'
+16:11:45 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'kjjnkn'
+16:11:45 SELECT SkillKey from OptionData where Name='kjjnkn'
+16:11:45 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'kjjnkn'
+16:11:45 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+16:11:45 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'kjjnkn' and AccountID = 'test123'
+16:11:45 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'kjjnkn' and AccountID = 'test123'
+16:11:45 [WzExDB] [ExDB][Friend List Request] Name[kjjnkn].
+16:11:45 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'kjjnkn'
+16:11:45 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 21
+16:11:45 [WzExDB] [ExDB][Friend List Send] Name[kjjnkn].
+16:11:45 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+16:11:45 SELECT FriendName FROM T_WaitFriend where GUID=21
+[WzExDB] [ExDB][Mail List Request] Name[kjjnkn].
+16:11:45 [WzExDB] [ExDB][Mail List Send] Name[kjjnkn].
+16:11:45 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=21
+16:11:45 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+16:12:16 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+16:12:16 INSERT INTO MuOnline.dbo.warehouse (AccountID, Money, EndUseDate, DbVersion) VALUES ('test123',0, getdate(), 3)
+16:12:18 UPDATE warehouse SET Money=0, pw=0, DbVersion=3 WHERE AccountID='test123'
+16:12:18 UPDATE warehouse SET Items=? WHERE AccountID='test123'
+16:12:18 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+16:12:21 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+16:12:21 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+16:12:21 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+16:12:24 UPDATE warehouse SET Money=0, pw=0, DbVersion=3 WHERE AccountID='test123'
+16:12:24 UPDATE warehouse SET Items=? WHERE AccountID='test123'
+16:12:24 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+16:12:27 EXEC WZ_GetItemSerial
+16:12:30 EXEC WZ_GetItemSerial
+16:12:40 SELECT Name FROM OptionData WHERE Name='kjjnkn'
+16:12:40 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='kjjnkn'
+16:12:40 UPDATE OptionData SET SkillKey=? where Name='kjjnkn'
+16:12:47 UPDATE Character SET cLevel=280,Class=32,LevelUpPoint=35, Experience=7840, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=870, MaxLife=3590, Mana=3723, MaxMana=4485, MapNumber=3, MapPosX=175, MapPosY=101, MapDir=3, PkCount=0, PkLevel=3, PkTime=321833, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+16:12:47 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+16:12:47 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+16:12:47 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+16:12:47 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:12:47 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:12:47 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+16:12:47 SELECT Inventory FROM Character WHERE Name='jhbjk'
+16:12:47 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+16:12:47 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjjnkn'
+16:12:47 SELECT Inventory FROM Character WHERE Name='kjjnkn'
+16:12:47 SELECT G_Status FROM GuildMember WHERE Name='kjjnkn'
+16:12:47 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:12:47 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:12:47 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+16:19:10 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='kjjnkn' AND AccountID='test123'
+16:19:10 SELECT Inventory from Character where Name='kjjnkn'
+16:19:10 SELECT MagicList from Character where Name='kjjnkn'
+16:19:10 SELECT Quest from Character where Name='kjjnkn'
+16:19:10 UPDATE AccountCharacter SET GameIDC='kjjnkn' WHERE Id='test123'
+16:19:10 SELECT * FROM OptionData WHERE Name='kjjnkn'
+16:19:10 [WzExDB] [ExDB][Guild Member Info Request] Member [kjjnkn].
+16:19:10 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='kjjnkn'
+16:19:10 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'kjjnkn'
+16:19:10 SELECT SkillKey from OptionData where Name='kjjnkn'
+16:19:10 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'kjjnkn'
+16:19:10 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+16:19:10 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'kjjnkn' and AccountID = 'test123'
+16:19:10 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'kjjnkn' and AccountID = 'test123'
+16:19:10 [WzExDB] [ExDB][Friend List Request] Name[kjjnkn].
+16:19:10 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'kjjnkn'
+16:19:10 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 21
+16:19:10 [WzExDB] [ExDB][Friend List Send] Name[kjjnkn].
+16:19:10 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+16:19:10 SELECT FriendName FROM T_WaitFriend where GUID=21
+[WzExDB] [ExDB][Mail List Request] Name[kjjnkn].
+16:19:10 [WzExDB] [ExDB][Mail List Send] Name[kjjnkn].
+16:19:10 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=21
+16:19:10 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+16:19:58 UPDATE Character SET cLevel=280,Class=32,LevelUpPoint=35, Experience=-177596, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=3590, MaxLife=3590, Mana=4485, MaxMana=4485, MapNumber=3, MapPosX=175, MapPosY=123, MapDir=4, PkCount=0, PkLevel=3, PkTime=322264, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+16:19:58 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+16:19:58 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+16:19:58 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+16:20:04 SELECT Name FROM OptionData WHERE Name='kjjnkn'
+16:20:04 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='kjjnkn'
+16:20:04 UPDATE OptionData SET SkillKey=? where Name='kjjnkn'
+16:20:10 UPDATE Character SET cLevel=280,Class=32,LevelUpPoint=35, Experience=-177596, Strength=22, Dexterity=25, Vitality=20, Energy=15, Money=0, Life=3590, MaxLife=3590, Mana=4485, MaxMana=4485, MapNumber=3, MapPosX=175, MapPosY=123, MapDir=3, PkCount=0, PkLevel=3, PkTime=322276, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'kjjnkn'
+16:20:10 UPDATE Character SET Inventory=? WHERE Name='kjjnkn'
+16:20:10 UPDATE Character SET MagicList=? WHERE Name='kjjnkn'
+16:20:10 UPDATE Character SET Quest=? WHERE Name='kjjnkn'
+16:20:11 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:20:11 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:20:11 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+16:20:11 SELECT Inventory FROM Character WHERE Name='jhbjk'
+16:20:11 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+16:20:11 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjjnkn'
+16:20:11 SELECT Inventory FROM Character WHERE Name='kjjnkn'
+16:20:11 SELECT G_Status FROM GuildMember WHERE Name='kjjnkn'
+16:20:11 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:20:11 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:20:11 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+16:20:17 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='jhbjk' AND AccountID='test123'
+16:20:17 SELECT Inventory from Character where Name='jhbjk'
+16:20:17 SELECT MagicList from Character where Name='jhbjk'
+16:20:17 SELECT Quest from Character where Name='jhbjk'
+16:20:17 UPDATE AccountCharacter SET GameIDC='jhbjk' WHERE Id='test123'
+16:20:17 SELECT * FROM OptionData WHERE Name='jhbjk'
+16:20:17 [WzExDB] [ExDB][Guild Member Info Request] Member [jhbjk].
+16:20:17 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='jhbjk'
+16:20:17 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'jhbjk'
+16:20:17 SELECT SkillKey from OptionData where Name='jhbjk'
+16:20:17 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'jhbjk'
+16:20:17 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+16:20:17 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'jhbjk' and AccountID = 'test123'
+16:20:17 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'jhbjk' and AccountID = 'test123'
+16:20:17 [WzExDB] [ExDB][Friend List Request] Name[jhbjk].
+16:20:17 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'jhbjk'
+16:20:17 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 20
+16:20:17 [WzExDB] [ExDB][Friend List Send] Name[jhbjk].
+16:20:17 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+16:20:17 SELECT FriendName FROM T_WaitFriend where GUID=20
+[WzExDB] [ExDB][Mail List Request] Name[jhbjk].
+16:20:17 [WzExDB] [ExDB][Mail List Send] Name[jhbjk].
+16:20:17 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=20
+16:20:17 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+16:20:28 SELECT Name FROM OptionData WHERE Name='jhbjk'
+16:20:28 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='jhbjk'
+16:20:28 UPDATE OptionData SET SkillKey=? where Name='jhbjk'
+16:20:34 UPDATE Character SET cLevel=313,Class=0,LevelUpPoint=60, Experience=30240, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=720, MaxLife=3720, Mana=2105, MaxMana=6840, MapNumber=0, MapPosX=153, MapPosY=130, MapDir=1, PkCount=0, PkLevel=3, PkTime=322300, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+16:20:34 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+16:20:34 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+16:20:34 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+16:20:34 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:20:34 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:20:34 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+16:20:34 SELECT Inventory FROM Character WHERE Name='jhbjk'
+16:20:34 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+16:20:34 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='kjjnkn'
+16:20:34 SELECT Inventory FROM Character WHERE Name='kjjnkn'
+16:20:34 SELECT G_Status FROM GuildMember WHERE Name='kjjnkn'
+16:20:34 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:20:34 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:20:34 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+16:20:51 DELETE FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'kjjnkn' and AccountID= 'test123'
+16:20:51 DELETE FROM Character WHERE AccountID='test123' AND Name='kjjnkn'
+16:20:51 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:20:51 UPDATE AccountCharacter SET GameID2=NULL WHERE Id='test123'
+16:21:08 EXEC WZ_DISCONNECT_MEMB 'test123'
+[Player] test123 has been deleted
+16:21:21 SELECT * FROM MEMB_INFO WHERE memb___id='test123'
+[Object] User test123 has join
+16:21:21 EXEC WZ_CONNECT_MEMB 'test123','Sub-3','45.122.232.61'
+16:21:21 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:21:21 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:21:21 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+16:21:21 SELECT Inventory FROM Character WHERE Name='jhbjk'
+16:21:21 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+16:21:21 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:21:21 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:21:21 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+16:21:29 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='jhbjk' AND AccountID='test123'
+16:21:29 SELECT Inventory from Character where Name='jhbjk'
+16:21:29 SELECT MagicList from Character where Name='jhbjk'
+16:21:29 SELECT Quest from Character where Name='jhbjk'
+16:21:29 UPDATE AccountCharacter SET GameIDC='jhbjk' WHERE Id='test123'
+16:21:29 SELECT * FROM OptionData WHERE Name='jhbjk'
+16:21:29 [WzExDB] [ExDB][Guild Member Info Request] Member [jhbjk].
+16:21:29 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='jhbjk'
+16:21:29 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'jhbjk'
+16:21:29 SELECT SkillKey from OptionData where Name='jhbjk'
+16:21:29 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'jhbjk'
+16:21:29 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+16:21:29 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'jhbjk' and AccountID = 'test123'
+16:21:29 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'jhbjk' and AccountID = 'test123'
+16:21:30 [WzExDB] [ExDB][Friend List Request] Name[jhbjk].
+16:21:30 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'jhbjk'
+16:21:30 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 20
+16:21:30 [WzExDB] [ExDB][Friend List Send] Name[jhbjk].
+16:21:30 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+16:21:30 SELECT FriendName FROM T_WaitFriend where GUID=20
+[WzExDB] [ExDB][Mail List Request] Name[jhbjk].
+16:21:30 [WzExDB] [ExDB][Mail List Send] Name[jhbjk].
+16:21:30 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=20
+16:21:30 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+16:21:40 SELECT Name FROM OptionData WHERE Name='jhbjk'
+16:21:40 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='jhbjk'
+16:21:40 UPDATE OptionData SET SkillKey=? where Name='jhbjk'
+16:21:46 UPDATE Character SET cLevel=313,Class=0,LevelUpPoint=60, Experience=30240, Strength=18, Dexterity=18, Vitality=15, Energy=30, Money=0, Life=720, MaxLife=3720, Mana=3370, MaxMana=6840, MapNumber=0, MapPosX=153, MapPosY=130, MapDir=7, PkCount=0, PkLevel=3, PkTime=322372, DbVersion=3, Leadership=0, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'jhbjk'
+16:21:46 UPDATE Character SET Inventory=? WHERE Name='jhbjk'
+16:21:46 UPDATE Character SET MagicList=? WHERE Name='jhbjk'
+16:21:46 UPDATE Character SET Quest=? WHERE Name='jhbjk'
+16:21:46 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:21:46 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:21:46 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+16:21:46 SELECT Inventory FROM Character WHERE Name='jhbjk'
+16:21:46 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+16:21:46 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:21:46 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:21:46 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+16:22:34 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:22:34 WZ_CreateCharacter 'test123', 'dllll', '64'
+16:22:34 UPDATE AccountCharacter SET GameID2='dllll' WHERE Id='test123'
+16:22:34 INSERT INTO SCFS5Quest (AccountID, Name) VALUES ('test123','dllll')
+16:22:37 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='dllll' AND AccountID='test123'
+16:22:37 SELECT Inventory from Character where Name='dllll'
+16:22:37 SELECT MagicList from Character where Name='dllll'
+16:22:37 SELECT Quest from Character where Name='dllll'
+16:22:37 UPDATE AccountCharacter SET GameIDC='dllll' WHERE Id='test123'
+16:22:37 SELECT * FROM OptionData WHERE Name='dllll'
+16:22:37 [WzExDB] [ExDB][Guild Member Info Request] Member [dllll].
+16:22:37 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='dllll'
+16:22:37 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'dllll'
+16:22:37 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'dllll'
+16:22:37 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+16:22:37 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'dllll' and AccountID = 'test123'
+16:22:37 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'dllll' and AccountID = 'test123'
+16:22:37 [WzExDB] [ExDB][Friend List Request] Name[dllll].
+16:22:37 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'dllll'
+16:22:37 WZ_UserGuidCreate 'dllll'
+16:22:37 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'dllll'
+16:22:37 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 22
+16:22:37 [WzExDB] [ExDB][Friend List Send] Name[dllll].
+16:22:37 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+16:22:37 SELECT FriendName FROM T_WaitFriend where GUID=22
+[WzExDB] [ExDB][Mail List Request] Name[dllll].
+16:22:37 [WzExDB] [ExDB][Mail List Send] Name[dllll].
+16:22:37 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=22
+16:22:37 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+16:22:56 SELECT Name FROM OptionData WHERE Name='dllll'
+16:22:56 INSERT INTO OptionData (Name, GameOption, Qkey, Wkey, Ekey, Rkey, ChatWindow) VALUES ('dllll', 9, 255, 255, 255, 255, 38)
+16:22:56 UPDATE OptionData SET SkillKey=? where Name='dllll'
+16:23:01 UPDATE Character SET cLevel=1,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=0, Life=640, MaxLife=900, Mana=400, MaxMana=400, MapNumber=0, MapPosX=143, MapPosY=126, MapDir=2, PkCount=0, PkLevel=3, PkTime=322447, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+16:23:01 UPDATE Character SET Inventory=? WHERE Name='dllll'
+16:23:01 UPDATE Character SET MagicList=? WHERE Name='dllll'
+16:23:01 UPDATE Character SET Quest=? WHERE Name='dllll'
+16:23:03 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:23:03 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:23:03 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+16:23:03 SELECT Inventory FROM Character WHERE Name='jhbjk'
+16:23:03 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+16:23:03 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='dllll'
+16:23:03 SELECT Inventory FROM Character WHERE Name='dllll'
+16:23:03 SELECT G_Status FROM GuildMember WHERE Name='dllll'
+16:23:03 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:23:03 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:23:03 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+16:25:11 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='dllll' AND AccountID='test123'
+16:25:11 SELECT Inventory from Character where Name='dllll'
+16:25:11 SELECT MagicList from Character where Name='dllll'
+16:25:11 SELECT Quest from Character where Name='dllll'
+16:25:11 UPDATE AccountCharacter SET GameIDC='dllll' WHERE Id='test123'
+16:25:11 SELECT * FROM OptionData WHERE Name='dllll'
+16:25:11 [WzExDB] [ExDB][Guild Member Info Request] Member [dllll].
+16:25:11 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='dllll'
+16:25:11 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'dllll'
+16:25:11 SELECT SkillKey from OptionData where Name='dllll'
+16:25:11 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'dllll'
+16:25:11 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+16:25:11 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'dllll' and AccountID = 'test123'
+16:25:11 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'dllll' and AccountID = 'test123'
+16:25:11 [WzExDB] [ExDB][Friend List Request] Name[dllll].
+16:25:11 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'dllll'
+16:25:11 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 22
+16:25:11 [WzExDB] [ExDB][Friend List Send] Name[dllll].
+16:25:11 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+16:25:11 SELECT FriendName FROM T_WaitFriend where GUID=22
+[WzExDB] [ExDB][Mail List Request] Name[dllll].
+16:25:11 [WzExDB] [ExDB][Mail List Send] Name[dllll].
+16:25:11 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=22
+16:25:11 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+16:25:17 EXEC WZ_GetItemSerial
+16:25:18 EXEC WZ_GetItemSerial
+16:25:42 SELECT Name FROM OptionData WHERE Name='dllll'
+16:25:42 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='dllll'
+16:25:42 UPDATE OptionData SET SkillKey=? where Name='dllll'
+16:25:48 UPDATE Character SET cLevel=150,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=90799, Life=640, MaxLife=3135, Mana=1239, MaxMana=1890, MapNumber=0, MapPosX=141, MapPosY=120, MapDir=1, PkCount=0, PkLevel=3, PkTime=322614, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+16:25:48 UPDATE Character SET Inventory=? WHERE Name='dllll'
+16:25:48 UPDATE Character SET MagicList=? WHERE Name='dllll'
+16:25:48 UPDATE Character SET Quest=? WHERE Name='dllll'
+16:25:48 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:25:48 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:25:48 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+16:25:48 SELECT Inventory FROM Character WHERE Name='jhbjk'
+16:25:48 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+16:25:48 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='dllll'
+16:25:48 SELECT Inventory FROM Character WHERE Name='dllll'
+16:25:48 SELECT G_Status FROM GuildMember WHERE Name='dllll'
+16:25:48 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:25:48 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:25:48 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+16:25:50 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='dllll' AND AccountID='test123'
+16:25:50 SELECT Inventory from Character where Name='dllll'
+16:25:50 SELECT MagicList from Character where Name='dllll'
+16:25:50 SELECT Quest from Character where Name='dllll'
+16:25:50 UPDATE AccountCharacter SET GameIDC='dllll' WHERE Id='test123'
+16:25:50 SELECT * FROM OptionData WHERE Name='dllll'
+16:25:50 [WzExDB] [ExDB][Guild Member Info Request] Member [dllll].
+16:25:50 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='dllll'
+16:25:50 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'dllll'
+16:25:50 SELECT SkillKey from OptionData where Name='dllll'
+16:25:50 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'dllll'
+16:25:50 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+16:25:50 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'dllll' and AccountID = 'test123'
+16:25:50 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'dllll' and AccountID = 'test123'
+16:25:50 [WzExDB] [ExDB][Friend List Request] Name[dllll].
+16:25:50 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'dllll'
+16:25:50 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 22
+16:25:50 [WzExDB] [ExDB][Friend List Send] Name[dllll].
+16:25:50 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+16:25:50 SELECT FriendName FROM T_WaitFriend where GUID=22
+[WzExDB] [ExDB][Mail List Request] Name[dllll].
+16:25:50 [WzExDB] [ExDB][Mail List Send] Name[dllll].
+16:25:50 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=22
+16:25:50 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+16:26:11 SELECT Name FROM OptionData WHERE Name='dllll'
+16:26:11 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='dllll'
+16:26:11 UPDATE OptionData SET SkillKey=? where Name='dllll'
+16:26:16 UPDATE Character SET cLevel=150,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=90799, Life=640, MaxLife=3135, Mana=1798, MaxMana=1890, MapNumber=0, MapPosX=141, MapPosY=120, MapDir=0, PkCount=0, PkLevel=3, PkTime=322642, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+16:26:16 UPDATE Character SET Inventory=? WHERE Name='dllll'
+16:26:16 UPDATE Character SET MagicList=? WHERE Name='dllll'
+16:26:16 UPDATE Character SET Quest=? WHERE Name='dllll'
+16:26:16 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:26:16 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:26:16 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='jhbjk'
+16:26:16 SELECT Inventory FROM Character WHERE Name='jhbjk'
+16:26:16 SELECT G_Status FROM GuildMember WHERE Name='jhbjk'
+16:26:16 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='dllll'
+16:26:16 SELECT Inventory FROM Character WHERE Name='dllll'
+16:26:16 SELECT G_Status FROM GuildMember WHERE Name='dllll'
+16:26:16 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:26:16 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:26:16 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+16:26:24 DELETE FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'jhbjk' and AccountID= 'test123'
+16:26:24 DELETE FROM Character WHERE AccountID='test123' AND Name='jhbjk'
+16:26:24 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:26:24 UPDATE AccountCharacter SET GameID1=NULL WHERE Id='test123'
+16:26:29 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='dllll' AND AccountID='test123'
+16:26:29 SELECT Inventory from Character where Name='dllll'
+16:26:29 SELECT MagicList from Character where Name='dllll'
+16:26:29 SELECT Quest from Character where Name='dllll'
+16:26:29 UPDATE AccountCharacter SET GameIDC='dllll' WHERE Id='test123'
+16:26:29 SELECT * FROM OptionData WHERE Name='dllll'
+16:26:29 [WzExDB] [ExDB][Guild Member Info Request] Member [dllll].
+16:26:29 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='dllll'
+16:26:29 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'dllll'
+16:26:29 SELECT SkillKey from OptionData where Name='dllll'
+16:26:29 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'dllll'
+16:26:29 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+16:26:29 [WzExDB] [ExDB][Friend List Request] Name[dllll].
+16:26:29 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'dllll'
+16:26:29 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 22
+16:26:29 [WzExDB] [ExDB][Friend List Send] Name[dllll].
+16:26:29 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+16:26:29 SELECT FriendName FROM T_WaitFriend where GUID=22
+16:26:29 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'dllll' and AccountID = 'test123'
+16:26:29 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'dllll' and AccountID = 'test123'
+[WzExDB] [ExDB][Mail List Request] Name[dllll].
+16:26:29 [WzExDB] [ExDB][Mail List Send] Name[dllll].
+16:26:29 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=22
+16:26:29 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+16:31:11 UPDATE Character SET cLevel=150,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=68799, Life=640, MaxLife=3135, Mana=1890, MaxMana=1890, MapNumber=0, MapPosX=136, MapPosY=126, MapDir=3, PkCount=0, PkLevel=3, PkTime=322937, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+16:31:11 UPDATE Character SET Inventory=? WHERE Name='dllll'
+16:31:11 UPDATE Character SET MagicList=? WHERE Name='dllll'
+16:31:11 UPDATE Character SET Quest=? WHERE Name='dllll'
+16:32:16 SELECT Name FROM OptionData WHERE Name='dllll'
+16:32:16 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='dllll'
+16:32:16 UPDATE OptionData SET SkillKey=? where Name='dllll'
+16:32:22 UPDATE Character SET cLevel=150,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=68799, Life=640, MaxLife=3135, Mana=1890, MaxMana=1890, MapNumber=0, MapPosX=136, MapPosY=126, MapDir=3, PkCount=0, PkLevel=3, PkTime=323008, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+16:32:22 UPDATE Character SET Inventory=? WHERE Name='dllll'
+16:32:22 UPDATE Character SET MagicList=? WHERE Name='dllll'
+16:32:22 UPDATE Character SET Quest=? WHERE Name='dllll'
+16:32:23 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:32:23 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:32:23 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='dllll'
+16:32:23 SELECT Inventory FROM Character WHERE Name='dllll'
+16:32:23 SELECT G_Status FROM GuildMember WHERE Name='dllll'
+16:32:23 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:32:23 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:32:23 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+16:34:34 EXEC WZ_DISCONNECT_MEMB 'test123'
+[Player] test123 has been deleted
+16:44:30 SELECT * FROM MEMB_INFO WHERE memb___id='test123'
+[Object] User test123 has join
+16:44:30 EXEC WZ_CONNECT_MEMB 'test123','Sub-3','45.122.232.61'
+16:44:31 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:44:31 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:44:31 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='dllll'
+16:44:31 SELECT Inventory FROM Character WHERE Name='dllll'
+16:44:31 SELECT G_Status FROM GuildMember WHERE Name='dllll'
+16:44:31 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:44:31 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:44:31 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+16:44:54 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='dllll' AND AccountID='test123'
+16:44:54 SELECT Inventory from Character where Name='dllll'
+16:44:54 SELECT MagicList from Character where Name='dllll'
+16:44:54 SELECT Quest from Character where Name='dllll'
+16:44:54 UPDATE AccountCharacter SET GameIDC='dllll' WHERE Id='test123'
+16:44:54 SELECT * FROM OptionData WHERE Name='dllll'
+16:44:54 [WzExDB] [ExDB][Guild Member Info Request] Member [dllll].
+16:44:54 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='dllll'
+16:44:54 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'dllll'
+16:44:54 SELECT SkillKey from OptionData where Name='dllll'
+16:44:54 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'dllll'
+16:44:54 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+16:44:54 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'dllll' and AccountID = 'test123'
+16:44:54 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'dllll' and AccountID = 'test123'
+16:44:54 [WzExDB] [ExDB][Friend List Request] Name[dllll].
+16:44:54 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'dllll'
+16:44:54 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 22
+16:44:54 [WzExDB] [ExDB][Friend List Send] Name[dllll].
+16:44:54 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+16:44:54 SELECT FriendName FROM T_WaitFriend where GUID=22
+[WzExDB] [ExDB][Mail List Request] Name[dllll].
+16:44:54 [WzExDB] [ExDB][Mail List Send] Name[dllll].
+16:44:54 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=22
+16:44:54 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+16:45:19 SELECT Name FROM OptionData WHERE Name='dllll'
+16:45:19 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='dllll'
+16:45:19 UPDATE OptionData SET SkillKey=? where Name='dllll'
+16:45:25 UPDATE Character SET cLevel=150,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=59599, Life=640, MaxLife=3135, Mana=1890, MaxMana=1890, MapNumber=0, MapPosX=138, MapPosY=126, MapDir=0, PkCount=0, PkLevel=3, PkTime=323791, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+16:45:25 UPDATE Character SET Inventory=? WHERE Name='dllll'
+16:45:25 UPDATE Character SET MagicList=? WHERE Name='dllll'
+16:45:25 UPDATE Character SET Quest=? WHERE Name='dllll'
+16:45:26 SELECT Id FROM AccountCharacter WHERE Id='test123'
+16:45:26 SELECT * FROM AccountCharacter WHERE Id='test123'
+16:45:26 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='dllll'
+16:45:26 SELECT Inventory FROM Character WHERE Name='dllll'
+16:45:26 SELECT G_Status FROM GuildMember WHERE Name='dllll'
+16:45:26 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+16:45:26 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+16:45:26 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+17:08:35 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='dllll' AND AccountID='test123'
+17:08:35 SELECT Inventory from Character where Name='dllll'
+17:08:35 SELECT MagicList from Character where Name='dllll'
+17:08:35 SELECT Quest from Character where Name='dllll'
+17:08:35 UPDATE AccountCharacter SET GameIDC='dllll' WHERE Id='test123'
+17:08:35 SELECT * FROM OptionData WHERE Name='dllll'
+17:08:35 [WzExDB] [ExDB][Guild Member Info Request] Member [dllll].
+17:08:35 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='dllll'
+17:08:35 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'dllll'
+17:08:35 SELECT SkillKey from OptionData where Name='dllll'
+17:08:35 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'dllll'
+17:08:35 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+17:08:35 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'dllll' and AccountID = 'test123'
+17:08:35 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'dllll' and AccountID = 'test123'
+17:08:35 [WzExDB] [ExDB][Friend List Request] Name[dllll].
+17:08:35 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'dllll'
+17:08:35 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 22
+17:08:35 [WzExDB] [ExDB][Friend List Send] Name[dllll].
+17:08:35 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+17:08:35 SELECT FriendName FROM T_WaitFriend where GUID=22
+[WzExDB] [ExDB][Mail List Request] Name[dllll].
+17:08:35 [WzExDB] [ExDB][Mail List Send] Name[dllll].
+17:08:35 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=22
+17:08:35 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+17:08:36 UPDATE Character SET cLevel=150,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=59599, Life=640, MaxLife=3135, Mana=1890, MaxMana=1890, MapNumber=0, MapPosX=138, MapPosY=126, MapDir=0, PkCount=0, PkLevel=3, PkTime=323791, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+17:08:36 UPDATE Character SET Inventory=? WHERE Name='dllll'
+17:08:36 UPDATE Character SET MagicList=? WHERE Name='dllll'
+17:08:36 UPDATE Character SET Quest=? WHERE Name='dllll'
+17:08:50 SELECT AccountID FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+17:08:50 SELECT Money, DbVersion, pw FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+17:08:50 SELECT Items FROM MuOnline.dbo.warehouse WHERE AccountID='test123'
+17:08:53 UPDATE warehouse SET Money=0, pw=0, DbVersion=3 WHERE AccountID='test123'
+17:08:53 UPDATE warehouse SET Items=? WHERE AccountID='test123'
+17:08:53 UPDATE Character SET Inventory=? WHERE Name='dllll'
+17:17:08 EXEC MuOnline.dbo.SCF_GENSRANKINGUPDATE 1
+17:17:08 EXEC MuOnline.dbo.SCF_GENSRANKINGUPDATE 2
+17:17:51 SELECT Name FROM OptionData WHERE Name='dllll'
+17:17:51 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='dllll'
+17:17:51 UPDATE OptionData SET SkillKey=? where Name='dllll'
+17:17:56 UPDATE Character SET cLevel=150,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=54999, Life=640, MaxLife=3135, Mana=1890, MaxMana=1890, MapNumber=0, MapPosX=147, MapPosY=142, MapDir=1, PkCount=0, PkLevel=3, PkTime=325742, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+17:17:56 UPDATE Character SET Inventory=? WHERE Name='dllll'
+17:17:56 UPDATE Character SET MagicList=? WHERE Name='dllll'
+17:17:56 UPDATE Character SET Quest=? WHERE Name='dllll'
+17:17:57 SELECT Id FROM AccountCharacter WHERE Id='test123'
+17:17:57 SELECT * FROM AccountCharacter WHERE Id='test123'
+17:17:57 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='dllll'
+17:17:57 SELECT Inventory FROM Character WHERE Name='dllll'
+17:17:57 SELECT G_Status FROM GuildMember WHERE Name='dllll'
+17:17:57 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+17:17:57 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+17:17:57 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+17:17:59 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='dllll' AND AccountID='test123'
+17:17:59 SELECT Inventory from Character where Name='dllll'
+17:17:59 SELECT MagicList from Character where Name='dllll'
+17:17:59 SELECT Quest from Character where Name='dllll'
+17:17:59 UPDATE AccountCharacter SET GameIDC='dllll' WHERE Id='test123'
+17:17:59 SELECT * FROM OptionData WHERE Name='dllll'
+17:17:59 [WzExDB] [ExDB][Guild Member Info Request] Member [dllll].
+17:17:59 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='dllll'
+17:17:59 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'dllll'
+17:17:59 SELECT SkillKey from OptionData where Name='dllll'
+17:17:59 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'dllll'
+17:17:59 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+17:17:59 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'dllll' and AccountID = 'test123'
+17:17:59 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'dllll' and AccountID = 'test123'
+17:17:59 [WzExDB] [ExDB][Friend List Request] Name[dllll].
+17:17:59 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'dllll'
+17:17:59 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 22
+17:17:59 [WzExDB] [ExDB][Friend List Send] Name[dllll].
+17:17:59 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+17:17:59 SELECT FriendName FROM T_WaitFriend where GUID=22
+[WzExDB] [ExDB][Mail List Request] Name[dllll].
+17:17:59 [WzExDB] [ExDB][Mail List Send] Name[dllll].
+17:17:59 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=22
+17:17:59 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+17:18:11 SELECT Name FROM OptionData WHERE Name='dllll'
+17:18:11 UPDATE OptionData SET GameOption=9, Qkey=255, Wkey=255, Ekey=255, Rkey=255, ChatWindow=38 WHERE Name='dllll'
+17:18:11 UPDATE OptionData SET SkillKey=? where Name='dllll'
+17:18:17 UPDATE Character SET cLevel=150,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=54999, Life=640, MaxLife=3135, Mana=1890, MaxMana=1890, MapNumber=0, MapPosX=147, MapPosY=142, MapDir=0, PkCount=0, PkLevel=3, PkTime=325763, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+17:18:17 UPDATE Character SET Inventory=? WHERE Name='dllll'
+17:18:17 UPDATE Character SET MagicList=? WHERE Name='dllll'
+17:18:17 UPDATE Character SET Quest=? WHERE Name='dllll'
+17:18:17 SELECT Id FROM AccountCharacter WHERE Id='test123'
+17:18:17 SELECT * FROM AccountCharacter WHERE Id='test123'
+17:18:17 SELECT cLevel, Class, CtlCode, DbVersion FROM vCharacterPreview WHERE Name='dllll'
+17:18:17 SELECT Inventory FROM Character WHERE Name='dllll'
+17:18:17 SELECT G_Status FROM GuildMember WHERE Name='dllll'
+17:18:17 SELECT SCFIsVip, SCFVipMoney, SCFVipDays, SCFWareVipCount, DateDiff(dd , out__days,getdate()) as dateDifference, SCFLuckyCoins, SCFExtWarehouse FROM MuOnline.dbo.MEMB_INFO WHERE memb___id = 'test123'
+17:18:17 SELECT AccountID,BotLife,BotMaxLife FROM MuOnline.dbo.BotPet WHERE AccountID='test123' AND BotLife < BotMaxLife
+17:18:17 SELECT COUNT(*) as cnt FROM MuOnline.dbo.TitanLotteryPlayers WHERE AccountID='test123'
+17:18:42 SELECT cLevel, Class, LevelUpPoint, Experience, Strength, Dexterity, Vitality, Energy, Money, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MapDir, PkCount, PkLevel, PkTime, CtlCode, DbVersion, Leadership, ChatLimitTime, FruitPoint, SCFExtInventory, SCFUpdatedPShop FROM Character WHERE Name='dllll' AND AccountID='test123'
+17:18:42 SELECT Inventory from Character where Name='dllll'
+17:18:42 SELECT MagicList from Character where Name='dllll'
+17:18:42 SELECT Quest from Character where Name='dllll'
+17:18:42 UPDATE AccountCharacter SET GameIDC='dllll' WHERE Id='test123'
+17:18:42 SELECT * FROM OptionData WHERE Name='dllll'
+17:18:42 [WzExDB] [ExDB][Guild Member Info Request] Member [dllll].
+17:18:42 SELECT G_Name, G_Level, G_Status FROM GuildMember where Name='dllll'
+17:18:42 SELECT Name FROM MuOnline.dbo.OfficialHelper WHERE Name = 'dllll'
+17:18:42 SELECT SkillKey from OptionData where Name='dllll'
+17:18:42 SELECT SCFMasterLevel, SCFMasterPoints, Resets, SCFPCPoints, SCFSealItem, SCFSealTime, SCFScrollItem, SCFScrollTime, SCFMarried, SCFMarryHusbandWife, SCFGensFamily, SCFGensContribution,SCFGensRank,SCFGensRecvReward,SCFGensDD = (CAST((DATEDIFF(dd,SCFGensDateLeave,GETDATE())) as int)+1) FROM MuOnline.dbo.Character WHERE Name = 'dllll'
+17:18:42 [WzExDB] [ExDB][Send Guild Member Info] No info returned from sManager->db.
+17:18:42 SELECT Name FROM MuOnline.dbo.SCFS5Quest WHERE Name = 'dllll' and AccountID = 'test123'
+17:18:42 SELECT SCFS5Quest FROM MuOnline.dbo.SCFS5Quest where Name = 'dllll' and AccountID = 'test123'
+17:18:42 [WzExDB] [ExDB][Friend List Request] Name[dllll].
+17:18:42 SELECT GUID, MemoTotal FROM T_FriendMain where Name = 'dllll'
+17:18:42 SELECT FriendGuid, FriendName, Del FROM T_FriendList where GUID = 22
+17:18:42 [WzExDB] [ExDB][Friend List Send] Name[dllll].
+17:18:42 [WzExDB] [ExDB][Friend List Send] Friend Count[0].
+17:18:42 SELECT FriendName FROM T_WaitFriend where GUID=22
+[WzExDB] [ExDB][Mail List Request] Name[dllll].
+17:18:42 [WzExDB] [ExDB][Mail List Send] Name[dllll].
+17:18:42 SELECT MemoIndex, FriendName, wDate, Subject, bRead FROM T_FriendMail where GUID=22
+17:18:42 [WzExDB] [ExDB][Mail List Send] Mail Count: 0.
+17:18:43 UPDATE Character SET cLevel=150,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=54999, Life=640, MaxLife=3135, Mana=1890, MaxMana=1890, MapNumber=0, MapPosX=147, MapPosY=142, MapDir=0, PkCount=0, PkLevel=3, PkTime=325763, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+17:18:43 UPDATE Character SET Inventory=? WHERE Name='dllll'
+17:18:43 UPDATE Character SET MagicList=? WHERE Name='dllll'
+17:18:43 UPDATE Character SET Quest=? WHERE Name='dllll'
+17:28:43 UPDATE Character SET cLevel=150,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=54999, Life=640, MaxLife=3135, Mana=1890, MaxMana=1890, MapNumber=0, MapPosX=146, MapPosY=137, MapDir=0, PkCount=0, PkLevel=3, PkTime=326389, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+17:28:43 UPDATE Character SET Inventory=? WHERE Name='dllll'
+17:28:43 UPDATE Character SET MagicList=? WHERE Name='dllll'
+17:28:43 UPDATE Character SET Quest=? WHERE Name='dllll'
+17:38:44 UPDATE Character SET cLevel=150,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=54999, Life=640, MaxLife=3135, Mana=1890, MaxMana=1890, MapNumber=0, MapPosX=146, MapPosY=137, MapDir=0, PkCount=0, PkLevel=3, PkTime=326990, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+17:38:44 UPDATE Character SET Inventory=? WHERE Name='dllll'
+17:38:44 UPDATE Character SET MagicList=? WHERE Name='dllll'
+17:38:44 UPDATE Character SET Quest=? WHERE Name='dllll'
+17:47:18 UPDATE Character SET cLevel=150,Class=64,LevelUpPoint=0, Experience=0, Strength=26, Dexterity=20, Vitality=20, Energy=15, Money=54999, Life=640, MaxLife=3135, Mana=1890, MaxMana=1890, MapNumber=0, MapPosX=146, MapPosY=137, MapDir=0, PkCount=0, PkLevel=3, PkTime=327504, DbVersion=3, Leadership=25, ChatLimitTime=0, FruitPoint=0, SCFExtInventory=0, SCFUpdatedPShop=1 WHERE Name = 'dllll'
+17:47:18 EXEC WZ_DISCONNECT_MEMB 'test123'
+17:47:18 UPDATE Character SET Inventory=? WHERE Name='dllll'
+17:47:18 UPDATE Character SET MagicList=? WHERE Name='dllll'
+17:47:18 UPDATE Character SET Quest=? WHERE Name='dllll'
+[Player] test123 has been deleted
+21:17:08 EXEC MuOnline.dbo.SCF_GENSRANKINGUPDATE 1
+21:17:08 EXEC MuOnline.dbo.SCF_GENSRANKINGUPDATE 2

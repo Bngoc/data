@@ -1,0 +1,12 @@
+01:55:01  [CashShop](bqngoc) Ask for List Items
+01:55:08  [CashShop](bqngoc) Try to Buy:[98,37,7221][Đặc biệt] Ngọc tăng tỉ lệ
+01:55:08  [CashShop](bqngoc) Buy Item:[98,37,7221][Đặc biệt] Ngọc tăng tỉ lệ
+01:55:08  [CashShop](bqngoc) Ask for List Items
+01:55:16  [CashShop](bqngoc) Ask for Use Item [26](22,37,7221)(0,1) Dur: 0
+01:55:16  [CashShop](bqngoc) Use Item (22,37,7221)
+01:55:16  [CashShop](bqngoc) Ask for List Items
+01:55:19  [CashShop](bqngoc) Ask for List Items
+01:55:26  [CashShop](bqngoc) Ask for List Items
+23:34:20  [MuItemShop Category] - ..\SCFData\PointsShops\WzShop\SCF_CashShop_Category.txt file is Loaded
+23:34:20  [MuItemShop Package] - ..\SCFData\PointsShops\WzShop\SCF_CashShop_Package.txt file is Loaded
+23:34:20  [MuItemShop Product] - ..\SCFData\PointsShops\WzShop\SCF_CashShop_Product.txt file is Loaded

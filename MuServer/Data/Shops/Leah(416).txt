@@ -1,39 +1,17 @@
-//Leha
-//37	242 elbaland
-//shop chung
-14 3 0 100 0 0 0 0 //binh mau to
-14 6 0 100 0 0 0 0 //binh phep to
-14 8 0 100 0 0 0 0 //giai doc
-13 0 0 255 0 0 0 0  //than ho menh
-13 1 0 255 0 0 0 0  // tieu quy
-13 2 0 255 0 0 0 0  //ki lan
 
-13 67 0 0 0 0 0 0 //rudo
-13 29 0 0 0 0 0 0 //giap hon nguyen
-
-14 9 0  0  0 0 0 0 //ruou
-14 10 0 0 0 0 0 0  //bua ve thanh
-14 68 0 0 0 0 0 0
-14 66 0 0 0 0 0 0
-14 67 0 0 0 0 0 0
-14 65 0 0 0 0 0 0
-14 24 1 0 0 0 0 0
-14 24 0 0 0 0 0 0
-14 23 0 0 0 0 0 0 //nhiem vu
-14 25 0 0 0 0 0 0
-14 26 0 0 0 0 0 0
-14 23 1 0 0 0 0 0
-
-4 7 5 255 0 0 0 0 //Arrows +5
-4 15 5 255 0 0 0 0 //Bolts +5
-
-12	130	0	255	0	0	0	0	//ao choang nho
-12	131	0	255	0	0	0	0	//canh SM nho
-
-12	133	0	255	0	0	0	0	//canh dw nho
-12	132	0	255	0	0	0	0	//canh f nho
-12	135	0	255	0	0	0	0	//canh RF nho
-12	134	0	255	0	0	0	0	//canh dk nho
+12	250	15 255 1 1 7 63	//canh Canh ac quy
+12	250	15 255 1 1 7 63	//canh Canh ac quy
+12	250	15 255 1 1 7 63	//canh Canh ac quy
+12	250	15 255 1 1 7 63	//canh Canh ac quy
+14	176	0 0 0 0 0 0	// xuoang tu than
+14	177	0 0 0 0 0 0	// Da quy vuong
+14	178	0 0 0 0 0 0	// long phuong hoang
+14	179	0 0 0 0 0 0	// Da linh hon
+14	180	0 0 0 0 0 0	// long vu pha le
+13 0 0 0 0 0 0 0//Guardian Angel
+13 0 0 0 0 0 0 0//Guardian Angel
+13 0 0 0 0 0 0 0//Guardian Angel
+12	251	15 255 1 1 7 63	//canh thien than
 
 
 end

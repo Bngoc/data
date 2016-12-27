@@ -1,0 +1,8 @@
+00:08:23  [MuItemShop Category] - ..\SCFData\PointsShops\WzShop\SCF_CashShop_Category.txt file is Loaded
+00:08:23  [MuItemShop Package] - ..\SCFData\PointsShops\WzShop\SCF_CashShop_Package.txt file is Loaded
+00:08:23  [MuItemShop Product] - ..\SCFData\PointsShops\WzShop\SCF_CashShop_Product.txt file is Loaded
+00:28:23  [CashShop](1234) Ask for List Items
+00:28:28  [CashShop](1234) Try to Buy:[260,0,7330][Đặc biệt] Mở rộng cửa hàng cá nhân
+00:28:28  [CashShop](1234) Not enough Money:[260,0,7330][Đặc biệt]Mở rộng cửa hàng cá nhân
+00:28:34  [CashShop](1234) Try to Buy:[124,9,6699][Bùa] Bùa tăng kinh nghiệm
+00:28:34  [CashShop](1234) Not enough Money:[124,9,6699][Bùa]Bùa tăng kinh nghiệm

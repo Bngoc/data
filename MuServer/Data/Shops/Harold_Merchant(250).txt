@@ -1,26 +1,31 @@
-//DL
-// 183	137 Loren 
+// Peddler
+// type index level
 
-7  25 7 255 0 1 0 0
-8  25 7 255 0 1 0 0
-9  25 7 255 0 1 0 0
-10 25 7 255 0 1 0 0
-11 25 7 255 0 1 0 0
-
-7 26 7 255 0 1 0 0
-9 26 7 255 0 1 0 0
-
-8  26 7 255 0 1 0 0
-2  11 7 255 1 1 0 0
-2  10 7 255 1 1 0 0
-10 26 7 255 0 1 0 0
-11 26 7 255 0 1 0 0
-
-12 21 0 1 0 0 0 0 
-12 22 0 1 0 0 0 0 
-12 23 0 1 0 0 0 0 
-12 24 0 1 0 0 0 0 
-12 35 0 1 0 0 0 0
-12 48 0 1 0 0 0 0  //sach bong ma
-
+7 26 15 255 2 2 2 63 //Adamantine Mask
+8 26 15 255 2 2 2 63 //Adamantine Armor
+9 26 15 255 2 2 2 63 //Adamantine Pants
+10 26 15 255 2 2 2 63 //Adamantine Gloves
+11 26 15 255 2 2 2 63 //Adamantine Boots
+2 11 15 255 2 2 2 63 //Master Scepter
+12 21 15 255 0 0 0 0 //FireBrust Spell
+12 22 15 255 0 0 0 0 //Summon Spell
+12 23 15 255 0 0 0 0 //Critical Damage Spell
+12 24 15 255 0 0 0 0 //Electric Spark Spell
+12 35 15 255 0 0 0 0 //Fire Scream Scroll
+12 48 15 255 0 0 0 0 //Scroll of Birds
+7 27 15 255 2 2 2 63 // non havuong
+8 27 15 255 2 2 2 63 // quan hacvuong
+9 27 15 255 2 2 2 63 // chan havuong
+10 27 15 255 2 2 2 63 // tay hacvuong
+11 27 15 255 2 2 2 63 // ao hacvuong
+7 28 15 255 2 2 2 63 // non chi ton
+8 28 15 255 2 2 2 63 // ao chiton
+9 28 15 255 2 2 2 63 // quan chiton
+10 28 15 255 2 2 2 63 // chan chiton
+11 28 15 255 2 2 2 63 // tay chi ton
+2 17 15 255 2 2 2 63 //Master Scepter
+6 11 15 255 2 2 2 63 // khien xa
+6 21 15 255 2 2 2 63 
+13 4 5 255 1 0 0 0 //ngua DL
+13 5 5 255 1 0 0 0 //QuaDL
 end
