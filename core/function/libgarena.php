@@ -655,135 +655,82 @@ function getCodeItem($string = '')
 function CheckSlotWarehouse($warehouse, $itemX, $itemY)
 {
     $items_data = getoption('#items_data');
-//
-//    $items = str_repeat('0', 120);
-//    $itemsm = str_repeat('1', 120);
-//    $i = 0;
-//    while ($i < 120) {
-//        $item = substr($warehouse, $i * 32, 32);
-//        if ($item == "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" || $item == "ffffffffffffffffffffffffffffffff") {
-//            $i++;
-//            continue;
-//        } else {
-//            $item32 = getCodeItem($item);
-//            echo "3441 ---ref x = $itemX ---ref y = $itemY >>><<< group =" . $item32['group'] . "=> id=" . $item32['id'] . "<br>";
-//            $item_data = $items_data[$item32['group'] . '.' . $item32['id']];
-//            echo "3443 ---ref x = " . $item_data['X'] . " ---ref y = " . $item_data['Y'] . "<br>";
-//            $y = 0;
-//            while ($y < $item_data['Y']) {
-//                $x = 0;
-//                while ($x < $item_data['X']) {
-//                    $items = substr_replace($items, '1', ($i + $x) + ($y * 8), 1);
-//                    $x++;
-//                }
-//                $y++;
-//            }
-//            $i++;
-//        }
-//    }
-//
-//    $y = 0;
-//    while ($y < $itemY) {
-//        $x = 0;
-//        while ($x < $itemX) {
-//            $x++;
-//            $spacerq[$x + (8 * $y)] = true;
-//        }
-//        $y++;
-//    }
-//    print_r($spacerq);
-//
-//    $walked = 0;
-//    $i = 0;
-//    while ($i < 120) {
-//        if (isset($spacerq[$i])) {
-//            $itemsm = substr_replace($itemsm, '0', $i - 1, 1);
-//            $last = $i;
-//            $walked++;
-//        }
-//        if ($walked == count($spacerq)) $i = 119;
-//        $i++;
-//    }
-//    //echo "<br>3454 --------- items = $itemsm <br>";//exit();0111111101111111011111110
-//    $useforlength = substr($itemsm, 0, $last);
-//    $findslotlikethis = str_replace('++', '+', str_replace('1', '+[0-1]+', $useforlength));
-//
-//    echo "<br>3454 --------- items = $itemsm last = $last useforlength = $useforlength <br> findslotlikethis = $findslotlikethis<br>";//exit();
-//    $i = 0;
-//    $nx = 0;
-//    $ny = 0;
-//    while ($i < 120) {
-//        if ($nx == 8) {
-//            $ny++;
-//            $nx = 0;
-//        }
-//        if ((preg_match('/^' . $findslotlikethis . '/', substr($items, $i, strlen($useforlength)))) && ($itemX + $nx < 9) && ($itemY + $ny < 16)) return $i;
-//        $i++;
-//        $nx++;
-//    }
-//
-
     $a = array();
-    for($c = 0; $c < 8; $c++){
-        for($r = 0; $r < 15; $r++) {
+    for ($c = 0; $c < 8; $c++) {
+        for ($r = 0; $r < 15; $r++) {
             $a[$r][$c] = 0;
         }
     }
 
     $lenghtwarehouse = strlen($warehouse);
-    $_idY = $_idX = 0;
+    $_idY = 0;
+    $_idX = -1;
     for ($c = 0; $c < $lenghtwarehouse; $c += 32) {
         $res = substr($warehouse, $c, 32);
 
         if ($_idY % 8 == 0) {
-            if ($_idY > 0) ++$_idX;
+            ++$_idX;
             $_idY = 0;
         }
-            $item32 = getCodeItem($res);
-            if (isset($items_data[$item32['group'] . '.' . $item32['id']])) {
-                $item_data = $items_data[$item32['group'] . '.' . $item32['id']];
-
-//                if ($a[$_idX][$_idY] != 1) {
-                    for ($jt = 0; $jt < $item_data['X']; $jt++) {
-                        for ($it = 0; $it < $item_data['Y']; $it++) {
-                            $a[$_idX + $it][$_idY + $jt] = 1;
-                        }
-                    }
+        $item32 = getCodeItem($res);
+        if (isset($items_data[$item32['group'] . '.' . $item32['id']])) {
+            $item_data = $items_data[$item32['group'] . '.' . $item32['id']];
+            for ($jt = 0; $jt < $item_data['X']; $jt++) {
+                for ($it = 0; $it < $item_data['Y']; $it++) {
+                    $a[$_idX + $it][$_idY + $jt] = 1;
                 }
-//            }
+            }
+        }
         ++$_idY;
     }
 
-    $xX = $itemX;
-    $yY = $itemY;
+    $paramentX = $itemX;
+    $paramentY = $itemY;
+    $ValueResult = array();
 
-    for($i = 0; $i < 15; $i++){
-        for($j = 0; $j < 8; $j++){
-            $checkXY = false;
-            if(($j + $yY) <= 8 && ($i + $xX) <= 15) {
-
-                for ($_y = 0; $_y < $yY; $_y++) {
-                    for ($x = 0; $x < $xX; $x++) {
-                        if ($a[$i + $x][$j + $_y] == 0) {
-                            $checkXY = true;
-                        } else{
-                            $checkXY = false;
-                            break;
+    for ($i = 0; $i < 15; $i++) {
+        for ($j = 0; $j < 8; $j++) {
+            $checkFrist = false;
+            if (!$checkFrist) {
+                $checkValueResult = array('resultX' => $i, 'resultY' => $j);
+                $checkFrist = true;
+            }
+            if ($a[$i][$j] == 0 && (($paramentY + $i) <= 15) && (8 >= ($j + $paramentX))) {
+                for ($x = 0; $x < $paramentX; $x++) {
+                    for ($_y = 0; $_y < $paramentY; $_y++) {
+                        if ($paramentX > $paramentX) {
+                            if ($a[$x + $i][$_y + $j] == 1) {
+                                $checkXY = false;
+                                break;
+                            }
+                            if ($a[$x + $i][$_y + $j] == 0) {
+                                $checkXY = true;
+                            }
+                        } else {
+                            if ($a[$_y + $i][$x + $j] == 1) {
+                                $checkXY = false;
+                                break;
+                            }
+                            if ($a[$_y + $i][$x + $j] == 0) {
+                                $checkXY = true;
+                            }
                         }
                     }
                 }
 
-            }
-
-            if (isset($checkXY) && $checkXY){
-                $result = $i*8 + 1 + $j;
-//                $result = $i*8 + (@$j ? 1 : 0) + $j;
-                return $result;
+                if ($checkXY) {
+                    $ValueResult = $checkValueResult;
+                    break;
+                }
             }
         }
+        if ($checkXY) {
+            break;
+        }
     }
-
-    return 3840;
+    if (empty($ValueResult)) return 3840;
+    $result = $ValueResult['resultX'] * 8 + $ValueResult['resultY'];
+    return $result;
 }
 
 

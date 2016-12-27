@@ -6,7 +6,7 @@ $ok_loop2 = false;
 list($before_info_pk, $showchar, $option_pk) = _GL('before_info_pk, showchar, option_pk');
 list($sub) = _GL('sub');
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 ?>
 
 

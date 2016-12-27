@@ -129,9 +129,13 @@ function shop___buy_s1()
     $member = member_get();
     $accc_ = $member['user_name'];
 
+    $warehouse_ = do_select_character('warehouse', $arr_cls = 'Items', "AccountID='$accc_'");
+    $warehouse = substr(strtoupper(bin2hex($warehouse_[0]['Items'])), 0, 3840);
+
     /// kiem tra khi character open warehouse => ???????????
-    if (request_type('POST')) {
-        if ($token == md5('__buy_s1' . $opt) && $id_item = REQ('Item')) {
+    //if (request_type('POST')) {
+    if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($token == md5('__buy_s1' . $opt) && $id_item = REQ('item')) {
             cn_dsi_check(true);
 
             $errors_false = false;
@@ -151,9 +155,6 @@ function shop___buy_s1()
                     $errors_false = true;
                 } else {
                     $items_data = getoption('#items_data');
-                    $warehouse_ = do_select_character('warehouse', $arr_cls = 'Items', "AccountID='$accc_'");
-                    $warehouse = '';
-                    $warehouse = substr(strtoupper(bin2hex($warehouse_[0]['Items'])), 0, 3840);
                     $item_code = $list_item[$id_item]['code32'];
 
                     if ($opt == "armor") {
@@ -169,7 +170,7 @@ function shop___buy_s1()
                                 continue;
                             } else {
                                 if (!isset($items_data[$item_data['group'] . "." . $item_data['id']])) {
-                                    cn_throw_message("Vật phẩm này không có trong danh sách giao bán.",'e');
+                                    cn_throw_message("Vật phẩm này không có trong danh sách giao bán.", 'e');
                                     $errors_false = true;
                                     break;
                                 } else {
@@ -181,7 +182,6 @@ function shop___buy_s1()
                                         $errors_false = true;
                                         break;
                                     } else {
-                                        echo '$slot=-> '. $slot . '<br>';
                                         $warehouse = substr_replace($warehouse, $item_code, $slot * 32, $leng_item_code);
                                     }
                                 }
@@ -195,7 +195,7 @@ function shop___buy_s1()
                         $item_data = getCodeItem($item_code);
 
                         if (!isset($items_data[$item_data['group'] . "." . $item_data['id']])) {
-                            cn_throw_message("Vật phẩm này không có trong danh sách giao bán.",'e');
+                            cn_throw_message("Vật phẩm này không có trong danh sách giao bán.", 'e');
                             $errors_false = true;
                         } else {
                             $items = $items_data[$item_data['group'] . "." . $item_data['id']];
@@ -204,7 +204,6 @@ function shop___buy_s1()
                                 cn_throw_message("Không đủ chỗ trống trong Hòm đồ", 'e');
                                 $errors_false = true;
                             } else {
-                                echo '$slot=-> '. $slot . '<br>';
                                 $warehouse = substr_replace($warehouse, $item_code, $slot * 32, $leng_item_code);
                             }
                         }
@@ -222,12 +221,20 @@ function shop___buy_s1()
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/shop/log_" . $opt . ".txt";
                 $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|".$_blank_var[0]['gc']."_" . $vp_ . "|".$_blank_var[0]['gc']."_" . $check . "|" . $Date . "|\n");
+                fputs($fp, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $vp_ . "|" . $_blank_var[0]['gc'] . "_" . $check . "|" . $Date . "|\n");
                 fclose($fp);
                 //End Ghi vào Log
 
                 cn_throw_message("Bạn đã mua thành công $name_ với giá " . number_format($price_, 0, ",", ".") . " V.Point.");
             }
+
+            $resultData = array(
+                'msgAction' => cn_snippet_messages(),
+                'menuTop' => menuTopMoney(true)
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
         }
     }
     $arr_shop = mcache_get('.breadcrumbs');
@@ -235,12 +242,11 @@ function shop___buy_s1()
 
 
     list($list_itemNew, $echoPagination) = cn_arr_pagina($list_item, cn_url_modify(array('reset'), 'mod=cash_shop', "token=$token", "opt=$opt", 'page', "per_page=$per_page"), $page, $per_page);
-//    $echoPagination = cn_countArr_pagination(count($list_item), cn_url_modify(array('reset'), 'mod=cash_shop', "token=$token", "opt=$opt", 'page', "per_page=$per_page"), $page, $per_page);
 
     cn_assign('list_item, token, opt', $list_itemNew, $token, $opt);
     cn_assign('per_page, echoPagination', $per_page, $echoPagination);
 
-    echoheader('-@my_cashshop/style.css', "Cửa hàng $name_shop - $name_shop");
+    echoheader('-@my_cashshop/style.css@my_cashshop/customAjaxShop.js', "Cửa hàng $name_shop - $name_shop");
     echocomtent_here(exec_tpl('my_cashshop/_general'), cn_snippet_bc_re());
     echofooter();
 }

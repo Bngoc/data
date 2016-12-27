@@ -1,7 +1,7 @@
 ﻿<?php
 
 list($sub, $showchar, $show_warehouse, $check_change) = _GL('sub, showchar, show_warehouse, check_change');
-cn_snippet_messages();
+echo cn_snippet_messages();
 ?>
 
 

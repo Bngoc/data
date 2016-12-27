@@ -2,7 +2,7 @@
 
 list($showchar, $card_list) = _GL('showchar, card_list');
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 ?>
 
 <form method="post" name="frmnapthe" action="index.php?module=napthe&type=<?php //echo $type ?>"

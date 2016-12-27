@@ -7,7 +7,7 @@ list($showchar) = _GL('showchar');
 list($before_info_cn, $cn_false) = _GL('before_info_cn, cn_false');
 list($sub, $num_) = _GL('sub, is_tax');
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 ?>
 
 

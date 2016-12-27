@@ -1,6 +1,6 @@
 <?PHP
 
-global $skin_header, $skin_menu, $skin_menu_none, $skin_footer, $abccc, $skin_top;
+global $skin_header_web, $skin_menu_web, $skin_menu_none, $skin_footer_web, $skin_content_web, $skin_menu_TopMoney, $skin_menu_TopAccount;
 
 $skin_prefix = "";
 
@@ -8,7 +8,7 @@ $skin_prefix = "";
 // Skin MENU
 // ********************************************************************************
 
-$skin_menu = cn_get_menu() . '<div style="clear:both;"></div>';
+$skin_menu_web = cn_get_menu() . '<div style="clear:both;"></div>';
 $skin_menu_none = cn_get_menu_none() . '<div style="clear:both;"></div>';
 $setpath_default = getoption('http_script_dir');
 
@@ -19,7 +19,7 @@ $keywords = getoption('keywords');
 // Skin HEADER
 // ********************************************************************************
 
-$skin_header = <<<HTML
+$skin_header_web = <<<HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -191,7 +191,7 @@ HTML;
 // Skin FOOTER
 // ********************************************************************************
 
-$skin_footer = <<<HTML
+$skin_footer_web = <<<HTML
 	</div> <!-- end mainsubcol -->
 	</div> <!-- end main -->
 	
@@ -224,7 +224,7 @@ $skin_footer = <<<HTML
 </body></html>
 HTML;
 
-$abccc = <<<HTML
+$skin_content_web = <<<HTML
 	<!-- ===================START COMMENT==================== -->
 		<div id="mainsubcol_content">
 
@@ -255,7 +255,7 @@ $abccc = <<<HTML
 	<!-- ===================END COMMENT==================== -->          
 HTML;
 
-$skin_top = <<<HTML
+$skin_menu_TopMoney = <<<HTML
         <ul class="top-showInfo">
             <li>{nameVpoint}</li>
             <li>{nameGcoin}</li>
@@ -265,6 +265,9 @@ $skin_top = <<<HTML
             <li>{nameCreate}</li>
             <li>{nameBank}</li>
         </ul>
+HTML;
+
+$skin_menu_TopAccount = <<<HTML
         <div class="user-inner">
             <div id="nonLogin">
                 <ul>

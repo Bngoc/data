@@ -4,7 +4,7 @@ list($list_item, $token, $opt) = _GL('list_item, token, opt');
 list($per_page) = _GL('per_page');
 
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 ?>
 
 <div class="panel">

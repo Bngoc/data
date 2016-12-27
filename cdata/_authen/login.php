@@ -1,4 +1,5 @@
-﻿<?php cn_snippet_messages(); ?>
+﻿<?php
+echo cn_snippet_messages(); ?>
 
 <form name="" method="post" action="<?php echo PHP_SELF; ?>">
     <input name="action" value="dologin" type="hidden">

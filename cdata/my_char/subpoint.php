@@ -7,7 +7,7 @@ list($showchar) = _GL('showchar');
 list($before_info_subpoint, $sd_pointdutru, $sms_notify) = _GL('before_info_subpoint,sd_pointdutru, sms_notify');
 list($sub, $point_false) = _GL('sub,point_false65k');
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 if ($sms_notify) echo $sms_notify;
 ?>
 

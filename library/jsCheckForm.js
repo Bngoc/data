@@ -1163,7 +1163,7 @@ var mouse_is_inside = false;
 
 $(document).ready(function () {
 
-    $('.pao').click(function () {
+    $('body').on('click', '.pao', function () {
         if ($('.box_login').is(":hidden")) {
             $('.box_login').slideDown('fast');
             $("i.down").toggleClass("downup");

@@ -6,7 +6,7 @@ $ok_loop2 = false;
 list($before_info_map, $showchar, $set_map, $num_map) = _GL('before_info_map, showchar, set_map, num_map');
 list($sub) = _GL('sub');
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 ?>
 
 

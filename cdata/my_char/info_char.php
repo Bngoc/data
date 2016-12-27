@@ -2,7 +2,7 @@
 
 list($showchar, $mod) = _GL('showchar, mod');
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 ?>
 
 <!-------------------------------------------------- -->

@@ -7,7 +7,7 @@ list($gh_loai1, $gh_loai2, $set_arr_rs, $showchar, $options_tanthu) = _GL('gh_lo
 list($cap_reset_max, $use_gioihanrs, $before_info_re, $notify_rs_ok) = _GL('user_max_rs, user_type_gh_rs, before_info_re, notify_rs_ok');
 list($sub) = _GL('sub');
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 
 if ($notify_rs_ok) echo $notify_rs_ok;
 ?>

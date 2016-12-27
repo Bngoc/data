@@ -7,7 +7,7 @@ list($gh_loai1, $gh_loai2, $get_arr_gh, $set_arr_rsvip, $showchar, $options_tant
 list($cap_reset_max, $use_gioihanrs, $before_info_rsvip, $notify_rs_ok) = _GL('user_max_rs, user_type_gh_rs, before_info_rsvip, notify_rs_ok');
 list($sub) = _GL('sub');
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 //cn_snippet_bc();
 /*
 list($fg_1, $fg_12, $fg_123, $fg_1234) = do_selc_char('bqngoc','qwwww');

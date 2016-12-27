@@ -561,7 +561,7 @@ function cn_snippet_messages($area = 'new')
     }
 
     if ($result) {
-        echo '<div class="cn_notify_overall">' . $result . '</div>';
+        return '<div class="cn_notify_overall">' . $result . '</div>';
     }
 }
 
@@ -1278,23 +1278,15 @@ function cn_get_menu_none()
     return $result;
 }
 
-// Displays header skin
-// $image = img@custom_style_tpl
-function echoheader($image, $header_text, $bread_crumbs = false)
+/**
+ * return html menu top
+ */
+function menuTopMoney($opt = '')
 {
-    global $skin_header, $lang_content_type, $skin_menu, $skin_menu_none, $skin_top, $_SESS, $_SERV_SESS;
-
-    $header_time = date('H:i:s | d, M, Y', ctime());
-
-    $customs = explode("@", $image);
-    $image = isset($customs[0]) ? $customs[0] : '';
-    $custom_style = isset($customs[1]) ? $customs[1] : false;
-    $custom_js = isset($customs[2]) ? $customs[2] : false;
+    global $skin_menu_TopMoney, $skin_menu_TopAccount;
+    $skin_menu_TopSample = '';
 
     if (isset($_SESSION['user_Gamer'])) {
-        $skin_header = preg_replace("/{menu}/", $skin_menu, $skin_header);
-        $skin_header = preg_replace("/{top}/", $skin_top, $skin_header);
-
         $member = member_get();
         $_blank_var = view_bank($member['user_name']);
 
@@ -1306,11 +1298,11 @@ function echoheader($image, $header_text, $bread_crumbs = false)
         $matches[5] = '<img src="' . getoption('http_script_dir') . '/images/icon-6.png" /> ' . number_format($_blank_var[0]['cre'], 0, ',', '.') . ' Cre';;
         $matches[6] = '<img src="' . getoption('http_script_dir') . '/images/icon-7.png" /> ' . number_format($_blank_var[0]['bank'], 0, ',', '.') . ' Zen';;
         $tempTop = ['{nameVpoint}', '{nameGcoin}', '{nameGcKm}', '{nameBule}', '{nameChaos}', '{nameCreate}', '{nameBank}'];
-        $skin_header = str_replace($tempTop, $matches, $skin_header);
+        $skin_menu_TopMoney = str_replace($tempTop, $matches, $skin_menu_TopMoney);
 
         $userName[0] = '<img class="icon-Userimg" src="' . getoption('http_script_dir') . '/images/user-Name.png" />';
         $userName[1] = $_SESSION['user_Gamer'];
-        $skin_header = str_replace(['{userImg}', '{userName}'], $userName, $skin_header);
+        $skin_menu_TopAccount = str_replace(['{userImg}', '{userName}'], $userName, $skin_menu_TopAccount);
 
         $boxArrInfo = [
             '{changePass}' => ['change_pass', 'Đổi pass-Game'],
@@ -1322,55 +1314,86 @@ function echoheader($image, $header_text, $bread_crumbs = false)
         ];
         foreach ($boxArrInfo as $jk => $its) {
             $tmpHtml = '<a href="' . PHP_SELF . '?mod=manager_account&amp;opt=' . $its[0] . '"><div><img height="20" width="20" src="' . getoption('http_script_dir') . '/images/' . $its[0] . '.png" /></div><div>' . $its[1] . '</div></a>';
-            $skin_header = str_replace($jk, $tmpHtml, $skin_header);
+            $skin_menu_TopAccount = str_replace($jk, $tmpHtml, $skin_menu_TopAccount);
+        }
+
+        if($opt){
+            $skin_menu_TopSample =  $skin_menu_TopMoney;
+        } else {
+            $skin_menu_TopSample =  $skin_menu_TopAccount;
+        }
+        // opt in true return skin menu top money
+        if (empty($opt)) {
+            $skin_menu_TopSample = $skin_menu_TopMoney . $skin_menu_TopAccount;
         }
     } else {
-        $skin_header = preg_replace("/{top}/", '<marquee scrollamount="9" height="45" align="center" style="font-size:14px;color: rgb(200, 128, 35); padding-top: 12px; font-style: oblique;">Chào mừng các bạn ghé thăm trang MuOnline</marquee>', $skin_header);
-        $skin_header = preg_replace("/{menu}/", $skin_menu_none, $skin_header);
+        $skin_menu_TopSample = '<marquee scrollamount="9" height="45" align="center" style="font-size:14px;color: rgb(200, 128, 35); padding-top: 12px; font-style: oblique;">Chào mừng các bạn ghé thăm trang MuOnline</marquee>';
     }
 
-    //$skin_header = get_skin($skin_header);
-    $skin_header = str_replace('{title}', ($header_text ? $header_text . ' / ' : '') . 'MuOnline', $skin_header);
-    $skin_header = str_replace("{header-text}", $header_text, $skin_header);
-    $skin_header = str_replace("{header-time}", $header_time, $skin_header);
-    $skin_header = str_replace("{content-type}", $lang_content_type, $skin_header);
-//    $skin_header = str_replace("{breadcrumbs}", $bread_crumbs, $skin_header); ///
+    return $skin_menu_TopSample;
+}
+
+// Displays header skin
+// $image = img@custom_style_tpl
+function echoheader($image, $header_text, $bread_crumbs = false)
+{
+    global $skin_header_web, $lang_content_type, $skin_menu_web, $skin_menu_none, $_SESS, $_SERV_SESS;
+
+    $header_time = date('H:i:s | d, M, Y', ctime());
+
+    $customs = explode("@", $image);
+    $image = isset($customs[0]) ? $customs[0] : '';
+    $custom_style = isset($customs[1]) ? $customs[1] : false;
+    $custom_js = isset($customs[2]) ? $customs[2] : false;
+
+    if (isset($_SESSION['user_Gamer'])) {
+        $skin_header_web = preg_replace("/{menu}/", $skin_menu_web, $skin_header_web);
+    } else {
+        $skin_header_web = preg_replace("/{menu}/", $skin_menu_none, $skin_header_web);
+    }
+
+    //$skin_header_web = get_skin($skin_header_web);
+    $skin_header_web = preg_replace("/{top}/", menuTopMoney(), $skin_header_web);
+    $skin_header_web = str_replace('{title}', ($header_text ? $header_text . ' / ' : '') . 'MuOnline', $skin_header_web);
+    $skin_header_web = str_replace("{header-text}", $header_text, $skin_header_web);
+    $skin_header_web = str_replace("{header-time}", $header_time, $skin_header_web);
+    $skin_header_web = str_replace("{content-type}", $lang_content_type, $skin_header_web);
+//    $skin_header_web = str_replace("{breadcrumbs}", $bread_crumbs, $skin_header_web); ///
 
     if ($custom_style) {
         $custom_style = read_tpl($custom_style);
     }
-    $skin_header = str_replace("{CustomStyle}", $custom_style, $skin_header);
+    $skin_header_web = str_replace("{CustomStyle}", $custom_style, $skin_header_web);
 
     if ($custom_js) {
         $custom_js = '<script type="text/javascript">' . read_tpl($custom_js) . '</script>';
     }
-    $skin_header = str_replace("{CustomJS}", $custom_js, $skin_header);
+    $skin_header_web = str_replace("{CustomJS}", $custom_js, $skin_header_web);
 
-    echo $skin_header;
-
+    echo $skin_header_web;
 }
 
 function echocomtent_here($echocomtent, $path_c = '', $bread_crumbs = true)
 {
-    global $abccc;// $path_c;;
-    $abccc = preg_replace("/{paths_c}/", $path_c, $abccc);                // duong dan chi ...
-    $abccc = preg_replace("/{paths_menu}/", cn_sort_menu(), $abccc);                // duong dan chi ...
-    $abccc = preg_replace("/{content_here}/", $echocomtent, $abccc);
-    echo $abccc;
+    global $skin_content_web;// $path_c;;
+    $skin_content_web = preg_replace("/{paths_c}/", $path_c, $skin_content_web);                // duong dan chi ...
+    $skin_content_web = preg_replace("/{paths_menu}/", cn_sort_menu(), $skin_content_web);                // duong dan chi ...
+    $skin_content_web = preg_replace("/{content_here}/", $echocomtent, $skin_content_web);
+    echo $skin_content_web;
 }
 
 function echofooter()
 {
-    global $skin_footer, $lang_content_type, $skin_menu, $config_adminemail, $config_admin;
+    global $skin_footer_web, $lang_content_type, $skin_menu_web, $config_adminemail, $config_admin;
 
-    //$skin_footer = get_skin($skin_footer);
-    //$skin_footer = str_replace("{content-type}", $lang_content_type, $skin_footer);
-    $skin_footer = str_replace("{exec-time}", round(microtime(true) - BQN_MU, 3), $skin_footer);
-    $skin_footer = str_replace("{year-time}", date("Y"), $skin_footer);
-    $skin_footer = str_replace("{email-name}", $config_adminemail, $skin_footer);
-    $skin_footer = str_replace("{byname}", $config_admin, $skin_footer);
+    //$skin_footer_web = get_skin($skin_footer_web);
+    //$skin_footer_web = str_replace("{content-type}", $lang_content_type, $skin_footer_web);
+    $skin_footer_web = str_replace("{exec-time}", round(microtime(true) - BQN_MU, 3), $skin_footer_web);
+    $skin_footer_web = str_replace("{year-time}", date("Y"), $skin_footer_web);
+    $skin_footer_web = str_replace("{email-name}", $config_adminemail, $skin_footer_web);
+    $skin_footer_web = str_replace("{byname}", $config_admin, $skin_footer_web);
 
-    die($skin_footer);
+    die($skin_footer_web);
 }
 
 // Since 2.0: Short message form

@@ -2,7 +2,8 @@
 
 list($showchar, $options_rs_trust, $before_info_trust) = _GL('showchar, options_rs_trust, before_info_trust');
 list($sub) = _GL('sub');
-cn_snippet_messages();
+echo cn_snippet_messages();
+
 $cap_reset_max = getoption('cap_reset_max');
 if ($cap_reset_max > 20) $cap_reset_max = 20;
 $ok_loop = false;

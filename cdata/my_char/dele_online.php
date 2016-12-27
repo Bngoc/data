@@ -7,7 +7,7 @@ list($showchar) = _GL('showchar');
 list($before_info_on) = _GL('before_info_on');
 list($sub) = _GL('sub');
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 ?>
 
 

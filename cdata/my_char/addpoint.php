@@ -6,7 +6,7 @@ $ok_loop2 = false;
 list($before_info_addpoint, $showchar, $_is_classdl, $sdpoint, $rootPoint) = _GL('before_info_addpoint, showchar, is_classDl, sd_point, rootPoint');
 list($sub) = _GL('sub');
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 ?>
 
 

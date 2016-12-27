@@ -6,7 +6,7 @@ $ok_loop2 = false;
 list($before_info_rspoint, $showchar, $sms_notify) = _GL('before_info_rspoint,showchar, sms_notify');
 list($sub) = _GL('sub');
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 if ($sms_notify) echo $sms_notify;
 ?>
 

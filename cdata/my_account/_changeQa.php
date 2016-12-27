@@ -1,7 +1,7 @@
 <?php
 list($errors_result, $tabActive) = _GL('errors_result, tabActive');
 
-cn_snippet_messages();
+echo cn_snippet_messages();
 
 if($errors_result) {
     cn_messages_show($errors_result, 'e');
