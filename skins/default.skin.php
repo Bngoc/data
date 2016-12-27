@@ -16,7 +16,7 @@ $description = getoption('description');
 $keywords = getoption('keywords');
 
 // ********************************************************************************
-// Skin HEADER
+// Skin HEADER WEB
 // ********************************************************************************
 
 $skin_header_web = <<<HTML
@@ -30,19 +30,12 @@ $skin_header_web = <<<HTML
 <meta name="keywords" content="$keywords" />
 
 <link rel="shortcut icon" type="image/ico" href="$setpath_default/images/favicon.ico"/>
-<!-- <link rel="stylesheet" type="text/css" href="http://localhost/bqn/data/library/common.css" /> -->
-
 <link rel="stylesheet" href="$setpath_default/skins/style.css" type="text/css" />
 <link rel="stylesheet" href="$setpath_default/skins/main.css" type="text/css"/>
 <link rel="stylesheet" href="$setpath_default/skins/sub.css" type="text/css"/>
 
+<script type="text/javascript" src="$setpath_default/js/jquery-2.1.0.min.js"></script>
 
-<!--link media="all" href="/images/widget43.css" type="text/css" rel="stylesheet" /> -->
-
-	<script type="text/javascript" src="$setpath_default/js/jquery-2.1.0.min.js"></script>
-<!--<script type="text/javascript" src="$setpath_default/library/vietvbb_topx.js"></script>-->
-<!--<script type="text/javascript" src="$setpath_default/library/wz_tooltip.js"></script>-->
-<script type="text/javascript" src="$setpath_default/library/jsCheckForm.js"></script>
 <!--	
 <script src="ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://localhost/bqn/data/images/referrer.js"></script>
@@ -58,15 +51,7 @@ $skin_header_web = <<<HTML
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 -->
 <script type="text/javascript" src="$setpath_default/images/main.js"></script>
-<!--
-<script type="text/javascript">
-    jQuery(function() { jQuery(document).pngFix(); });
-</script>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-
--->
     <title>{title}</title>
     <script type="text/javascript" src="$setpath_default/skins/cute.js"></script>
     {CustomJS}
@@ -124,23 +109,12 @@ $skin_header_web = <<<HTML
 </script> 
 
 </head>
-<!--
-<body style="margin: 0px;">
-<div id="dhtmltooltip"></div>
-<img id="dhtmlpointer" src="http://localhost/bqn/data/images/tooltiparrow.gif">
-<div id="absolute">
-<script type="text/javascript" src="http://localhost/bqn/data/images/mootools.js"></script>
 
-<style type="text/css">
-
-</div>
--->
 <div id="gp_bar">
     <div class="w-menu-top">
         {top}
     </div>
 </div>
-
 	
 <div id="wrapper">
 	
@@ -188,7 +162,7 @@ $skin_header_web = <<<HTML
 HTML;
 
 // ********************************************************************************
-// Skin FOOTER
+// Skin FOOTER WEB
 // ********************************************************************************
 
 $skin_footer_web = <<<HTML
@@ -205,12 +179,12 @@ $skin_footer_web = <<<HTML
     
 	
 </div> <!-- wrapper -->
-<!--
-	<script type="text/javascript" src="library/jsGeneralFunction.js"></script>
-	<!-- <script type="text/javascript" src="library/jsCheckForm.js"></script> -->
-	<!--<script type="text/javascript" src="$setpath_default/library/Common.js"></script>-->
-	<!--<script type="text/javascript" src="$setpath_default/library/jsWarehouse.js"></script>-->
+    <script type="text/javascript" src="$setpath_default/library/wz_tooltip.js"></script>
 	<!--<script type="text/javascript" src="$setpath_default/library/jsToolTip.js"></script>	-->
+    
+    <script type="text/javascript" src="$setpath_default/library/jsCheckForm.js"></script>
+
+
 
 <div style="clear:both;"></div>
 <div id="footer" style="float:left"> 
@@ -223,6 +197,10 @@ $skin_footer_web = <<<HTML
 </div>
 </body></html>
 HTML;
+
+// ********************************************************************************
+// Skin CONTENT WEB
+// ********************************************************************************
 
 $skin_content_web = <<<HTML
 	<!-- ===================START COMMENT==================== -->
@@ -255,6 +233,10 @@ $skin_content_web = <<<HTML
 	<!-- ===================END COMMENT==================== -->          
 HTML;
 
+// ********************************************************************************
+// Skin MENU TOP INFO MONEY WEB
+// ********************************************************************************
+
 $skin_menu_TopMoney = <<<HTML
         <ul class="top-showInfo">
             <li>{nameVpoint}</li>
@@ -266,6 +248,10 @@ $skin_menu_TopMoney = <<<HTML
             <li>{nameBank}</li>
         </ul>
 HTML;
+
+// ********************************************************************************
+// Skin MENU TOP INFO ACCOUNT WEB
+// ********************************************************************************
 
 $skin_menu_TopAccount = <<<HTML
         <div class="user-inner">

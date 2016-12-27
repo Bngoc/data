@@ -117,8 +117,7 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
 {
 
     if ($string == 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF' ||
-        $string == 'ffffffffffffffffffffffffffffffff' || strlen($string) != 32
-    ) {
+        $string == 'ffffffffffffffffffffffffffffffff' || strlen($string) != 32) {
         return '';
     }
     // analysis Item 32

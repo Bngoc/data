@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('.call-Form-Shop').on('click', function (e) {
         e.preventDefault();
 
-        var itemID = $(this).attr('id');
+        var itemID = $(this).attr('idItem');
         var infoItem = $('.infoName-' + itemID).text();
         var infoPrice = $('.infoPrice-' + itemID).text();
 

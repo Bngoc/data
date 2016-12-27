@@ -44,7 +44,7 @@ list($per_page, $echoPagination) = _GL('per_page, echoPagination');
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align:center"><input id="<?php echo $key; ?>" class="call-Form-Shop"
+                            <td style="text-align:center"><input idItem="<?php echo $key; ?>" class="call-Form-Shop"
                                                                  type="image" src="/images/order.gif" width="80"
                                                                  height="25"/></td>
                         </tr>
