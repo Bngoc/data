@@ -2523,6 +2523,7 @@ function char_addpoint()
     $point_vit = intval($point_vit);
     $point_ene = intval($point_ene);
     $point_cmd = intval($point_cmd);
+
     list($sub) = GET('sub', 'GPG');
     $showchar = cn_character();
     $arr_class = cn_template_class();
@@ -2532,19 +2533,20 @@ function char_addpoint()
         if (!in_array($sub, array_keys($showchar)))
             $sub = array_keys($showchar)[0];
     }
+
     $point = $total_point = $rootPoint = 0;
     $is_classDl = $point_false1 = $point_false = false;
     $point = $showchar[$sub]['point'];
     $point_dutru = $showchar[$sub]['point_dutru'];
-    $level = $showchar[$sub]['level'];
-    $reset_ = $showchar[$sub]['reset'];
     $_class = $showchar[$sub]['class'];
 
-    $rootPoint += $_str_ = $showchar[$sub]['str'];
-    $rootPoint += $_agi_ = $showchar[$sub]['dex']; //agi
-    $rootPoint += $_vit_ = $showchar[$sub]['vit'];
-    $rootPoint += $_ene_ = $showchar[$sub]['ene'];
+    $_str_ = $showchar[$sub]['str'];
+    $_agi_ = $showchar[$sub]['dex']; //agi
+    $_vit_ = $showchar[$sub]['vit'];
+    $_ene_ = $showchar[$sub]['ene'];
     $_cmd_ = $showchar[$sub]['com'];
+
+    $rootPoint = $_str_ + $_agi_ + $_vit_ + $_ene_;
     $total_point = $point_str + $point_agi + $point_vit + $point_ene;
 
     if ($_class == $arr_class['class_dl_1'] OR $_class == $arr_class['class_dl_2']) {
@@ -2552,11 +2554,14 @@ function char_addpoint()
         $rootPoint += $_cmd_;
         $str_com = number_format((float)$_cmd_, 0, ",", ".");
         $total_point += $point_cmd;
-        if ($_cmd_ < 0) $_cmd_ += 65536;
-        $_cmd_ += $point_cmd;
+        if ($_cmd_ < 0) $_cmd_ = 0;
+//        $_cmd_ += $point_cmd;
     }
 
-    if (0 <= ($_sd_point = $point  - $total_point)) $point_false = true;
+    $totalMaxPoint = $point + $rootPoint;
+    $pointMaxNew = $totalMaxPoint - $total_point;
+
+    if ($total_point <= ($rootPoint + $point)) $point_false = true;
     if ($total_point) $point_false1 = true;
 
     if ($point != 0) $_strpoint_dutru = "<a href=" . cn_url_modify('mod=char_manager', 'opt=subpoint', "sub=$sub") . " title='Rút point $sub'>" . number_format((float)$point_dutru, 0, ",", ".") . "</a>";
@@ -2578,23 +2583,19 @@ function char_addpoint()
     }
     $before_info_addpoint = array(
         0 => array('Nhân vật ', "<a href=" . cn_url_modify('mod=char_manager', 'opt=info_char', 'sub') . " title='Click info $sub'> $sub </a>"),
-        //1 => array('Reset',$reset_),
-        //2 => array('Cấp độ',$level),
-        8 => array('Point ', number_format((float)$point, 0, ",", ".")),
-        9 => array('Point dự trữ ', $_strpoint_dutru),
-        7 => array('Sức mạnh ', number_format((float)$_str_, 0, ",", ".")),
-        3 => array('Nhanh nhẹn ', number_format((float)$_agi_, 0, ",", ".")),
-        4 => array('Sức khỏe ', number_format((float)$_vit_, 0, ",", ".")),
-        5 => array('Năng lượng ', number_format((float)$_ene_, 0, ",", ".")),
-        6 => array('Mệnh lệnh ', isset($str_com) ? $str_com : null),
-        11 => array('Đổi nhân vật ', $status_change),
-        //12 => array('Online',$status),
+        8 => array('Point', number_format((float)$point, 0, ",", ".")),
+        9 => array('Point dự trữ', $_strpoint_dutru),
+        7 => array('Sức mạnh', number_format((float)$_str_, 0, ",", ".")),
+        3 => array('Nhanh nhẹn', number_format((float)$_agi_, 0, ",", ".")),
+        4 => array('Sức khỏe', number_format((float)$_vit_, 0, ",", ".")),
+        5 => array('Năng lượng', number_format((float)$_ene_, 0, ",", ".")),
+        6 => array('Mệnh lệnh', isset($str_com) ? $str_com : null),
+        11 => array('Đổi nhân vật', $status_change)
     );
-
 
     if (request_type('POST')) {
         if (REQ('action_addpoint')) {
-           cn_dsi_check(true);
+            cn_dsi_check(true);
             $errors_false = false;
 
             list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
@@ -2608,7 +2609,7 @@ function char_addpoint()
                 $errors_false = true;
             }
             if (!$point_false) {
-                cn_throw_message("Tổng số Point rút (" . number_format((float)($total_point), 0, ",", ".") . ") lớn hơn số dư Point hiện có.", 'e');
+                cn_throw_message("Tổng số Point cộng (" . number_format((float)($total_point), 0, ",", ".") . ") lớn hơn số dư Point hiện có (" . number_format((float)($point), 0, ",", ".") . ").", 'e');
                 $errors_false = true;
             }
             if (!$point_false1) {
@@ -2617,34 +2618,27 @@ function char_addpoint()
             }
 
             if (!$errors_false) {
-                if ($_str_ < 0) {
-                    $_str_ += 65536;
-                }
-                $_str_ += $point_str;
-                if ($_agi_ < 0) {
-                    $_agi_ += 65536;
-                }
-                $_agi_ += $point_agi;
-                if ($_vit_ < 0) {
-                    $_vit_ += 65536;
-                }
-                $_vit_ += $point_vit;
-                if ($_ene_ < 0) {
-                    $_ene_ += 65536;
-                }
-                $_ene_ += $point_ene;
 
-                do_update_character('Character', "Strength=$_str_", "Dexterity=$_agi_", "LevelUpPoint=LevelUpPoint-$total_point", "Vitality=$_vit_", "Energy=$_ene_", "Leadership=$_cmd_", "name:'$sub'");
+                do_update_character(
+                    'Character',
+                    "Strength=$point_str",
+                    "Dexterity=$point_agi",
+                    "LevelUpPoint=$pointMaxNew",
+                    "Vitality=$point_vit",
+                    "Energy=$point_ene",
+                    "Leadership=$point_cmd",
+                    "Name:'$sub'"
+                );
 
-                $before_info_addpoint[4][1] = number_format((float)$_vit_, 0, ",", ".");
-                $before_info_addpoint[5][1] = number_format((float)$_ene_, 0, ",", ".");
-                $before_info_addpoint[8][1] = number_format((float)(abs($_sd_point)), 0, ",", ".");
-                $before_info_addpoint[7][1] = number_format((float)$_str_, 0, ",", ".");
-                $before_info_addpoint[3][1] = number_format((float)$_agi_, 0, ",", ".");
+                $before_info_addpoint[4][1] = number_format((float)$point_vit, 0, ",", ".");
+                $before_info_addpoint[5][1] = number_format((float)$point_ene, 0, ",", ".");
+                $before_info_addpoint[8][1] = number_format((float)(abs($pointMaxNew)), 0, ",", ".");
+                $before_info_addpoint[7][1] = number_format((float)$point_str, 0, ",", ".");
+                $before_info_addpoint[3][1] = number_format((float)$point_agi, 0, ",", ".");
 
                 if ($is_classDl) $before_info_addpoint[6][1] = number_format((float)$_cmd_, 0, ",", ".");
-                $point -= $total_point;
-                $rootPoint += $total_point;
+                $point = $pointMaxNew;
+                $rootPoint = $total_point;
                 cn_throw_message("$sub đã cộng điểm thành công!");
             }
         }

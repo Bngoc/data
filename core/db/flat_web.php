@@ -623,13 +623,13 @@ function onoff_PointCharacter()
             $myQueryUpdate .= ' PhutUyThacOn_dutru = CASE';
             $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=1 THEN ' . (($items['PhutUyThacOn_dutru'] > 0) ? floor($items['PhutUyThacOn_dutru'] * (0.95)) : 0);
             $myQueryUpdate .= ' END, PointUyThac = CASE';
-            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=1 THEN ' . (($items['PointUyThac'] >0) ? floor($items['PointUyThac'] * (0.9)) : 0);
+            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=1 THEN ' . (($items['PointUyThac'] > 0) ? floor($items['PointUyThac'] * (0.9)) : 0);
         } else if ($items['Uythac'] == 1 && $items['uythacoffline_stat'] == 0) {
             //Status ON
             $myQueryUpdate .= ' PhutUyThacOff_dutru = CASE';
             $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=1 AND uythacoffline_stat=0 THEN ' . (($items['PhutUyThacOff_dutru'] > 0) ? floor($items['PhutUyThacOff_dutru'] * (0.95)) : 0);
             $myQueryUpdate .= ' END, PointUyThac = CASE';
-            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=1 AND uythacoffline_stat=0 THEN ' . (($items['PointUyThac'] >0) ? floor($items['PointUyThac'] * (0.9)) : 0);
+            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=1 AND uythacoffline_stat=0 THEN ' . (($items['PointUyThac'] > 0) ? floor($items['PointUyThac'] * (0.9)) : 0);
         } else if ($items['Uythac'] == 0 && $items['uythacoffline_stat'] == 0) {
             //None
             $myQueryUpdate .= ' PhutUyThacOn_dutru = CASE';
@@ -638,14 +638,15 @@ function onoff_PointCharacter()
             $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=0 THEN ' . (($items['PhutUyThacOff_dutru'] > 0) ? floor($items['PhutUyThacOff_dutru'] * (0.95)) : 0);
 
             $myQueryUpdate .= ' END, PointUyThac = CASE';
-            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=0 THEN ' . (($items['PointUyThac'] >0) ? floor($items['PointUyThac'] * (0.9)) : 0);
+            $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=0 THEN ' . (($items['PointUyThac'] > 0) ? floor($items['PointUyThac'] * (0.9)) : 0);
         }
-
-        $myQueryUpdate .= ' END WHERE Name =\'' . $items['Name'] . '\'';
-        //echo $myQueryUpdate;
-        $chekUpdate = do_update_orther($myQueryUpdate);
-//        if (!$chekUpdate) cn_writelog($myQueryUpdate, 'e');
     }
+
+    $myQueryUpdate .= ' END WHERE Name =\'' . $items['Name'] . '\'';
+    echo $myQueryUpdate;
+    $chekUpdate = do_update_orther($myQueryUpdate);
+//        if (!$chekUpdate) cn_writelog($myQueryUpdate, 'e');
+
 }
 
 

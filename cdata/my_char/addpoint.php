@@ -37,7 +37,7 @@ echo cn_snippet_messages();
                         if (isset($val[1]))
                             echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
-									<td><strong style="color:#009900">' . $val[1] . '</strong></td>
+									<td class="pd-left10"><strong style="color:#009900">' . $val[1] . '</strong></td>
 								</tr>';
                     } ?>
 
