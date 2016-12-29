@@ -173,7 +173,7 @@ function board_sysconf()
             'allow_registration' => array('Y/N', 'Allow self-Registration|allow users to register automatically'),
             'notify_registration' => array('Y/N', 'Allow Send Email Registration|allow send email for users to register'),
             'registration_level' => array('select', 'Self-registration level', $grps),
-            'config_time_logout' => array('int', 'Second Time Auto Logout After |eg: 900 (Automatic Logout after 15 minutes)'),
+            'config_time_logout' => array('int', 'Second Time Auto Logout After for Admin |eg: 900 (Automatic Logout after 15 minutes)'),
             'config_login_ban' => array('text', 'Limit the number of login attempts - Minute Time Blocks |eg: 5:360 (user block after failed 5 login template within 6 hours)'),
             'ban_attempts' => array('int', 'Second between login attempts'),
             'config_auth_email' => array('text', 'Account from send email'),

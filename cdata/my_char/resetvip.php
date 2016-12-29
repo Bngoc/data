@@ -8,29 +8,12 @@ list($cap_reset_max, $use_gioihanrs, $before_info_rsvip, $notify_rs_ok) = _GL('u
 list($sub) = _GL('sub');
 
 echo cn_snippet_messages();
-//cn_snippet_bc();
-/*
-list($fg_1, $fg_12, $fg_123, $fg_1234) = do_selc_char('bqngoc','qwwww');
-
-
-echo "123456778>>>>>====pk=====><<<<<<". $fg_1[0]." >>>>\$fg_1  <<<<< <br>";
-
-foreach($fg_12 as $gh =>$h)
-	echo "123456778>>>>>====> $gh =====> $h <<<<< <br>";
-	
-	echo "000000000000000000>>>>>========>". $fg_1[0]." <<<<< <br>";
-	echo "111111111111111111111111>>>>>=======>". $fg_12[0]." <<<<< <br>";
-	echo "222222222222222222222222>>>>>=======>". $fg_123[0]." <<<<< <br>";
-	echo "333333333333333333333333>>>>>======>". $fg_1234[0]." <<<<< <br>";
-	*/
-
 if ($notify_rs_ok) echo $notify_rs_ok;
 ?>
 
-
-<table style="width: 100%" cellpadding="2">
-    <form action="<?php echo PHP_SELF; ?>" method="GET">
-        <?php cn_form_open('mod, opt'); ?>
+<form action="<?php echo PHP_SELF; ?>" method="GET">
+    <?php cn_form_open('mod, opt'); ?>
+    <table style="width: 100%" cellpadding="2">
         <tr>
             <td colspan="3" class="">THÔNG TIN NHÂN VẬT<br/></td>
         </tr>
@@ -80,46 +63,12 @@ if ($notify_rs_ok) echo $notify_rs_ok;
             </td>
             <td class="bizwebform_col_3"></td>
         </tr>
-    </form>
+    </table>
+</form>
 
-    <form action="<?php echo PHP_SELF; ?>" method="POST">
-
-        <?php echo cn_snippet_get_hidden(); //cn_form_open('mod, opt, sub'); ?>
-        <tr>
-            <td colspan="3" class="">MÃ XÁC NHẬN</td>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
-                                               height="1px"/></div>
-                <br/></td>
-        </tr>
-        <tr>
-            <td class="bizwebform_col_1">Code Image</td>
-            <td class="bizwebform_col_2" style="padding-left:20px;"><img src="img.php?size=6"/></td>
-            <td class="bizwebform_col_3"></td>
-        </tr>
-        <tr>
-            <td class="bizwebform_col_1">Nhập mã xác nhận</td>
-            <td class="bizwebform_col_2"><a href='javascript: refreshCaptcha();'><img
-                        src="captcha.php?rand=<?php echo rand(); ?>"
-                        id='captchaimg'></a><?php //$vImage->showCodBox(1); ?></td>
-            <td class="bizwebform_col_3" id="msg_vImageCodP"></td>
-        </tr>
-        <tr>
-            <td colspan="3" style="padding:20px; text-align:center"></td>
-        </tr>
-        <tr>
-            <td colspan="3" style="text-align:center">
-                <input type="hidden" value="resetvip" name="action_rsvip"/>
-                <input type="image" src="<?php echo URL_PATH_IMG; ?>/capnhat.png" style="padding-right:10px">
-                <img style="cursor:pointer" border="0" src="<?php echo URL_PATH_IMG; ?>/cancel.png"
-                     style="padding-left:10px">
-            </td>
-        </tr>
-    </form>
-</table>
-
+<?php
+    echoFormVerifyChar(['resetvip' => 'action_rsvip']);
+?>
 
 <table style="width: 100%" cellpadding="2">
     <tr>
@@ -151,28 +100,26 @@ if ($notify_rs_ok) echo $notify_rs_ok;
             <td align="center"><b>Point</b></td>
             <td align="center"><b>Command</b></td>
         </tr>
-        <?php if ($set_arr_rsvip) foreach ($set_arr_rsvip as $df => $fd) {
-            if ($ok_loop) {
-                $lv_rs_f = $lv_rs_e;
-                $lv_rs_e = $fd['reset'];
-            } else {
-                $lv_rs_f = 0;
+        <?php if ($set_arr_rsvip) {
+            $lv_rs_e = 0;
+            foreach ($set_arr_rsvip as $df => $fd) {
+                $lv_rs_f = $ok_loop ? $lv_rs_e : 0;
                 $lv_rs_e = $fd['reset'];
                 $ok_loop = true;
-            } ?>
-            <tr <?php if ($odd++ % 2) echo 'style="background: #f8f8f8;"'; ?>>
-                <td align="center"><b>LV <?php echo ++$i; ?></b></td>
-                <td align="center"> <?php echo ++$lv_rs_f . ' &rarr; ' . $fd['reset']; ?></td>
-                <td align="center"><?php echo $fd['level']; ?></td>
-                <td align="center"><?php echo number_format((float)$fd['vpoint'], 0, ",", "."); ?></td>
-                <td align="center"><?php echo number_format((float)$fd['gcoin'], 0, ",", "."); ?></td>
-                <td align="center"><?php echo $fd['point']; ?></td>
-                <td align="center"><?php echo $fd['command']; ?></td>
+                ?>
+                <tr <?php if ($odd++ % 2) echo 'style="background: #f8f8f8;"'; ?>>
+                    <td align="center"><b>LV <?php echo ++$i; ?></b></td>
+                    <td align="center"> <?php echo ++$lv_rs_f . ' &rarr; ' . $fd['reset']; ?></td>
+                    <td align="center"><?php echo $fd['level']; ?></td>
+                    <td align="center"><?php echo number_format((float)$fd['vpoint'], 0, ",", "."); ?></td>
+                    <td align="center"><?php echo number_format((float)$fd['gcoin'], 0, ",", "."); ?></td>
+                    <td align="center"><?php echo $fd['point']; ?></td>
+                    <td align="center"><?php echo $fd['command']; ?></td>
 
-
-            </tr>
-            <?php if ($i === $cap_reset_max) break;
-        } ?>
+                </tr>
+                <?php if ($i === $cap_reset_max) break;
+            }
+        }?>
     </table>
 </div>
 
@@ -203,15 +150,13 @@ if ($notify_rs_ok) echo $notify_rs_ok;
                     <div align="center"><b>Reset</b></div>
                 </td>
             </tr>
-            <?php if ($gh_loai1) foreach ($gh_loai1 as $key => $val) {
-                if ($ok_loop2) {
-                    $i_f = $i_e;
+            <?php if ($gh_loai1) {
+                $i_f = 0;
+                foreach ($gh_loai1 as $key => $val) {
+                    $i_f = $ok_loop2 ? $i_e : 0;
                     $i_e = $i_e + 10;
-                } else {
-                    $i_f = 0;
-                    $i_e = 10;
-                    $ok_loop2 = True;
-                } ?>
+                    $ok_loop2 = true;
+                ?>
                 <tr <?php if ($odd++ % 2) echo 'style="background: #f8f8f8;"'; ?>>
                     <td align="center"><b>TOP <?php if (++$i_f > 50) {
                                 echo ' > ' . --$i_f;
@@ -221,7 +166,8 @@ if ($notify_rs_ok) echo $notify_rs_ok;
                     <td align="center">Reset Max <b> <?php echo $val['top']; ?></b> lần / ngày</td>
                 </tr>
 
-            <?php } ?>
+            <?php }
+            } ?>
         </table>
     </div>
 

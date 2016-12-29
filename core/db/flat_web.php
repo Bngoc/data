@@ -167,77 +167,27 @@ function view_warehouse($account)
     return $str_;
 }
 
-function point_tax($acc = '')
+function point_tax($sub = '')
 {
-
     //Kiểm tra những nhân vật đã thuê Point và xử lý khi hết thời gian
-
-    $result_ = do_select_character('Character', 'Name,TimeThuePoint,AccountID', "IsThuePoint=1 AND AccountID ='" . $acc . "'");
-    foreach ($result_ as $k => $val) {
-        if ($val[1] <= ctime()) {
+    $result_ = do_select_character('Character', 'Name,TimeThuePoint,AccountID', "IsThuePoint=1 AND AccountID ='" . $sub . "'");
+if (!empty($result_)) {
+        if ($result_[0]['TimeThuePoint'] <= ctime()) {
             //exit();
             //Check Online
-            $online_check = do_select_character('MEMB_STAT', '*', "memb___id='$val[2]' AND ConnectStat=1");
-            if (0 < count($online_check)) {
+            $online_check = do_select_character('MEMB_STAT', '[ServerName]', "memb___id='".$result_[0]['Name'] ."' AND ConnectStat=1");
+            if (!empty($online_check)) {
                 //Check Doi NV
-                $doinv_check = do_select_character('AccountCharacter', '*', "Id='$val[2]' AND GameIDC='$val[0]'");
-                if (count($doinv_check) < 1) {
-                    //$query_update = "UPDATE Character SET Clevel=400,Resets=Resets-1,IsThuePoint=2,LevelUpPoint=0,pointdutru=0,Strength=26,Dexterity=26,Vitality=26,Energy=26,Life=110,MaxLife=110,Mana=60,MaxMana=60,Leadership=0 WHERE Name='$check_thuepoint[0]'";
-                    //$run_update = $db_new->Execute($query_update);
-                    do_update_character('Character', 'IsThuePoint=0', 'PointThue=0', "Name:'$val[0]'");
+                $doinv_check = do_select_character('AccountCharacter', '*', "Id='".$result_[0]['AccountID'] ."' AND GameIDC='".$result_[0]['name'] ."'");
+                if (empty($doinv_check)) {
+                    do_update_character('Character', 'IsThuePoint=0', 'PointThue=0', "Name:'". $result_[0]['Name'] ."'");
                 }
             } else {
-                do_update_character('Character', 'IsThuePoint=0', 'PointThue=0', "Name:'$val[0]'");
-                //$query_update = "UPDATE Character SET Clevel=400,Resets=Resets-1,IsThuePoint=2,LevelUpPoint=0,pointdutru=0,Strength=26,Dexterity=26,Vitality=26,Energy=26,Life=110,MaxLife=110,Mana=60,MaxMana=60,Leadership=0 WHERE Name='$check_thuepoint[0]'";
-                //$run_update = $db_new->Execute($query_update);
+                do_update_character('Character', 'IsThuePoint=0', 'PointThue=0', "Name:'". $result_[0]['Name'] ."'");
             }
         }
     }
-    /*
-    $result_check_thuepoint = $db_new->Execute("SELECT Name,TimeThuePoint,AccountID FROM Character Where IsThuePoint=1");
-    while($check_thuepoint = $result_check_thuepoint->fetchrow()) {
-        if ( $check_thuepoint[1] <= ctime() ) {
-            //Check Online
-            $sql_online_check = $db_new->Execute("SELECT * FROM MEMB_STAT WHERE memb___id='$check_thuepoint[2]' AND ConnectStat=1");
-            if (0 < $online_check = $sql_online_check->numrows()) {
-                //Check Doi NV
-                $sql_doinv_check = $db_new->Execute("SELECT * FROM AccountCharacter WHERE Id='$check_thuepoint[2]' AND GameIDC='$check_thuepoint[0]'");
-                if (1 > $doinv_check = $sql_doinv_check->numrows()) {
-                    $query_update = "UPDATE Character SET Clevel=400,Resets=Resets-1,IsThuePoint=2,LevelUpPoint=0,pointdutru=0,Strength=26,Dexterity=26,Vitality=26,Energy=26,Life=110,MaxLife=110,Mana=60,MaxMana=60,Leadership=0 WHERE Name='$check_thuepoint[0]'";
-                    $run_update = $db_new->Execute($query_update);
-                }
-            }
-            else {
-                $query_update = "UPDATE Character SET Clevel=400,Resets=Resets-1,IsThuePoint=2,LevelUpPoint=0,pointdutru=0,Strength=26,Dexterity=26,Vitality=26,Energy=26,Life=110,MaxLife=110,Mana=60,MaxMana=60,Leadership=0 WHERE Name='$check_thuepoint[0]'";
-                $run_update = $db_new->Execute($query_update);
-            }
-        }
-    }
-/*
-//$arr_deleonline = do_select_character('Character','UyThac','uythaconline_time','PointUyThac','UyThacOnline_Daily',"Name:'$sub'",'');
-    //if(date("Y-M-d", $deleon_time) != date("Y-M-d", ctime())){ $UyThacOnline_Daily = 0;}
-    global $db_new;
-    $str_ = '';
-    if(!empty($account)){
 
-        kiemtra_kitudacbiet($password);
-
-        kiemtra_pass($account,$password);
-
-        kiemtra_acc($account);
-        kiemtra_block_acc($account);
-        kiemtra_ranking($account);
-        kiemtra_GM($account);
-        kiemtra_loggame($account);
-
-        $result = $db_new->Execute("SELECT thehe FROM MEMB_INFO WHERE memb___id='$account'");
-        if($result === false) return 'Error';
-        $row = $result->fetchrow();
-
-        $str_ = "OK||$gm||$ranking||$row[0]";
-    }
-    return $str_;
-    */
 }
 
 function mssql_real_escape_string($s)
@@ -599,68 +549,6 @@ function do_delete_char($myQuery){
     return false;
 }
 
-function do_selc_char($account, $character)
-{ //??
-
-    global $db_new;
-    //$str_ = '';
-    //$pk_level = $row = $master_check = $class_stat =array();
-    if (!empty($account)) {
-        //kiemtra_hackreset($account,$character);
-        //kemtra_doinv($account,$character);
-        //kiemtra_online($account);			//PkCount,Money FROM Character WHERE PkCount>0 and Name='$character'"
-
-        $pklevel_check = $db_new->Execute("SELECT PkLevel, PkCount, Money FROM Character WHERE Name='$character'");
-        if ($pklevel_check === false) $pk_level = array();
-        $pk_level = $pklevel_check->fetchrow() or $pk_level = array();
-
-        $result = $db_new->Execute("SELECT Clevel,Resets,Money,LevelUpPoint,Class,Relifes,NoResetInDay,Resets_Time FROM Character WHERE Name='$character'");
-        if ($result === false) $row = array();
-        $row = $result->fetchrow() or $row = array();
-
-        switch (getoption('server_type')) {
-            case "scf":
-                $sql_master_check = $db_new->Execute("SELECT SCFMasterLevel FROM Character WHERE Name='$character'");
-                if ($sql_master_check === false) return 'Error';
-                break;
-            case "ori":
-                $sql_master_check = $db_new->Execute("SELECT MASTER_LEVEL FROM T_MasterLevelSystem WHERE CHAR_NAME='$character'");
-                if ($sql_master_check === false) return 'Error';
-                break;
-            default:
-                $sql_master_check = $db_new->Execute("SELECT SCFMasterLevel FROM Character WHERE Name='$character'");
-                if ($sql_master_check === false) return 'Error';
-                break;
-        }
-        $master_check = $sql_master_check->fetchrow() or $master_check = array();
-
-        $sql_class_check = $db_new->Execute("SELECT Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership FROM DefaultClassType WHERE Class='$row[4]' Or Class='$row[4]'-1 Or Class='$row[4]'-2 Or Class='$row[4]'-3");
-        if ($sql_class_check === false) $class_stat = array();
-        $class_stat = $sql_class_check->fetchrow() or $class_stat = array();
-        if ($class_stat) {
-            $arr_class['Strength'] = $class_stat['Strength'];
-            $arr_class['Dexterity'] = $class_stat['Dexterity'];
-            $arr_class['Vitality'] = $class_stat['Vitality'];
-            $arr_class['Energy'] = $class_stat['Energy'];
-            $arr_class['Life'] = $class_stat['Life'];
-            $arr_class['MaxLife'] = $class_stat['MaxLife'];
-            $arr_class['Mana'] = $class_stat['Mana'];
-            $arr_class['MaxMana'] = $class_stat['MaxMana'];
-            $arr_class['MapNumber'] = $class_stat['MapNumber'];
-            $arr_class['MapPosX'] = $class_stat['MapPosX'];
-            $arr_class['MapPosY'] = $class_stat['MapPosY'];
-            $arr_class['Leadership'] = $class_stat['Leadership'];
-        }
-    }
-
-    $pk_level_ = isset($pk_level) ? $pk_level : array();
-    $row_ = isset($row) ? $row : array();
-    $master_check_ = isset($master_check) ? $master_check : array();
-    $arr_class_ = isset($arr_class) ? $arr_class : array();
-
-    return array($pk_level_, $row_, $master_check_, $arr_class_);
-}
-
 
 /**
  * @param  name
@@ -754,7 +642,7 @@ function onoff_PointCharacter()
         }
 
         $myQueryUpdate .= ' END WHERE Name =\'' . $items['Name'] . '\'';
-        echo $myQueryUpdate;
+        //echo $myQueryUpdate;
         $chekUpdate = do_update_orther($myQueryUpdate);
 //        if (!$chekUpdate) cn_writelog($myQueryUpdate, 'e');
     }
@@ -762,6 +650,16 @@ function onoff_PointCharacter()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------
+function check_changecls($account, $character)
+{
+    global $db_new;
+    $sql_doinv_check = $db_new->Execute("SELECT * FROM AccountCharacter WHERE Id='$account' AND GameIDC='$character'");
+    if ($sql_doinv_check->numrows() > 0) {
+        return false;
+    }
+    return true;
+}
+
 function kiemtra_cardnumber($card_num)
 {
     if (preg_match("[^a-zA-Z0-9$]", $card_num)) {
@@ -920,15 +818,6 @@ function check_online($account)
     return false;
 }
 
-function check_changecls($account, $character)
-{
-    global $db_new;
-    $sql_doinv_check = $db_new->Execute("SELECT * FROM AccountCharacter WHERE Id='$account' AND GameIDC='$character'");
-    if ($sql_doinv_check->numrows() > 0) {
-        return false;
-    }
-    return true;
-}
 
 function kiemtra_pass2($login, $pass2)
 {
@@ -1060,6 +949,7 @@ function kiemtra_topmonth($character)
     }
 }
 
+// bo qua
 function top50()
 {
     //global $db_new;

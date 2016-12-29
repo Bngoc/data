@@ -7,7 +7,7 @@ echo cn_snippet_messages();
 
 
 <form action="<?php echo PHP_SELF; ?>" method="GET">
-    <?php echo cn_snippet_get_hidden(); ?>
+    <?php echo cn_form_open('mod, opt, sub'); ?>
     <table style="width: 100%" cellpadding="2">
         <tr>
             <td colspan="3" class="">THÔNG TIN HÒM ĐỒ CÁ NHÂN<br/></td>
@@ -43,47 +43,9 @@ echo cn_snippet_messages();
     </table>
 </form>
 
-<form id="verify" action="<?php echo PHP_SELF; ?>" method="POST"  onSubmit="return validateFormOnSubmit(true);">
-    <?php echo cn_form_open('mod, opt, sub'); ?>
-    <input type="hidden" value="action_personalSotre" name="action_personalSotre"/>
-    <table width="100%">
-        <tr>
-            <td colspan="3" class="">MÃ XÁC NHẬN</td>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
-                                               height="1px"/></div>
-                <br/></td>
-        </tr>
-        <tr>
-            <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;" onclick="getId('capchaWeb')
-                    . src='<?php echo getoption('http_script_dir'); ?>/captcha.php?page=web&r='+Math.random(); return(false);">
-                    Refresh code</a></td>
-            <td colspan="" class="bizwebform_col_2" style="padding-left:20px;">
-                <div class="vertical-img"><img src="<?php echo getoption('http_script_dir'); ?>/captcha.php?cap=web"
-                                               id="capchaWeb" alt=""></div>
-            </td>
-            <td class="bizwebform_col_3"></td>
-        </tr>
-        <tr>
-            <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
-            <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="verifyCaptcha" required
-                                                onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
-            <td class="bizwebform_col_3" id="msg_Captcha"></td>
-        </tr>
-        <tr>
-            <td colspan="3" style="padding:20px; text-align:center"></td>
-        </tr>
-        <tr>
-            <td colspan="3" style="text-align:center">
-                <input type="image" src="<?php echo URL_PATH_IMG; ?>/capnhat.png" style="padding-right:10px">
-                <img style="cursor:pointer" border="0" src="<?php echo URL_PATH_IMG; ?>/cancel.png"
-                     onclick="document.getElementById('verify').reset();" style="padding-left:10px">
-            </td>
-        </tr>
-    </table>
-</form>
+<?php
+    echoFormVerifyChar(['action_personalSotre' => 'action_personalSotre'], "Bạn có chắc muốn xóa cửa hàng cá nhân không?");
+?>
 
 <table width="100%">
     <tr>

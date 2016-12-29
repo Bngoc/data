@@ -382,11 +382,11 @@ function validateFormOnSubmit($op) {
     }
 
     if(!checkValiFormRegist) {
-        alert('Vui lòng kiểm tra lại thông tin đăng ký!');
+        alert('Vui lòng kiểm tra lại thông tin!');
         return false;
     }
     if($op){
-        var verifyDel = confirm("Bạn có chắc muốn xóa cửa hàng cá nhân không?");
+        var verifyDel = confirm($op);
         if (!verifyDel){
             return false;
         }

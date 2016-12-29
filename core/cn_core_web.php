@@ -697,7 +697,7 @@ function cn_login()
         cn_logout();
     }
     if (isset($_SESSION['timeOutLogin'])) {
-        $_SESSION['timeOutLogin'] = ctime() + 300;
+        $_SESSION['timeOutLogin'] = ctime() + getoption('config_time_logout_web');
     }
     // Get logged username
     $logged_username = isset($_SESSION['user_Gamer']) ? $_SESSION['user_Gamer'] : FALSE;
@@ -754,8 +754,10 @@ function cn_login()
 
                             // set user to session
                             $_SESSION['user_Gamer'] = $username;
-                            $_SESSION['timeOutLogin'] = ctime() + 300;
-                    point_tax($username);
+                            $_SESSION['timeOutLogin'] = ctime() + getoption('config_time_logout_web');
+
+                            //Reset character -- AccountID -> Thue Point
+                            resetDefaultCharater($username);
 
                             // save last login status, clear ban
                             //db_user_update($username, 'lts='.time(), 'ban=0');
@@ -1281,7 +1283,7 @@ function cn_get_menu_none()
 /**
  * return html menu top
  */
-function menuTopMoney($opt = '')
+function cn_menuTopMoney($opt = '')
 {
     global $skin_menu_TopMoney, $skin_menu_TopAccount;
 
@@ -1331,6 +1333,30 @@ function menuTopMoney($opt = '')
     return $skin_menu_TopSample;
 }
 
+function echoFormVerifyChar($addOpt = array(), $msgVidateSubmit = '')
+{
+    global $defaultVerifyMyChar;
+
+//    $ischeckvaildate = '';
+//    if ($msgVidateSubmit) {
+//        $ischeckvaildate = $msgVidateSubmit;
+//    } else {
+//
+//    }
+
+    echo "<form id=\"verify\" action=\"". PHP_SELF ."\" method=\"POST\"  onSubmit=\"return validateFormOnSubmit('". $msgVidateSubmit ."');\">";
+    echo cn_form_open('mod, opt, sub');
+
+    if ($addOpt) {
+        foreach ($addOpt as $field => $val) {
+            echo'<input type="hidden" name="'. trim($field) .'" value="'. cn_htmlspecialchars($val) .'" />';
+        }
+    }
+    echo $defaultVerifyMyChar;
+    echo '</form>';
+
+}
+
 // Displays header skin
 // $image = img@custom_style_tpl
 function echoheader($image, $header_text, $bread_crumbs = false)
@@ -1351,7 +1377,7 @@ function echoheader($image, $header_text, $bread_crumbs = false)
     }
 
     //$skin_header_web = get_skin($skin_header_web);
-    $skin_header_web = preg_replace("/{top}/", menuTopMoney(), $skin_header_web);
+    $skin_header_web = preg_replace("/{top}/", cn_menuTopMoney(), $skin_header_web);
     $skin_header_web = str_replace('{title}', ($header_text ? $header_text . ' / ' : '') . 'MuOnline', $skin_header_web);
     $skin_header_web = str_replace("{header-text}", $header_text, $skin_header_web);
     $skin_header_web = str_replace("{header-time}", $header_time, $skin_header_web);
@@ -1822,7 +1848,6 @@ function cn_sort_menu()
     //echo $result;
 }
 
-
 //information character
 function cn_character()
 {
@@ -1898,248 +1923,6 @@ function cn_character()
 }
 
 
-function cn_template_class()
-{
-    // No in cache
-    if ($class = mcache_get('#class')) {
-        return $class;
-    }
-
-    mcache_set('#class', $class = cn_get_template_by('class'));
-    return $class;
-}
-
-function cn_template_reset()
-{
-    // No in cache
-    if ($_reset = mcache_get('#reset')) {
-        return $_reset;
-    }
-
-    $reset = cn_get_template_by('reset');
-    if (!$reset) {
-        return NULL;
-    }
-
-    $key_rs = array_keys($reset);
-    //$index = 0;
-    $options_rs = array();
-    for ($id = 0; $id < count($reset); $id += 9) {
-        $options_rs[] = array(
-            'reset' => $reset[$key_rs[$id]],
-            'level' => $reset[$key_rs[$id + 1]],
-            'zen' => $reset[$key_rs[$id + 2]],
-            'chaos' => $reset[$key_rs[$id + 3]],
-            'cre' => $reset[$key_rs[$id + 4]],
-            'blue' => $reset[$key_rs[$id + 5]],
-            'point' => $reset[$key_rs[$id + 6]],
-            'command' => $reset[$key_rs[$id + 7]],
-            'time' => $reset[$key_rs[$id + 8]]
-        );
-        //++$index;
-    }
-    mcache_set('#reset', $options_rs);
-
-    return $options_rs;
-}
-
-function cn_template_resetvip()
-{
-    // No in cache
-    if ($_resetvip = mcache_get('#resetvip')) {
-        return $_resetvip;
-    }
-
-    $resetvip = cn_get_template_by('reset_vip');
-    if (!$resetvip) {
-        return NULL;
-    }
-    $reset = cn_template_reset();
-    $key_rsvip = array_keys($resetvip);
-    $index = 0;
-    for ($id = 0; $id < count($resetvip); $id += 5) {
-        $options_rsvip[$index]['reset'] = $reset[$index]['reset'];
-        $options_rsvip[$index]['level'] = $resetvip[$key_rsvip[$id]];
-        $options_rsvip[$index]['vpoint'] = $resetvip[$key_rsvip[$id + 1]];
-        $options_rsvip[$index]['gcoin'] = $resetvip[$key_rsvip[$id + 2]];
-        $options_rsvip[$index]['point'] = $resetvip[$key_rsvip[$id + 3]];
-        $options_rsvip[$index]['command'] = $resetvip[$key_rsvip[$id + 4]];
-        $options_rsvip[$index]['time'] = $reset[$index]['time'];
-        ++$index;
-    }
-    mcache_set('#resetvip', $options_rsvip);
-
-    return $options_rsvip;
-}
-
-function cn_template_relife()
-{
-    // No in cache
-    if ($_relife = mcache_get('#relife')) {
-        return $_relife;
-    }
-
-    $relife = cn_get_template_by('relife');
-    if (!$relife) {
-        return NULL;
-    }
-
-    $key_relife = array_keys($relife);
-    $index = 0;
-    for ($id = 0; $id < count($relife); $id += 3) {
-        $options_rl[$index]['reset'] = $relife[$key_relife[$id]];
-        $options_rl[$index]['point'] = $relife[$key_relife[$id + 1]];
-        $options_rl[$index]['command'] = $relife[$key_relife[$id + 2]];
-        ++$index;
-    }
-    mcache_set('#relife', $options_rl);
-
-    return $options_rl;
-}
-
-function cn_template_uythacrs()
-{
-
-    // No in cache
-    if ($_uythac_rs = mcache_get('#uythacrs')) {
-        return $_uythac_rs;
-    }
-
-    $uythac_rs = cn_get_template_by('uythac_reset');
-    if (!$uythac_rs) {
-        return NULL;
-    }
-    $reset = cn_template_reset();
-    $id = 0;
-    foreach ($uythac_rs as $index => $val) {
-        $options_uythac_rs[$id]['reset'] = $reset[$id]['reset'];
-        $options_uythac_rs[$id]['point'] = $val;
-        $options_uythac_rs[$id]['zen'] = $reset[$id]['zen'];
-        $options_uythac_rs[$id]['chaos'] = $reset[$id]['chaos'];
-        $options_uythac_rs[$id]['cre'] = $reset[$id]['cre'];
-        $options_uythac_rs[$id]['blue'] = $reset[$id]['blue'];
-        $options_uythac_rs[$id]['time'] = $reset[$id]['time'];
-        ++$id;
-    }
-    mcache_set('#uythacrs', $options_uythac_rs);
-
-    return $options_uythac_rs;
-}
-
-function cn_template_uythacrsvip()
-{
-    // No in cache
-    if ($_uythac_rsvip = mcache_get('#uythacrsvip')) {
-        return $_uythac_rsvip;
-    }
-
-    $uythac_rsvip = cn_get_template_by('uythac_resetvip');
-    if (!$uythac_rsvip) {
-        return NULL;
-    }
-    $resetvip = cn_template_resetvip();
-    $id = 0;
-    foreach ($uythac_rsvip as $index => $val) {
-        $options_uythac_rsvip[$id]['reset'] = $resetvip[$id]['reset'];
-        $options_uythac_rsvip[$id]['point'] = $val;
-        $options_uythac_rsvip[$id]['vpoint'] = $resetvip[$id]['vpoint'];
-        $options_uythac_rsvip[$id]['gcoin'] = $resetvip[$id]['gcoin'];
-        $options_uythac_rsvip[$id]['time'] = $resetvip[$id]['time'];
-        ++$id;
-    }
-    mcache_set('#uythacrsvip', $options_uythac_rsvip);
-
-    return $options_uythac_rsvip;
-}
-
-function cn_template_rslimit1()
-{
-    // No in cache
-    if ($_rslimit1 = mcache_get('#rslimit1')) {
-        return $_rslimit1;
-    }
-
-    $rslimit1 = cn_get_template_by('gioihan_rs');
-    if (!$rslimit1) {
-        return NULL;
-    }
-    $key_rslimit1 = array_keys($rslimit1);
-    $id = 0;
-    foreach ($rslimit1 as $key => $val) {
-        $options_rslimit1[$id]['top'] = $val;//$rslimit1[$key_rslimit1[$id]];
-        if (++$id == 6) break;
-    }
-    mcache_set('#rslimit1', $options_rslimit1);
-
-    return $options_rslimit1;
-}
-
-function cn_template_rslimit2()
-{
-    if ($_rslimit2 = mcache_get('#rslimit2')) {
-        return $_rslimit2;
-    }
-
-    $rslimit2 = cn_get_template_by('gioihan_rs');
-    if (!$rslimit2) {
-        return NULL;
-    }
-    $key_rslimit2 = array_keys($rslimit2);
-    $id = 0;
-    $index = 0;
-    for ($id = 8; $id < count($rslimit2); $id += 4) {
-        $options_rslimit2[$index]['day1'] = $rslimit2[$key_rslimit2[6]];
-        $options_rslimit2[$index]['day2'] = $rslimit2[$key_rslimit2[7]];
-        $options_rslimit2[$index]['col1'] = $rslimit2[$key_rslimit2[$id]];
-        $options_rslimit2[$index]['col2'] = $rslimit2[$key_rslimit2[$id + 1]];
-        $options_rslimit2[$index]['col3'] = $rslimit2[$key_rslimit2[$id + 2]];
-        $options_rslimit2[$index]['col4'] = $rslimit2[$key_rslimit2[$id + 3]];
-        ++$index;
-    }
-
-    mcache_set('#rslimit2', $options_rslimit2);
-
-    return $options_rslimit2;
-}
-
-function cn_template_httt()
-{
-    // No in cache
-    if ($_hotro_tanthu = mcache_get('#hotro_tanthu')) {
-        return $_hotro_tanthu;
-    }
-
-    $hotro_tanthu = cn_get_template_by('hotro_tanthu');
-    if (!$hotro_tanthu) {
-        return NULL;
-    }
-    $key_httt = array_keys($hotro_tanthu);
-    $id = 0;
-    for ($in_ = 0; $in_ < count($hotro_tanthu); $in_ += 5) {
-        $options_httt[$id]['reset_min'] = $hotro_tanthu[$key_httt[$in_]];
-        $options_httt[$id]['reset_max'] = $hotro_tanthu[$key_httt[$in_ + 1]];
-        $options_httt[$id]['relife_min'] = $hotro_tanthu[$key_httt[$in_ + 2]];
-        $options_httt[$id]['relife_max'] = $hotro_tanthu[$key_httt[$in_ + 3]];
-        $options_httt[$id]['levelgiam'] = $hotro_tanthu[$key_httt[$in_ + 4]];
-        ++$id;
-    }
-    mcache_set('#hotro_tanthu', $options_httt);
-
-    return $options_httt;
-}
-
-// Since 2.0: Get template (if not exists, create from defaults)
-function cn_get_template_by($template_name = '')
-{
-    $templates = getoption('#temp_basic');
-    $template_name = strtolower($template_name);
-
-    // User template not exists in config... get from defaults
-    if (isset($templates[$template_name])) {
-        return $templates[$template_name];
-    }
-    return false;
-}
 
 /*
 function cn_template_rstrust(){
@@ -2346,29 +2129,6 @@ function cn_point_trust()
     }
 
     return isset($trust) ? $trust : array();
-}
-
-// Since 2.0: Read serialized array from php-safe file (or create file)
-function cn_touch_get($target)
-{
-    $fn = cn_touch($target, TRUE);
-    $fc = file($fn);
-    unset($fc[0]);
-
-    $fc = join('', $fc);
-
-    if (!$fc) {
-        $fc = array();
-    } else {
-        $data = unserialize(base64_decode($fc));
-        if ($data === FALSE) {
-            $fc = unserialize($fc);
-        } else {
-            $fc = $data;
-        }
-    }
-
-    return $fc;
 }
 
 /*
@@ -2582,79 +2342,6 @@ function cn_user_email_as_site($user_email, $username)
         return '<a href="mailto:' . cn_htmlspecialchars($user_email) . '">' . $username . '</a>';
     }
 }
-
-//
-//function CheckSlotWarehouse($warehouse, $itemX, $itemY)
-//{
-//    $items_data = getoption('#items_data');
-//
-//    $items = str_repeat('0', 120);
-//    $itemsm = str_repeat('1', 120);
-//    $i = 0;
-//    while ($i < 120) {
-//        $item = substr($warehouse, $i * 32, 32);
-//        if ($item == "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" || $item == "ffffffffffffffffffffffffffffffff") {
-//            $i++;
-//            continue;
-//        } else {
-//            $item32 = getCodeItem($item);
-//            echo "3441 ---ref x = $itemX ---ref y = $itemY >>><<< group =" . $item32['group'] . "=> id=" . $item32['id'] . "<br>";
-//            $item_data = $items_data[$item32['group'] . '.' . $item32['id']];
-//            echo "3443 ---ref x = " . $item_data['X'] . " ---ref y = " . $item_data['Y'] . "<br>";
-//            $y = 0;
-//            while ($y < $item_data['Y']) {
-//                $x = 0;
-//                while ($x < $item_data['X']) {
-//                    $items = substr_replace($items, '1', ($i + $x) + ($y * 8), 1);
-//                    $x++;
-//                }
-//                $y++;
-//            }
-//            $i++;
-//        }
-//    }
-//
-//    $y = 0;
-//    while ($y < $itemY) {
-//        $x = 0;
-//        while ($x < $itemX) {
-//            $x++;
-//            $spacerq[$x + (8 * $y)] = true;
-//        }
-//        $y++;
-//    }
-//    print_r($spacerq);
-//
-//    $walked = 0;
-//    $i = 0;
-//    while ($i < 120) {
-//        if (isset($spacerq[$i])) {
-//            $itemsm = substr_replace($itemsm, '0', $i - 1, 1);
-//            $last = $i;
-//            $walked++;
-//        }
-//        if ($walked == count($spacerq)) $i = 119;
-//        $i++;
-//    }
-//    //echo "<br>3454 --------- items = $itemsm <br>";//exit();0111111101111111011111110
-//    $useforlength = substr($itemsm, 0, $last);
-//    $findslotlikethis = str_replace('++', '+', str_replace('1', '+[0-1]+', $useforlength));
-//
-//    echo "<br>3454 --------- items = $itemsm last = $last useforlength = $useforlength <br> findslotlikethis = $findslotlikethis<br>";//exit();
-//    $i = 0;
-//    $nx = 0;
-//    $ny = 0;
-//    while ($i < 120) {
-//        if ($nx == 8) {
-//            $ny++;
-//            $nx = 0;
-//        }
-//        if ((preg_match('/^' . $findslotlikethis . '/', substr($items, $i, strlen($useforlength)))) && ($itemX + $nx < 9) && ($itemY + $ny < 16)) return $i;
-//        $i++;
-//        $nx++;
-//    }
-//    return 3840;
-//}
 
 function CheckSlotInventory($inventory, $itemX, $itemY)
 {

@@ -382,7 +382,6 @@ function shop_acient(){
 function shop_armor(){
 	$opt = REQ('opt', 'GETPOST');
 	$item_ = getoption('#item_shop'.$opt);
-	$arr_trust = cn_point_trust();
 	$showchar = cn_character();
 
 	foreach($showchar as $od => $do){

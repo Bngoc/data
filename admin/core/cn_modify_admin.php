@@ -1590,6 +1590,7 @@ function cn_config_load()
         'allow_registration' => 1,
         'registration_level' => 4,
         'config_time_logout' => 900,
+        'config_time_logout_web' => 300,
         'config_login_ban' => '5:15',
         'ban_attempts' => 3,
         'hd_user_e' => 'Ym95bG92ZS5uZ29jaXRAZ21haWwuY29t',
@@ -1873,29 +1874,6 @@ function cn_sort_menu($opt)
     $result .= "</select>";
 
     echo $result;
-}
-
-// Since 2.0: Read serialized array from php-safe file (or create file)
-function cn_touch_get($target)
-{
-    $fn = cn_touch($target, TRUE);
-    $fc = file($fn);
-    unset($fc[0]);
-
-    $fc = join('', $fc);
-
-    if (!$fc) {
-        $fc = array();
-    } else {
-        $data = unserialize(base64_decode($fc));
-        if ($data === FALSE) {
-            $fc = unserialize($fc);
-        } else {
-            $fc = $data;
-        }
-    }
-
-    return $fc;
 }
 
 // Since 2.0: Read file (or create file)

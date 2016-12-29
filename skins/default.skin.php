@@ -1,7 +1,7 @@
 <?PHP
 
 global $skin_header_web, $skin_menu_web, $skin_menu_none, $skin_footer_web, $skin_content_web, $skin_menu_TopMoney, $skin_menu_TopAccount;
-
+global $defaultVerifyMyChar;
 $skin_prefix = "";
 
 // ********************************************************************************
@@ -14,6 +14,7 @@ $setpath_default = getoption('http_script_dir');
 
 $description = getoption('description');
 $keywords = getoption('keywords');
+$patchImg = URL_PATH_IMG;
 
 // ********************************************************************************
 // Skin HEADER WEB
@@ -274,4 +275,51 @@ $skin_menu_TopAccount = <<<HTML
     </div>
     <div style="clear:both;"></div>
 HTML;
+
+// ********************************************************************************
+// Skin MENU TOP INFO ACCOUNT WEB
+// ********************************************************************************
+
+$defaultVerifyMyChar = <<<HTML
+    <table width="100%" class="pd-top10">
+        <tr>
+            <td colspan="3" class="">MÃ XÁC NHẬN</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div class="vertical-img"><img src="$patchImg/vertical-separator.jpg" width="100%"
+                                               height="1px"/></div>
+                <br/></td>
+        </tr>
+
+        <tr>
+            <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;" 
+                    onclick="getId('capchaWeb').src='/captcha.php?page=web&r='+Math.random(); return(false);">
+                    Refresh code</a></td>
+            <td colspan="" class="bizwebform_col_2" style="padding-left:20px;">
+                <div class="vertical-img"><img src="/captcha.php?cap=web"
+                                               id="capchaWeb" alt=""></div>
+            </td>
+            <td class="bizwebform_col_3"></td>
+        </tr>
+        <tr>
+            <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
+            <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="verifyCaptcha" required
+                                                onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
+            <td class="bizwebform_col_3" id="msg_Captcha"></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="padding:20px; text-align:center"></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align:center">
+                <input type="image" src="$patchImg/capnhat.png" style="padding-right:10px">
+                <img style="cursor:pointer" border="0" src="$patchImg/cancel.png"
+                     onclick="document.getElementById('verify').reset();" style="padding-left:10px">
+            </td>
+        </tr>
+    </table>
+HTML;
+
+
 ?>

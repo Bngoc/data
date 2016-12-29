@@ -230,7 +230,7 @@ function shop___buy_s1()
 
             $resultData = array(
                 'msgAction' => cn_snippet_messages(),
-                'menuTop' => menuTopMoney(true)
+                'menuTop' => cn_menuTopMoney(true)
             );
 
             header('Content-Type: application/json');

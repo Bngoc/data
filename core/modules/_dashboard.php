@@ -21,13 +21,17 @@ function char_invoke()
         'char_manager:movemap:Ca' => 'Di chuyển - Đổi Map',
         'char_manager:removepk:Cbi' => 'Rửa tội - Xóa PK',
         'char_manager:rspoint:Caf' => 'Reset Point - Cộng lại điểm',
+        'char_manager:delepersonalSotre:Cpc' => 'Xóa đồ cửa hàng cá nhân',
+        'char_manager:changeclass:Cwp' => 'Đổi giới tính',
+        'char_manager:changename:Clc' => 'Đổi tên nhận vật',
+
         'char_manager:wreplace:Crw' => 'Tẩy tủy - Reset lại',
         'char_manager:logs:Csl' => 'Reset Master Skill',
-        'char_manager:changeclass:Cwp' => 'Đổi giới tính',
+
         'char_manager:maint:Cmt' => 'Khóa đồ - Bảo vệ đồ',
-        'char_manager:changename:Clc' => 'Đổi tên nhận vật',
+
         'char_manager:script:Csr' => 'Chuyển nhân vật',
-        'char_manager:delepersonalSotre:Cpc' => 'Xóa đồ cửa hàng cá nhân',
+
         'char_manager:level1:Cpc' => 'Làm nhiệm vụ cấp 1',
         'char_manager:level2:Cpc' => 'Làm nhiệm vụ cấp 220',
         'char_manager:level3:Cpc' => 'Làm nhiệm vụ cấp Master',
@@ -55,8 +59,8 @@ function char_invoke()
     foreach ($char_board as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
 
-        if (test($acl_module) && $dl == $mod && $do == $opt && function_exists("char_$opt")) {
-//        if ($dl == $mod && $do == $opt && function_exists("char_$opt")) {
+        //if (test($acl_module) && $dl == $mod && $do == $opt && function_exists("char_$opt")) {
+        if ($dl == $mod && $do == $opt && function_exists("char_$opt")) {
             cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt));
             die(call_user_func("char_$opt"));
         }
@@ -137,7 +141,6 @@ function char_default()
 
 function char_info_char()
 {
-    $arr_trust = cn_point_trust();
     $showchar = cn_character();
 
     foreach ($showchar as $od => $do) {
@@ -174,16 +177,13 @@ function char_reset()
     $limit_1 = cn_template_rslimit1();
     $limit_2 = cn_template_rslimit2();
 
-    //$show_reponse = view_character($accc_);
-
     $showchar = cn_character();
-
     $_blank_var = view_bank($accc_ = $member['user_name']);
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
-            $sub = array_keys($showchar)[0];
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
     };
 
     $zen_acc_char = $showchar[$sub]['money'];
@@ -202,29 +202,19 @@ function char_reset()
     $show_blank_cre = $_blank_var[0]['cre'];
     $show_blank_blue = $_blank_var[0]['blue'];
 
-
-    //list($pk_y_n, $fg_12, $fg_123, $fg_1234) = do_selc_char($accc_,$sub);// tam thoi
-
     if (isset($options_rs)) {
         $ok_loop = false;
         $resetpoint = $leadership = $rs_index = 0;
+        $i_e = $p_e = $ml_e = 0;
         foreach ($options_rs as $aq => $qa) {
-            if ($ok_loop) {
-                $i_f = $i_e;
-                $i_e = $qa['reset'];
-                $p_f = $p_e;
-                $p_e = $qa['point'];
-                $ml_f = $ml_e;
-                $ml_e = $qa['command'];
-            } else {
-                $i_f = 0;
-                $i_e = $qa['reset'];
-                $p_f = 0;
-                $p_e = $qa['point'];
-                $ml_f = 0;
-                $ml_e = $qa['command'];
-                $ok_loop = True;
-            }
+            $i_f = $ok_loop ? $i_e : 0;
+            $i_e = $qa['reset'];
+            $p_f = $ok_loop ? $p_e : 0;
+            $p_e = $qa['point'];
+            $ml_f = $ok_loop ? $ml_e : 0;
+            $ml_e = $qa['command'];
+            $ok_loop = true;
+
             if (($reset_rs > $i_f) && ($reset_rs <= $i_e) || ($reset_rs == 0)) {
                 $level = $qa['level'];
                 $zen = $qa['zen'];
@@ -232,7 +222,7 @@ function char_reset()
                 $cre = $qa['cre'];
                 $blue = $qa['blue'];
                 $time_reset_next = $qa['time'];
-                // de quy tinh point va ml
+
                 $resetpoint += $qa['point'] * ($reset_rs - $i_f);
                 $leadership += $qa['command'] * ($reset_rs - $i_f);
                 $rs_index = $aq;
@@ -241,8 +231,8 @@ function char_reset()
 
             $resetpoint += ($i_e - $i_f) * $p_e;
             $leadership += ($i_e - $i_f) * $ml_e;
-            //echo "592 >> $i_f >>$i_e>>$leadership>>$reset_rs>>> $i_f>>> $resetpoint <br>";
         }
+
         $level = isset($level) ? $level : $options_rs[count($options_rs) - 1]['level'];
         $zen = isset($zen) ? $zen : $options_rs[count($options_rs) - 1]['zen'];
         $cre = isset($cre) ? $cre : $options_rs[count($options_rs) - 1]['cre'];
@@ -267,12 +257,13 @@ function char_reset()
     }
 
     if (getoption('hotrotanthu')) {
-        if (isset($options_tanthu))
+        if (isset($options_tanthu)) {
             foreach ($options_tanthu as $aq => $qa) {
                 if (($qa['reset_min'] <= $reset_rs && $reset_rs <= $qa['reset_max']) && ($qa['relife_min'] <= $relife_vl && $relife_vl <= $qa['relife_max'])) {
                     $giam_lv = $qa['levelgiam'];
                 }
             }
+        }
     }
 
 //    $inventory = bin2hex($inventory);
@@ -280,10 +271,6 @@ function char_reset()
 //    $inventory3 = strtoupper($inventory3);
 //    $shop_empty = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
 
-    //$get_zen = $zen_acc_char - (isset($zen) ? $zen: 0);
-    //$get_chao = $show_blank_chao - (isset($chao) ? $chao: 0);
-    //$get_cre = $show_blank_cre - (isset($cre) ? $cre: 0);
-    // 0 <= $get_blue = $show_blank_blue - (isset($blue) ? $blue: 0);
     $abc_level = $level_acc_char - (isset($level) ? $level : 0);
 
     if (0 <= $get_zen = $zen_acc_char - (isset($zen) ? $zen : 0)) $str_zen = number_format((float)$zen_acc_char, 0, ",", ".") . " (Đủ Zen)"; else {
@@ -306,7 +293,7 @@ function char_reset()
             if ($g_lv != 0) $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
         } else {
             $thieu_lever = ABS($test_vl);
-            $str_lever = "$level_acc_char <font color =red>(Thiếu abs($thieu_lever)  level)</font>";
+            $str_lever = "$level_acc_char <font color =red>(Thiếu ". abs($thieu_lever) ." level)</font>";
             if ($g_lv != 0) $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
         }
     } else {
@@ -314,7 +301,7 @@ function char_reset()
             $str_lever = "$level_acc_char (Đủ level).";
         else {
             $f_lv = ABS($abc_level);
-            $str_lever = "$level_acc_char <font color =red>(Thiếu abs($f_lv) level)</font>";
+            $str_lever = "$level_acc_char <font color =red>(Thiếu ". abs($f_lv) ." level)</font>";
         }
     }
 
@@ -332,16 +319,14 @@ function char_reset()
         else $rs_day = "<font color=red> $rs_inday / $gioihan_rs </font>";
     } else if ($user_type_gh_rs == 2) {
         $okloop = false;
-        if (isset($limit_2))
+
+        if (isset($limit_2)) {
+            $lv_rs_en = 0;
             foreach ($limit_2 as $d => $val) {
-                if ($okloop) {
-                    $lv_rs_f = $lv_rs_en;
-                    $lv_rs_en = $val['col1'];
-                } else {
-                    $lv_rs_f = 1;
+                    $lv_rs_f = $okloop ?  $lv_rs_en : 1;
                     $lv_rs_en = $val['col1'];
                     $okloop = true;
-                }
+                
                 if ($lv_rs_f < $reset_rs && $reset_rs <= $lv_rs_en) {
                     if (0 <= $rs_inday && $rs_inday <= $val['day1']) {
                         $VpointReset = $val['col2'];
@@ -355,7 +340,7 @@ function char_reset()
                     }
                 }
             }
-
+        }
         if ($reset_rs > $limit_2[count($limit_2) - 1]['col1']) {
             $abvc = $limit_2[count($limit_2) - 1];
             if (0 <= $rs_inday && $rs_inday <= $abvc['day1']) {
@@ -406,22 +391,21 @@ function char_reset()
     //-----------------------------------------------
     if (request_type('POST')) {
         if (REQ('action_rs')) {
-            $default_class = do_select_character('DefaultClassType', $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY', "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3");
-
+            cn_dsi_check(true);
             $errors_false = false;
 
             $resetup = $reset_rs + 1;
             $time_reset_next_ = $Resets_Time + (isset($time_reset_next) ? $time_reset_next : 5) * 60;
-
+            
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
             if ($showchar[$sub]['PkLevel'] > 3) {
                 cn_throw_message("Bạn đang là Sát thủ. Phải rửa tội trước khi Reset.", 'e');
                 $errors_false = true;
             }
-//            echo '$inventory3=> ' . $inventory3;
-//            if ($inventory3 != $shop_empty || $inventory3 != strtolower($shop_empty)) {
-//                cn_throw_message("Cửa hàng cá nhân có vật phẩm. Vui lòng bỏ ra khỏi cửa hàng cá nhân để tránh bị mất đồ.", 'e');
-//                $errors_false = true;
-//            }
             if ($check_on) {
                 cn_throw_message("Nhân vật chưa thoát Game. Hãy thoát Game trước khi thực hiện chức năng này.", 'e');
                 $errors_false = true;
@@ -465,13 +449,22 @@ function char_reset()
             }
 
             if (!$errors_false) {
-                point_tax($accc_);
-                $PointThue = do_select_character('Character', 'PointThue', "Name='$sub'");
+                point_tax($sub);
+                $default_class = do_select_character(
+                    'DefaultClassType',
+                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY',
+                    "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3"
+                );
+                $pointThue = do_select_character(
+                    'Character',
+                    'PointThue',
+                    "Name='$sub' AND IsThuePoint=1 AND TimeThuePoint>".ctime()
+                );
 
                 $vpointnew = isset($get_vp) ? $get_vp : $set_vp;
                 $CountNoResetInDay = $rs_inday + 1;
                 $resetmoney = $get_zen;
-                $resetpoint += ((isset($point_relifes) ? $point_relifes : 0) + $PointThue[0][0]);
+                $resetpoint += (isset($point_relifes) ? $point_relifes : 0) + (empty($pointThue[0]['PointThue']) ? 0 : $pointThue[0]['PointThue']);
                 $leadership += (isset($ml_relifes) ? $ml_relifes : 0);
                 if ($leadership > 64000) $leadership = 64000;
                 if ($resetpoint > 65000) {
@@ -492,52 +485,57 @@ function char_reset()
 
                 $get_default_class = substr($get_default_class, 0, -1);
 
-                /*
-				//------------------------------------// nghiem cuu sau----------
-				$arr_key_1234 = array_keys($fg_1234);
-				$fg_1234_pop_key = array_pop($arr_key_1234); //echo "318=>>>>>>>". $array_pop_key."  <br>";
-				$fg_1234_pop_val = array_pop($fg_1234); //echo "318=>>>>>>>". $array_pop_val."  <br>";
-				foreach ($fg_1234 as $a => $nb){ echo "318888 ---> $a > $nb <br>"; }//$v = [a=b]
-
-				$str_join = '';
-				foreach ($fg_1234 as $a => $b){ //$v = [a=b]
-					if($a)
-						$str_join .= $a ."=". $b .",";	//$cp_data[$a] = $b; 		// VD: a = b
-				}
-				echo "794 >>>>>>>>>> $str_join <br>";
-				if(strlen($str_join) > 0) $str_join = substr($str_join,0, -1);
-
-				$fg_123_pop_val = array_pop($fg_123);
-				echo "794 >>>>>>>>>> $str_join <br>";
-				*/
                 //----------------------------------------------------------------
-                // Reset nhan vat la Darklord
-                //if($class_ == $arr_class['class_dl_1'] OR $class_ == $arr_class['class_dl_2']){
-                //if(strlen($str_join) > 0)
-                //do_update_character('Character','Clevel=1','Experience=0',"Money=$resetmoney","LevelUpPoint=$pointup","pointdutru=$resetpoint","Resets=$resetup","$str_join","$fg_1234_pop_key=$leadership",'MapDir=0','MagicList=CONVERT(varbinary(180), null)','isThuePoint=0',"NoResetInDay=$CountNoResetInDay",'NoResetInMonth=NoResetInMonth+1',"Resets_Time=$ctime",'ResetVIP=0','PointThue=0',"name:'$sub'");
-                //else die("Error Reset.");
-                //}
-                //Reset nhan vat khong phai la DarkLord
-                //else
-                {
-                    do_update_character('Character', 'Clevel=1', 'Experience=0', "Money=$resetmoney", "LevelUpPoint=$pointup", "pointdutru=$resetpoint", "Resets=$resetup", "$get_default_class", "Leadership=$leadership", 'MapDir=0', "NoResetInDay=$CountNoResetInDay", 'NoResetInMonth=NoResetInMonth+1', "Resets_Time=$ctime", 'ResetVIP=0', "name:'$sub'");
+                do_update_character(
+                    'Character',
+                    'Clevel=1',
+                    'Experience=0',
+                    "Money=$resetmoney",
+                    "LevelUpPoint=$pointup",
+                    "pointdutru=$resetpoint",
+                    "Resets=$resetup",
+                    $get_default_class,
+                    "Leadership=$leadership",
+                    'MapDir=0',
+                    "NoResetInDay=$CountNoResetInDay",
+                    'NoResetInMonth=NoResetInMonth+1',
+                    "Resets_Time=$ctime",
+                    'ResetVIP=0',
+                    "name:'$sub'"
+                );
 
-                    if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
-                        do_update_character('Character', 'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', "Name:'$sub'");
-                    }
-
-                    //Add Xoay kiem cho DK
-                    if ($class_ == $arr_class['class_dk_1'] OR $class_ == $arr_class['class_dk_2'] OR $class_ == $arr_class['class_dk_3'])
-                        do_update_character('Character', 'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000', "name:'$sub'");
-
-                    //Add Mui ten vo tan cho Elf C3
-                    if ($class_ == $arr_class['class_elf_3'])
-                        do_update_character('Character', 'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000', "name:'$sub'");
-
-                    //Add Skill cho Summoner
-                    if ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3'])
-                        do_update_character('Character', 'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000', "name:'$sub'");
+                if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
+                    do_update_character(
+                        'Character',
+                        'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
+                        "Name:'$sub'"
+                    );
                 }
+
+                //Add Xoay kiem cho DK
+                if ($class_ == $arr_class['class_dk_1'] OR $class_ == $arr_class['class_dk_2'] OR $class_ == $arr_class['class_dk_3'])
+                    do_update_character(
+                        'Character',
+                        'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+                        "name:'$sub'"
+                    );
+
+                //Add Mui ten vo tan cho Elf C3
+                if ($class_ == $arr_class['class_elf_3'])
+                    do_update_character(
+                        'Character',
+                        'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+                        "name:'$sub'"
+                    );
+
+                //Add Skill cho Summoner
+                if ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3'])
+                    do_update_character(
+                        'Character',
+                        'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+                        "name:'$sub'"
+                    );
+
                 /*
 					//Reset Point Master Skill
 					if (($class_ == $arr_class['class_dw_3']) || ($class_ == $arr_class['class_dk_3']) || ($class_ == $arr_class['class_elf_3']) || ($class_ == $arr_class['class_mg_2']) || ($class_ == $arr_class['class_dl_2']) || ($class_ == $arr_class['class_sum_3']) || ($class_ == $arr_class['class_rf_2'])){
@@ -553,35 +551,35 @@ function char_reset()
 						//$result_reset_master_point = $db->Execute($sql_reset_master_point) or die("Lỗi Query: $sql_reset_master_point");
 					}
 					*/
-                do_update_character('MEMB_INFO', "jewel_chao=$get_chao", "jewel_cre=$get_cre", "jewel_blue=$get_blue", "vpoint=$vpointnew", "memb___id:'$accc_'");
-                /* viet lai arrr select*/
+                do_update_character(
+                    'MEMB_INFO',
+                    "jewel_chao=$get_chao",
+                    "jewel_cre=$get_cre",
+                    "jewel_blue=$get_blue",
+                    "vpoint=$vpointnew",
+                    "memb___id:'$accc_'"
+                );
+
                 //use event top test dd/mm/yy -> dd/mm/yy
                 if ((getoption('event_toprs_on') == 1))// && (strtotime($event_toprs_begin) < $ctime) && (strtotime($event_toprs_end) + 24*60*60 > $ctime))
                 {
                     //Kiem tra da co du lieu trong data Event_TOP_RS
                     $data___ = do_select_character('Event_TOP_RS', '*', "name='$sub'");
-                    //$data___ = do_select_character('Event_TOP_RS','acc','name','resets',"name:'$sub'",'');
-                    //$data_check_sql = $db->Execute("SELECT * FROM Event_TOP_RS WHERE name='$name'");
-                    //$data_check = $data_check_sql->numrows();
-                    //Du lieu da co
-                    if ($data___) // kiem tra lai
+                    if ($data___) {
+                        //Du lieu da co
                         do_update_character('Event_TOP_RS', 'resets=resets+1', "name:'$sub'");
-                    //Du lieu chua co
-                    else {
-                        do_insert_character('Event_TOP_RS', "acc='".$accc_."'", "name='".$sub."'", 'resets=1');
-                        //$insert_data_result = $db->Execute($insert_data_query) OR DIE("Lỗi Query: $insert_data_query");
+                    } else {
+                        //Du lieu chua co
+                        do_insert_character('Event_TOP_RS', "acc='" . $accc_ . "'", "name='" . $sub . "'", 'resets=1');
                     }
                 }
 
-                top50(); //?????????????????
-
                 //Ghi vào Log
                 $content = "$sub Reset lần thứ $resetup _ lần thứ $CountNoResetInDay trong ngày";
-                //$Date = date("h:iA, d/m/Y");
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/character/log_resets.txt";
                 $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|".$_blank_var[0]['gc']."_" . $set_vp . "|" . $_blank_var[0]['gc'] ."_" . $vpointnew . "|" . $Date . "|\n");
+                fputs($fp, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $vpointnew . "|" . $Date . "|\n");
                 fclose($fp);
                 //End Ghi vào Log
 
@@ -590,16 +588,13 @@ function char_reset()
                     else if ($gioihan_rs == $CountNoResetInDay) $rs_day_ = "<font color=red> $CountNoResetInDay / $gioihan_rs </font>";
                 } else if ($user_type_gh_rs == 2) {
                     $okloop = false;
-                    if (isset($limit_2))
+                    if (isset($limit_2)) {
+                        $lv_rs_en = 0;
                         foreach ($limit_2 as $d => $val) {
-                            if ($okloop) {
-                                $lv_rs_f = $lv_rs_en;
-                                $lv_rs_en = $val['col1'];
-                            } else {
-                                $lv_rs_f = 1;
-                                $lv_rs_en = $val['col1'];
-                                $okloop = true;
-                            }
+                            $lv_rs_f = $okloop ? $lv_rs_en : 1;
+                            $lv_rs_en = $val['col1'];
+                            $okloop = true;
+
                             if ($lv_rs_f < $resetup && $resetup <= $lv_rs_en) {
                                 if (0 <= $CountNoResetInDay && $CountNoResetInDay <= $val['day1']) {
                                     $VpointReset = $val['col2'];
@@ -613,7 +608,7 @@ function char_reset()
                                 }
                             }
                         }
-
+                    }
                     if ($resetup > $limit_2[count($limit_2) - 1]['col1']) {
                         $abvc = $limit_2[count($limit_2) - 1];
                         if (0 <= $CountNoResetInDay && $CountNoResetInDay <= $abvc['day1']) {
@@ -630,7 +625,9 @@ function char_reset()
                         $str_vp_ = "$vpointnew <font color =red> (Thiếu " . abs($get_vpup) . " Vpoint Reset)</font>";
                     }
                     $rs_day_ = "$CountNoResetInDay / ---";
-                } else $rs_day_ = "$CountNoResetInDay / No limit";
+                } else {
+                    $rs_day_ = "$CountNoResetInDay / No limit";
+                }
 
                 if ($rs_index >= count($options_rs) - 1) $rs_index = count($options_rs) - 1;
                 else if ($resetup > $i_e) ++$rs_index;
@@ -695,7 +692,6 @@ function char_reset()
                 $str_rutpoint .= "<br> <font color=red><i><em>Lưu ý</em><i>: Cộng Point mới có Skill!</font>";
             }
         }
-
     }
     //-----------------------------------------------
 
@@ -725,8 +721,6 @@ function char_resetvip()
     list($sub) = GET('sub', 'GPG');
     $accc_ = $member['user_name'];
 
-    //$arr_rsvip = cn_get_template_by('reset_vip');
-    //$show_reponse = view_character($accc_);
     $_blank_var = view_bank($accc_);
     $options_rsvip = cn_template_resetvip();
     $options_gh1 = cn_template_rslimit1();
@@ -736,60 +730,11 @@ function char_resetvip()
     $options_rl = cn_template_relife();
     $showchar = cn_character();
 
-    /*
-	$set_cls = false;
-	if($show_reponse){
-		foreach($show_reponse as $od => $do){
-			if ( !empty( $do[0] ) ){
-
-				if(!$set_cls){
-					$sub_ = $do[0];
-					$set_cls = true;
-				}
-
-				$showchar[$do[0]] = array(
-					//'char_image' => $Char_Image,
-					'name' => $do[0],
-					'class' => $do[1],
-					'level' => $do[2],
-					//'str' => $do[3],
-					//'dex' => $do[4],
-					//'vit' => $do[5],
-					//'ene' => $do[6],
-					//'com' => $do[7],
-					'reset' => $do[8],
-					'relife' => $do[9],
-					//'point' => $do[10],
-					//'point_dutru' => $do[11],
-					//'uythac' => $do[12],
-					//'point_uythac' => $do[13],
-					//'pcpoint' => $do[14],
-					'accountId' => $do[15],
-					'resetInDay' => $do[16],
-					//'money' => $do[17],
-					'top_50' => $do[18],
-					'Resets_Time' => $do[19],
-					'shop' => $do[21],
-				);
-			}
-		}
-	}
-	else{
-		msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này."); //Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.
-	}
-
-    if (!$sub) $sub = $sub_;
-    else{
-		if(!in_array($sub,array_keys($showchar)))
-			$sub = $sub_;
-    }
-	*/
     if (!$sub) $sub = array_keys($showchar)[0];
     else {
         if (!in_array($sub, array_keys($showchar)))
             $sub = array_keys($showchar)[0];
     };
-
 
     //$zen_acc_char = $showchar[$sub]['money'];
     $level_acc_char = $showchar[$sub]['level'];
@@ -807,30 +752,20 @@ function char_resetvip()
     $blank_gcoin = $_blank_var[0]['gc'];
     $blank_gcoin_km = $_blank_var[0]['gc_km'];
     $tong_gcoin = $blank_gcoin + $blank_gcoin_km;
-    $default_class = do_select_character('DefaultClassType', $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY', "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3");
-
-    //list($pk_y_n, $fg_12, $fg_123, $fg_1234) = do_selc_char($accc_,$sub);// tam thoi
 
     if (isset($options_rsvip)) {
         $ok_loop = false;
         $resetpoint_vip = $leadership_vip = $rsvip_index = 0;
+        $i_e = $p_e = $ml_e = 0;
         foreach ($options_rsvip as $aq => $qa) {
-            if ($ok_loop) {
-                $i_f = $i_e;
-                $i_e = $qa['reset'];
-                $p_f = $p_e;
-                $p_e = $qa['point'];
-                $ml_f = $ml_e;
-                $ml_e = $qa['command'];
-            } else {
-                $i_f = 0;
-                $i_e = $qa['reset'];
-                $p_f = 0;
-                $p_e = $qa['point'];
-                $ml_f = 0;
-                $ml_e = $qa['command'];
-                $ok_loop = True;
-            }
+            $i_f = $ok_loop ? $i_e : 0;
+            $i_e = $qa['reset'];
+            $p_f = $ok_loop ? $p_e : 0;
+            $p_e = $qa['point'];
+            $ml_f = $ok_loop ? $ml_e : 0;
+            $ml_e = $qa['command'];
+            $ok_loop = true;
+
             if (($reset_rsvip > $i_f) && ($reset_rsvip <= $i_e) || ($reset_rsvip == 0)) {
                 $level = $qa['level'];
                 $kt_vpoint = $qa['vpoint'];
@@ -845,6 +780,7 @@ function char_resetvip()
             $resetpoint_vip += ($i_e - $i_f) * $p_e;
             $leadership_vip += ($i_e - $i_f) * $ml_e;
         }
+
         $level = isset($level) ? $level : $options_rsvip[count($options_rsvip) - 1]['level'];
         $kt_vpoint = isset($kt_vpoint) ? $kt_vpoint : $options_rsvip[count($options_rsvip) - 1]['vpoint'];
         $kt_gcoin = isset($kt_gcoin) ? $kt_gcoin : $options_rsvip[count($options_rsvip) - 1]['gcoin'];
@@ -892,7 +828,7 @@ function char_resetvip()
         $sms_vp = " (Đủ Vpoint)";
     } else {
         $result_rsvip_false = true;
-        $sms_vp = " <font color=red>(Thiếu " . ($kt_vpoint - $blank_vp) . " Vpoint)</font>";
+        $sms_vp = " <font color=red>(Thiếu " . abs($kt_vpoint - $blank_vp) . " Vpoint)</font>";
     }
     //if(!$result_rsvip_false){$result_rs_blank = "Đủ để Reset Vip";}
     //else{$result_rs_blank = "<font color=red>Không đủ Reset Vip</font>";}
@@ -903,12 +839,6 @@ function char_resetvip()
 
     $abc_level = $level_acc_char - (isset($level) ? $level : 0);
 
-//    $inventory = bin2hex($inventory);
-//    $inventory3 = substr($inventory, 76 * 32, 32 * 32);
-//    $inventory3 = strtoupper($inventory3);
-//    $shop_empty = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
-
-
     if (getoption('hotrotanthu')) {
         $g_lv = isset($giam_lv) ? $giam_lv : 0;
         $test_vl = $abc_level + $g_lv;
@@ -917,7 +847,7 @@ function char_resetvip()
             if ($g_lv != 0) $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
         } else {
             $thieu_lever = ABS($test_vl);
-            $str_lever = "$level_acc_char <font color =red>(Thiếu $thieu_lever level)</font>";
+            $str_lever = "$level_acc_char <font color =red>(Thiếu " . abs($thieu_lever) . " level)</font>";
             if ($g_lv != 0) $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
         }
     } else {
@@ -926,7 +856,7 @@ function char_resetvip()
             $str_lever = "$level_acc_char (Đủ level).";
         else {
             $f_lv = ABS($abc_level);
-            $str_lever = "$level_acc_char <font color =red>(Thiếu $f_lv level)</font>";
+            $str_lever = "$level_acc_char <font color =red>(Thiếu " . abs($f_lv) . " level)</font>";
         }
     }
 
@@ -944,7 +874,8 @@ function char_resetvip()
     } else if ($user_type_gh_rs == 2) {
         $okloop = false;
 
-        if (isset($options_gh2))
+        if (isset($options_gh2)) {
+            $lv_rs_en = 0;
             foreach ($options_gh2 as $d => $val) {
                 if ($okloop) {
                     $lv_rs_f = $lv_rs_en;
@@ -967,6 +898,7 @@ function char_resetvip()
                     }
                 }
             }
+        }
 
         if ($reset_rsvip > $options_gh2[count($options_gh2) - 1]['col1']) {
             $abvc = $options_gh2[count($options_gh2) - 1];
@@ -983,7 +915,7 @@ function char_resetvip()
         $get_vp = (isset($get_blank_vp) ? $get_blank_vp : $blank_vp) - (isset($VpointReset) ? $VpointReset : 0);
 
         if ($get_vp < 0) {
-            $str_vp = " " . number_format((float)$set_vp, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(abs($get_vp)), 0, ",", ".") . " Vpoint Reset Vip)</font>";
+            $str_vp = " " . number_format((float)$blank_vp, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(abs($get_vp)), 0, ",", ".") . " Vpoint Reset Vip)</font>";
             $sms_vp = " <font color=red>(Thiếu " . abs($get_vp) . " Vpoint)</font>";
         }
     } else {
@@ -1021,11 +953,17 @@ function char_resetvip()
     //-----------------------------------------------
     if (request_type('POST')) {
         if (REQ('action_rsvip')) {
+           cn_dsi_check(true);
             $errors_false = false;
 
             $resetvipup = $reset_rsvip + 1;
             $time_reset_next_ = $Resets_Time + (isset($time_reset_next) ? $time_reset_next : 5) * 60;
 
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
             if ($showchar[$sub]['PkLevel'] > 3) {
                 cn_throw_message("Bạn đang là Sát thủ. Phải rửa tội trước khi Reset Vip.", 'e');
                 $errors_false = true;
@@ -1067,13 +1005,20 @@ function char_resetvip()
                 cn_throw_message("$sub cần $time_free giây nữa để Reset Vip lần tiếp theo.", 'e');
                 $errors_false = true;
             }
-//            if ($inventory3 != $shop_empty || $inventory3 != strtolower($shop_empty)) {
-//                cn_throw_message("Cửa hàng cá nhân có vật phẩm. Vui lòng bỏ ra khỏi cửa hàng cá nhân để tránh bị mất đồ.", 'e');
-//                $errors_false = true;
-//            }
+
             if (!$errors_false) {
-                point_tax($accc_);
-                $PointThue = do_select_character('Character', 'PointThue', "Name='$sub'");
+                point_tax($sub);
+                $default_class = do_select_character(
+                    'DefaultClassType',
+                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY',
+                    "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3"
+                );
+                $pointThue = do_select_character(
+                    'Character',
+                    'PointThue',
+                    "Name='$sub' AND IsThuePoint=1 AND TimeThuePoint>".ctime()
+                );
+
                 $gcoin_rsvip = isset($get_blank_g) ? $get_blank_g : $blank_gcoin;
                 $gcoin_gkm_rsvip = isset($get_blank_gkm) ? $get_blank_gkm : $blank_gcoin_km;
                 //$vpoint_rsvip = isset($get_blank_vp) ? $get_blank_vp : $blank_vp;
@@ -1081,7 +1026,7 @@ function char_resetvip()
                 $vpointnew = isset($get_vp) ? $get_vp : $blank_vp;
 
                 $CountNoResetInDay = $rsvip_inday + 1;
-                $resetpoint_vip += ((isset($point_relifes) ? $point_relifes : 0) + $PointThue[0][0]);
+                $resetpoint_vip += (isset($point_relifes) ? $point_relifes : 0) + (empty($pointThue[0]['PointThue']) ? 0 : $pointThue[0]['PointThue']);
                 $leadership_vip += (isset($ml_relifes) ? $ml_relifes : 0);
                 if ($leadership_vip > 64000) $leadership_vip = 64000;
                 if ($resetpoint_vip > 65000) {
@@ -1101,52 +1046,57 @@ function char_resetvip()
 
                 $get_default_class = substr($get_default_class, 0, -1);
 
-                /*
-				$arr_key_1234 = array_keys($fg_1234); // nghiem cuu sau
-				$fg_1234_pop_key = array_pop($arr_key_1234); //echo "318=>>>>>>>". $array_pop_key."  <br>";
-				$fg_1234_pop_val = array_pop($fg_1234); //echo "318=>>>>>>>". $array_pop_val."  <br>";
-				foreach ($fg_1234 as $a => $nb){ echo "318888 ---> $a > $nb <br>"; }//$v = [a=b]
 
-				$str_join = '';
-				foreach ($fg_1234 as $a => $b){ //$v = [a=b]
-					if($a)
-						$str_join .= $a ."=". $b .",";	//$cp_data[$a] = $b; 		// VD: a = b
-				}
-				echo "794 >>>>>>>>>> $str_join <br>";
-				if(strlen($str_join) > 0) $str_join = substr($str_join,0, -1);
+                do_update_character(
+                    'Character',
+                    'Clevel=1',
+                    'Experience=0',
+                    "LevelUpPoint=$pointup_vip",
+                    "pointdutru=$resetpoint_vip",
+                    "Resets=$resetvipup",
+                    $get_default_class,
+                    "Leadership=$leadership",
+                    'MapDir=0',
+                    "NoResetInDay=$CountNoResetInDay",
+                    'NoResetInMonth=NoResetInMonth+1',
+                    "Resets_Time=$ctime",
+                    'ResetVIP=1',
+                    "name:'$sub'"
+                );
 
-				$fg_123_pop_val = array_pop($fg_123);
-
-				echo "794 >>>>>>>>>> $str_join <br>";
-				*/
-                // Reset nhan vat la Darklord
-                //if($class_ == $arr_class['class_dl_1'] OR $class_ == $arr_class['class_dl_2']){
-                //if(strlen($str_join) > 0)
-                //do_update_character('Character','Clevel=1','Experience=0',"LevelUpPoint=$pointup_vip","pointdutru=$resetpoint_vip","Resets=$resetvipup","$str_join","$fg_1234_pop_key=$leadership",'MapDir=0','MagicList=CONVERT(varbinary(180), null)','isThuePoint=0',"NoResetInDay=$CountNoResetInDay",'NoResetInMonth=NoResetInMonth+1',"Resets_Time=$ctime",'ResetVIP=1','PointThue=0',"name:'$sub'");
-                //else die("Error Reset.");
-                //}
-                //Reset nhan vat khong phai la DarkLord
-                //else
-                {
-                    do_update_character('Character', 'Clevel=1', 'Experience=0', "LevelUpPoint=$pointup_vip", "pointdutru=$resetpoint_vip", "Resets=$resetvipup", "$get_default_class", "Leadership=$leadership", 'MapDir=0', "NoResetInDay=$CountNoResetInDay", 'NoResetInMonth=NoResetInMonth+1', "Resets_Time=$ctime", 'ResetVIP=1', "name:'$sub'");
-
-                    //All Quest For Class 3
-                    if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
-                        do_update_character('Character', 'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', "Name:'$sub'");
-                    }
-
-                    //Add Xoay kiem cho DK
-                    if ($class_ == $arr_class['class_dk_1'] OR $class_ == $arr_class['class_dk_2'] OR $class_ == $arr_class['class_dk_3'])
-                        do_update_character('Character', 'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000', "name:'$sub'");
-
-                    //Add Mui ten vo tan cho Elf C3
-                    if ($class_ == $arr_class['class_elf_3'])
-                        do_update_character('Character', 'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000', "name:'$sub'");
-
-                    //Add Skill cho Summoner
-                    if ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3'])
-                        do_update_character('Character', 'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000', "name:'$sub'");
+                //All Quest For Class 3
+                if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
+                    do_update_character(
+                        'Character',
+                        'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
+                        "Name:'$sub'"
+                    );
                 }
+
+                //Add Xoay kiem cho DK
+                if ($class_ == $arr_class['class_dk_1'] OR $class_ == $arr_class['class_dk_2'] OR $class_ == $arr_class['class_dk_3'])
+                    do_update_character(
+                        'Character',
+                        'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+                        "name:'$sub'"
+                    );
+
+                //Add Mui ten vo tan cho Elf C3
+                if ($class_ == $arr_class['class_elf_3'])
+                    do_update_character(
+                        'Character',
+                        'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+                        "name:'$sub'"
+                    );
+
+                //Add Skill cho Summoner
+                if ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3'])
+                    do_update_character(
+                        'Character',
+                        'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+                        "name:'$sub'"
+                    );
+
                 /*
 					//Reset Point Master Skill
 					if (($class_ == $arr_class['class_dw_3']) || ($class_ == $arr_class['class_dk_3']) || ($class_ == $arr_class['class_elf_3']) || ($class_ == $arr_class['class_mg_2']) || ($class_ == $arr_class['class_dl_2']) || ($class_ == $arr_class['class_sum_3']) || ($class_ == $arr_class['class_rf_2'])){
@@ -1158,28 +1108,24 @@ function char_resetvip()
 							do_update_character('Character', "SCFMasterPoints=$fg_123_pop_val","Name:'$sub'");
 					}
 					*/
-                do_update_character('MEMB_INFO', "gcoin=$gcoin_rsvip", "gcoin_km=$gcoin_gkm_rsvip", "vpoint=$vpointnew", "memb___id:'$accc_'");
+                do_update_character(
+                    'MEMB_INFO',
+                    "gcoin=$gcoin_rsvip",
+                    "gcoin_km=$gcoin_gkm_rsvip",
+                    "vpoint=$vpointnew",
+                    "memb___id:'$accc_'"
+                );
 
-                /* viet lai arrr select*/
                 //use event top test dd/mm/yy -> dd/mm/yy
                 if ((getoption('event_toprs_on') == 1))// && (strtotime($event_toprs_begin) < $ctime) && (strtotime($event_toprs_end) + 24*60*60 > $ctime))
                 {
-                    //Kiem tra da co du lieu trong data Event_TOP_RS
                     $data___ = do_select_character('Event_TOP_RS', '*', "name='$sub'");
-                    //$data___ = do_select_character('Event_TOP_RS','acc','name','resets',"name:'$sub'",'');
-                    //$data_check_sql = $db->Execute("SELECT * FROM Event_TOP_RS WHERE name='$name'");
-                    //$data_check = $data_check_sql->numrows();
-                    //Du lieu da co
-                    if ($data___) // kiem tra lai
+                    if ($data___) {
                         do_update_character('Event_TOP_RS', 'resets=resets+1', "name:'$sub'");
-                    //Du lieu chua co
-                    else {
-                        do_insert_character('Event_TOP_RS', "acc='".$accc_."'", "name='".$sub."'", 'resets=1');
-                        //$insert_data_result = $db->Execute($insert_data_query) OR DIE("Lỗi Query: $insert_data_query");
+                    } else {
+                        do_insert_character('Event_TOP_RS', "acc='" . $accc_ . "'", "name='" . $sub . "'", 'resets=1');
                     }
                 }
-
-                top50();
 
                 if ($user_type_gh_rs == 1) {
                     if ($gioihan_rsvip > $CountNoResetInDay) $rs_day_ = "$CountNoResetInDay / $gioihan_rsvip";
@@ -1188,14 +1134,10 @@ function char_resetvip()
                     $okloop = false;
                     if (isset($options_gh2))
                         foreach ($options_gh2 as $d => $val) {
-                            if ($okloop) {
-                                $lv_rs_f = $lv_rs_en;
-                                $lv_rs_en = $val['col1'];
-                            } else {
-                                $lv_rs_f = 1;
+                                $lv_rs_f = $okloop ?  $lv_rs_en : 1;
                                 $lv_rs_en = $val['col1'];
                                 $okloop = true;
-                            }
+
                             if ($lv_rs_f < $resetvipup && $resetvipup <= $lv_rs_en) {
                                 if (0 <= $CountNoResetInDay && $CountNoResetInDay <= $val['day1']) {
                                     $VpointReset = $val['col2'];
@@ -1247,7 +1189,7 @@ function char_resetvip()
                     if ($test_vlup >= 0) $str_leverup = "1 (Thiếu level)";
                     else {
                         $thieu_leverup = ABS($test_vlup);
-                        $str_leverup = "1 <font color =red>(Thiếu $thieu_leverup level)</font>";
+                        $str_leverup = "1 <font color =red>(Thiếu " . abs($thieu_leverup) . " level)</font>";
                         if ($g_lvup != 0) $str_leverup .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lvup level</i></font>";
                     }
                 } else {
@@ -1255,7 +1197,7 @@ function char_resetvip()
                     if ($test_vl >= 0) $str_leverup = "1 (Thiếu level)";
                     else {
                         $f_lvup = ABS($abc_level);
-                        $str_leverup = "1 <font color =red>(Thiếu $f_lvup level)</font>";
+                        $str_leverup = "1 <font color =red>(Thiếu " . abs($f_lvup) . " level)</font>";
                     }
                 }
                 //>>>>>>>>>>>>>>>>>>>>>> update .... loai 2....
@@ -1286,7 +1228,7 @@ function char_resetvip()
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/character/log_resetsvip.txt";
                 $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|" . $blank_gcoin . "_" . $blank_vp . "_". $blank_gcoin_km . "|" . $gcoin_rsvip . "_" . $vpointnew . "_" .$gcoin_gkm_rsvip. "|" . $Date . "|\n");
+                fputs($fp, $accc_ . "|" . $content . "|" . $blank_gcoin . "_" . $blank_vp . "_" . $blank_gcoin_km . "|" . $gcoin_rsvip . "_" . $vpointnew . "_" . $gcoin_gkm_rsvip . "|" . $Date . "|\n");
                 fclose($fp);
                 //End Ghi vào Log
 
@@ -1325,64 +1267,14 @@ function char_resetvip()
 
 function char_relife()
 {
-
     $member = member_get();
     list($sub) = GET('sub', 'GPG');
     $accc_ = $member['user_name'];
+    $showchar = cn_character();
 
     $arr_class = cn_template_class();
     $options_rl = cn_template_relife();
 
-    $showchar = cn_character();
-
-    /*
-	$show_reponse = view_character($accc_);
-	$set_cls = false;
-	if($show_reponse){
-		foreach($show_reponse as $od => $do){
-			if ( !empty( $do[0] ) ){
-
-				if(!$set_cls){
-					$sub_ = $do[0];
-					$set_cls = true;
-				}
-
-				$showchar[$do[0]] = array(
-					//'char_image' => $Char_Image,
-					'name' => $do[0],
-					'class' => $do[1],
-					'level' => $do[2],
-					//'str' => $do[3],
-					//'dex' => $do[4],
-					//'vit' => $do[5],
-					//'ene' => $do[6],
-					//'com' => $do[7],
-					'reset' => $do[8],
-					'relife' => $do[9],
-					//'point' => $do[10],
-					//'point_dutru' => $do[11],
-					//'uythac' => $do[12],
-					//'point_uythac' => $do[13],
-					//'pcpoint' => $do[14],
-					'accountId' => $do[15],
-					//'resetInDay' => $do[16],
-					//'money' => $do[17],
-					//'top_50' => $do[18],
-					'Resets_Time' => $do[19],
-				);
-			}
-		}
-	}
-	else{
-		msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.");
-	}
-
-    if (!$sub) $sub = $sub_;
-    else{
-		if(!in_array($sub,array_keys($showchar)))
-			$sub = $sub_;
-    }
-	*/
     if (!$sub) $sub = array_keys($showchar)[0];
     else {
         if (!in_array($sub, array_keys($showchar)))
@@ -1390,13 +1282,10 @@ function char_relife()
     };
 
     $level_acc_char = $showchar[$sub]['level'];
-    //$sub = $showchar[$sub]['name'];
     $reset_rs = $showchar[$sub]['reset'];
     $relife_vl = $showchar[$sub]['relife'];
     $class_ = $showchar[$sub]['class'];
     $ctime = ctime();
-
-    //list($pk_y_n, $fg_12, $fg_123, $fg_1234) = do_selc_char($accc_,$sub);// tam thoi
 
     if (isset($options_rl)) {
         foreach ($options_rl as $aq => $qa) {
@@ -1409,11 +1298,11 @@ function char_relife()
         }
     }
     if (0 < $f_lv = 400 - $level_acc_char) {
-        $str_lever = "$level_acc_char <font color =red>(Thiếu $f_lv level)</font>";
+        $str_lever = "$level_acc_char <font color =red>(Thiếu ". abs($f_lv) ." level)</font>";
     } else $str_lever = "$level_acc_char (Đủ level)";
 
     if (0 < $relife_rs = $reset_relifes - $reset_rs) {
-        $str_rs = "$reset_rs <font color =red>(Thiếu $relife_rs Reset)</font>";
+        $str_rs = "$reset_rs <font color =red>(Thiếu ". abs($relife_rs) ." Reset)</font>";
     } else $str_rs = "$level_acc_char (Đủ Reset)";
 
     if (check_online($accc_)) {
@@ -1441,9 +1330,15 @@ function char_relife()
 
     //-----------------------------------------------
     if (request_type('POST')) {
-        if (REQ('action_rsvip')) {
+        if (REQ('action_relife')) {
+           cn_dsi_check(true);
             $errors_false = false;
 
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
             if ($showchar[$sub]['PkLevel'] > 3) {
                 cn_throw_message("Bạn đang là Sát thủ. Phải rửa tội trước khi Reset Vip.", 'e');
                 $errors_false = true;
@@ -1497,23 +1392,65 @@ function char_relife()
                     $point_relifes = 0;
                 }
 
-                do_update_character('character', 'Clevel=1', 'Experience=0', "LevelUpPoint=$pointup_rl", "pointdutru=$point_relifes", "Relifes=Relifes+1", 'Resets=0', 'Strength=25', 'Dexterity=25', 'Vitality=25', 'Energy=25', 'Life=60', 'MaxLife=60', 'Mana=60', 'MaxMana=60', "MapNumber=$MapNumber", "MapPosX=$MapPosX", "MapPosY=$MapPosY", "MapDir=$Mapdir", 'Magiclist=CONVERT(varbinary(180), null)', "Leadership=$rl_ml_relifes", 'isThuePoint=0', 'ResetVIP=0', 'PointThue=0', "Name:'$sub'");
+                do_update_character(
+                    'character',
+                    'Clevel=1',
+                    'Experience=0',
+                    "LevelUpPoint=$pointup_rl",
+                    "pointdutru=$point_relifes",
+                    "Relifes=Relifes+1",
+                    'Resets=0',
+                    'Strength=25',
+                    'Dexterity=25',
+                    'Vitality=25',
+                    'Energy=25',
+                    'Life=60',
+                    'MaxLife=60',
+                    'Mana=60',
+                    'MaxMana=60',
+                    "MapNumber=$MapNumber",
+                    "MapPosX=$MapPosX",
+                    "MapPosY=$MapPosY",
+                    "MapDir=$Mapdir",
+                    'Magiclist=CONVERT(varbinary(180), null)',
+                    "Leadership=$rl_ml_relifes",
+                    'isThuePoint=0',
+                    'ResetVIP=0',
+                    'PointThue=0',
+                    "Name:'$sub'"
+                );
 
                 if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
-                    do_update_character('Character', 'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', "Name:'$sub'");
+                    do_update_character(
+                        'Character',
+                        'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
+                        "Name:'$sub'"
+                    );
                 }
 
                 //Add Xoay kiem cho DK
                 if ($class_ == $arr_class['class_dk_1'] OR $class_ == $arr_class['class_dk_2'] OR $class_ == $arr_class['class_dk_3'])
-                    do_update_character('Character', 'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000', "name:'$sub'");
+                    do_update_character(
+                        'Character',
+                        'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+                        "name:'$sub'"
+                    );
 
                 //Add Mui ten vo tan cho Elf C3
                 if ($class_ == $arr_class['class_elf_3'])
-                    do_update_character('Character', 'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000', "name:'$sub'");
+                    do_update_character(
+                        'Character',
+                        'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+                        "name:'$sub'"
+                    );
 
                 //Add Skill cho Summoner
                 if ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3'])
-                    do_update_character('Character', 'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000', "name:'$sub'");
+                    do_update_character(
+                        'Character',
+                        'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+                        "name:'$sub'"
+                    );
 
 
                 //Reset Point Master Skill
@@ -1526,29 +1463,8 @@ function char_relife()
                         do_update_character('Character', "SCFMasterPoints=$fg_123_pop_val", "Name:'$sub'");
                 }
 
-                /*
-
-				//use event top test dd/mm/yy -> dd/mm/yy
-				if((getoption('event_toprs_on') == 1))// && (strtotime($event_toprs_begin) < $ctime) && (strtotime($event_toprs_end) + 24*60*60 > $ctime))
-				{
-					//Kiem tra da co du lieu trong data Event_TOP_RS
-					$data___ = do_select_character('Event_TOP_RS', '*',"name:'$sub'",'');
-					//$data___ = do_select_character('Event_TOP_RS','acc','name','resets',"name:'$sub'",'');
-					//$data_check_sql = $db->Execute("SELECT * FROM Event_TOP_RS WHERE name='$name'");
-					//$data_check = $data_check_sql->numrows();
-					//Du lieu da co
-					if($data___) // kiem tra lai
-						do_update_character('Event_TOP_RS','resets=resets+1',"name:'$sub'");
-					//Du lieu chua co
-					else {
-						do_insert_character('Event_TOP_RS', "acc='".$accc_."'", "name="'.$sub."'",'resets=1');
-						//$insert_data_result = $db->Execute($insert_data_query) OR DIE("Lỗi Query: $insert_data_query");
-					}
-				}
-				*/
-
                 $before_info_rl[2][1] = $CountRelifeup;
-                $before_info_rl[3][1] = "0 <font color =red>(Thiếu " . $options_rl[$CountRelifeup]['reset'] . " Reset)</font>";
+                $before_info_rl[3][1] = "0 <font color =red>(Thiếu " . abs($options_rl[$CountRelifeup]['reset']) . " Reset)</font>";
                 $before_info_rl[4][1] = "1 <font color =red>(Thiếu 399 level)</font>";
 
                 //Ghi vào Log
@@ -1556,7 +1472,7 @@ function char_relife()
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/character/log_relife.txt";
                 $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|".$vp_gc[0]['gc']."_".$vp_gc[0]['vp']."|".$vp_gc[0]['gc']."_".$vp_gc[0]['vp']."|" . $Date . "|\n");
+                fputs($fp, $accc_ . "|" . $content . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $Date . "|\n");
                 fclose($fp);
                 //End Ghi vào Log
 
@@ -1565,7 +1481,6 @@ function char_relife()
                 else $str_rutpoint = "Bạn có " . number_format((float)$pointup_rl, 0, ",", ".") . " Point. Vui lòng <a href ='#'> cộng Point </a> cho nhân vật $sub.";
             }
         }
-
     }
 
     $show_re_succser = isset($str_rutpoint) ? $str_rutpoint : null;
@@ -1588,56 +1503,10 @@ function char_online()
     $member = member_get();
     list($sub) = GET('sub', 'GPG');
     $accc_ = $member['user_name'];
-
-    //$show_reponse = view_character($accc_);
-    $_map = cn_get_template_by('map');
     $showchar = cn_character();
+    $_map = cn_get_template_by('map');
     $_blank_var = view_bank($accc_);
-    /*
-	if($show_reponse){
-		$set_cls = false;
-		foreach($show_reponse as $od => $do){
-			if ( !empty( $do[0] ) ){
-				if(!$set_cls){
-					$sub_ = $do[0];
-					$set_cls = true;
-				}
 
-				$showchar[$do[0]] = array(
-					'name' => $do[0],
-					'class' => $do[1],
-					'level' => $do[2],
-					//'str' => $do[3],
-					//'dex' => $do[4],
-					//'vit' => $do[5],
-					//'ene' => $do[6],
-					//'com' => $do[7],
-					'reset' => $do[8],
-					'relife' => $do[9],
-					//'point' => $do[10],
-					//'point_dutru' => $do[11],
-					//'uythacoff' => $do[12],
-					//'point_uythac' => $do[13],
-					//'pcpoint' => $do[14],
-					'accountId' => $do[15],
-					//'resetInDay' => $do[16],
-					//'money' => $do[17],
-					//'top_50' => $do[18],
-					'Resets_Time' => $do[19],
-					//'uythacon' => $do[20],
-				);
-			}
-		}
-	}
-	else{
-		msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.");
-	}
-
-	if (!$sub) $sub = $sub_;
-    else{
-		if(!in_array($sub,array_keys($showchar))) $sub = $sub_;
-    }
-	*/
     if (!$sub) $sub = array_keys($showchar)[0];
     else {
         if (!in_array($sub, array_keys($showchar)))
@@ -1725,8 +1594,14 @@ function char_online()
 
     if (request_type('POST')) {
         if (REQ('action_deleonline')) {
-
+           cn_dsi_check(true);
             $errors_false = false;
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
 
             if ($status_online) {// status on
                 // kiem tra tien////
@@ -1834,53 +1709,7 @@ function char_offline()
     $accc_ = $member['user_name'];
     $_blank_var = view_bank($accc_);
     $showchar = cn_character();
-    /*
-	$show_reponse = view_character($accc_);
-	$set_cls = false;
-	if($show_reponse){
-		foreach($show_reponse as $od => $do){
-			if ( !empty( $do[0] ) ){
 
-				if(!$set_cls){
-					$sub_ = $do[0];
-					$set_cls = true;
-				}
-
-				$showchar[$do[0]] = array(
-					//'char_image' => $Char_Image,
-					'name' => $do[0],
-					'class' => $do[1],
-					'level' => $do[2],
-					//'str' => $do[3],
-					//'dex' => $do[4],
-					//'vit' => $do[5],
-					//'ene' => $do[6],
-					//'com' => $do[7],
-					'reset' => $do[8],
-					'relife' => $do[9],
-					//'point' => $do[10],
-					//'point_dutru' => $do[11],
-					//'uythac' => $do[12],
-					//'point_uythac' => $do[13],
-					//'pcpoint' => $do[14],
-					'accountId' => $do[15],
-					//'resetInDay' => $do[16],
-					//'money' => $do[17],
-					//'top_50' => $do[18],
-					'Resets_Time' => $do[19],
-				);
-			}
-		}
-	}
-	else{
-		msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.");
-	}
-
-	if (!$sub) $sub = $sub_;
-    else{
-		if(!in_array($sub,array_keys($showchar))) $sub = $sub_;
-    }
-	*/
     if (!$sub) $sub = array_keys($showchar)[0];
     else {
         if (!in_array($sub, array_keys($showchar)))
@@ -1961,9 +1790,14 @@ function char_offline()
 
     if (request_type('POST')) {
         if (REQ('action_deleoffline')) {
-
+           cn_dsi_check(true);
             $errors_false = false;
 
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
             if ($status_offline) {
                 //????????????
 
@@ -2073,53 +1907,7 @@ function char_rsdelegate()
     $_blank_var = view_bank($accc_);
     $options_uythacrs = cn_template_uythacrs();
     $options_rl = cn_template_relife();
-    $arr_class = cn_template_class();
-    /*
-	$set_cls = false;
-	if($show_reponse){
-		foreach($show_reponse as $od => $do){
-			if ( !empty( $do[0] ) ){
 
-				if(!$set_cls){
-					$sub_ = $do[0];
-					$set_cls = true;
-				}
-
-				$showchar[$do[0]] = array(
-					//'char_image' => $Char_Image,
-					'name' => $do[0],
-					'class' => $do[1],
-					'level' => $do[2],
-					//'str' => $do[3],
-					//'dex' => $do[4],
-					//'vit' => $do[5],
-					//'ene' => $do[6],
-					//'com' => $do[7],
-					'reset' => $do[8],
-					'relife' => $do[9],
-					//'point' => $do[10],
-					//'point_dutru' => $do[11],
-					//'uythac' => $do[12],
-					//'point_uythac' => $do[13],
-					//'pcpoint' => $do[14],
-					'accountId' => $do[15],
-					'resetInDay' => $do[16],
-					'money' => $do[17],
-					//'top_50' => $do[18],
-					'Resets_Time' => $do[19],
-				);
-			}
-		}
-	}
-	else{
-		msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.");
-	}
-
-	if (!$sub) $sub = $sub_;
-    else{
-		if(!in_array($sub,array_keys($showchar))) $sub = $sub_;
-    }
-*/
     if (!$sub) $sub = array_keys($showchar)[0];
     else {
         if (!in_array($sub, array_keys($showchar)))
@@ -2147,15 +1935,12 @@ function char_rsdelegate()
     if (isset($options_uythacrs)) {
         $ok_loop = false;
         $rsuythac_index = 0;
+        $i_e = 0;
         foreach ($options_uythacrs as $aq => $qa) {
-            if ($ok_loop) {
-                $i_f = $i_e;
-                $i_e = $qa['reset'];
-            } else {
-                $i_f = 0;
-                $i_e = $qa['reset'];
-                $ok_loop = True;
-            }
+            $i_f = $ok_loop ? $i_e : 0;
+            $i_e = $qa['reset'];
+            $ok_loop = true;
+
             if (($reset_rs > $i_f) && ($reset_rs <= $i_e) || ($reset_rs == 0)) {
                 $point = $qa['point'];
                 $zen = $qa['zen'];
@@ -2250,6 +2035,8 @@ function char_rsdelegate()
 
     if (request_type('POST')) {
         if (REQ('action_rsuythac')) {
+           cn_dsi_check(true);
+            
             $resetup = $reset_rs + 1;
             $time_reset_next_ = $Resets_Time + 120;
             $ctime = ctime();
@@ -2258,6 +2045,13 @@ function char_rsdelegate()
 				cn_throw_message( "Bạn đang là Sát thủ. Phải rửa tội trước khi Reset.", 'e');
 				$errors_false = true;
 			}*/
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+
             if ($check_on) {
                 cn_throw_message("Nhân vật chưa thoát Game. Hãy thoát Game trước khi thực hiện chức năng này.", 'e');
                 $errors_false = true;
@@ -2290,16 +2084,29 @@ function char_rsdelegate()
             }
             if (!$errors_false) {
 
-                do_update_character('Character', "Money=$get_zen", "Resets=$resetup", 'NoResetInMonth=NoResetInMonth+1', "Resets_Time=$ctime", "PointUyThac=$get_point_uythac", "name:'$sub'");
-                do_update_character('MEMB_INFO', "jewel_chao=$get_chao", "jewel_cre=$get_cre", "jewel_blue=$get_blue", "memb___id:'$accc_'");
+                do_update_character(
+                    'Character',
+                    "Money=$get_zen",
+                    "Resets=$resetup",
+                    'NoResetInMonth=NoResetInMonth+1',
+                    "Resets_Time=$ctime",
+                    "PointUyThac=$get_point_uythac",
+                    "name:'$sub'"
+                );
+                do_update_character(
+                    'MEMB_INFO',
+                    "jewel_chao=$get_chao",
+                    "jewel_cre=$get_cre",
+                    "jewel_blue=$get_blue",
+                    "memb___id:'$accc_'"
+                );
 
                 //Ghi vào Log
                 $content = "$sub Reset ủy thác lần thứ $resetup";
-                //$Date = date("h:iA, d/m/Y");
                 $Date = date("h:iA, d/m/Y", $ctime);
                 $file = MODULE_ADM . "/log/modules/character/log_rsuythac.txt";
                 $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|" .$_blank_var[0]['gc']. "_" . $set_vp . "|" .$_blank_var[0]['gc']. "_" . $set_vp . "|" . $Date . "|\n");
+                fputs($fp, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $Date . "|\n");
                 fclose($fp);
                 //End Ghi vào Log
 
@@ -2361,52 +2168,7 @@ function char_rsdelegatevip()
     $arr_trust = cn_point_trust();
     $_blank_var = view_bank($accc_);
     $showchar = cn_character();
-    /*
-	$set_cls = false;
-	if($show_reponse){
-		foreach($show_reponse as $od => $do){
-			if ( !empty( $do[0] ) ){
 
-				if(!$set_cls){
-					$sub_ = $do[0];
-					$set_cls = true;
-				}
-
-				$showchar[$do[0]] = array(
-					//'char_image' => $Char_Image,
-					'name' => $do[0],
-					'class' => $do[1],
-					'level' => $do[2],
-					//'str' => $do[3],
-					//'dex' => $do[4],
-					//'vit' => $do[5],
-					//'ene' => $do[6],
-					//'com' => $do[7],
-					'reset' => $do[8],
-					'relife' => $do[9],
-					//'point' => $do[10],
-					//'point_dutru' => $do[11],
-					//'uythac' => $do[12],
-					//'point_uythac' => $do[13],
-					//'pcpoint' => $do[14],
-					'accountId' => $do[15],
-					//'resetInDay' => $do[16],
-					//'money' => $do[17],
-					//'top_50' => $do[18],
-					'Resets_Time' => $do[19],
-				);
-			}
-		}
-	}
-	else{
-		msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.");
-	}
-
-	if (!$sub) $sub = $sub_;
-    else{
-		if(!in_array($sub,array_keys($showchar))) $sub = $sub_;
-    }
-	*/
     if (!$sub) $sub = array_keys($showchar)[0];
     else {
         if (!in_array($sub, array_keys($showchar)))
@@ -2431,16 +2193,13 @@ function char_rsdelegatevip()
     }
     if (isset($options_rsvip_trust)) {
         $ok_loop = false;
-        $rsvipuythac_index = 0;
+        $rsvipuythac_index = $i_e = 0;
+
         foreach ($options_rsvip_trust as $aq => $qa) {
-            if ($ok_loop) {
-                $i_f = $i_e;
+                $i_f = $ok_loop ? $i_e : 0;
                 $i_e = $qa['reset'];
-            } else {
-                $i_f = 0;
-                $i_e = $qa['reset'];
-                $ok_loop = True;
-            }
+                $ok_loop = true;
+
             if (($reset_rsvip > $i_f) && ($reset_rsvip <= $i_e) || ($reset_rsvip == 0)) {
                 $_point_trust = $qa['point'];
                 $_vpoint_trust = $qa['vpoint'];
@@ -2470,7 +2229,7 @@ function char_rsdelegatevip()
         $_relifes_trust = isset($_relifes_trust) ? $_relifes_trust : $options_rl[count($options_rl) - 1]['reset'];
     }
 
-    //$result_rsvip_trust = false;
+    $result_rsvip_trust = false;
     if ($_blank_gcoin >= $_gcoin_trust) {
         $get_blank_g = $_blank_gcoin - $_gcoin_trust;
         $sms_gc = "(Đủ Gcoin)";
@@ -2478,12 +2237,9 @@ function char_rsdelegatevip()
         $get_blank_vp = $_blank_vpoint - $_vpoint_trust;
         $sms_vp = "(Đủ Vpoint)";
     } else {
-        //$result_rsvip_trust = true;
-        $sms_vp = "<font color=red>(Thiếu $_vpoint_trust Vpoint)</font>";
+        $result_rsvip_trust = true;
+        $sms_vp = "<font color=red>(Thiếu ". abs($_vpoint_trust) ." Vpoint)</font>";
     }
-
-    //if(!$result_rsvip_trust){$result_rs_blank = "Đủ để Reset ủy thác Vip";}
-    //else{$result_rs_blank = "<font color=red>Không đủ để Reset ủy thác Vip</font>";}
 
     $get_point_uythac = $point_uythac - (isset($_point_trust) ? $_point_trust : 0);
     if ($get_point_uythac >= 0) $str_point_uythac = number_format((float)$point_uythac, 0, ",", ".") . " (Đủ Point)"; else {
@@ -2518,6 +2274,7 @@ function char_rsdelegatevip()
 
     if (request_type('POST')) {
         if (REQ('action_rsvipuythac')) {
+           cn_dsi_check(true);
             $resetvipup = $reset_rsvip + 1;
             $time_reset_next_ = $Resets_Time + 120;
             $ctime = ctime();
@@ -2526,6 +2283,12 @@ function char_rsdelegatevip()
 				cn_throw_message( "Bạn đang là Sát thủ. Phải rửa tội trước khi Reset.", 'e');
 				$errors_false = true;
 			}*/
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
             if ($check_on) {
                 cn_throw_message("Nhân vật chưa thoát Game. Hãy thoát Game trước khi thực hiện chức năng này.", 'e');
                 $errors_false = true;
@@ -2685,9 +2448,14 @@ function char_subpoint()
 
     if (request_type('POST')) {
         if (REQ('action_subpoint')) {
-
+           cn_dsi_check(true);
             $errors_false = false;
 
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
             if (!$check_change) {
                 cn_throw_message("Nhân vật $sub không được là nhân vật thoát ra sau cùng. Hãy vào Game và chọn nhân vật khác trước khi thực hiện chức năng này.", 'e');
                 $errors_false = true;
@@ -2756,8 +2524,8 @@ function char_addpoint()
     $point_ene = intval($point_ene);
     $point_cmd = intval($point_cmd);
     list($sub) = GET('sub', 'GPG');
-    $arr_class = cn_template_class();
     $showchar = cn_character();
+    $arr_class = cn_template_class();
 
     if (!$sub) $sub = array_keys($showchar)[0];
     else {
@@ -2826,8 +2594,14 @@ function char_addpoint()
 
     if (request_type('POST')) {
         if (REQ('action_addpoint')) {
-
+           cn_dsi_check(true);
             $errors_false = false;
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
 
             if (!$check_change) {
                 cn_throw_message("Nhân vật $sub không được là nhân vật thoát ra sau cùng. Hãy vào Game và chọn nhân vật khác trước khi thực hiện chức năng này.", 'e');
@@ -2923,30 +2697,31 @@ function char_rspoint()
     //do_update_character1('MEMB_INFO', $addd, "memb___id='bqngoc'");
     //------------------------------------------------
 
-    $default_class = do_select_character('DefaultClassType', 'Class,Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership', "Class=$_class Or Class=$_class - 1 Or Class=$_class - 2");
-    $default_total = $d_str = $default_class[0][1];
-    $default_total += $d_agi = $default_class[0][2];
-    $default_total += $d_vit = $default_class[0][3];
-    $default_total += $d_ene = $default_class[0][4];
-    $d_5 = $default_class[0][5];
-    $d_6 = $default_class[0][6];
-    $d_7 = $default_class[0][7];
-    $d_8 = $default_class[0][8];
-    $d_9 = $default_class[0][9];
-    $d_10 = $default_class[0][10];
-    $d_11 = $default_class[0][11];
-    $default_total += $d_cmd = $default_class[0][12];
+    $default_class = do_select_character(
+        'DefaultClassType',
+        'Class,Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership',
+        "Class=$_class Or Class=$_class - 1 Or Class=$_class - 2"
+    );
+    $d_class = $default_class[0]['Class'];
+    $default_total = $d_str = $default_class[0]['Strength'];
+    $default_total += $d_agi = $default_class[0]['Dexterity'];
+    $default_total += $d_vit = $default_class[0]['Vitality'];
+    $default_total += $d_ene = $default_class[0]['Energy'];
+    $d_5 = $default_class[0]['Life'];
+    $d_6 = $default_class[0]['MaxLife'];
+    $d_7 = $default_class[0]['Mana'];
+    $d_8 = $default_class[0]['MaxMana'];
+    $d_9 = $default_class[0]['MapNumber'];
+    $d_10 = $default_class[0]['MapPosX'];
+    $d_11 = $default_class[0]['MapPosY'];
+    $default_total += $d_cmd = $default_class[0]['Leadership'];
 
-
+    $i_e = 0;
     foreach ($options_rsvip as $aq => $qa) {
-        if ($_loop_rs) {
-            $i_f = $i_e;
-            $i_e = $qa['reset'];
-        } else {
-            $i_f = 0;
-            $i_e = $qa['reset'];
-            $_loop_rs = True;
-        }
+        $i_f = $_loop_rs ? $i_e : 0;
+        $i_e = $qa['reset'];
+        $_loop_rs = true;
+
         if (($reset_ > $i_f) && ($reset_ <= $i_e) || ($reset_ == 0)) {
             $_vpoint_test = $qa['vpoint'];
             $_gcoin_test = $qa['gcoin'];
@@ -2991,15 +2766,19 @@ function char_rspoint()
         //5 => array('Năng lượng', number_format((float)$_ene_,0,",",".")),
         //6 => array('Mệnh lệnh', isset($str_com) ? $str_com : null),
         11 => array('Đổi nhân vật', $status_change),
-        //12 => array('Online',$status),
     );
 
 
     if (request_type('POST')) {
         if (REQ('action_rspoint')) {
-
+           cn_dsi_check(true);
             $errors_false = false;
 
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
             if (!$check_change) {
                 cn_throw_message("Nhân vật $sub không được là nhân vật thoát ra sau cùng. Hãy vào Game và chọn nhân vật khác trước khi thực hiện chức năng này.", 'e');
                 $errors_false = true;
@@ -3021,7 +2800,25 @@ function char_rspoint()
                 $gcoin_new = isset($get_gc) ? $get_gc : $_gcoin;
                 $vpoint_new = isset($get_vp) ? $get_vp : $_vpoint;
 
-                do_update_character('Character', "LevelUpPoint=$lvup_point", "pointdutru=$point_dutru", "Strength=$d_str", "Dexterity=$d_agi", "Vitality=$d_vit", "Energy=$d_ene", "Life=$d_5", "MaxLife=$d_6", "Mana=$d_7", "MaxMana=$d_8", "MapNumber=$d_9", "MapPosX=$d_10", "MapPosY=$d_11", 'MapDir=0', "Leadership=$d_cmd", "Name:'$sub'");
+                do_update_character(
+                    'Character',
+                    "LevelUpPoint=$lvup_point",
+                    "pointdutru=$point_dutru",
+                    "Strength=$d_str",
+                    "Dexterity=$d_agi",
+                    "Vitality=$d_vit",
+                    "Energy=$d_ene",
+                    "Life=$d_5",
+                    "MaxLife=$d_6",
+                    "Mana=$d_7",
+                    "MaxMana=$d_8",
+                    "MapNumber=$d_9",
+                    "MapPosX=$d_10",
+                    "MapPosY=$d_11",
+                    'MapDir=0',
+                    "Leadership=$d_cmd",
+                    "Name:'$sub'"
+                );
                 do_update_character('MEMB_INFO', "gcoin=$gcoin_new", "vpoint=$vpoint_new", "memb___id:'$accc_'");
 
                 //Ghi vào Log
@@ -3073,12 +2870,9 @@ function char_movemap()
     }
 
     $no_move = false;
-    //$point = $showchar[$sub]['point'];
-    //$point_dutru = $showchar[$sub]['point_dutru'];
 
     $level = $showchar[$sub]['level'];
     $reset_ = $showchar[$sub]['reset'];
-    //$_class = $showchar[$sub]['class'];
     $MapNumber = $showchar[$sub]['MapNumber'];
 
     if (array_key_exists($MapNumber, $_map)) $local_map = $_map[$MapNumber];
@@ -3111,8 +2905,14 @@ function char_movemap()
 
     if (request_type('POST')) {
         if (REQ('action_movemap')) {
-
+           cn_dsi_check(true);
             $errors_false = false;
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
 
             if (!$check_change) {
                 cn_throw_message("Nhân vật $sub không được là nhân vật thoát ra sau cùng. Hãy vào Game và chọn nhân vật khác trước khi thực hiện chức năng này.", 'e');
@@ -3162,11 +2962,11 @@ function char_movemap()
 
 function char_removepk()
 {
-
     $member = member_get();
     list($sub, $move_map) = GET('sub, move_map', 'GPG');
-    $_blank_var = view_bank($accc_ = $member['user_name']);
     $showchar = cn_character();
+    $_blank_var = view_bank($accc_ = $member['user_name']);
+
     $_pk = cn_get_template_by('pk');
 
     if (!$sub) $sub = array_keys($showchar)[0];
@@ -3174,7 +2974,7 @@ function char_removepk()
         if (!in_array($sub, array_keys($showchar)))
             $sub = array_keys($showchar)[0];
     }
-    //$point = $showchar[$sub]['point'];
+
     $is_pk_money = $is_pk_vp = $is_pk = false;
     $is_vp = true;
     $vpoint_ = $_blank_var[0]['vp'];
@@ -3186,8 +2986,16 @@ function char_removepk()
     $PkCount = $showchar[$sub]['PkCount']; //>>>>>>>>>>>>??/
     $ui = $_pk['pk_zen_vpoint'];
 
-    $option_pk[0] = array('pkcount' => $_pk['pk_zen_vpoint'], 'pk' => $_pk['pk_zen']);
-    $option_pk[1] = array('pkcount' => $_pk['pk_zen_vpoint'], 'pk' => $_pk['pk_vpoint']);
+    $option_pk = array(
+        0 => array(
+            'pkcount' => $_pk['pk_zen_vpoint'],
+            'pk' => $_pk['pk_zen']
+        ),
+        1 => array(
+            'pkcount' => $_pk['pk_zen_vpoint'],
+            'pk' => $_pk['pk_vpoint']
+        )
+    );
 
     if ($PkCount) {
         $is_pk = true;
@@ -3208,9 +3016,9 @@ function char_removepk()
             }
         }
         $sms_pk = " (Sát thủ)";
-    } else $sms_pk = " <font color=red>(Không phải sát thủ)</font>";
-    //if(array_key_exists($MapNumber, $_map)) $local_map = $_map[$MapNumber];
-    //else $local_map = 'Chưa xác định MAP';
+    } else {
+        $sms_pk = " <font color=red>(Không phải sát thủ)</font>";
+    } 
 
     if (check_changecls($member['user_name'], $sub)) {
         $check_change = true;
@@ -3223,22 +3031,21 @@ function char_removepk()
         0 => array('Nhân vật', "<a href=" . cn_url_modify('mod=char_manager', 'opt=info_char', 'sub') . " title='Click info $sub'> $sub </a>"),
         1 => array('Reset', $reset_),
         2 => array('Cấp độ', $level),
-        //3 => array('Money', $local_map),
         3 => array('Money', number_format((float)$money, 0, ",", ".") . (isset($sms_money) ? $sms_money : '')),
         9 => array('Vpoint', number_format((float)$vpoint_, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '')),
         7 => array('Số lần Pk', number_format((float)($PkCount), 0, ",", ".") . (isset($sms_pk) ? $sms_pk : '')),
-        //4 => array('Point dự trữ', number_format((float)$point_dutru,0,",",".")),
-        //5 => array('Năng lượng', number_format((float)$_ene_,0,",",".")),
-        //6 => array('Mệnh lệnh', isset($str_com) ? $str_com : null),
         11 => array('Đổi nhân vật', $status_change),
-        //12 => array('Online',$status),
     );
 
     if (request_type('POST')) {
         if (REQ('action_removepk')) {
-            //cn_dsi_check();
-
+            cn_dsi_check(true);
             $errors_false = false;
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
 
             if (!$check_change) {
                 cn_throw_message("Nhân vật $sub không được là nhân vật thoát ra sau cùng. Hãy vào Game và chọn nhân vật khác trước khi thực hiện chức năng này.", 'e');
@@ -3271,11 +3078,11 @@ function char_removepk()
                     //$msresults1= $db->Execute($msquery1);
 
                     //Ghi vào Log
-                    $content = "$sub đã rửa tội giết $PkCount mạng với" . @$numVpPK ." V.Point";
+                    $content = "$sub đã rửa tội giết $PkCount mạng với" . @$numVpPK . " V.Point";
                     $Date = date("h:iA, d/m/Y", ctime());
                     $file = MODULE_ADM . "/log/modules/character/log_ruatoi.txt";
                     $fp = fopen($file, "a+");
-                    fputs($fp, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] ."_" . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $ktvpoint . "|" . $Date . "|\n");
+                    fputs($fp, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $ktvpoint . "|" . $Date . "|\n");
                     fclose($fp);
                     //End Ghi vào Log
                     $before_info_pk[9][1] = number_format((float)($ktvpoint), 0, ",", ".");
@@ -3301,8 +3108,7 @@ function char_pointtax()
     list($sub, $_point_tax) = GET('sub, point_tax', 'GPG');
     //list($_point_tax) = GET('point_tax','GETPOST');
     $_blank_var = view_bank($accc_ = $member['user_name']);
-    // Xu ly NV thue Point
-    point_tax($accc_);
+
     $showchar = cn_character();
 
     if (!$sub) $sub = array_keys($showchar)[0];
@@ -3310,7 +3116,9 @@ function char_pointtax()
         if (!in_array($sub, array_keys($showchar)))
             $sub = array_keys($showchar)[0];
     }
-    //$point = $showchar[$sub]['point'];
+    // Xu ly NV thue Point
+    point_tax($sub);
+
     $is_vp = $is_tax = true;
     $vpoint_ = $_blank_var[0]['vp'];
 
@@ -3355,22 +3163,21 @@ function char_pointtax()
         0 => array('Nhân vật', "<a href=" . cn_url_modify('mod=char_manager', 'opt=info_char', 'sub') . " title='Click info $sub'> $sub </a>"),
         1 => array('Reset', $reset_),
         2 => array('Cấp độ', $level),
-        //3 => array('Money', $local_map),
-        //3 => array('Money', number_format((float)$money,0,",",".") . (isset($sms_money) ? $sms_money : '')),
         9 => array('Vpoint', number_format((float)$vpoint_, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '')),
-        //7 => array('Số lần Pk', number_format((float)($PkCount),0,",",".") . (isset($sms_pk) ? $sms_pk : '')),
-        //4 => array('Point dự trữ', number_format((float)$point_dutru,0,",",".")),
-        //5 => array('Năng lượng', number_format((float)$_ene_,0,",",".")),
         6 => array('Tình trạng', $sms_tax),
-        11 => array('Đổi nhân vật', $status_change),
-        //12 => array('Online',$status),
+        11 => array('Đổi nhân vật', $status_change)
     );
 
     if (request_type('POST')) {
         if (REQ('action_pointtax')) {
-            //cn_dsi_check();
-
+            cn_dsi_check(true);
             $errors_false = false;
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
 
             if (!$check_change) {
                 cn_throw_message("Nhân vật $sub không được là nhân vật thoát ra sau cùng. Hãy vào Game và chọn nhân vật khác trước khi thực hiện chức năng này.", 'e');
@@ -3388,21 +3195,29 @@ function char_pointtax()
             if (!$errors_false) {
                 $ktvpoint = isset($ktvpoint) ? $ktvpoint : $vpoint_;
                 $ctime = ctime();
-                do_update_character('Character', 'IsThuePoint=1', "TimeThuePoint=$ctime", "PointThue=$var_vp", "memb___id:'$accc_'");
-                do_update_character('MEMB_INFO', "vpoint = $ktvpoint", "memb___id:'$accc_'");
+                do_update_character(
+                    'Character',
+                    'IsThuePoint=1',
+                    "TimeThuePoint=$ctime",
+                    "PointThue=$var_vp",
+                    "Name:'$sub'"
+                );
+                do_update_character(
+                    'MEMB_INFO',
+                    "vpoint = $ktvpoint",
+                    "memb___id:'$accc_'"
+                );
 
                 //Ghi vào Log
                 $content = "$sub đã thuê $var_vp point với $var_vp V.Point";
                 $Date = date("h:iA, d/m/Y", $ctime);
-                $file = MODULE_ADM . "/log/modules/character/character/log_thuepoint.txt";
+                $file = MODULE_ADM . "/log/modules/character/log_thuepoint.txt";
                 $fp = fopen($file, "a+");
                 fputs($fp, $accc_ . "|" . $content . "|". $_blank_var[0]['gc'] .'_'. $vpoint_ . "|". $_blank_var[0]['gc'] . '_' . $ktvpoint . "|" . $Date . "|\n");
                 fclose($fp);
                 //End Ghi vào Log
 
                 $before_info_pointtax[6][1] = "(Thuê còn " . date("H:i:s", $ctime) . ")";
-                //$before_info_pk[9][1] = number_format((float)($ktvpoint),0,",",".");
-
                 cn_throw_message("Nhân vật $sub đã thuê điểm thành công.");
             }
         }
@@ -3442,19 +3257,16 @@ function char_changename()
 
     $level = $showchar[$sub]['level'];
     $reset_ = $showchar[$sub]['reset'];
-
-    //$c_name = "somo9";
-    //$rule = '/\W+/';
+    
     if (!$c_name) $is_cn = true;
     if (preg_match('/\W+/', $c_name)) {
-        $is_cname = true; // ton tai cac ki tu ko cho phep.
-        echo "3169 thong bao ton tai ki tu ko cho phep <br>";
+        $is_cname = true; 
     }
 
     foreach ($_array_name as $key => $var) {
         if ($var[0] == $c_name) {
             $is_namenew = true;
-            break; // co ton tai
+            break;
         }
     }
 
@@ -3479,22 +3291,21 @@ function char_changename()
         0 => array('Nhân vật', "<a href=" . cn_url_modify('mod=char_manager', 'opt=info_char', 'sub') . " title='Click info $sub'> $sub </a>"),
         1 => array('Reset', $reset_),
         2 => array('Cấp độ', $level),
-        //3 => array('Money', $local_map),
         3 => array('Gcoin', number_format((float)$gcoin_, 0, ",", ".") . (isset($sms_gc) ? $sms_gc : '')),
         9 => array('Vpoint', number_format((float)$vpoint_, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '')),
-        //7 => array('Số lần Pk', number_format((float)($PkCount),0,",",".") . (isset($sms_pk) ? $sms_pk : '')),
-        //4 => array('Point dự trữ', number_format((float)$point_dutru,0,",",".")),
-        //5 => array('Năng lượng', number_format((float)$_ene_,0,",",".")),
-        //6 => array('Tình trạng', $sms_tax),
-        11 => array('Đổi nhân vật', $status_change),
-        //12 => array('Online',$status),
+        11 => array('Đổi nhân vật', $status_change)
     );
 
     if (request_type('POST')) {
         if (REQ('action_cname')) {
-            //cn_dsi_check();
-
+            cn_dsi_check(true);
             $errors_false = false;
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
 
             if (!$check_change) {
                 cn_throw_message("Nhân vật $sub không được là nhân vật thoát ra sau cùng. Hãy vào Game và chọn nhân vật khác trước khi thực hiện chức năng này.", 'e');
@@ -3517,7 +3328,6 @@ function char_changename()
                 $errors_false = true;
             }
 
-
             if (!$errors_false) {
                 $ktgcoin = isset($get_gc) ? $get_gc : $gcoin_;
                 $ktvpoint = isset($get_vp) ? $get_vp : $vpoint_;
@@ -3539,7 +3349,6 @@ function char_changename()
                 do_update_character('T_FriendMain', "Name='$c_name'", "Name:'$sub'");
                 do_update_character('T_CGuid', "Name='$c_name'", "Name:'$sub'");
                 do_update_character('OptionData', "Name='$c_name'", "Name:'$sub'");
-
 
                 do_update_character('MEMB_INFO', "vpoint = $ktvpoint", "gcoin = $ktgcoin", "memb___id:'$accc_'");
 
@@ -3570,13 +3379,13 @@ function char_changename()
     echofooter();
 }
 
-
 /**
  *Change class
  */
 function char_changeclass()
 {
     $changeClass = explode(':', getoption('changeClass_str'));
+    $showchar = cn_character();
     $infoClass = cn_template_class();
 
     $member = member_get();
@@ -3585,8 +3394,6 @@ function char_changeclass()
 
     // kiem chu va so ......????
     $_blank_var = view_bank($accc_ = $member['user_name']);
-    $showchar = cn_character();
-
 
     if (!$sub) $sub = array_keys($showchar)[0];
     else {
@@ -3623,17 +3430,6 @@ function char_changeclass()
 
     list ($get_gc, $sms_gc, $get_vp, $sms_vp, $cn_false) = checkGcoinVpoint($gcoin_, $vpoint_, $changeClass[0]);
 
-//    if ($gcoin_ >= $_gcoin_test = round(0.01 * getoption('vptogc') * ($_vpoint_test = $changeClass[0]))) {
-//        $get_gc = $gcoin_ - $_gcoin_test;
-//        $sms_gc = " (Đủ Gcoin)";
-//    } else if (0 <= $get_vp = $vpoint_ - $_vpoint_test) {
-//        $sms_vp = " (Đủ Vpoint)";
-//    } else {
-//        $cn_false = true;
-//        $sms_vp = " <font color=red>(Thiếu " . number_format((float)(abs($get_vp)), 0, ",", ".") . " Vpoint)</font>";
-//    }
-
-
     if (check_changecls($member['user_name'], $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
@@ -3647,13 +3443,19 @@ function char_changeclass()
         2 => array('Cấp độ', $level),
         3 => array('Gcoin', number_format((float)$get_gc, 0, ",", ".") . (isset($sms_gc) ? $sms_gc : '')),
         9 => array('Vpoint', number_format((float)$get_vp, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '')),
-        11 => array('Đổi nhân vật', $status_change),
+        11 => array('Đổi nhân vật', $status_change)
     );
 
     if (request_type('POST')) {
         if (REQ('action_className')) {
+           cn_dsi_check(true);
             $errors_false = false;
 
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
             if(!isset($infoClass['class_'.$nameClass.'_1'])) {
                 cn_throw_message("Lỗi hệ thống khi thay đổi giới tính, vui lòng liên hệ với admin", 'e');
             }
@@ -3721,8 +3523,6 @@ function char_changeclass()
                 fclose($fp);
                 //End Ghi vào Log
 
-//                list ($ktgcoin, $sms_gc, $ktvpoint, $sms_vp, $cn_false) = checkGcoinVpoint($ktgcoin, $ktvpoint, $changeClass[0]);
-
                 $before_info_cn[1][1] = number_format((float)$newReset, 0, ",", ".");
                 $before_info_cn[3][1] = number_format((float)$ktgcoin, 0, ",", ".");
                 $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
@@ -3789,9 +3589,9 @@ function char_delepersonalSotre()
                 cn_throw_message("Cửa hàng cá nhân không có vật phẩm nào.", 'e');
             } else {
                 cn_dsi_check(true);
-                list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
-
                 $errors_false = false;
+                
+                list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
                 if ($verifyCaptcha != $_SESSION['captcha_web']) {
                     cn_throw_message("Captcah không đúng.", 'e');
                     $errors_false = true;
@@ -3959,7 +3759,7 @@ function char_delepersonalSotre()
 //
 //    if (request_type('POST')) {
 //        if (REQ('action_cname')) {
-//            //cn_dsi_check();
+//            //cn_dsi_check(true);
 //
 //            $errors_false = false;
 //

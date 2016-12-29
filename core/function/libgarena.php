@@ -840,3 +840,416 @@ function cn_snippet_digital_signature($type = 'std')
 
     return FALSE;
 }
+
+function cn_template_class()
+{
+    // No in cache
+    if ($class = mcache_get('#class')) {
+        return $class;
+    }
+
+    mcache_set('#class', $class = cn_get_template_by('class'));
+    return $class;
+}
+
+function cn_template_reset()
+{
+    // No in cache
+    if ($_reset = mcache_get('#reset')) {
+        return $_reset;
+    }
+
+    $reset = cn_get_template_by('reset');
+    if (!$reset) {
+        return NULL;
+    }
+
+    $key_rs = array_keys($reset);
+    //$index = 0;
+    $options_rs = array();
+    for ($id = 0; $id < count($reset); $id += 9) {
+        $options_rs[] = array(
+            'reset' => $reset[$key_rs[$id]],
+            'level' => $reset[$key_rs[$id + 1]],
+            'zen' => $reset[$key_rs[$id + 2]],
+            'chaos' => $reset[$key_rs[$id + 3]],
+            'cre' => $reset[$key_rs[$id + 4]],
+            'blue' => $reset[$key_rs[$id + 5]],
+            'point' => $reset[$key_rs[$id + 6]],
+            'command' => $reset[$key_rs[$id + 7]],
+            'time' => $reset[$key_rs[$id + 8]]
+        );
+        //++$index;
+    }
+    mcache_set('#reset', $options_rs);
+    return $options_rs;
+}
+
+function cn_template_resetvip()
+{
+    // No in cache
+    if ($_resetvip = mcache_get('#resetvip')) {
+        return $_resetvip;
+    }
+
+    $resetvip = cn_get_template_by('reset_vip');
+    if (!$resetvip) {
+        return NULL;
+    }
+    $reset = cn_template_reset();
+    $key_rsvip = array_keys($resetvip);
+    $index = 0;
+    for ($id = 0; $id < count($resetvip); $id += 5) {
+        $options_rsvip[$index]['reset'] = $reset[$index]['reset'];
+        $options_rsvip[$index]['level'] = $resetvip[$key_rsvip[$id]];
+        $options_rsvip[$index]['vpoint'] = $resetvip[$key_rsvip[$id + 1]];
+        $options_rsvip[$index]['gcoin'] = $resetvip[$key_rsvip[$id + 2]];
+        $options_rsvip[$index]['point'] = $resetvip[$key_rsvip[$id + 3]];
+        $options_rsvip[$index]['command'] = $resetvip[$key_rsvip[$id + 4]];
+        $options_rsvip[$index]['time'] = $reset[$index]['time'];
+        ++$index;
+    }
+    mcache_set('#resetvip', $options_rsvip);
+
+    return $options_rsvip;
+}
+
+function cn_template_relife()
+{
+    // No in cache
+    if ($_relife = mcache_get('#relife')) {
+        return $_relife;
+    }
+
+    $relife = cn_get_template_by('relife');
+    if (!$relife) {
+        return NULL;
+    }
+
+    $key_relife = array_keys($relife);
+    $index = 0;
+    for ($id = 0; $id < count($relife); $id += 3) {
+        $options_rl[$index]['reset'] = $relife[$key_relife[$id]];
+        $options_rl[$index]['point'] = $relife[$key_relife[$id + 1]];
+        $options_rl[$index]['command'] = $relife[$key_relife[$id + 2]];
+        ++$index;
+    }
+    mcache_set('#relife', $options_rl);
+
+    return $options_rl;
+}
+
+function cn_template_uythacrs()
+{
+
+    // No in cache
+    if ($_uythac_rs = mcache_get('#uythacrs')) {
+        return $_uythac_rs;
+    }
+
+    $uythac_rs = cn_get_template_by('uythac_reset');
+    if (!$uythac_rs) {
+        return NULL;
+    }
+    $reset = cn_template_reset();
+    $id = 0;
+    foreach ($uythac_rs as $index => $val) {
+        $options_uythac_rs[$id]['reset'] = $reset[$id]['reset'];
+        $options_uythac_rs[$id]['point'] = $val;
+        $options_uythac_rs[$id]['zen'] = $reset[$id]['zen'];
+        $options_uythac_rs[$id]['chaos'] = $reset[$id]['chaos'];
+        $options_uythac_rs[$id]['cre'] = $reset[$id]['cre'];
+        $options_uythac_rs[$id]['blue'] = $reset[$id]['blue'];
+        $options_uythac_rs[$id]['time'] = $reset[$id]['time'];
+        ++$id;
+    }
+    mcache_set('#uythacrs', $options_uythac_rs);
+
+    return $options_uythac_rs;
+}
+
+function cn_template_uythacrsvip()
+{
+    // No in cache
+    if ($_uythac_rsvip = mcache_get('#uythacrsvip')) {
+        return $_uythac_rsvip;
+    }
+
+    $uythac_rsvip = cn_get_template_by('uythac_resetvip');
+    if (!$uythac_rsvip) {
+        return NULL;
+    }
+    $resetvip = cn_template_resetvip();
+    $id = 0;
+    foreach ($uythac_rsvip as $index => $val) {
+        $options_uythac_rsvip[$id]['reset'] = $resetvip[$id]['reset'];
+        $options_uythac_rsvip[$id]['point'] = $val;
+        $options_uythac_rsvip[$id]['vpoint'] = $resetvip[$id]['vpoint'];
+        $options_uythac_rsvip[$id]['gcoin'] = $resetvip[$id]['gcoin'];
+        $options_uythac_rsvip[$id]['time'] = $resetvip[$id]['time'];
+        ++$id;
+    }
+    mcache_set('#uythacrsvip', $options_uythac_rsvip);
+
+    return $options_uythac_rsvip;
+}
+
+function cn_template_rslimit1()
+{
+    // No in cache
+    if ($_rslimit1 = mcache_get('#rslimit1')) {
+        return $_rslimit1;
+    }
+
+    $rslimit1 = cn_get_template_by('gioihan_rs');
+    if (!$rslimit1) {
+        return NULL;
+    }
+    $key_rslimit1 = array_keys($rslimit1);
+    $id = 0;
+    foreach ($rslimit1 as $key => $val) {
+        $options_rslimit1[$id]['top'] = $val;//$rslimit1[$key_rslimit1[$id]];
+        if (++$id == 6) break;
+    }
+    mcache_set('#rslimit1', $options_rslimit1);
+
+    return $options_rslimit1;
+}
+
+function cn_template_rslimit2()
+{
+    if ($_rslimit2 = mcache_get('#rslimit2')) {
+        return $_rslimit2;
+    }
+
+    $rslimit2 = cn_get_template_by('gioihan_rs');
+    if (!$rslimit2) {
+        return NULL;
+    }
+    $key_rslimit2 = array_keys($rslimit2);
+    $id = 0;
+    $index = 0;
+    for ($id = 8; $id < count($rslimit2); $id += 4) {
+        $options_rslimit2[$index]['day1'] = $rslimit2[$key_rslimit2[6]];
+        $options_rslimit2[$index]['day2'] = $rslimit2[$key_rslimit2[7]];
+        $options_rslimit2[$index]['col1'] = $rslimit2[$key_rslimit2[$id]];
+        $options_rslimit2[$index]['col2'] = $rslimit2[$key_rslimit2[$id + 1]];
+        $options_rslimit2[$index]['col3'] = $rslimit2[$key_rslimit2[$id + 2]];
+        $options_rslimit2[$index]['col4'] = $rslimit2[$key_rslimit2[$id + 3]];
+        ++$index;
+    }
+
+    mcache_set('#rslimit2', $options_rslimit2);
+
+    return $options_rslimit2;
+}
+
+function cn_template_httt()
+{
+    // No in cache
+    if ($_hotro_tanthu = mcache_get('#hotro_tanthu')) {
+        return $_hotro_tanthu;
+    }
+
+    $hotro_tanthu = cn_get_template_by('hotro_tanthu');
+    if (!$hotro_tanthu) {
+        return NULL;
+    }
+    $key_httt = array_keys($hotro_tanthu);
+    $id = 0;
+    for ($in_ = 0; $in_ < count($hotro_tanthu); $in_ += 5) {
+        $options_httt[$id]['reset_min'] = $hotro_tanthu[$key_httt[$in_]];
+        $options_httt[$id]['reset_max'] = $hotro_tanthu[$key_httt[$in_ + 1]];
+        $options_httt[$id]['relife_min'] = $hotro_tanthu[$key_httt[$in_ + 2]];
+        $options_httt[$id]['relife_max'] = $hotro_tanthu[$key_httt[$in_ + 3]];
+        $options_httt[$id]['levelgiam'] = $hotro_tanthu[$key_httt[$in_ + 4]];
+        ++$id;
+    }
+    mcache_set('#hotro_tanthu', $options_httt);
+
+    return $options_httt;
+}
+
+
+// Since 2.0: Get template (if not exists, create from defaults)
+function cn_get_template_by($template_name = '')
+{
+    $templates = getoption('#temp_basic');
+    $template_name = strtolower($template_name);
+
+    // User template not exists in config... get from defaults
+    if (isset($templates[$template_name])) {
+        return $templates[$template_name];
+    }
+    return false;
+}
+
+// Since 2.0: Read serialized array from php-safe file (or create file)
+function cn_touch_get($target)
+{
+    $fn = cn_touch($target, TRUE);
+    $fc = file($fn);
+    unset($fc[0]);
+
+    $fc = join('', $fc);
+
+    if (!$fc) {
+        $fc = array();
+    } else {
+        $data = unserialize(base64_decode($fc));
+        if ($data === FALSE) {
+            $fc = unserialize($fc);
+        } else {
+            $fc = $data;
+        }
+    }
+
+    return $fc;
+}
+//----------------------------------------------------------------------
+function resetDefaultCharater($accountID)
+{
+    if (empty($accountID)) return false;
+
+    $resultlistChracter = do_select_orther("SELECT * FROM MuOnline.dbo.Character WHERE AccountID='$accountID' AND IsThuePoint =1");
+
+    $arr_class = cn_template_class();
+    $options_rs = cn_template_reset();
+    $options_rl = cn_template_relife();
+    $options_tanthu = cn_template_httt();
+
+
+    if ($resultlistChracter) {
+        foreach ($resultlistChracter as $key => $item) {
+            if ((($item['TimeThuePoint'] + 86400) <= ctime()) && $item['IsThuePoint']) {
+
+                $reset_rs = $item['Resets'];
+                $class_ = $item['Class'];
+                $relife_vl = $item['Relifes'];
+
+                if (getoption('hotrotanthu')) {
+                    if (isset($options_tanthu)) {
+                        foreach ($options_tanthu as $aq => $qa) {
+                            if (($qa['reset_min'] <= $reset_rs && $reset_rs <= $qa['reset_max']) && ($qa['relife_min'] <= $relife_vl && $relife_vl <= $qa['relife_max'])) {
+                                $giam_lv = $qa['levelgiam'];
+                            }
+                        }
+                    }
+                }
+                $reset_rs += isset($giam_lv) ? $giam_lv : 0;
+
+                if (isset($options_rs)) {
+                    $ok_loop = false;
+                    $resetpoint = $leadership = $rs_index = 0;
+                    $i_e = $p_e = $ml_e = 0;
+                    foreach ($options_rs as $aq => $qa) {
+                        $i_f = $ok_loop ? $i_e : 0;
+                        $i_e = $qa['reset'];
+                        $p_e = $qa['point'];
+                        $ml_e = $qa['command'];
+                        $ok_loop = true;
+
+                        if (($reset_rs > $i_f) && ($reset_rs <= $i_e) || ($reset_rs == 0)) {
+                            $resetpoint += $qa['point'] * ($reset_rs - $i_f);
+                            $leadership += $qa['command'] * ($reset_rs - $i_f);
+                            break;
+                        }
+
+                        $resetpoint += ($i_e - $i_f) * $p_e;
+                        $leadership += ($i_e - $i_f) * $ml_e;
+                    }
+                }
+
+                if (isset($options_rl)) {
+                    foreach ($options_rl as $aq => $qa) {
+                        if ($relife_vl == $aq) {
+                            $point_relifes = $qa['point'];
+                            $ml_relifes = $qa['command'];
+                            break;
+                        }
+                    }
+
+                    $point_relifes = isset($point_relifes) ? $point_relifes : $options_rl[count($options_rl) - 1]['point'];
+                    $ml_relifes = isset($ml_relifes) ? $ml_relifes : $options_rl[count($options_rl) - 1]['command'];
+                }
+
+                $default_class = do_select_character(
+                    'DefaultClassType',
+                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY',
+                    "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3"
+                );
+
+                $resetpoint = (isset($resetpoint) ? $resetpoint : $item['LevelUpPoint']);
+                $leadership = (isset($leadership) ? $leadership : $item['Leadership']);
+                $resetpoint += (isset($point_relifes) ? $point_relifes : 0);
+                $leadership += (isset($ml_relifes) ? $ml_relifes : 0);
+
+                if ($leadership > 64000) $leadership = 64000;
+                if ($resetpoint > 65000) {
+                    $pointup = 65000;
+                    $resetpoint -= 65000;
+                } else {
+                    $pointup = $resetpoint;
+                    $resetpoint = 0;
+                }
+
+                if (($class_ == $arr_class['class_dl_1']) || ($class_ == $arr_class['class_dl_2'])) {
+                } else $leadership = 0;
+
+                $get_default_class = '';
+                $_arr_cls = spsep($arr_cls);
+                foreach ($_arr_cls as $key => $val)
+                    $get_default_class .= "$val='" . $default_class[0][$key] . "',";
+
+                $get_default_class = substr($get_default_class, 0, -1);
+
+                //----------------------------------------------------------------
+                do_update_character(
+                    'Character',
+                    'Experience=0',
+                    "IsThuePoint=0",
+                    "LevelUpPoint=$pointup",
+                    "pointdutru=$resetpoint",
+                    $get_default_class,
+                    "Leadership=$leadership",
+                    'MapDir=0',
+                    "name:\'" . $item['Name'] . "\'"
+                );
+
+                if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
+                    do_update_character(
+                        'Character',
+                        'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
+                        "Name:\'" . $item['Name'] . "\'"
+                    );
+                }
+
+                //Add Xoay kiem cho DK
+                if ($class_ == $arr_class['class_dk_1'] OR $class_ == $arr_class['class_dk_2'] OR $class_ == $arr_class['class_dk_3'])
+                    do_update_character(
+                        'Character',
+                        'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+                        "name:\'" . $item['Name'] . "\'"
+                    );
+
+                //Add Mui ten vo tan cho Elf C3
+                if ($class_ == $arr_class['class_elf_3'])
+                    do_update_character(
+                        'Character',
+                        'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+                        "name:\'" . $item['Name'] . "\'"
+                    );
+
+                //Add Skill cho Summoner
+                if ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3'])
+                    do_update_character(
+                        'Character',
+                        'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+                        "name:\'" . $item['Name'] . "\'"
+                    );
+            }
+        }
+    }
+
+    return false;
+}
