@@ -67,7 +67,7 @@ if ($notify_rs_ok) echo $notify_rs_ok;
 </form>
 
 <?php
-    echoFormVerifyChar(['resetvip' => 'action_rsvip']);
+    echoFormVerifyChar(['action_rsvip' => 'resetvip']);
 ?>
 
 <table style="width: 100%" cellpadding="2">
