@@ -481,7 +481,7 @@ function char_reset()
                 $get_default_class = '';
                 $_arr_cls = spsep($arr_cls);
                 foreach ($_arr_cls as $key => $val)
-                    $get_default_class .= "$val='" . $default_class[0][$key] . "',";
+                    $get_default_class .= "$val='" . $default_class[0][$val] . "',";
 
                 $get_default_class = substr($get_default_class, 0, -1);
 
@@ -1042,7 +1042,7 @@ function char_resetvip()
                 } else $leadership = 0;
                 $get_default_class = '';
                 $_arr_cls = spsep($arr_cls);
-                foreach ($_arr_cls as $key => $val) $get_default_class .= "$val=" . $default_class[0][$key] . ",";
+                foreach ($_arr_cls as $key => $val) $get_default_class .= "$val=" . $default_class[0][$val] . ",";
 
                 $get_default_class = substr($get_default_class, 0, -1);
 
