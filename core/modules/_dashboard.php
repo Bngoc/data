@@ -458,7 +458,7 @@ function char_reset()
                 $pointThue = do_select_character(
                     'Character',
                     'PointThue',
-                    "Name='$sub' AND IsThuePoint=1 AND TimeThuePoint>". (ctime() + 86400)
+                    "Name='$sub' AND IsThuePoint=1 AND TimeThuePoint>". (ctime() - 86400)
                 );
 
                 $vpointnew = isset($get_vp) ? $get_vp : $set_vp;
@@ -1016,7 +1016,7 @@ function char_resetvip()
                 $pointThue = do_select_character(
                     'Character',
                     'PointThue',
-                    "Name='$sub' AND IsThuePoint=1 AND TimeThuePoint>". (ctime() + 86400)
+                    "Name='$sub' AND IsThuePoint=1 AND TimeThuePoint>". (ctime() - 86400)
                 );
 
                 $gcoin_rsvip = isset($get_blank_g) ? $get_blank_g : $blank_gcoin;
