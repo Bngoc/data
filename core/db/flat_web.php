@@ -141,53 +141,27 @@ function view_bank($account)
     return isset($_data) ? $_data : array();
 }
 
-// bo qua ....
-function view_warehouse($account)
-{
-    global $db_new;
-    $str_ = '';
-    if (!empty($account)) {
-        $warehouse_result_s = $db_new->Execute("SELECT Items,Money,pw,AccountID FROM warehouse WHERE AccountID = '$account'");
-        if ($warehouse_result_s === false) return null;
-        if ($warehouse_result_s->numrows() < 1) return null;
-        $warehouse_result_1 = $warehouse_result_s->fetchrow();
-        //$accountid_ = $warehouse_result_1[0];
-        //$item_no = $item_no.$warehouse_result_1[0];
-        $item_no = $warehouse_result_1[0];
-        $item_no = bin2hex($item_no);
-        $okj_1 = strlen($item_no);
-        $item_no = strtoupper($item_no);
-        $item_no = substr($item_no, 0, 3840);
-        $accountid_ = $warehouse_result_1[3];
-        $money = $warehouse_result_1[1];
-        $password = $warehouse_result_1[2];
-
-        $str_ = "$item_no||$money||$password||$accountid_";
-    }
-    return $str_;
-}
 
 function point_tax($sub = '')
 {
     //Kiểm tra những nhân vật đã thuê Point và xử lý khi hết thời gian
     $result_ = do_select_character('Character', 'Name,TimeThuePoint,AccountID', "IsThuePoint=1 AND AccountID ='" . $sub . "'");
-if (!empty($result_)) {
+    if (!empty($result_)) {
         if ($result_[0]['TimeThuePoint'] <= ctime()) {
             //exit();
             //Check Online
-            $online_check = do_select_character('MEMB_STAT', '[ServerName]', "memb___id='".$result_[0]['Name'] ."' AND ConnectStat=1");
+            $online_check = do_select_character('MEMB_STAT', '[ServerName]', "memb___id='" . $result_[0]['Name'] . "' AND ConnectStat=1");
             if (!empty($online_check)) {
                 //Check Doi NV
-                $doinv_check = do_select_character('AccountCharacter', '*', "Id='".$result_[0]['AccountID'] ."' AND GameIDC='".$result_[0]['name'] ."'");
+                $doinv_check = do_select_character('AccountCharacter', '*', "Id='" . $result_[0]['AccountID'] . "' AND GameIDC='" . $result_[0]['name'] . "'");
                 if (empty($doinv_check)) {
-                    do_update_character('Character', 'IsThuePoint=0', 'PointThue=0', "Name:'". $result_[0]['Name'] ."'");
+                    do_update_character('Character', 'IsThuePoint=0', 'PointThue=0', "Name:'" . $result_[0]['Name'] . "'");
                 }
             } else {
-                do_update_character('Character', 'IsThuePoint=0', 'PointThue=0', "Name:'". $result_[0]['Name'] ."'");
+                do_update_character('Character', 'IsThuePoint=0', 'PointThue=0', "Name:'" . $result_[0]['Name'] . "'");
             }
         }
     }
-
 }
 
 function mssql_real_escape_string($s)
@@ -227,6 +201,7 @@ function db_user_by_name($name)
             }
         }
     }
+
     return isset($pdata) ? $pdata : array();
 }
 
@@ -343,9 +318,7 @@ function do_select_character1()
     //4. gr_cont ko ...			pop ko ..		>> y
 
     if (!empty($gr_cont)) {
-        //if(strlen($gr_cont) > 5)
         $gr_cont = substr($gr_cont, 0, -5);
-        //$val_up_cont = substr($gr_cont,0, -5);
         if (!empty($user_order)) $val_up_cont = "WHERE " . $gr_cont . ' ' . $user_order;
         else $val_up_cont = "WHERE " . $gr_cont;
     } else {
@@ -380,19 +353,19 @@ function do_insert_character()
     $gr_col = $gr_cont = '';
     $cp_data = array();
     $args = func_get_args();
-    $user_table = array_shift($args);        // get table array frist
+    $user_table = array_shift($args);           // get table array frist
 
-    if (!$user_table) //1. name //table update/
+    if (!$user_table)                           //1. name //table update/
         return FALSE;
 
-    foreach ($args as $v) { //$v = [email=user_email]
+    foreach ($args as $v) {                     //$v = [email=user_email]
         list($a, $b) = explode('=', $v, 2);
         if ($a)
-            $cp_data[$a] = $b;        // VD: email = user_email
+            $cp_data[$a] = $b;                  // VD: email = user_email
     }
 
     if (!empty($cp_data))
-        $key_ids = array_keys($cp_data);    //get key cp_data
+        $key_ids = array_keys($cp_data);        //get key cp_data
 
     if (!empty($key_ids))
         foreach ($key_ids as $v)
@@ -420,69 +393,10 @@ function do_insert_character()
             $db_new->RollbackTrans();
         }
     }
+
     return FALSE;
 }
 
-//// check later
-//1. table => SQL
-//2: ... n => where		=> arrry[] = array('Column' => Val)
-//3. ... n => where 	=> WHRER Contine (AND ... AND ...)
-function do_update_character1($user_table, $array, $where = '')
-{
-    global $db_new;
-    //$gr_col = $gr_cont = '';
-    //$args = func_get_args(); 			//1.name, 2.email="user_email", 3.nick="$user_nic", 4.pass="24242424ggsgsgs"
-    //$user_table = array_shift($args);		// get name array frist
-
-    if (!$user_table) //1. name //table update/
-        return FALSE;
-    //$gr_cont ='';
-    if ($where) $where = "WHERE " . $where;
-
-    foreach ($array as $hj) {
-        $gr_col = '';
-
-        foreach ($hj as $key => $var) $gr_col .= "$key=$var,";
-
-        $gr_col = substr($gr_col, 0, -1);
-
-
-        /*
-        foreach ($args as $v){  //$v = [email=user_email] >, >=, <>, <, <=, (= :)
-            if(strpos($v,'=') !== false)
-                $gr_col .= "$v,";
-            elseif(strpos($v,':') !== false){
-                $df = str_replace(':','=', $v);
-                $gr_cont .= "$df AND ";
-            }
-            elseif(strpos($v,'>') !== false)
-                $gr_cont .= "$v AND ";
-            elseif(strpos($v,'>=') !== false)
-                $gr_cont .= "$v AND ";
-            elseif(strpos($v,'<>') !== false)
-                $gr_cont .= "$v AND ";
-            elseif(strpos($v,'<') !== false)
-                $gr_cont .= "$v AND ";
-            elseif(strpos($v,'<=') !== false)
-                $gr_cont .= "$df AND ";
-
-            //else continue;
-        }
-
-        if(strlen($gr_col) > 1)
-            $val_up_col = substr($gr_col,0, -1);
-        if(strlen($gr_cont) > 5)
-            $val_up_cont = substr($gr_cont,0, -5);
-        */
-        echo "453 ==>>> UPDATE $user_table SET $gr_col $where <br>";
-        if ($gr_col && $user_table) {
-            $check = $db_new->Execute("UPDATE $user_table SET $gr_col $where") or msg_err("Error >>>> UPDATE ... UPDATE $user_table SET $gr_col $where");
-            if (!$check)
-                return TRUE;
-        } else
-            return FALSE;
-    }
-}
 
 // sign table, mutile cont (abc=abc1,...N, abc2:abc3... N)
 //1. table => SQL
@@ -492,13 +406,13 @@ function do_update_character()
 {
     global $db_new;
     $gr_col = $gr_cont = '';
-    $args = func_get_args();            //1.name, 2.email="user_email", 3.nick="$user_nic", 4.pass="24242424ggsgsgs"
-    $user_table = array_shift($args);        // get name array frist
+    $args = func_get_args();                    //1.name, 2.email="user_email", 3.nick="$user_nic", 4.pass="24242424ggsgsgs"
+    $user_table = array_shift($args);           // get name array frist
 
-    if (!$user_table) //1. name //table update/
+    if (!$user_table)                            //1. name //table update/
         return FALSE;
 
-    foreach ($args as $v) {  //$v = [email=user_email] >, >=, <>, <, <=, (= :)
+    foreach ($args as $v) {                     //$v = [email=user_email] >, >=, <>, <, <=, (= :)
         if (strpos($v, '=') !== false)
             $gr_col .= "$v,";
         elseif (strpos($v, ':') !== false) {
@@ -640,13 +554,13 @@ function onoff_PointCharacter()
             $myQueryUpdate .= ' END, PointUyThac = CASE';
             $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=0 THEN ' . (($items['PointUyThac'] > 0) ? floor($items['PointUyThac'] * (0.9)) : 0);
         }
+
+
+        $myQueryUpdate .= ' END WHERE Name =\'' . $items['Name'] . '\'';
+        //echo $myQueryUpdate;
+        $chekUpdate = do_update_orther($myQueryUpdate);
+        if (!$chekUpdate) echo '--> Err Update - Uy Thac';
     }
-
-    $myQueryUpdate .= ' END WHERE Name =\'' . $items['Name'] . '\'';
-    echo $myQueryUpdate;
-    $chekUpdate = do_update_orther($myQueryUpdate);
-//        if (!$chekUpdate) cn_writelog($myQueryUpdate, 'e');
-
 }
 
 

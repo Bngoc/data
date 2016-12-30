@@ -1,10 +1,7 @@
 <?php
 
-list($log_read, $st, $num, $isfin, $section) = _GL('log_read, st, num,isfin, section');
-list($all_shop, $all_character) = _GL('all_shop, all_character');
-
-$st = intval($st);
-$num = intval($num);
+list($log_read, $section) = _GL('log_read, section');
+list($all_shop, $all_character, $echoPagination) = _GL('all_shop, all_character, echoPagination');
 
 cn_snippet_bc();
 $lopIndx = 0;
@@ -22,7 +19,7 @@ $i = 0;
     <div style="clear:both;"></div>
     <a style="float: right; margin: 5px;top: 37px; right: 8px; position: absolute;" href="<?php echo cn_url_modify('section', 'isdel=islog-systems'); ?>">Xóa Log</a>
     <table id="comparison" style="overflow-x:auto; border-collapse: collapse; display: table; border: 1px solid blue;" width="100%" cellspacing="1" cellpadding="3">
-        <th style="border: 1px solid blue; width: 2%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">#</th>
+        <th style="border: 1px solid blue; width: 3%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">#</th>
         <th style="border: 1px solid blue; width: 5%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">Status</th>
         <th style="border: 1px solid blue; width: 8%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">Time</th>
         <th style="border: 1px solid blue; width: 8%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">Name</th>
@@ -32,7 +29,7 @@ $i = 0;
         <?php
         foreach ($log_read as $k => $item){?>
         <tr style="background:<?php echo ($k%2 ? '#BFB6B3' : '#FFFFFF');?>">
-            <td style="border: 1px solid #ddd; overflow-x: scroll" align="middle"><?php echo $k + 1; ?></td>
+            <td style="border: 1px solid #ddd; overflow-x: scroll" align="middle"><?php echo $item['id']; ?></td>
             <td style="border: 1px solid #ddd; overflow-x: scroll"><?php echo $item['status']; ?></td>
             <td style="border: 1px solid #ddd; overflow-x: scroll"><?php echo $item['time']; ?></td>
             <td style="border: 1px solid #ddd; overflow-x: scroll"><?php echo $item['name']; ?></td>
@@ -86,7 +83,7 @@ $i = 0;
                                     <?php //if (!empty($log_read[$i]['account'])) {
                                     foreach ($log_read as $k => $item){?>
                                         <tr style="background:<?php echo ($i%2 ? '#BFB6B3' : '#FFFFFF');?>">
-                                            <td align="center" bgcolor=""><?php echo ++$i; ?></td>
+                                            <td align="center" bgcolor=""><?php echo $item['id']; ?></td>
                                             <td align="center" bgcolor=""><?php echo $item['account']; ?></td>
                                             <td align="center" bgcolor=""><?php echo $item['content']; ?></td>
                                             <td align="center" bgcolor=""><?php echo $item['gc_vp_before']; ?></td>
@@ -112,18 +109,7 @@ $i = 0;
 
 <div>
     <?php
-    if ($st - $num >= 0)
-        echo '<a href="' . cn_url_modify('st=' . ($st - $num)) . '">&lt;&lt; Prev</a>';
-    else
-        echo '&lt;&lt; Prev'
+        echo  $echoPagination;
     ?>
-    &nbsp;[<?php echo $st; ?>]&nbsp;
-    <?php
-    if (!$isfin)
-        echo '<a href="' . cn_url_modify('st=' . ($st + $num)) . '">Next &gt;&gt;</a>';
-    else
-        echo 'Next &gt;&gt;';
-    ?>
-<!--    a href="--><?php ///*echo cn_url_modify('st='.($st+$num));*/ ?><!--">Next &gt;&gt;</a-->
 </div>
 

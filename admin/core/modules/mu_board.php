@@ -1774,15 +1774,18 @@ function board_logs()
 {
     $log_read = $logs = array();
     $sub = REQ('sub', "GETPOST");
-
-    $skip = FALSE;
-    $num = 30;
-    $isfin = FALSE;
-    $n = 0;
-
-    $st = REQ('st');
-
+    $page = intval(REQ('page', 'GETPOST'));
+    $per_page = intval(REQ('per_page', 'GETPOST'));
     $section = REQ('section');
+
+    if (empty($per_page) || $per_page < 0) {
+        $num = 60;
+    } else {
+        $num = $per_page;
+    }
+    $n = 0;
+    if ($page < 0) $page = 1;
+    $st = ($page-1)*$num;
 
     $all_character = [
         'changeclass' => ['name' => 'Đổi giới tính'],
@@ -1854,46 +1857,32 @@ function board_logs()
 
     // --- System section ---
     if (!$section) {
-
+        $_url = cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs');
         $isdel = REQ('isdel');
         if (isset($isdel) && $isdel == 'islog-systems') {
             unlink(cn_path_construct(SERVDIR, 'log/system'). 'error_dump.log');
-            cn_relocation(cn_url_modify(array('reset'), 'mod=' . REQ('mod'), 'opt=' . REQ('opt'), 'sub=' . $sub, 'section'));
+            cn_relocation(cn_url_modify('mod=' . REQ('mod'), 'opt=' . REQ('opt'), 'sub=' . $sub, 'section'));
         }
 
         $path = cn_path_construct(SERVDIR, 'log/system') . 'error_dump.log';
+
         if (file_exists($path)) {
             $r = fopen($path, 'r');
+
+            $totalLines = intval(exec("wc -l '$path'"));
             if ($r) {
                 do {
                     $n++;
                     $v = trim(fgets($r));
                     $tempLine = str_replace("\t", "|", $v);
 
-//                    if ($v == '') {
-//                        $skip = FALSE;
-//                        continue;
-//                    } elseif ($skip) continue;
-//
-//                    // Catch
-//                    if (preg_match('/^\[(\d+)\] (.*)$/', $v, $c)) {
-//                        $n++;
-//
-//                        // Skip some logs
-//                        if ($n >= $st) {
-//                            list(, $msg) = explode('|', $c[2], 2);
-//                            $logs[] = array('msg' => $msg, 'date' => date('Y-m-d H:i:s', $c[1]));
-//                        }
-//
-//                        $skip = TRUE;
-//                    }
-
                     if (!$tempLine) break;
                     if ($n <= $st) continue;
-
+                    if ($n > $over) break;
                     $log_data = explode('|', $tempLine);
 
                     $log_read[] = array(
+                        'id' => $n,
                         'status' => $log_data[0],
                         'time' => $log_data[1],
                         'name' => $log_data[2],
@@ -1902,7 +1891,7 @@ function board_logs()
                         'error' => $log_data[5]
                     );
 
-                    if ($n > $over) break;
+
                 } while (!feof($r));
 
                 fclose($r);
@@ -1910,6 +1899,7 @@ function board_logs()
         }
     } // --- character log section ---
     elseif ($section === 'character') {
+        $_url = cn_url_modify('mod=editconfig', 'opt=logs', 'section=character');
 
         list($dir, $action) = GET('dir, action', 'GPG');
 
@@ -1917,24 +1907,6 @@ function board_logs()
             unlink(cn_path_construct(SERVDIR, 'log/modules/' . $dir) . $action . '.txt');
             cn_relocation(cn_url_modify(array('reset'), 'mod=' . REQ('mod'), 'opt=' . REQ('opt'), 'sub=' . $sub, 'section=' . $section));
         }
-//
-//        // Save data
-//        if (request_type('POST')) {
-//        }
-//
-//        $options = $options_list[$sub];
-//        foreach ($options as $id => $vo) {
-//            $options[$id]['var'] = getoption($id);
-//
-//            $text_parths = explode('|', $vo[1], 2);
-//            $title = isset($text_parths[0]) ? $text_parths[0] : '';
-//            $desc = isset($text_parths[1]) ? $text_parths[1] : '';
-//            $options[$id]['title'] = $title;
-//            $options[$id]['desc'] = $desc;
-//            $options[$id]['help'] = isset($help[$id]) ? $help[$id] : '';
-//
-//            unset($options[$id][1]);
-//        }
 
         if ($dir && $sub) {
             if (!file_exists($ul = cn_path_construct(SERVDIR, 'log/modules/' . $dir) . $sub . '.txt')) {
@@ -1942,15 +1914,14 @@ function board_logs()
             }
 
             $r = fopen($ul, 'r');
+            $totalLines = intval(exec("wc -l '$ul'"));
             do {
                 $n++;
                 $v = trim(fgets($r));
                 if (!$v) break;
                 if ($n <= $st) continue;
+                if ($n >= $over) break;
 
-                //list($date, $msg) = explode('|', $v, 2);
-
-                //$logs[] = array('msg' => $msg, 'date' => date('Y-m-d H:i:s', intval($date)));
                 $log_data = explode('|', $v);
                 $tempBefore = explode('_', $log_data[2]);
                 $tempAfter = explode('_', $log_data[3]);
@@ -1958,6 +1929,7 @@ function board_logs()
                 $vpointDG = $tempBefore[1] - $tempAfter[1];
 
                 $log_read[] = array(
+                    'id' => $n,
                     'account' => $log_data[0],
                     'content' => $log_data[1],
                     'gc_vp_before' => number_format($tempBefore[0], 0, ',', '.') . ' - ' . number_format($tempBefore[1], 0, ',', '.'),
@@ -1966,18 +1938,19 @@ function board_logs()
                     'time' => $log_data[4]
                 );
 
-                if ($n >= $over) break;
+
             } while (!feof($r));
 
             fclose($r);
         }
     }
-    //disable pagination
-    if (count($log_read) <= $st || count($log_read) <= $num) $isfin = true;
 
-    cn_assign('log_read, st, num, isfin, section', $log_read, $st, $num, $isfin, $section);
+    $totalLines = isset($totalLines) ? $totalLines : 0;
+    $_url = isset($_url) ? $_url : '';
+    $echoPagination = cn_countArr_pagination($totalLines, $_url, $page, $num);
 
-    cn_assign('all_shop, all_character', $all_shop, $all_character);
+    cn_assign('log_read, section', $log_read, $section);
+    cn_assign('all_shop, all_character, echoPagination', $all_shop, $all_character, $echoPagination);
     echoheader('-@com_board/style.css', 'System logs');
     echo exec_tpl('com_board/logs');
     echofooter();
