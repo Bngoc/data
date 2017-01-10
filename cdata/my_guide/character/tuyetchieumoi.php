@@ -16,7 +16,7 @@
     </tr>
     <tr>
         <td>Chém Băng</td>
-        <td><img src="/images/guides/dk_StrikeofDestruction_02.jpg" ></td>
+        <td><img src="/images/guides/dk_StrikeofDestruction_02.jpg"></td>
         <td><img src="/images/guides/img17C.gif"></td>
         <td>Chiến Binh</td>
         <td>Hòn đá Stroke</td>
@@ -28,7 +28,7 @@
     </tr>
     <tr>
         <td>Tăng ma lực</td>
-        <td><img src="/images/guides/dw_Expansion-of-Wizardry_02.jpg" ></td>
+        <td><img src="/images/guides/dw_Expansion-of-Wizardry_02.jpg"></td>
         <td><img src="/images/guides/img17E.gif"></td>
         <td>Pháp Sư</td>
         <td>Pháp thư tăng ma lực</td>
@@ -39,7 +39,7 @@
     </tr>
     <tr>
         <td>Liên Hoàn Tiễn</td>
-        <td><img src="/images/guides/elf_Multi-Shot_02.jpg" ></td>
+        <td><img src="/images/guides/elf_Multi-Shot_02.jpg"></td>
         <td><img src="/images/guides/img180.gif"></td>
         <td>Thánh Nữ</td>
         <td>Hòn đá multi shot</td>
@@ -50,7 +50,7 @@
     </tr>
     <tr>
         <td>Hồi phục</td>
-        <td><img src="/images/guides/elf_Recovery_02.jpg" ></td>
+        <td><img src="/images/guides/elf_Recovery_02.jpg"></td>
         <td><img src="/images/guides/img182.gif"></td>
         <td>Thánh Nữ</td>
         <td>Hòn đá hồi phục</td>
@@ -61,7 +61,7 @@
     </tr>
     <tr>
         <td>Quét Lửa</td>
-        <td><img src="/images/guides/mg_Flame-Strike_02.jpg" ></td>
+        <td><img src="/images/guides/mg_Flame-Strike_02.jpg"></td>
         <td><img src="/images/guides/img184.gif"></td>
         <td>Đấu Sĩ</td>
         <td>Hòn đá Flame Strike</td>
@@ -72,7 +72,7 @@
     </tr>
     <tr>
         <td>Bão Điện</td>
-        <td><img src="/images/guides/mg_Gigantic-Storm_02.jpg" ></td>
+        <td><img src="/images/guides/mg_Gigantic-Storm_02.jpg"></td>
         <td><img src="/images/guides/img186.gif"></td>
         <td>Đấu Sĩ</td>
         <td>Pháp thư Gigantis</td>
@@ -83,7 +83,7 @@
     </tr>
     <tr>
         <td>Chaotic Decayer</td>
-        <td><img  src="/images/guides/dl_ChaoticDiseier_02.jpg" ></td>
+        <td><img src="/images/guides/dl_ChaoticDiseier_02.jpg"></td>
         <td><img src="/images/guides/img188.gif"></td>
         <td>Chúa Tể</td>
         <td>Thánh chỉ Chaotic Decayer</td>

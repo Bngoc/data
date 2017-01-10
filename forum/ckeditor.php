@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -25,21 +25,17 @@ define('LOCATION_BYPASS', 1);
 define('NOGLOBALPHRASE', 1);
 
 // Immediately send back the 304 Not Modified header if this is cached, don't load global.php
-if ((!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) OR !empty($_SERVER['HTTP_IF_NONE_MATCH'])))
-{
-	$sapi_name = php_sapi_name();
-	if ($sapi_name == 'cgi' OR $sapi_name == 'cgi-fcgi')
-	{
-		header('Status: 304 Not Modified');
-	}
-	else
-	{
-		header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
-	}
-	// remove the content-type and X-Powered headers to emulate a 304 Not Modified response as close as possible
-	header('Content-Type:');
-	header('X-Powered-By:');
-	exit;
+if ((!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) OR !empty($_SERVER['HTTP_IF_NONE_MATCH']))) {
+    $sapi_name = php_sapi_name();
+    if ($sapi_name == 'cgi' OR $sapi_name == 'cgi-fcgi') {
+        header('Status: 304 Not Modified');
+    } else {
+        header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
+    }
+    // remove the content-type and X-Powered headers to emulate a 304 Not Modified response as close as possible
+    header('Content-Type:');
+    header('X-Powered-By:');
+    exit;
 }
 
 // ################### PRE-CACHE TEMPLATES AND DATA ######################
@@ -73,11 +69,10 @@ header('Last-Modified: ' . gmdate('D, d M Y H:i:s', 0) . ' GMT');
 $xml = new vB_AJAX_XML_Builder($vbulletin, 'text/xml');
 $xml->add_group('phrases');
 
-foreach ($vbphrase AS $key => $phrase)
-{
-	$xml->add_tag('phrase', $phrase, array(
-		'name'  => $key,
-	));
+foreach ($vbphrase AS $key => $phrase) {
+    $xml->add_tag('phrase', $phrase, array(
+        'name' => $key,
+    ));
 }
 
 $xml->close_group('group');

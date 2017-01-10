@@ -21,7 +21,7 @@ function home_invoke()
         $dataNotifyForum = do_select_ortherForum($myQuery_F);
 
         foreach ($dataNotifyForum as $key => $item) {
-            $dataNotifyForum[$key]['urlForum'] = ewConvertFromUtf8($item['title']);
+            $dataNotifyForum[$key]['urlForum'] = cn_ewConvertFromUtf8($item['title']);
             $keywords = str_replace(',', '', $item['title']);
             if (strlen($keywords) > 45) {
                 $keywords = substr($keywords, 0, 45) . '...';

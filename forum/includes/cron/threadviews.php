@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -12,9 +12,8 @@
 
 // ######################## SET PHP ENVIRONMENT ###########################
 error_reporting(E_ALL & ~E_NOTICE);
-if (!is_object($vbulletin->db))
-{
-	exit;
+if (!is_object($vbulletin->db)) {
+    exit;
 }
 
 // ########################################################################
@@ -35,30 +34,28 @@ $vbulletin->db->query_write("
 		KEY threadid (threadid)
 	) $enginetype = $tabletype");
 
-if ($vbulletin->options['usemailqueue'] == 2)
-{
-	$vbulletin->db->lock_tables(array(
-		 $aggtable     => 'WRITE',
-		 'threadviews' => 'WRITE'
-	));
+if ($vbulletin->options['usemailqueue'] == 2) {
+    $vbulletin->db->lock_tables(array(
+        $aggtable => 'WRITE',
+        'threadviews' => 'WRITE'
+    ));
 }
 
 $vbulletin->db->query_write("
-	INSERT INTO ". TABLE_PREFIX ."$aggtable
+	INSERT INTO " . TABLE_PREFIX . "$aggtable
 		SELECT threadid, COUNT(*) AS views
 		FROM " . TABLE_PREFIX . "threadviews
 		GROUP BY threadid
 ");
 
-if ($vbulletin->options['usemailqueue'] == 2)
-{
-	$vbulletin->db->unlock_tables();
+if ($vbulletin->options['usemailqueue'] == 2) {
+    $vbulletin->db->unlock_tables();
 }
 /* Small race condition but better than lots of IO wait for a DELETE query */
 $vbulletin->db->query_write("TRUNCATE TABLE " . TABLE_PREFIX . "threadviews");
 
 $vbulletin->db->query_write(
-	"UPDATE " . TABLE_PREFIX . "thread AS thread,". TABLE_PREFIX . "$aggtable AS aggregate
+    "UPDATE " . TABLE_PREFIX . "thread AS thread," . TABLE_PREFIX . "$aggtable AS aggregate
 	SET thread.views = thread.views + aggregate.views
 	WHERE thread.threadid = aggregate.threadid
 ");

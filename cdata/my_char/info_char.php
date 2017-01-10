@@ -21,8 +21,8 @@ echo cn_snippet_messages();
             </td>
         </tr>
         <tr>
-            <td style="text-align:left;padding-left: 12px"><b>Cấp độ: <font
-                        color="orange"><?php echo $val['level'] ?></font></b></td>
+            <td style=" text-align:left;padding-left: 12px"><b>Cấp độ: <font
+                                color="orange"><?php echo $val['level'] ?></font></b></td>
             <td style="text-align:left;padding-left: 12px;"><b>Chủng tộc: <font
                         color="brown"><?php echo $val['cclass'] ?></font></b></td>
         </tr>
@@ -62,8 +62,8 @@ echo cn_snippet_messages();
 		</tr>
 	</table>
 <?php }
-}
-else {
-    echo '<font color="red"><b>Bạn chưa tạo Nhân vật</b></font>';
-} ?>
+                        }
+                        else {
+                            echo '<font color="red"><b>Bạn chưa tạo Nhân vật</b></font>';
+                        } ?>
 </div>

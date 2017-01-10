@@ -94,7 +94,12 @@ cn_snippet_bc();
                     <div style="color: #888; margin: 0 0 8px 0;float: left;margin-left: 5px;"></div>
                 </td>
             </tr>
-            <tr><td></td><td><hr/></td></tr>
+            <tr>
+                <td></td>
+                <td>
+                    <hr/>
+                </td>
+            </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>

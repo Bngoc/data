@@ -17,18 +17,18 @@ $threadbit = $VB_API_WHITELIST_COMMON['threadbit'];
 $threadbit['thread'][] = 'forumtitle';
 
 $VB_API_WHITELIST = array(
-	'response' => array(
-		'HTML' => array(
-			'folder', 'folderjump', 'pagenav', 'totalallthreads',
-			'threadbits' => array(
-				//'*' => $VB_API_WHITELIST_COMMON['threadbit']
-                                '*' => $threadbit
-			)
-		)
-	),
-	'show' => array(
-		'allfolders', 'threadicons', 'dotthreads', 'havethreads',
-	)
+    'response' => array(
+        'HTML' => array(
+            'folder', 'folderjump', 'pagenav', 'totalallthreads',
+            'threadbits' => array(
+                //'*' => $VB_API_WHITELIST_COMMON['threadbit']
+                '*' => $threadbit
+            )
+        )
+    ),
+    'show' => array(
+        'allfolders', 'threadicons', 'dotthreads', 'havethreads',
+    )
 );
 /*
 function api_result_prewhitelist_1(&$value)

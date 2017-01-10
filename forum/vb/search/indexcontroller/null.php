@@ -4,7 +4,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -23,10 +23,11 @@
 // should normally be handled as static, but no problems are caused
 // if it is instantiated.
 
-class vb_Search_Indexcontroller_Null{
-	public function __call($name, $arguments)
-	{
-		return false;
-	}
+class vb_Search_Indexcontroller_Null
+{
+    public function __call($name, $arguments)
+    {
+        return false;
+    }
 }
 

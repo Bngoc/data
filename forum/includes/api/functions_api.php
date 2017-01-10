@@ -12,7 +12,7 @@
 
 function cleanAPIName($name)
 {
-	return preg_replace('/[^a-z0-9_.]/', '', $name);
+    return preg_replace('/[^a-z0-9_.]/', '', $name);
 }
 
 // #############################################################################
@@ -27,64 +27,55 @@ function cleanAPIName($name)
  */
 function loadAPI($scriptname, $do = '', $version = 0, $updatedo = false)
 {
-	static $internalscriptname;
-	global $VB_API_WHITELIST, $VB_API_WHITELIST_COMMON, $VB_API_ROUTE_SEGMENT_WHITELIST;
-	global $VB_API_REQUESTS;
+    static $internalscriptname;
+    global $VB_API_WHITELIST, $VB_API_WHITELIST_COMMON, $VB_API_ROUTE_SEGMENT_WHITELIST;
+    global $VB_API_REQUESTS;
 
-	if (!$version)
-	{
-		$version = $VB_API_REQUESTS['api_version'];
-	}
-	
-	$scriptname = cleanAPIName($scriptname);
-	// Setup new API
-	$internalscriptname = $scriptname;
-	if ($updatedo)
-	{
-		$_REQUEST['do'] = $_GET['do'] = $_POST['do'] = $do;
-	}
+    if (!$version) {
+        $version = $VB_API_REQUESTS['api_version'];
+    }
 
-	$do = cleanAPIName($do);
-	$version = intval($version);
-	$access = false;
-	
+    $scriptname = cleanAPIName($scriptname);
+    // Setup new API
+    $internalscriptname = $scriptname;
+    if ($updatedo) {
+        $_REQUEST['do'] = $_GET['do'] = $_POST['do'] = $do;
+    }
+
+    $do = cleanAPIName($do);
+    $version = intval($version);
+    $access = false;
+
 // If a v6 or greater file exists, just load it as it is a rollup of previous versions
-	for ($i = $version; $i >= 6; $i--)
-	{
-		$api_filename = CWD_API . '/' . $i . '/' . $scriptname . (($do AND !VB_API_CMS)?'_' . $do:'') . '.php';
-		if (file_exists($api_filename))
-		{
-			$access = true;
-			require_once($api_filename);
-			break;
-		}
-	}		
-	
-	// Available files to load must be v5 or lower, load them all
-	if (!$access)
-	{
-		for ($i = 1; $i <= $version; $i++)
-		{
-			$api_filename = CWD_API . '/' . $i . '/' . $scriptname . (($do AND !VB_API_CMS)?'_' . $do:'') . '.php';
-			if (file_exists($api_filename))
-			{
-				$access = true;
-				require_once($api_filename);
-			}
-		}
-	}
+    for ($i = $version; $i >= 6; $i--) {
+        $api_filename = CWD_API . '/' . $i . '/' . $scriptname . (($do AND !VB_API_CMS) ? '_' . $do : '') . '.php';
+        if (file_exists($api_filename)) {
+            $access = true;
+            require_once($api_filename);
+            break;
+        }
+    }
 
-	// Still don't have the api file
-	if (!$access)
-	{
-		if (!headers_sent())
-		{
-			header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-		}
-		die();
-	}
+    // Available files to load must be v5 or lower, load them all
+    if (!$access) {
+        for ($i = 1; $i <= $version; $i++) {
+            $api_filename = CWD_API . '/' . $i . '/' . $scriptname . (($do AND !VB_API_CMS) ? '_' . $do : '') . '.php';
+            if (file_exists($api_filename)) {
+                $access = true;
+                require_once($api_filename);
+            }
+        }
+    }
 
-	return $internalscriptname;
+    // Still don't have the api file
+    if (!$access) {
+        if (!headers_sent()) {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+        }
+        die();
+    }
+
+    return $internalscriptname;
 }
 
 // #############################################################################
@@ -96,42 +87,36 @@ function loadAPI($scriptname, $do = '', $version = 0, $updatedo = false)
  */
 function loadCommonWhiteList($version = 0)
 {
-	global $VB_API_WHITELIST_COMMON, $VB_API_REQUESTS;
-	//error_log("--- path = " . CWD_API,3,"/var/www/html/facebook/error/errors.txt");
-	if (!$version)
-	{
-		$version = $VB_API_REQUESTS['api_version'];
-	}
-	
-	// Why scan for these files when we know what files are there and this is easy to maintain?
-	// To add a v7 whitelist, make this array:
-	// $whitelistfiles = array(7,6,5);
-	// Descending Order!
-	$whitelistfiles = array(6,5);
-	
-	if ($version < 5)
-	{
-		// for versions < 5 always load commonwhitelist_1.php
-		require_once(CWD_API . '/commonwhitelist_1.php');
-		if ($version >= 2)
-		{
-			// for versions < 5 and >= 2, always load commonwhitelist_2.php
-			require_once(CWD_API . '/commonwhitelist_2.php');
-		}
-	}
-	else	// load newest file that is <= to our $version, these version contain all changes from previous versions
-	{
-		foreach ($whitelistfiles AS $_version)
-		{
-			if ($_version <= $version)
-			{
-				require_once(CWD_API . "/commonwhitelist_{$_version}.php");
-				break;
-			}
-		}
-	}
-	
-	return $VB_API_WHITELIST_COMMON;
+    global $VB_API_WHITELIST_COMMON, $VB_API_REQUESTS;
+    //error_log("--- path = " . CWD_API,3,"/var/www/html/facebook/error/errors.txt");
+    if (!$version) {
+        $version = $VB_API_REQUESTS['api_version'];
+    }
+
+    // Why scan for these files when we know what files are there and this is easy to maintain?
+    // To add a v7 whitelist, make this array:
+    // $whitelistfiles = array(7,6,5);
+    // Descending Order!
+    $whitelistfiles = array(6, 5);
+
+    if ($version < 5) {
+        // for versions < 5 always load commonwhitelist_1.php
+        require_once(CWD_API . '/commonwhitelist_1.php');
+        if ($version >= 2) {
+            // for versions < 5 and >= 2, always load commonwhitelist_2.php
+            require_once(CWD_API . '/commonwhitelist_2.php');
+        }
+    } else    // load newest file that is <= to our $version, these version contain all changes from previous versions
+    {
+        foreach ($whitelistfiles AS $_version) {
+            if ($_version <= $version) {
+                require_once(CWD_API . "/commonwhitelist_{$_version}.php");
+                break;
+            }
+        }
+    }
+
+    return $VB_API_WHITELIST_COMMON;
 }
 
 
@@ -145,14 +130,14 @@ function loadCommonWhiteList($version = 0)
  */
 function print_apierror($errorid, $errormessage = '')
 {
-	echo json_encode(array('response' => array(
-			'errormessage' => array(
-				$errorid, $errormessage
-			)
-		)
-	));
+    echo json_encode(array('response' => array(
+        'errormessage' => array(
+            $errorid, $errormessage
+        )
+    )
+    ));
 
-	exit;
+    exit;
 }
 
 
@@ -166,17 +151,16 @@ function print_apierror($errorid, $errormessage = '')
  */
 function build_message_plain($message)
 {
-	global $VB_API_REQUESTS;
+    global $VB_API_REQUESTS;
 
-	$newmessage = strip_bbcode($message, false, false, true, false, true);
+    $newmessage = strip_bbcode($message, false, false, true, false, true);
 
-	if ($VB_API_REQUESTS['api_version'] > 1)
-	{
-		$regex = '#\[(quote)(?>[^\]]*?)\](.*)(\[/\1\])#siU';
-		$newmessage = preg_replace($regex, "<< $2 >>", $newmessage);
-	}
+    if ($VB_API_REQUESTS['api_version'] > 1) {
+        $regex = '#\[(quote)(?>[^\]]*?)\](.*)(\[/\1\])#siU';
+        $newmessage = preg_replace($regex, "<< $2 >>", $newmessage);
+    }
 
-	return $newmessage;
+    return $newmessage;
 }
 
 /*======================================================================*\

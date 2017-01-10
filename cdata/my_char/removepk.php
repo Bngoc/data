@@ -65,7 +65,7 @@ echo cn_snippet_messages();
 </form>
 
 <?php
-    echoFormVerifyChar(['action_removepk' => 'removepk']);
+echoFormVerifyChar(['action_removepk' => 'removepk']);
 ?>
 
 <table style="width: 100%" cellpadding="2">

@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -59,8 +59,7 @@ $vbulletin->input->clean_array_gpc('r', array(
 
 $imageinfo = false;
 
-if ($vbulletin->GPC['attachmentid'])
-{
+if ($vbulletin->GPC['attachmentid']) {
     $imageinfo = $db->query_first_slave("
         SELECT newattachmentid
         FROM " . TABLE_PREFIX . "blog_attachmentlegacy
@@ -68,12 +67,9 @@ if ($vbulletin->GPC['attachmentid'])
     ");
 }
 
-if ($imageinfo)
-{
+if ($imageinfo) {
     exec_header_redirect("attachment.php?attachmentid=$imageinfo[newattachmentid]", 301);
-}
-else
-{
+} else {
     $filedata = vb_base64_decode('R0lGODlhAQABAIAAAMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
     $filesize = strlen($filedata);
     header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');             // Date in the past

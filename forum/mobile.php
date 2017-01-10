@@ -29,17 +29,16 @@ $globaltemplates = array();
 
 // pre-cache templates used by specific actions
 $actiontemplates = array(
-	'login' => array(
-		'mobile_login'
-	),
+    'login' => array(
+        'mobile_login'
+    ),
 );
 
 // ######################### REQUIRE BACK-END ############################
 require_once('./global.php');
 
-if (!IS_MOBILE_STYLE)
-{
-   exec_header_redirect($vbulletin->options['bburl']);
+if (!IS_MOBILE_STYLE) {
+    exec_header_redirect($vbulletin->options['bburl']);
 }
 
 // #######################################################################
@@ -47,21 +46,19 @@ if (!IS_MOBILE_STYLE)
 // #######################################################################
 
 // ######################### start cache.manifest ############################
-if ($_REQUEST['do'] == 'cachemanifest')
-{
-	// Debug only
-	if ($vbulletin->debug)
-	{
+if ($_REQUEST['do'] == 'cachemanifest') {
+    // Debug only
+    if ($vbulletin->debug) {
 //		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 //		header("Cache-Control: no-cache");
 //		header("Pragma: no-cache");
-	}
-	$vbulletin->contenttype = 'text/cache-manifest';
+    }
+    $vbulletin->contenttype = 'text/cache-manifest';
 
-	$templater = vB_Template::create('');
-	$cssfilepath = str_replace('&amp;', '&', $templater->fetch_css_path());
+    $templater = vB_Template::create('');
+    $cssfilepath = str_replace('&amp;', '&', $templater->fetch_css_path());
 
-	echo <<<EOD
+    echo <<<EOD
 CACHE MANIFEST
 
 # v4
@@ -104,66 +101,58 @@ NETWORK:
 *
 EOD;
 
-	die;
+    die;
 }
 
 // ######################### start login page ############################
-if ($_REQUEST['do'] == 'login')
-{
-	if ($vbulletin->userinfo['userid'])
-	{
-		// Already logged in
-		exec_header_redirect($vbulletin->options['bburl']);
-	}
+if ($_REQUEST['do'] == 'login') {
+    if ($vbulletin->userinfo['userid']) {
+        // Already logged in
+        exec_header_redirect($vbulletin->options['bburl']);
+    }
 
-	$show['forgetpassword'] = true;
+    $show['forgetpassword'] = true;
 
-	$templater = vB_Template::create('mobile_login');
-		$templater->register_page_templates();
-		$templater->register('url', $vbulletin->url);
-	print_output($templater->render());
+    $templater = vB_Template::create('mobile_login');
+    $templater->register_page_templates();
+    $templater->register('url', $vbulletin->url);
+    print_output($templater->render());
 }
 
 // ######################### start grid menu ############################
-if ($_REQUEST['do'] == 'gridmenu')
-{
-	if (!$notifications_total) $notifications_total = '0';
-	$show['blogs'] = ($vbulletin->products['vbblog'] == '1');
-	$show['articles'] = ($vbulletin->products['vbcms'] == '1');
+if ($_REQUEST['do'] == 'gridmenu') {
+    if (!$notifications_total) $notifications_total = '0';
+    $show['blogs'] = ($vbulletin->products['vbblog'] == '1');
+    $show['articles'] = ($vbulletin->products['vbcms'] == '1');
 
-	$templater = vB_Template::create('mobile_gridmenu');
-		$templater->register_page_templates();
-		$templater->register('notifications_total', $notifications_total);
-		$templater->register('pageinfo_friends', array('tab' => 'friends'));
-	print_output($templater->render());
+    $templater = vB_Template::create('mobile_gridmenu');
+    $templater->register_page_templates();
+    $templater->register('notifications_total', $notifications_total);
+    $templater->register('pageinfo_friends', array('tab' => 'friends'));
+    print_output($templater->render());
 }
 
 
 // ######################### start notifications ############################
-if ($_REQUEST['do'] == 'notifications')
-{
-	if ($notifications_total)
-	{
-		$show['notifications'] = true;
-	}
-	else
-	{
-		$show['notifications'] = false;
-	}
+if ($_REQUEST['do'] == 'notifications') {
+    if ($notifications_total) {
+        $show['notifications'] = true;
+    } else {
+        $show['notifications'] = false;
+    }
 
-	$templater = vB_Template::create('mobile_notifications');
-		$templater->register_page_templates();
-		$templater->register('notifications_menubits', $notifications_menubits);
-		$templater->register('notifications_total', $notifications_total);
-	print_output($templater->render());
+    $templater = vB_Template::create('mobile_notifications');
+    $templater->register_page_templates();
+    $templater->register('notifications_menubits', $notifications_menubits);
+    $templater->register('notifications_total', $notifications_total);
+    print_output($templater->render());
 
 }
 
 // ######################### start agreement ############################
-if ($_REQUEST['do'] == 'agreement')
-{
-	$templater = vB_Template::create('mobile_agreement');
-	print_output($templater->render());
+if ($_REQUEST['do'] == 'agreement') {
+    $templater = vB_Template::create('mobile_agreement');
+    print_output($templater->render());
 
 }
 

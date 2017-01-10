@@ -1,5 +1,5 @@
-.supportbtn{
-    background: -moz-linear-gradient(left center , #EEEEEE, #EFEFEF, #FFFFFF) repeat scroll 0 0 transparent;
+.supportbtn {
+    background: -moz-linear-gradient(left center, #EEEEEE, #EFEFEF, #FFFFFF) repeat scroll 0 0 transparent;
     background: -webkit-linear-gradient(left, #EEEEEE, #EFEFEF, #FFFFFF) repeat scroll 0 0 transparent;
     border-left: 1px solid #000;
     border-right: 1px solid #000;
@@ -20,10 +20,12 @@
     -ms-transition: all 1s ease;
     -o-transition: all 1s ease;
 }
-.supportbtn .textsupport{
+
+.supportbtn .textsupport {
     font-weight: bold;
 }
-.support_content{
+
+.support_content {
     position: fixed;
     bottom: 25px;
     /*left: -610px;*/
@@ -31,23 +33,26 @@
     padding: 5px 0;
     background: #eee;
     z-index: 9999;
-    box-shadow: inset 1px 1px #fff,inset -1px -1px #fff;
+    box-shadow: inset 1px 1px #fff, inset -1px -1px #fff;
     -moz-transition: all 1s ease;
     -webkit-transition: all 1s ease;
     -ms-transition: all 1s ease;
     -o-transition: all 1s ease;
 }
-.support_content .sp_main{
+
+.support_content .sp_main {
     width: 580px;
     margin: 0 auto;
     position: relative;
 }
-.support_content .sp_main .sp_tit{
+
+.support_content .sp_main .sp_tit {
     text-transform: uppercase;
     color: #333;
     text-align: center;
 }
-.support_content .sp_main .sp_close{
+
+.support_content .sp_main .sp_close {
     border-radius: 15px 15px 15px 15px;
     height: 25px;
     padding-top: 5px;
@@ -60,15 +65,18 @@
     border: 1px solid #fff;
     background: #fff;
 }
-.support_content .sp_main .sp_close:hover{
+
+.support_content .sp_main .sp_close:hover {
     border-color: #ccc;
 }
-.support_content .sp_main .sp_m{
+
+.support_content .sp_main .sp_m {
     width: 100%;
     padding: 5px 0;
     overflow: hidden;
 }
-.support_content .sp_main .sp_m .sp_l{
+
+.support_content .sp_main .sp_m .sp_l {
     background: #bbb;
     border: 1px solid #aaa;
     float: left;
@@ -78,58 +86,70 @@
     text-align: center;
     width: 187px;
 }
-.support_content .sp_main .sp_m .sp_l:hover{
+
+.support_content .sp_main .sp_m .sp_l:hover {
     background: #ccc;
 }
-.support_content .sp_main .sp_m .sp_l a{
+
+.support_content .sp_main .sp_m .sp_l a {
     display: block;
     height: 60px;
     text-decoration: none;
 }
-.support_content .sp_main .sp_m .sp_l a:hover{
+
+.support_content .sp_main .sp_m .sp_l a:hover {
     text-decoration: none;
 }
-.support_content .sp_main .sp_m .sp_l a .sp_text{
+
+.support_content .sp_main .sp_m .sp_l a .sp_text {
     text-align: center;
-    font-weight:bold;
+    font-weight: bold;
     font-size: 11px;
     color: #333;
 }
-.notice_ann{
-    width:915px;
+
+.notice_ann {
+    width: 915px;
     margin: 0 auto;
     padding: 10px;
     border: 1px solid #ccc;
-    background: url() repeat-y 300px 0 #EBEBEB;	
+    background: url() repeat-y 300px 0 #EBEBEB;
     float: left;
 }
-.notice_ann:hover{
+
+.notice_ann:hover {
     box-shadow: inset 0 1px #fff, inset 1px 0 #fff, inset 0 -1px #fff, inset -1px 0 #fff;
 }
-.notice_ann .list_event{
+
+.notice_ann .list_event {
     width: 300px;
     float: left;
 }
-.notice_ann .list_event fieldset{
+
+.notice_ann .list_event fieldset {
     width: 260px;
     padding: 5px;
     border: 1px solid #bbb;
-    box-shadow:inset 0px -1px rgba(255,255,255,0.5);
+    box-shadow: inset 0px -1px rgba(255, 255, 255, 0.5);
 }
-.notice_ann .list_event fieldset:hover{
-    box-shadow: 0px 1px rgba(255,255,255,0.5);
+
+.notice_ann .list_event fieldset:hover {
+    box-shadow: 0px 1px rgba(255, 255, 255, 0.5);
 }
-.notice_ann .list_event fieldset legend{
+
+.notice_ann .list_event fieldset legend {
     background: #822d2d;
     padding: 2px 4px;
     color: #fff;
     font-weight: bold;
 }
-.notice_ann .list_event fieldset .ongoings{
+
+.notice_ann .list_event fieldset .ongoings {
     width: 220px;
     margin-left: 10px;
 }
-.notice_ann .list_event fieldset .ongoings li{
+
+.notice_ann .list_event fieldset .ongoings li {
     padding: 2px 0 2px 17px;
     background: url(images/ranks/green.gif) no-repeat 0 4px;
     -moz-transition: all 0.5s ease;
@@ -138,11 +158,13 @@
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-.notice_ann .list_event fieldset .ongoings li:hover{
+
+.notice_ann .list_event fieldset .ongoings li:hover {
     padding: 2px 0 2px 0px;
     background: url(images/ranks/green.gif) no-repeat -15px 4px;
 }
-.notice_ann .list_event fieldset .ongoings li a{
+
+.notice_ann .list_event fieldset .ongoings li a {
     padding-right: 17px;
     background: url(images/ranks/diamod.gif) no-repeat 220px 0px;
     -moz-transition: all 0.5s ease;
@@ -151,44 +173,55 @@
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-.notice_ann .list_event fieldset .ongoings li a:hover{
+
+.notice_ann .list_event fieldset .ongoings li a:hover {
     text-decoration: none;
     background: url(images/ranks/diamod.gif) no-repeat right 0px;
 }
-.notice_ann .list_notice{
+
+.notice_ann .list_notice {
     width: 580px;
     float: left;
     margin-left: 10px;
 }
-.notice_ann .list_notice p{
+
+.notice_ann .list_notice p {
     font-size: 15px;
     font-weight: bold;
     padding: 4px 0 4px 30px;
     background-repeat: no-repeat;
     background-position: 0 7px;
 }
-.notice_ann .list_notice p:nth-child(1){
+
+.notice_ann .list_notice p:nth-child(1) {
     background-image: url(images/ranks/new.gif);
 }
-.notice_ann .list_notice p:nth-child(2){
+
+.notice_ann .list_notice p:nth-child(2) {
     background-image: url(images/ranks/new.gif);
 }
-.notice_ann .list_notice p:nth-child(3){
+
+.notice_ann .list_notice p:nth-child(3) {
     background-image: url(images/ranks/new.gif);
 }
-.notice_ann .list_notice p:nth-child(4){
+
+.notice_ann .list_notice p:nth-child(4) {
     background-image: url(images/ranks/new.gif);
 }
-.notice_ann .list_notice p:nth-child(5){
-    background-image: url/images/ranks/new.gif);
+
+.notice_ann .list_notice p:nth-child(5) {
+    background-image: url /images/ ranks / new . gif);
 }
-.notice_ann .list_notice p:nth-child(6){
+
+.notice_ann .list_notice p:nth-child(6) {
     background-image: url(images/ranks/new.gif);
 }
-.notice_ann .list_notice p:nth-child(7){
+
+.notice_ann .list_notice p:nth-child(7) {
     background-image: url(images/ranks/new.gif);
 }
-.notice_ann .list_notice p a:hover{
+
+.notice_ann .list_notice p a:hover {
     text-decoration: none;
     border-bottom: 1.5px dashed #900;
 }

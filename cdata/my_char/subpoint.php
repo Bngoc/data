@@ -69,7 +69,7 @@ if ($sms_notify) echo $sms_notify;
 <form action="<?php echo PHP_SELF; ?>" method="POST">
     <?php cn_form_open('mod, opt, sub'); ?>
     <input type="hidden" value="deleonline" name="action_subpoint"/>
-        <table width="100%">
+    <table width="100%">
         <tr>
             <td colspan="3" class="">MÃ XÁC NHẬN</td>
         </tr>
@@ -93,22 +93,22 @@ if ($sms_notify) echo $sms_notify;
                     <output id="rut-point">&nbsp; 0</output>
                 </strong></td>
         </tr>
-            <tr>
-                <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;"
-                                                onclick="getId('capchaWeb').src='<?php echo getoption('http_script_dir'); ?>/captcha.php?page=web&r='+Math.random(); return(false);">
-                        Refresh code</a></td>
-                <td colspan="" class="bizwebform_col_2" style="padding-left:20px;">
-                    <div class="vertical-img"><img src="<?php echo getoption('http_script_dir'); ?>/captcha.php?cap=web"
-                                                   id="capchaWeb" alt=""></div>
-                </td>
-                <td class="bizwebform_col_3"></td>
-            </tr>
-            <tr>
-                <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
-                <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="verifyCaptcha" required
-                                                    onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
-                <td class="bizwebform_col_3" id="msg_Captcha"></td>
-            </tr>
+        <tr>
+            <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;"
+                                            onclick="getId('capchaWeb').src='<?php echo getoption('http_script_dir'); ?>/captcha.php?page=web&r='+Math.random(); return(false);">
+                    Refresh code</a></td>
+            <td colspan="" class="bizwebform_col_2" style="padding-left:20px;">
+                <div class="vertical-img"><img src="<?php echo getoption('http_script_dir'); ?>/captcha.php?cap=web"
+                                               id="capchaWeb" alt=""></div>
+            </td>
+            <td class="bizwebform_col_3"></td>
+        </tr>
+        <tr>
+            <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
+            <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="verifyCaptcha" required
+                                                onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
+            <td class="bizwebform_col_3" id="msg_Captcha"></td>
+        </tr>
 
         <tr>
             <td colspan="3" style="padding:20px; text-align:center"></td>

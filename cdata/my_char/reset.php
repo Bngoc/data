@@ -36,11 +36,12 @@ if ($notify_rs_ok) echo $notify_rs_ok;
                         </td>
                     </tr>
                     <?php if ($before_info_re) foreach ($before_info_re as $ke => $val) {
-                        if (isset($val[1]))
+                        if (isset($val[1])){
                             echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
 									<td class="pd-left10"><strong style="color:#009900">' . $val[1] . '</strong></td>
 								</tr>';
+                        }
                     } ?>
 
                 </table>
@@ -54,12 +55,12 @@ if ($notify_rs_ok) echo $notify_rs_ok;
                 <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
                     <?php if ($showchar) {
                         foreach ($showchar as $name => $val) { ?>
-                        <option
-                            value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>><?php echo $name ?>
-                            (LV: <?php echo $val['level'] ?> - Reset: <?php echo $val['reset'] ?>
-                            - Đã Reset <?php echo $val['resetInDay'] ?> lần / ngày)
-                        </option>
-                    <?php }
+                            <option
+                                value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>><?php echo $name ?>
+                                (LV: <?php echo $val['level'] ?> - Reset: <?php echo $val['reset'] ?>
+                                - Đã Reset <?php echo $val['resetInDay'] ?> lần / ngày)
+                            </option>
+                        <?php }
                     } ?>
                 </select>
 
@@ -70,7 +71,7 @@ if ($notify_rs_ok) echo $notify_rs_ok;
 </form>
 
 <?php
-    echoFormVerifyChar(['action_rs' => 'reset']);
+echoFormVerifyChar(['action_rs' => 'reset']);
 ?>
 
 <table style="width: 100%" cellpadding="2">
@@ -81,8 +82,8 @@ if ($notify_rs_ok) echo $notify_rs_ok;
         <td colspan="3" class="">CONFIG RESET<br/></td>
     </tr>
     <tr>
-        <td>Lưu ý: Jewel cần cho Reset phải được gửi trong <a
-                href="<?php cn_url_modify('mod=char_manager', 'opt', 'sub') ?>"> ngân hàng!</a></td>
+        <td>Lưu ý: Jewel cần cho Reset phải được gửi trong
+            <a href="<?php echo cn_url_modify(array('reset'), 'mod=blank_money', 'opt', 'sub'); ?>"> ngân hàng!</a></td>
     </tr>
     <tr>
         <td colspan="3">
@@ -125,7 +126,7 @@ if ($notify_rs_ok) echo $notify_rs_ok;
                 </tr>
                 <?php if ($i === $cap_reset_max) break;
             }
-        }?>
+        } ?>
     </table>
 </div>
 
@@ -184,14 +185,7 @@ if ($notify_rs_ok) echo $notify_rs_ok;
     <div class="sub_ranking">
 
         <table id="tbl_ranking" class="std-table opt_table">
-            <?php //if($get_arr_gh) foreach ($gh_loai2 as $key => $val){?>
-            <!--tr>
-				<td><div align="center"><b>Reset</b></div></td>
-				<td><div align="center"><b>1 &rarr; <?php //echo $val['day1']; ?> RS / ngày</b></div></td>
-				<td><div align="center"><b><?php //echo ++$val['day1']; ?> &rarr; <?php //echo $val['day2']; ?> RS / ngày</b></div></td>
-				<td><div align="center"><b> >> <?php //echo $val['day2']; ?> RS / ngày</b></div></td>
-			</tr-->
-            <?php //} 
+            <?php
             if ($gh_loai2) foreach ($gh_loai2 as $key => $val) {
                 $count = count($gh_loai2) - 1;
                 if ($ok_loop2) {

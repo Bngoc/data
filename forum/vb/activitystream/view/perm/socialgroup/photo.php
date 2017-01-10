@@ -4,7 +4,7 @@
   || #################################################################### ||
   || # vBulletin 4.2.0 
   || # ---------------------------------------------------------------- # ||
-  || # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+  || # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
   || # This file may not be redistributed in whole or significant part. # ||
   || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
   || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -13,36 +13,33 @@
 
 class vB_ActivityStream_View_Perm_Socialgroup_Photo extends vB_ActivityStream_View_Perm_Socialgroup_Base
 {
-	public function __construct(&$content)
-	{
-		$this->requireExist['vB_ActivityStream_View_Perm_Socialgroup_Group'] = 1;
-		$this->requireFirst['vB_ActivityStream_View_Perm_Socialgroup_Photocomment'] = 1;
-		$this->requireFirst['vB_ActivityStream_View_Perm_Album_Comment'] = 1;
-		return parent::__construct($content);
-	}
+    public function __construct(&$content)
+    {
+        $this->requireExist['vB_ActivityStream_View_Perm_Socialgroup_Group'] = 1;
+        $this->requireFirst['vB_ActivityStream_View_Perm_Socialgroup_Photocomment'] = 1;
+        $this->requireFirst['vB_ActivityStream_View_Perm_Album_Comment'] = 1;
+        return parent::__construct($content);
+    }
 
-	public function group($activity)
-	{
-		if (!$this->fetchCanUseGroups() OR !vB::$vbulletin->userinfo['userid'])
-		{
-			return;
-		}
+    public function group($activity)
+    {
+        if (!$this->fetchCanUseGroups() OR !vB::$vbulletin->userinfo['userid']) {
+            return;
+        }
 
-		$this->content['group_photo_only'][$activity['contentid']] = 1;
-		if (!$this->content['socialgroup_attachment'][$activity['contentid']])
-		{
-			$this->content['socialgroup_attachmentid'][$activity['contentid']] = 1;
-		}
-	}
+        $this->content['group_photo_only'][$activity['contentid']] = 1;
+        if (!$this->content['socialgroup_attachment'][$activity['contentid']]) {
+            $this->content['socialgroup_attachmentid'][$activity['contentid']] = 1;
+        }
+    }
 
-	public function process()
-	{
-		if (!$this->content['socialgroup_attachmentid'] OR !vB::$vbulletin->userinfo['userid'])
-		{
-			return true;
-		}
+    public function process()
+    {
+        if (!$this->content['socialgroup_attachmentid'] OR !vB::$vbulletin->userinfo['userid']) {
+            return true;
+        }
 
-		$attachments = vB::$db->query_read_slave("
+        $attachments = vB::$db->query_read_slave("
 			SELECT
 				a.attachmentid AS a_attachmentid, a.dateline AS a_dateline, a.contentid AS a_groupid, a.userid AS a_userid, a.counter AS a_counter, a.state AS a_state,
 				fd.thumbnail_width AS a_thumbnail_width, fd.thumbnail_height AS a_thumbnail_height,
@@ -58,80 +55,72 @@ class vB_ActivityStream_View_Perm_Socialgroup_Photo extends vB_ActivityStream_Vi
 					AND
 				a.state <> 'deleted'
 		");
-		while ($attachment = vB::$db->fetch_array($attachments))
-		{
-			// Unset these values so we don't query for the discussions and groups when the process() functions for those get called .. we already have them
-			unset($this->content['groupid'][$attachment['g_groupid']]);
-			$this->content['socialgroup_attachment'][$attachment['a_attachmentid']] = $this->parse_array($attachment, 'a_');
-			$this->content['socialgroup_attachment_matrix'][$attachment['g_groupid']][] = $attachment['a_attachmentid'];
-			$this->content['userid'][$attachment['a_userid']] = 1;
-			if (!$this->content['socialgroup'][$attachment['g_groupid']])
-			{
-				$this->content['socialgroup'][$attachment['g_groupid']] = $this->parse_array($attachment, 'g_');
-				$this->content['socialgroup'][$attachment['g_groupid']]['is_owner'] = ($this->content['socialgroup'][$attachment['g_groupid']]['creatoruserid'] == vB::$vbulletin->userinfo['userid']);
-				$this->content['userid'][$attachment['g_creatoruserid']] = 1;
-			}
-		}
+        while ($attachment = vB::$db->fetch_array($attachments)) {
+            // Unset these values so we don't query for the discussions and groups when the process() functions for those get called .. we already have them
+            unset($this->content['groupid'][$attachment['g_groupid']]);
+            $this->content['socialgroup_attachment'][$attachment['a_attachmentid']] = $this->parse_array($attachment, 'a_');
+            $this->content['socialgroup_attachment_matrix'][$attachment['g_groupid']][] = $attachment['a_attachmentid'];
+            $this->content['userid'][$attachment['a_userid']] = 1;
+            if (!$this->content['socialgroup'][$attachment['g_groupid']]) {
+                $this->content['socialgroup'][$attachment['g_groupid']] = $this->parse_array($attachment, 'g_');
+                $this->content['socialgroup'][$attachment['g_groupid']]['is_owner'] = ($this->content['socialgroup'][$attachment['g_groupid']]['creatoruserid'] == vB::$vbulletin->userinfo['userid']);
+                $this->content['userid'][$attachment['g_creatoruserid']] = 1;
+            }
+        }
 
-		$this->content['socialgroup_attachmentid'] = array();
-	}
+        $this->content['socialgroup_attachmentid'] = array();
+    }
 
-	public function fetchCanView($record)
-	{
-		$this->processUsers();
-		return $this->fetchCanViewSocialgroupPhoto($record['contentid']);
-	}
+    public function fetchCanView($record)
+    {
+        $this->processUsers();
+        return $this->fetchCanViewSocialgroupPhoto($record['contentid']);
+    }
 
-	/*
-	 * Register Template
-	 *
-	 * @param	string	Template Name
-	 * @param	array	Activity Record
-	 *
-	 * @return	string	Template
-	 */
-	public function fetchTemplate($templatename, $activity, $skipgroup = false)
-	{
-		$attachmentinfo =& $this->content['socialgroup_attachment'][$activity['contentid']];
-		$groupinfo =& $this->content['socialgroup'][$attachmentinfo['groupid']];
+    /*
+     * Register Template
+     *
+     * @param	string	Template Name
+     * @param	array	Activity Record
+     *
+     * @return	string	Template
+     */
+    public function fetchTemplate($templatename, $activity, $skipgroup = false)
+    {
+        $attachmentinfo =& $this->content['socialgroup_attachment'][$activity['contentid']];
+        $groupinfo =& $this->content['socialgroup'][$attachmentinfo['groupid']];
 
-		if (!$skipgroup)
-		{
-			if (!$this->content['group_photo_only'][$attachmentinfo['attachmentid']])
-			{
-				return '';
-			}
+        if (!$skipgroup) {
+            if (!$this->content['group_photo_only'][$attachmentinfo['attachmentid']]) {
+                return '';
+            }
 
-			foreach($this->content['socialgroup_attachment_matrix'][$attachmentinfo['groupid']] AS $attachmentid)
-			{
-				$attachment = $this->content['socialgroup_attachment'][$attachmentid];
-				if ($this->content['group_photo_only'][$attachmentid] AND $activity['userid'] == $attachment['userid'])
-				{
-					$attach[] = $attachment;
-					unset($this->content['group_photo_only'][$attachmentid]);
-				}
-			}
-			$attach = array_reverse($attach);
-			$photocount = count($attach);
-		}
-		else
-		{
-			$attach = array($attachmentinfo);
-			$photocount = count($attach);
-		}
+            foreach ($this->content['socialgroup_attachment_matrix'][$attachmentinfo['groupid']] AS $attachmentid) {
+                $attachment = $this->content['socialgroup_attachment'][$attachmentid];
+                if ($this->content['group_photo_only'][$attachmentid] AND $activity['userid'] == $attachment['userid']) {
+                    $attach[] = $attachment;
+                    unset($this->content['group_photo_only'][$attachmentid]);
+                }
+            }
+            $attach = array_reverse($attach);
+            $photocount = count($attach);
+        } else {
+            $attach = array($attachmentinfo);
+            $photocount = count($attach);
+        }
 
-		$activity['postdate'] = vbdate(vB::$vbulletin->options['dateformat'], $activity['dateline'], true);
-		$activity['posttime'] = vbdate(vB::$vbulletin->options['timeformat'], $activity['dateline']);
+        $activity['postdate'] = vbdate(vB::$vbulletin->options['dateformat'], $activity['dateline'], true);
+        $activity['posttime'] = vbdate(vB::$vbulletin->options['timeformat'], $activity['dateline']);
 
-		$templater = vB_Template::create($templatename);
-			$templater->register('userinfo', $this->content['user'][$activity['userid']]);
-			$templater->register('activity', $activity);
-			$templater->register('attachmentinfo', $attachmentinfo);
-			$templater->register('attach', $attach);
-			$templater->register('groupinfo', $groupinfo);
-			$templater->register('photocount', $photocount);
-		return $templater->render();
-	}
+        $templater = vB_Template::create($templatename);
+        $templater->register('userinfo', $this->content['user'][$activity['userid']]);
+        $templater->register('activity', $activity);
+        $templater->register('attachmentinfo', $attachmentinfo);
+        $templater->register('attach', $attach);
+        $templater->register('groupinfo', $groupinfo);
+        $templater->register('photocount', $photocount);
+        return $templater->render();
+    }
 }
 
 /*======================================================================*\

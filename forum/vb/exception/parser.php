@@ -22,17 +22,16 @@
  */
 class vB_Exception_Parser extends vB_Exception
 {
-	public function __construct($message, $line = false, $code = false, $file = false, $line = false)
-	{
-		$message = $message ? $message : 'Parser Error';
-		
-		if (!empty($line))
-		{
-			$message .= "::$line";
-		}
-		
-		parent::__construct($message, $code, $file, $line);
-	}
+    public function __construct($message, $line = false, $code = false, $file = false, $line = false)
+    {
+        $message = $message ? $message : 'Parser Error';
+
+        if (!empty($line)) {
+            $message .= "::$line";
+        }
+
+        parent::__construct($message, $code, $file, $line);
+    }
 }
 
 /*======================================================================*\

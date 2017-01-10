@@ -71,7 +71,7 @@ if ($notify_rs_ok) echo $notify_rs_ok;
 </form>
 
 <?php
-    echoFormVerifyChar(['relife' => 'action_relife']);
+echoFormVerifyChar(['action_relife' => 'relife']);
 ?>
 
 <table style="width: 100%" cellpadding="2">

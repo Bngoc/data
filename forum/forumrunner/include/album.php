@@ -22,9 +22,9 @@ require_once(DIR . '/includes/functions_user.php');
 require_once(DIR . '/packages/vbattach/attach.php');
 
 $vbulletin->input->clean_array_gpc('r', array(
-    'albumid'   => TYPE_UINT,
+    'albumid' => TYPE_UINT,
     'pictureid' => TYPE_UINT,
-    'userid'    => TYPE_UINT,
+    'userid' => TYPE_UINT,
 ));
 
 $canviewalbums = (
@@ -40,15 +40,13 @@ $canviewgroups = (
     $vbulletin->userinfo['permissions']['socialgrouppermissions'] & $vbulletin->bf_ugp_socialgrouppermissions['canviewgroups']
 );
 
-if (!$canviewalbums)
-{
+if (!$canviewalbums) {
     // check for do=='unread', allow if user can view groups since the picture comment may be from there
     if (
         $_REQUEST['do'] != 'unread'
         OR
         !$canviewgroups
-    )
-    {
+    ) {
         print_no_permission();
     }
 }
@@ -66,42 +64,33 @@ $moderatedpictures = (
 ($hook = vBulletinHook::fetch_hook('album_start_precheck')) ? eval($hook) : false;
 
 // if we specify an album, make sure our user context is sane
-if ($vbulletin->GPC['albumid'])
-{
+if ($vbulletin->GPC['albumid']) {
     $albuminfo = fetch_albuminfo($vbulletin->GPC['albumid']);
-    if (!$albuminfo)
-    {
+    if (!$albuminfo) {
         standard_error(fetch_error('invalidid', $vbphrase['album'], $vbulletin->options['contactuslink']));
     }
 
     $vbulletin->GPC['userid'] = $albuminfo['userid'];
 }
 
-if ($vbulletin->GPC['attachmentid'])
-{
+if ($vbulletin->GPC['attachmentid']) {
     // todo
     $pictureinfo = fetch_pictureinfo($vbulletin->GPC['attachmentid'], $albuminfo['albumid']);
-    if (!$pictureinfo)
-    {
+    if (!$pictureinfo) {
         standard_error(fetch_error('invalidid', $vbphrase['picture'], $vbulletin->options['contactuslink']));
     }
 }
 
-if ($_REQUEST['do'] == 'overview')
-{
-    if ((!$vbulletin->GPC['userid'] AND !$vbulletin->userinfo['userid']) OR !($vbulletin->userinfo['permissions']['albumpermissions'] & $vbulletin->bf_ugp_albumpermissions['canalbum']))
-    {
+if ($_REQUEST['do'] == 'overview') {
+    if ((!$vbulletin->GPC['userid'] AND !$vbulletin->userinfo['userid']) OR !($vbulletin->userinfo['permissions']['albumpermissions'] & $vbulletin->bf_ugp_albumpermissions['canalbum'])) {
         $_REQUEST['do'] = 'latest';
     }
 }
 
 // don't need userinfo if we're only viewing latest
-if ($_REQUEST['do'] != 'latest')
-{
-    if (!$vbulletin->GPC['userid'])
-    {
-        if (!($vbulletin->GPC['userid'] = $vbulletin->userinfo['userid']))
-        {
+if ($_REQUEST['do'] != 'latest') {
+    if (!$vbulletin->GPC['userid']) {
+        if (!($vbulletin->GPC['userid'] = $vbulletin->userinfo['userid'])) {
             print_no_permission();
         }
     }
@@ -109,33 +98,26 @@ if ($_REQUEST['do'] != 'latest')
     $userinfo = verify_id('user', $vbulletin->GPC['userid'], 1, 1, FETCH_USERINFO_USERCSS);
 
     // don't show stuff for users awaiting moderation
-    if ($userinfo['usergroupid'] == 4 AND !($permissions['adminpermissions'] & $vbulletin->bf_ugp_adminpermissions['cancontrolpanel']))
-    {
+    if ($userinfo['usergroupid'] == 4 AND !($permissions['adminpermissions'] & $vbulletin->bf_ugp_adminpermissions['cancontrolpanel'])) {
         print_no_permission();
     }
 
     cache_permissions($userinfo, false);
-    if (!can_moderate(0, 'caneditalbumpicture') AND !($userinfo['permissions']['albumpermissions'] & $vbulletin->bf_ugp_albumpermissions['canalbum']))
-    {
+    if (!can_moderate(0, 'caneditalbumpicture') AND !($userinfo['permissions']['albumpermissions'] & $vbulletin->bf_ugp_albumpermissions['canalbum'])) {
         print_no_permission();
     }
 
-    if (!can_view_profile_section($userinfo['userid'], 'albums'))
-    {
+    if (!can_view_profile_section($userinfo['userid'], 'albums')) {
         // private album that we can not see
         standard_error(fetch_error('invalidid', $vbphrase['album'], $vbulletin->options['contactuslink']));
     }
 
     // determine if we can see this user's private albums and run the correct permission checks
-    if (!empty($albuminfo))
-    {
-        if ($albuminfo['state'] == 'private' AND !can_view_private_albums($userinfo['userid']))
-        {
+    if (!empty($albuminfo)) {
+        if ($albuminfo['state'] == 'private' AND !can_view_private_albums($userinfo['userid'])) {
             // private album that we can not see
             standard_error(fetch_error('invalidid', $vbphrase['album'], $vbulletin->options['contactuslink']));
-        }
-        else if ($albuminfo['state'] == 'profile' AND !can_view_profile_albums($userinfo['userid']))
-        {
+        } else if ($albuminfo['state'] == 'profile' AND !can_view_profile_albums($userinfo['userid'])) {
             // profile album that we can not see
             standard_error(fetch_error('invalidid', $vbphrase['album'], $vbulletin->options['contactuslink']));
         }
@@ -147,7 +129,7 @@ if ($_REQUEST['do'] != 'latest')
 }
 
 function
-do_get_albums ()
+do_get_albums()
 {
     global $vbulletin, $db, $show, $vbphrase, $foruminfo, $userinfo;
 
@@ -157,12 +139,10 @@ do_get_albums ()
     ));
 
     $state = array('public');
-    if (can_view_private_albums($userinfo['userid']))
-    {
+    if (can_view_private_albums($userinfo['userid'])) {
         $state[] = 'private';
     }
-    if (can_view_profile_albums($userinfo['userid']))
-    {
+    if (can_view_profile_albums($userinfo['userid'])) {
         $state[] = 'profile';
     }
 
@@ -173,8 +153,7 @@ do_get_albums ()
         AND state IN ('" . implode("', '", $state) . "')
         ");
 
-    if ($vbulletin->GPC['page'] < 1)
-    {
+    if ($vbulletin->GPC['page'] < 1) {
         $vbulletin->GPC['page'] = 1;
     }
 
@@ -210,8 +189,7 @@ do_get_albums ()
 
     $out_albums = array();
 
-    while ($album = $db->fetch_array($albums))
-    {
+    while ($album = $db->fetch_array($albums)) {
         $album['picturecount'] = vb_number_format($album['visible']);
         $album['picturedate'] = vbdate($vbulletin->options['dateformat'], $album['lastpicturedate'], true);
         $album['picturetime'] = vbdate($vbulletin->options['timeformat'], $album['lastpicturedate']);
@@ -221,28 +199,20 @@ do_get_albums ()
 
         $album['coverdimensions'] = ($album['thumbnail_width'] ? "width=\"$album[thumbnail_width]\" height=\"$album[thumbnail_height]\"" : '');
 
-        if ($album['state'] == 'private')
-        {
+        if ($album['state'] == 'private') {
             $show['personalalbum'] = true;
             $albumtype = $vbphrase['private_album_paren'];
-        }
-        else if ($album['state'] == 'profile')
-        {
+        } else if ($album['state'] == 'profile') {
             $show['personalalbum'] = true;
             $albumtype = $vbphrase['profile_album_paren'];
-        }
-        else
-        {
+        } else {
             $show['personalalbum'] = false;
         }
 
-        if ($album['moderation'] AND (can_moderate(0, 'canmoderatepictures') OR $vbulletin->userinfo['userid'] == $album['userid']))
-        {
+        if ($album['moderation'] AND (can_moderate(0, 'canmoderatepictures') OR $vbulletin->userinfo['userid'] == $album['userid'])) {
             $show['moderated'] = true;
             $album['moderatedcount'] = vb_number_format($album['moderation']);
-        }
-        else
-        {
+        } else {
             $show['moderated'] = false;
         }
 
@@ -281,17 +251,15 @@ do_get_albums ()
 }
 
 function
-do_get_photos ()
+do_get_photos()
 {
     global $vbulletin, $db, $show, $vbphrase, $foruminfo, $userinfo, $albuminfo, $session, $contenttypeid;
 
-    if (empty($albuminfo))
-    {
+    if (empty($albuminfo)) {
         standard_error(fetch_error('invalidid', $vbphrase['album'], $vbulletin->options['contactuslink']));
     }
 
-    if ($vbulletin->GPC['addgroup'] AND $albuminfo['userid'] != $vbulletin->userinfo['userid'])
-    {
+    if ($vbulletin->GPC['addgroup'] AND $albuminfo['userid'] != $vbulletin->userinfo['userid']) {
         print_no_permission();
     }
     ($hook = vBulletinHook::fetch_hook('album_album')) ? eval($hook) : false;
@@ -301,12 +269,9 @@ do_get_photos ()
 
     $input_pagenumber = $vbulletin->GPC['pagenumber'];
 
-    if (can_moderate(0, 'canmoderatepictures') OR $albuminfo['userid'] == $vbulletin->userinfo['userid'])
-    {
+    if (can_moderate(0, 'canmoderatepictures') OR $albuminfo['userid'] == $vbulletin->userinfo['userid']) {
         $totalpictures = $albuminfo['visible'] + $albuminfo['moderation'];
-    }
-    else
-    {
+    } else {
         $totalpictures = $albuminfo['visible'];
     }
 
@@ -342,24 +307,19 @@ do_get_photos ()
     $out_photos = array();
 
     $picnum = 0;
-    while ($picture = $db->fetch_array($pictures))
-    {
+    while ($picture = $db->fetch_array($pictures)) {
         $picture = prepare_pictureinfo_thumb($picture, $albuminfo);
 
-        if ($picnum % $vbulletin->options['album_pictures_perpage'] == 0)
-        {
+        if ($picnum % $vbulletin->options['album_pictures_perpage'] == 0) {
             $show['page_anchor'] = true;
             $page_anchor = ($picnum / $vbulletin->options['album_pictures_perpage']) + 1;
-        }
-        else
-        {
+        } else {
             $show['page_anchor'] = false;
         }
 
         $picnum++;
 
-        if ($picture['state'] != 'visible')
-        {
+        if ($picture['state'] != 'visible') {
             continue;
         }
 
@@ -386,13 +346,10 @@ do_get_photos ()
         )
     );
 
-    if ($albuminfo['state'] == 'private')
-    {
+    if ($albuminfo['state'] == 'private') {
         $show['personalalbum'] = true;
         $albumtype = $vbphrase['private_album_paren'];
-    }
-    else if ($albuminfo['state'] == 'profile')
-    {
+    } else if ($albuminfo['state'] == 'profile') {
         $show['personalalbum'] = true;
         $albumtype = $vbphrase['profile_album_paren'];
     }
@@ -407,21 +364,20 @@ do_get_photos ()
 }
 
 function
-do_create_album ()
+do_create_album()
 {
     global $vbulletin, $db, $show, $vbphrase, $foruminfo, $userinfo, $albuminfo, $session;
 
     // adding new, can only add in your own
-    if ($userinfo['userid'] != $vbulletin->userinfo['userid'])
-    {
+    if ($userinfo['userid'] != $vbulletin->userinfo['userid']) {
         print_no_permission();
     }
 
     $vbulletin->input->clean_array_gpc('p', array(
         // albumid cleaned at the beginning
-        'title'       => TYPE_NOHTML,
+        'title' => TYPE_NOHTML,
         'description' => TYPE_NOHTML,
-        'albumtype'   => TYPE_STR
+        'albumtype' => TYPE_STR
     ));
 
     if (!$vbulletin->GPC['albumtype']) {
@@ -429,13 +385,10 @@ do_create_album ()
     }
 
     $albumdata =& datamanager_init('Album', $vbulletin, ERRTYPE_ARRAY);
-    if (!empty($albuminfo['albumid']))
-    {
+    if (!empty($albuminfo['albumid'])) {
         $albumdata->set_existing($albuminfo);
         $albumdata->rebuild_counts();
-    }
-    else
-    {
+    } else {
         $albumdata->set('userid', $vbulletin->userinfo['userid']);
     }
 
@@ -452,12 +405,9 @@ do_create_album ()
 
     ($hook = vBulletinHook::fetch_hook('album_album_update')) ? eval($hook) : false;
 
-    if ($albumdata->errors)
-    {
+    if ($albumdata->errors) {
         json_error($albumdata->errors[0]);
-    }
-    else
-    {
+    } else {
         $albumdata->save();
     }
 
@@ -465,7 +415,7 @@ do_create_album ()
 }
 
 function
-do_upload_photo ()
+do_upload_photo()
 {
     global $vbulletin, $db, $show, $vbphrase, $foruminfo, $userinfo, $albuminfo, $session, $contenttypeid;
 
@@ -473,24 +423,22 @@ do_upload_photo ()
         'caption' => TYPE_STR,
     ));
 
-    if (empty($albuminfo))
-    {
+    if (empty($albuminfo)) {
         standard_error(fetch_error('invalidid', $vbphrase['album'], $vbulletin->options['contactuslink']));
     }
 
     // adding new, can only add in your own
-    if ($userinfo['userid'] != $vbulletin->userinfo['userid'])
-    {
+    if ($userinfo['userid'] != $vbulletin->userinfo['userid']) {
         print_no_permission();
     }
 
-    $vbulletin->input->clean_gpc('f', 'photo',    TYPE_FILE);
+    $vbulletin->input->clean_gpc('f', 'photo', TYPE_FILE);
     // format vbulletin expects: $files[name][x]... we only have one per post
     $vbulletin->GPC['attachment'] = array(
-	'name' => array($vbulletin->GPC['photo']['name']),
-	'tmp_name' => array($vbulletin->GPC['photo']['tmp_name']),
-	'error' => array($vbulletin->GPC['photo']['error']),
-	'size' => array($vbulletin->GPC['photo']['size']),
+        'name' => array($vbulletin->GPC['photo']['name']),
+        'tmp_name' => array($vbulletin->GPC['photo']['tmp_name']),
+        'error' => array($vbulletin->GPC['photo']['error']),
+        'size' => array($vbulletin->GPC['photo']['size']),
     );
 
     $values['albumid'] = $vbulletin->GPC['albumid'];
@@ -506,15 +454,13 @@ do_upload_photo ()
     $uploadids = $attachlib->upload($vbulletin->GPC['attachment'], array(), $vbulletin->GPC['filedata']);
     $uploads = explode(',', $uploadids);
 
-    if (!empty($attachlib->errors))
-    {
-	$errorlist = '';
-	foreach ($attachlib->errors AS $error)
-	{
-	    $filename = htmlspecialchars_uni($error['filename']);
-	    $errormessage = $error['error'] ? $error['error'] : $vbphrase["$error[errorphrase]"];
-	    json_error($errormessage, RV_UPLOAD_ERROR);
-	}
+    if (!empty($attachlib->errors)) {
+        $errorlist = '';
+        foreach ($attachlib->errors AS $error) {
+            $filename = htmlspecialchars_uni($error['filename']);
+            $errormessage = $error['error'] ? $error['error'] : $vbphrase["$error[errorphrase]"];
+            json_error($errormessage, RV_UPLOAD_ERROR);
+        }
     }
 
     // Fetch possible destination albums
@@ -528,10 +474,8 @@ do_upload_photo ()
 
     $destinations = array();
 
-    if ($db->num_rows($destination_result))
-    {
-        while ($album = $db->fetch_array($destination_result))
-        {
+    if ($db->num_rows($destination_result)) {
+        while ($album = $db->fetch_array($destination_result)) {
             $destinations[$album['albumid']] = $album;
         }
     }
@@ -549,8 +493,7 @@ do_upload_photo ()
         a.attachmentid IN (" . implode(',', $uploads) . ")
         ");
 
-    while ($picture = $db->fetch_array($picture_sql))
-    {
+    while ($picture = $db->fetch_array($picture_sql)) {
         $attachdata =& datamanager_init('Attachment', $vbulletin, ERRTYPE_ARRAY, 'attachment');
         $attachdata->set_existing($picture);
         $attachdata->set_info('albuminfo', $albuminfo);
@@ -562,15 +505,12 @@ do_upload_photo ()
     }
 
     // update all albums that pictures were moved to
-    foreach ($destinations as $albumid => $album)
-    {
-        if (sizeof($album['moved_pictures']))
-        {
+    foreach ($destinations as $albumid => $album) {
+        if (sizeof($album['moved_pictures'])) {
             $albumdata =& datamanager_init('Album', $vbulletin, ERRTYPE_SILENT);
             $albumdata->set_existing($album);
 
-            if (!$album['coverattachmentid'])
-            {
+            if (!$album['coverattachmentid']) {
                 $albumdata->set('coverattachmentid', array_shift($album['moved_pictures']));
             }
 
@@ -583,10 +523,8 @@ do_upload_photo ()
     $albumdata =& datamanager_init('Album', $vbulletin, ERRTYPE_SILENT);
     $albumdata->set_existing($albuminfo);
     $albumdata->rebuild_counts();
-    if ($new_coverid OR $updatecounter)
-    {
-        if ($new_coverid OR $cover_moved)
-        {
+    if ($new_coverid OR $updatecounter) {
+        if ($new_coverid OR $cover_moved) {
             $albumdata->set('coverattachmentid', $new_coverid);
         }
     }
@@ -597,10 +535,9 @@ do_upload_photo ()
     if (can_moderate(0, 'canmoderatepictures')
         OR
         (!$vbulletin->options['albums_pictures_moderation']
-        AND
-        ($vbulletin->userinfo['permissions']['albumpermissions'] & $vbulletin->bf_ugp_albumpermissions['picturefollowforummoderation']))
-    )
-    {
+            AND
+            ($vbulletin->userinfo['permissions']['albumpermissions'] & $vbulletin->bf_ugp_albumpermissions['picturefollowforummoderation']))
+    ) {
         exec_album_updated($vbulletin->userinfo, $albuminfo);
     }
 

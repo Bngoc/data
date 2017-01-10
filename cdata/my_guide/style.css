@@ -175,11 +175,11 @@ th.rbg, th.lbg {
     padding-top: 20px;
 }
 
-#bizwebselect{
+#bizwebselect {
     width: 197px;
 }
 
-#sub-select{
+#sub-select {
     COLOR: #fff;
     BORDER-TOP-STYLE: solid;
     BORDER-RIGHT-STYLE: solid;
@@ -189,11 +189,13 @@ th.rbg, th.lbg {
     padding: 4px 2px;
     width: 169px;
 }
+
 .sub_guide {
     padding: 0px 5px;
     display: block;
     margin: 0 auto;
 }
+
 ul.sysconf_top {
     float: left;
     display: inline-block;
@@ -202,6 +204,7 @@ ul.sysconf_top {
 table th, td {
     border: 1px solid #3a768f;
 }
+
 #table-custom td, th {
     border: 1px solid #999;
     padding: 0.5rem;

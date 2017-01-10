@@ -18,11 +18,13 @@ cn_snippet_messages();
                     </tr>
                     <tr>
                         <td>Server Name</td>
-                        <td><input type="text" id="nameLocal" placeholder="(local)" name="nameLocal" value="<?php echo REQ('nameLocal', 'POST'); ?>"/></td>
+                        <td><input type="text" id="nameLocal" placeholder="(local)" name="nameLocal"
+                                   value="<?php echo REQ('nameLocal', 'POST'); ?>"/></td>
                     </tr>
                     <tr>
                         <td>User quản lý SQL (thường là sa)</td>
-                        <td><input type="text" id="nameSql" placeholder="sa" name="nameSql" value="<?php echo REQ('nameSql', 'POST'); ?>"/></td>
+                        <td><input type="text" id="nameSql" placeholder="sa" name="nameSql"
+                                   value="<?php echo REQ('nameSql', 'POST'); ?>"/></td>
                     </tr>
                     <tr>
                         <td>Mật khẩu quản lý SQL</td>
@@ -30,7 +32,8 @@ cn_snippet_messages();
                     </tr>
                     <tr>
                         <td>Database sử dụng để lưu trữ thông tin MU</td>
-                        <td><input type="text" id="nameSaveDb" placeholder="MuOnline" name="nameSaveDb" value="<?php echo REQ('nameSaveDb', 'POST'); ?>"/></td>
+                        <td><input type="text" id="nameSaveDb" placeholder="MuOnline" name="nameSaveDb"
+                                   value="<?php echo REQ('nameSaveDb', 'POST'); ?>"/></td>
                     </tr>
                     <tr>
                         <td>Loại Server đang sử dụng</td>
@@ -44,7 +47,7 @@ cn_snippet_messages();
                     <tr>
                         <td>&nbsp;</td>
                         <td><input type="submit" value="Create connect Database"/>
-                        <input type="button" onclick="checkConnect()" value="Check Connect"/></td>
+                            <input type="button" onclick="checkConnect()" value="Check Connect"/></td>
                     </tr>
                     <tr>
                         <td colspan="100%">
@@ -67,16 +70,16 @@ cn_snippet_messages();
         pwdDb = $('#pwdDb').val();
         nameSaveDb = $('#nameSaveDb').val();
 
-        var fd = 'type_connect='+ type_connect + '&nameLocal=' + nameLocal + '&nameSql=' + nameSql + '&pwdDb=' + pwdDb + '&nameSaveDb=' + nameSaveDb;
+        var fd = 'type_connect=' + type_connect + '&nameLocal=' + nameLocal + '&nameSql=' + nameSql + '&pwdDb=' + pwdDb + '&nameSaveDb=' + nameSaveDb;
         $.ajax({
             type: "POST",
             url: "<?php echo getoption('http_script_dir') ?>/admin/core/cn_modify_admin.php?name_function=cn_check_conncet",
             data: fd,
             cache: false,
-            success: function(data){
+            success: function (data) {
                 varTemp = data.split('|');
                 $("#result").text(varTemp[1]).css('color', 'blue');
-                $('#actionSave').html('<input type="hidden" name="actionSave" value="'+ varTemp[0] +'"/>');
+                $('#actionSave').html('<input type="hidden" name="actionSave" value="' + varTemp[0] + '"/>');
             }
         });
     }

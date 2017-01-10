@@ -66,7 +66,7 @@ if ($sms_notify) echo $sms_notify;
 </form>
 
 <?php
-    echoFormVerifyChar(['action_rspoint' => 'rspoint']);
+echoFormVerifyChar(['action_rspoint' => 'rspoint']);
 ?>
 
 <table style="width: 100%" cellpadding="2">
@@ -86,7 +86,7 @@ if ($sms_notify) echo $sms_notify;
             <br/></td>
     </tr>
     <tr>
-        <td colspan="3"><em>Chi phí:</em> <b>25% Gcoin hoặc 25% Vpoint</b> tương ứng với số cấp Reset Vip.</td>
+        <td colspan="3"><em>Chi phí:</em> <b>5% Gcoin hoặc 5% Vpoint</b> tương ứng với số cấp Reset Vip.</td>
     </tr>
 </table>
 

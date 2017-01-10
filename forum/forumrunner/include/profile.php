@@ -38,38 +38,36 @@ require_once(DIR . '/includes/class_userprofile.php');
 require_once(DIR . '/includes/class_profileblock.php');
 
 function
-do_get_profile ()
+do_get_profile()
 {
     global $vbulletin, $db, $show, $vbphrase, $permissions, $imodcache;
 
     $vbulletin->input->clean_array_gpc('r', array(
-	'userid' => TYPE_UINT,
+        'userid' => TYPE_UINT,
     ));
 
     if (!$vbulletin->userinfo['userid'] && !$vbulletin->GPC['userid']) {
-	json_error(ERR_INVALID_LOGGEDIN, RV_NOT_LOGGED_IN);
+        json_error(ERR_INVALID_LOGGEDIN, RV_NOT_LOGGED_IN);
     }
 
-    if (!($permissions['forumpermissions'] & $vbulletin->bf_ugp_forumpermissions['canview']) OR !($permissions['genericpermissions'] & $vbulletin->bf_ugp_genericpermissions['canviewmembers']))
-    {
-	json_error(ERR_NO_PERMISSION);
+    if (!($permissions['forumpermissions'] & $vbulletin->bf_ugp_forumpermissions['canview']) OR !($permissions['genericpermissions'] & $vbulletin->bf_ugp_genericpermissions['canviewmembers'])) {
+        json_error(ERR_NO_PERMISSION);
     }
 
     if (!$vbulletin->GPC['userid']) {
-	$vbulletin->GPC['userid'] = $vbulletin->userinfo['userid'];
+        $vbulletin->GPC['userid'] = $vbulletin->userinfo['userid'];
     }
 
     $fetch_userinfo_options = (
-	FETCH_USERINFO_AVATAR | FETCH_USERINFO_LOCATION |
-	FETCH_USERINFO_PROFILEPIC | FETCH_USERINFO_SIGPIC |
-	FETCH_USERINFO_USERCSS | FETCH_USERINFO_ISFRIEND
+        FETCH_USERINFO_AVATAR | FETCH_USERINFO_LOCATION |
+        FETCH_USERINFO_PROFILEPIC | FETCH_USERINFO_SIGPIC |
+        FETCH_USERINFO_USERCSS | FETCH_USERINFO_ISFRIEND
     );
 
     $userinfo = verify_id('user', $vbulletin->GPC['userid'], 1, $fetch_userinfo_options);
 
-    if ($userinfo['usergroupid'] == 4 AND !($permissions['adminpermissions'] & $vbulletin->bf_ugp_adminpermissions['cancontrolpanel']))
-    {
-	json_error(ERR_NO_PERMISSION);
+    if ($userinfo['usergroupid'] == 4 AND !($permissions['adminpermissions'] & $vbulletin->bf_ugp_adminpermissions['cancontrolpanel'])) {
+        json_error(ERR_NO_PERMISSION);
     }
 
     $posts = $userinfo['posts'];
@@ -85,14 +83,14 @@ do_get_profile ()
 
     $avatarurl_info = fetch_avatar_url($userinfo['userid']);
     if ($avatarurl_info) {
-	$out['avatarurl'] = process_avatarurl($avatarurl_info[0]);
+        $out['avatarurl'] = process_avatarurl($avatarurl_info[0]);
     }
 
     cache_moderators();
     $canbanuser = (($vbulletin->userinfo['permissions']['adminpermissions'] & $vbulletin->bf_ugp_adminpermissions['cancontrolpanel']) OR can_moderate(0, 'canbanusers'));
 
     if ($canbanuser) {
-	$out['ban'] = true;
+        $out['ban'] = true;
     }
 
     $groups = array();
@@ -161,17 +159,15 @@ do_get_profile ()
 }
 
 function
-do_upload_avatar ()
+do_upload_avatar()
 {
     global $vbulletin, $db, $show, $vbphrase, $permissions;
 
-    if (!($permissions['genericpermissions'] & $vbulletin->bf_ugp_genericpermissions['canmodifyprofile']))
-    {
+    if (!($permissions['genericpermissions'] & $vbulletin->bf_ugp_genericpermissions['canmodifyprofile'])) {
         print_no_permission();
     }
 
-    if (!$vbulletin->options['avatarenabled'])
-    {
+    if (!$vbulletin->options['avatarenabled']) {
         standard_error(fetch_error('avatardisabled'));
     }
 

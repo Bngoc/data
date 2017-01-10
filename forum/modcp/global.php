@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -20,15 +20,13 @@ define('VB_AREA', 'ModCP');
 define('VB_ENTRY', 'ModCP');
 define('IN_CONTROL_PANEL', true);
 
-if (!isset($phrasegroups) OR !is_array($phrasegroups))
-{
-	$phrasegroups = array();
+if (!isset($phrasegroups) OR !is_array($phrasegroups)) {
+    $phrasegroups = array();
 }
 $phrasegroups[] = 'cpglobal';
 
-if (!isset($specialtemplates) OR !is_array($specialtemplates))
-{
-	$specialtemplates = array();
+if (!isset($specialtemplates) OR !is_array($specialtemplates)) {
+    $specialtemplates = array();
 }
 $specialtemplates[] = 'pluginlistadmin';
 
@@ -44,9 +42,8 @@ require_once(DIR . '/includes/functions_calendar.php');
 // ###################### Start headers #######################
 exec_nocache_headers();
 
-if ($vbulletin->userinfo['cssprefs'] != '')
-{
-	$vbulletin->options['cpstylefolder'] = $vbulletin->userinfo['cssprefs'];
+if ($vbulletin->userinfo['cssprefs'] != '') {
+    $vbulletin->options['cpstylefolder'] = $vbulletin->userinfo['cssprefs'];
 }
 
 // ###################### Get date / time info #######################
@@ -65,34 +62,31 @@ $vbulletin->userinfo['permissions'] =& $permissions;
 $cpsession = array();
 
 $vbulletin->input->clean_array_gpc('c', array(
-	COOKIE_PREFIX . 'cpsession' => TYPE_STR,
+    COOKIE_PREFIX . 'cpsession' => TYPE_STR,
 ));
 
-if (!empty($vbulletin->GPC[COOKIE_PREFIX . 'cpsession']))
-{
-	$cpsession = $db->query_first("
+if (!empty($vbulletin->GPC[COOKIE_PREFIX . 'cpsession'])) {
+    $cpsession = $db->query_first("
 		SELECT * FROM " . TABLE_PREFIX . "cpsession
 		WHERE userid = " . $vbulletin->userinfo['userid'] . "
 			AND hash = '" . $db->escape_string($vbulletin->GPC[COOKIE_PREFIX . 'cpsession']) . "'
 			AND dateline > " . iif($vbulletin->options['timeoutcontrolpanel'], intval(TIMENOW - $vbulletin->options['cookietimeout']), intval(TIMENOW - 3600))
-	);
+    );
 
-	if (!empty($cpsession))
-	{
-		$db->shutdown_query("
+    if (!empty($cpsession)) {
+        $db->shutdown_query("
 			UPDATE LOW_PRIORITY " . TABLE_PREFIX . "cpsession
 			SET dateline = " . TIMENOW . "
 			WHERE userid = " . $vbulletin->userinfo['userid'] . "
 				AND hash = '" . $db->escape_string($vbulletin->GPC[COOKIE_PREFIX . 'cpsession']) . "'
 		");
-	}
+    }
 }
 
 define('CP_SESSIONHASH', $cpsession['hash']);
 
-if ((!can_moderate() AND !can_moderate_calendar()) OR ($vbulletin->options['timeoutcontrolpanel'] AND !$vbulletin->session->vars['loggedin']) OR empty($vbulletin->GPC[COOKIE_PREFIX . 'cpsession']) OR $vbulletin->GPC[COOKIE_PREFIX . 'cpsession'] != $cpsession['hash'] OR empty($cpsession))
-{
-	print_cp_login();
+if ((!can_moderate() AND !can_moderate_calendar()) OR ($vbulletin->options['timeoutcontrolpanel'] AND !$vbulletin->session->vars['loggedin']) OR empty($vbulletin->GPC[COOKIE_PREFIX . 'cpsession']) OR $vbulletin->GPC[COOKIE_PREFIX . 'cpsession'] != $cpsession['hash'] OR empty($cpsession)) {
+    print_cp_login();
 }
 
 ($hook = vBulletinHook::fetch_hook('mod_global')) ? eval($hook) : false;

@@ -138,11 +138,13 @@
         </tr>
         <tr>
             <td colspan="3">
-                <div align="right"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image004.jpg"></div>
+                <div align="right"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image004.jpg">
+                </div>
             </td>
             <td colspan="2" class="style3">+</td>
             <td colspan="3">
-                <div align="right"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image006.jpg"></div>
+                <div align="right"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image006.jpg">
+                </div>
             </td>
             <td colspan="2">
                 <div align="center" class="style3">=</div>

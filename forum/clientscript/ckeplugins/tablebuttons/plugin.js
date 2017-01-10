@@ -1,198 +1,178 @@
-(function()
-{
-	CKEDITOR.plugins.add('tablebuttons',
-	{
-		requires: ['tabletools'],
-		
-		init: function(editor)
-		{
-			var lang = editor.lang.table;
+(function () {
+    CKEDITOR.plugins.add('tablebuttons',
+        {
+            requires: ['tabletools'],
 
-			editor.ui.addButton('InsertRowBefore',
-			{
-				label: lang.row.insertBefore,
-				command: 'vbRowInsertBefore'
-			});
+            init: function (editor) {
+                var lang = editor.lang.table;
 
-			editor.addCommand('vbRowInsertBefore',
-				{
-					exec : function(editor)
-					{
-						var selection = editor.getSelection(),
-							startElement = selection && selection.getStartElement(),
-							table = startElement && startElement.getAscendant( 'table', 1 );
+                editor.ui.addButton('InsertRowBefore',
+                    {
+                        label: lang.row.insertBefore,
+                        command: 'vbRowInsertBefore'
+                    });
 
-						if (!table)
-						{
-							return;
-						}
-						
-						editor.getCommand('rowInsertBefore').exec();
-					}
-			});
-			
-			editor.ui.addButton('InsertRowAfter',
-			{
-				label: lang.row.insertAfter,
-				command: 'vbRowInsertAfter'
-			});
+                editor.addCommand('vbRowInsertBefore',
+                    {
+                        exec: function (editor) {
+                            var selection = editor.getSelection(),
+                                startElement = selection && selection.getStartElement(),
+                                table = startElement && startElement.getAscendant('table', 1);
 
-			editor.addCommand('vbRowInsertAfter',
-				{
-					exec : function(editor)
-					{
-						var selection = editor.getSelection(),
-							startElement = selection && selection.getStartElement(),
-							table = startElement && startElement.getAscendant( 'table', 1 );
+                            if (!table) {
+                                return;
+                            }
 
-						if (!table)
-						{
-							return;
-						}
+                            editor.getCommand('rowInsertBefore').exec();
+                        }
+                    });
 
-						editor.getCommand('rowInsertAfter').exec();
-					}
-			});
+                editor.ui.addButton('InsertRowAfter',
+                    {
+                        label: lang.row.insertAfter,
+                        command: 'vbRowInsertAfter'
+                    });
 
-			editor.ui.addButton('DeleteRow',
-			{
-				label: lang.row.deleteRow,
-				command: 'vbRowDelete'
-			});
+                editor.addCommand('vbRowInsertAfter',
+                    {
+                        exec: function (editor) {
+                            var selection = editor.getSelection(),
+                                startElement = selection && selection.getStartElement(),
+                                table = startElement && startElement.getAscendant('table', 1);
 
-			editor.addCommand('vbRowDelete',
-				{
-					exec : function(editor)
-					{
-						var selection = editor.getSelection(),
-							startElement = selection && selection.getStartElement(),
-							table = startElement && startElement.getAscendant( 'table', 1 );
+                            if (!table) {
+                                return;
+                            }
 
-						if (!table)
-						{
-							return;
-						}
-						
-						editor.getCommand('rowDelete').exec();
-					}
-			});
+                            editor.getCommand('rowInsertAfter').exec();
+                        }
+                    });
 
-			editor.ui.addButton('InsertColumnBefore',
-			{
-				label: lang.column.insertBefore,
-				command: 'vbColumnInsertBefore'
-			});
+                editor.ui.addButton('DeleteRow',
+                    {
+                        label: lang.row.deleteRow,
+                        command: 'vbRowDelete'
+                    });
 
-			editor.addCommand('vbColumnInsertBefore',
-				{
-					exec : function(editor)
-					{
-						var selection = editor.getSelection(),
-							startElement = selection && selection.getStartElement(),
-							table = startElement && startElement.getAscendant( 'table', 1 );
+                editor.addCommand('vbRowDelete',
+                    {
+                        exec: function (editor) {
+                            var selection = editor.getSelection(),
+                                startElement = selection && selection.getStartElement(),
+                                table = startElement && startElement.getAscendant('table', 1);
 
-						if (!table)
-						{
-							return;
-						}
-						
-						editor.getCommand('columnInsertBefore').exec();
-					}
-			});
+                            if (!table) {
+                                return;
+                            }
 
-			editor.ui.addButton('InsertColumnAfter',
-			{
-				label: lang.column.insertAfter,
-				command: 'vbColumnInsertAfter'
-			});
+                            editor.getCommand('rowDelete').exec();
+                        }
+                    });
 
-			editor.addCommand('vbColumnInsertAfter',
-				{
-					exec : function(editor)
-					{
-						var selection = editor.getSelection(),
-							startElement = selection && selection.getStartElement(),
-							table = startElement && startElement.getAscendant( 'table', 1 );
+                editor.ui.addButton('InsertColumnBefore',
+                    {
+                        label: lang.column.insertBefore,
+                        command: 'vbColumnInsertBefore'
+                    });
 
-						if (!table)
-						{
-							return;
-						}
-						
-						editor.getCommand('columnInsertAfter').exec();
-					}
-			});
+                editor.addCommand('vbColumnInsertBefore',
+                    {
+                        exec: function (editor) {
+                            var selection = editor.getSelection(),
+                                startElement = selection && selection.getStartElement(),
+                                table = startElement && startElement.getAscendant('table', 1);
 
-			editor.ui.addButton('DeleteColumn',
-			{
-				label: lang.column.deleteColumn,
-				command: 'vbColumnDelete'
-			});
+                            if (!table) {
+                                return;
+                            }
 
-			editor.addCommand('vbColumnDelete',
-				{
-					exec : function(editor)
-					{
-						var selection = editor.getSelection(),
-							startElement = selection && selection.getStartElement(),
-							table = startElement && startElement.getAscendant( 'table', 1 );
+                            editor.getCommand('columnInsertBefore').exec();
+                        }
+                    });
 
-						if (!table)
-						{
-							return;
-						}
-						
-						editor.getCommand('columnDelete').exec();
-					}
-			});
+                editor.ui.addButton('InsertColumnAfter',
+                    {
+                        label: lang.column.insertAfter,
+                        command: 'vbColumnInsertAfter'
+                    });
 
-			editor.addCommand('vbTableProperties',
-				{
-					exec : function(editor)
-					{
-						if (CKEDITOR.env.ie)
-						{
-							editor.selectedTable = null;
-							var selection = editor.getSelection(),
-								selectedTable = null;
+                editor.addCommand('vbColumnInsertAfter',
+                    {
+                        exec: function (editor) {
+                            var selection = editor.getSelection(),
+                                startElement = selection && selection.getStartElement(),
+                                table = startElement && startElement.getAscendant('table', 1);
 
-							if (selection)
-							{
-								var ranges = selection.getRanges();
+                            if (!table) {
+                                return;
+                            }
 
-								if ((selectedTable = selection.getSelectedElement()))
-								{
-									editor.selectedTable = selectedTable.getAscendant('table', true);
-								}
-								else if (ranges && ranges.length > 0)
-								{
-									// Webkit could report the following range on cell selection (#4948):
-									// <table><tr><td>[&nbsp;</td></tr></table>]
-									if ( CKEDITOR.env.webkit )
-									{
-										ranges[ 0 ].shrink( CKEDITOR.NODE_ELEMENT );
-									}
+                            editor.getCommand('columnInsertAfter').exec();
+                        }
+                    });
 
-									var rangeRoot = ranges[0].getCommonAncestor(true);
-									editor.selectedTable = rangeRoot.getAscendant('table', true);
-								}
-							}
-						}
-						editor.getCommand('tableProperties').exec();
-					}
-			});
+                editor.ui.addButton('DeleteColumn',
+                    {
+                        label: lang.column.deleteColumn,
+                        command: 'vbColumnDelete'
+                    });
 
-			editor.ui.addButton('TableProperties',
-			{
-				label: lang.menu,
-				command: 'vbTableProperties'
-			});
+                editor.addCommand('vbColumnDelete',
+                    {
+                        exec: function (editor) {
+                            var selection = editor.getSelection(),
+                                startElement = selection && selection.getStartElement(),
+                                table = startElement && startElement.getAscendant('table', 1);
 
-			editor.ui.addButton('DeleteTable',
-			{
-				label: lang.deleteTable,
-				command: 'tableDelete'
-			});
-		}
-	});
+                            if (!table) {
+                                return;
+                            }
+
+                            editor.getCommand('columnDelete').exec();
+                        }
+                    });
+
+                editor.addCommand('vbTableProperties',
+                    {
+                        exec: function (editor) {
+                            if (CKEDITOR.env.ie) {
+                                editor.selectedTable = null;
+                                var selection = editor.getSelection(),
+                                    selectedTable = null;
+
+                                if (selection) {
+                                    var ranges = selection.getRanges();
+
+                                    if ((selectedTable = selection.getSelectedElement())) {
+                                        editor.selectedTable = selectedTable.getAscendant('table', true);
+                                    }
+                                    else if (ranges && ranges.length > 0) {
+                                        // Webkit could report the following range on cell selection (#4948):
+                                        // <table><tr><td>[&nbsp;</td></tr></table>]
+                                        if (CKEDITOR.env.webkit) {
+                                            ranges[0].shrink(CKEDITOR.NODE_ELEMENT);
+                                        }
+
+                                        var rangeRoot = ranges[0].getCommonAncestor(true);
+                                        editor.selectedTable = rangeRoot.getAscendant('table', true);
+                                    }
+                                }
+                            }
+                            editor.getCommand('tableProperties').exec();
+                        }
+                    });
+
+                editor.ui.addButton('TableProperties',
+                    {
+                        label: lang.menu,
+                        command: 'vbTableProperties'
+                    });
+
+                editor.ui.addButton('DeleteTable',
+                    {
+                        label: lang.deleteTable,
+                        command: 'tableDelete'
+                    });
+            }
+        });
 })();

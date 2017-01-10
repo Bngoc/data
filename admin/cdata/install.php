@@ -24,10 +24,10 @@ cn_snippet_messages();
                         <td>Confirm</td>
                         <td><input type="password" name="password2"/></td>
                     </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td><input type="submit" value="Create admin Account"/></td>
-                        </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><input type="submit" value="Create admin Account"/></td>
+                    </tr>
                 </table>
             </td>
             <td valign="top" style="padding: 0 0 0 32px; font-size: 18px; color: #888;">

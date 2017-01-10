@@ -28,7 +28,7 @@ list($errors_result) = _GL('errors_result');
                                                 value="<?php echo isset($_POST['nameAccount']) ? $_POST['nameAccount'] : ''; ?>"
                                                 onkeypress="isAlphabetKey(event, 'userID');"
                                                 onkeyup="findNewUser(this.value, 'userID', 'tài khoản');"
-                                                type="text" placeholder="eg. myaccount90" maxlength="10" required />
+                                                type="text" placeholder="eg. myaccount90" maxlength="10" required/>
                 <span id="error_noti"></span></td>
             <td class="bizwebform_col_3" id="userID"></td>
         </tr>
@@ -70,12 +70,12 @@ list($errors_result) = _GL('errors_result');
             <td class="bizwebform_col_3" id="err_num7"></td>
         </tr>
         <tr>
-        <td class="bizwebform_col_1">Mật khẩu Web <span class="required">*</span></td>
-        <td class="bizwebform_col_2"><input class="bizwebform" class="txt_160" name="pass_web" type="password"
-                                            id="pass1"
-                                            required="required" maxlength="15"
-                                            onkeypress="valid_pass(this.value, 'msg_passweb','mật khẩu');"/></td>
-        <td class="bizwebform_col_3" id="msg_passweb"></td>
+            <td class="bizwebform_col_1">Mật khẩu Web <span class="required">*</span></td>
+            <td class="bizwebform_col_2"><input class="bizwebform" class="txt_160" name="pass_web" type="password"
+                                                id="pass1"
+                                                required="required" maxlength="15"
+                                                onkeypress="valid_pass(this.value, 'msg_passweb','mật khẩu');"/></td>
+            <td class="bizwebform_col_3" id="msg_passweb"></td>
         </tr>
         <tr>
             <td class="bizwebform_col_1">Xác nhận mật khẩu Web <span class="required">*</span></td>
@@ -97,7 +97,8 @@ list($errors_result) = _GL('errors_result');
         </tr>
         <tr>
             <td class="bizwebform_col_1">Số điện thoại di động <span class="required">*</span></td>
-            <td class="bizwebform_col_2"><input name="phoneNumber" class="bizwebform" type="text" maxlength="17" id="phoneNumber"
+            <td class="bizwebform_col_2"><input name="phoneNumber" class="bizwebform" type="text" maxlength="17"
+                                                id="phoneNumber"
                                                 autocomplete="off"
                                                 onkeyup="renderPhoneTel(this.value, this.id); checkPhoneNumber(this.value, 'phoneNumberID');"
                                                 value="<?php echo isset($_POST['phoneNumber']) ? $_POST['phoneNumber'] : ''; ?>"/>
@@ -124,7 +125,7 @@ list($errors_result) = _GL('errors_result');
                     $arrQA = explode(',', $question_answers);
                     $fg = isset($_POST['nameQuestion']) ? $_POST['nameQuestion'] : null;
                     foreach ($arrQA as $key => $item) {
-                        echo '<option '. ($fg == ($key + 1) ? 'selected' : '') .' value="' . ($key + 1) . '">' . $item . '? </option>';
+                        echo '<option ' . ($fg == ($key + 1) ? 'selected' : '') . ' value="' . ($key + 1) . '">' . $item . '? </option>';
                     }
                     ?>
                 </select>

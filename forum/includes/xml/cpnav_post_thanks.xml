@@ -2,23 +2,23 @@
 
 <navgroups product="post_thanks">
 
-	<navgroup phrase="post_thanks" permissions="canadminthreads" displayorder="82">
+    <navgroup phrase="post_thanks" permissions="canadminthreads" displayorder="82">
 
-		<navoption displayorder="10">
-			<phrase>post_thanks_settings</phrase>
-			<link>options.php?do=options&amp;dogroup=post_thanks</link>
-		</navoption>
+        <navoption displayorder="10">
+            <phrase>post_thanks_settings</phrase>
+            <link>options.php?do=options&amp;dogroup=post_thanks</link>
+        </navoption>
 
-		<navoption displayorder="20">
-			<phrase>post_thanks_recounters</phrase>
-			<link>post_thanks_admin.php?do=recounters</link>
-		</navoption>
+        <navoption displayorder="20">
+            <phrase>post_thanks_recounters</phrase>
+            <link>post_thanks_admin.php?do=recounters</link>
+        </navoption>
 
-		<navoption displayorder="30">
-			<phrase>post_thanks_special_actions</phrase>
-			<link>post_thanks_admin.php?do=special_actions</link>
-		</navoption>
+        <navoption displayorder="30">
+            <phrase>post_thanks_special_actions</phrase>
+            <link>post_thanks_admin.php?do=special_actions</link>
+        </navoption>
 
-	</navgroup>
+    </navgroup>
 
 </navgroups>

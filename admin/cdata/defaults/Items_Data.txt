@@ -1,4 +1,8 @@
-Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
+// Column1 option add images
+// Ex: |1|1|Kris|1|2|NO|NO| 	==> option IMG => [0100100]
+// Ex: 20|2|2|Kris|1|2|NO|NO| 	==> option IMG => [0100220]
+// Ex: 0002200|0|22|Kris|1|2|NO|NO| 	==> option IMG => [0002200]
+// Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 0000000|0|0|Kris|1|2|NO|NO|
 0000100|0|1|Short Sword|1|3|NO|NO
 0000200|0|2|Rapier|1|3|Ceto|NO
@@ -1403,10 +1407,12 @@ Column1|TP|ID|NAME|X|Y|SetItem1|SetItem2
 1400901|14|9|Olivas|1|2|NO|NO
 1401000|14|10|Town Portal Scroll|1|2|NO|NO
 1401100|14|11|Box Of Luck|1|1|NO|NO
-|14|12|Cuore del drago|1|1|NO|NO
+0|14|12|Cuore del drago|1|1|NO|NO
+1|14|12|Heart|1|1|NO|NO
+2|14|12|Pergamin|1|1|NO|NO
 1401300|14|13|Jewel of Bles|1|1|NO|NO
 1401400|14|14|Jewel of Soul|1|1|NO|NO
-1401500|14|15|Zen|1|1|NO|NO
+1401599|14|15|Zen|1|1|NO|NO
 1401600|14|16|Jewel of Life|1|1|NO|NO
 1401707|14|17|Devils Eye +X|1|1|NO|NO
 1401807|14|18|Devils Key +X|1|1|NO|NO

@@ -21,7 +21,7 @@ $methods += array(
         'include' => 'album.php',
         'function' => 'do_get_albums',
     ),
-    
+
     /*
      * get_photos
      *
@@ -46,7 +46,7 @@ $methods += array(
         'include' => 'album.php',
         'function' => 'do_create_album',
     ),
-    
+
     /*
      * upload_photo
      *
@@ -72,8 +72,8 @@ $methods += array(
      * success
      */
     'like' => array(
-	'include' => 'misc.php',
-	'function' => 'do_like',
+        'include' => 'misc.php',
+        'function' => 'do_like',
     ),
 );
 

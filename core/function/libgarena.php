@@ -236,14 +236,14 @@ function cn_writelog($content, $info = '', $user = '')
             break;
     }
 
-    if ($user){
+    if ($user) {
         $member = $user;
     } else {
-        $member = member_get()['mu_Account'];
-        if(empty($member)) $member = member_get()['mu_Gamer'];
+        $member = $_SESSION['mu_Account'];
+        if (empty($member)) $member = $_SESSION['mu_Gamer'];
     }
 
-    if (!isset($member) || empty($member)) $member = 'UNKNOWN';
+    if (empty($member)) $member = 'UNKNOWN';
 
 
     if (($remote_addr = $_SERVER['REMOTE_ADDR']) == '') {
@@ -265,17 +265,18 @@ function cn_writelog($content, $info = '', $user = '')
     }
 }
 
-function ewConvertToUtf8($str)
+function cn_ewConvertToUtf8($str)
 {
-    return ewConvert(ewEncoding, "UTF-8", $str);
+    return cn_ewConvert(ewEncoding, "UTF-8", $str);
 }
 
- function ewConvertFromUtf8($str)
- {
-     $str = sanitizeTitle($str);
-     return ewConvert("UTF-8", ewEncoding, $str);
- }
-function ewConvert($from, $to, $str)
+function cn_ewConvertFromUtf8($str)
+{
+    $str = cn_sanitizeTitle($str);
+    return cn_ewConvert("UTF-8", ewEncoding, $str);
+}
+
+function cn_ewConvert($from, $to, $str)
 {
     if ($from != "" && $to != "" && $from != $to) {
         if (function_exists("iconv")) {
@@ -290,35 +291,38 @@ function ewConvert($from, $to, $str)
     }
 }
 
-function sanitizeTitle($string) {
-    if(!$string) return false;
+function cn_sanitizeTitle($string)
+{
+    if (!$string) return false;
     $utf8 = array(
-        'a'=>'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ|Á|À|Ả|Ã|Ạ|Ă|Ắ|Ặ|Ằ|Ẳ|Ẵ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
-        'd'=>'đ|Đ',
-        'e'=>'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ|É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ',
-        'i'=>'í|ì|ỉ|ĩ|ị|Í|Ì|Ỉ|Ĩ|Ị',
-        'o'=>'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ|Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
-        'u'=>'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự|Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
-        'y'=>'ý|ỳ|ỷ|ỹ|ỵ|Ý|Ỳ|Ỷ|Ỹ|Ỵ',
+        'a' => 'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ|Á|À|Ả|Ã|Ạ|Ă|Ắ|Ặ|Ằ|Ẳ|Ẵ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
+        'd' => 'đ|Đ',
+        'e' => 'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ|É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ',
+        'i' => 'í|ì|ỉ|ĩ|ị|Í|Ì|Ỉ|Ĩ|Ị',
+        'o' => 'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ|Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
+        'u' => 'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự|Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
+        'y' => 'ý|ỳ|ỷ|ỹ|ỵ|Ý|Ỳ|Ỷ|Ỹ|Ỵ',
     );
-    foreach($utf8 as $ascii=>$uni) $string = preg_replace("/($uni)/i",$ascii,$string);
-    $string = utf8Url($string);
+    foreach ($utf8 as $ascii => $uni) $string = preg_replace("/($uni)/i", $ascii, $string);
+    $string = cn_utf8Url($string);
     return $string;
 }
 
-function utf8Url($string){
+function cn_utf8Url($string)
+{
     $string = strtolower($string);
-    $string = str_replace( "ß", "ss", $string);
-    $string = str_replace( "%", "", $string);
-    $string = preg_replace("/[^_a-zA-Z0-9 -]/", "",$string);
+    $string = str_replace("ß", "ss", $string);
+    $string = str_replace("%", "", $string);
+    $string = preg_replace("/[^_a-zA-Z0-9 -]/", "", $string);
     $string = str_replace(array('%20', ' '), '-', $string);
-    $string = str_replace("----","-",$string);
-    $string = str_replace("---","-",$string);
-    $string = str_replace("--","-",$string);
+    $string = str_replace("----", "-", $string);
+    $string = str_replace("---", "-", $string);
+    $string = str_replace("--", "-", $string);
     return $string;
 }
 
-function echoArr($arr){
+function echoArr($arr)
+{
     echo '<pre>';
     var_dump($arr);
     echo '</pre>';
@@ -326,27 +330,41 @@ function echoArr($arr){
 
 function cn_analysis_code32($string, $title, $price, $image_mh)
 {
-
     if ($string == 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF' ||
-        $string == 'ffffffffffffffffffffffffffffffff' || strlen($string) != 32) {
+        $string == 'ffffffffffffffffffffffffffffffff' || strlen($string) != 32
+    ) {
         return '';
     }
     // analysis Item 32
-    $id = hexdec(substr($string, 0, 2));                // Item ID
-    $group = hexdec(substr($string, 18, 2));            // Item Type
-    $group = $group / 16;                               // Item Type
-    $option = hexdec(substr($string, 2, 2));            // Item Level/Skill/Option Data
-    $durability = hexdec(substr($string, 4, 2));        // Item Durability
-    $serial = substr($string, 6, 8);                    // Item SKey
-    $exc_option = hexdec(substr($string, 14, 2));       // Item Excellent Info/ Option
-    $ancient = hexdec(substr($string, 16, 2));          // Ancient data
+    $id = hexdec(substr($string, 0, 2));                        // Item ID
+    $group = hexdec(substr($string, 18, 2));                    // Item Type
+    $group = $group / 16;                                       // Item Type
+    $option = hexdec(substr($string, 2, 2));                    // Item Level/Skill/Option Data
+////----------------------------------------------------
+    $optionTemp = hexdec(substr($string, 2, 2));              // Item Level/Skill/Option Data
+    $optionClone1 = floor($optionTemp / 8);
+    $optionClone = ceil($optionClone1 % 8);
+
+    if ($optionClone) {
+        $optionTemp14 = floor(hexdec(substr($string, 14, 2)) / 8);
+        $optionTemp14Clone = ceil($optionTemp14 % 8);
+        $optionClone = abs($optionClone - $optionTemp14Clone);
+    }
+//    echo 'substr2 -> ' . substr($string, 2, 2) .' -Item22 -> ' . $optionTemp . '  -sub14=> ' . substr($string, 14, 2) . '  -Temp14-> ' . $optionTemp14 . '  -optionClone-> ' .  $optionClone . '<br>';
+//    //----------------------------------------------------
+//
+
+    $durability = hexdec(substr($string, 4, 2));                // Item Durability
+    $serial = substr($string, 6, 8);                            // Item SKey
+    $exc_option = hexdec(substr($string, 14, 2));               // Item Excellent Info/ Option
+    $ancient = hexdec(substr($string, 16, 2));                  // Ancient data
     $harmony = hexdec(substr($string, 20, 2));
 
-    $socket_slot[0] = hexdec(substr($string, 22, 2));    // Socket data
-    $socket_slot[1] = hexdec(substr($string, 24, 2));    // Socket data
-    $socket_slot[2] = hexdec(substr($string, 26, 2));    // Socket data
-    $socket_slot[3] = hexdec(substr($string, 28, 2));    // Socket data
-    $socket_slot[4] = hexdec(substr($string, 30, 2));    // Socket data
+    $socket_slot[0] = hexdec(substr($string, 22, 2));           // Socket data
+    $socket_slot[1] = hexdec(substr($string, 24, 2));           // Socket data
+    $socket_slot[2] = hexdec(substr($string, 26, 2));           // Socket data
+    $socket_slot[3] = hexdec(substr($string, 28, 2));           // Socket data
+    $socket_slot[4] = hexdec(substr($string, 30, 2));           // Socket data
 
     $output = array(
         'info' => '',
@@ -682,7 +700,7 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
         if ($val) {
             if ($val == 255) {
                 $item_socket .= '<br>Socket ' . ($key + 1) . ': (Chưa khảm dòng socket)';
-            } else {
+            } elseif (!empty($val)) {
                 $item_socket .= '<br>Socket ' . ($key + 1) . ': ' . $socket_type[$val];
             }
         }
@@ -824,7 +842,7 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
 
     $output['info'] = $item_info;
     $output['name'] = $item_name . "<font color=maroon> <i>(" . $title . ") </i></font>";
-    $output['image'] = $item_read['Image'];
+    $output['image'] = cn_renderImageItemCode($group, $id, $optionClone);
     $output['x'] = $item_read['X'];
     $output['y'] = $item_read['Y'];
     $output['set1'] = $item_read['SET1'];
@@ -835,11 +853,12 @@ function cn_analysis_code32($string, $title, $price, $image_mh)
     $output['price'] = $price;
     $output['code32'] = $string;
     $output['image_mh'] = $image_mh;
+    $output['option'] = $optionClone;
 
     return $output;
 }
 
-function getCodeItem($string = '')
+function cn_getCodeItem($string = '')
 {
     $output = array('id' => '', 'group' => '', 'level' => '', 'serial' => '');
     if (empty($string) || strlen($string) != 32) {
@@ -862,7 +881,7 @@ function getCodeItem($string = '')
     return $output;
 }
 
-function CheckSlotWarehouse($warehouse, $itemX, $itemY)
+function cn_CheckSlotWarehouse($warehouse, $itemX, $itemY)
 {
     $items_data = getoption('#items_data');
     $a = array();
@@ -882,7 +901,7 @@ function CheckSlotWarehouse($warehouse, $itemX, $itemY)
             ++$_idX;
             $_idY = 0;
         }
-        $item32 = getCodeItem($res);
+        $item32 = cn_getCodeItem($res);
         if (isset($items_data[$item32['group'] . '.' . $item32['id']])) {
             $item_data = $items_data[$item32['group'] . '.' . $item32['id']];
             for ($jt = 0; $jt < $item_data['X']; $jt++) {
@@ -940,23 +959,122 @@ function CheckSlotWarehouse($warehouse, $itemX, $itemY)
     }
     if (empty($ValueResult)) return 3840;
     $result = $ValueResult['resultX'] * 8 + $ValueResult['resultY'];
+
+    return $result;
+}
+
+function cn_CheckSlotInventory($inventory, $itemX, $itemY)
+{
+    $items_data = getoption('#items_data');
+    $a = array();
+    for ($c = 0; $c < 8; $c++) {
+        for ($r = 0; $r < 8; $r++) {
+            $a[$r][$c] = 0;
+        }
+    }
+
+    $lenghtwarehouse = strlen($inventory);
+    $_idY = 0;
+    $_idX = -1;
+    for ($c = 0; $c < $lenghtwarehouse; $c += 32) {
+        $res = substr($inventory, $c, 32);
+
+        if ($_idY % 8 == 0) {
+            ++$_idX;
+            $_idY = 0;
+        }
+        $item32 = cn_getCodeItem($res);
+        if (isset($items_data[$item32['group'] . '.' . $item32['id']])) {
+            $item_data = $items_data[$item32['group'] . '.' . $item32['id']];
+            for ($jt = 0; $jt < $item_data['X']; $jt++) {
+                for ($it = 0; $it < $item_data['Y']; $it++) {
+                    $a[$_idX + $it][$_idY + $jt] = 1;
+                }
+            }
+        }
+        ++$_idY;
+    }
+
+    $paramentX = $itemX;
+    $paramentY = $itemY;
+    $ValueResult = array();
+
+    for ($i = 0; $i < 8; $i++) {
+        for ($j = 0; $j < 8; $j++) {
+            $checkFrist = false;
+            if (!$checkFrist) {
+                $checkValueResult = array('resultX' => $i, 'resultY' => $j);
+                $checkFrist = true;
+            }
+            if ($a[$i][$j] == 0 && (($paramentY + $i) <= 8) && (8 >= ($j + $paramentX))) {
+                for ($x = 0; $x < $paramentX; $x++) {
+                    for ($_y = 0; $_y < $paramentY; $_y++) {
+                        if ($paramentX > $paramentX) {
+                            if ($a[$x + $i][$_y + $j] == 1) {
+                                $checkXY = false;
+                                break;
+                            }
+                            if ($a[$x + $i][$_y + $j] == 0) {
+                                $checkXY = true;
+                            }
+                        } else {
+                            if ($a[$_y + $i][$x + $j] == 1) {
+                                $checkXY = false;
+                                break;
+                            }
+                            if ($a[$_y + $i][$x + $j] == 0) {
+                                $checkXY = true;
+                            }
+                        }
+                    }
+                }
+
+                if ($checkXY) {
+                    $ValueResult = $checkValueResult;
+                    break;
+                }
+            }
+        }
+        if ($checkXY) {
+            break;
+        }
+    }
+    if (empty($ValueResult)) return 2048;
+    $result = $ValueResult['resultX'] * 8 + $ValueResult['resultY'];
+
     return $result;
 }
 
 
-function renderImageItencode($group, $id){
+function cn_renderImageItemCode($group, $id, $optImg)
+{
     $group = (string)$group;
     $id = (string)$id;
+    $optImg = (string)$optImg;
 
-    $strGroup = $strId = '';
-    if (strlen($group) == 1) $strGroup = '0'. $group;
+    if (strlen($optImg) == 7){
+        return (string)$optImg;
+    }
+
+    $strGroup = $strId = $strImg = '';
+    if (strlen($group) == 1) $strGroup = '0' . $group;
     else if (strlen($group) == 2) $strGroup = $group;
 
-    if (strlen($id) == 1) $strId = '00'. $id;
-    else if (strlen($id) == 2) $strId = '0'. $id;
+    if (strlen($id) == 1) $strId = '00' . $id;
+    else if (strlen($id) == 2) $strId = '0' . $id;
     else if (strlen($id) == 3) $strId = $id;
 
-    return (string)$strGroup.$strId .'00';
+    if (empty($optImg)) {
+        $strImg = '00';
+    }
+
+    if (strlen($optImg) == 1) {
+        $strImg = '0' . $optImg;
+    } elseif (strlen($optImg) == 2) {
+        $strImg = $optImg;
+    }
+
+    return (string)$strGroup . $strId . $strImg;
 }
 
 // Since 2.0: Check CSRF challenge
@@ -1009,6 +1127,7 @@ function cn_snippet_get_hidden($ADD = array())
 
     return $hid;
 }
+
 // Since 2.0: Write default input=hidden fields
 function cn_form_open($fields)
 {
@@ -1038,7 +1157,7 @@ function cn_snippet_digital_signature($type = 'std')
     if (!$ischeckSession) {
         $sign_extr = MD5(time() . mt_rand()) . '-' . $member['user_Account'];
         $signature = MD5($sign_extr . $member['pass'] . MD5(getoption('#crypt_salt')));
-    } else{
+    } else {
         $sign_extr = MD5(time() . mt_rand()) . '-' . $member['user_name'];
         $signature = MD5($sign_extr . $member['pass_web'] . MD5(getoption('#crypt_salt')));
     }
@@ -1317,8 +1436,9 @@ function cn_touch_get($target)
 
     return $fc;
 }
+
 //----------------------------------------------------------------------
-function resetDefaultCharater($accountID)
+function cn_resetDefaultCharater($accountID)
 {
     if (empty($accountID)) return false;
 
@@ -1410,7 +1530,7 @@ function resetDefaultCharater($accountID)
                 $get_default_class = '';
                 $_arr_cls = spsep($arr_cls);
                 foreach ($_arr_cls as $key => $val)
-                    $get_default_class .= "$val='" . $default_class[0][$key] . "',";
+                    $get_default_class .= "$val='" . $default_class[0][$val] . "',";
 
                 $get_default_class = substr($get_default_class, 0, -1);
 
@@ -1424,14 +1544,14 @@ function resetDefaultCharater($accountID)
                     $get_default_class,
                     "Leadership=$leadership",
                     'MapDir=0',
-                    "name:\'" . $item['Name'] . "\'"
+                    "name:'" . $item['Name'] . "'"
                 );
 
                 if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
                     do_update_character(
                         'Character',
                         'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-                        "Name:\'" . $item['Name'] . "\'"
+                        "Name:'" . $item['Name'] . "'"
                     );
                 }
 
@@ -1440,7 +1560,7 @@ function resetDefaultCharater($accountID)
                     do_update_character(
                         'Character',
                         'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
-                        "name:\'" . $item['Name'] . "\'"
+                        "name:'" . $item['Name'] . "'"
                     );
 
                 //Add Mui ten vo tan cho Elf C3
@@ -1448,7 +1568,7 @@ function resetDefaultCharater($accountID)
                     do_update_character(
                         'Character',
                         'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
-                        "name:\'" . $item['Name'] . "\'"
+                        "name:'" . $item['Name'] . "'"
                     );
 
                 //Add Skill cho Summoner
@@ -1456,11 +1576,29 @@ function resetDefaultCharater($accountID)
                     do_update_character(
                         'Character',
                         'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
-                        "name:\'" . $item['Name'] . "\'"
+                        "name:'" . $item['Name'] . "'"
                     );
             }
         }
     }
 
     return false;
+}
+
+function cn_zenderMoneyBank($moneyBank)
+{
+    $strMoneyBank = '';
+    if (empty($moneyBank) && $moneyBank != 0) {
+        return $strMoneyBank;
+    }
+    $moneyBankLenght = strlen($moneyBank);
+    if ($moneyBankLenght > 9) {
+        $subNumberShow = number_format(substr($moneyBank, 0, 4), 0, '.', ',');
+        $strMoneyBank .= $subNumberShow . '+E' . ($moneyBankLenght - 1);
+
+    } else {
+        $strMoneyBank .= number_format($moneyBank, 0, ',', '.');
+    }
+
+    return $strMoneyBank;
 }

@@ -41,7 +41,7 @@ class phptextClass
     {
         /* Settings */
         $text = $this->random();
-        $font =SERVDIR . '/core/captcha/font/monofont.ttf';/* font */
+        $font = SERVDIR . '/core/captcha/font/monofont.ttf';/* font */
 //        var_dump(SERVDIR);die;
         $textColor = $this->hexToRGB($textColor);
         $fontSize = $imgHeight * 0.75;

@@ -71,7 +71,7 @@ function char_invoke()
         }
     }
 
-    $images = array (
+    $images = array(
         'info_char' => 'info_char.gif',
         'reset' => 'reset.png',
         'resetvip' => 'resetvip.png',
@@ -110,11 +110,11 @@ function char_invoke()
         list($mod, $opt, $acl) = explode(':', $id, 3);
 
         //if (!test($acl)) {
-            // unset($char_board[$id]);
-            //continue;
+        // unset($char_board[$id]);
+        //continue;
         //}
 
-        $item = array (
+        $item = array(
             'name' => $name,
             'img' => isset($images[$opt]) ? $images[$opt] : 'home.gif',
             'mod' => $mod,
@@ -293,7 +293,7 @@ function char_reset()
             if ($g_lv != 0) $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
         } else {
             $thieu_lever = ABS($test_vl);
-            $str_lever = "$level_acc_char <font color =red>(Thiếu ". abs($thieu_lever) ." level)</font>";
+            $str_lever = "$level_acc_char <font color =red>(Thiếu " . abs($thieu_lever) . " level)</font>";
             if ($g_lv != 0) $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
         }
     } else {
@@ -301,7 +301,7 @@ function char_reset()
             $str_lever = "$level_acc_char (Đủ level).";
         else {
             $f_lv = ABS($abc_level);
-            $str_lever = "$level_acc_char <font color =red>(Thiếu ". abs($f_lv) ." level)</font>";
+            $str_lever = "$level_acc_char <font color =red>(Thiếu " . abs($f_lv) . " level)</font>";
         }
     }
 
@@ -323,10 +323,10 @@ function char_reset()
         if (isset($limit_2)) {
             $lv_rs_en = 0;
             foreach ($limit_2 as $d => $val) {
-                    $lv_rs_f = $okloop ?  $lv_rs_en : 1;
-                    $lv_rs_en = $val['col1'];
-                    $okloop = true;
-                
+                $lv_rs_f = $okloop ? $lv_rs_en : 1;
+                $lv_rs_en = $val['col1'];
+                $okloop = true;
+
                 if ($lv_rs_f < $reset_rs && $reset_rs <= $lv_rs_en) {
                     if (0 <= $rs_inday && $rs_inday <= $val['day1']) {
                         $VpointReset = $val['col2'];
@@ -396,7 +396,7 @@ function char_reset()
 
             $resetup = $reset_rs + 1;
             $time_reset_next_ = $Resets_Time + (isset($time_reset_next) ? $time_reset_next : 5) * 60;
-            
+
             list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
             if ($verifyCaptcha != $_SESSION['captcha_web']) {
                 cn_throw_message("Captcah không đúng.", 'e');
@@ -458,7 +458,7 @@ function char_reset()
                 $pointThue = do_select_character(
                     'Character',
                     'PointThue',
-                    "Name='$sub' AND IsThuePoint=1 AND TimeThuePoint>". (ctime() - 86400)
+                    "Name='$sub' AND IsThuePoint=1 AND TimeThuePoint>" . (ctime() - 86400)
                 );
 
                 $vpointnew = isset($get_vp) ? $get_vp : $set_vp;
@@ -577,10 +577,9 @@ function char_reset()
                 //Ghi vào Log
                 $content = "$sub Reset lần thứ $resetup _ lần thứ $CountNoResetInDay trong ngày";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_resets.txt";
-                $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $vpointnew . "|" . $Date . "|\n");
-                fclose($fp);
+                $file = MODULE_ADM . "/log/modules/character/log_resets.log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $vpointnew . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
 
                 if ($user_type_gh_rs == 1) {
@@ -953,7 +952,7 @@ function char_resetvip()
     //-----------------------------------------------
     if (request_type('POST')) {
         if (REQ('action_rsvip')) {
-           cn_dsi_check(true);
+            cn_dsi_check(true);
             $errors_false = false;
 
             $resetvipup = $reset_rsvip + 1;
@@ -1016,7 +1015,7 @@ function char_resetvip()
                 $pointThue = do_select_character(
                     'Character',
                     'PointThue',
-                    "Name='$sub' AND IsThuePoint=1 AND TimeThuePoint>". (ctime() - 86400)
+                    "Name='$sub' AND IsThuePoint=1 AND TimeThuePoint>" . (ctime() - 86400)
                 );
 
                 $gcoin_rsvip = isset($get_blank_g) ? $get_blank_g : $blank_gcoin;
@@ -1134,9 +1133,9 @@ function char_resetvip()
                     $okloop = false;
                     if (isset($options_gh2))
                         foreach ($options_gh2 as $d => $val) {
-                                $lv_rs_f = $okloop ?  $lv_rs_en : 1;
-                                $lv_rs_en = $val['col1'];
-                                $okloop = true;
+                            $lv_rs_f = $okloop ? $lv_rs_en : 1;
+                            $lv_rs_en = $val['col1'];
+                            $okloop = true;
 
                             if ($lv_rs_f < $resetvipup && $resetvipup <= $lv_rs_en) {
                                 if (0 <= $CountNoResetInDay && $CountNoResetInDay <= $val['day1']) {
@@ -1226,10 +1225,9 @@ function char_resetvip()
                 $content = "$sub Reset Vip lần thứ $resetvipup _ lần thứ $CountNoResetInDay trong ngày";
                 //$Date = date("h:iA, d/m/Y");
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_resetsvip.txt";
-                $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|" . $blank_gcoin . "_" . $blank_vp . "_" . $blank_gcoin_km . "|" . $gcoin_rsvip . "_" . $vpointnew . "_" . $gcoin_gkm_rsvip . "|" . $Date . "|\n");
-                fclose($fp);
+                $file = MODULE_ADM . "/log/modules/character/log_resetsvip.log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $blank_gcoin . "_" . $blank_vp . "_" . $blank_gcoin_km . "|" . $gcoin_rsvip . "_" . $vpointnew . "_" . $gcoin_gkm_rsvip . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
 
                 cn_throw_message("$sub Reset Vip lần thứ $resetvipup thành công!");
@@ -1298,11 +1296,11 @@ function char_relife()
         }
     }
     if (0 < $f_lv = 400 - $level_acc_char) {
-        $str_lever = "$level_acc_char <font color =red>(Thiếu ". abs($f_lv) ." level)</font>";
+        $str_lever = "$level_acc_char <font color =red>(Thiếu " . abs($f_lv) . " level)</font>";
     } else $str_lever = "$level_acc_char (Đủ level)";
 
     if (0 < $relife_rs = $reset_relifes - $reset_rs) {
-        $str_rs = "$reset_rs <font color =red>(Thiếu ". abs($relife_rs) ." Reset)</font>";
+        $str_rs = "$reset_rs <font color =red>(Thiếu " . abs($relife_rs) . " Reset)</font>";
     } else $str_rs = "$level_acc_char (Đủ Reset)";
 
     if (check_online($accc_)) {
@@ -1331,7 +1329,7 @@ function char_relife()
     //-----------------------------------------------
     if (request_type('POST')) {
         if (REQ('action_relife')) {
-           cn_dsi_check(true);
+            cn_dsi_check(true);
             $errors_false = false;
 
             list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
@@ -1470,10 +1468,9 @@ function char_relife()
                 //Ghi vào Log
                 $content = "$sub Relife lần thứ $CountRelifeup";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_relife.txt";
-                $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $Date . "|\n");
-                fclose($fp);
+                $file = MODULE_ADM . "/log/modules/character/log_relife.log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
 
                 cn_throw_message("$sub ReLife lần thứ $CountRelifeup thành công!");
@@ -1594,7 +1591,7 @@ function char_online()
 
     if (request_type('POST')) {
         if (REQ('action_deleonline')) {
-           cn_dsi_check(true);
+            cn_dsi_check(true);
             $errors_false = false;
 
             list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
@@ -1637,10 +1634,9 @@ function char_online()
                     //Ghi vào Log
                     $content = "$sub kết thúc ủy thác online, nhận được $minute_to_point điểm";
                     $Date = date("h:iA, d/m/Y", ctime());
-                    $file = MODULE_ADM . "/log/modules/character/log_uythaconline.txt";
-                    $fp = fopen($file, "a+");
-                    fputs($fp, $accc_ . "|" . $content . "|" . $_gcoin . "_" .$_blank_var[0]['vp']. "|" . $gcoin_after . "_" .$_blank_var[0]['vp']."|" . $Date . "|\n");
-                    fclose($fp);
+                    $file = MODULE_ADM . "/log/modules/character/log_uythaconline.log";
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_after . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                     //End Ghi vào Log
 
                     cn_throw_message("$sub đã kết thúc Ủy thác thành công.");
@@ -1675,10 +1671,9 @@ function char_online()
                     //Ghi vào Log
                     $Date = date("h:iA, d/m/Y", ctime());
                     $content = "$sub bắt đầu Ủy thác online lúc $Date";
-                    $file = MODULE_ADM . "/log/modules/character/log_uythaconline.txt";
-                    $fp = fopen($file, "a+");
-                    fputs($fp, $accc_ . "|" . $content . "|" . $_gcoin . "_" .$_blank_var[0]['vp']."|" . $_gcoin . "_" .$_blank_var[0]['vp']."|" . $Date . "|\n");
-                    fclose($fp);
+                    $file = MODULE_ADM . "/log/modules/character/log_uythaconline.log";
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                     //End Ghi vào Log
 
                     $before_info_on[6][1] = '<img src="' . URL_PATH_IMG . '/checkbullet.gif" title="Online">';
@@ -1790,7 +1785,7 @@ function char_offline()
 
     if (request_type('POST')) {
         if (REQ('action_deleoffline')) {
-           cn_dsi_check(true);
+            cn_dsi_check(true);
             $errors_false = false;
 
             list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
@@ -1833,10 +1828,9 @@ function char_offline()
                     //Ghi vào Log
                     $content = "$sub kết thúc ủy thác offline, nhận được $minute_to_point điểm";
                     $Date = date("h:iA, d/m/Y", ctime());
-                    $file = MODULE_ADM . "/log/modules/character/log_uythacoffline.txt";
-                    $fp = fopen($file, "a+");
-                    fputs($fp, $accc_ . "|" . $content . "|" . $_gcoin . "_" .$_blank_var[0]['vp']. "|" . $gcoin_after . "_" .$_blank_var[0]['vp']. "|" . $Date . "|\n");
-                    fclose($fp);
+                    $file = MODULE_ADM . "/log/modules/character/log_uythacoffline.log";
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_after . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                     //End Ghi vào Log
 
                     cn_throw_message("$sub đã kết thúc Ủy thác thành công.");
@@ -1871,10 +1865,9 @@ function char_offline()
                     //Ghi vào Log
                     $Date = date("h:iA, d/m/Y", ctime());
                     $content = "$sub bắt đầu Ủy thác offline lúc $Date";
-                    $file = MODULE_ADM . "/log/modules/character/log_uythacoffline.txt";
-                    $fp = fopen($file, "a+");
-                    fputs($fp, $accc_ . "|" . $content . "|" . $_gcoin . "_" .$_blank_var[0]['vp']. "|" . $_gcoin . "_" .$_blank_var[0]['vp']. "|" . $Date . "|\n");
-                    fclose($fp);
+                    $file = MODULE_ADM . "/log/modules/character/log_uythacoffline.log";
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                     //End Ghi vào Log
 
                     $before_info_off[6][1] = '<img src="' . URL_PATH_IMG . '/checkbullet.gif" title="Online">';
@@ -2035,8 +2028,8 @@ function char_rsdelegate()
 
     if (request_type('POST')) {
         if (REQ('action_rsuythac')) {
-           cn_dsi_check(true);
-            
+            cn_dsi_check(true);
+
             $resetup = $reset_rs + 1;
             $time_reset_next_ = $Resets_Time + 120;
             $ctime = ctime();
@@ -2104,10 +2097,9 @@ function char_rsdelegate()
                 //Ghi vào Log
                 $content = "$sub Reset ủy thác lần thứ $resetup";
                 $Date = date("h:iA, d/m/Y", $ctime);
-                $file = MODULE_ADM . "/log/modules/character/log_rsuythac.txt";
-                $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $Date . "|\n");
-                fclose($fp);
+                $file = MODULE_ADM . "/log/modules/character/log_rsuythac.log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
 
 
@@ -2196,9 +2188,9 @@ function char_rsdelegatevip()
         $rsvipuythac_index = $i_e = 0;
 
         foreach ($options_rsvip_trust as $aq => $qa) {
-                $i_f = $ok_loop ? $i_e : 0;
-                $i_e = $qa['reset'];
-                $ok_loop = true;
+            $i_f = $ok_loop ? $i_e : 0;
+            $i_e = $qa['reset'];
+            $ok_loop = true;
 
             if (($reset_rsvip > $i_f) && ($reset_rsvip <= $i_e) || ($reset_rsvip == 0)) {
                 $_point_trust = $qa['point'];
@@ -2238,7 +2230,7 @@ function char_rsdelegatevip()
         $sms_vp = "(Đủ Vpoint)";
     } else {
         $result_rsvip_trust = true;
-        $sms_vp = "<font color=red>(Thiếu ". abs($_vpoint_trust) ." Vpoint)</font>";
+        $sms_vp = "<font color=red>(Thiếu " . abs($_vpoint_trust) . " Vpoint)</font>";
     }
 
     $get_point_uythac = $point_uythac - (isset($_point_trust) ? $_point_trust : 0);
@@ -2274,7 +2266,7 @@ function char_rsdelegatevip()
 
     if (request_type('POST')) {
         if (REQ('action_rsvipuythac')) {
-           cn_dsi_check(true);
+            cn_dsi_check(true);
             $resetvipup = $reset_rsvip + 1;
             $time_reset_next_ = $Resets_Time + 120;
             $ctime = ctime();
@@ -2325,10 +2317,9 @@ function char_rsdelegatevip()
                 //Ghi vào Log
                 $content = "$sub Reset Vip lần thứ $resetvipup";
                 $Date = date("h:iA, d/m/Y", $ctime);
-                $file = MODULE_ADM . "/log/modules/character/log_rsuythacvip.txt";
-                $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|" . $_blank_gcoin . "_" . $_blank_vpoint . "|" . $gcoin_rsvip . "_" . $vpointnew . "|" . $Date . "|\n");
-                fclose($fp);
+                $file = MODULE_ADM . "/log/modules/character/log_rsuythacvip.log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_gcoin . "_" . $_blank_vpoint . "|" . $gcoin_rsvip . "_" . $vpointnew . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
 
                 if ($rsvipuythac_index >= count($options_rsvip_trust) - 1) $rsvipuythac_index = count($options_rsvip_trust) - 1;
@@ -2448,7 +2439,7 @@ function char_subpoint()
 
     if (request_type('POST')) {
         if (REQ('action_subpoint')) {
-           cn_dsi_check(true);
+            cn_dsi_check(true);
             $errors_false = false;
 
             list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
@@ -2723,8 +2714,8 @@ function char_rspoint()
         }
     }
     //25% Gcoin or Vpoint
-    $_vpoint_test = ceil(0.25 * (isset($_vpoint_test) ? $_vpoint_test : $options_rsvip[count($options_rsvip) - 1]['vpoint']));
-    $_gcoin_test = ceil(0.25 * (isset($_gcoin_test) ? $_gcoin_test : $options_rsvip[count($options_rsvip) - 1]['gcoin']));
+    $_vpoint_test = ceil(0.05 * (isset($_vpoint_test) ? $_vpoint_test : $options_rsvip[count($options_rsvip) - 1]['vpoint']));
+    $_gcoin_test = ceil(0.05 * (isset($_gcoin_test) ? $_gcoin_test : $options_rsvip[count($options_rsvip) - 1]['gcoin']));
 
     if ($_gcoin >= $_gcoin_test) {
         $get_gc = $_gcoin - $_gcoin_test;
@@ -2765,7 +2756,7 @@ function char_rspoint()
 
     if (request_type('POST')) {
         if (REQ('action_rspoint')) {
-           cn_dsi_check(true);
+            cn_dsi_check(true);
             $errors_false = false;
 
             list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
@@ -2818,10 +2809,9 @@ function char_rspoint()
                 //Ghi vào Log
                 $content = "$sub đã tẩy điểm với 25% Gcoin hoặc 25% Vpoint tương ứng với số cấp Reset Vip";
                 $Date = date("h:iA, d/m/Y", time());
-                $file = MODULE_ADM . "/log/modules/character/log_rspoint.txt";
-                $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_new . "_" . $vpoint_new . "|" . $Date . "|\n");
-                fclose($fp);
+                $file = MODULE_ADM . "/log/modules/character/log_rspoint.log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_new . "_" . $vpoint_new . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
 
 
@@ -2899,7 +2889,7 @@ function char_movemap()
 
     if (request_type('POST')) {
         if (REQ('action_movemap')) {
-           cn_dsi_check(true);
+            cn_dsi_check(true);
             $errors_false = false;
 
             list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
@@ -3012,7 +3002,7 @@ function char_removepk()
         $sms_pk = " (Sát thủ)";
     } else {
         $sms_pk = " <font color=red>(Không phải sát thủ)</font>";
-    } 
+    }
 
     if (check_changecls($member['user_name'], $sub)) {
         $check_change = true;
@@ -3074,10 +3064,9 @@ function char_removepk()
                     //Ghi vào Log
                     $content = "$sub đã rửa tội giết $PkCount mạng với" . @$numVpPK . " V.Point";
                     $Date = date("h:iA, d/m/Y", ctime());
-                    $file = MODULE_ADM . "/log/modules/character/log_ruatoi.txt";
-                    $fp = fopen($file, "a+");
-                    fputs($fp, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $ktvpoint . "|" . $Date . "|\n");
-                    fclose($fp);
+                    $file = MODULE_ADM . "/log/modules/character/log_ruatoi.log";
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $ktvpoint . "|" . $Date . "|\n" . $fileContents);
                     //End Ghi vào Log
                     $before_info_pk[9][1] = number_format((float)($ktvpoint), 0, ",", ".");
                 }
@@ -3205,10 +3194,9 @@ function char_pointtax()
                 //Ghi vào Log
                 $content = "$sub đã thuê $var_vp point với $var_vp V.Point";
                 $Date = date("h:iA, d/m/Y", $ctime);
-                $file = MODULE_ADM . "/log/modules/character/log_thuepoint.txt";
-                $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|". $_blank_var[0]['gc'] .'_'. $vpoint_ . "|". $_blank_var[0]['gc'] . '_' . $ktvpoint . "|" . $Date . "|\n");
-                fclose($fp);
+                $file = MODULE_ADM . "/log/modules/character/log_thuepoint.log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . '_' . $ktvpoint . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
 
                 $before_info_pointtax[6][1] = "(Thuê còn " . date("H:i:s", $ctime) . ")";
@@ -3251,10 +3239,10 @@ function char_changename()
 
     $level = $showchar[$sub]['level'];
     $reset_ = $showchar[$sub]['reset'];
-    
+
     if (!$c_name) $is_cn = true;
     if (preg_match('/\W+/', $c_name)) {
-        $is_cname = true; 
+        $is_cname = true;
     }
 
     foreach ($_array_name as $key => $var) {
@@ -3349,10 +3337,9 @@ function char_changename()
                 //Ghi vào Log
                 $content = "$sub đã đổi $sub sang $c_name với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_changename.txt";
-                $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $var_vp . "|" . $Date . "|\n");
-                fclose($fp);
+                $file = MODULE_ADM . "/log/modules/character/log_changename.log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $var_vp . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
 
                 $before_info_cn[3][1] = number_format((float)$ktgcoin, 0, ",", ".");
@@ -3409,17 +3396,17 @@ function char_changeclass()
     foreach ($infoClass as $key => $val) {
         $strA = explode('_', $key);
         if (in_array($strA[1], $tempClass)) {
-            if(!isset($temp[$strA[1]]) && $strA[1] != $isClass) {
-                $temp[$strA[1]] = [$strA[1].'_code' => $infoClass[$key], $strA[1].'_name' => $infoClass[$key.'_name']];
+            if (!isset($temp[$strA[1]]) && $strA[1] != $isClass) {
+                $temp[$strA[1]] = [$strA[1] . '_code' => $infoClass[$key], $strA[1] . '_name' => $infoClass[$key . '_name']];
             }
         }
     }
 
-    if($reset_ >= $changeClass[2]){
+    if ($reset_ >= $changeClass[2]) {
         $sms_reset_ = $reset_ . '(Đủ Reset)';
         $is_cname = true;
     } else {
-        $sms_reset_ = $reset_ . ' <font color=red>(Thiếu ' .abs($changeClass[2]- $reset_). ' Reset) </font>';
+        $sms_reset_ = $reset_ . ' <font color=red>(Thiếu ' . abs($changeClass[2] - $reset_) . ' Reset) </font>';
     }
 
     list ($get_gc, $sms_gc, $get_vp, $sms_vp, $cn_false) = checkGcoinVpoint($gcoin_, $vpoint_, $changeClass[0]);
@@ -3442,7 +3429,7 @@ function char_changeclass()
 
     if (request_type('POST')) {
         if (REQ('action_className')) {
-           cn_dsi_check(true);
+            cn_dsi_check(true);
             $errors_false = false;
 
             list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
@@ -3450,7 +3437,7 @@ function char_changeclass()
                 cn_throw_message("Captcah không đúng.", 'e');
                 $errors_false = true;
             }
-            if(!isset($infoClass['class_'.$nameClass.'_1'])) {
+            if (!isset($infoClass['class_' . $nameClass . '_1'])) {
                 cn_throw_message("Lỗi hệ thống khi thay đổi giới tính, vui lòng liên hệ với admin", 'e');
             }
 
@@ -3459,7 +3446,7 @@ function char_changeclass()
                 $errors_false = true;
             }
             if (!$is_cname) {
-                cn_throw_message("Yêu cầu tối thiểu " . $changeClass[2]. " reset", 'e');
+                cn_throw_message("Yêu cầu tối thiểu " . $changeClass[2] . " reset", 'e');
                 $errors_false = true;
             }
 
@@ -3474,11 +3461,11 @@ function char_changeclass()
 
                 $ktvpoint = $get_vp;
                 $ktgcoin = $get_gc;
-                $newReset = $reset_ - ceil(0.01*$changeClass[1]*$reset_);
-                if ($ktvpoint == $vpoint_) $var_vp = ($_blank_var[0]['gc']- $get_gc) . " Gcoin";
-                else $var_vp = ($_blank_var[0]['vp']- $get_vp) . " Vpoint";
+                $newReset = $reset_ - ceil(0.01 * $changeClass[1] * $reset_);
+                if ($ktvpoint == $vpoint_) $var_vp = ($_blank_var[0]['gc'] - $get_gc) . " Gcoin";
+                else $var_vp = ($_blank_var[0]['vp'] - $get_vp) . " Vpoint";
 
-                $_codeClass = $infoClass['class_'.$nameClass.'_1'];
+                $_codeClass = $infoClass['class_' . $nameClass . '_1'];
 
                 $default_class = do_select_character('DefaultClassType', $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership', "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3");
                 $get_default_class = '';
@@ -3488,8 +3475,8 @@ function char_changeclass()
 
                 $get_default_class = substr($get_default_class, 0, -1);
 
-                $inventory_nothing ='';
-                for($i = 0; $i < 3456; $i++){
+                $inventory_nothing = '';
+                for ($i = 0; $i < 3456; $i++) {
                     $inventory_nothing .= 'F';
                 }
                 $quest_nothing = substr($inventory_nothing, 0, 100);
@@ -3497,7 +3484,7 @@ function char_changeclass()
                 do_update_character('Character', 'Clevel=400', "Resets=$newReset", 'Experience=0', "Class=$_codeClass", "LevelUpPoint=0", "pointdutru=0", "$get_default_class", "MapDir=0", "MagicList=CONVERT(varbinary(180), null)", "Quest=0x$quest_nothing", "Inventory=0x$inventory_nothing", "name:'$sub'");
 
                 //Reset Point Master Skill
-                if ( ($class_ == $infoClass['class_dw_3']) || ($class_ == $infoClass['class_dk_3']) || ($class_ == $infoClass['class_elf_3']) || ($class_ == $infoClass['class_mg_2']) || ($class_ == $infoClass['class_dl_2']) || ($class_ == $infoClass['class_sum_3']) || ($class_ == $infoClass['class_rf_2']) ) {
+                if (($class_ == $infoClass['class_dw_3']) || ($class_ == $infoClass['class_dk_3']) || ($class_ == $infoClass['class_elf_3']) || ($class_ == $infoClass['class_mg_2']) || ($class_ == $infoClass['class_dl_2']) || ($class_ == $infoClass['class_sum_3']) || ($class_ == $infoClass['class_rf_2'])) {
                     if (getoption('server_type') == "scf")
                         do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
                     else if (getoption('server_type') == "ori")
@@ -3509,12 +3496,11 @@ function char_changeclass()
                 do_update_character('MEMB_INFO', "vpoint = $ktvpoint", "gcoin = $ktgcoin", "memb___id:'$accc_'");
 
                 //Ghi vào Log
-                $content = "Nhân vật $sub đã đổi ". strtoupper($isClass) ." sang " .  strtoupper($nameClass) ." với $var_vp";
+                $content = "Nhân vật $sub đã đổi " . strtoupper($isClass) . " sang " . strtoupper($nameClass) . " với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_changeclass.txt";
-                $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n");
-                fclose($fp);
+                $file = MODULE_ADM . "/log/modules/character/log_changeclass.log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
 
                 $before_info_cn[1][1] = number_format((float)$newReset, 0, ",", ".");
@@ -3522,9 +3508,9 @@ function char_changeclass()
                 $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
 
                 unset($temp[$nameClass]);
-                $temp[$isClass] = [$isClass.'_code' => $infoClass['class_'.$isClass.'_1'], $isClass.'_name' => $infoClass['class_'.$isClass.'_1_name']];
+                $temp[$isClass] = [$isClass . '_code' => $infoClass['class_' . $isClass . '_1'], $isClass . '_name' => $infoClass['class_' . $isClass . '_1_name']];
 
-                cn_throw_message("Nhân vật $sub đã đổi ". strtoupper($isClass) ." sang " .  strtoupper($nameClass) ." thành công.");
+                cn_throw_message("Nhân vật $sub đã đổi " . strtoupper($isClass) . " sang " . strtoupper($nameClass) . " thành công.");
             }
         }
     }
@@ -3537,16 +3523,583 @@ function char_changeclass()
     echofooter();
 }
 
-function char_level1(){
-die('11111');
-    // nv nao...
-    // l2-l3 -> ?
-    // phi //?
+function char_level1()
+{
+    $config_level = explode('|', getoption('configLevel'), 2);
+
+    $tempClass = ['class_dw_1', 'class_dk_1', 'class_elf_1', 'class_sum_1'];
+    $tempSkip = ['mg', 'dl', 'rf'];
+
+    $showchar = cn_character();
+    $infoClass = cn_template_class();
+    $_blank_var = view_bank($accc_ = $_SESSION['user_Gamer']);
+
+    list($sub) = GET('sub', 'GPG');
+
+    if (!$sub) $sub = array_keys($showchar)[0];
+    else {
+        if (!in_array($sub, array_keys($showchar)))
+            $sub = array_keys($showchar)[0];
+    }
+
+    $cn_false = $is_clevel1 = false;
+    $gcoin_ = $_blank_var[0]['gc'];
+    $vpoint_ = $_blank_var[0]['vp'];
+
+    $level = $showchar[$sub]['level'];
+    $reset_ = $showchar[$sub]['reset'];
+    $isClass = $showchar[$sub]['isClass'];
+    $class_ = $showchar[$sub]['class'];
+    $status = '';
+    $checkLevel150 = false;
+
+    $key = array_search($class_, $infoClass);
+    if ($key !== false) {
+        $numberClass = explode('_', $key);
+
+        if (in_array($key, $tempClass) && !in_array($isClass, $tempSkip) && $numberClass[2] == 1) {
+            $status = '<span class="cBule"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 1 </span><br>";
+        } else {
+            $status = '<span class="cInfo"> <b>' . ucfirst($sub) . "</b> đã làm nhiệm vụ cấp 1 </span><br>";
+            $checkLevel150 = true;
+        }
+    }
+
+    $temp = [];
+    foreach ($infoClass as $key => $val) {
+        $strA = explode('_', $key);
+        if (in_array($strA[1], $tempClass)) {
+            if (!isset($temp[$strA[1]]) && $strA[1] != $isClass) {
+                $temp[$strA[1]] = [$strA[1] . '_code' => $infoClass[$key], $strA[1] . '_name' => $infoClass[$key . '_name']];
+            }
+        }
+    }
+
+    if ($level >= 150) {
+        $sms_level = $level . '(Đủ Level)';
+        $is_clevel1 = true;
+    } else {
+        $sms_level = $level . ' <font color=red>(Thiếu ' . abs(150 - $level) . ' Level) </font>';
+    }
+
+    list ($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, $config_level[0]);
+
+    if (check_changecls($_SESSION['user_Gamer'], $sub)) {
+        $check_change = true;
+        $status_change = "Đã đổi";
+    } else {
+        $check_change = false;
+        $status_change = "<font color =red>Chưa đổi</font>";
+    }
+    $before_info_cn = array(
+        0 => array('Nhân vật', "<a href=" . cn_url_modify('mod=char_manager', 'opt=info_char', 'sub') . " title='Click info $sub'> $sub </a>"),
+        1 => array('Level', $sms_level),
+        2 => array('Cấp độ', $level),
+        3 => array('Vpoint', number_format((float)$get_vp, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '')),
+        4 => array('Đổi nhân vật', $status_change),
+        5 => array('Status', $status)
+    );
+
+    if (request_type('POST')) {
+        if (REQ('action_level1')) {
+            cn_dsi_check(true);
+            $errors_false = false;
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+
+            if (!$check_change) {
+                cn_throw_message("Nhân vật $sub không được là nhân vật thoát ra sau cùng. Hãy vào Game và chọn nhân vật khác trước khi thực hiện chức năng này.", 'e');
+                $errors_false = true;
+            }
+            if (!$is_clevel1) {
+                cn_throw_message("Yêu cầu tối thiểu 150 level", 'e');
+                $errors_false = true;
+            }
+
+            if ($cn_false) {
+                cn_throw_message("Bạn không đủ Vpoint để đổi tên.", 'e');
+                $errors_false = true;
+            }
+
+            if ($checkLevel150) {
+                cn_throw_message('Nhân vật ' . $sub . ' đã làm nhiệm vụ cấp 1 (level 150)!');
+                $errors_false = true;
+            }
+
+            if (!$errors_false) {
+//                $ktvpoint = isset($get_vp) ? $get_vp : $vpoint_;
+
+                $ktvpoint = $get_vp;
+
+                $newReset = $reset_ - ceil(0.01 * $changeClass[1] * $reset_);
+//                if ($ktvpoint == $vpoint_) $var_vp = ($_blank_var[0]['gc']- $get_gc) . " Gcoin";
+//                else
+                $var_vp = ($_blank_var[0]['vp'] - $get_vp) . " Vpoint";
+
+//                $_codeClass = $infoClass['class_'.$nameClass.'_1'];
+
+                $default_class = do_select_character(
+                    'DefaultClassType',
+                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership',
+                    "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3"
+                );
+                $get_default_class = '';
+                $_arr_cls = spsep($arr_cls);
+                foreach ($_arr_cls as $key => $val)
+                    $get_default_class .= "$val=" . $default_class[0][$val] . ",";
+
+                $get_default_class = substr($get_default_class, 0, -1);
+
+                $inventory_nothing = '';
+                for ($i = 0; $i < 3456; $i++) {
+                    $inventory_nothing .= 'F';
+                }
+                $quest_nothing = substr($inventory_nothing, 0, 100);
+
+                do_update_character(
+                    'Character',
+                    'Clevel=400',
+                    "Resets=$newReset",
+                    'Experience=0',
+                    "Class=$_codeClass",
+                    "LevelUpPoint=0",
+                    "pointdutru=0",
+                    "$get_default_class",
+                    "MapDir=0",
+                    "MagicList=CONVERT(varbinary(180), null)",
+                    "Quest=0x$quest_nothing",
+                    "Inventory=0x$inventory_nothing",
+                    "name:'$sub'"
+                );
+
+                //Reset Point Master Skill
+                if (($class_ == $infoClass['class_dw_3']) || ($class_ == $infoClass['class_dk_3']) || ($class_ == $infoClass['class_elf_3']) || ($class_ == $infoClass['class_mg_2']) || ($class_ == $infoClass['class_dl_2']) || ($class_ == $infoClass['class_sum_3']) || ($class_ == $infoClass['class_rf_2'])) {
+                    if (getoption('server_type') == "scf")
+                        do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
+                    else if (getoption('server_type') == "ori")
+                        do_update_character('T_MasterLevelSystem', 'MASTER_LEVEL=0', 'ML_POINT=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
+                    else
+                        do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
+                }
+
+                do_update_character('MEMB_INFO', "vpoint = $ktvpoint", "gcoin = $ktgcoin", "memb___id:'$accc_'");
+
+                //Ghi vào Log
+                $content = "Nhân vật $sub làm nhiệm vụ với $var_vp";
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/character/log_level150.log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc_ . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
+
+                $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
+
+                $temp[$isClass] = [$isClass . '_code' => $infoClass['class_' . $isClass . '_1'], $isClass . '_name' => $infoClass['class_' . $isClass . '_1_name']];
+
+                cn_throw_message("Nhân vật $sub đã đổi nhiệm vụ 150 thành công.");
+            }
+        }
+    }
+
+    cn_assign('showchar, sub, before_info_cn', $showchar, $sub, $before_info_cn);
+
+    echoheader('-@my_char/style.css', "Làm nhiệm vụ (level 150) cấp 1");
+    echocomtent_here(exec_tpl('my_char/level_1'), cn_snippet_bc_re());
+    echofooter();
 }
 
-function char_level2(){}
+function char_level2()
+{
+    $tempClass = ['class_dw_2', 'class_dk_2', 'class_elf_2', 'class_sum_2'];
 
-function char_level3(){}
+    $config_level = explode('|', getoption('configLevel'), 2);
+
+    $tempClassLevel = ['class_dw_1', 'class_dk_1', 'class_elf_1', 'class_sum_1'];
+    $tempSkip = ['mg', 'dl', 'rf'];
+//
+    $showchar = cn_character();
+    $infoClass = cn_template_class();
+    $_blank_var = view_bank($accc_ = $_SESSION['user_Gamer']);
+
+    list($sub) = GET('sub', 'GPG');
+
+    if (!$sub) $sub = array_keys($showchar)[0];
+    else {
+        if (!in_array($sub, array_keys($showchar)))
+            $sub = array_keys($showchar)[0];
+    }
+
+    $cn_false = $is_level2 = false;
+    $gcoin_ = $_blank_var[0]['gc'];
+    $vpoint_ = $_blank_var[0]['vp'];
+
+    $level = $showchar[$sub]['level'];
+    $reset_ = $showchar[$sub]['reset'];
+    $isClass = $showchar[$sub]['isClass'];
+    $class_ = $showchar[$sub]['class'];
+    $status = '';
+    $checkLevel150 = $checkLevel220 = false;
+
+    $key = array_search($class_, $infoClass);
+    if ($key !== false) {
+        $numberClass = explode('_', $key);
+
+        if (in_array($key, $tempClass) && !in_array($isClass, $tempSkip) && $numberClass[2] == 2) {
+            $status = '<span class="cBule"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 2 </span><br>";
+        } else {
+            $status = '<span class="cInfo"> <b>' . ucfirst($sub) . "</b> đã làm nhiệm vụ cấp 2 </span><br>";
+            $checkLevel220 = true;
+        }
+        if (in_array($key, $tempClassLevel)) {
+            $status = '<span class="cReda"><a  href="' . cn_url_modify('opt=level1') . '"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 1 </a> </span><br>";
+            $checkLevel150 = true;
+            $checkLevel220 = false;
+        }
+    }
+//
+    $temp = [];
+    foreach ($infoClass as $key => $val) {
+        $strA = explode('_', $key);
+        if (in_array($strA[1], $tempClass)) {
+            if (!isset($temp[$strA[1]]) && $strA[1] != $isClass) {
+                $temp[$strA[1]] = [$strA[1] . '_code' => $infoClass[$key], $strA[1] . '_name' => $infoClass[$key . '_name']];
+            }
+        }
+    }
+
+    if ($level >= 215) {
+        $sms_level = $level . '(Đủ Level)';
+        $is_level2 = true;
+    } else {
+        $sms_level = $level . ' <font color=red>(Thiếu ' . abs(215 - $level) . ' Level) </font>';
+    }
+
+    list ($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, $config_level[0]);
+
+    if (check_changecls($_SESSION['user_Gamer'], $sub)) {
+        $check_change = true;
+        $status_change = "Đã đổi";
+    } else {
+        $check_change = false;
+        $status_change = "<font color =red>Chưa đổi</font>";
+    }
+    $before_info_cn = array(
+        0 => array('Nhân vật', "<a href=" . cn_url_modify('mod=char_manager', 'opt=info_char', 'sub') . " title='Click info $sub'> $sub </a>"),
+        1 => array('Level', $sms_level),
+        2 => array('Cấp độ', $level),
+        3 => array('Vpoint', number_format((float)$get_vp, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '')),
+        4 => array('Đổi nhân vật', $status_change),
+        5 => array('Status', $status)
+    );
+
+    if (request_type('POST')) {
+        if (REQ('action_level2')) {
+            cn_dsi_check(true);
+            $errors_false = false;
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+
+            if (!$check_change) {
+                cn_throw_message("Nhân vật $sub không được là nhân vật thoát ra sau cùng. Hãy vào Game và chọn nhân vật khác trước khi thực hiện chức năng này.", 'e');
+                $errors_false = true;
+            }
+            if (!$is_level2) {
+                cn_throw_message("Yêu cầu tối thiểu 215 level", 'e');
+                $errors_false = true;
+            }
+
+            if ($cn_false) {
+                cn_throw_message("Bạn không đủ Vpoint để đổi tên.", 'e');
+                $errors_false = true;
+            }
+
+            if ($checkLevel220) {
+                cn_throw_message('Nhân vật ' . $sub . ' đã làm nhiệm vụ cấp 2 (level 220)!', 'e');
+                $errors_false = true;
+            }
+            if ($checkLevel150) {
+                cn_throw_message('Nhân vật ' . $sub . ' chưa làm nhiệm vụ cấp 1 (level 150)!', 'e');
+                $errors_false = true;
+            }
+
+            if (!$errors_false) {
+                $ktvpoint = isset($get_vp) ? $get_vp : $vpoint_;
+
+                $ktvpoint = $get_vp;
+                $ktgcoin = $get_gc;
+                $newReset = $reset_ - ceil(0.01 * $changeClass[1] * $reset_);
+                if ($ktvpoint == $vpoint_) $var_vp = ($_blank_var[0]['gc'] - $get_gc) . " Gcoin";
+                else $var_vp = ($_blank_var[0]['vp'] - $get_vp) . " Vpoint";
+
+                $_codeClass = $infoClass['class_' . $nameClass . '_1'];
+
+                $default_class = do_select_character('DefaultClassType', $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership', "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3");
+                $get_default_class = '';
+                $_arr_cls = spsep($arr_cls);
+                foreach ($_arr_cls as $key => $val)
+                    $get_default_class .= "$val=" . $default_class[0][$val] . ",";
+
+                $get_default_class = substr($get_default_class, 0, -1);
+
+                $inventory_nothing = '';
+                for ($i = 0; $i < 3456; $i++) {
+                    $inventory_nothing .= 'F';
+                }
+                $quest_nothing = substr($inventory_nothing, 0, 100);
+
+                do_update_character(
+                    'Character',
+                    'Clevel=400',
+                    "Resets=$newReset",
+                    'Experience=0',
+                    "Class=$_codeClass",
+                    "LevelUpPoint=0",
+                    "pointdutru=0",
+                    "$get_default_class",
+                    "MapDir=0",
+                    "MagicList=CONVERT(varbinary(180), null)",
+                    "Quest=0x$quest_nothing",
+                    "Inventory=0x$inventory_nothing",
+                    "name:'$sub'"
+                );
+
+                //Reset Point Master Skill
+                if (($class_ == $infoClass['class_dw_3']) || ($class_ == $infoClass['class_dk_3']) || ($class_ == $infoClass['class_elf_3']) || ($class_ == $infoClass['class_mg_2']) || ($class_ == $infoClass['class_dl_2']) || ($class_ == $infoClass['class_sum_3']) || ($class_ == $infoClass['class_rf_2'])) {
+                    if (getoption('server_type') == "scf")
+                        do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
+                    else if (getoption('server_type') == "ori")
+                        do_update_character('T_MasterLevelSystem', 'MASTER_LEVEL=0', 'ML_POINT=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
+                    else
+                        do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
+                }
+
+                do_update_character('MEMB_INFO', "vpoint = $ktvpoint", "gcoin = $ktgcoin", "memb___id:'$accc_'");
+
+                //Ghi vào Log
+                $content = "Nhân vật $sub nhiệm vụ level 220 với $var_vp";
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/character/log_level220.log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
+
+                $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
+
+                $temp[$isClass] = [$isClass . '_code' => $infoClass['class_' . $isClass . '_1'], $isClass . '_name' => $infoClass['class_' . $isClass . '_1_name']];
+
+                cn_throw_message("Nhân vật $sub đã đổi nhiệm vụ 220 thành công.");
+            }
+        }
+    }
+
+    cn_assign('showchar, sub, before_info_cn', $showchar, $sub, $before_info_cn);
+
+    echoheader('-@my_char/style.css', "Làm nhiệm vụ (level 220) cấp 2");
+    echocomtent_here(exec_tpl('my_char/level_2'), cn_snippet_bc_re());
+    echofooter();
+}
+
+function char_level3()
+{
+    $tempClass = ['dw_3', 'dk_3', 'elf_3', 'mg_', 'dl_3', 'sum_3', 'rf_3'];
+    $config_level = explode('|', getoption('configLevel'), 2);
+
+    $tempClassLevel = ['class_dw_1', 'class_dk_1', 'class_elf_1', 'class_sum_1'];
+    $tempSkip = ['mg', 'dl', 'rf'];
+//
+    $showchar = cn_character();
+    $infoClass = cn_template_class();
+    $_blank_var = view_bank($accc_ = $_SESSION['user_Gamer']);
+
+    list($sub) = GET('sub', 'GPG');
+
+    if (!$sub) $sub = array_keys($showchar)[0];
+    else {
+        if (!in_array($sub, array_keys($showchar)))
+            $sub = array_keys($showchar)[0];
+    }
+
+    $cn_false = $is_level2 = false;
+    $gcoin_ = $_blank_var[0]['gc'];
+    $vpoint_ = $_blank_var[0]['vp'];
+
+    $level = $showchar[$sub]['level'];
+    $reset_ = $showchar[$sub]['reset'];
+    $isClass = $showchar[$sub]['isClass'];
+    $class_ = $showchar[$sub]['class'];
+    $status = '';
+    $checkLevel150 = $checkLevel220 = false;
+
+    $key = array_search($class_, $infoClass);
+    if ($key !== false) {
+        $numberClass = explode('_', $key);
+
+        if (in_array($key, $tempClass) && !in_array($isClass, $tempSkip) && $numberClass[2] == 2) {
+            $status = '<span class="cBule"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 2 </span><br>";
+        } else {
+            $status = '<span class="cInfo"> <b>' . ucfirst($sub) . "</b> đã làm nhiệm vụ cấp 2 </span><br>";
+            $checkLevel220 = true;
+        }
+        if (in_array($key, $tempClassLevel)) {
+            $status = '<span class="cRed"><a href="' . cn_url_modify() . '"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 1 </a> </span><br>";
+            $checkLevel150 = true;
+        }
+    }
+//
+    $temp = [];
+    foreach ($infoClass as $key => $val) {
+        $strA = explode('_', $key);
+        if (in_array($strA[1], $tempClass)) {
+            if (!isset($temp[$strA[1]]) && $strA[1] != $isClass) {
+                $temp[$strA[1]] = [$strA[1] . '_code' => $infoClass[$key], $strA[1] . '_name' => $infoClass[$key . '_name']];
+            }
+        }
+    }
+
+    if ($level >= 380) {
+        $sms_level = $level . '(Đủ Level)';
+        $is_level2 = true;
+    } else {
+        $sms_level = $level . ' <font color=red>(Thiếu ' . abs(380 - $level) . ' Level) </font>';
+    }
+
+    list ($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, $config_level[0]);
+
+    if (check_changecls($_SESSION['user_Gamer'], $sub)) {
+        $check_change = true;
+        $status_change = "Đã đổi";
+    } else {
+        $check_change = false;
+        $status_change = "<font color =red>Chưa đổi</font>";
+    }
+    $before_info_cn = array(
+        0 => array('Nhân vật', "<a href=" . cn_url_modify('mod=char_manager', 'opt=info_char', 'sub') . " title='Click info $sub'> $sub </a>"),
+        1 => array('Level', $sms_level),
+        2 => array('Cấp độ', $level),
+        3 => array('Vpoint', number_format((float)$get_vp, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '')),
+        4 => array('Đổi nhân vật', $status_change),
+        5 => array('Status', $status)
+    );
+
+    if (request_type('POST')) {
+        if (REQ('action_level3')) {
+            cn_dsi_check(true);
+            $errors_false = false;
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+
+            if (!$check_change) {
+                cn_throw_message("Nhân vật $sub không được là nhân vật thoát ra sau cùng. Hãy vào Game và chọn nhân vật khác trước khi thực hiện chức năng này.", 'e');
+                $errors_false = true;
+            }
+            if (!$is_level2) {
+                cn_throw_message("Yêu cầu tối thiểu 380 level", 'e');
+                $errors_false = true;
+            }
+
+            if ($cn_false) {
+                cn_throw_message("Bạn không đủ Vpoint để đổi tên.", 'e');
+                $errors_false = true;
+            }
+
+            if ($checkLevel220) {
+                cn_throw_message('Nhân vật ' . $sub . ' đã làm nhiệm vụ cấp 2 (level 220)!');
+                $errors_false = true;
+            }
+            if ($checkLevel150) {
+                cn_throw_message('Nhân vật ' . $sub . ' chưa làm nhiệm vụ cấp 1 (level 150)!');
+                $errors_false = true;
+            }
+
+            if (!$errors_false) {
+                $ktvpoint = isset($get_vp) ? $get_vp : $vpoint_;
+
+                $ktvpoint = $get_vp;
+                $ktgcoin = $get_gc;
+                $newReset = $reset_ - ceil(0.01 * $changeClass[1] * $reset_);
+                if ($ktvpoint == $vpoint_) $var_vp = ($_blank_var[0]['gc'] - $get_gc) . " Gcoin";
+                else $var_vp = ($_blank_var[0]['vp'] - $get_vp) . " Vpoint";
+
+                $_codeClass = $infoClass['class_' . $nameClass . '_1'];
+
+                $default_class = do_select_character('DefaultClassType', $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership', "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3");
+                $get_default_class = '';
+                $_arr_cls = spsep($arr_cls);
+                foreach ($_arr_cls as $key => $val)
+                    $get_default_class .= "$val=" . $default_class[0][$val] . ",";
+
+                $get_default_class = substr($get_default_class, 0, -1);
+
+                $inventory_nothing = '';
+                for ($i = 0; $i < 3456; $i++) {
+                    $inventory_nothing .= 'F';
+                }
+                $quest_nothing = substr($inventory_nothing, 0, 100);
+
+                do_update_character(
+                    'Character',
+                    'Clevel=400',
+                    "Resets=$newReset",
+                    'Experience=0',
+                    "Class=$_codeClass",
+                    "LevelUpPoint=0",
+                    "pointdutru=0",
+                    "$get_default_class",
+                    "MapDir=0",
+                    "MagicList=CONVERT(varbinary(180), null)",
+                    "Quest=0x$quest_nothing",
+                    "Inventory=0x$inventory_nothing",
+                    "name:'$sub'"
+                );
+
+                //Reset Point Master Skill
+                if (($class_ == $infoClass['class_dw_3']) || ($class_ == $infoClass['class_dk_3']) || ($class_ == $infoClass['class_elf_3']) || ($class_ == $infoClass['class_mg_2']) || ($class_ == $infoClass['class_dl_2']) || ($class_ == $infoClass['class_sum_3']) || ($class_ == $infoClass['class_rf_2'])) {
+                    if (getoption('server_type') == "scf")
+                        do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
+                    else if (getoption('server_type') == "ori")
+                        do_update_character('T_MasterLevelSystem', 'MASTER_LEVEL=0', 'ML_POINT=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
+                    else
+                        do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
+                }
+
+                do_update_character('MEMB_INFO', "vpoint = $ktvpoint", "gcoin = $ktgcoin", "memb___id:'$accc_'");
+
+                //Ghi vào Log
+                $content = "Nhân vật $sub nhiệm vụ level 380 với $var_vp";
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/character/log_level380.log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
+
+                $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
+
+                $temp[$isClass] = [$isClass . '_code' => $infoClass['class_' . $isClass . '_1'], $isClass . '_name' => $infoClass['class_' . $isClass . '_1_name']];
+
+                cn_throw_message("Nhân vật $sub đã đổi nhiệm vụ 380 thành công.");
+            }
+        }
+    }
+
+    cn_assign('showchar, sub, before_info_cn', $showchar, $sub, $before_info_cn);
+
+    echoheader('-@my_char/style.css', "Làm nhiệm vụ (level 380) cấp 3");
+    echocomtent_here(exec_tpl('my_char/level_3'), cn_snippet_bc_re());
+    echofooter();
+
+}
 
 function char_delepersonalSotre()
 {
@@ -3567,14 +4120,14 @@ function char_delepersonalSotre()
     $ceilInventoryShopPresonal = 1024; // 32*32
     $inventoryRaw = strtoupper(bin2hex($inventory));
     //$inventoryDele = substr($inventoryRaw, 76 * 32, 32 * 32);
-    $inventoryDele = substr($inventoryRaw, (-1)*$ceilInventoryShopPresonal);
+    $inventoryDele = substr($inventoryRaw, (-1) * $ceilInventoryShopPresonal);
 
     $check_change = false;
     if (check_changecls($_SESSION['user_Gamer'], $sub)) {
         $check_change = true;
     }
 
-    $checkExistItem =  mcache_get("#existItem");
+    $checkExistItem = mcache_get("#existItem");
 
     $isCheckAction = false;
     if (request_type('POST')) {
@@ -3584,7 +4137,7 @@ function char_delepersonalSotre()
             } else {
                 cn_dsi_check(true);
                 $errors_false = false;
-                
+
                 list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
                 if ($verifyCaptcha != $_SESSION['captcha_web']) {
                     cn_throw_message("Captcah không đúng.", 'e');
@@ -3641,8 +4194,21 @@ function char_delepersonalSotre()
                 if (!$item32['x']) $itemx = 1;
                 else $itemx = $item32['x'];
 
-                $show_warehouse .= "<div style='margin-top:" . ((floor($i / 8) * 32) + 82) . "px; margin-left:" . ($x * 32) . "px; position:absolute; width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px; cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>
-									<img src='images/items/" . $item32['image'] . ".gif' style=\"height:" . (31 * $itemy - $itemy - 1) . "px; width:" . (31 * $itemx) . "px;\"></div>";
+                $show_warehouse .= "<div style='margin-top:" . ((floor($i / 8) * 32) + 82) . "px; margin-left:" . ($x * 32) . "px; position:absolute; width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px; cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>";
+//									<img src='images/items/" . $item32['image'] . ".gif' style=\"height:" . (31 * $itemy - $itemy - 1) . "px; width:" . (31 * $itemx) . "px;\"></div>";
+
+                if (file_exists(ROOT. '/images/items/' . $item32['image'] . '.gif')) {
+                    $show_warehouse .= "<img src='images/items/" . $item32['image'] . ".gif'
+											style='height:" . (32 * $itemy - $itemy - 1) . "px;
+											 width:" . (32 * $itemx) . "px;'";
+
+                    $show_warehouse .= ' onMouseOut="UnTip()" onMouseOver="topxTip(document.getElementById(\'iditem' . $i . '\').innerHTML)" /></div>';
+                    $show_warehouse .= "<div class='floatcontainer forumbit_nopost' id='iditem$i' style='display:none; background: rgba(0, 128, 0, 0.15);'>" . $item32['info'] . "</div>";
+                } else {
+                    $show_warehouse .= "<img src='images/items/SinFoto.gif'
+											style='height:" . (32 * $itemy - $itemy - 1) . "px;
+											 width:" . (32 * $itemx) . "px;' /></div>";
+                }
             }
         }
     }
@@ -3807,10 +4373,9 @@ function char_delepersonalSotre()
 //                //Ghi vào Log
 //                $content = "$sub đã đổi $sub sang $c_name với $var_vp";
 //                $Date = date("h:iA, d/m/Y", ctime());
-//                $file = MODULE_ADM . "/log/modules/character/log_changename.txt";
-//                $fp = fopen($file, "a+");
-//                fputs($fp, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $var_vp . "|" . $Date . "|\n");
-//                fclose($fp);
+//                $file = MODULE_ADM . "/log/modules/character/log_changename.log";
+//                $fileContents = file_get_contents($file);
+//                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $var_vp . "|" . $Date . "|\n" . $fileContents);
 //                //End Ghi vào Log
 //
 //                $before_info_cn[3][1] = number_format((float)$ktgcoin, 0, ",", ".");
@@ -3831,7 +4396,8 @@ function char_delepersonalSotre()
 //}
 
 
-function checkGcoinVpoint($gcRoot, $vpRoot, $parVpoint) {
+function checkGcoinVpoint($gcRoot, $vpRoot, $parVpoint)
+{
     $get_vp = $vpRoot;
     $get_gc = $gcRoot;
     $sms_gc = $sms_vp = '';
@@ -3849,5 +4415,21 @@ function checkGcoinVpoint($gcRoot, $vpRoot, $parVpoint) {
     }
 
     return array($get_gc, $sms_gc, $get_vp, $sms_vp, $cn_false);
+}
+
+function checkVpoint($vpRoot, $parVpoint)
+{
+    $get_vp = $vpRoot;
+    $sms_gc = $sms_vp = '';
+    $cn_false = false;
+
+    if (0 <= $get_vp = $vpRoot - $parVpoint) {
+        $sms_vp = " (Đủ Vpoint)";
+    } else {
+        $cn_false = true;
+        $sms_vp = " <font color=red>(Thiếu " . number_format((float)(abs($get_vp)), 0, ",", ".") . " Vpoint)</font>";
+    }
+
+    return array($get_vp, $sms_vp, $cn_false);
 }
 

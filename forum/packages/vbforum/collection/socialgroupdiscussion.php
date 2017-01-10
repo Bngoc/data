@@ -25,35 +25,34 @@
  */
 class vBForum_Collection_SocialGroupDiscussion extends vB_Collection
 {
-	/*Config Info======================================================================*/
-	protected $item_package = 'vBForum';
-	protected $item_class = 'SocialGroupDiscussion';
+    /*Config Info======================================================================*/
+    protected $item_package = 'vBForum';
+    protected $item_class = 'SocialGroupDiscussion';
 
-	/*LoadInfo======================================================================*/
+    /*LoadInfo======================================================================*/
 
-	/**
-	 * Fetches the SQL for loading.
-	 * $required_query is used to identify which query to build for classes that
-	 * have multiple queries for fetching info.
-	 *
-	 * This can safely be based on $this->required_info as long as a consitent
-	 * flag is used for identifying the query.
-	 *
-	 * @param int $required_query				- The required query
-	 * @param bool $force_rebuild				- Whether to rebuild the string
-	 *
-	 * @return string
-	 */
-	protected function getLoadQuery($required_query = self::QUERY_BASIC, $force_rebuild = false)
-	{
-		// Hooks should check the required query before populating the hook vars
-		$hook_query_fields = $hook_query_join = $hook_query_where = '';
-		($hook = vBulletinHook::fetch_hook($this->query_hook)) ? eval($hook) : false;
+    /**
+     * Fetches the SQL for loading.
+     * $required_query is used to identify which query to build for classes that
+     * have multiple queries for fetching info.
+     *
+     * This can safely be based on $this->required_info as long as a consitent
+     * flag is used for identifying the query.
+     *
+     * @param int $required_query - The required query
+     * @param bool $force_rebuild - Whether to rebuild the string
+     *
+     * @return string
+     */
+    protected function getLoadQuery($required_query = self::QUERY_BASIC, $force_rebuild = false)
+    {
+        // Hooks should check the required query before populating the hook vars
+        $hook_query_fields = $hook_query_join = $hook_query_where = '';
+        ($hook = vBulletinHook::fetch_hook($this->query_hook)) ? eval($hook) : false;
 
-		if (self::QUERY_BASIC == $required_query)
-		{
-			$ids = array_map('intval', $this->itemid);
-			return $query = "
+        if (self::QUERY_BASIC == $required_query) {
+            $ids = array_map('intval', $this->itemid);
+            return $query = "
 				SELECT
 					discussion.discussionid as itemid,
 					discussion.*,
@@ -66,18 +65,18 @@ class vBForum_Collection_SocialGroupDiscussion extends vB_Collection
 					firstpost.ipaddress,
 					firstpost.allowsmilie,
 					firstpost.reportthreadid " .
-					$hook_query_fields . "
+                $hook_query_fields . "
 				FROM " . TABLE_PREFIX . "discussion AS discussion JOIN " .
-					TABLE_PREFIX . "groupmessage AS firstpost ON discussion.firstpostid = firstpost.gmid
-					INNER JOIN " .	TABLE_PREFIX . "socialgroup AS socialgroup ON socialgroup.groupid = discussion.groupid " .
-				$hook_query_join . "
+                TABLE_PREFIX . "groupmessage AS firstpost ON discussion.firstpostid = firstpost.gmid
+					INNER JOIN " . TABLE_PREFIX . "socialgroup AS socialgroup ON socialgroup.groupid = discussion.groupid " .
+                $hook_query_join . "
 				WHERE discussion.discussionid IN (" . implode(',', $ids) . ")
 				$hook_query_where";
-		}
+        }
 
-		throw (new vB_Exception_Model('Invalid query id \'' . htmlspecialchars($required_query) .
-			'\'specified for social group message collection: ' . htmlspecialchars($query)));
-	}
+        throw (new vB_Exception_Model('Invalid query id \'' . htmlspecialchars($required_query) .
+            '\'specified for social group message collection: ' . htmlspecialchars($query)));
+    }
 }
 
 /*======================================================================*\

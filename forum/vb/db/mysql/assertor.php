@@ -28,9 +28,9 @@
  */
 class vB_dB_MYSQL_Assertor extends vB_dB_Assertor
 {
-	/*Properties====================================================================*/
+    /*Properties====================================================================*/
 
-	protected static $db_type = 'MYSQL';
+    protected static $db_type = 'MYSQL';
 
 }
 

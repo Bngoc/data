@@ -2,22 +2,26 @@
     color: aquamarine;
     text-transform: uppercase;
 }
-.entry  {
+
+.entry {
     width: 100%;
 }
-.row-notify{
+
+.row-notify {
     border-bottom: #ad9898 dotted 5px;
     line-height: 20px;
     border-width: thin;
     width: 100%;
 }
-.postForum{
+
+.postForum {
     padding: 0;
     margin: 0;
     font-size: 13px;
     text-align: justify;
     padding: 0 10px;
 }
+
 .topx-content-tab {
     display: inline-block;
     width: 80%;
@@ -32,6 +36,7 @@
     position: relative;
 
 }
+
 .time-nofify-Forum {
     padding: 2px 3px;
     border: 1px solid #d0c4c4;
@@ -47,13 +52,16 @@
 .time-tb {
     background: #cc0000;
 }
+
 .time-garena {
     background: #009900;
 }
+
 a.overtext {
     color: #9e0319;
 }
-.ranking_sub th.title-ranking{
+
+.ranking_sub th.title-ranking {
     font-weight: bold;
     color: #b66836 !important;
 }

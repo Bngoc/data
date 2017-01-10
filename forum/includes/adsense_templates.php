@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -12,11 +12,11 @@
 
 function get_adsense_templates()
 {
-	#####################
-	## LOW (text)
-	#####################
+    #####################
+    ## LOW (text)
+    #####################
 
-	$ad_navbar_below_low_text = '<vb:if condition="$adsense_pub_id AND CONTENT_PAGE">
+    $ad_navbar_below_low_text = '<vb:if condition="$adsense_pub_id AND CONTENT_PAGE">
 <div style="width:728px; margin:0 auto; padding-bottom:1em">
 <script type="text/javascript"><!--
 google_ad_client = "{vb:var adsense_pub_id}";
@@ -39,7 +39,7 @@ google_ui_features = "rc:6";
 </div>
 </vb:if>';
 
-	$ad_footer_start_low_text = '<vb:if condition="$adsense_pub_id AND CONTENT_PAGE">
+    $ad_footer_start_low_text = '<vb:if condition="$adsense_pub_id AND CONTENT_PAGE">
 <div class="google_adsense_footer" style="width:468px; margin:0 auto; padding-top:1em">
 <script type="text/javascript"><!--
 google_ad_client = "{vb:var adsense_pub_id}";
@@ -63,11 +63,11 @@ google_ui_features = "rc:6";
 </div>
 </vb:if>';
 
-	#####################
-	## HIGH (text)
-	#####################
+    #####################
+    ## HIGH (text)
+    #####################
 
-	$ad_footer_start_high_text = '<vb:if condition="$adsense_pub_id AND CONTENT_PAGE">
+    $ad_footer_start_high_text = '<vb:if condition="$adsense_pub_id AND CONTENT_PAGE">
 <div class="google_adsense_footer" style="width:728px; margin:0 auto; padding-top:1em">
 <script type="text/javascript"><!--
 google_ad_client = "{vb:var adsense_pub_id}";
@@ -92,7 +92,7 @@ google_ui_features = "rc:6";
 </vb:if>';
 
 
-	$ad_navbar_below_high_text = '<vb:if condition="$adsense_pub_id AND CONTENT_PAGE">
+    $ad_navbar_below_high_text = '<vb:if condition="$adsense_pub_id AND CONTENT_PAGE">
 <div style="width:728px; margin:0 auto; padding-bottom:1em">
 <script type="text/javascript"><!--
 google_ad_client = "{vb:var adsense_pub_id}";
@@ -116,7 +116,7 @@ google_ui_features = "rc:6";
 </div>
 </vb:if>';
 
-	$ad_showthread_firstpost_start_high_text = '<vb:if condition="$adsense_pub_id AND CONTENT_PAGE">
+    $ad_showthread_firstpost_start_high_text = '<vb:if condition="$adsense_pub_id AND CONTENT_PAGE">
 <vb:if condition="!$bbuserinfo[\'userid\']">
 <div style="float:right; width:300px; height:250px; margin-left:10px">
 <script type="text/javascript"><!--
@@ -143,57 +143,57 @@ google_ui_features = "rc:6";
 </vb:if>';
 
 
-	// ######################## THE ARRAY ###########################
+    // ######################## THE ARRAY ###########################
 
-	$ad_showthread_firstpost_sig = '<vb:if condition="$adsense_pub_id AND CONTENT_PAGE">
+    $ad_showthread_firstpost_sig = '<vb:if condition="$adsense_pub_id AND CONTENT_PAGE">
 <vb:if condition="!$bbuserinfo[\'userid\']">
 <div style="clear:both"></div>
 </vb:if>
 </vb:if>';
 
-	return array(
-		'low-text' => array(
-			'ad_navbar_below' => $ad_navbar_below_low_text,
-			'ad_showthread_firstpost_start' => '',
-			'ad_showthread_firstpost_sig' => '',
-			'ad_footer_start' => $ad_footer_start_low_text,
-		),
-		'low-image' => array(
-			'ad_navbar_below' => remove_adsense_text_only_limit($ad_navbar_below_low_text),
-			'ad_showthread_firstpost_start' => '',
-			'ad_showthread_firstpost_sig' => '',
-			'ad_footer_start' => remove_adsense_text_only_limit($ad_footer_start_low_text),
-		),
+    return array(
+        'low-text' => array(
+            'ad_navbar_below' => $ad_navbar_below_low_text,
+            'ad_showthread_firstpost_start' => '',
+            'ad_showthread_firstpost_sig' => '',
+            'ad_footer_start' => $ad_footer_start_low_text,
+        ),
+        'low-image' => array(
+            'ad_navbar_below' => remove_adsense_text_only_limit($ad_navbar_below_low_text),
+            'ad_showthread_firstpost_start' => '',
+            'ad_showthread_firstpost_sig' => '',
+            'ad_footer_start' => remove_adsense_text_only_limit($ad_footer_start_low_text),
+        ),
 
-		'high-text' => array(
-			'ad_navbar_below' => $ad_navbar_below_high_text,
-			'ad_showthread_firstpost_start' => $ad_showthread_firstpost_start_high_text,
-			'ad_showthread_firstpost_sig' => $ad_showthread_firstpost_sig,
-			'ad_footer_start' => $ad_footer_start_high_text,
-		),
-		'high-image' => array(
-			'ad_navbar_below' => remove_adsense_text_only_limit($ad_navbar_below_high_text),
-			'ad_showthread_firstpost_start' => remove_adsense_text_only_limit($ad_showthread_firstpost_start_high_text),
-			'ad_showthread_firstpost_sig' => $ad_showthread_firstpost_sig,
-			'ad_footer_start' => remove_adsense_text_only_limit($ad_footer_start_high_text),
-		),
+        'high-text' => array(
+            'ad_navbar_below' => $ad_navbar_below_high_text,
+            'ad_showthread_firstpost_start' => $ad_showthread_firstpost_start_high_text,
+            'ad_showthread_firstpost_sig' => $ad_showthread_firstpost_sig,
+            'ad_footer_start' => $ad_footer_start_high_text,
+        ),
+        'high-image' => array(
+            'ad_navbar_below' => remove_adsense_text_only_limit($ad_navbar_below_high_text),
+            'ad_showthread_firstpost_start' => remove_adsense_text_only_limit($ad_showthread_firstpost_start_high_text),
+            'ad_showthread_firstpost_sig' => $ad_showthread_firstpost_sig,
+            'ad_footer_start' => remove_adsense_text_only_limit($ad_footer_start_high_text),
+        ),
 
-		'remove' => array(
-			'ad_navbar_below' => '',
-			'ad_showthread_firstpost_start' => '',
-			'ad_showthread_firstpost_sig' => '',
-			'ad_footer_start' => '',
-		),
-	);
+        'remove' => array(
+            'ad_navbar_below' => '',
+            'ad_showthread_firstpost_start' => '',
+            'ad_showthread_firstpost_sig' => '',
+            'ad_footer_start' => '',
+        ),
+    );
 }
 
 function remove_adsense_text_only_limit($adsense_string)
 {
-	return str_replace(
-		'google_ad_type = "text";',
-		'google_ad_type = "text_image";',
-		$adsense_string
-	);
+    return str_replace(
+        'google_ad_type = "text";',
+        'google_ad_type = "text_image";',
+        $adsense_string
+    );
 }
 
 /*======================================================================*\

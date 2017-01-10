@@ -62,7 +62,6 @@
     vertical-align: middle;
 }
 
-
 #ranking_search #input_search input.on {
     background-image: none;
 }
@@ -380,22 +379,26 @@ th.rbg, th.lbg {
     padding: 8px 0;
     color: white;
 }
-.col-left{
+
+.col-left {
     text-align: left;
     padding-right: 5px;
     margin-top: 12px;
     padding-top: 7px;
     float: left;
 }
-.col-left span{
+
+.col-left span {
     float: left;
 }
-.col-left a{
+
+.col-left a {
     display: block;
     float: inherit;
     padding: 0px 3px;
 }
-.col-right{
+
+.col-right {
     float: right;
     display: block;
 }

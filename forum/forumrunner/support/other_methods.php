@@ -22,8 +22,8 @@ $methods = array_merge($methods, array(
      * success
      */
     'get_cms_section' => array(
-	'include' => 'cms.php',
-	'function' => 'do_get_cms_section',
+        'include' => 'cms.php',
+        'function' => 'do_get_cms_section',
     ),
     /*
      * get_cms_sections
@@ -37,8 +37,8 @@ $methods = array_merge($methods, array(
      * success
      */
     'get_cms_sections' => array(
-	'include' => 'cms.php',
-	'function' => 'do_get_cms_sections',
+        'include' => 'cms.php',
+        'function' => 'do_get_cms_sections',
     ),
     /*
      * get_cms_article
@@ -52,8 +52,8 @@ $methods = array_merge($methods, array(
      * success
      */
     'get_cms_article' => array(
-	'include' => 'cms.php',
-	'function' => 'do_get_cms_article',
+        'include' => 'cms.php',
+        'function' => 'do_get_cms_article',
     ),
 ));
 

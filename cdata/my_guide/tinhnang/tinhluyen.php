@@ -7,7 +7,7 @@
 - Tìm gặp NPC Elpis (78 - 174) chuyên tinh chế Đá Nguyên Thủy <br>
 <br>
 <div>
-  <div align="center"><img height="350" src=" /images/guides/npc-Elpis.jpg" width="80%"></div>
+    <div align="center"><img height="350" src=" /images/guides/npc-Elpis.jpg" width="80%"></div>
 </div>
 <br>
 - Chọn chức năng Tinh luyện Đá Nguyên Thủy <br>
@@ -23,8 +23,8 @@
 - Người chơi gặp <strong>NPC Osbourne</strong> chuyên chế tạo các loại Đá Tinh Luyện ở Aida tọa độ 80-12. <br>
 <br>
 <div>
-  <div align="center"><img height="350" src=" /images/guides/npc-Osbourne.jpg" width="80%">
-  </div>
+    <div align="center"><img height="350" src=" /images/guides/npc-Osbourne.jpg" width="80%">
+    </div>
 </div>
 <br>
 <br>
@@ -44,8 +44,8 @@
 - Người chơi gặp NPC Cheris chuyên Phục hồi các item gia cường tại Aida tọa độ 86-12. <br>
 <br>
 <div>
-  <div align="center"><img height="400" src=" /images/guides/npc-Cheris.jpg" width="80%">
-  </div>
+    <div align="center"><img height="400" src=" /images/guides/npc-Cheris.jpg" width="80%">
+    </div>
 </div>
 <br>
 - Khi quá trình Phục hồi thành công, tính năng gia cường sẽ biến mất và dòng chữ “không thể giao dịch” cũng sẽ mất theo đó.
@@ -54,8 +54,8 @@
 - Tỉ lệ thành công của quá trình Phục hồi là 100%. <br>
 <br>
 <div>
-  <div align="center"><img height="400" src=" /images/guides/restoreItem.jpg" width="60%">
-  </div>
+    <div align="center"><img height="400" src=" /images/guides/restoreItem.jpg" width="60%">
+    </div>
 </div>
 <br>
 <br>
@@ -81,8 +81,8 @@
 - Chọn dòng Sự kết hợp tính năng của Items <br>
 <br>
 <div>
-  <div align="center"><img height="350" src=" /images/guides/npc-ChaosGobin.jpg" width="70%">
-  </div>
+    <div align="center"><img height="350" src=" /images/guides/npc-ChaosGobin.jpg" width="70%">
+    </div>
 </div>
 <br>
 <br>
@@ -91,8 +91,8 @@
 - Nếu thành công item của bạn sẽ có thêm 2 dòng tính năng mới (màu tím) <br>
 <br>
 <div>
-  <div align="center"><img height="350" src=" /images/guides/succitem380.jpg" width="70%">
-  </div>
+    <div align="center"><img height="350" src=" /images/guides/succitem380.jpg" width="70%">
+    </div>
 </div>
 <br>
 <br>

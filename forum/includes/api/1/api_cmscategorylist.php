@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin Blog 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -13,16 +13,16 @@ if (!VB_API) die;
 
 class vB_APIMethod_api_cmscategorylist extends vBI_APIMethod
 {
-	public function output()
-	{
-		global $vbulletin;
+    public function output()
+    {
+        global $vbulletin;
 
-		$sectionid = 1;
+        $sectionid = 1;
 
-		//First we'll generate the category list
+        //First we'll generate the category list
 
-		//compose the sql
-		$rst = vB::$vbulletin->db->query_read($sql = "SELECT parent.category AS parentcat, cat.categoryid, cat.category,
+        //compose the sql
+        $rst = vB::$vbulletin->db->query_read($sql = "SELECT parent.category AS parentcat, cat.categoryid, cat.category,
 		cat.catleft, cat.catright, info.title AS node, parentnode.nodeid, count(nodecat.nodeid) as qty
 	FROM " . TABLE_PREFIX . "cms_node AS node
 		INNER JOIN " . TABLE_PREFIX . "cms_node AS parentnode ON (node.nodeleft >= parentnode.nodeleft AND node.nodeleft <= parentnode.noderight)
@@ -35,44 +35,40 @@ class vB_APIMethod_api_cmscategorylist extends vBI_APIMethod
 		cat.catleft, cat.catright, info.title, parentnode.nodeid
 		ORDER BY node.nodeleft, catleft;");
 
-		$parents = array();
-		$level = 0;
-		$nodes = array();
-		if ($record = vB::$vbulletin->db->fetch_array($rst))
-		{
-			$record['level'] = $level;
-			$record['route_info'] = $record['categoryid'] .
-				($record['category'] != '' ? '-' . str_replace(' ', '-', $record['category']) : '');
-			$nodes[strtolower($record['category'])] = $parents[0] = $record;
-			$last_category = -1;
+        $parents = array();
+        $level = 0;
+        $nodes = array();
+        if ($record = vB::$vbulletin->db->fetch_array($rst)) {
+            $record['level'] = $level;
+            $record['route_info'] = $record['categoryid'] .
+                ($record['category'] != '' ? '-' . str_replace(' ', '-', $record['category']) : '');
+            $nodes[strtolower($record['category'])] = $parents[0] = $record;
+            $last_category = -1;
 
-			while($record = vB::$vbulletin->db->fetch_array($rst))
-			{
-				$record['route_info'] = $record['categoryid'] .
-					($record['category'] != '' ? '-' . str_replace(' ', '-', $record['category']) : '');
+            while ($record = vB::$vbulletin->db->fetch_array($rst)) {
+                $record['route_info'] = $record['categoryid'] .
+                    ($record['category'] != '' ? '-' . str_replace(' ', '-', $record['category']) : '');
 
-				if ($record['categoryid'] == $last_category )
-				{
-					continue;
-				}
+                if ($record['categoryid'] == $last_category) {
+                    continue;
+                }
 
-				//note that since we're already sorted by by catleft we don't need to check that.
-				while((intval($record['catright']) > intval($parents['level']['catright'])) AND $level > 0)
-				{
-					$level--;
-				}
-				$level++;
-				$record['level'] = $level;
+                //note that since we're already sorted by by catleft we don't need to check that.
+                while ((intval($record['catright']) > intval($parents['level']['catright'])) AND $level > 0) {
+                    $level--;
+                }
+                $level++;
+                $record['level'] = $level;
 
-				$nodes[strtolower($record['category'])] = $parents[$level] = $record;
-				$last_category = $record['categoryid'];
-			}
-		}
-		ksort($nodes);
+                $nodes[strtolower($record['category'])] = $parents[$level] = $record;
+                $last_category = $record['categoryid'];
+            }
+        }
+        ksort($nodes);
 
-		return $nodes;
-		
-	}
+        return $nodes;
+
+    }
 }
 
 /*======================================================================*\

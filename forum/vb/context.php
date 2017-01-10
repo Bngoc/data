@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -23,7 +23,7 @@
  * the context id.
  *
  * @example:
- * 	$context = new vB_Context();
+ *    $context = new vB_Context();
  *  $context->widgetid = 55;
  *  $context->widgetlabel = 'mywidget';
  *  $context->nodeid = 2;
@@ -32,9 +32,9 @@
  *  // Get cached result based on the above context
  *  if (!($result = $cache->read($context)))
  *  {
- * 		// ... code to create the new output
- * 		// save result to cache
- * 		$cache->write($context, $data);
+ *        // ... code to create the new output
+ *        // save result to cache
+ *        $cache->write($context, $data);
  *  }
  *  return $result;
  *
@@ -46,114 +46,110 @@
  */
 class vB_Context
 {
-	/*Properties====================================================================*/
+    /*Properties====================================================================*/
 
-	/**
-	 * A custom key to add to the context.
-	 * The evaluated md5 string representation of the context can be prefixed with a
-	 * custom string to allow it to be more easily identified visually.  If a key is
-	 * provided, the resulting string id of the context will be truncated to
-	 * accomodate the prefix.
-	 *
-	 * @var string
-	 */
-	private $_key;
+    /**
+     * A custom key to add to the context.
+     * The evaluated md5 string representation of the context can be prefixed with a
+     * custom string to allow it to be more easily identified visually.  If a key is
+     * provided, the resulting string id of the context will be truncated to
+     * accomodate the prefix.
+     *
+     * @var string
+     */
+    private $_key;
 
-	/**
-	 * The individualising characteristics of the context.
-	 *
-	 * @var array mixed
-	 */
-	private $_values = array();
+    /**
+     * The individualising characteristics of the context.
+     *
+     * @var array mixed
+     */
+    private $_values = array();
 
-	/**
-	 * The resolved id of the context.
-	 * This can be used to get or test data relating to the appropriate context.
-	 *
-	 * @var string
-	 */
-	private $_id;
+    /**
+     * The resolved id of the context.
+     * This can be used to get or test data relating to the appropriate context.
+     *
+     * @var string
+     */
+    private $_id;
 
 
+    /*Initialization================================================================*/
 
-	/*Initialization================================================================*/
+    /**
+     * Constructor.
+     * Allows values to be given as an array on instantiation.
+     *
+     * @param array mixed $values
+     */
+    public function __construct($key = false, $values = false)
+    {
+        $this->_key = $key;
 
-	/**
-	 * Constructor.
-	 * Allows values to be given as an array on instantiation.
-	 *
-	 * @param array mixed $values
-	 */
-	public function __construct($key = false, $values = false)
-	{
-		$this->_key = $key;
-
-		if (is_array($values))
-		{
-			$this->_values = $values;
-		}
-	}
+        if (is_array($values)) {
+            $this->_values = $values;
+        }
+    }
 
 
 
-	/*Definition====================================================================*/
+    /*Definition====================================================================*/
 
-	/**
-	 * Setter for defining the context characteristics.
-	 *
-	 * @param string $property					- The property id
-	 * @param mixed $value						- The value to set
-	 */
-	public function __set($property, $value)
-	{
-		$this->_values[$property] = $value;
+    /**
+     * Setter for defining the context characteristics.
+     *
+     * @param string $property - The property id
+     * @param mixed $value - The value to set
+     */
+    public function __set($property, $value)
+    {
+        $this->_values[$property] = $value;
 
-		$this->_id = false;
-	}
-
-
-
-	/*Id============================================================================*/
-
-	/**
-	 * Gets an individual id for the context.
-	 *
-	 * @return string
-	 */
-	public function getId()
-	{
-		// Only calculate once
-		if (!$this->_id)
-		{
-			// sort values so that the order is always the same regardless of the order that they were set
-			ksort($this->_values);
-
-			// serialize values for md5
-			$result = serialize($this->_values);
-
-			// return md5 of serialization
-			$this->_id = md5($result);
-
-			if ($this->_key)
-			{
-				$this->_id = substr($this->_key . '.' . $this->_id, 0, 64);
-			}
-		}
-
-		return $this->_id;
-	}
+        $this->_id = false;
+    }
 
 
-	/**
-	 * __toString
-	 * Returns the evaluated context id.
-	 *
-	 * @return string
-	 */
-	public function __toString()
-	{
-		return $this->getId();
-	}
+
+    /*Id============================================================================*/
+
+    /**
+     * Gets an individual id for the context.
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        // Only calculate once
+        if (!$this->_id) {
+            // sort values so that the order is always the same regardless of the order that they were set
+            ksort($this->_values);
+
+            // serialize values for md5
+            $result = serialize($this->_values);
+
+            // return md5 of serialization
+            $this->_id = md5($result);
+
+            if ($this->_key) {
+                $this->_id = substr($this->_key . '.' . $this->_id, 0, 64);
+            }
+        }
+
+        return $this->_id;
+    }
+
+
+    /**
+     * __toString
+     * Returns the evaluated context id.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getId();
+    }
 }
 
 /*======================================================================*\

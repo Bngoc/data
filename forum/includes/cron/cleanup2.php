@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -12,9 +12,8 @@
 
 // ######################## SET PHP ENVIRONMENT ###########################
 error_reporting(E_ALL & ~E_NOTICE);
-if (!is_object($vbulletin->db))
-{
-	exit;
+if (!is_object($vbulletin->db)) {
+    exit;
 }
 
 // ########################################################################
@@ -83,14 +82,12 @@ $pmtexts = $vbulletin->db->query_read_slave("
 	LEFT JOIN " . TABLE_PREFIX . "pm AS pm USING(pmtextid)
 	WHERE pm.pmid IS NULL
 ");
-if ($vbulletin->db->num_rows($pmtexts))
-{
-	$pmtextids = '0';
-	while ($pmtext = $vbulletin->db->fetch_array($pmtexts))
-	{
-		$pmtextids .= ",$pmtext[pmtextid]";
-	}
-	$vbulletin->db->query_write("DELETE FROM " . TABLE_PREFIX . "pmtext WHERE pmtextid IN($pmtextids)");
+if ($vbulletin->db->num_rows($pmtexts)) {
+    $pmtextids = '0';
+    while ($pmtext = $vbulletin->db->fetch_array($pmtexts)) {
+        $pmtextids .= ",$pmtext[pmtextid]";
+    }
+    $vbulletin->db->query_write("DELETE FROM " . TABLE_PREFIX . "pmtext WHERE pmtextid IN($pmtextids)");
 }
 $vbulletin->db->free_result($pmtexts);
 
@@ -101,9 +98,8 @@ $vbulletin->db->query_write("
 ");
 
 // Stale pm throttle data
-if ($vbulletin->options['pmthrottleperiod'])
-{
-	$vbulletin->db->query_write("
+if ($vbulletin->options['pmthrottleperiod']) {
+    $vbulletin->db->query_write("
 		DELETE FROM " . TABLE_PREFIX . "pmthrottle
 		WHERE dateline < " . (TIMENOW - $vbulletin->options['pmthrottleperiod'] * 60) . "
 	");

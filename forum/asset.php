@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -14,10 +14,9 @@
 error_reporting(E_ALL & ~E_NOTICE);
 @ini_set('zlib.output_compression', 'Off');
 @set_time_limit(0);
-if (@ini_get('output_handler') == 'ob_gzhandler' AND @ob_get_length() !== false)
-{	// if output_handler = ob_gzhandler, turn it off and remove the header sent by PHP
-	@ob_end_clean();
-	header('Content-Encoding:');
+if (@ini_get('output_handler') == 'ob_gzhandler' AND @ob_get_length() !== false) {    // if output_handler = ob_gzhandler, turn it off and remove the header sent by PHP
+    @ob_end_clean();
+    header('Content-Encoding:');
 }
 
 // ##################### DEFINE IMPORTANT CONSTANTS #######################
@@ -31,41 +30,32 @@ define('NONOTICES', 1);
 define('NOSHUTDOWNFUNC', 1);
 define('LOCATION_BYPASS', 1);
 
-if (empty($_REQUEST['fid']))
-{
-	// return not found header
-	$sapi_name = php_sapi_name();
-	if ($sapi_name == 'cgi' OR $sapi_name == 'cgi-fcgi')
-	{
-		header('Status: 404 Not Found');
-	}
-	else
-	{
-		header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-	}
-	exit;
+if (empty($_REQUEST['fid'])) {
+    // return not found header
+    $sapi_name = php_sapi_name();
+    if ($sapi_name == 'cgi' OR $sapi_name == 'cgi-fcgi') {
+        header('Status: 404 Not Found');
+    } else {
+        header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+    }
+    exit;
 }
 
 // Immediately send back the 304 Not Modified header if this image is cached, don't load global.php
-if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) OR !empty($_SERVER['HTTP_IF_NONE_MATCH']))
-{
-	$sapi_name = php_sapi_name();
-	if ($sapi_name == 'cgi' OR $sapi_name == 'cgi-fcgi')
-	{
-		header('Status: 304 Not Modified');
-	}
-	else
-	{
-		header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
-	}
-	// remove the content-type and X-Powered headers to emulate a 304 Not Modified response as close as possible
-	header('Content-Type:');
-	header('X-Powered-By:');
-	if (!empty($_REQUEST['fid']))
-	{
-		header('ETag: "' . intval($_REQUEST['fid']));
-	}
-	exit;
+if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) OR !empty($_SERVER['HTTP_IF_NONE_MATCH'])) {
+    $sapi_name = php_sapi_name();
+    if ($sapi_name == 'cgi' OR $sapi_name == 'cgi-fcgi') {
+        header('Status: 304 Not Modified');
+    } else {
+        header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
+    }
+    // remove the content-type and X-Powered headers to emulate a 304 Not Modified response as close as possible
+    header('Content-Type:');
+    header('X-Powered-By:');
+    if (!empty($_REQUEST['fid'])) {
+        header('ETag: "' . intval($_REQUEST['fid']));
+    }
+    exit;
 }
 
 // #################### PRE-CACHE TEMPLATES AND DATA ######################
@@ -97,13 +87,13 @@ require_once('./global.php');
 // ########################################################################
 
 $vbulletin->input->clean_array_gpc('r', array(
-	'fid' => TYPE_UINT,
+    'fid' => TYPE_UINT,
 ));
 
 if (
-	!$vbulletin->GPC['fid']
-		OR
-	!($filedatainfo = $db->query_first_slave("
+    !$vbulletin->GPC['fid']
+    OR
+    !($filedatainfo = $db->query_first_slave("
 		SELECT
 			fd.filedataid, fd.thumbnail_dateline AS dateline, fd.thumbnail_filesize AS filesize, fd.extension, fd.userid, fd.thumbnail AS filedata, fd.refcount,
 			at.mimetype
@@ -116,48 +106,37 @@ if (
 			acu.userid = {$vbulletin->userinfo['userid']}
 		LIMIT 1
 	"))
-)
-{
-	eval(standard_error(fetch_error('invalidid', 'filedata', $vbulletin->options['contactuslink'])));
+) {
+    eval(standard_error(fetch_error('invalidid', 'filedata', $vbulletin->options['contactuslink'])));
 }
 
-if ($filedatainfo['extension'])
-{
-	$extension = strtolower($filedatainfo['extension']);
-}
-else
-{
-	$extension = strtolower(file_extension($filedatainfo['filename']));
+if ($filedatainfo['extension']) {
+    $extension = strtolower($filedatainfo['extension']);
+} else {
+    $extension = strtolower(file_extension($filedatainfo['filename']));
 }
 
-if ($vbulletin->options['attachfile'])
-{
-	require_once(DIR . '/includes/functions_file.php');
-	$filepath = fetch_attachment_path($filedatainfo['userid'], $filedatainfo['filedataid'], true);
+if ($vbulletin->options['attachfile']) {
+    require_once(DIR . '/includes/functions_file.php');
+    $filepath = fetch_attachment_path($filedatainfo['userid'], $filedatainfo['filedataid'], true);
 
-	if (!($fp = @fopen($filepath, 'rb')))
-	{
-		// replace this with a ? type image
-		echo fetch_blank_image();
-		exit;
-	}
-}
-else if (!$filedatainfo['filedata'])
-{
-	// replace this with a ? type image
-	echo fetch_blank_image();
-	exit;
+    if (!($fp = @fopen($filepath, 'rb'))) {
+        // replace this with a ? type image
+        echo fetch_blank_image();
+        exit;
+    }
+} else if (!$filedatainfo['filedata']) {
+    // replace this with a ? type image
+    echo fetch_blank_image();
+    exit;
 }
 
 // send jpeg header for PDF, BMP, TIF, TIFF, and PSD thumbnails as they are jpegs
-if (in_array($extension, array('bmp', 'tif', 'tiff', 'psd', 'pdf')))
-{
-	$filedatainfo['filename'] = preg_replace('#.(bmp|tiff?|psd|pdf)$#i', '.jpg', $filedatainfo['filename']);
-	$mimetype = array('Content-type: image/jpeg');
-}
-else
-{
-	$mimetype = unserialize($filedatainfo['mimetype']);
+if (in_array($extension, array('bmp', 'tif', 'tiff', 'psd', 'pdf'))) {
+    $filedatainfo['filename'] = preg_replace('#.(bmp|tiff?|psd|pdf)$#i', '.jpg', $filedatainfo['filename']);
+    $mimetype = array('Content-type: image/jpeg');
+} else {
+    $mimetype = unserialize($filedatainfo['mimetype']);
 }
 
 header('Pragma:'); // VBIV-8269 
@@ -169,77 +148,59 @@ header('ETag: "' . $filedatainfo['filedataid'] . '-' . $filedatainfo['userid'] .
 // look for entities in the file name, and if found try to convert
 // the filename to UTF-8
 $filename = $filedatainfo['filename'];
-if (preg_match('~&#([0-9]+);~', $filename))
-{
-	if (function_exists('iconv'))
-	{
-		$filename_conv = @iconv(vB_Template_Runtime::fetchStyleVar('charset'), 'UTF-8//IGNORE', $filename);
-		if ($filename_conv !== false)
-		{
-			$filename = $filename_conv;
-		}
-	}
+if (preg_match('~&#([0-9]+);~', $filename)) {
+    if (function_exists('iconv')) {
+        $filename_conv = @iconv(vB_Template_Runtime::fetchStyleVar('charset'), 'UTF-8//IGNORE', $filename);
+        if ($filename_conv !== false) {
+            $filename = $filename_conv;
+        }
+    }
 
-	$filename = preg_replace(
-		'~&#([0-9]+);~e',
-		"convert_int_to_utf8('\\1')",
-		$filename
-	);
-	$filename_charset = 'utf-8';
-}
-else
-{
-	$filename_charset = vB_Template_Runtime::fetchStyleVar('charset');
+    $filename = preg_replace(
+        '~&#([0-9]+);~e',
+        "convert_int_to_utf8('\\1')",
+        $filename
+    );
+    $filename_charset = 'utf-8';
+} else {
+    $filename_charset = vB_Template_Runtime::fetchStyleVar('charset');
 }
 
 $filename = preg_replace('#[\r\n]#', '', $filename);
 
 // Opera and IE have not a clue about this, mozilla puts on incorrect extensions.
-if (is_browser('mozilla'))
-{
-	$filename = "filename*=" . $filename_charset . "''" . rawurlencode($filename);
-}
-else
-{
-	// other browsers seem to want names in UTF-8
-	if ($filename_charset != 'utf-8' AND function_exists('iconv'))
-	{
-		$filename_conv = iconv($filename_charset, 'UTF-8//IGNORE', $filename);
-		if ($filename_conv !== false)
-		{
-			$filename = $filename_conv;
-		}
-	}
+if (is_browser('mozilla')) {
+    $filename = "filename*=" . $filename_charset . "''" . rawurlencode($filename);
+} else {
+    // other browsers seem to want names in UTF-8
+    if ($filename_charset != 'utf-8' AND function_exists('iconv')) {
+        $filename_conv = iconv($filename_charset, 'UTF-8//IGNORE', $filename);
+        if ($filename_conv !== false) {
+            $filename = $filename_conv;
+        }
+    }
 
-	if (is_browser('opera') OR is_browser('konqueror') OR is_browser('safari'))
-	{
-		// Opera / Konqueror does not support encoded file names
-		$filename = 'filename="' . str_replace('"', '', $filename) . '"';
-	}
-	else
-	{
-		// encode the filename to stay within spec
-		$filename = 'filename="' . rawurlencode($filename) . '"';
-	}
+    if (is_browser('opera') OR is_browser('konqueror') OR is_browser('safari')) {
+        // Opera / Konqueror does not support encoded file names
+        $filename = 'filename="' . str_replace('"', '', $filename) . '"';
+    } else {
+        // encode the filename to stay within spec
+        $filename = 'filename="' . rawurlencode($filename) . '"';
+    }
 }
 
 header("Content-disposition: inline; $filename");
 header('Content-transfer-encoding: binary');
 header('Content-Length: ' . $filedatainfo['filesize']);
 
-if (is_array($mimetype))
-{
-	foreach ($mimetype AS $header)
-	{
-		if (!empty($header))
-		{
-			header($header);
-		}
-	}
-}
-else
-{
-	header('Content-type: unknown/unknown');
+if (is_array($mimetype)) {
+    foreach ($mimetype AS $header) {
+        if (!empty($header)) {
+            header($header);
+        }
+    }
+} else {
+    header('Content-type: unknown/unknown');
 }
 
 // This is new in IE8 and tells the browser not to try and guess
@@ -247,26 +208,19 @@ header('X-Content-Type-Options: nosniff');
 
 ($hook = vBulletinHook::fetch_hook('asset_filedata_display')) ? eval($hook) : false;
 
-if (defined('NOSHUTDOWNFUNC'))
-{
-	if ($_GET['stc'] == 1)
-	{
-		$db->close();
-	}
-	else
-	{
-		exec_shut_down();
-	}
+if (defined('NOSHUTDOWNFUNC')) {
+    if ($_GET['stc'] == 1) {
+        $db->close();
+    } else {
+        exec_shut_down();
+    }
 }
 
-if ($vbulletin->options['attachfile'])
-{
-	echo @fread($fp, $filedatainfo['filesize']);
-	@fclose($fp);
-}
-else
-{
-	echo $filedatainfo['filedata'];
+if ($vbulletin->options['attachfile']) {
+    echo @fread($fp, $filedatainfo['filesize']);
+    @fclose($fp);
+} else {
+    echo $filedatainfo['filedata'];
 }
 flush();
 
@@ -274,17 +228,17 @@ flush();
 
 function fetch_blank_image()
 {
-	$filedata = vb_base64_decode('R0lGODlhAQABAIAAAMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
-	$filesize = strlen($filedata);
-	header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');             // Date in the past
-	header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-	header('Cache-Control: no-cache, must-revalidate');           // HTTP/1.1
-	header('Pragma: no-cache');                                   // HTTP/1.0
-	header("Content-disposition: inline; filename=clear.gif");
-	header('Content-transfer-encoding: binary');
-	header("Content-Length: $filesize");
-	header('Content-type: image/gif');
-	return $filedata;
+    $filedata = vb_base64_decode('R0lGODlhAQABAIAAAMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+    $filesize = strlen($filedata);
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');             // Date in the past
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+    header('Cache-Control: no-cache, must-revalidate');           // HTTP/1.1
+    header('Pragma: no-cache');                                   // HTTP/1.0
+    header("Content-disposition: inline; filename=clear.gif");
+    header('Content-transfer-encoding: binary');
+    header("Content-Length: $filesize");
+    header('Content-type: image/gif');
+    return $filedata;
 }
 
 /*======================================================================*\

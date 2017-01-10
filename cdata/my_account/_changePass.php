@@ -3,7 +3,7 @@ list($errors_result) = _GL('errors_result');
 
 echo cn_snippet_messages();
 
-if($errors_result) {
+if ($errors_result) {
     cn_messages_show($errors_result, 'e');
 }
 ?>
@@ -100,7 +100,8 @@ if($errors_result) {
             <td colspan="3" class="pd-top20" style="text-align:center">
                 <input type="hidden" value="deleoffline" name="action_deleoffline"/>
                 <input type="image" src="<?php echo URL_PATH_IMG; ?>/capnhat.png" style="padding-right:10px">
-                <img style="cursor:pointer" onclick="document.getElementById('formChangeRegist').reset();" border="0" src="<?php echo URL_PATH_IMG; ?>/cancel.png"
+                <img style="cursor:pointer" onclick="document.getElementById('formChangeRegist').reset();" border="0"
+                     src="<?php echo URL_PATH_IMG; ?>/cancel.png"
                      style="padding-left:10px">
             </td>
         </tr>

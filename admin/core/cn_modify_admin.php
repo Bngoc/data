@@ -700,15 +700,15 @@ function cn_login()
                         }
                     } else {
                         list ($numLogin, $timeBlock) = explode(':', getoption('config_login_ban'));
-                        if(++$member['numLogin'] > (@$numLogin ? $numLogin : 5)) {
-                            $timeFutrueBan = ctime() + 60* (@$timeBlock ? $timeBlock : 3);
+                        if (++$member['numLogin'] > (@$numLogin ? $numLogin : 5)) {
+                            $timeFutrueBan = ctime() + 60 * (@$timeBlock ? $timeBlock : 3);
                         } else {
                             $timeFutrueBan = ctime() + getoption('ban_attempts');
                         }
 
                         cn_throw_message("Invalid password or login", 'e');
                         cn_writelog("'User " . substr($username, 0, 32) . " (" . $_SERVER['REMOTE_ADDR'] . ") login failed");
-                        do_update_character('Account_Info', "Lastdate=". ctime(), 'Ban=' . $timeFutrueBan, "NumLogin=NumLogin+1", "UserAcc:'$username'");
+                        do_update_character('Account_Info', "Lastdate=" . ctime(), 'Ban=' . $timeFutrueBan, "NumLogin=NumLogin+1", "UserAcc:'$username'");
                     }
                 }
             } else {
@@ -873,7 +873,7 @@ function cn_register_form($admin = TRUE)
                     // Send notify about register
                     if (getoption('notify_registration')) {
                         $tempRegister = "<html><body><h1>Account Details</h1><p>Thank you for registering on our site, your account details are as follows:<br>Username: %username%<br>Email: %email%</p></body></html>";
-                        $status = cn_send_mail($regemail, 'Welcome to '. $_SERVER['SERVER_NAME'], cn_replace_text($tempRegister, '%username%, %email%', $regusername, $regemail));
+                        $status = cn_send_mail($regemail, 'Welcome to ' . $_SERVER['SERVER_NAME'], cn_replace_text($tempRegister, '%username%, %email%', $regusername, $regemail));
                         if ($status)
                             msg_info('For you send register');
                         else
@@ -1025,9 +1025,6 @@ function cn_get_menu()
     (
         'editconfig' => array('Cd', 'Cấu hình chung'),
         'cashshop' => array('Can', 'Cash Shop'),
-        'money' => array('Can', 'Tiền tệ', NULL, 'source,year,mon,day,sort,dir'), //can => add; new cvn => view
-        'event' => array('Can', 'Event'),
-        'relax' => array('Can', 'Relax'),
         'logout' => array('', 'Logout', 'logout'),
     ));
 
@@ -1049,7 +1046,7 @@ function cn_get_menu()
         $app = isset($var[3]) ? $var[3] : '';
 
         if ($acl && !test($acl))
-        continue;
+            continue;
 
         if (isset($title) && $title) $action = '&amp;action=' . $title; else $action = '';
         if ($mod == $mod_key) $select = ' active '; else $select = '';
@@ -1155,7 +1152,7 @@ function msg_info($title, $go_back = null)
 				<b><p>' . $title . '</p></b><br>
 				<p><b><a href=' . $go_back . '><font size="15" color="red">OK</font></a></b></p>
 			</div>';
-echo $str_;
+    echo $str_;
 //    echocomtent_here($str_, cn_snippet_bc_re("Home", "Permission check"));
 
     echofooter();
@@ -1165,32 +1162,26 @@ echo $str_;
 // Since 2.0: @bootstrap
 function cn_detect_user_ip()
 {
-    if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
-    {
+    if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
         $IP = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    }
-    elseif (isset($_SERVER['HTTP_CLIENT_IP']))
-    {
+    } elseif (isset($_SERVER['HTTP_CLIENT_IP'])) {
         $IP = $_SERVER['HTTP_CLIENT_IP'];
     }
 
-    if (empty($IP) && isset($_SERVER['REMOTE_ADDR']))
-    {
+    if (empty($IP) && isset($_SERVER['REMOTE_ADDR'])) {
         $IP = $_SERVER['REMOTE_ADDR'];
     }
-    if (empty($IP))
-    {
+    if (empty($IP)) {
         $IP = false;
     }
 
-    if (!preg_match('/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/', $IP))
-    {
+    if (!preg_match('/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/', $IP)) {
         $IP = '';
     }
 
     define('CLIENT_IP', $IP);
     // CRYPT_SALT consists an IP
-    define('CRYPT_SALT', (getoption('ipauth') == '1'? CLIENT_IP : '').'@'.getoption('#crypt_salt'));
+    define('CRYPT_SALT', (getoption('ipauth') == '1' ? CLIENT_IP : '') . '@' . getoption('#crypt_salt'));
 }
 
 // Since 2.0: Grab from $_POST all parameters
@@ -1552,7 +1543,7 @@ function cn_load_skin()
 function cn_config_load()
 {
     global $_CN_access;
-    //checking permission for load config
+
     $conf_dir = cn_path_construct(ROOT, 'gifnoc');
     if (!is_dir($conf_dir) || !is_writable($conf_dir)) {
         die('Permissions and CHMOD for gifnoc');
@@ -1565,14 +1556,12 @@ function cn_config_load()
             echo 'Sorry, but news not available by technical reason.';
             die();
         } else {
-            //echo 'Need convert data - run migration_update_data.php';
             $cfg = cn_touch_get($conf_path, true);
-
         }
     }
 
     date_default_timezone_set("UTC"); //HKEY_LOCAL_MACHINE\\SYSTEM\CurrentControlSet\Control\TimeZoneInformation
-	$shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
+    $shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
     $time_bias = -($shell->RegRead("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation\\ActiveTimeBias")) / 60;
 
     // make site section
@@ -1583,10 +1572,10 @@ function cn_config_load()
         'frontend_encoding' => 'UTF-8',
         'useutf8' => 1,
         'utf8html' => 1,
-        'news_title_max_long' => 100,
+//        'news_title_max_long' => 100,
+
         'date_adjust' => $time_bias,
         'num_center_pagination' => 3,
-
         'allow_registration' => 1,
         'registration_level' => 4,
         'config_time_logout' => 900,
@@ -1600,7 +1589,7 @@ function cn_config_load()
         'show_comments_with_full' => 1,
         'timestamp_active' => 'd M Y',
         'use_captcha' => 1,
-        'reverse_c  omments' => 0,
+        'reverse_comments' => 0,
         'flood_time' => 15,
         'comments_std_show' => 1,
         'comment_max_long' => 1500,
@@ -1638,9 +1627,10 @@ function cn_config_load()
         "conf['interval']" => 1,
         "conf['requests']" => 10,
         "conf['blocktime']" => 10,
+
         'Use_WebShop' => 1,
         'Use_TienTe' => 1,
-        //'Use_NapThe'					=> 1,
+        'Use_NapThe' => 1,
         'Use_Event' => 1,
         'Use_XepHang' => 1,
         'Use_ShopTienZen' => 1,
@@ -1671,11 +1661,9 @@ function cn_config_load()
         'changename_vpoint' => 50000,
         'changeClass_str' => '50000:15:100',
         'user_rs_uythac' => 1,
-        //'taytuy_vpoint'					=> 1,
         'uythacon_price' => 10,
         'uythacoff_price' => 10,
         'user_delegate' => 2,
-        //'user_resetvip......'         => array('Y/N', 'Sử dụng top ResetVip|.........Short story field will not be required'),
         'event_toprs_on' => 1,
         'hotrotanthu' => 1,
         'cap_relife_max' => 7,
@@ -1683,8 +1671,12 @@ function cn_config_load()
         'use_gioihanrs' => 1,
 
         // CHARACTER Question
-        'question_answers' => 'Tên con vật yêu thích,Trò chơi bạn thích nhất,Tên con vật yêu thích,Trường cấp 1 của bạn tên gì,Người bạn yêu quý nhất,Nơi để lại kỉ niệm khó quên nhất'
-
+        'question_answers' => 'Tên con vật yêu thích,Trò chơi bạn thích nhất,Tên con vật yêu thích,Trường cấp 1 của bạn tên gì,Người bạn yêu quý nhất,Nơi để lại kỉ niệm khó quên nhất',
+        // Vpoint - level
+        'configLevel' => '2000|3000|5000',
+        //Relax
+        'user_BauCua' => 1,
+        'user_BaiCao' => 1,
     );
 
     // Set default values
@@ -1725,19 +1717,23 @@ function cn_config_load()
     $cfg['grp'][1]['A'] = $_CN_access['C'] . ',' . $_CN_access['N'] . ',' . $_CN_access['M'];
 
     $Items_Data = file(cn_path_construct(SKIN, 'defaults') . 'Items_Data.txt');
-    unset($Items_Data[0]);                                        //Image|Group|ID|NAME|X|Y|SetItem1|SetItem2
+    // OptionImage|Group|ID|NAME|X|Y|SetItem1|SetItem2
 
     foreach ($Items_Data as $key => $line) {
         $line_ = trim($line);
         $lineComment = substr($line_, 0, 2);
         if (empty($line_) || $lineComment == '//') continue;
 
-        list($image, $group, $id, $name, $x, $y, $set1, $set2) = explode('|', $line_, 8);
+        list($optImg, $group, $id, $name, $x, $y, $set1, $set2) = explode('|', $line_, 8);
         $key = $group . "." . $id;
         // Is empty row
+
+//        $optImgRender = cn_renderImageItemCode((string)$group, (string)$id, (string)$optImg);
+
         if (!isset($cfg['items_data'][$key])) {
+
             $cfg['items_data'][$key] = array(
-                'Image' => @$image ? $image : renderImageItencode((string)$group, (string)$id),
+                'Image' => $optImg,
                 'G' => $group,
                 'ID' => $id,
                 'Name' => $name,
@@ -1892,7 +1888,7 @@ function cn_read_file($target)
             $ctime = substr(md5($val), 3, 11);
             list($code32, $name, $price, $image) = explode("|", $val);
 
-            if(!cn_check_code32(trim($code32))) continue;
+            if (!cn_check_code32(trim($code32))) continue;
 
             $data[$ctime] = array(
                 'code32' => trim($code32),
@@ -1996,13 +1992,6 @@ function cn_relocation_db()
         cn_db_installed();
     }
 
-    //$database = "Driver={SQL Server};Server=(local);Database=MuOnline";
-//    $passviewcard = getoption('passviewcard');
-//    $passcode = getoption('passcode');
-//    $passadmin = getoption('passadmin');
-//    $passcard = getoption('passcard');
-//    $server_type = getoption('server_type');
-
     $config_admin = "BUI NGOC";
     $config_adminemail = "ngoctbhy@gmail.com";
 
@@ -2071,7 +2060,7 @@ function cn_db_installed()
                 setoption('#%site', $opt_result);
 
                 cn_throw_message('Saved successfully');
-                cn_relocation(getoption('http_script_dir').'/admin.php');
+                cn_relocation(getoption('http_script_dir') . '/admin.php');
             }
         }
         echoheader('-@../skins/default.css', 'Install Database');
@@ -2090,7 +2079,6 @@ function cn_check_conncet()
         if ($localhost && $databaseuser && $databsepassword && $d_base) {
 
             $resultSms = '1|Kết nối thành công với SQL Server!';
-//            $result['isAct'] = 1;
 
             include_once('../adodb/adodb.inc.php');
             if ($type_connect == 'odbc') {
@@ -2169,7 +2157,7 @@ function cn_require_install()
 //                // Greets page
 //                cn_relocation("http://cutephp.com/thanks.php?referer=" . urlencode(base64_encode('http://' . $_SERVER['SERVER_NAME'] . PHP_SELF)));
                 cn_throw_message('Tạo thành công tài khoản Admin');
-                cn_relocation(getoption('http_script_dir')."/admin.php");
+                cn_relocation(getoption('http_script_dir') . "/admin.php");
             }
         }
 

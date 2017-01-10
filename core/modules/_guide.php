@@ -5,7 +5,7 @@ add_hook('index/invoke_module', '*guide_invoke');
 //=====================================================================================================================
 function guide_invoke()
 {
-    $cManger_account = array (
+    $cManger_account = array(
         'guide:cottruyen:Csc' => 'Cốt truyện',
         'guide:tinhnang:Cp' => 'Tính năng',
         'guide:nhanvat:Ciw' => 'Nhân vật',
@@ -51,7 +51,7 @@ function guide_invoke()
 
     echoheader('-@my_guide/style.css', "Manger Account");
 
-    $images = array (
+    $images = array(
         'change_pass' => 'change_pass.png',
         'change_tel' => 'change_tel.png',
         'change_email' => 'change_email.png',
@@ -66,7 +66,7 @@ function guide_invoke()
     foreach ($cManger_account as $id => $name) {
         list($mod, $opt, $acl) = explode(':', $id, 3);
 
-        $item = array (
+        $item = array(
             'name' => $name,
             'img' => isset($images[$opt]) ? $images[$opt] : 'home.gif',
             'mod' => $mod,
@@ -90,13 +90,15 @@ function guide_default()
     echofooter();
 }
 
-function guide_cottruyen() {
+function guide_cottruyen()
+{
     echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_cottruyen'), cn_snippet_bc_re());
     echofooter();
 }
 
-function guide_tinhnang() {
+function guide_tinhnang()
+{
     $sub = REQ('sub', "GETPOST");
 
     $options_list = array
@@ -126,10 +128,10 @@ function guide_tinhnang() {
         $sub = 'old-features';
     }
 
-    if(request_type('POST')){
-        if (isset($_REQUEST['show'])){
+    if (request_type('POST')) {
+        if (isset($_REQUEST['show'])) {
             $show = $_REQUEST['show'];
-            return exec_tpl('-@my_guide/tinhnang/'.$show);
+            return exec_tpl('-@my_guide/tinhnang/' . $show);
             //return 1;
         }
     }
@@ -142,7 +144,8 @@ function guide_tinhnang() {
     echofooter();
 }
 
-function guide_nhanvat() {
+function guide_nhanvat()
+{
     $options = array
     (
         'chuate' => 'Chúa tể',
@@ -155,10 +158,10 @@ function guide_nhanvat() {
         'tuyetchieumoi' => 'Tuyệt chiêu mới',
     );
 
-    if(request_type('POST')){
-        if (isset($_REQUEST['sub'])){
+    if (request_type('POST')) {
+        if (isset($_REQUEST['sub'])) {
             $sub = $_REQUEST['sub'];
-            return exec_tpl('-@my_guide/character/'.$sub);
+            return exec_tpl('-@my_guide/character/' . $sub);
         }
     }
 
@@ -172,18 +175,22 @@ function guide_nhanvat() {
     echofooter();
 }
 
-function guide_nhiemvu() {
+function guide_nhiemvu()
+{
     echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_nhiemvu'), cn_snippet_bc_re());
     echofooter();
 }
 
-function guide_thuhotro() {
+function guide_thuhotro()
+{
     echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_thuhotro'), cn_snippet_bc_re());
     echofooter();
 }
-function guide_quaivat() {
+
+function guide_quaivat()
+{
     $options = array
     (
         'lorencia' => 'Lorencia',
@@ -203,10 +210,10 @@ function guide_quaivat() {
         'crywolf' => 'Crywolf'
     );
 
-    if(request_type('POST')){
-        if (isset($_REQUEST['sub'])){
+    if (request_type('POST')) {
+        if (isset($_REQUEST['sub'])) {
             $sub = $_REQUEST['sub'];
-            return exec_tpl('-@my_guide/monster/'.$sub);
+            return exec_tpl('-@my_guide/monster/' . $sub);
         }
     }
 
@@ -220,31 +227,36 @@ function guide_quaivat() {
     echofooter();
 }
 
-function guide_items() {
+function guide_items()
+{
     echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_items'), cn_snippet_bc_re());
     echofooter();
 }
 
-function guide_npc() {
+function guide_npc()
+{
     echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_npc'), cn_snippet_bc_re());
     echofooter();
 }
 
-function guide_thucuoi() {
+function guide_thucuoi()
+{
     echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_thucuoi'), cn_snippet_bc_re());
     echofooter();
 }
 
-function guide_banghoi() {
+function guide_banghoi()
+{
     echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
     echocomtent_here(exec_tpl('-@my_guide/_banghoi'), cn_snippet_bc_re());
     echofooter();
 }
 
-function guide_sukiengame() {
+function guide_sukiengame()
+{
     $options = array
     (
         'blood' => 'Lâu đài máu',
@@ -256,10 +268,10 @@ function guide_sukiengame() {
         'pds' => 'Pháo Đài Sói',
     );
 
-    if(request_type('POST')){
-        if (isset($_REQUEST['sub'])){
+    if (request_type('POST')) {
+        if (isset($_REQUEST['sub'])) {
             $sub = $_REQUEST['sub'];
-            return exec_tpl('-@my_guide/eventgame/'.$sub);
+            return exec_tpl('-@my_guide/eventgame/' . $sub);
         }
     }
 

@@ -4,7 +4,7 @@
   || #################################################################### ||
   || # vBulletin 4.2.0 
   || # ---------------------------------------------------------------- # ||
-  || # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+  || # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
   || # This file may not be redistributed in whole or significant part. # ||
   || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
   || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -13,38 +13,34 @@
 
 class vB_ActivityStream_View_Perm_Cms_Comment extends vB_ActivityStream_View_Perm_Cms_Base
 {
-	public function __construct(&$content)
-	{
-		$this->requireExist['vB_ActivityStream_View_Perm_Cms_Article'] = 1;
-		return parent::__construct($content);
-	}
+    public function __construct(&$content)
+    {
+        $this->requireExist['vB_ActivityStream_View_Perm_Cms_Article'] = 1;
+        return parent::__construct($content);
+    }
 
-	public function group($activity)
-	{
-		if (!vB::$vbulletin->products['vbcms'])
-		{
-			return;
-		}
+    public function group($activity)
+    {
+        if (!vB::$vbulletin->products['vbcms']) {
+            return;
+        }
 
-		if (!$this->content['cms_post'][$activity['contentid']])
-		{
-			$this->content['cms_postid'][$activity['contentid']] = 1;
-		}
-	}
+        if (!$this->content['cms_post'][$activity['contentid']]) {
+            $this->content['cms_postid'][$activity['contentid']] = 1;
+        }
+    }
 
-	public function process()
-	{
-		if (!vB::$vbulletin->products['vbcms'])
-		{
-			return true;
-		}
+    public function process()
+    {
+        if (!vB::$vbulletin->products['vbcms']) {
+            return true;
+        }
 
-		if (!$this->content['cms_postid'])
-		{
-			return true;
-		}
+        if (!$this->content['cms_postid']) {
+            return true;
+        }
 
-		$posts = vB::$db->query_read_slave("
+        $posts = vB::$db->query_read_slave("
 			SELECT
 				p.pagetext AS p_pagetext, p.postid AS p_postid, p.threadid AS p_threadid, p.title AS p_title, p.visible AS p_visible, p.userid AS p_userid, p.username AS p_username,
 				ni.nodeid AS p_nodeid, ni.viewcount AS ni_viewcount, node.nodeid AS ni_nodeid, ni.title AS ni_title, ni.html_title AS ni_html_title,
@@ -61,64 +57,62 @@ class vB_ActivityStream_View_Perm_Cms_Comment extends vB_ActivityStream_View_Per
 					AND
 				" . vBCMS_Permissions::getPermissionString() . "
 		");
-		while ($post = vB::$db->fetch_array($posts))
-		{
-			unset($this->content['cms_nodeid'][$post['ni_nodeid']]);
-			$this->content['cms_post'][$post['p_postid']] = $this->parse_array($post, 'p_');
-			$this->content['userid'][$post['p_userid']] = 1;
-			if (!$this->content['cms_node'][$post['ni_nodeid']])
-			{
-				$this->content['cms_node'][$post['ni_nodeid']] = $this->parse_array($post, 'ni_');
-				$this->content['cms_article'][$post['a_contentid']] = $this->parse_array($post, 'a_');
-				$this->content['userid'][$post['ni_userid']] = 1;
-			}
-		}
+        while ($post = vB::$db->fetch_array($posts)) {
+            unset($this->content['cms_nodeid'][$post['ni_nodeid']]);
+            $this->content['cms_post'][$post['p_postid']] = $this->parse_array($post, 'p_');
+            $this->content['userid'][$post['p_userid']] = 1;
+            if (!$this->content['cms_node'][$post['ni_nodeid']]) {
+                $this->content['cms_node'][$post['ni_nodeid']] = $this->parse_array($post, 'ni_');
+                $this->content['cms_article'][$post['a_contentid']] = $this->parse_array($post, 'a_');
+                $this->content['userid'][$post['ni_userid']] = 1;
+            }
+        }
 
-		$this->content['cms_postid'] = array();
-	}
+        $this->content['cms_postid'] = array();
+    }
 
-	/*
-	 * Register Template
-	 *
-	 * @param	string	Template Name
-	 * @param	array	Activity Record
-	 *
-	 * @return	string	Template
-	 */
-	public function fetchTemplate($templatename, $activity)
-	{
-		$postinfo =& $this->content['cms_post'][$activity['contentid']];
-		$nodeinfo =& $this->content['cms_node'][$postinfo['nodeid']];
-		$articleinfo =& $this->content['cms_article'][$nodeinfo['contentid']];
-		$activity['postdate'] = vbdate(vB::$vbulletin->options['dateformat'], $activity['dateline'], true);
-		$activity['posttime'] = vbdate(vB::$vbulletin->options['timeformat'], $activity['dateline']);
+    /*
+     * Register Template
+     *
+     * @param	string	Template Name
+     * @param	array	Activity Record
+     *
+     * @return	string	Template
+     */
+    public function fetchTemplate($templatename, $activity)
+    {
+        $postinfo =& $this->content['cms_post'][$activity['contentid']];
+        $nodeinfo =& $this->content['cms_node'][$postinfo['nodeid']];
+        $articleinfo =& $this->content['cms_article'][$nodeinfo['contentid']];
+        $activity['postdate'] = vbdate(vB::$vbulletin->options['dateformat'], $activity['dateline'], true);
+        $activity['posttime'] = vbdate(vB::$vbulletin->options['timeformat'], $activity['dateline']);
 
-		$preview = strip_quotes($postinfo['pagetext']);
-		$articleinfo['preview'] = htmlspecialchars_uni(fetch_censored_text(
-			fetch_trimmed_title(strip_bbcode($preview, false, true, true, true),
-				vb::$vbulletin->options['as_snippet'])
-		));
+        $preview = strip_quotes($postinfo['pagetext']);
+        $articleinfo['preview'] = htmlspecialchars_uni(fetch_censored_text(
+            fetch_trimmed_title(strip_bbcode($preview, false, true, true, true),
+                vb::$vbulletin->options['as_snippet'])
+        ));
 
-		$articleinfo['fullurl'] = vB_Route::create('vBCms_Route_Content', $nodeinfo['nodeid'] . ($nodeinfo['url'] == '' ? '' : '-' . $nodeinfo['url'] ))->getCurrentURL();
-		$nodeinfo['parenturl'] = $this->fetchParentUrl($nodeinfo['parentnode']);
-		$nodeinfo['parenttitle'] = $this->fetchParentTitle($nodeinfo['parentnode']);
+        $articleinfo['fullurl'] = vB_Route::create('vBCms_Route_Content', $nodeinfo['nodeid'] . ($nodeinfo['url'] == '' ? '' : '-' . $nodeinfo['url']))->getCurrentURL();
+        $nodeinfo['parenturl'] = $this->fetchParentUrl($nodeinfo['parentnode']);
+        $nodeinfo['parenttitle'] = $this->fetchParentTitle($nodeinfo['parentnode']);
 
-		$userinfo = $this->fetchUser($activity['userid'], $postinfo['username']);
+        $userinfo = $this->fetchUser($activity['userid'], $postinfo['username']);
 
-		$templater = vB_Template::create($templatename);
-			$templater->register('userinfo', $userinfo);
-			$templater->register('postinfo', $postinfo);
-			$templater->register('activity', $activity);
-			$templater->register('nodeinfo', $nodeinfo);
-			$templater->register('articleinfo', $articleinfo);
-		return $templater->render();
-	}
+        $templater = vB_Template::create($templatename);
+        $templater->register('userinfo', $userinfo);
+        $templater->register('postinfo', $postinfo);
+        $templater->register('activity', $activity);
+        $templater->register('nodeinfo', $nodeinfo);
+        $templater->register('articleinfo', $articleinfo);
+        return $templater->render();
+    }
 
-	public function fetchCanView($record)
-	{
-		$this->processUsers();
-		return $this->fetchCanViewCmsComment($record['contentid']);
-	}
+    public function fetchCanView($record)
+    {
+        $this->processUsers();
+        return $this->fetchCanViewCmsComment($record['contentid']);
+    }
 }
 
 /*======================================================================*\

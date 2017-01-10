@@ -48,10 +48,9 @@ define('VB_PKG_PATH', realpath(VB_PATH . '../packages') . '/');
 require_once(VB_PATH . 'vb.php');
 vB::init();
 
-if (defined('VB_API') AND VB_API === true)
-{
-	// Force vB::$vbulletin->options['route_requestvar'] to 'r' for API.
-	vB::$vbulletin->options['route_requestvar'] = 'r';
+if (defined('VB_API') AND VB_API === true) {
+    // Force vB::$vbulletin->options['route_requestvar'] to 'r' for API.
+    vB::$vbulletin->options['route_requestvar'] = 'r';
 }
 
 // Get routed response

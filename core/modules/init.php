@@ -14,14 +14,16 @@ $_init_modules = hook('modules/init_modules', array
     'information' => array('path' => '_information', 'acl' => ''),
     'manager_account' => array('path' => '_account', 'acl' => 'Can'),
     'char_manager' => array('path' => '_dashboard', 'acl' => 'Cd'),
-    'event' => array('path' => '_event', 'acl' => 'Cc'),
-    'blank_money' => array('path' => '_blank_money', 'acl' => 'Cd'),
     'cash_shop' => array('path' => '_cashshop', 'acl' => 'Can'),
     'relax' => array('path' => '_relax', 'acl' => 'Cvn'),
-    'ranking' => array('path' => '_ranking', 'acl' => 'com'),
+    'blank_money' => array('path' => '_blank_money', 'acl' => 'Cd'),
+
+    'ranking' => array('path' => '_ranking', 'acl' => 'Cd'),
+    'event' => array('path' => '_event', 'acl' => 'Cd'),
     'auto_money' => array('path' => '_auto_money', 'acl' => ''),
     'transaction' => array('path' => '_transaction', 'acl' => 'Cc'),
     'help' => array('path' => 'help', 'acl' => ''),
+
     'logout' => array('path' => 'logout', 'acl' => '')
 ));
 

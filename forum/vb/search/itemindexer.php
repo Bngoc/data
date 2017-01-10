@@ -4,7 +4,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -37,34 +37,40 @@
  */
 abstract class vB_Search_ItemIndexer
 {
-	/**
-	 * Index an item based on a map of fieldname/value pairs
-	 *
-	 * The exact fields vary by content type, but must include the core search fields.
-	 * These include the content type and item id.
-	 *
-	 * @param array $fields fields to index.
-	 */
-	public function index($fields){}
+    /**
+     * Index an item based on a map of fieldname/value pairs
+     *
+     * The exact fields vary by content type, but must include the core search fields.
+     * These include the content type and item id.
+     *
+     * @param array $fields fields to index.
+     */
+    public function index($fields)
+    {
+    }
 
-	/**
-	 * Delete an item from the index.
-	 *
-	 * @param string the content type
-	 * @param int the item id
-	 */
-	public function delete($contenttype, $id) {}
-	
-	/**
-	*	Blow out the entire index.
-	* 
-	*/
-	public function empty_index() {}
+    /**
+     * Delete an item from the index.
+     *
+     * @param string the content type
+     * @param int the item id
+     */
+    public function delete($contenttype, $id)
+    {
+    }
 
-	/*
-	 * A count used for the ranged indexed on a index_id_range() call 
-	 */
-	protected $range_indexed = 0;
+    /**
+     *    Blow out the entire index.
+     *
+     */
+    public function empty_index()
+    {
+    }
+
+    /*
+     * A count used for the ranged indexed on a index_id_range() call
+     */
+    protected $range_indexed = 0;
 }
 
 /*======================================================================*\

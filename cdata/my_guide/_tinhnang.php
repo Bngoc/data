@@ -1,11 +1,11 @@
 <?php
 list($sub, $options, $options_list) = _GL('sub, options, options_list');
 
-if($sub == 'old-features'){
+if ($sub == 'old-features') {
     $show = 'nenngoc';
-}else if ($sub == 'new-features') {
+} else if ($sub == 'new-features') {
     $show = 'khamngoc';
-} else{
+} else {
     $show = '';
 }
 ?>
@@ -21,8 +21,8 @@ if($sub == 'old-features'){
 <div class="sub_guide">
     <div align="right">
         <select name="" id="sub-select" onChange="ajax_load(this.value,'sub-content')">
-            <?php foreach ($options as $key => $items){
-                echo '<option value="'. cn_url_modify('mod=guide', 'opt=tinhnang', "sub=$sub", "show=$key") .'">'. $items .'</option>';
+            <?php foreach ($options as $key => $items) {
+                echo '<option value="' . cn_url_modify('mod=guide', 'opt=tinhnang', "sub=$sub", "show=$key") . '">' . $items . '</option>';
             } ?>
         </select>
     </div>
@@ -33,6 +33,6 @@ if($sub == 'old-features'){
 
 <div class="sub_guide">
     <div id="sub-content">
-        <?php echo exec_tpl('-@my_guide/tinhnang/'.$show)?>
+        <?php echo exec_tpl('-@my_guide/tinhnang/' . $show) ?>
     </div>
 </div>

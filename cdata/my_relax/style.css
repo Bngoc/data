@@ -1,0 +1,36 @@
+.bizwebform {
+    width: 40%;
+}
+
+.play-baicao {
+    background: url(/images/baicao/tablebg.jpg) no-repeat top;
+    position: relative;
+    margin: auto;
+}
+
+.play-baicao .custom-height {
+    position: inherit;
+    height: 370px;
+    text-align: center;
+}
+
+.btn-play {
+    width: 70%;
+    color: #0000CD;
+    font-size: 16px;
+}
+
+.btn-play input.call-playbaicao {
+    clear: both;
+}
+
+.text-result {
+    font-size: 25px;
+    color: #e8e5e5;
+    font-weight: 800;
+}
+.info-per {
+    font-size: 16px;
+    color: #e8e5e5;
+    font-weight: 700;
+}

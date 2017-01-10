@@ -5,7 +5,7 @@ add_hook('index/invoke_module', '*screenshots_invoke');
 //=====================================================================================================================
 function screenshots_invoke()
 {
-    $cscreenshots_ = array (
+    $cscreenshots_ = array(
         'screenshots:screenshots:Csc' => 'Cốt truyện',
         'screenshots:wallpapers:Cp' => 'Wallpapers',
         'screenshots:conceptart:Ciw' => 'Concept - Art',
@@ -44,7 +44,7 @@ function screenshots_invoke()
 
     echoheader('-@my_screenshots/style.css', "Manger Account");
 
-    $images = array (
+    $images = array(
         'screenshots' => 'change_pass.png',
         'wallpapers' => 'change_tel.png',
         'conceptart' => 'change_email.png',
@@ -57,7 +57,7 @@ function screenshots_invoke()
     foreach ($cscreenshots_ as $id => $name) {
         list($mod, $opt, $acl) = explode(':', $id, 3);
 
-        $item = array (
+        $item = array(
             'name' => $name,
             'img' => isset($images[$opt]) ? $images[$opt] : 'home.gif',
             'mod' => $mod,
@@ -81,7 +81,8 @@ function screenshots_default()
     echofooter();
 }
 
-function screenshots_screenshots() {
+function screenshots_screenshots()
+{
     $errors = array();
 
     // Do change pass-game

@@ -23,8 +23,8 @@ require_once('./global.php');
 
 $agent = strtolower($_SERVER['HTTP_USER_AGENT']);
 if (strpos($agent, 'iphone') === false && strpos($agent, 'ipad') === false &&
-    strpos($agent, 'ipod') === false && strpos($agent, 'android') === false)
-{
+    strpos($agent, 'ipod') === false && strpos($agent, 'android') === false
+) {
     header('Location: ' . $vbulletin->options['bburl']);
     return;
 }

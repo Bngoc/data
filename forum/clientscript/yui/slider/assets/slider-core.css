@@ -9,6 +9,7 @@ version: 2.9.0
 .yui-region-slider {
     position: relative;
 }
+
 .yui-h-slider .yui-slider-thumb,
 .yui-v-slider .yui-slider-thumb,
 .yui-region-slider .yui-slider-thumb {

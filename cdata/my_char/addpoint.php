@@ -84,7 +84,8 @@ echo cn_snippet_messages();
             <td class="bizwebform_col_1">Sức mạnh (str)</td>
             <td class="bizwebform_col_2">
                 <div class="dec button">-</div>
-                <input class="txt-add-sub" id="str" type="number" name="addstr" value="<?php echo filter_var($before_info_addpoint[7][1], FILTER_SANITIZE_NUMBER_INT); ?>">
+                <input class="txt-add-sub" id="str" type="number" name="addstr"
+                       value="<?php echo filter_var($before_info_addpoint[7][1], FILTER_SANITIZE_NUMBER_INT); ?>">
                 <div class="inc button">+</div>
                 <span id="str_"></span>
             </td>
@@ -94,7 +95,8 @@ echo cn_snippet_messages();
             <td class="bizwebform_col_1">Nhanh nhẹn (agi)</td>
             <td class="bizwebform_col_2">
                 <div class="dec button">-</div>
-                <input class="txt-add-sub" id="agi" type="number" name="addagi" value="<?php echo filter_var($before_info_addpoint[3][1], FILTER_SANITIZE_NUMBER_INT); ?>"/>
+                <input class="txt-add-sub" id="agi" type="number" name="addagi"
+                       value="<?php echo filter_var($before_info_addpoint[3][1], FILTER_SANITIZE_NUMBER_INT); ?>"/>
                 <div class="inc button">+</div>
             </td>
             <td class="bizwebform_col_3" id=""></td>
@@ -104,7 +106,8 @@ echo cn_snippet_messages();
             <td class="bizwebform_col_2">
                 <div class="dec button">-</div>
                 <!-- type="range" min="1" max="20" value="10" onchange="updateRangeValue()" -->
-                <input class="txt-add-sub" id="vit" type="number" name="addvit" value="<?php echo filter_var($before_info_addpoint[4][1], FILTER_SANITIZE_NUMBER_INT); ?>">
+                <input class="txt-add-sub" id="vit" type="number" name="addvit"
+                       value="<?php echo filter_var($before_info_addpoint[4][1], FILTER_SANITIZE_NUMBER_INT); ?>">
                 <!-- <button type="button"  id="vitinc" class="but"> + </button><strong><output id="intNumberValue">&nbsp; kjljkj</output></strong>  -->
                 <div class="inc button">+</div>
             </td>
@@ -114,7 +117,8 @@ echo cn_snippet_messages();
             <td class="bizwebform_col_1">Năng lượng (ene)</td>
             <td class="bizwebform_col_2" class="ene numbers-row">
                 <div class="dec button">-</div>
-                <input class="txt-add-sub" id="ene" type="number" name="addene" value="<?php echo filter_var($before_info_addpoint[5][1], FILTER_SANITIZE_NUMBER_INT); ?>"/>
+                <input class="txt-add-sub" id="ene" type="number" name="addene"
+                       value="<?php echo filter_var($before_info_addpoint[5][1], FILTER_SANITIZE_NUMBER_INT); ?>"/>
                 <div class="inc button">+</div>
             </td>
         </tr>
@@ -122,7 +126,7 @@ echo cn_snippet_messages();
 			<td class="bizwebform_col_1">Mệnh lệnh (cmd)</td>
 			<td class="bizwebform_col_2" class="numbers-row">
 				<div class="dec button">-</div>
-				<input class="txt-add-sub" id="cmd" type="number" name="addcmd" value="' . filter_var($before_info_addpoint[6][1], FILTER_SANITIZE_NUMBER_INT) .'" />
+				<input class="txt-add-sub" id="cmd" type="number" name="addcmd" value="' . filter_var($before_info_addpoint[6][1], FILTER_SANITIZE_NUMBER_INT) . '" />
 				<div class="inc button">+</div>
 			</td>
 		</tr>';
@@ -131,7 +135,7 @@ echo cn_snippet_messages();
             <td class="bizwebform_col_1">Số dư Point</td>
             <td class="bizwebform_col_2"><input class="hd-sms" readonly="readonly" value="0"/></td>
             <td class="bizwebform_col_3">
-                <input type="hidden" id="sum-point" value="<?php echo ($rootPoint + $sdpoint); ?>"/>
+                <input type="hidden" id="sum-point" value="<?php echo($rootPoint + $sdpoint); ?>"/>
                 <input type="hidden" id="haveAddPoint" value="<?php echo $sdpoint; ?>"/>
             </td>
         </tr>

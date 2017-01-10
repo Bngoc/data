@@ -12,18 +12,17 @@
 
 function parse_video_bbcode($pagetext)
 {
-	global $vbulletin;
+    global $vbulletin;
 
-	($hook = vBulletinHook::fetch_hook('data_parse_bbcode_video')) ? eval($hook) : false;
+    ($hook = vBulletinHook::fetch_hook('data_parse_bbcode_video')) ? eval($hook) : false;
 
-	if (stripos($pagetext, '[video]') !== false)
-	{
-		require_once(DIR . '/includes/class_bbcode_alt.php');
-		$parser = new vB_BbCodeParser_Video_PreParse($vbulletin, array());
-		$pagetext = $parser->parse($pagetext);
-	}
+    if (stripos($pagetext, '[video]') !== false) {
+        require_once(DIR . '/includes/class_bbcode_alt.php');
+        $parser = new vB_BbCodeParser_Video_PreParse($vbulletin, array());
+        $pagetext = $parser->parse($pagetext);
+    }
 
-	return $pagetext;
+    return $pagetext;
 }
 
 /*======================================================================*\

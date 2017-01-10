@@ -66,7 +66,7 @@ echo cn_snippet_messages();
 </form>
 
 <?php
-    echoFormVerifyChar(['action_deleoffline' => 'deleoffline']);
+echoFormVerifyChar(['action_deleoffline' => 'deleoffline']);
 ?>
 
 <table style="width: 100%" cellpadding="2">
@@ -82,15 +82,15 @@ echo cn_snippet_messages();
 </table>
 
 <div class="sub_ranking">
-<div class="box-notice">
-    <b>Điều kiện Ủy Thác</b><br>
-    - Nhân vật phải thoát <b> Game</b>.
-    <br>
-    - Khi mất Ủy thác có thể <b>kích hoạt lại Ủy thác Trên Web</b>.
-    <br>
-    - <b>1 </b>Điểm ủy Thác = <b><?php echo getoption('uythacoff_price'); ?> </b> Gcoin / <b>1</b> Phút ủy thác<br>
+    <div class="box-notice">
+        <b>Điều kiện Ủy Thác</b><br>
+        - Nhân vật phải thoát <b> Game</b>.
+        <br>
+        - Khi mất Ủy thác có thể <b>kích hoạt lại Ủy thác Trên Web</b>.
+        <br>
+        - <b>1 </b>Điểm ủy Thác = <b><?php echo getoption('uythacoff_price'); ?> </b> Gcoin / <b>1</b> Phút ủy thác<br>
 
-    <p align="left">
+        <p align="left">
             <br><b>Lưu ý</b>:
         <ul>
             <li><strong>Thời gian Uỷ Thác Offline tối đa trong 1 ngày là 12 tiếng</strong> (<strong>720 Điểm Ủy
@@ -103,8 +103,8 @@ echo cn_snippet_messages();
             <li><b>Khi Ủy Thác Offline nhân vật sẽ bị khóa</b>. Kết thúc Ủy thác Offline nhân vật sẽ được mở.</li>
             <li><font color='red'>Điểm Ủy Thác <b>-10%</b>, thời gian ủy thác Offline <b>-5% </b> vào 24h hàng ngày. Nên
                     sử dụng hết trước 24h hàng ngày.</font></li>
-            <li>Chú ý tính toán kĩ thời gian kết thúc Ủy thác, tránh trường hợp để quá lâu bị hết Gcoin (^_^)</li>
+            <li>Chú ý tính toán kĩ thời gian kết thúc Ủy thác, tránh trường hợp để quá lâu bị hết tiền (^_^)</li>
         </ul>
-    </p>
+        </p>
     </div>
 </div>

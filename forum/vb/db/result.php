@@ -28,144 +28,130 @@
  */
 class vB_dB_Result implements iterator
 {
-	/** This class is called by the new vB_dB_Assertor query class.. vB_dB_Query
-	 * It's a wrapper for the class_core db class, but instead of calling
-	 * db->fetch_array($recordset) it's implemented as an iterator.
-	 * We also will allow returning the data in JSON or XML format.
-	
-	Properties====================================================================*/
-	/** the shared database object **/
-	protected $db = false;
-	
-	/** The text of the query**/
-	protected $querystring = false;
-	
-	/** The result recordset **/
-	protected $recordset = false;
+    /** This class is called by the new vB_dB_Assertor query class.. vB_dB_Query
+     * It's a wrapper for the class_core db class, but instead of calling
+     * db->fetch_array($recordset) it's implemented as an iterator.
+     * We also will allow returning the data in JSON or XML format.
+     *
+     * Properties====================================================================*/
+    /** the shared database object **/
+    protected $db = false;
 
-	/** The result recordset **/
-	protected $eof = false;
+    /** The text of the query**/
+    protected $querystring = false;
 
-	/** The result recordset **/
-	protected $resultrow = false;
+    /** The result recordset **/
+    protected $recordset = false;
 
-	/** The result recordset **/
-	protected $resultseq = 0;
+    /** The result recordset **/
+    protected $eof = false;
+
+    /** The result recordset **/
+    protected $resultrow = false;
+
+    /** The result recordset **/
+    protected $resultseq = 0;
 
 
-	/** standard constructor
-	 *
-	 *	@param 	mixed		the standard vbulletin db object
-	 * @param 	mixed		the query string
-	 *
-	 ***/
-	public function __construct(&$db, $querystring)
-	{
-		$this->querystring = $querystring;
-		$this->db = $db;
-		$this->recordset = $this->db->query_read($querystring);
-		$this->resultrow = $this->db->fetch_array($this->recordset);
-		
-		$this->resultseq = 0;
-		if ($this->resultrow)
-		{
-			$this->eof = false;
-		}
-		else
-		{
-			$this->eof = true;
-		}
-	}
-	
-	/* standard iterator method */
-	public function current()
-	{
-		if ($this->resultrow === false)
-		{
-			$this->rewind();
-		}
-		return $this->resultrow;
-	}
-	
-	/* standard iterator method */
-	public function key()
-	{
-		return $this->resultseq;
-	}
-	
-	/* standard iterator method */
-	public function next()
-	{
-		if ($this->eof)
-		{
-			return false;
-		}
-		if ($this->recordset AND !$this->eof)
-		{
-			$this->resultrow = $this->db->fetch_array($this->recordset);
-			
-			if (!$this->resultrow)
-			{
-				$this->eof = true;
-			}
-			$this->resultseq++;
-		}
-		return $this->resultrow;
-	}
-	
-	/* standard iterator method */
-	public function rewind()
-	{
-		if ($this->recordset)
-		{
-			$this->db->free_result($this->recordset);
-		}
-		
-		$this->recordset = $this->db->query_read($this->querystring);
-		$this->resultrow = $this->db->fetch_array($this->recordset);
+    /** standard constructor
+     *
+     * @param    mixed        the standard vbulletin db object
+     * @param    mixed        the query string
+     *
+     ***/
+    public function __construct(&$db, $querystring)
+    {
+        $this->querystring = $querystring;
+        $this->db = $db;
+        $this->recordset = $this->db->query_read($querystring);
+        $this->resultrow = $this->db->fetch_array($this->recordset);
 
-		$this->resultseq = 0;
-		if ($this->resultrow)
-		{
-			$this->eof = false;
-		}
-		else
-		{
-			$this->eof = true;
-		}
-	}
-	
-	/* standard iterator method */
-	public function valid()
-	{
-		return ($this->recordset AND !$this->eof);
-	}
-	
-	/* returns the complete data array in JSON format */
-	public function toJSON()
-	{
-		$json = array();
-		
-		if (($this->resultseq > 1) OR !$this->recordset)
-		{
-			$this->rewind();
-		}
-	
-		while($this->valid())
-		{
-			$values = array();
-			foreach ($this->resultrow as $fieldname => $fieldvalue)
-			{
-				$values[] = "\"$fieldname\":\"" . str_replace('"', '\"', $fieldvalue) . '"';
-				
-			}
-			$json[] = $this->resultseq . "\":{\n" . implode($values, ",\n" ) . "}\n";
-			$this->next();
-		}
-		return '{"' . implode($json, ",\n" ) . "}\n";
-	}
-	
-		
+        $this->resultseq = 0;
+        if ($this->resultrow) {
+            $this->eof = false;
+        } else {
+            $this->eof = true;
+        }
+    }
+
+    /* standard iterator method */
+    public function current()
+    {
+        if ($this->resultrow === false) {
+            $this->rewind();
+        }
+        return $this->resultrow;
+    }
+
+    /* standard iterator method */
+    public function key()
+    {
+        return $this->resultseq;
+    }
+
+    /* standard iterator method */
+    public function next()
+    {
+        if ($this->eof) {
+            return false;
+        }
+        if ($this->recordset AND !$this->eof) {
+            $this->resultrow = $this->db->fetch_array($this->recordset);
+
+            if (!$this->resultrow) {
+                $this->eof = true;
+            }
+            $this->resultseq++;
+        }
+        return $this->resultrow;
+    }
+
+    /* standard iterator method */
+    public function rewind()
+    {
+        if ($this->recordset) {
+            $this->db->free_result($this->recordset);
+        }
+
+        $this->recordset = $this->db->query_read($this->querystring);
+        $this->resultrow = $this->db->fetch_array($this->recordset);
+
+        $this->resultseq = 0;
+        if ($this->resultrow) {
+            $this->eof = false;
+        } else {
+            $this->eof = true;
+        }
+    }
+
+    /* standard iterator method */
+    public function valid()
+    {
+        return ($this->recordset AND !$this->eof);
+    }
+
+    /* returns the complete data array in JSON format */
+    public function toJSON()
+    {
+        $json = array();
+
+        if (($this->resultseq > 1) OR !$this->recordset) {
+            $this->rewind();
+        }
+
+        while ($this->valid()) {
+            $values = array();
+            foreach ($this->resultrow as $fieldname => $fieldvalue) {
+                $values[] = "\"$fieldname\":\"" . str_replace('"', '\"', $fieldvalue) . '"';
+
+            }
+            $json[] = $this->resultseq . "\":{\n" . implode($values, ",\n") . "}\n";
+            $this->next();
+        }
+        return '{"' . implode($json, ",\n") . "}\n";
+    }
+
+
 }
 
 /*======================================================================*\

@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -20,58 +20,52 @@
  */
 class vB_Controller_HttpError extends vB_Controller
 {
-	/*Properties====================================================================*/
+    /*Properties====================================================================*/
 
-	/**
-	 * The package that the controller belongs to.
-	 *
-	 * @var string
-	 */
-	protected $package = 'vB';
+    /**
+     * The package that the controller belongs to.
+     *
+     * @var string
+     */
+    protected $package = 'vB';
 
-	/**
-	 * The class string id that identifies the controller.
-	 *
-	 * @var string
-	 */
-	protected $class = 'HttpError';
+    /**
+     * The class string id that identifies the controller.
+     *
+     * @var string
+     */
+    protected $class = 'HttpError';
 
 
+    /*Initialization================================================================*/
 
-	/*Initialization================================================================*/
+    /**
+     * Main entry point for the controller.
+     *
+     * @return string                            - The final page output
+     */
+    public function getResponse()
+    {
+        $error = vB_Router::getSegment('error');
 
-	/**
-	 * Main entry point for the controller.
-	 *
-	 * @return string							- The final page output
-	 */
-	public function getResponse()
-	{
-		$error = vB_Router::getSegment('error');
+        // Resolve rerouted error
+        $error = in_array($error, array('403', '404', '500')) ? $error : '404';
 
-		// Resolve rerouted error
-		$error = in_array($error, array('403', '404', '500')) ? $error : '404';
+        // Setup the templater for xhtml
+        vB_View::registerTemplater(vB_View::OT_XHTML, new vB_Templater_vB());
 
-		// Setup the templater for xhtml
-		vB_View::registerTemplater(vB_View::OT_XHTML, new vB_Templater_vB());
+        $view = new vB_View_AJAXHTML('http_error');
 
-		$view = new vB_View_AJAXHTML('http_error');
+        if ('403' == $error) {
+            $view->addError(new vB_Phrase('error', 'nopermission_loggedin_ajax'));
+        } else if ('500' == $error) {
+            $view->addError(new vB_Phrase('error', 'error_500'));
+        } else {
+            $view->addError(new vB_Phrase('error', 'error_400'));
+        }
 
-		if ('403' == $error)
-		{
-			$view->addError(new vB_Phrase('error', 'nopermission_loggedin_ajax'));
-		}
-		else if ('500' == $error)
-		{
-			$view->addError(new vB_Phrase('error', 'error_500'));
-		}
-		else
-		{
-			$view->addError(new vB_Phrase('error', 'error_400'));
-		}
-
-		return $view->render(true);
-	}
+        return $view->render(true);
+    }
 }
 
 /*======================================================================*\

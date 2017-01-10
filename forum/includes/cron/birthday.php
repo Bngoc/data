@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -12,9 +12,8 @@
 
 // ######################## SET PHP ENVIRONMENT ###########################
 error_reporting(E_ALL & ~E_NOTICE);
-if (!is_object($vbulletin->db))
-{
-	exit;
+if (!is_object($vbulletin->db)) {
+    exit;
 }
 
 // ########################################################################
@@ -24,12 +23,10 @@ if (!is_object($vbulletin->db))
 $today = date('m-d', TIMENOW);
 
 $ids = '0';
-foreach($vbulletin->usergroupcache AS $usergroupid => $usergroup)
-{
-	if ($usergroup['genericoptions'] & $vbulletin->bf_ugp_genericoptions['showbirthday'] AND $usergroup['genericoptions'] & $vbulletin->bf_ugp_genericoptions['isnotbannedgroup'] AND !in_array($usergroup['usergroupid'], array(1, 3, 4)))
-	{
-		$ids .= ",$usergroupid";
-	}
+foreach ($vbulletin->usergroupcache AS $usergroupid => $usergroup) {
+    if ($usergroup['genericoptions'] & $vbulletin->bf_ugp_genericoptions['showbirthday'] AND $usergroup['genericoptions'] & $vbulletin->bf_ugp_genericoptions['isnotbannedgroup'] AND !in_array($usergroup['usergroupid'], array(1, 3, 4))) {
+        $ids .= ",$usergroupid";
+    }
 }
 
 $birthdays = $vbulletin->db->query_read("
@@ -42,20 +39,18 @@ $birthdays = $vbulletin->db->query_read("
 
 vbmail_start();
 
-while ($userinfo = $vbulletin->db->fetch_array($birthdays))
-{
-	$username = unhtmlspecialchars($userinfo['username']);
-	eval(fetch_email_phrases('birthday', $userinfo['languageid']));
-	vbmail($userinfo['email'], $subject, $message);
-	$emails .= iif($emails, ', ');
-	$emails .= $userinfo['username'];
+while ($userinfo = $vbulletin->db->fetch_array($birthdays)) {
+    $username = unhtmlspecialchars($userinfo['username']);
+    eval(fetch_email_phrases('birthday', $userinfo['languageid']));
+    vbmail($userinfo['email'], $subject, $message);
+    $emails .= iif($emails, ', ');
+    $emails .= $userinfo['username'];
 }
 
 vbmail_end();
 
-if ($emails)
-{
-	log_cron_action($emails, $nextitem, 1);
+if ($emails) {
+    log_cron_action($emails, $nextitem, 1);
 }
 
 

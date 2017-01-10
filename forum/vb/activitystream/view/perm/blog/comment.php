@@ -4,7 +4,7 @@
   || #################################################################### ||
   || # vBulletin 4.2.0 
   || # ---------------------------------------------------------------- # ||
-  || # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+  || # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
   || # This file may not be redistributed in whole or significant part. # ||
   || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
   || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -13,44 +13,40 @@
 
 class vB_ActivityStream_View_Perm_Blog_Comment extends vB_ActivityStream_View_Perm_Blog_Base
 {
-	public function __construct(&$content)
-	{
-		$this->requireExist['vB_ActivityStream_View_Perm_Blog_Entry'] = 1;
-		return parent::__construct($content);
-	}
+    public function __construct(&$content)
+    {
+        $this->requireExist['vB_ActivityStream_View_Perm_Blog_Entry'] = 1;
+        return parent::__construct($content);
+    }
 
-	public function group($activity)
-	{
-		if (!vB::$vbulletin->products['vbblog'])
-		{
-			return false;
-		}
+    public function group($activity)
+    {
+        if (!vB::$vbulletin->products['vbblog']) {
+            return false;
+        }
 
-		if (!$this->content['blogtext'][$activity['contentid']])
-		{
-			$this->content['blogtextid'][$activity['contentid']] = 1;
-		}
-	}
+        if (!$this->content['blogtext'][$activity['contentid']]) {
+            $this->content['blogtextid'][$activity['contentid']] = 1;
+        }
+    }
 
-	public function process()
-	{
-		if (!$this->content['blogtextid'] OR !vB::$vbulletin->products['vbblog'])
-		{
-			return true;
-		}
+    public function process()
+    {
+        if (!$this->content['blogtextid'] OR !vB::$vbulletin->products['vbblog']) {
+            return true;
+        }
 
-		if (vB::$vbulletin->userinfo['userid'])
-		{
-			$fields = ", ignored.relationid AS b_ignoreid, buddy.relationid AS b_buddyid";
-			$joins = "
+        if (vB::$vbulletin->userinfo['userid']) {
+            $fields = ", ignored.relationid AS b_ignoreid, buddy.relationid AS b_buddyid";
+            $joins = "
 				LEFT JOIN " . TABLE_PREFIX . "userlist AS ignored ON (ignored.userid = user.userid AND ignored.relationid = " . vB::$vbulletin->userinfo['userid'] . " AND ignored.type = 'ignore')
 				LEFT JOIN " . TABLE_PREFIX . "userlist AS buddy ON (buddy.userid = user.userid AND buddy.relationid = " . vB::$vbulletin->userinfo['userid'] . " AND buddy.type = 'buddy')
 			";
-		}
+        }
 
-		$catsql = $this->fetchCategoryPermissions();
+        $catsql = $this->fetchCategoryPermissions();
 
-		$comments = vB::$db->query_read_slave("
+        $comments = vB::$db->query_read_slave("
 			SELECT
 				IF (bu.title <> '', bu.title, user.username) AS b_blog_title, bt.pagetext AS bt_pagetext, blog.postedby_userid, bt.username AS bt_username,
 				bt.blogid AS bt_blogid, bt.blogtextid AS bt_blogtextid, bt.title AS bt_title, bt.state AS bt_state, bt.userid AS bt_userid, fp.pagetext AS b_pagetext,
@@ -71,62 +67,60 @@ class vB_ActivityStream_View_Perm_Blog_Comment extends vB_ActivityStream_View_Pe
 				blog.pending = 0
 				{$catsql['wheresql']}
 		");
-		while ($comment = vB::$db->fetch_array($comments))
-		{
-			$this->content['blogtext'][$comment['blogtextid']] = $comment;
+        while ($comment = vB::$db->fetch_array($comments)) {
+            $this->content['blogtext'][$comment['blogtextid']] = $comment;
 
-			unset($this->content['blogid'][$comment['bt_blogid']]);
-			$this->content['blogtext'][$comment['bt_blogtextid']] = $this->parse_array($comment, 'bt_');
-			$this->content['userid'][$comment['bt_userid']] = 1;
-			if (!$this->content['blog'][$comment['b_blogid']])
-			{
-				$this->content['blog'][$comment['b_blogid']] = $this->parse_array($comment, 'b_');
-				cache_permissions($this->content['blog'][$comment['b_blogid']], false);
-				$this->content['userid'][$comment['b_userid']] = 1;
-				$this->content['userid'][$comment['postedby_userid']] = 1;
-			}
-		}
+            unset($this->content['blogid'][$comment['bt_blogid']]);
+            $this->content['blogtext'][$comment['bt_blogtextid']] = $this->parse_array($comment, 'bt_');
+            $this->content['userid'][$comment['bt_userid']] = 1;
+            if (!$this->content['blog'][$comment['b_blogid']]) {
+                $this->content['blog'][$comment['b_blogid']] = $this->parse_array($comment, 'b_');
+                cache_permissions($this->content['blog'][$comment['b_blogid']], false);
+                $this->content['userid'][$comment['b_userid']] = 1;
+                $this->content['userid'][$comment['postedby_userid']] = 1;
+            }
+        }
 
-		$this->content['blogtextid'] = array();
-	}
+        $this->content['blogtextid'] = array();
+    }
 
-	public function fetchCanView($record)
-	{
-		$this->processUsers();
-		return $this->fetchCanViewBlogComment($record['contentid']);
-	}
+    public function fetchCanView($record)
+    {
+        $this->processUsers();
+        return $this->fetchCanViewBlogComment($record['contentid']);
+    }
 
-	/*
-	 * Register Template
-	 *
-	 * @param	string	Template Name
-	 * @param	array	Activity Record
-	 *
-	 * @return	string	Template
-	 */
-	public function fetchTemplate($templatename, $activity)
-	{
-		$blogtextinfo =& $this->content['blogtext'][$activity['contentid']];
-		$bloginfo =& $this->content['blog'][$blogtextinfo['blogid']];
+    /*
+     * Register Template
+     *
+     * @param	string	Template Name
+     * @param	array	Activity Record
+     *
+     * @return	string	Template
+     */
+    public function fetchTemplate($templatename, $activity)
+    {
+        $blogtextinfo =& $this->content['blogtext'][$activity['contentid']];
+        $bloginfo =& $this->content['blog'][$blogtextinfo['blogid']];
 
-		$activity['postdate'] = vbdate(vB::$vbulletin->options['dateformat'], $activity['dateline'], true);
-		$activity['posttime'] = vbdate(vB::$vbulletin->options['timeformat'], $activity['dateline']);
+        $activity['postdate'] = vbdate(vB::$vbulletin->options['dateformat'], $activity['dateline'], true);
+        $activity['posttime'] = vbdate(vB::$vbulletin->options['timeformat'], $activity['dateline']);
 
-		$preview = strip_quotes($blogtextinfo['pagetext']);
-		$blogtextinfo['preview'] = htmlspecialchars_uni(fetch_censored_text(
-			fetch_trimmed_title(strip_bbcode($preview, false, true, true, true),
-				vb::$vbulletin->options['as_snippet'])
-		));
-		$userinfo = $this->fetchUser($activity['userid'], $blogtextinfo['username']);
+        $preview = strip_quotes($blogtextinfo['pagetext']);
+        $blogtextinfo['preview'] = htmlspecialchars_uni(fetch_censored_text(
+            fetch_trimmed_title(strip_bbcode($preview, false, true, true, true),
+                vb::$vbulletin->options['as_snippet'])
+        ));
+        $userinfo = $this->fetchUser($activity['userid'], $blogtextinfo['username']);
 
-		$templater = vB_Template::create($templatename);
-			$templater->register('userinfo', $userinfo);
-			$templater->register('activity', $activity);
-			$templater->register('blogtextinfo', $blogtextinfo);
-			$templater->register('bloginfo', $bloginfo);
-			$templater->register('pageinfo', array('bt' => $blogtextinfo['blogtextid']));
-		return $templater->render();
-	}
+        $templater = vB_Template::create($templatename);
+        $templater->register('userinfo', $userinfo);
+        $templater->register('activity', $activity);
+        $templater->register('blogtextinfo', $blogtextinfo);
+        $templater->register('bloginfo', $bloginfo);
+        $templater->register('pageinfo', array('bt' => $blogtextinfo['blogtextid']));
+        return $templater->render();
+    }
 }
 
 /*======================================================================*\

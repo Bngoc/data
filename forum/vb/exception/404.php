@@ -27,23 +27,23 @@
  */
 class vB_Exception_404 extends vB_Exception_Reroute
 {
-	/*Initialisation================================================================*/
+    /*Initialisation================================================================*/
 
-	/**
-	 * Creates a 404 exception with the given message
-	 *
-	 * @param string $message					- A user friendly error
-	 * @param int $code							- The PHP code of the error
-	 * @param string $file						- The file the exception was thrown from
-	 * @param int $line							- The line the exception was thrown from
-	 */
-	public function __construct($message = false, $code = false, $file = false, $line = false)
-	{
-		$message = $message ? $message : new vB_Phrase('error', 'page_not_found');
+    /**
+     * Creates a 404 exception with the given message
+     *
+     * @param string $message - A user friendly error
+     * @param int $code - The PHP code of the error
+     * @param string $file - The file the exception was thrown from
+     * @param int $line - The line the exception was thrown from
+     */
+    public function __construct($message = false, $code = false, $file = false, $line = false)
+    {
+        $message = $message ? $message : new vB_Phrase('error', 'page_not_found');
 
-		// Standard exception initialisation
-		parent::__construct(vB_Router::get404Path(), $message, $code, $file, $line);
-	}
+        // Standard exception initialisation
+        parent::__construct(vB_Router::get404Path(), $message, $code, $file, $line);
+    }
 }
 
 /*======================================================================*\

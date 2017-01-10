@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -16,7 +16,7 @@ in the navigation manager */
 define('VB_REDIRECT', true);
 
 /**
- * If you want to move this file to the root of your website, change the 
+ * If you want to move this file to the root of your website, change the
  * line below to your vBulletin directory and uncomment it (delete the //).
  *
  * For example, if vBulletin is installed in '/forum' the line should
@@ -28,16 +28,15 @@ define('VB_REDIRECT', true);
  * the cookie path is set to '/'.
  *
  * See 'Admin Control Panel
- *	->Cookies and HTTP Header Options
- *	  ->Path to Save Cookies
+ *    ->Cookies and HTTP Header Options
+ *      ->Path to Save Cookies
  */
 
 //define('VB_RELATIVE_PATH', 'forums');
 
 // Do not edit anything below //
-if (defined('VB_RELATIVE_PATH'))
-{
-	chdir('./' . VB_RELATIVE_PATH);
+if (defined('VB_RELATIVE_PATH')) {
+    chdir('./' . VB_RELATIVE_PATH);
 }
 
 require('forum.php');

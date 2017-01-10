@@ -76,7 +76,7 @@ echo cn_snippet_messages();
 </form>
 
 <?php
-    echoFormVerifyChar(['action_pointtax' => '_pointtax'], 'Bạn có chắc muốm thuê điểm không?');
+echoFormVerifyChar(['action_pointtax' => '_pointtax'], 'Bạn có chắc muốm thuê điểm không?');
 ?>
 
 <table style="width: 100%" cellpadding="2">

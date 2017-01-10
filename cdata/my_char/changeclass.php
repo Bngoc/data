@@ -98,20 +98,21 @@ echo cn_snippet_messages();
             <td class="bizwebform_col_1">Chọn giới tính cần đổi</td>
             <td class="bizwebform_col_2">
                 <select name="nameClass" id="bizwebselect">
-                <?php
-                    if($infoClass) foreach ($infoClass as $key => $items){
-                        echo '<option value="' . $key .'">' .  $items[$key.'_name'] .' </option>';
+                    <?php
+                    if ($infoClass) foreach ($infoClass as $key => $items) {
+                        echo '<option value="' . $key . '">' . $items[$key . '_name'] . ' </option>';
                     }
-                ?>
+                    ?>
                 </select>
             </td>
             <td class="bizwebform_col_3"></td>
-<!--            <td class="bizwebform_col_1">Tên nhân vật mới</td>-->
-<!--            <td class="bizwebform_col_2">-->
-<!--                <input class="bizwebform" id="" --><?php //if ($cn_false) echo 'readonly="readonly"'; ?><!-- type="text"-->
-<!--                       name="c_name" placeholder="abc123">-->
-<!--            </td>-->
-<!--            <td class="bizwebform_col_3"></td>-->
+            <!--            <td class="bizwebform_col_1">Tên nhân vật mới</td>-->
+            <!--            <td class="bizwebform_col_2">-->
+            <!--                <input class="bizwebform" id="" -->
+            <?php //if ($cn_false) echo 'readonly="readonly"'; ?><!-- type="text"-->
+            <!--                       name="c_name" placeholder="abc123">-->
+            <!--            </td>-->
+            <!--            <td class="bizwebform_col_3"></td>-->
         </tr>
 
         <tr>
@@ -122,7 +123,7 @@ echo cn_snippet_messages();
 
                 <input type="image" src="<?php echo URL_PATH_IMG; ?>/capnhat.png" style="padding-right:10px">
                 <img style="cursor:pointer" border="0" src="<?php echo URL_PATH_IMG; ?>/cancel.png"
-                    onclick="document.getElementById('verify').reset();" style="padding-left:10px">
+                     onclick="document.getElementById('verify').reset();" style="padding-left:10px">
             </td>
         </tr>
 
@@ -148,9 +149,9 @@ echo cn_snippet_messages();
 </table>
 <em>
     <?php
-        $changeClass = explode(':', getoption('changeClass_str'));
-        echo '<b>Phí: ' . number_format((float)(getoption('vptogc') * $changeClass[0] * 0.01), 0, ",", ".") . ' Gcoin</b> hoặc <b>' . number_format((float)($changeClass[0]), 0, ",", ".") . ' Vpoint </b><br>';
-        echo '<b>Trừ: ' . $changeClass[1] . ' %</b> số Reset <b></br>';
-        echo '<b>Cần: ' . $changeClass[2] . '</b> Reset tối thiểu';
-        ?>
+    $changeClass = explode(':', getoption('changeClass_str'));
+    echo '<b>Phí: ' . number_format((float)(getoption('vptogc') * $changeClass[0] * 0.01), 0, ",", ".") . ' Gcoin</b> hoặc <b>' . number_format((float)($changeClass[0]), 0, ",", ".") . ' Vpoint </b><br>';
+    echo '<b>Trừ: ' . $changeClass[1] . ' %</b> số Reset <b></br>';
+    echo '<b>Cần: ' . $changeClass[2] . '</b> Reset tối thiểu';
+    ?>
 </em>

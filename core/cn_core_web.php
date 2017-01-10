@@ -397,7 +397,7 @@ function member_get()
     }
 
     mcache_set('#member', $user = db_user_by_name($_SESSION['user_Gamer']));
-    //foreach($user as $fg => $r) echo "585 uers==> $fg => $r <br>";
+
     return $user;
 }
 
@@ -494,7 +494,7 @@ function cn_login()
     // Check user exists. If user logged, but not exists, logout now
     //if ($logged_username && !db_user_by_name($logged_username))
     //{
-        //cn_logout();
+    //cn_logout();
     //}
 
     $is_logged = false;
@@ -546,7 +546,7 @@ function cn_login()
                             $_SESSION['timeOutLogin'] = ctime() + getoption('config_time_logout_web');
 
                             //Reset character -- AccountID -> Thue Point
-                            resetDefaultCharater($username);
+                            cn_resetDefaultCharater($username);
 
                             // save last login status, clear ban
                             //db_user_update($username, 'lts='.time(), 'ban=0');
@@ -615,16 +615,16 @@ function cn_register_form($admin = TRUE)
                 if ($newHash != trim($user[0]['token_regist'])) msg_info('Đường dẫn không hợp lệ.');
                 if (trim($user[0]['mail_check'])) msg_info('Tài khoản đã được kích hoạt.', 'index.php');
 
-                if (ctime() > $user[0]['date_resgit_email']){
-                    $statusDelete = do_delete_char("DELETE FROM MEMB_INFO WHERE memb___id ='". $d_string ."'");
-                    if ($statusDelete){
+                if (ctime() > $user[0]['date_resgit_email']) {
+                    $statusDelete = do_delete_char("DELETE FROM MEMB_INFO WHERE memb___id ='" . $d_string . "'");
+                    if ($statusDelete) {
                         msg_info('Bạn có thể sử dụng lại email để đăng ký.', 'index.php?register');
                     } else {
                         msg_info('Đã hết hạn kích hoạt tài khoản.');
                     }
                 }
 
-                $statusUp = do_update_character('MEMB_INFO', 'mail_chek=1', "acl=". ACL_LEVEL_JOURNALIST , "memb___id:'" . $d_string . "'");
+                $statusUp = do_update_character('MEMB_INFO', 'mail_chek=1', "acl=" . ACL_LEVEL_JOURNALIST, "memb___id:'" . $d_string . "'");
                 if ($statusUp) {
                     msg_info('Tài khoản đã được kích hoạt....', 'index.php');
                 }
@@ -645,7 +645,7 @@ function cn_register_form($admin = TRUE)
         if ($d_string) {
             list($ctime, $d_username) = explode(' ', $d_string, 2);
 
-            if ($ctime <ctime()) {
+            if ($ctime < ctime()) {
                 msg_info('Đã hết hạn xác nhận quên mật khẩu.', 'index.html');
             }
 
@@ -653,7 +653,7 @@ function cn_register_form($admin = TRUE)
             $user = do_select_character('MEMB_INFO', 'memb___id', "memb___id='$d_username'");
 
             // All OK: authorize user
-            if(isset($user)) {
+            if (isset($user)) {
                 //cn_throw_message('Vui lòng thay đổi mật khẩu', 'e');
                 $_SESSION['user_ChangePwd'] = true;
                 $_SESSION['user_Gamer'] = $d_username;
@@ -739,8 +739,6 @@ function cn_register_form($admin = TRUE)
             if (!preg_match("/(\(\+84\)|0)\d{2,3}[-]\d{4}[-]\d{3}$/i", $phoneNumber)) $errors[] = ucfirst("Số di động không hợp lệ.");
             if (substr_count($username, 'dis') > 0) $errors[] = ucfirst("Tên tài khoản không được phép đăng ký.");
 
-//              if (!eregi("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$", $email)){
-//              $error = "$email không đúng dạng địa chỉ Email. Xin vui lòng kiểm tra lại.</font><br>";}
             if (strlen($username) < 4 || strlen($username) > 10) $errors[] = "Tên tài khoản chỉ từ 4-10 kí tự.";
             if (strlen($re_pwd) < 3) $errors[] = 'Mật khẩu quá ngắn';
             if ($pwd != $re_pwd) $errors[] = "Mật khẩu Game không giống nhau.";
@@ -750,14 +748,13 @@ function cn_register_form($admin = TRUE)
             if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
             if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
 
-
             // Do register
             if (empty($errors)) {
                 $user = do_select_character('MEMB_INFO', 'memb___id', "memb___id='$username'");
                 if (!$user) {
                     $user = do_select_character('MEMB_INFO', 'mail_addr', "mail_addr='$nameEmail'");
                     if (!$user) {
-                        $tempRegisterSendEmail ='
+                        $tempRegisterSendEmail = '
                                 <h1 style="padding: 0;">Thông tin tài khoàn</h1><p style="float: left; margin: 0 0 3px 0;">Cảm ơn bạn đã đăng ký trên trang web của chúng tôi, chi tiết tài khoản của bạn như sau:
                                 <hr style="float: left; width: 100%;">
                                     <table align="left" style="line-height: 17px; padding: 5px 0; color: blue;">
@@ -778,7 +775,7 @@ function cn_register_form($admin = TRUE)
 
                         $strHoder = '%account%, %email%, %ma7code%, %password%, %passWeb%, %phonenumber%, %quest_choise%, %answer%, %nameHome%';
 
-                        $question_aws =  getoption('question_answers');
+                        $question_aws = getoption('question_answers');
                         $arr_QA = explode(',', $question_aws);
 
                         $rand = '';
@@ -800,15 +797,15 @@ function cn_register_form($admin = TRUE)
                         );
 
                         $status = cn_send_mail(
-                                $nameEmail,
-                                'Welcome to '. $_SERVER['SERVER_NAME'],
-                                cn_replace_text($stetemp, '%home_url%', $_SERVER['SERVER_NAME']) . $stetem1
+                            $nameEmail,
+                            'Welcome to ' . $_SERVER['SERVER_NAME'],
+                            cn_replace_text($stetemp, '%home_url%', $_SERVER['SERVER_NAME']) . $stetem1
                         );
 
                         if ($status) {
                             $register_OK = TRUE;
                             //msg_info('For you send register');
-                        }else {
+                        } else {
                             msg_info('Err, Xin lỗi không thể gửi email xác nhận tài khoản!');
                         }
                     } else {
@@ -825,7 +822,7 @@ function cn_register_form($admin = TRUE)
                 $checkStatusDB = do_insert_character(
                     '[MEMB_INFO]',
                     "memb___id='" . $username . "'",
-                    "memb__pwd='". $re_pwd ."'",
+                    "memb__pwd='" . $re_pwd . "'",
                     "mail_addr='" . $nameEmail . "'",
                     "tel__numb='" . $phoneNumber . "'",
                     "memb__pwdmd5='" . SHA256_hash($repass_web) . "'",
@@ -843,7 +840,7 @@ function cn_register_form($admin = TRUE)
                     "ip='" . $_SERVER["REMOTE_ADDR"] . "'",
                     "acl='" . getoption('registration_level') . "'",
                     "token_regist='" . $rand . "'",
-                    "date_resgit_email='" . (ctime() + 86400). "'",
+                    "date_resgit_email='" . (ctime() + 86400) . "'",
                     'ban_login=0',
                     'num_login=1'
                 );
@@ -851,7 +848,7 @@ function cn_register_form($admin = TRUE)
                 $stetemp .= '<p style="float: left; color: red"><i>Vui lòng check email để xác nhận tài khoản.</i></p>';
                 if ($checkStatusDB) {
                     msg_info($stetemp, 'index.php');
-                } else{
+                } else {
                     msg_info('Err, Không thể tạo được tài khoản mới!');
                 }
             }
@@ -998,9 +995,9 @@ function cn_get_menu()
         }
 
         $result .= '<li class = "' . $select . '"><a href="' . PHP_SELF . '?mod=' . $mod_key . $action . '">
-                        <span class="ca-icon">'. $iconText .'</span>
+                        <span class="ca-icon">' . $iconText . '</span>
                             <div class="ca-content"><h2 class="ca-main">' . cn_htmlspecialchars($name) . '</h2>
-                            <h3 class="ca-sub">'. $infoText .'</h3> </div>
+                            <h3 class="ca-sub">' . $infoText . '</h3> </div>
                         </a></li>';
     }
 
@@ -1018,7 +1015,7 @@ function cn_get_menu_none()
             'auto_money' => array('Cd', 'qlink_depoisit.png', 'VTC'),
             'cash_shop' => array('Cc', 'qlink_cashshop.png', 'shop_orther'),
             //'acc_manager'   		=> array('Can', 'XXXXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXX', 'source,year,mon,day,sort,dir'), //can => add; new cvn => view
-    ));
+        ));
 
     if (getoption('main_site')) $modules['my_site'] = getoption('main_site');
 
@@ -1026,7 +1023,7 @@ function cn_get_menu_none()
 
     $result = '<div class="loginbx"> <!-- start loginbx --> 
                     <div class="loginbx_n"></div>
-                    <div class="loginbx_c"><div class="loginbx_content">'. cn_login_form() .'</div></div>
+                    <div class="loginbx_c"><div class="loginbx_content">' . cn_login_form() . '</div></div>
                     <div class="loginbx_s"></div>
                 </div><!-- end loginbx -->			
             <div class="clear"></div>
@@ -1061,7 +1058,7 @@ function cn_get_menu_none()
             if ($actions) $action .= '&amp;' . join('&amp;', $actions);
         }
 
-        $result .= '<div class="quicklink_item"><a href="' . PHP_SELF . '?mod=' . $mod_key . $action . '"><img src="'. getoption('http_script_dir'). '/images/' . cn_htmlspecialchars($name) . '" alt="Nạp thẻ VTC" /></a></div>';
+        $result .= '<div class="quicklink_item"><a href="' . PHP_SELF . '?mod=' . $mod_key . $action . '"><img src="' . getoption('http_script_dir') . '/images/' . cn_htmlspecialchars($name) . '" alt="Nạp thẻ VTC" /></a></div>';
     }
 
     $result .= "</div>";
@@ -1079,14 +1076,15 @@ function cn_menuTopMoney($opt = '')
     if (isset($_SESSION['user_Gamer'])) {
         $_blank_var = view_bank($_SESSION['user_Gamer']);
 
-        $matches[0] = '<img src="' . getoption('http_script_dir') . '/images/icon-1.png" /> ' . number_format($_blank_var[0]['vp'], 0, ',', '.') . ' Vpoint';;
-        $matches[1] = '<img src="' . getoption('http_script_dir') . '/images/icon-2.png" /> ' . number_format($_blank_var[0]['gc'], 0, ',', '.') . ' Gcoin';;
-        $matches[2] = '<img src="' . getoption('http_script_dir') . '/images/icon-3.png" /> ' . number_format($_blank_var[0]['gc_km'], 0, ',', '.') . ' Gcoin KM';;
-        $matches[3] = '<img src="' . getoption('http_script_dir') . '/images/icon-4.png" /> ' . number_format($_blank_var[0]['blue'], 0, ',', '.') . ' Blue';;
-        $matches[4] = '<img src="' . getoption('http_script_dir') . '/images/icon-5.png" /> ' . number_format($_blank_var[0]['chaos'], 0, ',', '.') . ' Chaos';;
-        $matches[5] = '<img src="' . getoption('http_script_dir') . '/images/icon-6.png" /> ' . number_format($_blank_var[0]['cre'], 0, ',', '.') . ' Cre';;
-        $matches[6] = '<img src="' . getoption('http_script_dir') . '/images/icon-7.png" /> ' . number_format($_blank_var[0]['bank'], 0, ',', '.') . ' Zen';;
-        $tempTop = ['{nameVpoint}', '{nameGcoin}', '{nameGcKm}', '{nameBule}', '{nameChaos}', '{nameCreate}', '{nameBank}'];
+        $matches[0] = '<img height="20px" src="' . getoption('http_script_dir') . '/images/top-menu/icon-1.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['vp']) . ' Vpoint';
+        $matches[1] = '<img height="20px" src="' . getoption('http_script_dir') . '/images/top-menu/icon-2.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['gc']) . ' Gcoin';
+        $matches[2] = '<img height="20px" src="' . getoption('http_script_dir') . '/images/top-menu/icon-3.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['gc_km']) . ' Gcoin KM';
+        $matches[3] = '<img height="20px" src="' . getoption('http_script_dir') . '/images/top-menu/icon-4.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['blue']) . ' Blue';;
+        $matches[4] = '<img height="20px" src="' . getoption('http_script_dir') . '/images/top-menu/icon-5.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['chaos']) . ' Chaos';
+        $matches[5] = '<img height="20px" src="' . getoption('http_script_dir') . '/images/top-menu/icon-6.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['cre']) . ' Cre';
+        $matches[6] = '<img height="20px" src="' . getoption('http_script_dir') . '/images/top-menu/icon-7.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['bank']) . ' Zen';
+        $matches[7] = '<img height="20px" src="' . getoption('http_script_dir') . '/images/top-menu/icon-8.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['feather']) . ' Lông vũ';
+        $tempTop = ['{nameVpoint}', '{nameGcoin}', '{nameGcKm}', '{nameBule}', '{nameChaos}', '{nameCreate}', '{nameBank}', '{nameFeather}'];
         $skin_menu_TopMoney = str_replace($tempTop, $matches, $skin_menu_TopMoney);
 
         $userName[0] = '<img class="icon-Userimg" src="' . getoption('http_script_dir') . '/images/user-Name.png" />';
@@ -1106,7 +1104,7 @@ function cn_menuTopMoney($opt = '')
             $skin_menu_TopAccount = str_replace($jk, $tmpHtml, $skin_menu_TopAccount);
         }
 
-        if($opt){
+        if ($opt) {
             $skin_menu_TopSample = $skin_menu_TopMoney;
         } else {
             $skin_menu_TopSample = $skin_menu_TopAccount;
@@ -1126,24 +1124,47 @@ function echoFormVerifyChar($addOpt = array(), $msgVidateSubmit = '')
 {
     global $defaultVerifyMyChar;
 
-//    $ischeckvaildate = '';
-//    if ($msgVidateSubmit) {
-//        $ischeckvaildate = $msgVidateSubmit;
-//    } else {
-//
-//    }
-
-    echo "<form id=\"verify\" action=\"". PHP_SELF ."\" method=\"POST\"  onSubmit=\"return validateFormOnSubmit('". $msgVidateSubmit ."');\">";
+    echo "<form id=\"verify\" action=\"" . PHP_SELF . "\" method=\"POST\"  onSubmit=\"return validateFormOnSubmit('" . $msgVidateSubmit . "');\">";
     echo cn_form_open('mod, opt, sub');
 
     if ($addOpt) {
         foreach ($addOpt as $field => $val) {
-            echo'<input type="hidden" name="'. trim($field) .'" value="'. cn_htmlspecialchars($val) .'" />';
+            echo '<input type="hidden" name="' . trim($field) . '" value="' . cn_htmlspecialchars($val) . '" />';
         }
     }
     echo $defaultVerifyMyChar;
     echo '</form>';
 
+}
+
+function echoFormVerifyAjax($addOpt = array(), $nameFrom)
+{
+    if (empty($nameFrom)) {
+        echo '';
+    } else {
+
+        global $defaultVerifyAjax;
+
+        $charFirst = substr($nameFrom, 0, 1);
+        // default class
+        if ($charFirst == '#') {
+            $nameForm = 'id="'. substr($nameFrom, 1) .'"';
+        } else {
+            $nameForm = 'class="'. substr($nameFrom, 1) .'"';
+        }
+        $defaultVerifyAjax = str_replace('{nameAction}', $nameForm, $defaultVerifyAjax);
+
+        echo "<form id=\"verify\" action=\"" . PHP_SELF . "\" method=\"POST\" onsubmit=\"return false;\">";
+        echo cn_form_open('mod, opt, sub');
+
+        if ($addOpt) {
+            foreach ($addOpt as $field => $val) {
+                echo '<input type="hidden" name="' . trim($field) . '" value="' . cn_htmlspecialchars($val) . '" />';
+            }
+        }
+        echo $defaultVerifyAjax;
+        echo '</form>';
+    }
 }
 
 // Displays header skin
@@ -1567,38 +1588,7 @@ function cn_config_load()
 
     mcache_set('config', $cfg);
 
-    // ---------------------------------------------
-
-
-    /*foreach($cfg as $f =>$val){
-		if(!is_array($val))
-			echo "\$f$f <-----> $val \$val<br>";
-		else{
-			echo "array =====>$f <=====<br>";
-			foreach($val as $f1 =>$val1){
-				if(!is_array($val1))
-					echo "----------->$f1 => $val1 <br>";
-				else{
-					echo "arary --------------------> $f1 --------------------------<br>";
-					//foreach($val1['config_class'] as $f11 =>$val11){
-					foreach($val1 as $f11 =>$val11){
-						echo "$f11 => $val11 <br>";
-						foreach($val11['config_pk'] as $f111 =>$val111)
-						echo "$f111 => $val111 <br>";
-						}
-				}
-
-			}
-	   }
-	}*/
-    //echo "llllllllllllllllllllll=>" . $cfg['temp_basic']['templates']['config_class']['class_dw_2'] ."<=== <br>";
-    //$f= getoption('#temp_basic');
-
-    //$ty = cn_get_template_by('class');
-    //echo "111111111111111111111111111=>" . $ty['class'] ."<=== <br>";
-    //echo "222222222222222222222222222=>" . $cfg['class']['class_dw_2'] ."<=== <br>";
-    // ---------------------------------------------
-    return TRUE;
+    return true;
 }
 
 
@@ -1643,10 +1633,10 @@ function cn_character()
     $member = member_get();
     $show_reponse = view_character($member['user_name']);
     $arr_class = cn_template_class();
-    if (!$arr_class){
+    if (!$arr_class) {
         die('Err. Bạn chưa thiết lập các thông số nhân vật!');
     }
-    //$key_class = array_keys($arr_class);
+
     //img character in folder /images/class/ ...gif
     $img_character = array('dw' => 'DarkWizard', 'dk' => 'DarkKnight', 'elf' => 'FairyElf', 'mg' => 'MagicGladiator', 'dl' => 'DarkLord', 'sum' => 'Summoner', 'rf' => 'RageFighter',);
     if ($show_reponse) {
@@ -1701,7 +1691,6 @@ function cn_character()
                     'TimeThuePoint' => $do['TimeThuePoint'],
                     'isClass' => $isClass,
                 );
-                //$showchar_[$do[0]] = $showchar;PkLevel, PkCount
             }
         }
     } else {
@@ -1710,7 +1699,6 @@ function cn_character()
 
     return isset($showchar) ? $showchar : array();
 }
-
 
 
 /*
@@ -2019,7 +2007,7 @@ function cn_relocation_db_new()
     $databsepassword = getoption('databsepassword');
     $d_base = getoption('d_base');
 
-    if (!$type_connect || !$localhost || !$databaseuser || !$databsepassword || !$d_base ) {
+    if (!$type_connect || !$localhost || !$databaseuser || !$databsepassword || !$d_base) {
         echo 'Không có kết nối đến máy chủ!';
         die();
     }
@@ -2051,7 +2039,6 @@ function cn_relocation_db_new()
         //$conn->ErrorMsg()
     }
 }
-
 
 /**
  * return global
@@ -2131,67 +2118,68 @@ function cn_user_email_as_site($user_email, $username)
     }
 }
 
-function CheckSlotInventory($inventory, $itemX, $itemY)
-{
-    $items_data = getoption('#items_data');
-    $items = str_repeat('0', 64);
-    $itemsm = str_repeat('1', 64);
-    $i = 0;
-    while ($i < 64) {
-        $item = substr($inventory, $i * 32, 32);
-        if ($item == "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" || $item == "ffffffffffffffffffffffffffffffff") {
-            $i++;
-            continue;
-        } else {
-            $item_ = getCodeItem($item);
-            $item_data = $items_data[$item_['group'] . "." . $item_['id']];
-            $y = 0;
-            while ($y < $item_data['Y']) {
-                $x = 0;
-                while ($x < $item_data['X']) {
-                    $items = substr_replace($items, '1', ($i + $x) + ($y * 8), 1);
-                    $x++;
-                }
-                $y++;
-            }
-            $i++;
-        }
-    }
-    $y = 0;
-    while ($y < $itemY) {
-        $x = 0;
-        while ($x < $itemX) {
-            $x++;
-            $spacerq[$x + (8 * $y)] = true;
-        }
-        $y++;
-    }
-    $walked = 0;
-    $i = 0;
-    while ($i < 64) {
-        if (isset($spacerq[$i])) {
-            $itemsm = substr_replace($itemsm, '0', $i - 1, 1);
-            $last = $i;
-            $walked++;
-        }
-        if ($walked == count($spacerq)) $i = 63;
-        $i++;
-    }
-    $useforlength = substr($itemsm, 0, $last);
-    $findslotlikethis = str_replace('++', '+', str_replace('1', '+[0-1]+', $useforlength));
-    $i = 0;
-    $nx = 0;
-    $ny = 0;
-    while ($i < 64) {
-        if ($nx == 8) {
-            $ny++;
-            $nx = 0;
-        }
-        if ((preg_match('/^' . $findslotlikethis . '/', substr($items, $i, strlen($useforlength)))) && ($itemX + $nx < 9) && ($itemY + $ny < 16)) return $i;
-        $i++;
-        $nx++;
-    }
-    return 2048;
-}
+//
+//function CheckSlotInventory($inventory, $itemX, $itemY)
+//{
+//    $items_data = getoption('#items_data');
+//    $items = str_repeat('0', 64);
+//    $itemsm = str_repeat('1', 64);
+//    $i = 0;
+//    while ($i < 64) {
+//        $item = substr($inventory, $i * 32, 32);
+//        if ($item == "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" || $item == "ffffffffffffffffffffffffffffffff") {
+//            $i++;
+//            continue;
+//        } else {
+//            $item_ = cn_getCodeItem($item);
+//            $item_data = $items_data[$item_['group'] . "." . $item_['id']];
+//            $y = 0;
+//            while ($y < $item_data['Y']) {
+//                $x = 0;
+//                while ($x < $item_data['X']) {
+//                    $items = substr_replace($items, '1', ($i + $x) + ($y * 8), 1);
+//                    $x++;
+//                }
+//                $y++;
+//            }
+//            $i++;
+//        }
+//    }
+//    $y = 0;
+//    while ($y < $itemY) {
+//        $x = 0;
+//        while ($x < $itemX) {
+//            $x++;
+//            $spacerq[$x + (8 * $y)] = true;
+//        }
+//        $y++;
+//    }
+//    $walked = 0;
+//    $i = 0;
+//    while ($i < 64) {
+//        if (isset($spacerq[$i])) {
+//            $itemsm = substr_replace($itemsm, '0', $i - 1, 1);
+//            $last = $i;
+//            $walked++;
+//        }
+//        if ($walked == count($spacerq)) $i = 63;
+//        $i++;
+//    }
+//    $useforlength = substr($itemsm, 0, $last);
+//    $findslotlikethis = str_replace('++', '+', str_replace('1', '+[0-1]+', $useforlength));
+//    $i = 0;
+//    $nx = 0;
+//    $ny = 0;
+//    while ($i < 64) {
+//        if ($nx == 8) {
+//            $ny++;
+//            $nx = 0;
+//        }
+//        if ((preg_match('/^' . $findslotlikethis . '/', substr($items, $i, strlen($useforlength)))) && ($itemX + $nx < 9) && ($itemY + $ny < 16)) return $i;
+//        $i++;
+//        $nx++;
+//    }
+//    return 2048;
+//}
 
 ?>

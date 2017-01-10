@@ -399,7 +399,8 @@
                             height=164 alt=""
                             src="/images/guides/items/rf/img_setItems_ragefighter_sacred.jpg" width=105
                         ></SPAN></P>
-                <P style="TEXT-ALIGN: center"><SPAN style="COLOR: rgb(153,204,255)">Bộ Địa Long </SPAN><SPAN style="COLOR: rgb(153,204,255)">Sĩ</SPAN></P></TD>
+                <P style="TEXT-ALIGN: center"><SPAN style="COLOR: rgb(153,204,255)">Bộ Địa Long </SPAN><SPAN
+                        style="COLOR: rgb(153,204,255)">Sĩ</SPAN></P></TD>
             <TD>
                 <P style="TEXT-ALIGN: center">&nbsp;</P>
                 <P style="TEXT-ALIGN: center"><SPAN style="COLOR: rgb(153,204,255)"><IMG

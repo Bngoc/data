@@ -5,7 +5,7 @@ add_hook('index/invoke_module', '*manager_invoke');
 //=====================================================================================================================
 function manager_invoke()
 {
-    $cManger_account = array (
+    $cManger_account = array(
         'manager_account:change_pass:Csc' => 'Đổi pass-Game',
         'manager_account:change_tel:Cp' => 'Đổi Sđt',
         'manager_account:change_email:Ciw' => 'Đổi Email',
@@ -46,7 +46,7 @@ function manager_invoke()
 
     echoheader('-@my_account/style.css', "Manger Account");
 
-    $images = array (
+    $images = array(
         'change_pass' => 'change_pass.png',
         'change_tel' => 'change_tel.png',
         'change_email' => 'change_email.png',
@@ -66,7 +66,7 @@ function manager_invoke()
             continue;
         }
 
-        $item = array (
+        $item = array(
             'name' => $name,
             'img' => isset($images[$opt]) ? $images[$opt] : 'home.gif',
             'mod' => $mod,
@@ -90,7 +90,8 @@ function manager_default()
     echofooter();
 }
 
-function manager_change_pass() {
+function manager_change_pass()
+{
     $errors = array();
 
     // Do change pass-game
@@ -110,17 +111,17 @@ function manager_change_pass() {
         if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
 
 
-        $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='". $_SESSION['user_Gamer'] ."'");
+        $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");
 
-        if (trim($user[0][1]) != $nameQuestion){
+        if (trim($user[0][1]) != $nameQuestion) {
             $errors[] = 'Câu hỏi không đúng.';
         }
-        if (trim($user[0][2]) != $nameAnswer){
+        if (trim($user[0][2]) != $nameAnswer) {
             $errors[] = 'Câu trả lời không đúng.';
         }
 
         if (empty($errors)) {
-            $statusUp = do_update_character('MEMB_INFO', "memb__pwd='". $re_pwd ."'", "memb___id:'". $_SESSION['user_Gamer'] ."'");
+            $statusUp = do_update_character('MEMB_INFO', "memb__pwd='" . $re_pwd . "'", "memb___id:'" . $_SESSION['user_Gamer'] . "'");
 
             if ($statusUp) {
                 $changePassWebEmail = 'Hi {username}, <br><p>Change your password</p><hr><p>Mật khẩu Game mới: {pass_game} </p>';
@@ -139,7 +140,8 @@ function manager_change_pass() {
     echofooter();
 }
 
-function manager_change_tel() {
+function manager_change_tel()
+{
     $errors = array();
 
     // Do change tel-phone
@@ -158,17 +160,17 @@ function manager_change_tel() {
         if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
 
 
-        $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='". $_SESSION['user_Gamer'] ."'");
+        $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");
 
-        if (trim($user[0][1]) != $nameQuestion){
+        if (trim($user[0][1]) != $nameQuestion) {
             $errors[] = 'Câu hỏi không đúng.';
         }
-        if (trim($user[0][2]) != $nameAnswer){
+        if (trim($user[0][2]) != $nameAnswer) {
             $errors[] = 'Câu trả lời không đúng.';
         }
 
         if (empty($errors)) {
-            $statusUp = do_update_character('MEMB_INFO',  "tel__numb='" . $phoneNumber . "'", "memb___id:'". $_SESSION['user_Gamer'] ."'");
+            $statusUp = do_update_character('MEMB_INFO', "tel__numb='" . $phoneNumber . "'", "memb___id:'" . $_SESSION['user_Gamer'] . "'");
 
             if ($statusUp) {
                 $changePassWebEmail = 'Hi {username}, <br><hr><p>Số điện thoại mới: {pass_tel}</p>';
@@ -181,13 +183,14 @@ function manager_change_tel() {
         }
     }
 
-    cn_assign('errors_result' , $errors);
+    cn_assign('errors_result', $errors);
     echoheader('-@my_account/style.css', "Thay đổi số điện thoại");
     echocomtent_here(exec_tpl('-@my_account/_changeTel'), cn_snippet_bc_re());
     echofooter();
 }
 
-function manager_change_email() {
+function manager_change_email()
+{
 
     //cn_assign('errors_result' , $errors);
     echoheader('-@my_account/style.css', "Đổi pass-Web");
@@ -195,8 +198,9 @@ function manager_change_email() {
     echofooter();
 }
 
-function manager_change_pwd() {
-    if (isset($_SESSION['user_ChangePwd']) &&  $_SESSION['user_ChangePwd']) {
+function manager_change_pwd()
+{
+    if (isset($_SESSION['user_ChangePwd']) && $_SESSION['user_ChangePwd']) {
         $isAuthEmail = true;
     }
     $isAuthEmail = isset($isAuthEmail) ? $isAuthEmail : false;
@@ -217,17 +221,17 @@ function manager_change_pwd() {
         if (!$isAuthEmail && !preg_match('/[\w]\@[\w]/i', $nameEmail)) $errors[] = ucfirst("$nameEmail không đúng dạng địa chỉ Email.");
         if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
 
-        $user = do_select_character('MEMB_INFO', 'memb___id,mail_addr', "memb___id='". $_SESSION['user_Gamer'] ."'");
+        $user = do_select_character('MEMB_INFO', 'memb___id,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");
 
-        if (!$isAuthEmail && trim($user[0][1]) != $nameEmail){
+        if (!$isAuthEmail && trim($user[0][1]) != $nameEmail) {
             $errors[] = 'Email không đúng.';
         }
 
         if (empty($errors)) {
-            $statusUp = do_update_character('MEMB_INFO', "memb__pwdmd5='". SHA256_hash($repass_web) ."'", "memb___id:'". $_SESSION['user_Gamer'] ."'");
+            $statusUp = do_update_character('MEMB_INFO', "memb__pwdmd5='" . SHA256_hash($repass_web) . "'", "memb___id:'" . $_SESSION['user_Gamer'] . "'");
 
             if ($statusUp) {
-                $user = do_select_character('MEMB_INFO', 'memb___id,mail_addr', "memb___id='". $_SESSION['user_Gamer'] ."'");
+                $user = do_select_character('MEMB_INFO', 'memb___id,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");
 
                 $changePassWebEmail = 'Hi {username}, <br>
                     <p>Thay đổi mật khẩu</p>
@@ -243,14 +247,15 @@ function manager_change_pwd() {
         }
     }
 
-    cn_assign('isAuthEmail, errors_result', $isAuthEmail , $errors);
+    cn_assign('isAuthEmail, errors_result', $isAuthEmail, $errors);
 
     echoheader('-@my_account/style.css', "Thay đổi mật khẩu web");
     echocomtent_here(exec_tpl('-@my_account/_changePassWeb'), cn_snippet_bc_re());
     echofooter();
 }
 
-function manager_change_secret() {
+function manager_change_secret()
+{
     $errors = array();
 
     // Do change pass-web
@@ -269,17 +274,17 @@ function manager_change_secret() {
         if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
 
 
-        $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='". $_SESSION['user_Gamer'] ."'");
+        $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");
 
-        if (trim($user[0][1]) != $nameQuestion){
+        if (trim($user[0][1]) != $nameQuestion) {
             $errors[] = 'Câu hỏi không đúng.';
         }
-        if (trim($user[0][2]) != $nameAnswer){
+        if (trim($user[0][2]) != $nameAnswer) {
             $errors[] = 'Câu trả lời không đúng.';
         }
 
         if (empty($errors)) {
-            $statusUp = do_update_character('MEMB_INFO', "sno__numb='". $ma7code ."'", "memb___id:'". $_SESSION['user_Gamer'] ."'");
+            $statusUp = do_update_character('MEMB_INFO', "sno__numb='" . $ma7code . "'", "memb___id:'" . $_SESSION['user_Gamer'] . "'");
 
             if ($statusUp) {
                 $changePassWebEmail = 'Hi {username},<br><hr><p>Thay đổi mã số bí mật</p><p>Mã số bí mật mới: {pass_secret} </p>';
@@ -291,13 +296,14 @@ function manager_change_secret() {
         }
     }
 
-    cn_assign('errors_result' , $errors);
+    cn_assign('errors_result', $errors);
     echoheader('-@my_account/style.css', "Thay đổi mã số bí mật");
     echocomtent_here(exec_tpl('-@my_account/_changeSecret'), cn_snippet_bc_re());
     echofooter();
 }
 
-function manager_change_qa() {
+function manager_change_qa()
+{
     $errors = array();
     $nameActive = 'A';
     // Do change q-a
@@ -314,13 +320,13 @@ function manager_change_qa() {
         if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
 
 
-        $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='". $_SESSION['user_Gamer'] ."'");
+        $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");
 
-        if (trim($user[0][3]) != $nameEmail){
+        if (trim($user[0][3]) != $nameEmail) {
             $errors[] = 'Email không đúng.';
         }
 
-        if ($nameActive == 'Q'){
+        if ($nameActive == 'Q') {
             $setValEmail = $nameQuestion;
             $myExcQuery = "fpas_ques='" . $setValEmail . "'";
             $notify = 'câu hỏi';
@@ -335,19 +341,19 @@ function manager_change_qa() {
         }
 
         if (empty($errors)) {
-            $statusUp = do_update_character('MEMB_INFO', $myExcQuery, "memb___id:'". $_SESSION['user_Gamer'] ."'");
+            $statusUp = do_update_character('MEMB_INFO', $myExcQuery, "memb___id:'" . $_SESSION['user_Gamer'] . "'");
 
             if ($statusUp) {
-                $changePassWebEmail = 'Hi {username},<br><hr><p>Thay đổi '. $notify .'</p><p>'. $showStrEmail .': {q_a} </p>';
+                $changePassWebEmail = 'Hi {username},<br><hr><p>Thay đổi ' . $notify . '</p><p>' . $showStrEmail . ': {q_a} </p>';
                 $strHoderFotgot = '{username}, {q_a}';
-                $checkemailforgot = cn_send_mail($user[0][3], 'Thay đổi '. $notify, cn_replace_text($changePassWebEmail, $strHoderFotgot, substr($user[0][0], 0, -4) . '****', $setValEmail));
+                $checkemailforgot = cn_send_mail($user[0][3], 'Thay đổi ' . $notify, cn_replace_text($changePassWebEmail, $strHoderFotgot, substr($user[0][0], 0, -4) . '****', $setValEmail));
 
-                cn_throw_message('Bạn đã thay đổi '. $notify .' thành công.');
+                cn_throw_message('Bạn đã thay đổi ' . $notify . ' thành công.');
             }
         }
     }
 
-    cn_assign('errors_result, tabActive' , $errors, $nameActive);
+    cn_assign('errors_result, tabActive', $errors, $nameActive);
     echoheader('-@my_account/style.css@my_account/customjs.js', "Thay đổi câu hỏi - trả lời bí mật");
     echocomtent_here(exec_tpl('-@my_account/_changeQa'), cn_snippet_bc_re());
     echofooter();

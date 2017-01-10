@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -18,20 +18,20 @@
  * @see vB_Bootstrap
  *
  * @tutorial
- * 	require_once(DIR . '/includes/class_bootstrap_framework.php');
- *	vB_Bootstrap_Framework::init();
+ *    require_once(DIR . '/includes/class_bootstrap_framework.php');
+ *    vB_Bootstrap_Framework::init();
  *
- *	// Get Widgets
- *	$widgets = vBCms_Widget::getWidgetCollection(array(1), vBCms_Item_Widget::INFO_CONFIG);
- *	$widgets = vBCms_Widget::getWidgetControllers($widgets, true);
+ *    // Get Widgets
+ *    $widgets = vBCms_Widget::getWidgetCollection(array(1), vBCms_Item_Widget::INFO_CONFIG);
+ *    $widgets = vBCms_Widget::getWidgetControllers($widgets, true);
  *
- *	// Register the templater to be used for XHTML
- *	vB_View::registerTemplater(vB_View::OT_XHTML, new vB_Templater_vB());
+ *    // Register the templater to be used for XHTML
+ *    vB_View::registerTemplater(vB_View::OT_XHTML, new vB_Templater_vB());
  *
- *	foreach($widgets AS $widget)
- *	{
- *		echo($widget->getPageView());
- *	}
+ *    foreach($widgets AS $widget)
+ *    {
+ *        echo($widget->getPageView());
+ *    }
  *
  * @package vBulletin
  * @author vBulletin Development Team
@@ -41,68 +41,61 @@
  */
 class vB_Bootstrap_Framework
 {
-	/**
-	 * Whether the bootstrap has been initialized.
-	 *
-	 * @var bool
-	 */
-	protected static $initialized;
+    /**
+     * Whether the bootstrap has been initialized.
+     *
+     * @var bool
+     */
+    protected static $initialized;
 
 
-	/**
-	 * Initializes the bootstrap and framework.
-	 */
-	public static function init($relative_path = false)
-	{
-		if (!self::$initialized)
-		{
-			global $vbulletin;
+    /**
+     * Initializes the bootstrap and framework.
+     */
+    public static function init($relative_path = false)
+    {
+        if (!self::$initialized) {
+            global $vbulletin;
 
-			// Check datastore
-			// This should be redundant as all routes are accessed via vB_Router
-			if (!sizeof($vbulletin->routes) AND VBINSTALL !== true)
-			{
-				$vbulletin->datastore->fetch(array('routes'));
-			}
-			
-			// Notify includes they are ok to run
-			if (!defined('VB_ENTRY'))
-			{
-				define('VB_ENTRY', 1);
-			}
+            // Check datastore
+            // This should be redundant as all routes are accessed via vB_Router
+            if (!sizeof($vbulletin->routes) AND VBINSTALL !== true) {
+                $vbulletin->datastore->fetch(array('routes'));
+            }
 
-			// Mark the framework as loaded
-			if (!defined('VB_FRAMEWORK'))
-			{
-				define('VB_FRAMEWORK', true);
-			}
+            // Notify includes they are ok to run
+            if (!defined('VB_ENTRY')) {
+                define('VB_ENTRY', 1);
+            }
 
-			// Get the entry time
-			if (!defined('VB_ENTRY_TIME'))
-			{
-				define('VB_ENTRY_TIME', microtime(true));
-			}
+            // Mark the framework as loaded
+            if (!defined('VB_FRAMEWORK')) {
+                define('VB_FRAMEWORK', true);
+            }
 
-			// vB core path
-			if (!defined('VB_PATH'))
-			{
-				define('VB_PATH', realpath(dirname(__FILE__) . '/../vb') . '/');
-			}
+            // Get the entry time
+            if (!defined('VB_ENTRY_TIME')) {
+                define('VB_ENTRY_TIME', microtime(true));
+            }
 
-			// The package path
-			if (!defined('VB_PKG_PATH'))
-			{
-				define('VB_PKG_PATH', realpath(VB_PATH . '../packages') . '/');
-			}
+            // vB core path
+            if (!defined('VB_PATH')) {
+                define('VB_PATH', realpath(dirname(__FILE__) . '/../vb') . '/');
+            }
 
-			// Bootstrap to the new system
-			require_once(VB_PATH . 'vb.php');
+            // The package path
+            if (!defined('VB_PKG_PATH')) {
+                define('VB_PKG_PATH', realpath(VB_PATH . '../packages') . '/');
+            }
 
-			vB::init($relative_path);
-		}
+            // Bootstrap to the new system
+            require_once(VB_PATH . 'vb.php');
 
-		self::$initialized = true;
-	}
+            vB::init($relative_path);
+        }
+
+        self::$initialized = true;
+    }
 }
 
 /*======================================================================*\

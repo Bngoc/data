@@ -28,7 +28,7 @@
  */
 class vB_dB_MYSQL_Result extends vB_dB_Result
 {
-	protected $db_type = 'MYSQL';
+    protected $db_type = 'MYSQL';
 
 
 }

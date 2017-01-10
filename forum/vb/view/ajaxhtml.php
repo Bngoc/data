@@ -40,267 +40,252 @@
  */
 class vB_View_AJAXHTML extends vB_View
 {
-	/*Constants====================================================================*/
+    /*Constants====================================================================*/
 
-	const URL_CANCEL = 'cancel';
-	const URL_FINISHED = 'finished';
+    const URL_CANCEL = 'cancel';
+    const URL_FINISHED = 'finished';
 
-	const STATUS_MESSAGE = 0;
-	const STATUS_VIEW = 1;
-	const STATUS_FINISHED = 2;
-
-
-
-	/*Properties====================================================================*/
-
-	/**
-	 * Whether this view type needs to send content headers.
-	 *
-	 * @var bool
-	 */
-	protected $send_content_headers = true;
-
-	/**
-	 * The inner content for the response.
-	 * The inner content should be a view that is rendered and returned as 'content'
-	 * tag with CDATA content.
-	 *
-	 * @var vB_View
-	 */
-	protected $content;
-
-	/**
-	 * The status of the response.
-	 * The status is used to notify the client on the appropriate action to take.
-	 * The status is rendered as a 'status' tag.  The action to be taken is
-	 * arbitrary and should be decided by the client and the view's client code.
-	 *
-	 * @var string
-	 */
-	protected $status = self::STATUS_VIEW;
-
-	/**
-	 * User friendly status message.
-	 * The 'feedback' tag should be populated with a user friendly status message,
-	 * giving them feedback on required input, general errors that occured, and
-	 * information on the next expected action.
-	 *
-	 * @var string
-	 */
-	protected $feedback;
-
-	/**
-	 * Response errors.
-	 * Errors are grouped into an 'errors' tag.  Child error elements contain the
-	 * error strings for each error that is registered with the view.
-	 *
-	 * Each error is an array with an arbitrary error code 'code' and a string
-	 * description.
-	 *
-	 * @var array array key => message
-	 */
-	protected $errors = array();
-
-	/**
-	 * The output type of this view.
-	 * @see vB_View::$_output_type
-	 *
-	 * @var string								- A string identifier of an output type.
-	 */
-	protected $_output_type = vB_View::OT_NULL;
-
-	/**
-	 * Whether to allow runtime output type overriding.
-	 *
-	 * @var mixed
-	 */
-	protected $_allow_output_type_override = false;
-
-	/**
-	 * URL's
-	 *
-	 * @var array string
-	 */
-	protected $urls = array();
+    const STATUS_MESSAGE = 0;
+    const STATUS_VIEW = 1;
+    const STATUS_FINISHED = 2;
 
 
-	/*Accessors=====================================================================*/
+    /*Properties====================================================================*/
 
-	/**
-	 * Sets the inner content for the response.
-	 *
-	 * @param vB_View $content
-	 */
-	public function setContent(vB_View $content)
-	{
-		$this->content = $content;
-	}
+    /**
+     * Whether this view type needs to send content headers.
+     *
+     * @var bool
+     */
+    protected $send_content_headers = true;
 
+    /**
+     * The inner content for the response.
+     * The inner content should be a view that is rendered and returned as 'content'
+     * tag with CDATA content.
+     *
+     * @var vB_View
+     */
+    protected $content;
 
-	/**
-	 * Sets the response status.
-	 * Optionally, a feedback message can be set here as well.
-	 *
-	 * @param string $status					- An arbitrary response status
-	 * @param string $feedback					- User friendly feedback
-	 */
-	public function setStatus($status, $feedback = false)
-	{
-		$this->status = $status;
-		$this->feedback = $feedback;
-	}
+    /**
+     * The status of the response.
+     * The status is used to notify the client on the appropriate action to take.
+     * The status is rendered as a 'status' tag.  The action to be taken is
+     * arbitrary and should be decided by the client and the view's client code.
+     *
+     * @var string
+     */
+    protected $status = self::STATUS_VIEW;
 
+    /**
+     * User friendly status message.
+     * The 'feedback' tag should be populated with a user friendly status message,
+     * giving them feedback on required input, general errors that occured, and
+     * information on the next expected action.
+     *
+     * @var string
+     */
+    protected $feedback;
 
-	/**
-	 * Sets a user friendly feedback message.
-	 *
-	 * @param string $feedback
-	 */
-	public function setFeedback($feedback)
-	{
-		$this->feedback = $feedback;
-	}
+    /**
+     * Response errors.
+     * Errors are grouped into an 'errors' tag.  Child error elements contain the
+     * error strings for each error that is registered with the view.
+     *
+     * Each error is an array with an arbitrary error code 'code' and a string
+     * description.
+     *
+     * @var array array key => message
+     */
+    protected $errors = array();
 
+    /**
+     * The output type of this view.
+     * @see vB_View::$_output_type
+     *
+     * @var string                                - A string identifier of an output type.
+     */
+    protected $_output_type = vB_View::OT_NULL;
 
-	/**
-	 * Sets a url
-	 *
-	 * @param string $type						- The type to report in the xml
-	 * @param string $url						- The URL
-	 */
-	public function setUrl($type, $url)
-	{
-		$this->urls[$type] = $url;
-	}
+    /**
+     * Whether to allow runtime output type overriding.
+     *
+     * @var mixed
+     */
+    protected $_allow_output_type_override = false;
 
-
-
-	/*Errors========================================================================*/
-
-	/**
-	 * Adds an error to the response.
-	 * Note: Adding an error does not necessarily indicate that the AJAX request
-	 * failed.  For example, an error may be used to inform the user of input
-	 * validation failure.  To indicate a server side error, $status should also be
-	 * set to something meaningful, such as 'error' or 'failed'.
-	 *
-	 * @param string $message					- User friendly error message
-	 * @param mixed $code						- Arbitrary error code
-	 */
-	public function addError($message, $code = false)
-	{
-		$error = array('message' => $message, 'code' => $code);
-
-		// Don't duplicate errors
-		if (!in_array($error, $this->errors, true))
-		{
-			$this->errors[] = $error;
-		}
-	}
+    /**
+     * URL's
+     *
+     * @var array string
+     */
+    protected $urls = array();
 
 
-	/**
-	 * Adds an array of errors.
-	 * Replacement error codes can be given.
-	 *
-	 * @param array array key => message
-	 * @param array string $errorcodes
-	 */
-	public function addErrors($errors, array $errorcodes = null)
-	{
-		if (!is_array($errors) OR empty($errors))
-		{
-			return;
-		}
+    /*Accessors=====================================================================*/
 
-		foreach ($errors AS $code => $error)
-		{
-			if (is_array($error))
-			{
-				if (!isset($error['message']))
-				{
-					throw (new vB_Exception_View('No message defined in errors added to ' . get_class($this)));
-				}
+    /**
+     * Sets the inner content for the response.
+     *
+     * @param vB_View $content
+     */
+    public function setContent(vB_View $content)
+    {
+        $this->content = $content;
+    }
 
-				$message = $error['message'];
-				$code = (isset($error['code']) ? $error['code'] : false);
-			}
-			else if ($error instanceof vB_Phrase)
-			{
-				$message = $error;
 
-				if (isset($errorcodes[$code]))
-				{
-					$code = $errorcodes[$code];
-				}
-			}
+    /**
+     * Sets the response status.
+     * Optionally, a feedback message can be set here as well.
+     *
+     * @param string $status - An arbitrary response status
+     * @param string $feedback - User friendly feedback
+     */
+    public function setStatus($status, $feedback = false)
+    {
+        $this->status = $status;
+        $this->feedback = $feedback;
+    }
 
-			$this->addError($message, $code);
-		}
-	}
+
+    /**
+     * Sets a user friendly feedback message.
+     *
+     * @param string $feedback
+     */
+    public function setFeedback($feedback)
+    {
+        $this->feedback = $feedback;
+    }
+
+
+    /**
+     * Sets a url
+     *
+     * @param string $type - The type to report in the xml
+     * @param string $url - The URL
+     */
+    public function setUrl($type, $url)
+    {
+        $this->urls[$type] = $url;
+    }
 
 
 
-	/*Render========================================================================*/
+    /*Errors========================================================================*/
 
-	/**
-	 * Renders the view to a string and returns it.
-	 *
-	 * @return string
-	 */
-	public function render($send_content_headers = false)
-	{
-		require_once(DIR . '/includes/class_xml.php');
-		$xml = new vB_AJAX_XML_Builder(vB::$vbulletin, 'text/xml');
+    /**
+     * Adds an error to the response.
+     * Note: Adding an error does not necessarily indicate that the AJAX request
+     * failed.  For example, an error may be used to inform the user of input
+     * validation failure.  To indicate a server side error, $status should also be
+     * set to something meaningful, such as 'error' or 'failed'.
+     *
+     * @param string $message - User friendly error message
+     * @param mixed $code - Arbitrary error code
+     */
+    public function addError($message, $code = false)
+    {
+        $error = array('message' => $message, 'code' => $code);
 
-		$xml->add_group('container');
-		$xml->add_tag('success', 1);
+        // Don't duplicate errors
+        if (!in_array($error, $this->errors, true)) {
+            $this->errors[] = $error;
+        }
+    }
 
-		if ($this->content)
-		{
-			$xml->add_tag('html', $this->content->render());
-		}
 
-		$xml->add_tag('title', $this->title);
-		$xml->add_tag('status', $this->status);
-		$xml->add_tag('message', $this->feedback);
+    /**
+     * Adds an array of errors.
+     * Replacement error codes can be given.
+     *
+     * @param array array key => message
+     * @param array string $errorcodes
+     */
+    public function addErrors($errors, array $errorcodes = null)
+    {
+        if (!is_array($errors) OR empty($errors)) {
+            return;
+        }
 
-		if (sizeof($this->errors))
-		{
-			$xml->add_group('errors');
+        foreach ($errors AS $code => $error) {
+            if (is_array($error)) {
+                if (!isset($error['message'])) {
+                    throw (new vB_Exception_View('No message defined in errors added to ' . get_class($this)));
+                }
 
-			foreach ($this->errors AS $error)
-			{
-				$xml->add_tag('error', $error['message'], array('errcode' => $error['code']));
-			}
+                $message = $error['message'];
+                $code = (isset($error['code']) ? $error['code'] : false);
+            } else if ($error instanceof vB_Phrase) {
+                $message = $error;
 
-			$xml->close_group();
-		}
+                if (isset($errorcodes[$code])) {
+                    $code = $errorcodes[$code];
+                }
+            }
 
-		if (sizeof($this->urls))
-		{
-			$xml->add_group('urls');
+            $this->addError($message, $code);
+        }
+    }
 
-			foreach ($this->urls AS $type => $url)
-			{
-				$xml->add_tag('url', $url, array('type' => $type));
-			}
 
-			$xml->close_group();
-		}
 
-		$xml->close_group();
+    /*Render========================================================================*/
 
-		if ($send_content_headers AND !vB::contentHeadersSent())
-		{
-			$xml->send_content_type_header();
-			$xml->send_content_length_header();
+    /**
+     * Renders the view to a string and returns it.
+     *
+     * @return string
+     */
+    public function render($send_content_headers = false)
+    {
+        require_once(DIR . '/includes/class_xml.php');
+        $xml = new vB_AJAX_XML_Builder(vB::$vbulletin, 'text/xml');
 
-			vB::contentHeadersSent(true);
-		}
+        $xml->add_group('container');
+        $xml->add_tag('success', 1);
 
-		return $xml->fetch_xml();
-	}
+        if ($this->content) {
+            $xml->add_tag('html', $this->content->render());
+        }
+
+        $xml->add_tag('title', $this->title);
+        $xml->add_tag('status', $this->status);
+        $xml->add_tag('message', $this->feedback);
+
+        if (sizeof($this->errors)) {
+            $xml->add_group('errors');
+
+            foreach ($this->errors AS $error) {
+                $xml->add_tag('error', $error['message'], array('errcode' => $error['code']));
+            }
+
+            $xml->close_group();
+        }
+
+        if (sizeof($this->urls)) {
+            $xml->add_group('urls');
+
+            foreach ($this->urls AS $type => $url) {
+                $xml->add_tag('url', $url, array('type' => $type));
+            }
+
+            $xml->close_group();
+        }
+
+        $xml->close_group();
+
+        if ($send_content_headers AND !vB::contentHeadersSent()) {
+            $xml->send_content_type_header();
+            $xml->send_content_length_header();
+
+            vB::contentHeadersSent(true);
+        }
+
+        return $xml->fetch_xml();
+    }
 }
 
 /*======================================================================*\

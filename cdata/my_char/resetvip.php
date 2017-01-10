@@ -67,7 +67,7 @@ if ($notify_rs_ok) echo $notify_rs_ok;
 </form>
 
 <?php
-    echoFormVerifyChar(['action_rsvip' => 'resetvip']);
+echoFormVerifyChar(['action_rsvip' => 'resetvip']);
 ?>
 
 <table style="width: 100%" cellpadding="2">
@@ -119,7 +119,7 @@ if ($notify_rs_ok) echo $notify_rs_ok;
                 </tr>
                 <?php if ($i === $cap_reset_max) break;
             }
-        }?>
+        } ?>
     </table>
 </div>
 
@@ -156,17 +156,17 @@ if ($notify_rs_ok) echo $notify_rs_ok;
                     $i_f = $ok_loop2 ? $i_e : 0;
                     $i_e = $i_e + 10;
                     $ok_loop2 = true;
-                ?>
-                <tr <?php if ($odd++ % 2) echo 'style="background: #f8f8f8;"'; ?>>
-                    <td align="center"><b>TOP <?php if (++$i_f > 50) {
-                                echo ' > ' . --$i_f;
-                            } else {
-                                echo $i_f . ' &rarr; ' . $i_e;
-                            } ?></b></td>
-                    <td align="center">Reset Max <b> <?php echo $val['top']; ?></b> lần / ngày</td>
-                </tr>
+                    ?>
+                    <tr <?php if ($odd++ % 2) echo 'style="background: #f8f8f8;"'; ?>>
+                        <td align="center"><b>TOP <?php if (++$i_f > 50) {
+                                    echo ' > ' . --$i_f;
+                                } else {
+                                    echo $i_f . ' &rarr; ' . $i_e;
+                                } ?></b></td>
+                        <td align="center">Reset Max <b> <?php echo $val['top']; ?></b> lần / ngày</td>
+                    </tr>
 
-            <?php }
+                <?php }
             } ?>
         </table>
     </div>

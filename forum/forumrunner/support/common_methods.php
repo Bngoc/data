@@ -18,8 +18,8 @@ $methods = array(
      * version
      */
     'version' => array(
-	'include' => 'misc.php',
-	'function' => 'do_version',
+        'include' => 'misc.php',
+        'function' => 'do_version',
     ),
 
     /*
@@ -37,8 +37,8 @@ $methods = array(
      * requires_authentication
      */
     'login' => array(
-	'include' => 'login.php',
-	'function' => 'do_login',
+        'include' => 'login.php',
+        'function' => 'do_login',
     ),
 
     /*
@@ -54,8 +54,8 @@ $methods = array(
      * requires_authentication
      */
     'logout' => array(
-	'include' => 'login.php',
-	'function' => 'do_logout',
+        'include' => 'login.php',
+        'function' => 'do_logout',
     ),
 
     /*
@@ -70,8 +70,8 @@ $methods = array(
      * unused.
      */
     'get_forum_summary' => array(
-	'include' => 'get_forum.php',
-	'function' => 'do_get_forum_summary',
+        'include' => 'get_forum.php',
+        'function' => 'do_get_forum_summary',
     ),
 
     /*
@@ -114,8 +114,8 @@ $methods = array(
      * prefixrequired
      */
     'get_forum' => array(
-	'include' => 'get_forum.php',
-	'function' => 'do_get_forum',
+        'include' => 'get_forum.php',
+        'function' => 'do_get_forum',
     ),
 
     /*
@@ -144,8 +144,8 @@ $methods = array(
      * total_threads
      */
     'search_getnew' => array(
-	'include' => 'search_forum.php',
-	'function' => 'do_search_getnew',
+        'include' => 'search_forum.php',
+        'function' => 'do_search_getnew',
     ),
 
     /*
@@ -162,8 +162,8 @@ $methods = array(
      *  )
      */
     'get_pm_folders' => array(
-	'include' => 'pms.php',
-	'function' => 'do_get_pm_folders',
+        'include' => 'pms.php',
+        'function' => 'do_get_pm_folders',
     ),
 
     /*
@@ -190,8 +190,8 @@ $methods = array(
      * unread_pms
      */
     'get_pms' => array(
-	'include' => 'pms.php',
-	'function' => 'do_get_pms',
+        'include' => 'pms.php',
+        'function' => 'do_get_pms',
     ),
 
     /*
@@ -215,8 +215,8 @@ $methods = array(
      * avatarurl
      */
     'get_pm' => array(
-	'include' => 'pms.php',
-	'function' => 'do_get_pm',
+        'include' => 'pms.php',
+        'function' => 'do_get_pm',
     ),
 
     /*
@@ -233,8 +233,8 @@ $methods = array(
      * success
      */
     'send_pm' => array(
-	'include' => 'pms.php',
-	'function' => 'do_send_pm',
+        'include' => 'pms.php',
+        'function' => 'do_send_pm',
     ),
 
     /*
@@ -249,8 +249,8 @@ $methods = array(
      * success
      */
     'delete_pm' => array(
-	'include' => 'pms.php',
-	'function' => 'do_delete_pm',
+        'include' => 'pms.php',
+        'function' => 'do_delete_pm',
     ),
 
     /*
@@ -284,8 +284,8 @@ $methods = array(
      * canpost
      */
     'get_thread' => array(
-	'include' => 'get_thread.php',
-	'function' => 'do_get_thread',
+        'include' => 'get_thread.php',
+        'function' => 'do_get_thread',
     ),
 
     /*
@@ -306,8 +306,8 @@ $methods = array(
      * total_threads
      */
     'search' => array(
-	'include' => 'search_forum.php',
-	'function' => 'do_search',
+        'include' => 'search_forum.php',
+        'function' => 'do_search',
     ),
 
     /*
@@ -322,13 +322,13 @@ $methods = array(
      * thread info
      */
     'search_finduser' => array(
-	'include' => 'search_forum.php',
-	'function' => 'do_search_finduser',
+        'include' => 'search_forum.php',
+        'function' => 'do_search_finduser',
     ),
 
     'search_searchid' => array(
-	'include' => 'search_forum.php',
-	'function' => 'do_search_searchid',
+        'include' => 'search_forum.php',
+        'function' => 'do_search_searchid',
     ),
 
     /*
@@ -354,8 +354,8 @@ $methods = array(
      * total_posts
      */
     'get_announcement' => array(
-	'include' => 'announcement.php',
-	'function' => 'do_get_announcement',
+        'include' => 'announcement.php',
+        'function' => 'do_get_announcement',
     ),
 
     /*
@@ -374,8 +374,8 @@ $methods = array(
      * success
      */
     'post_message' => array(
-	'include' => 'post.php',
-	'function' => 'do_post_message',
+        'include' => 'post.php',
+        'function' => 'do_post_message',
     ),
 
     /*
@@ -393,8 +393,8 @@ $methods = array(
      * success
      */
     'post_reply' => array(
-	'include' => 'post.php',
-	'function' => 'do_post_reply',
+        'include' => 'post.php',
+        'function' => 'do_post_reply',
     ),
 
     /*
@@ -411,8 +411,8 @@ $methods = array(
      * success
      */
     'post_edit' => array(
-	'include' => 'post.php',
-	'function' => 'do_post_edit',
+        'include' => 'post.php',
+        'function' => 'do_post_edit',
     ),
 
     /*
@@ -427,8 +427,8 @@ $methods = array(
      * success
      */
     'mark_read' => array(
-	'include' => 'misc.php',
-	'function' => 'do_mark_read',
+        'include' => 'misc.php',
+        'function' => 'do_mark_read',
     ),
 
     /*
@@ -445,8 +445,8 @@ $methods = array(
      * attachmentid
      */
     'upload_attachment' => array(
-	'include' => 'attach.php',
-	'function' => 'do_upload_attachment',
+        'include' => 'attach.php',
+        'function' => 'do_upload_attachment',
     ),
 
     /*
@@ -462,8 +462,8 @@ $methods = array(
      * success
      */
     'delete_attachment' => array(
-	'include' => 'attach.php',
-	'function' => 'do_delete_attachment',
+        'include' => 'attach.php',
+        'function' => 'do_delete_attachment',
     ),
 
     /*
@@ -480,8 +480,8 @@ $methods = array(
      * avatarurl
      */
     'get_profile' => array(
-	'include' => 'profile.php',
-	'function' => 'do_get_profile',
+        'include' => 'profile.php',
+        'function' => 'do_get_profile',
     ),
 
     /*
@@ -498,8 +498,8 @@ $methods = array(
      * updates
      */
     'get_new_updates' => array(
-	'include' => 'misc.php',
-	'function' => 'do_get_new_updates',
+        'include' => 'misc.php',
+        'function' => 'do_get_new_updates',
     ),
 
     /*
@@ -510,8 +510,8 @@ $methods = array(
      * fr_username
      */
     'remove_fr_user' => array(
-	'include' => 'misc.php',
-	'function' => 'do_remove_fr_user',
+        'include' => 'misc.php',
+        'function' => 'do_remove_fr_user',
     ),
 
     /*
@@ -525,8 +525,8 @@ $methods = array(
      * output:
      */
     'get_subscriptions' => array(
-	'include' => 'subscriptions.php',
-	'function' => 'do_get_subscriptions',
+        'include' => 'subscriptions.php',
+        'function' => 'do_get_subscriptions',
     ),
 
     /*
@@ -541,8 +541,8 @@ $methods = array(
      * success
      */
     'unsubscribe_thread' => array(
-	'include' => 'subscriptions.php',
-	'function' => 'do_unsubscribe_thread',
+        'include' => 'subscriptions.php',
+        'function' => 'do_unsubscribe_thread',
     ),
 
     /*
@@ -557,8 +557,8 @@ $methods = array(
      * success
      */
     'subscribe_thread' => array(
-	'include' => 'subscriptions.php',
-	'function' => 'do_subscribe_thread',
+        'include' => 'subscriptions.php',
+        'function' => 'do_subscribe_thread',
     ),
 
     /*
@@ -577,8 +577,8 @@ $methods = array(
      * success
      */
     'stats' => array(
-	'include' => 'misc.php',
-	'function' => 'do_stats',
+        'include' => 'misc.php',
+        'function' => 'do_stats',
     ),
 
     /*
@@ -595,8 +595,8 @@ $methods = array(
      * success
      */
     'online' => array(
-	'include' => 'online.php',
-	'function' => 'do_online',
+        'include' => 'online.php',
+        'function' => 'do_online',
     ),
 
     /*
@@ -612,8 +612,8 @@ $methods = array(
      * success
      */
     'moderation' => array(
-	'include' => 'moderation.php',
-	'function' => 'do_moderation',
+        'include' => 'moderation.php',
+        'function' => 'do_moderation',
     ),
 
     /*
@@ -628,8 +628,8 @@ $methods = array(
      * success
      */
     'get_poll' => array(
-	'include' => 'get_thread.php',
-	'function' => 'do_get_poll',
+        'include' => 'get_thread.php',
+        'function' => 'do_get_poll',
     ),
 
     /*
@@ -645,8 +645,8 @@ $methods = array(
      * success
      */
     'vote_poll' => array(
-	'include' => 'get_thread.php',
-	'function' => 'do_vote_poll',
+        'include' => 'get_thread.php',
+        'function' => 'do_vote_poll',
     ),
 
     /*
@@ -662,8 +662,8 @@ $methods = array(
      * success
      */
     'get_spam_data' => array(
-	'include' => 'moderation.php',
-	'function' => 'do_get_spam_data',
+        'include' => 'moderation.php',
+        'function' => 'do_get_spam_data',
     ),
 
     /*
@@ -676,8 +676,8 @@ $methods = array(
      * success
      */
     'get_ban_data' => array(
-	'include' => 'moderation.php',
-	'function' => 'do_get_ban_data',
+        'include' => 'moderation.php',
+        'function' => 'do_get_ban_data',
     ),
 
     /*
@@ -694,8 +694,8 @@ $methods = array(
      * success
      */
     'ban_user' => array(
-	'include' => 'moderation.php',
-	'function' => 'do_ban_user',
+        'include' => 'moderation.php',
+        'function' => 'do_ban_user',
     ),
 
     /*
@@ -711,8 +711,8 @@ $methods = array(
      * success
      */
     'get_post' => array(
-	'include' => 'get_thread.php',
-	'function' => 'do_get_post',
+        'include' => 'get_thread.php',
+        'function' => 'do_get_post',
     ),
 
     /*
@@ -728,8 +728,8 @@ $methods = array(
      * success
      */
     'report' => array(
-	'include' => 'misc.php',
-	'function' => 'do_report',
+        'include' => 'misc.php',
+        'function' => 'do_report',
     ),
 
     /*
@@ -741,8 +741,8 @@ $methods = array(
      *
      */
     'register' => array(
-	'include' => 'login.php',
-	'function' => 'do_register',
+        'include' => 'login.php',
+        'function' => 'do_register',
     ),
 
     /*

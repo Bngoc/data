@@ -1,4 +1,6 @@
-<?php if (!defined('BQN_MU')) { die('Access restricted'); }
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 // ACL: basic access control level
 define('ACL_LEVEL_ADMIN', 1);
@@ -121,7 +123,7 @@ function view_character($account)
 function view_bank($account)
 {
     if (!empty($account)) {
-        $result = do_select_character('MEMB_INFO', 'bank,vpoint,jewel_chao,jewel_cre,jewel_blue,gcoin,gcoin_km', "memb___id='$account'", '');
+        $result = do_select_character('MEMB_INFO', 'bank,vpoint,jewel_chao,jewel_cre,jewel_blue,gcoin,gcoin_km,jewel_feather', "memb___id='$account'", '');
 
         if ($result) {
             foreach ($result as $key => $var) {
@@ -132,7 +134,8 @@ function view_bank($account)
                     'cre' => $var['jewel_cre'],
                     'blue' => $var['jewel_blue'],
                     'gc' => $var['gcoin'],
-                    'gc_km' => $var['gcoin_km']
+                    'gc_km' => $var['gcoin_km'],
+                    'feather' => $var['jewel_feather']
                 );
             }
         }
@@ -410,7 +413,7 @@ function do_update_character()
     $user_table = array_shift($args);           // get name array frist
 
     if (!$user_table)                            //1. name //table update/
-        return FALSE;
+        return false;
 
     foreach ($args as $v) {                     //$v = [email=user_email] >, >=, <>, <, <=, (= :)
         if (strpos($v, '=') !== false)
@@ -438,10 +441,11 @@ function do_update_character()
 
     if ($val_up_col && $val_up_cont && $user_table) {
         $check = $db_new->Execute("UPDATE $user_table SET $val_up_col WHERE $val_up_cont") or cn_writelog("UPDATE $user_table SET $val_up_col WHERE $val_up_cont", 'e');
-        if ($check)
-            return TRUE;
+        if ($check){
+            return true;
+        }
     }
-    return FALSE;
+    return false;
 }
 
 
@@ -449,7 +453,8 @@ function do_update_character()
  * @param $myQuery
  * @return bool
  */
-function do_delete_char($myQuery){
+function do_delete_char($myQuery)
+{
     global $db_new;
 
     if ($myQuery) {
@@ -469,10 +474,10 @@ function do_delete_char($myQuery){
  * return array info manager Account
  * return bool exits name in Account_info
  */
-function db_membget_account($clause, $colClause ='[UserAcc]', $ischek = FALSE)
+function db_membget_account($clause, $colClause = '[UserAcc]', $ischek = FALSE)
 {
     if ($clause) {
-        $usx = do_select_orther("SELECT Top 1 * FROM Account_Info WHERE ". $colClause ."='". $clause . "' ORDER BY ID DESC");
+        $usx = do_select_orther("SELECT Top 1 * FROM Account_Info WHERE " . $colClause . "='" . $clause . "' ORDER BY ID DESC");
 
         if (!is_array($usx) || !$usx) {
             return null;
@@ -506,7 +511,8 @@ function db_membget_account($clause, $colClause ='[UserAcc]', $ischek = FALSE)
 /**
  * return Query SQL auto update ranking column Top50
  */
-function rankingCharaterTop(){
+function rankingCharaterTop()
+{
     $myQueryRankingTop = "SELECT Top 125 [Name] FROM Character ORDER BY relifes DESC, resets DESC, cLevel DESC";
     $resultRankingTop = do_select_orther($myQueryRankingTop);
 

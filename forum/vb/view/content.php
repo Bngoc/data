@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -22,16 +22,16 @@
  */
 class vB_View_Content extends vB_View
 {
-	/*Render========================================================================*/
+    /*Render========================================================================*/
 
-	/**
-	 * Prepares properties for rendering.
-	 */
-	protected function prepareProperties()
-	{
-		$this->description = htmlspecialchars_uni($this->description);
-		$this->contenttype = vB_Types::instance()->getContentTypeTitle(array('package' => $this->package, 'class' => $this->class));
-	}
+    /**
+     * Prepares properties for rendering.
+     */
+    protected function prepareProperties()
+    {
+        $this->description = htmlspecialchars_uni($this->description);
+        $this->contenttype = vB_Types::instance()->getContentTypeTitle(array('package' => $this->package, 'class' => $this->class));
+    }
 }
 
 /*======================================================================*\

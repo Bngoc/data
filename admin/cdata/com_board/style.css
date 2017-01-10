@@ -231,12 +231,22 @@ table#comparison {
     border-collapse: separate;
     table-layout: fixed;
 }
+
 table#comparison th,
 table#comparison td {
     max-width: 350px;
     min-width: 100px;
     text-align: left;
 }
+
 table#comparison th {
     overflow: hidden;
+}
+
+.cust-style {
+    padding: 3px 0;
+}
+
+.xoalog {
+    padding-top: 3px;
 }

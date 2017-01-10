@@ -1,0 +1,9 @@
+.moneyInventory {
+    position: absolute;
+    color: aquamarine;
+    margin: 280px 40px 0 50px;
+    width: 200px;
+    border: 0px;
+    font-size: 15px;
+    font-weight: bold;
+}

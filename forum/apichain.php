@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -42,37 +42,34 @@ $calls = array(
 */
 
 $vbulletin->input->clean_array_gpc('r', array(
-	'calls' => TYPE_STR,
-	'sig'   => TYPE_STR,
-	'debug' => TYPE_BOOL
+    'calls' => TYPE_STR,
+    'sig' => TYPE_STR,
+    'debug' => TYPE_BOOL
 ));
 
-if (!$vbulletin->GPC['calls'])
-{
-	header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-	die();
+if (!$vbulletin->GPC['calls']) {
+    header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+    die();
 }
 
 $calls = @json_decode($vbulletin->GPC['calls'], true);
 
-if (!$calls)
-{
-	header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-	die();
+if (!$calls) {
+    header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+    die();
 }
 
 // Validate signature
 $signtoverify = md5($vbulletin->GPC['calls'] . $vbulletin->session->vars['dbsessionhash'] . $vbulletin->userinfo['securitytoken_raw']);
-if ($vbulletin->GPC['sig'] !== $signtoverify AND !($vbulletin->debug AND $vbulletin->GPC['debug']))
-{
-	$error = array(
-		'response' => array(
-			'errormessage' => array('invalid_apichain_signature')
-		)
-	);
+if ($vbulletin->GPC['sig'] !== $signtoverify AND !($vbulletin->debug AND $vbulletin->GPC['debug'])) {
+    $error = array(
+        'response' => array(
+            'errormessage' => array('invalid_apichain_signature')
+        )
+    );
 
-	echo json_encode($error);
-	die;
+    echo json_encode($error);
+    die;
 }
 
 
@@ -82,46 +79,36 @@ $api->setSecuritytoken($vbulletin->userinfo['securitytoken_raw']);
 
 $data = array();
 
-foreach ($calls['methods'] as $method)
-{
-	if (!$calls[$method]['POST'])
-	{
-		$calls[$method]['POST'] = array();
-	}
-	if (!$calls[$method]['GET'])
-	{
-		$calls[$method]['GET'] = array();
-	}
+foreach ($calls['methods'] as $method) {
+    if (!$calls[$method]['POST']) {
+        $calls[$method]['POST'] = array();
+    }
+    if (!$calls[$method]['GET']) {
+        $calls[$method]['GET'] = array();
+    }
 
-	if ($data)
-	{
-		foreach ($calls[$method]['POST'] as &$v)
-		{
-			api_chain_parse($v, $data);
-		}
-		foreach ($calls[$method]['GET'] as &$v)
-		{
-			api_chain_parse($v, $data);
-		}
-		foreach ($calls[$method] as &$v)
-		{
-			if (!is_array($v))
-			{
-				api_chain_parse($v, $data);
-			}
-		}
-	}
+    if ($data) {
+        foreach ($calls[$method]['POST'] as &$v) {
+            api_chain_parse($v, $data);
+        }
+        foreach ($calls[$method]['GET'] as &$v) {
+            api_chain_parse($v, $data);
+        }
+        foreach ($calls[$method] as &$v) {
+            if (!is_array($v)) {
+                api_chain_parse($v, $data);
+            }
+        }
+    }
 
-	if ($calls[$method]['sessionhash'])
-	{
-		$api->setSessionhash($calls[$method]['sessionhash']);
-	}
-	if ($calls[$method]['securitytoken'])
-	{
-		$api->setSecuritytoken($calls[$method]['securitytoken']);
-	}
+    if ($calls[$method]['sessionhash']) {
+        $api->setSessionhash($calls[$method]['sessionhash']);
+    }
+    if ($calls[$method]['securitytoken']) {
+        $api->setSecuritytoken($calls[$method]['securitytoken']);
+    }
 
-	$data = $api->call($method, $calls[$method]['GET'], $calls[$method]['POST'], 1);
+    $data = $api->call($method, $calls[$method]['GET'], $calls[$method]['POST'], 1);
 }
 
 echo json_encode($data);
@@ -129,18 +116,16 @@ exit;
 
 function api_chain_parse(&$value, &$data)
 {
-	if (preg_match('/\{([a-z0-9.]+)\}/', $value, $match))
-	{
-		$value = $match[1];
+    if (preg_match('/\{([a-z0-9.]+)\}/', $value, $match)) {
+        $value = $match[1];
 
-		$datacopy = $data;
-		foreach (explode('.', $value) as $part)
-		{
-			$datacopy = $datacopy[$part];
-		}
+        $datacopy = $data;
+        foreach (explode('.', $value) as $part) {
+            $datacopy = $datacopy[$part];
+        }
 
-		$value = $datacopy;
-	}
+        $value = $datacopy;
+    }
 }
 
 /*======================================================================*\

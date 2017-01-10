@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -29,102 +29,101 @@
  */
 class vB_Route_Error extends vB_Route
 {
-	/*Properties====================================================================*/
+    /*Properties====================================================================*/
 
-	/**
-	 * The segment scheme
-	 *
-	 * @see vB_Route::$_segment_scheme
-	 *
-	 * @var array mixed
-	 */
-	protected $_segment_scheme = array(
-		'error'			=>	array (
-			'optional'  =>  true,
-			'values'	=>	array (
-								'403',
-								'404',
-								'409',
-								'500'
-							),
-			'default'	=>	'404'
-		)
-	);
+    /**
+     * The segment scheme
+     *
+     * @see vB_Route::$_segment_scheme
+     *
+     * @var array mixed
+     */
+    protected $_segment_scheme = array(
+        'error' => array(
+            'optional' => true,
+            'values' => array(
+                '403',
+                '404',
+                '409',
+                '500'
+            ),
+            'default' => '404'
+        )
+    );
 
-	/**
-	 * A default controller class.
-	 *
-	 * @var string
-	 */
-	protected $_default_controller_class = 'vB_Controller_Error';
+    /**
+     * A default controller class.
+     *
+     * @var string
+     */
+    protected $_default_controller_class = 'vB_Controller_Error';
 
-	/**
-	 * Default path.
-	 *
-	 * @var string
-	 */
-	protected $_default_path = '404';
-
-
-
-	/*URL===========================================================================*/
-
-	/**
-	 * Returns a representative URL of a route.
-	 * Optional segments and parameters may be passed to set the route state.
-	 *
-	 * @param array mixed $segments				- Assoc array of segment => value
-	 * @param array mixed $parameters			- Array of parameter values, in order
-	 * @return string							- The URL representing the route
-	 */
-	public static function getURL(array $segments = null, array $parameters = null, $absolute_path = false)
-	{
-		return vB_Route::create('vB_Route_Error')->getCurrentURL($segments);
-	}
+    /**
+     * Default path.
+     *
+     * @var string
+     */
+    protected $_default_path = '404';
 
 
-	/**
-	 * Gets the 403 path.
-	 *
-	 * @return string
-	 */
-	public function get403Path()
-	{
-		return $this->_class_segment . '/403';
-	}
+    /*URL===========================================================================*/
+
+    /**
+     * Returns a representative URL of a route.
+     * Optional segments and parameters may be passed to set the route state.
+     *
+     * @param array mixed $segments                - Assoc array of segment => value
+     * @param array mixed $parameters            - Array of parameter values, in order
+     * @return string                            - The URL representing the route
+     */
+    public static function getURL(array $segments = null, array $parameters = null, $absolute_path = false)
+    {
+        return vB_Route::create('vB_Route_Error')->getCurrentURL($segments);
+    }
 
 
-	/**
-	 * Gets the 404 path.
-	 *
-	 * @return string
-	 */
-	public function get404Path()
-	{
-		return $this->_class_segment . '/404';
-	}
+    /**
+     * Gets the 403 path.
+     *
+     * @return string
+     */
+    public function get403Path()
+    {
+        return $this->_class_segment . '/403';
+    }
 
 
-	/**
-	 * Gets the 409 path
-	 *
-	 * @return string
-	 */
-	public function get409Path()
-	{
-		return $this->_class_segment . '/409';
-	}
+    /**
+     * Gets the 404 path.
+     *
+     * @return string
+     */
+    public function get404Path()
+    {
+        return $this->_class_segment . '/404';
+    }
 
 
-	/**
-	 * Gets the 500 path.
-	 *
-	 * @return string
-	 */
-	public function get500Path()
-	{
-		return $this->_class_segment . '/500';
-	}
+    /**
+     * Gets the 409 path
+     *
+     * @return string
+     */
+    public function get409Path()
+    {
+        return $this->_class_segment . '/409';
+    }
+
+
+    /**
+     * Gets the 500 path.
+     *
+     * @return string
+     */
+    public function get500Path()
+    {
+        return $this->_class_segment . '/500';
+    }
 }
 
 /*======================================================================*\

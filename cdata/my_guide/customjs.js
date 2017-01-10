@@ -1,13 +1,13 @@
 $(document).ready(function () {
-    $('a#callAjax').on('click', function(){
+    $('a#callAjax').on('click', function () {
         var url = $(this).attr('fhref');
         var idContent = $(this).attr('idContent');
 
-        var callbacks = $.Callbacks( "unique memory" );
+        var callbacks = $.Callbacks("unique memory");
         callbacks.add(ajax_load);
         callbacks.fire(url, idContent);
 
-        if(callbacks){
+        if (callbacks) {
             $(this).parent().parent().each(function () {
                 $(this).children('li').removeClass('selected');
             });
@@ -22,7 +22,7 @@ function ajax_load(url, id) {
         data: {
             format: 'html'
         },
-        success: function(data) {
+        success: function (data) {
             $('#' + id).html(data);
         },
         type: 'POST'

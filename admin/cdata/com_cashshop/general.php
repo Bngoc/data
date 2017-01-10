@@ -82,11 +82,11 @@ list($dashboard, $username, $greeting_message) = _GL('dashboard, username, greet
     <div class="options">
 
         <?php if ($free) { ?>
-        <div><?php echo 'Disk usage'; ?> (<?php echo $ds_t; ?>)</div>
-        <div class="a">
-            <div class="b" style='width: <?php echo $free; ?>%'><?php echo $free; ?>%</div>
-        </div>
-        <div style="clear: left;"></div>
+            <div><?php echo 'Disk usage'; ?> (<?php echo $ds_t; ?>)</div>
+            <div class="a">
+                <div class="b" style='width: <?php echo $free; ?>%'><?php echo $free; ?>%</div>
+            </div>
+            <div style="clear: left;"></div>
         <?php } ?>
     </div>
     <?php //} ?>

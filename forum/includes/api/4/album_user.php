@@ -14,19 +14,19 @@ if (!VB_API) die;
 loadCommonWhiteList();
 
 $VB_API_WHITELIST = array(
-	'response' => array(
-                'albumcount',
-		'albumbits' => $VB_API_WHITELIST_COMMON['albumbits'],
-		'latestbits' => $VB_API_WHITELIST_COMMON['albumbits'],
-		'latest_pagenav' => $VB_API_WHITELIST_COMMON['pagenav'],
-		'pagenav' => $VB_API_WHITELIST_COMMON['pagenav'],
-		'userinfo' => array(
-			'userid', 'username'
-		)
-	),
-	'show' => array(
-		'personalalbum', 'moderated', 'add_album_option'
-	)
+    'response' => array(
+        'albumcount',
+        'albumbits' => $VB_API_WHITELIST_COMMON['albumbits'],
+        'latestbits' => $VB_API_WHITELIST_COMMON['albumbits'],
+        'latest_pagenav' => $VB_API_WHITELIST_COMMON['pagenav'],
+        'pagenav' => $VB_API_WHITELIST_COMMON['pagenav'],
+        'userinfo' => array(
+            'userid', 'username'
+        )
+    ),
+    'show' => array(
+        'personalalbum', 'moderated', 'add_album_option'
+    )
 );
 
 /*======================================================================*\

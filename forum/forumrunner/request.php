@@ -27,7 +27,7 @@ require_once(MCWD . '/support/JSON.php');
 require_once(MCWD . '/include/general_vb.php');
 
 if (file_exists(MCWD . '/branded.php')) {
-    require_once(MCWD .'/branded.php');
+    require_once(MCWD . '/branded.php');
 }
 
 $phrasegroups = array();
@@ -80,11 +80,11 @@ $json_out = array(
 // Return Unread PM/Subscribed Threads count
 if ($vbulletin->userinfo['userid'] > 0 &&
     $processed['cmd'] != 'get_new_updates' &&
-    $processed['cmd'] != 'login')
-{
+    $processed['cmd'] != 'login'
+) {
     if ($vbulletin->userinfo['userid'] > 0) {
-	$json_out['pm_notices'] = get_pm_unread();
-	$json_out['sub_notices'] = get_sub_thread_updates();
+        $json_out['pm_notices'] = get_pm_unread();
+        $json_out['sub_notices'] = get_sub_thread_updates();
     }
 }
 

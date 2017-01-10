@@ -5,7 +5,6 @@ echo cn_snippet_messages();
 ?>
 
 
-
 <form action="<?php echo PHP_SELF; ?>" method="GET">
     <?php echo cn_form_open('mod, opt, sub'); ?>
     <table style="width: 100%" cellpadding="2">
@@ -20,10 +19,12 @@ echo cn_snippet_messages();
         </tr>
         <tr>
             <td colspan="3">
-                <?php echo $show_warehouse;?>
+                <?php echo $show_warehouse; ?>
             </td>
         </tr>
-        <tr><td colspan="3"></td></tr>
+        <tr>
+            <td colspan="3"></td>
+        </tr>
         <tr>
             <td class="bizwebform_col_1 pd-top15 pd-bottom15">Chọn Nhân vật</td>
             <td class="bizwebform_col_2 pd-top15 pd-bottom15">
@@ -44,7 +45,7 @@ echo cn_snippet_messages();
 </form>
 
 <?php
-    echoFormVerifyChar(['action_personalSotre' => 'action_personalSotre'], "Bạn có chắc muốn xóa cửa hàng cá nhân không?");
+echoFormVerifyChar(['action_personalSotre' => 'personalSotre'], "Bạn có chắc muốn xóa cửa hàng cá nhân không?");
 ?>
 
 <table width="100%">
@@ -57,11 +58,11 @@ echo cn_snippet_messages();
     </tr>
     <tr>
         <td>
-        <?php if ($check_change) {
-            echo '- Nhân vật '. $sub . '<font color =red> đã đổi</font>';
-        } else {
-            echo '- Nhân vật '. $sub . '<font color =red> chưa đổi</font>';
-        }?>
+            <?php if ($check_change) {
+                echo '- Nhân vật ' . $sub . '<font color =red> đã đổi</font>';
+            } else {
+                echo '- Nhân vật ' . $sub . '<font color =red> chưa đổi</font>';
+            } ?>
         </td>
     </tr>
 </table>

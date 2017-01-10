@@ -66,7 +66,7 @@ echo cn_snippet_messages();
 </form>
 
 <?php
-    echoFormVerifyChar(['action_deleonline' => 'deleonline']);
+echoFormVerifyChar(['action_deleonline' => 'deleonline']);
 ?>
 
 <table style="width: 100%" cellpadding="2">
@@ -89,7 +89,7 @@ echo cn_snippet_messages();
         - Khi mất Ủy thác có thể <b>kích hoạt lại Ủy thác Trên Web</b>.
         <br>
         - <b>1 </b>Điểm ủy Thác = <b><?php echo getoption('uythacon_price') ?> </b> Gcoin / <b>1</b> Phút ủy thác<br>
-    <p align="left">
+        <p align="left">
             <br><b>Lưu ý</b>:
         <ul>
             <li><strong>Thời gian Uỷ Thác Online tối đa trong 1 ngày là 12 tiếng</strong> (<strong>720 Điểm Ủy
@@ -101,9 +101,9 @@ echo cn_snippet_messages();
             </li>
             <li><font color='red'>Điểm Ủy Thác <b>-10%</b>, thời gian ủy thác Online <b>-5% </b> vào 24h hàng ngày. Nên
                     sử dụng hết trước 24h hàng ngày.</font></li>
-            <li>Chú ý tính toán kĩ thời gian kết thúc Ủy thác, tránh trường hợp để quá lâu bị hết Gcoin (^_^)</li>
+            <li>Chú ý tính toán kĩ thời gian kết thúc Ủy thác, tránh trường hợp để quá lâu bị hết tiền (^_^)</li>
             <li>Nhân vật phải ở trong làng Lorencia hoặc Noria.</li>
         </ul>
         </p>
-</div>
+    </div>
 </div>

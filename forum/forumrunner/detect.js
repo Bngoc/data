@@ -3,16 +3,14 @@ var iphoneBranded = false;
 var forumName = '';
 
 function
-forumRunnerCookie ()
-{
+forumRunnerCookie() {
     var expires = new Date();
     expires.setTime(expires.getTime() + (90 * 1000 * 60 * 60 * 24));
     document.cookie = 'skip_fr_detect=false;expires=' + expires.toGMTString() + ';path=/';
 }
 
 function
-forumRunnerAndroid (opera)
-{
+forumRunnerAndroid(opera) {
     var msg;
     var operaMsg;
     if (androidBranded && forumName != '') {
@@ -22,23 +20,22 @@ forumRunnerAndroid (opera)
         msg = 'Get our Android app for easier viewing and posting on this forum, optional push notifications and more!';
         operaMsg = 'Get our Android app for easier viewing and posting on this forum!  Search for "Forum Runner" in the Market.  Reload the page to load the normal website.';
     }
-    
+
     if (opera) {
-	forumRunnerCookie();
-	alert(operaMsg);
-	return;
+        forumRunnerCookie();
+        alert(operaMsg);
+        return;
     }
-	
+
     if (confirm(msg)) {
-	window.location = 'market://details?id=net.endoftime.android.forumrunner';
+        window.location = 'market://details?id=net.endoftime.android.forumrunner';
     } else {
-	forumRunnerCookie();
+        forumRunnerCookie();
     }
 }
 
 function
-forumRunnerIphone (type, opera)
-{
+forumRunnerIphone(type, opera) {
     var operaMsg;
     var safariMsg;
 
@@ -52,47 +49,46 @@ forumRunnerIphone (type, opera)
     }
 
     if (opera) {
-	forumRunnerCookie();
-	alert(operaMsg);
-	return;
+        forumRunnerCookie();
+        alert(operaMsg);
+        return;
     }
 
     if (confirm(safariMsg)) {
-	window.location = 'http://itunes.apple.com/us/app/forum-runner-vbulletin/id362527234?mt=8';
+        window.location = 'http://itunes.apple.com/us/app/forum-runner-vbulletin/id362527234?mt=8';
     } else {
-	forumRunnerCookie();
+        forumRunnerCookie();
     }
 }
 
 function
-forumRunnerDetect ()
-{
+forumRunnerDetect() {
     if (document.cookie.indexOf('skip_fr_detect=false') == -1) {
-	var agent = navigator.userAgent.toLowerCase();
-	var type;
-	var opera = (agent.indexOf('opera') != -1);
-	var android = iphone = false;
+        var agent = navigator.userAgent.toLowerCase();
+        var type;
+        var opera = (agent.indexOf('opera') != -1);
+        var android = iphone = false;
 
-	if (agent.indexOf('iphone') != -1) {
-	    type = 'iPhone';
-	    iphone = true;
-	} else if (agent.indexOf('ipod') != -1) {
-	    type = 'iPod Touch';
-	    iphone = true;
-	} else if (agent.indexOf('ipad') != -1) {
-	    type = 'iPad';
-	    iphone = true;
-	} else if (agent.indexOf('android') != -1) {
-	    android = true;
-	} else {
-	    return;
-	}
+        if (agent.indexOf('iphone') != -1) {
+            type = 'iPhone';
+            iphone = true;
+        } else if (agent.indexOf('ipod') != -1) {
+            type = 'iPod Touch';
+            iphone = true;
+        } else if (agent.indexOf('ipad') != -1) {
+            type = 'iPad';
+            iphone = true;
+        } else if (agent.indexOf('android') != -1) {
+            android = true;
+        } else {
+            return;
+        }
 
-	if (android) {
-	    forumRunnerAndroid(opera);
-	} else if (iphone) {
-	    forumRunnerIphone(type, opera)
-	}
+        if (android) {
+            forumRunnerAndroid(opera);
+        } else if (iphone) {
+            forumRunnerIphone(type, opera)
+        }
     }
 }
 

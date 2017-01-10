@@ -293,11 +293,11 @@ function isNumKey(evt, id) {
     }
 }
 
-function verifyEmail(value, id){
+function verifyEmail(value, id) {
     if (!ischeckEmail(value)) {
         getId(id).innerHTML = covertStrBool('Địa chỉ email không hợp lệ.', false, 2);
         return false;
-    } else{
+    } else {
         getId(id).innerHTML = notify_img_apccet;
     }
 }
@@ -334,19 +334,19 @@ function proce_notify_err(str_val, str_smg_default) {
 function covertStrBool(str_val, bool, number) {
     var img_notify = '';
     if (number == 1) {
-        img_notify  = notify_img_load;
-    }else if (number == 2) {
-        img_notify  = notify_img_deline;
-    }else if (number == 3){
-        img_notify  = notify_img_apccet;
+        img_notify = notify_img_load;
+    } else if (number == 2) {
+        img_notify = notify_img_deline;
+    } else if (number == 3) {
+        img_notify = notify_img_apccet;
     }
     var html_err_ = cap_char(str_val);
     var color_text = '';
-    if (!bool){
+    if (!bool) {
         color_text = '#FF0000';
     }
 
-    return img_notify + '<span style="color:'+ color_text +'">' + html_err_ + '</span>';
+    return img_notify + '<span style="color:' + color_text + '">' + html_err_ + '</span>';
 }
 
 function dataSize(varData) {
@@ -374,20 +374,20 @@ function menuLayer_close(idname) {
 
 function validateFormOnSubmit($op) {
     var checkValiFormRegist = false;
-    for (var key in arr_error){
+    for (var key in arr_error) {
         if (arr_error[key]) {
             checkValiFormRegist = true;
             break;
         }
     }
 
-    if(!checkValiFormRegist) {
+    if (!checkValiFormRegist) {
         alert('Vui lòng kiểm tra lại thông tin!');
         return false;
     }
-    if($op){
+    if ($op) {
         var verifyDel = confirm($op);
-        if (!verifyDel){
+        if (!verifyDel) {
             return false;
         }
     }
@@ -569,9 +569,9 @@ function valid_pass(value, id_smg, str_notify) {
     arr_error[id_smg] = 1;
     if (value == "") {
         getId(id_smg).innerHTML = proce_notify_err("Bạn chưa nhập", str_notify);
-    }else if(value.length < 6) {
+    } else if (value.length < 6) {
         getId(id_smg).innerHTML = covertStrBool('Mật khẩu dài hơn 6 kí tự', false, 2);
-    }else {
+    } else {
         getId(id_smg).innerHTML = '';
         arr_error[id_smg] = 0;
     }
@@ -579,7 +579,7 @@ function valid_pass(value, id_smg, str_notify) {
 
 function checkPhoneNumber(value, id) {
     getId(id).innerHTML = notify_img_load;
-    setTimeout("isNumberPhone('" + value + "', '"+ id +"')", 500);
+    setTimeout("isNumberPhone('" + value + "', '" + id + "')", 500);
 }
 function isNumberPhone(value, id) {
     arr_error[id] = 1;
@@ -589,7 +589,7 @@ function isNumberPhone(value, id) {
         getId(id).innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
         arr_error[id] = 0;
         return true;
-    }else {
+    } else {
         getId(id).innerHTML = notify_img_deline + '<span style="color:#FF0000">Số điện thoại không hợp lệ</span>';
         return false;
     }
@@ -672,7 +672,7 @@ function renderPhoneTel(value, id) {
 
 function checkQuestion(value, id) {
     getId(id).innerHTML = notify_img_load;
-    setTimeout("checkQuestionTrue('" + value + "', '"+ id +"')", 100);
+    setTimeout("checkQuestionTrue('" + value + "', '" + id + "')", 100);
 }
 function checkQuestionTrue(value, id) {
     arr_error[id] = 1;
@@ -686,7 +686,7 @@ function checkQuestionTrue(value, id) {
 
 function checkAnswer(value, id) {
     getId(id).innerHTML = "<div style='padding:2px;'><img src=/images/spinner_grey.gif /></div>"
-    setTimeout("checkAnswerTrue('" + value + "', '"+ id +"')", 100);
+    setTimeout("checkAnswerTrue('" + value + "', '" + id + "')", 100);
 }
 function checkAnswerTrue(value, id) {
     arr_error[id] = 1;
@@ -820,7 +820,6 @@ function checkCaptcha(value, id) {
 //     else
 //         document.getElementById('AnswerID').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
 // }
-
 
 
 //

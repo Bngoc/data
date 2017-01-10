@@ -51,56 +51,53 @@ if (!$attachlib->verify_permissions()) {
 }
 
 function
-do_upload_attachment ()
+do_upload_attachment()
 {
     global $vbulletin, $db, $foruminfo, $attachlib;
 
-    $vbulletin->input->clean_gpc('f', 'attachment',    TYPE_FILE);
+    $vbulletin->input->clean_gpc('f', 'attachment', TYPE_FILE);
     // format vbulletin expects: $files[name][x]... we only have one per post
     $vbulletin->GPC['attachment'] = array(
-	'name' => array($vbulletin->GPC['attachment']['name']),
-	'tmp_name' => array($vbulletin->GPC['attachment']['tmp_name']),
-	'error' => array($vbulletin->GPC['attachment']['error']),
-	'size' => array($vbulletin->GPC['attachment']['size']),
+        'name' => array($vbulletin->GPC['attachment']['name']),
+        'tmp_name' => array($vbulletin->GPC['attachment']['tmp_name']),
+        'error' => array($vbulletin->GPC['attachment']['error']),
+        'size' => array($vbulletin->GPC['attachment']['size']),
     );
 
-    if ($vbulletin->GPC['flash'] AND is_array($vbulletin->GPC['attachment']))
-    {
-	$vbulletin->GPC['attachment']['utf8_names'] = true;
+    if ($vbulletin->GPC['flash'] AND is_array($vbulletin->GPC['attachment'])) {
+        $vbulletin->GPC['attachment']['utf8_names'] = true;
     }
 
     $uploadids = $attachlib->upload($vbulletin->GPC['attachment'], array(), $vbulletin->GPC['filedata']);
     $uploads = explode(',', $uploadids);
 
-    if (!empty($attachlib->errors))
-    {
-	$errorlist = '';
-	foreach ($attachlib->errors AS $error)
-	{
-	    $filename = htmlspecialchars_uni($error['filename']);
-	    $errormessage = $error['error'] ? $error['error'] : $vbphrase["$error[errorphrase]"];
-	    json_error($errormessage, RV_UPLOAD_ERROR);
-	}
+    if (!empty($attachlib->errors)) {
+        $errorlist = '';
+        foreach ($attachlib->errors AS $error) {
+            $filename = htmlspecialchars_uni($error['filename']);
+            $errormessage = $error['error'] ? $error['error'] : $vbphrase["$error[errorphrase]"];
+            json_error($errormessage, RV_UPLOAD_ERROR);
+        }
     }
 
     return array(
-	'attachmentid' => $uploads[0],
+        'attachmentid' => $uploads[0],
     );
 }
 
 function
-do_delete_attachment ()
+do_delete_attachment()
 {
     global $vbulletin, $attachlib;
 
     $vbulletin->input->clean_array_gpc('r', array(
-	'attachmentid' => TYPE_UINT,
+        'attachmentid' => TYPE_UINT,
     ));
 
     $delete[$vbulletin->GPC['attachmentid']] = 1;
     $attachlib->delete($delete);
 
     return array(
-	'success' => 1,
+        'success' => 1,
     );
 }

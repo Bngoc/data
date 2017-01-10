@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -22,31 +22,30 @@
  */
 class vB_Route_HttpError extends vB_Route_Error
 {
-	/*Properties====================================================================*/
+    /*Properties====================================================================*/
 
-	/**
-	 * A default controller class.
-	 *
-	 * @var string
-	 */
-	protected $_default_controller_class = 'vB_Controller_HttpError';
+    /**
+     * A default controller class.
+     *
+     * @var string
+     */
+    protected $_default_controller_class = 'vB_Controller_HttpError';
 
 
+    /*URL===========================================================================*/
 
-	/*URL===========================================================================*/
-
-	/**
-	 * Returns a representative URL of a route.
-	 * Optional segments and parameters may be passed to set the route state.
-	 *
-	 * @param array mixed $segments				- Assoc array of segment => value
-	 * @param array mixed $parameters			- Array of parameter values, in order
-	 * @return string							- The URL representing the route
-	 */
-	public static function getURL(array $segments = null, array $parameters = null, $absolute_path = false)
-	{
-		return vB_Route::create('vB_Route_HttpError')->getCurrentURL($segments);
-	}
+    /**
+     * Returns a representative URL of a route.
+     * Optional segments and parameters may be passed to set the route state.
+     *
+     * @param array mixed $segments                - Assoc array of segment => value
+     * @param array mixed $parameters            - Array of parameter values, in order
+     * @return string                            - The URL representing the route
+     */
+    public static function getURL(array $segments = null, array $parameters = null, $absolute_path = false)
+    {
+        return vB_Route::create('vB_Route_HttpError')->getCurrentURL($segments);
+    }
 }
 
 /*======================================================================*\

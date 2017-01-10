@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -12,9 +12,8 @@
 
 // ######################## SET PHP ENVIRONMENT ###########################
 error_reporting(E_ALL & ~E_NOTICE);
-if (!is_object($vbulletin->db))
-{
-	exit;
+if (!is_object($vbulletin->db)) {
+    exit;
 }
 
 // ##################### DEFINE IMPORTANT CONSTANTS #######################
@@ -40,46 +39,41 @@ vbmail_start();
 
 $emails = '';
 
-while ($user = $vbulletin->db->fetch_array($users))
-{
-	// make random number
-	if (empty($user['activationid']))
-	{ //none exists so create one
-		$user['activationid'] = fetch_random_string(40);
-		/*insert query*/
-		$vbulletin->db->query_write("
+while ($user = $vbulletin->db->fetch_array($users)) {
+    // make random number
+    if (empty($user['activationid'])) { //none exists so create one
+        $user['activationid'] = fetch_random_string(40);
+        /*insert query*/
+        $vbulletin->db->query_write("
 			REPLACE INTO " . TABLE_PREFIX . "useractivation
 				(userid, dateline, activationid, type, usergroupid)
 			VALUES
 				($user[userid], " . TIMENOW . ", '$user[activationid]', 0, 2)
 		");
-	}
-	else
-	{
-		$user['activationid'] = fetch_random_string(40);
-		$vbulletin->db->query_write("
+    } else {
+        $user['activationid'] = fetch_random_string(40);
+        $vbulletin->db->query_write("
 			UPDATE " . TABLE_PREFIX . "useractivation SET
 			dateline = " . TIMENOW . ",
 			activationid = '$user[activationid]'
 			WHERE userid = $user[userid] AND type = 0
 		");
-	}
+    }
 
-	$userid = $user['userid'];
-	$username = $user['username'];
-	$activateid = $user['activationid'];
+    $userid = $user['userid'];
+    $username = $user['username'];
+    $activateid = $user['activationid'];
 
-	eval(fetch_email_phrases('activateaccount', $user['languageid']));
+    eval(fetch_email_phrases('activateaccount', $user['languageid']));
 
-	vbmail($user['email'], $subject, $message);
+    vbmail($user['email'], $subject, $message);
 
-	$emails .= iif($emails, ', ');
-	$emails .= $user['username'];
+    $emails .= iif($emails, ', ');
+    $emails .= $user['username'];
 }
 
-if ($emails)
-{
-	log_cron_action($emails, $nextitem, 1);
+if ($emails) {
+    log_cron_action($emails, $nextitem, 1);
 }
 
 vbmail_end();

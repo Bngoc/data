@@ -4,7 +4,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -36,45 +36,44 @@
 abstract class vB_Search_Result
 {
 
-	protected function __construct() {}
+    protected function __construct()
+    {
+    }
 
-	/**
-	 * Can we display this item in a search result for the given user
-	 *
-	 * @param vB_User $user user whose permissions we wish to check.
-	 */
-	abstract public function can_search($user);
+    /**
+     * Can we display this item in a search result for the given user
+     *
+     * @param vB_User $user user whose permissions we wish to check.
+     */
+    abstract public function can_search($user);
 
-	abstract public function get_contenttype();
+    abstract public function get_contenttype();
 
-	/**
-	* Return the group search result for this parent
-	*
-	* By default returns a vB_Search_Result_Null item or throws an excetion in debug mode
-	*/
-	public function get_group_item()
-	{
-		if ($GLOBALS['vbulletin']->debug)
-		{
-			throw new Exception("Group item not defined for: " . get_class($this));
-		}
-		else
-		{
-			return new vB_Search_Result_Null();
-		}
-	}
+    /**
+     * Return the group search result for this parent
+     *
+     * By default returns a vB_Search_Result_Null item or throws an excetion in debug mode
+     */
+    public function get_group_item()
+    {
+        if ($GLOBALS['vbulletin']->debug) {
+            throw new Exception("Group item not defined for: " . get_class($this));
+        } else {
+            return new vB_Search_Result_Null();
+        }
+    }
 
-	/**
-	 * Return the html string for this item in the results list.
-	 *
-	 * @param vB_User $user user requesting search (used to customize search results by user)
-	 */
-	abstract public function render($current_user, $criteria, $template_name = '');
+    /**
+     * Return the html string for this item in the results list.
+     *
+     * @param vB_User $user user requesting search (used to customize search results by user)
+     */
+    abstract public function render($current_user, $criteria, $template_name = '');
 
-	public function get_id()
-	{
-		return false;
-	}
+    public function get_id()
+    {
+        return false;
+    }
 
 }
 

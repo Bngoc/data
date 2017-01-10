@@ -28,7 +28,8 @@ list($per_page, $echoPagination) = _GL('per_page, echoPagination');
                                         echo 'items/' . $raw['image'] . '.gif';
                                     }
                                     echo '" title="' . $raw['title'] . '"'; ?> onMouseOut='UnTip()'
-                                         onMouseOver="topxTip(document.getElementById('<?php echo $key; ?>').innerHTML)" />
+                                         onMouseOver=" topxTip(document.getElementById('<?php echo $key; ?>
+                                ').innerHTML)" />
                                 <div class="floatcontainer forumbit_nopost" id="<?php echo $key; ?>"
                                      style="display:none;background: rgba(0, 128, 0, 0.15);"><?php echo $raw['info'] ?></div>
                             </td>
@@ -38,8 +39,9 @@ list($per_page, $echoPagination) = _GL('per_page, echoPagination');
                                 <strong class="infoName-<?php echo $key . "\">" . $raw['title']; ?></strong></td>
                             </tr>
                             <tr>
-                                <td style=" text-align:center"><strong>Giá : <font color="#FF0000">
-                                        <span class="infoPrice-<?php echo $key; ?>"><?php echo number_format($raw['price'], 0, ',', '.') ?></span>
+                                <td style="text-align="center"><strong>Giá : <font color="#FF0000">
+                                        <span
+                                            class="infoPrice-<?php echo $key; ?>"><?php echo number_format($raw['price'], 0, ',', '.') ?></span>
                                         V.Point</font></strong>
                             </td>
                         </tr>

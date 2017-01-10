@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -20,37 +20,37 @@ define('CSRF_PROTECTION', true);
 // ################### PRE-CACHE TEMPLATES AND DATA ######################
 // get special phrase groups
 $phrasegroups = array(
-	'showthread',
-	'postbit',
-	'reputationlevel',
+    'showthread',
+    'postbit',
+    'reputationlevel',
 );
 
 // get special data templates from the datastore
 $specialtemplates = array(
-	'smiliecache',
-	'bbcodecache',
+    'smiliecache',
+    'bbcodecache',
 );
 
 // pre-cache templates used by all actions
 $globaltemplates = array(
-	'im_aim',
-	'im_icq',
-	'im_msn',
-	'im_yahoo',
-	'im_skype',
-	'postbit',
-	'postbit_wrapper',
-	'postbit_attachment',
-	'postbit_attachmentimage',
-	'postbit_attachmentthumbnail',
-	'postbit_attachmentmoderated',
-	'postbit_ip',
-	'postbit_onlinestatus',
-	'bbcode_code',
-	'bbcode_html',
-	'bbcode_php',
-	'bbcode_quote',
-	'bbcode_video',
+    'im_aim',
+    'im_icq',
+    'im_msn',
+    'im_yahoo',
+    'im_skype',
+    'postbit',
+    'postbit_wrapper',
+    'postbit_attachment',
+    'postbit_attachmentimage',
+    'postbit_attachmentthumbnail',
+    'postbit_attachmentmoderated',
+    'postbit_ip',
+    'postbit_onlinestatus',
+    'bbcode_code',
+    'bbcode_html',
+    'bbcode_php',
+    'bbcode_quote',
+    'bbcode_video',
 );
 
 // pre-cache templates used by specific actions
@@ -68,61 +68,52 @@ require_once(DIR . '/includes/class_postbit.php');
 verify_forum_url();
 
 $vbulletin->input->clean_array_gpc('r', array(
-	'highlight'	=> TYPE_STR,
-	'postcount'	=> TYPE_UINT,
+    'highlight' => TYPE_STR,
+    'postcount' => TYPE_UINT,
 ));
 
 // words to highlight from the search engine
-if (!empty($vbulletin->GPC['highlight']))
-{
-	$highlight = str_replace('\*', '[a-z]*', preg_quote(strtolower($vbulletin->GPC['highlight']), '/'));
-	$highlightwords = explode(' ', $highlight);
-	foreach ($highlightwords AS $val)
-	{
-		if ($val == 'or' OR $val == 'and' OR $val == 'not')
-		{
-			continue;
-		}
-		$replacewords[] = $val;
-	}
+if (!empty($vbulletin->GPC['highlight'])) {
+    $highlight = str_replace('\*', '[a-z]*', preg_quote(strtolower($vbulletin->GPC['highlight']), '/'));
+    $highlightwords = explode(' ', $highlight);
+    foreach ($highlightwords AS $val) {
+        if ($val == 'or' OR $val == 'and' OR $val == 'not') {
+            continue;
+        }
+        $replacewords[] = $val;
+    }
 }
 
 // #######################################################################
 // ############################# SHOW POST ###############################
 // #######################################################################
 
-if (!$postinfo['postid'])
-{
-	eval(standard_error(fetch_error('invalidid', $vbphrase['post'], $vbulletin->options['contactuslink'])));
+if (!$postinfo['postid']) {
+    eval(standard_error(fetch_error('invalidid', $vbphrase['post'], $vbulletin->options['contactuslink'])));
 }
 
-if ((!$postinfo['visible'] OR $postinfo['isdeleted']) AND !can_moderate($threadinfo['forumid']))
-{
-	eval(standard_error(fetch_error('invalidid', $vbphrase['post'], $vbulletin->options['contactuslink'])));
+if ((!$postinfo['visible'] OR $postinfo['isdeleted']) AND !can_moderate($threadinfo['forumid'])) {
+    eval(standard_error(fetch_error('invalidid', $vbphrase['post'], $vbulletin->options['contactuslink'])));
 }
 
-if ((!$threadinfo['visible'] OR $threadinfo['isdeleted']) AND !can_moderate($threadinfo['forumid']))
-{
-	eval(standard_error(fetch_error('invalidid', $vbphrase['thread'], $vbulletin->options['contactuslink'])));
+if ((!$threadinfo['visible'] OR $threadinfo['isdeleted']) AND !can_moderate($threadinfo['forumid'])) {
+    eval(standard_error(fetch_error('invalidid', $vbphrase['thread'], $vbulletin->options['contactuslink'])));
 }
 
 $forumperms = fetch_permissions($threadinfo['forumid']);
-if (!($forumperms & $vbulletin->bf_ugp_forumpermissions['canview']) OR !($forumperms & $vbulletin->bf_ugp_forumpermissions['canviewthreads']))
-{
-	print_no_permission();
+if (!($forumperms & $vbulletin->bf_ugp_forumpermissions['canview']) OR !($forumperms & $vbulletin->bf_ugp_forumpermissions['canviewthreads'])) {
+    print_no_permission();
 }
-if (!($forumperms & $vbulletin->bf_ugp_forumpermissions['canviewothers']) AND ($threadinfo['postuserid'] != $vbulletin->userinfo['userid'] OR $vbulletin->userinfo['userid'] == 0))
-{
-	print_no_permission();
+if (!($forumperms & $vbulletin->bf_ugp_forumpermissions['canviewothers']) AND ($threadinfo['postuserid'] != $vbulletin->userinfo['userid'] OR $vbulletin->userinfo['userid'] == 0)) {
+    print_no_permission();
 }
 
 // check if there is a forum password and if so, ensure the user has it set
 verify_forum_password($foruminfo['forumid'], $foruminfo['password']);
 
-if ($_SERVER['REQUEST_METHOD'] != 'POST' OR !$vbulletin->GPC['ajax'])
-{
-	// redirect to showthread with a 301
-	exec_header_redirect(fetch_seo_url('thread|js', $threadinfo, array('p' => $postinfo['postid'])). "#post$postinfo[postid]", 301);
+if ($_SERVER['REQUEST_METHOD'] != 'POST' OR !$vbulletin->GPC['ajax']) {
+    // redirect to showthread with a 301
+    exec_header_redirect(fetch_seo_url('thread|js', $threadinfo, array('p' => $postinfo['postid'])) . "#post$postinfo[postid]", 301);
 }
 
 $hook_query_fields = $hook_query_joins = '';
@@ -158,24 +149,21 @@ $post = $db->query_first_slave("
 ");
 
 // Tachy goes to coventry
-if (in_coventry($threadinfo['postuserid']) AND !can_moderate($threadinfo['forumid']))
-{
-	// do not show post if part of a thread from a user in Coventry and bbuser is not mod
-	eval(standard_error(fetch_error('invalidid', $vbphrase['thread'], $vbulletin->options['contactuslink'])));
+if (in_coventry($threadinfo['postuserid']) AND !can_moderate($threadinfo['forumid'])) {
+    // do not show post if part of a thread from a user in Coventry and bbuser is not mod
+    eval(standard_error(fetch_error('invalidid', $vbphrase['thread'], $vbulletin->options['contactuslink'])));
 }
-if (in_coventry($post['userid']) AND !can_moderate($threadinfo['forumid']))
-{
-	// do not show post if posted by a user in Coventry and bbuser is not mod
-	eval(standard_error(fetch_error('invalidid', $vbphrase['post'], $vbulletin->options['contactuslink'])));
+if (in_coventry($post['userid']) AND !can_moderate($threadinfo['forumid'])) {
+    // do not show post if posted by a user in Coventry and bbuser is not mod
+    eval(standard_error(fetch_error('invalidid', $vbphrase['post'], $vbulletin->options['contactuslink'])));
 }
 
 // check for attachments
-if ($post['attach'])
-{
-	$types = vB_Types::instance();
-	$contenttypeid = $types->getContentTypeID('vBForum_Post');
+if ($post['attach']) {
+    $types = vB_Types::instance();
+    $contenttypeid = $types->getContentTypeID('vBForum_Post');
 
-	$attachments = $db->query_read_slave("
+    $attachments = $db->query_read_slave("
 		SELECT
 			fd.thumbnail_dateline, fd.filesize, IF(fd.thumbnail_filesize > 0, 1, 0) AS hasthumbnail, fd.thumbnail_filesize,
 			a.dateline, a.state, a.attachmentid, a.counter, a.contentid AS postid, a.filename,
@@ -189,21 +177,18 @@ if ($post['attach'])
 			a.contenttypeid = $contenttypeid
 		ORDER BY a.displayorder
 	");
-	while ($attachment = $db->fetch_array($attachments))
-	{
-		$content = @unserialize($attachment['contenttypes']);
-		$attachment['newwindow'] = $content["$contenttypeid"]['n'];
-		$post['attachments']["$attachment[attachmentid]"] = $attachment;
-	}
+    while ($attachment = $db->fetch_array($attachments)) {
+        $content = @unserialize($attachment['contenttypes']);
+        $attachment['newwindow'] = $content["$contenttypeid"]['n'];
+        $post['attachments']["$attachment[attachmentid]"] = $attachment;
+    }
 }
 
-if (!($forumperms & $vbulletin->bf_ugp_forumpermissions['canseethumbnails']))
-{
-	$vbulletin->options['attachthumbs'] = 0;
+if (!($forumperms & $vbulletin->bf_ugp_forumpermissions['canseethumbnails'])) {
+    $vbulletin->options['attachthumbs'] = 0;
 }
-if (!($forumperms & $vbulletin->bf_ugp_forumpermissions['cangetattachment']))
-{
-	$vbulletin->options['viewattachedimages'] = (($vbulletin->options['viewattachedimages'] AND $vbulletin->options['attachthumbs']) ? 1 : 0);
+if (!($forumperms & $vbulletin->bf_ugp_forumpermissions['cangetattachment'])) {
+    $vbulletin->options['viewattachedimages'] = (($vbulletin->options['viewattachedimages'] AND $vbulletin->options['attachthumbs']) ? 1 : 0);
 }
 
 // needed for deleted post management
@@ -212,32 +197,28 @@ $show['approvepost'] = (can_moderate($threadinfo['forumid'], 'canmoderateposts')
 $show['managethread'] = (can_moderate($threadinfo['forumid'], 'canmanagethreads')) ? true : false;
 $show['inlinemod'] = ($show['managethread'] OR $show['managepost'] OR $show['approvepost']) ? true : false;
 $show['multiquote_global'] = ($vbulletin->options['multiquote'] AND $vbulletin->userinfo['userid']);
-if ($show['multiquote_global'])
-{
-	$vbulletin->input->clean_array_gpc('c', array(
-		'vbulletin_multiquote' => TYPE_STR
-	));
-	$vbulletin->GPC['vbulletin_multiquote'] = explode(',', $vbulletin->GPC['vbulletin_multiquote']);
+if ($show['multiquote_global']) {
+    $vbulletin->input->clean_array_gpc('c', array(
+        'vbulletin_multiquote' => TYPE_STR
+    ));
+    $vbulletin->GPC['vbulletin_multiquote'] = explode(',', $vbulletin->GPC['vbulletin_multiquote']);
 }
 // work out if quickreply should be shown or not
 if (
-	$vbulletin->options['quickreply']
-	AND
-	!$threadinfo['isdeleted'] AND !is_browser('netscape') AND $vbulletin->userinfo['userid']
-	AND (
-		($vbulletin->userinfo['userid'] == $threadinfo['postuserid'] AND $forumperms & $vbulletin->bf_ugp_forumpermissions['canreplyown'])
-		OR
-		($vbulletin->userinfo['userid'] != $threadinfo['postuserid'] AND $forumperms & $vbulletin->bf_ugp_forumpermissions['canreplyothers'])
-	)
-	AND ($threadinfo['open'] OR can_moderate($threadinfo['forumid'], 'canopenclose'))
-	AND (!fetch_require_hvcheck('post'))
-)
-{
-	$show['quickreply'] = true;
-}
-else
-{
-	$show['quickreply'] = false;
+    $vbulletin->options['quickreply']
+    AND
+    !$threadinfo['isdeleted'] AND !is_browser('netscape') AND $vbulletin->userinfo['userid']
+    AND (
+        ($vbulletin->userinfo['userid'] == $threadinfo['postuserid'] AND $forumperms & $vbulletin->bf_ugp_forumpermissions['canreplyown'])
+        OR
+        ($vbulletin->userinfo['userid'] != $threadinfo['postuserid'] AND $forumperms & $vbulletin->bf_ugp_forumpermissions['canreplyothers'])
+    )
+    AND ($threadinfo['open'] OR can_moderate($threadinfo['forumid'], 'canopenclose'))
+    AND (!fetch_require_hvcheck('post'))
+) {
+    $show['quickreply'] = true;
+} else {
+    $show['quickreply'] = false;
 }
 $show['lightbox'] = ($vbulletin->options['lightboxenabled'] AND $vbulletin->options['usepopups']);
 $show['spacer'] = false;
@@ -262,18 +243,17 @@ $postbit_obj->cachable = (!$post['pagetext_html'] AND $vbulletin->options['cache
 $postbits = $postbit_obj->construct_postbit($post);
 
 // save post to cache if relevant
-if ($postbit_obj->cachable)
-{
-	/*insert query*/
-	$db->shutdown_query("
+if ($postbit_obj->cachable) {
+    /*insert query*/
+    $db->shutdown_query("
 		REPLACE INTO " . TABLE_PREFIX . "postparsed (postid, dateline, hasimages, pagetext_html, styleid, languageid)
 		VALUES (
 			$post[postid], " .
-			intval($threadinfo['lastpost']) . ", " .
-			intval($postbit_obj->post_cache['has_images']) . ", '" .
-			$db->escape_string($postbit_obj->post_cache['text']) . "', " .
-			intval(STYLEID) . ", " .
-			intval(LANGUAGEID) . "
+        intval($threadinfo['lastpost']) . ", " .
+        intval($postbit_obj->post_cache['has_images']) . ", '" .
+        $db->escape_string($postbit_obj->post_cache['text']) . "', " .
+        intval(STYLEID) . ", " .
+        intval(LANGUAGEID) . "
 			)
 	");
 }

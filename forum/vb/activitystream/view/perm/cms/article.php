@@ -4,7 +4,7 @@
   || #################################################################### ||
   || # vBulletin 4.2.0 
   || # ---------------------------------------------------------------- # ||
-  || # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+  || # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
   || # This file may not be redistributed in whole or significant part. # ||
   || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
   || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -13,38 +13,34 @@
 
 class vB_ActivityStream_View_Perm_Cms_Article extends vB_ActivityStream_View_Perm_Cms_Base
 {
-	public function __construct(&$content)
-	{
-		$this->requireFirst['vB_ActivityStream_View_Perm_Cms_Comment'] = 1;
-		return parent::__construct($content);
-	}
+    public function __construct(&$content)
+    {
+        $this->requireFirst['vB_ActivityStream_View_Perm_Cms_Comment'] = 1;
+        return parent::__construct($content);
+    }
 
-	public function group($activity)
-	{
-		if (!vB::$vbulletin->products['vbcms'])
-		{
-			return;
-		}
+    public function group($activity)
+    {
+        if (!vB::$vbulletin->products['vbcms']) {
+            return;
+        }
 
-		if (!$this->content['cms_node'][$activity['contentid']])
-		{
-			$this->content['cms_nodeid'][$activity['contentid']] = 1;
-		}
-	}
+        if (!$this->content['cms_node'][$activity['contentid']]) {
+            $this->content['cms_nodeid'][$activity['contentid']] = 1;
+        }
+    }
 
-	public function process()
-	{
-		if (!vB::$vbulletin->products['vbcms'])
-		{
-			return true;
-		}
+    public function process()
+    {
+        if (!vB::$vbulletin->products['vbcms']) {
+            return true;
+        }
 
-		if (!$this->content['cms_nodeid'])
-		{
-			return true;
-		}
+        if (!$this->content['cms_nodeid']) {
+            return true;
+        }
 
-		$nodes = vB::$db->query_read_slave("
+        $nodes = vB::$db->query_read_slave("
 			SELECT
 				node.nodeid AS n_nodeid, node.url AS n_url, node.comments_enabled AS n_comments_enabled, node.userid AS n_userid,
 				ni.viewcount AS n_viewcount, ni.title AS n_title, ni.html_title AS n_html_title, a.contentid AS n_contentid,
@@ -59,56 +55,55 @@ class vB_ActivityStream_View_Perm_Cms_Article extends vB_ActivityStream_View_Per
 					AND
 				" . vBCMS_Permissions::getPermissionString() . "
 		");
-		while ($node = vB::$db->fetch_array($nodes))
-		{
-			$this->content['cms_node'][$node['n_nodeid']] = $this->parse_array($node, 'n_');
-			$this->content['cms_article'][$node['a_contentid']] = $this->parse_array($node, 'a_');
-			$this->content['userid'][$node['n_userid']] = 1;
-		}
+        while ($node = vB::$db->fetch_array($nodes)) {
+            $this->content['cms_node'][$node['n_nodeid']] = $this->parse_array($node, 'n_');
+            $this->content['cms_article'][$node['a_contentid']] = $this->parse_array($node, 'a_');
+            $this->content['userid'][$node['n_userid']] = 1;
+        }
 
-		$this->content['cms_nodeid'] = array();
-	}
+        $this->content['cms_nodeid'] = array();
+    }
 
-	public function fetchCanView($record)
-	{
-		$this->processUsers();
-		return $this->fetchCanViewCmsArticle($record['contentid']);
-	}
+    public function fetchCanView($record)
+    {
+        $this->processUsers();
+        return $this->fetchCanViewCmsArticle($record['contentid']);
+    }
 
-	/*
-	 * Register Template
-	 *
-	 * @param	string	Template Name
-	 * @param	array	Activity Record
-	 *
-	 * @return	string	Template
-	 */
-	public function fetchTemplate($templatename, $activity)
-	{
+    /*
+     * Register Template
+     *
+     * @param	string	Template Name
+     * @param	array	Activity Record
+     *
+     * @return	string	Template
+     */
+    public function fetchTemplate($templatename, $activity)
+    {
 
-		$nodeinfo =& $this->content['cms_node'][$activity['contentid']];
-		$articleinfo =& $this->content['cms_article'][$nodeinfo['contentid']];
-		$activity['postdate'] = vbdate(vB::$vbulletin->options['dateformat'], $activity['dateline'], true);
-		$activity['posttime'] = vbdate(vB::$vbulletin->options['timeformat'], $activity['dateline']);
+        $nodeinfo =& $this->content['cms_node'][$activity['contentid']];
+        $articleinfo =& $this->content['cms_article'][$nodeinfo['contentid']];
+        $activity['postdate'] = vbdate(vB::$vbulletin->options['dateformat'], $activity['dateline'], true);
+        $activity['posttime'] = vbdate(vB::$vbulletin->options['timeformat'], $activity['dateline']);
 
-		$preview = strip_quotes($articleinfo['pagetext']);
-		$articleinfo['preview'] = htmlspecialchars_uni(fetch_censored_text(
-			fetch_trimmed_title(strip_bbcode($preview, false, true, true, true),
-				vb::$vbulletin->options['as_snippet'])
-		));
+        $preview = strip_quotes($articleinfo['pagetext']);
+        $articleinfo['preview'] = htmlspecialchars_uni(fetch_censored_text(
+            fetch_trimmed_title(strip_bbcode($preview, false, true, true, true),
+                vb::$vbulletin->options['as_snippet'])
+        ));
 
-		$articleinfo['fullurl'] = vB_Route::create('vBCms_Route_Content', $nodeinfo['nodeid'] . ($nodeinfo['url'] == '' ? '' : '-' . $nodeinfo['url'] ))->getCurrentURL();
-		$nodeinfo['parenturl'] = $this->fetchParentUrl($nodeinfo['parentnode']);
-		$nodeinfo['parenttitle'] = $this->fetchParentTitle($nodeinfo['parentnode']);
-		$userinfo = $this->fetchUser($activity['userid']);
+        $articleinfo['fullurl'] = vB_Route::create('vBCms_Route_Content', $nodeinfo['nodeid'] . ($nodeinfo['url'] == '' ? '' : '-' . $nodeinfo['url']))->getCurrentURL();
+        $nodeinfo['parenturl'] = $this->fetchParentUrl($nodeinfo['parentnode']);
+        $nodeinfo['parenttitle'] = $this->fetchParentTitle($nodeinfo['parentnode']);
+        $userinfo = $this->fetchUser($activity['userid']);
 
-		$templater = vB_Template::create($templatename);
-			$templater->register('userinfo', $userinfo);
-			$templater->register('activity', $activity);
-			$templater->register('nodeinfo', $nodeinfo);
-			$templater->register('articleinfo', $articleinfo);
-		return $templater->render();
-	}
+        $templater = vB_Template::create($templatename);
+        $templater->register('userinfo', $userinfo);
+        $templater->register('activity', $activity);
+        $templater->register('nodeinfo', $nodeinfo);
+        $templater->register('articleinfo', $articleinfo);
+        return $templater->render();
+    }
 }
 
 /*======================================================================*\

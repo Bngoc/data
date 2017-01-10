@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -44,8 +44,8 @@ require_once(CWD . '/includes/init.php');
 
 $vbulletin->input->clean_array_gpc('r', array(
     'pictureid' => TYPE_UINT,
-    'albumid'   => TYPE_UINT,
-    'groupid'   => TYPE_UINT,
+    'albumid' => TYPE_UINT,
+    'groupid' => TYPE_UINT,
 ));
 
 // #######################################################################
@@ -54,8 +54,7 @@ $vbulletin->input->clean_array_gpc('r', array(
 
 $imageinfo = false;
 
-if ($vbulletin->GPC['pictureid'] AND ($vbulletin->options['socnet'] & $vbulletin->bf_misc_socnet['enable_albums']) AND ($vbulletin->GPC['albumid'] OR $vbulletin->GPC['groupid']))
-{
+if ($vbulletin->GPC['pictureid'] AND ($vbulletin->options['socnet'] & $vbulletin->bf_misc_socnet['enable_albums']) AND ($vbulletin->GPC['albumid'] OR $vbulletin->GPC['groupid'])) {
     $imageinfo = $db->query_first_slave("
         SELECT pl.attachmentid
         FROM " . TABLE_PREFIX . "picturelegacy AS pl
@@ -66,12 +65,9 @@ if ($vbulletin->GPC['pictureid'] AND ($vbulletin->options['socnet'] & $vbulletin
     ");
 }
 
-if ($imageinfo)
-{
+if ($imageinfo) {
     exec_header_redirect("attachment.php?attachmentid=$imageinfo[attachmentid]", 301);
-}
-else
-{
+} else {
     $filedata = vb_base64_decode('R0lGODlhAQABAIAAAMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
     $filesize = strlen($filedata);
     header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');             // Date in the past

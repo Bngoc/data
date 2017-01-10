@@ -4,7 +4,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -20,7 +20,7 @@
  * @copyright vBulletin Solutions Inc.
  */
 
-require_once (DIR . '/vb/search/result.php');
+require_once(DIR . '/vb/search/result.php');
 
 /**
  * Enter description here...
@@ -30,44 +30,46 @@ require_once (DIR . '/vb/search/result.php');
  */
 class vB_Search_Result_Null extends vB_Search_Result
 {
-	public function __construct() {}
+    public function __construct()
+    {
+    }
 
-	/**
-	 * Enter description here...
-	 *
-	 * @param unknown_type $user
-	 * @return unknown
-	 */
-	public function can_search($user)
-	{
-		return false;
-	}
+    /**
+     * Enter description here...
+     *
+     * @param unknown_type $user
+     * @return unknown
+     */
+    public function can_search($user)
+    {
+        return false;
+    }
 
-	public function get_contenttype() 
-	{
-		return "";
-	}
+    public function get_contenttype()
+    {
+        return "";
+    }
 
-	/**
-	 * Enter description here...
-	 *
-	 * @return unknown
-	 */
-	public function render($current_user, $criteria, $template_name = '')
-	{
-		return "";
-	}
+    /**
+     * Enter description here...
+     *
+     * @return unknown
+     */
+    public function render($current_user, $criteria, $template_name = '')
+    {
+        return "";
+    }
 
-	//for real types, the type should be a singleton that we keep a reference 
-	//to in every item
-	public function get_type()
-	{
-	}
+    //for real types, the type should be a singleton that we keep a reference 
+    //to in every item
+    public function get_type()
+    {
+    }
 
-	public function get_group_item()
-	{
-		return new vB_Search_Result_Null();
-	}
+    public function get_group_item()
+    {
+        return new vB_Search_Result_Null();
+    }
 }
 
 /*======================================================================*\

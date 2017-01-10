@@ -11,9 +11,9 @@ $odd = 0;
 $i = 0;
 ?>
 
-<form action="<?php echo PHP_SELF; ?>" method="GET">
-    <?php cn_form_open('mod, opt'); ?>
-    <table style="width: 100%" cellpadding="2">
+    <form action="<?php echo PHP_SELF; ?>" method="GET">
+        <?php cn_form_open('mod, opt'); ?>
+        <table style="width: 100%" cellpadding="2">
             <tr>
                 <td colspan="3" class="">THÔNG TIN NHÂN VẬT<br/></td>
             </tr>
@@ -62,11 +62,11 @@ $i = 0;
                 </td>
                 <td class="bizwebform_col_3"></td>
             </tr>
-    </table>
-</form>
+        </table>
+    </form>
 
 <?php
-    echoFormVerifyChar(['action_rsuythac' => 'uythacreset']);
+echoFormVerifyChar(['action_rsuythac' => 'uythacreset']);
 ?>
 <?php
 if (getoption('user_rs_uythac')) { ?>

@@ -21,9 +21,9 @@ list($dashboard) = _GL('dashboard');
                 </div>
 
             <?php }
-        } else{
+        } else {
             echo "Chưa có vật phẩm nào giao bán!";
-        }?>
+        } ?>
     </div>
     <div style="clear: both"></div>
 </div>

@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -11,143 +11,133 @@
 \*======================================================================*/
 
 /**
-* Class to handle style variable storage
-*
-* @package	vBulletin
-* @version	$Revision: 58798 $
-* @date		$Date: 2012-02-08 15:40:25 -0800 (Wed, 08 Feb 2012) $
-*/
-
+ * Class to handle style variable storage
+ *
+ * @package    vBulletin
+ * @version    $Revision: 58798 $
+ * @date        $Date: 2012-02-08 15:40:25 -0800 (Wed, 08 Feb 2012) $
+ */
 abstract class vB_StyleVar
 {
-	public $registry;
+    public $registry;
 
-	public $stylevarid;
+    public $stylevarid;
 
-	protected $definition;
-	protected $value;
-	protected $inherited = 0;		// used to set the color, 0 = unchanged, 1 = inherited from parent, -1 = customized in this style
+    protected $definition;
+    protected $value;
+    protected $inherited = 0;        // used to set the color, 0 = unchanged, 1 = inherited from parent, -1 = customized in this style
 
-	private $styleid = -1;
+    private $styleid = -1;
 
-	// static variables for printing color input rows
-	protected static $need_colorpicker = true;
-	protected static $count = 0;
+    // static variables for printing color input rows
+    protected static $need_colorpicker = true;
+    protected static $count = 0;
 
-	// only output the background preview js once
-	protected static $need_background_preview_js = true;
+    // only output the background preview js once
+    protected static $need_background_preview_js = true;
 
-	//abstract public function validate();
-	function validate()
-	{
-		return true;
-	}
+    //abstract public function validate();
+    function validate()
+    {
+        return true;
+    }
 
-	public function print_editor($masterstyleid)
-	{
-		global $vbulletin, $vbphrase;
-		$addon = ($masterstyleid == -2) ? '_mobile' : '';
-		$header = $vbphrase["stylevar_{$this->stylevarid}_name{$addon}"] ? $vbphrase["stylevar_{$this->stylevarid}_name{$addon}"] : $this->stylevarid;
+    public function print_editor($masterstyleid)
+    {
+        global $vbulletin, $vbphrase;
+        $addon = ($masterstyleid == -2) ? '_mobile' : '';
+        $header = $vbphrase["stylevar_{$this->stylevarid}_name{$addon}"] ? $vbphrase["stylevar_{$this->stylevarid}_name{$addon}"] : $this->stylevarid;
 
-		$addbit = false;
-		if ($vbulletin->GPC['dostyleid'] == -1 OR $vbulletin->GPC['dostyleid'] == -2)
-		{
-			$header .= ' - <span class="smallfont">' . construct_link_code($vbphrase['edit'], "stylevar.php?" . $vbulletin->session->vars['sessionurl'] . "do=dfnedit&amp;stylevarid=" . $this->stylevarid . "&dostyleid=" . $vbulletin->GPC['dostyleid']);
-			$addbit = true;
-		}
+        $addbit = false;
+        if ($vbulletin->GPC['dostyleid'] == -1 OR $vbulletin->GPC['dostyleid'] == -2) {
+            $header .= ' - <span class="smallfont">' . construct_link_code($vbphrase['edit'], "stylevar.php?" . $vbulletin->session->vars['sessionurl'] . "do=dfnedit&amp;stylevarid=" . $this->stylevarid . "&dostyleid=" . $vbulletin->GPC['dostyleid']);
+            $addbit = true;
+        }
 
-		if ($this->inherited == -1 OR $this->inherited == -2)
-		{
-			if (!$addbit)
-			{
-				$header .= ' - <span class="smallfont">';
-			}
-			else
-			{
-				$header .= ' - ';
-			}
-			$header .= (count($header) == 1 ? '<span class="smallfont">' : '') . construct_link_code($vbphrase['revert'], "stylevar.php?" . $vbulletin->session->vars['sessionurl'] . "do=confirmrevert&amp;dostyleid=" . $vbulletin->GPC['dostyleid'] . "&stylevarid=" . $this->stylevarid . "&rootstyle=" . $this->inherited);
-		}
+        if ($this->inherited == -1 OR $this->inherited == -2) {
+            if (!$addbit) {
+                $header .= ' - <span class="smallfont">';
+            } else {
+                $header .= ' - ';
+            }
+            $header .= (count($header) == 1 ? '<span class="smallfont">' : '') . construct_link_code($vbphrase['revert'], "stylevar.php?" . $vbulletin->session->vars['sessionurl'] . "do=confirmrevert&amp;dostyleid=" . $vbulletin->GPC['dostyleid'] . "&stylevarid=" . $this->stylevarid . "&rootstyle=" . $this->inherited);
+        }
 
-		if ($addbit)
-		{
-			$header .= '</span>';
-		}
+        if ($addbit) {
+            $header .= '</span>';
+        }
 
-		print_table_header($header);
+        print_table_header($header);
 
-		if ($vbphrase["stylevar_{$this->stylevarid}_description{$addon}"])
-		{
-			print_description_row($vbphrase["stylevar_{$this->stylevarid}_description{$addon}"], false, 2);
-		}
+        if ($vbphrase["stylevar_{$this->stylevarid}_description{$addon}"]) {
+            print_description_row($vbphrase["stylevar_{$this->stylevarid}_description{$addon}"], false, 2);
+        }
 
-		// once we have LSB change this to self::
-		$this->print_editor_form();
-	}
+        // once we have LSB change this to self::
+        $this->print_editor_form();
+    }
 
-	abstract public function print_editor_form();
+    abstract public function print_editor_form();
 
-	public function set_value($value)
-	{
-		$this->value = $value;
-		//$this->validate();
-	}
+    public function set_value($value)
+    {
+        $this->value = $value;
+        //$this->validate();
+    }
 
-	public function set_definition($definition)
-	{
-		$this->definition = $definition;
-	}
+    public function set_definition($definition)
+    {
+        $this->definition = $definition;
+    }
 
-	public function set_inherited($inherited)
-	{
-		$this->inherited = $inherited;
-	}
+    public function set_inherited($inherited)
+    {
+        $this->inherited = $inherited;
+    }
 
-	public function set_stylevarid($stylevarid)
-	{
-		$this->stylevarid = $stylevarid;
-	}
+    public function set_stylevarid($stylevarid)
+    {
+        $this->stylevarid = $stylevarid;
+    }
 
-	public function set_styleid($styleid)
-	{
-		$this->styleid = $styleid;
-	}
+    public function set_styleid($styleid)
+    {
+        $this->styleid = $styleid;
+    }
 
-	public function get()
-	{
-		return ($this->value);
-	}
+    public function get()
+    {
+        return ($this->value);
+    }
 
-	protected function fetch_inherit_color()
-	{
-		switch($this->inherited)
-		{
-			case 0:
-				$class = 'col-g';
-				break;
+    protected function fetch_inherit_color()
+    {
+        switch ($this->inherited) {
+            case 0:
+                $class = 'col-g';
+                break;
 
-			case 1:
-				$class = 'col-i';
-				break;
+            case 1:
+                $class = 'col-i';
+                break;
 
-			case -1:
-			case -2:
-			default:
-				$class = 'col-c';
-				break;
-		}
-		return $class;
-	}
+            case -1:
+            case -2:
+            default:
+                $class = 'col-c';
+                break;
+        }
+        return $class;
+    }
 
-	public function build()
-	{
-		if (!is_array($this->value))
-		{
-			$this->value = array($this->value);
-		}
+    public function build()
+    {
+        if (!is_array($this->value)) {
+            $this->value = array($this->value);
+        }
 
-		$value = serialize($this->value);
-		$this->registry->db->query_write("
+        $value = serialize($this->value);
+        $this->registry->db->query_write("
 			REPLACE INTO " . TABLE_PREFIX . "stylevar
 			(stylevarid, styleid, value, dateline, username)
 			VALUE
@@ -159,82 +149,80 @@ abstract class vB_StyleVar
 				'" . $this->registry->db->escape_string($this->registry->userinfo['username']) . "'
 			)
 		");
-	}
+    }
 
-	public function print_units($current_units)
-	{
-		global $vbphrase;
-		$svunitsarray = array(
-			'' => '',
-			'%' => '%',
-			'px' => 'px',
-			'pt' => 'pt',
-			'em' => 'em',
-			'ex' => 'ex',
-			'pc' => 'pc',
-			'in' => 'in',
-			'cm' => 'cm',
-			'mm' => 'mm'
-		);
+    public function print_units($current_units)
+    {
+        global $vbphrase;
+        $svunitsarray = array(
+            '' => '',
+            '%' => '%',
+            'px' => 'px',
+            'pt' => 'pt',
+            'em' => 'em',
+            'ex' => 'ex',
+            'pc' => 'pc',
+            'in' => 'in',
+            'cm' => 'cm',
+            'mm' => 'mm'
+        );
 
-		print_select_row($vbphrase['units'], 'stylevar[' . $this->stylevarid . '][units]', $svunitsarray, $current_units);
-	}
+        print_select_row($vbphrase['units'], 'stylevar[' . $this->stylevarid . '][units]', $svunitsarray, $current_units);
+    }
 
-	public function print_border_style($current_style)
-	{
-		global $vbphrase;
+    public function print_border_style($current_style)
+    {
+        global $vbphrase;
 
-		$svborderstylearray = array(
-			'none' => 'none',
-			'hidden' => 'hidden',
-			'dotted' => 'dotted',
-			'dashed' => 'dashed',
-			'solid' => 'solid',
-			'double' => 'double',
-			'groove' => 'groove',
-			'ridge' => 'ridge',
-			'inset' => 'inset',
-			'outset' => 'outset',
-			'inherit' => 'inherit'
-		);
+        $svborderstylearray = array(
+            'none' => 'none',
+            'hidden' => 'hidden',
+            'dotted' => 'dotted',
+            'dashed' => 'dashed',
+            'solid' => 'solid',
+            'double' => 'double',
+            'groove' => 'groove',
+            'ridge' => 'ridge',
+            'inset' => 'inset',
+            'outset' => 'outset',
+            'inherit' => 'inherit'
+        );
 
-		print_select_row($vbphrase['border_style'], 'stylevar[' . $this->stylevarid . '][style]', $svborderstylearray, $current_style);
-	}
-	
-	protected function print_color_input_row($title, $name, $value)
-	{
-		$cp = "";
+        print_select_row($vbphrase['border_style'], 'stylevar[' . $this->stylevarid . '][style]', $svborderstylearray, $current_style);
+    }
 
-		//only include the colorpicker on the first color element.
-		if (self::$need_colorpicker)
-		{
-			//construct all of the markup/javascript for the color picker.
-			global $vbulletin, $vbphrase;
+    protected function print_color_input_row($title, $name, $value)
+    {
+        $cp = "";
 
-			//set from construct_color_picker
-			global $colorPickerWidth, $colorPickerType;
+        //only include the colorpicker on the first color element.
+        if (self::$need_colorpicker) {
+            //construct all of the markup/javascript for the color picker.
+            global $vbulletin, $vbphrase;
 
-			$cp = '<script type="text/javascript" src="' . $vbulletin->options['bburl'] .
-				'/clientscript/vbulletin_cpcolorpicker.js?v=' .
-				$vbulletin->options['simpleversion'] . '"></script>' . "\n";
-			$cp .= construct_color_picker(11);
+            //set from construct_color_picker
+            global $colorPickerWidth, $colorPickerType;
 
-			$js_phrases = array();
-			foreach (array(
-				'css_value_invalid',
-				'color_picker_not_ready',
-			) AS $phrasename)
-			{
-				$js_phrases[] = "vbphrase.$phrasename = \"" . fetch_js_safe_string($vbphrase["$phrasename"]) . "\"";
-			}
+            $cp = '<script type="text/javascript" src="' . $vbulletin->options['bburl'] .
+                '/clientscript/vbulletin_cpcolorpicker.js?v=' .
+                $vbulletin->options['simpleversion'] . '"></script>' . "\n";
+            $cp .= construct_color_picker(11);
 
-			$js_phrases = "\r\n\t\t\t\t\t" . implode(";\r\n\t\t\t\t\t", $js_phrases) . ";";
+            $js_phrases = array();
+            foreach (array(
+                         'css_value_invalid',
+                         'color_picker_not_ready',
+                     ) AS $phrasename) {
+                $js_phrases[] = "vbphrase.$phrasename = \"" . fetch_js_safe_string($vbphrase["$phrasename"]) . "\"";
+            }
 
-			$cp .= '
+            $js_phrases = "\r\n\t\t\t\t\t" . implode(";\r\n\t\t\t\t\t", $js_phrases) . ";";
+
+            $cp .= '
 					<script type="text/javascript">
 					<!--
-					var bburl = "' . $vbulletin->options['bburl'] .'";
-					var cpstylefolder = "' . $vbulletin->options['cpstylefolder'] .'";
+					var bburl = "' . $vbulletin->options['bburl'] . '";
+					var cpstylefolder = "' . $vbulletin->options['cpstylefolder'] . '";
 					var colorPickerWidth = ' . intval($colorPickerWidth) . ';
 					var colorPickerType = ' . intval($colorPickerType) . ';
 					if(vbphrase == undefined) {vbphrase = new Object();}
@@ -244,50 +232,48 @@ abstract class vB_StyleVar
 					{
 						init_color_preview();
 					});
-					var cleargifurl = "' .$vbulletin->options['cleargifurl'] .'";
+					var cleargifurl = "' . $vbulletin->options['cleargifurl'] . '";
 					//-->
 				</script>';
 
-			self::$need_colorpicker = false;
-		}
+            self::$need_colorpicker = false;
+        }
 
-		$id = 'color_'. self::$count;
+        $id = 'color_' . self::$count;
 
-		$color_preview = '<div id="preview_' . self::$count .
-			'" class="colorpreview" onclick="open_color_picker(' . self::$count . ', event)"></div>';
+        $color_preview = '<div id="preview_' . self::$count .
+            '" class="colorpreview" onclick="open_color_picker(' . self::$count . ', event)"></div>';
 
-		$title_attr = ($vbulletin->debug ? " title=\"name=&quot;$name&quot;\"" : '');
-		$cell =
-			"<div id=\"ctrl_$name\" class=\"color_input_container\">" .
-				"<input type=\"text\" name=\"$name\" id=\"$id\" " .
-					"value=\"$value\" " .
-					"tabindex=\"1\" $title_attr />" .
-			"</div>";
+        $title_attr = ($vbulletin->debug ? " title=\"name=&quot;$name&quot;\"" : '');
+        $cell =
+            "<div id=\"ctrl_$name\" class=\"color_input_container\">" .
+            "<input type=\"text\" name=\"$name\" id=\"$id\" " .
+            "value=\"$value\" " .
+            "tabindex=\"1\" $title_attr />" .
+            "</div>";
 
-		print_label_row(
-			$title,
-			$cp . $cell . $color_preview,
-			'', 'top', $name
-		);
+        print_label_row(
+            $title,
+            $cp . $cell . $color_preview,
+            '', 'top', $name
+        );
 
-		self::$count++;
-	}
+        self::$count++;
+    }
 
-	protected function print_background_output()
-	{
-		global $vbphrase;
-		$image = $this->value['image'];
+    protected function print_background_output()
+    {
+        global $vbphrase;
+        $image = $this->value['image'];
 
-		if ($this->value['image'] != "" && !strpos($image,'http://'))  /* see if image location is relative or not */
-		{
-			 /* this assumes that the images folder is stored in root directory might need to fix this one day */
-			$image = str_replace('(','(../',$image);
-		}
+        if ($this->value['image'] != "" && !strpos($image, 'http://'))  /* see if image location is relative or not */ {
+            /* this assumes that the images folder is stored in root directory might need to fix this one day */
+            $image = str_replace('(', '(../', $image);
+        }
 
-		$background_preview_js = '';
-		if (self::$need_background_preview_js)
-		{
-			$background_preview_js = '
+        $background_preview_js = '';
+        if (self::$need_background_preview_js) {
+            $background_preview_js = '
 				<script type="text/javascript">
 				<!--
 					function previewBackground(stylevar)
@@ -339,278 +325,276 @@ abstract class vB_StyleVar
 					}
 				-->
 				</script>';
-			self::$need_background_preview_js = false;
-		}
+            self::$need_background_preview_js = false;
+        }
 
-		$cell = "
+        $cell = "
 			<div id=\"preview_bg_" . $this->stylevarid . "\" style=\"
 				background: " . $this->value['color'] .
-				" " . $image .
-				" " . $this->value['repeat'] .
-				" " . $this->value['x'] . $this->value['units'].
-				" " . $this->value['y'] . $this->value['units'].
-				";width:100%;height:30px;border:1px solid #000000;\">
+            " " . $image .
+            " " . $this->value['repeat'] .
+            " " . $this->value['x'] . $this->value['units'] .
+            " " . $this->value['y'] . $this->value['units'] .
+            ";width:100%;height:30px;border:1px solid #000000;\">
 			</div>";
 
-		$label = '<a href="javascript:previewBackground(\'' . $this->stylevarid . '\');">'. $vbphrase['click_here_to_preview'] .' </a>';
-		print_label_row($label, $background_preview_js . $cell);
-	}
+        $label = '<a href="javascript:previewBackground(\'' . $this->stylevarid . '\');">' . $vbphrase['click_here_to_preview'] . ' </a>';
+        print_label_row($label, $background_preview_js . $cell);
+    }
 }
 
 class vB_StyleVar_default extends vB_StyleVar
 {
-	private $datatype;
+    private $datatype;
 
-	public function __construct($datatype)
-	{
-		$this->datatype = $datatype;
-	}
+    public function __construct($datatype)
+    {
+        $this->datatype = $datatype;
+    }
 
-	public function print_editor_form()
-	{
-		global $vbphrase;
+    public function print_editor_form()
+    {
+        global $vbphrase;
 
-		// imagedir, url, path, and string are technically all just strings
-		switch ($this->datatype)
-		{
-			case 'string':
-				print_input_row($vbphrase['string'], 'stylevar[' . $this->stylevarid . ']', $this->value[$this->datatype], true);
-			break;
+        // imagedir, url, path, and string are technically all just strings
+        switch ($this->datatype) {
+            case 'string':
+                print_input_row($vbphrase['string'], 'stylevar[' . $this->stylevarid . ']', $this->value[$this->datatype], true);
+                break;
 
-			case 'url':
-				print_input_row($vbphrase['url'], 'stylevar[' . $this->stylevarid . ']', $this->value[$this->datatype], true);
-			break;
+            case 'url':
+                print_input_row($vbphrase['url'], 'stylevar[' . $this->stylevarid . ']', $this->value[$this->datatype], true);
+                break;
 
-			case 'imagedir':
-				print_input_row($vbphrase['image_path'], 'stylevar[' . $this->stylevarid . ']', $this->value[$this->datatype], true);
-			break;
+            case 'imagedir':
+                print_input_row($vbphrase['image_path'], 'stylevar[' . $this->stylevarid . ']', $this->value[$this->datatype], true);
+                break;
 
-			case 'path':
-				print_input_row($vbphrase['path'], 'stylevar[' . $this->stylevarid . ']', $this->value[$this->datatype], true);
-			break;
+            case 'path':
+                print_input_row($vbphrase['path'], 'stylevar[' . $this->stylevarid . ']', $this->value[$this->datatype], true);
+                break;
 
-			case 'numeric':
-				print_input_row($vbphrase['numeric'], 'stylevar[' . $this->stylevarid . ']', $this->value[$this->datatype], true);
-			break;
+            case 'numeric':
+                print_input_row($vbphrase['numeric'], 'stylevar[' . $this->stylevarid . ']', $this->value[$this->datatype], true);
+                break;
 
-			case 'size':
-				$this->print_units($this->value['units']);
-				print_input_row($vbphrase['size'], 'stylevar[' . $this->stylevarid . '][size]', $this->value['size'], true);
-			break;
+            case 'size':
+                $this->print_units($this->value['units']);
+                print_input_row($vbphrase['size'], 'stylevar[' . $this->stylevarid . '][size]', $this->value['size'], true);
+                break;
 
-			case 'fontlist':
-				print_textarea_row($vbphrase['fontlist'], 'stylevar[' . $this->stylevarid . ']', $this->value[$this->datatype], 20, 40, true);
-			break;
-		}
-	}
+            case 'fontlist':
+                print_textarea_row($vbphrase['fontlist'], 'stylevar[' . $this->stylevarid . ']', $this->value[$this->datatype], 20, 40, true);
+                break;
+        }
+    }
 }
 
 class vB_StyleVar_padding extends vB_StyleVar
 {
-	public function print_editor_form()
-	{
-		global $vbphrase;
-		$this->print_units($this->value['units']);
-		print_yes_no_row($vbphrase['use_same_padding_margin'], 'stylevar[' . $this->stylevarid . '][same]', $this->value['same']);
-		print_input_row($vbphrase['top'], 'stylevar[' . $this->stylevarid . '][top]', $this->value['top'], true);
-		print_input_row($vbphrase['right'], 'stylevar[' . $this->stylevarid . '][right]', $this->value['right'], true);
-		print_input_row($vbphrase['bottom'], 'stylevar[' . $this->stylevarid . '][bottom]', $this->value['bottom'], true);
-		print_input_row($vbphrase['left'], 'stylevar[' . $this->stylevarid . '][left]', $this->value['left'], true);
-	}
+    public function print_editor_form()
+    {
+        global $vbphrase;
+        $this->print_units($this->value['units']);
+        print_yes_no_row($vbphrase['use_same_padding_margin'], 'stylevar[' . $this->stylevarid . '][same]', $this->value['same']);
+        print_input_row($vbphrase['top'], 'stylevar[' . $this->stylevarid . '][top]', $this->value['top'], true);
+        print_input_row($vbphrase['right'], 'stylevar[' . $this->stylevarid . '][right]', $this->value['right'], true);
+        print_input_row($vbphrase['bottom'], 'stylevar[' . $this->stylevarid . '][bottom]', $this->value['bottom'], true);
+        print_input_row($vbphrase['left'], 'stylevar[' . $this->stylevarid . '][left]', $this->value['left'], true);
+    }
 }
 
 class vB_StyleVar_margin extends vB_StyleVar
 {
-	public function print_editor_form()
-	{
-		global $vbphrase;
+    public function print_editor_form()
+    {
+        global $vbphrase;
 
-		$this->print_units($this->value['units']);
-		print_yes_no_row($vbphrase['use_same_padding_margin'], 'stylevar[' . $this->stylevarid . '][same]', $this->value['same']);
-		print_input_row($vbphrase['top'], 'stylevar[' . $this->stylevarid . '][top]', $this->value['top'], true);
-		print_input_row($vbphrase['right'], 'stylevar[' . $this->stylevarid . '][right]', $this->value['right'], true);
-		print_input_row($vbphrase['bottom'], 'stylevar[' . $this->stylevarid . '][bottom]', $this->value['bottom'], true);
-		print_input_row($vbphrase['left'], 'stylevar[' . $this->stylevarid . '][left]', $this->value['left'], true);
-	}
+        $this->print_units($this->value['units']);
+        print_yes_no_row($vbphrase['use_same_padding_margin'], 'stylevar[' . $this->stylevarid . '][same]', $this->value['same']);
+        print_input_row($vbphrase['top'], 'stylevar[' . $this->stylevarid . '][top]', $this->value['top'], true);
+        print_input_row($vbphrase['right'], 'stylevar[' . $this->stylevarid . '][right]', $this->value['right'], true);
+        print_input_row($vbphrase['bottom'], 'stylevar[' . $this->stylevarid . '][bottom]', $this->value['bottom'], true);
+        print_input_row($vbphrase['left'], 'stylevar[' . $this->stylevarid . '][left]', $this->value['left'], true);
+    }
 }
 
 class vB_StyleVar_textdecoration extends vB_StyleVar
 {
-	public function print_editor_form()
-	{
-		global $vbphrase;
-		// needs checked
-		print_yes_no_row($vbphrase['none'], 'stylevar[' . $this->stylevarid . '][none]', $this->value['none']);
-		print_yes_no_row($vbphrase['underline'], 'stylevar[' . $this->stylevarid . '][underline]', $this->value['underline']);
-		print_yes_no_row($vbphrase['overline'], 'stylevar[' . $this->stylevarid . '][overline]', $this->value['overline']);
-		print_yes_no_row($vbphrase['linethrough'], 'stylevar[' . $this->stylevarid . '][line-through]', $this->value['line-through']);
-		print_yes_no_row($vbphrase['blink'], 'stylevar[' . $this->stylevarid . '][blink]', $this->value['blink']);
-	}
+    public function print_editor_form()
+    {
+        global $vbphrase;
+        // needs checked
+        print_yes_no_row($vbphrase['none'], 'stylevar[' . $this->stylevarid . '][none]', $this->value['none']);
+        print_yes_no_row($vbphrase['underline'], 'stylevar[' . $this->stylevarid . '][underline]', $this->value['underline']);
+        print_yes_no_row($vbphrase['overline'], 'stylevar[' . $this->stylevarid . '][overline]', $this->value['overline']);
+        print_yes_no_row($vbphrase['linethrough'], 'stylevar[' . $this->stylevarid . '][line-through]', $this->value['line-through']);
+        print_yes_no_row($vbphrase['blink'], 'stylevar[' . $this->stylevarid . '][blink]', $this->value['blink']);
+    }
 }
 
 class vB_StyleVar_font extends vB_StyleVar
 {
-	public function print_editor_form()
-	{
-		global $vbphrase;
+    public function print_editor_form()
+    {
+        global $vbphrase;
 
-		$font_weights = array(
-			'' => '',
-			'normal' => $vbphrase['normal'],
-			'bold' => $vbphrase['bold'],
-			'bolder' => $vbphrase['bolder'],
-			'lighter' => $vbphrase['lighter'],
-		);
+        $font_weights = array(
+            '' => '',
+            'normal' => $vbphrase['normal'],
+            'bold' => $vbphrase['bold'],
+            'bolder' => $vbphrase['bolder'],
+            'lighter' => $vbphrase['lighter'],
+        );
 
-		$font_styles = array(
-			'' => '',
-			'normal' => $vbphrase['normal'],
-			'italic' => $vbphrase['italic'],
-			'oblique' => $vbphrase['oblique'],
-		);
+        $font_styles = array(
+            '' => '',
+            'normal' => $vbphrase['normal'],
+            'italic' => $vbphrase['italic'],
+            'oblique' => $vbphrase['oblique'],
+        );
 
-		$font_variants = array(
-			'' => '',
-			'normal' => $vbphrase['normal'],
-			'small-caps' => $vbphrase['small_caps'],
-		);
+        $font_variants = array(
+            '' => '',
+            'normal' => $vbphrase['normal'],
+            'small-caps' => $vbphrase['small_caps'],
+        );
 
-		// TODO: add repeat, offset
-		print_input_row($vbphrase['font_family'], 'stylevar[' . $this->stylevarid . '][family]', $this->value['family'], true);
+        // TODO: add repeat, offset
+        print_input_row($vbphrase['font_family'], 'stylevar[' . $this->stylevarid . '][family]', $this->value['family'], true);
 
-		$this->print_units($this->value['units']);
-		print_input_row($vbphrase['font_size'], 'stylevar[' . $this->stylevarid . '][size]', $this->value['size'], true);
+        $this->print_units($this->value['units']);
+        print_input_row($vbphrase['font_size'], 'stylevar[' . $this->stylevarid . '][size]', $this->value['size'], true);
 
-		print_select_row($vbphrase['font_weight'], 'stylevar[' . $this->stylevarid . '][weight]', $font_weights, $this->value['weight']);
-		print_select_row($vbphrase['font_style'], 'stylevar[' . $this->stylevarid . '][style]', $font_styles, $this->value['style']);
-		print_select_row($vbphrase['font_variant'], 'stylevar[' . $this->stylevarid . '][variant]', $font_variants, $this->value['variant']);
-	}
+        print_select_row($vbphrase['font_weight'], 'stylevar[' . $this->stylevarid . '][weight]', $font_weights, $this->value['weight']);
+        print_select_row($vbphrase['font_style'], 'stylevar[' . $this->stylevarid . '][style]', $font_styles, $this->value['style']);
+        print_select_row($vbphrase['font_variant'], 'stylevar[' . $this->stylevarid . '][variant]', $font_variants, $this->value['variant']);
+    }
 }
 
 class vB_StyleVar_background extends vB_StyleVar
 {
 
-	public function print_editor_form()
-	{
-		global $vbphrase;
+    public function print_editor_form()
+    {
+        global $vbphrase;
 
-		$values = array(
-			'' => '',
-			'repeat' => $vbphrase['repeat'],
-			'repeat-x' => $vbphrase['repeat_x'],
-			'repeat-y' => $vbphrase['repeat_y'],
-			'no-repeat' => $vbphrase['no_repeat'],
-		);
+        $values = array(
+            '' => '',
+            'repeat' => $vbphrase['repeat'],
+            'repeat-x' => $vbphrase['repeat_x'],
+            'repeat-y' => $vbphrase['repeat_y'],
+            'no-repeat' => $vbphrase['no_repeat'],
+        );
 
-		// TODO: add repeat, offset -- Offset Done
-		$this->print_color_input_row($vbphrase['background_color'], 'stylevar[' . $this->stylevarid . '][color]', $this->value['color']);
-		print_input_row($vbphrase['background_image'], 'stylevar[' . $this->stylevarid . '][image]', $this->value['image'], true);
-		print_select_row($vbphrase['background_repeat'], 'stylevar[' . $this->stylevarid . '][repeat]', $values, $this->value['repeat']);
-		$this->print_units($this->value['units']);
-		print_input_row($vbphrase['background_position_x'], 'stylevar['.$this->stylevarid.'][x]',$this->value['x'],true);
-		print_input_row($vbphrase['background_position_y'], 'stylevar['.$this->stylevarid.'][y]',$this->value['y'],true);
-		$this->print_background_output();
-	}
+        // TODO: add repeat, offset -- Offset Done
+        $this->print_color_input_row($vbphrase['background_color'], 'stylevar[' . $this->stylevarid . '][color]', $this->value['color']);
+        print_input_row($vbphrase['background_image'], 'stylevar[' . $this->stylevarid . '][image]', $this->value['image'], true);
+        print_select_row($vbphrase['background_repeat'], 'stylevar[' . $this->stylevarid . '][repeat]', $values, $this->value['repeat']);
+        $this->print_units($this->value['units']);
+        print_input_row($vbphrase['background_position_x'], 'stylevar[' . $this->stylevarid . '][x]', $this->value['x'], true);
+        print_input_row($vbphrase['background_position_y'], 'stylevar[' . $this->stylevarid . '][y]', $this->value['y'], true);
+        $this->print_background_output();
+    }
 
 }
 
 class vB_StyleVar_dimension extends vB_StyleVar
 {
-	public function print_editor_form()
-	{
-		global $vbphrase;
+    public function print_editor_form()
+    {
+        global $vbphrase;
 
-		$this->print_units($this->value['units']);
-		print_input_row($vbphrase['width'], 'stylevar[' . $this->stylevarid . '][width]', $this->value['width'], true);
-		print_input_row($vbphrase['height'], 'stylevar[' . $this->stylevarid . '][height]', $this->value['height'], true);
-	}
+        $this->print_units($this->value['units']);
+        print_input_row($vbphrase['width'], 'stylevar[' . $this->stylevarid . '][width]', $this->value['width'], true);
+        print_input_row($vbphrase['height'], 'stylevar[' . $this->stylevarid . '][height]', $this->value['height'], true);
+    }
 }
 
 class vB_StyleVar_border extends vB_StyleVar
 {
-	public function print_editor_form()
-	{
-		global $vbphrase;
+    public function print_editor_form()
+    {
+        global $vbphrase;
 
-		$this->print_units($this->value['units']);
-		print_input_row($vbphrase['width'], 'stylevar[' . $this->stylevarid . '][width]', $this->value['width'], true);
-		$this->print_border_style($this->value['style']);
-		$this->print_color_input_row($vbphrase['color'], 'stylevar[' . $this->stylevarid . '][color]', $this->value['color']);
-	}
+        $this->print_units($this->value['units']);
+        print_input_row($vbphrase['width'], 'stylevar[' . $this->stylevarid . '][width]', $this->value['width'], true);
+        $this->print_border_style($this->value['style']);
+        $this->print_color_input_row($vbphrase['color'], 'stylevar[' . $this->stylevarid . '][color]', $this->value['color']);
+    }
 }
 
 class vB_StyleVar_color extends vB_StyleVar
 {
-	public function print_editor_form()
-	{
-		global $vbphrase;
+    public function print_editor_form()
+    {
+        global $vbphrase;
 
-		$this->print_color_input_row($vbphrase['color'], 'stylevar[' . $this->stylevarid . '][color]', $this->value['color']);
-	}
+        $this->print_color_input_row($vbphrase['color'], 'stylevar[' . $this->stylevarid . '][color]', $this->value['color']);
+    }
 }
 
 class vB_StyleVar_factory
 {
-	/**
-	 * Creates a stylevar.
-	 *
-	 * @param string $type
-	 * @return vB_StyleVar
-	 */
-	public static function create($type)
-	{
-		// not really a good factory, in fact, this is a dumb factory
-		$stylevarobj = null;
-		switch ($type)
-		{
-			case 'numeric':
-			case 'string':
-			case 'url':
-			case 'imagedir':
-			case 'image':
-			case 'path':
-			case 'fontlist':
-			case 'size':
-				$stylevarobj = new vB_StyleVar_default($type);
-				break;
+    /**
+     * Creates a stylevar.
+     *
+     * @param string $type
+     * @return vB_StyleVar
+     */
+    public static function create($type)
+    {
+        // not really a good factory, in fact, this is a dumb factory
+        $stylevarobj = null;
+        switch ($type) {
+            case 'numeric':
+            case 'string':
+            case 'url':
+            case 'imagedir':
+            case 'image':
+            case 'path':
+            case 'fontlist':
+            case 'size':
+                $stylevarobj = new vB_StyleVar_default($type);
+                break;
 
-			case 'color':
-				$stylevarobj = new vB_StyleVar_color();
-				break;
+            case 'color':
+                $stylevarobj = new vB_StyleVar_color();
+                break;
 
-			case 'background':
-				$stylevarobj = new vB_StyleVar_background();
-				break;
+            case 'background':
+                $stylevarobj = new vB_StyleVar_background();
+                break;
 
-			case 'textdecoration':
-				$stylevarobj = new vB_StyleVar_textdecoration();
-				break;
+            case 'textdecoration':
+                $stylevarobj = new vB_StyleVar_textdecoration();
+                break;
 
-			case 'font':
-				$stylevarobj = new vB_StyleVar_font();
-				break;
+            case 'font':
+                $stylevarobj = new vB_StyleVar_font();
+                break;
 
-			case 'dimension':
-				$stylevarobj = new vB_StyleVar_dimension();
-				break;
+            case 'dimension':
+                $stylevarobj = new vB_StyleVar_dimension();
+                break;
 
-			case 'border':
-				$stylevarobj = new vB_StyleVar_border();
-				break;
+            case 'border':
+                $stylevarobj = new vB_StyleVar_border();
+                break;
 
-			case 'padding':
-				$stylevarobj = new vB_StyleVar_padding();
-				break;
+            case 'padding':
+                $stylevarobj = new vB_StyleVar_padding();
+                break;
 
-			case 'margin':
-				$stylevarobj = new vB_StyleVar_margin();
-				break;
+            case 'margin':
+                $stylevarobj = new vB_StyleVar_margin();
+                break;
 
-			default:
-				trigger_error("Unknown Data Type ( Type: " . $type . ")", E_USER_ERROR);
-		}
-		return $stylevarobj;
-	}
+            default:
+                trigger_error("Unknown Data Type ( Type: " . $type . ")", E_USER_ERROR);
+        }
+        return $stylevarobj;
+    }
 }
 
 /*======================================================================*\

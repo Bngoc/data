@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -12,9 +12,8 @@
 
 // ######################## SET PHP ENVIRONMENT ###########################
 error_reporting(E_ALL & ~E_NOTICE);
-if (!is_object($vbulletin->db))
-{
-	exit;
+if (!is_object($vbulletin->db)) {
+    exit;
 }
 
 // ########################################################################
@@ -35,30 +34,28 @@ $vbulletin->db->query_write("
 		KEY attachmentid (attachmentid)
 	) $enginetype = $tabletype");
 
-if ($vbulletin->options['usemailqueue'] == 2)
-{
-	$vbulletin->db->lock_tables(array(
-		$aggtable         => 'WRITE',
-		'attachmentviews' => 'WRITE'
-	));
+if ($vbulletin->options['usemailqueue'] == 2) {
+    $vbulletin->db->lock_tables(array(
+        $aggtable => 'WRITE',
+        'attachmentviews' => 'WRITE'
+    ));
 }
 
 $vbulletin->db->query_write("
-	INSERT INTO ". TABLE_PREFIX ."$aggtable
+	INSERT INTO " . TABLE_PREFIX . "$aggtable
 		SELECT attachmentid, COUNT(*) AS views
 		FROM " . TABLE_PREFIX . "attachmentviews
 		GROUP BY attachmentid
 ");
 
-if ($vbulletin->options['usemailqueue'] == 2)
-{
-	$vbulletin->db->unlock_tables();
+if ($vbulletin->options['usemailqueue'] == 2) {
+    $vbulletin->db->unlock_tables();
 }
 /* Small race condition but better than lots of IO wait for a DELETE query */
 $vbulletin->db->query_write("TRUNCATE TABLE " . TABLE_PREFIX . "attachmentviews");
 
 $vbulletin->db->query_write(
-	"UPDATE " . TABLE_PREFIX . "attachment AS attachment,". TABLE_PREFIX . "$aggtable AS aggregate
+    "UPDATE " . TABLE_PREFIX . "attachment AS attachment," . TABLE_PREFIX . "$aggtable AS aggregate
 	SET attachment.counter = attachment.counter + aggregate.views
 	WHERE attachment.attachmentid = aggregate.attachmentid
 ");

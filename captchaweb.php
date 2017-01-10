@@ -1,7 +1,7 @@
 <?php
 include('core/init.php');
 
-require_once MODULE_ADM .'/core/captcha/phptextClass.php';
+require_once MODULE_ADM . '/core/captcha/phptextClass.php';
 //echo MODULE_ADM .'/core/captcha/phptextClass.php'; die();
 $phptextObj = new phptextClass();
 $phptextObj->path_Url = MODULE_ADM;

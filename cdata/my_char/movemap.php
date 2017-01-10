@@ -66,7 +66,7 @@ echo cn_snippet_messages();
 </form>
 
 <?php
-    echoFormVerifyChar(['action_movemap' => 'movemap']);
+echoFormVerifyChar(['action_movemap' => 'movemap']);
 ?>
 
 

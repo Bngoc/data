@@ -68,7 +68,7 @@ echo cn_snippet_messages();
       onsubmit="return validateFormOnSubmit('Bạn có chắc muốn đổi tên nhân vật không?');">
     <?php cn_form_open('mod, opt, sub'); ?>
     <input type="hidden" value="_cname" name="action_cname"/>
-   <table width="100%">
+    <table width="100%">
 
         <tr>
             <td colspan="3" class="">MÃ XÁC NHẬN</td>
@@ -114,7 +114,7 @@ echo cn_snippet_messages();
                      onclick="document.getElementById('verify').reset();" style="padding-left:10px">
             </td>
         </tr>
-    </form>
+</form>
 </table>
 
 

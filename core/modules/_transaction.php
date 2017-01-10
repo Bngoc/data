@@ -213,7 +213,7 @@ function transaction___buy_gd()
                             $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
                             $item_code = substr_replace($item_code, dechex($i * 16), 18, 2);
                             $leng_item_code = strlen($item_code);
-                            $item_data = getCodeItem($item_code);
+                            $item_data = cn_getCodeItem($item_code);
                             if (($item_data['id'] == 15 || $item_data['id'] == 20 || $item_data['id'] == 23 || $item_data['id'] == 32 || $item_data['id'] == 37 || $item_data['id'] == 47 || $item_data['id'] == 48) && ($i == 7)) {
                                 continue;
                             } else {
@@ -223,7 +223,7 @@ function transaction___buy_gd()
                                     //$errors_false = true;
                                     msg_info('[Error - line 251] Gặp sự cố trên Server. Vui thông báo cho admin.', cn_url_modify(array('reset'), 'mod=' . REQ('mod'), 'token=' . REQ('token'), 'opt=' . REQ('opt')));
                                 }
-                                $slot = CheckSlotWarehouse($warehouse, $items['X'], $items['Y']);
+                                $slot = cn_CheckSlotWarehouse($warehouse, $items['X'], $items['Y']);
 
                                 echo "<br><br><br><br>217 slot => " . $slot . " <br>";
                                 if ($slot == 3840) {
@@ -237,14 +237,14 @@ function transaction___buy_gd()
                         $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0][0]));
                         $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
                         $leng_item_code = strlen($item_code);
-                        $item_data = getCodeItem($item_code);
+                        $item_data = cn_getCodeItem($item_code);
                         $items = $items_data[$item_data['group'] . "." . $item_data['id']];
                         if (!$items) {
                             //cn_throw_message("[Error - line 251] Gặp sự cố trên Server. Vui thông báo cho admin",'e');
                             //$errors_false = true;
                             msg_info('[Error - line 251] Gặp sự cố trên Server. Vui thông báo cho admin.', cn_url_modify(array('reset'), 'mod=' . REQ('mod'), 'token=' . REQ('token'), 'opt=' . REQ('opt')));
                         }
-                        $slot = CheckSlotWarehouse($warehouse, $items['X'], $items['Y']);
+                        $slot = cn_CheckSlotWarehouse($warehouse, $items['X'], $items['Y']);
                         if ($slot == 3840) {
                             cn_throw_message("Không đủ chỗ trống trong Hòm đồ", 'e');
                             $errors_false = true;
@@ -261,10 +261,9 @@ function transaction___buy_gd()
                 //Ghi vào Log
                 $content = "$accc_ đã mua $name_ (Serial: $serial_n) giá " . number_format($price_, 0, ",", ".") . " V.Point";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/log_" . $opt . ".txt";
-                $fp = fopen($file, "a+");
-                fputs($fp, $accc_ . "|" . $content . "|" . $vp_ . "|" . $check . "|" . $Date . "|\n");
-                fclose($fp);
+                $file = MODULE_ADM . "/log/modules/log_" . $opt . ".log";
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $vp_ . "|" . $check . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
 
                 cn_throw_message("Bạn đã mua thành công $name_ với giá " . number_format($price_, 0, ",", ".") . " V.Point.");

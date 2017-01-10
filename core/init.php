@@ -72,8 +72,8 @@ cn_connect_forum();
 // 2.0.3 checking existing configuration
 //if ($is_config)
 //{
-    //cn_load_plugins();
-    //cn_online_counter();
+//cn_load_plugins();
+//cn_online_counter();
 //}
 
 //db_installed_check();

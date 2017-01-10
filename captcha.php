@@ -2,7 +2,7 @@
 
 include('core/init.php');
 
-require_once SERVDIR .'/core/captcha/phptextClass.php';
+require_once SERVDIR . '/core/captcha/phptextClass.php';
 /*create class object*/
 $phptextObj = new phptextClass();
 

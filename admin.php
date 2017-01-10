@@ -18,7 +18,7 @@ cn_register_form();
 if (cn_login()) {
     hook('index/invoke_module', array($_module));
 } else {
-     cn_login_form();
+    cn_login_form();
 }
 
 ?>

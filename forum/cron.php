@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -27,8 +27,8 @@ $phrasegroups = array();
 
 // get special data templates from the datastore
 $specialtemplates = array(
-	'crondata',
-	'mailqueue',
+    'crondata',
+    'mailqueue',
 );
 
 // pre-cache templates used by all actions
@@ -52,42 +52,34 @@ $filesize = strlen($filedata);
 
 header('Content-type: image/gif');
 
-if (!(strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false AND strpos(SAPI_NAME, 'cgi') !== false))
-{
-	header('Content-Length: ' . $filesize);
-	header('Connection: Close');
+if (!(strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false AND strpos(SAPI_NAME, 'cgi') !== false)) {
+    header('Content-Length: ' . $filesize);
+    header('Connection: Close');
 }
 
-if (!$vbulletin->options['crontab'])
-{
-	echo $filedata;
-	flush();
+if (!$vbulletin->options['crontab']) {
+    echo $filedata;
+    flush();
 }
 
 ($hook = vBulletinHook::fetch_hook('cron_start')) ? eval($hook) : false;
 
-if (!defined('NOSHUTDOWNFUNC') AND !$vbulletin->options['crontab'])
-{
-	vB_Shutdown::add('exec_cron');
-}
-else
-{
-	$cronid = NULL;
-	if ($vbulletin->options['crontab'] AND SAPI_NAME == 'cli')
-	{
-		$cronid = intval($_SERVER['argv'][1]);
-		// if its a negative number or 0 set it to NULL so it just grabs the next task
-		if ($cronid < 1)
-		{
-			$cronid = NULL;
-		}
-	}
+if (!defined('NOSHUTDOWNFUNC') AND !$vbulletin->options['crontab']) {
+    vB_Shutdown::add('exec_cron');
+} else {
+    $cronid = NULL;
+    if ($vbulletin->options['crontab'] AND SAPI_NAME == 'cli') {
+        $cronid = intval($_SERVER['argv'][1]);
+        // if its a negative number or 0 set it to NULL so it just grabs the next task
+        if ($cronid < 1) {
+            $cronid = NULL;
+        }
+    }
 
-	exec_cron($cronid);
-	if (defined('NOSHUTDOWNFUNC'))
-	{
-		$db->close();
-	}
+    exec_cron($cronid);
+    if (defined('NOSHUTDOWNFUNC')) {
+        $db->close();
+    }
 }
 
 /*======================================================================*\

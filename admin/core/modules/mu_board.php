@@ -9,7 +9,7 @@ function board_invoke()
     $dashboard = array
     (
         'editconfig:sysconf:Csc' => 'Cấu hình Hệ thống',
-        'editconfig:templates:Ct' => 'Cấu hình chức năng',
+        'editconfig:confchar:Ct' => 'Cấu hình chức năng',
         'editconfig:category:Can' => 'Cấu hình DDOS',
         /*'editconfig:iserverz:Ciw'     => 'SERVER',*/
         'editconfig:ischaracter:Ciw' => 'Character',
@@ -50,7 +50,7 @@ function board_invoke()
         'userman' => 'users.gif',
         'sysconf' => 'options.gif',
         'category' => 'category.png',
-        'templates' => 'template.png',
+        'confchar' => 'settings.png',
         'backup' => 'archives.gif',
         'archives' => 'arch.png',
         'media' => 'images.gif',
@@ -90,26 +90,9 @@ function board_invoke()
         $dashboard[$id] = $item;
     }
 
-
-    $member = member_get();
-
-    //$meta_draft = db_index_meta_load('draft');
-    //$drafts =isset($meta_draft['locs'])? intval(array_sum($meta_draft['locs'])):false;
-
-    //if ($drafts && test('Cvn'))
-    //{
-    //$greeting_message = i18n('News in draft: %1', '<a href="'.cn_url_modify('mod=editnews', 'source=draft').'"><b>'.$drafts.'</b></a>');
-    //}
-    //else
-    //{
-    //$greeting_message = i18n('Have a nice day!');
-    //}
-
     $greeting_message = 'Have a nice day!';
-    cn_assign('dashboard, username, greeting_message', $dashboard, $member['user_Account'], $greeting_message);
-    //echo exec_tpl('header');
+    cn_assign('dashboard, username, greeting_message', $dashboard, $_SESSION['user_Account'], $greeting_message);
     echo exec_tpl('com_board/general');
-
     echofooter();
 }
 
@@ -154,13 +137,9 @@ function board_sysconf()
         $grps[$id] = ucfirst($vn['N']);
     }
 
-    $options_list = array
-    (
-        // Section
-        'general' => array
-        (
-            // Option -> 0=Type(text [Y/N] int select), 1=Title|Description, [2=Optional values]
-
+    // Option -> 0=Type(text [Y/N] int select), 1=Title|Description, [2=Optional values]
+    $options_list = array(
+        'general' => array(
             '_GENERAL' => array('title', 'General site settings'),
             'http_script_dir' => array('text', 'Full URL to CuteNews directory|example: http://yoursite.com/cutenews'),
             'main_site' => array('text', 'URL to your site|example: http://yoursite.com/ (optional)'),
@@ -211,16 +190,16 @@ function board_sysconf()
 //            'tw_show_count' => array('Y/N', 'Show count|if yes, count of tweets will be shown near button', array("horisontal" => "Horisontal", "vertical" => "Vertical", "none" => "None")),
 //            'tw_via' => array('text', 'Via @|Screen name of the user to attribute the Tweet to'),
 //            'tw_recommended' => array('text', 'Recommended @|Accounts suggested to the user after tweeting, comma-separated.'),
-            'tw_hashtag' => array('text', 'Hashtag #|Comma-separated hashtags appended to the tweet text'),
-            'tw_large' => array('Y/N', 'Large button|if yes, the twitter button will be large'),
-            'tw_lang' => array('select', 'Language|The language of button text', array("en" => "English", "fr" => "French", "ar" => "Arabic", "ja" => "Japanese", "es" => "Spanish", "de" => "German", "it" => "Italian", "id" => "Indonesian", "pt" => "Portuguese", "ko" => "Korean", "tr" => "Turkish", "ru" => "Russian", "nl" => "Dutch", "fil" => "Filipino", "msa" => "Malay", "zh-tw" => "Traditional Chinese", "zh-cn" => "Simplified Chinese", "hi" => "Hindi", "no" => "Norwegian", "sv" => "Swedish", "fi" => "Finnish", "da" => "Danish", "pl" => "Polish", "hu" => "Hungarian", "fa" => "Farsi", "he" => "Hebrew", "ur" => "Urdu", "th" => "Thai", "uk" => "Ukrainian", "ca" => "Catalan", "el" => "Greek", "eu" => "Basque", "cs" => "Czech", "gl" => "Galician", "ro" => "Romanian")),
+//            'tw_hashtag' => array('text', 'Hashtag #|Comma-separated hashtags appended to the tweet text'),
+//            'tw_large' => array('Y/N', 'Large button|if yes, the twitter button will be large'),
+//            'tw_lang' => array('select', 'Language|The language of button text', array("en" => "English", "fr" => "French", "ar" => "Arabic", "ja" => "Japanese", "es" => "Spanish", "de" => "German", "it" => "Italian", "id" => "Indonesian", "pt" => "Portuguese", "ko" => "Korean", "tr" => "Turkish", "ru" => "Russian", "nl" => "Dutch", "fil" => "Filipino", "msa" => "Malay", "zh-tw" => "Traditional Chinese", "zh-cn" => "Simplified Chinese", "hi" => "Hindi", "no" => "Norwegian", "sv" => "Swedish", "fi" => "Finnish", "da" => "Danish", "pl" => "Polish", "hu" => "Hungarian", "fa" => "Farsi", "he" => "Hebrew", "ur" => "Urdu", "th" => "Thai", "uk" => "Ukrainian", "ca" => "Catalan", "el" => "Greek", "eu" => "Basque", "cs" => "Czech", "gl" => "Galician", "ro" => "Romanian")),
 
             // use_gplus + gplus_i18n
 //            '_G+' => array('title', 'Google+ button:'),
 //            'use_gplus' => array('Y/N', 'Use +1 button'),
 //            'gplus_size' => array('select', 'Button size', array("small" => "Small", "medium" => "Medium", "standard" => "Standard", "tall" => "Tall")),
-            'gplus_annotation' => array('select', 'Annotation|Sets the annotation to display next to the button.', array('inline' => 'Inline', 'bubble' => 'Bubble', 'none' => 'None')),
-            'gplus_width' => array('int', 'Box width, in pixels'),
+//            'gplus_annotation' => array('select', 'Annotation|Sets the annotation to display next to the button.', array('inline' => 'Inline', 'bubble' => 'Bubble', 'none' => 'None')),
+//            'gplus_width' => array('int', 'Box width, in pixels'),
 
             'allowed_extensions' => array('text', 'Allowed extensions|Used by file manager. Enter by comma without space'),
             'uploads_dir' => array('text', 'Server upload dir|Real path on server'),
@@ -228,23 +207,23 @@ function board_sysconf()
 
 
         ),
+        'websites' => array(
+//            'news_title_max_long' => array('int', 'Max. Length of news title in characters|enter <b>0</b> to disable chacking.'),
+//            'active_news_def' => array('int', 'Count active news, by default|If 0, show all list, with archives'),
+//            'reverse_active' => array('Y/N', 'Reverse News|if yes, older news will be shown on the top'),
+//            'full_popup' => array('Y/N', 'Show full story in popup|full Story will be opened in PopUp window'),
+//            'full_popup_string' => array('text', "Settings for full story popup|only if 'Show Full Story In PopUp' is enabled"),
+//            'auto_news_alias' => array('Y/N', 'Autocomplete page alias|Set news title as page alias'),
+//            'show_comments_with_full' => array('Y/N', 'Show comments when showing full story|if yes, comments will be shown under the story'),
+//            'timestamp_active' => array('text', 'Time format for news|view help for time formatting <a href="http://www.php.net/manual/en/function.date.php" target="_blank">here</a>'),
+//            'use_captcha' => array('Y/N', 'Use CAPTCHA|on registration and comments'),
+//            'hide_captcha' => array('Y/N', 'Hide captcha source path from visitors'),
+//            'disable_pagination' => array('Y/N', 'Disable pagination|Use it to disable pagination'),
+//            'mon_list' => array('text', 'Month list|comma separated, 12 variables'),
 
-        'websites' => array
-        (
-            'news_title_max_long' => array('int', 'Max. Length of news title in characters|enter <b>0</b> to disable chacking.'),
-            'active_news_def' => array('int', 'Count active news, by default|If 0, show all list, with archives'),
-            'reverse_active' => array('Y/N', 'Reverse News|if yes, older news will be shown on the top'),
-            'full_popup' => array('Y/N', 'Show full story in popup|full Story will be opened in PopUp window'),
-            'full_popup_string' => array('text', "Settings for full story popup|only if 'Show Full Story In PopUp' is enabled"),
-            'auto_news_alias' => array('Y/N', 'Autocomplete page alias|Set news title as page alias'),
-            'show_comments_with_full' => array('Y/N', 'Show comments when showing full story|if yes, comments will be shown under the story'),
-            'timestamp_active' => array('text', 'Time format for news|view help for time formatting <a href="http://www.php.net/manual/en/function.date.php" target="_blank">here</a>'),
-            'use_captcha' => array('Y/N', 'Use CAPTCHA|on registration and comments'),
-            'hide_captcha' => array('Y/N', 'Hide captcha source path from visitors'),
-            'disable_pagination' => array('Y/N', 'Disable pagination|Use it to disable pagination'),
-            'mon_list' => array('text', 'Month list|comma separated, 12 variables'),
+
+            'configLevel' => array('text', 'Set Vpoint level 150 - 220 - 380 |Ex: 2000|3000|5000  =-> 2k Vp <-> Level I; 3k Vp <-> Level II; 5k Vp <-> Level III'),
             'question_answers' => array('text', 'Câu hỏi|Liệt kê các câu hỏi ngăn cách nhau bằng dấu \',\''),
-
 
             'vptogc' => array('int', 'Công thức Gcoin = X% Vpoint|VD: X = 80 => [Gcoin = 80% Vpoint]'),
             //'gctovp'         => array('int', 'Title field will not be required|VD: 1 Vpoint = 1 Gcoin'),
@@ -264,22 +243,15 @@ function board_sysconf()
             'cap_reset_max' => array('int', 'Số cấp Reset hiển thị dành cho người chơi|Số cấp Reset từ cấp 1 đến cấp 20'),
             'use_gioihanrs' => array('select', 'Sử dụng giới hạn Reset|chọn giới hạn reset với nhu cầu', array(0 => "Không sử dụng", 1 => "Loại 1", 2 => "Loại 2",)),
         ),
-
-        'server' => array
-        (
+        'server' => array(
             'type_connect' => array('select', 'Dạng kết nối Database|show/hide standart comment system', array("odbc" => "Odbc", "mssql" => "Mssql")),
             'localhost' => array('text', 'Localhost|newest comments will be shown at the top'),
             'databaseuser' => array('text', 'User quản lý SQL (thường là sa)|in seconds; 0 = no protection'),
             'databsepassword' => array('password', 'Mật khẩu quản lý SQL|enter <b>0</b> to disable checking'),
             'd_base' => array('text', 'Database sử dụng để lưu trữ thông tin MU|enter <b>0</b> or leave empty to disable pagination'),
-//            'passviewcard' => array('password', 'Mật khẩu để vào trang Log, Admin|if yes, only registered users can post comments'),
-//            'passadmin' => array('password', 'Mật khẩu để vào trang Online, CheckIP|visitors will be able to put their site URL instead of an email'),
-//            'passcard' => array('password', 'Mật khẩu để vào trang CardPhone|comments will be opened in PopUp window'),
-//            'passcode' => array('password', "Mật khẩu để vào trang ViewCard|only if 'Show Comments In PopUp' is enabled"),
             'server_type' => array('select', 'Loại Server đang sử dụng|if yes, comments will be shown under the story', array("scf" => "SCF", "original" => "Original")),
         ),
-        'Napthe' => array
-        (
+        'napthe' => array(
             'napthe_list' => array('text', 'Nap the list [VTC - GATE - VIETTEL - MOBI - VINA]| 1 => Yes, 0 => No, VD: 1,1,1,1,1'),
             'napthe_gate' => array('text', 'Card Gate list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
             'napthe_vtc' => array('text', 'Card Vtc list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
@@ -287,8 +259,7 @@ function board_sysconf()
             'napthe_mobi' => array('text', 'Card Mobi list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
             'napthe_vina' => array('text', 'Card Vina list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
         ),
-        'Money' => array
-        (
+        'money' => array(
             '_MONEY' => array('title', 'Money:'),
             'config_itemvpoint' => array('text', 'Frontend upload dir|Frontend path for uploads'),
             'config_buyzen' => array('text', 'Frontend upload dir|Frontend path for uploads'),
@@ -299,9 +270,18 @@ function board_sysconf()
             'config_gc2wcp' => array('text', 'Frontend upload dir|Frontend path for uploads'),
             'config_gc2gob' => array('text', 'Frontend upload dir|Frontend path for uploads'),
         ),
-        'SEO' => array(
+        'seo' => array(
             'description' => array('text', 'Descriptions for site'),
             'keywords' => array('text', 'Keywords for website')
+        ),
+        'event' => array(
+            '_EVENT' => array('title', 'Event:'),
+        ),
+        'relax' => array(
+            '_RELAX_BCua' => array('title', 'Tro Bau Cua'),
+            'user_BauCua' => array('Y/N', 'Sử dụng trò Bầu Cua'),
+            '_RELAX_BCao' => array('title', 'Tro Bai Cao'),
+            'user_BaiCao' => array('Y/N', 'Relax:Sử dụng trò Bài Cáo'),
         )
     );
 
@@ -401,6 +381,156 @@ function board_sysconf()
     //echo exec_tpl('header');
     echo exec_tpl('com_board/sysconf');
     echofooter();
+}
+
+function board_confChar()
+{
+//
+//    $lng = $grps = $all_skins = array();
+//    $_grps = getoption('#grp');
+//    //$conf_class_ = cn_get_template('class_dw_1_name','config_class');
+//    //$conf_class = cn_get_template_byarr('config_class');
+//
+//    //echo "000000000000000000000 142 =>". $conf_class['class_dw_1_name'] ."<br>";
+//    //echo "000000000000000000000 143 =>". $conf_class_ ."<br>";
+//
+//
+//    /*
+//    // fetch skins
+//    foreach ($skins as $skin)
+//    {
+//        if (preg_match('/(.*)\.skin\.php/i', $skin, $c)) //<=> *.skin.php
+//        {
+//            $all_skins[$c[1]] = $c[1];
+//        }
+//    }
+//
+//    // fetch lang packets
+//    foreach ($langs as  $lf)
+//    {
+//        if (preg_match('/(.*)\.txt/i', $lf, $c))
+//        {
+//            $lng[$c[1]] = $c[1];
+//        }
+//    }
+//*/
+//    // fetch groups
+//    foreach ($_grps as $id => $vn) {
+//        $grps[$id] = ucfirst($vn['N']);
+//    }
+//
+//    $options_list = array
+//    (
+//        // Section
+//        // Option -> 0=Type(text [Y/N] int select), 1=Title|Description, [2=Optional values]
+//        'general' => array
+//        (
+//            '_GENERAL' => array('title', 'General site settings'),
+////            'configLevel' => array('text', 'Set Vpoint level 150 - 220 - 380 |Ex: 2000|3000|5000  =-> 2k Vp <-> Level I; 3k Vp <-> Level II; 5k Vp <-> Level III'),
+//        ),
+//        'xxxxc' => array(
+//            '_GENERAL' => array('title', 'General site settings'),
+//
+//        ),
+//        'x' => array
+//        (),
+//        'xxx' => array
+//        (),
+//        'xxxxx' => array
+//        (),
+//    );
+//
+//
+//    // Static rewrite path
+//    $cfg = mcache_get('config');
+//
+//
+//    // Save cached copy
+//    mcache_set('config', $cfg);
+//
+//    // ------------------
+//    $sub = REQ('sub', "GETPOST");
+//    if (!isset($options_list[$sub])) {
+//        $sub = 'general';
+//    }
+//
+//    // Save data
+//    if (request_type('POST')) {
+//        cn_dsi_check();
+//
+//        $post_cfg = $_POST['config'];
+//        $opt_result = getoption('#%site');
+//        $by_default = $options_list[$sub];
+//
+//        // Detect selfpath
+//        $SN = dirname($_SERVER['SCRIPT_NAME']);
+//        $script_path = "http://" . $_SERVER['SERVER_NAME'] . (($SN == '/' || $SN == '\\') ? '' : $SN);
+//
+//        // Fill empty fields
+//        if (empty($post_cfg['http_script_dir'])) {
+//            $post_cfg['http_script_dir'] = $script_path;
+//        }
+//        if (empty($post_cfg['uploads_dir'])) {
+//            //$post_cfg['uploads_dir'] =  cn_path_construct( SERVDIR , 'uploads');
+//            $post_cfg['uploads_dir'] = cn_path_construct(($SN == DIRECTORY_SEPARATOR) ? SERVDIR : substr(SERVDIR, 0, -strlen($SN)), 'uploads');
+//        }
+//        if (empty($post_cfg['uploads_ext'])) {
+//            $post_cfg['uploads_ext'] = $script_path . '/uploads';
+//        }
+//
+//
+//        // all
+//        foreach ($by_default as $id => $var) {
+//            if ($var[0] == 'text' || $var[0] == 'select') {
+//                $opt_result[$id] = $post_cfg[$id];
+//            } elseif ($var[0] == 'int') {
+//                $opt_result[$id] = intval($post_cfg[$id]);
+//            } elseif ($var[0] == 'password') {
+//                if ($post_cfg[$id]) {
+//                    $opt_result[$id] = $post_cfg[$id];
+//                } else {
+//                    $opt_result[$id] = getoption($id);
+//                }
+//            } elseif ($var[0] == 'Y/N') {
+//                $opt_result[$id] = (isset($post_cfg[$id]) && 'Y' == $post_cfg[$id]) ? 1 : 0;
+//            } elseif (isset($post_cfg[$id])) {
+//                unset($opt_result[$id]);
+//            }
+//        }
+//
+//        setoption('#%site', $opt_result);
+//
+//        cn_load_skin();
+//        cn_throw_message('Saved successfully');
+//    }
+//
+//    $options = $options_list[$sub];
+//    foreach ($options as $id => $vo) {
+//        $options[$id]['var'] = getoption($id);
+//
+//        $text_parths = explode('|', $vo[1], 2);
+//        $title = isset($text_parths[0]) ? $text_parths[0] : '';
+//        $desc = isset($text_parths[1]) ? $text_parths[1] : '';
+//        $options[$id]['title'] = $title;
+//        $options[$id]['desc'] = $desc;
+//        $options[$id]['help'] = isset($help[$id]) ? $help[$id] : '';
+//
+//        unset($options[$id][1]);
+//    }
+//
+//    if (REQ('message', 'GET') == 'saved') {
+//        unset($_GET['message']);
+//        cn_throw_message('Successfully saved');
+//    }
+//
+//
+//    cn_assign('options, sub, options_list', $options, $sub, $options_list);
+//
+//
+//    echoheader('-@com_board/style.css', "System configurations character");
+//    //echo exec_tpl('header');
+//    echo exec_tpl('com_board/confchar');
+//    echofooter();
 }
 
 // =====================================================================================================================
@@ -519,59 +649,35 @@ function board_ischaracter()
     //$tuser = getoption('#templates');
     $acx = getoption('#temp_basic');// get all
 
-    $options_list = array
-    (
-        // Section
-        'class' => array
-        (
-            // Option -> 0=Type(text [Y/N] int select), 1=Title|Description, [2=Optional values]
-
+    // Option -> 0=Type(text [Y/N] int select), 1=Title|Description, [2=Optional values]
+    $options_list = array(
+        'class' => array(
             'class_dw_1:class_dw_1_name' => array('int,text', 'Mã nhân vật DarkWizard cấp 1|Tên hiển thị nhân vật DarkWizard cấp 1'),
-            //'class_dw_1_name'			=> array('text', 'Tên hiển thị nhân vật DarkWizard cấp 1|example: http://yoursite.com/cutenews'),
             'class_dw_2:class_dw_2_name' => array('int,text', 'Mã nhân vật DarkWizard cấp 2|Tên hiển thị nhân vật DarkWizard cấp 2'),
-            //'class_dw_2_name'			=> array('text', 'Tên hiển thị nhân vật DarkWizard cấp 2'),
             'class_dw_3:class_dw_3_name:end' => array('int,text', 'Mã nhân vật DarkWizard cấp 3|Tên hiển thị nhân vật DarkWizard cấp 3'),
-            //'class_dw_3_name'           => array('text', 'Tên hiển thị nhân vật DarkWizard cấp 3'),
 
             'class_dk_1:class_dk_1_name' => array('int,text', 'Mã nhân vật DarkKnight cấp 1|with this option, admin panel uses utf-8 charset'),
-            //'class_dk_1_name'			=> array('text', "Tên hiển thị nhân vật DarkKnight cấp 1|E.g. &aring to &amp;aring;"),
             'class_dk_2:class_dk_2_name' => array('int,text', 'Mã nhân vật DarkKnight cấp 2|Tên hiển thị nhân vật DarkKnight cấp 2'),
-            //'class_dk_2_name'			=> array('text', 'Tên hiển thị nhân vật DarkKnight cấp 2'),
             'class_dk_3:class_dk_3_name:end' => array('int,text', 'Mã nhân vật DarkKnight cấp 3|Tên hiển thị nhân vật DarkKnight cấp 3'),
-            //'class_dk_3_name'           => array('text', 'Tên hiển thị nhân vật DarkKnight cấp 3|in minutes; eg. : 180 = +3 hours; -120 = -2 hours'),
 
             'class_elf_1:class_elf_1_name' => array('int,text', 'Mã nhân vật ELF cấp 1|Tên hiển thị nhân vật ELF cấp 1'),
-            //'class_elf_1_name'			=> array('text', 'Tên hiển thị nhân vật ELF cấp 1|Hide smiles path'),
             'class_elf_2:class_elf_2_name' => array('int,text', 'Mã nhân vật ELF cấp 2|Tên hiển thị nhân vật ELF cấp 2'),
-            //'class_elf_2_name'			=> array('text', 'Tên hiển thị nhân vật ELF cấp 2'),
             'class_elf_3:class_elf_3_name:end' => array('int,text', 'Mã nhân vật ELF cấp 3|Tên hiển thị nhân vật ELF cấp 3'),
-            //'class_elf_3_name'			=> array('text', 'Tên hiển thị nhân vật ELF cấp 3|stronger authenticate (by changing this setting, you will be logged out)'),
 
             'class_mg_1:class_mg_1_name' => array('int,text', 'Mã nhân vật MG cấp 1|Tên hiển thị nhân vật MG cấp 1'),
-            //'class_mg_1_name'			=> array('text', 'Tên hiển thị nhân vật MG cấp 1|Used by file manager. Enter by comma without space'),
             'class_mg_2:class_mg_2_name:end' => array('int,text', 'Mã nhân vật MG cấp 2|Tên hiển thị nhân vật MG cấp 2'),
-            //'class_mg_2_name'			=> array('text', 'Tên hiển thị nhân vật MG cấp 2'),
 
             'class_dl_1:class_dl_1_name' => array('int,text', 'Mã nhân vật DarkLord cấp 1|Tên hiển thị nhân vật DarkLord cấp 1'),
-            //'class_dl_1_name'			=> array('text', 'Tên hiển thị nhân vật DarkLord cấp 1|If 0, client online disabled'),
             'class_dl_2:class_dl_2_name:end' => array('int,text', 'Mã nhân vật DarkLord cấp 2|Tên hiển thị nhân vật DarkLord cấp 2'),
-            //'class_dl_2_name'			=> array('text', 'Tên hiển thị nhân vật DarkLord cấp 2'),
 
             'class_sum_1:class_sum_1_name' => array('int,text', 'Mã nhân vật Summoner cấp 1|Larger than the specified size is considered a big'),
-            //'class_sum_1_name'			=> array('text', 'Tên hiển thị nhân vật Summoner cấp 1|Real path on server'),
             'class_sum_2:class_sum_2_name' => array('int,text', 'Mã nhân vật Summoner cấp 2|Tên hiển thị nhân vật Summoner cấp 2'),
-            //'class_sum_2_name'			=> array('text', 'Tên hiển thị nhân vật Summoner cấp 2|Frontend path for uploads'),
             'class_sum_3:class_sum_3_name:end' => array('int,text', 'Mã nhân vật Summoner cấp 3|Tên hiển thị nhân vật Summoner cấp 3'),
-            //'class_sum_3_name'			=> array('text', 'Tên hiển thị nhân vật Summoner cấp 3|Frontend path for uploads'),
 
             'class_rf_1:class_rf_1_name' => array('int,text', 'Mã nhân vật RageFighter cấp 1|Tên hiển thị nhân vật RageFighter cấp 1'),
-            //'class_rf_1_name'			=> array('text', 'Tên hiển thị nhân vật RageFighter cấp 1|Frontend path for uploads'),
             'class_rf_2:class_rf_2_name:end' => array('int,text', 'Mã nhân vật RageFighter cấp 2|Tên hiển thị nhân vật RageFighter cấp 2'),
-            // 'class_rf_2_name'           => array('text', 'Tên hiển thị nhân vật RageFighter cấp 2|Frontend path for uploads'),
         ),
-
-        'reset' => array
-        (
+        'reset' => array(
             'reset_cap_1:level_cap_1:zen_cap_1:chao_cap_1:cre_cap_1:blue_cap_1:point_cap_1:ml_cap_1:time_reset_next_1' => array('int,text', 'Mã nhân vật DarkWizard cấp 1|Tên hiển thị nhân vật DarkWizard cấp 1'),
             'reset_cap_2:level_cap_2:zen_cap_2:chao_cap_2:cre_cap_2:blue_cap_2:point_cap_2:ml_cap_2:time_reset_next_2' => array('int,text', 'Mã nhân vật DarkWizard cấp 1|Tên hiển thị nhân vật DarkWizard cấp 1'),
             'reset_cap_3:level_cap_3:zen_cap_3:chao_cap_3:cre_cap_3:blue_cap_3:point_cap_3:ml_cap_3:time_reset_next_3' => array('int,text', 'Mã nhân vật DarkWizard cấp 1|Tên hiển thị nhân vật DarkWizard cấp 1'),
@@ -593,7 +699,6 @@ function board_ischaracter()
             'reset_cap_19:level_cap_19:zen_cap_19:chao_cap_19:cre_cap_19:blue_cap_19:point_cap_19:ml_cap_19:time_reset_next_19' => array('int,text', 'Mã nhân vật DarkWizard cấp 1|Tên hiển thị nhân vật DarkWizard cấp 1'),
             'reset_cap_20:level_cap_20:zen_cap_20:chao_cap_20:cre_cap_20:blue_cap_20:point_cap_20:ml_cap_20:time_reset_next_20:end' => array('int,text', 'Mã nhân vật DarkWizard cấp 1|Tên hiển thị nhân vật DarkWizard cấp 1'),
         ),
-
         'reset_vip' => array(
             'reset_cap_1:level_cap_1_vip:vpoint_cap_1_vip:gcoin_cap_1_vip:point_cap_1_vip:ml_cap_1_vip' => array('int,text', 'help|help'),
             'reset_cap_2:level_cap_2_vip:vpoint_cap_2_vip:gcoin_cap_2_vip:point_cap_2_vip:ml_cap_2_vip' => array('int,text', 'help|help'),
@@ -714,10 +819,6 @@ function board_ischaracter()
         $all_header_conf[$id]['name'] = ucwords(str_replace('_', ' ', trim($id)));
     }
 
-    //foreach ($acv as $id => $subtpl){
-    //echo "1134 CACHES $id => $subtpl <br>";
-    //}
-
     switch ($sub) {
         case 'class':
             break;
@@ -726,33 +827,6 @@ function board_ischaracter()
             break;
     }
     if ($sub === 'class') {
-
-        /*
-            $dem = 0;
-            //$dm = 0;
-            $set_arr = array();
-            $sa_name_1 ='';$sa_ma_1 ='';
-            foreach($acv as $as => $sa){
-                $dem++;
-                
-                if($dem % 2 === 0){
-                    $set_arr[$sa_ma_1] = $sa_name_1;
-                    $set_arr[$as] = $sa;
-                    
-                    //$set_arr[$dm]['ma_class'] = $sa_ma_1;
-                    //$set_arr[$dm]['gt_ma_class'] = $sa_name_1;
-                    //$set_arr[$dm]['name_class'] = $as;
-                    //$set_arr[$dm]['gt_name_class'] = $sa;
-                    $sa_name_1 ='';$sa_ma_1 ='';
-                    //$dm++;
-                }
-                else{
-                    $sa_ma_1 = $as;
-                    $sa_name_1 = $sa;
-                }
-            }
-        */
-        //$options = $options_list[$sub];
         foreach ($options as $id => $vo) {
             $get_id = explode(':', $id);
             $id_1 = $get_id[0];
@@ -1076,24 +1150,8 @@ function board_ischaracter()
 
             $options[$id]['end'] = $id_7;
         }
-
     }
 
-    //echo "556 => ".$set_arr['class_dw_1']."=>". $set_arr['class_dw_1_name'] ."<br>";
-
-    //echo "556 => ".$set_arr['class_rf_2']."=>". $set_arr['class_rf_2_name'] ."<br>";
-
-    //foreach($set_arr as $aa => $d){
-    //echo "556 $aa => \$d=> ".$d[0]."=>". $d[1] ."<br>";
-    //echo "556 =>".$d['ma_class']."=>". $d['gt_ma_class'] ."=>".$d['name_class']."=>". $d['gt_name_class'] ."<br>";
-    //echo "556 $aa =><br>";
-    //foreach($d as $a => $dd){
-    //echo "565 $a => ".$dd." => \$dd['name_class'].<br>";
-    //}
-    //exit();
-    //}
-    //exit();
-    //------------------------------------------------------------------
     if (!$template) {
         $template = 'config_class_';
     }
@@ -1256,8 +1314,8 @@ function board_ischaracter()
                 }
     */
 //            foreach ($post_cfg as $s => $f) {
-                //$post_cfg_[$s]['id'] = $s;
-                //$post_cfg_[$s]['name'] = $f;
+            //$post_cfg_[$s]['id'] = $s;
+            //$post_cfg_[$s]['name'] = $f;
 //                echo "1271 POST ==>" . $s . "=> $f <br>";
 //            }
 
@@ -1512,8 +1570,6 @@ function board_ischaracter()
         */
 }
 
-// =====================================================================================================================
-// Since 2.0: Users management
 
 function board_userman()
 {
@@ -1642,134 +1698,6 @@ function board_userman()
 }
 
 
-// =====================================================================================================================
-// Since 2.0: Integration Wizard tool
-/*
-function board_iserverz()
-{
-    $sub = REQ('sub');
-
-	
-	/*
-    $categories = cn_get_categories();
-
-    $rss                    = getoption('#rss');
-    $rss_encoding           =isset($rss['encoding'])? $rss['encoding']:'UTF-8';
-    $rss_news_include_url   =isset($rss['news_include_url'])? $rss['news_include_url']:'';
-    $rss_title              =isset($rss['title'])? $rss['title']:'';
-    $rss_language           =isset($rss['language'])? $rss['language']:'en-us';
-
-    // Default: view
-    if ($rss_encoding == '') 
-    {
-        $rss_encoding = 'UTF-8';
-    }
-    if ($rss_language == '') 
-    {
-        $rss_language = 'en-us';
-    }
-
-    // Check submit
-    if (request_type('POST'))
-    {
-        cn_dsi_check();
-
-        // Save new configuration
-        if ($sub == 'rss')
-        {
-            $rss['encoding']         = $rss_encoding         = REQ('rss_encoding');
-            $rss['news_include_url'] = $rss_news_include_url = REQ('rss_news_include_url');
-            $rss['title']            = $rss_title            = REQ('rss_title');
-            $rss['language']         = $rss_language         = REQ('rss_language');
-
-            // Default: save
-            if ($rss_encoding == '') 
-            {
-                $rss_encoding = 'UTF-8';
-            }
-            if ($rss_language == '') 
-            {
-                $rss_language = 'en-us';
-            }
-
-            setoption('#rss', $rss);
-        }
-    }
-
-    $all_tpls  = array();
-    $listsys   = cn_template_list();
-    $templates = getoption('#templates');
-
-    // Get all templates
-    foreach ($listsys as $id => $_t) 
-    {
-        $all_tpls[ $id ] = $id;
-    }
-    foreach ($templates as $id => $_t) 
-    {
-        $all_tpls[ $id ] = $id;
-    }
-
-    cn_assign('sub, categories, all_tpls', $sub, $categories, $all_tpls);
-    cn_assign('rss_news_include_url, rss_encoding, rss_language, rss_title', $rss_news_include_url, $rss_encoding, $rss_language, $rss_title);
-
-    echoheader('-@dashboard/style.css', 'Integration Wizard'); echo exec_tpl('dashboard/intwiz'); echofooter();
-	
-    echoheader('-@com_board/style.css', 'Integration Wizard'); echo exec_tpl('com_board/inserver'); echofooter();
-	
-}
-*/
-// =====================================================================================================================
-// Since 2.0: Ban by IP and name
-/*
-function board_iswebshop()
-{
-	/*
-    $ipban = getoption('#ipban');
-    if (!is_array($ipban)) 
-    {
-        $ipban = array();
-    }
-
-    // Submit new IP
-    if (request_type('POST'))
-    {
-        cn_dsi_check();
-
-        $ip = trim(REQ('add_ip'));
-        if(!empty($ip))
-        {
-            // Times blocked : Expire time
-            $ipban[$ip] = array(0, 0);
-
-            setoption('#ipban', $ipban);
-            cn_throw_message('IP or name mask ['.$ip.'] add/replaced');
-        }
-        else
-        {
-            cn_throw_message('IP Address must be filled','w');
-        }
-    }
-    // Unblock IP
-    elseif ($ip = REQ('unblock'))
-    {
-        cn_dsi_check();
-
-        if (isset($ipban[$ip]))
-        {
-            unset($ipban[$ip]);
-        }
-        
-        setoption('#ipban', $ipban);
-    }
-
-    cn_assign('list', $ipban);
-    echoheader('-@com_board/style.css', 'Block IP'); echo exec_tpl('com_board/ipban'); echofooter();
-}
-*/
-// =====================================================================================================================
-// Since 2.0: User logs
-
 function board_logs()
 {
     $log_read = $logs = array();
@@ -1779,97 +1707,92 @@ function board_logs()
     $section = REQ('section');
 
     if (empty($per_page) || $per_page < 0) {
-        $num = 60;
+        $num = 50;
     } else {
         $num = $per_page;
     }
     $n = 0;
     if ($page < 0) $page = 1;
-    $st = ($page-1)*$num;
+    $st = ($page - 1) * $num;
 
-    $all_character = [
-        'changeclass' => ['name' => 'Đổi giới tính'],
-        'changename' => ['name' => 'Đổi tên nhân vật'],
-        'relife' => ['name' => 'Tái Sinh'],
-        'resets' => ['name' => 'Reset'],
-        'resetsvip' => ['name' => 'Reset Vip'],
-        'rsuythac' => ['name' => 'Reset Ủy Thác'],
-        'rsuythacvip' => ['name' => 'Reset Ủy Thác Vip'],
-        'uythacoffline' => ['name' => 'Ủy Thác Offline'],
-        'uythaconline' => ['name' => 'Ủy Thác Online'],
-        'chuyenvpoint' => ['name' => 'Chuyển V.Point'],
-        'online_market' => ['name' => 'Chợ trực tuyến'],
-        'xosokienthiet' => ['name' => 'Xổ số kiến thiết'],
-        'pcpoint2vpoint' => ['name' => 'Đổi PCPoint'],
-        'randomquest' => ['name' => 'Nhiệm vụ ngẫu nhiên'],
-        'ruatoi' => ['name' => 'Rửa tội'],
-        'thuepoint' => ['name' => 'Thuê điểm'],
-        'rspoint' => ['name' => 'Tẩy điểm'],
-        'vpoint2item' => ['name' => 'Mua Item V.Point'],
-        'muazen' => ['name' => 'Mua Zen bằng V.Point'],
-        'item2vpoint' => ['name' => 'Item V.Point --> V.Point'],
-        'vpoint2gcoin' => ['name' => 'V.Point --> Gcoin'],
-        'gcoin2vpoint' => ['name' => 'Gcoin --> V.Point']
-        //'orther' => ['name' => ''],
-        //'orther' => ['name' => '']
-    ];
+    $default_log = array(
+        'system' => [],
+        'character' => [
+            'changeclass' => ['name' => 'Đổi giới tính'],
+            'changename' => ['name' => 'Đổi tên nhân vật'],
+            'relife' => ['name' => 'Tái Sinh'],
+            'resets' => ['name' => 'Reset'],
+            'resetsvip' => ['name' => 'Reset Vip'],
+            'rsuythac' => ['name' => 'Reset Ủy Thác'],
+            'rsuythacvip' => ['name' => 'Reset Ủy Thác Vip'],
+            'uythacoffline' => ['name' => 'Ủy Thác Offline'],
+            'uythaconline' => ['name' => 'Ủy Thác Online'],
+            'chuyenvpoint' => ['name' => 'Chuyển V.Point'],
+            'online_market' => ['name' => 'Chợ trực tuyến'],
+            'xosokienthiet' => ['name' => 'Xổ số kiến thiết'],
+            'pcpoint2vpoint' => ['name' => 'Đổi PCPoint'],
+            'randomquest' => ['name' => 'Nhiệm vụ ngẫu nhiên'],
+            'level150' => ['name' => 'Nhiệm vụ level 150'],
+            'level220' => ['name' => 'Nhiệm vụ level 220'],
+            'level380' => ['name' => 'Nhiệm vụ level 380'],
+            'ruatoi' => ['name' => 'Rửa tội'],
+            'thuepoint' => ['name' => 'Thuê điểm'],
+            'rspoint' => ['name' => 'Tẩy điểm'],
+            'vpoint2item' => ['name' => 'Mua Item V.Point'],
+            'muazen' => ['name' => 'Mua Zen bằng V.Point'],
+            'item2vpoint' => ['name' => 'Item V.Point --> V.Point'],
+            'vpoint2gcoin' => ['name' => 'V.Point --> Gcoin'],
+            'gcoin2vpoint' => ['name' => 'Gcoin --> V.Point']
+            //'orther' => ['name' => ''],
+            //'orther' => ['name' => '']
+        ],
 
-    $all_shop = [
-        'acient' => ['name' => 'Cửa Hàng Đồ Thần'],
-        'eventticket' => ['name' => 'Cửa Hàng Vé'],
-        'armor' => ['name' => 'Cửa Hàng Giáp trụ'],
-        'crossbows' => ['name' => 'Cửa Hàng Cung - Nỏ'],
-        'fenrir' => ['name' => 'Cửa Hàng Sói tinh'],
-        'ringpendants' => ['name' => 'Cửa Hàng Trang sức'],
-        'scepters' => ['name' => 'Cửa Hàng Quyền trượng'],
-        'shields' => ['name' => 'Cửa Hàng Khiên'],
-        'wings' => ['name' => 'Cửa Hàng Cánh'],
-        'spears' => ['name' => 'Cửa Hàng Thương - Giáo'],
-        'weapons' => ['name' => 'Cửa Hàng Đao - Kiếm'],
-        'staffs' => ['name' => 'Cửa Hàng Gậy'],
-        'orther' => ['name' => 'Cửa Hàng Khác']
-    ];
-
-    if ($section === 'character') {
-        $logs_character = scan_dir(cn_path_construct(SERVDIR, 'log', 'modules', 'character'));
-        $logs_shop = scan_dir(cn_path_construct(SERVDIR, 'log', 'modules', 'shop'));
-
-        foreach ($logs_character as $lf) {
-            if (preg_match('/log_(.*)\.txt/i', $lf, $c)) {
-                if (isset($all_character[$c[1]])) {
-                    $all_character[$c[1]]['log'] = 'log_' . $c[1];
-                }
-            }
-        }
-
-        foreach ($logs_shop as $lf) {
-            if (preg_match('/log_(.*)\.txt/i', $lf, $c)) {
-                if (isset($all_shop[$c[1]])) {
-                    $all_shop[$c[1]]['log'] = 'log_' . $c[1];
-                }
-            }
-        }
-    }
+        'shop' => [
+            'acient' => ['name' => 'Cửa Hàng Đồ Thần'],
+            'eventticket' => ['name' => 'Cửa Hàng Vé'],
+            'armor' => ['name' => 'Cửa Hàng Giáp trụ'],
+            'crossbows' => ['name' => 'Cửa Hàng Cung - Nỏ'],
+            'fenrir' => ['name' => 'Cửa Hàng Sói tinh'],
+            'ringpendants' => ['name' => 'Cửa Hàng Trang sức'],
+            'scepters' => ['name' => 'Cửa Hàng Quyền trượng'],
+            'shields' => ['name' => 'Cửa Hàng Khiên'],
+            'wings' => ['name' => 'Cửa Hàng Cánh'],
+            'spears' => ['name' => 'Cửa Hàng Thương - Giáo'],
+            'weapons' => ['name' => 'Cửa Hàng Đao - Kiếm'],
+            'staffs' => ['name' => 'Cửa Hàng Gậy'],
+            'orther' => ['name' => 'Cửa Hàng Khác']
+        ],
+        'relax' => array(
+            'baucua' => ['name' => 'Bầu Cua'],
+            'baicao' => ['name' => 'Bài Cáo']
+        )
+    );
 
     if ($st < 0) $st = 0;
-//    if (!isset($st)) $st = 0;
     $over = $st + $num;
+    $log_read = array();
 
-    // --- System section ---
-    if (!$section) {
-        $_url = cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs');
-        $isdel = REQ('isdel');
-        if (isset($isdel) && $isdel == 'islog-systems') {
-            unlink(cn_path_construct(SERVDIR, 'log/system'). 'error_dump.log');
-            cn_relocation(cn_url_modify('mod=' . REQ('mod'), 'opt=' . REQ('opt'), 'sub=' . $sub, 'section'));
+
+    $isActionDele = REQ('action');
+    if (!empty($isActionDele) && $isActionDele) {
+        if ((empty($section) || $section == 'system')) {
+            $_sestion = 'system';
+        } else {
+            $_sestion = 'modules/' . $section;
         }
 
+        unlink(cn_path_construct(SERVDIR, 'log/' . $_sestion) . $isActionDele . '.log');
+    }
+
+    if (!$section || $section == 'system') {
+        $_url = cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs');
         $path = cn_path_construct(SERVDIR, 'log/system') . 'error_dump.log';
 
         if (file_exists($path)) {
             $r = fopen($path, 'r');
 
             $totalLines = intval(exec("wc -l '$path'"));
+
             if ($r) {
                 do {
                     $n++;
@@ -1890,26 +1813,31 @@ function board_logs()
                         'url' => $log_data[4],
                         'error' => $log_data[5]
                     );
-
-
                 } while (!feof($r));
-
                 fclose($r);
             }
         }
-    } // --- character log section ---
-    elseif ($section === 'character') {
-        $_url = cn_url_modify('mod=editconfig', 'opt=logs', 'section=character');
+    } else {
+        $options = $default_log[$section];
 
-        list($dir, $action) = GET('dir, action', 'GPG');
+        $logs_ = scan_dir(cn_path_construct(SERVDIR, 'log', 'modules', $section));
+        $_url = cn_url_modify('mod=editconfig', 'opt=logs', 'section=' . $section, 'page', 'per_page');
 
-        if (isset($action)) {
-            unlink(cn_path_construct(SERVDIR, 'log/modules/' . $dir) . $action . '.txt');
-            cn_relocation(cn_url_modify(array('reset'), 'mod=' . REQ('mod'), 'opt=' . REQ('opt'), 'sub=' . $sub, 'section=' . $section));
+        $isSub = false;
+        foreach ($logs_ as $lf) {
+            if (preg_match('/log_(.*)\.log/i', $lf, $c)) {
+                if (isset($options[$c[1]])) {
+                    $options[$c[1]]['log'] = 'log_' . $c[1];
+                    if (!$isSub && empty($sub)) {
+                        $sub = $c[1];
+                        $isSub = true;
+                    }
+                }
+            }
         }
 
-        if ($dir && $sub) {
-            if (!file_exists($ul = cn_path_construct(SERVDIR, 'log/modules/' . $dir) . $sub . '.txt')) {
+        if (!empty($sub)) {
+            if (!file_exists($ul = cn_path_construct(SERVDIR, 'log/modules/' . $section) . 'log_' . $sub . '.log')) {
                 fclose(fopen($ul, 'w+'));
             }
 
@@ -1932,13 +1860,11 @@ function board_logs()
                     'id' => $n,
                     'account' => $log_data[0],
                     'content' => $log_data[1],
-                    'gc_vp_before' => number_format($tempBefore[0], 0, ',', '.') . ' - ' . number_format($tempBefore[1], 0, ',', '.'),
-                    'gc_vp_after' => number_format($tempAfter[0], 0, ',', '.') . ' - ' . number_format($tempAfter[1], 0, ',', '.'),
-                    'gc_vp_gd' => number_format($gcoinDG, 0, ',', '.') . ' - ' . number_format($vpointDG, 0, ',', '.'),
+                    'gc_vp_before' => number_format($tempBefore[0], 0, ',', '.') . ' ~ ' . number_format($tempBefore[1], 0, ',', '.'),
+                    'gc_vp_after' => number_format($tempAfter[0], 0, ',', '.') . ' ~ ' . number_format($tempAfter[1], 0, ',', '.'),
+                    'gc_vp_gd' => number_format($gcoinDG, 0, ',', '.') . ' ~ ' . (($vpointDG < 0) ? '(' . number_format($vpointDG, 0, ',', '.') . ')' : number_format($vpointDG, 0, ',', '.')),
                     'time' => $log_data[4]
                 );
-
-
             } while (!feof($r));
 
             fclose($r);
@@ -1949,8 +1875,8 @@ function board_logs()
     $_url = isset($_url) ? $_url : '';
     $echoPagination = cn_countArr_pagination($totalLines, $_url, $page, $num);
 
-    cn_assign('log_read, section', $log_read, $section);
-    cn_assign('all_shop, all_character, echoPagination', $all_shop, $all_character, $echoPagination);
+    cn_assign('log_read, section, default_log, options, sub', $log_read, $section, $default_log, $options, $sub);
+    cn_assign('echoPagination', $echoPagination);
     echoheader('-@com_board/style.css', 'System logs');
     echo exec_tpl('com_board/logs');
     echofooter();

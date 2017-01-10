@@ -13,7 +13,8 @@
     <p><br>
         • Chủ Hội phải có cấp độ 100 trở lên.</p>
     <p>• Tên Hội phải từ 4 kí tự trở lên </p>
-    <div style="text-align: center"><img align="center" height="200" alt="" src="/images/guides/createGuide.png" width="60%"></div>
+    <div style="text-align: center"><img align="center" height="200" alt="" src="/images/guides/createGuide.png"
+                                         width="60%"></div>
     <div><br><strong>Biểu tượng Hội (Guild Mark)</strong></div>
 
     <div><br>
@@ -41,9 +42,11 @@
 <div><strong><br>Thách đấu giữa các Hội (Guild Duel)</strong></div>
 <div>Câu lệnh: /war (Tên Hội)</div>
 
-<p>Chủ Hội có quyền đưa ra lời thách đấu với một Hội khác. Khi Hội khác nhận được và đồng ý lời thách đấu, ngay lập tức thành viên của 2 Hội có thể đấu với nhau. </p>
+<p>Chủ Hội có quyền đưa ra lời thách đấu với một Hội khác. Khi Hội khác nhận được và đồng ý lời thách đấu, ngay lập tức
+    thành viên của 2 Hội có thể đấu với nhau. </p>
 
-<p><br>Trong trận đấu giữa các Hội, không có món đồ nào rớt ra và không thành viên nào của 2 Hội được điểm kinh nghiệm.</p>
+<p><br>Trong trận đấu giữa các Hội, không có món đồ nào rớt ra và không thành viên nào của 2 Hội được điểm kinh nghiệm.
+</p>
 <p><br>
     Khi cuộc thách đấu giữa Hội của bạn và Hội khác diễn ra, màn hình hỏi bạn có tham gia vào cuộc thách đầu hay
     không sẽ hiện ra. Bạn có thể từ chối bằng việc nhấn vào nút “Cancel”. Trong suốt cuộc phiêu lưu trên vùng đất
@@ -55,10 +58,13 @@
 
 <p>Câu lệnh: /battlesoccer (Tên hội)</p>
 
-<p>Cách khác để giải quyết mâu thuẫn xảy ra trong MU là tổ chức trận cầu giữa các Hội. Trong trận cầu này, mỗi Hội đề cử 1-5 thành viên tạo thành một nhóm, hai nhóm sẽ gặp nhau tại Arena - địa điểm chuyên dành cho các trận tranh cầu. Tiến hành thi đấu bằng cách ghi điểm và hạ gục đối phương.
+<p>Cách khác để giải quyết mâu thuẫn xảy ra trong MU là tổ chức trận cầu giữa các Hội. Trong trận cầu này, mỗi Hội đề cử
+    1-5 thành viên tạo thành một nhóm, hai nhóm sẽ gặp nhau tại Arena - địa điểm chuyên dành cho các trận tranh cầu.
+    Tiến hành thi đấu bằng cách ghi điểm và hạ gục đối phương.
 </p>
 <p><br>
-    Điểm số được tính khi hạ gục được thành viên (chỉ cho phép trên máy chủ hỗ trợ giao đấu) hoặc đánh banh vào cầu môn của nhóm kia.
+    Điểm số được tính khi hạ gục được thành viên (chỉ cho phép trên máy chủ hỗ trợ giao đấu) hoặc đánh banh vào cầu môn
+    của nhóm kia.
 </p>
 <p>•  Mỗi bàn thắng được tính 20 điểm.</p>
 <p>•  Tiêu diệt 1 nhân vật được 1 điểm (chỉ áp dụng trên máy chủ hỗ trợ giao đấu).</p>
