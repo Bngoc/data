@@ -210,8 +210,9 @@ function cn_snippet_bc($sep = '&gt;')
 // Home > name
 function cn_snippet_bc_re($home_ = 'Home', $_name_bread = null, $sep = '&gt;')
 {
+    ////            cn_htmlspecialchars
     $bc = mcache_get('.breadcrumbs');
-    $result = '<div id="mainsub_title" class="cn_breadcrumbs"><span class="bcitem"><a href="' . PHP_SELF . '">' . cn_htmlspecialchars($home_) . '</a></span>';
+    $result = '<div id="mainsub_title" class="cn_breadcrumbs"><span class="bcitem"><a href="' . PHP_SELF . '">' . $home_ . '</a></span>';
 
     //if(is_array($bc)) $result .='<span class="bcsep"> '.$sep.' </span>';
     $maxs = count($bc) - 1;
@@ -223,9 +224,9 @@ function cn_snippet_bc_re($home_ = 'Home', $_name_bread = null, $sep = '&gt;')
 
             //if(is_null($_name_bread)){
             if ($key != $maxs)// && is_null($_name_bread))
-                $ls[] = '<span class="bcitem"><a href="' . $item['url'] . '">' . cn_htmlspecialchars($item['name']) . '</a></span>';
+                $ls[] = '<span class="bcitem"><a href="' . $item['url'] . '">' . $item['name'] . '</a></span>';
             else
-                $ls[] .= '<span class="bcitem">' . cn_htmlspecialchars($item['name']) . '</span>';
+                $ls[] .= '<span class="bcitem">' . $item['name'] . '</span>';
             //}
             //else
             //$ls[] = '<span class="bcitem"><a href="'.$item['url'].'">'.cn_htmlspecialchars($item['name']).'</a></span>';
@@ -239,7 +240,7 @@ function cn_snippet_bc_re($home_ = 'Home', $_name_bread = null, $sep = '&gt;')
     //$result .= '<span class="bcsep"> '.$sep.' </span>';
 
     if (!is_null($_name_bread) && $_name_bread)
-        $result .= '<span class="bcsep"> ' . $sep . ' </span><span class="bcitem">' . cn_htmlspecialchars($_name_bread) . '</span>';
+        $result .= '<span class="bcsep"> ' . $sep . ' </span><span class="bcitem">' . $_name_bread . '</span>';
 
 
     $result .= "</div>";
@@ -550,7 +551,7 @@ function cn_login()
 
                             // save last login status, clear ban
                             //db_user_update($username, 'lts='.time(), 'ban=0');
-                            do_update_character('MEMB_INFO', 'ban_login=0', "memb___id:'$username'");
+                            do_update_character('MEMB_INFO', "ip='" . $_SERVER['REMOTE_ADDR'] . "'", 'ban_login=0', "memb___id:'$username'");
                             // send return header (if exists)
                             if (isset($_SESSION['RQU'])) {
                                 cn_relocation($_SESSION['RQU']);
@@ -1619,12 +1620,11 @@ function cn_sort_menu()
         $result .= '<option value="' . $item['url'] . $get_per_page . '"';
         //if($check !== false) $result .= 'selected';
         if ($key == $opt) $result .= 'selected';
-        $result .= '>' . cn_htmlspecialchars($item['name']) . '</option>';
+        $result .= '>' . ($item['name']) . '</option>';
     }
     $result .= "</select>";
-    return $result;
 
-    //echo $result;
+    return $result;
 }
 
 //information character
@@ -1972,21 +1972,6 @@ function getoption($opt_name = '', $var_name = '')
     } else {
         return isset($cfg['%site'][$opt_name]) ? $cfg['%site'][$opt_name] : FALSE;
     }
-}
-
-// Since 2.0: Create file
-function cn_touch($fn, $php_safe = FALSE)
-{
-    if (!file_exists($fn)) {
-        $w = fopen($fn, 'w+');
-
-        if ($php_safe) {
-            fwrite($w, "<?php die('Direct call - access denied'); ?>\n");
-        }
-        fclose($w);
-    }
-
-    return $fn;
 }
 
 // Since 1.5.0: Force relocation

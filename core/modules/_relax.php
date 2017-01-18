@@ -9,7 +9,7 @@ function relax_invoke()
     (
         'relax:baucua:Csc' => 'Bầu Cua',
         'relax:baicao:Cp' => 'Bài Cáo',
-        //'relax:resetvip:Ct' => 'Reset Vip'
+        'relax:xoso:Ct' => 'Đánh Đề'
     );
 
     // Call dashboard extend
@@ -46,8 +46,8 @@ function relax_invoke()
 
     $images = array(
         'baucua' => 'baucua.png',
-        'baicao' => 'baicao.png'
-//        'resetvip' => 'resetvip.png',
+        'baicao' => 'baicao.png',
+        'xoso' => 'resetvip.png'
     );
 
     // More dashboard images
@@ -206,6 +206,7 @@ function relax_baucua()
                     $content = "$accc_ đã chơi bầu cua, kết quả " . $contLog;
                     $Date = date("h:iA, d/m/Y", ctime());
                     $file = MODULE_ADM . "/log/modules/relax/log_baucua.log";
+                    cn_touch($file);
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $update_money . "|" . $Date . "|\n" . $fileContents);
                     //End Ghi vào Log
@@ -349,6 +350,7 @@ function relax_baicao()
                     $content = "$accc_ đã chơi bài cáo, kết quả" . substr($msg, 4);
                     $Date = date("h:iA, d/m/Y", ctime());
                     $file = MODULE_ADM . "/log/modules/relax/log_baicao.log";
+                    cn_touch($file);
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $update_money . "|" . $Date . "|\n" . $fileContents);
                     //End Ghi vào Log
@@ -378,4 +380,202 @@ function baicao_get_card_value($i)
     }
 
     return $i;
+}
+
+function relax_xoso()
+{
+    $time = ctime();
+    $ctime = date('Y-m-d', $time);
+    $accc_ = $_SESSION['user_Gamer'];
+
+    $limitTimeDe = getoption('timeWriterLimit');
+    $hourTime = date('H:i', ctime());
+
+    list ($page) = GET('page', 'GPG');
+    $page = intval($page);
+    if (empty($page)) $page = 1;
+
+    $showResultDe = do_select_orther("SELECT Top 1 [ResultDe], [timesDe], [OptionResult] FROM ResultDe ORDER BY ID DESC");
+//    $showResultDe = do_select_orther("SELECT [ResultDe], [timesDe], [OptionResult] FROM ResultDe WHERE Convert(Date, timesDe)='$ctime'");
+    $showHisrotyPlay = do_select_orther("SELECT [AccountID],[WriteDe],[timestamp],[Action], [Vpoint],[Result] FROM WriteDe WHERE AccountID='" . $accc_ . "' order by ID DESC");
+
+    if (request_type('POST')) {
+        if (REQ('action_history')) {
+
+            $resultData = array(
+                'msgAction' => cn_snippet_messages(),
+                'menuTop' => cn_menuTopMoney(true),
+                'show_history' => show_historyDe($showHisrotyPlay, $page),
+                'resetFrom' => 0
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
+        }
+    }
+
+    if (request_type('POST')) {
+        if (REQ('action_playDe')) {
+            cn_dsi_check(true);
+            $errors_false = false;
+            $_blank_var = view_bank($accc_);
+            $vpoint_ = $_blank_var[0]['vp'];
+
+            list ($numberDe, $verifyCaptcha, $moneyVpDe) = GET('numberDe, verifyCaptcha, moneyVpDe', 'GPG');
+
+            $moneyVpDe = abs(intval($moneyVpDe));
+
+            if ($moneyVpDe > MAX_TRANS){
+                cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
+                $errors_false = true;
+            }
+
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+
+            if ((empty($moneyVpDe)) || (!is_numeric($moneyVpDe)) || ($moneyVpDe < 0)) {
+                cn_throw_message("Bạn chưa đặt tiền.", 'e');
+                $errors_false = true;
+            }
+            if (!preg_match('/^[0-9]+$/', $moneyVpDe)) {
+                cn_throw_message("Tiền đặt phải là số!", 'e');
+                $errors_false = true;
+            }
+
+            if (empty($numberDe) && $numberDe == '') {
+                cn_throw_message("Bạn chưa ghi số đế nào!", 'e');
+                $errors_false = true;
+            }
+
+            if (!preg_match('/^[0-9]+$/', $numberDe)) {
+                cn_throw_message("Số đề có thể là 0 đến 99!", 'e');
+                $errors_false = true;
+            }
+
+            if ($hourTime > $limitTimeDe) {
+                cn_throw_message("Hết thời gian nhận ghi đề!", 'e');
+                $errors_false = true;
+            }
+            if ($moneyVpDe < getoption('moneyMinDe')) {
+                cn_throw_message("Số Vpoint tối thiểu ghi đề là " . number_format(getoption('moneyMinDe'), 0, ',', '.') . ' Vpoint', 'e');
+                $errors_false = true;
+            }
+
+            $numberDe = abs(intval($numberDe));
+
+            if ($showHisrotyPlay) {
+                foreach ($showHisrotyPlay as $key => $item){
+                    $makerTime = date_create(trim($item['timestamp']));
+                    $tempTime = date_format($makerTime, 'Y-m-d');
+
+                    if ($item['WriteDe'] == $numberDe && $item['Action'] == 1 && $tempTime == $ctime) {
+                        cn_throw_message('Bạn đã ghi số đề ' . $numberDe .'.', 'e');
+                        $errors_false = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!$errors_false) {
+                $moneyAfter = $vpoint_ - $moneyVpDe;
+                do_insert_character(
+                    '[WriteDe]',
+                    "[AccountID]='" . $accc_ . "'",
+                    "[WriteDe]=" . $numberDe,
+                    "[timestamp]='" . date('Y-m-d H:i:s', $time) . "'",
+                    "[Vpoint]='" . $moneyVpDe . "'",
+                    "[Action]=1"
+                );
+                do_update_orther("UPDATE MEMB_INFO SET [vpoint]=$moneyAfter WHERE memb___id='$accc_'");
+
+                //Ghi vào Log
+                $content = "$accc_ đã đánh đề số $numberDe, Số Vpoint: " . number_format($moneyVpDe, 0, ',', 0);
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/relax/log_xosoDe.log";
+                cn_touch($file);
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $moneyAfter . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
+
+                cn_throw_message("Bạn đã ghi đề $numberDe với giá tiền " . number_format($moneyVpDe, 0, ',', '.') . " Vpoint.");
+
+                $showHisrotyAdd['AccountID'] = $accc_;
+                $showHisrotyAdd['WriteDe'] = $numberDe;
+                $showHisrotyAdd['timestamp'] = date('Y-m-d H:i:s', $time);
+                $showHisrotyAdd['Action'] = 1;
+                $showHisrotyAdd['Vpoint'] = $moneyVpDe;
+                $showHisrotyAdd['Result'] = 0;
+                array_unshift($showHisrotyPlay, $showHisrotyAdd);
+            }
+
+            $resultData = array(
+                'msgAction' => cn_snippet_messages(),
+                'menuTop' => cn_menuTopMoney(true),
+                'show_history' => show_historyDe($showHisrotyPlay, $page),
+                'resetFrom' => (!$errors_false) ? 1 : 0
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
+        }
+    }
+
+    $resultPlayDe = trim($showResultDe[0]['ResultDe']);
+    $stuffDateTime = trim($showResultDe[0]['OptionResult']);
+    if (empty($stuffDateTime)) {
+        $stuffDateTime = strtotime(trim($showResultDe[0]['timesDe']));
+    }
+    cn_assign('resultPlayDe, timesTampResult', $resultPlayDe, $stuffDateTime);
+    cn_assign('show_history', show_historyDe($showHisrotyPlay, $page));
+
+    echoheader('-@my_relax/style.css@my_relax/relaxAjaxPlay.js', "Giải trí - Chơi Đề");
+    echocomtent_here(exec_tpl('my_relax/xoso'), cn_snippet_bc_re());
+    echofooter();
+}
+
+function show_historyDe($datahistory, $page)
+{
+    $url = cn_url_modify(array('reset'), 'mod=relax', 'opt=xoso', 'action_history=1', 'page', 'per_page');
+    $per_page = 20;
+    list ($resultShowData, $pagination) = cn_arr_paginaAjax($datahistory, $url, $page, $per_page);
+
+    if (empty($resultShowData)) return '';
+
+    $html = '<table align="middle" class="mg-top15 ranking" width="100%">
+            <tr >
+                <th>#</th>
+                <th>Số đề</th>
+                <th>Vpoint</th>
+                <th>Thời gian</th>
+                <th>Kết Quả</th>
+            </tr>';
+    if ($resultShowData) {
+        foreach ($resultShowData as $key => $items) {
+            $makerTime = date_create(trim($items['timestamp']));
+            $tempTime = date_format($makerTime, 'l, Y-m-d H:i:s');
+            $checkResult = $items['Result'];
+            if ($checkResult == 1) {
+                $strResult = '<span class="cBlue"> Trúng </span>';
+            } elseif ($checkResult == 2){
+                $strResult = '<span class="cRed"> Không trúng </span>';
+            } else {
+                $strResult = '---';
+            }
+
+            $html .= '<tr><td>' . ($key + 1) . '</td>';
+            $html .= '<td>' . $items['WriteDe'] . '</td>';
+            $html .= '<td>' . number_format($items['Vpoint'], 0, ',', '.') . '</td>';
+            $html .= '<td>' . $tempTime . '</td>';
+            $html .= '<td>' . $strResult . '</td></tr>';
+        }
+    }
+
+    $html .= '</table>';
+    $html .= '<div class="clear"></div>';
+
+    $html .= '<div class="right">' . $pagination . '</div>';
+
+    return $html;
 }

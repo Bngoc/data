@@ -123,7 +123,7 @@ function view_character($account)
 function view_bank($account)
 {
     if (!empty($account)) {
-        $result = do_select_character('MEMB_INFO', 'bank,vpoint,jewel_chao,jewel_cre,jewel_blue,gcoin,gcoin_km,jewel_feather', "memb___id='$account'", '');
+        $result = do_select_character('MEMB_INFO', 'bank,vpoint,jewel_chao,jewel_cre,jewel_blue,gcoin,gcoin_km,jewel_feather,[WCoin],[WCoinP],[GoblinCoin]', "memb___id='$account'", '');
 
         if ($result) {
             foreach ($result as $key => $var) {
@@ -135,7 +135,10 @@ function view_bank($account)
                     'blue' => $var['jewel_blue'],
                     'gc' => $var['gcoin'],
                     'gc_km' => $var['gcoin_km'],
-                    'feather' => $var['jewel_feather']
+                    'feather' => $var['jewel_feather'],
+                    'wCoin' => $var['WCoin'],
+                    'wCoinP' => $var['WCoinP'],
+                    'goblinCoin' => $var['GoblinCoin']
                 );
             }
         }
@@ -398,6 +401,27 @@ function do_insert_character()
     }
 
     return FALSE;
+}
+
+function do_insert_orther($myQureyInsert)
+{
+    global $db_new;
+    if (empty($myQureyInsert)) {
+        return false;
+    }
+
+    $check = $db_new->Execute($myQureyInsert) or cn_writelog($myQureyInsert, 'e');
+//        $check = $db_new->Execute("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)") or cn_writelog("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)", 'e');
+
+    if ($check) {
+        $db_new->CompleteTrans();
+        return true;
+    } else {
+        $db_new->RollbackTrans();
+    }
+
+
+    return false;
 }
 
 

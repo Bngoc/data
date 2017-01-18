@@ -25,7 +25,7 @@
                 <div class="custom-height result"></div>
                 <div class="btn-play">
                     Tiền đặt cược<span class="required">*</span>
-                    <input type='number' name='bet' class="bizwebform" required/> Vpoint
+                    <input type='number' name='bet' id="changeNumber" class="bizwebform" required/> Vpoint
                     <div class="clear"></div>
                     <input type='button' class="call-playbaicao btn mg-top15 mg-bottom5" value='Chia bài'>
                 </div>

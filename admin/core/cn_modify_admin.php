@@ -1677,6 +1677,15 @@ function cn_config_load()
         //Relax
         'user_BauCua' => 1,
         'user_BaiCao' => 1,
+        //configBuyZen
+        'configBuyZen' => '5000|10000|15000|20000',
+        //TransVpoint
+        'configTransVpoint' => '5000',
+        // Time write De
+        'timeWriterLimit' => '17:45',
+        'timeResultDe' => '8:00',
+        'moneyMinDe' => '5000',
+
     );
 
     // Set default values
@@ -1923,20 +1932,6 @@ function cn_check_code32($code32)
     return false;
 }
 
-// Since 2.0: Create file
-function cn_touch($fn, $php_safe = FALSE)
-{
-    if (!file_exists($fn)) {
-        $w = fopen($fn, 'w+');
-
-        if ($php_safe) {
-            fwrite($w, "<?php die('Direct call - access denied'); ?>\n");
-        }
-        fclose($w);
-    }
-
-    return $fn;
-}
 
 // Since 2.0: Save whole config
 function cn_config_save($cfg = null)

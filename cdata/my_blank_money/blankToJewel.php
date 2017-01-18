@@ -32,7 +32,7 @@ list($htmlOptionNumItem, $isZen) = _GL('htmlOptionNumItem, isZen');
         <tr>
             <td class="bizwebform_col_1"><?php echo ((@$isZen || $isZen == 0) ? '' : 'Chọn số lượng'); ?></td>
             <td colspan=""><div class="show-NumItem"><?php echo $htmlOptionNumItem; ?></div></td>
-            <td <?php echo ((@$isZen || $isZen == 0) ? '' : 'id="msg_NumItem"'); ?> ></td>
+            <td id="msg_NumItem"></td>
         </tr>
         <tr>
             <td class="bizwebform_col_1 pd-top15 pd-bottom15">Chọn Nhân vật</td>

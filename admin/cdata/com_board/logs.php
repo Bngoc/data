@@ -13,7 +13,7 @@ $i = 0;
 
     <?php foreach ($default_log as $key => $ol) { ?>
         <li <?php if ($section == $key || (empty($section) && $key == 'system')) echo ' class="selected"'; ?>><a
-                href="<?php echo cn_url_modify('mod=editconfig', 'opt=logs', "section=$key", 'sub', 'page'); ?>"><?php echo ucfirst($key); ?></a>
+                href="<?php echo cn_url_modify('mod=editconfig', 'opt=logs', "section=$key", 'sub', 'page', 'action'); ?>"><?php echo ucfirst($key); ?></a>
         </li>
     <?php } ?>
 </ul>
@@ -62,7 +62,7 @@ $i = 0;
     foreach ($options as $key => $item) {
         echo '<td class="cust-style" bgcolor="' . (($key == $sub) ? '#c2e9bb' : '#ffffcc') . '" valign="top">';
         echo '<a href="' . cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs', 'section=' . $section, "sub=$key") . '">' . $item['name'] . '</a>';
-        echo '<hr><div class="xoalog"><a href="' . cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs', 'section=' . $section, "sub=$key", "action=" . (@$item['log'] ? $item['log'] : '')) . '"><font color="#FF0000">Xóa Log</font></div></td>';
+        echo '<hr><div class="xoalog"><a href="' . cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs', 'action', 'section=' . $section, "sub=$key", "action=" . (@$item['log'] ? $item['log'] : '')) . '"><font color="#FF0000">Xóa Log</font></div></td>';
         $lopIndx++;
         if ($lopIndx % 7 == 0) {
             echo '</tr><tr>';

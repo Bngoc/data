@@ -578,6 +578,7 @@ function char_reset()
                 $content = "$sub Reset lần thứ $resetup _ lần thứ $CountNoResetInDay trong ngày";
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/character/log_resets.log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $vpointnew . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
@@ -1226,6 +1227,7 @@ function char_resetvip()
                 //$Date = date("h:iA, d/m/Y");
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/character/log_resetsvip.log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $blank_gcoin . "_" . $blank_vp . "_" . $blank_gcoin_km . "|" . $gcoin_rsvip . "_" . $vpointnew . "_" . $gcoin_gkm_rsvip . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
@@ -1469,6 +1471,7 @@ function char_relife()
                 $content = "$sub Relife lần thứ $CountRelifeup";
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/character/log_relife.log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
@@ -1635,6 +1638,7 @@ function char_online()
                     $content = "$sub kết thúc ủy thác online, nhận được $minute_to_point điểm";
                     $Date = date("h:iA, d/m/Y", ctime());
                     $file = MODULE_ADM . "/log/modules/character/log_uythaconline.log";
+                    cn_touch($file);
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_after . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                     //End Ghi vào Log
@@ -1672,6 +1676,7 @@ function char_online()
                     $Date = date("h:iA, d/m/Y", ctime());
                     $content = "$sub bắt đầu Ủy thác online lúc $Date";
                     $file = MODULE_ADM . "/log/modules/character/log_uythaconline.log";
+                    cn_touch($file);
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                     //End Ghi vào Log
@@ -1829,6 +1834,7 @@ function char_offline()
                     $content = "$sub kết thúc ủy thác offline, nhận được $minute_to_point điểm";
                     $Date = date("h:iA, d/m/Y", ctime());
                     $file = MODULE_ADM . "/log/modules/character/log_uythacoffline.log";
+                    cn_touch($file);
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_after . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                     //End Ghi vào Log
@@ -1866,6 +1872,7 @@ function char_offline()
                     $Date = date("h:iA, d/m/Y", ctime());
                     $content = "$sub bắt đầu Ủy thác offline lúc $Date";
                     $file = MODULE_ADM . "/log/modules/character/log_uythacoffline.log";
+                    cn_touch($file);
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                     //End Ghi vào Log
@@ -2098,6 +2105,7 @@ function char_rsdelegate()
                 $content = "$sub Reset ủy thác lần thứ $resetup";
                 $Date = date("h:iA, d/m/Y", $ctime);
                 $file = MODULE_ADM . "/log/modules/character/log_rsuythac.log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
@@ -2318,6 +2326,7 @@ function char_rsdelegatevip()
                 $content = "$sub Reset Vip lần thứ $resetvipup";
                 $Date = date("h:iA, d/m/Y", $ctime);
                 $file = MODULE_ADM . "/log/modules/character/log_rsuythacvip.log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_gcoin . "_" . $_blank_vpoint . "|" . $gcoin_rsvip . "_" . $vpointnew . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
@@ -2808,8 +2817,9 @@ function char_rspoint()
 
                 //Ghi vào Log
                 $content = "$sub đã tẩy điểm với 25% Gcoin hoặc 25% Vpoint tương ứng với số cấp Reset Vip";
-                $Date = date("h:iA, d/m/Y", time());
+                $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/character/log_rspoint.log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_new . "_" . $vpoint_new . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
@@ -3065,6 +3075,7 @@ function char_removepk()
                     $content = "$sub đã rửa tội giết $PkCount mạng với" . @$numVpPK . " V.Point";
                     $Date = date("h:iA, d/m/Y", ctime());
                     $file = MODULE_ADM . "/log/modules/character/log_ruatoi.log";
+                    cn_touch($file);
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $ktvpoint . "|" . $Date . "|\n" . $fileContents);
                     //End Ghi vào Log
@@ -3195,6 +3206,7 @@ function char_pointtax()
                 $content = "$sub đã thuê $var_vp point với $var_vp V.Point";
                 $Date = date("h:iA, d/m/Y", $ctime);
                 $file = MODULE_ADM . "/log/modules/character/log_thuepoint.log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . '_' . $ktvpoint . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
@@ -3338,6 +3350,7 @@ function char_changename()
                 $content = "$sub đã đổi $sub sang $c_name với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/character/log_changename.log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $var_vp . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
@@ -3471,7 +3484,7 @@ function char_changeclass()
                 $get_default_class = '';
                 $_arr_cls = spsep($arr_cls);
                 foreach ($_arr_cls as $key => $val)
-                    $get_default_class .= "$val=" . $default_class[0][$key] . ",";
+                    $get_default_class .= "$val=" . $default_class[0][$val] . ",";
 
                 $get_default_class = substr($get_default_class, 0, -1);
 
@@ -3481,7 +3494,7 @@ function char_changeclass()
                 }
                 $quest_nothing = substr($inventory_nothing, 0, 100);
 
-                do_update_character('Character', 'Clevel=400', "Resets=$newReset", 'Experience=0', "Class=$_codeClass", "LevelUpPoint=0", "pointdutru=0", "$get_default_class", "MapDir=0", "MagicList=CONVERT(varbinary(180), null)", "Quest=0x$quest_nothing", "Inventory=0x$inventory_nothing", "name:'$sub'");
+                do_update_character('Character', 'Clevel=400', "Resets=$newReset", "DGT_Time=" . ctime(), 'Experience=0', "Class=$_codeClass", "LevelUpPoint=0", "pointdutru=0", $get_default_class, "MapDir=0", "MagicList=CONVERT(varbinary(180), null)", "Quest=0x$quest_nothing", "Inventory=0x$inventory_nothing", "name:'$sub'");
 
                 //Reset Point Master Skill
                 if (($class_ == $infoClass['class_dw_3']) || ($class_ == $infoClass['class_dk_3']) || ($class_ == $infoClass['class_elf_3']) || ($class_ == $infoClass['class_mg_2']) || ($class_ == $infoClass['class_dl_2']) || ($class_ == $infoClass['class_sum_3']) || ($class_ == $infoClass['class_rf_2'])) {
@@ -3499,6 +3512,7 @@ function char_changeclass()
                 $content = "Nhân vật $sub đã đổi " . strtoupper($isClass) . " sang " . strtoupper($nameClass) . " với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/character/log_changeclass.log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
@@ -3558,7 +3572,7 @@ function char_level1()
         $numberClass = explode('_', $key);
 
         if (in_array($key, $tempClass) && !in_array($isClass, $tempSkip) && $numberClass[2] == 1) {
-            $status = '<span class="cBule"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 1 </span><br>";
+            $status = '<span class="cBlue"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 1 </span><br>";
         } else {
             $status = '<span class="cInfo"> <b>' . ucfirst($sub) . "</b> đã làm nhiệm vụ cấp 1 </span><br>";
             $checkLevel150 = true;
@@ -3692,6 +3706,7 @@ function char_level1()
                 $content = "Nhân vật $sub làm nhiệm vụ với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/character/log_level150.log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc_ . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
@@ -3749,7 +3764,7 @@ function char_level2()
         $numberClass = explode('_', $key);
 
         if (in_array($key, $tempClass) && !in_array($isClass, $tempSkip) && $numberClass[2] == 2) {
-            $status = '<span class="cBule"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 2 </span><br>";
+            $status = '<span class="cBlue"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 2 </span><br>";
         } else {
             $status = '<span class="cInfo"> <b>' . ucfirst($sub) . "</b> đã làm nhiệm vụ cấp 2 </span><br>";
             $checkLevel220 = true;
@@ -3887,6 +3902,7 @@ function char_level2()
                 $content = "Nhân vật $sub nhiệm vụ level 220 với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/character/log_level220.log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
@@ -3943,7 +3959,7 @@ function char_level3()
         $numberClass = explode('_', $key);
 
         if (in_array($key, $tempClass) && !in_array($isClass, $tempSkip) && $numberClass[2] == 2) {
-            $status = '<span class="cBule"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 2 </span><br>";
+            $status = '<span class="cBlue"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 2 </span><br>";
         } else {
             $status = '<span class="cInfo"> <b>' . ucfirst($sub) . "</b> đã làm nhiệm vụ cấp 2 </span><br>";
             $checkLevel220 = true;
@@ -4080,6 +4096,7 @@ function char_level3()
                 $content = "Nhân vật $sub nhiệm vụ level 380 với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/character/log_level380.log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
@@ -4374,6 +4391,7 @@ function char_delepersonalSotre()
 //                $content = "$sub đã đổi $sub sang $c_name với $var_vp";
 //                $Date = date("h:iA, d/m/Y", ctime());
 //                $file = MODULE_ADM . "/log/modules/character/log_changename.log";
+//                cn_touch($file);
 //                $fileContents = file_get_contents($file);
 //                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $var_vp . "|" . $Date . "|\n" . $fileContents);
 //                //End Ghi vào Log

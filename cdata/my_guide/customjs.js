@@ -19,13 +19,13 @@ $(document).ready(function () {
 function ajax_load(url, id) {
     $.ajax({
         url: url,
+        type: 'POST',
         data: {
             format: 'html'
         },
         success: function (data) {
             $('#' + id).html(data);
-        },
-        type: 'POST'
+        }
     });
 }
 

@@ -222,12 +222,14 @@ function board_sysconf()
 //            'mon_list' => array('text', 'Month list|comma separated, 12 variables'),
 
 
+            'configBuyZen' => array('text', 'Buy zen list [500.000.000.000 - 1.000.000.000 - 1.500.000.000 - 2.000.000.000]|Ex: 5000|10000|15000|20000  ==> 5000 Vp <-> 500.000.000.000 Zen, ...'),
             'configLevel' => array('text', 'Set Vpoint level 150 - 220 - 380 |Ex: 2000|3000|5000  =-> 2k Vp <-> Level I; 3k Vp <-> Level II; 5k Vp <-> Level III'),
             'question_answers' => array('text', 'Câu hỏi|Liệt kê các câu hỏi ngăn cách nhau bằng dấu \',\''),
 
             'vptogc' => array('int', 'Công thức Gcoin = X% Vpoint|VD: X = 80 => [Gcoin = 80% Vpoint]'),
             //'gctovp'         => array('int', 'Title field will not be required|VD: 1 Vpoint = 1 Gcoin'),
 
+            'configTransVpoint' => array('int', 'Chuyển Vpoint|VD: 5000 / 1L'),
             'changename_vpoint' => array('int', 'Thay đổi tên nhân vật Vpoint|VD: 50000'),
             'changeClass_str' => array('text', 'Thay đổi Class = Vpoint:-X% Reset:MinReset |VD: 50000:15:100 (50k Vpoint, -15% số reset, min reset 100)'),
 
@@ -282,6 +284,10 @@ function board_sysconf()
             'user_BauCua' => array('Y/N', 'Sử dụng trò Bầu Cua'),
             '_RELAX_BCao' => array('title', 'Tro Bai Cao'),
             'user_BaiCao' => array('Y/N', 'Relax:Sử dụng trò Bài Cáo'),
+            '_RELAX_XoSo' => array('title', 'Danh De'),
+            'timeWriterLimit' => array('text', 'Relax:Thời gian kết thức nhận ghi đề; Định dạng 24h| VD: 17:45 hàng ngày'),
+            'timeResultDe' => array('text', 'Relax:Thời gian trả kết quả đề; Định dạng 24h| VD: 8:0 ngày ngày hôm sau, và nhỏ hơn thơi gian kết thức nhận ghi đề'),
+            'moneyMinDe' => array('int', 'Số tiền tối thiểu nhận ghi đề (Vpoint)| VD: 5000 Vpoint'),
         )
     );
 
@@ -1727,9 +1733,7 @@ function board_logs()
             'rsuythacvip' => ['name' => 'Reset Ủy Thác Vip'],
             'uythacoffline' => ['name' => 'Ủy Thác Offline'],
             'uythaconline' => ['name' => 'Ủy Thác Online'],
-            'chuyenvpoint' => ['name' => 'Chuyển V.Point'],
             'online_market' => ['name' => 'Chợ trực tuyến'],
-            'xosokienthiet' => ['name' => 'Xổ số kiến thiết'],
             'pcpoint2vpoint' => ['name' => 'Đổi PCPoint'],
             'randomquest' => ['name' => 'Nhiệm vụ ngẫu nhiên'],
             'level150' => ['name' => 'Nhiệm vụ level 150'],
@@ -1738,11 +1742,7 @@ function board_logs()
             'ruatoi' => ['name' => 'Rửa tội'],
             'thuepoint' => ['name' => 'Thuê điểm'],
             'rspoint' => ['name' => 'Tẩy điểm'],
-            'vpoint2item' => ['name' => 'Mua Item V.Point'],
-            'muazen' => ['name' => 'Mua Zen bằng V.Point'],
-            'item2vpoint' => ['name' => 'Item V.Point --> V.Point'],
-            'vpoint2gcoin' => ['name' => 'V.Point --> Gcoin'],
-            'gcoin2vpoint' => ['name' => 'Gcoin --> V.Point']
+
             //'orther' => ['name' => ''],
             //'orther' => ['name' => '']
         ],
@@ -1764,7 +1764,20 @@ function board_logs()
         ],
         'relax' => array(
             'baucua' => ['name' => 'Bầu Cua'],
-            'baicao' => ['name' => 'Bài Cáo']
+            'baicao' => ['name' => 'Bài Cáo'],
+            'xosoDe' => ['name' => 'Xổ số kiến thiết'],
+        ),
+        'money' => array(
+            'vpoint2gcoin' => ['name' => 'Vpoint &rsaquo;&rsaquo;&rsaquo; Gcoin'],
+            'gcoin2vpoint' => ['name' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; Vpoint'],
+            'transgc2wc' => ['name' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; Wcoin'],
+            'transgc2wcp' => ['name' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; WcoinP'],
+            'transgc2gob' => ['name' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; GoblinCoin'],
+            'item2vpoint' => ['name' => 'Item V.Point &rsaquo;&rsaquo;&rsaquo; V.Point'],
+            'vpoint2item' => ['name' => 'Mua Item V.Point'],
+            'chuyenvpoint' => ['name' => 'Chuyển V.Point'],
+            'muazen' => ['name' => 'Mua Zen bằng V.Point']
+
         )
     );
 
@@ -1781,7 +1794,9 @@ function board_logs()
             $_sestion = 'modules/' . $section;
         }
 
-        unlink(cn_path_construct(SERVDIR, 'log/' . $_sestion) . $isActionDele . '.log');
+        if(file_exists(cn_path_construct(SERVDIR, 'log/' . $_sestion) . $isActionDele . '.log')) {
+            unlink(cn_path_construct(SERVDIR, 'log/' . $_sestion) . $isActionDele . '.log');
+        }
     }
 
     if (!$section || $section == 'system') {

@@ -87,7 +87,7 @@
     1. time zone  (0 -> +7)
     2. allow regiter
     3. character
-    4. cashshop	
+    4. cashshop
 	
  [*] E>
 	1. Hex main + Hex main config	
@@ -121,7 +121,12 @@
 		        C2. IIS -> request feltring - > URL -> Deny sequence ...  /core/rankingTopAutoUpdate.php
 		    5.2> PHP Apache ....
 		        -> .htaccess deny file
-		
+
+[*] G> Cau hinh choi De
+        1. Cau hinh tu tuong nhu Ranking Top 50 [ Task scheduler for Win]
+        2. Default Tra ket qua la 8:0 ngay hom sau (thoi gian tra ket qua tu 0 den 17:45 (default) thoi gian ket thuc nhan ghi de;
+        3. file auto --> -f <patch> /core/resultDeAutoUpdate.php
+
  Z>
 	1.open port
 		--> Connecting to SQL Server remotely on AWS involves 3 main factors: 

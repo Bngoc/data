@@ -30,6 +30,7 @@ class pagintion_temp
     public $url_modify = '';//cn_url_modify('mod=cashshop', '__item', '_id', 'do=action', "opt=".$opt);//	THÔNG SỐ SUA URL VOI FUNCTION CN_URL_MODIFY
     public $class_pagination = 'light-theme simple-pagination pagination'; // TÊN CÁC CLASS
     public $class_active = 'current'; // TEN CLASS Active
+    public $isAjax = false;
 
     private $start;
     private $prev;
@@ -37,6 +38,7 @@ class pagintion_temp
     private $lastpage;
     private $lpm1;
     private $variablesParam = '&amp;';
+    private $nameAjax = 'href';
 
     public function Load()
     {
@@ -55,6 +57,7 @@ class pagintion_temp
         $this->lpm1 = $this->lastpage - 1; //last page minus 1
 
         if ($this->url_modify == '') $this->variablesParam = '?';
+        if ($this->isAjax) $this->nameAjax = 'fhref';
 
         /* CREATE THE PAGINATION */
 
@@ -63,60 +66,60 @@ class pagintion_temp
             $pagination .= "<div class='$this->class_pagination'> <ul>";
 
             if ($this->page > 1) {
-                $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->prev . " class='page-link prev' title='Prev'>Prev</a></li>";
+                $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->prev . " class='callAjax page-link prev' title='Prev'>Prev</a></li>";
             } elseif ($this->page == 1)
-                $pagination .= "<li><a rel='nofollow' href='' class='$this->class_active' title='Prev'>Prev</a></li>";
+                $pagination .= "<li><a rel='nofollow' $this->nameAjax='' class='callAjax $this->class_active' title='Prev'>Prev</a></li>";
 
             if ($this->lastpage < 7 + ($this->adjacents * 2)) { // so trang < 13 = so bt hien thi
                 for ($counter = 1; $counter <= $this->lastpage; $counter++) {
                     if ($counter == $this->page)
-                        $pagination .= "<li><a rel='nofollow' href='#' class='$this->class_active' title='Page number $counter'>$counter</a></li>";
+                        $pagination .= "<li><a rel='nofollow' $this->nameAjax='#' class='callAjax $this->class_active' title='Page number $counter'>$counter</a></li>";
                     else
-                        $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='page-link' title='Page number $counter'>$counter</a></li>";
+                        $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='callAjax page-link' title='Page number $counter'>$counter</a></li>";
                 }
             } elseif ($this->lastpage > 5 + ($this->adjacents * 2)) { //enough pages to hide some so trang >11
                 //close to beginning; only hide later pages
                 if ($this->page < 1 + ($this->adjacents * 2)) { //  hien tai < 7...... => hientai 1 2 3 4 5 6 7 => hien 1 2 3 4 5 6 7 8 9
                     for ($counter = 1; $counter < 4 + ($this->adjacents * 2); $counter++) { //$counter < 9 + (2 tr cuoi)
                         if ($counter == $this->page)
-                            $pagination .= "<li><a rel='nofollow' href='#' class='$this->class_active' title='Page number $counter'>$counter</a></li>";
+                            $pagination .= "<li><a rel='nofollow' $this->nameAjax='#' class='callAjax $this->class_active' title='Page number $counter'>$counter</a></li>";
                         else
-                            $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='page-link' title='Page number $counter'>$counter</a></li>";
+                            $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='callAjax page-link' title='Page number $counter'>$counter</a></li>";
                     }
 
                     $pagination .= "<li>...</li>";
-                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lpm1 . " class='page-link' title='Page number $this->lpm1'>$this->lpm1</a></li>";
-                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lastpage . " class='page-link' title='Page number $this->lastpage'>$this->lastpage</a></li>";
+                    $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lpm1 . " class='callAjax page-link' title='Page number $this->lpm1'>$this->lpm1</a></li>";
+                    $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lastpage . " class='callAjax page-link' title='Page number $this->lastpage'>$this->lastpage</a></li>";
                 } //in middle; hide some front and some back
                 elseif ($this->lastpage - ($this->adjacents * 2) > $this->page && $this->page > ($this->adjacents * 2)) { // so tr - 6 > hientai  hienta > 6
 
-                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 1 . " class='page-link' title='1'>1</a></li>";        // trang dau 1
-                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 2 . " class='page-link' title='2'>2</a></li>";        // trang thu 2
+                    $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 1 . " class='callAjax page-link' title='1'>1</a></li>";        // trang dau 1
+                    $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 2 . " class='callAjax page-link' title='2'>2</a></li>";        // trang thu 2
                     $pagination .= "<li>...</li>";
                     for ($counter = $this->page - $this->adjacents; $counter <= $this->page + $this->adjacents; $counter++) { // 1 2 3 hientai 5 6 7  (tong 7)
 
                         if ($counter == $this->page)
-                            $pagination .= "<li><a rel='nofollow' href='#' class='$this->class_active' title='Page number $counter'>$counter</a></li>";
+                            $pagination .= "<li><a rel='nofollow' $this->nameAjax='#' class='callAjax $this->class_active' title='Page number $counter'>$counter</a></li>";
                         else
-                            $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='page-link' title='Page number $counter'>$counter</a></li>";
+                            $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='callAjax page-link' title='Page number $counter'>$counter</a></li>";
                     }
 
                     $pagination .= "<li>...</li>";
 
-                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lpm1 . " class='page-link' title='Page number $this->lpm1'>$this->lpm1</a></li>"; // trang cuoi - 1
-                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lastpage . " class='page-link' title='Page number $this->lastpage'>$this->lastpage</a></li>";  // trang cuoi
+                    $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lpm1 . " class='callAjax page-link' title='Page number $this->lpm1'>$this->lpm1</a></li>"; // trang cuoi - 1
+                    $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->lastpage . " class='callAjax page-link' title='Page number $this->lastpage'>$this->lastpage</a></li>";  // trang cuoi
 
                 } //close to end; only hide early pages
                 else {
-                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 1 . " class='page-link' title='1'>1</a></li>";
-                    $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 2 . " class='page-link' title='2'>2</a></li>";
+                    $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 1 . " class='callAjax page-link' title='1'>1</a></li>";
+                    $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . 2 . " class='callAjaxpage-link' title='2'>2</a></li>";
                     $pagination .= "<li>...</li>";
 
                     for ($counter = $this->lastpage - (2 + ($this->adjacents * 2)); $counter <= $this->lastpage; $counter++) {  // chi so = tong - 8; chi so < tong class="$this->class_active"
                         if ($counter == $this->page) {
-                            $pagination .= "<li><a rel='nofollow' href='#' class='$this->class_active' title='Page number $counter'>$counter</a></li>";
+                            $pagination .= "<li><a rel='nofollow' $this->nameAjax='#' class='callAjax $this->class_active' title='Page number $counter'>$counter</a></li>";
                         } else {
-                            $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='page-link' title='Page number $counter'>$counter</a></li>";
+                            $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $counter . " class='callAjax page-link' title='Page number $counter'>$counter</a></li>";
                         }
                     }
                 }
@@ -124,9 +127,9 @@ class pagintion_temp
 
             //next button
             if (($this->page >= 1) && $this->page < $this->lastpage) {
-                $pagination .= "<li><a href=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->next . " class='page-link' title='Next'>Next</a></li>";
+                $pagination .= "<li><a $this->nameAjax=" . $this->url_modify . $this->variablesParam . $this->name_per_page . '=' . $this->per_page . '&amp;' . $this->name_page . '=' . $this->next . " class='callAjax page-link' title='Next'>Next</a></li>";
             } elseif ($this->page == $this->lastpage) {
-                $pagination .= "<li><a rel='nofollow' href='' class='$this->class_active' title='Next'>Next</a></li>";
+                $pagination .= "<li><a rel='nofollow' $this->nameAjax='' class='callAjax $this->class_active' title='Next'>Next</a></li>";
             }
 
             $pagination .= "</ul></div>\n";
@@ -178,6 +181,38 @@ function cn_arr_pagina($array, $_url, $page, $per_page, $adjacents = 3, $name_pe
     }
 
     //goi...
+    $get_paging = $paging->Load();
+
+    return array($arr, $get_paging);
+}
+
+function cn_arr_paginaAjax($array, $_url, $page, $per_page, $isCallAjax = true, $adjacents = 3, $name_per_page = 'per_page', $name_page = 'page', $class_active = 'current', $class_pagination = 'light-theme simple-pagination pagination')
+{
+    $arr = array();
+    $paging = new pagintion_temp();
+
+    $paging->class_pagination = $class_pagination;  // ĐẶT CLASS CHO THÀNH PHẦN PHÂN TRANG THEO Ý MUỐN
+    $paging->class_active = $class_active;          // TEN CLASS Active
+    $paging->page = $page;                          // TRANG
+    $paging->total = $total = count($array);        // TONG SO RECODE
+    $paging->per_page = $per_page;                  // SỐ RECODE TRÊN 1 TRANG default = 10
+    $paging->adjacents = $adjacents;                // SỐ PAGE  CENTER DEFAULT = 3
+    $paging->name_page = $name_page;                // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
+    $paging->name_per_page = $name_per_page;        // GET NAMEPAGE  LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST OR GET
+    $paging->url_modify = $_url;                    //	THÔNG SỐ SUA URL VOI FUNCTION CN_URL_MODIFY
+    $paging->isAjax = $isCallAjax;                  //	Call Ajax
+
+    if ($page <= 0) $page_end = $per_page;
+    else if ($page != 0) $page_end = $per_page * $page;
+
+    $page_frist = (--$page_end) - $per_page;
+
+    $_id = 0;
+    foreach ($array as $key => $raw) {
+        if ($page_frist < $_id && $_id <= $page_end) $arr[$key] = $array[$key];
+        ++$_id;
+    }
+
     $get_paging = $paging->Load();
 
     return array($arr, $get_paging);
@@ -239,8 +274,10 @@ function cn_writelog($content, $info = '', $user = '')
     if ($user) {
         $member = $user;
     } else {
-        $member = $_SESSION['mu_Account'];
-        if (empty($member)) $member = $_SESSION['mu_Gamer'];
+        if (isset($_SESSION['mu_Account'])) {
+            $member = $_SESSION['mu_Account'];
+            if (empty($member)) $member = $_SESSION['mu_Gamer'];
+        }
     }
 
     if (empty($member)) $member = 'UNKNOWN';
@@ -255,14 +292,18 @@ function cn_writelog($content, $info = '', $user = '')
     }
 
     $date = date("Y-m-d H:i:s a", ctime());
+    $ul = ROOT . "/admin/log/system/error_dump.log";
+    cn_touch($ul);
+    $fileContents = file_get_contents($ul);
+    file_put_contents($ul, $status . "\t" . $date . "\t" . $member . "\t" . $remote_addr . "\t" . $request_uri . "\t" . $content . "\n" . $fileContents);
 
-    if (!file_exists($ul = cn_path_construct(ROOT, '/admin/log/system/') . 'error_dump.log')) {
-        fclose(fopen($ul, 'w+'));
-    }
-    if ($fd = @fopen($ul, "a")) {
-        $result = fputcsv($fd, array($status, $date, $member, $remote_addr, $request_uri, $content), "\t");
-        fclose($fd);
-    }
+//    if (!file_exists($ul = cn_path_construct(ROOT, '/admin/log/system/') . 'error_dump.log')) {
+//        fclose(fopen($ul, 'w+'));
+//    }
+//    if ($fd = @fopen($ul, "a")) {
+//        $result = fputcsv($fd, array($status, $date, $member, $remote_addr, $request_uri, $content), "\t");
+//        fclose($fd);
+//    }
 }
 
 function cn_ewConvertToUtf8($str)
@@ -326,6 +367,51 @@ function echoArr($arr)
     echo '<pre>';
     var_dump($arr);
     echo '</pre>';
+}
+
+function mcs()
+{
+    global $dbg_microtime;
+    $dbg_microtime = microtime(1);
+}
+
+function mce()
+{
+    global $dbg_microtime;
+    dbg("Microtime: " . (microtime(1) - $dbg_microtime));
+    $dbg_microtime = microtime(1);
+}
+
+// Since 2.0: Since time format
+function time_since_format($diff)
+{
+    $out = array();
+
+    if ($diff > 31557600) {
+        $out['y'] = intval($diff / 31557600);
+        $diff %= 31557600;
+    } // years
+    if ($diff > 2629800) {
+        $out['mon'] = intval($diff / 2629800);
+        $diff %= 2629800;
+    } // month
+    if ($diff > 86400) {
+        $out['d'] = intval($diff / 86400);
+        $diff %= 86400;
+    } // days
+    if ($diff > 3600) {
+        $out['h'] = intval($diff / 3600);
+        $diff %= 3600;
+    } // hours
+    if ($diff > 60) {
+        $out['m'] = intval($diff / 60);
+        $diff %= 60;
+    } // minutes
+    if ($diff > 0) {
+        $out['s'] = $diff;
+    } // seconds
+
+    return $out;
 }
 
 function cn_analysis_code32($string, $title, $price, $image_mh)
@@ -1601,4 +1687,94 @@ function cn_zenderMoneyBank($moneyBank)
     }
 
     return $strMoneyBank;
+}
+
+// Since 2.0: Create file
+function cn_touch($fn, $php_safe = FALSE)
+{
+    if (!file_exists($fn)) {
+        $w = fopen($fn, 'w+');
+
+        if ($php_safe) {
+            fwrite($w, "<?php die('Direct call - access denied'); ?>\n");
+        }
+        fclose($w);
+    }
+
+    return $fn;
+}
+
+function cn_ResultDe()
+{
+    $ctimeAction = getoption('timeWriterLimit');
+    $time = ctime();
+    $hourTime = date('H:i', $time);
+
+    if ($hourTime < $ctimeAction) {
+        # Use the Curl extension to query Google and get back a page of results
+        $url = URL_RESULR_DE;
+        $ch = curl_init();
+        $timeout = 5;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        $html = curl_exec($ch);
+        curl_close($ch);
+
+        # Create a DOM parser object
+        $dom = new DOMDocument();
+
+        # Parse the HTML from Google.
+        # The @ before the method call suppresses any warnings that
+        # loadHTML might throw because of invalid HTML in the page.
+        @$dom->loadHTML($html);
+
+        $xpath = new DomXpath($dom);
+        $div = $xpath->query('//*/p[@class="kqbackground text-center"]')->item(0);
+        $stuffDate = $div->textContent;
+        $stuffDateTime = strtotime(trim(explode(':', $stuffDate)[1]));
+        $stuffDateTimeAction = date('Y-m-d H:i:s', $stuffDateTime);
+
+        $resultPlayDe = $dom->getElementById('rs_0_0')->nodeValue;
+        $resultPlayDe = substr($resultPlayDe, -2);
+
+        $dateTime = date('Y-m-d', ($time - 86400));
+//        $dateTime = date('Y-m-d', strtotime(date('Y-m-d', $time) . '- 1 days'));
+
+        if ($resultPlayDe || $resultPlayDe == 0) {
+            $resultSelect = do_select_orther("SELECT count(*) as nameCount FROM ResultDe WHERE Convert(Date, timesDe)='" . $dateTime . "'");
+            if (empty($resultSelect[0]['nameCount'])) {
+                do_insert_character(
+                    'ResultDe',
+                    'ResultDe=' . $resultPlayDe,
+                    'timesDe=\'' . ((empty($stuffDateTime)) ? date('Y-m-d H:i:s', $time) : $stuffDateTimeAction ). '\'',
+                    'OptionResult=\'' . $stuffDateTime . '\''
+                );
+
+                $showupDate = do_select_orther("SELECT [ID], [AccountID],[WriteDe],[timestamp],[Action], [Vpoint] FROM WriteDe WHERE Convert(Date, timestamp)='$dateTime' AND Action = 1");
+
+                foreach ($showupDate as $key => $items) {
+                    $ischeck = false;
+                    $ID = trim($items['ID']);
+                    $AccountID = trim($items['AccountID']);
+                    if (trim($items['WriteDe']) == $resultPlayDe) {
+                        $vpointnew = $items['Vpoint'] * 70;
+                        do_update_character('MEMB_INFO', "vpoint=vpoint+$vpointnew", "memb___id:'$AccountID'");
+                        $ischeck = true;
+                    }
+
+                    do_update_character('WriteDe', "Action=0", "Result=" . (($ischeck) ? '1' : '2'), "ID:'$ID'");
+                }
+            }
+        }
+        //-----------------------------------------------------------------
+        //    $resultPlayDe = $dom->getElementById("rs_0_0")->innertext;
+        //    $resultPlayDe = substr($resultPlayDe, -2);
+
+        //    $df = $html->find('table[class=table table-condensed kqcenter table14force background-border table-kq-hover] td');
+        //   foreach ($df as $f => $dd){
+        //    echo $dd->innertext . '<br>';
+        //}
+        //-----------------------------------------------------------------
+    }
 }

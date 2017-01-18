@@ -101,10 +101,8 @@ function guide_tinhnang()
 {
     $sub = REQ('sub', "GETPOST");
 
-    $options_list = array
-    (
-        'old-features' => array
-        (
+    $options_list = array(
+        'old-features' => array(
             'nenngoc' => 'Hệ thống nén ngọc',
             'giacuong' => 'Gia cường Items',
             'tinhluyen' => 'Tinh luyện',
@@ -116,8 +114,7 @@ function guide_tinhnang()
             'taocanh' => 'Tạo cánh',
             'chaosvua' => 'Kết hợp Chaos Vua'
         ),
-        'new-features' => array
-        (
+        'new-features' => array(
             'khamngoc' => 'Hệ thống khảm ngọc',
             'masterlevel' => 'Master Level',
             'canhcap3' => 'Cánh cấp 3'

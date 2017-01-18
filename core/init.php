@@ -27,6 +27,8 @@ define('URL_PATH', dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn
 define('URL_PATH_IMG', '/images');  //custom by bqn
 //define('URL_PATH_IMG', dirname($_SERVER['SCRIPT_NAME']) . '/images');  //custom by bqn
 define('PHP_SELF', $_SERVER["SCRIPT_NAME"]);
+define('MAXBANKZEN', 999999999999999);
+define('MAX_TRANS', 2000000000);
 
 // include necessary libs
 require_once ROOT . '/core/function/libgarena.php';
@@ -35,6 +37,7 @@ require_once SERVDIR . '/core/security.php';
 require_once SERVDIR . '/core/db/flat_web.php';
 require_once SERVDIR . '/core/class.phpmailer.php';
 require_once SERVDIR . '/core/class.smtp.php';
+//require_once SERVDIR . '/core/simple_html_dom.php'; //libs
 //require_once MODULE_ADM . '/core/captcha/phptextClass.php';
 
 // create cutenews caches

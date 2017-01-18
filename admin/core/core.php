@@ -247,83 +247,74 @@ function UTF8ToEntities($string)
         'e299a5' => '&hearts;',
         'e299a6' => '&diams;',
     );
-    /*
-        // Decode UTF-8 code-table
-        $HTML_SPECIAL_CHARS = array();
-        foreach ($HTML_SPECIAL_CHARS_UTF8 as $hex => $html)
-        {
-            $key = '';
-            if (strlen($hex) == 4)
-            {
-                $key = pack("CC",  hexdec(substr($hex, 0, 2)), hexdec(substr($hex, 2, 2)));
-            }
-            elseif (strlen($hex) == 6)
-            {
-                $key = pack("CCC", hexdec(substr($hex, 0, 2)), hexdec(substr($hex, 2, 2)), hexdec(substr($hex, 4, 2)));
-            }
 
-            if ($key)
-            {
-                $HTML_SPECIAL_CHARS[$key] = $html;
-            }
+    // Decode UTF-8 code-table
+    $HTML_SPECIAL_CHARS = array();
+    foreach ($HTML_SPECIAL_CHARS_UTF8 as $hex => $html) {
+        $key = '';
+        if (strlen($hex) == 4) {
+            $key = pack("CC", hexdec(substr($hex, 0, 2)), hexdec(substr($hex, 2, 2)));
+        } elseif (strlen($hex) == 6) {
+            $key = pack("CCC", hexdec(substr($hex, 0, 2)), hexdec(substr($hex, 2, 2)), hexdec(substr($hex, 4, 2)));
         }
 
-        // Common conversion
-        $string = str_replace(array_keys($HTML_SPECIAL_CHARS), array_values($HTML_SPECIAL_CHARS), $string);
+        if ($key) {
+            $HTML_SPECIAL_CHARS[$key] = $html;
+        }
+    }
 
-        /* note: apply htmlspecialchars if desired /before/ applying this function
-        /* Only do the slow convert if there are 8-bit characters */
+    // Common conversion
+    $string = str_replace(array_keys($HTML_SPECIAL_CHARS), array_values($HTML_SPECIAL_CHARS), $string);
+
+    /* note: apply htmlspecialchars if desired /before/ applying this function
+    /* Only do the slow convert if there are 8-bit characters */
     /* avoid using 0xA0 (\240) in ereg ranges. RH73 does not like that */
-    /*
-      if (!preg_match("~[\200-\237]~", $string) and ! preg_match("~[\241-\377]~", $string))
-        {
-            return $string;
-        }
 
-        // reject too-short sequences
-        $string = preg_replace("/[\302-\375]([\001-\177])/", "&#65533;\\1", $string);
-        $string = preg_replace("/[\340-\375].([\001-\177])/", "&#65533;\\1", $string);
-        $string = preg_replace("/[\360-\375]..([\001-\177])/", "&#65533;\\1", $string);
-        $string = preg_replace("/[\370-\375]...([\001-\177])/", "&#65533;\\1", $string);
-        $string = preg_replace("/[\374-\375]....([\001-\177])/", "&#65533;\\1", $string);
-        $string = preg_replace("/[\300-\301]./", "&#65533;", $string);
-        $string = preg_replace("/\364[\220-\277]../", "&#65533;", $string);
-        $string = preg_replace("/[\365-\367].../", "&#65533;", $string);
-        $string = preg_replace("/[\370-\373]..../", "&#65533;", $string);
-        $string = preg_replace("/[\374-\375]...../", "&#65533;", $string);
-        $string = preg_replace("/[\376-\377]/", "&#65533;", $string);
-        $string = preg_replace("/[\302-\364]{2,}/", "&#65533;", $string);
+    if (!preg_match("~[\200-\237]~", $string) and !preg_match("~[\241-\377]~", $string)) {
+        return $string;
+    }
 
-        // decode four byte unicode characters
-        $string = preg_replace_callback(
-            "/([\360-\364])([\200-\277])([\200-\277])([\200-\277])/",
-            function ($matches)
-            {
-                return '&#'.((ord($matches[1])&7)<<18 | (ord($matches[2])&63)<<12 |(ord($matches[3])&63)<<6 | (ord($matches[4])&63)).';';
-            },
-            $string);
+    // reject too-short sequences
+    $string = preg_replace("/[\302-\375]([\001-\177])/", "&#65533;\\1", $string);
+    $string = preg_replace("/[\340-\375].([\001-\177])/", "&#65533;\\1", $string);
+    $string = preg_replace("/[\360-\375]..([\001-\177])/", "&#65533;\\1", $string);
+    $string = preg_replace("/[\370-\375]...([\001-\177])/", "&#65533;\\1", $string);
+    $string = preg_replace("/[\374-\375]....([\001-\177])/", "&#65533;\\1", $string);
+    $string = preg_replace("/[\300-\301]./", "&#65533;", $string);
+    $string = preg_replace("/\364[\220-\277]../", "&#65533;", $string);
+    $string = preg_replace("/[\365-\367].../", "&#65533;", $string);
+    $string = preg_replace("/[\370-\373]..../", "&#65533;", $string);
+    $string = preg_replace("/[\374-\375]...../", "&#65533;", $string);
+    $string = preg_replace("/[\376-\377]/", "&#65533;", $string);
+    $string = preg_replace("/[\302-\364]{2,}/", "&#65533;", $string);
 
-        // decode three byte unicode characters
-        $string = preg_replace_callback(
-            "/([\340-\357])([\200-\277])([\200-\277])/",
-            function ($matches)
-            {
-                return '&#'.((ord($matches[1])&15)<<12 | (ord($matches[2])&63)<<6 | (ord($matches[3])&63)).';';
-            },
-            $string);
+    // decode four byte unicode characters
+    $string = preg_replace_callback(
+        "/([\360-\364])([\200-\277])([\200-\277])([\200-\277])/",
+        function ($matches) {
+            return '&#' . ((ord($matches[1]) & 7) << 18 | (ord($matches[2]) & 63) << 12 | (ord($matches[3]) & 63) << 6 | (ord($matches[4]) & 63)) . ';';
+        },
+        $string);
 
-        // decode two byte unicode characters
-        $string = preg_replace_callback(
-            "/([\300-\337])([\200-\277])/",
-            function ($matches)
-            {
-                return '&#'.((ord($matches[1])&31)<<6 | (ord($matches[2])&63)).';';
-            },
-            $string);
+    // decode three byte unicode characters
+    $string = preg_replace_callback(
+        "/([\340-\357])([\200-\277])([\200-\277])/",
+        function ($matches) {
+            return '&#' . ((ord($matches[1]) & 15) << 12 | (ord($matches[2]) & 63) << 6 | (ord($matches[3]) & 63)) . ';';
+        },
+        $string);
 
-        // reject leftover continuation bytes
-        $string = preg_replace("/[\200-\277]/", "&#65533;", $string);
-    */
+    // decode two byte unicode characters
+    $string = preg_replace_callback(
+        "/([\300-\337])([\200-\277])/",
+        function ($matches) {
+            return '&#' . ((ord($matches[1]) & 31) << 6 | (ord($matches[2]) & 63)) . ';';
+        },
+        $string);
+
+    // reject leftover continuation bytes
+    $string = preg_replace("/[\200-\277]/", "&#65533;", $string);
+
     return $string;
 }
 

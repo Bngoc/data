@@ -6,22 +6,23 @@ add_hook('index/invoke_module', '*blank_money_invoke');
 function blank_money_invoke()
 {
     $blank_money_board = array(
-        'blank_money:chaos2blank:Csc' => 'Gửi chaos vào blank',
-        'blank_money:blank2chaos:Csc' => 'Rút chaos từ blank',
-        'blank_money:cre2blank:Cp' => 'Gửi Cre vào blank',
-        'blank_money:blank2cre:Cp' => 'Rút Cre từ blank',
-        'blank_money:feather2blank:Cp' => 'Gửi Lông vũ vào blank',
-        'blank_money:blank2feather:Cp' => 'Rút Lông vũ từ blank',
-        'blank_money:blue2blank:Cp' => 'Gửi Bule vào blank',
-        'blank_money:blank2bule:Cp' => 'Rút Bule từ blank',
-        'blank_money:zen2blank:Cp' => 'Gửi zen vào blank',
-        'blank_money:blank2zen:Ct' => 'Rút zen từ blank',
-        'blank_money:vpoint2blank:Cp' => 'Gửi Vpoint vào ngân hàng',
-        'blank_money:blank2vpoint:Cp' => 'Rút Vpoint từ ngân hàng',
+        'blank_money:chaos2blank:Csc' => 'Chaos &rsaquo;&rsaquo;&rsaquo; Bank',
+        'blank_money:blank2chaos:Csc' => 'Chaos &lsaquo;&lsaquo;&lsaquo; Bank',
+        'blank_money:cre2blank:Cp' => 'Cre &rsaquo;&rsaquo;&rsaquo; Bank',
+        'blank_money:blank2cre:Cp' => 'Cre &lsaquo;&lsaquo;&lsaquo; blank',
+        'blank_money:feather2blank:Cp' => 'Lông vũ &rsaquo;&rsaquo;&rsaquo; Bank',
+        'blank_money:blank2feather:Cp' => 'Lông vũ &lsaquo;&lsaquo;&lsaquo; blank',
+        'blank_money:blue2blank:Cp' => 'Bule &rsaquo;&rsaquo;&rsaquo; Bank',
+        'blank_money:blank2bule:Cp' => 'Bule &lsaquo;&lsaquo;&lsaquo; blank',
+        'blank_money:zen2blank:Cp' => 'Zen &rsaquo;&rsaquo;&rsaquo; Bank',
+        'blank_money:blank2zen:Ct' => 'Zen &lsaquo;&lsaquo;&lsaquo; blank',
+        'blank_money:vpoint2blank:Cp' => 'Vpoint &rsaquo;&rsaquo;&rsaquo; Bank',
+        'blank_money:blank2vpoint:Cp' => 'Vpoint &lsaquo;&lsaquo;&lsaquo; Bank',
         //----------------------------------------------------------
+        'blank_money:transvpoint:Cp' => 'Chuyển Vpoint',
+        'blank_money:muazen:Cp' => 'Mua Zen bằng Vpoint',
         'blank_money:vpoint2gcoin:Cp' => 'Vpoint &rsaquo;&rsaquo;&rsaquo; Gcoin',
         'blank_money:gcoin2vpoint:Cp' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; Vpoint',
-        'blank_money:transvpoint:Cp' => 'Chuyển Vpoint',
         'blank_money:transgc2wc:Cp' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; Wcoin',
         'blank_money:transgc2wcp:Cp' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; WcoinP',
         'blank_money:transgc2gob:Cp' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; GoblinCoin',
@@ -78,7 +79,9 @@ function blank_money_invoke()
         'transvpoint' => 'transvpoint.png',
         'transgc2wc' => 'transgc2wc.png',
         'transgc2wcp' => 'transgc2wcp.png',
-        'transgc2gob' => 'transgc2gob.png'
+        'transgc2gob' => 'transgc2gob.png',
+        'muazen' => 'muazen.png'
+
     );
 
     // More dashboard images
@@ -103,7 +106,7 @@ function blank_money_invoke()
     }
 
     cn_assign('dashboard', $blank_money_board);
-    echoheader('-@my_blank_money/style.css', "Giải trí");
+    echoheader('-@my_blank_money/style.css', "Ngân hàng - Tiền tệ");
     echocomtent_here(exec_tpl('my_blank_money/general'), cn_snippet_bc_re());
     echofooter();
 }
@@ -492,6 +495,7 @@ function blank_money_feather2blank()
 
 function blank_money_zen2blank()
 {
+    $maxBank = MAXBANKZEN;
     $option = ' Zen';
     $showchar = cn_character();
     $_blank_var = view_bank($accoutID = $_SESSION['user_Gamer']);
@@ -507,7 +511,7 @@ function blank_money_zen2blank()
     $moneyInventory = $showchar[$sub]['money'];
     $inventory = strtoupper(bin2hex($showchar[$sub]['shop_inventory']));
     $inventory2 = substr($inventory, 12 * 32, 64 * 32);
-    $maxBank = 999999999999999;
+
     $totalSendBank = $moneyInventory + $moneyBlank;
 
     if (request_type('POST')) {
@@ -562,6 +566,7 @@ function blank_money_vpoint2blank()
 {
     $option = ' Vpoint';
     $showchar = cn_character();
+    $showBlank = view_bank($acountID = $_SESSION['user_Gamer']);
 
     list($sub) = GET('sub', 'GPG');
     if (!$sub) {
@@ -602,10 +607,19 @@ function blank_money_vpoint2blank()
 
             if (!$errors_false) {
                 $newInventory = $inventory1 . $inventory2After . $inventory3;
-                $acountID = $_SESSION['user_Gamer'];
 
                 do_update_orther("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
                 do_update_orther("UPDATE MEMB_INFO SET vpoint=vpoint+$countVpoint WHERE memb___id='$acountID'");
+
+                //Ghi vào Log
+                $afterVpoint = $showBlank[0]['vp'] + $countVpoint;
+                $content = "$sub -  $acountID đã chuyển " . number_format($countVpoint, 0, ",", ".") . " Item Vpoint thành Vpoint";
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/money/log_item2vpoint.log";
+                cn_touch($file);
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $acountID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $showBlank[0]['gc'] . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
 
                 cn_throw_message("Bạn đã thêm Sl: " . number_format($countVpoint, 0, ",", ".") . " Vpoint vào ngân hàng thành công!");
             }
@@ -636,7 +650,7 @@ function zenderNumberSelectOption($numberItems, $numberItem = 0)
     $countItems = intval($numberItems);
     $numberItem = intval($numberItem);
 
-    $htmlOption = '<select id="bizwebselect" name="numberItemJewel" onchange=\'submit()\'><option value="0">--Chọn số lượng--</option>';
+    $htmlOption = '<select id="bizwebselect" name="numberItemJewel" onchange=\'changeValueNumber(this)\'><option value="0">--Chọn số lượng--</option>';
     if ($numberItems) {
         if ($numberItems < 10) {
             for ($i = 1; $i <= $countItems; $i++) {
@@ -668,7 +682,7 @@ function zenderNumberSelectOptionVpoint($numberItems, $numberItem = 0)
     $countItems = intval($numberItems);
     $numberItem = intval($numberItem);
 
-    $htmlOption = '<select id="bizwebselect" name="numberItemJewel" onchange=\'submit()\'><option value="0">--Chọn số lượng--</option>';
+    $htmlOption = '<select id="bizwebselect" name="numberItemJewel" onchange=\'changeValueNumber(this)\'><option value="0">--Chọn số lượng--</option>';
     if ($numberItems) {
         if ($numberItems < 10) {
             for ($i = 1; $i <= $countItems; $i++) {
@@ -691,6 +705,22 @@ function zenderNumberSelectOptionVpoint($numberItems, $numberItem = 0)
     $htmlOption .= '</select>';
 
     return $htmlOption;
+}
+
+function zenderOptionBuyZen()
+{
+    $optionListZen = explode('|', getoption('configBuyZen'));
+    $strHtml = '<select class="" id="bizwebselect" onchange="changeValueNumber(this)">
+                    <option value="0">--Chọn số lượng--</option>';
+    if ($optionListZen) {
+        foreach ($optionListZen as $key => $list) {
+            $strHtml .= '<option value="' . $list . '">' . $list . ' Vpoint</option>';
+        }
+    }
+
+    $strHtml .= '</select>';
+
+    return $strHtml;
 }
 
 function blank_money_blank2chaos()
@@ -819,7 +849,6 @@ function blank_money_blank2chaos()
     echocomtent_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
     echofooter();
 }
-
 
 function blank_money_blank2cre()
 {
@@ -1206,7 +1235,7 @@ function blank_money_blank2zen()
     $moneyStoreBank = $showBlank[0]['bank'];
 
     $subMoneyStoreBankNew = 0;
-    $maxMoneyStore = 2000000000;
+    $maxMoneyStore = MAX_TRANS;
     if ($moneyStoreBank >= $maxMoneyStore && $moneyInventory < $maxMoneyStore) {
         $subMoneyStoreBankNew = $maxMoneyStore - $moneyInventory;
     } elseif ($moneyInventory < $maxMoneyStore &&  $moneyStoreBank > 0)  {
@@ -1309,7 +1338,7 @@ function blank_money_blank2vpoint()
     $inventory2Clone = $inventory2 = substr($inventory, 12 * 32, 64 * 32);
     $inventory3 = substr($inventory, 76 * 32);
 
-    $showBlank = view_bank($accoutID = $_SESSION['user_Gamer']);
+    $showBlank = view_bank($acountID = $_SESSION['user_Gamer']);
     $countVpoint = $showBlank[0]['vp'];
 
     $htmlOptionNumItem = zenderNumberSelectOptionVpoint($countVpoint, $numberItem);
@@ -1323,7 +1352,7 @@ function blank_money_blank2vpoint()
 
 
             if ($countVpoint < $postNumberItem) {
-                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($countVpoint, 0, ',', '.') . ' Blue.', 'e');
+                cn_throw_message('Tài khoản ' . $acountID . ' có tối đa ' . number_format($countVpoint, 0, ',', '.') . ' Blue.', 'e');
                 $errors_false = true;
             }
 
@@ -1380,10 +1409,19 @@ function blank_money_blank2vpoint()
 
             if (!$errors_false) {
                 $newInventory = $inventory1 . $inventory2 . $inventory3;
-                $acountID = $_SESSION['user_Gamer'];
 
                 do_update_orther("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
                 do_update_orther("UPDATE MEMB_INFO SET vpoint=vpoint-$postNumberItem WHERE memb___id='$acountID'");
+
+                //Ghi vào Log
+                $afterVpoint = ($showBlank[0]['vp'] - $countVpoint);
+                $content = "$sub - $acountID chuyển " . number_format($postNumberItem, 0, ",", ".") . " Vpoint thành Vpoint Item.";
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/money/log_vpoint2item.log";
+                cn_touch($file);
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $acountID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $showBlank[0]['gc'] . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
 
                 cn_throw_message("Bạn đã rút Sl: " . number_format($postNumberItem, 0, ",", ".") . " Vpoint từ ngân hàng thành công!");
 
@@ -1418,3 +1456,603 @@ function blank_money_blank2vpoint()
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
+
+function blank_money_vpoint2gcoin()
+{
+    $showBlank = view_bank($accoutID = $_SESSION['user_Gamer']);
+
+    $rootVpoint = $showBlank[0]['vp'];
+    $rootGcoin = $showBlank[0]['gc'];
+
+
+    if (request_type('POST')) {
+        if (REQ('action_transBlank')) {
+            cn_dsi_check(true);
+            $errors_false = false;
+            list($postNumberItem) = GET('numberItem', 'GPG');
+
+            $postNumberItem = intval($postNumberItem);
+
+            if ($postNumberItem > MAX_TRANS){
+                cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
+                $errors_false = true;
+            }
+
+            if (empty($rootVpoint)) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' không Vpoint trong ngân hàng.', 'e');
+                $errors_false = true;
+            }
+            if ($postNumberItem <= 0) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' chưa nhập số Vpoint cần chuyển sang Gcoin.', 'e');
+                $errors_false = true;
+            }
+
+            if ($postNumberItem > $rootVpoint) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootVpoint, 0 , ',', '.') . ' Vpoint.', 'e');
+                $errors_false = true;
+            }
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+
+            if (!$errors_false) {
+
+                $gcoinNew = floor($postNumberItem * getoption('vptogc') / 100);
+                $acountID = $_SESSION['user_Gamer'];
+                do_update_orther("UPDATE MEMB_INFO SET gcoin=gcoin+$gcoinNew, vpoint=vpoint-$postNumberItem WHERE memb___id='$acountID'");
+
+                cn_throw_message("Bạn đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Vpoint sang " . number_format($gcoinNew, 0, ',', '.') . " Gcoin thành công!");
+
+                //Ghi vào Log
+                $afterVpoint = ($rootVpoint - $postNumberItem);
+                $afterGcoin = ($rootGcoin + $gcoinNew);
+                $content = "$accoutID đã chuyển Vpoint " . number_format($postNumberItem, 0, ",", ".") . " thành Gcoin " . number_format($gcoinNew, 0, ',', '.');
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/money/log_vpoint2gcoin.log";
+                cn_touch($file);
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
+            }
+
+            $resultData = array(
+                'msgAction' => cn_snippet_messages(),
+                'menuTop' => cn_menuTopMoney(true),
+                'countItem' => '',
+                'htmlOptionNumItem' => '',
+                'result' => ''
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
+        }
+    }
+
+    $showConfigVpoint = '- Tỷ lệ: <strong> 1 Gcoin</strong><i> = </i><strong> 1*' . getoption('vptogc') . '% Vpoint</strong>';
+    cn_assign('options, strInfoMoney, showConfigVpoint, optionBuyZen', 'Vpoint', '', $showConfigVpoint, '');
+    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Money - Chuyển Vpoint sang Gcoin.");
+    echocomtent_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
+    echofooter();
+}
+
+function blank_money_gcoin2vpoint()
+{
+    $showBlank = view_bank($accoutID = $_SESSION['user_Gamer']);
+
+    $rootVpoint = $showBlank[0]['vp'];
+    $rootGcoin = $showBlank[0]['gc'];
+
+    if (request_type('POST')) {
+        if (REQ('action_transBlank')) {
+            cn_dsi_check(true);
+            $errors_false = false;
+            list($postNumberItem) = GET('numberItem', 'GPG');
+
+            $postNumberItem = intval($postNumberItem);
+
+            if ($postNumberItem > MAX_TRANS){
+                cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
+                $errors_false = true;
+            }
+
+            if (empty($rootGcoin)) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' không Gcoin trong ngân hàng.', 'e');
+                $errors_false = true;
+            }
+            if ($postNumberItem <= 0) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' chưa nhập số Gcoin cần chuyển sang Vpoint.', 'e');
+                $errors_false = true;
+            }
+
+            if ($postNumberItem > $rootGcoin) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootGcoin, 0 , ',', '.') . ' Gcoin.', 'e');
+                $errors_false = true;
+            }
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+
+            if (!$errors_false) {
+                $acountID = $_SESSION['user_Gamer'];
+                do_update_orther("UPDATE MEMB_INFO SET gcoin=gcoin-$postNumberItem, vpoint=vpoint+$postNumberItem WHERE memb___id='$acountID'");
+
+                cn_throw_message("Bạn đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin sang " . number_format($postNumberItem, 0, ',', '.') . " Vpoint thành công!");
+
+                //Ghi vào Log
+                $afterVpoint = ($rootVpoint + $postNumberItem);
+                $afterGcoin = $rootGcoin - $postNumberItem;
+                $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin thành " . number_format($postNumberItem, 0, ',', ' Vpoint.');
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/money/log_gcoin2vpoint.log";
+                cn_touch($file);
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
+            }
+
+            $resultData = array(
+                'msgAction' => cn_snippet_messages(),
+                'menuTop' => cn_menuTopMoney(true),
+                'countItem' => '',
+                'htmlOptionNumItem' => '',
+                'result' => ''
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
+        }
+    }
+    $showConfigVpoint = '- Tỷ lệ: <strong> 1 Gcoin</strong><i> = </i><strong>1 Vpoint</strong>';
+    cn_assign('options, strInfoMoney, showConfigVpoint', 'Gcoin', '', $showConfigVpoint);
+    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gcoin sang Vpoint");
+    echocomtent_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
+    echofooter();
+}
+
+function blank_money_transgc2wc()
+{
+    $showBlank = view_bank($accoutID = $_SESSION['user_Gamer']);
+
+    $rootVpoint = $showBlank[0]['vp'];
+    $rootGcoin = $showBlank[0]['gc'];
+
+    $strInfoMoney = 'Tài khoản ' . $accoutID . ' có <b class="cRed">' . number_format($showBlank[0]['wCoin'], 0, ',', '.') . ' Wcoin </b>';
+
+    if (request_type('POST')) {
+        if (REQ('action_transBlank')) {
+            cn_dsi_check(true);
+            $errors_false = false;
+            list($postNumberItem) = GET('numberItem', 'GPG');
+
+            $postNumberItem = intval($postNumberItem);
+            if ($postNumberItem > MAX_TRANS){
+                cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
+                $errors_false = true;
+            }
+            if (empty($rootGcoin)) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' không Gcoin trong ngân hàng.', 'e');
+                $errors_false = true;
+            }
+            if ($postNumberItem <= 0) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' chưa nhập số Gcoin cần chuyển sang Wcoin.', 'e');
+                $errors_false = true;
+            }
+
+            if ($postNumberItem > $rootGcoin) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootGcoin, 0 , ',', '.') . ' Gcoin.', 'e');
+                $errors_false = true;
+            }
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+
+            if (!$errors_false) {
+                $acountID = $_SESSION['user_Gamer'];
+                do_update_orther("UPDATE MEMB_INFO SET gcoin=gcoin-$postNumberItem, wCoin=wCoin+$postNumberItem WHERE memb___id='$acountID'");
+
+                cn_throw_message("Bạn đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin sang " . number_format($postNumberItem, 0, ',', '.') . " Wcoin thành công!");
+
+                //Ghi vào Log
+                $afterVpoint = $rootVpoint;
+                $afterGcoin = $rootGcoin - $postNumberItem;
+                $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin thành " . number_format($postNumberItem, 0, ',', ' Wcoin.');
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/money/log_transgc2wc.log";
+                cn_touch($file);
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
+            }
+
+            $showMoney = (!$errors_false) ? ($showBlank[0]['wCoin'] + $postNumberItem) : $showBlank[0]['wCoin'];
+            $resultData = array(
+                'msgAction' => cn_snippet_messages(),
+                'menuTop' => cn_menuTopMoney(true),
+                'countItem' => '',
+                'htmlOptionNumItem' => '',
+                'result' => 'Tài khoản ' . $accoutID . ' có <b class="cRed">' . number_format($showMoney, 0, ',', '.') . ' WcoinP </b>'
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
+        }
+    }
+
+    $showConfigVpoint = '- Tỷ lệ: <strong> 1 Gcoin</strong><i> = </i><strong>1 Wcoin</strong>';
+    cn_assign('options, strInfoMoney, showConfigVpoint, optionBuyZen', 'Gcoin', $strInfoMoney, $showConfigVpoint, '');
+    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gcoin sang Wcoin");
+    echocomtent_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
+    echofooter();
+}
+
+function blank_money_transgc2wcp()
+{
+    $showBlank = view_bank($accoutID = $_SESSION['user_Gamer']);
+
+    $rootVpoint = $showBlank[0]['vp'];
+    $rootGcoin = $showBlank[0]['gc'];
+
+    $strInfoMoney = 'Tài khoản ' . $accoutID . ' có <b class="cRed">' . number_format($showBlank[0]['wCoinP'], 0, ',', '.') . ' WcoinP </b>';
+
+    if (request_type('POST')) {
+        if (REQ('action_transBlank')) {
+            cn_dsi_check(true);
+            $errors_false = false;
+            list($postNumberItem) = GET('numberItem', 'GPG');
+
+            $postNumberItem = intval($postNumberItem);
+
+            if ($postNumberItem > MAX_TRANS){
+                cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
+                $errors_false = true;
+            }
+            if (empty($rootGcoin)) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' không Gcoin trong ngân hàng.', 'e');
+                $errors_false = true;
+            }
+            if ($postNumberItem <= 0) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' chưa nhập số Gcoin cần chuyển sang WcoinP.', 'e');
+                $errors_false = true;
+            }
+
+            if ($postNumberItem > $rootGcoin) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootGcoin, 0 , ',', '.') . ' Gcoin.', 'e');
+                $errors_false = true;
+            }
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+
+            if (!$errors_false) {
+                $acountID = $_SESSION['user_Gamer'];
+                do_update_orther("UPDATE MEMB_INFO SET gcoin=gcoin-$postNumberItem, wCoinP=wCoinP+$postNumberItem WHERE memb___id='$acountID'");
+
+                cn_throw_message("Bạn đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin sang " . number_format($postNumberItem, 0, ',', '.') . " WcoinP thành công!");
+
+                //Ghi vào Log
+                $afterVpoint = $rootVpoint;
+                $afterGcoin = $rootGcoin - $postNumberItem;
+                $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin thành  " . number_format($postNumberItem, 0, ',', '.'). ' WcoinP.';
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/money/log_transgc2wcp.log";
+                cn_touch($file);
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
+            }
+
+            $showMoney = (!$errors_false) ? ($showBlank[0]['wCoinP'] + $postNumberItem) : $showBlank[0]['wCoinP'];
+
+            $resultData = array(
+                'msgAction' => cn_snippet_messages(),
+                'menuTop' => cn_menuTopMoney(true),
+                'countItem' => '',
+                'htmlOptionNumItem' => '',
+                'result' => 'Tài khoản ' . $accoutID . ' có <b class="cRed">' . number_format($showMoney, 0, ',', '.') . ' WcoinP </b>'
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
+        }
+    }
+    $showConfigVpoint = '- Tỷ lệ: <strong> 1 Gcoin</strong><i> = </i><strong>1 WcoinP</strong>';
+
+    cn_assign('options, strInfoMoney, showConfigVpoint, optionBuyZen', 'Gcoin', $strInfoMoney, $showConfigVpoint, '');
+    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gcoin sang WcoinP");
+    echocomtent_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
+    echofooter();
+}
+
+function blank_money_transgc2gob()
+{
+    $showBlank = view_bank($accoutID = $_SESSION['user_Gamer']);
+
+    $rootVpoint = $showBlank[0]['vp'];
+    $rootGcoin = $showBlank[0]['gc'];
+
+    $strInfoMoney = 'Tài khoản ' . $accoutID . ' có <b class="cRed">' . number_format($showBlank[0]['goblinCoin'], 0, ',', '.') . ' GoblinCoin </b>';
+
+    if (request_type('POST')) {
+        if (REQ('action_transBlank')) {
+            cn_dsi_check(true);
+            $errors_false = false;
+            list($postNumberItem) = GET('numberItem', 'GPG');
+
+            $postNumberItem = intval($postNumberItem);
+
+            if (empty($rootGcoin)) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' không Gcoin trong ngân hàng.', 'e');
+                $errors_false = true;
+            }
+            if ($postNumberItem <= 0) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' chưa nhập số Gcoin cần chuyển sang GoblinCoin.', 'e');
+                $errors_false = true;
+            }
+
+            if ($postNumberItem > MAX_TRANS){
+                cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
+                $errors_false = true;
+            }
+            if ($postNumberItem > $rootGcoin) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootGcoin, 0 , ',', '.') . ' Gcoin.', 'e');
+                $errors_false = true;
+            }
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+
+            if (!$errors_false) {
+                $acountID = $_SESSION['user_Gamer'];
+                do_update_orther("UPDATE MEMB_INFO SET gcoin=gcoin-$postNumberItem, goblinCoin=goblinCoin+$postNumberItem WHERE memb___id='$acountID'");
+
+                cn_throw_message("Bạn đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin sang " . number_format($postNumberItem, 0, ',', '.') . " GoblinCoin thành công!");
+
+                //Ghi vào Log
+                $afterVpoint = $rootVpoint;
+                $afterGcoin = $rootGcoin - $postNumberItem;
+                $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin thành " . number_format($postNumberItem, 0, ',', '.') .' GoblinCoin.';
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/money/log_transgc2gob.log";
+                cn_touch($file);
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
+
+            }
+
+            $showMoney = (!$errors_false) ? ($showBlank[0]['goblinCoin'] +  $postNumberItem) : $showBlank[0]['goblinCoin'];
+
+            $resultData = array(
+                'msgAction' => cn_snippet_messages(),
+                'menuTop' => cn_menuTopMoney(true),
+                'countItem' => '',
+                'htmlOptionNumItem' => '',
+                'result' => 'Tài khoản ' . $accoutID . ' có <b class="cRed">' . number_format($showMoney, 0, ',', '.') . ' GoblinCoin </b>'
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
+        }
+    }
+
+    $showConfigVpoint = '- Tỷ lệ: <strong> 1 Gcoin</strong><i> = </i><strong>1 GoblinCoin</strong>';
+
+    cn_assign('options, strInfoMoney, showConfigVpoint, optionBuyZen', 'Gcoin', $strInfoMoney, $showConfigVpoint, '');
+
+    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gcoin sang GoblinCoin");
+    echocomtent_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
+    echofooter();
+}
+
+function blank_money_muazen()
+{
+    $showBlank = view_bank($accoutID = $_SESSION['user_Gamer']);
+
+    $rootVpoint = $showBlank[0]['vp'];
+    $rootGcoin = $showBlank[0]['gc'];
+    $rootBank = $showBlank[0]['bank'];
+
+    if (request_type('POST')) {
+        if (REQ('action_transBlank')) {
+            cn_dsi_check(true);
+            $errors_false = false;
+            list($postNumberItem) = GET('numberItem', 'GPG');
+
+            $postNumberItem = intval($postNumberItem);
+
+            if (empty($rootVpoint)) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' không Vpoint trong ngân hàng.', 'e');
+                $errors_false = true;
+            }
+            if ($postNumberItem <= 0) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' chưa nhập số lượng mua zen.', 'e');
+                $errors_false = true;
+            }
+
+            if ($postNumberItem > $rootVpoint) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootVpoint, 0 , ',', '.') . ' Vpoint.', 'e');
+                $errors_false = true;
+            }
+
+            $arrListZen = explode('|', getoption('configBuyZen'));
+
+            if (!in_array($postNumberItem, $arrListZen)) {
+                cn_throw_message('Chức năng không được sử dụng hoặc do vấn đề coder chưa chưa xử lý.', 'e');
+                goto Lable;
+            }
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+
+            $arrZen = [500000000, 1000000000, 1500000000, 2000000000];
+            $getZen = 0;
+            foreach ($arrZen as $key => $item) {
+                if ($arrListZen[$key] == $postNumberItem) {
+                    $getZen = $item;
+                    break;
+                }
+            }
+
+            if (empty($getZen)) {
+                cn_throw_message('Số 0 Zen không thể cập nhập vào ngân hàng', 'e');
+                    $errors_false = true;
+            }
+
+            if ($getZen + $rootBank > MAXBANKZEN) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' có thể chứa tối đa ' . number_format(MAXBANKZEN, 0, ',', '.') . ' Zen.', 'e');
+                $errors_false = true;
+            }
+
+
+            if (!$errors_false) {
+                $acountID = $_SESSION['user_Gamer'];
+                do_update_orther("UPDATE MEMB_INFO SET bank=bank+$getZen, vpoint=vpoint-$postNumberItem WHERE memb___id='$acountID'");
+
+                cn_throw_message("Bạn đã mua " . number_format($getZen, 0, ",", ".") . " Zen với " . number_format($postNumberItem, 0, ',', '.') . " Vpoint thành công!");
+
+                //Ghi vào Log
+                $afterVpoint = ($rootVpoint - $postNumberItem);
+                $content = "$accoutID đã mua " . number_format($getZen, 0, ",", ".") . " Zen với " . number_format($postNumberItem, 0, ',', '.') . ' Vpoint.';
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/money/log_muazen.log";
+                cn_touch($file);
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accoutID . "|" . $content . "|" . $rootGcoin . "_" . $showBlank[0]['vp'] . "|" . $rootGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
+            }
+
+            Lable:
+            $resultData = array(
+                'msgAction' => cn_snippet_messages(),
+                'menuTop' => cn_menuTopMoney(true),
+                'countItem' => '',
+                'htmlOptionNumItem' => '',
+                'result' => ''
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
+        }
+    }
+
+    $showConfigVpoint = '- Mua Zen bằng Vpoint';
+    cn_assign('options, strInfoMoney, showConfigVpoint, optionBuyZen', 'Zen', '', $showConfigVpoint, zenderOptionBuyZen());
+
+    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Mua Zen bằng Vpoint");
+    echocomtent_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
+    echofooter();
+}
+
+function blank_money_transvpoint()
+{
+    $showBlank = view_bank($accoutID = $_SESSION['user_Gamer']);
+
+    $rootVpoint = $showBlank[0]['vp'];
+    $rootGcoin = $showBlank[0]['gc'];
+    $rootBank = $showBlank[0]['bank'];
+    $configTransVpoint = intval(getoption('configTransVpoint'));
+
+    if (request_type('POST')) {
+        if (REQ('action_TransVpoint2Account')) {
+            cn_dsi_check(true);
+            $errors_false = false;
+            list($postNumberItem, $changeAccount) = GET('numberItem, changeAccount', 'GPG');
+
+            $postNumberItem = intval($postNumberItem);
+            $changeAccount = htmlentities($changeAccount);
+            $vpointNew = $configTransVpoint + $postNumberItem;
+
+            $checkResultAccount = do_select_orther("SElECT memb___id FROM MEMB_INFO WHERE memb___id ='$changeAccount'");
+            $newAccount = $checkResultAccount[0]['memb___id'];
+
+            if (isset($newAccount) && $newAccount == $accoutID) {
+                cn_throw_message('Tài khoản chuyển Vpoint phải khác tài khoản nhận.', 'e');
+                $errors_false = true;
+            }
+
+            if (empty($newAccount)) {
+                cn_throw_message('Không xác định tài khoản nhận Vpoint.', 'e');
+                $errors_false = true;
+            }
+            if ($postNumberItem > MAX_TRANS) {
+                cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
+                $errors_false = true;
+            }
+
+            if (empty($rootVpoint)) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' không Vpoint trong ngân hàng.', 'e');
+                $errors_false = true;
+            }
+            if ($postNumberItem <= 0) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' chưa nhập số lượng Vpoint cần chuyển.', 'e');
+                $errors_false = true;
+            }
+
+            if ($vpointNew > $rootVpoint) {
+                cn_throw_message('Số Vpoint chuyển ' . number_format($postNumberItem, 0, ',', '.') . ' Vpoint phí ' . number_format($configTransVpoint, 0, ',', '.') . ' Vpoint/1L lớn hơn tổng ' . number_format($rootVpoint, 0, ',', '.') . ' Vpoint có trong ngân hàng.', 'e');
+                $errors_false = true;
+            }
+
+            list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+
+            if (!$errors_false) {
+                $acountID = $_SESSION['user_Gamer'];
+
+                do_update_orther("UPDATE MEMB_INFO SET vpoint=vpoint-$vpointNew WHERE memb___id='$acountID'");
+                do_update_orther("UPDATE MEMB_INFO SET vpoint=vpoint+$postNumberItem WHERE memb___id='$newAccount'");
+
+                cn_throw_message("Bạn đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Vpoint, phí " . number_format($configTransVpoint, 0, ',', '.') . " Vpoint/1L sang tài khoản $newAccount thành công!");
+
+                //Ghi vào Log
+                $afterVpoint = ($rootVpoint - $vpointNew);
+                $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Vpoint, phí " . number_format($configTransVpoint, 0, ',', '.') . ' Vpoint/1L sang tài khoản ' . $newAccount . '.';
+                $Date = date("h:iA, d/m/Y", ctime());
+                $file = MODULE_ADM . "/log/modules/money/log_chuyenvpoint.log";
+                cn_touch($file);
+                $fileContents = file_get_contents($file);
+                file_put_contents($file, $accoutID . "|" . $content . "|" . $rootGcoin . "_" . $rootVpoint . "|" . $rootGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                //End Ghi vào Log
+            }
+
+            $resultData = array(
+                'msgAction' => cn_snippet_messages(),
+                'menuTop' => cn_menuTopMoney(true),
+                'countItem' => '',
+                'htmlOptionNumItem' => '',
+                'result' => ''
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
+        }
+    }
+
+    $showConfigTransVpoint = '- Phí: <strong> ' . number_format($configTransVpoint, 0, ',', '.') . ' Vpoint </strong><i> / </i><strong> 1L</strong>';
+    cn_assign('showConfigTransVpoint', $showConfigTransVpoint);
+
+    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Chuyển Vpoint");
+    echocomtent_here(exec_tpl('my_blank_money/transVpoint2Account'), cn_snippet_bc_re());
+    echofooter();
+}

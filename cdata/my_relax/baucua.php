@@ -47,7 +47,7 @@
                 <tr align="middle">
                     <td colspan="100" class="pd-top15">
                         Tiền đặt cược<span class="required">*</span>
-                        <input type='number' name='bet' class="bizwebform" required /> Vpoint
+                        <input type='number' name='bet' id="changeNumber" class="bizwebform" required /> Vpoint
                         <input type='button' class="call-play btn mg-top15" value='Mở ^_^'>
                     </td>
                 </tr>

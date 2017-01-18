@@ -262,6 +262,7 @@ function transaction___buy_gd()
                 $content = "$accc_ đã mua $name_ (Serial: $serial_n) giá " . number_format($price_, 0, ",", ".") . " V.Point";
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/log_" . $opt . ".log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $vp_ . "|" . $check . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log

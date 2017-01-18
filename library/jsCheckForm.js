@@ -267,6 +267,14 @@ function cap_char(str) {
     return '';
 }
 
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
 function isAlphabetKey(evt, id) {
     var charCode = (evt.which) ? evt.which : event.keyCode
@@ -419,10 +427,11 @@ function findNewUser(value, id, notify_smg) {
         proce_user_from(value, test_, id, notify_smg);
     }
 }
+
 function check_num(value, num, id, notify_smg) {
     document.getElementById(id).innerHTML = notify_img_load;
     if (!vali_num7(value, num)) {
-        getId(id).innerHTML = covertStrBool("Mã gồm có " + num + " chữ số.", false, 2);// proce_notify_err(notify_smg);
+        getId(id).innerHTML = covertStrBool("Mã gồm có " + num + " chữ số.", false, 2);
         arr_error[id] = 1;
         return false;
     }
@@ -432,6 +441,7 @@ function check_num(value, num, id, notify_smg) {
         return true;
     }
 }
+
 function checkEmail(value, id) {
     var test_ = 'user_email';
     document.getElementById(id).innerHTML = notify_img_load;
@@ -1194,4 +1204,23 @@ $(document).ready(function () {
         }
     });
 
+    $("#changeNumber, .changeNumber").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+            // Allow: Ctrl+C
+            (e.keyCode == 67 && e.ctrlKey === true) ||
+            // Allow: Ctrl+X
+            (e.keyCode == 88 && e.ctrlKey === true) ||
+            // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
 });

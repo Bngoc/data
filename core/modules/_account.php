@@ -268,7 +268,6 @@ function manager_change_secret()
         if ($nameAnswer === '') $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật.");
         if ($nameQuestion === '') $errors[] = ucfirst("Chưa chọn câu hỏi bí mật.");
         if ($namecaptcha === '') $errors[] = ucfirst("Chưa nhập mã Captcha.");
-
         if (strlen($ma7code) != 7) $errors[] = "Mã gồm có 7 chữ số";
         if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
         if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";

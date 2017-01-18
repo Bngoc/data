@@ -220,6 +220,7 @@ function shop___buy_s1()
                 $content = "$accc_ đã mua $name_ (Serial: $serial_n) giá " . number_format($price_, 0, ",", ".") . " V.Point";
                 $Date = date("h:iA, d/m/Y", ctime());
                 $file = MODULE_ADM . "/log/modules/shop/log_" . $opt . ".log";
+                cn_touch($file);
                 $fileContents = file_get_contents($file);
                 file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $vp_ . "|" . $_blank_var[0]['gc'] . "_" . $check . "|" . $Date . "|\n" . $fileContents);
                 //End Ghi vào Log
