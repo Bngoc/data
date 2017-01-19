@@ -669,7 +669,7 @@ function cn_login()
                     if ($ban_time && $ban_time > ctime()) {
                         msg_info('Too frequent queries. Wait ' . ($ban_time - ctime() . ' sec.'));
 
-                        if (in_array($member['pass'], $compares)) {
+                        if ($member['user_Account'] == $username) {
                             do_update_character('Account_Info', "NumLogin=1", "UserAcc:'$username'");
                         }
                     }
