@@ -15,7 +15,7 @@ list($per_page, $echoPagination) = _GL('per_page, echoPagination');
                 <td class="hh-w" valign="top" align="center">
                     <form method="POST" <?php echo "action=" . PHP_SELF . "\" class=\"form-" . $key; ?>"
                     onsubmit="return false;">
-                    <?php cn_form_open('mod, token, opt');//echo cn_snippet_get_hidden();//?>
+                    <?php cn_form_open('mod, token, opt');?>
                     <input type="hidden" name="item" value="<?php echo $key; ?>">
                     <table style="width: 150px;height: 170px;">
                         <tr class="h-ww" style="height: 105px;cursor: pointer;">

@@ -1657,6 +1657,7 @@ function cn_config_load()
         'napthe_vina' => "0,1,0,1,1,1,0,1",
         'napthe_vtc' => "0,1,0,1,1,1,0,1",
         'napthe_list' => "1,1,1,1,1",
+        'km_list' => "0,0,0,0,0|20",
         'vptogc' => 80,
         'changename_vpoint' => 50000,
         'changeClass_str' => '50000:15:100',
@@ -1685,7 +1686,10 @@ function cn_config_load()
         'timeWriterLimit' => '17:45',
         'timeResultDe' => '8:00',
         'moneyMinDe' => '5000',
-
+        // config Account GameBank.vn
+        'Merchant_ID' => '',
+        'API_User' => '',
+        'API_Password' => ''
     );
 
     // Set default values

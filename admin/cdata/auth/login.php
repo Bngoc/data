@@ -11,13 +11,13 @@ cn_snippet_messages();
     <table width="100%">
         <tr>
             <td width='80'>Username:</td>
-            <td width='160'><input tabindex=1 type="text" name="username" id="login_username"
+            <td width='160'><input tabindex=1 type="text" name="username" id="login_username" autocomplete="off" required
                                    value="<?php echo $last_user_name; ?>" style="width: 150px;"></td>
             <td>&nbsp;<?php if (getoption('allow_registration')) { ?><a href="?register">(register)</a><?php } ?></td>
         </tr>
         <tr>
             <td>Password:</td>
-            <td><input tabindex="1" type="password" name="password" id="login_password" style='width: 150px'></td>
+            <td><input tabindex="1" type="password" name="password" autocomplete="off" required id="login_password" style='width: 150px'></td>
             <td>&nbsp;<a href="?register&lostpass">(lost password)</a></td>
         </tr>
         <tr>

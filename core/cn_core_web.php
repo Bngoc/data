@@ -945,8 +945,8 @@ function cn_send_mail($to, $subject, $message, $alt_headers = NULL, $addressCC =
 // Since 2.0: Make 'Top menu'
 function cn_get_menu()
 {
-    $modules = hook('core/cn_get_menu', array                    // acl	name	title	app
-    (
+    // acl	name	title	app
+    $modules = hook('core/cn_get_menu', array(
         'char_manager' => array('Cd', 'Nhân Vật', null, null, 'Q', ''),
         'event' => array('Cc', 'Event', null, null, 'q', ''),
         'blank_money' => array('Cc', 'Blank - Money', null, null, ']', ''),

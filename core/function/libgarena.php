@@ -282,12 +282,19 @@ function cn_writelog($content, $info = '', $user = '')
 
     if (empty($member)) $member = 'UNKNOWN';
 
-
-    if (($remote_addr = $_SERVER['REMOTE_ADDR']) == '') {
-        $remote_addr = "REMOTE_ADDR_UNKNOWN";
+    if (isset($_SERVER['REMOTE_ADDR'])) {
+        if (($remote_addr = $_SERVER['REMOTE_ADDR']) == '') {
+            $remote_addr = "REMOTE_ADDR_UNKNOWN";
+        }
+    } else {
+        $remote_addr = 'REMOTE_ADDR_UNKNOWN';
     }
 
-    if (($request_uri = $_SERVER['REQUEST_URI']) == '') {
+    if (isset($_SERVER['REQUEST_URI'])) {
+        if (($request_uri = $_SERVER['REQUEST_URI']) == '') {
+            $request_uri = "REQUEST_URI_UNKNOWN";
+        }
+    } else {
         $request_uri = "REQUEST_URI_UNKNOWN";
     }
 
@@ -1729,16 +1736,17 @@ function cn_ResultDe()
         # loadHTML might throw because of invalid HTML in the page.
         @$dom->loadHTML($html);
 
-        $xpath = new DomXpath($dom);
-        $div = $xpath->query('//*/p[@class="kqbackground text-center"]')->item(0);
-        $stuffDate = $div->textContent;
-        $stuffDateTime = strtotime(trim(explode(':', $stuffDate)[1]));
-        $stuffDateTimeAction = date('Y-m-d H:i:s', $stuffDateTime);
+//        $xpath = new DomXpath($dom);
+//        $div = $xpath->query('//*/p[@class="kqbackground text-center"]')->item(0);
+//        $stuffDate = $div->textContent;
+//        $stuffDateTime = strtotime(trim(explode(':', $stuffDate)[1]));
+//        $stuffDateTimeAction = date('Y-m-d H:i:s', $stuffDateTime);
 
         $resultPlayDe = $dom->getElementById('rs_0_0')->nodeValue;
         $resultPlayDe = substr($resultPlayDe, -2);
 
-        $dateTime = date('Y-m-d', ($time - 86400));
+        $timeYesterday = $time - 86400;
+        $dateTime = date('Y-m-d', $timeYesterday);
 //        $dateTime = date('Y-m-d', strtotime(date('Y-m-d', $time) . '- 1 days'));
 
         if ($resultPlayDe || $resultPlayDe == 0) {
@@ -1747,8 +1755,9 @@ function cn_ResultDe()
                 do_insert_character(
                     'ResultDe',
                     'ResultDe=' . $resultPlayDe,
-                    'timesDe=\'' . ((empty($stuffDateTime)) ? date('Y-m-d H:i:s', $time) : $stuffDateTimeAction ). '\'',
-                    'OptionResult=\'' . $stuffDateTime . '\''
+                    'timesDe=\'' . date('Y-m-d H:i:s', $timeYesterday) . '\'',
+//                    'timesDe=\'' . ((empty($stuffDateTime)) ? date('Y-m-d H:i:s', ($time - 86400)) : $stuffDateTimeAction ). '\'',
+                    'OptionResult=\'' . $timeYesterday . '\''
                 );
 
                 $showupDate = do_select_orther("SELECT [ID], [AccountID],[WriteDe],[timestamp],[Action], [Vpoint] FROM WriteDe WHERE Convert(Date, timestamp)='$dateTime' AND Action = 1");

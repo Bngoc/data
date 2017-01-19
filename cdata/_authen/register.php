@@ -161,7 +161,7 @@ list($errors_result) = _GL('errors_result');
         </tr>
         <tr>
             <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
-            <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="nameCaptcha" required
+            <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="nameCaptcha" required autocomplete="off"
                                                 onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
             <td class="bizwebform_col_3" id="msg_Captcha"></td>
         </tr>

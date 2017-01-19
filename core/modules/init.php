@@ -19,10 +19,10 @@ $_init_modules = hook('modules/init_modules', array
     'relax' => array('path' => '_relax', 'acl' => 'Cvn'),
     'blank_money' => array('path' => '_blank_money', 'acl' => 'Cd'),
     'ranking' => array('path' => '_ranking', 'acl' => 'Cd'),
+    'transaction' => array('path' => '_transaction', 'acl' => 'Can'),
 
     'event' => array('path' => '_event', 'acl' => 'Cd'),
     'auto_money' => array('path' => '_auto_money', 'acl' => ''),
-    'transaction' => array('path' => '_transaction', 'acl' => 'Cc'),
     'help' => array('path' => 'help', 'acl' => ''),
 
     'logout' => array('path' => 'logout', 'acl' => '')

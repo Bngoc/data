@@ -5,13 +5,12 @@ add_hook('index/invoke_module', '*transaction_invoke');
 //=====================================================================================================================
 function transaction_invoke()
 {
-    $ctrans_board = array
-    (
-        'transaction:Vtc:__buy_gd:Csc' => 'Nạp thẻ VTC',
-        'transaction:Gate:__buy_gd:Cp' => 'Nạp thẻ Gate',
-        'transaction:Viettel:__buy_gd:Ciw' => 'Nạp thẻ Viettel',
-        'transaction:Mobi:__buy_gd:Cg' => 'Nạp thẻ Mobi',
-        'transaction:Vina:__buy_gd:Cb' => 'Nạp thẻ Vina',
+    $ctrans_board = array(
+        'transaction:vtc:__buy_gd:Cp' => 'Nạp thẻ VTC',
+        'transaction:gate:__buy_gd:Cp' => 'Nạp thẻ Gate',
+        'transaction:viettel:__buy_gd:Cp' => 'Nạp thẻ Viettel',
+        'transaction:mobi:__buy_gd:Cp' => 'Nạp thẻ Mobi',
+        'transaction:vina:__buy_gd:Cp' => 'Nạp thẻ Vina',
     );
 
     // Call dashboard extend
@@ -31,55 +30,37 @@ function transaction_invoke()
         list($dl, $do, $_token, $acl_module) = explode(':', $id);
 
         if (in_array($strkey = strtolower($do), array_keys($ar_list)))
-            if (!$ar_list[$strkey]) {
+            if (empty($ar_list[$strkey])) {
                 unset($ctrans_board[$id]);
                 continue;
             }
 
         if (function_exists("transaction_$_token"))
-            cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'token=' . md5($acl_module . $_token . $do), 'opt=' . $do), $do);
+            cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl,'opt=' . $do, 'token=' . md5($_token . $do)), $do);
     }
 
     // Request module
     foreach ($ctrans_board as $id => $_t) {
         list($dl, $do, $token_, $acl_module) = explode(':', $id);
-        $_token = md5($acl_module . $token_ . $do);
-        //if (test($acl_module) && $dl == $mod && $do == $opt && function_exists("dashboard_$opt"))
-        if ($dl == $mod && $do == $opt && $token == $_token && function_exists("transaction_$token_")) {
-            cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'token=' . $_token, 'opt=' . $opt));
+        $_token = md5($token_ . $do);
+        if (test($acl_module) && $dl == $mod && $do == $opt && $token == $_token && function_exists("transaction_$token_")) {
+//        if ($dl == $mod && $do == $opt && $token == $_token && function_exists("transaction_$token_")) {
+            cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt, 'token=' . $_token));
             die(call_user_func("transaction_$token_"));
         }
         //else{
         if ($dl == $mod && $do == $opt && $token == $_token && !function_exists("transaction_$token_")) {
-            cn_bc_add('Lỗi dữ liệu', cn_url_modify(array('reset'), 'mod=' . $mod, 'token=' . $_token, 'opt=' . $opt));
+            cn_bc_add('Lỗi dữ liệu', cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt, 'token=' . $_token));
             die(call_user_func("transaction_default"));
         }
     }
 
-    echoheader('-@my_char/style.css', "Character");
-
-    $images = array
-    (
-        'personal' => 'user.gif',
-        'userman' => 'users.gif',
-        'sysconf' => 'options.gif',
-        'category' => 'category.png',
-        'templates' => 'template.png',
-        'backup' => 'archives.gif',
-        'archives' => 'arch.png',
-        'media' => 'images.gif',
-        'intwiz' => 'wizard.gif',
-        'logs' => 'list.png',
-        'selfchk' => 'check.png',
-        'ipban' => 'block.png',
-        'widgets' => 'widgets.png',
-        'wreplace' => 'replace.png',
-        'morefields' => 'more.png',
-        'maint' => 'settings.png',
-        'group' => 'group.png',
-        'locale' => 'locale.png',
-        'script' => 'script.png',
-        'comments' => 'comments.png',
+    $images = array(
+        'vtc' => 'user.gif',
+        'gate' => 'users.gif',
+        'viettel' => 'options.gif',
+        'mobi' => 'category.png',
+        'vina' => 'template.png'
     );
 
     // More dashboard images
@@ -93,45 +74,20 @@ function transaction_invoke()
             continue;
         }
 
-        $item = array
-        (
-            //'name' => i18n($name),
+        $item = array(
             'name' => $name,
             'img' => isset($images[$opt]) ? $images[$opt] : 'home.gif',
             'mod' => $mod,
             'opt' => $opt,
-            'token' => md5($acl . $token . $opt),
+            'token' => md5($token . $opt),
         );
-
         //$ctrans_board[$id] = $item;
         $_ctrans_board[$opt] = $item;
     }
 
+    cn_assign('dashboard', $_ctrans_board);
 
-    //cn_character();
-    $member = member_get();
-
-    //$meta_draft = db_index_meta_load('draft');
-    //$drafts =isset($meta_draft['locs'])? intval(array_sum($meta_draft['locs'])):false;
-
-    //if ($drafts && test('Cvn'))
-    //{
-    //$greeting_message = i18n('News in draft: %1', '<a href="'.cn_url_modify('mod=editnews', 'source=draft').'"><b>'.$drafts.'</b></a>');
-    //}
-    //else
-    //{
-    //$greeting_message = i18n('Have a nice day!');
-    //}
-
-    //$nameset = $accc_;
-
-
-    $greeting_message = 'Have a nice day!';
-    //cn_assign('dashboard, username, greeting_message', $dashboard, $member['name'], $greeting_message);
-    cn_assign('dashboard, username, greeting_message', $_ctrans_board, $member['user_name'], $greeting_message);
-
-    //echo exec_tpl('header');
-    //echo exec_tpl('my_dashboard/general');
+    echoheader('-@my_transaction/style.css', "Nap The");
     echocomtent_here(exec_tpl('my_transaction/general'), cn_snippet_bc_re());
     echofooter();
 }
@@ -140,267 +96,342 @@ function transaction_default()
 {
     $arr_shop = mcache_get('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('my_char/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('my_char/default'), cn_snippet_bc_re());
+    echoheader('defaults/style.css', "Error - $name__");
+    echocomtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
     echofooter();
 }
 
 function transaction___buy_gd()
 {
-
-    //$opt = REQ('opt', 'GETPOST');
-    list($page, $per_page, $token, $opt, $sub) = GET('page, per_page, token, opt, sub', 'GPG');
-
-    $page = intval($page);
-    if (!$page) $page = 0;
-    //if (intval($per_page) == 0) $per_page = 15;
-    //if ($opt == 'eventticket' || $opt == 'orther') $per_page = 21;
+    list($token, $opt, $sub, $page) = GET('token, opt, sub, page', 'GPG');
 
     $card_list = $list_item = array();
-    //$item_ = getoption('napthe_'.strtolower($opt));
 
-    list($_10k, $_20k, $_30k, $_50k, $_100k, $_200k, $_300k, $_500k) = explode(",", getoption('napthe_' . strtolower($opt)), 8);
-    $napthe_list = array('10k' => $_10k, '20k' => $_20k, '30k' => $_30k, '50k' => $_50k, '100k' => $_100k, '200k' => $_200k, '300k' => $_300k, '500k' => $_500k);
+    $km_list = explode('|', getoption('km_list'));
+    $pt_km = 0;
+    if ($km_list[1]) {
+        $pt_km = $km_list[1];
+        $strKm = 'Chương trình khuyến mại mọi thẻ nạp: <span class="cRed">' . $km_list[1] . '%</span> cho bất kì mệnh giá nào.';
+    } else {
+        $km_listOne = explode(',', $km_list[0]);
 
-    //$get = getoption('napthe_'.strtolower($opt));
-    print_r($napthe_list);
-
-    foreach ($napthe_list as $key => $var) {
-
-        if ($var) $card_list[$key] = substr($key, 0, -1) . "000";
+        if($km_listOne[0]){
+            $pt_km =  $km_listOne[0];
+            $strKm = 'Chương trình khuyến mại thẻ nạp VTC: <span class="cRed">' . $km_listOne[0] . ' %</span> cho bất kì mệnh giá nào.';
+        }elseif ($km_listOne[1]){
+            $pt_km =  $km_listOne[1];
+            $strKm = 'Chương trình khuyến mại thẻ nạp GATE: <span class="cRed">' . $km_listOne[1] . ' %</span> cho bất kì mệnh giá nào.';
+        }elseif ($km_listOne[2]){
+            $pt_km =  $km_listOne[2];
+            $strKm = 'Chương trình khuyến mại thẻ nạp VIETTEL: <span class="cRed">' . $km_listOne[2] . ' %</span> cho bất kì mệnh giá nào.';
+        }elseif ($km_listOne[3]){
+            $pt_km =  $km_listOne[3];
+            $strKm = 'Chương trình khuyến mại thẻ nạp MOBI: <span class="cRed">' . $km_listOne[3] . ' %</span> cho bất kì mệnh giá nào.';
+        }elseif ($km_listOne[4]){
+            $pt_km =  $km_listOne[4];
+            $strKm = 'Chương trình khuyến mại thẻ nạp VINA: <span class="cRed">' . $km_listOne[4] . ' %</span> cho bất kì mệnh giá nào.';
+        }else{
+            $strKm = '';
+        }
     }
 
+    $page = intval($page);
+    if (empty($page)) $page = 1;
+    $pt_km = intval($pt_km);
+    $opt = strtolower($opt);
+    list($_10k, $_20k, $_30k, $_50k, $_100k, $_200k, $_300k, $_500k) = explode(",", getoption('napthe_' . $opt), 8);
+    $napthe_list = array('10k' => $_10k, '20k' => $_20k, '30k' => $_30k, '50k' => $_50k, '100k' => $_100k, '200k' => $_200k, '300k' => $_300k, '500k' => $_500k);
 
-    if ($item_)
-        foreach ($item_ as $key => $var) {
-            $list_item[$key] = cn_analysis_code32($var['code32'], $var['name'], $var['price'], $var['image_mh']);
+    $arrTypeCard = [
+        'viettel' => 1,
+        'mobi' => 2,
+        'vina' => 3,
+        'gate' => 4,
+        'vtc' => 5
+    ];
+
+    foreach ($napthe_list as $key => $var) {
+        if ($var){
+            $card_list[$key] = (int)substr($key, 0, -1) . "000";
         }
-    $member = member_get();
-    $accc_ = $member['user_name'];
+    }
+    $accc_ = $_SESSION['user_Gamer'];
+    $showHisrotyPlay = do_select_orther("SELECT [accountID], [Name], [menhgia], [card_type], [card_num], [card_serial], [status], [addvpoint], [timenap], [timeduyet], [teknet_status], [teknet_check_wait], [teknet_check_last], times_tamp FROM CardPhone WHERE accountID='" . $accc_ ."'");
 
-    /// kiem tra khi character open warehouse => ???????????
     if (request_type('POST')) {
-        if ($token == md5('__buy_s1' . $opt) && $id_item = REQ('Item')) {
+        if (REQ('action_historyCard')) {
 
+            $resultData = array(
+                'msgAction' => cn_snippet_messages(),
+                'menuTop' => cn_menuTopMoney(true),
+                'show_history' => show_historyDe($showHisrotyPlay, $page),
+                'resetFrom' => 0
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
+        }
+    }
+
+    if (request_type('POST')) {
+        if ($token == md5('__buy_gd' . $opt)) {
+            cn_dsi_check(true);
             $errors_false = false;
 
-            if (!in_array($id_item, array_keys($list_item))) {
-                cn_throw_message("Trên Server không có Item bạn muốn mua. Chi tiết vui lòng liên hệ BQT để cập nhập.", 'e');
+            //* Card_type = 1 => Viettel
+            //* Card_type = 2 => Mobiphone
+            //* Card_type = 3 => Vinaphone
+            //* Card_type = 4 => Gate
+            //*Card_type = 5 => VTC
+            $ctime = ctime();
+            $card_type = $arrTypeCard[$opt];
+            $merchant_id = intval(getoption('Merchant_ID')); // interger
+            $api_user = trim(getoption('API_User')); // string
+            $api_password = trim(getoption('API_Password')); // string
+
+            list($pin, $seri, $verifyCaptcha) = GET('cardCode, cardSerial, verifyCaptcha', 'GPG');
+
+            if (empty($card_type)) {
+                cn_throw_message('Không xác nhận được loại thẻ nạp', 'e');
                 $errors_false = true;
-            } else {
-                $price_ = $list_item[$id_item]['price'];
-                $name_ = $list_item[$id_item]['title'];
-
-                $_blank_var = view_bank($accc_);
-                $vp_ = $_blank_var[0]['vp'];
-
-                if (0 > $check = $vp_ - $price_) {
-                    cn_throw_message("Bạn đang có $vp_ Vpoint. $name_ giá " . number_format($price_, 0, ",", ".") . " Vpoint. Bạn còn thiếu " . number_format((abs($check)), 0, ",", ".") . " Vpoint", 'e');
-                    $errors_false = true;
-                } else {
-                    $items_data = getoption('#items_data');
-                    $warehouse_ = do_select_character('warehouse', $arr_cls = 'Items', "AccountID='$accc_'");
-                    $warehouse = substr(strtoupper(bin2hex($warehouse_[0][0])), 0, 3840);
-                    $item_code = $list_item[$id_item]['code32'];
-
-                    echo "171 warehouse_ > " . $warehouse . " <br>";
-                    echo "166 name_ = $name_ price_ =$price_  token = $token -> id_item = $id_item <br>";
-
-                    if ($opt == "armor") {
-                        for ($i = 7; $i <= 11; $i++) {
-                            $serial = do_select_orther('EXEC WZ_GetItemSerial');
-                            $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0][0]));
-                            $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
-                            $item_code = substr_replace($item_code, dechex($i * 16), 18, 2);
-                            $leng_item_code = strlen($item_code);
-                            $item_data = cn_getCodeItem($item_code);
-                            if (($item_data['id'] == 15 || $item_data['id'] == 20 || $item_data['id'] == 23 || $item_data['id'] == 32 || $item_data['id'] == 37 || $item_data['id'] == 47 || $item_data['id'] == 48) && ($i == 7)) {
-                                continue;
-                            } else {
-                                $items = $items_data[$item_data['group'] . "." . $item_data['id']];
-                                if (!$items) {
-                                    //cn_throw_message("[Error - line 251] Gặp sự cố trên Server. Vui thông báo cho admin",'e');
-                                    //$errors_false = true;
-                                    msg_info('[Error - line 251] Gặp sự cố trên Server. Vui thông báo cho admin.', cn_url_modify(array('reset'), 'mod=' . REQ('mod'), 'token=' . REQ('token'), 'opt=' . REQ('opt')));
-                                }
-                                $slot = cn_CheckSlotWarehouse($warehouse, $items['X'], $items['Y']);
-
-                                echo "<br><br><br><br>217 slot => " . $slot . " <br>";
-                                if ($slot == 3840) {
-                                    cn_throw_message("Không đủ chỗ trống trong Hòm đồ", 'e');
-                                    $errors_false = true;
-                                } else $warehouse = substr_replace($warehouse, $item_code, $slot * 32, $leng_item_code);
-                            }
-                        }
-                    } else {
-                        $serial = do_select_orther('EXEC WZ_GetItemSerial');
-                        $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0][0]));
-                        $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
-                        $leng_item_code = strlen($item_code);
-                        $item_data = cn_getCodeItem($item_code);
-                        $items = $items_data[$item_data['group'] . "." . $item_data['id']];
-                        if (!$items) {
-                            //cn_throw_message("[Error - line 251] Gặp sự cố trên Server. Vui thông báo cho admin",'e');
-                            //$errors_false = true;
-                            msg_info('[Error - line 251] Gặp sự cố trên Server. Vui thông báo cho admin.', cn_url_modify(array('reset'), 'mod=' . REQ('mod'), 'token=' . REQ('token'), 'opt=' . REQ('opt')));
-                        }
-                        $slot = cn_CheckSlotWarehouse($warehouse, $items['X'], $items['Y']);
-                        if ($slot == 3840) {
-                            cn_throw_message("Không đủ chỗ trống trong Hòm đồ", 'e');
-                            $errors_false = true;
-                        } else $warehouse = substr_replace($warehouse, $item_code, $slot * 32, $leng_item_code);
-                    }
-                }
+            }
+            if ($verifyCaptcha != $_SESSION['captcha_web']) {
+                cn_throw_message("Captcah không đúng.", 'e');
+                $errors_false = true;
+            }
+            if (empty($merchant_id)) {
+                cn_throw_message("Thiết lập hệ thống lỗi, vui lòng liên hệ với Admin.", 'e');
+                $errors_false = true;
+            }
+            if (empty($api_user)) {
+                cn_throw_message("Thiết lập hệ thống lỗi, vui lòng liên hệ với Admin.", 'e');
+                $errors_false = true;
+            }
+            if (empty($api_password)) {
+                cn_throw_message("Thiết lập hệ thống lỗi, vui lòng liên hệ với Admin.", 'e');
+                $errors_false = true;
             }
 
             if (!$errors_false) {
-                $new_warehouse = $warehouse;
-                do_update_character('warehouse', "[Items]=0x$new_warehouse", "AccountID:'$accc_'");
-                do_update_character('MEMB_INFO', "vpoint=$check", "memb___id:'$accc_'");
+                $ischeckActionUpdate = false;
+                $codeErrorCard = array(
+                    0 => 'Nạp thẻ thành công',
+                    1 => 'Merchant_id not found',
+                    2 => 'Unauthorized',
+                    3 => 'Mã thẻ cào hoặc seri không chính xác',
+                    4 => 'Thẻ đã sử dụng',
+                    5 => 'Bạn phải nhập seri thẻ',
+                    6 => 'Thẻ đã gửi sang hệ thống nhưng bị trễ',
+                    7 => 'Hệ thống nạp thẻ đang bảo trì',
+                    8 => 'Có lỗi xảy ra trong quá trình nạp thẻ.Liên hệ Gamebank',
+                    9 => 'Thẻ không sử dụng được',
+                    10 => 'Nhập sai định dạng thẻ',
+                    11 => 'Nhập sai quá 3 lần',
+                    12 => 'Lỗi hệ thống.Liên hệ Gamebank',
+                    13 => 'IP không được phép truy cập sau 5 phút',
+                    14 => 'Tên đăng nhập không đúng',
+                    15 => 'Loại thẻ không đúng',
+                    16 => 'Mã thẻ viettel phải có 13 chữ số',
+                    17 => 'Seri viettel phải có 11 chữ số',
+                    18 => 'Mã thẻ mobiphone phải có 12 hoặc 14 số',
+                    19 => 'Seri mobiphone phải là 1 dãy số',
+                    20 => 'Mã thẻ vinaphone phải có 12 hoặc 14 số',
+                    21 => 'Mã thẻ gate có 10 số và seri có 10 ký tự gồm chữ và số',
+                    22 => 'Thẻ đã nạp sang hệ thống, không nạp nữa',
+                    23 => 'Sai thông tin partner',
+                    24 => 'Chưa nhận được kết quả trả về từ nhà cung cấp mã thẻ',
+                    25 => 'Dữ liệu truyền vào không đúng',
+                    26 => 'Nhà cung cấp không tồn tại',
+                    27 => 'Sai IP',
+                    28 => 'Sai session',
+                    29 => 'Session hết hạn',
+                    30 => 'Hệ thống bận, nạp lại sau ít phút',
+                    31 => 'Tạm thời khóa kênh nạp VMS do quá tải',
+                    32 => 'Trùng giao dịch, nạp lại sau ít phút',
+                    33 => 'Seri hoặc mã thẻ không đúng',
+                    34 => 'Card tạm thời bị khóa trong 24h',
+                    35 => 'Mã thẻ và Mã seri phải có 12 ký tự gồm chữ và số',
+                    36 => 'Tài khoản của bạn chưa thiết lập IP hoặc chưa được duyệt',
+                    37 => 'IP hiện tại không thuộc sở hữu hoặc trong danh sách cho phép của bạn',
+                    38 => 'Thẻ VTC không còn được hỗ trợ',
+                    39 => 'Thẻ đang bảo trì!',
+                    40 => 'Tài khoản của bạn đang bị khóa!',
+                    -1 => 'Thẻ đã sử dụng',
+                    -2 => 'Thẻ đã bị khóa',
+                    -3 => 'Thẻ hết hạn sử dụng',
+                    -4 => 'Thẻ chưa kích hoạt',
+                    -5 => 'Giao dịch không hợp lệ',
+                    -6 => 'Mã thẻ và số Serial không khớp',
+                    -8 => 'Cảnh báo số lần giao dịch lỗi của một tài khoản',
+                    -9 => 'Thẻ thử quá số lần cho phép',
+                    -10 => 'Mã seri không hợp lệ',
+                    -11 => 'Mã thẻ không hợp lệ',
+                    -12 => 'Thẻ không tồn tại hoặc đã sử dụng',
+                    -13 => 'Sai cấu trúc Description',
+                    -14 => 'Mã dịch vụ không tồn tại',
+                    -15 => 'Thiếu thông tin khách hàng',
+                    -16 => 'Mã giao dịch không hợp lệ',
+                    -90 => 'Sai tên hàm',
+                    -98 => 'Giao dịch thất bại do Lỗi hệ thống',
+                    -99 => 'Giao dịch thất bại do Lỗi hệ thống',
+                    -999 => 'Hệ thống tạm thời bận',
+                    -100 => 'Giao dịch nghi vấn'
+                );
 
-                //Ghi vào Log
-                $content = "$accc_ đã mua $name_ (Serial: $serial_n) giá " . number_format($price_, 0, ",", ".") . " V.Point";
-                $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/log_" . $opt . ".log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $vp_ . "|" . $check . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $gb_api = new GB_API();
+                $gb_api->setMerchantId($merchant_id);
+                $gb_api->setApiUser($api_user);
+                $gb_api->setApiPassword($api_password);
+                $gb_api->setPin($pin);
+                $gb_api->setSeri($seri);
+                $gb_api->setCardType(intval($card_type));
+                $gb_api->setNote("username accname"); // ghi chu giao dich ben ban tu sinh
+                $gb_api->cardCharging();
 
-                cn_throw_message("Bạn đã mua thành công $name_ với giá " . number_format($price_, 0, ",", ".") . " V.Point.");
+                $code = intval($gb_api->getCode());
+                $info_card = intval($gb_api->getInfoCard());
+
+                $vpointAdd = $info_card * $pt_km * 0.01 + $info_card;
+                $resultCodeApi = 1;
+
+echo $code .'<br>';
+echo $info_card .'<br>';
+echo $gb_api->getMsg() .'<br>';
+echoArr($gb_api); die;
+                // nap the thanh cong
+                if ($code === 0 && $info_card >= 10000) {
+                    $ischeckActionUpdate = true;
+//                    echo json_encode(array('code' => 0, 'msg' => "Nạp thẻ thành công mệnh giá " . $info_card));
+                } else {
+                    // get thong bao loi
+//                    echo json_encode(array('code' => 1, 'msg' => $gb_api->getMsg()));
+                }
+
+
+                if (!$ischeckActionUpdate) {
+
+                    $showMoneyBank = view_bank($accc_);
+                    $moneyAfter = $showMoneyBank[0]['vp'] + $vpointAdd;
+                    do_update_character(
+                        'CardPhone',
+                        '[accountID]=\'' . $accc_ . '\'',
+                        //[Name]
+                        '[menhgia]=' . $info_card,
+                        '[card_type]=\'' . $opt . '\'',
+                        '[card_num]=\'' . $pin . '\'',
+                        '[card_serial]=\'' . $seri . '\'',
+                        '[addvpoint]=' . $vpointAdd,
+                        '[timenap]\'=\'' . date('Y-m-d H:i:s', $ctime),
+                        'times_tamp=' . $ctime
+                    //      ,[status]
+//      ,[timeduyet]
+//      ,[teknet_status]
+//      ,[teknet_check_wait]
+//      ,[teknet_check_last]
+//      ,[card_num_md5],
+
+                    );
+
+                    do_update_character(
+                        'DoanhThu',
+                        '[timeCard]=\'' . date('Y-m-d H:i:s', $ctime),
+                        '[money]=' . $info_card,
+                        '[card_type]=\'' . $opt . '\''
+                    );
+
+                    // Ghi vào Log
+                    $content = "$accc_ đã nạp thẻ " . ucfirst($opt) . " mệnh giá: " . number_format($info_card, 0, ",", ".") . " VND, Serial: $seri , Số Vpoint: " . number_format($vpointAdd, 0, ",", ".") . " , Tình trạng: <span class=\"cRed\">" . $codeErrorCard[$resultCodeApi] . "</span>";
+                    $Date = date("h:iA, d/m/Y", ctime());
+                    $file = MODULE_ADM . "/log/modules/log_" . $opt . ".log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $showMoneyBank[0]['gc'] . '_' . $showMoneyBank[0]['vp'] . "|" . $showMoneyBank[0]['gc'] . "_" . $moneyAfter . "|" . $Date . "|\n" . $fileContents);
+                    // End Ghi vào Log
+
+                    cn_throw_message($content);
+
+                    $showHisrotyAdd['AccountID'] = $accc_;
+                    $showHisrotyAdd['WriteDe'] = $numberDe;
+                    $showHisrotyAdd['timestamp'] = date('Y-m-d H:i:s', $time);
+                    $showHisrotyAdd['Action'] = 1;
+                    $showHisrotyAdd['Vpoint'] = $moneyVpDe;
+                    $showHisrotyAdd['Result'] = 0;
+                    array_unshift($showHisrotyPlay, $showHisrotyAdd);
+                }
             }
+
+            $resultData = array(
+                'msgAction' => cn_snippet_messages(),
+                'menuTop' => cn_menuTopMoney(true),
+                'show_history' => zenderHtmlTableHistoryCard($showHisrotyPlay, $page),
+                'resetFrom' => (!$errors_false) ? 1 : 0
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
         }
     }
 
     $arr_shop = mcache_get('.breadcrumbs');
     $name_shop = array_pop($arr_shop)['name'];
 
-
     cn_assign('list_item, token, opt', $list_item, $token, $opt);
-    cn_assign('per_page, card_list', $per_page, $card_list);
+    cn_assign('card_list, strKm, pt_km, show_history', $card_list, $strKm, $pt_km, zenderHtmlTableHistoryCard($showHisrotyPlay, $page));
 
-    echoheader('my_char/style.css', "Giao dịch $name_shop - $name_shop");                                //???????????????????
+    echoheader('-@my_transaction/style.css@my_transaction/cardAjax.js', "Giao dịch $name_shop - $name_shop");
     echocomtent_here(exec_tpl('my_transaction/napthe'), cn_snippet_bc_re());
     echofooter();
 }
-/*
-function shop___what_(){
-	$member = member_get();$accc_ = $member['user_name'];
-	$warehouse_ = do_select_character('warehouse','Items,Money,pw,AccountID',"AccountID='$accc_'");
-	
-	$item_list = substr(strtoupper(bin2hex($warehouse_[0][0])), 0, 3840);
-	$money = $warehouse_[0][1];
-	$password = $warehouse_[0][2];
-	//$accountid_ = $warehouse_[0][3]; //??
-	
-	$show_warehouse = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:57px; padding-left:25px; height:628px; background-image: url(images/warehouse.jpg)'>";
-	$i = -1;
-	$x = -1;
-	
-	while ( $i < 119 ) {
-		$i++;
-		$x++;
-		if ( $x == 8 ) $x = 0;	
-		$item32 = cn_analysis_code32(substr($item_list, $i*32,32),'','','');
-		if(!$item32) continue;
-		
-		if($item32['name']){
-			if (!$item32['y']) $itemy = 1;
-			else $itemy = $item32['y'];
-			
-			if (!$item32['x']) $itemx = 1;
-			else $itemx = $item32['x'];
-			
-			$show_warehouse .= "<div style='margin-top:".(floor($i/8)*32)."px; 
-											margin-left:".($x*32)."px; position:absolute;
-											width:".($itemx*32)."px; height:".($itemy*32)."px;
-											cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>
-									<img src='images/items/".$item32['image'].".gif' 
-											style=\"height:".(32*$itemy-$itemy-1)."px;
-											width:".(32*$itemx)."px;\" 
-											onMouseOut='UnTip()' onMouseOver=\"topxTip(document.getElementById('iditem".$i."').innerHTML)\">
-								</div>";
-			$show_warehouse .= "<div class='floatcontainer forumbit_nopost' id='iditem$i' style='display:none;background: rgba(0, 128, 0, 0.15);'>'".$item32['info']."'</div>";
-					
-		//onmouseover="topxTip(document.getElementById('tip_10261').innerHTML)" onmouseout="UnTip()"
-		//onMouseOut='hidetip()' onMouseOver=\"showtip('".$item32['info']."')\">
-		}
-	}
-	
-	if ( $password != NULL AND $password != 0 ) $wwname = "<font color='#A42725'>Hòm đồ (Đóng)</font>";
-	else $wwname = "<font color='#ffffff'>Hòm đồ (Mở)</font>";
-	if ( $money < 100000) $color = "#F7DDAA";
-	else if ( $money >= 100000 and $money < 1000000 ) $color	= "#3CA445";
-	else if ( $money >= 1000000 and $money < 10000000 ) $color = "#D2A154";
-	else $color = "#A42725";
-	
-	$show_warehouse	.=	"<div style='margin-top:-42px; position:absolute; text-align:center; width:256px; border:0px;'>".$wwname."</div>";
-	$show_warehouse	.=	"<div id='zzen2' style='margin-top:100px; margin-left:-20px; position:absolute; border:0px; width:0px; height:0px;'></div>";
-	$show_warehouse	.=	"<div align=right style='position:absolute; color:".$color."; margin-top:502px; width:200px; margin-right:37px; margin-left:50px; border:0px;'>".$money."</div>";
-	//$show_warehouse	.=	"<div style='margin-top:565px; margin-left:36px; position:absolute; width:57px; cursor:pointer; height:47px;'><img alt='Rút Zen' onmousemove='return overlib(\"Rút Zen từ Hòm đồ\");' onclick='get_zen2(\"1\")' onmouseout='return nd();' src='images/insert_zen.jpg'></div>";
-	//$show_warehouse	.=	"<div style='margin-top:565px; margin-left:100px; position:absolute; width:59px; cursor:pointer; height:47px;'><img alt='Gửi Zen' onmousemove='return overlib(\"Gửi Zen vào Hòm đồ\");' onclick='get_zen2(\"2\")' onmouseout='return nd();' src='images/get_zen.jpg'></div>";
-	$show_warehouse	.=	"<div style='margin-top:565px; margin-left:36px; position:absolute; width:57px; height:47px;'><img src='images/insert_zen.jpg'></div>";
-	$show_warehouse	.=	"<div style='margin-top:565px; margin-left:100px; position:absolute; width:59px; height:47px;'><img src='images/get_zen.jpg'></div>";
-	
-	if ( $password != NULL AND $password != 0 ) {
-		$type = 1;
-		$echo_t = "Mở khóa Hòm đồ";
-		$imgl = "images/lock_on.jpg";
-	}
-	else {
-		$type = 0;
-		$echo_t = "Khóa Hòm đồ";
-		$imgl = "images/lock_off.jpg";
-	}
-	//$show_warehouse	.=	"<div style='margin-top:565px; margin-left:166px; position:absolute; width:57px; cursor:pointer; height:47px;'><img alt='Lock' onmousemove='return overlib(\"".$echo_t."\");' onmouseout='return nd();' onclick='lock_t2(\"".$type."\");' src='".$imgl."'></div>";
-	$show_warehouse	.=	"<div style='margin-top:565px; margin-left:166px; position:absolute; width:57px; height:47px;'><img src='".$imgl."'></div>";
-	$show_warehouse	.=	"</div>";
 
-	//echo $show_warehouse;
-	cn_assign('show_warehouse', $show_warehouse);
-	
-	echoheader('my_char/style.css', "Thùng đồ - Warehouse"); 								//???????????????????
-	echocomtent_here(exec_tpl('my_cashshop/_warehouse'), cn_snippet_bc_re());
-	echofooter();
-}
+function zenderHtmlTableHistoryCard($dataHistory, $page)
+{
+    $url = cn_url_modify(array('reset'), 'mod=relax', 'opt=xoso', 'action_historyCard=1', 'page', 'per_page');
+    $per_page = 20;
+    if (empty($page)) $page = 1;
+    list ($resultShowData, $pagination) = cn_arr_paginaAjax($dataHistory, $url, $page, $per_page);
 
-/*
-function shop_acient(){
-	$opt = REQ('opt', 'GETPOST');
-	$list_item = array();
-	$item_ = getoption('#item_shop'.$opt);	//'code32' - 'name'  - 'price' - 'image_mh'
-	foreach($item_ as $ak => $var){
-		echo "150 opt = $opt -> $ak => $var[code32]-> $var[name] -> $var[price] -> $var[image_mh] <br>";
-	
-		$list_item[] = cn_analysis_code32($var['code32'], $var['name'], $var['price'], $var['image_mh']);
-	}
-	cn_assign('item_', $list_item);
-	echoheader('my_char/style.css', "Error"); 								//???????????????????
-	echocomtent_here(exec_tpl('my_cashshop/_acient'), cn_snippet_bc_re());
-	echofooter();
-}
-function shop_armor(){
-	$opt = REQ('opt', 'GETPOST');
-	$item_ = getoption('#item_shop'.$opt);
-	$showchar = cn_character();
+    if (empty($resultShowData)) return '';
 
-	foreach($showchar as $od => $do){
-		if(!empty($od)){
-			
-			if($do['point'] > 0) $do_10 = "<a href =". cn_url_modify('mod=cshop_', 'opt=addpoint','sub='.$od)." title='cộng Point'>". number_format($do['point'],0,",",".")."</a>"; else $do_10 = $do['point'];
-			if($do['point_dutru'] > 0) $do_11 = "<a href =".cn_url_modify('mod=cshop_', 'opt=subpoint','sub='.$od)." title='rút Point'>". number_format($do['point_dutru'],0,",",".")."</a>"; else $do_11 = $do['point_dutru'];
-			
-			if($do['status_off']) $do_12_20 = "<a href =".cn_url_modify('mod=cshop_', 'opt=offline','sub='.$od)." title='Đang ủy thác Offline'><img src='". URL_PATH_IMG ."/checkbullet.gif'></a>";
-			else if($do['status_on']) $do_12_20 = "<a href =".cn_url_modify('mod=cshop_', 'opt=online','sub='.$od)." title='Đang ủy thác Online'><img src='". URL_PATH_IMG ."/checkbullet.gif'></a>";
-			else $do_12_20 = "<img src='". URL_PATH_IMG ."/alert_icon.gif'>";
-				
-			$showchar_[] = array('char_image' => $do['char_image'], 'Name' => $od, 'cclass' => $do['cclass'], 'level' => $do['level'], 'str' => $do['str'], 'dex' => $do['dex'], 'vit' => $do['vit'], 'ene' => $do['ene'], 'com' => $do['com'], 'reset' => $do['reset'], 'relife' => $do['relife'], 'point' => $do_10, 'point_dutru' => $do_11, 'status_uythac' => $do_12_20, 'point_uythac' => $do['point_uythac'], 'pcpoint' => $do['pcpoint']);
-		}
-	}
+    $html = '<table class="ranking" width="100%">
+            <tr>
+                <th class="lbg">#</th>
+                <th>Loại thẻ</th>
+                <th>Mã thẻ</th>
+                <th>Serial</th>
+                <th>Vpoint</th>
+                <th>Ngày nạp</th>
+                <th class="rbg"><span>Tình trạng</span></th>
+            </tr>';
 
-	cn_assign('showchar', $showchar_);
+//if (!is_array($cardphone) && !is_object($cardphone)) settype($cardphone, 'array'); foreach ($cardphone as $cardphone){}
+    if ($dataHistory) {
+        foreach ($dataHistory as $key => $items) {
+//            $makerTime = date_create(trim($items['timestamp']));
+//            $tempTime = date_format($makerTime, 'l, Y-m-d H:i:s');
+//            $checkResult = $items['Result'];
+//            if ($checkResult == 1) {
+//                $strResult = '<span class="cBlue"> Trúng </span>';
+//            } elseif ($checkResult == 2) {
+//                $strResult = '<span class="cRed"> Không trúng </span>';
+//            } else {
+//                $strResult = '---';
+//            }
 
-	echoheader('-@my_char/style.css', "Information character");
-	echocomtent_here(exec_tpl('my_char/info_char'), cn_snippet_bc_re());
-	echofooter();
+            $html .= '<tr><td>' . ($key + 1) . '</td>';
+            $html .= '<td>' . ucfirst($items['card_type']) . '</td>';
+            $html .= '<td>' . trim($items['card_num']) . '</td>';
+            $html .= '<td>' . trim($items['card_serial']) . '</td>';
+            $html .= '<td>' . number_format(intval($items['addvpoint']), 0, ',', '.') . '</td>';
+//            $html .= '<td>' . number_format($items['Vpoint'], 0, ',', '.') . '</td>';
+            $html .= '<td>' . date('l, d-m-Y H:i:A', $items['times_tamp']) . '</td>';
+            $html .= '<td>' . 0 . '</td></tr>';
+        }
+    }
+    $html .= '</table>';
+    $html .= '<div class="clear"></div>';
+    $html .= '<div class="right">' . $pagination . '</div>';
+
+    $html .= '</table>';
+
+    return $html;
 }

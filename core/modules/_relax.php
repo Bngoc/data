@@ -539,6 +539,8 @@ function show_historyDe($datahistory, $page)
 {
     $url = cn_url_modify(array('reset'), 'mod=relax', 'opt=xoso', 'action_history=1', 'page', 'per_page');
     $per_page = 20;
+    if (empty($page)) $page = 1;
+
     list ($resultShowData, $pagination) = cn_arr_paginaAjax($datahistory, $url, $page, $per_page);
 
     if (empty($resultShowData)) return '';
@@ -571,10 +573,8 @@ function show_historyDe($datahistory, $page)
             $html .= '<td>' . $strResult . '</td></tr>';
         }
     }
-
     $html .= '</table>';
     $html .= '<div class="clear"></div>';
-
     $html .= '<div class="right">' . $pagination . '</div>';
 
     return $html;
