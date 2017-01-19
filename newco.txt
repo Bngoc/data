@@ -84,6 +84,7 @@
 	1. Mysql => https://dev.mysql.com/downloads/workbench/
 	2. -> Vao duong dan dan <pacth>/data/forum/includes/config.php
 		-> mo = notepad++ thay doi cho phu hop
+		
  
  [*] D> cau hinh tren /admin.php
     1. time zone  (0 -> +7)
