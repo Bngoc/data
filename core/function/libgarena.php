@@ -1787,3 +1787,12 @@ function cn_ResultDe()
         //-----------------------------------------------------------------
     }
 }
+
+/**
+ * @param $dirpath
+ * @param int $mode
+ * @return bool
+ */
+function makeDirs($dirpath, $mode=0777) {
+    return is_dir($dirpath) || mkdir($dirpath, $mode, true);
+}

@@ -205,11 +205,14 @@ function relax_baucua()
                     //Ghi vào Log
                     $content = "$accc_ đã chơi bầu cua, kết quả " . $contLog;
                     $Date = date("h:iA, d/m/Y", ctime());
-                    $file = MODULE_ADM . "/log/modules/relax/log_baucua.log";
-                    cn_touch($file);
-                    $fileContents = file_get_contents($file);
-                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $update_money . "|" . $Date . "|\n" . $fileContents);
-                    //End Ghi vào Log
+                    $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/relax");
+                    if ($checkDir) {
+                        $file = $files . "/log_baucua.log";
+                        cn_touch($file);
+                        $fileContents = file_get_contents($file);
+                        file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $update_money . "|" . $Date . "|\n" . $fileContents);
+                    }
+                        //End Ghi vào Log
                 }
             }
 
@@ -349,11 +352,15 @@ function relax_baicao()
                     //Ghi vào Log
                     $content = "$accc_ đã chơi bài cáo, kết quả" . substr($msg, 4);
                     $Date = date("h:iA, d/m/Y", ctime());
-                    $file = MODULE_ADM . "/log/modules/relax/log_baicao.log";
-                    cn_touch($file);
-                    $fileContents = file_get_contents($file);
-                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $update_money . "|" . $Date . "|\n" . $fileContents);
-                    //End Ghi vào Log
+                    $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/relax");
+                    if ($checkDir) {
+                        $file = $files . "/log_baicao.log";
+//                        $file = MODULE_ADM . "/log/modules/relax/log_baicao.log";
+                        cn_touch($file);
+                        $fileContents = file_get_contents($file);
+                        file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $update_money . "|" . $Date . "|\n" . $fileContents);
+                    }
+                        //End Ghi vào Log
                 }
             }
 
@@ -493,11 +500,15 @@ function relax_xoso()
                 //Ghi vào Log
                 $content = "$accc_ đã đánh đề số $numberDe, Số Vpoint: " . number_format($moneyVpDe, 0, ',', 0);
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/relax/log_xosoDe.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $moneyAfter . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/relax");
+                if ($checkDir) {
+                    $file = $files . "/log_xosoDe.log";
+//                $file = MODULE_ADM . "/log/modules/relax/log_xosoDe.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $moneyAfter . "|" . $Date . "|\n" . $fileContents);
+                }
+                 //End Ghi vào Log
 
                 cn_throw_message("Bạn đã ghi đề $numberDe với giá tiền " . number_format($moneyVpDe, 0, ',', '.') . " Vpoint.");
 

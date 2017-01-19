@@ -577,11 +577,15 @@ function char_reset()
                 //Ghi vào Log
                 $content = "$sub Reset lần thứ $resetup _ lần thứ $CountNoResetInDay trong ngày";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_resets.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $vpointnew . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                if ($checkDir) {
+                    $file = $files . "/log_resets.log";
+//                    $file = MODULE_ADM . "/log/modules/character/log_resets.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $vpointnew . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
                 if ($user_type_gh_rs == 1) {
                     if ($gioihan_rs > $CountNoResetInDay) $rs_day_ = "$CountNoResetInDay / $gioihan_rs";
@@ -1226,11 +1230,15 @@ function char_resetvip()
                 $content = "$sub Reset Vip lần thứ $resetvipup _ lần thứ $CountNoResetInDay trong ngày";
                 //$Date = date("h:iA, d/m/Y");
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_resetsvip.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $blank_gcoin . "_" . $blank_vp . "_" . $blank_gcoin_km . "|" . $gcoin_rsvip . "_" . $vpointnew . "_" . $gcoin_gkm_rsvip . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                if ($checkDir) {
+                    $file = $files . "/log_resetsvip.log";
+//                $file = MODULE_ADM . "/log/modules/character/log_resetsvip.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $blank_gcoin . "_" . $blank_vp . "_" . $blank_gcoin_km . "|" . $gcoin_rsvip . "_" . $vpointnew . "_" . $gcoin_gkm_rsvip . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
                 cn_throw_message("$sub Reset Vip lần thứ $resetvipup thành công!");
                 if ($resetpoint_vip > 0) $str_rutpoint = "Bạn có " . number_format((float)$pointup_vip, 0, ",", ".") . " Point. Vui lòng <a href='" . cn_url_modify('mod=char_manager', 'opt=addpoint', 'sub=' . $sub) . "' title='cộng Point'> cộng Point </a> trước khi <b><a href ='" . cn_url_modify('mod=char_manager', 'opt=subpoint', 'sub=' . $sub) . "' title='rút Point'> rút Point</a></b> còn lại cho nhân vật $sub.";
@@ -1470,11 +1478,15 @@ function char_relife()
                 //Ghi vào Log
                 $content = "$sub Relife lần thứ $CountRelifeup";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_relife.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                if ($checkDir) {
+                    $file = $files . "/log_relife.log";
+//                $file = MODULE_ADM . "/log/modules/character/log_relife.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
                 cn_throw_message("$sub ReLife lần thứ $CountRelifeup thành công!");
                 if ($point_relifes > 0) $str_rutpoint = "Bạn có " . number_format((float)$pointup_rl, 0, ",", ".") . " Point. Vui lòng <a href='#' title='cộng Point'> cộng Point </a> trước khi <b><a href ='#' title='rút Point'> rút Point</a></b> còn lại cho nhân vật $sub.";
@@ -1637,11 +1649,15 @@ function char_online()
                     //Ghi vào Log
                     $content = "$sub kết thúc ủy thác online, nhận được $minute_to_point điểm";
                     $Date = date("h:iA, d/m/Y", ctime());
-                    $file = MODULE_ADM . "/log/modules/character/log_uythaconline.log";
-                    cn_touch($file);
-                    $fileContents = file_get_contents($file);
-                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_after . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
-                    //End Ghi vào Log
+                    $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                    if ($checkDir) {
+                        $file = $files . "/log_uythaconline.log";
+//                    $file = MODULE_ADM . "/log/modules/character/log_uythaconline.log";
+                        cn_touch($file);
+                        $fileContents = file_get_contents($file);
+                        file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_after . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
+                    }
+                        //End Ghi vào Log
 
                     cn_throw_message("$sub đã kết thúc Ủy thác thành công.");
                     cn_throw_message("Nhận được $minute_to_point Điểm Ủy thác trong $_point phút Ủy thác. Chi phí $gcoin_uythac Gcoin.");
@@ -1675,11 +1691,15 @@ function char_online()
                     //Ghi vào Log
                     $Date = date("h:iA, d/m/Y", ctime());
                     $content = "$sub bắt đầu Ủy thác online lúc $Date";
-                    $file = MODULE_ADM . "/log/modules/character/log_uythaconline.log";
-                    cn_touch($file);
-                    $fileContents = file_get_contents($file);
-                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
-                    //End Ghi vào Log
+                    $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                    if ($checkDir) {
+                        $file = $files . "/log_uythaconline.log";
+//                    $file = MODULE_ADM . "/log/modules/character/log_uythaconline.log";
+                        cn_touch($file);
+                        $fileContents = file_get_contents($file);
+                        file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
+                    }
+                        //End Ghi vào Log
 
                     $before_info_on[6][1] = '<img src="' . URL_PATH_IMG . '/checkbullet.gif" title="Online">';
 
@@ -1833,11 +1853,15 @@ function char_offline()
                     //Ghi vào Log
                     $content = "$sub kết thúc ủy thác offline, nhận được $minute_to_point điểm";
                     $Date = date("h:iA, d/m/Y", ctime());
-                    $file = MODULE_ADM . "/log/modules/character/log_uythacoffline.log";
-                    cn_touch($file);
-                    $fileContents = file_get_contents($file);
-                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_after . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
-                    //End Ghi vào Log
+                    $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                    if ($checkDir) {
+                        $file = $files . "/log_uythacoffline.log";
+//                    $file = MODULE_ADM . "/log/modules/character/log_uythacoffline.log";
+                        cn_touch($file);
+                        $fileContents = file_get_contents($file);
+                        file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_after . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
+                    }
+                        //End Ghi vào Log
 
                     cn_throw_message("$sub đã kết thúc Ủy thác thành công.");
                     cn_throw_message("Nhận được $minute_to_point Điểm Ủy thác trong $_point phút Ủy thác. Chi phí $gcoin_uythac gcoin.");
@@ -1871,11 +1895,15 @@ function char_offline()
                     //Ghi vào Log
                     $Date = date("h:iA, d/m/Y", ctime());
                     $content = "$sub bắt đầu Ủy thác offline lúc $Date";
-                    $file = MODULE_ADM . "/log/modules/character/log_uythacoffline.log";
-                    cn_touch($file);
-                    $fileContents = file_get_contents($file);
-                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
-                    //End Ghi vào Log
+                    $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                    if ($checkDir) {
+                        $file = $files . "/log_uythacoffline.log";
+//                    $file = MODULE_ADM . "/log/modules/character/log_uythacoffline.log";
+                        cn_touch($file);
+                        $fileContents = file_get_contents($file);
+                        file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
+                    }
+                        //End Ghi vào Log
 
                     $before_info_off[6][1] = '<img src="' . URL_PATH_IMG . '/checkbullet.gif" title="Online">';
 
@@ -2104,10 +2132,14 @@ function char_rsdelegate()
                 //Ghi vào Log
                 $content = "$sub Reset ủy thác lần thứ $resetup";
                 $Date = date("h:iA, d/m/Y", $ctime);
-                $file = MODULE_ADM . "/log/modules/character/log_rsuythac.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $Date . "|\n" . $fileContents);
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                if ($checkDir) {
+                    $file = $files . "/log_rsuythac.log";
+//                    $file = MODULE_ADM . "/log/modules/character/log_rsuythac.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $Date . "|\n" . $fileContents);
+                }
                 //End Ghi vào Log
 
 
@@ -2325,11 +2357,15 @@ function char_rsdelegatevip()
                 //Ghi vào Log
                 $content = "$sub Reset Vip lần thứ $resetvipup";
                 $Date = date("h:iA, d/m/Y", $ctime);
-                $file = MODULE_ADM . "/log/modules/character/log_rsuythacvip.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_gcoin . "_" . $_blank_vpoint . "|" . $gcoin_rsvip . "_" . $vpointnew . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                if ($checkDir) {
+                    $file = $files . "/log_rsuythacvip.log";
+//                    $file = MODULE_ADM . "/log/modules/character/log_rsuythacvip.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_gcoin . "_" . $_blank_vpoint . "|" . $gcoin_rsvip . "_" . $vpointnew . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
                 if ($rsvipuythac_index >= count($options_rsvip_trust) - 1) $rsvipuythac_index = count($options_rsvip_trust) - 1;
                 else if ($rsvipuythac_index > $i_e) ++$rsvipuythac_index;
@@ -2818,11 +2854,15 @@ function char_rspoint()
                 //Ghi vào Log
                 $content = "$sub đã tẩy điểm với 25% Gcoin hoặc 25% Vpoint tương ứng với số cấp Reset Vip";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_rspoint.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_new . "_" . $vpoint_new . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                if ($checkDir) {
+                    $file = $files . "/log_rspoint.log";
+//                $file = MODULE_ADM . "/log/modules/character/log_rspoint.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_new . "_" . $vpoint_new . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
 
                 if ($gcoin_new >= $_gcoin_test) $sms_gc = "(Đủ Gcoin)";
@@ -3074,11 +3114,15 @@ function char_removepk()
                     //Ghi vào Log
                     $content = "$sub đã rửa tội giết $PkCount mạng với" . @$numVpPK . " V.Point";
                     $Date = date("h:iA, d/m/Y", ctime());
-                    $file = MODULE_ADM . "/log/modules/character/log_ruatoi.log";
-                    cn_touch($file);
-                    $fileContents = file_get_contents($file);
-                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $ktvpoint . "|" . $Date . "|\n" . $fileContents);
-                    //End Ghi vào Log
+                    $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                    if ($checkDir) {
+                        $file = $files . "/log_ruatoi.log";
+//                    $file = MODULE_ADM . "/log/modules/character/log_ruatoi.log";
+                        cn_touch($file);
+                        $fileContents = file_get_contents($file);
+                        file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $ktvpoint . "|" . $Date . "|\n" . $fileContents);
+                    }
+                        //End Ghi vào Log
                     $before_info_pk[9][1] = number_format((float)($ktvpoint), 0, ",", ".");
                 }
 
@@ -3205,11 +3249,15 @@ function char_pointtax()
                 //Ghi vào Log
                 $content = "$sub đã thuê $var_vp point với $var_vp V.Point";
                 $Date = date("h:iA, d/m/Y", $ctime);
-                $file = MODULE_ADM . "/log/modules/character/log_thuepoint.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . '_' . $ktvpoint . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                if ($checkDir) {
+                    $file = $files . "/log_thuepoint.log";
+//                    $file = MODULE_ADM . "/log/modules/character/log_thuepoint.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . '_' . $ktvpoint . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
                 $before_info_pointtax[6][1] = "(Thuê còn " . date("H:i:s", $ctime) . ")";
                 cn_throw_message("Nhân vật $sub đã thuê điểm thành công.");
@@ -3349,11 +3397,15 @@ function char_changename()
                 //Ghi vào Log
                 $content = "$sub đã đổi $sub sang $c_name với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_changename.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $var_vp . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                if ($checkDir) {
+                    $file = $files . "/log_changename.log";
+//                $file = MODULE_ADM . "/log/modules/character/log_changename.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $var_vp . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
                 $before_info_cn[3][1] = number_format((float)$ktgcoin, 0, ",", ".");
                 $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
@@ -3511,11 +3563,15 @@ function char_changeclass()
                 //Ghi vào Log
                 $content = "Nhân vật $sub đã đổi " . strtoupper($isClass) . " sang " . strtoupper($nameClass) . " với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_changeclass.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                if ($checkDir) {
+                    $file = $files . "/log_changeclass.log";
+//                $file = MODULE_ADM . "/log/modules/character/log_changeclass.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
                 $before_info_cn[1][1] = number_format((float)$newReset, 0, ",", ".");
                 $before_info_cn[3][1] = number_format((float)$ktgcoin, 0, ",", ".");
@@ -3705,11 +3761,15 @@ function char_level1()
                 //Ghi vào Log
                 $content = "Nhân vật $sub làm nhiệm vụ với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_level150.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc_ . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                if ($checkDir) {
+                    $file = $files . "/log_level150.log";
+//                $file = MODULE_ADM . "/log/modules/character/log_level150.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc_ . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
                 $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
 
@@ -3901,11 +3961,15 @@ function char_level2()
                 //Ghi vào Log
                 $content = "Nhân vật $sub nhiệm vụ level 220 với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_level220.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                if ($checkDir) {
+                    $file = $files . "/log_level220.log";
+//                $file = MODULE_ADM . "/log/modules/character/log_level220.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
                 $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
 
@@ -4095,11 +4159,15 @@ function char_level3()
                 //Ghi vào Log
                 $content = "Nhân vật $sub nhiệm vụ level 380 với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/character/log_level380.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+                if ($checkDir) {
+                    $file = $files . "/log_level380.log";
+//                $file = MODULE_ADM . "/log/modules/character/log_level380.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
                 $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
 
@@ -4390,10 +4458,14 @@ function char_delepersonalSotre()
 //                //Ghi vào Log
 //                $content = "$sub đã đổi $sub sang $c_name với $var_vp";
 //                $Date = date("h:iA, d/m/Y", ctime());
+//$checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+//if ($checkDir) {
+//    $file = $files . "/log_changename.log";
 //                $file = MODULE_ADM . "/log/modules/character/log_changename.log";
 //                cn_touch($file);
 //                $fileContents = file_get_contents($file);
 //                file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $var_vp . "|" . $Date . "|\n" . $fileContents);
+//                }
 //                //End Ghi vào Log
 //
 //                $before_info_cn[3][1] = number_format((float)$ktgcoin, 0, ",", ".");

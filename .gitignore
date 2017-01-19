@@ -1,7 +1,7 @@
 /.idea/
 /gifnoc/gifnoc.php
 /gifnoc/*.bak
-/log/system/*.log
-/log/../../*.log
+log/modules/../*.log
+log/system/*.log
 .htaccess
 web.config

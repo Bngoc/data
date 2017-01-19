@@ -114,10 +114,14 @@ function relax_baucua()
 //                //Ghi vào Log
 //                $content = "$accc_ đã chơi bầu cua, kết quả " . $contLog;
 //                $Date = date("h:iA, d/m/Y", ctime());
+//                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/money");
+//                if ($checkDir) {
+//                    $file = $files . "/log_baucua.log";
 //                $file = MODULE_ADM . "/log/modules/relax/log_baucua.log";
 //                cn_touch($file);
 //                $fileContents = file_get_contents($file);
 //                file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $update_money . "|" . $Date . "|\n" . $fileContents);
+//               }
 //                //End Ghi vào Log
             }
 

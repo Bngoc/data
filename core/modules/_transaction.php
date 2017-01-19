@@ -342,10 +342,14 @@ echoArr($gb_api); die;
                     // Ghi vào Log
                     $content = "$accc_ đã nạp thẻ " . ucfirst($opt) . " mệnh giá: " . number_format($info_card, 0, ",", ".") . " VND, Serial: $seri , Số Vpoint: " . number_format($vpointAdd, 0, ",", ".") . " , Tình trạng: <span class=\"cRed\">" . $codeErrorCard[$resultCodeApi] . "</span>";
                     $Date = date("h:iA, d/m/Y", ctime());
-                    $file = MODULE_ADM . "/log/modules/log_" . $opt . ".log";
-                    cn_touch($file);
-                    $fileContents = file_get_contents($file);
-                    file_put_contents($file, $accc_ . "|" . $content . "|" . $showMoneyBank[0]['gc'] . '_' . $showMoneyBank[0]['vp'] . "|" . $showMoneyBank[0]['gc'] . "_" . $moneyAfter . "|" . $Date . "|\n" . $fileContents);
+                    $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/napthe");
+                    if ($checkDir) {
+                        $file = $files . "/log_" . $opt . ".log";
+//                    $file = MODULE_ADM . "/log/modules/log_" . $opt . ".log";
+                        cn_touch($file);
+                        $fileContents = file_get_contents($file);
+                        file_put_contents($file, $accc_ . "|" . $content . "|" . $showMoneyBank[0]['gc'] . '_' . $showMoneyBank[0]['vp'] . "|" . $showMoneyBank[0]['gc'] . "_" . $moneyAfter . "|" . $Date . "|\n" . $fileContents);
+                    }
                     // End Ghi vào Log
 
                     cn_throw_message($content);

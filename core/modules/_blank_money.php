@@ -615,11 +615,15 @@ function blank_money_vpoint2blank()
                 $afterVpoint = $showBlank[0]['vp'] + $countVpoint;
                 $content = "$sub -  $acountID đã chuyển " . number_format($countVpoint, 0, ",", ".") . " Item Vpoint thành Vpoint";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/money/log_item2vpoint.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $acountID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $showBlank[0]['gc'] . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/money");
+                if ($checkDir) {
+                    $file = $files . "/log_item2vpoint.log";
+//                $file = MODULE_ADM . "/log/modules/money/log_item2vpoint.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $acountID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $showBlank[0]['gc'] . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
                 cn_throw_message("Bạn đã thêm Sl: " . number_format($countVpoint, 0, ",", ".") . " Vpoint vào ngân hàng thành công!");
             }
@@ -1417,11 +1421,15 @@ function blank_money_blank2vpoint()
                 $afterVpoint = ($showBlank[0]['vp'] - $countVpoint);
                 $content = "$sub - $acountID chuyển " . number_format($postNumberItem, 0, ",", ".") . " Vpoint thành Vpoint Item.";
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/money/log_vpoint2item.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $acountID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $showBlank[0]['gc'] . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/money");
+                if ($checkDir) {
+                    $file = $files . "/log_vpoint2item.log";
+//                    $file = MODULE_ADM . "/log/modules/money/log_vpoint2item.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $acountID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $showBlank[0]['gc'] . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
                 cn_throw_message("Bạn đã rút Sl: " . number_format($postNumberItem, 0, ",", ".") . " Vpoint từ ngân hàng thành công!");
 
@@ -1511,11 +1519,15 @@ function blank_money_vpoint2gcoin()
                 $afterGcoin = ($rootGcoin + $gcoinNew);
                 $content = "$accoutID đã chuyển Vpoint " . number_format($postNumberItem, 0, ",", ".") . " thành Gcoin " . number_format($gcoinNew, 0, ',', '.');
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/money/log_vpoint2gcoin.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/money");
+                if ($checkDir) {
+                    $file = $files . "/log_vpoint2gcoin.log";
+//                    $file = MODULE_ADM . "/log/modules/money/log_vpoint2gcoin.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
             }
 
             $resultData = array(
@@ -1589,11 +1601,15 @@ function blank_money_gcoin2vpoint()
                 $afterGcoin = $rootGcoin - $postNumberItem;
                 $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin thành " . number_format($postNumberItem, 0, ',', ' Vpoint.');
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/money/log_gcoin2vpoint.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/money");
+                if ($checkDir) {
+                    $file = $files . "/log_gcoin2vpoint.log";
+//                $file = MODULE_ADM . "/log/modules/money/log_gcoin2vpoint.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
             }
 
             $resultData = array(
@@ -1666,10 +1682,14 @@ function blank_money_transgc2wc()
                 $afterGcoin = $rootGcoin - $postNumberItem;
                 $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin thành " . number_format($postNumberItem, 0, ',', ' Wcoin.');
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/money/log_transgc2wc.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/money");
+                if ($checkDir) {
+                    $file = $files . "/log_transgc2wc.log";
+//                $file = MODULE_ADM . "/log/modules/money/.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                }
                 //End Ghi vào Log
             }
 
@@ -1746,11 +1766,15 @@ function blank_money_transgc2wcp()
                 $afterGcoin = $rootGcoin - $postNumberItem;
                 $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin thành  " . number_format($postNumberItem, 0, ',', '.'). ' WcoinP.';
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/money/log_transgc2wcp.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/money");
+                if ($checkDir) {
+                    $file = $files . "/log_transgc2wcp.log";
+//                    $file = MODULE_ADM . "/log/modules/money/log_transgc2wcp.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
             }
 
             $showMoney = (!$errors_false) ? ($showBlank[0]['wCoinP'] + $postNumberItem) : $showBlank[0]['wCoinP'];
@@ -1827,11 +1851,15 @@ function blank_money_transgc2gob()
                 $afterGcoin = $rootGcoin - $postNumberItem;
                 $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin thành " . number_format($postNumberItem, 0, ',', '.') .' GoblinCoin.';
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/money/log_transgc2gob.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/money");
+                if ($checkDir) {
+                    $file = $files . "/log_transgc2gob.log";
+//                $file = MODULE_ADM . "/log/modules/money/log_transgc2gob.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
 
             }
 
@@ -1932,11 +1960,15 @@ function blank_money_muazen()
                 $afterVpoint = ($rootVpoint - $postNumberItem);
                 $content = "$accoutID đã mua " . number_format($getZen, 0, ",", ".") . " Zen với " . number_format($postNumberItem, 0, ',', '.') . ' Vpoint.';
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/money/log_muazen.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accoutID . "|" . $content . "|" . $rootGcoin . "_" . $showBlank[0]['vp'] . "|" . $rootGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
-                //End Ghi vào Log
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/money");
+                if ($checkDir) {
+                    $file = $files . "/log_muazen.log";
+//                $file = MODULE_ADM . "/log/modules/money/log_muazen.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accoutID . "|" . $content . "|" . $rootGcoin . "_" . $showBlank[0]['vp'] . "|" . $rootGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                }
+                    //End Ghi vào Log
             }
 
             Lable:
@@ -2029,10 +2061,14 @@ function blank_money_transvpoint()
                 $afterVpoint = ($rootVpoint - $vpointNew);
                 $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Vpoint, phí " . number_format($configTransVpoint, 0, ',', '.') . ' Vpoint/1L sang tài khoản ' . $newAccount . '.';
                 $Date = date("h:iA, d/m/Y", ctime());
-                $file = MODULE_ADM . "/log/modules/money/log_chuyenvpoint.log";
-                cn_touch($file);
-                $fileContents = file_get_contents($file);
-                file_put_contents($file, $accoutID . "|" . $content . "|" . $rootGcoin . "_" . $rootVpoint . "|" . $rootGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/money");
+                if ($checkDir) {
+                    $file = $files . "/log_chuyenvpoint.log";
+//                $file = MODULE_ADM . "/log/modules/money/log_chuyenvpoint.log";
+                    cn_touch($file);
+                    $fileContents = file_get_contents($file);
+                    file_put_contents($file, $accoutID . "|" . $content . "|" . $rootGcoin . "_" . $rootVpoint . "|" . $rootGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
+                }
                 //End Ghi vào Log
             }
 
