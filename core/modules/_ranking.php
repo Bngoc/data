@@ -328,8 +328,6 @@ function zenderDataContentCardRich($dataResult)
             $dataTableResult .= '<td><img src="/images/'. 4 .'" alt="'. 0 .'">' . 4 . '</td></tr>';
         }
     }
-//users_offline.gif
-    // users_online.gif
     $dataTableResult .= '</table>';
 
     return $dataTableResult;

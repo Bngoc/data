@@ -35,7 +35,7 @@ list ($resultDe, $timesTampResult, $show_history) = _GL('resultPlayDe, timesTamp
                 </tr>
                 <tr>
                     <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
-                    <td class="bizwebform_col_2"><input id="verifyCaptcha" type="text" class="bizwebform width90" name="verifyCaptcha" required
+                    <td class="bizwebform_col_2"><input id="verifyCaptcha" type="text" class="bizwebform width90" name="verifyCaptcha" required autocomplete="off"
                                                         onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
                     <td class="bizwebform_col_3" id="msg_Captcha"></td>
                 </tr>
@@ -51,7 +51,7 @@ list ($resultDe, $timesTampResult, $show_history) = _GL('resultPlayDe, timesTamp
                 </tr>
                 <tr>
                     <td colspan="3" style="text-align:center">
-                        <img src="/images/capnhat.png" style="padding-right:10px" alt="update" id="actionDe">
+                        <img src="/images/capnhat.png" class="cursor" style="padding-right:10px" alt="update" id="actionDe">
                         <img style="cursor:pointer" border="0" src="/images/cancel.png"
                              onclick="document.getElementById('from-playDe').reset();" style="padding-left:10px">
                     </td>
@@ -64,7 +64,7 @@ list ($resultDe, $timesTampResult, $show_history) = _GL('resultPlayDe, timesTamp
     <hr>
     <div class="show-history">
         <?php if (empty($show_history)) {
-            echo '<div class="mg-top15 cRed">Bạn chưa ghi đề. </div>';
+            echo '<div class="mg-top15 cRed mg-left15">Bạn chưa ghi đề. </div>';
         }else {
             echo $show_history;
         }?>

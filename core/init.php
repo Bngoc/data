@@ -37,6 +37,7 @@ require_once SERVDIR . '/core/security.php';
 require_once SERVDIR . '/core/db/flat_web.php';
 require_once SERVDIR . '/core/class.phpmailer.php';
 require_once SERVDIR . '/core/class.smtp.php';
+require_once SERVDIR . '/core/cardGB_API.php';
 //require_once SERVDIR . '/core/simple_html_dom.php'; //libs
 //require_once MODULE_ADM . '/core/captcha/phptextClass.php';
 

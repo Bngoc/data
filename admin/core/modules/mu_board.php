@@ -254,7 +254,11 @@ function board_sysconf()
             'server_type' => array('select', 'Loại Server đang sử dụng|if yes, comments will be shown under the story', array("scf" => "SCF", "original" => "Original")),
         ),
         'napthe' => array(
+            'Merchant_ID' => array('text', 'Merchant_ID|info: https://sv.gamebank.vn; VD: 12345'),
+            'API_User' => array('text', 'API User|info: https://sv.gamebank.vn; VD: tukjhji5'),
+            'API_Password' => array('text', 'API Password|info: https://sv.gamebank.vn; VD: 98hjhgtyjkjlklbjhgjhgyhfhfhtfdy'),
             'napthe_list' => array('text', 'Nap the list [VTC - GATE - VIETTEL - MOBI - VINA]| 1 => Yes, 0 => No, VD: 1,1,1,1,1'),
+            'km_list' => array('text', 'Khuyen Mai list [VTC - GATE - VIETTEL - MOBI - VINA]| 10% => 10, 0 => No, 20 % => all, VD: 10,0,0,0,0|20'),
             'napthe_gate' => array('text', 'Card Gate list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
             'napthe_vtc' => array('text', 'Card Vtc list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
             'napthe_viettel' => array('text', 'Card Viettel list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
@@ -1746,7 +1750,6 @@ function board_logs()
             //'orther' => ['name' => ''],
             //'orther' => ['name' => '']
         ],
-
         'shop' => [
             'acient' => ['name' => 'Cửa Hàng Đồ Thần'],
             'eventticket' => ['name' => 'Cửa Hàng Vé'],
@@ -1778,6 +1781,13 @@ function board_logs()
             'chuyenvpoint' => ['name' => 'Chuyển V.Point'],
             'muazen' => ['name' => 'Mua Zen bằng V.Point']
 
+        ),
+        'napthe' => array(
+            'viettel' => ['name' => 'Viettel'],
+            'mobi' => ['name' => 'Mobiphone'],
+            'vina' => ['name' => 'Vinaphone'],
+            'gate' => ['name' => 'Gate'],
+            'vtc' => ['name' => 'VTC']
         )
     );
 

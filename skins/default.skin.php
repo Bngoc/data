@@ -305,7 +305,7 @@ $defaultVerifyMyChar = <<<HTML
         </tr>
         <tr>
             <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
-            <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="verifyCaptcha" required
+            <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="verifyCaptcha" required autocomplete="off"
                                                 onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
             <td class="bizwebform_col_3" id="msg_Captcha"></td>
         </tr>
@@ -350,7 +350,7 @@ $defaultVerifyAjax = <<<HTML
         </tr>
         <tr>
             <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
-            <td class="bizwebform_col_2"><input id="verifyCaptcha" type="text" class="bizwebform" name="verifyCaptcha" required
+            <td class="bizwebform_col_2"><input id="verifyCaptcha" type="text" class="bizwebform" name="verifyCaptcha" required autocomplete="off"
                                                 onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
             <td class="bizwebform_col_3" id="msg_Captcha"></td>
         </tr>

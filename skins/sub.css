@@ -741,3 +741,6 @@ ul.sysconf_top li.selected a {
 .updateAction, #blankJewel {
     cursor: pointer;
 }
+.cursor{
+    cursor:pointer !important;
+}
