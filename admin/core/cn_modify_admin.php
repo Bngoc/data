@@ -665,12 +665,14 @@ function cn_login()
 
                 if ($member) {
                     $ban_time = isset($member['ban']) ? (int)$member['ban'] : 0;
-
+                    $compares = hash_generate($password);
                     if ($ban_time && $ban_time > ctime()) {
                         msg_info('Too frequent queries. Wait ' . ($ban_time - ctime() . ' sec.'));
-                    }
 
-                    $compares = hash_generate($password);
+                        if (in_array($member['pass'], $compares)) {
+                            do_update_character('Account_Info', "NumLogin=1", "UserAcc:'$username'");
+                        }
+                    }
 
                     if (!isset($member['pass'])) {
                         $member['pass'] = '';
