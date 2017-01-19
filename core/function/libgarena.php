@@ -1716,10 +1716,10 @@ function cn_ResultDe()
     $ctimeAction = getoption('timeWriterLimit');
     $time = ctime();
     $hourTime = date('H:i', $time);
-
+    $id_getResult_De = trim(getoption('id_getResult_De'));
     if ($hourTime < $ctimeAction) {
         # Use the Curl extension to query Google and get back a page of results
-        $url = URL_RESULR_DE;
+        $url = trim(getoption('url_Result_De'));// URL_RESULR_DE;
         $ch = curl_init();
         $timeout = 5;
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -1742,7 +1742,7 @@ function cn_ResultDe()
 //        $stuffDateTime = strtotime(trim(explode(':', $stuffDate)[1]));
 //        $stuffDateTimeAction = date('Y-m-d H:i:s', $stuffDateTime);
 
-        $resultPlayDe = $dom->getElementById('rs_0_0')->nodeValue;
+        $resultPlayDe = $dom->getElementById($id_getResult_De)->nodeValue;
         $resultPlayDe = substr($resultPlayDe, -2);
 
         $timeYesterday = $time - 86400;

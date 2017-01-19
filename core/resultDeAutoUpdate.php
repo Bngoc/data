@@ -9,7 +9,7 @@ define('SKIN', SERVDIR . '/cdata'); // chua html
 define('MODULE_ADM', SERVDIR . '/admin'); // chua ADMIN
 define('CN_DEBUG', FALSE);
 define('URL_PATH', dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn
-define('URL_RESULR_DE', 'http://ketqua.net/');
+//define('URL_RESULR_DE', 'http://ketqua.net/');
 
 
 require_once ROOT . '/core/function/libgarena.php';
