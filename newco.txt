@@ -81,7 +81,8 @@
 	3. Allow remote connect to this server [sql server]
 
  [*] C> Cau hinh cho forum
-	-> Vao duong dan dan <pacth>/data/forum/includes/config.php
+	1. Mysql => https://dev.mysql.com/downloads/workbench/
+	2. -> Vao duong dan dan <pacth>/data/forum/includes/config.php
 		-> mo = notepad++ thay doi cho phu hop
  
  [*] D> cau hinh tren /admin.php

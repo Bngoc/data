@@ -290,7 +290,7 @@ function board_sysconf()
             'user_BaiCao' => array('Y/N', 'Relax:Sử dụng trò Bài Cáo'),
             '_RELAX_XoSo' => array('title', 'Danh De'),
             'url_Result_De' => array('text', 'Trang website kết quả xổ số | VD: http://ketqua.net/'),
-            'id_getResult_De' => array('text', 'Id xác kết quả đề của trang website xổ số | VD: r_0_0'),
+            'id_getResult_De' => array('text', 'ID (html) xác nhận kết quả đề của trang website xổ số | VD: r_0_0'),
             'timeWriterLimit' => array('text', 'Thời gian kết thức nhận ghi đề; Định dạng 24h| VD: 17:45 hàng ngày'),
             'timeResultDe' => array('text', 'Thời gian trả kết quả đề; Định dạng 24h| VD: 8:0 ngày ngày hôm sau, và nhỏ hơn thơi gian kết thức nhận ghi đề'),
             'moneyMinDe' => array('int', 'Số tiền tối thiểu nhận ghi đề (Vpoint)| VD: 5000 Vpoint'),
