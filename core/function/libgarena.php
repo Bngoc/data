@@ -1720,6 +1720,9 @@ function cn_ResultDe()
     if ($hourTime < $ctimeAction) {
         # Use the Curl extension to query Google and get back a page of results
         $url = trim(getoption('url_Result_De'));// URL_RESULR_DE;
+//        $url = URL_RESULR_DE;
+        $id_getResult_De = $id_getResult_De;
+
         $ch = curl_init();
         $timeout = 5;
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -1742,49 +1745,71 @@ function cn_ResultDe()
 //        $stuffDateTime = strtotime(trim(explode(':', $stuffDate)[1]));
 //        $stuffDateTimeAction = date('Y-m-d H:i:s', $stuffDateTime);
 
-        $resultPlayDe = $dom->getElementById($id_getResult_De)->nodeValue;
-        $resultPlayDe = substr($resultPlayDe, -2);
+        if (!empty($id_getResult_De) && !empty($url)) {
+            if ($dom->getElementById($id_getResult_De)) {
+                $resultPlayDe = $dom->getElementById($id_getResult_De)->nodeValue;
+                $resultPlayDe = substr($resultPlayDe, -2);
 
-        $timeYesterday = $time - 86400;
-        $dateTime = date('Y-m-d', $timeYesterday);
-//        $dateTime = date('Y-m-d', strtotime(date('Y-m-d', $time) . '- 1 days'));
+                $timeYesterday = $time - 86400;
+                $dateTime = date('Y-m-d', $timeYesterday);
+                //$dateTime = date('Y-m-d', strtotime(date('Y-m-d', $time) . '- 1 days'));
 
-        if ($resultPlayDe || $resultPlayDe == 0) {
-            $resultSelect = do_select_orther("SELECT count(*) as nameCount FROM ResultDe WHERE Convert(Date, timesDe)='" . $dateTime . "'");
-            if (empty($resultSelect[0]['nameCount'])) {
-                do_insert_character(
-                    'ResultDe',
-                    'ResultDe=' . $resultPlayDe,
-                    'timesDe=\'' . date('Y-m-d H:i:s', $timeYesterday) . '\'',
-//                    'timesDe=\'' . ((empty($stuffDateTime)) ? date('Y-m-d H:i:s', ($time - 86400)) : $stuffDateTimeAction ). '\'',
-                    'OptionResult=\'' . $timeYesterday . '\''
-                );
+                if ($resultPlayDe || $resultPlayDe == 0) {
+                    $resultSelect = do_select_orther("SELECT count(*) as nameCount FROM ResultDe WHERE Convert(Date, timesDe)='" . $dateTime . "'");
+                    if (empty($resultSelect[0]['nameCount'])) {
+                        do_insert_character(
+                            'ResultDe',
+                            'ResultDe=' . $resultPlayDe,
+                            'timesDe=\'' . date('Y-m-d H:i:s', $timeYesterday) . '\'',
+                            //'timesDe=\'' . ((empty($stuffDateTime)) ? date('Y-m-d H:i:s', ($time - 86400)) : $stuffDateTimeAction ). '\'',
+                            'OptionResult=\'' . $timeYesterday . '\''
+                        );
 
-                $showupDate = do_select_orther("SELECT [ID], [AccountID],[WriteDe],[timestamp],[Action], [Vpoint] FROM WriteDe WHERE Convert(Date, timestamp)='$dateTime' AND Action = 1");
+                        $showupDate = do_select_orther("SELECT [ID], [AccountID],[WriteDe],[timestamp],[Action], [Vpoint] FROM WriteDe WHERE Convert(Date, timestamp)='$dateTime' AND Action = 1");
 
-                foreach ($showupDate as $key => $items) {
-                    $ischeck = false;
-                    $ID = trim($items['ID']);
-                    $AccountID = trim($items['AccountID']);
-                    if (trim($items['WriteDe']) == $resultPlayDe) {
-                        $vpointnew = $items['Vpoint'] * 70;
-                        do_update_character('MEMB_INFO', "vpoint=vpoint+$vpointnew", "memb___id:'$AccountID'");
-                        $ischeck = true;
+                        foreach ($showupDate as $key => $items) {
+                            $ischeck = false;
+                            $ID = trim($items['ID']);
+                            $AccountID = trim($items['AccountID']);
+                            if (trim($items['WriteDe']) == $resultPlayDe) {
+                                $vpointnew = $items['Vpoint'] * 70;
+                                do_update_character('MEMB_INFO', "vpoint=vpoint+$vpointnew", "memb___id:'$AccountID'");
+                                $ischeck = true;
+                            }
+
+                            do_update_character('WriteDe', "Action=0", "Result=" . (($ischeck) ? '1' : '2'), "ID:'$ID'");
+                        }
+
+                        echo "\n \t----------------------------------------------------------------- \n";
+                        echo "\t Thanh cong, Ket qua da duoc cap nhap tu trang web $url \n";
+                        echo "\t-----------------------------------------------------------------";
+                    } else {
+                        echo "\n \t----------------------------------------------------------------- \n";
+                        echo "\t Loi, Ket qua da duoc cap nhap tu trang web $url \n";
+                        echo "\t-----------------------------------------------------------------";
                     }
 
-                    do_update_character('WriteDe', "Action=0", "Result=" . (($ischeck) ? '1' : '2'), "ID:'$ID'");
                 }
-            }
-        }
-        //-----------------------------------------------------------------
-        //    $resultPlayDe = $dom->getElementById("rs_0_0")->innertext;
-        //    $resultPlayDe = substr($resultPlayDe, -2);
+                //-----------------------------------------------------------------
+                //    $resultPlayDe = $dom->getElementById("rs_0_0")->innertext;
+                //    $resultPlayDe = substr($resultPlayDe, -2);
 
-        //    $df = $html->find('table[class=table table-condensed kqcenter table14force background-border table-kq-hover] td');
-        //   foreach ($df as $f => $dd){
-        //    echo $dd->innertext . '<br>';
-        //}
-        //-----------------------------------------------------------------
+                //    $df = $html->find('table[class=table table-condensed kqcenter table14force background-border table-kq-hover] td');
+                //   foreach ($df as $f => $dd){
+                //    echo $dd->innertext . '<br>';
+                //}
+                //-----------------------------------------------------------------
+            } else {
+                echo "\n \t----------------------------------------------------------------- \n";
+                echo "\t Loi, Khong xac nhan duoc ID (html) lay ket qua de tu trang web $url \n";
+                echo "\t-----------------------------------------------------------------";
+            }
+        } else {
+            echo "\n\t----------------------------------------------------------------- \n";
+            echo "\t Loi, Ban chua thiet lap thong so cai dat, => Relax choi Danh De \n";
+            echo "\t-----------------------------------------------------------------";
+        }
+
     }
 }
 
