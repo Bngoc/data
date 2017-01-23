@@ -56,11 +56,11 @@ function transaction_invoke()
     }
 
     $images = array(
-        'vtc' => 'user.gif',
-        'gate' => 'users.gif',
-        'viettel' => 'options.gif',
-        'mobi' => 'category.png',
-        'vina' => 'template.png'
+        'vtc' => 'vtc.png',
+        'gate' => 'gate.png',
+        'viettel' => 'viettel.png',
+        'mobi' => 'mobifone.png',
+        'vina' => 'vinaphone.png'
     );
 
     // More dashboard images

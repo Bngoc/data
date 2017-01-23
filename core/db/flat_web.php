@@ -392,7 +392,7 @@ function do_insert_orther($myQureyInsert)
 
     return false;
 }
-g
+
 // sign table, mutile cont (abc=abc1,...N, abc2:abc3... N)
 //1. table => SQL
 //2: ... n => Col = val		=> update SQL
