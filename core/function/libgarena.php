@@ -1599,8 +1599,8 @@ function cn_resetDefaultCharater($accountID)
 
                 $default_class = do_select_character(
                     'DefaultClassType',
-                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY',
-                    "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3"
+                    $arr_cls = 'Strength, Dexterity, Vitality, Energy, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MagicList, Quest',
+                    "Class=" . ($class_ - 0) . " Or Class=" . ($class_ - 1) . " Or Class=" . ($class_ - 2) . " Or Class=" . ($class_ - 3)
                 );
 
                 $resetpoint = (isset($resetpoint) ? $resetpoint : $item['LevelUpPoint']);
@@ -1620,12 +1620,8 @@ function cn_resetDefaultCharater($accountID)
                 if (($class_ == $arr_class['class_dl_1']) || ($class_ == $arr_class['class_dl_2'])) {
                 } else $leadership = 0;
 
-                $get_default_class = '';
                 $_arr_cls = spsep($arr_cls);
-                foreach ($_arr_cls as $key => $val)
-                    $get_default_class .= "$val='" . $default_class[0][$val] . "',";
-
-                $get_default_class = substr($get_default_class, 0, -1);
+                $get_default_class = zenderColumUpdateCharacter($_arr_cls, $default_class, $class_, $arr_class);
 
                 //----------------------------------------------------------------
                 do_update_character(
@@ -1640,37 +1636,37 @@ function cn_resetDefaultCharater($accountID)
                     "name:'" . $item['Name'] . "'"
                 );
 
-                if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
-                    do_update_character(
-                        'Character',
-                        'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-                        "Name:'" . $item['Name'] . "'"
-                    );
-                }
-
-                //Add Xoay kiem cho DK
-                if ($class_ == $arr_class['class_dk_1'] OR $class_ == $arr_class['class_dk_2'] OR $class_ == $arr_class['class_dk_3'])
-                    do_update_character(
-                        'Character',
-                        'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
-                        "name:'" . $item['Name'] . "'"
-                    );
-
-                //Add Mui ten vo tan cho Elf C3
-                if ($class_ == $arr_class['class_elf_3'])
-                    do_update_character(
-                        'Character',
-                        'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
-                        "name:'" . $item['Name'] . "'"
-                    );
-
-                //Add Skill cho Summoner
-                if ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3'])
-                    do_update_character(
-                        'Character',
-                        'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
-                        "name:'" . $item['Name'] . "'"
-                    );
+//                if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
+//                    do_update_character(
+//                        'Character',
+//                        'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
+//                        "Name:'" . $item['Name'] . "'"
+//                    );
+//                }
+//
+//                //Add Xoay kiem cho DK
+//                if ($class_ == $arr_class['class_dk_1'] OR $class_ == $arr_class['class_dk_2'] OR $class_ == $arr_class['class_dk_3'])
+//                    do_update_character(
+//                        'Character',
+//                        'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+//                        "name:'" . $item['Name'] . "'"
+//                    );
+//
+//                //Add Mui ten vo tan cho Elf C3
+//                if ($class_ == $arr_class['class_elf_3'])
+//                    do_update_character(
+//                        'Character',
+//                        'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+//                        "name:'" . $item['Name'] . "'"
+//                    );
+//
+//                //Add Skill cho Summoner
+//                if ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3'])
+//                    do_update_character(
+//                        'Character',
+//                        'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
+//                        "name:'" . $item['Name'] . "'"
+//                    );
             }
         }
     }
@@ -1820,4 +1816,51 @@ function cn_ResultDe()
  */
 function makeDirs($dirpath, $mode=0777) {
     return is_dir($dirpath) || mkdir($dirpath, $mode, true);
+}
+
+function zenderColumUpdateCharacter($_arr_cls, $default_class, $class_, $arr_class)
+{
+
+    $get_default_class = '';
+
+    if (empty($_arr_cls)) {
+        return $get_default_class;
+    }
+
+    foreach ($_arr_cls as $key => $val) {
+        $val = trim($val);
+        if ($val == 'Quest') {
+            if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
+                $newQuest = 0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
+                $default_class[0][$val] = $newQuest;
+            } else {
+                unset($default_class[0][$val]);
+                continue;
+            }
+        }
+
+        if ($val == 'MagicList') {
+            //Add Xoay kiem cho DK
+            if ($class_ == $arr_class['class_dk_1'] OR $class_ == $arr_class['class_dk_2'] OR $class_ == $arr_class['class_dk_3']) {
+                $newMagicList = 0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000;
+                //Add Mui ten vo tan cho Elf C3
+            } elseif ($class_ == $arr_class['class_elf_3']) {
+                $newMagicList = 0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000;
+                //Add Skill cho Summoner
+            } elseif ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3']) {
+                $newMagicList = 0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000;
+            } else {
+                unset($default_class[0][$val]);
+                continue;
+            }
+
+            $default_class[0][$val] = $newMagicList;
+        }
+
+        $get_default_class .= "$val='" . $default_class[0][$val] . "',";
+    }
+
+    $get_default_class = substr($get_default_class, 0, -1);
+
+    return $get_default_class;
 }

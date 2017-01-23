@@ -452,8 +452,8 @@ function char_reset()
                 point_tax($sub);
                 $default_class = do_select_character(
                     'DefaultClassType',
-                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY',
-                    "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3"
+                    $arr_cls = 'Strength, Dexterity, Vitality, Energy, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MagicList, Quest',
+                    "Class=" . ($class_ - 0) . " Or Class=" . ($class_ - 1) . " Or Class=" . ($class_ - 2) . " Or Class=" . ($class_ - 3)
                 );
                 $pointThue = do_select_character(
                     'Character',
@@ -478,12 +478,8 @@ function char_reset()
                 if (($class_ == $arr_class['class_dl_1']) || ($class_ == $arr_class['class_dl_2'])) {
                 } else $leadership = 0;
 
-                $get_default_class = '';
                 $_arr_cls = spsep($arr_cls);
-                foreach ($_arr_cls as $key => $val)
-                    $get_default_class .= "$val='" . $default_class[0][$val] . "',";
-
-                $get_default_class = substr($get_default_class, 0, -1);
+                $get_default_class = zenderColumUpdateCharacter($_arr_cls, $default_class, $class_, $arr_class);
 
                 //----------------------------------------------------------------
                 do_update_character(
@@ -504,37 +500,6 @@ function char_reset()
                     "name:'$sub'"
                 );
 
-                if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
-                    do_update_character(
-                        'Character',
-                        'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-                        "Name:'$sub'"
-                    );
-                }
-
-                //Add Xoay kiem cho DK
-                if ($class_ == $arr_class['class_dk_1'] OR $class_ == $arr_class['class_dk_2'] OR $class_ == $arr_class['class_dk_3'])
-                    do_update_character(
-                        'Character',
-                        'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
-                        "name:'$sub'"
-                    );
-
-                //Add Mui ten vo tan cho Elf C3
-                if ($class_ == $arr_class['class_elf_3'])
-                    do_update_character(
-                        'Character',
-                        'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
-                        "name:'$sub'"
-                    );
-
-                //Add Skill cho Summoner
-                if ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3'])
-                    do_update_character(
-                        'Character',
-                        'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
-                        "name:'$sub'"
-                    );
 
                 /*
 					//Reset Point Master Skill
@@ -1014,8 +979,8 @@ function char_resetvip()
                 point_tax($sub);
                 $default_class = do_select_character(
                     'DefaultClassType',
-                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY',
-                    "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3"
+                    $arr_cls = 'Strength, Dexterity, Vitality, Energy, Life, MaxLife, Mana, MaxMana, MapNumber, MapPosX, MapPosY, MagicList, Quest',
+                    "Class=" . ($class_ - 0) . " Or Class=" . ($class_ - 1) . " Or Class=" . ($class_ - 2) . " Or Class=" . ($class_ - 3)
                 );
                 $pointThue = do_select_character(
                     'Character',
@@ -1044,12 +1009,9 @@ function char_resetvip()
                 if ($class_ == $arr_class['class_dl_1'] || $class_ == $arr_class['class_dl_2']) {
                     $leadership = $leadership_vip;
                 } else $leadership = 0;
-                $get_default_class = '';
+
                 $_arr_cls = spsep($arr_cls);
-                foreach ($_arr_cls as $key => $val) $get_default_class .= "$val=" . $default_class[0][$val] . ",";
-
-                $get_default_class = substr($get_default_class, 0, -1);
-
+                $get_default_class = zenderColumUpdateCharacter($_arr_cls, $default_class, $class_, $arr_class);
 
                 do_update_character(
                     'Character',
@@ -1067,39 +1029,6 @@ function char_resetvip()
                     'ResetVIP=1',
                     "name:'$sub'"
                 );
-
-                //All Quest For Class 3
-                if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
-                    do_update_character(
-                        'Character',
-                        'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-                        "Name:'$sub'"
-                    );
-                }
-
-                //Add Xoay kiem cho DK
-                if ($class_ == $arr_class['class_dk_1'] OR $class_ == $arr_class['class_dk_2'] OR $class_ == $arr_class['class_dk_3'])
-                    do_update_character(
-                        'Character',
-                        'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
-                        "name:'$sub'"
-                    );
-
-                //Add Mui ten vo tan cho Elf C3
-                if ($class_ == $arr_class['class_elf_3'])
-                    do_update_character(
-                        'Character',
-                        'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
-                        "name:'$sub'"
-                    );
-
-                //Add Skill cho Summoner
-                if ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3'])
-                    do_update_character(
-                        'Character',
-                        'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
-                        "name:'$sub'"
-                    );
 
                 /*
 					//Reset Point Master Skill
@@ -1121,8 +1050,8 @@ function char_resetvip()
                 );
 
                 //use event top test dd/mm/yy -> dd/mm/yy
-                if ((getoption('event_toprs_on') == 1))// && (strtotime($event_toprs_begin) < $ctime) && (strtotime($event_toprs_end) + 24*60*60 > $ctime))
-                {
+                if ((getoption('event_toprs_on') == 1)) {
+                    // && (strtotime($event_toprs_begin) < $ctime) && (strtotime($event_toprs_end) + 24*60*60 > $ctime))
                     $data___ = do_select_character('Event_TOP_RS', '*', "name='$sub'");
                     if ($data___) {
                         do_update_character('Event_TOP_RS', 'resets=resets+1', "name:'$sub'");
@@ -1233,12 +1162,12 @@ function char_resetvip()
                 $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
                 if ($checkDir) {
                     $file = $files . "/log_resetsvip.log";
-//                $file = MODULE_ADM . "/log/modules/character/log_resetsvip.log";
+                // $file = MODULE_ADM . "/log/modules/character/log_resetsvip.log";
                     cn_touch($file);
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $blank_gcoin . "_" . $blank_vp . "_" . $blank_gcoin_km . "|" . $gcoin_rsvip . "_" . $vpointnew . "_" . $gcoin_gkm_rsvip . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
                 cn_throw_message("$sub Reset Vip lần thứ $resetvipup thành công!");
                 if ($resetpoint_vip > 0) $str_rutpoint = "Bạn có " . number_format((float)$pointup_vip, 0, ",", ".") . " Point. Vui lòng <a href='" . cn_url_modify('mod=char_manager', 'opt=addpoint', 'sub=' . $sub) . "' title='cộng Point'> cộng Point </a> trước khi <b><a href ='" . cn_url_modify('mod=char_manager', 'opt=subpoint', 'sub=' . $sub) . "' title='rút Point'> rút Point</a></b> còn lại cho nhân vật $sub.";
@@ -3532,7 +3461,11 @@ function char_changeclass()
 
                 $_codeClass = $infoClass['class_' . $nameClass . '_1'];
 
-                $default_class = do_select_character('DefaultClassType', $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership', "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3");
+                $default_class = do_select_character(
+                    'DefaultClassType',
+                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership',
+                    "Class=" . ($class_ - 0) . " Or Class=" . ($class_ - 1) . " Or Class=" . ($class_ - 2) . " Or Class=" . ($class_ - 3)
+                );
                 $get_default_class = '';
                 $_arr_cls = spsep($arr_cls);
                 foreach ($_arr_cls as $key => $val)
@@ -3715,7 +3648,7 @@ function char_level1()
                 $default_class = do_select_character(
                     'DefaultClassType',
                     $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership',
-                    "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3"
+                    "Class=" . ($class_ - 0) . " Or Class=" . ($class_ - 1) . " Or Class=" . ($class_ - 2) . " Or Class=" . ($class_ - 3)
                 );
                 $get_default_class = '';
                 $_arr_cls = spsep($arr_cls);
@@ -3916,7 +3849,11 @@ function char_level2()
 
                 $_codeClass = $infoClass['class_' . $nameClass . '_1'];
 
-                $default_class = do_select_character('DefaultClassType', $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership', "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3");
+                $default_class = do_select_character(
+                    'DefaultClassType',
+                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership',
+                    "Class=" . ($class_ - 0) . " Or Class=" . ($class_ - 1) . " Or Class=" . ($class_ - 2) . " Or Class=" . ($class_ - 3)
+                );
                 $get_default_class = '';
                 $_arr_cls = spsep($arr_cls);
                 foreach ($_arr_cls as $key => $val)
@@ -4114,7 +4051,11 @@ function char_level3()
 
                 $_codeClass = $infoClass['class_' . $nameClass . '_1'];
 
-                $default_class = do_select_character('DefaultClassType', $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership', "Class='$class_' Or Class='$class_'-1 Or Class='$class_'-2 Or Class='$class_'-3");
+                $default_class = do_select_character(
+                    'DefaultClassType',
+                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership',
+                    "Class=" . ($class_ - 0) . " Or Class=" . ($class_ - 1) . " Or Class=" . ($class_ - 2) . " Or Class=" . ($class_ - 3)
+                );
                 $get_default_class = '';
                 $_arr_cls = spsep($arr_cls);
                 foreach ($_arr_cls as $key => $val)

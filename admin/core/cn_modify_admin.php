@@ -1481,7 +1481,10 @@ function cn_config_load()
         // config Account GameBank.vn
         'Merchant_ID' => '',
         'API_User' => '',
-        'API_Password' => ''
+        'API_Password' => '',
+        //DebugSql
+        'debugSql' => 0
+
     );
 
     // Set default values

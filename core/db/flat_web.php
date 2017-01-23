@@ -117,6 +117,10 @@ function view_character($account)
         }
     }
 
+    if (getoption('debugSql')) {
+        cn_writelog($myQuery);
+    }
+
     return isset($info_char_) ? $info_char_ : array();
 }
 
@@ -142,6 +146,10 @@ function view_bank($account)
                 );
             }
         }
+    }
+
+    if (getoption('debugSql')) {
+        cn_writelog('MEMB_INFO', 'bank,vpoint,jewel_chao,jewel_cre,jewel_blue,gcoin,gcoin_km,jewel_feather,[WCoin],[WCoinP],[GoblinCoin]', "memb___id='$account'", '');
     }
 
     return isset($_data) ? $_data : array();
@@ -208,6 +216,10 @@ function db_user_by_name($name)
         }
     }
 
+    if (getoption('debugSql')) {
+        cn_writelog('MEMB_INFO', 'memb___id,memb__pwd,tel__numb,phon_numb,mail_addr,fpas_ques,fpas_answ,memb__pwd2,memb__pwdmd5,acl,ban_login,num_login,pass2', "memb___id='$username'");
+    }
+
     return isset($pdata) ? $pdata : array();
 }
 
@@ -220,13 +232,18 @@ function do_select_orther($orther = '')
 
     if ($orther) {
         $orther = trim($orther);
-        $check = $db_new->Execute("$orther") or cn_writelog($orther, 'e');
+        $check = $db_new->Execute($orther) or cn_writelog($orther, 'e');
         if ($check) {
             while ($row = $check->fetchrow()) {
                 $rs_data[] = $row;
             }
         }
     } else return FALSE;
+
+    if (getoption('debugSql')) {
+        cn_writelog($orther);
+    }
+
     return isset($rs_data) ? $rs_data : array();
 }
 
@@ -240,8 +257,14 @@ function do_update_orther($orther = '')
 
     if ($orther) {
         $orther = trim($orther);
-        $check = $db_new->Execute("$orther") or cn_writelog($orther, 'e');
-        if ($check) return true;
+        $check = $db_new->Execute($orther) or cn_writelog($orther, 'e');
+        if ($check){
+            if (getoption('debugSql')) {
+                cn_writelog($orther);
+            }
+
+            return true;
+        }
     } else return FALSE;
 }
 
@@ -281,73 +304,11 @@ function do_select_character($table, $col, $where = '', $orther = '')
         }
     }
 
+    if (getoption('debugSql')) {
+        cn_writelog("SELECT $str_col FROM $table $str_where $orther");
+    }
+
     return isset($rs_data) ? $rs_data : array();
-}
-
-// sign table, mutile cont (abc,abc1... N OR *, abc2:abc3,... N, (ORDER ..... or null))
-//1. table => SQL
-//2: ... n => Col => select SQL 
-//3. ... n => Col : val, col (>, <=, ...) val 	=> WHRER Contine
-function do_select_character1()
-{
-    global $db_new;
-    $gr_col = $gr_cont = '';
-    $args = func_get_args();            //1.name, 2.email="user_email", 3.nick:"$user_nic", 4.pass:"2gs" OR //1.name, *, 3.nick:"$user_nic", 4.pass:"2gs"
-    $user_table = array_shift($args);        // get table array frist
-    $user_order = array_pop($args);        // get order array last
-
-    if (!$user_table) //1. name //table update/
-        return FALSE;
-
-    foreach ($args as $v) {  //$v = [email=user_email] /// ???? and (hgghgh or hghhjjh)
-        if (strpos($v, ':') !== false) {
-            $df = str_replace(':', '=', $v);
-            $gr_cont .= "$df AND ";
-        } elseif (strpos($v, '>') !== false)
-            $gr_cont .= "$v AND ";
-        elseif (strpos($v, '>=') !== false)
-            $gr_cont .= "$v AND ";
-        elseif (strpos($v, '<>') !== false)
-            $gr_cont .= "$v AND ";
-        elseif (strpos($v, '<') !== false)
-            $gr_cont .= "$v AND ";
-        elseif (strpos($v, '<=') !== false)
-            $gr_cont .= "$df AND ";
-        elseif (strpos($v, '*') !== false)
-            $gr_col = "*";
-        else
-            $gr_col .= "$v,";
-    }
-    //1. gr_cont co ... cut .. 	pop co .. where >> y
-    //2. gr_cont co ... cut .. 	pop ko .. where >> y
-    //3. gr_cont ko ...			pop co ..		>> y
-    //4. gr_cont ko ...			pop ko ..		>> y
-
-    if (!empty($gr_cont)) {
-        $gr_cont = substr($gr_cont, 0, -5);
-        if (!empty($user_order)) $val_up_cont = "WHERE " . $gr_cont . ' ' . $user_order;
-        else $val_up_cont = "WHERE " . $gr_cont;
-    } else {
-        if (!empty($user_order)) $val_up_cont = $user_order;
-        else $val_up_cont = '';
-    }
-
-    if (strpos($gr_col, '*') === false) { // sai
-        if (strlen($gr_col) > 1)
-            $val_up_col = substr($gr_col, 0, -1);
-    } else
-        $val_up_col = $gr_col;
-
-    if ($val_up_col && $user_table) {
-        $check = $db_new->Execute("SELECT $val_up_col FROM $user_table $val_up_cont") or cn_writelog("SELECT $val_up_col FROM $user_table $val_up_cont", 'e');
-        if ($check)
-            while ($row = $check->fetchrow()) {
-                $rs_data[] = $row;
-            }
-    }
-    return isset($rs_data) ? $rs_data : array();
-
-    return null;
 }
 
 // sign table, mutile cont (abc=abc1,... N)
@@ -394,6 +355,11 @@ function do_insert_character()
 
         if ($check) {
             $db_new->CompleteTrans();
+
+            if (getoption('debugSql')) {
+                cn_writelog("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)");
+            }
+
             return TRUE;
         } else {
             $db_new->RollbackTrans();
@@ -415,16 +381,18 @@ function do_insert_orther($myQureyInsert)
 
     if ($check) {
         $db_new->CompleteTrans();
+
+        if (getoption('debugSql')) {
+            cn_writelog($myQureyInsert);
+        }
         return true;
     } else {
         $db_new->RollbackTrans();
     }
 
-
     return false;
 }
-
-
+g
 // sign table, mutile cont (abc=abc1,...N, abc2:abc3... N)
 //1. table => SQL
 //2: ... n => Col = val		=> update SQL
@@ -466,6 +434,10 @@ function do_update_character()
     if ($val_up_col && $val_up_cont && $user_table) {
         $check = $db_new->Execute("UPDATE $user_table SET $val_up_col WHERE $val_up_cont") or cn_writelog("UPDATE $user_table SET $val_up_col WHERE $val_up_cont", 'e');
         if ($check){
+
+            if (getoption('debugSql')) {
+                cn_writelog("UPDATE $user_table SET $val_up_col WHERE $val_up_cont");
+            }
             return true;
         }
     }
@@ -483,8 +455,11 @@ function do_delete_char($myQuery)
 
     if ($myQuery) {
         $myQuery = trim($myQuery);
-        $check = $db_new->Execute("$myQuery") or cn_writelog($myQuery, 'e');
+        $check = $db_new->Execute($myQuery) or cn_writelog($myQuery, 'e');
         if ($check) {
+            if (getoption('debugSql')) {
+                cn_writelog($myQuery);
+            }
             return true;
         }
     } else return false;
@@ -810,36 +785,6 @@ function kiemtra_daily($account)
     else $dl = 'isDL';
 }
 
-function kiemtra_hackreset($account, $character)
-{
-    global $db_new;
-    $time_check = ctime() - 60;
-    $sql_hack_check = $db_new->Execute("SELECT Name FROM Character WHERE Resets_Time>'$time_check' AND Clevel = '400'");
-    while ($hack_check = $sql_hack_check->fetchrow()) {
-        $xuly_hack = $db_new->Execute("Update Character SET Resets=Resets-1,NoResetInDay=NoResetInDay-1,NoResetInMonth=NoResetInMonth-1,Resets_Time=$time_check WHERE Name='$hack_check[0]'");
-        if ($hack_check[0] == $character) {
-            echo "Nhân vật $character đã thực hiện hành vi Hack Reset. Bạn đã bị trừ 1 lần Reset";
-            exit();
-        }
-    }
-}
-
-function kiemtra_hackvpoint($account)
-{
-    global $db_new;
-    $time_check = $timestamp - 60;
-    $sql_vpoint_check = $db_new->Execute("SELECT vpoint FROM MEMB_INFO WHERE memb___id = '$account'");
-    $vpoint_check = $sql_vpoint_check->fetchrow();
-    $sql_hack_check = $db_new->Execute("SELECT memb___id FROM MEMB_INFO WHERE Transfer_Time>'$time_check' AND vpoint=$vpoint_check[0]");
-    while ($hack_check = $sql_hack_check->fetchrow()) {
-        $xuly_hack = $db_new->Execute("UPDATE MEMB_INFO SET vpoint=vpoint-10000,Transfer_Time='$time_check' WHERE memb___id='$hack_check[0]'");
-        if ($hack_check[0] == $character) {
-            echo "Tài khoản $account đã thực hiện hành vi Hack V.Point. Bạn đã bị trừ 10.000 V.Point";
-            exit();
-        }
-    }
-}
-
 function kiemtra_topmonth($character)
 {
     global $db_new;
@@ -893,356 +838,6 @@ function kiemtra_topmonth($character)
         }
     }
 }
-
-// bo qua
-function top50()
-{
-    //global $db_new;
-    $dt_time = do_select_character('Check_Action', 'time', "action='TOP50'", '');
-    //check_top50_query = "SELECT time FROM Check_Action WHERE action='Top50'";
-    //    $check_top50_result = $db_new->Execute($check_top50_query);
-    //        check_queryerror($check_top50_query, $check_top50_result);
-    //    $check_top50 = $check_top50_result->fetchrow();
-    //Reset số lần RS trong tháng khi sang tháng mới
-    $time_ = ctime();
-    //$time_ = ;
-    //$time_top50 = ;
-    if (date("d", $dt_time[0][0]) != date("d", $time_)) {
-        //Update Time check
-        do_update_character('Check_Action', "time=$time_", "action:'Top50'");
-        //$update_time_result = $db_new->Execute($update_time_query);
-        //check_queryerror($update_time_query, $update_time_result);
-        // Neu khong phai ngay dau tien
-        //if($dt_time[0] != 0) {
-        //Reset TOP 50
-        do_update_character('Character', 'Top50=0', 'Top50>0');
-        /*
-        $resettop50_result = $db_new->Execute($resettop50_query);
-             check_queryerror($resettop50_query, $resettop50_result);
-
-
-         $thehemax_query = "SELECT TOP1, thehe FROM MEMB_INFO ORDER BY thehe DESC";
-         $thehemax_result = $db_new->Execute($thehemax_query);
-             check_queryerror($thehemax_query, $thehemax_result);
-         $thehemax_fetch = $thehemax_result->FetchRow();
-         $thehemax = $thehemax_fetch[0];
-         */
-        //for($i=1; $i<=$thehemax; $i++) {
-
-        $arr_top50 = do_select_character('Character', 'Name', '', 'ORDER BY Relifes DESC, Resets DESC , cLevel DESC');
-        //$query_top50 = "SELECT Name FROM Character ORDER BY Relifes DESC, Resets DESC , cLevel DESC";
-        //$result_top50 = $db_new->Execute("SELECT Name FROM Character ORDER BY Relifes DESC, Resets DESC , cLevel DESC");
-        //$top = 1;
-        foreach ($arr_top50 as $top => $val) {
-            $top++;
-            do_update_character('Character', "Top50=$top", "Name:'$val[0]'");
-        }
-        //}
-        //}
-    }
-}
-
-
-/*
-
-//-------------------------------------	
-	switch ($action) {
-		
-			
-		case 'view_char':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			echo "$row[0]||$row[1]||$row[2]||$row[3]||$row[4]";
-			break;
-			
-		case 'view_acc':
-			kiemtra_acc($account);
-			$query = $db_new->Execute("SELECT mail_addr,tel__numb,fpas_ques,fpas_answ,vpoint FROM MEMB_INFO WHERE memb___id='$account'");
-			$row = $query->fetchrow();
-			echo "$row[0]||$row[1]||$row[2]||$row[3]||$row[4]";
-			break;
-			
-		
-		case 'view_char':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			echo "$row[0]||$row[1]||$row[2]||$row[3]||$row[4]";
-			break;
-			
-		
-			
-		case 'view_charaddpoint':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i) {
-				if ( !empty($row[$i]) ) {
-					$query_point = $db_new->Execute("SELECT LevelUpPoint FROM Character WHERE Name='$row[$i]'");
-					$rs_point = $query_point->fetchrow();
-					$point[] = $rs_point[0];
-				}
-				else { $point[] = 0; }
-			}
-			echo "$row[0]|$point[0]||$row[1]|$point[1]||$row[2]|$point[2]||$row[3]|$point[3]||$row[4]|$point[4]";
-			break;
-			
-		case 'view_charrutpoint':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i) {
-				if ( !empty($row[$i]) ) {
-					$query_point = $db_new->Execute("SELECT pointdutru FROM Character WHERE Name='$row[$i]'");
-					$point = $query_point->fetchrow();
-					$point_dutru[] = $point[0];
-				}
-				else { $point_dutru[] = 0; }
-			}
-			echo "$row[0]|$point_dutru[0]||$row[1]|$point_dutru[1]||$row[2]|$point_dutru[2]||$row[3]|$point_dutru[3]||$row[4]|$point_dutru[4]";
-			break;
-			
-		case 'view_combo':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i) {
-				if ( !empty($row[$i]) ) {
-					$query_leveldk3 = $db_new->Execute("SELECT Clevel FROM Character WHERE Name='$row[$i]' AND (Class='$class_dw_3' OR Class='$class_dk_3' OR Class='$class_elf_3' OR Class='$class_sum_3' OR Class='$class_rf_2')");
-					$rs_leveldk3 = $query_leveldk3->fetchrow();
-					$leveldk3[] = $rs_leveldk3[0];
-				}
-				else { $leveldk3[] = 0; }
-			}
-			echo "$row[0]|$leveldk3[0]||$row[1]|$leveldk3[1]||$row[2]|$leveldk3[2]||$row[3]|$leveldk3[3]||$row[4]|$leveldk3[4]";
-			break;
-			
-		case 'view_uythacoffline':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i) {
-				if ( !empty($row[$i]) ) {
-					$query_uythacoff = $db_new->Execute("SELECT uythacoffline_stat,uythacoffline_time,PointUyThac FROM Character WHERE Name='$row[$i]'");
-					$uythacoff = $query_uythacoff->fetchrow();
-					$tinhtrang[] = $uythacoff[0];
-					if ( 0 < $uythacoff[1] ) {
-						$thoigian[] = floor( ( $timestamp - $uythacoff[1] ) / 60 );
-					}
-					else {
-						$thoigian[] = 0;
-					}
-					$diem[] = $uythacoff[2];
-				}
-				else { $tinhtrang[] = 0; $thoigian[] = 0; $diem[] = 0; }
-			}
-			echo "$row[0]|$tinhtrang[0]|$thoigian[0]|$diem[0]||$row[1]|$tinhtrang[1]|$thoigian[1]|$diem[1]||$row[2]|$tinhtrang[2]|$thoigian[2]|$diem[2]||$row[3]|$tinhtrang[3]|$thoigian[3]|$diem[3]||$row[4]|$tinhtrang[4]|$thoigian[4]|$diem[4]";
-			break;
-			
-		case 'view_charrs_uythac':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i) {
-				if ( !empty($row[$i]) ) {
-					$query_reset = $db_new->Execute("SELECT PointUyThac,Resets FROM Character WHERE Name='$row[$i]'");
-					$rs_reset = $query_reset->fetchrow();
-					$pointuythac[] = $rs_reset[0];
-					$reset[] = $rs_reset[1];
-				}
-				else { $reset[] = 0; $pointuythac[] = 0; }
-			}
-			echo "$row[0]|$pointuythac[0]|$reset[0]||$row[1]|$pointuythac[1]|$reset[1]||$row[2]|$pointuythac[2]|$reset[2]||$row[3]|$pointuythac[3]|$reset[3]||$row[4]|$pointuythac[4]|$reset[4]";
-			break;
-			
-
-			
-		case 'view_pcpoint2vpoint':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i) {
-				if ( !empty($row[$i]) ) {
-					switch($server_type) {
-						case "scf":
-							$query_pcpoint = $db_new->Execute("SELECT SCFPCPoints FROM Character WHERE Name='$row[$i]'");
-							break;
-						case "ori":
-							$query_pcpoint = $db_new->Execute("SELECT PCPoints FROM Character WHERE Name='$row[$i]'");
-							break;
-						default:
-							$query_pcpoint = $db_new->Execute("SELECT SCFPCPoints FROM Character WHERE Name='$row[$i]'");
-							break;
-					}
-					$pcpoint = $query_pcpoint->fetchrow();
-					$point[] = $pcpoint[0];
-				}
-				else { $point[] = 0; }
-			}
-			echo "$row[0]|$point[0]||$row[1]|$point[1]||$row[2]|$point[2]||$row[3]|$point[3]||$row[4]|$point[4]";
-			break;
-			
-		case 'view_zen2bank':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i) {
-				if ( !empty($row[$i]) ) {
-					$query_zen = $db_new->Execute("SELECT Money FROM Character WHERE Name='$row[$i]'");
-					$zen = $query_zen->fetchrow();
-					$money[] = $zen[0];
-				}
-				else { $money[] = 0; }
-			}
-			echo "$row[0]|$money[0]||$row[1]|$money[1]||$row[2]|$money[2]||$row[3]|$money[3]||$row[4]|$money[4]";
-			break;
-			
-		case 'view_charpk':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i) {
-				if ( !empty($row[$i]) ) {
-					$query_PK = $db_new->Execute("SELECT PkLevel,PkCount FROM Character WHERE Name='$row[$i]'");
-					$rs_PK = $query_PK->fetchrow();
-					$PkLevel[] = $rs_PK[0];
-					$PkCount[] = $rs_PK[1];
-				}
-				else { $PkLevel[] = 0; $PkCount[] = 0; }
-			}
-			echo "$row[0]|$PkLevel[0]|$PkCount[0]||$row[1]|$PkLevel[1]|$PkCount[1]||$row[2]|$PkLevel[2]|$PkCount[2]||$row[3]|$PkLevel[3]|$PkCount[3]||$row[4]|$PkLevel[4]|$PkCount[4]";
-			break;
-			
-		case 'view_charchangeclass':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i) {
-				if ( !empty($row[$i]) ) {
-					$query_Class = $db_new->Execute("SELECT Class,Resets,cLevel FROM Character WHERE Name='$row[$i]'");
-					$rs_Class = $query_Class->fetchrow();
-					$Class[] = $rs_Class[0];
-					$Reset[] = $rs_Class[1];
-					$Level[] = $rs_Class[2];
-				}
-				else { $Class[] = 0; $Reset[] = 0; $Level[] = 0; }
-			}
-			echo "$row[0]|$Class[0]|$Reset[0]|$Level[0]||$row[1]|$Class[1]|$Reset[1]|$Level[1]||$row[2]|$Class[2]|$Reset[2]|$Level[2]||$row[3]|$Class[3]|$Reset[3]|$Level[3]||$row[4]|$Class[4]|$Reset[4]|$Level[4]";
-			break;
-			
-		case 'view_charthuepoint':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i) {
-				if ( !empty($row[$i]) ) {
-					$query_point = $db_new->Execute("SELECT IsThuePoint,TimeThuePoint,PointThue FROM Character WHERE Name='$row[$i]'");
-					$point = $query_point->fetchrow();
-					$point_status[] = $point[0];
-					$point_time[] = $point[1];
-					$point_thue[] = $point[2];
-				}
-				else { $point_status[] = 0; $point_time[] = 0; $point_thue[] = 0; }
-			}
-			echo "$row[0]|$point_status[0]|$point_time[0]|$point_thue[0]||$row[1]|$point_status[1]|$point_time[1]|$point_thue[1]||$row[2]|$point_status[2]|$point_time[2]|$point_thue[2]||$row[3]|$point_status[3]|$point_time[3]|$point_thue[3]||$row[4]|$point_status[4]|$point_time[4]|$point_thue[4]";
-			break;
-			
-		case 'view_charlockitem':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i)
-			{
-				if ( !empty($row[$i]) ) {
-					$query_khoaitem = $db_new->Execute("SELECT IsLockItem FROM Character WHERE Name='$row[$i]'");
-					$rs_khoaitem = $query_khoaitem->fetchrow();
-					$status_khoado[] = $rs_khoaitem[0];
-				}
-				else { $status_khoado[] = 0; }
-			}
-			echo "$row[0]|$status_khoado[0]||$row[1]|$status_khoado[1]||$row[2]|$status_khoado[2]||$row[3]|$status_khoado[3]||$row[4]|$status_khoado[4]";
-			break;
-			
-		case 'view_charrl':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i) {
-				if ( !empty($row[$i]) ) {
-					$query_reset = $db_new->Execute("SELECT cLevel,Resets,ReLifes FROM Character WHERE Name='$row[$i]'");
-					$rs_reset = $query_reset->fetchrow();
-					$level[] = $rs_reset[0];
-					$reset[] = $rs_reset[1];
-					$relife[] = $rs_reset[2];
-				}
-				else { $reset[] = 0; $level[] = 0; }
-			}
-			echo "$row[0]|$level[0]|$reset[0]|$relife[0]||$row[1]|$level[1]|$reset[1]|$relife[1]||$row[2]|$level[2]|$reset[2]|$relife[2]||$row[3]|$level[3]|$reset[3]|$relife[3]||$row[4]|$level[4]|$reset[4]|$relife[4]";
-			break;
-			
-		case 'view_randomquest':
-			$query = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'";
-			$result = $db_new->Execute( $query );
-			$row = $result->fetchrow();
-			for ($i=0;$i<5;++$i) {
-				if ( !empty($row[$i]) ) {
-					$query_nhiemvu = $db_new->Execute("SELECT QuestReg,QuestType,QuestCount FROM Character WHERE Name='$row[$i]'");
-					$nhiemvu = $query_nhiemvu->fetchrow();
-					$tinhtrang[] = $nhiemvu[0];
-					$loai[] = $nhiemvu[1];
-					$soluong[] = $nhiemvu[2];
-				}
-				else { $tinhtrang[] = 0; $loai[] = 0; $soluong[] = 0; }
-			}
-			echo "$row[0]|$tinhtrang[0]|$loai[0]|$soluong[0]||$row[1]|$tinhtrang[1]|$loai[1]|$soluong[1]||$row[2]|$tinhtrang[2]|$loai[2]|$soluong[2]||$row[3]|$tinhtrang[3]|$loai[3]|$soluong[3]||$row[4]|$tinhtrang[4]|$loai[4]|$soluong[4]";
-			break;
-			
-		case 'view_xosokienthiet':
-			$query_xoso = $db_new->Execute("SELECT Account,Num1,Num2,Num3,Num4,Num5,Num6,Num7,Num8,Num9,Num10 FROM XoSoData WHERE Account='$account'");
-			$number = $query_xoso->fetchrow();
-			for ($i=0;$i<=10;++$i) {
-				if (empty($number[$i])) $number[$i] = "Chưa có";
-			}
-			echo "$number[0]||$number[1]||$number[2]||$number[3]||$number[4]||$number[5]||$number[6]||$number[7]||$number[8]||$number[9]||$number[10]";
-			break;
-			
-		case 'view_vpoint':
-			$query_vpoint = $db_new->Execute("SELECT vpoint FROM MEMB_INFO WHERE memb___id='$account'");
-			$check_vpoint = $query_vpoint->fetchrow();
-			echo $check_vpoint[0];
-			break;
-			
-		case 'view_vpoint_full':
-			$query_vpoint_f = $db_new->Execute("SELECT vpoint,gcoin,gcoin_km FROM MEMB_INFO WHERE memb___id='$account'");
-			$check_vpoint_f = $query_vpoint_f->fetchrow();
-			echo "$check_vpoint_f[0]||$check_vpoint_f[1]||$check_vpoint_f[2]";
-			break;
-			
-		case 'view_zen':
-			$query_zen = $db_new->Execute("SELECT bank FROM MEMB_INFO WHERE memb___id='$account'");
-			$check_zen = $query_zen->fetchrow();
-			echo $check_zen[0];
-			break;
-			
-		
-			
-		case 'view_infomu':
-			$query_total_acc = "SELECT Count(*) FROM MEMB_INFO";
-			$result_total_acc = $db_new->Execute($query_total_acc);
-			$total_acc = $result_total_acc->fetchrow();
-			$query_total_char = "SELECT Count(*) FROM Character";
-			$result_total_char = $db_new->Execute($query_total_char);
-			$total_char = $result_total_char->fetchrow();
-			$query_total_online = "SELECT * FROM MEMB_STAT WHERE ConnectStat='1'";
-			$result_total_online = $db_new->Execute($query_total_online);
-			$total_online = $result_total_online->numrows();
-			echo "$total_acc[0]||$total_char[0]||$total_online";
-			break;
-			
-	}
-} //else echo "Error
-*/
 
 // --------------------------Forum--------------------------------//
 /**

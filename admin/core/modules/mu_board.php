@@ -208,6 +208,8 @@ function board_sysconf()
 
         ),
         'websites' => array(
+            '_deBugWeb' => array('title', 'USE DEBUG WEB'),
+            'debugSql' => array('Y/N', 'Uses have debug| Check is debug Sql'),
 //            'news_title_max_long' => array('int', 'Max. Length of news title in characters|enter <b>0</b> to disable chacking.'),
 //            'active_news_def' => array('int', 'Count active news, by default|If 0, show all list, with archives'),
 //            'reverse_active' => array('Y/N', 'Reverse News|if yes, older news will be shown on the top'),
@@ -221,6 +223,7 @@ function board_sysconf()
 //            'disable_pagination' => array('Y/N', 'Disable pagination|Use it to disable pagination'),
 //            'mon_list' => array('text', 'Month list|comma separated, 12 variables'),
 
+            '_Web' => array('title', '.............'),
 
             'configBuyZen' => array('text', 'Buy zen list [500.000.000.000 - 1.000.000.000 - 1.500.000.000 - 2.000.000.000]|Ex: 5000|10000|15000|20000  ==> 5000 Vp <-> 500.000.000.000 Zen, ...'),
             'configLevel' => array('text', 'Set Vpoint level 150 - 220 - 380 |Ex: 2000|3000|5000  =-> 2k Vp <-> Level I; 3k Vp <-> Level II; 5k Vp <-> Level III'),
