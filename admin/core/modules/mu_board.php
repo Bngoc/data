@@ -297,6 +297,14 @@ function board_sysconf()
             'timeWriterLimit' => array('text', 'Thời gian kết thức nhận ghi đề; Định dạng 24h| VD: 17:45 hàng ngày'),
             'timeResultDe' => array('text', 'Thời gian trả kết quả đề; Định dạng 24h| VD: 8:0 ngày ngày hôm sau, và nhỏ hơn thơi gian kết thức nhận ghi đề'),
             'moneyMinDe' => array('int', 'Số tiền tối thiểu nhận ghi đề (Vpoint)| VD: 5000 Vpoint'),
+        ),
+        'download' => array(
+            '_Download' => array('title', 'Download Game'),
+            'download_media' =>  array('text', 'Download file for mediafire| VD: http://www.mediafire.com/download.php?sz41ac5m7rn'),
+            'download_onedrive' =>  array('text', 'Download file for OneDrive| VD: https://d.docs.live.net/bdc1aa9209a93fd4'),
+            'download_4share' =>  array('text', 'Download file for 4share| VD: http://www.4shared.com/d7fnlfadfffp?sz41ac5m7rn'),
+            'download_dropbox' =>  array('text', 'Download file for Dropbox| VD: https://www.dropbox.com/9227sz41ac5m7rn'),
+            'download_googledriver' =>  array('text', 'Download file for Google Drive | VD: https://drive.google.com/drive/gdgdgdgdgdgdgdgdrd'),
         )
     );
 

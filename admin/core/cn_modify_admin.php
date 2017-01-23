@@ -1483,7 +1483,13 @@ function cn_config_load()
         'API_User' => '',
         'API_Password' => '',
         //DebugSql
-        'debugSql' => 0
+        'debugSql' => 0,
+        //download
+        'download_media' => '',
+        'download_onedrive' => '',
+        'download_4share' => '',
+        'download_dropbox' => '',
+        'download_googledriver' => '',
 
     );
 

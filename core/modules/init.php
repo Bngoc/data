@@ -20,6 +20,7 @@ $_init_modules = hook('modules/init_modules', array
     'blank_money' => array('path' => '_blank_money', 'acl' => 'Cd'),
     'ranking' => array('path' => '_ranking', 'acl' => 'Cd'),
     'transaction' => array('path' => '_transaction', 'acl' => 'Can'),
+    'download' => array('path' => '_download', 'acl' => 'Can'),
 
     'event' => array('path' => '_event', 'acl' => 'Cd'),
     'auto_money' => array('path' => '_auto_money', 'acl' => ''),
