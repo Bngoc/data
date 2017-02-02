@@ -40,13 +40,13 @@
  see http://www.gnu.org/copyleft/lesser.html
  */
 
-var config = new Object();
+var config = {};
 
 
 //===================  GLOBAL TOOLTIP CONFIGURATION  =========================//
-var tt_Debug = true		// false or true - recommended: false once you release your page to the public
-var tt_Enabled = true		// Allows to (temporarily) suppress tooltips, e.g. by providing the user with a button that sets this global variable to false
-var TagsToTip = true		// false or true - if true, HTML elements to be converted to tooltips via TagToTip() are automatically hidden;
+var tt_Debug = true;		// false or true - recommended: false once you release your page to the public
+var tt_Enabled = true;		// Allows to (temporarily) suppress tooltips, e.g. by providing the user with a button that sets this global variable to false
+var TagsToTip = true;		// false or true - if true, HTML elements to be converted to tooltips via TagToTip() are automatically hidden;
 // if false, you should hide those HTML elements yourself
 
 // For each of the following config variables there exists a command, which is
@@ -55,52 +55,52 @@ var TagsToTip = true		// false or true - if true, HTML elements to be converted 
 // configuration. Order of commands is arbitrary.
 // Example: onmouseover="Tip('Tooltip text', LEFT, true, BGCOLOR, '#FF9900', FADEIN, 400)"
 
-config.Above = false		// false or true - tooltip above mousepointer
-config.BgColor = '#E2E7FF'	// Background colour (HTML colour value, in quotes)
-config.BgImg = ''		// Path to background image, none if empty string ''
-config.BorderColor = '#003099'
-config.BorderStyle = 'solid'	// Any permitted CSS value, but I recommend 'solid', 'dotted' or 'dashed'
-config.BorderWidth = 1
-config.CenterMouse = false		// false or true - center the tip horizontally below (or above) the mousepointer
-config.ClickClose = false		// false or true - close tooltip if the user clicks somewhere
-config.ClickSticky = false		// false or true - make tooltip sticky if user left-clicks on the hovered element while the tooltip is active
-config.CloseBtn = false		// false or true - closebutton in titlebar
-config.CloseBtnColors = ['#990000', '#FFFFFF', '#DD3333', '#FFFFFF']	// [Background, text, hovered background, hovered text] - use empty strings '' to inherit title colours
-config.CloseBtnText = '&nbsp;X&nbsp;'	// Close button text (may also be an image tag)
-config.CopyContent = true		// When converting a HTML element to a tooltip, copy only the element's content, rather than converting the element by its own
-config.Delay = 400		// Time span in ms until tooltip shows up
-config.Duration = 0			// Time span in ms after which the tooltip disappears; 0 for infinite duration, < 0 for delay in ms _after_ the onmouseout until the tooltip disappears
-config.Exclusive = false		// false or true - no other tooltip can appear until the current one has actively been closed
-config.FadeIn = 100		// Fade-in duration in ms, e.g. 400; 0 for no animation
-config.FadeOut = 100
-config.FadeInterval = 30		// Duration of each fade step in ms (recommended: 30) - shorter is smoother but causes more CPU-load
-config.Fix = null		// Fixated position, two modes. Mode 1: x- an y-coordinates in brackets, e.g. [210, 480]. Mode 2: Show tooltip at a position related to an HTML element: [ID of HTML element, x-offset, y-offset from HTML element], e.g. ['SomeID', 10, 30]. Value null (default) for no fixated positioning.
-config.FollowMouse = true		// false or true - tooltip follows the mouse
-config.FontColor = '#000044'
-config.FontFace = 'Verdana,Geneva,sans-serif'
-config.FontSize = '8pt'		// E.g. '9pt' or '12px' - unit is mandatory
-config.FontWeight = 'normal'	// 'normal' or 'bold';
-config.Height = 0			// Tooltip height; 0 for automatic adaption to tooltip content, < 0 (e.g. -100) for a maximum for automatic adaption
-config.JumpHorz = false		// false or true - jump horizontally to other side of mouse if tooltip would extend past clientarea boundary
-config.JumpVert = true		// false or true - jump vertically		"
-config.Left = false		// false or true - tooltip on the left of the mouse
-config.OffsetX = 14		// Horizontal offset of left-top corner from mousepointer
-config.OffsetY = 8			// Vertical offset
-config.Opacity = 100		// Integer between 0 and 100 - opacity of tooltip in percent
-config.Padding = 3			// Spacing between border and content
-config.Shadow = false		// false or true
-config.ShadowColor = '#C0C0C0'
-config.ShadowWidth = 5
-config.Sticky = false		// false or true - fixate tip, ie. don't follow the mouse and don't hide on mouseout
-config.TextAlign = 'left'	// 'left', 'right' or 'justify'
-config.Title = ''		// Default title text applied to all tips (no default title: empty string '')
-config.TitleAlign = 'left'	// 'left' or 'right' - text alignment inside the title bar
-config.TitleBgColor = ''		// If empty string '', BorderColor will be used
-config.TitleFontColor = '#FFFFFF'	// Color of title text - if '', BgColor (of tooltip body) will be used
-config.TitleFontFace = ''		// If '' use FontFace (boldified)
-config.TitleFontSize = ''		// If '' use FontSize
-config.TitlePadding = 2
-config.Width = 0			// Tooltip width; 0 for automatic adaption to tooltip content; < -1 (e.g. -240) for a maximum width for that automatic adaption;
+config.Above = false;		// false or true - tooltip above mousepointer
+config.BgColor = '#E2E7FF';	// Background colour (HTML colour value, in quotes)
+config.BgImg = '';		// Path to background image, none if empty string ''
+config.BorderColor = '#003099';
+config.BorderStyle = 'solid';	// Any permitted CSS value, but I recommend 'solid', 'dotted' or 'dashed'
+config.BorderWidth = 1;
+config.CenterMouse = false;		// false or true - center the tip horizontally below (or above) the mousepointer
+config.ClickClose = false;		// false or true - close tooltip if the user clicks somewhere
+config.ClickSticky = false;		// false or true - make tooltip sticky if user left-clicks on the hovered element while the tooltip is active
+config.CloseBtn = false;		// false or true - closebutton in titlebar
+config.CloseBtnColors = ['#990000', '#FFFFFF', '#DD3333', '#FFFFFF'];	// [Background, text, hovered background, hovered text] - use empty strings '' to inherit title colours
+config.CloseBtnText = '&nbsp;X&nbsp;';	// Close button text (may also be an image tag)
+config.CopyContent = true;		// When converting a HTML element to a tooltip, copy only the element's content, rather than converting the element by its own
+config.Delay = 400;		// Time span in ms until tooltip shows up
+config.Duration = 0;			// Time span in ms after which the tooltip disappears; 0 for infinite duration, < 0 for delay in ms _after_ the onmouseout until the tooltip disappears
+config.Exclusive = false;		// false or true - no other tooltip can appear until the current one has actively been closed
+config.FadeIn = 100;		// Fade-in duration in ms, e.g. 400; 0 for no animation
+config.FadeOut = 100;
+config.FadeInterval = 30;		// Duration of each fade step in ms (recommended: 30) - shorter is smoother but causes more CPU-load
+config.Fix = null;		// Fixated position, two modes. Mode 1: x- an y-coordinates in brackets, e.g. [210, 480]. Mode 2: Show tooltip at a position related to an HTML element: [ID of HTML element, x-offset, y-offset from HTML element], e.g. ['SomeID', 10, 30]. Value null (default) for no fixated positioning.
+config.FollowMouse = true;		// false or true - tooltip follows the mouse
+config.FontColor = '#000044';
+config.FontFace = 'Verdana,Geneva,sans-serif';
+config.FontSize = '8pt';		// E.g. '9pt' or '12px' - unit is mandatory
+config.FontWeight = 'normal';	// 'normal' or 'bold';
+config.Height = 0;			// Tooltip height; 0 for automatic adaption to tooltip content, < 0 (e.g. -100) for a maximum for automatic adaption
+config.JumpHorz = false;		// false or true - jump horizontally to other side of mouse if tooltip would extend past clientarea boundary
+config.JumpVert = true;		// false or true - jump vertically		"
+config.Left = false;		// false or true - tooltip on the left of the mouse
+config.OffsetX = 14;		// Horizontal offset of left-top corner from mousepointer
+config.OffsetY = 8;			// Vertical offset
+config.Opacity = 100;		// Integer between 0 and 100 - opacity of tooltip in percent
+config.Padding = 3;			// Spacing between border and content
+config.Shadow = false;		// false or true
+config.ShadowColor = '#C0C0C0';
+config.ShadowWidth = 5;
+config.Sticky = false;		// false or true - fixate tip, ie. don't follow the mouse and don't hide on mouseout
+config.TextAlign = 'left';	// 'left', 'right' or 'justify'
+config.Title = '';		// Default title text applied to all tips (no default title: empty string '')
+config.TitleAlign = 'left';	// 'left' or 'right' - text alignment inside the title bar
+config.TitleBgColor = '';		// If empty string '', BorderColor will be used
+config.TitleFontColor = '#FFFFFF';	// Color of title text - if '', BgColor (of tooltip body) will be used
+config.TitleFontFace = '';		// If '' use FontFace (boldified)
+config.TitleFontSize = '';		// If '' use FontSize
+config.TitlePadding = 2;
+config.Width = 0;			// Tooltip width; 0 for automatic adaption to tooltip content; < -1 (e.g. -240) for a maximum width for that automatic adaption;
 // -1: tooltip width confined to the width required for the titlebar
 //=======  END OF TOOLTIP CONFIG, DO NOT CHANGE ANYTHING BELOW  ==============//
 
@@ -128,7 +128,7 @@ function UnTip() {
 // OnMoveAfter, OnHideInit, OnHide, OnKill
 
 var tt_aElt = new Array(10), // Container DIV, outer title & body DIVs, inner title & body TDs, closebutton SPAN, shadow DIVs, and IFRAME to cover windowed elements in IE
-    tt_aV = new Array(),	// Caches and enumerates config data for currently active tooltip
+    tt_aV = [],	// Caches and enumerates config data for currently active tooltip
     tt_sContent,			// Inner tooltip text or HTML
     tt_t2t, tt_t2tDad,		// Tag converted to tip, and its DOM parent element
     tt_musX, tt_musY,
@@ -255,7 +255,7 @@ function tt_MovDomNode(el, dadFrom, dadTo) {
 }
 
 //======================  PRIVATE  ===========================================//
-var tt_aExt = new Array(),	// Array of extension objects
+var tt_aExt = [],	// Array of extension objects
 
     tt_db, tt_op, tt_ie, tt_ie56, tt_bBoxOld,	// Browser flags
     tt_body,
@@ -267,8 +267,8 @@ var tt_aExt = new Array(),	// Array of extension objects
     tt_bJmpVert, tt_bJmpHorz,// Tip temporarily on other side of mouse
     tt_elDeHref,			// The tag from which we've removed the href attribute
 // Timer
-    tt_tShow = new Number(0), tt_tHide = new Number(0), tt_tDurt = new Number(0),
-    tt_tFade = new Number(0), tt_tWaitMov = new Number(0),
+    tt_tShow = Number(0), tt_tHide = Number(0), tt_tDurt = Number(0),
+    tt_tFade = Number(0), tt_tWaitMov = Number(0),
     tt_bWait = false,
     tt_u = "undefined";
 
@@ -528,7 +528,7 @@ function tt_AdaptConfig1() {
     if (tt_aV[CLOSEBTN]) {
         // Use title colours for non-specified closebutton colours
         if (!tt_aV[CLOSEBTNCOLORS])
-            tt_aV[CLOSEBTNCOLORS] = new Array("", "", "", "");
+            tt_aV[CLOSEBTNCOLORS] = ["", "", "", ""];
         for (var i = 4; i;) {
             --i;
             if (!tt_aV[CLOSEBTNCOLORS][i].length)
@@ -602,7 +602,7 @@ function tt_MkTipSubDivs() {
     tt_ExtCallFncs(0, "SubDivsCreated");
 }
 function tt_GetSubDivRefs() {
-    var aId = new Array("WzTiTl", "WzTiTlTb", "WzTiTlI", "WzClOsE", "WzBoDy", "WzBoDyI", "WzTtShDwB", "WzTtShDwR");
+    var aId = ["WzTiTl", "WzTiTlTb", "WzTiTlI", "WzClOsE", "WzBoDy", "WzBoDyI", "WzTtShDwB", "WzTtShDwR"];
 
     for (var i = aId.length; i; --i)
         tt_aElt[i] = tt_GetElt(aId[i - 1]);
@@ -857,7 +857,7 @@ function tt_Show() {
         tt_iState |= 0x8;
     if (tt_aV[DURATION] > 0)
         tt_tDurt.Timer("tt_HideInit()", tt_aV[DURATION], true);
-    tt_ExtCallFncs(0, "Show")
+    tt_ExtCallFncs(0, "Show");
     css.visibility = "visible";
     tt_iState |= 0x2;
     if (tt_aV[FADEIN])
@@ -1055,13 +1055,13 @@ function tt_Int(x) {
 Number.prototype.Timer = function (s, iT, bUrge) {
     if (!this.value || bUrge)
         this.value = window.setTimeout(s, iT);
-}
+};
 Number.prototype.EndTimer = function () {
     if (this.value) {
         window.clearTimeout(this.value);
         this.value = 0;
     }
-}
+};
 function tt_GetWndCliSiz(s) {
     var db, y = window["inner" + s], sC = "client" + s, sN = "number";
     if (typeof y == sN) {

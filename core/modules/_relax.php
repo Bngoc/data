@@ -1,8 +1,5 @@
 ﻿<?php if (!defined('BQN_MU')) die('Access restricted');
-
 add_hook('index/invoke_module', '*relax_invoke');
-
-//=====================================================================================================================
 function relax_invoke()
 {
     $relax_board = array
@@ -374,7 +371,6 @@ function relax_baicao()
             return json_encode($resultData);
         }
     }
-
     echoheader('-@my_relax/style.css@my_relax/relaxAjaxPlay.js', "Giải trí - Bài Cáo");
     echocomtent_here(exec_tpl('my_relax/baicao'), cn_snippet_bc_re());
     echofooter();

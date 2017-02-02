@@ -18,7 +18,7 @@
         </tr>
     </table>
     <center>
-        <form action='<?php echo PHP_SELF; ?>' method='POST' id="from-play">
+        <form action='<?php echo PHP_SELF; ?>' method='POST' id="from-play" onsubmit="return false;">
             <?php echo cn_form_open('mod, opt, sub'); ?>
             <input name='action_playbaucua' type='hidden' value='play'>
             <table class='sort-table' cellpadding='0' border='0' width="60%">

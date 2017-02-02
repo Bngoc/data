@@ -107,7 +107,7 @@ if (empty($_REQUEST['do']) OR $_REQUEST['do'] == 'global') {
             document.getElementById('reg_to_assoc_back').style.display = 'none';
         }
         function skimValidateEmail(email) {
-            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return email.match(re)
         }
         var promptchange = false;
@@ -781,14 +781,12 @@ if ($_REQUEST['do'] == 'advanced') {
             $('form[name=SkimLinksForm] > table').wrapAll('<div class="tborder" />');
 
             $('form[name=SkimLinksForm]').bind('submit', function (e) {
-                var i, j, value, $inputs, inputNames = new Array(
-                    'skimlinks_disable_groups',
+                var i, j, value, $inputs, inputNames = ['skimlinks_disable_groups',
                     'skimwords_disable_groups',
                     'skimwords_disable_groups_parse',
                     'skimlinks_disable_groups_parse',
                     'skimlinks_disable_forums',
-                    'skimwords_disable_forums'
-                );
+                    'skimwords_disable_forums'];
 
                 for (i = 0; i < inputNames.length; i++) {
                     value = [];

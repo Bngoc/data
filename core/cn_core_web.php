@@ -2030,7 +2030,8 @@ function cn_relocation_db_new()
  */
 function cn_connect_forum()
 {
-    require_once ROOT . '/forum/includes/config.php';
+//    require_once ROOT . '/forum/includes/config.php';
+    @include_once ROOT . '/forum/includes/config.php';
     global $db_Forum;
     if (isset($config['Database']['dbtype'])) {
         include_once(ROOT . '/admin/adodb/adodb.inc.php');

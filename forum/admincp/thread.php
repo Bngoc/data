@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.0 
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2012 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -127,7 +127,7 @@ function js_fetch_thread_title(formid,threadid)
 		formid.threadtitle.value = t[threadid];
 	}
 }
-t = new Array();
+t = [];
 <?php
 // END JAVASCRIPT CODE
 
@@ -341,7 +341,7 @@ if ($_REQUEST['do'] == 'pruneusersel')
 	}
 
 ?>
-	<script type="text/javascript">
+	<script; type="text/javascript">
 	function js_check_all_posts()
 	{
 		for (var i=0; i < document.cpform.elements.length; i++)
@@ -352,7 +352,7 @@ if ($_REQUEST['do'] == 'pruneusersel')
 				e.checked = document.cpform.allboxposts.checked;
 			}
 		}
-	}
+	};
 
 	function js_check_all_threads()
 	{

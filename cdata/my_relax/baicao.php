@@ -18,7 +18,7 @@
         </tr>
     </table>
     <center>
-        <form action='<?php echo PHP_SELF; ?>' method='POST' id="from-playbaicao">
+        <form action='<?php echo PHP_SELF; ?>' method='POST' id="from-playbaicao" onsubmit="return false;">
             <?php echo cn_form_open('mod, opt, sub'); ?>
             <input name='action_playbaicao' type='hidden' value='play'>
             <div class="play-baicao">

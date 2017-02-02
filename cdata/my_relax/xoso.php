@@ -19,7 +19,7 @@ list ($resultDe, $timesTampResult, $show_history) = _GL('resultPlayDe, timesTamp
         </tr>
     </table>
     <center>
-        <form action='<?php echo PHP_SELF; ?>' method='POST' id="from-playDe">
+        <form action='<?php echo PHP_SELF; ?>' method='POST' id="from-playDe" onsubmit="return false;">
             <?php echo cn_form_open('mod, opt, sub'); ?>
             <input name='action_playDe' type='hidden' value='play'>
             <table width="100%" class="mg-top15" align="center">

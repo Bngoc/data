@@ -80,8 +80,6 @@ if (empty($mod)) $mod = 'editconfig';
         function checkDelete() {
             return confirm('Are you sure to delete?');
         }
-        ;
-
         // -----------------------------------------------
         // Get ID in misc browser
         function getId(id) {

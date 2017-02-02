@@ -367,7 +367,7 @@ function makeTable($section, $recordset)
 
         $result .= "<td width=\"12%\" align=\"center\" valign=\"top\">
 			" . $vbphrase[$table_column_phrase] . "
-			<select id=\"change_selection_permid_" . $table_column_permid . "\" onchange=\"javascript: toggleCheckBox('cb', '" . $table_column_groupid . "', document.getElementById('count').value, this.value);\">
+			<select id=\"change_selection_permid_" . $table_column_permid . "toggleCheckBox('cb', '" . $table_column_groupid . "', document.getElementById('count').value, this.value);\">
 				<option></option>
 				<option value=\"1\">" . $vbphrase['select_all'] . "</option>
 				<option value=\"0\">" . $vbphrase['deselect_all'] . "</option>

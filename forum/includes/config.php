@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 /*======================================================================*\
 || #################################################################### ||
 || # vBulletin 4.2.0
 || # ---------------------------------------------------------------- # ||
-|| # All PHP code in this file is �2000-2012 vBulletin Solutions Inc. # ||
+|| # All PHP code in this file is ?2000-2012 vBulletin Solutions Inc. # ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||

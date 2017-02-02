@@ -225,8 +225,8 @@ abstract class vB_StyleVar
 					var cpstylefolder = "' . $vbulletin->options['cpstylefolder'] . '";
 					var colorPickerWidth = ' . intval($colorPickerWidth) . ';
 					var colorPickerType = ' . intval($colorPickerType) . ';
-					if(vbphrase == undefined) {vbphrase = new Object();}
-					' . $js_phrases . '
+					if(vbphrase == undefined) {vbphrase = {};}
+					' . $js_phrases . ';
 
 					vBulletin.events.systemInit.subscribe(function()
 					{

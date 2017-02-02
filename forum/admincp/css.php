@@ -357,7 +357,7 @@ if ($_REQUEST['do'] == 'doedit') {
             }
             window.open(gotourl, 'showdefault', 'resizable=yes,width=670,height=' + wheight);
         }
-        var style = new Array();
+        var style = [];
         <?php echo implode('', $jsarray); ?>
         function js_show_style_info(styleid) {
             alert(construct_phrase("<?php echo $vbphrase['this_item_is_customized_in_the_parent_style_called_x']; ?>", style[styleid]));
@@ -510,7 +510,7 @@ if ($_REQUEST['do'] == 'doedit') {
             ?>
             <script type="text/javascript">
                 window.onresize = redo_fieldset;
-                var target_fieldsets = new Array();
+                var target_fieldsets = [];
                 var z = 0;
                 function redo_fieldset() {
                     for (m = 0; m < z; m++) {

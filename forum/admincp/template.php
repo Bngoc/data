@@ -397,7 +397,7 @@ if ($_REQUEST['do'] == 'files') {
             styleid = document.forms.downloadform.dostyleid.options[document.forms.downloadform.dostyleid.selectedIndex].value;
             document.forms.downloadform.title.value = style[styleid];
         }
-        var style = new Array();
+        var style = [];
         style['-1'] = "<?php echo $vbphrase['master_style'] . "\";\n";?>
         style['-2'] = "<?php echo $vbphrase['mobile_master_style'] . '";';?>
 
@@ -2718,14 +2718,9 @@ if ($_REQUEST['do'] == 'stylegenerator') {
     echo "<div id=\"jscheck\">
 		<h1>" . $vbphrase['style_generator'] . "</h1>
 		<div id=\"load\">
-		<h4>" . $vbphrase['style_generator_error'] . "</h4>
-			<hr>
-			</div>
-			</div>
-
-			<script type=\"text/javascript\">
+		<h4>" . $vbphrase['style_generator_error'] . ">
 			<!--
-			var elm = document.getElementById('load')
+			var elm = document.getElementById('load');
 			if (elm) {elm.innerHTML = '<p>" . addslashes_js($vbphrase['style_generator_loading']) . "<'+'/p>';}
 			//-->
 			</script>

@@ -18,19 +18,26 @@ $(document).ready(function () {
     });
 
     $('.call-playbaicao').on('click', function (e) {
-        e.preventDefault();
-         $.ajax({
-                type: 'POST',
-                url: 'index.php',
-                data: $('form#from-playbaicao').serialize(),
-                success: function (data) {
-
-                    $('.top-showInfo').remove();
-                    $(".w-menu-top").prepend(data['menuTop']);
-                    $("#msg-Show").html(data['msgAction']);
-                    $('.result').html(data['result']);
-                }
-            });
+        // e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'index.php',
+            // dataType: "text",
+            data: $('form#from-playbaicao').serialize(),
+            // beforeSend: function() {
+            //     console.log("Bcadfasd");
+            // },
+            success: function (data) {
+                // var data1 = JSON.parse(data);
+                $('.top-showInfo').remove();
+                $(".w-menu-top").prepend(data['menuTop']);
+                $("#msg-Show").html(data['msgAction']);
+                $('.result').html(data['result']);
+            },
+            // error: function (xhr, status, error) {
+            //     console.log(status);
+            // }
+        });
     });
 
     $('#numberDe').bind('keyup', function () {

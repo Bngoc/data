@@ -230,7 +230,7 @@ function print_nav_panel()
         }
 
         function save_group_prefs(groupid) {
-            var opengroups = new Array();
+            var opengroups = [];
             var counter = 0;
             var navobj = null;
 

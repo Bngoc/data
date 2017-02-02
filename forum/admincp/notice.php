@@ -522,7 +522,7 @@ if ($_REQUEST['do'] == 'edit' OR $_REQUEST['do'] == 'add') {
                     var textareas = span.getElementsByTagName("textarea");
                     if (textareas.length > 0) {
                         textareas[0].select();
-                        return;
+
                     }
                 }
             }
@@ -531,7 +531,7 @@ if ($_REQUEST['do'] == 'edit' OR $_REQUEST['do'] == 'add') {
                 setTimeout("init_checkboxes()", 100);
             }
 
-            var checkboxes = new Array();
+            var checkboxes = [];
             var inputs = document.getElementsByTagName("input");
             for (var i = 0; i < inputs.length; i++) {
                 if (inputs[i].type == "checkbox" && inputs[i].name.substr(0, String("criteria").length) == "criteria") {

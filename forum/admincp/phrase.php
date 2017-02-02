@@ -1054,7 +1054,7 @@ if ($_REQUEST['do'] == 'add' OR $_REQUEST['do'] == 'edit') {
     ?>
     <script type="text/javascript">
         function copy_default_text(targetlanguage) {
-            var deftext = fetch_object("default_phrase").value
+            var deftext = fetch_object("default_phrase").value;
             if (deftext == "") {
                 alert("<?php echo $vbphrase['default_text_is_empty']; ?>");
             }

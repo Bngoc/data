@@ -53,8 +53,8 @@ echo cn_snippet_messages();
 
 <script type="text/javascript">
 
-    var montharray = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
-    var serverdate = new Date()
+    var montharray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var serverdate = new Date();
 
     var ap = "AM";
     if (serverdate.getHours() > 11) {
@@ -62,13 +62,13 @@ echo cn_snippet_messages();
     }
 
     function padlength(what) {
-        var output = (what.toString().length == 1) ? "0" + what : what
+        var output = (what.toString().length == 1) ? "0" + what : what;
         return output
     }
 
     function padhourlength(what) {
-        var output = (what > 12) ? what - 12 : what
-        output = (output.toString().length == 1) ? "0" + output : output
+        var output = (what > 12) ? what - 12 : what;
+        output = (output.toString().length == 1) ? "0" + output : output;
         return output
     }
 

@@ -5381,7 +5381,7 @@ function import_generated_style()
 	}
 	var style = new Array();
 	style['-2'] = \"" . $vbphrase['mobile_master_style'] . "\"
-	style['-1'] = \"" . $vbphrase['master_style'] . "\"";
+	style['-1'] = \"" . $vbphrase['master_style'] . ";
     foreach ($stylecache AS $styleid => $style) {
         echo "\n\tstyle['$styleid'] = \"" . addslashes_js($style['title'], '"') . "\";";
         $styleoptions["$styleid"] = construct_depth_mark($style['depth'], '--', iif($vbulletin->debug, '--', '')) . ' ' . $style['title'];

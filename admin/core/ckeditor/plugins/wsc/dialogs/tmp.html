@@ -52,7 +52,6 @@
                 } else {
                     window.attachEvent("onmessage", handler);
                 }
-                ;
             };
             var _sendCmd = function (o) {
                 var str,
@@ -66,8 +65,6 @@
                     (o.message['id']) ? o.message['id'] : o.message['id'] = id;
                     message = o.message;
                 }
-                ;
-
                 str = JSON.stringify(message, fn);
                 target.postMessage(str, '*');
             };
@@ -100,7 +97,7 @@
                         scriptTag.onreadystatechange = null;
                         setTimeout(function () {
                             scriptTag.parentNode.removeChild(scriptTag)
-                        }, 1)
+                        }, 1);
                         callback();
                     }
                 };
@@ -113,12 +110,9 @@
                     callback();
                 };
             }
-            ;
             scriptTag.src = src;
             document.getElementsByTagName("head")[0].appendChild(scriptTag);
-        };
-
-
+        }
         window.onload = function () {
             loadScript(appString, function () {
                 manageMessageTmp.send({

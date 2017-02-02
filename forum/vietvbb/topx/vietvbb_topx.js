@@ -29,7 +29,7 @@ function topxInit() {
     var select = document.getElementById('vietvbb_topstats_s');
     select.onchange = function () {
         viewMenu(this.value);
-    }
+    };
 
     var result_menu = document.getElementById('vietvbb_topstats_result');
     if (result_menu)

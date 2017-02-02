@@ -2084,7 +2084,7 @@ function print_cp_redirect($gotopage, $timeout = 0)
 		}
 		exec_refresh();";
         echo "\n</script>\n";
-        echo '<p align="center" class="smallfont"><a href="' . $gotopage . '" onclick="javascript:clearTimeout(timerID);">' . $vbphrase['processing_complete_proceed'] . '</a></p>';
+        echo '<p align="center" class="smallfont"><a href="' . $gotopage . '" onclick="clearTimeout(timerID);">' . $vbphrase['processing_complete_proceed'] . '</a></p>';
     }
     print_cp_footer();
     exit;
@@ -2111,7 +2111,7 @@ function print_dots_start($text, $dotschar = ':', $elementid = 'dotsarea')
     <script type="text/javascript"><!--
         function js_dots() {
             <?php echo $elementid; ?>.
-            innerText = <?php echo $elementid; ?>.
+            innerText =; <?php echo $elementid; ?>.
             innerText + "<?php echo $dotschar; ?>";
             jstimer = setTimeout("js_dots();", 75);
         }

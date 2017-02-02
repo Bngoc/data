@@ -1208,7 +1208,7 @@ TextDecorationControl.prototype.handle_click = function(e)
 		console.log("Text-Decoration:(not none)");
 		YAHOO.util.Dom.get(this.id + ".none").checked = false;
 	}
-}
+};
 
 function init_margin_padding_handler()
 {
@@ -1228,7 +1228,7 @@ function MarginPaddingControl(element)
 {
 	this.id = element.id;
 	this.same = YAHOO.util.Dom.get(this.id + ".same");
-	this.dynamic_elements = new Array("right", "bottom", "left");
+	this.dynamic_elements = ["right", "bottom", "left"];
 
 	YAHOO.util.Event.on(this.same, "click", this.set_state, this, true);
 	YAHOO.util.Event.on(this.id + ".top", "keyup", this.set_state, this, true);
@@ -1253,10 +1253,10 @@ MarginPaddingControl.prototype.set_state = function()
 			current_element.value = value;
 		}
 	}
-}
+};
 
-var txtdec_ctrls = new Object();
-var bp_ctrls = new Object();
+var txtdec_ctrls = {};
+var bp_ctrls = {};
 
 YAHOO.util.Event.on(window, "load", init);
 //-->

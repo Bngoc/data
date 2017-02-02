@@ -525,7 +525,7 @@ print_form_header('user', 'update', false, false, 'cpform', '90%', '" onsubmit="
                 if ($vbulletin->GPC['userid']) {
                     // QUICK LINKS SECTION
                     print_table_header(construct_phrase($vbphrase['x_y_id_z'], $vbphrase['user'], $user['username'], $vbulletin->GPC['userid']));
-                    print_label_row($vbphrase['quick_user_links'], '<select name="quicklinks" onchange="javascript:pick_a_window(this.options[this.selectedIndex].value);" tabindex="1" class="bginput">' . construct_select_options($quicklinks) . '</select><input type="button" class="button" value="' . $vbphrase['go'] . '" onclick="javascript:pick_a_window(this.form.quicklinks.options[this.form.quicklinks.selectedIndex].value);" tabindex="2" />');
+                    print_label_row($vbphrase['quick_user_links'], '<select name="quicklinks" onchange="pick_a_window(this.options[this.selectedIndex].value);" tabindex="1" class="bginput">' . construct_select_options($quicklinks) . '</select><input type="button" class="button" value="' . $vbphrase['go'] . '" onclick="pick_a_window(this.form.quicklinks.options[this.form.quicklinks.selectedIndex].value);" tabindex="2" />');
                     print_table_break('', $INNERTABLEWIDTH);
 
                     require_once(DIR . '/includes/class_userchangelog.php');
