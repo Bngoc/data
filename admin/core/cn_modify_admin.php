@@ -1478,6 +1478,7 @@ function cn_config_load()
         'timeResultDe' => '8:00',
         'moneyMinDe' => '5000',
         'url_Result_De' => 'http://ketqua.net/',
+        'id_getResult_De' => 'rs_0_0/',
         // config Account GameBank.vn
         'Merchant_ID' => '',
         'API_User' => '',
