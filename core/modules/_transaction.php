@@ -294,10 +294,14 @@ function transaction___buy_gd()
                 $vpointAdd = $info_card * $pt_km * 0.01 + $info_card;
                 $resultCodeApi = 1;
 
-echo $code .'<br>';
-echo $info_card .'<br>';
-echo $gb_api->getMsg() .'<br>';
+                $strInfo = $codeErrorCard[$code];
+
+//echo $code .'<br>';
+//echo '$strInfo => ' . $strInfo .'<br>';
+//echo $info_card .'<br>';
+//echo $gb_api->getMsg() .'<br>';
 echoArr($gb_api); die;
+
                 // nap the thanh cong
                 if ($code === 0 && $info_card >= 10000) {
                     $ischeckActionUpdate = true;

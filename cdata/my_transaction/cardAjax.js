@@ -6,6 +6,9 @@ $(document).ready(function () {
             type: 'POST',
             url: 'index.php',
             data: $('form#fromCard').serialize(),
+            beforeSend: function () {
+                $('.reload').html('<img width="100%" height="3px" src="/images/load.gif" />');
+            },
             success: function (data) {
                 $('.top-showInfo').remove();
                 $(".w-menu-top").prepend(data['menuTop']);
@@ -17,6 +20,9 @@ $(document).ready(function () {
                     $("#verifyCaptcha").val('');
                     $('.changeNumber').val('');
                 }
+            },
+            complete: function () {
+                $('.reload').html('');
             }
         });
     });

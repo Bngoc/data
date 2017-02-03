@@ -11,6 +11,7 @@ echo cn_snippet_messages();
     <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
                                    height="1px"/></div>
 </div>
+<div class="reload"></div>
 <div id="msg-Show"></div>
 <div class="clear"></div>
 <form id="fromCard" action='<?php echo PHP_SELF; ?>' method='POST'>

@@ -185,6 +185,7 @@ class GB_API {
         curl_setopt($ch, CURLOPT_TIMEOUT, 120);
         curl_setopt($ch, CURLOPT_USERPWD, $this->api_user . ":" . $this->api_password);
         $result = curl_exec($ch);
+
         $result = json_decode($result);
         $this->code = $result->code;
         $this->msg = $result->msg;
