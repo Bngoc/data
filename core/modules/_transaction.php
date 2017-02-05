@@ -115,22 +115,17 @@ function transaction___buy_gd()
     } else {
         $km_listOne = explode(',', $km_list[0]);
 
-        if($km_listOne[0]){
-            $pt_km =  $km_listOne[0];
+        if ($km_listOne[0]) {
             $strKm = 'Chương trình khuyến mại thẻ nạp VTC: <span class="cRed">' . $km_listOne[0] . ' %</span> cho bất kì mệnh giá nào.';
-        }elseif ($km_listOne[1]){
-            $pt_km =  $km_listOne[1];
+        } elseif ($km_listOne[1]) {
             $strKm = 'Chương trình khuyến mại thẻ nạp GATE: <span class="cRed">' . $km_listOne[1] . ' %</span> cho bất kì mệnh giá nào.';
-        }elseif ($km_listOne[2]){
-            $pt_km =  $km_listOne[2];
+        } elseif ($km_listOne[2]) {
             $strKm = 'Chương trình khuyến mại thẻ nạp VIETTEL: <span class="cRed">' . $km_listOne[2] . ' %</span> cho bất kì mệnh giá nào.';
-        }elseif ($km_listOne[3]){
-            $pt_km =  $km_listOne[3];
+        } elseif ($km_listOne[3]) {
             $strKm = 'Chương trình khuyến mại thẻ nạp MOBI: <span class="cRed">' . $km_listOne[3] . ' %</span> cho bất kì mệnh giá nào.';
-        }elseif ($km_listOne[4]){
-            $pt_km =  $km_listOne[4];
+        } elseif ($km_listOne[4]) {
             $strKm = 'Chương trình khuyến mại thẻ nạp VINA: <span class="cRed">' . $km_listOne[4] . ' %</span> cho bất kì mệnh giá nào.';
-        }else{
+        } else {
             $strKm = '';
         }
     }
@@ -151,20 +146,38 @@ function transaction___buy_gd()
     ];
 
     foreach ($napthe_list as $key => $var) {
-        if ($var){
+        if ($var) {
             $card_list[$key] = (int)substr($key, 0, -1) . "000";
         }
     }
+
+    if (empty($pt_km)) {
+        if ($opt == 'vtc') {
+            $pt_km = $km_listOne[0];
+        } else if ($opt == 'gate') {
+            $pt_km = $km_listOne[1];
+        } else if ($opt == 'viettel') {
+            $pt_km = $km_listOne[2];
+        } else if ($opt == 'mobi') {
+            $pt_km = $km_listOne[3];
+        } else if ($opt == 'vina') {
+            $pt_km = $km_listOne[4];
+        } else {
+            $pt_km = 0;
+        }
+    }
+
     $accc_ = $_SESSION['user_Gamer'];
-    $showHisrotyPlay = do_select_orther("SELECT [accountID], [Name], [menhgia], [card_type], [card_num], [card_serial], [status], [addvpoint], [timenap], [timeduyet], [teknet_status], [teknet_check_wait], [teknet_check_last], times_tamp FROM CardPhone WHERE accountID='" . $accc_ ."'");
+    $showHisrotyPlay = do_select_orther("SELECT [accountID], [Name], [menhgia], [card_type], [card_num], [card_serial], [status], [addvpoint], [timenap], [timeduyet], [teknet_status], [teknet_check_wait], [teknet_check_last], times_tamp FROM CardPhone WHERE accountID='" . $accc_ . "'  ORDER BY stt DESC");
+
+    $url = cn_url_modify(array('reset'), 'mod=transaction', 'opt=' . $opt, 'token=' . md5('__buy_gd' . $opt), 'action_historyCard=1', 'page', 'per_page');
 
     if (request_type('POST')) {
         if (REQ('action_historyCard')) {
-
             $resultData = array(
                 'msgAction' => cn_snippet_messages(),
                 'menuTop' => cn_menuTopMoney(true),
-                'show_history' => show_historyDe($showHisrotyPlay, $page),
+                'show_history' => zenderHtmlTableHistoryCard($showHisrotyPlay, $url, $page),
                 'resetFrom' => 0
             );
 
@@ -292,31 +305,23 @@ function transaction___buy_gd()
                 $info_card = intval($gb_api->getInfoCard());
 
                 $vpointAdd = $info_card * $pt_km * 0.01 + $info_card;
-                $resultCodeApi = 1;
-
+//                $resultCodeApi = 1;
                 $strInfo = $codeErrorCard[$code];
-
-//echo $code .'<br>';
-//echo '$strInfo => ' . $strInfo .'<br>';
-//echo $info_card .'<br>';
-//echo $gb_api->getMsg() .'<br>';
-echoArr($gb_api); die;
+                //echoArr($gb_api);
 
                 // nap the thanh cong
                 if ($code === 0 && $info_card >= 10000) {
                     $ischeckActionUpdate = true;
-//                    echo json_encode(array('code' => 0, 'msg' => "Nạp thẻ thành công mệnh giá " . $info_card));
+//                    cn_throw_message("Nạp thẻ thành công mệnh giá " . $info_card . ' VND.');
+//                    cn_throw_message("Bạn có thêm " . $vpointAdd . ' Vpoint.');
                 } else {
-                    // get thong bao loi
-//                    echo json_encode(array('code' => 1, 'msg' => $gb_api->getMsg()));
+                    cn_throw_message($gb_api->getMsg(), 'e');
                 }
 
-
                 if (!$ischeckActionUpdate) {
-
                     $showMoneyBank = view_bank($accc_);
                     $moneyAfter = $showMoneyBank[0]['vp'] + $vpointAdd;
-                    do_update_character(
+                    do_insert_character(
                         'CardPhone',
                         '[accountID]=\'' . $accc_ . '\'',
                         //[Name]
@@ -325,27 +330,32 @@ echoArr($gb_api); die;
                         '[card_num]=\'' . $pin . '\'',
                         '[card_serial]=\'' . $seri . '\'',
                         '[addvpoint]=' . $vpointAdd,
-                        '[timenap]\'=\'' . date('Y-m-d H:i:s', $ctime),
-                        'times_tamp=' . $ctime
-                    //      ,[status]
+                        '[timenap]=\'' . date('Y-m-d H:i:s', $ctime) . '\'',
+                        'times_tamp=' . $ctime,
+                        'status=\'' . $strInfo . '\''
 //      ,[timeduyet]
 //      ,[teknet_status]
 //      ,[teknet_check_wait]
 //      ,[teknet_check_last]
 //      ,[card_num_md5],
-
                     );
 
-                    do_update_character(
+                    do_insert_character(
                         'DoanhThu',
-                        '[timeCard]=\'' . date('Y-m-d H:i:s', $ctime),
+                        '[timeCard]=\'' . date('Y-m-d H:i:s', $ctime) . '\'',
                         '[money]=' . $info_card,
                         '[card_type]=\'' . $opt . '\''
                     );
 
+                    do_update_character(
+                        'MEMB_INFO',
+                        "vpoint=" . $moneyAfter,
+                        "memb___id:'$accc_'"
+                    );
+
                     // Ghi vào Log
-                    $content = "$accc_ đã nạp thẻ " . ucfirst($opt) . " mệnh giá: " . number_format($info_card, 0, ",", ".") . " VND, Serial: $seri , Số Vpoint: " . number_format($vpointAdd, 0, ",", ".") . " , Tình trạng: <span class=\"cRed\">" . $codeErrorCard[$resultCodeApi] . "</span>";
-                    $Date = date("h:iA, d/m/Y", ctime());
+                    $content = "$accc_ đã nạp thẻ thành công " . ucfirst($opt) . " mệnh giá: " . number_format($info_card, 0, ",", ".") . " VND, Serial: $seri , Số Vpoint: " . number_format($vpointAdd, 0, ",", ".") . " , Tình trạng: <span class=\"cRed\">" . $strInfo . "</span>";
+                    $Date = date("h:iA, d/m/Y", $ctime);
                     $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/napthe");
                     if ($checkDir) {
                         $file = $files . "/log_" . $opt . ".log";
@@ -358,12 +368,14 @@ echoArr($gb_api); die;
 
                     cn_throw_message($content);
 
-                    $showHisrotyAdd['AccountID'] = $accc_;
-                    $showHisrotyAdd['WriteDe'] = $numberDe;
-                    $showHisrotyAdd['timestamp'] = date('Y-m-d H:i:s', $time);
-                    $showHisrotyAdd['Action'] = 1;
-                    $showHisrotyAdd['Vpoint'] = $moneyVpDe;
-                    $showHisrotyAdd['Result'] = 0;
+                    $showHisrotyAdd['card_type'] = ucfirst($card_type);
+                    $showHisrotyAdd['card_num'] = $pin;
+                    $showHisrotyAdd['card_serial'] = $seri;
+                    $showHisrotyAdd['addvpoint'] = $vpointAdd;
+                    $showHisrotyAdd['menhgia'] = number_format($info_card, 0, ',', '.');
+                    $showHisrotyAdd['times_tamp'] = $ctime;
+                    $showHisrotyAdd['status'] = $strInfo;
+
                     array_unshift($showHisrotyPlay, $showHisrotyAdd);
                 }
             }
@@ -371,7 +383,7 @@ echoArr($gb_api); die;
             $resultData = array(
                 'msgAction' => cn_snippet_messages(),
                 'menuTop' => cn_menuTopMoney(true),
-                'show_history' => zenderHtmlTableHistoryCard($showHisrotyPlay, $page),
+                'show_history' => zenderHtmlTableHistoryCard($showHisrotyPlay, $url, $page),
                 'resetFrom' => (!$errors_false) ? 1 : 0
             );
 
@@ -384,16 +396,15 @@ echoArr($gb_api); die;
     $name_shop = array_pop($arr_shop)['name'];
 
     cn_assign('list_item, token, opt', $list_item, $token, $opt);
-    cn_assign('card_list, strKm, pt_km, show_history', $card_list, $strKm, $pt_km, zenderHtmlTableHistoryCard($showHisrotyPlay, $page));
+    cn_assign('card_list, strKm, pt_km, show_history', $card_list, $strKm, $pt_km, zenderHtmlTableHistoryCard($showHisrotyPlay, $url, $page));
 
     echoheader('-@my_transaction/style.css@my_transaction/cardAjax.js', "Giao dịch $name_shop - $name_shop");
     echocomtent_here(exec_tpl('my_transaction/napthe'), cn_snippet_bc_re());
     echofooter();
 }
 
-function zenderHtmlTableHistoryCard($dataHistory, $page)
+function zenderHtmlTableHistoryCard($dataHistory, $url, $page)
 {
-    $url = cn_url_modify(array('reset'), 'mod=relax', 'opt=xoso', 'action_historyCard=1', 'page', 'per_page');
     $per_page = 20;
     if (empty($page)) $page = 1;
     list ($resultShowData, $pagination) = cn_arr_paginaAjax($dataHistory, $url, $page, $per_page);
@@ -406,33 +417,22 @@ function zenderHtmlTableHistoryCard($dataHistory, $page)
                 <th>Loại thẻ</th>
                 <th>Mã thẻ</th>
                 <th>Serial</th>
+                <th>VND</th>
                 <th>Vpoint</th>
                 <th>Ngày nạp</th>
                 <th class="rbg"><span>Tình trạng</span></th>
             </tr>';
 
-//if (!is_array($cardphone) && !is_object($cardphone)) settype($cardphone, 'array'); foreach ($cardphone as $cardphone){}
-    if ($dataHistory) {
-        foreach ($dataHistory as $key => $items) {
-//            $makerTime = date_create(trim($items['timestamp']));
-//            $tempTime = date_format($makerTime, 'l, Y-m-d H:i:s');
-//            $checkResult = $items['Result'];
-//            if ($checkResult == 1) {
-//                $strResult = '<span class="cBlue"> Trúng </span>';
-//            } elseif ($checkResult == 2) {
-//                $strResult = '<span class="cRed"> Không trúng </span>';
-//            } else {
-//                $strResult = '---';
-//            }
-
+    if ($resultShowData) {
+        foreach ($resultShowData as $key => $items) {
             $html .= '<tr><td>' . ($key + 1) . '</td>';
             $html .= '<td>' . ucfirst($items['card_type']) . '</td>';
             $html .= '<td>' . trim($items['card_num']) . '</td>';
             $html .= '<td>' . trim($items['card_serial']) . '</td>';
+            $html .= '<td>' . number_format(trim($items['menhgia']), 0, ',', '.') . '</td>';
             $html .= '<td>' . number_format(intval($items['addvpoint']), 0, ',', '.') . '</td>';
-//            $html .= '<td>' . number_format($items['Vpoint'], 0, ',', '.') . '</td>';
-            $html .= '<td>' . date('l, d-m-Y H:i:A', $items['times_tamp']) . '</td>';
-            $html .= '<td>' . 0 . '</td></tr>';
+            $html .= '<td>' . date('D, d-M-Y H:i:A', $items['times_tamp']) . '</td>';
+            $html .= '<td>' . ucfirst($items['status']) . '</td></tr>';
         }
     }
     $html .= '</table>';

@@ -541,8 +541,8 @@ table.ranking tbody:hover td {
 }
 
 table.ranking tbody:hover tr:hover td {
-    color: #444;
+    color: #1503ff;
     text-shadow: 0 1px 0 #fff;
-    font-weight: 600;
+    /*font-weight: 600;*/
 }
 /********************************* table ******************************/

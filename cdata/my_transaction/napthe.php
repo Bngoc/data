@@ -81,7 +81,8 @@ echo cn_snippet_messages();
     </div>
 </div>
 
-<div class="sub_ranking mg-top20">
+<div class="clear"></div>
+<div class="sub_ranking mg-top15">
     <div class="">THÔNG TIN TRỊ GIÁ</div>
     <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
                                    height="1px"/></div>
