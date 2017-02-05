@@ -201,7 +201,7 @@ CREATE TABLE [dbo].[Account_Info](
 ) ON [PRIMARY]
 GO
 
-/********** ***************/
+/********** --------------- ***************/
 USE [MuOnline]
 GO
 /****** Object:  Table [dbo].[WriteDe]    Script Date: 01/18/2017 23:01:42 ******/
@@ -243,32 +243,53 @@ GO
 ALTER TABLE [dbo].[WriteDe] ADD  CONSTRAINT [DF_WriteDe_Action]  DEFAULT ((0)) FOR [Action]
 GO
 
+/* ------------------------------------------------------ */
 
 USE [MuOnline]
 GO
-/****** Object:  Table [dbo].[DoanhThu]    Script Date: 01/19/2017 14:29:26 ******/
+
+/****** Object:  Table [dbo].[DoanhThu]    Script Date: 02/05/2017 11:37:20 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
 SET ANSI_PADDING ON
 GO
+
 CREATE TABLE [dbo].[DoanhThu](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[timeCard] [datetime] NOT NULL,
 	[money] [int] NOT NULL,
 	[card_type] [varchar](20) NULL
 ) ON [PRIMARY]
+
 GO
+
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[CardPhone]    Script Date: 01/19/2017 14:29:26 ******/
+
+ALTER TABLE [dbo].[DoanhThu] ADD  CONSTRAINT [DF__DoanhThu__month__6339AFF7]  DEFAULT ((1)) FOR [timeCard]
+GO
+
+ALTER TABLE [dbo].[DoanhThu] ADD  CONSTRAINT [DF__DoanhThu__money__642DD430]  DEFAULT ((0)) FOR [money]
+GO
+
+/* ------------------------------------------------------ */
+USE [MuOnline]
+GO
+
+/****** Object:  Table [dbo].[CardPhone]    Script Date: 02/05/2017 11:33:13 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
 SET ANSI_PADDING ON
 GO
+
 CREATE TABLE [dbo].[CardPhone](
 	[stt] [int] IDENTITY(1,1) NOT NULL,
 	[accountID] [varchar](20) NOT NULL,
@@ -280,28 +301,26 @@ CREATE TABLE [dbo].[CardPhone](
 	[addvpoint] [varchar](20) NOT NULL,
 	[timenap] [datetime] NOT NULL,
 	[times_tamp] [int] NOT NULL,
-	[status] [tinyint] NULL,
+	[status] [text] NULL,
 	[timeduyet] [int] NULL,
 	[teknet_status] [tinyint] NULL,
 	[teknet_check_wait] [tinyint] NULL,
 	[teknet_check_last] [int] NULL,
 	[card_num_md5] [varchar](35) NULL
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
 GO
+
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Default [DF_CardPhone_timenap]    Script Date: 01/19/2017 14:29:26 ******/
+
 ALTER TABLE [dbo].[CardPhone] ADD  CONSTRAINT [DF_CardPhone_timenap]  DEFAULT (NULL) FOR [timenap]
 GO
-/****** Object:  Default [DF__CardPhone__kingn__5E94F66B]    Script Date: 01/19/2017 14:29:26 ******/
+
 ALTER TABLE [dbo].[CardPhone] ADD  CONSTRAINT [DF__CardPhone__kingn__5E94F66B]  DEFAULT ((0)) FOR [teknet_status]
 GO
-/****** Object:  Default [DF__CardPhone__kingn__5F891AA4]    Script Date: 01/19/2017 14:29:26 ******/
+
 ALTER TABLE [dbo].[CardPhone] ADD  CONSTRAINT [DF__CardPhone__kingn__5F891AA4]  DEFAULT ((0)) FOR [teknet_check_wait]
 GO
-/****** Object:  Default [DF__DoanhThu__month__6339AFF7]    Script Date: 01/19/2017 14:29:26 ******/
-ALTER TABLE [dbo].[DoanhThu] ADD  CONSTRAINT [DF__DoanhThu__month__6339AFF7]  DEFAULT ((1)) FOR [timeCard]
-GO
-/****** Object:  Default [DF__DoanhThu__money__642DD430]    Script Date: 01/19/2017 14:29:26 ******/
-ALTER TABLE [dbo].[DoanhThu] ADD  CONSTRAINT [DF__DoanhThu__money__642DD430]  DEFAULT ((0)) FOR [money]
-GO
+
+
