@@ -2,15 +2,13 @@
 
 add_hook('index/invoke_module', '*board_invoke');
 
-// =====================================================================================================================
-
 function board_invoke()
 {
     $dashboard = array
     (
         'editconfig:sysconf:Csc' => 'Cấu hình Hệ thống',
         'editconfig:confchar:Ct' => 'Cấu hình chức năng',
-        'editconfig:category:Can' => 'Cấu hình DDOS',
+        'editconfig:secure:Can' => 'Cấu hình DDOS',
         /*'editconfig:iserverz:Ciw'     => 'SERVER',*/
         'editconfig:ischaracter:Ciw' => 'Character',
         /*'editconfig:iswebshop:Ciw'     => 'CashShop',
@@ -46,26 +44,16 @@ function board_invoke()
 
     $images = array
     (
+        'sysconf' => 'options.gif',
+        'confchar' => 'settings.png',
+        'secure' => 'secure.gif',
+        'ischaracter' => 'ischaracter.png',
+
         'personal' => 'user.gif',
         'userman' => 'users.gif',
-        'sysconf' => 'options.gif',
-        'category' => 'category.png',
-        'confchar' => 'settings.png',
-        'backup' => 'archives.gif',
-        'archives' => 'arch.png',
-        'media' => 'images.gif',
-        'intwiz' => 'wizard.gif',
-        'logs' => 'list.png',
-        'selfchk' => 'check.png',
-        'ipban' => 'block.png',
-        'widgets' => 'widgets.png',
-        'wreplace' => 'replace.png',
-        'morefields' => 'more.png',
-        'maint' => 'settings.png',
         'group' => 'group.png',
-        'locale' => 'locale.png',
-        'script' => 'script.png',
-        'ischaracter' => 'ischaracter.png',
+        'statistics' => 'statistic.png',
+        'logs' => 'list.png'
     );
 
     // More dashboard images
@@ -96,9 +84,6 @@ function board_invoke()
     echofooter();
 }
 
-// =====================================================================================================================
-// Since 2.0: System configurations
-
 function board_sysconf()
 {
 
@@ -108,10 +93,6 @@ function board_sysconf()
     $_grps = getoption('#grp');
     //$conf_class_ = cn_get_template('class_dw_1_name','config_class');
     //$conf_class = cn_get_template_byarr('config_class');
-
-    //echo "000000000000000000000 142 =>". $conf_class['class_dw_1_name'] ."<br>";
-    //echo "000000000000000000000 143 =>". $conf_class_ ."<br>";
-
 
     /*
     // fetch skins
@@ -351,7 +332,6 @@ function board_sysconf()
             $post_cfg['uploads_ext'] = $script_path . '/uploads';
         }
 
-
         // all
         foreach ($by_default as $id => $var) {
             if ($var[0] == 'text' || $var[0] == 'select') {
@@ -556,8 +536,6 @@ function board_confChar()
 //    echofooter();
 }
 
-// =====================================================================================================================
-// Since 2.0: Personal options
 function board_personal()
 {
     $member = member_get();
@@ -651,9 +629,6 @@ function board_personal()
     echo exec_tpl('dashboard/personal');
     echofooter();
 }
-
-// =====================================================================================================================
-// Since 2.0: Template management
 
 function board_ischaracter()
 {
@@ -1593,7 +1568,6 @@ function board_ischaracter()
         */
 }
 
-
 function board_userman()
 {
     list($section, $st, $delete) = GET('section, st, delete');
@@ -1720,7 +1694,6 @@ function board_userman()
     echofooter();
 }
 
-
 function board_logs()
 {
     $log_read = $logs = array();
@@ -1759,9 +1732,6 @@ function board_logs()
             'ruatoi' => ['name' => 'Rửa tội'],
             'thuepoint' => ['name' => 'Thuê điểm'],
             'rspoint' => ['name' => 'Tẩy điểm'],
-
-            //'orther' => ['name' => ''],
-            //'orther' => ['name' => '']
         ],
         'shop' => [
             'acient' => ['name' => 'Cửa Hàng Đồ Thần'],
@@ -1919,9 +1889,6 @@ function board_logs()
     echo exec_tpl('com_board/logs');
     echofooter();
 }
-
-// =====================================================================================================================
-// Since 2.0: Additional fields
 
 function board_statistics()
 {

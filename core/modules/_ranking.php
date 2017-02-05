@@ -46,7 +46,7 @@ function ranking_invoke()
         'character' => 'character.png',
         'rickCard' => 'classRickCard.png',
         'guild' => 'guild.png',
-        'month' => 'month.png'
+//        'month' => 'month.png'
     );
 
 //    // More dashboard images
