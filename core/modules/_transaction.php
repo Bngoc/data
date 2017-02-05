@@ -405,6 +405,7 @@ function transaction___buy_gd()
 
 function zenderHtmlTableHistoryCard($dataHistory, $url, $page)
 {
+    if (empty($dataHistory)) return '<div class="mg-top15 cRed mg-left15">Bạn chưa nạp thẻ nào. </div>';
     $per_page = 20;
     if (empty($page)) $page = 1;
     list ($resultShowData, $pagination) = cn_arr_paginaAjax($dataHistory, $url, $page, $per_page);
