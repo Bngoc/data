@@ -318,7 +318,7 @@ function transaction___buy_gd()
                     cn_throw_message($gb_api->getMsg(), 'e');
                 }
 
-                if (!$ischeckActionUpdate) {
+                if ($ischeckActionUpdate) {
                     $showMoneyBank = view_bank($accc_);
                     $moneyAfter = $showMoneyBank[0]['vp'] + $vpointAdd;
                     do_insert_character(
