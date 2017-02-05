@@ -1925,409 +1925,51 @@ function board_logs()
 
 function board_statistics()
 {
-    $list = getoption('#more_list');
-
-    $name = REQ('extr_name', "GET");
-    $remove = REQ('remove');
-    $type = $desc = $meta = $group = $req = '';
-
-    // Apply the changes
-    if (request_type('POST')) {
-        cn_dsi_check();
-
-        list($type, $name, $desc, $meta, $group, $req) = GET('type, name, desc, meta, group, req', 'POST');
-
-        if ($remove) {
-            unset($list[$name]);
-
-            $type = $name = $desc = $meta = $group = $req = '';;
-            setoption('#more_list', $list);
-        } else {
-            if (!preg_match('/^[a-z0-9_-]+$/i', $name))
-                cn_throw_message('Name invalid - empty or bad chars', 'e');
-
-            if ($group && !preg_match('/^[a-z0-9_-]+$/i', $group))
-                cn_throw_message('Group field consists bad chars', 'e');
-
-            $errors = cn_get_message('e', 'c');
-            if (!$errors) {
-                $list[$name] = array('grp' => $group, 'type' => $type, 'desc' => $desc, 'meta' => $meta, 'req' => $req);
-                setoption('#more_list', $list);
-                cn_throw_message("Field added successfully");
-            }
-        }
-    }
-
-    // Request fields
-    if ($name && $list[$name]) {
-        $desc = $list[$name]['desc'];
-        $meta = $list[$name]['meta'];
-        $type = $list[$name]['type'];
-        $group = $list[$name]['grp'];
-        $req = $list[$name]['req'];
-    }
-
-    cn_assign('list', $list);
-    cn_assign('type, name, desc, meta, group, req', $type, $name, $desc, $meta, $group, $req);
-    echoheader('-@dashboard/style.css', 'Additional fields');
-    echo exec_tpl('dashboard/morefields');
+//    $list = getoption('#more_list');
+//
+//    $name = REQ('extr_name', "GET");
+//    $remove = REQ('remove');
+//    $type = $desc = $meta = $group = $req = '';
+//
+//    // Apply the changes
+//    if (request_type('POST')) {
+//        cn_dsi_check();
+//
+//        list($type, $name, $desc, $meta, $group, $req) = GET('type, name, desc, meta, group, req', 'POST');
+//
+//        if ($remove) {
+//            unset($list[$name]);
+//
+//            $type = $name = $desc = $meta = $group = $req = '';;
+//            setoption('#more_list', $list);
+//        } else {
+//            if (!preg_match('/^[a-z0-9_-]+$/i', $name))
+//                cn_throw_message('Name invalid - empty or bad chars', 'e');
+//
+//            if ($group && !preg_match('/^[a-z0-9_-]+$/i', $group))
+//                cn_throw_message('Group field consists bad chars', 'e');
+//
+//            $errors = cn_get_message('e', 'c');
+//            if (!$errors) {
+//                $list[$name] = array('grp' => $group, 'type' => $type, 'desc' => $desc, 'meta' => $meta, 'req' => $req);
+//                setoption('#more_list', $list);
+//                cn_throw_message("Field added successfully");
+//            }
+//        }
+//    }
+//
+//    // Request fields
+//    if ($name && $list[$name]) {
+//        $desc = $list[$name]['desc'];
+//        $meta = $list[$name]['meta'];
+//        $type = $list[$name]['type'];
+//        $group = $list[$name]['grp'];
+//        $req = $list[$name]['req'];
+//    }
+//
+//    cn_assign('list', $list);
+//    cn_assign('type, name, desc, meta, group, req', $type, $name, $desc, $meta, $group, $req);
+    echoheader('-@com_board/style.css', 'statistics - Thống kê');
+    echo exec_tpl('com_board/statistics');
     echofooter();
 }
-
-// =====================================================================================================================
-// Since 2.0: Replace words
-
-/*function board_group()
-{
-    global $_CN_access;
-
-    $access_desc = array();
-    $form_desc = array();
-
-    $gn = file(SKIN . '/defaults/groups_names.tpl');
-    foreach ($gn as $G) {
-        if (($G = trim($G)) == '') {
-            continue;
-        }
-        list($cc, $xgrp, $name_desc) = explode('|', $G, 3);
-
-        if (!isset($access_desc[$xgrp])) {
-            $access_desc[$xgrp] = array();
-        }
-
-        $access_desc[$xgrp][$cc] = $name_desc;
-        $form_desc[$cc] = explode('|', $name_desc);
-    }
-
-    $ATR = array('C' => 'Configs', 'N' => 'New', 'M' => 'Comment', 'B' => 'Behavior');
-
-    // Extension for access rights
-    list($access_desc, $ATR) = hook('extend_acl_groups', array($access_desc, $ATR));
-
-    $grp = array();
-    $groups = getoption('#grp');
-    list($group_name, $group_id, $group_grp, $ACL, $delete_group, $reset_group, $mode) = GET('group_name, group_id, group_grp, acl, delete_group, reset_group,mode');
-    $is_add_edit = false;
-
-    // -----------
-    if (request_type('POST')) {
-        cn_dsi_check();
-
-        if (!$group_name) {
-            cn_throw_message("Enter group name", 'e');
-        } elseif ($mode == 'edit') {
-            $is_edited = true;
-
-            // Update exists or new group
-            if ($group_id > 1) {
-                if (!empty($groups[$group_id])) {
-                    $is_edited = md5($groups[$group_id]['N'] . $groups[$group_id]['G'] . $groups[$group_id]['A']) != md5($group_name . $group_grp . (!empty($ACL) ? join(',', $ACL) : ''));
-                }
-                if ($is_edited) {
-                    $groups[$group_id] = array
-                    (
-                        '#' => $groups[$group_id]['#'],
-                        'N' => $group_name,
-                        'G' => $group_grp,
-                        'A' => (!empty($ACL) ? join(',', $ACL) : ''),
-                    );
-                }
-            }
-
-            if ($group_id == 1) {
-                cn_throw_message("Can't update admin group", 'e');
-            } elseif ($is_edited) {
-                // Save to config
-                setoption('#grp', $groups);
-                cn_throw_message("Group updated");
-            } else {
-                cn_throw_message("No data for update", 'w');
-            }
-        } elseif ($mode == 'add') {
-            $is_exists = FALSE;
-            // Check group exists
-            foreach ($groups as $id => $dt) {
-                if ($dt['N'] == $group_name) {
-                    $is_exists = TRUE;
-                    break;
-                }
-            }
-
-            $group_id = max(array_keys($groups)) + 1;
-            // Update exists or new group
-            if ($group_id > 1 && !$is_exists) {
-                $groups[$group_id] = array
-                (
-                    '#' => '',
-                    'N' => $group_name,
-                    'G' => $group_grp,
-                    'A' => (!empty($ACL) ? join(',', $ACL) : ''),
-                );
-                // Save to config
-                setoption('#grp', $groups);
-                cn_throw_message("Group added");
-            } elseif ($is_exists) {
-                cn_throw_message("Group with that name already exist", 'e');
-                $group_id = 0;
-            } else {
-                cn_throw_message("Group not added", 'e');
-            }
-        } else {
-            $edit_system = FALSE;
-            $edit_exists = FALSE;
-            $is_add_edit = TRUE;
-            // Check group exists
-            foreach ($groups as $id => $dt) {
-                if ($id == $group_id && $dt['#']) {
-                    $edit_system = TRUE;
-                }
-
-                if ($dt['N'] == $group_name) {
-                    $edit_exists = TRUE;
-                }
-            }
-
-            // Reset group rights
-            if ($reset_group && $group_id) {
-                $cgrp = file(SKIN . '/defaults/groups.tpl');
-                foreach ($cgrp as $G) {
-                    $G = trim($G);
-                    if ($G[0] === '#') {
-                        continue;
-                    }
-
-                    list($id, $name, $group, $access) = explode('|', $G);
-                    $id = intval($id);
-
-                    if ($id == $group_id) {
-                        $ACL = spsep(($access === '*') ? $_CN_access['C'] . ',' . $_CN_access['N'] . ',' . $_CN_access['M'] : $access);
-                        $groups[$group_id] = array
-                        (
-                            '#' => TRUE,
-                            'N' => $name,
-                            'G' => $group,
-                            'A' => (!empty($ACL) ? join(',', $ACL) : ''),
-                        );
-
-                        cn_throw_message("Group reset");
-                    }
-                }
-                $is_add_edit = FALSE;
-            } // Update group
-            elseif ($edit_exists && !$delete_group) {
-                if ($group_id == 1) {
-                    cn_throw_message("Can't update admin group", 'e');
-                } else {
-                    cn_throw_message('Parameters for a group are not correct specified or group already exists', 'e');
-                }
-            } // Unable remove system group
-            elseif ($delete_group && $edit_exists) {
-                if ($edit_system) {
-                    cn_throw_message("Unable remove system group");
-                } else {
-                    unset($groups[$group_id]);
-
-                    $ACL = array();
-                    $group_id = 0;
-
-                    cn_throw_message("Group removed");
-                }
-            }
-
-            // Save to config
-            setoption('#grp', $groups);
-        }
-    }
-
-    foreach ($groups as $name => $data) {
-        $_gtext = array();
-        $G = spsep($data['G']);
-
-        foreach ($G as $id) {
-            if (isset ($groups[$id])) {
-                $_gtext[] = $groups[$id]['N'];
-            }
-        }
-
-        $grp[$name] = array
-        (
-            'system' => $data['#'],
-            'name' => $data['N'],
-            'grp' => $_gtext,
-            'acl' => $data['A'],
-        );
-    }
-
-    // Translate ACL to view
-    $access = array();
-    $bc = array();
-
-    // Get user acl data
-    if ($group_id && $groups[$group_id]) {
-        $bc = spsep($groups[$group_id]['A']);
-    }
-
-    foreach ($_CN_access as $Gp => $Ex) {
-        $Gz = array();
-        $Ex = spsep($Ex);
-        $Tr = $access_desc[$ATR[$Gp]];
-
-        foreach ($Ex as $id) {
-            $trp = explode('|', $Tr[$id]);
-            $d = isset($trp[0]) ? $trp[0] : '';
-            $t = isset($trp[1]) ? $trp[1] : '';
-            $c = in_array($id, $bc);
-            if ($is_add_edit) {
-                $c = FALSE;
-            }
-            $Gz[$id] = array
-            (
-                //'d' => i18n( array($d, 'DS-') ),
-                //'t' => i18n( array($t, 'DS-') ),
-                'd' => array($d, 'DS-'),
-                't' => array($t, 'DS-'),
-                'c' => $c
-            );
-        }
-
-        $access[$ATR[$Gp]] = $Gz;
-    }
-
-    // Group is system
-    $group_system = $group_id && $groups[$group_id]['#'];
-
-
-    if ($group_id) {
-        if (!$is_add_edit) {
-            $group_name = $groups[$group_id]['N'];
-            $group_grp = $groups[$group_id]['G'];
-        } else {
-            $group_name = $group_grp = '';
-            $group_id = 0;
-        }
-    }
-
-    cn_assign('grp, group_name, group_id, group_grp, group_system, access, form_desc', $grp, $group_name, $group_id, $group_grp, $group_system, $access, $form_desc);
-    echoheader('-@dashboard/style.css', 'Groups');
-    echo exec_tpl('dashboard/group');
-    echofooter();
-}
-
-// =====================================================================================================================
-// Since 2.0: Replace words
-
-function board_wreplace()
-{
-    list($word, $replace, $delete) = GET('word, replace, delete');
-    $wlist = getoption('#rword');
-
-    if (request_type('POST')) {
-        cn_dsi_check();
-
-        if ($delete && $word) {
-            unset($wlist[$word]);
-            cn_throw_message("Word deleted");
-            setoption('#rword', $wlist);
-        } elseif ($word && $replace) {
-            $wlist[$word] = $replace;
-            setoption('#rword', $wlist);
-        } else {
-            cn_throw_message("Can't save");
-        }
-    }
-
-    // Require additional data
-    if (isset($wlist[$word])) {
-        $replace = $wlist[$word];
-    }
-    $is_replace_opt = getoption('use_replacement');
-    cn_assign('wlist, word, replace, repopt', $wlist, $word, $replace, $is_replace_opt);
-    echoheader('-@dashboard/style.css', 'Replace words');
-    echo exec_tpl('dashboard/replace');
-    echofooter();
-}
-
-// =====================================================================================================================
-// Since 2.0: Localization
-
-function board_locale()
-{
-    list($lang_token, $lang, $create_phrase, $phraseid, $translate, $delete_phrase, $exid) = GET('lang_token, lang, create_phrase, phraseid, translate, delete_phrase, exid');
-
-    $tkn = array();
-    $list = scan_dir(SERVDIR . '/core/lang/', '.*\.txt');
-    $updated = FALSE;
-
-    // Load langs
-    foreach ($list as $id => $code)
-        if (preg_match('/^(.*)\.txt/i', $code, $c))
-            $list[$id] = $c[1];
-
-    // Load symbols
-    $lang_token = preg_replace('/[^a-z0-9_\-]/i', '', $lang_token);
-    if ($lang_token) {
-        $_tkn = file($cfile = SERVDIR . '/core/lang/' . $lang_token . '.txt');
-        foreach ($_tkn as $data) {
-            list($TKN, $DAT) = explode(': ', $data, 2);
-            $tkn[$TKN] = $DAT;
-        }
-    }
-
-    // Do submit new data
-    if (request_type('POST') && REQ('modifica')) {
-        cn_dsi_check();
-
-        // Create new phrase
-        if ($create_phrase || !$exid || $exid && $exid !== $phraseid) {
-            if ($phraseid && $translate) {
-                $exid = $h = hi18n($phraseid);
-                if (!isset($tkn[$h])) {
-                    $updated = TRUE;
-                    $tkn[$h] = str_replace("\n", '', $translate);
-                    cn_throw_message('Row added');
-                } else {
-                    cn_throw_message('Row with same ID already exists', 'e');
-                }
-            } else
-                cn_throw_message('Fill required fields', 'e');
-        } // Do delete
-        elseif ($delete_phrase) {
-            if (isset($tkn[$exid])) {
-                $updated = TRUE;
-                unset($tkn[$exid]);
-                cn_throw_message('Row deleted');
-            } else {
-                cn_throw_message('Phrase not deleted: not exists');
-            }
-        } // Do modify
-        else {
-            $updated = TRUE;
-            $tkn[$exid] = str_replace("\n", '', $translate);
-
-            cn_throw_message('Row edited');
-        }
-    }
-
-    // Updated? Try save
-    if ($updated && isset($cfile)) {
-        $w = fopen($cfile, 'w+');
-        foreach ($tkn as $I => $T) fwrite($w, "$I: " . trim($T) . "\n");
-        fclose($w);
-
-        // Reinitialize skin
-        cn_lang_init();
-        cn_load_skin();
-    }
-
-    // Select
-    if ($exid && isset($tkn[$exid])) {
-        $phraseid = $exid;
-        $translate = $tkn[$exid];
-    }
-
-    cn_assign('lang_token, lang, list, tkn, phraseid, translate', $lang_token, $lang, $list, $tkn, $phraseid, $translate);
-    echoheader('-@dashboard/style.css', 'Localization');
-    echo exec_tpl('dashboard/locale');
-    echofooter();
-}
-*/

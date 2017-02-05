@@ -49,8 +49,6 @@ stm_aix("p4i1", "p1i1", [], 194, 2);
 stm_aix("p4i2", "p2i2", [0, "Xếp hạng bang hội", "", "", -1, -1, 0, "?mod=ranking&opt=guild"], 194, 27);
 stm_aix("p4i3", "p1i1", [], 194, 2);
 stm_aix("p4i2", "p2i2", [0, "Xếp hạng phu hội", "", "", -1, -1, 0, "?mod=ranking&opt=rickCard"], 194, 27);
-stm_aix("p4i3", "p1i1", [], 194, 2);
-stm_aix("p4i4", "p2i18", [0, "Nhân vật của tháng", "", "", -1, -1, 0, "?mod=ranking&opt=month"], 194, 36);
 stm_ep();
 
 stm_aix("p0i4", "p0i0", [0, "", "", "", -1, -1, 0, "?mod=screenshots&opt=screenshots", "_self", "", "", "", "", 0, 0, 0, "", "", 0, 0, 0, 0, 1, "#993366", 1, "#e1ecf6", 1, "m5.png", "m5_over.png"], 189, 35);

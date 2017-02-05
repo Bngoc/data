@@ -8,8 +8,7 @@ function ranking_invoke()
     $ranking_board = array(
         'ranking:character:Ct' => 'Xếp Hạng Nhân vật',
         'ranking:rickCard:Ct' => 'Xếp Hạng Phú Hộ',
-        'ranking:guild:Ct' => 'Xếp Hạng Bang Hội',
-        'ranking:month:Ct' => 'Nhân Vật Của Tháng'
+        'ranking:guild:Ct' => 'Xếp Hạng Bang Hội'
     );
 
     // Call dashboard extend
@@ -102,7 +101,7 @@ function zenderRankingCharacter($class, $url, $page, $optSort = 'DESC')
         }
     }
 
-    if (empty($class)) {
+    if (!empty($class) && $class == 'class_none') {
         $keyClass = '';
     } else {
         $keyClassList .= '-1';
@@ -150,7 +149,7 @@ function zenderRankingGuild($sub, $url, $page, $optSort = 'DESC')
 
 //    $strQueryClause .= implode(',', array_column($resultTopGuild, 'G_Name'));
 
-    $myQuery = "SELECT GuildMember.G_Name, Character.Name, Character.Relifes, Character.Resets, Character.cLevel";
+    $myQuery = "SELECT TOP 250 GuildMember.G_Name, Character.Name, Character.Relifes, Character.Resets, Character.cLevel";
     $myQuery .= " FROM MuOnline.dbo.Character LEFT JOIN MuOnline.dbo.GuildMember on GuildMember.Name = Character.Name";
     $myQuery .= (strlen($strQueryClause) > 0) ? " WHERE GuildMember.G_Name IN (" . substr($strQueryClause, 0, -1) . ")" : '';
     $myQuery .= " order by GuildMember.G_Name $optSort, Relifes DESC, Resets DESC, cLevel DESC";
@@ -201,72 +200,19 @@ function zenderRankingGuild($sub, $url, $page, $optSort = 'DESC')
     return array($resultShowData, $pagination);
 }
 
-function zenderRankingCard($sub, $url, $page, $optSort = 'DESC')
+function zenderRankingCard($opts, $url, $page, $optSort = 'DESC')
 {
-//    $per_page = 50;
-//    $resultTopGuild = do_select_orther("select top 20 COUNT(*) as count, Guild.G_Name, Guild.G_Master from MuOnline.dbo.GuildMember, MuOnline.dbo.Guild where GuildMember.G_Name = Guild.G_Name group by Guild.G_Name, G_Master order by count $optSort");
-//    $arrGuild = array();
-//    $strQueryClause = '';
-//    foreach ($resultTopGuild as $ds => $vl) {
-//        $arrGuild[$vl['G_Name']] = $vl;
-//        $strQueryClause .= "'" . $vl['G_Name'] . "',";
-//    }
-//
-//    if (empty($resultTopGuild)) {
-//        return array(array(), '');
-//    }
-//
-////    $strQueryClause .= implode(',', array_column($resultTopGuild, 'G_Name'));
-//
-//    $myQuery = "SELECT GuildMember.G_Name, Character.Name, Character.Relifes, Character.Resets, Character.cLevel";
-//    $myQuery .= " FROM MuOnline.dbo.Character LEFT JOIN MuOnline.dbo.GuildMember on GuildMember.Name = Character.Name";
-//    $myQuery .= (strlen($strQueryClause) > 0) ? " WHERE GuildMember.G_Name IN (" . substr($strQueryClause, 0, -1) . ")" : '';
-//    $myQuery .= " order by GuildMember.G_Name $optSort, Relifes DESC, Resets DESC, cLevel DESC";
-//
-//    $resultData = do_select_orther($myQuery);
-//    $tempRl = false;
-//    $tempGuild = '';
-//    foreach ($resultData as $ke => $item) {
-//        if ($tempGuild != $item['G_Name']){
-//            $tempGuild = $item['G_Name'];
-//            $tempRl = false;
-//        }
-//
-//        if (in_array($item['G_Name'], $arrGuild[$item['G_Name']])) {
-//            $arrGuild[$item['G_Name']]['totalReset'] += $item['Resets'];
-//            $tempGuild = $item['G_Name'];
-//
-//            if(!$tempRl) {
-//                $arrGuild[$item['G_Name']]['strongClassGuils'] = $item['Name'];
-//                $arrGuild[$item['G_Name']]['Resets'] = $item['Resets'];
-//                $arrGuild[$item['G_Name']]['Relifes'] = $item['Relifes'];
-//                $arrGuild[$item['G_Name']]['cLevel'] = $item['cLevel'];
-//                $tempRl = true;
-//            }
-//        }
-//    }
-//
-//    $showData = array();
-//    foreach ($arrGuild as $key => $its) {
-//        $showData[] = $its;
-//    }
-//
-//    // Top Reset
-//    if ($sub == 'class_1') {
-//        if($optSort == 'DESC') {
-//            usort($showData, function ($a, $b) {
-//                return $b['totalReset'] - $a['totalReset'];
-//            });
-//        } else {
-//            usort($showData, function ($a, $b) {
-//                return $a['totalReset'] - $b['totalReset'];
-//            });
-//        }
-//    }
-//
-//    list ($resultShowData, $pagination) = cn_arr_paginaAjax($showData, $url, $page, $per_page);
+    $per_page = 50;
+    $whereOpt = '';
+    $opts = explode('_', $opts)[1];
+    if (strtolower($opts) && $opts != 'none') {
+        $whereOpt = 'WHERE card_type= \'' . strtolower($opts) . '\'';
+    }
+    $resultTopCard = do_select_orther("select TOP 250 accountID, SUM(menhgia) as total_vnd from muonline.dbo.cardphone $whereOpt group by accountID order by total_vnd $optSort");
 
-    return array([], '');
+    list ($resultShowData, $pagination) = cn_arr_paginaAjax($resultTopCard, $url, $page, $per_page);
+
+    return array($resultShowData, $pagination);
 }
 
 function zenderDataContent($dataResult)
@@ -295,8 +241,7 @@ function zenderDataContent($dataResult)
             $dataTableResult .= '<td><img src="/images/'. (@$items['ConnectStat'] ? 'users_online' : 'users_offline') .'.gif" alt="'. (@$items['ConnectStat'] ? 'Online' : 'Offline') .'"></td></tr>';
         }
     }
-//users_offline.gif
-    // users_online.gif
+
     $dataTableResult .= '</table>';
 
     return $dataTableResult;
@@ -307,25 +252,25 @@ function zenderDataContentCardRich($dataResult)
     $dataTableResult = '<table class="pd-top5 ranking" width="100%">
         <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Level</th>
-            <th>Relife / Reset</th>
+            <th>Tài khoản</th>
+            <th>Tổng VND</th>
+            <!--<th>Relife / Reset</th>
             <th>Point</th>
             <th>Class</th>
             <th>ChangeClass</th>
-            <th>Status</th>
+            <th>Status</th> -->
         </tr>';
 
     if ($dataResult) {
         foreach ($dataResult as $key => $items) {
             $dataTableResult .= '<tr><td>' . ($key + 1) . '</td>';
-            $dataTableResult .= '<td>' . ucfirst($items['Name']) . '</td>';
-            $dataTableResult .= '<td>' . $items['cLevel'] . '</td>';
-            $dataTableResult .= '<td>' . $items['Relifes'] . ' / ' . $items['Resets'] . '</td>';
-            $dataTableResult .= '<td>' . 0 . '</td>';
-            $dataTableResult .= '<td>' . 0 . '</td>';
-            $dataTableResult .= '<td>' . 0 . '</td>';
-            $dataTableResult .= '<td><img src="/images/'. 4 .'" alt="'. 0 .'">' . 4 . '</td></tr>';
+            $dataTableResult .= '<td>' . ucfirst($items['accountID']) . '</td>';
+//            $dataTableResult .= '<td>' . $items['cLevel'] . '</td>';
+//            $dataTableResult .= '<td>' . $items['Relifes'] . ' / ' . $items['Resets'] . '</td>';
+//            $dataTableResult .= '<td>' . 0 . '</td>';
+//            $dataTableResult .= '<td>' . 0 . '</td>';
+//            $dataTableResult .= '<td>' . 0 . '</td>';
+            $dataTableResult .= '<td>' . number_format($items['total_vnd'], 0, ',', '.') . '</td></tr>';
         }
     }
     $dataTableResult .= '</table>';
@@ -364,17 +309,18 @@ function ranking_character()
 {
     list($sub, $sort, $page) = GET('sub, sort, page', "GETPOST");
     $class_board = array(
-        'class_dw' => 'Dark Wizard',
-        'class_dk' => 'Dark Knight',
+        'class_none' => 'All',
+        'class_dk' => 'Dark Kni...',
+        'class_dl' => 'Dark Lor...',
+        'class_dw' => 'Dark Wiz...',
         'class_elf' => 'Elf',
-        'class_mg' => 'Magic Gladiator',
+        'class_mg' => 'Magic Gla..',
         'class_sum' => 'Summoner',
-        'class_dl' => 'Dark Lord',
-        'class_rf' => 'Rage Fighter'
+        'class_rf' => 'Rage Fig...'
     );
 
     if (empty($sub)) {
-        $sub = 'class_dk';
+        $sub = 'class_none';
     }
     if (empty($sort)) {
         $sort = 'desc';
@@ -406,44 +352,6 @@ function ranking_character()
     cn_assign('opt', 'character');
     cn_assign('class_board, sub, pagination, sort, result_content', $class_board, $sub, $pagination, $sort, zenderDataContent($arrRankingCharater));
     echoheader('-@my_ranking/style.css@my_ranking/callAjaxRanking.js', "Bảng xếp hạng theo nhân vật");
-    echocomtent_here(exec_tpl('my_ranking/_ranking'), cn_snippet_bc_re());
-    echofooter();
-}
-
-function ranking_month()
-{
-    list($sort, $page) = GET('sort, page', "GETPOST");
-
-    if (empty($sort)) {
-        $sort = 'desc';
-    }
-    if (empty($page) || $page <= 0) {
-        $page = 1;
-    }
-    $url = cn_url_modify(array('reset'), 'mod=ranking', 'opt=month', 'sort='. strtolower($sort), 'per_page', 'page');
-
-    if (request_type('GET')) {
-        if (isset($_REQUEST['sort'])) {
-
-            list ($arrRankingCharater, $pagination) = zenderRankingCharacter('', $url, $page, strtoupper($sort));
-
-            $resultData = array(
-                'id-sub' => '',
-                'id-sort' => $sort,
-                'result_content' => zenderDataContent($arrRankingCharater),
-                'result_pagination' => $pagination
-            );
-
-            header('Content-Type: application/json');
-            return json_encode($resultData);
-        }
-    }
-
-    list ($arrRankingCharater, $pagination) = zenderRankingCharacter('', $url, $page, strtoupper($sort));
-
-    cn_assign('opt', 'month');
-    cn_assign('class_board, sub, pagination, sort, result_content', array(), '', $pagination, $sort, zenderDataContent($arrRankingCharater));
-    echoheader('-@my_ranking/style.css@my_ranking/callAjaxRanking.js', "Bảng xếp hạng nhân vật theo tháng");
     echocomtent_here(exec_tpl('my_ranking/_ranking'), cn_snippet_bc_re());
     echofooter();
 }
@@ -498,8 +406,16 @@ function ranking_rickCard()
     list($sub, $sort, $page) = GET('sub, sort, page', "GETPOST");
     $class_board = array();
 
+    $class_board = array(
+        'class_none' => 'All',
+        'class_gate' => 'Gate',
+        'class_mobi' => 'Mobifone',
+        'class_vina' => 'VinaPhone',
+        'class_viettel' => 'Viettel',
+        'class_vtc' => 'Vtc'
+    );
     if (empty($sub)) {
-        $sub = 'class_dk';
+        $sub = 'class_none';
     }
     if (empty($sort)) {
         $sort = 'desc';
@@ -508,7 +424,7 @@ function ranking_rickCard()
         $page = 1;
     }
 
-    $url = cn_url_modify(array('reset'), 'mod=ranking', 'sub=' . $sub, 'opt=rickCard', 'sort=' . strtolower($sort), 'per_page', 'page');
+    $url = cn_url_modify(array('reset'), 'mod=ranking', 'opt=rickCard', 'sub=' . $sub, 'sort=' . strtolower($sort), 'per_page', 'page');
 
     if (request_type('GET')) {
         if (isset($_REQUEST['sub'])) {
