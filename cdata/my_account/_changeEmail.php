@@ -24,7 +24,7 @@ if ($errors_result) {
             </td>
         </tr>
         <tr>
-            <td class="bizwebform_col_1">Ðịa chỉ Email <span class="required">*</span></td>
+            <td class="bizwebform_col_1">Ðịa chỉ Email mới <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input name="nameEmail" class="bizwebform" type="email" maxlength="40"
                                                 autocomplete="off" onchange="checkEmail(this.value,'checkemail');"
                                                 value="<?php echo isset($_POST['nameEmail']) ? $_POST['nameEmail'] : ''; ?>"/>

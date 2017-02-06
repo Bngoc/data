@@ -1,6 +1,6 @@
 <?php
 
-list($showchar, $card_list, $strKm, $pt_km, $show_history) = _GL('showchar, card_list, strKm, pt_km, show_history');
+list($showchar, $card_list, $strKm, $pt_km, $show_history, $opt) = _GL('showchar, card_list, strKm, pt_km, show_history, opt');
 
 echo cn_snippet_messages();
 ?>
@@ -20,14 +20,17 @@ echo cn_snippet_messages();
         <tr>
             <td class="bizwebform_col_1">Mã số thẻ <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input name="cardCode" class="bizwebform" type="text" maxlength="14" required
-                                                autocomplete="off" onchange="checkCardCode(this.value);"/></td>
+                                                autocomplete="off"
+                                                onchange="checkCardCode(this.value, '<?php echo $opt; ?>', 'cardCodeID');"/>
+            </td>
             <td class="bizwebform_col_3" id="cardCodeID"></td>
         </tr>
         <tr>
             <td class="bizwebform_col_1">Serial <span class="required">*</span></td>
-            <td class="bizwebform_col_2"><input name="cardSerial" class="bizwebform" type="text" maxlength="12" required
-                                                autocomplete="off" onchange="checkCardSerial(this.value);"
-                                                value="<?php //if ($type == "VTC") echo "PM"; ?>"/></td>
+            <td class="bizwebform_col_2"><input name="cardSerial" class="bizwebform" type="text" maxlength="16" required
+                                                autocomplete="off"
+                                                onchange="checkCardSerial(this.value, '<?php echo $opt; ?>', 'cardSerialID');"
+                                                value="<?php //if ($opt == "vtc") echo "PM"; ?>"/></td>
             <td class="bizwebform_col_3" id="cardSerialID"></td>
         </tr>
 <!--        <tr>-->

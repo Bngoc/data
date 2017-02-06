@@ -25,7 +25,7 @@ if ($errors_result) {
         </tr>
         <tr>
         <tr>
-            <td class="bizwebform_col_1">Mật khẩu <span class="required">*</span></td>
+            <td class="bizwebform_col_1">Mật khẩu  mới <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input name="cpwd" id="abc_paws" class="bizwebform"
                                                 onchange="return valid_pass(this.value, 'cpass_msg','mật khẩu'); verify_valida(this.value,'cre_pwd','crepwd_smg','mật khẩu');"
                                                 onkeyup="pwd_strength(this.id, 'pwd_color', 'cpass_msg');"
@@ -36,7 +36,7 @@ if ($errors_result) {
             <td class="bizwebform_col_3" id="cpass_msg"></td>
         </tr>
         <tr>
-            <td class="bizwebform_col_1">Xác nhận mật khẩu <span class="required">*</span></td>
+            <td class="bizwebform_col_1">Xác nhận mật khẩu mới <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input name="cre_pwd" class="bizwebform" type="password" maxlength="15"
                                                 placeholder="eg. My8Pass@9oK" required="required"
                                                 onchange="verify_valida(this.value, 'cpwd', 'crepwd_smg','mật khẩu');"/>

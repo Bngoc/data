@@ -32,7 +32,7 @@ if ($errors_result) {
                     trả lại bí mật </label></td>
         </tr>
         <tr id="Cars-Q" class="desc" <?php if ($tabActive != 'Q') echo 'style="display:none"'; ?>>
-            <td class="bizwebform_col_1">Câu hỏi bí mật <span class="required">*</span></td>
+            <td class="bizwebform_col_1">Câu hỏi bí mật mới <span class="required">*</span></td>
             <td class="bizwebform_col_2">
                 <select size="1" name="cnameQuestion" id="bizwebselect"
                         onchange="checkQuestion(this.value, 'checkQuestionID');">
@@ -49,7 +49,7 @@ if ($errors_result) {
             <td class="bizwebform_col_3" id="checkQuestionID"></td>
         </tr>
         <tr id="Cars-A" class="desc" <?php if ($tabActive != 'A') echo 'style="display:none"'; ?>>
-            <td class="bizwebform_col_1">Câu trả lại bí mật<span class="required">*</span></td>
+            <td class="bizwebform_col_1">Câu trả lại bí mật mới <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input name="cnameAnswer" class="bizwebform" type="text" maxlength="15"
                                                 autocomplete="off" onchange="checkAnswer(this.value, 'answerID');"
                                                 value="<?php echo isset($_POST['cnameAnswer']) ? $_POST['cnameAnswer'] : ''; ?>"/>

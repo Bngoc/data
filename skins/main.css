@@ -186,7 +186,7 @@
 }
 
 .read_more a:link, a:visited, a:hover {
-    color: #004040;
+    color: #a9e2e2;
     text-decoration: underline;
 }
 
@@ -195,7 +195,6 @@
 }
 
 /* =========== MAIN COL CONTENT //=========== */
-
 /* =========== RIGHT COL CONTENT =========== */
 #serverclock {
     background: url(../images/bg_serverclock.png) no-repeat top center;

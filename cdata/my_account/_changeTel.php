@@ -24,7 +24,7 @@ if ($errors_result) {
             </td>
         </tr>
         <tr>
-            <td class="bizwebform_col_1">Số điện thoại di động <span class="required">*</span></td>
+            <td class="bizwebform_col_1">Số điện thoại di động mới <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input name="cphoneNumber" class="bizwebform" type="text" maxlength="17"
                                                 id="cphoneNumber"
                                                 autocomplete="off"

@@ -107,28 +107,28 @@ function NumACheck(value) {
 }
 
 
-function Specialcheck(value) {
-    var blankCount = 0;
-    var Speccount = 0;
-
-    for (var i = 0; i < value.length; i++) {
-        if (value.substring(i, i + 1) == " ") {
-            blankCount = blankCount + 1;
-
-        }
-        for (j = 0; j < etcVal.length; j++) {
-            if (value.substring(i, i + 1) == etcVal.charAt(j)) {
-                Speccount = Speccount + 1;
-            }
-        }
-    }
-
-    if (blankCount > 0 || Speccount > 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
+// function Specialcheck(value) {
+//     var blankCount = 0;
+//     var Speccount = 0;
+//
+//     for (var i = 0; i < value.length; i++) {
+//         if (value.substring(i, i + 1) == " ") {
+//             blankCount = blankCount + 1;
+//
+//         }
+//         for (j = 0; j < etcVal.length; j++) {
+//             if (value.substring(i, i + 1) == etcVal.charAt(j)) {
+//                 Speccount = Speccount + 1;
+//             }
+//         }
+//     }
+//
+//     if (blankCount > 0 || Speccount > 0) {
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }
 
 function getId(id) {
     if (document.all) return (document.all[id]);
@@ -154,8 +154,9 @@ function IsMatchingCode(str) { //IsMatchingCode
 
 function check_cap(value) {
     if (value) {
-        for (var i = 0; i < value.length; i++)
+        for (var i = 0; i < value.length; i++){
             if (-1 != upVal.indexOf(value.charAt(i))) return true;
+        }
 
         return false;
     }
@@ -720,452 +721,94 @@ function checkCaptcha(value, id) {
     }
 }
 
+function checkCardSerial(val, opt,  idSms) {
+    // var strSerial = id.replace("PM", "");
+    getId(idSms).innerHTML = notify_img_load;
+    setTimeout("checkCardSerialTrue('" + val + "', '" + opt + "', '" + idSms + "')", 500);
+}
 
-// function checkPassword(id, value) {
-//     document.getElementById(id).innerHTML = notify_img_load;
-//     //setTimeout("checkPasswordTrue('"+id+"','"+value+"')", 300);
-//     setTimeout("valid_Password('" + id + "','" + value + "')", 300);
-// }
-// function checkPasswordTrue(id, value) {
-//
-//
-//     if (!NumACheck(document.frmRegister.Password.value)) {
-//         document.getElementById('Password').innerHTML = '<img style="margin-right:5px" src="images/alert_icon.gif"><span style="color:#FF0000">Mật khẩu không hợp lệ</span>';
-//         document.frmRegister.Password.focus();
-//         document.frmRegister.Password.value = "";
-//         alert("Mật khẩu không được sử dụng dấu cách.");
-//         return false;
-//     }
-//     if (Specialcheck(document.frmRegister.Password.value)) {
-//         document.getElementById('Password').innerHTML = notify_img_deline + '<span style="color:#FF0000">Mật khẩu không hợp lệ</span>';
-//         document.frmRegister.Password.focus();
-//         document.frmRegister.Password.value = "";
-//         alert("Mật khẩu không được sử dụng ký tự đặc biệt.");
-//         return false;
-//     }
-//     else
-//         document.getElementById('Password').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-// }
-
-//
-// function RecheckPassword(id) {
-//     document.getElementById('RePassword').innerHTML = notify_img_load;
-//     setTimeout("RecheckPasswordTrue('" + id + "')", 500);
-// }
-// function RecheckPasswordTrue(id) {
-//     if ((document.frmRegister.Password.value) != (document.frmRegister.RePassword.value)) {
-//         document.getElementById('RePassword').innerHTML = notify_img_deline + '<span style="color:#FF0000">Mật khẩu không giống nhau</span>';
-//         document.getElementById('Password').innerHTML = notify_img_deline + '<span style="color:#FF0000">Vui lòng điền lại mật khẩu</span>';
-//         alert("Vui lòng kiểm tra lại mật khẩu của bạn");
-//         document.frmRegister.Password.focus();
-//         document.frmRegister.Password.value = "";
-//         document.frmRegister.RePassword.value = "";
-//         //return false;
-//     }
-//     else
-//         document.getElementById('RePassword').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-// }
-
-//
-// function checkEmail1111(value, id) {
-//     document.getElementById(id).innerHTML = notify_img_load;
-//     setTimeout("checkEmailTrue('" + id + "','" + value + "','Email')", 1000);
-// }
-// // function checkEmailTrue(id, value, str_smg) {
-//     var hj = proce_notify_err(str_smg);
-//     if (!ischeckEmail(value)) {
-//         getId(id).innerHTML = proce_notify_err(str_smg);
-//         //document.frmRegister.Password.focus();
-//         //document.frmRegister.Password.value = "";
-//
-//         alert("Please provide a valid email address.");
-//         return false;
-//     }
-//     var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-//     xmlhttp.open("GET", 'checkForm.php?action=checkid&check=check_email&id=' + value, false);
-//     xmlhttp.send(null);
-//     document.getElementById(id).innerHTML = xmlhttp.responseText;
-//     cells = id.getElementsByTagName("script");
-//     for (var i = 0; i < cells.length; i++) {
-//         eval(cells[i].innerHTML);
-//     }
-// }
-
-
-// function RecheckEmail(id) {
-//     document.getElementById('RecheckEmail').innerHTML = notify_img_load;
-//     setTimeout("RecheckEmailTrue('" + id + "')", 1500);
-// }
-// function RecheckEmailTrue(id) {
-//     if ((document.frmRegister.Email.value) != (document.frmRegister.ReEmail.value)) {
-//         document.getElementById('RecheckEmail').innerHTML = notify_img_deline + '<span style="color:#FF0000">Email không giống nhau</span>';
-//         document.getElementById('checkEmailID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Vui lòng điền lại Email</span>';
-//         alert("Vui lòng kiểm tra lại Email của bạn");
-//         document.frmRegister.Email.focus();
-//         document.frmRegister.Email.value = "";
-//         document.frmRegister.ReEmail.value = "";
-//         //return false;
-//     }
-//     else
-//         document.getElementById('RecheckEmail').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-// }
-
-
-// function checkAnswer(id) {
-//     document.getElementById('AnswerID').innerHTML = notify_img_load;
-//     setTimeout("checkAnswerTrue('" + id + "')", 1000);
-// }
-// function checkAnswerTrue(id) {
-//     if (Specialcheck(document.frmRegister.Answer.value)) {
-//         document.getElementById('AnswerID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Câu trả lời bí mật không hợp lệ</span>';
-//         document.frmRegister.Answer.focus();
-//         document.frmRegister.Answer.value = "";
-//         alert("Câu trả lời bí mật không được sử dụng ký tự đặc biệt.");
-//         return false;
-//     }
-//     else if (document.frmRegister.Answer.value.length < 4) {
-//         document.getElementById('AnswerID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Câu trả lời cần có ít nhất 4 ký tự</span>';
-//         alert("Câu trả lời bí mật cần có ít nhất 4 ký tự");
-//     }
-//     else
-//         document.getElementById('AnswerID').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-// }
-
-
-//
-//
-// function CheckFormRegister() {
-//     if (document.frmRegister.Account.value == '') {
-//         alert("Vui lòng kiểm tra tên đăng nhập.");
-//         return false;
-//     }
-//     if (document.frmRegister.Account.value.length < 4) {
-//         alert("Vui lòng điền tên đăng nhập. Tên đăng nhập phải có ít nhất 4 ký tự !");
-//         document.frmRegister.Account.focus();
-//         document.frmRegister.Account.value = "";
-//         return false;
-//     }
-//     if (document.frmRegister.Password.value.length < 6) {
-//         alert("Vui lòng nhập mật khẩu của bạn. Mật khẩu phải có ít nhất 6 ký tự !");
-//         document.frmRegister.Password.focus();
-//         document.frmRegister.Password.value = "";
-//         return false;
-//     }
-//     if ((document.frmRegister.Password.value) != (document.frmRegister.RePassword.value)) {
-//         alert("Vui lòng kiểm tra lại mật khẩu của bạn");
-//         document.frmRegister.Password.focus();
-//         document.frmRegister.Password.value = "";
-//         document.frmRegister.RePassword.value = "";
-//         return false;
-//     }
-//     if ((document.frmRegister.Email.value.indexOf("@", 0) == -1 || document.frmRegister.Email.value.indexOf(".", 0) == -1)) {
-//         alert("Địa chỉ Email không hợp lệ");
-//         return false;
-//     }
-//     if ((document.frmRegister.Email.value) != (document.frmRegister.ReEmail.value)) {
-//         alert("Vui lòng kiểm tra lại Email của bạn");
-//         document.frmRegister.Email.focus();
-//         document.frmRegister.Email.value = "";
-//         document.frmRegister.ReEmail.value = "";
-//         return false;
-//     }
-//     if (document.frmRegister.PhoneNumber.value.length < 9) {
-//         alert("Vui lòng kiểm tra lại số điện thoại của bạn");
-//         document.frmRegister.PhoneNumber.focus();
-//         document.frmRegister.PhoneNumber.value = "";
-//         return false;
-//     }
-//     if (document.frmRegister.Question.value.length < 4) {
-//         alert("Vui lòng kiểm tra lại câu hỏi bí mật của bạn");
-//         document.frmRegister.Question.focus();
-//         document.frmRegister.Question.value = "";
-//         return false;
-//     }
-//     if (document.frmRegister.Answer.value.length < 4) {
-//         alert("Vui lòng kiểm tra lại câu trả lời bí mật của bạn");
-//         document.frmRegister.Answer.focus();
-//         document.frmRegister.Answer.value = "";
-//         return false;
-//     }
-//     if (document.frmRegister.vImageCodP.value.length != 6) {
-//         alert("Vui lòng kiểm tra lại Mã xác nhận");
-//         document.frmRegister.vImageCodP.focus();
-//         document.frmRegister.vImageCodP.value = "";
-//         return false;
-//     }
-//     return true;
-// }
-//
-//
-// function findUser(id) {
-//     document.getElementById(id).innerHTML = notify_img_load;
-//     setTimeout("findUserTrue('" + id + "')", 1000);
-// }
-// function findUserTrue(id) {
-//     var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-//     xmlhttp.open("GET", 'checkForm.php?action=finduser&id=' + id, false);
-//     xmlhttp.send(null);
-//     document.getElementById('UserID').innerHTML = xmlhttp.responseText;
-//     cells = UserID.getElementsByTagName("script");
-//     for (var i = 0; i < cells.length; i++) {
-//         eval(cells[i].innerHTML);
-//     }
-// }
-//
-//
-// function findAnswer(id) {
-//     document.getElementById('AnswerID').innerHTML = notify_img_load;
-//     setTimeout("findAnswerTrue('" + id + "')", 1000);
-// }
-// function findAnswerTrue(id) {
-//     var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-//     xmlhttp.open("GET", 'checkForm.php?action=findanswer&id=' + id, false);
-//     xmlhttp.send(null);
-//     document.getElementById('AnswerID').innerHTML = xmlhttp.responseText;
-//     cells = AnswerID.getElementsByTagName("script");
-//     for (var i = 0; i < cells.length; i++) {
-//         eval(cells[i].innerHTML);
-//     }
-// }
-//
-//
-// function isNumberKey(evt, id) {
-//     var charCode = (evt.which) ? evt.which : event.keyCode
-//     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-//         document.getElementById(id).innerHTML = notify_img_deline + '<span style="color:#FF0000">Chỉ được sử dụng số</span>';
-//         //alert('Bạn chỉ được dùng số, không dùng chữ')
-//         return false;
-//     }
-//     document.getElementById(id).innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-//     return true;
-// }
-//
-//
-// function CheckFormTranfer() {
-//     if (document.frmTranfer.Account.value == '') {
-//         document.getElementById('UserID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Tài khoản nhận không hợp lệ</span>';
-//         document.frmTranfer.Account.focus();
-//         return false;
-//     }
-//     if (document.frmTranfer.VpointTranfer.value < 10) {
-//         document.getElementById('VpointTranferID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Nhập số tiền muốn chuyển</span>';
-//         document.frmTranfer.VpointTranfer.focus();
-//         document.frmTranfer.VpointTranfer.value = "0";
-//         return false;
-//     }
-//     if (document.frmTranfer.Answer.value.length < 4) {
-//         document.getElementById('AnswerID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Vui lòng điền câu trả lời bí mật</span>';
-//         document.frmTranfer.Answer.focus();
-//         return false;
-//     }
-//     return true;
-// }
-//
-// function checkCardSerial(id) {
-//     var strSerial = id.replace("PM", "");
-//     document.getElementById('CardSerialID').innerHTML = notify_img_load;
-//     setTimeout("checkCardSerialTrue('" + strSerial + "')", 2000);
-// }
-// function checkCardSerialTrue(id) {
-//     var CardSerialLength;
-//     switch (document.frmnapthe.CardType.value) {
-//         case "VTC":
-//             CardSerialLength = 12;
-//             break;
-//         case "Gate":
-//             CardSerialLength = 10;
-//             break;
-//         case "Viettel":
-//             CardSerialLength = 11;
-//             break;
-//         case "Mobi":
-//             CardSerialLength = 9;
-//             break;
-//         case "Vina":
-//             CardSerialLength = 9;
-//             break;
-//         default:
-//             CardSerialLength = 12;
-//             break;
-//     }
-//     if (document.frmnapthe.CardSerial.value.replace(" ", "").length != CardSerialLength) {
-//         document.getElementById('CardSerialID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Serial thẻ không hợp lệ</span>';
-//         alert("Serial thẻ không hợp lệ.\nSerial thẻ phải có " + CardSerialLength + " ký tự. Bạn không được sử dụng dấu cách.");
+function checkCardSerialTrue(value, opt, idSms) {
+    var CardSerialLength;
+    switch (value) {
+        case "vtc":
+            CardSerialLength = 12;
+            break;
+        case "gate":
+            CardSerialLength = 10;
+            break;
+        case "viettel":
+            CardSerialLength = 11;
+            break;
+        case "mobi":
+            CardSerialLength = 9;
+            break;
+        case "vina":
+            CardSerialLength = 9;
+            break;
+        default:
+            // CardSerialLength = 12;
+            break;
+    }
+    if (value.length != CardSerialLength) {
+        getId(idSms).innerHTML = notify_img_deline + '<span style = "color:#FF0000"> Serial thẻ không hợp lệ </span> ';
 //         document.frmnapthe.CardSerial.focus();
 //         if (document.frmnapthe.CardType.value == "VTC")
 //             document.frmnapthe.CardSerial.value = "PM";
 //         else
 //             document.frmnapthe.CardSerial.value = "";
-//     }
-//     else if (((id / id) != 1) && (id != 0) && (document.frmnapthe.CardType.value == "VTC")) {
-//         document.getElementById('CardSerialID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Serial thẻ không hợp lệ</span>';
-//         alert("Serial thẻ không hợp lệ.\nSerial thẻ chỉ bao gồm chữ PM và 10 chữ số.");
+    }
+    else if (((id / id) != 1) && (id != 0)) {
+        // else if (((id / id) != 1) && (id != 0) && (document.frmnapthe.CardType.value == "VTC")) {
+        getId(idSms).innerHTML = notify_img_deline + '<span style="color:#FF0000">Serial thẻ không hợp lệ</span>';
 //         document.frmnapthe.CardSerial.focus();
 //         if (document.frmnapthe.CardType.value == "VTC")
 //             document.frmnapthe.CardSerial.value = "PM";
 //         else
 //             document.frmnapthe.CardSerial.value = "";
-//     }
-//     else
-//         document.getElementById('CardSerialID').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-// }
-//
-//
-// function checkCardCode(id) {
-//     document.getElementById('CardCodeID').innerHTML = notify_img_load;
-//     setTimeout("checkCardCodeTrue('" + id + "')", 2000);
-// }
-// function checkCardCodeTrue(id) {
-//     var CardCodeLength;
-//     switch (document.frmnapthe.CardType.value) {
-//         case "VTC":
-//             CardCodeLength = 12;
-//             break;
-//         case "Gate":
-//             CardCodeLength = 10;
-//             break;
-//         case "Viettel":
-//             CardCodeLength = 13;
-//             break;
-//         case "Mobi":
-//             CardCodeLength = 14;
-//             break;
-//         case "Vina":
-//             CardCodeLength = 12;
-//             break;
-//         default:
-//             CardCodeLength = 12;
-//             break;
-//     }
-//     if (document.frmnapthe.CardCode.value.replace(" ", "").length != CardCodeLength) {
-//         document.getElementById('CardCodeID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Mã số thẻ không hợp lệ</span>';
-//         alert("Mã số thẻ không hợp lệ.\nMã số thẻ phải có " + CardCodeLength + " ký tự. Bạn không được sử dụng dấu cách.");
-//         document.frmnapthe.CardCode.focus();
-//         document.frmnapthe.CardCode.value = "";
-//     }
-//     else if (((id / id) != 1) && (id != 0)) {
-//         document.getElementById('CardCodeID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Mã số thẻ không hợp lệ</span>';
-//         alert("Mã số thẻ không hợp lệ.\nMã số thẻ chỉ bao gồm " + CardCodeLength + " chữ số.");
-//         document.frmnapthe.CardCode.focus();
-//         document.frmnapthe.CardCode.value = "";
-//     }
-//     else
-//         document.getElementById('CardCodeID').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-// }
-//
-//
-// function checkDenominations(id) {
-//     document.getElementById('DenominationsID').innerHTML = notify_img_load;
-//     setTimeout("checkDenominationsTrue('" + id + "')", 1000);
-// }
-// function checkDenominationsTrue(id) {
-//     if (document.frmnapthe.Denominations.value == '') {
-//         document.getElementById('DenominationsID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Hãy chọn mệnh giá thẻ nạp</span>';
-//         alert("Hãy chọn mệnh giá thẻ nạp của bạn.");
-//     }
-//     else
-//         document.getElementById('DenominationsID').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-// }
-//
-//
-// function CheckFormNapThe() {
-//     var CardSerialLength;
-//     var CardCodeLength;
-//     switch (document.frmnapthe.CardType.value) {
-//         case "VTC":
-//             CardSerialLength = 12;
-//             CardCodeLength = 12;
-//             break;
-//         case "Gate":
-//             CardSerialLength = 10;
-//             CardCodeLength = 10;
-//             break;
-//         case "Viettel":
-//             CardSerialLength = 11;
-//             CardCodeLength = 13;
-//             break;
-//         case "Mobi":
-//             CardSerialLength = 9;
-//             CardCodeLength = 14;
-//             break;
-//         case "Vina":
-//             CardSerialLength = 9;
-//             CardCodeLength = 12;
-//             break;
-//         default:
-//             CardSerialLength = 12;
-//             CardCodeLength = 12;
-//             break;
-//     }
-//     if (document.frmnapthe.CardSerial.value.length < CardSerialLength) {
-//         document.getElementById('checkCardSerialID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Serial thẻ không hợp lệ</span>';
-//         document.frmnapthe.CardSerial.focus();
-//         if (document.frmnapthe.CardType.value == "VTC")
-//             document.frmnapthe.CardSerial.value = "PM";
-//         else
-//             document.frmnapthe.CardSerial.value = "";
-//         return false;
-//     }
-//     if (document.frmnapthe.CardCode.value.length < CardCodeLength) {
-//         document.getElementById('CardCodeID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Mã số thẻ không hợp lệ</span>';
-//         document.frmnapthe.CardCode.focus();
-//         document.frmnapthe.CardCode.value = "";
-//         return false;
-//     }
-//     if (document.frmnapthe.Denominations.value == '') {
-//         document.getElementById('DenominationsID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Hãy chọn mệnh giá thẻ nạp</span>';
-//         document.frmnapthe.Denominations.focus();
-//         return false;
-//     }
-//     return true;
-// }
-//
-//
-// function CheckCodeVerify(value) {
-//     if (value.length == 6) {
-//         document.getElementById('msg_vImageCodP').innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-//     }
-//     else
-//         document.getElementById('msg_vImageCodP').innerHTML = notify_img_deline + '<span style="color:#FF0000">Mã xác nhận không hợp lệ</span>';
-// }
-//
-//
-// function CheckFormChangeName() {
-//     if (document.frmChangeName.NewName.value == '') {
-//         document.getElementById('NewNameID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Vui lòng nhập tên Nhân vật</span>';
-//         document.frmChangeName.NewName.focus();
-//         return false;
-//     }
-//     if (document.frmChangeName.NewName.value.length < 4) {
-//         alert("Vui lòng điền tên nhân vật. Tên nhân vật phải có ít nhất 4 ký tự !");
-//         document.frmChangeName.NewName.focus();
-//         document.frmChangeName.NewName.value = "";
-//         return false;
-//     }
-//     return true;
-// }
-//
-// function findNewName(id) {
-//     document.getElementById('NewNameID').innerHTML = notify_img_load;
-//     setTimeout("findNewNameTrue('" + id + "')", 1500);
-// }
-// function findNewNameTrue(id) {
-//     if (Specialcheck(document.frmChangeName.NewName.value)) {
-//         document.getElementById('NewNameID').innerHTML = notify_img_deline + '<span style="color:#FF0000">Tài khoản không hợp lệ</span>';
-//         document.frmChangeName.NewName.focus();
-//         document.frmChangeName.NewName.value = "";
-//         alert("Tên nhân vật không được sử dụng ký tự đặc biệt.");
-//         return false;
-//     }
-//     var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-//     xmlhttp.open("GET", 'checkForm.php?action=checkname&id=' + id, false);
-//     xmlhttp.send(null);
-//     document.getElementById('NewNameID').innerHTML = xmlhttp.responseText;
-//     cells = NewNameID.getElementsByTagName("script");
-//     for (var i = 0; i < cells.length; i++) {
-//         eval(cells[i].innerHTML);
-//     }
-// }
+    } else {
+        getId(idSms).innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
+    }
+}
+
+function checkCardCode(val, opt,  idSms) {
+    getId(idSms).innerHTML = notify_img_load;
+    setTimeout("checkCardCodeTrue('" + val + "', '" + opt + "', '" + idSms + "')", 500);
+}
+function checkCardCodeTrue(value, opt, idSms) {
+    var CardCodeLength;
+    switch (opt) {
+        case "vtc":
+            CardCodeLength = 12;
+            break;
+        case "gate":
+            CardCodeLength = 10;
+            break;
+        case "viettel":
+            CardCodeLength = 13;
+            break;
+        case "mobi":
+            CardCodeLength = 14;
+            break;
+        case "vina":
+            CardCodeLength = 12;
+            break;
+        default:
+            // CardCodeLength = 12;
+            break;
+    }
+    if (value.length != CardCodeLength) {
+        getId(idSms).innerHTML = notify_img_deline + '<span style="color:#FF0000">Mã số thẻ không hợp lệ</span>';
+        // document.frmnapthe.CardCode.focus();
+        // document.frmnapthe.CardCode.value = "";
+    }
+    else if (((id / id) != 1) && (id != 0)) {
+        getId(idSms).innerHTML = notify_img_deline + '<span style="color:#FF0000">Mã số thẻ không hợp lệ</span>';
+        // document.frmnapthe.CardCode.focus();
+        // document.frmnapthe.CardCode.value = "";
+    } else {
+        getId(idSms).innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
+    }
+}
 
 function topxTip(content) {
     Tip(content, PADDING, 1, BORDERWIDTH, 0, BGCOLOR, '', STICKY, 1, DURATION, 10000, CLICKCLOSE, true);

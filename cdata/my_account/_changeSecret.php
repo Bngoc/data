@@ -22,7 +22,7 @@ if ($errors_result) {
             </td>
         </tr>
         <tr>
-            <td class="bizwebform_col_1">Mã số bí mật (7) <span class="required">*</span></td>
+            <td class="bizwebform_col_1">Mã số bí mật mới (7) <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input name="cnum_7_verify" class="bizwebform" type="text" maxlength="7"
                                                 autocomplete="off"
                                                 onkeypress="return isNumKey(event,'cerr_num7');"

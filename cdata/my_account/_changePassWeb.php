@@ -25,7 +25,7 @@ if ($errors_result) {
         </tr>
         <tr>
         <tr>
-            <td class="bizwebform_col_1">Mật khẩu Web <span class="required">*</span></td>
+            <td class="bizwebform_col_1">Mật khẩu Web mới <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input class="bizwebform" class="txt_160" name="cpass_web" type="password"
                                                 id="pass1"
                                                 required="required" maxlength="15"
@@ -33,7 +33,7 @@ if ($errors_result) {
             <td class="bizwebform_col_3" id="cmsg_passweb"></td>
         </tr>
         <tr>
-            <td class="bizwebform_col_1">Xác nhận mật khẩu Web <span class="required">*</span></td>
+            <td class="bizwebform_col_1">Xác nhận mật khẩu Web mới <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input class="bizwebform" class="txt_160" name="crepass_web" type="password"
                                                 id="repass1" required="required"
                                                 maxlength="15"
