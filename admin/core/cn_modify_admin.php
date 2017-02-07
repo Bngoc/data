@@ -1488,10 +1488,7 @@ function cn_config_load()
         //download
         'download_media' => '',
         'download_onedrive' => '',
-        'download_4share' => '',
-        'download_dropbox' => '',
-        'download_googledriver' => '',
-
+        'download_4share' => ''
     );
 
     // Set default values

@@ -13,15 +13,16 @@ list($arr_downlooadShow) = _GL('arr_downlooadShow');
             <th class="rbg"><span>Download</span></th>
         </tr>
         <?php foreach ($arr_downlooadShow as $key => $item) {
-            echo '<tr><td>' . ($i + 1) . '</td>';
-//            if (!empty($item['href'])) {
-            echo '<td>' . 0 . '</td>';
-            echo '<td>' . ucfirst($item['name']) . '</td>';
-            echo '<td>' . $item['href'] .
-                '<img border="0" src="<?php echo $img_url; ?>/btn_download.gif"
+            if (!empty($item['href'])) {
+                echo '<tr><td>' . ($key + 1) . '</td>';
+                echo '<td>' . $item['name'] . '</td>';
+                echo '<td>' . $item['filesize'] . '</td>';
+                echo '<td>' . ucfirst($item['hostname']) . '</td>';
+                echo '<td> <a href="' . $item['href'] . '" target="_blank">
+                <img border="0" src="' . URL_PATH_IMG . '/btn_download.gif"
                              width="86" height="28"></a>
                 </td>';
-//            }
+            }
             echo '</tr>';
         } ?>
     </table>
