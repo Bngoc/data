@@ -755,6 +755,7 @@ function char_resetvip()
         $time_reset_next = isset($time_reset_next) ? $time_reset_next : $options_rsvip[count($options_rsvip) - 1]['time'];
     }
 
+    echo 'kt_vpoint => ' . $kt_vpoint . '<br>';
     if (isset($options_rl)) {
         foreach ($options_rl as $_aq => $qa) {
             if ($relife_vl == $_aq) {
