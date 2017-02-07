@@ -1761,7 +1761,7 @@ function cn_ResultDe()
                             'OptionResult=\'' . $timeYesterday . '\''
                         );
 
-                        $showupDate = do_select_orther("SELECT [ID], [AccountID],[WriteDe],[timestamp],[Action], [Vpoint] FROM WriteDe WHERE Convert(Date, timestamp)='$dateTime' AND Action = 1");
+                        $showupDate = do_select_orther("SELECT [ID], [AccountID],[WriteDe],[timestamp],[Action], [Vpoint] FROM WriteDe WHERE Convert(Date, [timestamp])='$dateTime' AND Action = 1");
 
                         foreach ($showupDate as $key => $items) {
                             $ischeck = false;
