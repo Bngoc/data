@@ -755,7 +755,6 @@ function char_resetvip()
         $time_reset_next = isset($time_reset_next) ? $time_reset_next : $options_rsvip[count($options_rsvip) - 1]['time'];
     }
 
-    echo 'kt_vpoint => ' . $kt_vpoint . '<br>';
     if (isset($options_rl)) {
         foreach ($options_rl as $_aq => $qa) {
             if ($relife_vl == $_aq) {
@@ -838,8 +837,14 @@ function char_resetvip()
             $i_end = $i_end + 10;
         }
         $gioihan_rsvip = isset($gioihan_rsvip) ? $gioihan_rsvip : $options_gh1[count($options_gh1) - 1]['top'];
-        if ($gioihan_rsvip > $rsvip_inday) $rs_day = "$rsvip_inday / $gioihan_rsvip";
-        else $rs_day = "<font color=red> $rsvip_inday / $gioihan_rsvip </font>";
+
+        if ($gioihan_rsvip > $rsvip_inday){
+            $rs_day = "$rsvip_inday / $gioihan_rsvip";
+        } else {
+            $rs_day = "<font color=red> $rsvip_inday / $gioihan_rsvip </font>";
+        }
+        $get_vp = (isset($get_blank_vp) ? $get_blank_vp : $blank_vp);
+
     } else if ($user_type_gh_rs == 2) {
         $okloop = false;
 
