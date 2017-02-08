@@ -1804,21 +1804,24 @@ function cn_ResultDe()
         }
     }
 
+    $dateTimeAction = date('Y-m-d', strtotime(date('d-m-Y', $time) . '- 1 days'));
     foreach ($showupDate as $key => $items) {
         $ischeck = false;
         $ID = trim($items['ID']);
         $AccountID = trim($items['AccountID']);
         $keytmp = getDMY($items['timestamp']);
 
-        if (isset($dataResultDe[$keytmp])) {
-            if ($dataResultDe[$keytmp] && trim($items['WriteDe']) == $dataResultDe[$keytmp]) {
-                $vpointnew = $items['Vpoint'] * 70;
-                do_update_character('MEMB_INFO', "vpoint=vpoint+$vpointnew", "memb___id:'$AccountID'");
-                $ischeck = true;
+        if ($keytmp && $keytmp < $dateTimeAction) {
+            if (isset($dataResultDe[$keytmp])) {
+                if ($dataResultDe[$keytmp] && trim($items['WriteDe']) == $dataResultDe[$keytmp]) {
+                    $vpointnew = $items['Vpoint'] * 70;
+                    do_update_character('MEMB_INFO', "vpoint=vpoint+$vpointnew", "memb___id:'$AccountID'");
+                    $ischeck = true;
+                }
             }
-        }
 
-        do_update_character('WriteDe', "Action=0", "Result=" . (($ischeck) ? '1' : '2'), "ID:'$ID'");
+            do_update_character('WriteDe', "Action=0", "Result=" . (($ischeck) ? '1' : '2'), "ID:'$ID'");
+        }
     }
 }
 
