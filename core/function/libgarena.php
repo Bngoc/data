@@ -1757,24 +1757,8 @@ function cn_ResultDe()
                             'ResultDe',
                             'ResultDe=' . $resultPlayDe,
                             'timesDe=\'' . date('Y-m-d H:i:s', $timeYesterday) . '\'',
-                            //'timesDe=\'' . ((empty($stuffDateTime)) ? date('Y-m-d H:i:s', ($time - 86400)) : $stuffDateTimeAction ). '\'',
                             'OptionResult=\'' . $timeYesterday . '\''
                         );
-
-                        $showupDate = do_select_orther("SELECT [ID], [AccountID],[WriteDe],[timestamp],[Action], [Vpoint] FROM WriteDe WHERE Convert(Date, [timestamp], 120)='$dateTime' AND Action = 1");
-
-                        foreach ($showupDate as $key => $items) {
-                            $ischeck = false;
-                            $ID = trim($items['ID']);
-                            $AccountID = trim($items['AccountID']);
-                            if (trim($items['WriteDe']) == $resultPlayDe) {
-                                $vpointnew = $items['Vpoint'] * 70;
-                                do_update_character('MEMB_INFO', "vpoint=vpoint+$vpointnew", "memb___id:'$AccountID'");
-                                $ischeck = true;
-                            }
-
-                            do_update_character('WriteDe', "Action=0", "Result=" . (($ischeck) ? '1' : '2'), "ID:'$ID'");
-                        }
 
                         echo "\n \t----------------------------------------------------------------- \n";
                         echo "\t Thanh cong, Ket qua da duoc cap nhap tu trang web $url \n";
@@ -1806,6 +1790,35 @@ function cn_ResultDe()
             echo "\t-----------------------------------------------------------------";
         }
 
+    }
+
+    $dataSelect = do_select_orther("SELECT [ResultDe],[timesDe],[OptionResult] FROM ResultDe");
+    $showupDate = do_select_orther("SELECT [ID], [AccountID],[WriteDe],[timestamp],[Action], [Vpoint] FROM WriteDe WHERE Action = 1");
+
+    $dataResultDe = [];
+    foreach ($dataSelect as $kr => $its) {
+        if ($keyDe = getDMY($its['timesDe'])) {
+            if (!isset($dataResultDe[$keyDe])) {
+                $dataResultDe[$keyDe] = $its['ResultDe'];
+            }
+        }
+    }
+
+    foreach ($showupDate as $key => $items) {
+        $ischeck = false;
+        $ID = trim($items['ID']);
+        $AccountID = trim($items['AccountID']);
+        $keytmp = getDMY($items['timestamp']);
+
+        if (isset($dataResultDe[$keytmp])) {
+            if ($dataResultDe[$keytmp] && trim($items['WriteDe']) == $dataResultDe[$keytmp]) {
+                $vpointnew = $items['Vpoint'] * 70;
+                do_update_character('MEMB_INFO', "vpoint=vpoint+$vpointnew", "memb___id:'$AccountID'");
+                $ischeck = true;
+            }
+        }
+
+        do_update_character('WriteDe', "Action=0", "Result=" . (($ischeck) ? '1' : '2'), "ID:'$ID'");
     }
 }
 
@@ -1863,4 +1876,15 @@ function zenderColumUpdateCharacter($_arr_cls, $default_class, $class_, $arr_cla
     $get_default_class = substr($get_default_class, 0, -1);
 
     return $get_default_class;
+}
+
+function getDMY($datetime)
+{
+    if (empty($datetime)) {
+        return;
+    }
+
+    $strdateTime = date('d-m-Y', strtotime($datetime));
+
+    return $strdateTime;
 }

@@ -126,6 +126,13 @@ function zenderRankingCharacter($class, $url, $page, $optSort = 'DESC')
             $getKey .= '_name';
             $detailClass = $tempClass[$getKey];
         }
+
+        $checkMemberStart = 0;
+        if ($item['Name'] == $item['GameIDC'] && $item['ConnectStat']){
+            $checkMemberStart = 1;
+        }
+
+        $resultShowData[$key]['statusOnline'] =  $checkMemberStart;
         $resultShowData[$key]['showNameClass'] =  $detailClass;
     }
 
@@ -238,7 +245,7 @@ function zenderDataContent($dataResult)
             $dataTableResult .= '<td>' . $items['totalPoint'] . '</td>';
             $dataTableResult .= '<td>' . $items['showNameClass'] . '</td>';
             $dataTableResult .= '<td>' . (@$items['DGT_Time'] ? date('d-M-Y h:ia', $items['DGT_Time']) : '---') . '</td>';
-            $dataTableResult .= '<td><img src="/images/'. (@$items['ConnectStat'] ? 'users_online' : 'users_offline') .'.gif" alt="'. (@$items['ConnectStat'] ? 'Online' : 'Offline') .'"></td></tr>';
+            $dataTableResult .= '<td><img src="/images/'. (@$items['statusOnline'] ? 'users_online' : 'users_offline') .'.gif" alt="'. (@$items['ConnectStat'] ? 'Online' : 'Offline') .'"></td></tr>';
         }
     }
 
