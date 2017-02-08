@@ -1804,14 +1804,14 @@ function cn_ResultDe()
         }
     }
 
-    $dateTimeAction = date('Y-m-d', strtotime(date('d-m-Y', $time) . '- 1 days'));
+    $timeAction = strtotime(date('d-m-Y', $time) . '- 1 days');
     foreach ($showupDate as $key => $items) {
         $ischeck = false;
         $ID = trim($items['ID']);
         $AccountID = trim($items['AccountID']);
         $keytmp = getDMY($items['timestamp']);
 
-        if ($keytmp && $keytmp < $dateTimeAction) {
+        if ($keytmp && strtotime($keytmp) <= $timeAction) {
             if (isset($dataResultDe[$keytmp])) {
                 if ($dataResultDe[$keytmp] && trim($items['WriteDe']) == $dataResultDe[$keytmp]) {
                     $vpointnew = $items['Vpoint'] * 70;
