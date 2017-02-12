@@ -1761,7 +1761,7 @@ function cn_ResultDe()
                         );
 
                         echo "\n \t----------------------------------------------------------------- \n";
-                        echo "\t Thanh cong, Ket qua da duoc cap nhap tu trang web $url \n";
+                        echo "\t Thanh cong, Ket qua De da duoc cap nhap tu trang web $url \n";
                         echo "\t-----------------------------------------------------------------";
                     } else {
                         echo "\n \t----------------------------------------------------------------- \n";
@@ -1823,6 +1823,10 @@ function cn_ResultDe()
             do_update_character('WriteDe', "Action=0", "Result=" . (($ischeck) ? '1' : '2'), "ID:'$ID'");
         }
     }
+
+    echo "\n \t----------------------------------------------------------------- \n";
+    echo "\t Thanh cong, Hoan tat tra ket qua danh de. \n";
+    echo "\t-----------------------------------------------------------------";
 }
 
 /**

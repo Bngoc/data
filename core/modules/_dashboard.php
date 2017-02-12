@@ -549,7 +549,7 @@ function char_reset()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $set_vp . "|" . $_blank_var[0]['gc'] . "_" . $vpointnew . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
                 if ($user_type_gh_rs == 1) {
                     if ($gioihan_rs > $CountNoResetInDay) $rs_day_ = "$CountNoResetInDay / $gioihan_rs";
@@ -838,7 +838,7 @@ function char_resetvip()
         }
         $gioihan_rsvip = isset($gioihan_rsvip) ? $gioihan_rsvip : $options_gh1[count($options_gh1) - 1]['top'];
 
-        if ($gioihan_rsvip > $rsvip_inday){
+        if ($gioihan_rsvip > $rsvip_inday) {
             $rs_day = "$rsvip_inday / $gioihan_rsvip";
         } else {
             $rs_day = "<font color=red> $rsvip_inday / $gioihan_rsvip </font>";
@@ -1167,7 +1167,7 @@ function char_resetvip()
                 $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
                 if ($checkDir) {
                     $file = $files . "/log_resetsvip.log";
-                // $file = MODULE_ADM . "/log/modules/character/log_resetsvip.log";
+                    // $file = MODULE_ADM . "/log/modules/character/log_resetsvip.log";
                     cn_touch($file);
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $blank_gcoin . "_" . $blank_vp . "_" . $blank_gcoin_km . "|" . $gcoin_rsvip . "_" . $vpointnew . "_" . $gcoin_gkm_rsvip . "|" . $Date . "|\n" . $fileContents);
@@ -1418,7 +1418,7 @@ function char_relife()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $vp_gc[0]['gc'] . "_" . $vp_gc[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
                 cn_throw_message("$sub ReLife lần thứ $CountRelifeup thành công!");
                 if ($point_relifes > 0) $str_rutpoint = "Bạn có " . number_format((float)$pointup_rl, 0, ",", ".") . " Point. Vui lòng <a href='#' title='cộng Point'> cộng Point </a> trước khi <b><a href ='#' title='rút Point'> rút Point</a></b> còn lại cho nhân vật $sub.";
@@ -1589,7 +1589,7 @@ function char_online()
                         $fileContents = file_get_contents($file);
                         file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_after . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                     }
-                        //End Ghi vào Log
+                    //End Ghi vào Log
 
                     cn_throw_message("$sub đã kết thúc Ủy thác thành công.");
                     cn_throw_message("Nhận được $minute_to_point Điểm Ủy thác trong $_point phút Ủy thác. Chi phí $gcoin_uythac Gcoin.");
@@ -1631,7 +1631,7 @@ function char_online()
                         $fileContents = file_get_contents($file);
                         file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                     }
-                        //End Ghi vào Log
+                    //End Ghi vào Log
 
                     $before_info_on[6][1] = '<img src="' . URL_PATH_IMG . '/checkbullet.gif" title="Online">';
 
@@ -1793,7 +1793,7 @@ function char_offline()
                         $fileContents = file_get_contents($file);
                         file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_after . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                     }
-                        //End Ghi vào Log
+                    //End Ghi vào Log
 
                     cn_throw_message("$sub đã kết thúc Ủy thác thành công.");
                     cn_throw_message("Nhận được $minute_to_point Điểm Ủy thác trong $_point phút Ủy thác. Chi phí $gcoin_uythac gcoin.");
@@ -1835,7 +1835,7 @@ function char_offline()
                         $fileContents = file_get_contents($file);
                         file_put_contents($file, $accc_ . "|" . $content . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $_gcoin . "_" . $_blank_var[0]['vp'] . "|" . $Date . "|\n" . $fileContents);
                     }
-                        //End Ghi vào Log
+                    //End Ghi vào Log
 
                     $before_info_off[6][1] = '<img src="' . URL_PATH_IMG . '/checkbullet.gif" title="Online">';
 
@@ -2297,7 +2297,7 @@ function char_rsdelegatevip()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_gcoin . "_" . $_blank_vpoint . "|" . $gcoin_rsvip . "_" . $vpointnew . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
                 if ($rsvipuythac_index >= count($options_rsvip_trust) - 1) $rsvipuythac_index = count($options_rsvip_trust) - 1;
                 else if ($rsvipuythac_index > $i_e) ++$rsvipuythac_index;
@@ -2794,7 +2794,7 @@ function char_rspoint()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $_blank_var[0]['vp'] . "|" . $gcoin_new . "_" . $vpoint_new . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
 
                 if ($gcoin_new >= $_gcoin_test) $sms_gc = "(Đủ Gcoin)";
@@ -3054,7 +3054,7 @@ function char_removepk()
                         $fileContents = file_get_contents($file);
                         file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $ktvpoint . "|" . $Date . "|\n" . $fileContents);
                     }
-                        //End Ghi vào Log
+                    //End Ghi vào Log
                     $before_info_pk[9][1] = number_format((float)($ktvpoint), 0, ",", ".");
                 }
 
@@ -3189,7 +3189,7 @@ function char_pointtax()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . '_' . $ktvpoint . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
                 $before_info_pointtax[6][1] = "(Thuê còn " . date("H:i:s", $ctime) . ")";
                 cn_throw_message("Nhân vật $sub đã thuê điểm thành công.");
@@ -3337,7 +3337,7 @@ function char_changename()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $var_vp . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
                 $before_info_cn[3][1] = number_format((float)$ktgcoin, 0, ",", ".");
                 $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
@@ -3507,7 +3507,7 @@ function char_changeclass()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
                 $before_info_cn[1][1] = number_format((float)$newReset, 0, ",", ".");
                 $before_info_cn[3][1] = number_format((float)$ktgcoin, 0, ",", ".");
@@ -3534,7 +3534,7 @@ function char_level1()
     $config_level = explode('|', getoption('configLevel'), 2);
 
     $tempClass = ['class_dw_1', 'class_dk_1', 'class_elf_1', 'class_sum_1'];
-    $tempSkip = ['mg', 'dl', 'rf'];
+    $skipClass = ['mg', 'dl', 'rf'];
 
     $showchar = cn_character();
     $infoClass = cn_template_class();
@@ -3548,38 +3548,28 @@ function char_level1()
             $sub = array_keys($showchar)[0];
     }
 
-    $cn_false = $is_clevel1 = false;
+    $is_clevel1 = false;
     $gcoin_ = $_blank_var[0]['gc'];
     $vpoint_ = $_blank_var[0]['vp'];
 
     $level = $showchar[$sub]['level'];
-    $reset_ = $showchar[$sub]['reset'];
-    $isClass = $showchar[$sub]['isClass'];
+    $isClass = strtolower($showchar[$sub]['isClass']);
     $class_ = $showchar[$sub]['class'];
-    $status = '';
-    $checkLevel150 = false;
 
     $key = array_search($class_, $infoClass);
-    if ($key !== false) {
-        $numberClass = explode('_', $key);
-
-        if (in_array($key, $tempClass) && !in_array($isClass, $tempSkip) && $numberClass[2] == 1) {
-            $status = '<span class="cBlue"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 1 </span><br>";
-        } else {
-            $status = '<span class="cInfo"> <b>' . ucfirst($sub) . "</b> đã làm nhiệm vụ cấp 1 </span><br>";
-            $checkLevel150 = true;
-        }
+    if ($key === false) {
+        $notFoundClass = true;
     }
 
-    $temp = [];
-    foreach ($infoClass as $key => $val) {
-        $strA = explode('_', $key);
-        if (in_array($strA[1], $tempClass)) {
-            if (!isset($temp[$strA[1]]) && $strA[1] != $isClass) {
-                $temp[$strA[1]] = [$strA[1] . '_code' => $infoClass[$key], $strA[1] . '_name' => $infoClass[$key . '_name']];
-            }
-        }
-    }
+//    $temp = [];
+//    foreach ($infoClass as $key => $val) {
+//        $strA = explode('_', $key);
+//        if (in_array($strA[1], $tempClass)) {
+//            if (!isset($temp[$strA[1]]) && $strA[1] != $isClass) {
+//                $temp[$strA[1]] = [$strA[1] . '_code' => $infoClass[$key], $strA[1] . '_name' => $infoClass[$key . '_name']];
+//            }
+//        }
+//    }
 
     if ($level >= 150) {
         $sms_level = $level . '(Đủ Level)';
@@ -3588,7 +3578,7 @@ function char_level1()
         $sms_level = $level . ' <font color=red>(Thiếu ' . abs(150 - $level) . ' Level) </font>';
     }
 
-    list ($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, $config_level[0]);
+    list ($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, (int)$config_level[0]);
 
     if (check_changecls($_SESSION['user_Gamer'], $sub)) {
         $check_change = true;
@@ -3603,7 +3593,6 @@ function char_level1()
         2 => array('Cấp độ', $level),
         3 => array('Vpoint', number_format((float)$get_vp, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '')),
         4 => array('Đổi nhân vật', $status_change),
-        5 => array('Status', $status)
     );
 
     if (request_type('POST')) {
@@ -3631,68 +3620,36 @@ function char_level1()
                 $errors_false = true;
             }
 
-            if ($checkLevel150) {
-                cn_throw_message('Nhân vật ' . $sub . ' đã làm nhiệm vụ cấp 1 (level 150)!');
+            if (in_array($isClass, $skipClass)) {
+                cn_throw_message("Nhân vật ' . $sub . ' không nằm trong danh sách thực hiện làm nhiệm cấp 1 (lv.150).", 'e');
+                $errors_false = true;
+            }
+
+            if (isset($notFoundClass)) {
+                cn_throw_message('Nhân vật ' . $sub . ' không thực hiện được nhiệm vụ cấp 1. <br>Vui lòng thực hiện trong game!');
                 $errors_false = true;
             }
 
             if (!$errors_false) {
-//                $ktvpoint = isset($get_vp) ? $get_vp : $vpoint_;
-
-                $ktvpoint = $get_vp;
-
-                $newReset = $reset_ - ceil(0.01 * $changeClass[1] * $reset_);
-//                if ($ktvpoint == $vpoint_) $var_vp = ($_blank_var[0]['gc']- $get_gc) . " Gcoin";
-//                else
+                //Quest
+                //DW, DK, F, Sum => 0xFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
                 $var_vp = ($_blank_var[0]['vp'] - $get_vp) . " Vpoint";
 
-//                $_codeClass = $infoClass['class_'.$nameClass.'_1'];
-
-                $default_class = do_select_character(
-                    'DefaultClassType',
-                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership',
-                    "Class=" . ($class_ - 0) . " Or Class=" . ($class_ - 1) . " Or Class=" . ($class_ - 2) . " Or Class=" . ($class_ - 3)
-                );
-                $get_default_class = '';
-                $_arr_cls = spsep($arr_cls);
-                foreach ($_arr_cls as $key => $val)
-                    $get_default_class .= "$val=" . $default_class[0][$val] . ",";
-
-                $get_default_class = substr($get_default_class, 0, -1);
-
-                $inventory_nothing = '';
-                for ($i = 0; $i < 3456; $i++) {
-                    $inventory_nothing .= 'F';
-                }
-                $quest_nothing = substr($inventory_nothing, 0, 100);
+                $quest_nothing = '0xFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF';
 
                 do_update_character(
                     'Character',
-                    'Clevel=400',
-                    "Resets=$newReset",
-                    'Experience=0',
-                    "Class=$_codeClass",
-                    "LevelUpPoint=0",
-                    "pointdutru=0",
-                    "$get_default_class",
-                    "MapDir=0",
-                    "MagicList=CONVERT(varbinary(180), null)",
-                    "Quest=0x$quest_nothing",
-                    "Inventory=0x$inventory_nothing",
+                    "LevelUpPoint=LevelUpPoint+20",
+                    'Class=' . $infoClass['class_' . $isClass . '_1'],
+                    "Quest=$quest_nothing",
                     "name:'$sub'"
                 );
 
-                //Reset Point Master Skill
-                if (($class_ == $infoClass['class_dw_3']) || ($class_ == $infoClass['class_dk_3']) || ($class_ == $infoClass['class_elf_3']) || ($class_ == $infoClass['class_mg_2']) || ($class_ == $infoClass['class_dl_2']) || ($class_ == $infoClass['class_sum_3']) || ($class_ == $infoClass['class_rf_2'])) {
-                    if (getoption('server_type') == "scf")
-                        do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
-                    else if (getoption('server_type') == "ori")
-                        do_update_character('T_MasterLevelSystem', 'MASTER_LEVEL=0', 'ML_POINT=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
-                    else
-                        do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
-                }
-
-                do_update_character('MEMB_INFO', "vpoint = $ktvpoint", "gcoin = $ktgcoin", "memb___id:'$accc_'");
+                do_update_character(
+                    'MEMB_INFO',
+                    "vpoint = $get_vp",
+                    "memb___id:'$accc_'"
+                );
 
                 //Ghi vào Log
                 $content = "Nhân vật $sub làm nhiệm vụ với $var_vp";
@@ -3700,18 +3657,21 @@ function char_level1()
                 $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
                 if ($checkDir) {
                     $file = $files . "/log_level150.log";
-//                $file = MODULE_ADM . "/log/modules/character/log_level150.log";
                     cn_touch($file);
                     $fileContents = file_get_contents($file);
-                    file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc_ . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $gcoin_ . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
-                $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
+                list ($get_vpNew, $sms_vp, $cn_false) = checkVpoint($get_vp, (int)$config_level[0]);
+                $before_info_cn[3][1] = number_format((float)$get_vpNew, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '');
 
-                $temp[$isClass] = [$isClass . '_code' => $infoClass['class_' . $isClass . '_1'], $isClass . '_name' => $infoClass['class_' . $isClass . '_1_name']];
+//                $temp[$isClass] = [
+//                    $isClass . '_code' => $infoClass['class_' . $isClass . '_1'],
+//                    $isClass . '_name' => $infoClass['class_' . $isClass . '_1_name']
+//                ];
 
-                cn_throw_message("Nhân vật $sub đã đổi nhiệm vụ 150 thành công.");
+                cn_throw_message("Nhân vật $sub đã đổi nhiệm vụ cấp 1 (lv.150) thành công.");
             }
         }
     }
@@ -3726,12 +3686,9 @@ function char_level1()
 function char_level2()
 {
     $tempClass = ['class_dw_2', 'class_dk_2', 'class_elf_2', 'class_sum_2'];
+    $skipClass = ['mg', 'dl', 'rf'];
 
-    $config_level = explode('|', getoption('configLevel'), 2);
-
-    $tempClassLevel = ['class_dw_1', 'class_dk_1', 'class_elf_1', 'class_sum_1'];
-    $tempSkip = ['mg', 'dl', 'rf'];
-//
+    $config_level = explode('|', getoption('configLevel'), 3);
     $showchar = cn_character();
     $infoClass = cn_template_class();
     $_blank_var = view_bank($accc_ = $_SESSION['user_Gamer']);
@@ -3744,52 +3701,28 @@ function char_level2()
             $sub = array_keys($showchar)[0];
     }
 
-    $cn_false = $is_level2 = false;
+    $is_level2 = false;
     $gcoin_ = $_blank_var[0]['gc'];
     $vpoint_ = $_blank_var[0]['vp'];
 
     $level = $showchar[$sub]['level'];
-    $reset_ = $showchar[$sub]['reset'];
-    $isClass = $showchar[$sub]['isClass'];
+    $isClass = strtolower($showchar[$sub]['isClass']);
     $class_ = $showchar[$sub]['class'];
-    $status = '';
-    $checkLevel150 = $checkLevel220 = false;
+    $checkLevel220 = false;
 
     $key = array_search($class_, $infoClass);
-    if ($key !== false) {
-        $numberClass = explode('_', $key);
-
-        if (in_array($key, $tempClass) && !in_array($isClass, $tempSkip) && $numberClass[2] == 2) {
-            $status = '<span class="cBlue"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 2 </span><br>";
-        } else {
-            $status = '<span class="cInfo"> <b>' . ucfirst($sub) . "</b> đã làm nhiệm vụ cấp 2 </span><br>";
-            $checkLevel220 = true;
-        }
-        if (in_array($key, $tempClassLevel)) {
-            $status = '<span class="cReda"><a  href="' . cn_url_modify('opt=level1') . '"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 1 </a> </span><br>";
-            $checkLevel150 = true;
-            $checkLevel220 = false;
-        }
-    }
-//
-    $temp = [];
-    foreach ($infoClass as $key => $val) {
-        $strA = explode('_', $key);
-        if (in_array($strA[1], $tempClass)) {
-            if (!isset($temp[$strA[1]]) && $strA[1] != $isClass) {
-                $temp[$strA[1]] = [$strA[1] . '_code' => $infoClass[$key], $strA[1] . '_name' => $infoClass[$key . '_name']];
-            }
-        }
+    if ($key === false) {
+        $notFoundClass = true;
     }
 
-    if ($level >= 215) {
+    if ($level >= 220) {
         $sms_level = $level . '(Đủ Level)';
         $is_level2 = true;
     } else {
-        $sms_level = $level . ' <font color=red>(Thiếu ' . abs(215 - $level) . ' Level) </font>';
+        $sms_level = $level . ' <font color=red>(Thiếu ' . abs(220 - $level) . ' Level) </font>';
     }
 
-    list ($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, $config_level[0]);
+    list ($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, (int)$config_level[1]);
 
     if (check_changecls($_SESSION['user_Gamer'], $sub)) {
         $check_change = true;
@@ -3803,8 +3736,7 @@ function char_level2()
         1 => array('Level', $sms_level),
         2 => array('Cấp độ', $level),
         3 => array('Vpoint', number_format((float)$get_vp, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '')),
-        4 => array('Đổi nhân vật', $status_change),
-        5 => array('Status', $status)
+        4 => array('Đổi nhân vật', $status_change)
     );
 
     if (request_type('POST')) {
@@ -3823,7 +3755,7 @@ function char_level2()
                 $errors_false = true;
             }
             if (!$is_level2) {
-                cn_throw_message("Yêu cầu tối thiểu 215 level", 'e');
+                cn_throw_message("Yêu cầu tối thiểu 220 level", 'e');
                 $errors_false = true;
             }
 
@@ -3832,71 +3764,49 @@ function char_level2()
                 $errors_false = true;
             }
 
+            if (in_array($isClass, $skipClass)) {
+                cn_throw_message("Nhân vật ' . $sub . ' không nằm trong danh sách thực hiện làm nhiệm cấp 1 (lv.150).", 'e');
+                $errors_false = true;
+            }
+
             if ($checkLevel220) {
                 cn_throw_message('Nhân vật ' . $sub . ' đã làm nhiệm vụ cấp 2 (level 220)!', 'e');
                 $errors_false = true;
             }
-            if ($checkLevel150) {
-                cn_throw_message('Nhân vật ' . $sub . ' chưa làm nhiệm vụ cấp 1 (level 150)!', 'e');
+
+            if (isset($notFoundClass)) {
+                cn_throw_message('Nhân vật ' . $sub . ' không thực hiện được nhiệm vụ cấp 2. <br>Vui lòng thực hiện trong game!');
                 $errors_false = true;
             }
 
             if (!$errors_false) {
-                $ktvpoint = isset($get_vp) ? $get_vp : $vpoint_;
+                //Quest
+                //DW, F, Sum => 0xEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                //DK => 0xAAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 
-                $ktvpoint = $get_vp;
-                $ktgcoin = $get_gc;
-                $newReset = $reset_ - ceil(0.01 * $changeClass[1] * $reset_);
-                if ($ktvpoint == $vpoint_) $var_vp = ($_blank_var[0]['gc'] - $get_gc) . " Gcoin";
-                else $var_vp = ($_blank_var[0]['vp'] - $get_vp) . " Vpoint";
-
-                $_codeClass = $infoClass['class_' . $nameClass . '_1'];
-
-                $default_class = do_select_character(
-                    'DefaultClassType',
-                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership',
-                    "Class=" . ($class_ - 0) . " Or Class=" . ($class_ - 1) . " Or Class=" . ($class_ - 2) . " Or Class=" . ($class_ - 3)
-                );
-                $get_default_class = '';
-                $_arr_cls = spsep($arr_cls);
-                foreach ($_arr_cls as $key => $val)
-                    $get_default_class .= "$val=" . $default_class[0][$val] . ",";
-
-                $get_default_class = substr($get_default_class, 0, -1);
-
-                $inventory_nothing = '';
-                for ($i = 0; $i < 3456; $i++) {
-                    $inventory_nothing .= 'F';
+                if ($isClass == 'dw' || $isClass == 'elf' || $isClass == 'sum') {
+                    $quest_nothing = "Quest=0xEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
+                } elseif ($isClass == 'dw') {
+                    $quest_nothing = "Quest=0xAAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
+                } else {
+                    $quest_nothing = '';
                 }
-                $quest_nothing = substr($inventory_nothing, 0, 100);
+
+                $var_vp = ($_blank_var[0]['vp'] - $get_vp) . " Vpoint";
 
                 do_update_character(
                     'Character',
-                    'Clevel=400',
-                    "Resets=$newReset",
-                    'Experience=0',
-                    "Class=$_codeClass",
-                    "LevelUpPoint=0",
-                    "pointdutru=0",
-                    "$get_default_class",
-                    "MapDir=0",
-                    "MagicList=CONVERT(varbinary(180), null)",
-                    "Quest=0x$quest_nothing",
-                    "Inventory=0x$inventory_nothing",
+                    "LevelUpPoint=LevelUpPoint+200",
+                    'Class=' . $infoClass['class_' . $isClass . '_2'],
+                    $quest_nothing,
                     "name:'$sub'"
                 );
 
-                //Reset Point Master Skill
-                if (($class_ == $infoClass['class_dw_3']) || ($class_ == $infoClass['class_dk_3']) || ($class_ == $infoClass['class_elf_3']) || ($class_ == $infoClass['class_mg_2']) || ($class_ == $infoClass['class_dl_2']) || ($class_ == $infoClass['class_sum_3']) || ($class_ == $infoClass['class_rf_2'])) {
-                    if (getoption('server_type') == "scf")
-                        do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
-                    else if (getoption('server_type') == "ori")
-                        do_update_character('T_MasterLevelSystem', 'MASTER_LEVEL=0', 'ML_POINT=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
-                    else
-                        do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
-                }
-
-                do_update_character('MEMB_INFO', "vpoint = $ktvpoint", "gcoin = $ktgcoin", "memb___id:'$accc_'");
+                do_update_character(
+                    'MEMB_INFO',
+                    "vpoint=$get_vp",
+                    "memb___id:'$accc_'"
+                );
 
                 //Ghi vào Log
                 $content = "Nhân vật $sub nhiệm vụ level 220 với $var_vp";
@@ -3904,18 +3814,16 @@ function char_level2()
                 $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
                 if ($checkDir) {
                     $file = $files . "/log_level220.log";
-//                $file = MODULE_ADM . "/log/modules/character/log_level220.log";
                     cn_touch($file);
                     $fileContents = file_get_contents($file);
-                    file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $gcoin_ . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
-                $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
+                list ($get_vpNew, $sms_vp, $cn_false) = checkVpoint($get_vp, (int)$config_level[1]);
+                $before_info_cn[3][1] = number_format((float)$get_vpNew, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '');
 
-                $temp[$isClass] = [$isClass . '_code' => $infoClass['class_' . $isClass . '_1'], $isClass . '_name' => $infoClass['class_' . $isClass . '_1_name']];
-
-                cn_throw_message("Nhân vật $sub đã đổi nhiệm vụ 220 thành công.");
+                cn_throw_message("Nhân vật $sub đã đổi nhiệm vụ cấp (lv.220) thành công.");
             }
         }
     }
@@ -3929,12 +3837,10 @@ function char_level2()
 
 function char_level3()
 {
-    $tempClass = ['dw_3', 'dk_3', 'elf_3', 'mg_', 'dl_3', 'sum_3', 'rf_3'];
-    $config_level = explode('|', getoption('configLevel'), 2);
+//    $tempClass = ['class_dw_3', 'class_dk_3', 'class_elf_3', 'class_mg_2', 'class_dl_2', 'class_sum_3', 'class_rf_2'];
+    $config_level = explode('|', getoption('configLevel'), 3);
+    $skipClass = ['mg', 'dl', 'rf'];
 
-    $tempClassLevel = ['class_dw_1', 'class_dk_1', 'class_elf_1', 'class_sum_1'];
-    $tempSkip = ['mg', 'dl', 'rf'];
-//
     $showchar = cn_character();
     $infoClass = cn_template_class();
     $_blank_var = view_bank($accc_ = $_SESSION['user_Gamer']);
@@ -3947,41 +3853,17 @@ function char_level3()
             $sub = array_keys($showchar)[0];
     }
 
-    $cn_false = $is_level2 = false;
+    $is_level2 = false;
     $gcoin_ = $_blank_var[0]['gc'];
     $vpoint_ = $_blank_var[0]['vp'];
 
     $level = $showchar[$sub]['level'];
-    $reset_ = $showchar[$sub]['reset'];
-    $isClass = $showchar[$sub]['isClass'];
+    $isClass = strtolower($showchar[$sub]['isClass']);
     $class_ = $showchar[$sub]['class'];
-    $status = '';
-    $checkLevel150 = $checkLevel220 = false;
 
     $key = array_search($class_, $infoClass);
-    if ($key !== false) {
-        $numberClass = explode('_', $key);
-
-        if (in_array($key, $tempClass) && !in_array($isClass, $tempSkip) && $numberClass[2] == 2) {
-            $status = '<span class="cBlue"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 2 </span><br>";
-        } else {
-            $status = '<span class="cInfo"> <b>' . ucfirst($sub) . "</b> đã làm nhiệm vụ cấp 2 </span><br>";
-            $checkLevel220 = true;
-        }
-        if (in_array($key, $tempClassLevel)) {
-            $status = '<span class="cRed"><a href="' . cn_url_modify() . '"> <b>' . ucfirst($sub) . "</b> chưa làm nhiệm vụ cấp 1 </a> </span><br>";
-            $checkLevel150 = true;
-        }
-    }
-//
-    $temp = [];
-    foreach ($infoClass as $key => $val) {
-        $strA = explode('_', $key);
-        if (in_array($strA[1], $tempClass)) {
-            if (!isset($temp[$strA[1]]) && $strA[1] != $isClass) {
-                $temp[$strA[1]] = [$strA[1] . '_code' => $infoClass[$key], $strA[1] . '_name' => $infoClass[$key . '_name']];
-            }
-        }
+    if ($key === false) {
+        $notFoundClass = true;
     }
 
     if ($level >= 380) {
@@ -3991,7 +3873,7 @@ function char_level3()
         $sms_level = $level . ' <font color=red>(Thiếu ' . abs(380 - $level) . ' Level) </font>';
     }
 
-    list ($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, $config_level[0]);
+    list ($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, (int)$config_level[2]);
 
     if (check_changecls($_SESSION['user_Gamer'], $sub)) {
         $check_change = true;
@@ -4000,13 +3882,13 @@ function char_level3()
         $check_change = false;
         $status_change = "<font color =red>Chưa đổi</font>";
     }
+
     $before_info_cn = array(
         0 => array('Nhân vật', "<a href=" . cn_url_modify('mod=char_manager', 'opt=info_char', 'sub') . " title='Click info $sub'> $sub </a>"),
         1 => array('Level', $sms_level),
         2 => array('Cấp độ', $level),
         3 => array('Vpoint', number_format((float)$get_vp, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '')),
-        4 => array('Đổi nhân vật', $status_change),
-        5 => array('Status', $status)
+        4 => array('Đổi nhân vật', $status_change)
     );
 
     if (request_type('POST')) {
@@ -4034,90 +3916,60 @@ function char_level3()
                 $errors_false = true;
             }
 
-            if ($checkLevel220) {
-                cn_throw_message('Nhân vật ' . $sub . ' đã làm nhiệm vụ cấp 2 (level 220)!');
-                $errors_false = true;
-            }
-            if ($checkLevel150) {
-                cn_throw_message('Nhân vật ' . $sub . ' chưa làm nhiệm vụ cấp 1 (level 150)!');
+            if (isset($notFoundClass)) {
+                cn_throw_message('Nhân vật ' . $sub . ' không thực hiện được nhiệm vụ cấp 2. <br>Vui lòng thực hiện trong game!');
                 $errors_false = true;
             }
 
             if (!$errors_false) {
-                $ktvpoint = isset($get_vp) ? $get_vp : $vpoint_;
-
-                $ktvpoint = $get_vp;
-                $ktgcoin = $get_gc;
-                $newReset = $reset_ - ceil(0.01 * $changeClass[1] * $reset_);
-                if ($ktvpoint == $vpoint_) $var_vp = ($_blank_var[0]['gc'] - $get_gc) . " Gcoin";
-                else $var_vp = ($_blank_var[0]['vp'] - $get_vp) . " Vpoint";
-
-                $_codeClass = $infoClass['class_' . $nameClass . '_1'];
-
-                $default_class = do_select_character(
-                    'DefaultClassType',
-                    $arr_cls = 'Strength,Dexterity,Vitality,Energy,Life,MaxLife,Mana,MaxMana,MapNumber,MapPosX,MapPosY,Leadership',
-                    "Class=" . ($class_ - 0) . " Or Class=" . ($class_ - 1) . " Or Class=" . ($class_ - 2) . " Or Class=" . ($class_ - 3)
-                );
-                $get_default_class = '';
-                $_arr_cls = spsep($arr_cls);
-                foreach ($_arr_cls as $key => $val)
-                    $get_default_class .= "$val=" . $default_class[0][$val] . ",";
-
-                $get_default_class = substr($get_default_class, 0, -1);
-
-                $inventory_nothing = '';
-                for ($i = 0; $i < 3456; $i++) {
-                    $inventory_nothing .= 'F';
+                if (in_array($isClass, $skipClass)) {
+                    $codeCalss = $infoClass['class_' . $isClass . '_2'];
+                } else {
+                    $codeCalss = $infoClass['class_' . $isClass . '_3'];
                 }
-                $quest_nothing = substr($inventory_nothing, 0, 100);
+
+                $arrQuset = array(
+                    'dw' => '0xEAEAFFFF14141401FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',
+                    'dk' => '0xAAEAFFFF14141401FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',
+                    'elf' => '0xEAEAFFFF14141401FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',
+                    'sum' => '0xEAEAFFFF0A0A0A01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',
+                    'dl' => '0xFFEAFFFF14141401FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',
+                    'mg' => '0xFFEAFFFF14141401FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',
+                    'rf' => '0xFFEAFFFF14141401FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
+                );
+                $var_vp = ($_blank_var[0]['vp'] - $get_vp) . " Vpoint";
 
                 do_update_character(
                     'Character',
-                    'Clevel=400',
-                    "Resets=$newReset",
-                    'Experience=0',
-                    "Class=$_codeClass",
-                    "LevelUpPoint=0",
-                    "pointdutru=0",
-                    "$get_default_class",
-                    "MapDir=0",
-                    "MagicList=CONVERT(varbinary(180), null)",
-                    "Quest=0x$quest_nothing",
-                    "Inventory=0x$inventory_nothing",
+                    "Class=$codeCalss",
+                    "LevelUpPoint=240",
+                    "Quest=$arrQuset[$isClass]",
                     "name:'$sub'"
                 );
 
-                //Reset Point Master Skill
-                if (($class_ == $infoClass['class_dw_3']) || ($class_ == $infoClass['class_dk_3']) || ($class_ == $infoClass['class_elf_3']) || ($class_ == $infoClass['class_mg_2']) || ($class_ == $infoClass['class_dl_2']) || ($class_ == $infoClass['class_sum_3']) || ($class_ == $infoClass['class_rf_2'])) {
-                    if (getoption('server_type') == "scf")
-                        do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
-                    else if (getoption('server_type') == "ori")
-                        do_update_character('T_MasterLevelSystem', 'MASTER_LEVEL=0', 'ML_POINT=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
-                    else
-                        do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
-                }
-
-                do_update_character('MEMB_INFO', "vpoint = $ktvpoint", "gcoin = $ktgcoin", "memb___id:'$accc_'");
+                do_update_character(
+                    'MEMB_INFO',
+                    "vpoint=$get_vp",
+                    "memb___id:'$accc_'"
+                );
 
                 //Ghi vào Log
                 $content = "Nhân vật $sub nhiệm vụ level 380 với $var_vp";
                 $Date = date("h:iA, d/m/Y", ctime());
                 $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
+
                 if ($checkDir) {
                     $file = $files . "/log_level380.log";
-//                $file = MODULE_ADM . "/log/modules/character/log_level380.log";
                     cn_touch($file);
                     $fileContents = file_get_contents($file);
-                    file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $get_gc . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
+                    file_put_contents($file, $accc_ . "|" . $content . "|" . $gcoin_ . '_' . $vpoint_ . "|" . $gcoin_ . "_" . $get_vp . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
-                $before_info_cn[9][1] = number_format((float)$ktvpoint, 0, ",", ".");
+                list ($get_vpNew, $sms_vp, $cn_false) = checkVpoint($get_vp, (int)$config_level[2]);
+                $before_info_cn[3][1] = number_format((float)$get_vpNew, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '');
 
-                $temp[$isClass] = [$isClass . '_code' => $infoClass['class_' . $isClass . '_1'], $isClass . '_name' => $infoClass['class_' . $isClass . '_1_name']];
-
-                cn_throw_message("Nhân vật $sub đã đổi nhiệm vụ 380 thành công.");
+                cn_throw_message("Nhân vật $sub đã đổi nhiệm vụ cấp 3 (lv.380 master) thành công.");
             }
         }
     }
@@ -4226,7 +4078,7 @@ function char_delepersonalSotre()
                 $show_warehouse .= "<div style='margin-top:" . ((floor($i / 8) * 32) + 82) . "px; margin-left:" . ($x * 32) . "px; position:absolute; width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px; cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>";
 //									<img src='images/items/" . $item32['image'] . ".gif' style=\"height:" . (31 * $itemy - $itemy - 1) . "px; width:" . (31 * $itemx) . "px;\"></div>";
 
-                if (file_exists(ROOT. '/images/items/' . $item32['image'] . '.gif')) {
+                if (file_exists(ROOT . '/images/items/' . $item32['image'] . '.gif')) {
                     $show_warehouse .= "<img src='images/items/" . $item32['image'] . ".gif'
 											style='height:" . (32 * $itemy - $itemy - 1) . "px;
 											 width:" . (32 * $itemx) . "px;'";
@@ -4453,15 +4305,16 @@ function checkGcoinVpoint($gcRoot, $vpRoot, $parVpoint)
 
 function checkVpoint($vpRoot, $parVpoint)
 {
-    $get_vp = $vpRoot;
-    $sms_gc = $sms_vp = '';
+    $parVpoint = intval($parVpoint);
+    $get_vp = $vpRoot - $parVpoint;
+    $sms_vp = '';
     $cn_false = false;
 
-    if (0 <= $get_vp = $vpRoot - $parVpoint) {
-        $sms_vp = " (Đủ Vpoint)";
+    if (0 <= $get_vp) {
+        $sms_vp .= " (Đủ Vpoint)";
     } else {
         $cn_false = true;
-        $sms_vp = " <font color=red>(Thiếu " . number_format((float)(abs($get_vp)), 0, ",", ".") . " Vpoint)</font>";
+        $sms_vp .= " <font color=red>(Thiếu " . number_format((float)(abs($get_vp)), 0, ",", ".") . " Vpoint)</font>";
     }
 
     return array($get_vp, $sms_vp, $cn_false);

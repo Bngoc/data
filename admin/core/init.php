@@ -37,14 +37,6 @@ require_once SERVDIR . '/core/news.php';
 require_once ROOT . '/core/class.phpmailer.php';
 require_once ROOT . '/core/class.smtp.php';
 
-
-/*
-// magic quotes = ON, filtering it
-if (ini_get('magic_quotes_gpc'))
-{
-    cn_filter_magic_quotes();
-}
-*/
 /*
 if (!DEV_DEBUG)
 {

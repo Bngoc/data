@@ -4,20 +4,22 @@ add_hook('index/invoke_module', '*board_invoke');
 
 function board_invoke()
 {
-    $dashboard = array
-    (
+    $dashboard = array(
         'editconfig:sysconf:Csc' => 'Cấu hình Hệ thống',
         'editconfig:confchar:Ct' => 'Cấu hình chức năng',
         'editconfig:secure:Can' => 'Cấu hình DDOS',
-        /*'editconfig:iserverz:Ciw'     => 'SERVER',*/
         'editconfig:ischaracter:Ciw' => 'Character',
-        /*'editconfig:iswebshop:Ciw'     => 'CashShop',
-        'editconfig:iseverz:Ciw'     => 'Thẻ nạp',*/
         'editconfig:personal:Cp' => 'Personal options',
         'editconfig:userman:Cum' => 'Users manager',
         'editconfig:group:Cg' => 'Groups',
         'editconfig:logs:Csl' => 'Logs',
-        'editconfig:statistics:Csl' => 'Thống kê'
+        'editconfig:statistics:Csl' => 'Thống kê',
+
+        'editconfig:select:Ciw'     => 'Select',
+        'editconfig:updatemoney:Ciw'     => 'Update Money',
+        'editconfig:updateCharater:Ciw'     => 'Update Character',
+        'editconfig:update:Ciw'     => 'Update Money',
+        'editconfig:insert:Ciw'     => 'Insert',
     );
 
     // Call dashboard extend
@@ -1936,5 +1938,59 @@ function board_statistics()
 //    cn_assign('type, name, desc, meta, group, req', $type, $name, $desc, $meta, $group, $req);
     echoheader('-@com_board/style.css', 'statistics - Thống kê');
     echo exec_tpl('com_board/statistics');
+    echofooter();
+}
+
+function board_select()
+{
+
+    list($sub, $sort, $page) = GET('sub, sort, page', "GETPOST");
+    $class_board = array();
+
+//    $class_board = array(
+//        'class_none' => 'All',
+//        'class_gate' => 'Gate',
+//        'class_mobi' => 'Mobifone',
+//        'class_vina' => 'VinaPhone',
+//        'class_viettel' => 'Viettel',
+//        'class_vtc' => 'Vtc'
+//    );
+//    if (empty($sub)) {
+//        $sub = 'class_none';
+//    }
+//    if (empty($sort)) {
+//        $sort = 'desc';
+//    }
+    if (empty($page) || $page <= 0) {
+        $page = 1;
+    }
+
+    $url = cn_url_modify(array('reset'), 'mod=ranking', 'opt=rickCard', 'sub=' . $sub, 'sort=' . strtolower($sort), 'per_page', 'page');
+
+
+    if (request_type('POST')) {
+        if (isset($_REQUEST['sub'])) {
+
+            cn_checkDisk();
+            list ($arrRankingCharater, $pagination) = zenderRankingCharacter($sub, $url, $page, strtoupper($sort));
+
+            $resultData = array(
+                'id-sub' => $sub,
+                'id-sort' => $sort,
+                'result_content' => zenderDataContent($arrRankingCharater),
+                'result_pagination' => $pagination
+            );
+
+            header('Content-Type: application/json');
+            return json_encode($resultData);
+        }
+    }
+//    list ($arrRankingCharater, $pagination) = zendeHtmlExecute();
+//    list ($arrRankingCharater, $pagination) = zendeHtmlExecute($sub, $url, $page, strtoupper($sort));
+
+    cn_assign('sub, pagination, sort, result_content', $sub, '', $sort, zendeHtmlExecute(array()));
+
+    echoheader('-@com_board/style.css@com_board/executeSelect.js', "Select");
+    echo exec_tpl('com_board/selsect');
     echofooter();
 }

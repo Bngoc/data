@@ -2023,4 +2023,8 @@ if (isset($_REQUEST['name_function'])) {
 if ($name_function == 'cn_check_conncet') {
     cn_check_conncet();
 }
-?>
+
+function zendeHtmlExecute()
+{
+
+}

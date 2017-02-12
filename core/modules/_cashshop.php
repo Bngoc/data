@@ -143,6 +143,9 @@ function shop___buy_s1()
             if (!in_array($id_item, array_keys($list_item))) {
                 cn_throw_message("Trên Server không có Item bạn muốn mua. Chi tiết vui lòng liên hệ BQT để cập nhập.", 'e');
                 $errors_false = true;
+            } elseif (check_online($accc_)) {
+                cn_throw_message("Tài khoản chưa thoát Game. Hãy thoát Game trước khi thực hiện chức năng này.", 'e');
+                $errors_false = true;
             } else {
                 $price_ = $list_item[$id_item]['price'];
                 $name_ = $list_item[$id_item]['title'];
