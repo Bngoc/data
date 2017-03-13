@@ -42,7 +42,7 @@ cn_snippet_bc();
                     <td align="center"><input type="word" name="config[<?php echo $fd['id_2']; ?>]"
                                               value="<?php echo $fd['id_2_val']; ?>" size="20" maxlength="19"></td>
                 </tr>
-                <?php if ($fd['end']) echo '<tr><td colspan="4"><hr></td></tr>';
+                <?php if ($fd['end']) echo '<tr><td colspan="4"></td></tr>';
             } ?>
             <tr>
                 <td colspan="4" align="right"><input type="submit" style="font-weight:bold;font-size:120%;"

@@ -490,7 +490,7 @@ function db_membget_account($clause, $colClause = '[UserAcc]', $ischek = FALSE)
             }
         }
         $result = [
-            'id' => $usx[0]['id'],
+            'id' => $usx[0]['Id'],
             'user_Account' => trim($usx[0]['UserAcc']),
             'pass' => $usx[0]['Pwd'],
             'acl' => $usx[0]['AdLevel'],

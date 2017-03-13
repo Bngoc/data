@@ -21,27 +21,26 @@ $patchImg = URL_PATH_IMG;
 // ********************************************************************************
 
 $skin_header_web = <<<HTML
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <html lang="en">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <meta http-equiv="imagetoolbar" content="no" />
 <meta http-equiv="content-script-type" content="text/javascript" />
-<meta name="description" content="$description"/>
-<meta name="keywords" content="$keywords" />
+<meta name="description" content="{title}/$description"/>
+<meta name="keywords" content="{title}/$keywords" />
+<meta name="robots" content="{title}" />
+<title>{title}</title>
+    
+<link rel="shortcut icon" type="image/ico" href="/images/favicon.ico"/>
+<link rel="stylesheet" href="/skins/style.css" type="text/css" />
+<link rel="stylesheet" href="/skins/main.css" type="text/css"/>
+<link rel="stylesheet" href="/skins/sub.css" type="text/css"/>
+<link rel="stylesheet" href="/bootstrap.min.css" type="text/css"/>
 
-<link rel="shortcut icon" type="image/ico" href="$setpath_default/images/favicon.ico"/>
-<link rel="stylesheet" href="$setpath_default/skins/style.css" type="text/css" />
-<link rel="stylesheet" href="$setpath_default/skins/main.css" type="text/css"/>
-<link rel="stylesheet" href="$setpath_default/skins/sub.css" type="text/css"/>
-
-<script type="text/javascript" src="$setpath_default/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="/js/jquery-2.1.0.min.js"></script>
 
 <!--	
-<script src="ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="http://localhost/bqn/data/images/referrer.js"></script>
-<script language="javascript" src="http://localhost/bqn/data/images/features.js" type="text/javascript"></script>
-
 <script type="text/javascript" src="http://localhost/bqn/data/images/jquery-latest.pack.js"></script>
 <script type="text/javascript" src="http://localhost/bqn/data/images/jquery.pngFix.js"></script>
 
@@ -51,64 +50,11 @@ $skin_header_web = <<<HTML
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 -->
-<script type="text/javascript" src="$setpath_default/images/main.js"></script>
-
-    <title>{title}</title>
-    <script type="text/javascript" src="$setpath_default/skins/cute.js"></script>
+    <script type="text/javascript" src="/images/main.js"></script>
+    
     {CustomJS}
     <style type="text/css"><!-- {CustomStyle} --></style>
-	<script type="text/javascript">
-		$(function(){
-			$(window).scroll(function(){
-				if($(this).scrollTop()!=0){
-					$('#bttop').fadeIn();
-				}
-				else{
-					$('#bttop').fadeOut();
-				}
-			});
-			$('#bttop').click(function(){
-				$('body,html').animate({
-					scrollTop:10},500);
-			});
-		});
-		function moveScroller() {
-			var move = function() {
-				var st = $(window).scrollTop();
-				var ot = $("#leftcol-anchor").offset().top;
-				var s = $("#anchor");
-				var submain = $("#mainsubcol");
-				if(st > ot) {
-					s.css({
-						position: "fixed",
-						top: "45px"
-					});
-					submain.css({
-						float:"right",
-					});
-				} else {
-					if(st < ot) {
-						s.css({
-							position: "relative",
-							top: ""
-						});
-						submain.css({
-						float:"left",
-					 });
-					}
-				}
-			};
-			$(window).scroll(move);
-			move();
-		}
-		
-	</script>
-<script type="text/javascript"> 
-  $(function() {
-    moveScroller();
-  });
-</script> 
-
+	
 </head>
 
 <div id="gp_bar">
@@ -121,11 +67,24 @@ $skin_header_web = <<<HTML
 	
     <div id="page_wrapper1">
         <div id="page_wrapper2">		
-    		<script language="JavaScript" type="text/javascript" src="$setpath_default/images/stmenu.js"></script>
+    		<script language="JavaScript" type="text/javascript" src="/images/stmenu.js"></script>
 		
 		<div class="clear"></div>  
-		<div id="main_header"><script type="text/javascript">flashWrite('$setpath_default/images/allods_effect.swf',958,270,'','','transparent')</script></div>
-		 <div id="menu"><script type="text/javascript" src="$setpath_default/images/menubody.js"></script></div>
+		<div id="main_header"><script type="text/javascript">flashWrite('/images/allods_effect.swf',958,270,'','','transparent')</script></div>
+		 <!--<div id="menu"><script type="text/javascript" src="/images/menubody.js"></script></div>-->
+		 <div id="menu">
+		    <ul class="menu">
+                <li class="home"><a href="#">Home</a></li>
+                <li class="about"><a href="#">Tin tuc</a>
+                    <ul>
+                        <li>ygjb</li>hgvjk,<li>kjhkh</li><li>jguugjkbjb</li>
+                    </ul>
+                </li>
+                <li class="services"><a href="#">Huong dan</a></li>
+                <li class="contact"><a href="#">Xep Hang</a></li>
+                <li class="contact"><a href="#">Thu Vien</a></li>
+            </ul>
+        </div>
    
    <div class="clear"></div>  
  
@@ -180,9 +139,7 @@ $skin_footer_web = <<<HTML
     
 	
 </div> <!-- wrapper -->
-    <script type="text/javascript" src="$setpath_default/library/wz_tooltip.js"></script>
-	<!--<script type="text/javascript" src="$setpath_default/library/jsToolTip.js"></script>	-->
-    <script type="text/javascript" src="$setpath_default/library/jsCheckForm.js"></script>
+
 
 <div style="clear:both;"></div>
 <div id="footer" style="float:left"> 
@@ -193,6 +150,64 @@ $skin_footer_web = <<<HTML
 		<span style="color: #888888; font-size: 15px;">Copyright &copy; {year-time}&nbsp; Convert by &nbsp;</span><a href="mailto:{email-name}">{byname}
 	</div>
 </div>
+    
+    <script type="text/javascript" src="/skins/cute.js"></script>
+    <script type="text/javascript" src="/library/wz_tooltip.js"></script>
+	<script type="text/javascript" src="/js/topxTip.js"></script>	
+    <script type="text/javascript" src="/library/jsCheckForm.js"></script>
+    
+    <script type="text/javascript">
+            $(function(){
+                $(window).scroll(function(){
+                    if($(this).scrollTop()!=0){
+                        $('#bttop').fadeIn();
+                    }
+                    else{
+                        $('#bttop').fadeOut();
+                    }
+                });
+                $('#bttop').click(function(){
+                    $('body,html').animate({
+                        scrollTop:10},500);
+                });
+            });
+            
+            function moveScroller() {
+                var move = function() {
+                    var st = $(window).scrollTop();
+                    var ot = $("#leftcol-anchor").offset().top;
+                    var s = $("#anchor");
+                    var submain = $("#mainsubcol");
+                    if(st > ot) {
+                        s.css({
+                            position: "fixed",
+                            top: "45px"
+                        });
+                        submain.css({
+                            float:"right",
+                        });
+                    } else {
+                        if(st < ot) {
+                            s.css({
+                                position: "relative",
+                                top: ""
+                            });
+                            submain.css({
+                            float:"left",
+                         });
+                        }
+                    }
+                };
+                $(window).scroll(move);
+                move();
+            }
+            
+        </script>
+    <script type="text/javascript"> 
+      $(function() {
+        moveScroller();
+      });
+    </script> 
 </body></html>
 HTML;
 

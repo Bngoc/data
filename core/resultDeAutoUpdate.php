@@ -8,7 +8,7 @@ define('MODULE_DIR', SERVDIR . '/core/modules'); // nhan xu li
 define('SKIN', SERVDIR . '/cdata'); // chua html
 define('MODULE_ADM', SERVDIR . '/admin'); // chua ADMIN
 define('CN_DEBUG', FALSE);
-define('URL_PATH', dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn
+define('URL_PATH', (isset($_SERVER['HTTPS']) ? "https" : "http") . '://' . dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn
 //define('URL_RESULR_DE', 'http://ketqua.net/');
 
 

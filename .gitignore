@@ -4,3 +4,4 @@
 *.log
 .htaccess
 web.config
+/setupApi/*.json

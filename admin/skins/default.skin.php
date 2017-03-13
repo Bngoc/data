@@ -16,41 +16,29 @@ $setpath_root_admin = URL_PATH;                        //	=> /bqn/data/admin
 // Skin HEADER
 // ********************************************************************************
 $skin_header = <<<HTML
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
 	 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<!--<base href ="$setpath_default">-->
+	<title>{title}</title>
     <meta name="robots" content="noindex" />
-    <link rel="shortcut icon" type="image/ico" href="$setpath_default/images/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="$setpath_default/admin/skins/default.css">
-	<!--<link rel="stylesheet" href="$setpath_default/admin/images/css.css" type="text/css">-->
-	<script type="text/javascript" src="$setpath_default/js/jquery-2.1.0.min.js"></script>
-	<script type="text/javascript" src="$setpath_default/js/clock.js"></script> <!--  ham gio --> 
-	<script type="text/javascript" src="$setpath_default/library/vietvbb_topx.js"></script>
-	<!--<script type="text/javascript" src="$setpath_default/library/wz_tooltip.js"></script>-->
-	<!--<script type="text/javascript" src="$setpath_default/js/jsToolTip.js"></script>-->
-    <title>{title}</title>
-    <script type="text/javascript" src="$setpath_default/admin/skins/cute.js"></script>
-    {CustomJS}
+    <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/admin/skins/default.css">
+	<link rel="stylesheet" href="/skins/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="/skins/font-awesome.min.css" type="text/css">
+
     <style type="text/css"><!-- {CustomStyle} --></style>
-	<script type="text/javascript">
-	$(function(){
-		$(window).scroll(function(){
-			if($(this).scrollTop()!=0){
-				$('#bttop').fadeIn();
-				}
-				else{
-					$('#bttop').fadeOut();
-				}
-			});
-		$('#bttop').click(function(){
-			$('body,html').animate({
-				scrollTop:10},500);
-			});
-		});
-	</script>
 	
+	<script type="text/javascript" src="/js/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="/js/clock.js"></script>
+	
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.2.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/angular-animate.min.js"></script>
+	<srcipt type="text/javascript">
+	</srcipt>
+	{CustomJS}
 </head>
 
 <body>
@@ -75,8 +63,9 @@ HTML;
 // Skin FOOTER
 // ********************************************************************************
 $skin_footer = <<<HTML
-        <div style="clear:both;"></div>
-    </div>
+			<div style="clear:both;"></div>
+		</div>
+		</div>
 	</div>
 </div>
 <!-- FOOTER -->
@@ -88,6 +77,27 @@ $skin_footer = <<<HTML
 		<span style="color: #888888; font-size: 15px;">Copyright &copy; {year-time}&nbsp; Convert by &nbsp;</span>{convertby}
 	</div>
 </div>
+	<script type="text/javascript" src="/library/wz_tooltip.js"></script>
+	<script type="text/javascript" src="/js/topxTip.js"></script>
+    <script type="text/javascript" src="/skins/cute.js"></script>
+    
+	<script type="text/javascript">
+		$(function(){
+			$(window).scroll(function(){
+				if($(this).scrollTop()!=0){
+					$('#bttop').fadeIn();
+					}
+					else{
+						$('#bttop').fadeOut();
+					}
+				});
+			$('#bttop').click(function(){
+				$('body,html').animate({
+					scrollTop:10},500);
+				});
+			});
+		</script>
+		
 </body></html>
 HTML;
 

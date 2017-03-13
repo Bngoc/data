@@ -5,7 +5,7 @@ if (substr(PHP_VERSION, 0, 5) < '4.1.0') {
     die('PHP Version is ' . PHP_VERSION . ', need great than PHP &gt;= 4.1.0 to start cutenews');
 }
 
-define('DEV_DEBUG', false); // for visual detect errors
+define('DEV_DEBUG', true); // for visual detect errors
 if (DEV_DEBUG) {
     ini_set('display_errors', '1');
     error_reporting(E_ALL | E_STRICT);
@@ -25,11 +25,12 @@ define('MODULE_DIR', SERVDIR . '/core/modules'); // nhan xu li
 define('SKIN', SERVDIR . '/cdata'); // chua html
 define('CN_DEBUG', FALSE);
 //define('URL_PATH', 		cn_path_uri());  //custom by bqn
-define('URL_PATH_', dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn ===>root
-define('URL_PATH', dirname($_SERVER['SCRIPT_NAME']) . '/admin');  //custom by bqn===>admin
+define('URL_PATH_', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn ===>root
+define('URL_PATH', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . dirname($_SERVER['SCRIPT_NAME']) . '/admin');  //custom by bqn===>admin
 define('PHP_SELF', $_SERVER["SCRIPT_NAME"]);
 
 // include necessary libs
+require_once ROOT .'/vendor/autoload.php';
 require_once ROOT . '/core/function/libgarena.php';
 require_once SERVDIR . '/core/cn_modify_admin.php'; //libs
 require_once SERVDIR . '/core/security.php';

@@ -243,7 +243,6 @@ function cn_get_message($area, $method = 's') // s-show, c-count
     return null;
 }
 
-
 // Since 2.0; HTML show errors
 function cn_snippet_messages($area = 'new')
 {
@@ -278,7 +277,6 @@ function cn_snippet_messages($area = 'new')
     }
 }
 
-
 // Since 2.0: Show login form
 function cn_login_form($admin = TRUE)
 {
@@ -293,7 +291,6 @@ function cn_login_form($admin = TRUE)
         die();
     }
 }
-
 
 function member_get()
 {
@@ -371,7 +368,6 @@ function test($requested_acl, $requested_user = NULL, $is_self = FALSE)
 
     return TRUE;
 }
-
 
 function cn_cookie_remember($client = false)
 {
@@ -522,7 +518,6 @@ function cn_login()
 
     return $is_logged;
 }
-
 
 // Since 2.0: Show register form
 function cn_register_form($admin = TRUE)
@@ -867,7 +862,6 @@ function request_type($type = 'POST')
     return $_SERVER['REQUEST_METHOD'] === $type ? TRUE : FALSE;
 }
 
-
 // Displays header skin
 // $image = img@custom_style_tpl
 function echoheader($image, $header_text, $bread_crumbs = false)
@@ -1022,14 +1016,12 @@ function mcache_set($name, $var)
     $_CN_SESS_CACHE[$name] = $var;
 }
 
-
 // Since 1.5.3: Get variable from cache
 function mcache_get($name)
 {
     global $_CN_SESS_CACHE;
     return isset($_CN_SESS_CACHE[$name]) ? $_CN_SESS_CACHE[$name] : FALSE;
 }
-
 
 // Since 1.5.0: Add hook to system
 function add_hook($hook, $func)
@@ -1048,7 +1040,6 @@ function add_hook($hook, $func)
     // priority (+/-)
     if ($prior) array_unshift($_HOOKS[$hook], $func); else $_HOOKS[$hook][] = $func;
 }
-
 
 // Since 1.5.0: Cascade Hooks
 function hook($hook, $args = null)
@@ -1101,7 +1092,6 @@ function ctime()
     return (time() + 3600 * getoption('date_adjust'));
 }
 
-
 // Since 1.5.0: Hash type MD5 and SHA256
 function hash_generate($password, $md5hash = false)
 {
@@ -1143,7 +1133,6 @@ function cn_path_construct()
 
     return implode(DIRECTORY_SEPARATOR, $args) . DIRECTORY_SEPARATOR;
 }
-
 
 // Since 2.0: Get option from #CFG or [%site][<opt_name>]
 // Usage: #level1/level2/.../levelN or 'option_name' from %site
@@ -1196,7 +1185,6 @@ function getoption($opt_name = '', $var_name = '')
     }
 }
 
-
 // Since 2.0: Save option to config
 // Usage: #level1/level2/.../levelN or 'option_name' from %site
 function setoption($opt_name, $var)// $var_name ='')
@@ -1224,7 +1212,6 @@ function setoption($opt_name, $var)// $var_name ='')
     cn_config_save($cfg);
 }
 
-
 // Since 2.0: @Helper recursive function
 function setoption_rc($names, $var, $cfg)
 {
@@ -1241,7 +1228,6 @@ function setoption_rc($names, $var, $cfg)
 
     return $cfg;
 }
-
 
 // Since 1.5.1: Simply read template file
 function read_tpl($tpl = 'index')
@@ -1282,7 +1268,6 @@ function read_tpl($tpl = 'index')
     mcache_set("tpl:$tpl", $ob);
     return $ob;
 }
-
 
 // Since 2.0: Execute PHP-template
 // 1st argument - template name, other - variables ==> mo file
@@ -1488,7 +1473,15 @@ function cn_config_load()
         //download
         'download_media' => '',
         'download_onedrive' => '',
-        'download_4share' => ''
+        'download_4share' => '',
+        //Download Api
+        'appNameDropBox' => '',
+        'keyDropBox' => '',
+        'secretDropBox' => '',
+        'redirectUriDropBox' => '',
+        'accessTokenDropBox' => '',
+        'nameAppDriver' => '',
+        'credentialsApiDriver' => ''
     );
 
     // Set default values
@@ -1577,7 +1570,7 @@ function cn_config_load()
     // ---------------- S_custum by bqn -----
     // Detect self pathes
     $SN = dirname($_SERVER['SCRIPT_NAME']);
-    $script_path = "http://" . $_SERVER['SERVER_NAME'] . (($SN != '/') ? '' : $SN);
+    $script_path = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['SERVER_NAME'] . (($SN != '/') ? '' : $SN);
 //    $script_path = "http://" . $_SERVER['SERVER_NAME'];
     //check http_script_dir
     $path_http_script_dir = $script_path;
@@ -1735,7 +1728,6 @@ function cn_check_code32($code32)
     return false;
 }
 
-
 // Since 2.0: Save whole config
 function cn_config_save($cfg = null)
 {
@@ -1757,7 +1749,6 @@ function cn_config_save($cfg = null)
     mcache_set('config', $cfg);
     return $cfg;
 }
-
 
 // Since 1.5.0: Force relocation
 function cn_relocation($url)
@@ -1977,7 +1968,6 @@ function cn_throw_message($msg, $area = 'n')
     mcache_set('msg:stor', $es);
     return FALSE;
 }
-
 
 // Since 2.0.3
 function cn_user_email_as_site($user_email, $username)

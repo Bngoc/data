@@ -44,6 +44,7 @@ cn_snippet_bc();
                 <td align="center"><?php
 
                     if ($opt_vars[0] == 'label') echo cn_htmlspecialchars($opt_vars['var']);
+                    elseif ($opt_vars[0] == 'disable') echo '<input type="text" disabled style="width: 500px;" value="' . cn_htmlspecialchars($opt_vars['var']) . '"/>';
                     elseif ($opt_vars[0] == 'text') echo '<input type="text" name="config[' . $opt_id . ']" style="width: 400px;" value="' . cn_htmlspecialchars($opt_vars['var']) . '"/>';
                     elseif ($opt_vars[0] == 'int') echo '<input type="text" name="config[' . $opt_id . ']" size="28" value="' . intval($opt_vars['var']) . '"/>';
                     elseif ($opt_vars[0] == 'password') echo '<input type="password" name="config[' . $opt_id . ']" size="28" value=""/>';

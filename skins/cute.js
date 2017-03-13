@@ -1,3 +1,5 @@
+window.pathcDataAdmin = '/admin/cdata/';
+
 // Get ID in misc browser
 function getId(id) {
     if (document.all) return (document.all[id]);
@@ -393,3 +395,47 @@ function refreshCaptcha() {
         });
     }
 })();
+
+$(function () {
+    calculategcoin();
+    $(".txt-add-sub").on("keydown keyup", function () {
+        calculategcoin();
+    });
+});
+
+function calculategcoin() {
+    var point = raw_p = $('#sum-point').val();
+    point *= 0.8;
+
+    $('.hd-sms').val(point);
+}
+
+function flashMsg(msg, isSucc) {
+    var result = '';
+
+    if (msg) {
+        var isSuccTest = '';
+
+        switch (isSucc) {
+            case 's':
+                isSuccTest = 'success';
+                break;
+            case 'w':
+                isSuccTest = 'warnings';
+                break;
+            case 'e':
+                isSuccTest = 'error';
+                break;
+            case 'd':
+                break;
+            default :
+                isSuccTest = 'notify';
+        }
+
+        result = '<div class="cn_' + isSuccTest + '_list"><div class="cn_' + isSuccTest + '_item" id="notify_' + date.getSeconds() + '"> ' +
+            '<div><b>' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '</b> ' + msg + '.</div> </div>' +
+            '<script type="text/javascript">notify_auto_hide("notify_' + date.getSeconds() + '", 7500);<\/script></div>';
+    }
+
+    return result;
+}

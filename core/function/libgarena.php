@@ -1173,7 +1173,15 @@ function cn_renderImageItemCode($group, $id, $optImg)
 // Since 2.0: Check CSRF challenge
 function cn_dsi_check($isWeb = false)
 {
+    global $request;
     list($key, $dsi) = GET('__signature_key, __signature_dsi', 'GETPOST');
+
+    if (empty($key)){
+        $key = @($request->__signature_key) ? $request->__signature_key : '';
+    }
+    if (empty($dsi)) {
+        $dsi = @($request->__signature_dsi) ? $request->__signature_dsi : '';
+    }
 
     if (empty($key) && empty($dsi)) {
         list($dsi_inline) = GET('__signature_dsi_inline', 'GETPOST');
@@ -1894,4 +1902,91 @@ function getDMY($datetime)
     $strdateTime = date('d-m-Y', strtotime($datetime));
 
     return $strdateTime;
+}
+
+/**
+ * Returns an authorized API client.
+ * @return Google_Client the authorized client object
+ */
+function getClient($code = null)
+{
+    try {
+        $client = new Google_Client();
+        $client->setApplicationName(APPLICATION_NAME);
+        $client->setScopes(SCOPES);
+        $client->setAuthConfig(CLIENT_SECRET_PATH);
+        $client->addScope("email");
+        $client->addScope("profile");
+        $client->setAccessType('offline');
+        $client->setApprovalPrompt('force');
+
+        $guzzleClient = new \GuzzleHttp\Client(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false,),));
+        $client->setHttpClient($guzzleClient);
+
+        $_SESSION['STDIN'] = '';
+
+        // Load previously authorized credentials from a file.
+//         $credentialsPath = expandHomeDirectory(CREDENTIALS_PATH);
+//         if (file_exists($credentialsPath)) {
+//             $accessToken = json_decode(file_get_contents($credentialsPath), true);
+
+        $credentialsPath = getoption('credentialsApiDriver');
+        if ($credentialsPath) {
+            $accessToken = json_decode($credentialsPath, true);
+        } else {
+            if (empty($_SESSION['STDIN']) && empty($code)) {
+                // Request authorization from the user.
+                $authUrl = $client->createAuthUrl();
+                header('Location:' . $authUrl);
+            } else {
+                $authCode = trim($code);
+//            $authCode = trim(fgets(STDIN));
+                $_SESSION['STDIN'] = $authCode;
+
+                // Exchange authorization code for an access token.
+                $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
+
+                // Store the credentials to disk.
+//                if (!file_exists(dirname($credentialsPath))) {
+//                    mkdir(dirname($credentialsPath), 0700, true);
+//                }
+//                file_put_contents($credentialsPath, json_encode($accessToken));
+                setoption('credentialsApiDriver', json_encode($accessToken));
+            }
+        }
+
+        // Refresh the token if it's expired.
+        if ($client->isAccessTokenExpired()) {
+//            $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+//            file_put_contents($credentialsPath, json_encode($client->getAccessToken()));
+
+            $client->fetchAccessTokenWithRefreshToken($accessToken['refresh_token']);
+            $newAccessToken = $client->getAccessToken();
+            $accessToken = array_merge($accessToken, $newAccessToken);
+            setoption('credentialsApiDriver', json_encode($accessToken));
+        }
+
+        $client->setAccessToken($accessToken);
+
+    } catch (Exception $ex) {
+        msg_info($ex->getMessage());
+    }
+
+    return $client;
+}
+
+function bytesToSize1024($bytes, $precision = 2) {
+
+    $unit = array('B','KB','MB');
+    return @round($bytes / pow(1024, ($i = floor(log($bytes, 1024)))), $precision).' '.$unit[$i];
+}
+
+function cn_Rfc3339ToDateTime($timeRfc, $format ='d-m-Y H:i:s') {
+
+    if ($timeRfc) {
+        $date_source = strtotime($timeRfc);
+        return date($format, $date_source);
+    }
+
+    return;
 }

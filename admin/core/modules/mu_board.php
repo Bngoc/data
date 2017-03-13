@@ -1,9 +1,19 @@
 ﻿<?php if (!defined('BQN_MU')) die('Access restricted');
 
+use \Dropbox as dbx;
+
 add_hook('index/invoke_module', '*board_invoke');
 
 function board_invoke()
 {
+    global $request;
+    $postdata = file_get_contents("php://input");
+    $request = json_decode($postdata);
+    global $request;
+
+    @$mod = $request->mod;
+    @$opt = $request->opt;
+
     $dashboard = array(
         'editconfig:sysconf:Csc' => 'Cấu hình Hệ thống',
         'editconfig:confchar:Ct' => 'Cấu hình chức năng',
@@ -14,6 +24,8 @@ function board_invoke()
         'editconfig:group:Cg' => 'Groups',
         'editconfig:logs:Csl' => 'Logs',
         'editconfig:statistics:Csl' => 'Thống kê',
+        'editconfig:uploadFileAPIDropBox:Csl' => 'Upload File DropBox API',
+        'editconfig:uploadFileAPIGoogle:Csl' => 'Upload File Google Drivers API',
 
         'editconfig:select:Ciw'     => 'Select',
         'editconfig:updatemoney:Ciw'     => 'Update Money',
@@ -26,8 +38,12 @@ function board_invoke()
     $dashboard = hook('extend_dashboard', $dashboard);
 
     // Exec
-    $mod = REQ('mod', 'GETPOST');
-    $opt = REQ('opt', 'GETPOST');
+    if (empty($mod)) {
+        $mod = REQ('mod', 'GETPOST');
+    }
+    if (empty($opt)) {
+        $opt = REQ('opt', 'GETPOST');
+    }
 
     // Top level (dashboard)
     cn_bc_add('Cấu hình', cn_url_modify(array('reset'), 'mod=' . $mod));
@@ -44,12 +60,13 @@ function board_invoke()
 
     echoheader('-@com_board/style.css', "Mu Online dashboard");
 
-    $images = array
-    (
+    $images = array(
         'sysconf' => 'options.gif',
         'confchar' => 'settings.png',
         'secure' => 'secure.gif',
         'ischaracter' => 'ischaracter.png',
+        'uploadFileAPIDropBox' => 'api.png',
+        'uploadFileAPIGoogle' => 'api.png',
 
         'personal' => 'user.gif',
         'userman' => 'users.gif',
@@ -81,14 +98,13 @@ function board_invoke()
     }
 
     $greeting_message = 'Have a nice day!';
-    cn_assign('dashboard, username, greeting_message', $dashboard, $_SESSION['user_Account'], $greeting_message);
+    cn_assign('dashboard, username, greeting_message', $dashboard, (@$_SESSION['mu_Account'] ? $_SESSION['mu_Account'] : ''), $greeting_message);
     echo exec_tpl('com_board/general');
     echofooter();
 }
 
 function board_sysconf()
 {
-
     $lng = $grps = $all_skins = array();
     //$skins = scan_dir(cn_path_construct(SERVDIR,'skins'));
     //$langs = scan_dir(cn_path_construct(SERVDIR,'core','lang'), 'txt');
@@ -286,6 +302,17 @@ function board_sysconf()
             'download_media' =>  array('text', 'Download file for mediafire (auto)| VD: http://download1635.mediafire.com/download.php?sz41ac5m7rn'),
             'download_onedrive' =>  array('text', 'Download file for OneDrive (auto)| VD: https://d.docs.live.net/bdc1aa9209a93fd4'),
             'download_4share' =>  array('text', 'Download file for 4share| VD: http://www.4shared.com/d7fnlfadfffp?sz41ac5m7rn'),
+        ),
+        'downloadApi' => array(
+            '_Dropbox_API_' => array('title', 'Api Dropbox'),
+            'appNameDropBox' => array('text', 'Name app of api dropbox|https://www.dropbox.com/developers/apps'),
+            'keyDropBox' => array('text', 'App key|https://www.dropbox.com/developers/apps'),
+            'secretDropBox' => array('text', 'App secret|https://www.dropbox.com/developers/apps'),
+            'redirectUriDropBox' => array('text', 'Redirect URIs uses htttps://|https://www.dropbox.com/developers/apps'),
+            'accessTokenDropBox' => array('text', 'Auto Generated access Token| OR set access Token'),
+            '_GoogleDriver_API_' => array('title', 'Api Google Driver'),
+            'nameAppDriver' => array('text', 'Name Application'),
+            'credentialsApiDriver' => array('text', 'Auto Generated access Token')
         )
     );
 
@@ -1941,6 +1968,434 @@ function board_statistics()
     echofooter();
 }
 
+function board_uploadFileAPIDropBox()
+{
+    $nameApp = trim(getoption('appNameDropBox'));
+    $dropbox_config = array(
+        'key' => getoption('keyDropBox'),
+        'secret' => getoption('secretDropBox')
+    );
+    $configData = array(
+        'nameApp' => $nameApp,
+        'redirectUri' => getoption('redirectUriDropBox')
+    );
+//        'redirectUri' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"
+    try {
+        $webAuthClone = getWebAuth($dropbox_config, $configData);
+
+        if (empty($webAuthClone)) {
+            msg_info('No setup or setup failed with dropbox Api.');
+        }
+
+        $accessTokenDropBox = trim(getoption('accessTokenDropBox'));
+        if (empty($accessTokenDropBox)) {
+            list ($code) = GET('code', 'GETPOST');
+            if (empty($code)) {
+                $authorizeUrl = $webAuthClone->start();
+                header("Location: $authorizeUrl");
+            } else {
+                list($accessTokenDropBox, $userId, $urlState) = $webAuthClone->finish($_GET);
+
+                assert($urlState === null);  // Since we didn't pass anything in start()
+                setoption('accessTokenDropBox', $accessTokenDropBox);
+            }
+        }
+    } catch (dbx\WebAuthException_BadRequest $ex) {
+        msg_info($ex->getMessage());
+//        error_log("/dropbox-auth-finish: bad request: " . $ex->getMessage());
+        // Respond with an HTTP 400 and display error page...
+    } catch (dbx\WebAuthException_Csrf $ex) {
+        msg_info($ex->getMessage());
+//        error_log("/dropbox-auth-finish: CSRF mismatch: " . $ex->getMessage());
+        // Respond with HTTP 403 and display error page...
+    } catch (dbx\WebAuthException_NotApproved $ex) {
+        msg_info($ex->getMessage());
+//        error_log("/dropbox-auth-finish: not approved: " . $ex->getMessage());
+    } catch (dbx\WebAuthException_Provider $ex) {
+        msg_info($ex->getMessage());
+//        error_log("/dropbox-auth-finish: error redirect from Dropbox: " . $ex->getMessage());
+    } catch (dbx\Exception $ex) {
+        msg_info($ex->getMessage());
+//        error_log("/dropbox-auth-finish: error communicating with Dropbox API: " . $ex->getMessage());
+    }
+
+    if ($accessTokenDropBox && $nameApp) {
+        try {
+            $dbxClient = new dbx\Client($accessTokenDropBox, $nameApp, 'UTF-8');
+//            $accoutInfo = $dbxClient->getAccountInfo();
+
+            if (request_type('POST')) {
+                if ($_REQUEST['actionPost']) {
+
+                    cn_dsi_check();
+
+                    if (!empty($_SERVER['CONTENT_LENGTH']) && empty($_FILES) && empty($_POST))
+                        echo 'The uploaded zip was too large. You must upload a file smaller than ' . ini_get("upload_max_filesize");
+
+                    $sFileName = $_FILES['image_file']['name'];
+                    if ($sFileName) {
+                        $f = fopen($_FILES["image_file"]["tmp_name"], "rb");
+
+                        $result = $dbxClient->uploadFile('/' . $sFileName, dbx\WriteMode::force(), $f);
+//                $result = $dbxClient->uploadFile($sFileName, dbx\WriteMode::add(), $file);
+
+
+//            $sFileType = $_FILES['image_file']['type'];
+//            $sFileSize = bytesToSize1024($_FILES['image_file']['size'], 1);
+
+                        $html = "<p>Your file: $sFileName has been successfully received.</p>
+                     <p>Type: " . $result['mime_type'] . "</p>
+                     <p>Size: " . $result['size'] . "</p>";
+
+                        return $html;
+                    }
+                }
+            }
+        } catch (dbx\Exception_InvalidAccessToken $e) {
+            msg_info('No setup or setup failed with dropbox Api.....');
+        }
+    } else {
+
+    }
+
+//    $f = fopen("working-draft.txt", "rb");
+//    $result = $dbxClient->uploadFile("/working-draft.txt", dbx\WriteMode::add(), $f);
+//    fclose($f);
+//    print_r($result);
+
+//    $folderMetadata = $dbxClient->getMetadataWithChildren("/");
+//    print_r($folderMetadata);
+
+//    $f = fopen("working-draft.txt", "w+b");
+//    $fileMetadata = $dbxClient->getFile("/working-draft.txt", $f);
+//    fclose($f);
+//    print_r($fileMetadata);
+
+    echoheader('-@com_board/style.css@com_board/downloadapi_dropbox.js', 'download Api - download');
+    echo exec_tpl('com_board/downloadApi');
+    echofooter();
+}
+
+function getWebAuth($dropbox_config, $configData)
+{
+
+    if (empty($dropbox_config['key']) || empty($dropbox_config['secret']) || empty($configData['nameApp']) || empty($configData['redirectUri'])) {
+        return;
+    }
+    $clientIdentifier = $configData['nameApp']."/1.0";
+    $redirectUri = $configData['redirectUri'];
+    $appInfo = dbx\AppInfo::loadFromJson($dropbox_config);
+
+    $csrfTokenStore = new dbx\ArrayEntryStore($_SESSION, 'dropbox-auth-csrf-token');
+
+    return new dbx\WebAuth($appInfo, $clientIdentifier, $redirectUri, $csrfTokenStore);
+}
+
+function board_uploadFileAPIGoogle()
+{
+    define('APPLICATION_NAME', getoption('nameAppDriver'));
+    define('CREDENTIALS_PATH', '~/api/credentials/drive-php-quickstart.json');
+    define('CLIENT_SECRET_PATH', ROOT . '/api/client_secret.json');
+    define('SCOPES', implode(' ', array(
+            Google_Service_Drive::DRIVE,
+            Google_Service_Drive::DRIVE_READONLY,
+            'https://www.googleapis.com/auth/userinfo.profile'
+        )
+    ));
+    define('SERVICE_ACCOUNT_NAME', 'ngoctbhy@gmail.com');
+
+    if (empty(APPLICATION_NAME)) {
+        msg_info('Application name undefined drive api');
+    }
+
+    if (empty(CLIENT_SECRET_PATH)) {
+        msg_info('File \'client_secret.json\' does not exist');
+    }
+
+    list ($code) = GET('code', 'GETPOST');
+
+    $client = getClient($code);
+    $service = new Google_Service_Drive($client);
+
+    $fileStatus = array(
+        'status' => 1,
+        'message' => '',
+        'statusUpload' => '',
+        'body' => ''
+    );
+
+    if (request_type('POST')) {
+        global $request;
+
+        @$actionUpload = $request->actionUpload;
+        if (isset($_REQUEST['actionUpload']) && $_REQUEST['actionUpload'] || isset($actionUpload) && $actionUpload) {
+
+            cn_dsi_check();
+
+            $mimes = array(
+                'image/jpeg',
+                'image/png',
+                'image/gif',
+                'application/msword',
+                'application/octet-stream', // ...
+                'text/css',
+                'text/plain',
+                'application/x-msdownload', // .exe
+                'video/mp4',
+                'audio/x-aac',
+                'audio/mp3',
+            );
+
+            if (isset($_FILES['myfile']) && $client->getAccessToken()) {
+                $nameFiles = $_FILES['myfile'];
+
+                try {
+                    $file = new Google_Service_Drive_DriveFile();
+//                    foreach ($nameFiles['name'] as $key => $items) {
+//                        if (empty($nameFiles['error'][$key])) {
+                        if (empty($nameFiles['error'])) {
+                            $fileName = $nameFiles['name'];
+                            $fileType = $nameFiles['type'];
+                            $fileError = $nameFiles['error'];
+
+                            if ($fileError == 1) {
+                                //Lỗi vượt dung lượng
+                                $fileStatus['message'] = 'Dung lượng quá giới hạn cho phép';
+                            } elseif (!in_array($fileType, $mimes)) {
+                                //Kiểm tra định dạng file
+                                $fileStatus['message'] = 'Không cho phép định dạng này';
+                            } else {
+                                //Không có lỗi nào
+//                              move_uploaded_file($nameFiles['tmp_name'][$key], 'uploads/' . $fileName);
+
+                                $file->setName($fileName);
+                                $file->setDescription('A test document');
+                                $file->setMimeType($fileType);
+                                $data = file_get_contents($nameFiles['tmp_name']);
+
+                                $createdFile = $service->files->create($file, array(
+                                    'data' => $data,
+                                    'mimeType' => $fileType,
+                                    'uploadType' => 'multipart'
+                                ));
+
+                                if ($createdFile->getId()) {
+                                    do_insert_character(
+                                        'ListFileApiCloud',
+                                        "nameFile='" . $fileName . "'",
+                                        "alias='" . $createdFile->getId() . "'",
+                                        'createTime=' . ctime()
+                                    );
+
+                                    $fileStatus['message'] = "Bạn đã upload $fileName thành công";
+                                    $fileStatus['statusUpload'] = "upload thành công";
+                                    $fileStatus['status'] = 0;
+                                }
+                            }
+                        }
+//                    }
+                } catch (Google_Service_Exception $ex) {
+                    $fileStatus['message'] = $ex->getMessage();
+                }
+//                $dataResults = selectListFiles($service);
+//                $fileStatus['body'] = $dataResults;
+
+                header('Content-Type: application/json');
+                return json_encode($fileStatus);
+
+//            /************************************************
+//             * If we're signed in then lets try to upload our
+//             * file.
+//             ************************************************/
+//            if ($_SERVER['REQUEST_METHOD'] == 'POST' && $client->getAccessToken()) {
+//                /************************************************
+//                 * We'll setup an empty 20MB file to upload.
+//                 ************************************************/
+//                DEFINE("TESTFILE", 'testfile.txt');
+//                if (!file_exists(TESTFILE)) {
+//                    $fh = fopen(TESTFILE, 'w');
+//                    fseek($fh, 1024 * 1024 * 20);
+//                    fwrite($fh, "!", 1);
+//                    fclose($fh);
+//                }
+
+//                $file = new Google_Service_Drive_DriveFile();
+//                $file->name = "Big File";
+//                $chunkSizeBytes = 1 * 1024 * 1024;
+//                // Call the API with the media upload, defer so it doesn't immediately return.
+//                $client->setDefer(true);
+//                $request = $service->files->create($file);
+//                // Create a media file upload to represent our upload process.
+//                $media = new Google_Http_MediaFileUpload(
+//                    $client,
+//                    $request,
+//                    'text/plain',
+//                    null,
+//                    true,
+//                    $chunkSizeBytes
+//                );
+//
+//                $media->setFileSize(filesize(TESTFILE));
+//                // Upload the various chunks. $status will be false until the process is
+//                // complete.
+//                $status = false;
+//                $handle = fopen(TESTFILE, "rb");
+//                while (!$status && !feof($handle)) {
+//                    // read until you get $chunkSizeBytes from TESTFILE
+//                    // fread will never return more than 8192 bytes if the stream is read buffered and it does not represent a plain file
+//                    // An example of a read buffered file is when reading from a URL
+//                    $chunk = readVideoChunk($handle, $chunkSizeBytes);
+//                    $status = $media->nextChunk($chunk);
+//                }
+//                // The final value of $status will be the data from the API for the object
+//                // that has been uploaded.
+//                $result = false;
+//                if ($status != false) {
+//                    $result = $status;
+//                }
+//                fclose($handle);
+//
+//                try {
+//                    $service->files->delete($fileId);
+//                } catch (Exception $e) {
+//                    print "An error occurred: " . $e->getMessage();
+//                }
+
+            }
+        }
+    }
+
+    if (isset($_REQUEST['actAng']) && ($_REQUEST['actAng'] == 1)) {
+
+        list($sort, $isTrash) = GET('sort, trash', 'GPG');
+        $dataResult = selectListFiles($service, $sort, $isTrash);
+
+        $fileStatus['body'] = $dataResult;
+        if (empty($dataResult['status'])) {
+            $fileStatus['status'] =0;
+        }
+
+        header('Content-Type: application/json');
+        return json_encode($fileStatus);
+    }
+
+    echoheader('-@com_board/style.css@com_board/uploadApiGoogleDrivers.js', 'Api-Upload file to GoogleDrivers');
+    echo exec_tpl('com_board/downloadApiGoogle');
+    echofooter();
+}
+
+function selectListFiles($service, $sort, $isTrash)
+{
+    if (strtolower($sort) == 'a') {
+    $namSort = 'asc';
+} else {
+    $namSort = 'desc';
+}
+    $resultData = do_select_orther("SELECT * FROM ListFileApiCloud WHERE typeApi=0 ORDER BY createTime $namSort");
+
+    $resultDataClone = array();
+    $resultDataResult = array(
+        'status' => 0,
+        'msg' => '',
+        'data' => ''
+    );
+
+    $optParams = array(
+        'orderBy' => "createdTime $namSort",
+//        'pageSize' => 20,
+        'fields' => 'nextPageToken, files(id, name, modifiedTime, createdTime, mimeType, size, originalFilename)',
+
+        'q' => "trashed=$isTrash"
+    );
+
+    try {
+        $results = $service->files->listFiles($optParams);
+        if (count($results->getFiles())) {
+            foreach ($results->getFiles() as $keys => $file) {
+                $key = trim($file->getId());
+                $resultDataClone[$key]['name'] = $file->getName();
+                $resultDataClone[$key]['ID'] = $file->getId();
+                $resultDataClone[$key]['mimeType'] = $file->getMimeType();
+                $resultDataClone[$key]['size'] = bytesToSize1024($file->getSize());
+                $resultDataClone[$key]['originalFilename'] = $file->getOriginalFilename();
+                $resultDataClone[$key]['modifiedTime'] = cn_Rfc3339ToDateTime($file->getModifiedTime(), 'D, d-m-Y H:i:s');
+                $resultDataClone[$key]['createdTime'] = cn_Rfc3339ToDateTime($file->getCreatedTime(), 'D, d-m-Y H:i:s');
+                $resultDataClone[$key]['sortTime'] = strtotime($file->getCreatedTime());
+//                $resultDataClone[]['getOriginalFilename'] =  $file->getOriginalFilename();
+            }
+        }
+    } catch (Exception $e) {
+        $resultDataResult['msg'] =  $e->getMessage();
+        $resultDataResult['status'] = 1;
+    }
+
+    if ($resultDataClone && $resultData) {
+        foreach ($resultData as $kr => $item) {
+            if (!isset($resultDataClone[trim($item['alias'])])) {
+                unset($resultData[$kr]);
+                continue;
+            }
+            $resultData[$kr]['size'] = $resultDataClone[$item['alias']]['size'];
+            $resultData[$kr]['mimeType'] = $resultDataClone[$item['alias']]['mimeType'];
+            $resultData[$kr]['modifiedTime'] = $resultDataClone[$item['alias']]['modifiedTime'];
+            $resultData[$kr]['createdTime'] = $resultDataClone[$item['alias']]['createdTime'];
+            $resultData[$kr]['sortTime'] = $resultDataClone[$item['alias']]['sortTime'];
+            $resultData[$kr]['isTrash'] = $isTrash;
+        }
+        $resultDataResult['data'] = $resultData;
+    } else {
+        $resultDataResult['status'] = 1;
+        $resultDataResult['msg'] = 'Error Select List';
+    }
+
+    return $resultDataResult;
+}
+
+function broad_downloadApiMediafrie ()
+{
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
+    require_once("../mflib.php");
+
+    $appId = "";
+    $apiKey = "";
+    $email = "";
+    $password = "";
+
+//    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+//    <head>
+//        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+//        <title>PHP - MediaFire API Library - File Uploading With Get Link</title>
+//    </head>
+//    <body>
+//    <form method="post" enctype="multipart/form-data" action="">
+//        <p>Upload a file:</p>
+//        <label title="Choose a Local File to a MediaFire account" for="file">File:</label>
+//        <input type="file" id="file" name="file" size="30" />
+//        <div style="clear:left;display:block;" id="dvFile"></div>
+//        <input type="submit" id="upload" name="upload" value="Upload" />
+//    </form>
+//    </body>
+//    </html>
+//
+
+    if (isset($_POST['upload'])) {
+
+        $mflib = new mflib($appId, $apiKey);
+        $mflib->email    = $email;
+        $mflib->password = $password;
+        $token = $mflib->userGetSessionToken(null);
+
+        $uploadkey = $mflib->fileUpload($token, $_FILES["file"]["tmp_name"],"myfiles",$_FILES["file"]["name"]);
+        $fileDetails = $mflib->filePollUpload($token, $uploadkey);
+        $link = $mflib->fileGetLinks($fileDetails['quickkey'], "direct_download", $token);
+
+
+        print_r($link);
+    }
+}
+
 function board_select()
 {
 
@@ -1994,3 +2449,18 @@ function board_select()
     echo exec_tpl('com_board/selsect');
     echofooter();
 }
+
+/**
+ * Expands the home directory alias '~' to the full path.
+ * @param string $path the path to expand.
+ * @return string the expanded path.
+ */
+function expandHomeDirectory($path)
+{
+    $homeDirectory = getenv('HOME');
+    if (empty($homeDirectory)) {
+        $homeDirectory = getenv('HOMEDRIVE') . getenv('HOMEPATH');
+    }
+    return str_replace('~', realpath($homeDirectory), $path);
+}
+

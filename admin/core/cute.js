@@ -344,15 +344,3 @@ function tiny_msg(object) {
     return false;
 }
 
-$(function () {
-    calculategcoin();
-    $(".txt-add-sub").on("keydown keyup", function () {
-        calculategcoin();
-    });
-});
-function calculategcoin() {
-    var point = raw_p = $('#sum-point').val();
-    point *= 0.8;
-
-    $('.hd-sms').val(point);
-}

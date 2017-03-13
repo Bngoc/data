@@ -402,11 +402,11 @@ div.box_login1 .fotgetPass a:hover span {
 }
 
 #page_wrapper1 {
-    /*background: url(../images/bgvisual_top.jpg) no-repeat top center;*/
+    background: url(../images/bgvisual_top.jpg) no-repeat top center;
 }
 
 /* top bg for subpage */
-/* #page_wrapper2 {height: auto !important; min-height:1555px; background:url(../images/bgvisual_bottom.jpg) no-repeat bottom center;} /* sum of bgvisual_bottom and bgvisual_top heights 1555 */
+/* #page_wrapper2 {height: auto !important; min-height:1555px; background:url(../images/bgvisual_bottom.jpg) no-repeat bottom center;} !* sum of bgvisual_bottom and bgvisual_top heights 1555 */
 #footer_wrapper {
     height: auto !important;
     min-height: 170px;
@@ -2046,3 +2046,59 @@ select.sel-p {
     font-size: smaller;*/
 }
 
+.menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #fff;
+}
+.menu li {
+    top: 7px;
+    height: 25px;
+    margin-right: 1em;
+    list-style: none;
+    background-repeat: no-repeat;
+    padding-left: 10px;
+}
+.menu li a, .menu li a:visited {
+    display: block;
+    text-decoration: none;
+    text-indent: -9999px;
+    height: 30px;
+    background-repeat: no-repeat;
+}
+.home {
+    background-image: url(/images/menu/home.png);
+    width: 80px;
+    background-size: contain;
+    margin-left: 30px;
+}
+.home a:hover {
+    background-image: url(/images/menu/home_over.png);
+    background-size: cover;
+}
+.about {background-image: url(/images/menu/tintuc.png);
+    width: 106px;
+    background-size: contain;
+}
+.about a {background-image: url(/images/menu/rollover02a.gif);
+    background-size: contain;
+}
+.services {background-image: url(/images/menu/hd.png);
+    width: 150px;
+    background-size: contain;
+}
+.services a {background-image: url(/images/menu/rollover03a.gif);
+    background-size: contain;
+}
+.contact {background-image: url(/images/menu/m4.png); width: 122px;
+    background-size: contain;}
+.contact a {background-image: url(/images/rollover04a.gif);
+    background-size: contain;}
+
+ul.menu li a:hover {background: none;}
+
+.menu li {
+    float: left;
+    position: relative;
+}
