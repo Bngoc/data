@@ -1,5 +1,14 @@
 <?php
 define("ewEncoding", "ISO-8859-1", true);
+define('CREDENTIALS_PATH', '~/api/credentials/drive-php-quickstart.json');
+define('CLIENT_SECRET_PATH', ROOT . '/api/client_secret.json');
+define('SCOPES', implode(' ', array(
+        Google_Service_Drive::DRIVE,
+        Google_Service_Drive::DRIVE_READONLY,
+        'https://www.googleapis.com/auth/userinfo.profile'
+    )
+));
+define('SERVICE_ACCOUNT_NAME', 'ngoctbhy@gmail.com');
 
 /*
 	$paging = new pagintion_temp();
@@ -1145,7 +1154,7 @@ function cn_renderImageItemCode($group, $id, $optImg)
     $id = (string)$id;
     $optImg = (string)$optImg;
 
-    if (strlen($optImg) == 7){
+    if (strlen($optImg) == 7) {
         return (string)$optImg;
     }
 
@@ -1176,7 +1185,7 @@ function cn_dsi_check($isWeb = false)
     global $request;
     list($key, $dsi) = GET('__signature_key, __signature_dsi', 'GETPOST');
 
-    if (empty($key)){
+    if (empty($key)) {
         $key = @($request->__signature_key) ? $request->__signature_key : '';
     }
     if (empty($dsi)) {
@@ -1270,6 +1279,34 @@ function cn_snippet_digital_signature($type = 'std')
     }
 
     return FALSE;
+}
+
+// @Param: type = std (input hidden), a (inline in a)
+function cn_digital_signature_meta()
+{
+    $htmlResult = '';
+    $member = member_get();
+
+    if (isset($member['user_Account'])) $ischeckSession = false;
+    else if (isset($member['user_name'])) $ischeckSession = true;
+    else return $htmlResult;
+
+    // Is not member - is fatal error
+    if (is_null($member)) return;
+
+    // Make signature
+    if (!$ischeckSession) {
+        $sign_extr = MD5(time() . mt_rand()) . '-' . $member['user_Account'];
+        $signature = MD5($sign_extr . $member['pass'] . MD5(getoption('#crypt_salt')));
+    } else {
+        $sign_extr = MD5(time() . mt_rand()) . '-' . $member['user_name'];
+        $signature = MD5($sign_extr . $member['pass_web'] . MD5(getoption('#crypt_salt')));
+    }
+
+    $htmlResult .= '<meta name="__signature_key" content="' . cn_htmlspecialchars($sign_extr) . '" />';
+    $htmlResult .= '<meta name="__signature_dsi" content="' . cn_htmlspecialchars($signature) . '" />';
+
+    return $htmlResult;
 }
 
 function cn_template_class()
@@ -1842,7 +1879,8 @@ function cn_ResultDe()
  * @param int $mode
  * @return bool
  */
-function makeDirs($dirpath, $mode=0777) {
+function makeDirs($dirpath, $mode = 0777)
+{
     return is_dir($dirpath) || mkdir($dirpath, $mode, true);
 }
 
@@ -1975,13 +2013,15 @@ function getClient($code = null)
     return $client;
 }
 
-function bytesToSize1024($bytes, $precision = 2) {
+function bytesToSize1024($bytes, $precision = 2)
+{
 
-    $unit = array('B','KB','MB');
-    return @round($bytes / pow(1024, ($i = floor(log($bytes, 1024)))), $precision).' '.$unit[$i];
+    $unit = array('B', 'KB', 'MB');
+    return @round($bytes / pow(1024, ($i = floor(log($bytes, 1024)))), $precision) . ' ' . $unit[$i];
 }
 
-function cn_Rfc3339ToDateTime($timeRfc, $format ='d-m-Y H:i:s') {
+function cn_Rfc3339ToDateTime($timeRfc, $format = 'd-m-Y H:i:s')
+{
 
     if ($timeRfc) {
         $date_source = strtotime($timeRfc);

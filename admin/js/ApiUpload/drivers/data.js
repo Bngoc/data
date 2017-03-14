@@ -38,6 +38,32 @@ app.factory("Data", ['$http', '$location',
             });
         };
 
+        obj.deleteItemApi = function (cUrl, object ) {
+            return $http({
+                method: 'DELETE',
+                url: cUrl,
+                data: object,
+                headers:{
+                    'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+                }
+            }).then(function (done) {
+                return done;
+            },function(response){
+                //faile
+            });
+        }
+
+        obj.putFrom = function (cUrl, object) {
+            return $http({
+                method: 'POST',
+                url: cUrl,
+                data: object,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (results) {
+                return results.data;
+            });
+        };
+
         obj.uploadFile = function (url, object, files) {
             var formdata = new FormData();
             Object.keys(object).forEach(function (key) {
@@ -50,7 +76,7 @@ app.factory("Data", ['$http', '$location',
 
             formdata.append('myfile', files);
 
-            var status = { progress: 0 };
+            var status = {progress: 0};
             // var defer = $q.defer();
 
             return $http({
@@ -83,13 +109,13 @@ app.factory("Data", ['$http', '$location',
                 timeout: 30000,
                 cache: false,
                 uploadEventHandlers: {
-                    progress: function(e) {
+                    progress: function (e) {
                         // defer.notify(e.loaded * 100 / e.total);
                         // console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
                     }
                 }
-            // }).progress(function (evt) {
-            //     console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                // }).progress(function (evt) {
+                //     console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
                 // $scope.progressBar = parseInt(100.0 * evt.loaded / evt.total);
             }).success(function (data, status, headers, config) {
                 // defer.resolve(responce);
@@ -126,7 +152,7 @@ app.factory("Data", ['$http', '$location',
             // return defer;
         };
 
-         obj.apiUploadFileByMe = function(url, drivers, files, done, progress, speedUpload, vIndex) {
+        obj.apiUploadFileByMe = function (url, drivers, files, done, progress, speedUpload, vIndex) {
 
             var xhr = new XMLHttpRequest();
             http_arr.push(xhr);
@@ -136,59 +162,59 @@ app.factory("Data", ['$http', '$location',
                 formdata.append(key, drivers[key]);
             });
 
-             formdata.append('myfile', files);
+            formdata.append('myfile', files);
 
 
-                 // angular.forEach(files, function(v, k){
-                 //     formdata.append("myfile[]", v);
-                 // });
+            // angular.forEach(files, function(v, k){
+            //     formdata.append("myfile[]", v);
+            // });
 
 
-                 // xhr.upload.addEventListener("progress", uploadProgress, false);
-                 // xhr.addEventListener("load", uploadComplete, false);
-                 // xhr.addEventListener("error", uploadFailed, false);
-                 // xhr.addEventListener("abort", uploadCanceled, false);
-                 // xhr.open("POST", url);
-                 // scope.progressVisible = true;
-                 // xhr.send(formdata);
+            // xhr.upload.addEventListener("progress", uploadProgress, false);
+            // xhr.addEventListener("load", uploadComplete, false);
+            // xhr.addEventListener("error", uploadFailed, false);
+            // xhr.addEventListener("abort", uploadCanceled, false);
+            // xhr.open("POST", url);
+            // scope.progressVisible = true;
+            // xhr.send(formdata);
 
-                 var oldLoaded = 0;
-                 var oldTime = 0;
+            var oldLoaded = 0;
+            var oldTime = 0;
 
-                 if (typeof speedUpload == 'function') {
-                     xhr.upload.addEventListener('progress', function (event) {
-                         if (oldTime == 0) { //Set thời gian trước đó nếu như bằng không.
-                             oldTime = event.timeStamp;
-                         }
-                         speedUpload.call(xhr, speedRate(oldTime, event.timeStamp, oldLoaded, event.loaded), vIndex);
-                         oldTime = event.timeStamp; //Set thời gian sau khi thực hiện xử lý
-                         oldLoaded = event.loaded; //Set dữ liệu đã nhận được
-                     });
-                 }
+            if (typeof speedUpload == 'function') {
+                xhr.upload.addEventListener('progress', function (event) {
+                    if (oldTime == 0) { //Set thời gian trước đó nếu như bằng không.
+                        oldTime = event.timeStamp;
+                    }
+                    speedUpload.call(xhr, speedRate(oldTime, event.timeStamp, oldLoaded, event.loaded), vIndex);
+                    oldTime = event.timeStamp; //Set thời gian sau khi thực hiện xử lý
+                    oldLoaded = event.loaded; //Set dữ liệu đã nhận được
+                });
+            }
 
-                 if (typeof progress == 'function') {
-                     xhr.upload.addEventListener('progress', function (e) {
-                         progress.call(xhr, parseInt((e.loaded * 100) / e.total), vIndex);
-                     });
-                 }
-                 if (typeof done == 'function') {
-                     xhr.onreadystatechange = function () {
+            if (typeof progress == 'function') {
+                xhr.upload.addEventListener('progress', function (e) {
+                    progress.call(xhr, parseInt((e.loaded * 100) / e.total), vIndex);
+                });
+            }
+            if (typeof done == 'function') {
+                xhr.onreadystatechange = function () {
 
-                         if (xhr.readyState == 4 && xhr.status == 200) {
-                             //     $rootScope.$apply(function() {
-                             return done.call(xhr, xhr.responseText, vIndex);
-                             //     });
-                             //
-                         }
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        //     $rootScope.$apply(function() {
+                        return done.call(xhr, xhr.responseText, vIndex);
+                        //     });
+                        //
+                    }
 
-                         // xhr.removeEventListener('progress');
-                     }
-                 }
+                    // xhr.removeEventListener('progress');
+                }
+            }
 
-                 xhr.open('POST', url, true);
-                 xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-                 xhr.setRequestHeader("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
-                 xhr.send(formdata);
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            xhr.setRequestHeader("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
+            xhr.send(formdata);
         };
 
         obj.canelUpload = function (rUrl, object) {
@@ -211,7 +237,7 @@ app.factory("Data", ['$http', '$location',
         };
 
         function uploadProgress(evt) {
-            scope.$apply(function(){
+            scope.$apply(function () {
                 if (evt.lengthComputable) {
                     scope.progress = Math.round(evt.loaded * 100 / evt.total)
                 } else {
@@ -230,7 +256,7 @@ app.factory("Data", ['$http', '$location',
         }
 
         function uploadCanceled(evt) {
-            scope.$apply(function(){
+            scope.$apply(function () {
                 scope.progressVisible = false
             })
             alert("The upload has been canceled by the user or the browser dropped the connection.")
@@ -300,8 +326,8 @@ app.service('fileUpload', ['$http', function ($http) {
     // }
 }]);
 
-app.filter("trust", ['$sce', function($sce) {
-    return function(htmlCode){
+app.filter("trust", ['$sce', function ($sce) {
+    return function (htmlCode) {
         return $sce.trustAsHtml(htmlCode);
     };
 }]);

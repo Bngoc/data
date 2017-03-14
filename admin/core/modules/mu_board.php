@@ -1,6 +1,7 @@
 ﻿<?php if (!defined('BQN_MU')) die('Access restricted');
 
 use \Dropbox as dbx;
+define('APPLICATION_NAME', getoption('nameAppDriver'));
 
 add_hook('index/invoke_module', '*board_invoke');
 
@@ -26,6 +27,8 @@ function board_invoke()
         'editconfig:statistics:Csl' => 'Thống kê',
         'editconfig:uploadFileAPIDropBox:Csl' => 'Upload File DropBox API',
         'editconfig:uploadFileAPIGoogle:Csl' => 'Upload File Google Drivers API',
+        'editconfig:apiDriverdChangeShare:Csl:1' => 'Change share Drivers API',
+        'editconfig:apiDeleteDrivers:Csl:1' => 'Delete item Drivers API',
 
         'editconfig:select:Ciw'     => 'Select',
         'editconfig:updatemoney:Ciw'     => 'Update Money',
@@ -79,19 +82,18 @@ function board_invoke()
     $images = hook('extend_dashboard_images', $images);
 
     foreach ($dashboard as $id => $name) {
-        list($mod, $opt, $acl) = explode(':', $id, 3);
-
+        list($mod, $opt, $acl) = explode(':', $id, 4);
         if (!test($acl)) {
             unset($dashboard[$id]);
             continue;
         }
 
-        $item = array
-        (
+        $item = array(
             'name' => $name,
             'img' => isset($images[$opt]) ? $images[$opt] : 'home.gif',
             'mod' => $mod,
             'opt' => $opt,
+            'isHide' => @explode(':', $id)[3] ? 0 : 1
         );
 
         $dashboard[$id] = $item;
@@ -1822,6 +1824,7 @@ function board_logs()
     if (!$section || $section == 'system') {
         $_url = cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs');
         $path = cn_path_construct(SERVDIR, 'log/system') . 'error_dump.log';
+        $options = $default_log['system'];
 
         if (file_exists($path)) {
             $r = fopen($path, 'r');
@@ -2093,17 +2096,6 @@ function getWebAuth($dropbox_config, $configData)
 
 function board_uploadFileAPIGoogle()
 {
-    define('APPLICATION_NAME', getoption('nameAppDriver'));
-    define('CREDENTIALS_PATH', '~/api/credentials/drive-php-quickstart.json');
-    define('CLIENT_SECRET_PATH', ROOT . '/api/client_secret.json');
-    define('SCOPES', implode(' ', array(
-            Google_Service_Drive::DRIVE,
-            Google_Service_Drive::DRIVE_READONLY,
-            'https://www.googleapis.com/auth/userinfo.profile'
-        )
-    ));
-    define('SERVICE_ACCOUNT_NAME', 'ngoctbhy@gmail.com');
-
     if (empty(APPLICATION_NAME)) {
         msg_info('Application name undefined drive api');
     }
@@ -2113,7 +2105,6 @@ function board_uploadFileAPIGoogle()
     }
 
     list ($code) = GET('code', 'GETPOST');
-
     $client = getClient($code);
     $service = new Google_Service_Drive($client);
 
@@ -2464,3 +2455,90 @@ function expandHomeDirectory($path)
     return str_replace('~', realpath($homeDirectory), $path);
 }
 
+function board_apiDriverdChangeShare()
+{
+    if (request_type('POST')){
+        try {
+            cn_dsi_check();
+
+            $postdata = file_get_contents("php://input");
+            $request = json_decode($postdata);
+
+            $alias = htmlentities(html_entity_decode(trim($request->alias)));
+            $shareDownload = (int)$request->shareDownload;
+            $shareDownloadChange = ($shareDownload == 1) ? 0 : 1;
+            $result = array(
+                'messgase' => '',
+                'status' => 1,
+                'atcDownload' => $shareDownload
+            );
+
+            $isChek = do_update_orther("UPDATE ListFileApiCloud SET shareDownload=$shareDownloadChange WHERE alias='$alias'");
+
+//            $shareDownloadChange = $shareDownload;
+            if ($isChek) {
+                $result['msg'] = 'ok';
+                $result['status'] = 0;
+                $result['atcDownload'] = $shareDownloadChange;
+            } else {
+                $result['msg'] = 'Error update';
+            }
+
+        } catch (Exception $ex){
+            $result['msg'] = $ex->getMessage();
+        }
+
+        header('Content-Type: application/json');
+        return json_encode($result);
+    }
+}
+
+function board_apiRestoreDriver ()
+{
+
+}
+
+function board_apiDeleteDrivers()
+{
+    if (request_type('POST')){
+
+        $result = array(
+            'messgase' => '',
+            'status' => 1,
+            'f' => ''
+        );
+
+        try {
+            cn_dsi_check();
+            $postdata = file_get_contents("php://input");
+            $request = json_decode($postdata);
+            list($code) = GET('code', 'GETPOST');
+            $client = getClient($code);
+            $service = new Google_Service_Drive($client);
+            if($request->alias) {
+                $alias = htmlentities(html_entity_decode(trim($request->alias)));
+
+                $service->files->delete($alias);
+                $isChek = do_update_orther("UPDATE ListFileApiCloud SET isDelete=1 WHERE alias='$alias'");
+
+//            $shareDownloadChange = $shareDownload;
+                if ($isChek) {
+                    $result['msg'] = 'ok';
+                    $result['status'] = 0;
+                } else {
+                    $result['msg'] = 'Error execute';
+                }
+            }
+        } catch (Exception $ex){
+            $result['msg'] = $ex->getMessage();
+        }
+
+        header('Content-Type: application/json');
+        return json_encode($result);
+    }
+}
+
+function board_apiEditDrivers()
+{
+
+}

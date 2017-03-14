@@ -866,8 +866,7 @@ function request_type($type = 'POST')
 // $image = img@custom_style_tpl
 function echoheader($image, $header_text, $bread_crumbs = false)
 {
-    global $skin_header, $lang_content_type, $skin_menu, $skin_menu_none, $_SESS, $_SERV_SESS;
-
+    global $skin_header, $lang_content_type, $skin_menu, $digitalSignature, $skin_menu_none, $_SESS, $_SERV_SESS;
     $header_time = date('H:i:s | d, M, Y', ctime());
 
     $customs = explode("@", $image);
@@ -883,6 +882,7 @@ function echoheader($image, $header_text, $bread_crumbs = false)
 
     //$skin_header = get_skin($skin_header);
     $skin_header = str_replace('{title}', ($header_text ? $header_text . ' / ' : '') . 'Admin Dashboard ', $skin_header);
+    $skin_header = str_replace('{signature}', $digitalSignature, $skin_header);
     //$skin_header = str_replace("{image-name}", $skin_prefix.$image, $skin_header);
     $skin_header = str_replace("{header-text}", $header_text, $skin_header);
     $skin_header = str_replace("{header-time}", $header_time, $skin_header);

@@ -29,23 +29,23 @@
                         <th ng-repeat="c in columns">{{c.text}}</th>
                     </tr>
                     <tr ng-repeat="c in products | filter:filterProduct | orderBy:'-id'" id="{{c.id}}">
-                        <td>{{$index}}</td>
+                        <td>{{$index+1}}</td>
                         <td>{{c.nameFile}}</td>
                         <td>{{c.size}}</td>
                         <td>{{c.alias}}</td>
                         <td>{{c.createdTime}}</td>
                         <td>{{c.modifiedTime}}</td>
                         <td>
-                            <button class="btn ng-binding"
+                            <button ng-hide="checkInTrash" class="btn ng-binding"
                                     ng-class="{1:'btn-success', '0':'btn-default-cus'}[c.shareDownload]"
                                     ng-click="changeProductStatus(c);">Inactive
                             </button>
                         </td>
                         <td>
-                            <div class="btn-group">
+                            <div class="btn-group" ng-hide="checkInTrash">
                                 <button type="button" class="btn btn-default fa fa-edit" ng-click="open(c);"></button>
                                 <button type="button" class="btn btn-danger fa fa-trash-o"
-                                        ng-click="deleteProduct(c);"></button>
+                                        ng-click="deleteItemDrivers(c);"></button>
                             </div>
                         </td>
                         <td>

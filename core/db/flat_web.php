@@ -258,6 +258,7 @@ function do_update_orther($orther = '')
     if ($orther) {
         $orther = trim($orther);
         $check = $db_new->Execute($orther) or cn_writelog($orther, 'e');
+
         if ($check){
             if (getoption('debugSql')) {
                 cn_writelog($orther);
@@ -265,6 +266,7 @@ function do_update_orther($orther = '')
 
             return true;
         }
+
     } else return FALSE;
 }
 

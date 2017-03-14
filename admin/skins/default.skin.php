@@ -1,6 +1,6 @@
 <?PHP
 
-global $skin_header, $skin_menu, $skin_footer, $skin_prefix;
+global $skin_header, $skin_menu, $skin_footer, $skin_prefix, $digitalSignature;
 
 $skin_prefix = "";
 
@@ -12,6 +12,7 @@ $skin_menu = cn_get_menu() . '<div style="clear:both;"></div>';
 $setpath_default = getoption('http_script_dir');    // 	=> http://localhost/bqn/data <=> /bqn/data
 $setpath_root_ = URL_PATH_;                            //	=> /bqn/data
 $setpath_root_admin = URL_PATH;                        //	=> /bqn/data/admin
+$digitalSignature = cn_digital_signature_meta();
 // ********************************************************************************
 // Skin HEADER
 // ********************************************************************************
@@ -26,7 +27,7 @@ $skin_header = <<<HTML
     <link rel="stylesheet" type="text/css" href="/admin/skins/default.css">
 	<link rel="stylesheet" href="/skins/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="/skins/font-awesome.min.css" type="text/css">
-
+	{signature}
     <style type="text/css"><!-- {CustomStyle} --></style>
 	
 	<script type="text/javascript" src="/js/jquery-2.1.0.min.js"></script>

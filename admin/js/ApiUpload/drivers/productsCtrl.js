@@ -37,8 +37,8 @@ app.controller('productsCtrl', function ($scope, $modal, $filter, Data, fileUplo
         Data.getData('admin.php', $scope.drivers, addObject).then(function (results) {
             try {
                 $scope.products = results.data.body.data;
-            } catch (e){
-
+            } catch (ex){
+                console.log(ex);
             }
         });
     };
@@ -46,17 +46,34 @@ app.controller('productsCtrl', function ($scope, $modal, $filter, Data, fileUplo
 
     Data.getData('admin.php', $scope.drivers, addObject).then(function (results) {
         try {
-            console.log(results);
             $scope.products = results.data.body.data;
         } catch (e){
 
         }
     });
 
-    $scope.changeProductStatus = function (product) {
+    $scope.changeProductStatus = function (products) {
+        var dataObject = {
+            mod: 'editconfig',
+            opt: 'apiDriverdChangeShare',
+            alias: products.alias,
+            shareDownload: product.shareDownload,
+            __signature_key: $("meta[name='__signature_key']").attr("content"),
+            __signature_dsi: $("meta[name='__signature_dsi']").attr("content")
+        }
 
-        product.status = (product.status == "Active" ? "Inactive" : "Active");
-        Data.put("products/" + product.id, {status: product.status});
+        Data.putFrom("admin.php", dataObject).then(function (serverResult) {
+            try {
+                //xmlHttprequest
+                // var serverResult = JSON.parse(result);
+
+                if (serverResult.status == 0 && serverResult.msg == 'ok') {
+                    products.shareDownload = serverResult.atcDownload;
+                }
+            } catch (ex) {
+                console.log(ex);
+            }
+        });
     };
 
     $scope.deleteProduct = function (product) {
@@ -101,6 +118,29 @@ app.controller('productsCtrl', function ($scope, $modal, $filter, Data, fileUplo
             // }
         });
     };
+
+    $scope.deleteItemDrivers = function (product) {
+        if (confirm("Are you sure to remove the product")) {
+            var varObject = {
+                mod: 'editconfig',
+                opt: 'apiDeleteDrivers',
+                alias: product.alias,
+                __signature_key: $("meta[name='__signature_key']").attr("content"),
+                __signature_dsi: $("meta[name='__signature_dsi']").attr("content")
+            }
+
+            Data.putFrom('admin.php', varObject).then(function (serverResult) {
+                try {
+                    if (serverResult.status == 0 && serverResult.msg == 'ok') {
+                        // $scope.products = _.without($scope.products, _.findWhere($scope.products, {id: product.alias}));
+                        $scope.products.splice($scope.products.indexOf(product.alias),1);
+                    }
+                } catch (ex) {
+                    console.log(ex);
+                }
+            });
+        }
+    }
 
     $scope.restoreTrash = function () {
         console.log('1111');
@@ -161,6 +201,8 @@ app.controller('productEditCtrl', function ($scope, $modalInstance, item, Data, 
          // ProgressText.className = 'progress-text';
 
          drivers['actionUpload'] = 1;
+         drivers['__signature_dsi'] = $("meta[name='__signature_dsi']").attr("content");
+         drivers['__signature_key'] = $("meta[name='__signature_key']").attr("content");
 
          if ($scope.fileList.length) {
              checkUpload = true;
@@ -205,7 +247,6 @@ app.controller('productEditCtrl', function ($scope, $modalInstance, item, Data, 
                          }
                      }, function (speed, vIndex) {
                          $('#upSpeed_' + vIndex).html('Upload Speed: ' + speed + 'KB/s');
-                         console.log(speed);
                          // ProgressText.innerHTML = 'Upload Speed: ' + speed + 'KB/s';
                      }
                      , j, false);
