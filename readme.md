@@ -1,6 +1,13 @@
  [*] A>
 	 1. 1433 ---> connect sql server
+	    > Download Microsoft SQL 2k5 Server Management Studio Express
+	    ->>>> Phan quyen DB
+	    ->>>> Run Server Management Studio Express AD
+	    ->>>> Attach DB vao Server Management Studio Express
 	 2. IIS
+	     Programs and Features Click Turn Windows features on or off
+	     > Internet Information Service > Web Management Tools & World Wide Web Services
+	     
 		-> chmod thu muc data.....
 		-> iis --> php .. them thu muc php [php-cgi.exe]
 		-> IUSR

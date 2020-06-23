@@ -1387,12 +1387,7 @@ function cn_config_load()
         'Use_WebShop' => 1,
         'Use_NapVpoint' => 1,
         'Use_ChuyenVpoint' => 1,
-        'Use_TienTe' => 1,
-        'Use_DoiGioiTinh' => 1,
-        'Use_ResetVIP' => 1,
-        'Use_UyThacOffline' => 1,
         'Use_UyThacResetVIP' => 1,
-        'use_gioihanrs' => 1,
 
         'domain_pri' => "192.168.X.X",
         'home_url' => "http://192.168.X.X/ABC",
@@ -1404,7 +1399,6 @@ function cn_config_load()
         "conf['requests']" => 10,
         "conf['blocktime']" => 10,
 
-        'Use_WebShop' => 1,
         'Use_TienTe' => 1,
         'Use_NapThe' => 1,
         'Use_Event' => 1,
