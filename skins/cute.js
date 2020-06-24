@@ -371,10 +371,9 @@ function refreshCaptcha() {
     var input = document.getElementById('username');
     var form = document.getElementById('form');
     var elem = document.getElementById('error_noti');
-    if (elem) {
+    if (elem && form) {
         elem.id = 'notify';
         elem.style.display = 'none';
-
         form.appendChild(elem);
 
         input.addEventListener('invalid', function (event) {

@@ -76,10 +76,16 @@ cn_snippet_messages();
             url: "<?php echo getoption('http_script_dir') ?>/admin/core/cn_modify_admin.php?name_function=cn_check_conncet",
             data: fd,
             cache: false,
+            beforeSend: function() {
+                $("#result").text("");
+			},
             success: function (data) {
                 varTemp = data.split('|');
-                $("#result").text(varTemp[1]).css('color', 'blue');
+                $("#result").text(varTemp[1]).css({color: (+varTemp[0] !== 0 ? 'blue' : 'red'), 'font-weight': "bold" });
                 $('#actionSave').html('<input type="hidden" name="actionSave" value="' + varTemp[0] + '"/>');
+            },
+			error: function (error) {
+				console.log(error)
             }
         });
     }

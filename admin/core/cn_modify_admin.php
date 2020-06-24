@@ -587,7 +587,7 @@ function cn_register_form($admin = TRUE)
             if ($status)
                 msg_info('For you send activate link');
             else
-                msg_info('For you send error');
+                msg_info('For you send error after forgot password.');
         }
 
         msg_info('Enter required field: email');
@@ -663,7 +663,7 @@ function cn_register_form($admin = TRUE)
                         if ($status)
                             msg_info('For you send register');
                         else
-                            msg_info('For you send error');
+                            msg_info('For you send error after register');
                     }
                     header('Location: ' . PHP_SELF);
                     die();
@@ -1564,7 +1564,7 @@ function cn_config_load()
     // ---------------- S_custum by bqn -----
     // Detect self pathes
     $SN = dirname($_SERVER['SCRIPT_NAME']);
-    $script_path = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['SERVER_NAME'] . (($SN != '/') ? '' : $SN);
+    $script_path = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? "https" : "http") . "://" . $_SERVER['SERVER_NAME'] . (($SN != '/') ? '' : $SN);
 //    $script_path = "http://" . $_SERVER['SERVER_NAME'];
     //check http_script_dir
     $path_http_script_dir = $script_path;
@@ -1856,34 +1856,49 @@ function cn_check_conncet()
 {
     error_reporting(0);
     if (request_type('POST')) {
-
         list($type_connect, $localhost, $databaseuser, $databsepassword, $d_base) = GET('type_connect, nameLocal, nameSql, pwdDb, nameSaveDb', 'GPG');
-
         if ($localhost && $databaseuser && $databsepassword && $d_base) {
 
-            $resultSms = '1|Kết nối thành công với SQL Server!';
+            $result = [
+                "status" => 0,
+                "msg" => "Chưa xác định dạng kết nối!"
+            ];
 
             include_once('../adodb/adodb.inc.php');
-            if ($type_connect == 'odbc') {
-                $db_new = ADONewConnection('odbc');
-                $database_ = "Driver={SQL Server};Server={$localhost};Database={$d_base}";
-                $connect_mssql = $db_new->Connect($database_, $databaseuser, $databsepassword);
-                if (!$connect_mssql) {
-                    die('0|Kết nối với SQL Server lỗi!! Hãy kiểm tra lại ODBC hoặc User - Pass không đúng.');
+            switch ($type_connect) {
+                case "odbc":
+                {
+                    $db_new = ADONewConnection('odbc');
+                    $database_ = "Driver={SQL Server};Server={$localhost};Database={$d_base}";
+                    $connect_mssql = $db_new->Connect($database_, $databaseuser, $databsepassword);
+                    if (!$connect_mssql) {
+                        $result["msg"] = 'Kết nối với SQL Server lỗi!! Hãy kiểm tra lại ODBC hoặc User - Pass không đúng.';
+                    } else {
+                        $result["status"] = 1;
+                        $result["msg"] = 'Kết nối thành công với SQL Server!';
+                    }
+                    break;
                 }
-            } else if ($type_connect == 'mssql') { // config sau
-                if (extension_loaded('mssql')) echo('');
-                else {
-                    die('0|Lỗi! Không thể load thư viện php_mssql.dll. Hãy cho phép sử dụng php_mssql.dll trong php.ini');
-                }
-                $db_new = &ADONewConnection('mssql');
-                $connect_mssql = $db_new->Connect($localhost, $databaseuser, $databsepassword, $d_base);
-                if (!$connect_mssql) die('0|Lỗi! Không thể kết nối SQL Server');
-            } else {
-                die ('Chưa xác định dạng kết nối!');
-            }
+                case "mssql":
+                {
+                    if (!extension_loaded('mssql')) {
+                        $result["msg"] = 'Lỗi! Không thể load thư viện php_mssql.dll. Hãy cho phép sử dụng php_mssql.dll trong php.ini';
+                    } else {
+                        $db_new = &ADONewConnection('mssql');
+                        $connect_mssql = $db_new->Connect($localhost, $databaseuser, $databsepassword, $d_base);
 
-            die($resultSms);
+                        if (!$connect_mssql) {
+                            $result["msg"] = 'Lỗi! Không thể kết nối SQL Server';
+                        } else {
+                            $result["status"] = 1;
+                            $result["msg"] = 'Kết nối thành công với SQL Server!';
+                        }
+                    }
+                    break;
+                }
+                default:
+            }
+            die(implode("|", $result));
         }
     }
 }
@@ -2004,6 +2019,7 @@ $name_function = '';
 if (isset($_REQUEST['name_function'])) {
     $name_function = $_GET['name_function'];
 }
+
 if ($name_function == 'cn_check_conncet') {
     cn_check_conncet();
 }

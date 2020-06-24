@@ -1,3 +1,0 @@
-	1. php-CGI.exe
-		http://windows.php.net/downloads/releases/php-5.6.27-nts-Win32-VC11-x86.zip
-

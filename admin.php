@@ -1,15 +1,10 @@
 <?php
 
 define('AREA', "ADMIN");
-//define('ROOT', dirname(__FILE__));
 
-//load lib
-//require(ROOT."/admin/security.php"); // ?????????
-//include (ROOT.'/includes/functions.php'); //???????
-
-//include ROOT . '/admin/core/init.php';
+// load lib
+//include dirname(__FILE__) . '/admin/core/security.php';
 include dirname(__FILE__) . '/admin/core/init.php';
-
 
 //cn_sendheaders();
 cn_load_skin(); // load skin templa
@@ -20,5 +15,3 @@ if (cn_login()) {
 } else {
     cn_login_form();
 }
-
-?>

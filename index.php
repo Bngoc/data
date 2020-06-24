@@ -1,8 +1,5 @@
 <?php
 
-//echo "ffd " .dirname(dirname(__FILE__).'.html');
-
-//echo "Root " . Root;
 define('AREA', "ADMIN");
 //define('ROOT', dirname(__FILE__));
 //define('URL_HTTP', 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']);
@@ -20,5 +17,3 @@ cn_login();
 cn_register_form();
 
 hook('index/invoke_module', array($_module));
-
-?>

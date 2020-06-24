@@ -28,7 +28,6 @@ function char_invoke()
         'char_manager:logs:Csl' => 'Reset Master Skill',
 
         'char_manager:maint:Cmt' => 'Khóa đồ - Bảo vệ đồ',
-
         'char_manager:script:Csr' => 'Chuyển nhân vật',
 
         'char_manager:level1:Cpc' => 'Làm nhiệm vụ cấp 1',
@@ -107,11 +106,6 @@ function char_invoke()
 
     foreach ($char_board as $id => $name) {
         list($mod, $opt, $acl) = explode(':', $id, 3);
-
-        //if (!test($acl)) {
-        // unset($char_board[$id]);
-        //continue;
-        //}
 
         $item = array(
             'name' => $name,

@@ -13,7 +13,7 @@ function home_invoke()
     if ($page != 0) $pageLimit = ($page - 1) * $per_page;
 
     $result_Count_F = do_select_ortherForum("SELECT COUNT(*) as numCount FROM thread WHERE open = 1 AND postuserid IN (SELECT userid from user where usergroupid in (5,6,7,9))");
-    $countNotifyForum = $result_Count_F[0]['numCount'];
+    $countNotifyForum = count($result_Count_F) ? $result_Count_F[0]['numCount'] : 0;
 
     if ($countNotifyForum > 50) $countNotifyForum = 50;
     if ($countNotifyForum) {

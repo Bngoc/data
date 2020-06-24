@@ -2,14 +2,13 @@
 ob_start();
 
 // for visual detect errors
-define('DEV_DEBUG', false);
+define('DEV_DEBUG', true);
 if (DEV_DEBUG) {
     ini_set('display_errors', '1');
     error_reporting(E_ALL | E_STRICT);
 } else {
     error_reporting(E_ALL ^ E_NOTICE);
 }
-//error_reporting(E_ERROR | E_PARSE);
 
 // definitions
 define('BQN_MU', microtime(true));
@@ -24,8 +23,7 @@ define('SKIN', SERVDIR . '/cdata'); // chua html
 define('MODULE_ADM', SERVDIR . '/admin'); // chua ADMIN
 define('CN_DEBUG', FALSE);
 define('URL_PATH', (isset($_SERVER['HTTPS']) ? "https" : "http") . '://' . dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn
-define('URL_PATH_IMG', '/images');  //custom by bqn
-//define('URL_PATH_IMG', dirname($_SERVER['SCRIPT_NAME']) . '/images');  //custom by bqn
+define('URL_PATH_IMG', '/images');
 define('PHP_SELF', $_SERVER["SCRIPT_NAME"]);
 define('MAXBANKZEN', 999999999999999);
 define('MAX_TRANS', 2000000000);
@@ -33,12 +31,14 @@ define('MAX_TRANS', 2000000000);
 // include necessary libs
 require_once ROOT .'/vendor/autoload.php';
 require_once ROOT . '/core/function/libgarena.php';
-require_once SERVDIR . '/core/cn_core_web.php'; //libs
+// libs
+require_once SERVDIR . '/core/cn_core_web.php';
 require_once SERVDIR . '/core/security.php';
 require_once SERVDIR . '/core/db/flat_web.php';
 require_once SERVDIR . '/core/class.phpmailer.php';
 require_once SERVDIR . '/core/class.smtp.php';
 require_once SERVDIR . '/core/cardGB_API.php';
+
 //require_once SERVDIR . '/core/simple_html_dom.php'; //libs
 //require_once MODULE_ADM . '/core/captcha/phptextClass.php';
 
@@ -63,12 +63,12 @@ $_CN_access = array
 
 // v2.0 init sections
 //$is_config = cn_config_load();
-//set default......
+// set default
 cn_config_load();
 // get url
 cn_parse_url();
 cn_detect_user_ip();
-//load session_start
+// load session_start
 cn_load_session();
 cn_relocation_db_new();
 // connect to forum

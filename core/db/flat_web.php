@@ -471,9 +471,10 @@ function do_delete_char($myQuery)
 
 
 /**
- * @param  name
- * return array info manager Account
- * return bool exits name in Account_info
+ * @param $clause
+ * @param string $colClause
+ * @param bool $ischek
+ * @return array|bool|null
  */
 function db_membget_account($clause, $colClause = '[UserAcc]', $ischek = FALSE)
 {

@@ -2030,7 +2030,6 @@ function cn_relocation_db_new()
  */
 function cn_connect_forum()
 {
-//    require_once ROOT . '/forum/includes/config.php';
     @include_once ROOT . '/forum/includes/config.php';
     global $db_Forum;
     if (isset($config['Database']['dbtype'])) {
@@ -2052,16 +2051,19 @@ function cn_connect_forum()
         if ($dbservername && $dbname && $dbusername) {
             switch ($dbType) {
                 case 'mysqli':
-                    if (extension_loaded('mysqli')) echo('');
-                    else die('Loi! Khong the load thu vien php_mysqli.dll. Hay cho phep su dung php_mssql.dll trong php.ini');
+                    if (!extension_loaded('mysqli')) {
+                        die('Loi! Khong the load thu vien php_mysqli.dll. Hay cho phep su dung php_mssql.dll trong php.ini');
+                    }
+
                     $db_Forum = ADONewConnection('mysqli');
                     //$db->Connect($server, $userid, $password, $database);
                     $connect_mssql = $db_Forum->Connect($dbservername, $dbusername, $dbpassword, $dbname);
                     if (!$connect_mssql) die('Ket noi voi MYSQLI loi! Hay kiem tra lai MYSQLI ton tai hoac User & Pass SQL dung.');
                     break;
                 case 'mysql':
-                    if (extension_loaded('mysql')) echo('');
-                    else die('Loi! Khong the load thu vien php_mysql.dll. Hay cho phep su dung php_mssql.dll trong php.ini');
+                    if (!extension_loaded('mysql')) {
+                        die('Loi! Khong the load thu vien php_mysql.dll. Hay cho phep su dung php_mssql.dll trong php.ini');
+                    }
                     $db_Forum = ADONewConnection('mysql');
                     //$db->Connect($server, $userid, $password, $database);
                     $connect_mssql = $db_Forum->Connect($dbservername, $dbusername, $dbpassword, $dbname);

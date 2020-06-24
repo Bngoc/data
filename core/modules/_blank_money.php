@@ -661,7 +661,6 @@ function zenderNumberSelectOption($numberItems, $numberItem = 0)
                 $htmlOption .= '<option ' . (($numberItem == $i) ? 'selected' : '') . ' value="' . $i . '"> ' . $i . ' </option>';
             }
         } else {
-
             for ($i = 1; $i <= 9; $i++) {
                 $htmlOption .= '<option ' . (($numberItem == $i) ? 'selected' : '') . ' value="' . $i . '"> ' . $i . ' </option>';
             }
@@ -681,6 +680,7 @@ function zenderNumberSelectOption($numberItems, $numberItem = 0)
 
     return $htmlOption;
 }
+
 function zenderNumberSelectOptionVpoint($numberItems, $numberItem = 0)
 {
     $countItems = intval($numberItems);

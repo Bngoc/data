@@ -40,21 +40,9 @@ $skin_header_web = <<<HTML
 
 <script type="text/javascript" src="/js/jquery-2.1.0.min.js"></script>
 
-<!--	
-<script type="text/javascript" src="http://localhost/bqn/data/images/jquery-latest.pack.js"></script>
-<script type="text/javascript" src="http://localhost/bqn/data/images/jquery.pngFix.js"></script>
-
-<!--
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
--->
-    <script type="text/javascript" src="/images/main.js"></script>
     
     {CustomJS}
     <style type="text/css"><!-- {CustomStyle} --></style>
-	
 </head>
 
 <div id="gp_bar">
@@ -70,19 +58,18 @@ $skin_header_web = <<<HTML
     		<script language="JavaScript" type="text/javascript" src="/images/stmenu.js"></script>
 		
 		<div class="clear"></div>  
-		<div id="main_header"><script type="text/javascript">flashWrite('/images/allods_effect.swf',958,270,'','','transparent')</script></div>
+		<div id="main_header">
+		    <div class="download_home" title="Download"><a href="#" title="Download"></a></div>
+         </div>
 		 <!--<div id="menu"><script type="text/javascript" src="/images/menubody.js"></script></div>-->
 		 <div id="menu">
 		    <ul class="menu">
-                <li class="home"><a href="#">Home</a></li>
-                <li class="about"><a href="#">Tin tuc</a>
-                    <ul>
-                        <li>ygjb</li>hgvjk,<li>kjhkh</li><li>jguugjkbjb</li>
-                    </ul>
+                <li class="home" title="Home"><a href="#">Home</a></li>
+                <li class="about" title="About"><a href="#">Tin tức</a>
                 </li>
-                <li class="services"><a href="#">Huong dan</a></li>
-                <li class="contact"><a href="#">Xep Hang</a></li>
-                <li class="contact"><a href="#">Thu Vien</a></li>
+                <li class="services"><a href="#">Hướng Dẫn</a></li>
+                <li class="contact"><a href="#">Xếp Hạng</a></li>
+                <li class="contact"><a href="#">Thư Viện</a></li>
             </ul>
         </div>
    
@@ -102,18 +89,7 @@ $skin_header_web = <<<HTML
 					<div class="loginbx_s"></div>
 				</div>
 				<!-- ------------------------------------------- --><!-- ------------------------------------------- -->
-
-				<!--<div class="quicklink">
-					<div class="quicklink_item"><a href="" onclick="MM_nbGroup('down','group1','Foro','',1)" onmouseover="MM_nbGroup('over','Foro','images/qlink_depoisit-over.png','',1)" onmouseout="MM_nbGroup('out')"><img src="images/11.png" alt="Foro" name="Foro" border="0" id="Home" onload=""></a></div>
-					<div class="quicklink_item"><a href="" onclick="MM_nbGroup('down','group1','22','',1)" onmouseover="MM_nbGroup('over','22','images/diendan.png','',1)" onmouseout="MM_nbGroup('out')"><img src="images/22.png" alt="Foro" name="22" border="0" id="Home" onload=""></a></div>
-					<div class="quicklink_item"><a href="" onclick="MM_nbGroup('down','group1','33','',1)" onmouseover="MM_nbGroup('over','33','images/dangky1.png','',1)" onmouseout="MM_nbGroup('out')"><img src="images/33.png" alt="Foro" name="33" border="0" id="Home" onload=""></a></div>
-					&lt;!&ndash;div class="quicklink_item"><a href="/"><img src="/images/qlink_depoisit.png" alt="Webshop phụ kiện" /></a></div&ndash;&gt;
-					<div class="quicklink_item"><a href="" onclick="MM_nbGroup('down','group1','44','',1)" onmouseover="MM_nbGroup('over','44','images/qlink_cashshop.png','',1)" onmouseout="MM_nbGroup('out')"><img src="images/44.png" alt="Foro" name="44" border="0" id="Home" onload=""></a></div>
-					<div class="quicklink_item"><a href="" onclick="MM_nbGroup('down','group1','55','',1)" onmouseover="MM_nbGroup('over','55','images/ws.png','',1)" onmouseout="MM_nbGroup('out')"><img src="images/55.png" alt="Foro" name="55" border="0" id="Home" onload=""></a></div>        				
-				</div>-->
-		
 				<div class="hotrotructuyen"></div>
-				
 			</div><!-- end anchor  -->
 		</div><!-- end leftcol  -->
 	<!-- ================END LEFTCOL=================-->
@@ -382,5 +358,3 @@ $defaultVerifyAjax = <<<HTML
         </tr>
     </table>
 HTML;
-
-?>

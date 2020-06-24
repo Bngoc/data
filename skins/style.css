@@ -475,6 +475,16 @@ div.box_login1 .fotgetPass a:hover span {
     width: 958px;
     margin: 0 auto;
     text-align: center;
+    position: relative;
+}
+
+#main_header .download_home {
+    position: absolute;
+    bottom: 10px;
+    left: calc(60% - 187px);
+    cursor: pointer;
+    height: 70px;
+    width: 180px;
 }
 
 #menu {
@@ -2052,6 +2062,7 @@ select.sel-p {
     list-style: none;
     background: #fff;
 }
+
 .menu li {
     top: 7px;
     height: 25px;
@@ -2060,6 +2071,7 @@ select.sel-p {
     background-repeat: no-repeat;
     padding-left: 10px;
 }
+
 .menu li a, .menu li a:visited {
     display: block;
     text-decoration: none;
@@ -2067,36 +2079,34 @@ select.sel-p {
     height: 30px;
     background-repeat: no-repeat;
 }
+
 .home {
     background-image: url(/images/menu/home.png);
     width: 80px;
     background-size: contain;
     margin-left: 30px;
 }
+
 .home a:hover {
     background-image: url(/images/menu/home_over.png);
     background-size: cover;
 }
-.about {background-image: url(/images/menu/tintuc.png);
+
+.about {
+    background-image: url(/images/menu/tintuc.png);
     width: 106px;
     background-size: contain;
 }
-.about a {background-image: url(/images/menu/rollover02a.gif);
-    background-size: contain;
-}
-.services {background-image: url(/images/menu/hd.png);
+
+.services {
+    background-image: url(/images/menu/hd.png);
     width: 150px;
     background-size: contain;
 }
-.services a {background-image: url(/images/menu/rollover03a.gif);
-    background-size: contain;
-}
-.contact {background-image: url(/images/menu/m4.png); width: 122px;
-    background-size: contain;}
-.contact a {background-image: url(/images/rollover04a.gif);
-    background-size: contain;}
 
-ul.menu li a:hover {background: none;}
+ul.menu li a:hover {
+    background: none;
+}
 
 .menu li {
     float: left;
