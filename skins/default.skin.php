@@ -61,12 +61,10 @@ $skin_header_web = <<<HTML
 		<div id="main_header">
 		    <div class="download_home" title="Download"><a href="#" title="Download"></a></div>
          </div>
-		 <!--<div id="menu"><script type="text/javascript" src="/images/menubody.js"></script></div>-->
 		 <div id="menu">
 		    <ul class="menu">
                 <li class="home" title="Home"><a href="#">Home</a></li>
-                <li class="about" title="About"><a href="#">Tin tức</a>
-                </li>
+                <li class="news" title="News"><a href="#">Tin tức</a></li>
                 <li class="services"><a href="#">Hướng Dẫn</a></li>
                 <li class="contact"><a href="#">Xếp Hạng</a></li>
                 <li class="contact"><a href="#">Thư Viện</a></li>
