@@ -1,4 +1,7 @@
-<?PHP
+<?php
+
+require_once  ROOT .'/core/ProcessCoreWeb.php';
+$coreWeb = new ProcessCoreWeb();
 
 global $skin_header_web, $skin_menu_web, $skin_menu_none, $skin_footer_web, $skin_content_web, $skin_menu_TopMoney, $skin_menu_TopAccount;
 global $defaultVerifyMyChar, $defaultVerifyAjax;
@@ -8,12 +11,12 @@ $skin_prefix = "";
 // Skin MENU
 // ********************************************************************************
 
-$skin_menu_web = cn_get_menu() . '<div style="clear:both;"></div>';
-$skin_menu_none = cn_get_menu_none() . '<div style="clear:both;"></div>';
-$setpath_default = getoption('http_script_dir');
+$skin_menu_web = $coreWeb->cn_get_menu() . '<div style="clear:both;"></div>';
+$skin_menu_none = $coreWeb->cn_get_menu_none() . '<div style="clear:both;"></div>';
+$setpath_default = getOption('http_script_dir');
 
-$description = getoption('description');
-$keywords = getoption('keywords');
+$description = getOption('description');
+$keywords = getOption('keywords');
 $patchImg = URL_PATH_IMG;
 
 // ********************************************************************************
@@ -31,7 +34,7 @@ $skin_header_web = <<<HTML
 <meta name="keywords" content="{title}/$keywords" />
 <meta name="robots" content="{title}" />
 <title>{title}</title>
-    
+
 <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico"/>
 <link rel="stylesheet" href="/skins/style.css" type="text/css" />
 <link rel="stylesheet" href="/skins/main.css" type="text/css"/>
@@ -40,7 +43,7 @@ $skin_header_web = <<<HTML
 
 <script type="text/javascript" src="/js/jquery-2.1.0.min.js"></script>
 
-    
+
     {CustomJS}
     <style type="text/css"><!-- {CustomStyle} --></style>
 </head>
@@ -50,14 +53,14 @@ $skin_header_web = <<<HTML
         {top}
     </div>
 </div>
-	
+
 <div id="wrapper">
-	
+
     <div id="page_wrapper1">
-        <div id="page_wrapper2">		
+        <div id="page_wrapper2">
     		<script language="JavaScript" type="text/javascript" src="/images/stmenu.js"></script>
-		
-		<div class="clear"></div>  
+
+		<div class="clear"></div>
 		<div id="main_header">
 		    <div class="download_home" title="Download"><a href="#" title="Download"></a></div>
          </div>
@@ -70,9 +73,9 @@ $skin_header_web = <<<HTML
                 <li class="contact"><a href="#">Thư Viện</a></li>
             </ul>
         </div>
-   
-   <div class="clear"></div>  
- 
+
+   <div class="clear"></div>
+
 	<div id="main">
 		<!-- ================START LEFTCOL=================-->
 		<div id="leftcol">
@@ -102,34 +105,34 @@ HTML;
 $skin_footer_web = <<<HTML
 	</div> <!-- end mainsubcol -->
 	</div> <!-- end main -->
-	
-		<div class="clear"></div>       
+
+		<div class="clear"></div>
 		</div> <!-- page_wrapper2 -->
-      
+
 	</div> <!-- page_wrapper1 -->
 	</div> <!-- page_wrapper1 -->
-    
+
  <!-- ---------------end body-------------------- -->
-    
-	
+
+
 </div> <!-- wrapper -->
 
 
 <div style="clear:both;"></div>
-<div id="footer" style="float:left"> 
-	<div id="bttop" style="display: block;">BACK TO TOP</div>	
+<div id="footer" style="float:left">
+	<div id="bttop" style="display: block;">BACK TO TOP</div>
 
 	<div style="text-align: center;">
 		<span style="color: #888888; font-size: 15px;">Execution time: {exec-time} s.<br>
 		<span style="color: #888888; font-size: 15px;">Copyright &copy; {year-time}&nbsp; Convert by &nbsp;</span><a href="mailto:{email-name}">{byname}
 	</div>
 </div>
-    
+
     <script type="text/javascript" src="/skins/cute.js"></script>
-    <script type="text/javascript" src="/library/wz_tooltip.js"></script>
-	<script type="text/javascript" src="/js/topxTip.js"></script>	
-    <script type="text/javascript" src="/library/jsCheckForm.js"></script>
-    
+    <script type="text/javascript" src="/public/library/wz_tooltip.js"></script>
+	<script type="text/javascript" src="/js/topxTip.js"></script>
+    <script type="text/javascript" src="/public/library/jsCheckForm.js"></script>
+
     <script type="text/javascript">
             $(function(){
                 $(window).scroll(function(){
@@ -145,7 +148,7 @@ $skin_footer_web = <<<HTML
                         scrollTop:10},500);
                 });
             });
-            
+
             function moveScroller() {
                 var move = function() {
                     var st = $(window).scrollTop();
@@ -175,13 +178,13 @@ $skin_footer_web = <<<HTML
                 $(window).scroll(move);
                 move();
             }
-            
+
         </script>
-    <script type="text/javascript"> 
+    <script type="text/javascript">
       $(function() {
         moveScroller();
       });
-    </script> 
+    </script>
 </body></html>
 HTML;
 
@@ -200,24 +203,24 @@ $skin_content_web = <<<HTML
                     <font color="#d1a151">{paths_c}</font>
                     {paths_menu}
                 </div>
-                
+
                 <div id="mainsub_ranking_n"></div>
                 <div id="mainsub_ranking_c">
-                    <div id="mainsub_inner_content"> 
+                    <div id="mainsub_inner_content">
                         <!-- ================ CONTENT HERE ================ -->
                         {content_here}
                         <!-- ================ CONTENT HERE ================ //-->
-                    </div>                  
+                    </div>
                 </div>
-                <div id="mainsub_ranking_s"></div>					
-                <div class="clear"></div>              	
-            </div>              
+                <div id="mainsub_ranking_s"></div>
+                <div class="clear"></div>
+            </div>
         </div>
         <div id="mainsub_s"></div>
         <div class="clear"></div>
 
-    </div> 
-	<!-- ===================END COMMENT==================== -->          
+    </div>
+	<!-- ===================END COMMENT==================== -->
 HTML;
 
 // ********************************************************************************
@@ -283,7 +286,7 @@ $defaultVerifyMyChar = <<<HTML
         </tr>
 
         <tr>
-            <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;" 
+            <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;"
                     onclick="getId('capchaWeb').src='/captcha.php?page=web&r='+Math.random(); return(false);">
                     Refresh code</a></td>
             <td colspan="" class="bizwebform_col_2" style="padding-left:20px;">
@@ -328,7 +331,7 @@ $defaultVerifyAjax = <<<HTML
         </tr>
 
         <tr>
-            <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;" 
+            <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;"
                     onclick="getId('capchaWeb').src='/captcha.php?page=web&r='+Math.random(); return(false);">
                     Refresh code</a></td>
             <td colspan="" class="bizwebform_col_2" style="padding-left:20px;">

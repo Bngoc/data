@@ -29,10 +29,12 @@ list($options, $strInfoMoney, $showConfigVpoint, $optionBuyZen) = _GL('options, 
                 <?php if (!empty($optionBuyZen) && isset($optionBuyZen)) {
                     echo $optionBuyZen;
                 } else {
-                    echo '<input type="number" class="bizwebform" id="changeNumber" name="numberItem" value="'. (isset($_REQUEST['numberItem']) ? $_REQUEST['numberItem'] : '') . '" />';
+                    echo '<input type="number" class="bizwebform" id="changeNumber" name="numberItem" value="' . (isset($_REQUEST['numberItem']) ? $_REQUEST['numberItem'] : '') . '" />';
                 } ?>
             </td>
-            <td><div id="msg_NumItem"></div></td>
+            <td>
+                <div id="msg_NumItem"></div>
+            </td>
         </tr>
     </table>
 </form>

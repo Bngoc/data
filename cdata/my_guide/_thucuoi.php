@@ -31,7 +31,7 @@
     của trùm Quỷ Kundun và hơn thế nữa, nó còn cho các chiến binh sử dụng toàn bộ sức mạnh của mình để chống lại cái ác
     đang ngày đêm diễn ra trên Lục địa MU hàng ngàn năm về trước. <br>
     <br>
-    <div align="center"><img width="70%" src="/images/guides/Fenrir/Content_clip_image002.jpg"><br>
+    <div align="center"><img width="70%" src="/public/images/guides/Fenrir/Content_clip_image002.jpg"><br>
         (Fenrir)
     </div>
     <br>
@@ -52,28 +52,29 @@
             <td>Tỷ lệ thành công</td>
         </tr>
         <tr>
-            <td><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image004.jpg"></td>
+            <td><img width="60" height="60" src="/public/images/guides/Fenrir/Content_clip_image004.jpg"></td>
             <td>Mảnh vỡ của áo giáp</td>
             <td>Săn bắn</td>
             <td>Nguyên liệu dùng để liên kết lần thứ 1</td>
             <td>÷</td>
         </tr>
         <tr>
-            <td><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image006.jpg"></td>
+            <td><img width="60" height="60" src="/public/images/guides/Fenrir/Content_clip_image006.jpg"></td>
             <td>Sự bảo hộ của nữ thần</td>
             <td>Săn bắn</td>
             <td>Nguyên liệu dùng để liên kết lần thứ 1</td>
             <td>÷</td>
         </tr>
         <tr>
-            <td><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image008.jpg"></td>
+            <td><img width="60" height="60" src="/public/images/guides/Fenrir/Content_clip_image008.jpg"></td>
             <td>Nanh sói</td>
             <td>Săn bắn</td>
             <td>Nguyên liệu dùng để liên kết lần thứ 2</td>
             <td>÷</td>
         </tr>
         <tr>
-            <td rowspan="3"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image010_0000.jpg"></td>
+            <td rowspan="3"><img width="60" height="60"
+                                 src="/public/images/guides/Fenrir/Content_clip_image010_0000.jpg"></td>
             <td rowspan="3">Mảnh sừng</td>
             <td rowspan="3">Liên kết <br>
                 (bước 1)
@@ -88,7 +89,8 @@
             <td>1 viên ngọc Chaos</td>
         </tr>
         <tr>
-            <td rowspan="2"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image012_0000.jpg"></td>
+            <td rowspan="2"><img width="60" height="60"
+                                 src="/public/images/guides/Fenrir/Content_clip_image012_0000.jpg"></td>
             <td rowspan="2">Sừng gãy</td>
             <td rowspan="2">Liên kết <br>
                 (bước 2)
@@ -100,7 +102,8 @@
             <td>(mảnh sừng)</td>
         </tr>
         <tr>
-            <td rowspan="4"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image014.jpg"></td>
+            <td rowspan="4"><img width="60" height="60" src="/public/images/guides/Fenrir/Content_clip_image014.jpg">
+            </td>
             <td rowspan="4">Linh hồn Sói Tinh</td>
             <td rowspan="4">Liên kết <br>
                 (bước 3)
@@ -138,18 +141,21 @@
         </tr>
         <tr>
             <td colspan="3">
-                <div align="right"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image004.jpg">
+                <div align="right"><img width="60" height="60"
+                                        src="/public/images/guides/Fenrir/Content_clip_image004.jpg">
                 </div>
             </td>
             <td colspan="2" class="style3">+</td>
             <td colspan="3">
-                <div align="right"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image006.jpg">
+                <div align="right"><img width="60" height="60"
+                                        src="/public/images/guides/Fenrir/Content_clip_image006.jpg">
                 </div>
             </td>
             <td colspan="2">
                 <div align="center" class="style3">=</div>
             </td>
-            <td width="192"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image010_0000.jpg"></td>
+            <td width="192"><img width="60" height="60"
+                                 src="/public/images/guides/Fenrir/Content_clip_image010_0000.jpg"></td>
         </tr>
         <tr>
             <td colspan="11"><strong>Lần thứ 2:</strong></td>
@@ -158,27 +164,31 @@
             <td width="82">
                 <div align="right"><span class="style3">10x</span></div>
             </td>
-            <td colspan="2"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image010_0000.jpg"></td>
+            <td colspan="2"><img width="60" height="60"
+                                 src="/public/images/guides/Fenrir/Content_clip_image010_0000.jpg"></td>
             <td colspan="2" class="style3">+</td>
             <td width="258" class="style3">
                 <div align="right">5x</div>
             </td>
-            <td colspan="2"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image008.jpg"></td>
+            <td colspan="2"><img width="60" height="60" src="/public/images/guides/Fenrir/Content_clip_image008.jpg">
+            </td>
             <td colspan="2" class="style3">=</td>
-            <td><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image012_0000.jpg"></td>
+            <td><img width="60" height="60" src="/public/images/guides/Fenrir/Content_clip_image012_0000.jpg"></td>
         </tr>
         <tr>
             <td colspan="11"><strong>Lần thứ 3</strong></td>
         </tr>
         <tr>
             <td></td>
-            <td colspan="2"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image012_0000.jpg"></td>
+            <td colspan="2"><img width="60" height="60"
+                                 src="/public/images/guides/Fenrir/Content_clip_image012_0000.jpg"></td>
             <td colspan="2" class="style3">+</td>
             <td colspan="3">3 viên ngọc Sinh Mệnh +1 viên ngọc Hỗn Nguyên + 10tr zen</td>
             <td colspan="2" class="style3">
                 <div align="center">=</div>
             </td>
-            <td colspan="2"><img width="60" height="60" src="/images/guides/Fenrir/Content_clip_image014.jpg"></td>
+            <td colspan="2"><img width="60" height="60" src="/public/images/guides/Fenrir/Content_clip_image014.jpg">
+            </td>
         </tr>
         </tbody>
     </table>
@@ -261,13 +271,13 @@
     <p align="left"><strong>Cách thức liên kết Sói tinh tấn công:</strong></p>
     <p>Gặp Goblin ở Noria, chọn Liên kết bình thường<br>
         Linh hồn Sói tinh <img height="63"
-                               src="/images/guides/Fenrir/Content_clip_image014.jpg"
+                               src="/public/images/guides/Fenrir/Content_clip_image014.jpg"
                                width="84">  + 5 viên ngọc Sinh mệnh + Các loại vũ khí tấn công cấp độ trên +4 và tính
         năng trên 4 (opt 4) + 10 triệu Zen = Sói tinh Tấn công </p>
     <p align="left"><strong>Cách thức liên kết Sói tinh phòng thủ: </strong></p>
     <p>Gặp Goblin ở Noria, chọn Liên kết bình thường<br>
         Linh hồn Sói tinh <img height="63"
-                               src="/images/guides/Fenrir/Content_clip_image014.jpg"
+                               src="/public/images/guides/Fenrir/Content_clip_image014.jpg"
                                width="84">  + 5 viên ngọc Sinh mệnh + Các loại vũ khí chống đỡ cấp độ trên +4 và tính
         năng trên 4 (opt 4) + 10 triệu Zen à Sói tinh Tấn công </p>
     <p align="left"><strong>Chú ý:</strong></p>
@@ -290,17 +300,17 @@
             </tr>
             <tr>
                 <td>Sói tinh bình thường</td>
-                <td><img height="305" src="/images/guides/Fenrir/Content_clip_image019.jpg"
+                <td><img height="305" src="/public/images/guides/Fenrir/Content_clip_image019.jpg"
                          width="100%"></td>
             </tr>
             <tr>
                 <td>Sói Tinh tấn công</td>
-                <td><img height="305" src="/images/guides/Fenrir/Content_clip_image021.jpg"
+                <td><img height="305" src="/public/images/guides/Fenrir/Content_clip_image021.jpg"
                          width="100%"></td>
             </tr>
             <tr>
                 <td>Sói Tinh phòng thủ</td>
-                <td><img height="305" src="/images/guides/Fenrir/Content_clip_image023.jpg"
+                <td><img height="305" src="/public/images/guides/Fenrir/Content_clip_image023.jpg"
                          width="100%"></td>
             </tr>
             </tbody>

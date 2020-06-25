@@ -53,7 +53,7 @@ if ($preview_html) { ?>
             <div class="name">Article title<?php if (!getoption('disable_title')) {
                     echo ' <span class="req">*</span>';
                 } ?></div>
-            <div><input type="text" style="width: 100%" value="<?php echo cn_htmlspecialchars($vTitle); ?>" name="title"
+            <div><input type="text" style="width: 100%" value="<?php echo cnHtmlSpecialChars($vTitle); ?>" name="title"
                         tabindex=1></div>
         </div>
 
@@ -70,17 +70,19 @@ if ($preview_html) { ?>
 
                     <select name="category">
                         <option value="">---</option>
-                        <?php foreach ($categories as $catid => $cat_data) {
+                        <?php foreach ($categories
+
+                        as $catid => $cat_data) {
                         if (!empty($cat_data['ac_forum'])) {
                         ?>
                         <optgroup
-                            label="<?php echo str_repeat('&nbsp;&nbsp;&nbsp;', $cat_data['level_forum']) . cn_htmlspecialchars($cat_data['name_forum']); ?>"
+                            label="<?php echo str_repeat('&nbsp;&nbsp;&nbsp;', $cat_data['level_forum']) . cnHtmlSpecialChars($cat_data['name_forum']); ?>"
                             style="font:bold;">
                             <?php } else { ?>
                                 <option <?php if (in_array($catid, $vCategory)) {
                                     echo 'selected="selected"';
                                 } ?>
-                                    value="<?php echo $catid; ?>"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;', $cat_data['level_forum']) . cn_htmlspecialchars($cat_data['name_forum']); ?></option>
+                                    value="<?php echo $catid; ?>"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;', $cat_data['level_forum']) . cnHtmlSpecialChars($cat_data['name_forum']); ?></option>
                             <?php }
                             } ?>
                     </select>
@@ -94,8 +96,8 @@ if ($preview_html) { ?>
                              <input id="chkbx<?php echo $catid ?>" type="checkbox"
                                     name="category[]" <?php if ($vCategory && in_array($catid, $vCategory)) echo 'checked'; ?>
                                     value="<?php echo $catid; ?>" class="chkbox-fix"/>
-                             <label for="chkbx<?php echo $catid ?>">   
-                                    <?php echo cn_htmlspecialchars($cat_data['name_forum']); ?>
+                             <label for="chkbx<?php echo $catid ?>">
+                                    <?php echo cnHtmlSpecialChars($cat_data['name_forum']); ?>
                              </label>
                         </span>
                             <?php }
@@ -117,7 +119,7 @@ if ($preview_html) { ?>
                     echo ' <span class="req">*</span>';
                 } ?></div>
             <div><textarea rows="12" cols="74" id="short_story" name="short_story"
-                           tabindex=2><?php echo cn_htmlspecialchars($vShort); ?></textarea></div>
+                           tabindex=2><?php echo cnHtmlSpecialChars($vShort); ?></textarea></div>
 
             <?php if ($CKEDITOR_Active == 0) { ?>
                 <div class="ballon">
@@ -136,7 +138,7 @@ if ($preview_html) { ?>
 
             <div class="name">Full Story (optional)</div>
             <div><textarea rows="12" cols="74" id="full_story" name="full_story"
-                           tabindex=3><?php echo cn_htmlspecialchars($vFull); ?></textarea></div>
+                           tabindex=3><?php echo cnHtmlSpecialChars($vFull); ?></textarea></div>
 
             <?php if ($CKEDITOR_Active == 0) { ?>
                 <div class="ballon">
@@ -182,7 +184,7 @@ if ($preview_html) { ?>
             <hr/>
 
             <div class="name">Page alias</div>
-            <div><input type="text" style="width: 100%" value="<?php echo cn_htmlspecialchars($vPage); ?>" name="page"
+            <div><input type="text" style="width: 100%" value="<?php echo cnHtmlSpecialChars($vPage); ?>" name="page"
                         tabindex=4></div>
             <div style="font-size: 10px; color: #808080; margin: 0 0 15px 0;">The unique name of the page. Use
                 $page_alias parameter before include show_news.php, charset [a-zA-Z0-9_-]
@@ -191,7 +193,7 @@ if ($preview_html) { ?>
             <!-- tags line -->
             <div class="section">
                 <div class="name">Tagline</div>
-                <div><input type="text" style="width: 100%" value="<?php echo cn_htmlspecialchars($vTags); ?>"
+                <div><input type="text" style="width: 100%" value="<?php echo cnHtmlSpecialChars($vTags); ?>"
                             name="tags" tabindex=5></div>
                 <div style="font-size: 10px; color: #808080; margin: 0 0 15px 0;">List the tags for news, separated by
                     commas

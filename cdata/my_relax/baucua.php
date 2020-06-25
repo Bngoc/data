@@ -26,28 +26,28 @@
                     <td class="img-height" style='background:url(/images/baucua/0.gif) no-repeat;'>
                         <input class="custom-checkbox" name='bet_0' type='checkbox' value='1'>
                     </td>
-                    <td class="img-height" style='background:url(/images/baucua/1.gif) no-repeat;'>
+                    <td class="img-height" style='background:url(/public/images/baucua/1.gif) no-repeat;'>
                         <input class="custom-checkbox" name='bet_1' type='checkbox' value='1'>
                     </td>
-                    <td class="img-height" style='background:url(/images/baucua/2.gif) no-repeat;'>
+                    <td class="img-height" style='background:url(/public/images/baucua/2.gif) no-repeat;'>
                         <input class="custom-checkbox" name='bet_2' type='checkbox' value='1'>
                     </td>
                 </tr>
                 <tr align="middle">
-                    <td class="img-height" style='background:url(/images/baucua/3.gif) no-repeat'>
+                    <td class="img-height" style='background:url(/public/images/baucua/3.gif) no-repeat'>
                         <input class="custom-checkbox" name='bet_3' type='checkbox' value='1'>
                     </td>
-                    <td class="img-height" style='background:url(/images/baucua/4.gif) no-repeat'>
+                    <td class="img-height" style='background:url(/public/images/baucua/4.gif) no-repeat'>
                         <input class="custom-checkbox" name='bet_4' type='checkbox' value='1'>
                     </td>
-                    <td class="img-height" style='background:url(/images/baucua/5.gif) no-repeat'>
+                    <td class="img-height" style='background:url(/public/images/baucua/5.gif) no-repeat'>
                         <input class="custom-checkbox" name='bet_5' type='checkbox' value='1'>
                     </td>
                 </tr>
                 <tr align="middle">
                     <td colspan="100" class="pd-top15">
                         Tiền đặt cược<span class="required">*</span>
-                        <input type='number' name='bet' id="changeNumber" class="bizwebform" required /> Vpoint
+                        <input type='number' name='bet' id="changeNumber" class="bizwebform" required/> Vpoint
                         <input type='button' class="call-play btn mg-top15" value='Mở ^_^'>
                     </td>
                 </tr>
@@ -56,7 +56,9 @@
         <hr>
         <table class="">
             <tr align="middle" class="result-play"></tr>
-            <tr class=""><td colspan="100" class="result"></td></tr>
+            <tr class="">
+                <td colspan="100" class="result"></td>
+            </tr>
         </table>
     </center>
 
@@ -70,7 +72,8 @@
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="/images/vertical-separator.jpg" width="100%" height="1px"></div>
+                <div class="vertical-img"><img src="/public/images/vertical-separator.jpg" width="100%" height="1px">
+                </div>
                 <br></td>
         </tr>
         </tbody>

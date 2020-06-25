@@ -27,16 +27,22 @@ list ($showConfigTransVpoint) = _GL('showConfigTransVpoint');
         <tr>
             <td class="bizwebform_col_1">Tài khoản nhận Vpoint<span class="required">*</span></td>
             <td colspan="" class="bizwebform_col_2">
-                <input type="text" class="bizwebform" id="changeAccount" minlength="4" name="changeAccount" value="<?php echo(isset($_REQUEST['changeAccount']) ? $_REQUEST['changeAccount'] : '') ?>" />
+                <input type="text" class="bizwebform" id="changeAccount" minlength="4" name="changeAccount"
+                       value="<?php echo(isset($_REQUEST['changeAccount']) ? $_REQUEST['changeAccount'] : '') ?>"/>
             </td>
-            <td><div id="msg_ChangeAccout"></div></td>
+            <td>
+                <div id="msg_ChangeAccout"></div>
+            </td>
         </tr>
         <tr>
             <td class="bizwebform_col_1">Chọn số lượng <?php echo $options; ?> <span class="required">*</span></td>
             <td colspan="" class="bizwebform_col_2">
-                <input type="number" class="bizwebform" id="changeNumber" name="numberItem" value="<?php echo(isset($_REQUEST['numberItem']) ? $_REQUEST['numberItem'] : '') ?>" />
+                <input type="number" class="bizwebform" id="changeNumber" name="numberItem"
+                       value="<?php echo(isset($_REQUEST['numberItem']) ? $_REQUEST['numberItem'] : '') ?>"/>
             </td>
-            <td><div id="msg_NumItem"></div></td>
+            <td>
+                <div id="msg_NumItem"></div>
+            </td>
         </tr>
 
     </table>

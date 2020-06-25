@@ -36,7 +36,7 @@ function cashshop_invoke()
     // Request menu
     foreach ($dashboard as $id => $_t) {
         list($dl, $do, $action, $acl_module) = explode(':', $id);
-        if (test($acl_module) && function_exists("cashshop_$action")) {
+        if (testRoleAdmin($acl_module) && function_exists("cashshop_$action")) {
             cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'do=' . $action, 'opt=' . $do), $do);
         }
     }
@@ -44,13 +44,13 @@ function cashshop_invoke()
     foreach ($dashboard as $id => $_t) {
         list($dl, $do, $action, $acl_module) = explode(':', $id);
 
-        if (test($acl_module) && $dl == $mod && $do == $opt && function_exists("cashshop_$action")) {
+        if (testRoleAdmin($acl_module) && $dl == $mod && $do == $opt && function_exists("cashshop_$action")) {
             cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'do=' . $action, 'opt=' . $do));
             die(call_user_func("cashshop_$action"));
         }
     }
 
-    echoheader('-@com_cashshop/style.css', "Cash Shop");
+    echo_header_admin('-@com_cashshop/style.css', "Cash Shop");
 
     $images = array
     (
@@ -76,7 +76,7 @@ function cashshop_invoke()
     foreach ($dashboard as $id => $name) {
         list($mod, $opt, $act, $acl) = explode(':', $id, 4);
 
-        if (!test($acl)) {
+        if (!testRoleAdmin($acl)) {
             unset($dashboard[$id]);
             continue;
         }
@@ -93,11 +93,11 @@ function cashshop_invoke()
         $dashboard[$id] = $item;
     }
 
-    $member = member_get();
+    $member = getMember();
 
     $greeting_message = 'Have a nice day!';
-    cn_assign('dashboard, username, greeting_message', $dashboard, $member['user_Account'], $greeting_message);
-    echo exec_tpl('com_cashshop/general');
+    cn_assign('dashboard, username, greeting_message', $dashboard, $member['UserAcc'], $greeting_message);
+    echo execTemplate('com_cashshop/general');
 
     echofooter();
 }
@@ -143,13 +143,13 @@ function cashshop_action()
 
             //exit();
             //if($s_data)
-            //setoption('#item_shop'.$opt, $s_data);
-            setoption('#item_shop' . $opt, $__data);
+            //setOption('#item_shop'.$opt, $s_data);
+            setOption('#item_shop' . $opt, $__data);
             cn_throw_message('Add Code Item successfully');
         }
     } else if (REQ('__item', 'GPG') == 'del-item') {
         unset($__data);
-        setoption('#item_shop' . $opt, array());
+        setOption('#item_shop' . $opt, array());
         cn_throw_message('Delete all Code Item successfully');
     }
     //$s_data=cn_read_file($path = cn_path_construct(ROOT,'core','cashshop').'shop_'.$opt.'.php'); //shop_acient
@@ -209,7 +209,7 @@ function cashshop_action()
             }
 
             if (!$is_cancel) {
-                setoption('#item_shop' . $opt, $__data);
+                setOption('#item_shop' . $opt, $__data);
             }
             $txt_image = $txt_name = $txt_price = $txt_code32 = $_id = '';
         } elseif (!$is_delete) {
@@ -221,7 +221,7 @@ function cashshop_action()
         foreach ($__data as $key => $raw)
             $set_data[$key] = cn_analysis_code32($raw['code32'], $raw['name'], $raw['price'], $raw['image_mh']);
 
-    $items_data = getoption('#items_data');
+    $items_data = getOption('#items_data');
     $key_items_data = array_keys($items_data);
 
     foreach ($set_data as $key => $raw) {
@@ -239,7 +239,7 @@ function cashshop_action()
         }
     }
     if ($item_temp) {
-        setoption('#items_data', array_merge($items_data, $item_temp));
+        setOption('#items_data', array_merge($items_data, $item_temp));
     }
 
     list($item_read, $get_paging) = cn_arr_pagina($set_data, cn_url_modify(array('reset'), 'mod=cashshop', 'do=action', "opt=$opt", '__item', '_id'), $page, $per_page);
@@ -251,13 +251,13 @@ function cashshop_action()
         $txt_image = $__data[$_id]['image_mh'];
     }
 
-    $bc_title = mcache_get('.menu');
+    $bc_title = getMemcache('.menu');
 
     cn_assign('item_read, per_page, pagination, opt, sub', $item_read, $per_page, $get_paging, $opt, $sub);
     cn_assign('_id, _txt_name, _txt_price, _txt_code32, _txt_image', $_id, $txt_name, $txt_price, $txt_code32, $txt_image);
 
-    echoheader('-@com_cashshop/style.css', "Configurations - " . $bc_title[$opt]['name']);
-    echo exec_tpl('com_cashshop/_armor');
+    echo_header_admin('-@com_cashshop/style.css', "Configurations - " . $bc_title[$opt]['name']);
+    echo execTemplate('com_cashshop/_armor');
     echofooter();
 }
 
@@ -314,10 +314,10 @@ function cashshop_acient()
 
     cn_assign('item_read, per_page, pagination, opt, sub', $item_read, $per_page, $get_paging, $opt, $sub);
 
-    //echoheader('-@com_board/style.css', "Templates"); echo exec_tpl('com_board/classchar'); echofooter();
-    echoheader('-@com_cashshop/style.css', "Configurations - Set thần");
-    //echo exec_tpl('header');
-    echo exec_tpl('com_cashshop/_acient');
+    //echo_header_admin('-@com_board/style.css', "Templates"); echo execTemplate('com_board/classchar'); echofooter();
+    echo_header_admin('-@com_cashshop/style.css', "Configurations - Set thần");
+    //echo execTemplate('header');
+    echo execTemplate('com_cashshop/_acient');
     echofooter();
 }
 
@@ -347,10 +347,10 @@ function cashshop_armor()
 
     cn_assign('item_read, per_page, pagination, opt, sub', $item_data, $per_page, $get_paging, $opt, $sub);
 
-    //echoheader('-@com_board/style.css', "Templates"); echo exec_tpl('com_board/classchar'); echofooter();
-    echoheader('-@com_cashshop/style.css', "Configurations - Giáp trụ");
-    //echo exec_tpl('header');
-    echo exec_tpl('com_cashshop/_armor');
+    //echo_header_admin('-@com_board/style.css', "Templates"); echo execTemplate('com_board/classchar'); echofooter();
+    echo_header_admin('-@com_cashshop/style.css', "Configurations - Giáp trụ");
+    //echo execTemplate('header');
+    echo execTemplate('com_cashshop/_armor');
     echofooter();
 }
 

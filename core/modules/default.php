@@ -6,8 +6,7 @@ add_hook('index/invoke_module', '*default_invoke');
 
 function default_invoke()
 {
-    echoheader('-@defaults/style.css', "Error");
-    echocomtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re("Home", "Lỗi dữ liệu"));
-    echofooter();
-
+    echo_header_web('-@defaults/style.css', "Error");
+    echo_content_here(exec_tpl('defaults/default'), cn_snippet_bc_re("Home", "Lỗi dữ liệu"));
+    echo_footer_web();
 }

@@ -46,7 +46,7 @@ function cn_helper_html_text($e, $p)
     if (isset($e['ht']) && $e['ht'])
         $text = hook('kses', $text);
     else
-        $text = nl2br(cn_htmlspecialchars($text));
+        $text = nl2br(cnHtmlSpecialChars($text));
 
     // 0) Special
     $text = preg_replace('/\[(\/?)list\]/i', '<\\1ul>', $text);
@@ -96,8 +96,8 @@ function cn_helper_bb_decode($bb)
     $a_opts = $b_opts = '';
     $bb = cn_bb_decode($bb);
 
-    if (isset($bb['target']) && $bb['target']) $a_opts = 'target="' . cn_htmlspecialchars($bb['target']) . '" ';
-    if (isset($bb['anchor']) && $bb['anchor']) $b_opts = '#' . cn_htmlspecialchars($bb['anchor']);
+    if (isset($bb['target']) && $bb['target']) $a_opts = 'target="' . cnHtmlSpecialChars($bb['target']) . '" ';
+    if (isset($bb['anchor']) && $bb['anchor']) $b_opts = '#' . cnHtmlSpecialChars($bb['anchor']);
 
     return array($a_opts, $b_opts);
 }
@@ -179,7 +179,7 @@ function cn_modify_s2bb_img($t, $bb)
 
     $w = isset($bb['width']) ? ' width="' . intval($bb['width']) . '" ' : '';
     $h = isset($bb['height']) ? ' height="' . intval($bb['height']) . '" ' : '';
-    $a = isset($bb['alt']) ? ' alt="' . cn_htmlspecialchars($bb['alt']) . '" ' : '';
+    $a = isset($bb['alt']) ? ' alt="' . cnHtmlSpecialChars($bb['alt']) . '" ' : '';
 
     // Default upload dir
     //$upext = getoption('uploads_ext') ?  getoption('uploads_ext') : getoption('http_script_dir') . '/uploads';
@@ -271,15 +271,15 @@ function cn_modify_author($e)
     print "F_new 242 " . $e['u'] . "<br>";
 
     if (is_null($user)) {
-        return cn_htmlspecialchars($e['u']);
+        return cnHtmlSpecialChars($e['u']);
     }
 
     // base username
-    $username = cn_htmlspecialchars($e['u']);
+    $username = cnHtmlSpecialChars($e['u']);
 
     // user has nick
     if (isset($user['nick']) && $user['nick']) {
-        $username = cn_htmlspecialchars($user['nick']);
+        $username = cnHtmlSpecialChars($user['nick']);
     }
 
     // user allow to show his email?
@@ -310,7 +310,7 @@ function cn_modify_avatar($e, $p)
 function cn_modify_author_name($e)
 {
     if ($e['u']) {
-        return cn_htmlspecialchars($e['u']);
+        return cnHtmlSpecialChars($e['u']);
     } else {
         return '<b>author undefined</b>';
     }
@@ -330,7 +330,7 @@ function cn_modify_category($e)
         if ($cat['name'])
             $ns[] = $cat['name'];
 
-    return cn_htmlspecialchars(join(', ', $ns));
+    return cnHtmlSpecialChars(join(', ', $ns));
 }
 
 function cn_modify_category_icon($e)
@@ -467,7 +467,7 @@ function cn_modify_tagline($e)
             $esrc = preg_replace('/\{comma\|(.*?)\}/is', '\\1', $esrc);
         }
 
-        $echo[] = str_replace('{tag}', cn_htmlspecialchars($tag), $esrc);
+        $echo[] = str_replace('{tag}', cnHtmlSpecialChars($tag), $esrc);
 
         $ix++;
     }
@@ -568,7 +568,7 @@ function cn_modify_twitter($e)
     }
 
     $data_href = 'http://' . $_SERVER['SERVER_NAME'] . $PHP_SELF . '?id=' . $e['id'];
-    $twitter_text = getoption('tw_text') ? getoption('tw_text') : cn_htmlspecialchars($e['t']);
+    $twitter_text = getoption('tw_text') ? getoption('tw_text') : cnHtmlSpecialChars($e['t']);
 
     $i18n = getoption('i18n');
     if (!$i18n) {
@@ -737,7 +737,7 @@ function cn_modify_bb_cat($e, $t, $c)
 
 function cn_modify_bb_loggedin($e, $t)
 {
-    $user = member_get();
+    $user = getMember();
     if ($user) return $t;
     else return '';
 }
@@ -776,7 +776,7 @@ function cn_modify_comm_author($e)
     $username = isset($user['nick']) && !empty($user['nick']) ? $user['nick'] : $user['name'];
 
     // User exists
-    $username = $user['name'] ? cn_htmlspecialchars($username) : 'Anonymous';
+    $username = $user['name'] ? cnHtmlSpecialChars($username) : 'Anonymous';
 
     // user allow to show his email?
     if ((isset($user['e-hide']) && $user['e-hide']) || empty($user['email']))
@@ -793,38 +793,38 @@ function cn_modify_comm_date($e)
 function cn_modify_comm_mail($e)
 {
     $user = db_user_by_name($e['u']);
-    return cn_htmlspecialchars($user['email']);
+    return cnHtmlSpecialChars($user['email']);
 }
 
 function cn_modify_comm_input_username()
 {
     global $_SESS;
-    $user = member_get();
+    $user = getMember();
 
     // User is authorized
     if ($user) {
-        return '<input type="text" class="cn_comm_username" value="' . cn_htmlspecialchars($user['name']) . '" disabled="disabled" />';
+        return '<input type="text" class="cn_comm_username" value="' . cnHtmlSpecialChars($user['name']) . '" disabled="disabled" />';
     } else {
         $guest_name = isset($_SESSION['guest_name']) ? $_SESSION['guest_name'] : '';
         $name_input = REQ('name', 'POST') ? REQ('name', 'POST') : $guest_name;
-        return '<input type="text" class="cn_comm_username" name="name" value="' . cn_htmlspecialchars($name_input) . '"/>';
+        return '<input type="text" class="cn_comm_username" name="name" value="' . cnHtmlSpecialChars($name_input) . '"/>';
     }
 }
 
 function cn_modify_comm_input_email()
 {
     global $_SESS;
-    $user = member_get();
+    $user = getMember();
 
     // User is authorized
     if ($user) {
-        return '<input type="text" class="cn_comm_email" value="' . cn_htmlspecialchars($user['email']) . '" disabled="disabled" />';
+        return '<input type="text" class="cn_comm_email" value="' . cnHtmlSpecialChars($user['email']) . '" disabled="disabled" />';
     } else {
         $guest_name = isset($_SESSION['guest_name']) ? $_SESSION['guest_name'] : '';
         $guest_email = isset($_SESSION['guest_email']) ? $_SESSION['guest_email'] : '';
 
         $email_input = REQ('mail', 'POST') ? REQ('mail', 'POST') : $guest_email;
-        return '<input type="text" name="mail" class="cn_comm_email" value="' . cn_htmlspecialchars($email_input) . '"/>';
+        return '<input type="text" name="mail" class="cn_comm_email" value="' . cnHtmlSpecialChars($email_input) . '"/>';
     }
 }
 
@@ -835,7 +835,7 @@ function cn_modify_comm_input_commentbox($e)
 
     if (!empty($edit_id)) {
         $username = $e['co'][$edit_id]['u'];
-        $member = member_get();
+        $member = getMember();
         $target_user = db_user_by_name($username);
 
         // Check ACL for edit
@@ -843,7 +843,7 @@ function cn_modify_comm_input_commentbox($e)
             $cm_text = str_replace('[', '&#91;', $e['co'][$edit_id]['c']);
         }
     }
-    return '<textarea cols="40" rows="6" name="comments" class="cn_comm_textarea" id="ncomm_' . $e['id'] . '">' . cn_htmlspecialchars($cm_text) . '</textarea>';
+    return '<textarea cols="40" rows="6" name="comments" class="cn_comm_textarea" id="ncomm_' . $e['id'] . '">' . cnHtmlSpecialChars($cm_text) . '</textarea>';
 }
 
 function cn_modify_comm_smilies($e)
@@ -855,7 +855,7 @@ function cn_modify_comm_remember_me()
 {
     $member_name = REQ('member_name');
 
-    $user = member_get();
+    $user = getMember();
     $name = '';
 
     if (isset($_SESSION['guest_name'])) {
@@ -871,7 +871,7 @@ function cn_modify_comm_remember_me()
     }
 
     if ($name) {
-        $echo = '<span class="cn_com_logged">' . i18n('Logged as') . ' <b>' . cn_htmlspecialchars($name) . '</b></span>';
+        $echo = '<span class="cn_com_logged">' . i18n('Logged as') . ' <b>' . cnHtmlSpecialChars($name) . '</b></span>';
         $echo .= ' <input type="hidden" name="isforgetme" value="" />';
         $echo .= ' <span class="cn_comm_forget"><a href="#" onclick="forget_me(); return false;">' . i18n('Forget me') . '</a></span>';
     }
@@ -881,7 +881,7 @@ function cn_modify_comm_remember_me()
 
 function cn_modify_bb_comm_captcha($e, $t)
 {
-    if (getoption('use_captcha') && !member_get()) {
+    if (getoption('use_captcha') && !getMember()) {
         return $t;
     } else {
         return '';
@@ -918,7 +918,7 @@ function cn_modify_comm_captcha($e)
 
 function cn_modify_bb_comm_submit($e, $t)
 {
-    $echo = '<input type="submit" value="' . cn_htmlspecialchars($t) . '" class="cn_submit_bb"/>';
+    $echo = '<input type="submit" value="' . cnHtmlSpecialChars($t) . '" class="cn_submit_bb"/>';
 
     if ((test('Mea') || test('Mes')) && intval(REQ('edit_id'))) {
         $echo .= '<input type="submit" name="cm_edit_comment" value="Edit comment" class="cn_edit_bb"/>';
@@ -935,13 +935,13 @@ function cn_modify_comm_comment($e)
 
 function cn_modify_comm_username()
 {
-    $user = member_get();
+    $user = getMember();
     return $user ? $user['name'] : '';
 }
 
 function cn_modify_comm_usermail()
 {
-    $user = member_get();
+    $user = getMember();
     return $user ? $user['email'] : '';
 }
 
@@ -959,7 +959,7 @@ function cn_modify_comm_comment_iteration()
 // [comment_edit] .. [/] only for Admin or owner (registered user)
 function cn_modify_bb_comm_edit($e, $t)
 {
-    $user = member_get();
+    $user = getMember();
     $edit_link = '<a href="' . cn_url_modify('id=' . intval($_GET['id']), 'edit_id=' . intval($e['id'])) . '">' . $t . '</a>';
     if (test('Mes') && $e['u'] == $user['name']) {
         return $edit_link;
@@ -974,7 +974,7 @@ function cn_modify_bb_comm_edit($e, $t)
 
 function cn_modify_bb_comm_delete($e, $t)
 {
-    $user = member_get();
+    $user = getMember();
 
     if (test('Mda') || (test('Mds') && $user['name'] == $e['u'])) {
         return str_replace('%cbox', '<input type="checkbox" name="comm_delete[]" value="' . intval($e['id']) . '" />', $t);

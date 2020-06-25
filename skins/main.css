@@ -79,18 +79,18 @@
 }
 
 .newsitem_n {
-    background: url(../images/newsitem_n.png) no-repeat top center;
+    background: url(../public/images/newsitem_n.png) no-repeat top center;
     background-size: cover;
     height: 12px;
 }
 
 .newsitem_c {
-    background: url(../images/newsitem_c.png) repeat-y top center;
+    background: url(../public/images/newsitem_c.png) repeat-y top center;
     background-size: cover;
 }
 
 .newsitem_s {
-    background: url(../images/newsitem_s.png) no-repeat top center;
+    background: url(../public/images/newsitem_s.png) no-repeat top center;
     background-size: cover;
     height: 12px;
 }
@@ -172,7 +172,7 @@
 }
 
 .news_line {
-    background: url(../images/news_line.gif) no-repeat top center;
+    background: url(../public/images/news_line.gif) no-repeat top center;
     width: 481px;
     height: 2px;
 }
@@ -197,7 +197,7 @@
 /* =========== MAIN COL CONTENT //=========== */
 /* =========== RIGHT COL CONTENT =========== */
 #serverclock {
-    background: url(../images/bg_serverclock.png) no-repeat top center;
+    background: url(../public/images/bg_serverclock.png) no-repeat top center;
     width: 100%;
     background-size: cover;
     height: 75px;
@@ -544,4 +544,5 @@ table.ranking tbody:hover tr:hover td {
     text-shadow: 0 1px 0 #fff;
     /*font-weight: 600;*/
 }
+
 /********************************* table ******************************/

@@ -197,7 +197,7 @@
     nhằm phong ấn Kundun một lần nữa. <br>
     <br>
     <h3>6. Phát hiện Raklion</h3>
-    <div><img src="/images/guides/raklion.JPG" width="100%" border="0"></div>
+    <div><img src="/public/images/guides/raklion.JPG" width="100%" border="0"></div>
     <br>
     <br>
     Raklion là vùng đất nhận được sự bảo hộ của phép thuật mạnh mẽ, vì nó là nơi chứa nguyên liệu secromicon, kim loại
@@ -212,7 +212,7 @@
     hơn bởi vì Selupan đã có được sức mạnh của Secromicon. Đối với các nhà thám hiểm, đây là vùng đất không dễ dàng gì
     tiếp cận.
     <h3>7. Selupan và Raklion – Vùng đất bị đóng băng</h3>
-    <div><img src="/images/guides/selupan.JPG" width="100%" border="1"></div>
+    <div><img src="/public/images/guides/selupan.JPG" width="100%" border="1"></div>
     <br>
     Về phần Kundun sau khi được giải phong ấn, hắn quyết tâm báo thù. Hắn biết rằng sức mạnh của Etramus vẫn còn tồn tại
     đâu đó trên lục địa này, và nhớ đến bí kíp Secromicon. Kế hoạch muốn chiếm lĩnh hoàn toàn đại lục MU mắc phải một
@@ -239,7 +239,7 @@
     <div>
         <h2>Vương quốc ngầm Kanturu</h2>
     </div>
-    <div><img src="/images/guides/kanturu.png" width="100%" border="1"></div>
+    <div><img src="/public/images/guides/kanturu.png" width="100%" border="1"></div>
     <h3>1. Vương quốc ngầm Kanturu:</h3>
     <br>
     Tại vùng Đông Bắc của lục địa MU, đã từng xuất hiện một xã hội văn minh cực kỳ phát triển, trước

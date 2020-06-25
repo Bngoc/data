@@ -14,7 +14,7 @@ echo cn_snippet_messages();
                 <div class="news_n"></div>
                 <div class="news_c">
                     <div class="news_content">
-                        <div class="title_newshome">erlkelkrler</div>
+                        <div class="title_newshome"></div>
                         <div class="clear"></div>
                         <div id="mainhome_content">
                             <div class="newsitem" style="padding: 0px;">

@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) . '/core/init.php');
 
 list($id, $action, $check_) = GET('id, action, check');
 
-//if(isset()) goi member_get.... get table.... //action=...&check=...&id=...
+//if(isset()) goi getMember.... get table.... //action=...&check=...&id=...
 if ($action) {
     $str_null = "không tồn tại.";
     $str_char = "đã tồn tại.";

@@ -1464,11 +1464,11 @@ class adoSchema
      *
      * Call this method to load the specified schema (see the DTD for the proper format) from
      * the filesystem and generate the SQL necessary to create the database described.
-     * @see ParseSchemaString()
-     *
      * @param string $file Name of XML schema file.
      * @param bool $returnSchema Return schema rather than parsing.
      * @return array Array of SQL queries, ready to execute
+     * @see ParseSchemaString()
+     *
      */
     function ParseSchema($filename, $returnSchema = FALSE)
     {
@@ -1534,11 +1534,11 @@ class adoSchema
      *
      * Call this method to parse a string containing an XML schema (see the DTD for the proper format)
      * and generate the SQL necessary to create the database described by the schema.
-     * @see ParseSchema()
-     *
      * @param string $xmlstring XML schema string.
      * @param bool $returnSchema Return schema rather than parsing.
      * @return array Array of SQL queries, ready to execute.
+     * @see ParseSchema()
+     *
      */
     function ParseSchemaString($xmlstring, $returnSchema = FALSE)
     {
@@ -1577,11 +1577,11 @@ class adoSchema
      *
      * Call this method to load the specified schema (see the DTD for the proper format) from
      * the filesystem and generate the SQL necessary to remove the database described.
-     * @see RemoveSchemaString()
-     *
      * @param string $file Name of XML schema file.
      * @param bool $returnSchema Return schema rather than parsing.
      * @return array Array of SQL queries, ready to execute
+     * @see RemoveSchemaString()
+     *
      */
     function RemoveSchema($filename, $returnSchema = FALSE)
     {
@@ -1593,11 +1593,11 @@ class adoSchema
      *
      * Call this method to parse a string containing an XML schema (see the DTD for the proper format)
      * and generate the SQL necessary to uninstall the database described by the schema.
-     * @see RemoveSchema()
-     *
      * @param string $schema XML schema string.
      * @param bool $returnSchema Return schema rather than parsing.
      * @return array Array of SQL queries, ready to execute.
+     * @see RemoveSchema()
+     *
      */
     function RemoveSchemaString($schema, $returnSchema = FALSE)
     {
@@ -1616,12 +1616,12 @@ class adoSchema
      * Call this method to apply the current schema (generally created by calling
      * ParseSchema() or ParseSchemaString() ) to the database (creating the tables, indexes,
      * and executing other SQL specified in the schema) after parsing.
-     * @see ParseSchema(), ParseSchemaString(), ExecuteInline()
-     *
      * @param array $sqlArray Array of SQL statements that will be applied rather than
      *        the current schema.
      * @param boolean $continueOnErr Continue to apply the schema even if an error occurs.
      * @returns integer 0 if failure, 1 if errors, 2 if successful.
+     * @see ParseSchema(), ParseSchemaString(), ExecuteInline()
+     *
      */
     function ExecuteSchema($sqlArray = NULL, $continueOnErr = NULL)
     {
@@ -1757,12 +1757,12 @@ class adoSchema
      * parameter is specified, the schema will be converted to the current DTD version.
      * If the newFile parameter is provided, the converted schema will be written to the specified
      * file.
-     * @see ConvertSchemaFile()
-     *
      * @param string $schema String containing XML schema that will be converted.
      * @param string $newVersion DTD version to convert to.
      * @param string $newFile File name of (converted) output file.
      * @return string Converted XML schema or FALSE if an error occurs.
+     * @see ConvertSchemaFile()
+     *
      */
     function ConvertSchemaString($schema, $newVersion = NULL, $newFile = NULL)
     {
@@ -1806,12 +1806,12 @@ class adoSchema
      * parameter is specified, the schema will be converted to the current DTD version.
      * If the newFile parameter is provided, the converted schema will be written to the specified
      * file.
-     * @see ConvertSchemaString()
-     *
      * @param string $filename Name of XML schema file that will be converted.
      * @param string $newVersion DTD version to convert to.
      * @param string $newFile File name of (converted) output file.
      * @return string Converted XML schema or FALSE if an error occurs.
+     * @see ConvertSchemaString()
+     *
      */
     function ConvertSchemaFile($filename, $newVersion = NULL, $newFile = NULL)
     {
@@ -1950,10 +1950,10 @@ class adoSchema
      * Returns the AXMLS Schema Version of the requested XML schema file.
      *
      * Call this method to obtain the AXMLS DTD version of the requested XML schema file.
-     * @see SchemaStringVersion()
-     *
      * @param string $filename AXMLS schema file
      * @return string Schema version number or FALSE on error
+     * @see SchemaStringVersion()
+     *
      */
     function SchemaFileVersion($filename)
     {
@@ -1977,10 +1977,10 @@ class adoSchema
      * Returns the AXMLS Schema Version of the provided XML schema string.
      *
      * Call this method to obtain the AXMLS DTD version of the provided XML schema string.
-     * @see SchemaFileVersion()
-     *
      * @param string $xmlstring XML schema string
      * @return string Schema version number or FALSE on error
+     * @see SchemaFileVersion()
+     *
      */
     function SchemaStringVersion($xmlstring)
     {

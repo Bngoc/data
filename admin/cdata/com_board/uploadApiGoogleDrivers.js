@@ -61,7 +61,7 @@ function uploadFile(file, index) {
     }, false);
 
     var fileInfo = document.forms.namedItem("fileinfo");
-   // var fileInfo = document.querySelector("form");
+    // var fileInfo = document.querySelector("form");
 
     //Bắt đầu Upload
     var data = new FormData(fileInfo);

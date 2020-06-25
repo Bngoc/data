@@ -257,12 +257,12 @@ function cn_countArr_pagination($countArray, $_url, $page, $per_page, $adjacents
 }
 
 /**
- * @param content
- * @param User
- * @param info
- * Retrun write log system error
+ * @param $content
+ * @param string $info
+ * @param string $user
+ * @return bool
  */
-function cn_writelog($content, $info = '', $user = '')
+function cn_write_log($content, $info = '', $user = '')
 {
     if (!isset($content)) {
         return false;
@@ -308,18 +308,10 @@ function cn_writelog($content, $info = '', $user = '')
     }
 
     $date = date("Y-m-d H:i:s a", ctime());
-    $ul = ROOT . "/admin/log/system/error_dump.log";
+    $ul = ROOT . "/admin/log/system/error_dump_". time() .".log";
     cn_touch($ul);
     $fileContents = file_get_contents($ul);
     file_put_contents($ul, $status . "\t" . $date . "\t" . $member . "\t" . $remote_addr . "\t" . $request_uri . "\t" . $content . "\n" . $fileContents);
-
-//    if (!file_exists($ul = cn_path_construct(ROOT, '/admin/log/system/') . 'error_dump.log')) {
-//        fclose(fopen($ul, 'w+'));
-//    }
-//    if ($fd = @fopen($ul, "a")) {
-//        $result = fputcsv($fd, array($status, $date, $member, $remote_addr, $request_uri, $content), "\t");
-//        fclose($fd);
-//    }
 }
 
 function cn_ewConvertToUtf8($str)
@@ -1208,7 +1200,7 @@ function cn_dsi_check($isWeb = false)
         unset($_GET['__signature_key'], $_GET['__signature_dsi']);
     }
 
-    $member = member_get();
+    $member = getMemcache();
 
     list(, $username) = explode('-', $key, 2);
     // Get signature
@@ -1231,7 +1223,7 @@ function cn_snippet_get_hidden($ADD = array())
     $GET = $_GET + $ADD;
     foreach ($GET as $k => $v) {
         if ($v !== '') {
-            $hid .= '<input type="hidden" name="' . cn_htmlspecialchars($k) . '" value="' . cn_htmlspecialchars($v) . '" />';
+            $hid .= '<input type="hidden" name="' . cnHtmlSpecialChars($k) . '" value="' . cnHtmlSpecialChars($v) . '" />';
         }
     }
 
@@ -1244,7 +1236,7 @@ function cn_form_open($fields)
     $fields = explode(',', $fields);
     foreach ($fields as $field) {
         $_field = REQ(trim($field), 'GPG');
-        echo '<input type="hidden" name="' . trim($field) . '" value="' . cn_htmlspecialchars($_field) . '" />';
+        echo '<input type="hidden" name="' . trim($field) . '" value="' . cnHtmlSpecialChars($_field) . '" />';
     }
 
     cn_snippet_digital_signature();
@@ -1254,7 +1246,7 @@ function cn_form_open($fields)
 // @Param: type = std (input hidden), a (inline in a)
 function cn_snippet_digital_signature($type = 'std')
 {
-    $member = member_get();
+    $member = getMember();
 
     if (isset($member['user_Account'])) $ischeckSession = false;
     else if (isset($member['user_name'])) $ischeckSession = true;
@@ -1272,8 +1264,8 @@ function cn_snippet_digital_signature($type = 'std')
         $signature = MD5($sign_extr . $member['pass_web'] . MD5(getoption('#crypt_salt')));
     }
     if ($type == 'std') {
-        echo '<input type="hidden" name="__signature_key" value="' . cn_htmlspecialchars($sign_extr) . '" />';
-        echo '<input type="hidden" name="__signature_dsi" value="' . cn_htmlspecialchars($signature) . '" />';
+        echo '<input type="hidden" name="__signature_key" value="' . cnHtmlSpecialChars($sign_extr) . '" />';
+        echo '<input type="hidden" name="__signature_dsi" value="' . cnHtmlSpecialChars($signature) . '" />';
     } elseif ($type == 'a') {
         return '__signature_dsi_inline=' . $signature . '.' . urlencode($sign_extr);
     }
@@ -1282,10 +1274,9 @@ function cn_snippet_digital_signature($type = 'std')
 }
 
 // @Param: type = std (input hidden), a (inline in a)
-function cn_digital_signature_meta()
+function cn_digital_signature_meta($member)
 {
     $htmlResult = '';
-    $member = member_get();
 
     if (isset($member['user_Account'])) $ischeckSession = false;
     else if (isset($member['user_name'])) $ischeckSession = true;
@@ -1296,15 +1287,15 @@ function cn_digital_signature_meta()
 
     // Make signature
     if (!$ischeckSession) {
-        $sign_extr = MD5(time() . mt_rand()) . '-' . $member['user_Account'];
-        $signature = MD5($sign_extr . $member['pass'] . MD5(getoption('#crypt_salt')));
+        $sign_extr = md5(time() . mt_rand()) . '-' . $member['user_Account'];
+        $signature = md5($sign_extr . $member['pass'] . md5(getoption('#crypt_salt')));
     } else {
-        $sign_extr = MD5(time() . mt_rand()) . '-' . $member['user_name'];
-        $signature = MD5($sign_extr . $member['pass_web'] . MD5(getoption('#crypt_salt')));
+        $sign_extr = md5(time() . mt_rand()) . '-' . $member['user_name'];
+        $signature = md5($sign_extr . $member['pass_web'] . md5(getoption('#crypt_salt')));
     }
 
-    $htmlResult .= '<meta name="__signature_key" content="' . cn_htmlspecialchars($sign_extr) . '" />';
-    $htmlResult .= '<meta name="__signature_dsi" content="' . cn_htmlspecialchars($signature) . '" />';
+    $htmlResult .= '<meta name="__signature_key" content="' . cnHtmlSpecialChars($sign_extr) . '" />';
+    $htmlResult .= '<meta name="__signature_dsi" content="' . cnHtmlSpecialChars($signature) . '" />';
 
     return $htmlResult;
 }
@@ -1312,7 +1303,7 @@ function cn_digital_signature_meta()
 function cn_template_class()
 {
     // No in cache
-    if ($class = mcache_get('#class')) {
+    if ($class = getMemcache('#class')) {
         return $class;
     }
 
@@ -1323,7 +1314,7 @@ function cn_template_class()
 function cn_template_reset()
 {
     // No in cache
-    if ($_reset = mcache_get('#reset')) {
+    if ($_reset = getMemcache('#reset')) {
         return $_reset;
     }
 
@@ -1356,7 +1347,7 @@ function cn_template_reset()
 function cn_template_resetvip()
 {
     // No in cache
-    if ($_resetvip = mcache_get('#resetvip')) {
+    if ($_resetvip = getMemcache('#resetvip')) {
         return $_resetvip;
     }
 
@@ -1385,7 +1376,7 @@ function cn_template_resetvip()
 function cn_template_relife()
 {
     // No in cache
-    if ($_relife = mcache_get('#relife')) {
+    if ($_relife = getMemcache('#relife')) {
         return $_relife;
     }
 
@@ -1411,7 +1402,7 @@ function cn_template_uythacrs()
 {
 
     // No in cache
-    if ($_uythac_rs = mcache_get('#uythacrs')) {
+    if ($_uythac_rs = getMemcache('#uythacrs')) {
         return $_uythac_rs;
     }
 
@@ -1439,7 +1430,7 @@ function cn_template_uythacrs()
 function cn_template_uythacrsvip()
 {
     // No in cache
-    if ($_uythac_rsvip = mcache_get('#uythacrsvip')) {
+    if ($_uythac_rsvip = getMemcache('#uythacrsvip')) {
         return $_uythac_rsvip;
     }
 
@@ -1465,7 +1456,7 @@ function cn_template_uythacrsvip()
 function cn_template_rslimit1()
 {
     // No in cache
-    if ($_rslimit1 = mcache_get('#rslimit1')) {
+    if ($_rslimit1 = getMemcache('#rslimit1')) {
         return $_rslimit1;
     }
 
@@ -1486,7 +1477,7 @@ function cn_template_rslimit1()
 
 function cn_template_rslimit2()
 {
-    if ($_rslimit2 = mcache_get('#rslimit2')) {
+    if ($_rslimit2 = getMemcache('#rslimit2')) {
         return $_rslimit2;
     }
 
@@ -1515,7 +1506,7 @@ function cn_template_rslimit2()
 function cn_template_httt()
 {
     // No in cache
-    if ($_hotro_tanthu = mcache_get('#hotro_tanthu')) {
+    if ($_hotro_tanthu = getMemcache('#hotro_tanthu')) {
         return $_hotro_tanthu;
     }
 
@@ -1580,7 +1571,7 @@ function cn_resetDefaultCharater($accountID)
 {
     if (empty($accountID)) return false;
 
-    $resultlistChracter = do_select_orther("SELECT * FROM MuOnline.dbo.Character WHERE AccountID='$accountID' AND IsThuePoint =1");
+    $resultlistChracter = do_select_other("SELECT * FROM MuOnline.dbo.Character WHERE AccountID='$accountID' AND IsThuePoint =1");
 
     $arr_class = cn_template_class();
     $options_rs = cn_template_reset();
@@ -1738,7 +1729,7 @@ function cn_zenderMoneyBank($moneyBank)
 }
 
 // Since 2.0: Create file
-function cn_touch($fn, $php_safe = FALSE)
+function cn_touch($fn, $php_safe = false)
 {
     if (!file_exists($fn)) {
         $w = fopen($fn, 'w+');
@@ -1796,7 +1787,7 @@ function cn_ResultDe()
                 //$dateTime = date('Y-m-d', strtotime(date('Y-m-d', $time) . '- 1 days'));
 
                 if ($resultPlayDe || $resultPlayDe == 0) {
-                    $resultSelect = do_select_orther("SELECT count(*) as nameCount FROM ResultDe WHERE Convert(Date, timesDe)='" . $dateTime . "'");
+                    $resultSelect = do_select_other("SELECT count(*) as nameCount FROM ResultDe WHERE Convert(Date, timesDe)='" . $dateTime . "'");
                     if (empty($resultSelect[0]['nameCount'])) {
                         do_insert_character(
                             'ResultDe',
@@ -1837,8 +1828,8 @@ function cn_ResultDe()
 
     }
 
-    $dataSelect = do_select_orther("SELECT [ResultDe],[timesDe],[OptionResult] FROM ResultDe");
-    $showupDate = do_select_orther("SELECT [ID], [AccountID],[WriteDe],[timestamp],[Action], [Vpoint] FROM WriteDe WHERE Action = 1");
+    $dataSelect = do_select_other("SELECT [ResultDe],[timesDe],[OptionResult] FROM ResultDe");
+    $showupDate = do_select_other("SELECT [ID], [AccountID],[WriteDe],[timestamp],[Action], [Vpoint] FROM WriteDe WHERE Action = 1");
 
     $dataResultDe = [];
     foreach ($dataSelect as $kr => $its) {

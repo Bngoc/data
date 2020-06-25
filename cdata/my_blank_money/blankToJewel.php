@@ -8,7 +8,7 @@ list($htmlOptionNumItem, $isZen) = _GL('htmlOptionNumItem, isZen');
 <div id="msg-Show"></div>
 <form action="<?php echo PHP_SELF; ?>" method="GET">
     <?php echo cn_form_open('mod, opt'); ?>
-<!--    --><?php //echo cn_form_open('mod, opt, sub, numberItemJewel'); ?>
+    <!--    --><?php //echo cn_form_open('mod, opt, sub, numberItemJewel'); ?>
     <table style="width: 100%" cellpadding="2" align="middle">
         <tr>
             <td colspan="3" class="">THÔNG TIN HÒM ĐỒ CÁ NHÂN<br/></td>
@@ -30,8 +30,10 @@ list($htmlOptionNumItem, $isZen) = _GL('htmlOptionNumItem, isZen');
             </td>
         </tr>
         <tr>
-            <td class="bizwebform_col_1"><?php echo ((@$isZen || $isZen == 0) ? '' : 'Chọn số lượng'); ?></td>
-            <td colspan=""><div class="show-NumItem"><?php echo $htmlOptionNumItem; ?></div></td>
+            <td class="bizwebform_col_1"><?php echo((@$isZen || $isZen == 0) ? '' : 'Chọn số lượng'); ?></td>
+            <td colspan="">
+                <div class="show-NumItem"><?php echo $htmlOptionNumItem; ?></div>
+            </td>
             <td id="msg_NumItem"></td>
         </tr>
         <tr>

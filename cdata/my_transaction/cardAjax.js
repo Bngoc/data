@@ -27,8 +27,8 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('click','.callAjax', function () {
-        if(!$(this).hasClass('current')) {
+    $(document).on('click', '.callAjax', function () {
+        if (!$(this).hasClass('current')) {
             var dataUrl = $(this).attr('fhref');
             $.ajax({
                 url: dataUrl,

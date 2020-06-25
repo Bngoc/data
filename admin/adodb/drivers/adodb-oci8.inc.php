@@ -1431,9 +1431,9 @@ SELECT /*+ RULE */ distinct b.column_name
     /**
      * returns assoc array where keys are tables, and values are foreign keys
      *
-     * @param    str $table
-     * @param    str $owner [optional][default=NULL]
-     * @param    bool $upper [optional][discarded]
+     * @param str $table
+     * @param str $owner [optional][default=NULL]
+     * @param bool $upper [optional][discarded]
      * @return    mixed[]            Array of foreign key information
      *
      * @link http://gis.mit.edu/classes/11.521/sqlnotes/referential_integrity.html
@@ -1745,9 +1745,9 @@ class ADORecordset_oci8 extends ADORecordSet
      * not the fastest implementation - quick and dirty - jlim
      * for best performance, use the actual $rs->MetaType().
      *
-     * @param    mixed $t
-     * @param    int $len [optional] Length of blobsize
-     * @param    bool $fieldobj [optional][discarded]
+     * @param mixed $t
+     * @param int $len [optional] Length of blobsize
+     * @param bool $fieldobj [optional][discarded]
      * @return    str                    The metatype of the field
      */
     function MetaType($t, $len = -1, $fieldobj = false)

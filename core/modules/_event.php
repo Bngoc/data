@@ -72,18 +72,18 @@ function event_invoke()
     }
 //
     cn_assign('dashboard', $relax_board);
-    echoheader('-@my_event/style.css', "Sự kiện");
-    echocomtent_here(exec_tpl('my_event/general'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_event/style.css', "Sự kiện");
+    echo_comtent_here(exec_tpl('my_event/general'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function event_default()
 {
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('defaults/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('defaults/style.css', "Error - $name__");
+    echo_comtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function relax_baucua()
@@ -137,7 +137,7 @@ function relax_baucua()
         }
     }
 
-    echoheader('-@my_relax/style.css@my_relax/relaxAjaxPlay.js', "Giải trí - Bầu Cua");
-    echocomtent_here(exec_tpl('my_relax/baucua'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_relax/style.css@my_relax/relaxAjaxPlay.js', "Giải trí - Bầu Cua");
+    echo_comtent_here(exec_tpl('my_relax/baucua'), cn_snippet_bc_re());
+    echo_footer_web();
 }

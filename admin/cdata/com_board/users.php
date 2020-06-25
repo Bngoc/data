@@ -18,7 +18,7 @@ cn_snippet_bc();
         <tr>
             <td align="right">Username <span class="required">*</span></td>
             <td><input type="text" name="user_name" style="width: 350px;"
-                       value="<?php echo cn_htmlspecialchars($user_name); ?>"/></td>
+                       value="<?php echo cnHtmlSpecialChars($user_name); ?>"/></td>
         </tr>
 
         <tr>
@@ -41,13 +41,13 @@ cn_snippet_bc();
         <tr>
             <td align="right">Nickname</td>
             <td><input style="width: 650px;" type="text" name="user_nick"
-                       value="<?php echo cn_htmlspecialchars($user_nick); ?>"/></td>
+                       value="<?php echo cnHtmlSpecialChars($user_nick); ?>"/></td>
         </tr>
 
         <tr>
             <td align="right">Email <span class="required">*</span></td>
             <td><input style="width: 650px;" type="text" name="user_email"
-                       value="<?php echo cn_htmlspecialchars($user_email); ?>"/></td>
+                       value="<?php echo cnHtmlSpecialChars($user_email); ?>"/></td>
         </tr>
 
         <tr>
@@ -61,7 +61,7 @@ cn_snippet_bc();
                 <select name="user_acl">
                     <?php foreach ($grp as $grp_id => $item) { ?>
                         <option
-                            value="<?php echo $grp_id; ?>"<?php if ($user_acl == $grp_id) echo ' selected="selected"'; ?>><?php echo cn_htmlspecialchars(ucfirst($item['N'])); ?></option>
+                            value="<?php echo $grp_id; ?>"<?php if ($user_acl == $grp_id) echo ' selected="selected"'; ?>><?php echo cnHtmlSpecialChars(ucfirst($item['N'])); ?></option>
                     <?php } ?>
                 </select>
                 <button name="add" value="add">Add</button>
@@ -82,7 +82,7 @@ cn_snippet_bc();
             href="<?php echo cn_url_modify('user_name,st', 'section'); ?>">Everyone</a></li>
     <?php foreach ($grp as $grp_id => $item) { ?>
         <li<?php if ($section == $grp_id) echo ' class="selected"'; ?>><a
-                href="<?php echo cn_url_modify('user_name,st', 'section=' . $grp_id); ?>"><?php echo cn_htmlspecialchars(ucfirst($item['N'])); ?></a>
+                href="<?php echo cn_url_modify('user_name,st', 'section=' . $grp_id); ?>"><?php echo cnHtmlSpecialChars(ucfirst($item['N'])); ?></a>
         </li>
     <?php } ?>
 
@@ -97,11 +97,11 @@ cn_snippet_bc();
     <?php if ($users) foreach ($users as $id => $user) { ?>
         <tr <?php if (isset($user['name']) && $user_name == $user['name']) echo 'class="row_selected"'; ?>>
             <td width="400px"><a
-                    href="<?= (isset($user['name']) ? cn_url_modify('user_name=' . $user['name']) : ''); ?>"><?= (isset($user['name']) ? cn_htmlspecialchars($user['name']) : ''); ?>
+                    href="<?= (isset($user['name']) ? cn_url_modify('user_name=' . $user['name']) : ''); ?>"><?= (isset($user['name']) ? cnHtmlSpecialChars($user['name']) : ''); ?>
             </td>
             <td align="center"><?= (isset($user['id']) ? date('Y-m-d H:i', $user['id']) : ''); ?></td>
             <td align="center"><?= (isset($user['cnt']) ? intval($user['cnt']) : 0); ?></td>
-            <td align="center"><?= (isset($user['acl']) && isset($grp[$user['acl']]['N']) ? cn_htmlspecialchars(ucfirst($grp[$user['acl']]['N'])) : ''); ?></td>
+            <td align="center"><?= (isset($user['acl']) && isset($grp[$user['acl']]['N']) ? cnHtmlSpecialChars(ucfirst($grp[$user['acl']]['N'])) : ''); ?></td>
         </tr>
     <?php } else { ?>
         <tr>

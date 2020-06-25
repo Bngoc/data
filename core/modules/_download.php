@@ -38,9 +38,9 @@ function download_invoke()
 
     cn_assign('arr_downlooadShow', $result_Data);
 
-    echoheader('-@my_download/style.css', "Nap The");
-    echocomtent_here(exec_tpl('my_download/show_download'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_download/style.css', "Nap The");
+    echo_content_here(exec_tpl('my_download/show_download'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function getRemoteFilesize($url, $formatSize = true, $useHead = true)

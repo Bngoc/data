@@ -32,7 +32,8 @@
     Pháo đài Crywolf đèn đuốc sáng cả đêm <br>
     Balgass phen này đừng mong còn đất sống <br>
     Ngày định mệnh được mọi người trông ngóng <br>
-    Khí giới đã xong lương thực cũng sẵn sàng....&quot;</div>
+    Khí giới đã xong lương thực cũng sẵn sàng....&quot;
+</div>
 <div><br>
     ...&quot;Crywolf nằm phía Đông Nam khe núi Lorencia, nơi liên quân của các bộ tộc Hiệp sỹ – Pháp sư – Đấu
     sỹ – Chúa tể - Nhân thần đang chống lại sự phục thù của Ma Vương Kundun&quot;. <br>

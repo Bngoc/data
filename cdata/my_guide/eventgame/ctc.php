@@ -16,7 +16,8 @@
             đủ ti&ecirc;u chuẩn để tham gia trận Seige Warfare. </span></span></div>
 <div style="margin: 0in 0in 0pt; line-height: normal; text-align: justify">&nbsp;</div>
 <div style="margin: 0in 0in 0pt; line-height: normal; text-align: justify"><span style="color: #00ffff"><b><span
-                style="font-size: 10pt">Kế hoạch</span></b></span>&nbsp;</div>
+                style="font-size: 10pt">Kế hoạch</span></b></span>&nbsp;
+</div>
 <div style="margin: 0in 0in 0pt; line-height: normal; text-align: justify">&nbsp;</div>
 <div style="margin: 0in 0in 0pt; line-height: normal; text-align: center">
     <center>

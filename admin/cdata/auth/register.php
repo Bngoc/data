@@ -20,13 +20,13 @@ list($errors_result, $regusername, $regemail) = _GL('errors_result, regusername,
         <tr>
             <td width=85>Username: <span class="required">*</span></td>
             <td colspan="2"><input tabindex="1" type="text" name=regusername
-                                   value="<?php echo cn_htmlspecialchars($regusername); ?>" style="width:134px"
+                                   value="<?php echo cnHtmlSpecialChars($regusername); ?>" style="width:134px"
                                    size="20"></td>
         </tr>
         <tr>
             <td width=85>Email: <span class="required">*</span></td>
             <td colspan="2"><input tabindex="1" type="text" name="regemail"
-                                   value="<?php echo cn_htmlspecialchars($regemail); ?>" style="width:134px" size="20">
+                                   value="<?php echo cnHtmlSpecialChars($regemail); ?>" style="width:134px" size="20">
             </td>
         </tr>
 

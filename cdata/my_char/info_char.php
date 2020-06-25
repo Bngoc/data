@@ -8,7 +8,9 @@ echo cn_snippet_messages();
 <!-------------------------------------------------- -->
 <div class="sub_ranking">
     <?php if ($showchar){
-    foreach ($showchar as $kr => $val) { ?>
+    foreach ($showchar
+
+    as $kr => $val) { ?>
     <table id="tbl_ranking">
         <tr>
             <th class="lbg">Hình ảnh</th>

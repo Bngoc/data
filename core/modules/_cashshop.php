@@ -96,18 +96,18 @@ function cshop_invoke()
     }
 
     cn_assign('dashboard', $cshop_board);
-    echoheader('-@my_cashshop/style.css', "Character");
-    echocomtent_here(exec_tpl('my_cashshop/general'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_cashshop/style.css', "Character");
+    echo_content_here(exec_tpl('my_cashshop/general'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function shop_default()
 {
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@defaults/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@defaults/style.css', "Error - $name__");
+    echo_content_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function shop___buy_s1()
@@ -126,7 +126,7 @@ function shop___buy_s1()
         foreach ($item_ as $key => $var) {
             $list_item[$key] = cn_analysis_code32($var['code32'], $var['name'], $var['price'], $var['image_mh']);
         }
-    $member = member_get();
+    $member = getMember();
     $accc_ = $member['user_name'];
 
     $warehouse_ = do_select_character('warehouse', $arr_cls = 'Items', "AccountID='$accc_'");
@@ -162,7 +162,7 @@ function shop___buy_s1()
 
                     if ($opt == "armor") {
                         for ($i = 7; $i <= 11; $i++) {
-                            $serial = do_select_orther('EXEC WZ_GetItemSerial');
+                            $serial = do_select_other('EXEC WZ_GetItemSerial');
 
                             $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                             $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
@@ -191,7 +191,7 @@ function shop___buy_s1()
                             }
                         }
                     } else {
-                        $serial = do_select_orther('EXEC WZ_GetItemSerial');
+                        $serial = do_select_other('EXEC WZ_GetItemSerial');
                         $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                         $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
                         $leng_item_code = strlen($item_code);
@@ -243,7 +243,7 @@ function shop___buy_s1()
             return json_encode($resultData);
         }
     }
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name_shop = array_pop($arr_shop)['name'];
 
 
@@ -252,14 +252,14 @@ function shop___buy_s1()
     cn_assign('list_item, token, opt', $list_itemNew, $token, $opt);
     cn_assign('per_page, echoPagination', $per_page, $echoPagination);
 
-    echoheader('-@my_cashshop/style.css@my_cashshop/customAjaxShop.js', "Cửa hàng $name_shop - $name_shop");
-    echocomtent_here(exec_tpl('my_cashshop/_general'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_cashshop/style.css@my_cashshop/customAjaxShop.js', "Cửa hàng $name_shop - $name_shop");
+    echo_content_here(exec_tpl('my_cashshop/_general'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function shop___what_()
 {
-    $member = member_get();
+    $member = getMember();
     $accc_ = $member['user_name'];
     $warehouse_ = do_select_character('warehouse', 'Items,Money,pw,AccountID', "AccountID='$accc_'");
 
@@ -293,7 +293,7 @@ function shop___what_()
 											width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px;
 											cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>";
 
-                if (file_exists(ROOT. '/images/items/' . $item32['image'] . '.gif')) {
+                if (file_exists(ROOT . '/images/items/' . $item32['image'] . '.gif')) {
                     $show_warehouse .= "<img src='images/items/" . $item32['image'] . ".gif'
 											style='height:" . (32 * $itemy - $itemy - 1) . "px;
 											 width:" . (32 * $itemx) . "px;'";
@@ -332,7 +332,7 @@ function shop___what_()
 
     cn_assign('show_warehouse', $show_warehouse);
 
-    echoheader('-@my_cashshop/style.css', "Thùng đồ - Warehouse");
-    echocomtent_here(exec_tpl('my_cashshop/_warehouse'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_cashshop/style.css', "Thùng đồ - Warehouse");
+    echo_content_here(exec_tpl('my_cashshop/_warehouse'), cn_snippet_bc_re());
+    echo_footer_web();
 }

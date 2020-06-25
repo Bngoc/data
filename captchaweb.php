@@ -8,5 +8,3 @@ $phptextObj->path_Url = MODULE_ADM;
 $phptextObj->nameSession = 'captcha_web';
 
 $phptextObj->phpcaptcha('#fff', '#328ae4', 134, 30, 5, 30);
-
-?>

@@ -44,7 +44,8 @@
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="/images/vertical-separator.jpg" width="100%" height="1px"></div>
+                <div class="vertical-img"><img src="/public/images/vertical-separator.jpg" width="100%" height="1px">
+                </div>
                 <br></td>
         </tr>
         </tbody>

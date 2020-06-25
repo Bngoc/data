@@ -52,7 +52,7 @@
         </td>
         <td>
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image062.jpg"
+                                     src="/public/images/guides/image062.jpg"
                                      width="27"></div>
         </td>
         <td>
@@ -68,7 +68,7 @@
     <tr height="22">
         <td> 
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image064.jpg"
+                                     src="/public/images/guides/image064.jpg"
                                      width="27"></div>
         </td>
         <td>
@@ -87,7 +87,7 @@
         </td>
         <td>
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image066.jpg"
+                                     src="/public/images/guides/image066.jpg"
                                      width="27"></div>
         </td>
         <td>
@@ -103,7 +103,7 @@
     <tr height="22">
         <td width="50"> 
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image068.jpg"
+                                     src="/public/images/guides/image068.jpg"
                                      width="27"></div>
         </td>
         <td>
@@ -119,7 +119,7 @@
     <tr height="21">
         <td width="50" rowspan="2">
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image070.jpg"
+                                     src="/public/images/guides/image070.jpg"
                                      width="27"></div>
         </td>
         <td rowspan="2">
@@ -142,7 +142,7 @@
         </td>
         <td width="50"> 
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image072.jpg"
+                                     src="/public/images/guides/image072.jpg"
                                      width="27"></div>
         </td>
         <td>
@@ -165,7 +165,7 @@
         </td>
         <td width="50"> 
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image074.jpg"
+                                     src="/public/images/guides/image074.jpg"
                                      width="27"></div>
         </td>
         <td>
@@ -181,7 +181,7 @@
     <tr height="70">
         <td width="50">
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image076.jpg"
+                                     src="/public/images/guides/image076.jpg"
                                      width="27"> 
             </div>
         </td>
@@ -202,7 +202,7 @@
          
         <td width="50">
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image078.jpg"
+                                     src="/public/images/guides/image078.jpg"
                                      width="27"> 
             </div>
         </td>
@@ -219,7 +219,7 @@
     <tr height="36">
         <td width="50">
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image080.jpg"
+                                     src="/public/images/guides/image080.jpg"
                                      width="27"> 
             </div>
         </td>
@@ -239,7 +239,7 @@
         </td>
         <td width="50">
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image082.jpg"
+                                     src="/public/images/guides/image082.jpg"
                                      width="27"> 
             </div>
         </td>
@@ -256,7 +256,7 @@
     <tr height="22">
         <td width="50"> 
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image084.jpg"
+                                     src="/public/images/guides/image084.jpg"
                                      width="27"></div>
         </td>
         <td>
@@ -275,7 +275,7 @@
         </td>
         <td width="50">
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image074.jpg"
+                                     src="/public/images/guides/image074.jpg"
                                      width="27"> 
             </div>
         </td>
@@ -292,7 +292,7 @@
     <tr height="22">
         <td width="50"> 
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image086.jpg"
+                                     src="/public/images/guides/image086.jpg"
                                      width="27"></div>
         </td>
         <td>
@@ -311,7 +311,7 @@
         </td>
         <td width="50"> 
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image088.jpg"
+                                     src="/public/images/guides/image088.jpg"
                                      width="27"></div>
         </td>
         <td>
@@ -327,7 +327,7 @@
     <tr height="22">
         <td width="50"> 
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image090.jpg"
+                                     src="/public/images/guides/image090.jpg"
                                      width="27"></div>
         </td>
         <td>
@@ -344,6 +344,6 @@
 <br>
 <p><strong>Bảng kỹ năng 2</strong></p>
 <div>
-    <img width="100%" src="/images/guides/masterbosung.jpg" alt="masterbosung.jpg">
-    <img width="100%" src="/images/guides/masterbosung1.jpg" alt="masterbosung1.jpg">
+    <img width="100%" src="/public/images/guides/masterbosung.jpg" alt="masterbosung.jpg">
+    <img width="100%" src="/public/images/guides/masterbosung1.jpg" alt="masterbosung1.jpg">
 </div>

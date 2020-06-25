@@ -68,7 +68,7 @@
     </tr>
     <tr>
         <td>Sóng năng lượng</td>
-        <td><img src="/images/guides/sum_Chain Lightning_02.jpg"></td>
+        <td><img src="/public/images/guides/sum_Chain Lightning_02.jpg"></td>
         <td>57 energy</td>
         <td>5</td>
         <td>14÷21</td>
@@ -81,7 +81,7 @@
     </tr>
     <tr>
         <td>Lightning shock</td>
-        <td><img src="/images/guides/sum_Lightning-Shock_02.jpg"></td>
+        <td><img src="/public/images/guides/sum_Lightning-Shock_02.jpg"></td>
         <td>823 Energy</td>
         <td>÷</td>
         <td>95</td>
@@ -94,7 +94,7 @@
     </tr>
     <tr>
         <td>Berserker</td>
-        <td><img src="/images/guides/sum_Berserker_02.jpg"></td>
+        <td><img src="/public/images/guides/sum_Berserker_02.jpg"></td>
         <td>620 Energy</td>
         <td>÷</td>
         <td>Sức sát thương x2</td>
@@ -108,7 +108,7 @@
     </tr>
     <tr>
         <td>Ma Công</td>
-        <td><img src="/images/guides/sum_Pollution_02.jpg"></td>
+        <td><img src="/public/images/guides/sum_Pollution_02.jpg"></td>
         <td>557 Energy</td>
         <td>9</td>
         <td>80</td>
@@ -121,7 +121,7 @@
     </tr>
     <tr>
         <td>Quỷ Kiếm</td>
-        <td><img src="/images/guides/sum_Requiem_02.jpg"></td>
+        <td><img src="/public/images/guides/sum_Requiem_02.jpg"></td>
         <td>382 energy</td>
         <td>10</td>
         <td>Sức sát thương x2</td>

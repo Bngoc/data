@@ -229,7 +229,7 @@ class DB
         if (!is_object($value)) return false;
         $class = strtolower(get_class($value));
         return $class == 'pear_error' || is_subclass_of($value, 'pear_error') ||
-        $class == 'db_error' || is_subclass_of($value, 'db_error');
+            $class == 'db_error' || is_subclass_of($value, 'db_error');
     }
 
 

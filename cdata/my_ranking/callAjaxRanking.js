@@ -7,7 +7,7 @@ $(document).ready(function () {
         var callbacks = $.Callbacks("unique memory");
         callbacks.add(ajax_loadRanking);
         callbacks.fire(dataUrl, function () {
-            
+
         });
     });
 
@@ -18,19 +18,19 @@ $(document).ready(function () {
             var url = $('li[class*="selected"]').children('a').attr('fhref');
             var dataUrl = url + '&sort=' + sortClass;
 
-            ajax_loadRanking(dataUrl, function() {
+            ajax_loadRanking(dataUrl, function () {
                 $('.callAjaxRanking').removeClass('bd');
                 currentElement.addClass('bd');
             });
         }
     });
 
-    $(document).on('click','.callAjax', function () {
-        if(!$(this).hasClass('current')) {
+    $(document).on('click', '.callAjax', function () {
+        if (!$(this).hasClass('current')) {
             var dataUrl = $(this).attr('fhref');
 
             ajax_loadRanking(dataUrl, function () {
-                
+
             })
         }
     });

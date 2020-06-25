@@ -5,7 +5,7 @@ app.controller('productsCtrl', function ($scope, $modal, $filter, Data, fileUplo
 
     $scope.product = {};
     $scope.sort = {sortList: 'd'};
-    addObject = {actAng:1};
+    addObject = {actAng: 1};
 
     $scope.drivers = {
         // actionUpload: 1,
@@ -24,7 +24,7 @@ app.controller('productsCtrl', function ($scope, $modal, $filter, Data, fileUplo
         Data.getData('admin.php', $scope.drivers, addObject).then(function (results) {
             try {
                 $scope.products = results.data.body.data;
-            } catch (e){
+            } catch (e) {
 
             }
         });
@@ -37,7 +37,7 @@ app.controller('productsCtrl', function ($scope, $modal, $filter, Data, fileUplo
         Data.getData('admin.php', $scope.drivers, addObject).then(function (results) {
             try {
                 $scope.products = results.data.body.data;
-            } catch (ex){
+            } catch (ex) {
                 console.log(ex);
             }
         });
@@ -47,7 +47,7 @@ app.controller('productsCtrl', function ($scope, $modal, $filter, Data, fileUplo
     Data.getData('admin.php', $scope.drivers, addObject).then(function (results) {
         try {
             $scope.products = results.data.body.data;
-        } catch (e){
+        } catch (e) {
 
         }
     });
@@ -99,7 +99,7 @@ app.controller('productsCtrl', function ($scope, $modal, $filter, Data, fileUplo
                 }
             },
             backdrop: 'static', // disable click modal outsite
-            keyboard :false     // ESC
+            keyboard: false     // ESC
         });
 
         modalInstance.result.then(function (selectedObject) {
@@ -133,7 +133,7 @@ app.controller('productsCtrl', function ($scope, $modal, $filter, Data, fileUplo
                 try {
                     if (serverResult.status == 0 && serverResult.msg == 'ok') {
                         // $scope.products = _.without($scope.products, _.findWhere($scope.products, {id: product.alias}));
-                        $scope.products.splice($scope.products.indexOf(product.alias),1);
+                        $scope.products.splice($scope.products.indexOf(product.alias), 1);
                     }
                 } catch (ex) {
                     console.log(ex);
@@ -194,69 +194,69 @@ app.controller('productEditCtrl', function ($scope, $modalInstance, item, Data, 
         $scope.$apply();
     }
 
-     $scope.uploadFileByMe = function (drivers, vet) {
-         // var ProgressBar = document.createElement('div');
-         // ProgressBar.className = 'progress-bar';
-         // var ProgressText = document.createElement('span');
-         // ProgressText.className = 'progress-text';
+    $scope.uploadFileByMe = function (drivers, vet) {
+        // var ProgressBar = document.createElement('div');
+        // ProgressBar.className = 'progress-bar';
+        // var ProgressText = document.createElement('span');
+        // ProgressText.className = 'progress-text';
 
-         drivers['actionUpload'] = 1;
-         drivers['__signature_dsi'] = $("meta[name='__signature_dsi']").attr("content");
-         drivers['__signature_key'] = $("meta[name='__signature_key']").attr("content");
+        drivers['actionUpload'] = 1;
+        drivers['__signature_dsi'] = $("meta[name='__signature_dsi']").attr("content");
+        drivers['__signature_key'] = $("meta[name='__signature_key']").attr("content");
 
-         if ($scope.fileList.length) {
-             checkUpload = true;
-             $scope.isDisabled = true;
-             for (j = 0; j < $scope.fileList.length; j++) {
-                 Data.apiUploadFileByMe('admin.php', drivers, $scope.fileList[j],
-                     function (done, vIndex) {
-                         // $scope.products = done.body.data;
-                         try { //Bẫy lỗi JSON
-                             var server = JSON.parse(done);
+        if ($scope.fileList.length) {
+            checkUpload = true;
+            $scope.isDisabled = true;
+            for (j = 0; j < $scope.fileList.length; j++) {
+                Data.apiUploadFileByMe('admin.php', drivers, $scope.fileList[j],
+                    function (done, vIndex) {
+                        // $scope.products = done.body.data;
+                        try { //Bẫy lỗi JSON
+                            var server = JSON.parse(done);
 
-                             $('.msgError').children().removeClass('display-none');
-                             // $scope.msgError = flashMsg(server.message, 's');
-                             // $('.msgError').append().html(flashMsg(server.message, 's'));
-                             $('#fileInfo_' + vIndex).removeClass('progress-bar-u').addClass('progress-bar-s');
-                             $('#upSpeed_' + vIndex).html(server.statusUpload);
+                            $('.msgError').children().removeClass('display-none');
+                            // $scope.msgError = flashMsg(server.message, 's');
+                            // $('.msgError').append().html(flashMsg(server.message, 's'));
+                            $('#fileInfo_' + vIndex).removeClass('progress-bar-u').addClass('progress-bar-s');
+                            $('#upSpeed_' + vIndex).html(server.statusUpload);
 
-                         } catch (e) {
-                             console.log(e);
-                             $('.msgError').append().html(flashMsg(server.message, 's'));
-                             // ProgressBar.className += ' progress-bar-danger'; //Thêm class Danger
-                             // ProgressBar.innerHTML = 'Có lỗi xảy ra'; //Thông báo
-                         }
-                     }, function (progress, vIndex) {
-                         // console.log('#fileInfo_' + j);
-                         // console.log(progress);
-                         if (progress >= 100) {
+                        } catch (e) {
+                            console.log(e);
+                            $('.msgError').append().html(flashMsg(server.message, 's'));
+                            // ProgressBar.className += ' progress-bar-danger'; //Thêm class Danger
+                            // ProgressBar.innerHTML = 'Có lỗi xảy ra'; //Thông báo
+                        }
+                    }, function (progress, vIndex) {
+                        // console.log('#fileInfo_' + j);
+                        // console.log(progress);
+                        if (progress >= 100) {
 
-                             // $('#fileInfo_' + vIndex).removeClass('progress-bar-u').addClass('progress-bar-s');
-                             $('#fileInfo_' + vIndex).css('width', progress + '%');
-                             // $('div.progress-bar').fadeOut(2000, function () {
-                             //     $('#image-holder').empty();
-                             // });
-                             // ProgressBar.style.background = '-webkit-gradient(linear, left top, left bottom, from(#6666cc), to(#4b9500)) !important';
-                         } else {
-                             // $('div.progress-bar').show();
-                             // $(".progress-bar .current-process").css('width', progress + '%');
-                             // $('#fileInfo_'+ j + 1).addClass('progress-bar-s');
-                             // ProgressBar.style.background = 'url("/images/progressbar.gif")';
-                             $('#fileInfo_' + vIndex).css('width', progress + '%');
-                             $('#fileInfo_' + vIndex).addClass('progress-bar-u');
-                         }
-                     }, function (speed, vIndex) {
-                         $('#upSpeed_' + vIndex).html('Upload Speed: ' + speed + 'KB/s');
-                         // ProgressText.innerHTML = 'Upload Speed: ' + speed + 'KB/s';
-                     }
-                     , j, false);
-             }
-         } else {
-             // if (result.data.status) {
-             $('.msgError').children().removeClass('display-none');
-             // }
-             $scope.msgError = flashMsg('No file', 'e');
-         }
+                            // $('#fileInfo_' + vIndex).removeClass('progress-bar-u').addClass('progress-bar-s');
+                            $('#fileInfo_' + vIndex).css('width', progress + '%');
+                            // $('div.progress-bar').fadeOut(2000, function () {
+                            //     $('#image-holder').empty();
+                            // });
+                            // ProgressBar.style.background = '-webkit-gradient(linear, left top, left bottom, from(#6666cc), to(#4b9500)) !important';
+                        } else {
+                            // $('div.progress-bar').show();
+                            // $(".progress-bar .current-process").css('width', progress + '%');
+                            // $('#fileInfo_'+ j + 1).addClass('progress-bar-s');
+                            // ProgressBar.style.background = 'url("/images/progressbar.gif")';
+                            $('#fileInfo_' + vIndex).css('width', progress + '%');
+                            $('#fileInfo_' + vIndex).addClass('progress-bar-u');
+                        }
+                    }, function (speed, vIndex) {
+                        $('#upSpeed_' + vIndex).html('Upload Speed: ' + speed + 'KB/s');
+                        // ProgressText.innerHTML = 'Upload Speed: ' + speed + 'KB/s';
+                    }
+                    , j, false);
+            }
+        } else {
+            // if (result.data.status) {
+            $('.msgError').children().removeClass('display-none');
+            // }
+            $scope.msgError = flashMsg('No file', 'e');
+        }
     };
 
 
@@ -265,7 +265,7 @@ app.controller('productEditCtrl', function ($scope, $modalInstance, item, Data, 
         if ($scope.fileList.length) {
             for (i = 0; i < $scope.fileList.length; i++) {
                 Data.uploadFile('admin.php', drivers, $scope.fileList[i]).then(function (result) {
-                // Data.uploadFile('admin.php', drivers, $scope.fileList).then(function (result) {
+                    // Data.uploadFile('admin.php', drivers, $scope.fileList).then(function (result) {
 
                     try {
                         // if (result.data.status) {
@@ -295,7 +295,7 @@ app.controller('productEditCtrl', function ($scope, $modalInstance, item, Data, 
     };
 
     $scope.cancel = function () {
-        if(checkUpload) {
+        if (checkUpload) {
             $scope.drivers['actAng'] = 1;
             delete $scope.drivers.actionUpload;
             checkUpload = false;

@@ -42,7 +42,7 @@ function account_invoke()
 //        }
 //    }
 //
-//    echoheader('-@com_board/style.css', "Mu Online dashboard");
+//    echo_header_admin('-@com_board/style.css', "Mu Online dashboard");
 //
 //    $images = array
 //    (
@@ -92,7 +92,7 @@ function account_invoke()
 //
 //    $greeting_message = 'Have a nice day!';
 //    cn_assign('dashboard, username, greeting_message', $dashboard, $_SESSION['user_Account'], $greeting_message);
-//    echo exec_tpl('com_board/general');
+//    echo execTemplate('com_board/general');
 //
 //    echofooter();
 }
@@ -286,7 +286,7 @@ function account_invoke()
 //    ));
 //
 //    // Static rewrite path
-//    $cfg = mcache_get('config');
+//    $cfg = getMemcache('config');
 //
 //
 //    // Save cached copy
@@ -369,8 +369,8 @@ function account_invoke()
 //
 //    cn_assign('options, sub, options_list', $options, $sub, $options_list);
 //
-//    echoheader('-@com_board/style.css', "System configurations");
-//    echo exec_tpl('com_board/sysconf');
+//    echo_header_admin('-@com_board/style.css', "System configurations");
+//    echo execTemplate('com_board/sysconf');
 //    echofooter();
 //}
 //
@@ -378,7 +378,7 @@ function account_invoke()
 //// Since 2.0: Personal options
 //function board_personal()
 //{
-//    $member = member_get();
+//    $member = getMember();
 //
 //    // Additional fields for user
 //    $personal_more = array
@@ -446,7 +446,7 @@ function account_invoke()
 //
 //            // Update & Get member from DB
 //            mcache_set('#member', NULL);
-//            $member = member_get();
+//            $member = getMember();
 //
 //            cn_throw_message("User info updated! $clause");
 //        } else {
@@ -465,8 +465,8 @@ function account_invoke()
 //    }
 //
 //    cn_assign('member, acl_write_news, acl_desc, personal_more', $member, test('Can'), $acl_desc, $personal_more);
-//    echoheader('-@dashboard/style.css', "Personal options");
-//    echo exec_tpl('dashboard/personal');
+//    echo_header_admin('-@dashboard/style.css', "Personal options");
+//    echo execTemplate('dashboard/personal');
 //    echofooter();
 //}
 //
@@ -1288,8 +1288,8 @@ function account_invoke()
 //    // ----
 //    //cn_assign('template_parts, all_templates, template_text, template, sub, can_delete, all_header_conf, set_arr', $template_parts, $acv, $template_text, $template, $sub, $can_delete, $all_header_conf, $options);
 //    cn_assign('gh_loai1, gh_loai2, sub, all_header_conf, set_arr', $get_gh_loai1, $get_gh_loai2, $sub, $all_header_conf, $options);
-//    echoheader('-@com_board/style.css', "Config Character");
-//    echo exec_tpl('com_board/classchar');
+//    echo_header_admin('-@com_board/style.css', "Config Character");
+//    echo execTemplate('com_board/classchar');
 //    echofooter();
 //    /*
 //    $all_header_conf = array();
@@ -1479,7 +1479,7 @@ function account_invoke()
 //
 //        // ----
 //        cn_assign('template_parts, all_templates, template_text, template, sub, can_delete, tuser', $template_parts, $all_templates, $template_text, $template, $sub, $can_delete, $all_header_conf);
-//        echoheader('-@com_board/style.css', "Templates"); echo exec_tpl('com_board/template'); echofooter();
+//        echo_header_admin('-@com_board/style.css', "Templates"); echo execTemplate('com_board/template'); echofooter();
 //        */
 //}
 //
@@ -1607,8 +1607,8 @@ function account_invoke()
 //    cn_assign('users, section, st, per_page, grp', $userlist, $section, $st, $per_page, $grp);
 //    cn_assign('user_name, user_nick, user_email, user_acl, is_edit', $user_name, $user_nick, $user_email, $user_acl, $is_edit);
 //
-//    echoheader('-@dashboard/style.css', "Users manager");
-//    echo exec_tpl('dashboard/users');
+//    echo_header_admin('-@dashboard/style.css', "Users manager");
+//    echo execTemplate('dashboard/users');
 //    echofooter();
 //}
 //
@@ -1684,9 +1684,9 @@ function account_invoke()
 //    cn_assign('sub, categories, all_tpls', $sub, $categories, $all_tpls);
 //    cn_assign('rss_news_include_url, rss_encoding, rss_language, rss_title', $rss_news_include_url, $rss_encoding, $rss_language, $rss_title);
 //
-//    echoheader('-@dashboard/style.css', 'Integration Wizard'); echo exec_tpl('dashboard/intwiz'); echofooter();
+//    echo_header_admin('-@dashboard/style.css', 'Integration Wizard'); echo execTemplate('dashboard/intwiz'); echofooter();
 //
-//    echoheader('-@com_board/style.css', 'Integration Wizard'); echo exec_tpl('com_board/inserver'); echofooter();
+//    echo_header_admin('-@com_board/style.css', 'Integration Wizard'); echo execTemplate('com_board/inserver'); echofooter();
 //
 //}
 //*/
@@ -1735,7 +1735,7 @@ function account_invoke()
 //    }
 //
 //    cn_assign('list', $ipban);
-//    echoheader('-@com_board/style.css', 'Block IP'); echo exec_tpl('com_board/ipban'); echofooter();
+//    echo_header_admin('-@com_board/style.css', 'Block IP'); echo execTemplate('com_board/ipban'); echofooter();
 //}
 //*/
 //// =====================================================================================================================
@@ -1949,8 +1949,8 @@ function account_invoke()
 //    cn_assign('log_read, st, num, isfin, section', $log_read, $st, $num, $isfin, $section);
 //
 //    cn_assign('all_shop, all_character', $all_shop, $all_character);
-//    echoheader('-@com_board/style.css', 'System logs');
-//    echo exec_tpl('com_board/logs');
+//    echo_header_admin('-@com_board/style.css', 'System logs');
+//    echo execTemplate('com_board/logs');
 //    echofooter();
 //}
 //
@@ -2003,8 +2003,8 @@ function account_invoke()
 //
 //    cn_assign('list', $list);
 //    cn_assign('type, name, desc, meta, group, req', $type, $name, $desc, $meta, $group, $req);
-//    echoheader('-@dashboard/style.css', 'Additional fields');
-//    echo exec_tpl('dashboard/morefields');
+//    echo_header_admin('-@dashboard/style.css', 'Additional fields');
+//    echo execTemplate('dashboard/morefields');
 //    echofooter();
 //}
 //
@@ -2242,8 +2242,8 @@ function account_invoke()
 //    }
 //
 //    cn_assign('grp, group_name, group_id, group_grp, group_system, access, form_desc', $grp, $group_name, $group_id, $group_grp, $group_system, $access, $form_desc);
-//    echoheader('-@dashboard/style.css', 'Groups');
-//    echo exec_tpl('dashboard/group');
+//    echo_header_admin('-@dashboard/style.css', 'Groups');
+//    echo execTemplate('dashboard/group');
 //    echofooter();
 //}
 //
@@ -2276,8 +2276,8 @@ function account_invoke()
 //    }
 //    $is_replace_opt = getoption('use_replacement');
 //    cn_assign('wlist, word, replace, repopt', $wlist, $word, $replace, $is_replace_opt);
-//    echoheader('-@dashboard/style.css', 'Replace words');
-//    echo exec_tpl('dashboard/replace');
+//    echo_header_admin('-@dashboard/style.css', 'Replace words');
+//    echo execTemplate('dashboard/replace');
 //    echofooter();
 //}
 //
@@ -2360,8 +2360,8 @@ function account_invoke()
 //    }
 //
 //    cn_assign('lang_token, lang, list, tkn, phraseid, translate', $lang_token, $lang, $list, $tkn, $phraseid, $translate);
-//    echoheader('-@dashboard/style.css', 'Localization');
-//    echo exec_tpl('dashboard/locale');
+//    echo_header_admin('-@dashboard/style.css', 'Localization');
+//    echo execTemplate('dashboard/locale');
 //    echofooter();
 //}
 //*/

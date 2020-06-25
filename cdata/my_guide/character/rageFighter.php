@@ -129,63 +129,68 @@
     <div class="contBox box_specialized">
         <h2 class="title">Kỹ Năng (Skills) của Thiết Binh</h2>
         <ul>
-            <li><img alt="" src="/images/guides/img_ragefighter_skills_clingBlow.jpg">
+            <li><img alt="" src="/public/images/guides/img_ragefighter_skills_clingBlow.jpg">
                 <p><span><strong>Cú đấm ngọa hổ (Cling Blow) :</strong> Kỹ năng của vũ khí</span><img
-                        src="/images/guides/rf_Cling%20Blow.jpg" style="width:30px; height:40px; padding-right:10px"> Kỹ
+                        src="/public/images/guides/rf_Cling%20Blow.jpg"
+                        style="width:30px; height:40px; padding-right:10px"> Kỹ
                     năng do Nắm Đấm Địa Long và Nắm Đấm Quyền Lực đem lại. Tuyệt chiêu sử dụng đôi tay để tấn công với
                     khả năng liên hoàn giống hệt như võ sĩ quyền anh thực thụ. Khi tuyệt chiêu tung ra, song song với
                     đôi tay sẽ xuất hiện ảo ảnh là đầu những con Bạch Hổ lao vào đối phương.</p>
             </li>
-            <li><img alt="" src="/images/guides/img_ragefighter_skills_beastUpper.jpg">
+            <li><img alt="" src="/public/images/guides/img_ragefighter_skills_beastUpper.jpg">
                 <p><span><strong>Cú đấm mạnh long (Beast Upper) :</strong> Kỹ năng của vũ khí</span><img
-                        src="/images/guides/rf_Beast%20Upper.jpg" style="width:30px; height:40px; padding-right:10px">
+                        src="/public/images/guides/rf_Beast%20Upper.jpg"
+                        style="width:30px; height:40px; padding-right:10px">
                     Kỹ năng do Nắm Đấm Bạch Hổ đem lại. Kỹ năng sử dụng đôi tay để tấn công với khả năng liên hoàn bằng
                     những đòn lửa.</p>
             </li>
-            <li><img alt="" src="/images/guides/img_ragefighter_skills_chainDrive.jpg">
+            <li><img alt="" src="/public/images/guides/img_ragefighter_skills_chainDrive.jpg">
                 <p><span><strong>Vật Ngã :</strong> Kỹ năng chiến đấu</span><img
-                        src="/images/guides/rf_Chain%20Driver.jpg" style="width:30px; height:40px; padding-right:10px">
+                        src="/public/images/guides/rf_Chain%20Driver.jpg"
+                        style="width:30px; height:40px; padding-right:10px">
                     Có khả năng tấn công từ xa khoảng cách 5m, Thiết Binh có thể tung ra những cú đá xoáy trên xông vào
                     đối phương, sau đó sử dụng cả chân và tay để tấn công liên hoàn.</p>
             </li>
-            <li><img alt="" src="/images/guides/img_ragefighter_skills_darkSide.jpg">
+            <li><img alt="" src="/public/images/guides/img_ragefighter_skills_darkSide.jpg">
                 <p><span><strong>Ảo Ảnh Liên Hoàn :</strong> Kỹ năng chiến đấu</span><img
-                        src="/images/guides/rf_Dark%20Side.jpg" style="width:30px; height:40px; padding-right:10px"> Có
+                        src="/public/images/guides/rf_Dark%20Side.jpg"
+                        style="width:30px; height:40px; padding-right:10px"> Có
                     khả năng gây sát thương trên diện rộng. Ảo Ảnh Liên Hoàn giống như khả năng phân thân của Thiết Binh
                     và tấn công lên đối phương trong tầm ảnh hưởng.</p>
             </li>
-            <li><img alt="" src="/images/guides/img_ragefighter_skills_dragonLore.jpg">
+            <li><img alt="" src="/public/images/guides/img_ragefighter_skills_dragonLore.jpg">
                 <p><span><strong>Gầm Thét :</strong> Kỹ năng chiến đấu</span><img
-                        src="/images/guides/rf_Dragon%20Roar.jpg" style="width:30px; height:40px; padding-right:10px">
+                        src="/public/images/guides/rf_Dragon%20Roar.jpg"
+                        style="width:30px; height:40px; padding-right:10px">
                     Tuyệt chiêu có sức lan tỏa trên diện rộng. Khi sử dụng sẽ xuất hiện vòng lửa lớn nổ to và gây chấn
                     động, sát thương lên toàn bộ đối thủ nằm trong tầm ảnh hưởng.</p>
             </li>
-            <li><img alt="" src="/images/guides/img_ragefighter_skills_dragonSlasher.jpg">
+            <li><img alt="" src="/public/images/guides/img_ragefighter_skills_dragonSlasher.jpg">
                 <p><span><strong>Hơi Thở Rồng :</strong> Kỹ năng chiến đấu</span><img
-                        src="/images/guides/rf_Dragon%20Slasher.jpg"
+                        src="/public/images/guides/rf_Dragon%20Slasher.jpg"
                         style="width:30px; height:40px; padding-right:10px"> Được sử dụng bằng đôi chân; Thiết Binh tung
                     ra cú đá vòng móc câu lên người đối phương. Đây là một tuyệt chiêu có sức sát thương cao, có khả
                     năng gây Shock khi đối phương dính đòn.</p>
             </li>
-            <li><img alt="" src="/images/guides/img_ragefighter_skills_ignoranceOfDefenseOfEnemies.jpg">
+            <li><img alt="" src="/public/images/guides/img_ragefighter_skills_ignoranceOfDefenseOfEnemies.jpg">
                 <p><span><strong>Xuyên thấu (Ignorance of defense of enemies) :</strong> Kỹ năng buff</span><img
-                        src="/images/guides/rf_Ignore%20Defense.jpg"
+                        src="/public/images/guides/rf_Ignore%20Defense.jpg"
                         style="width:30px; height:40px; padding-right:10px"> Kỹ năng Xuyên Thấu, nói cách khác là khả
                     năng loại bỏ sức phòng thủ của đối phương. Đây là một kỹ năng nguy hiểm mà nhiều người chơi ngán
                     ngẩm khi đối đầu với Thiết Binh. Và rất có thể sẽ là khắc tinh của Thuật Sỹ trong phiên bản SS6. Tuy
                     nhiên kỹ năng này lại không thể tác động được lên những thành viên trong nhóm.</p>
             </li>
-            <li><img alt="" src="/images/guides/img_ragefighter_skills_increaseOfStrength.jpg">
+            <li><img alt="" src="/public/images/guides/img_ragefighter_skills_increaseOfStrength.jpg">
                 <p><span><strong>Tăng thể lực (Increase of Strength) :</strong> Kỹ năng buff</span><img
-                        src="/images/guides/rf_Increase%20Health.jpg"
+                        src="/public/images/guides/rf_Increase%20Health.jpg"
                         style="width:30px; height:40px; padding-right:10px"> Khả năng này giúp Thiết Binh tăng lượng HP
                     bằng cách tăng trực tiếp vào chỉ số thể lực. Việc này có thể tác động được lên những thành viên
                     trong nhóm. Nếu áp dụng cùng với DK năng lượng, các thành viên trong nhóm sẽ được hưởng một lượng HP
                     khổng lồ.</p>
             </li>
-            <li><img alt="" src="/images/guides/img_ragefighter_skills_increaseOfDefenseRate.jpg">
+            <li><img alt="" src="/public/images/guides/img_ragefighter_skills_increaseOfDefenseRate.jpg">
                 <p><span><strong>Hộ thân (Increase of Defense rate) :</strong> Kỹ năng buff</span><img
-                        src="/images/guides/rf_Increase%20Block.jpg"
+                        src="/public/images/guides/rf_Increase%20Block.jpg"
                         style="width:30px; height:40px; padding-right:10px"> Kỹ năng Hộ Thân không giống như tuyệt chiêu
                     Buff phòng thủ của dòng Tiên Nữ. Với kỹ năng này khả năng tránh đòn của bản thân có thể lên tới 100%
                     giống như DK thuần nhanh nhẹn hoặc kỹ năng hấp thụ sát thương của DW.<br><br>

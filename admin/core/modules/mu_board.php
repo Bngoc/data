@@ -1,9 +1,11 @@
 ﻿<?php if (!defined('BQN_MU')) die('Access restricted');
 
-use \Dropbox as dbx;
-define('APPLICATION_NAME', getoption('nameAppDriver'));
+use Dropbox as dbx;
+
+define('APPLICATION_NAME', getOption('nameAppDriver'));
 
 add_hook('index/invoke_module', '*board_invoke');
+global $coreAdmin;
 
 function board_invoke()
 {
@@ -30,11 +32,11 @@ function board_invoke()
         'editconfig:apiDriverdChangeShare:Csl:1' => 'Change share Drivers API',
         'editconfig:apiDeleteDrivers:Csl:1' => 'Delete item Drivers API',
 
-        'editconfig:select:Ciw'     => 'Select',
-        'editconfig:updatemoney:Ciw'     => 'Update Money',
-        'editconfig:updateCharater:Ciw'     => 'Update Character',
-        'editconfig:update:Ciw'     => 'Update Money',
-        'editconfig:insert:Ciw'     => 'Insert',
+        'editconfig:select:Ciw' => 'Select',
+        'editconfig:updatemoney:Ciw' => 'Update Money',
+        'editconfig:updateCharater:Ciw' => 'Update Character',
+        'editconfig:update:Ciw' => 'Update Money',
+        'editconfig:insert:Ciw' => 'Insert',
     );
 
     // Call dashboard extend
@@ -55,13 +57,13 @@ function board_invoke()
     foreach ($dashboard as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
 
-        if (test($acl_module) && $dl == $mod && $do == $opt && function_exists("board_$opt")) {
+        if (testRoleAdmin($acl_module) && $dl == $mod && $do == $opt && function_exists("board_$opt")) {
             cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt));
             die(call_user_func("board_$opt"));
         }
     }
 
-    echoheader('-@com_board/style.css', "Mu Online dashboard");
+    echo_header_admin('-@com_board/style.css', "Mu Online dashboard");
 
     $images = array(
         'sysconf' => 'options.gif',
@@ -83,7 +85,7 @@ function board_invoke()
 
     foreach ($dashboard as $id => $name) {
         list($mod, $opt, $acl) = explode(':', $id, 4);
-        if (!test($acl)) {
+        if (!testRoleAdmin($acl)) {
             unset($dashboard[$id]);
             continue;
         }
@@ -101,7 +103,7 @@ function board_invoke()
 
     $greeting_message = 'Have a nice day!';
     cn_assign('dashboard, username, greeting_message', $dashboard, (@$_SESSION['mu_Account'] ? $_SESSION['mu_Account'] : ''), $greeting_message);
-    echo exec_tpl('com_board/general');
+    echo execTemplate('com_board/general');
     echofooter();
 }
 
@@ -110,9 +112,9 @@ function board_sysconf()
     $lng = $grps = $all_skins = array();
     //$skins = scan_dir(cn_path_construct(SERVDIR,'skins'));
     //$langs = scan_dir(cn_path_construct(SERVDIR,'core','lang'), 'txt');
-    $_grps = getoption('#grp');
+    $_grps = getOption('#grp');
     //$conf_class_ = cn_get_template('class_dw_1_name','config_class');
-    //$conf_class = cn_get_template_byarr('config_class');
+    //$conf_class = cn_get_template_by_array('config_class');
 
     /*
     // fetch skins
@@ -301,9 +303,9 @@ function board_sysconf()
         ),
         'download' => array(
             '_Download' => array('title', 'Download Game'),
-            'download_media' =>  array('text', 'Download file for mediafire (auto)| VD: http://download1635.mediafire.com/download.php?sz41ac5m7rn'),
-            'download_onedrive' =>  array('text', 'Download file for OneDrive (auto)| VD: https://d.docs.live.net/bdc1aa9209a93fd4'),
-            'download_4share' =>  array('text', 'Download file for 4share| VD: http://www.4shared.com/d7fnlfadfffp?sz41ac5m7rn'),
+            'download_media' => array('text', 'Download file for mediafire (auto)| VD: http://download1635.mediafire.com/download.php?sz41ac5m7rn'),
+            'download_onedrive' => array('text', 'Download file for OneDrive (auto)| VD: https://d.docs.live.net/bdc1aa9209a93fd4'),
+            'download_4share' => array('text', 'Download file for 4share| VD: http://www.4shared.com/d7fnlfadfffp?sz41ac5m7rn'),
         ),
         'downloadApi' => array(
             '_Dropbox_API_' => array('title', 'Api Dropbox'),
@@ -325,11 +327,11 @@ function board_sysconf()
     ));
 
     // Static rewrite path
-    $cfg = mcache_get('config');
+    $cfg = getMemcache('config');
 
 
     // Save cached copy
-    mcache_set('config', $cfg);
+    setMemcache('config', $cfg);
 
     // ------------------
     $sub = REQ('sub', "GETPOST");
@@ -342,7 +344,7 @@ function board_sysconf()
         cn_dsi_check();
 
         $post_cfg = $_POST['config'];
-        $opt_result = getoption('#%site');
+        $opt_result = getOption('#%site');
         $by_default = $options_list[$sub];
 
         // Detect selfpath
@@ -371,7 +373,7 @@ function board_sysconf()
                 if ($post_cfg[$id]) {
                     $opt_result[$id] = $post_cfg[$id];
                 } else {
-                    $opt_result[$id] = getoption($id);
+                    $opt_result[$id] = getOption($id);
                 }
             } elseif ($var[0] == 'Y/N') {
                 $opt_result[$id] = (isset($post_cfg[$id]) && 'Y' == $post_cfg[$id]) ? 1 : 0;
@@ -388,7 +390,7 @@ function board_sysconf()
 
     $options = $options_list[$sub];
     foreach ($options as $id => $vo) {
-        $options[$id]['var'] = getoption($id);
+        $options[$id]['var'] = getOption($id);
 
         $text_parths = explode('|', $vo[1], 2);
         $title = isset($text_parths[0]) ? $text_parths[0] : '';
@@ -409,9 +411,9 @@ function board_sysconf()
     cn_assign('options, sub, options_list', $options, $sub, $options_list);
 
 
-    echoheader('-@com_board/style.css', "System configurations");
-    //echo exec_tpl('header');
-    echo exec_tpl('com_board/sysconf');
+    echo_header_admin('-@com_board/style.css', "System configurations");
+    //echo execTemplate('header');
+    echo execTemplate('com_board/sysconf');
     echofooter();
 }
 
@@ -419,9 +421,9 @@ function board_confChar()
 {
 //
 //    $lng = $grps = $all_skins = array();
-//    $_grps = getoption('#grp');
+//    $_grps = getOption('#grp');
 //    //$conf_class_ = cn_get_template('class_dw_1_name','config_class');
-//    //$conf_class = cn_get_template_byarr('config_class');
+//    //$conf_class = cn_get_template_by_array('config_class');
 //
 //    //echo "000000000000000000000 142 =>". $conf_class['class_dw_1_name'] ."<br>";
 //    //echo "000000000000000000000 143 =>". $conf_class_ ."<br>";
@@ -474,11 +476,11 @@ function board_confChar()
 //
 //
 //    // Static rewrite path
-//    $cfg = mcache_get('config');
+//    $cfg = getMemcache('config');
 //
 //
 //    // Save cached copy
-//    mcache_set('config', $cfg);
+//    setMemcache('config', $cfg);
 //
 //    // ------------------
 //    $sub = REQ('sub', "GETPOST");
@@ -491,7 +493,7 @@ function board_confChar()
 //        cn_dsi_check();
 //
 //        $post_cfg = $_POST['config'];
-//        $opt_result = getoption('#%site');
+//        $opt_result = getOption('#%site');
 //        $by_default = $options_list[$sub];
 //
 //        // Detect selfpath
@@ -521,7 +523,7 @@ function board_confChar()
 //                if ($post_cfg[$id]) {
 //                    $opt_result[$id] = $post_cfg[$id];
 //                } else {
-//                    $opt_result[$id] = getoption($id);
+//                    $opt_result[$id] = getOption($id);
 //                }
 //            } elseif ($var[0] == 'Y/N') {
 //                $opt_result[$id] = (isset($post_cfg[$id]) && 'Y' == $post_cfg[$id]) ? 1 : 0;
@@ -538,7 +540,7 @@ function board_confChar()
 //
 //    $options = $options_list[$sub];
 //    foreach ($options as $id => $vo) {
-//        $options[$id]['var'] = getoption($id);
+//        $options[$id]['var'] = getOption($id);
 //
 //        $text_parths = explode('|', $vo[1], 2);
 //        $title = isset($text_parths[0]) ? $text_parths[0] : '';
@@ -559,15 +561,15 @@ function board_confChar()
 //    cn_assign('options, sub, options_list', $options, $sub, $options_list);
 //
 //
-//    echoheader('-@com_board/style.css', "System configurations character");
-//    //echo exec_tpl('header');
-//    echo exec_tpl('com_board/confchar');
+//    echo_header_admin('-@com_board/style.css', "System configurations character");
+//    //echo execTemplate('header');
+//    echo execTemplate('com_board/confchar');
 //    echofooter();
 }
 
 function board_personal()
 {
-    $member = member_get();
+    $member = getMember();
 
     // Additional fields for user
     $personal_more = array
@@ -617,7 +619,7 @@ function board_personal()
         }
         // Set an avatar
         if (!empty($avatar_file) && $avatar_file['error'] == 0) {
-            $uploads_dir = getoption('uploads_dir');
+            $uploads_dir = getOption('uploads_dir');
             if ($uploads_dir) {
                 $file_name = 'avatar_' . $member['name'] . '_' . $avatar_file['name'];
                 if (isset($member['avatar']) && $member['avatar'] != $file_name) {
@@ -634,8 +636,8 @@ function board_personal()
             db_user_update($member['name'], "nick=$editnickname", "e-hide=$edithidemail");
 
             // Update & Get member from DB
-            mcache_set('#member', NULL);
-            $member = member_get();
+            setMemcache('#member', NULL);
+            $member = getMember();
 
             cn_throw_message("User info updated! $clause");
         } else {
@@ -643,7 +645,7 @@ function board_personal()
         }
     }
 
-    $grp = getoption('#grp');
+    $grp = getOption('#grp');
     $acl_desc = $grp[$member['acl']]['N'];
 
     // Get info from personal data
@@ -654,8 +656,8 @@ function board_personal()
     }
 
     cn_assign('member, acl_write_news, acl_desc, personal_more', $member, test('Can'), $acl_desc, $personal_more);
-    echoheader('-@dashboard/style.css', "Personal options");
-    echo exec_tpl('dashboard/personal');
+    echo_header_admin('-@dashboard/style.css', "Personal options");
+    echo execTemplate('dashboard/personal');
     echofooter();
 }
 
@@ -671,10 +673,10 @@ function board_ischaracter()
         $sub = 'class';
     }
 
-    $acv = cn_get_template_byarr($sub); // get array $sub
+    $acv = cn_get_template_by_array($sub); // get array $sub
     // User changes
-    //$tuser = getoption('#templates');
-    $acx = getoption('#temp_basic');// get all
+    //$tuser = getOption('#templates');
+    $acx = getOption('#temp_basic');// get all
 
     // Option -> 0=Type(text [Y/N] int select), 1=Title|Description, [2=Optional values]
     $options_list = array(
@@ -837,9 +839,9 @@ function board_ischaracter()
         ),
     );
 
-    $options = $options_list[$sub];
+    $options = isset($options_list[$sub]) ? $options_list[$sub] : [];
 
-    //$acv = cn_get_template_byarr($template);
+    //$acv = cn_get_template_by_array($template);
 
     foreach ($acx as $id => $subtpl) {
         $all_header_conf[$id]['id'] = $id;
@@ -915,7 +917,7 @@ function board_ischaracter()
 
 //log_reset=0 // web
 //reset_cap_0=0
-            ///$text_parths=explode('|', $vo[1], 2);        
+            ///$text_parths=explode('|', $vo[1], 2);
             //$title=isset($text_parths[0])?$text_parths[0]:'';
             //$desc =isset($text_parths[1])?$text_parths[1]:'';
             //$options[$id]['title'] = $title;
@@ -937,7 +939,7 @@ function board_ischaracter()
             $id_6 = $get_id[5];
             $id_7 = isset($get_id[6]) ? $get_id[6] : false;
 
-            //$options[$id]['id_1'] = $id_1;	
+            //$options[$id]['id_1'] = $id_1;
             $options[$id]['id_2'] = $id_2;
             $options[$id]['id_3'] = $id_3;
             $options[$id]['id_4'] = $id_4;
@@ -947,14 +949,14 @@ function board_ischaracter()
             $options[$id]['id_1_val'] = $acx['reset'][$id_1];
             $options[$id]['id_2_val'] = $acv[$id_2];
             $options[$id]['id_3_val'] = $acv[$id_3];
-            //$options[$id]['id_4_val'] = $acv[$id_4];	
+            //$options[$id]['id_4_val'] = $acv[$id_4];
             //$options[$id]['id_4_val'] = (int) $acv[$id_3]*0.8;// 80% Vpoint
             $options[$id]['id_5_val'] = $acv[$id_5];
             $options[$id]['id_6_val'] = $acv[$id_6];
 
             //user_config_reset=1 //web
 
-            ///$text_parths=explode('|', $vo[1], 2);        
+            ///$text_parths=explode('|', $vo[1], 2);
             //$title=isset($text_parths[0])?$text_parths[0]:'';
             //$desc =isset($text_parths[1])?$text_parths[1]:'';
             //$options[$id]['title'] = $title;
@@ -970,7 +972,7 @@ function board_ischaracter()
 
             $id_1 = $get_id[0];
             $id_2 = $get_id[1];
-            $id_3 = $get_id[2];        //$id_4 = $get_id[3];		
+            $id_3 = $get_id[2];        //$id_4 = $get_id[3];
             $id_4 = isset($get_id[3]) ? $get_id[3] : false;
 
             $options[$id]['id_1'] = $id_1;
@@ -981,7 +983,7 @@ function board_ischaracter()
             $options[$id]['id_3_val'] = $acv[$id_3];
 
 
-            ///$text_parths=explode('|', $vo[1], 2);        
+            ///$text_parths=explode('|', $vo[1], 2);
             //$title=isset($text_parths[0])?$text_parths[0]:'';
             //$desc =isset($text_parths[1])?$text_parths[1]:'';
             //$options[$id]['title'] = $title;
@@ -1014,7 +1016,7 @@ function board_ischaracter()
             $options[$id]['id_5_val'] = $acv[$id_5];
 
 
-            ///$text_parths=explode('|', $vo[1], 2);        
+            ///$text_parths=explode('|', $vo[1], 2);
             //$title=isset($text_parths[0])?$text_parths[0]:'';
             //$desc =isset($text_parths[1])?$text_parths[1]:'';
             //$options[$id]['title'] = $title;
@@ -1030,7 +1032,7 @@ function board_ischaracter()
 
             $id_1 = $get_id[0];
             $id_2 = $get_id[1];
-            //$id_3 = $get_id[2];		$id_4 = $get_id[3];		$id_5 = $get_id[4];		
+            //$id_3 = $get_id[2];		$id_4 = $get_id[3];		$id_5 = $get_id[4];
             $id_3 = isset($get_id[2]) ? $get_id[2] : false;
 
             $options[$id]['id_1'] = $id_1;
@@ -1041,7 +1043,7 @@ function board_ischaracter()
             //$options[$id]['id_3_val'] = $acv[$id_3];		$options[$id]['id_4_val'] = $acv[$id_4]; 	$options[$id]['id_5_val'] = $acv[$id_5];
 
 //            echo "9222 ------------------- " . $id_2 . $acv[$id_2] . "<br>";
-            ///$text_parths=explode('|', $vo[1], 2);        
+            ///$text_parths=explode('|', $vo[1], 2);
             //$title=isset($text_parths[0])?$text_parths[0]:'';
             //$desc =isset($text_parths[1])?$text_parths[1]:'';
             //$options[$id]['title'] = $title;
@@ -1058,7 +1060,7 @@ function board_ischaracter()
             $id_1 = $get_id[0];
             $id_2 = $get_id[1];
             $id_3 = $get_id[2];
-            $id_4 = $get_id[3];        //$id_5 = $get_id[4];		
+            $id_4 = $get_id[3];        //$id_5 = $get_id[4];
             $id_5 = isset($get_id[4]) ? $get_id[4] : false;
 
             $options[$id]['id_1'] = $id_1;
@@ -1071,7 +1073,7 @@ function board_ischaracter()
             $options[$id]['id_3_val'] = $acv[$id_3];
             $options[$id]['id_4_val'] = $acv[$id_4];    //$options[$id]['id_5_val'] = $acv[$id_5];
 
-            ///$text_parths=explode('|', $vo[1], 2);        
+            ///$text_parths=explode('|', $vo[1], 2);
             //$title=isset($text_parths[0])?$text_parths[0]:'';
             //$desc =isset($text_parths[1])?$text_parths[1]:'';
             //$options[$id]['title'] = $title;
@@ -1109,7 +1111,7 @@ function board_ischaracter()
 
             $id_1 = $get_id[0];
             $id_2 = $get_id[1];
-            $id_3 = $get_id[2];        //$id_4 = $get_id[3];		//$id_5 = $get_id[4];		
+            $id_3 = $get_id[2];        //$id_4 = $get_id[3];		//$id_5 = $get_id[4];
             $id_4 = isset($get_id[3]) ? $get_id[3] : false;
 
             $options[$id]['id_1'] = $id_1;
@@ -1120,7 +1122,7 @@ function board_ischaracter()
             $options[$id]['id_2_val'] = $acv[$id_2];
             $options[$id]['id_3_val'] = $acv[$id_3];        //$options[$id]['id_4_val'] = $acv[$id_4]; 	//$options[$id]['id_5_val'] = $acv[$id_5];
 
-            ///$text_parths=explode('|', $vo[1], 2);        
+            ///$text_parths=explode('|', $vo[1], 2);
             //$title=isset($text_parths[0])?$text_parths[0]:'';
             //$desc =isset($text_parths[1])?$text_parths[1]:'';
             //$options[$id]['title'] = $title;
@@ -1140,8 +1142,8 @@ function board_ischaracter()
             $id_4 = isset($get_id[3]) ? $get_id[3] : false;
 
             $options[$id]['id_2'] = $id_2;        //$options[$id]['id_2'] = $id_2;		$options[$id]['id_3'] = $id_3;
-            //$options[$id]['id_4'] = $id_4;		$options[$id]['id_5'] = $id_5;		$options[$id]['id_6'] = $id_6;	
-            //$options[$id]['id_7'] = $id_7;		$options[$id]['id_8'] = $id_8;		$options[$id]['id_9'] = $id_9;		
+            //$options[$id]['id_4'] = $id_4;		$options[$id]['id_5'] = $id_5;		$options[$id]['id_6'] = $id_6;
+            //$options[$id]['id_7'] = $id_7;		$options[$id]['id_8'] = $id_8;		$options[$id]['id_9'] = $id_9;
 
             $options[$id]['id_1_val'] = $acx['reset'][$id_1];
             $options[$id]['id_2_val'] = $acv[$id_2];
@@ -1165,8 +1167,8 @@ function board_ischaracter()
             $id_7 = isset($get_id[6]) ? $get_id[6] : false;
 
             $options[$id]['id_2'] = $id_2;        //$options[$id]['id_2'] = $id_2;		$options[$id]['id_3'] = $id_3;
-            //$options[$id]['id_4'] = $id_4;		$options[$id]['id_5'] = $id_5;		$options[$id]['id_6'] = $id_6;	
-            //$options[$id]['id_7'] = $id_7;		$options[$id]['id_8'] = $id_8;		$options[$id]['id_9'] = $id_9;		
+            //$options[$id]['id_4'] = $id_4;		$options[$id]['id_5'] = $id_5;		$options[$id]['id_6'] = $id_6;
+            //$options[$id]['id_7'] = $id_7;		$options[$id]['id_8'] = $id_8;		$options[$id]['id_9'] = $id_9;
 
             $options[$id]['id_1_val'] = $acx['reset'][$id_1];
             $options[$id]['id_2_val'] = $acv[$id_2];
@@ -1195,35 +1197,35 @@ function board_ischaracter()
                 'class_dw_2_name'         => array('text', "Rewrite prefix|e.g. /news/"),
                 'rw_use_shorten'    => array('Y/N', "Disable .html at end of urls"),
             ),
-        
+
         */
 
     /*
     // Copy default subtemplate, if not exists
-    if (!isset($tuser[$template])) 
+    if (!isset($tuser[$template]))
     {
-        foreach ($list[$template] as $_sub => $_var) 
+        foreach ($list[$template] as $_sub => $_var)
         {
             $tuser[$template][$_sub] = $_var;
         }
     }
 
     // Get all templates, mark it as user/system
-    foreach ($tuser as $id => $vs) 
+    foreach ($tuser as $id => $vs)
     {
         $all_templates[ $id ] = 'User';
     }
-    
-    foreach ($list as $id => $vs) 
+
+    foreach ($list as $id => $vs)
     {
         $all_templates[ $id ] = 'Sys';
     }
 
-    
+
     $all_templates  = array();
     $template_parts = array();
 
-    
+
     $odata = array();
     foreach ($tuser[$template] as $id => $subtpl)
     {
@@ -1243,7 +1245,7 @@ function board_ischaracter()
     reset($odata);
 
     // Get subtmpl by default
-    if (!$sub) 
+    if (!$sub)
     {
         $sub = key($odata);
     }
@@ -1321,18 +1323,18 @@ function board_ischaracter()
                     $post_cfg_[$s]['name'] = $f;
                     //echo "1271 ==>". $s . "=> $f <br>";
                 }
-                
+
                 //foreach ($post_cfg_ as $s => $f)
                 //echo "1275 ==>".$post_cfg_[$s]['id'] . "<===>".$post_cfg_[$s]['name'] . "<=  <br>";
-                
-                
-                
+
+
+
                 foreach ($acx[$sub] as $id => $val){
                 //foreach ($post_cfg as $id => $val){
                     //if(isset($acx[$sub][$id])){
                     if(isset($post_cfg_[$id]['id'])){
                          $acx[$sub][$id] = $post_cfg_[$id]['name'];
-                    }				
+                    }
                     //if(isset($post_cfg_[$id]['name'])){
                         // unset($acx[$sub][$id]);
                          //$acx[$sub][$id] = $val;
@@ -1377,7 +1379,7 @@ function board_ischaracter()
             //cn_relocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
         }
     }
-    //$get_arr_sub = cn_get_template_byarr($sub);
+    //$get_arr_sub = cn_get_template_by_array($sub);
 
     if (isset($_POST['template'])) {
         //$_GET['template'] = $_POST['template'];
@@ -1402,8 +1404,8 @@ function board_ischaracter()
     // ----
     //cn_assign('template_parts, all_templates, template_text, template, sub, can_delete, all_header_conf, set_arr', $template_parts, $acv, $template_text, $template, $sub, $can_delete, $all_header_conf, $options);
     cn_assign('gh_loai1, gh_loai2, sub, all_header_conf, set_arr', $get_gh_loai1, $get_gh_loai2, $sub, $all_header_conf, $options);
-    echoheader('-@com_board/style.css', "Config Character");
-    echo exec_tpl('com_board/classchar');
+    echo_header_admin('-@com_board/style.css', "Config Character");
+    echo execTemplate('com_board/classchar');
     echofooter();
     /*
     $all_header_conf = array();
@@ -1434,49 +1436,49 @@ function board_ischaracter()
     $list = cn_template_list();
 
     // User changes
-    $tuser = getoption('#temp_basic');
-    //list($tuser) = getoption('#temp_basic');
+    $tuser = getOption('#temp_basic');
+    //list($tuser) = getOption('#temp_basic');
 
     // Basic template name and fetch data (user/system)
-    if (!$template) 
+    if (!$template)
     {
         $template = 'config_class';
     }
-    
-   
-    
+
+
+
     // Copy default subtemplate, if not exists
-    if (!isset($tuser[$template])) 
+    if (!isset($tuser[$template]))
     {
-        foreach ($list[$template] as $_sub => $_var) 
+        foreach ($list[$template] as $_sub => $_var)
         {
             $tuser[$template][$_sub] = $_var;
         }
     }
 
     // Get all templates, mark it as user/system
-    foreach ($tuser as $id => $vs) 
+    foreach ($tuser as $id => $vs)
     {
         $all_templates[ $id ] = 'User';
     }
-    
-    foreach ($all_templates as $id => $vs) 
+
+    foreach ($all_templates as $id => $vs)
     {
         echo "576 mu_b $id => $vs <br>";
     }
-    
-    
-    foreach ($list as $id => $vs) 
+
+
+    foreach ($list as $id => $vs)
     {
         $all_templates[ $id ] = 'Sys';
     }
-    
-    foreach ($all_templates as $id => $vs) 
+
+    foreach ($all_templates as $id => $vs)
     {
         echo "582 mu_b $id => $vs <br>";
     }
-    
-    
+
+
 /*
     $odata = array();
     foreach ($tuser[$template] as $id => $subtpl)
@@ -1498,17 +1500,17 @@ function board_ischaracter()
 */
     /*
         // Get subtmpl by default
-        if (!$sub) 
+        if (!$sub)
         {
             $sub = key($odata);
         }
-    
+
         // ------------------------------------------------------------------------------------ ACTIONS --------------------
         // save template?
         if (request_type('POST'))
         {
             cn_dsi_check();
-    
+
             // ------------------------
             if (REQ('select', 'POST'))
             {
@@ -1518,7 +1520,7 @@ function board_ischaracter()
             elseif (REQ('create') || REQ('template_name'))
             {
                 $template_name = trim(strtolower(preg_replace('/[^a-z0-9_]/i', '-', REQ('template_name'))));
-    
+
                 if (!$template_name)
                 {
                     cn_throw_message('Enter correct template name', 'e');
@@ -1530,7 +1532,7 @@ function board_ischaracter()
                 else
                 {
                     $tuser[$template][$sub] = REQ('save_template_text', 'POST');
-    
+
                     setoption("#templates/$template_name", $tuser[$template]);
                     msg_info('Template ['.$template_name.'] created', cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'template='.$template_name));
                 }
@@ -1546,7 +1548,7 @@ function board_ischaracter()
                 {
                     unset($tuser[$template]);
                     setoption('#templates', $tuser);
-    
+
                     msg_info('Template ['.$template.'] deleted!', cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt')));
                 }
             }
@@ -1557,7 +1559,7 @@ function board_ischaracter()
                 {
                     unset($tuser[$template]);
                     setoption("#templates", $tuser);
-    
+
                     cn_throw_message("Template reset to default");
                 }
                 else
@@ -1570,30 +1572,30 @@ function board_ischaracter()
             {
                 $tuser[$template][$sub] = REQ('save_template_text', 'POST');
                 setoption("#templates", $tuser);
-    
+
                 cn_throw_message('Template saved successfully');
             }
         }
-    
-        if (isset($_POST['template']))  
+
+        if (isset($_POST['template']))
         {
             $_GET['template'] = $_POST['template'];
         }
-        
-        if (isset($_POST['sub']))       
+
+        if (isset($_POST['sub']))
         {
             $_GET['sub'] = $_POST['sub'];
         }
-    
+
         // user can't delete system template, only modify
         $can_delete = $all_templates[$template] == 'Sys' ? FALSE : TRUE;
-    
+
         // get template text (may be modified before)
         $template_text = isset($tuser[$template][$sub]) ? $tuser[$template][$sub] : (isset($list[$template][$sub]) ? $list[$template][$sub] : '');
-    
+
         // ----
         cn_assign('template_parts, all_templates, template_text, template, sub, can_delete, tuser', $template_parts, $all_templates, $template_text, $template, $sub, $can_delete, $all_header_conf);
-        echoheader('-@com_board/style.css', "Templates"); echo exec_tpl('com_board/template'); echofooter();
+        echo_header_admin('-@com_board/style.css', "Templates"); echo execTemplate('com_board/template'); echofooter();
         */
 }
 
@@ -1605,7 +1607,7 @@ function board_userman()
     $per_page = 100;
     $section = intval($section);
     $st = intval($st);
-    $grp = getoption('#grp');
+    $grp = getOption('#grp');
     $is_edit = FALSE; //visability Edit btton
 
     if (request_type('POST')) {
@@ -1614,7 +1616,7 @@ function board_userman()
         // Do Delete
         if ($delete) {
             db_user_delete($user_name);
-            cn_throw_message('User [' . cn_htmlspecialchars($user_name) . '] deleted');
+            cn_throw_message('User [' . cnHtmlSpecialChars($user_name) . '] deleted');
 
             $user_name = $user_nick = $user_email = $user_acl = '';
         } // Add-Edit
@@ -1718,8 +1720,8 @@ function board_userman()
     cn_assign('users, section, st, per_page, grp', $userlist, $section, $st, $per_page, $grp);
     cn_assign('user_name, user_nick, user_email, user_acl, is_edit', $user_name, $user_nick, $user_email, $user_acl, $is_edit);
 
-    echoheader('-@dashboard/style.css', "Users manager");
-    echo exec_tpl('dashboard/users');
+    echo_header_admin('-@dashboard/style.css', "Users manager");
+    echo execTemplate('dashboard/users');
     echofooter();
 }
 
@@ -1816,7 +1818,7 @@ function board_logs()
             $_sestion = 'modules/' . $section;
         }
 
-        if(file_exists(cn_path_construct(SERVDIR, 'log/' . $_sestion) . $isActionDele . '.log')) {
+        if (file_exists(cn_path_construct(SERVDIR, 'log/' . $_sestion) . $isActionDele . '.log')) {
             unlink(cn_path_construct(SERVDIR, 'log/' . $_sestion) . $isActionDele . '.log');
         }
     }
@@ -1915,14 +1917,14 @@ function board_logs()
 
     cn_assign('log_read, section, default_log, options, sub', $log_read, $section, $default_log, $options, $sub);
     cn_assign('echoPagination', $echoPagination);
-    echoheader('-@com_board/style.css', 'System logs');
-    echo exec_tpl('com_board/logs');
+    echo_header_admin('-@com_board/style.css', 'System logs');
+    echo execTemplate('com_board/logs');
     echofooter();
 }
 
 function board_statistics()
 {
-//    $list = getoption('#more_list');
+//    $list = getOption('#more_list');
 //
 //    $name = REQ('extr_name', "GET");
 //    $remove = REQ('remove');
@@ -1966,21 +1968,21 @@ function board_statistics()
 //
 //    cn_assign('list', $list);
 //    cn_assign('type, name, desc, meta, group, req', $type, $name, $desc, $meta, $group, $req);
-    echoheader('-@com_board/style.css', 'statistics - Thống kê');
-    echo exec_tpl('com_board/statistics');
+    echo_header_admin('-@com_board/style.css', 'statistics - Thống kê');
+    echo execTemplate('com_board/statistics');
     echofooter();
 }
 
 function board_uploadFileAPIDropBox()
 {
-    $nameApp = trim(getoption('appNameDropBox'));
+    $nameApp = trim(getOption('appNameDropBox'));
     $dropbox_config = array(
-        'key' => getoption('keyDropBox'),
-        'secret' => getoption('secretDropBox')
+        'key' => getOption('keyDropBox'),
+        'secret' => getOption('secretDropBox')
     );
     $configData = array(
         'nameApp' => $nameApp,
-        'redirectUri' => getoption('redirectUriDropBox')
+        'redirectUri' => getOption('redirectUriDropBox')
     );
 //        'redirectUri' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"
     try {
@@ -1990,7 +1992,7 @@ function board_uploadFileAPIDropBox()
             msg_info('No setup or setup failed with dropbox Api.');
         }
 
-        $accessTokenDropBox = trim(getoption('accessTokenDropBox'));
+        $accessTokenDropBox = trim(getOption('accessTokenDropBox'));
         if (empty($accessTokenDropBox)) {
             list ($code) = GET('code', 'GETPOST');
             if (empty($code)) {
@@ -2074,8 +2076,8 @@ function board_uploadFileAPIDropBox()
 //    fclose($f);
 //    print_r($fileMetadata);
 
-    echoheader('-@com_board/style.css@com_board/downloadapi_dropbox.js', 'download Api - download');
-    echo exec_tpl('com_board/downloadApi');
+    echo_header_admin('-@com_board/style.css@com_board/downloadapi_dropbox.js', 'download Api - download');
+    echo execTemplate('com_board/downloadApi');
     echofooter();
 }
 
@@ -2085,7 +2087,7 @@ function getWebAuth($dropbox_config, $configData)
     if (empty($dropbox_config['key']) || empty($dropbox_config['secret']) || empty($configData['nameApp']) || empty($configData['redirectUri'])) {
         return;
     }
-    $clientIdentifier = $configData['nameApp']."/1.0";
+    $clientIdentifier = $configData['nameApp'] . "/1.0";
     $redirectUri = $configData['redirectUri'];
     $appInfo = dbx\AppInfo::loadFromJson($dropbox_config);
 
@@ -2144,46 +2146,46 @@ function board_uploadFileAPIGoogle()
                     $file = new Google_Service_Drive_DriveFile();
 //                    foreach ($nameFiles['name'] as $key => $items) {
 //                        if (empty($nameFiles['error'][$key])) {
-                        if (empty($nameFiles['error'])) {
-                            $fileName = $nameFiles['name'];
-                            $fileType = $nameFiles['type'];
-                            $fileError = $nameFiles['error'];
+                    if (empty($nameFiles['error'])) {
+                        $fileName = $nameFiles['name'];
+                        $fileType = $nameFiles['type'];
+                        $fileError = $nameFiles['error'];
 
-                            if ($fileError == 1) {
-                                //Lỗi vượt dung lượng
-                                $fileStatus['message'] = 'Dung lượng quá giới hạn cho phép';
-                            } elseif (!in_array($fileType, $mimes)) {
-                                //Kiểm tra định dạng file
-                                $fileStatus['message'] = 'Không cho phép định dạng này';
-                            } else {
-                                //Không có lỗi nào
+                        if ($fileError == 1) {
+                            //Lỗi vượt dung lượng
+                            $fileStatus['message'] = 'Dung lượng quá giới hạn cho phép';
+                        } elseif (!in_array($fileType, $mimes)) {
+                            //Kiểm tra định dạng file
+                            $fileStatus['message'] = 'Không cho phép định dạng này';
+                        } else {
+                            //Không có lỗi nào
 //                              move_uploaded_file($nameFiles['tmp_name'][$key], 'uploads/' . $fileName);
 
-                                $file->setName($fileName);
-                                $file->setDescription('A test document');
-                                $file->setMimeType($fileType);
-                                $data = file_get_contents($nameFiles['tmp_name']);
+                            $file->setName($fileName);
+                            $file->setDescription('A test document');
+                            $file->setMimeType($fileType);
+                            $data = file_get_contents($nameFiles['tmp_name']);
 
-                                $createdFile = $service->files->create($file, array(
-                                    'data' => $data,
-                                    'mimeType' => $fileType,
-                                    'uploadType' => 'multipart'
-                                ));
+                            $createdFile = $service->files->create($file, array(
+                                'data' => $data,
+                                'mimeType' => $fileType,
+                                'uploadType' => 'multipart'
+                            ));
 
-                                if ($createdFile->getId()) {
-                                    do_insert_character(
-                                        'ListFileApiCloud',
-                                        "nameFile='" . $fileName . "'",
-                                        "alias='" . $createdFile->getId() . "'",
-                                        'createTime=' . ctime()
-                                    );
+                            if ($createdFile->getId()) {
+                                do_insert_character(
+                                    'ListFileApiCloud',
+                                    "nameFile='" . $fileName . "'",
+                                    "alias='" . $createdFile->getId() . "'",
+                                    'createTime=' . ctime()
+                                );
 
-                                    $fileStatus['message'] = "Bạn đã upload $fileName thành công";
-                                    $fileStatus['statusUpload'] = "upload thành công";
-                                    $fileStatus['status'] = 0;
-                                }
+                                $fileStatus['message'] = "Bạn đã upload $fileName thành công";
+                                $fileStatus['statusUpload'] = "upload thành công";
+                                $fileStatus['status'] = 0;
                             }
                         }
+                    }
 //                    }
                 } catch (Google_Service_Exception $ex) {
                     $fileStatus['message'] = $ex->getMessage();
@@ -2263,26 +2265,26 @@ function board_uploadFileAPIGoogle()
 
         $fileStatus['body'] = $dataResult;
         if (empty($dataResult['status'])) {
-            $fileStatus['status'] =0;
+            $fileStatus['status'] = 0;
         }
 
         header('Content-Type: application/json');
         return json_encode($fileStatus);
     }
 
-    echoheader('-@com_board/style.css@com_board/uploadApiGoogleDrivers.js', 'Api-Upload file to GoogleDrivers');
-    echo exec_tpl('com_board/downloadApiGoogle');
+    echo_header_admin('-@com_board/style.css@com_board/uploadApiGoogleDrivers.js', 'Api-Upload file to GoogleDrivers');
+    echo execTemplate('com_board/downloadApiGoogle');
     echofooter();
 }
 
 function selectListFiles($service, $sort, $isTrash)
 {
     if (strtolower($sort) == 'a') {
-    $namSort = 'asc';
-} else {
-    $namSort = 'desc';
-}
-    $resultData = do_select_orther("SELECT * FROM ListFileApiCloud WHERE typeApi=0 ORDER BY createTime $namSort");
+        $namSort = 'asc';
+    } else {
+        $namSort = 'desc';
+    }
+    $resultData = do_select_other("SELECT * FROM ListFileApiCloud WHERE typeApi=0 ORDER BY createTime $namSort");
 
     $resultDataClone = array();
     $resultDataResult = array(
@@ -2316,7 +2318,7 @@ function selectListFiles($service, $sort, $isTrash)
             }
         }
     } catch (Exception $e) {
-        $resultDataResult['msg'] =  $e->getMessage();
+        $resultDataResult['msg'] = $e->getMessage();
         $resultDataResult['status'] = 1;
     }
 
@@ -2342,7 +2344,7 @@ function selectListFiles($service, $sort, $isTrash)
     return $resultDataResult;
 }
 
-function broad_downloadApiMediafrie ()
+function broad_downloadApiMediafrie()
 {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
@@ -2374,11 +2376,11 @@ function broad_downloadApiMediafrie ()
     if (isset($_POST['upload'])) {
 
         $mflib = new mflib($appId, $apiKey);
-        $mflib->email    = $email;
+        $mflib->email = $email;
         $mflib->password = $password;
         $token = $mflib->userGetSessionToken(null);
 
-        $uploadkey = $mflib->fileUpload($token, $_FILES["file"]["tmp_name"],"myfiles",$_FILES["file"]["name"]);
+        $uploadkey = $mflib->fileUpload($token, $_FILES["file"]["tmp_name"], "myfiles", $_FILES["file"]["name"]);
         $fileDetails = $mflib->filePollUpload($token, $uploadkey);
         $link = $mflib->fileGetLinks($fileDetails['quickkey'], "direct_download", $token);
 
@@ -2434,10 +2436,10 @@ function board_select()
 //    list ($arrRankingCharater, $pagination) = zendeHtmlExecute();
 //    list ($arrRankingCharater, $pagination) = zendeHtmlExecute($sub, $url, $page, strtoupper($sort));
 
-    cn_assign('sub, pagination, sort, result_content', $sub, '', $sort, zendeHtmlExecute(array()));
+    cn_assign('sub, pagination, sort, result_content', $sub, '', $sort, array());
 
-    echoheader('-@com_board/style.css@com_board/executeSelect.js', "Select");
-    echo exec_tpl('com_board/selsect');
+    echo_header_admin('-@com_board/style.css@com_board/executeSelect.js', "Select");
+    echo execTemplate('com_board/selsect');
     echofooter();
 }
 
@@ -2457,7 +2459,7 @@ function expandHomeDirectory($path)
 
 function board_apiDriverdChangeShare()
 {
-    if (request_type('POST')){
+    if (request_type('POST')) {
         try {
             cn_dsi_check();
 
@@ -2484,7 +2486,7 @@ function board_apiDriverdChangeShare()
                 $result['msg'] = 'Error update';
             }
 
-        } catch (Exception $ex){
+        } catch (Exception $ex) {
             $result['msg'] = $ex->getMessage();
         }
 
@@ -2493,14 +2495,14 @@ function board_apiDriverdChangeShare()
     }
 }
 
-function board_apiRestoreDriver ()
+function board_apiRestoreDriver()
 {
 
 }
 
 function board_apiDeleteDrivers()
 {
-    if (request_type('POST')){
+    if (request_type('POST')) {
 
         $result = array(
             'messgase' => '',
@@ -2515,7 +2517,7 @@ function board_apiDeleteDrivers()
             list($code) = GET('code', 'GETPOST');
             $client = getClient($code);
             $service = new Google_Service_Drive($client);
-            if($request->alias) {
+            if ($request->alias) {
                 $alias = htmlentities(html_entity_decode(trim($request->alias)));
 
                 $service->files->delete($alias);
@@ -2529,7 +2531,7 @@ function board_apiDeleteDrivers()
                     $result['msg'] = 'Error execute';
                 }
             }
-        } catch (Exception $ex){
+        } catch (Exception $ex) {
             $result['msg'] = $ex->getMessage();
         }
 

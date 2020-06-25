@@ -32,7 +32,7 @@
 * Gặp NPC Seed Master <br>
 <br>
 - Có thể tiến hành quá trình tách rời nhờ Seed Master ở Elbeland. <br>
-<div align="center"><img height="250" src="/images/guides/image031.jpg" width="90%"></div>
+<div align="center"><img height="250" src="/public/images/guides/image031.jpg" width="90%"></div>
 ※ Mức độ thành công phụ thuộc vào từng cấp độ và đẳng cấp của nguyên liệu. <br>
 <br>
 * Xử lý khi quá trình tách rời thất bại <br>
@@ -46,9 +46,9 @@
 Các loại hạt nguyên tố. <br>
 <br>
 <div>
-    <img src="/images/guides/img_socket_2.jpg" alt="img_socket_2.jpg" width="100%">
-    <img src="/images/guides/img_socket_1.jpg" alt="img_socket_1.jpg" width="100%">
-    <img src="/images/guides/img_socket_3.jpg" alt="img_socket_3.jpg" width="100%">
+    <img src="/public/images/guides/img_socket_2.jpg" alt="img_socket_2.jpg" width="100%">
+    <img src="/public/images/guides/img_socket_1.jpg" alt="img_socket_1.jpg" width="100%">
+    <img src="/public/images/guides/img_socket_3.jpg" alt="img_socket_3.jpg" width="100%">
 </div>
 <h2>D. Gắn kết</h2>
 <br>
@@ -73,7 +73,8 @@ Giới thiệu <br>
 <h3>2. Hình thức sở hữu </h3>
 <br>
 * Có thể nhặt được khi săn quái vật (không đạt được khi tách ra hoặc liên kết) <br>
-<div align="center"><img height="118" src="/images/guides/94721277366367.jpg" alt="Sphere (mono)" width="90%"></div>
+<div align="center"><img height="118" src="/public/images/guides/94721277366367.jpg" alt="Sphere (mono)" width="90%">
+</div>
 <br>
 <h2>E. Ngọc nguyên tố:</h2>
 <br>
@@ -90,7 +91,7 @@ Có thể lấy được thông qua quá trình gắn kết NPC. <br>
 <br>
 <h2>F. Phương pháp lắp đặt:</h2>
 <div>
-    <div align="center"><img height="350" src="/images/guides/npc- Seed.png" width="90%"><br>
+    <div align="center"><img height="350" src="/public/images/guides/npc- Seed.png" width="90%"><br>
         (Nhà nghiên cứu Seed)
     </div>
 </div>
@@ -105,7 +106,7 @@ Có thể lấy được thông qua quá trình gắn kết NPC. <br>
 - Item phòng ngự có thể lắp đặt ngọc nguyên tố có chứa thuộc tính nước, gió, đất. <br>
 <br>
 * Chọn nguyên liệu tách rời: <br>
-<div><img src="/images/guides/58621277366438.jpg" alt="58621277366438.jpg" width="100%"></div>
+<div><img src="/public/images/guides/58621277366438.jpg" alt="58621277366438.jpg" width="100%"></div>
 <br>
 <br>
 <h2>G. Socket bổ sung:</h2>
@@ -120,12 +121,12 @@ Có thể lấy được thông qua quá trình gắn kết NPC. <br>
 <br>
 - Thứ tự của seed sphere được tổ hợp rất quan trọng. Option được hình thành không theo thứ tự tổ hợp sẽ không cho kết quả như ý đôi khi không hình thành option mới.
 <br>
-<div><img src="/images/guides/dameSocket.jpg" alt="dameSocket.jpg" width="100%"></div>
+<div><img src="/public/images/guides/dameSocket.jpg" alt="dameSocket.jpg" width="100%"></div>
 <br>
 <h3>2) Tính năng socket </h3>
 Seed Sphere lấp vào toàn bộ socket item đang sử dụng. <br>
 <br>
-<div><img src="/images/guides/succSocket.jpg" alt="succSocket.jpg" width="100%"></div>
+<div><img src="/public/images/guides/succSocket.jpg" alt="succSocket.jpg" width="100%"></div>
 <br>
 <br>
 <h2>H. Phá huỷ:</h2>

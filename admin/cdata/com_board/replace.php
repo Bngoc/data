@@ -28,9 +28,9 @@ if (!$is_repl_opt) {
 
             <tr <?php if ($word == $name) echo 'class="row_selected"'; ?>>
                 <td>
-                    <a href="<?php echo cn_url_modify('word=' . $name); ?>"><?php echo cn_htmlspecialchars($name); ?></a>
+                    <a href="<?php echo cn_url_modify('word=' . $name); ?>"><?php echo cnHtmlSpecialChars($name); ?></a>
                 </td>
-                <td><?php echo cn_htmlspecialchars($var); ?></td>
+                <td><?php echo cnHtmlSpecialChars($var); ?></td>
             </tr>
 
         <?php } else { ?>
@@ -44,13 +44,13 @@ if (!$is_repl_opt) {
     <table class="panel">
         <tr>
             <td align="right">Word</td>
-            <td><input type="text" style="width: 350px;" name="word" value="<?php echo cn_htmlspecialchars($word); ?>"/>
+            <td><input type="text" style="width: 350px;" name="word" value="<?php echo cnHtmlSpecialChars($word); ?>"/>
             </td>
         </tr>
         <tr>
             <td align="right">Replace</td>
             <td><input type="text" style="width: 350px;" name="replace"
-                       value="<?php echo cn_htmlspecialchars($replace); ?>"/></td>
+                       value="<?php echo cnHtmlSpecialChars($replace); ?>"/></td>
         </tr>
         <tr>
             <td align="right"><input type="checkbox" name="delete" value="Y"/></td>

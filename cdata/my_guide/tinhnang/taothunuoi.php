@@ -48,7 +48,7 @@
 </ul>
 <h3>Cách kết hợp nguyên liệu tạo Quạ Tinh:</h3>
 <div>
-    <div align="center"><img height="171" src="/images/guides/quatinh.jpg" width="159"></div>
+    <div align="center"><img height="171" src="/public/images/guides/quatinh.jpg" width="159"></div>
 </div>
 <ol>
     <li>Nói chuyện với Nhà huấn luyện thú ở toạ độ (122,110) ở Lorencia.</li>
@@ -69,7 +69,7 @@
 </ol>
 <h3>Cách kết hợp nguyên liệu tạo Chiến Mã:</h3>
 <div>
-    <div align="center"><img height="205" src="/images/guides/chienma.jpg" width="200">
+    <div align="center"><img height="205" src="/public/images/guides/chienma.jpg" width="200">
     </div>
 </div>
 <ol>

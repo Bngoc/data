@@ -37,7 +37,7 @@ cn_snippet_bc();
             <tr <?php if ($odd++ % 2) echo ' style="background: #f8f8f8;"'; ?>>
                 <td>
                     <div class="o_title">
-                        <b><?php echo $opt_id; ?></b> <?php //if ($opt_vars['help']) echo '<a href="#" title="'.cn_htmlspecialchars($opt_vars['help']).'" onclick="return(tiny_msg(this));"><sup>?</sup></a>';
+                        <b><?php echo $opt_id; ?></b> <?php //if ($opt_vars['help']) echo '<a href="#" title="'.cnHtmlSpecialChars($opt_vars['help']).'" onclick="return(tiny_msg(this));"><sup>?</sup></a>';
                         ?></div>
                     <div class="o_desc"><?php //echo $opt_vars['desc'];
                         ?></div>
@@ -45,15 +45,15 @@ cn_snippet_bc();
                 <td align="center"><?php
 
                     echo $opt_vars;
-                    //if ($opt_vars[0] == 'label') echo cn_htmlspecialchars($opt_vars['var']);
-                    //elseif ($opt_vars[0] == 'text') echo '<input type="text" name="config['.$opt_id.']" style="width: 400px;" value="'.cn_htmlspecialchars($opt_vars['var']).'"/>';
+                    //if ($opt_vars[0] == 'label') echo cnHtmlSpecialChars($opt_vars['var']);
+                    //elseif ($opt_vars[0] == 'text') echo '<input type="text" name="config['.$opt_id.']" style="width: 400px;" value="'.cnHtmlSpecialChars($opt_vars['var']).'"/>';
                     // elseif ($opt_vars[0] == 'int')  echo '<input type="text" name="config['.$opt_id.']" size="8" value="'.intval($opt_vars['var']).'"/>';
                     //elseif ($opt_vars[0] == 'Y/N') echo '<input type="checkbox" name="config['.$opt_id.']" '.($opt_vars['var']?'checked="checked"' : '').' value="Y"/>';
                     // elseif ($opt_vars[0] == 'select')
                     //{
                     //echo '<select name="config['.$opt_id.']"/>';
                     //foreach ($opt_vars[2] as $_id => $_var)
-                    //echo '<option value="'.cn_htmlspecialchars($_id).'" '.($_id == $opt_vars['var']? 'selected="selected"':'').'>'.cn_htmlspecialchars($_var).'</option>';
+                    //echo '<option value="'.cnHtmlSpecialChars($_id).'" '.($_id == $opt_vars['var']? 'selected="selected"':'').'>'.cnHtmlSpecialChars($_var).'</option>';
 
                     // echo '</select>';
                     // }
@@ -106,7 +106,7 @@ cn_snippet_bc();
 
         <?php cn_form_open('mod, opt, template, sub'); ?>
         <textarea id="template_text" style="width: 100%; height: 480px; font: 12px/1.2em Monospace;"
-                  name="save_template_text"><?php echo cn_htmlspecialchars($template_text); ?></textarea>
+                  name="save_template_text"><?php echo cnHtmlSpecialChars($template_text); ?></textarea>
         <?php if (getoption('ckeditor2template')) {
             cn_snippet_ckeditor('template_text');
         } ?>
@@ -128,7 +128,7 @@ cn_snippet_bc();
                 <input type="submit" name="reset" value="Reset"/>
             <?php } ?>
 
-            <?php echo cn_htmlspecialchars(ucfirst($template)); ?>
+            <?php echo cnHtmlSpecialChars(ucfirst($template)); ?>
         </div>
 
     <?php } ?>

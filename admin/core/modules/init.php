@@ -1,5 +1,8 @@
 <?php if (!defined('BQN_MU')) die('Access restricted');
 
+require_once  ROOT_ADMIN .'/ProcessCoreAdmin.php';
+$coreAdmin = new ProcessCoreAdmin();
+
 $_module = REQ('mod', 'GPG');
 
 // Loading all modules (internal + external)
@@ -20,8 +23,8 @@ if (!isset($_init_modules[$_module])) {
 }
 
 // Check restrictions, if user is authorized
-if (($user = member_get()) && defined('AREA') && AREA == 'ADMIN') {
-    if (test($_init_modules[$_module]['acl'])) {
+if (($user = getMember()) && defined('AREA') && AREA == 'ADMIN') {
+    if (testRoleAdmin($_init_modules[$_module]['acl'])) {
         // Request module
         $_mod_cfg = $_init_modules[$_module];
         if (file_exists($callPath = MODULE_DIR . '/' . $_mod_cfg['path'] . '.php')) {
@@ -32,6 +35,6 @@ if (($user = member_get()) && defined('AREA') && AREA == 'ADMIN') {
             global $_SESS;
             $_SESSION = array();
         }
-        msg_info('Section [' . cn_htmlspecialchars($_module) . '] disabled for you', PHP_SELF);
+        $coreAdmin->msg_info('Section [' . cnHtmlSpecialChars($_module) . '] disabled for you', PHP_SELF);
     }
 }

@@ -37,22 +37,22 @@ cn_snippet_bc();
             <tr <?php if ($odd++ % 2) echo ' style="background: #f8f8f8;"'; ?>>
                 <td>
                     <div class="o_title">
-                        <b><?php echo $opt_vars['title']; ?></b> <?php if ($opt_vars['help']) echo '<a href="#" title="' . cn_htmlspecialchars($opt_vars['help']) . '" onclick="return(tiny_msg(this));"><sup>?</sup></a>'; ?>
+                        <b><?php echo $opt_vars['title']; ?></b> <?php if ($opt_vars['help']) echo '<a href="#" title="' . cnHtmlSpecialChars($opt_vars['help']) . '" onclick="return(tiny_msg(this));"><sup>?</sup></a>'; ?>
                     </div>
                     <div class="o_desc"><?php echo $opt_vars['desc']; ?></div>
                 </td>
                 <td align="center"><?php
 
-                    if ($opt_vars[0] == 'label') echo cn_htmlspecialchars($opt_vars['var']);
-                    elseif ($opt_vars[0] == 'disable') echo '<input type="text" disabled style="width: 500px;" value="' . cn_htmlspecialchars($opt_vars['var']) . '"/>';
-                    elseif ($opt_vars[0] == 'text') echo '<input type="text" name="config[' . $opt_id . ']" style="width: 400px;" value="' . cn_htmlspecialchars($opt_vars['var']) . '"/>';
+                    if ($opt_vars[0] == 'label') echo cnHtmlSpecialChars($opt_vars['var']);
+                    elseif ($opt_vars[0] == 'disable') echo '<input type="text" disabled style="width: 500px;" value="' . cnHtmlSpecialChars($opt_vars['var']) . '"/>';
+                    elseif ($opt_vars[0] == 'text') echo '<input type="text" name="config[' . $opt_id . ']" style="width: 400px;" value="' . cnHtmlSpecialChars($opt_vars['var']) . '"/>';
                     elseif ($opt_vars[0] == 'int') echo '<input type="text" name="config[' . $opt_id . ']" size="28" value="' . intval($opt_vars['var']) . '"/>';
                     elseif ($opt_vars[0] == 'password') echo '<input type="password" name="config[' . $opt_id . ']" size="28" value=""/>';
                     elseif ($opt_vars[0] == 'Y/N') echo '<input type="checkbox" name="config[' . $opt_id . ']" ' . ($opt_vars['var'] ? 'checked="checked"' : '') . ' value="Y"/>';
                     elseif ($opt_vars[0] == 'select') {
                         echo '<select name="config[' . $opt_id . ']"/>';
                         foreach ($opt_vars[2] as $_id => $_var)
-                            echo '<option size="28" value="' . cn_htmlspecialchars($_id) . '" ' . ($_id == $opt_vars['var'] ? 'selected="selected"' : '') . '>' . cn_htmlspecialchars($_var) . '</option>';
+                            echo '<option size="28" value="' . cnHtmlSpecialChars($_id) . '" ' . ($_id == $opt_vars['var'] ? 'selected="selected"' : '') . '>' . cnHtmlSpecialChars($_var) . '</option>';
 
                         echo '</select>';
                     }

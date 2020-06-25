@@ -49,7 +49,7 @@
 <br>
 <br>
 <h3>Cách tính điểm của Chúa Tể</h3>
-<p align="center"><img src="/images/guides/dl_Force_Wave_02.jpg"></p>
+<p align="center"><img src="/public/images/guides/dl_Force_Wave_02.jpg"></p>
 <p> </p>
 <table cellspacing="0" cellpadding="10" align="center" border="1">
     <tbody>
@@ -86,7 +86,7 @@
     <tbody>
     <tr>
         <td>Hỏa xích long</td>
-        <td><img src="/images/guides/dl_Fire_Burst_02.jpg"></td>
+        <td><img src="/public/images/guides/dl_Fire_Burst_02.jpg"></td>
         <td>25</td>
         <td>0</td>
         <td>Tuyệt chiêu từ sách</td>
@@ -96,7 +96,7 @@
     </tr>
     <tr>
         <td>Giậm đất</td>
-        <td><img src="/images/guides//img8.jpg"></td>
+        <td><img src="/public/images/guides//img8.jpg"></td>
         <td>100</td>
         <td>50</td>
         <td>Tuyệt chiêu của Chiến Mã</td>
@@ -108,7 +108,7 @@
     </tr>
     <tr>
         <td>Triệu hồi thành viên</td>
-        <td><img src="/images/guides/dl_Summon_02.jpg"></td>
+        <td><img src="/public/images/guides/dl_Summon_02.jpg"></td>
         <td>70</td>
         <td>30</td>
         <td>Tuyệt chiêu từ sách</td>
@@ -120,7 +120,7 @@
     </tr>
     <tr>
         <td>Tăng sát thương</td>
-        <td><img src="/images/guides/dl_IncreaseDamage_02.jpg"></td>
+        <td><img src="/public/images/guides/dl_IncreaseDamage_02.jpg"></td>
         <td>50</td>
         <td>50</td>
         <td>Tuyệt chiêu từ sách</td>
@@ -132,7 +132,7 @@
     </tr>
     <tr>
         <td>Tập hợp năng lượng</td>
-        <td><img src="/images/guides/dl_Electric_Spike_02.jpg"></td>
+        <td><img src="/public/images/guides/dl_Electric_Spike_02.jpg"></td>
         <td>100</td>
         <td>100</td>
         <td>Tuyệt chiêu từ sách</td>
@@ -157,7 +157,7 @@
     </tr>
     <tr>
         <td>Tia lửa điện</td>
-        <td><img src="/images/guides//imgC.jpg"></td>
+        <td><img src="/public/images/guides//imgC.jpg"></td>
         <td>10</td>
         <td>0</td>
         <td>Tuyệt chiêu Công thành</td>
@@ -167,7 +167,7 @@
     </tr>
     <tr>
         <td>Ẩn hình</td>
-        <td><img src="/images/guides//imgE.jpg"></td>
+        <td><img src="/public/images/guides//imgE.jpg"></td>
         <td>N/A</td>
         <td>N/A</td>
         <td>Tuyệt chiêu Công thành</td>
@@ -177,7 +177,7 @@
     </tr>
     <tr>
         <td>Cột lửa</td>
-        <td><img src="/images/guides/dl_Fire_Blast_02.jpg"></td>
+        <td><img src="/public/images/guides/dl_Fire_Blast_02.jpg"></td>
         <td>20</td>
         <td>15</td>
         <td>Tuyệt chiêu Công thành</td>

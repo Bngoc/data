@@ -57,8 +57,9 @@ list ($resultDe, $timesTampResult, $show_history) = _GL('resultPlayDe, timesTamp
             </tr>
             <tr>
                 <td colspan="3" style="text-align:center">
-                    <img src="/images/capnhat.png" class="cursor" style="padding-right:10px" alt="update" id="actionDe">
-                    <img style="cursor:pointer" border="0" src="/images/cancel.png"
+                    <img src="/public/images/capnhat.png" class="cursor" style="padding-right:10px" alt="update"
+                         id="actionDe">
+                    <img style="cursor:pointer" border="0" src="/public/images/cancel.png"
                          onclick="document.getElementById('from-playDe').reset();" style="padding-left:10px">
                 </td>
             </tr>
@@ -86,7 +87,7 @@ list ($resultDe, $timesTampResult, $show_history) = _GL('resultPlayDe, timesTamp
     </tr>
     <tr>
         <td colspan="3">
-            <div class="vertical-img"><img src="/images/vertical-separator.jpg" width="100%" height="1px"></div>
+            <div class="vertical-img"><img src="/public/images/vertical-separator.jpg" width="100%" height="1px"></div>
             <br></td>
     </tr>
     </tbody>

@@ -33,21 +33,22 @@ echo cn_snippet_messages();
                                                 value="<?php //if ($opt == "vtc") echo "PM"; ?>"/></td>
             <td class="bizwebform_col_3" id="cardSerialID"></td>
         </tr>
-<!--        <tr>-->
-<!--            <td class="bizwebform_col_1">Mệnh giá thẻ</td>-->
-<!--            <td class="bizwebform_col_2">-->
-<!--                <select size="1" name="Denominations" id="bizwebselect" onchange="checkDenominations(this.value);">-->
-<!--                    <option value="" selected="selected"> -- Chọn mệnh giá thẻ nạp --</option>-->
-<!--                    --><?php //if ($card_list) foreach ($card_list as $id => $val) {
-//                        echo '<option value="' . $id . '"> Thẻ ' . number_format($val, 0, ",", ".") . ' VNĐ</option>';
-//                    } ?>
-<!--                </select>-->
-<!--            </td>-->
-<!--            <td class="bizwebform_col_3" id="DenominationsID"></td>-->
-<!--        </tr>-->
+        <!--        <tr>-->
+        <!--            <td class="bizwebform_col_1">Mệnh giá thẻ</td>-->
+        <!--            <td class="bizwebform_col_2">-->
+        <!--                <select size="1" name="Denominations" id="bizwebselect" onchange="checkDenominations(this.value);">-->
+        <!--                    <option value="" selected="selected"> -- Chọn mệnh giá thẻ nạp --</option>-->
+        <!--                    --><?php //if ($card_list) foreach ($card_list as $id => $val) {
+        //                        echo '<option value="' . $id . '"> Thẻ ' . number_format($val, 0, ",", ".") . ' VNĐ</option>';
+        //                    } ?>
+        <!--                </select>-->
+        <!--            </td>-->
+        <!--            <td class="bizwebform_col_3" id="DenominationsID"></td>-->
+        <!--        </tr>-->
         <tr>
             <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
-            <td class="bizwebform_col_2"><input id="verifyCaptcha" type="text" class="bizwebform" name="verifyCaptcha" required autocomplete="off"
+            <td class="bizwebform_col_2"><input id="verifyCaptcha" type="text" class="bizwebform" name="verifyCaptcha"
+                                                required autocomplete="off"
                                                 onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
             <td class="bizwebform_col_3" id="msg_Captcha"></td>
         </tr>
@@ -63,8 +64,10 @@ echo cn_snippet_messages();
         </tr>
         <tr align="middle">
             <td colspan="100%" class="pd-top15">
-                <img id="actionCard" class="cursor" alt="update" src="<?php echo URL_PATH_IMG; ?>/capnhat.png" style="padding-right:10px">
-                <img style="cursor:pointer" border="0" onclick="document.getElementById('fromCard').reset();" src="<?php echo URL_PATH_IMG; ?>/cancel.png"
+                <img id="actionCard" class="cursor" alt="update" src="<?php echo URL_PATH_IMG; ?>/capnhat.png"
+                     style="padding-right:10px">
+                <img style="cursor:pointer" border="0" onclick="document.getElementById('fromCard').reset();"
+                     src="<?php echo URL_PATH_IMG; ?>/cancel.png"
                      style="padding-left:10px">
             </td>
         </tr>
@@ -78,9 +81,9 @@ echo cn_snippet_messages();
     <div class="show_history_card">
         <?php if (empty($show_history)) {
             echo '<div class="mg-top15 cRed mg-left15">Bạn chưa nạp thẻ nào. </div>';
-        }else {
+        } else {
             echo $show_history;
-        }?>
+        } ?>
     </div>
 </div>
 

@@ -118,18 +118,18 @@ function char_invoke()
     }
 
     cn_assign('dashboard', $char_board);
-    echoheader('-@my_char/style.css', "Character");
-    echocomtent_here(exec_tpl('my_char/general'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Character");
+    echo_content_here(exec_tpl('my_char/general'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_default()
 {
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('defaults/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('defaults/style.css', "Error - $name__");
+    echo_content_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_info_char()
@@ -151,16 +151,16 @@ function char_info_char()
     }
 
     cn_assign('showchar', $showchar_);
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "Information character - $name__");
-    echocomtent_here(exec_tpl('my_char/info_char'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Information character - $name__");
+    echo_content_here(exec_tpl('my_char/info_char'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_reset()
 {
-    $member = member_get();
+    $member = getMember();
     list($sub) = GET('sub', 'GPG');
 
     $arr_class = cn_template_class();
@@ -670,16 +670,16 @@ function char_reset()
     cn_assign('gh_loai1, gh_loai2, set_arr_rs, showchar, notify_rs_ok', $get_gh_loai1, $get_gh_loai2, $options_rs, $showchar_, $show_re_succser);
     cn_assign('sub', $sub);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "$sub reset thường - $name__");
-    echocomtent_here(exec_tpl('my_char/reset'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "$sub reset thường - $name__");
+    echo_content_here(exec_tpl('my_char/reset'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_resetvip()
 {
-    $member = member_get();
+    $member = getMember();
     list($sub) = GET('sub', 'GPG');
     $accc_ = $member['user_name'];
 
@@ -1191,17 +1191,17 @@ function char_resetvip()
     cn_assign('gh_loai1, gh_loai2, set_arr_gh, set_arr_rsvip, showchar, notify_rs_ok', $get_gh_loai1, $get_gh_loai2, $options_gh, $options_rsvip, $showchar_, $show_re_succser);
     cn_assign('sub', $sub);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "$sub Reset Vip - $name__");
-    echocomtent_here(exec_tpl('my_char/resetvip'), cn_snippet_bc_re());
+    echo_header_web('-@my_char/style.css', "$sub Reset Vip - $name__");
+    echo_content_here(exec_tpl('my_char/resetvip'), cn_snippet_bc_re());
 
-    echofooter();
+    echo_footer_web();
 }
 
 function char_relife()
 {
-    $member = member_get();
+    $member = getMember();
     list($sub) = GET('sub', 'GPG');
     $accc_ = $member['user_name'];
     $showchar = cn_character();
@@ -1427,18 +1427,18 @@ function char_relife()
     cn_assign('options_rl, showchar, notify_rs_ok', $options_rl, $showchar, $show_re_succser);
     cn_assign('sub', $sub);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "$sub relife - $name__");
-    echocomtent_here(exec_tpl('my_char/relife'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "$sub relife - $name__");
+    echo_content_here(exec_tpl('my_char/relife'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_online()
 {
     $trust_on = cn_point_trust();
 
-    $member = member_get();
+    $member = getMember();
     list($sub) = GET('sub', 'GPG');
     $accc_ = $member['user_name'];
     $showchar = cn_character();
@@ -1640,17 +1640,17 @@ function char_online()
     cn_assign('showchar', $showchar_);
     cn_assign('sub', $sub);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "$sub ủy thác Online - $name__");
-    echocomtent_here(exec_tpl('my_char/dele_online'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "$sub ủy thác Online - $name__");
+    echo_content_here(exec_tpl('my_char/dele_online'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_offline()
 {
     $trust_off = cn_point_trust();
-    $member = member_get();
+    $member = getMember();
     list($sub) = GET('sub', 'GPG');
     $accc_ = $member['user_name'];
     $_blank_var = view_bank($accc_);
@@ -1844,16 +1844,16 @@ function char_offline()
     cn_assign('showchar, before_info_off', $showchar_, $before_info_off);
     cn_assign('sub', $sub);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "$sub ủy thác Offline - $name__");
-    echocomtent_here(exec_tpl('my_char/dele_offline'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "$sub ủy thác Offline - $name__");
+    echo_content_here(exec_tpl('my_char/dele_offline'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_rsdelegate()
 {
-    $member = member_get();
+    $member = getMember();
     list($sub) = GET('sub', 'GPG');
     $accc_ = $member['user_name'];
     $arr_trust = cn_point_trust();
@@ -2111,16 +2111,16 @@ function char_rsdelegate()
     cn_assign('showchar, before_info_trust,options_rs_trust', $showchar, $before_info_trust, $options_uythacrs);
     cn_assign('sub', $sub);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "$sub Reset ủy thác - $name__");
-    echocomtent_here(exec_tpl('my_char/trust_reset'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "$sub Reset ủy thác - $name__");
+    echo_content_here(exec_tpl('my_char/trust_reset'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_rsdelegatevip()
 {
-    $member = member_get();
+    $member = getMember();
     list($sub) = GET('sub', 'GPG');
     $accc_ = $member['user_name'];
     $arr_trust = cn_point_trust();
@@ -2325,16 +2325,16 @@ function char_rsdelegatevip()
     cn_assign('showchar, before_info_trustvip,options_rsvip_trust', $showchar, $before_info_trustvip, $options_rsvip_trust);
     cn_assign('sub', $sub);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "$sub Reset ủy thác vip - $name__");
-    echocomtent_here(exec_tpl('my_char/trust_resetvip'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "$sub Reset ủy thác vip - $name__");
+    echo_content_here(exec_tpl('my_char/trust_resetvip'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_subpoint()
 {
-    $member = member_get();
+    $member = getMember();
     list($rut_point) = GET('rut_point');
     $rut_point = intval($rut_point);
     list($sub) = GET('sub', 'GPG');
@@ -2469,16 +2469,16 @@ function char_subpoint()
     cn_assign('showchar, before_info_subpoint, sd_pointdutru, sms_notify', $showchar, $before_info_subpoint, $use_point_dt, $sms_rp);
     cn_assign('sub,point_false65k', $sub, $point_false65k);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "Rút point cho nhân vật $sub - $name__");
-    echocomtent_here(exec_tpl('my_char/subpoint]'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Rút point cho nhân vật $sub - $name__");
+    echo_content_here(exec_tpl('my_char/subpoint]'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_addpoint()
 {
-    $member = member_get();
+    $member = getMember();
     list($point_str, $point_agi, $point_vit, $point_ene, $point_cmd) = GET('addstr, addagi, addvit, addene, addcmd');
     $point_str = intval($point_str);
     $point_agi = intval($point_agi);
@@ -2609,16 +2609,16 @@ function char_addpoint()
     cn_assign('showchar, before_info_addpoint, is_classDl, sd_point, rootPoint', $showchar, $before_info_addpoint, $is_classDl, $point, $rootPoint);
     cn_assign('sub', $sub);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "Cộng point cho nhân vật $sub - $name__");
-    echocomtent_here(exec_tpl('my_char/addpoint'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Cộng point cho nhân vật $sub - $name__");
+    echo_content_here(exec_tpl('my_char/addpoint'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_rspoint()
 {
-    $member = member_get();
+    $member = getMember();
     list($sub) = GET('sub', 'GPG');
     //$arr_class = cn_template_class();
     $showchar = cn_character();
@@ -2808,16 +2808,16 @@ function char_rspoint()
 
     cn_assign('showchar, sub, before_info_rspoint, sms_notify', $showchar, $sub, $before_info_rspoint, (isset($sms_notify) ? $sms_notify : ''));
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "Reset Point - Cộng lại điểm - $name__");
-    echocomtent_here(exec_tpl('my_char/rspoint'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Reset Point - Cộng lại điểm - $name__");
+    echo_content_here(exec_tpl('my_char/rspoint'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_movemap()
 {
-    $member = member_get();
+    $member = getMember();
     list($sub, $move_map) = GET('sub, move_map', 'GPG');
 
     $showchar = cn_character();
@@ -2913,16 +2913,16 @@ function char_movemap()
 
     cn_assign('showchar, sub, before_info_map, set_map, num_map', $showchar, $sub, $before_info_map, $set_map, $MapNumber);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "Di chuyển - Đổi Map - $name__");
-    echocomtent_here(exec_tpl('my_char/movemap'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Di chuyển - Đổi Map - $name__");
+    echo_content_here(exec_tpl('my_char/movemap'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_removepk()
 {
-    $member = member_get();
+    $member = getMember();
     list($sub, $move_map) = GET('sub, move_map', 'GPG');
     $showchar = cn_character();
     $_blank_var = view_bank($accc_ = $member['user_name']);
@@ -3059,16 +3059,16 @@ function char_removepk()
     }
     cn_assign('showchar, sub, before_info_pk, option_pk', $showchar, $sub, $before_info_pk, $option_pk);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "Rửa tội - Xóa PK - $name__");
-    echocomtent_here(exec_tpl('my_char/removepk'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Rửa tội - Xóa PK - $name__");
+    echo_content_here(exec_tpl('my_char/removepk'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_pointtax()
 {
-    $member = member_get();
+    $member = getMember();
     list($sub, $_point_tax) = GET('sub, point_tax', 'GPG');
     //list($_point_tax) = GET('point_tax','GETPOST');
     $_blank_var = view_bank($accc_ = $member['user_name']);
@@ -3193,17 +3193,17 @@ function char_pointtax()
 
     cn_assign('showchar, sub, before_info_pointtax, opt_pointtax, is_tax', $showchar, $sub, $before_info_pointtax, $opt_pointtax, $_point_tax);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "Thuê điểm - $name__");
-    echocomtent_here(exec_tpl('my_char/pointtax'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Thuê điểm - $name__");
+    echo_content_here(exec_tpl('my_char/pointtax'), cn_snippet_bc_re());
+    echo_footer_web();
 
 }
 
 function char_changename()
 {
-    $member = member_get();
+    $member = getMember();
     list($sub, $c_name) = GET('sub, c_name', 'GPG');
     $c_name = strtolower($c_name);
     // kiem chu va so ......????
@@ -3344,11 +3344,11 @@ function char_changename()
         }
     }
     cn_assign('showchar, sub, before_info_cn, cn_false', $showchar, $sub, $before_info_cn, $cn_false);
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "Đổi tên nhân vật - $name__");
-    echocomtent_here(exec_tpl('my_char/cname'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Đổi tên nhân vật - $name__");
+    echo_content_here(exec_tpl('my_char/cname'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 /**
@@ -3360,7 +3360,7 @@ function char_changeclass()
     $showchar = cn_character();
     $infoClass = cn_template_class();
 
-    $member = member_get();
+    $member = getMember();
     list($sub, $nameClass) = GET('sub, nameClass', 'GPG');
     $nameClass = strtolower($nameClass);
 
@@ -3516,11 +3516,11 @@ function char_changeclass()
     }
     cn_assign('showchar, sub, before_info_cn, infoClass', $showchar, $sub, $before_info_cn, $temp);
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@my_char/style.css', "Đổi giới tính nhân vật");
-    echocomtent_here(exec_tpl('my_char/changeclass'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Đổi giới tính nhân vật");
+    echo_content_here(exec_tpl('my_char/changeclass'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_level1()
@@ -3672,9 +3672,9 @@ function char_level1()
 
     cn_assign('showchar, sub, before_info_cn', $showchar, $sub, $before_info_cn);
 
-    echoheader('-@my_char/style.css', "Làm nhiệm vụ (level 150) cấp 1");
-    echocomtent_here(exec_tpl('my_char/level_1'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Làm nhiệm vụ (level 150) cấp 1");
+    echo_content_here(exec_tpl('my_char/level_1'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_level2()
@@ -3824,9 +3824,9 @@ function char_level2()
 
     cn_assign('showchar, sub, before_info_cn', $showchar, $sub, $before_info_cn);
 
-    echoheader('-@my_char/style.css', "Làm nhiệm vụ (level 220) cấp 2");
-    echocomtent_here(exec_tpl('my_char/level_2'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Làm nhiệm vụ (level 220) cấp 2");
+    echo_content_here(exec_tpl('my_char/level_2'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function char_level3()
@@ -3970,9 +3970,9 @@ function char_level3()
 
     cn_assign('showchar, sub, before_info_cn', $showchar, $sub, $before_info_cn);
 
-    echoheader('-@my_char/style.css', "Làm nhiệm vụ (level 380) cấp 3");
-    echocomtent_here(exec_tpl('my_char/level_3'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Làm nhiệm vụ (level 380) cấp 3");
+    echo_content_here(exec_tpl('my_char/level_3'), cn_snippet_bc_re());
+    echo_footer_web();
 
 }
 
@@ -4002,7 +4002,7 @@ function char_delepersonalSotre()
         $check_change = true;
     }
 
-    $checkExistItem = mcache_get("#existItem");
+    $checkExistItem = getMemcache("#existItem");
 
     $isCheckAction = false;
     if (request_type('POST')) {
@@ -4093,9 +4093,9 @@ function char_delepersonalSotre()
 
     cn_assign('sub, show_warehouse, showchar, check_change', $sub, $show_warehouse, $showchar, $check_change);
 
-    echoheader('-@my_char/style.css', "Xóa cửa hàng cá nhân - Personal Store");
-    echocomtent_here(exec_tpl('my_char/personalSotre'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_char/style.css', "Xóa cửa hàng cá nhân - Personal Store");
+    echo_content_here(exec_tpl('my_char/personalSotre'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 
@@ -4103,7 +4103,7 @@ function char_delepersonalSotre()
 //{
 //    $infoClas = cn_template_class();
 //
-//    $member = member_get();
+//    $member = getMember();
 //    list($sub, $c_name) = GET('sub, c_name', 'GPG');
 //    $c_name = strtolower($c_name);
 //    // kiem chu va so ......????
@@ -4268,11 +4268,11 @@ function char_delepersonalSotre()
 //    }
 //    cn_assign('showchar, sub, before_info_cn, cn_false, infClas', $showchar, $sub, $before_info_cn, $cn_false, $infoClas);
 //
-//    $arr_shop = mcache_get('.breadcrumbs');
+//    $arr_shop = getMemcache('.breadcrumbs');
 //    $name__ = array_pop($arr_shop)['name'];
-//    echoheader('-@my_char/style.css', "Đổi tên nhân vật");
-//    echocomtent_here(exec_tpl('my_char/changeclass'), cn_snippet_bc_re());
-//    echofooter();
+//    echo_header_web('-@my_char/style.css', "Đổi tên nhân vật");
+//    echo_content_here(exec_tpl('my_char/changeclass'), cn_snippet_bc_re());
+//    echo_footer_web();
 //}
 
 

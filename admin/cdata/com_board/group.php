@@ -29,7 +29,7 @@ cn_snippet_bc();
 
                 <td align="center"><?php echo $id; ?></td>
                 <td>
-                    <a href="<?php echo cn_url_modify("group_id=$id"); ?>"><?php echo cn_htmlspecialchars($acl['name']); ?></a>
+                    <a href="<?php echo cn_url_modify("group_id=$id"); ?>"><?php echo cnHtmlSpecialChars($acl['name']); ?></a>
                 </td>
                 <td><?php
 
@@ -64,7 +64,7 @@ cn_snippet_bc();
         <tr>
             <td valign="top" align="right" style="padding: 8px 0 0 0;">Name <span class="required">*</span></td>
             <td><input style="width: 650px;" type="text" name="group_name"
-                       value="<?php echo cn_htmlspecialchars($group_name); ?>"/>
+                       value="<?php echo cnHtmlSpecialChars($group_name); ?>"/>
                 <div style="color: #888; margin: 0 0 8px 0;">enter another name to create inherited group</div>
             </td>
         </tr>
@@ -72,7 +72,7 @@ cn_snippet_bc();
         <tr>
             <td valign="top" align="right" style="padding: 8px 0 0 0;">Consists</td>
             <td><input style="width: 650px;" type="text" name="group_grp"
-                       value="<?php echo cn_htmlspecialchars($group_grp); ?>"/>
+                       value="<?php echo cnHtmlSpecialChars($group_grp); ?>"/>
                 <div style="color: #888; margin: 0 0 8px 0;">group ids, comma separated</div>
             </td>
         </tr>
@@ -95,9 +95,9 @@ cn_snippet_bc();
                             } ?> value="<?php echo $name; ?>"/>
                             <?php
                             if ($desc['t']) {
-                                echo '<a href="#" title="' . cn_htmlspecialchars($desc['t']) . '" onclick="return (tiny_msg(this));">' . cn_htmlspecialchars($desc['d']) . '</a>';
+                                echo '<a href="#" title="' . cnHtmlSpecialChars($desc['t']) . '" onclick="return (tiny_msg(this));">' . cnHtmlSpecialChars($desc['d']) . '</a>';
                             } else {
-                                echo cn_htmlspecialchars($desc['d']);
+                                echo cnHtmlSpecialChars($desc['d']);
                             }
                             ?>
                         </span>

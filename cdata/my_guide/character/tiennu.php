@@ -98,7 +98,7 @@
     </tr>
     <tr>
         <td>Tấn công liên hoàn</td>
-        <td><img src="/images/guides/elf_Triple-Shot_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Triple-Shot_02.jpg"></td>
         <td>5</td>
         <td>3</td>
         <td>Tuyệt chiêu vũ khí</td>
@@ -122,7 +122,7 @@
     </tr>
     <tr>
         <td>Phục Hồi Máu</td>
-        <td><img src="/images/guides/elf_Heal_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Heal_02.jpg"></td>
         <td>52</td>
         <td>20</td>
         <td>0</td>
@@ -134,7 +134,7 @@
     </tr>
     <tr>
         <td>Tăng Phòng Thủ</td>
-        <td><img src="/images/guides/elf_Greater Defense_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Greater Defense_02.jpg"></td>
         <td>72</td>
         <td>30</td>
         <td>0</td>
@@ -146,7 +146,7 @@
     </tr>
     <tr>
         <td>Tăng Tấn Công</td>
-        <td><img src="/images/guides/elf_Greater Damage_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Greater Damage_02.jpg"></td>
         <td>92</td>
         <td>40</td>
         <td>0</td>
@@ -158,7 +158,7 @@
     </tr>
     <tr>
         <td>Triệu hồi yêu tinh</td>
-        <td><img src="/images/guides/elf_Summon-Goblin_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Summon-Goblin_02.jpg"></td>
         <td>30</td>
         <td>40</td>
         <td>0</td>
@@ -168,7 +168,7 @@
     </tr>
     <tr>
         <td>Triệu Hồi Người Đá</td>
-        <td><img src="/images/guides/elf_Summon-Stone-Golem_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Summon-Stone-Golem_02.jpg"></td>
         <td>60</td>
         <td>70</td>
         <td>0</td>
@@ -178,7 +178,7 @@
     </tr>
     <tr>
         <td>Triệu hồi sát thủ</td>
-        <td><img src="/images/guides/elf_Summon-Assassin_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Summon-Assassin_02.jpg"></td>
         <td>90</td>
         <td>110</td>
         <td>0</td>
@@ -188,7 +188,7 @@
     </tr>
     <tr>
         <td>Triệu Hồi Dã Nhân Vương</td>
-        <td><img src="/images/guides/elf_Summon-Elite-Yeti_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Summon-Elite-Yeti_02.jpg"></td>
         <td>130</td>
         <td>160</td>
         <td>0</td>
@@ -198,7 +198,7 @@
     </tr>
     <tr>
         <td>Triệu hồi quái vật 1 sừng</td>
-        <td><img src="/images/guides/elf_Summon-Bali_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Summon-Bali_02.jpg"></td>
         <td>210</td>
         <td>250</td>
         <td>0</td>
@@ -208,7 +208,7 @@
     </tr>
     <tr>
         <td>Triệu hồi chiến binh</td>
-        <td><img src="/images/guides/elf_Summon-Soldier_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Summon-Soldier_02.jpg"></td>
         <td>300</td>
         <td>350</td>
         <td>0</td>
@@ -218,7 +218,7 @@
     </tr>
     <tr>
         <td>Xuyên tâm tiễn</td>
-        <td><img src="/images/guides/elf_Penetration_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Penetration_02.jpg"></td>
         <td>130</td>
         <td>7</td>
         <td>10 </td>
@@ -228,7 +228,7 @@
     </tr>
     <tr>
         <td>Mũi tên băng</td>
-        <td><img src="/images/guides/elf_Ice-Arrow_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Ice-Arrow_02.jpg"></td>
         <td>646</td>
         <td>10</td>
         <td>28</td>
@@ -239,7 +239,7 @@
     </tr>
     <tr>
         <td>Triệu Hồi Kiếm Sĩ Ma</td>
-        <td><img src="/images/guides/elf_Summon-Dark-Knight_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Summon-Dark-Knight_02.jpg"></td>
         <td>170</td>
         <td>200</td>
         <td>0</td>
@@ -262,7 +262,7 @@
     </tr>
     <tr>
         <td>Mũi tên thiên đường</td>
-        <td><img src="/images/guides/elf_Starfall_02.jpg"></td>
+        <td><img src="/public/images/guides/elf_Starfall_02.jpg"></td>
         <td>Thánh Nữ</td>
         <td>20</td>
         <td>15</td>

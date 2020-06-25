@@ -32,7 +32,7 @@ function ranking_invoke()
         list($dl, $do, $acl_module) = explode(':', $id);
         //if (test($acl_module) && $dl == $mod && $do == $opt && function_exists("ranking_$do")) {
         if ($dl == $mod && $do == $opt && function_exists("ranking_$do")) {
-            cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod,  'opt=' . $opt));
+            cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt));
             die(call_user_func("ranking_$opt"));
         }
 
@@ -71,18 +71,18 @@ function ranking_invoke()
     }
 
     cn_assign('dashboard', $ranking_board);
-    echoheader('-@my_ranking/style.css', "Xếp hạng");
-    echocomtent_here(exec_tpl('my_ranking/general'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_ranking/style.css', "Xếp hạng");
+    echo_content_here(exec_tpl('my_ranking/general'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function ranking_default()
 {
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('defaults/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('defaults/style.css', "Error - $name__");
+    echo_content_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function zenderRankingCharacter($class, $url, $page, $optSort = 'DESC')
@@ -114,7 +114,7 @@ function zenderRankingCharacter($class, $url, $page, $optSort = 'DESC')
     $myQuerydataTop .= " FROM Character LEFT JOIN AccountCharacter ON Character.AccountID = AccountCharacter.Id LEFT JOIN MEMB_STAT ON Character.AccountID = MEMB_STAT.memb___id";
     $myQuerydataTop .= " $keyClass ORDER BY Character.[Relifes] $optSort, Character.[Resets] $optSort, Character.[cLevel] $optSort";
 
-    $dataTop = do_select_orther($myQuerydataTop);
+    $dataTop = do_select_other($myQuerydataTop);
 
     list ($resultShowData, $pagination) = cn_arr_paginaAjax($dataTop, $url, $page, $per_page);
 
@@ -128,12 +128,12 @@ function zenderRankingCharacter($class, $url, $page, $optSort = 'DESC')
         }
 
         $checkMemberStart = 0;
-        if ($item['Name'] == $item['GameIDC'] && $item['ConnectStat']){
+        if ($item['Name'] == $item['GameIDC'] && $item['ConnectStat']) {
             $checkMemberStart = 1;
         }
 
-        $resultShowData[$key]['statusOnline'] =  $checkMemberStart;
-        $resultShowData[$key]['showNameClass'] =  $detailClass;
+        $resultShowData[$key]['statusOnline'] = $checkMemberStart;
+        $resultShowData[$key]['showNameClass'] = $detailClass;
     }
 
     return array($resultShowData, $pagination);
@@ -142,7 +142,7 @@ function zenderRankingCharacter($class, $url, $page, $optSort = 'DESC')
 function zenderRankingGuild($sub, $url, $page, $optSort = 'DESC')
 {
     $per_page = 50;
-    $resultTopGuild = do_select_orther("select top 20 COUNT(*) as count, Guild.G_Name, Guild.G_Master from MuOnline.dbo.GuildMember, MuOnline.dbo.Guild where GuildMember.G_Name = Guild.G_Name group by Guild.G_Name, G_Master order by count $optSort");
+    $resultTopGuild = do_select_other("select top 20 COUNT(*) as count, Guild.G_Name, Guild.G_Master from MuOnline.dbo.GuildMember, MuOnline.dbo.Guild where GuildMember.G_Name = Guild.G_Name group by Guild.G_Name, G_Master order by count $optSort");
     $arrGuild = array();
     $strQueryClause = '';
     foreach ($resultTopGuild as $ds => $vl) {
@@ -161,11 +161,11 @@ function zenderRankingGuild($sub, $url, $page, $optSort = 'DESC')
     $myQuery .= (strlen($strQueryClause) > 0) ? " WHERE GuildMember.G_Name IN (" . substr($strQueryClause, 0, -1) . ")" : '';
     $myQuery .= " order by GuildMember.G_Name $optSort, Relifes DESC, Resets DESC, cLevel DESC";
 
-    $resultData = do_select_orther($myQuery);
+    $resultData = do_select_other($myQuery);
     $tempRl = false;
     $tempGuild = '';
     foreach ($resultData as $ke => $item) {
-        if ($tempGuild != $item['G_Name']){
+        if ($tempGuild != $item['G_Name']) {
             $tempGuild = $item['G_Name'];
             $tempRl = false;
         }
@@ -174,7 +174,7 @@ function zenderRankingGuild($sub, $url, $page, $optSort = 'DESC')
             $arrGuild[$item['G_Name']]['totalReset'] += $item['Resets'];
             $tempGuild = $item['G_Name'];
 
-            if(!$tempRl) {
+            if (!$tempRl) {
                 $arrGuild[$item['G_Name']]['strongClassGuils'] = $item['Name'];
                 $arrGuild[$item['G_Name']]['Resets'] = $item['Resets'];
                 $arrGuild[$item['G_Name']]['Relifes'] = $item['Relifes'];
@@ -191,7 +191,7 @@ function zenderRankingGuild($sub, $url, $page, $optSort = 'DESC')
 
     // Top Reset
     if ($sub == 'class_1') {
-        if($optSort == 'DESC') {
+        if ($optSort == 'DESC') {
             usort($showData, function ($a, $b) {
                 return $b['totalReset'] - $a['totalReset'];
             });
@@ -215,7 +215,7 @@ function zenderRankingCard($opts, $url, $page, $optSort = 'DESC')
     if (strtolower($opts) && $opts != 'none') {
         $whereOpt = 'WHERE card_type= \'' . strtolower($opts) . '\'';
     }
-    $resultTopCard = do_select_orther("select TOP 250 accountID, SUM(menhgia) as total_vnd from muonline.dbo.cardphone $whereOpt group by accountID order by total_vnd $optSort");
+    $resultTopCard = do_select_other("select TOP 250 accountID, SUM(menhgia) as total_vnd from muonline.dbo.cardphone $whereOpt group by accountID order by total_vnd $optSort");
 
     list ($resultShowData, $pagination) = cn_arr_paginaAjax($resultTopCard, $url, $page, $per_page);
 
@@ -245,7 +245,7 @@ function zenderDataContent($dataResult)
             $dataTableResult .= '<td>' . $items['totalPoint'] . '</td>';
             $dataTableResult .= '<td>' . $items['showNameClass'] . '</td>';
             $dataTableResult .= '<td>' . (@$items['DGT_Time'] ? date('d-M-Y h:ia', $items['DGT_Time']) : '---') . '</td>';
-            $dataTableResult .= '<td><img src="/images/'. (@$items['statusOnline'] ? 'users_online' : 'users_offline') .'.gif" alt="'. (@$items['ConnectStat'] ? 'Online' : 'Offline') .'"></td></tr>';
+            $dataTableResult .= '<td><img src="/images/' . (@$items['statusOnline'] ? 'users_online' : 'users_offline') . '.gif" alt="' . (@$items['ConnectStat'] ? 'Online' : 'Offline') . '"></td></tr>';
         }
     }
 
@@ -335,7 +335,7 @@ function ranking_character()
     if (empty($page) || $page <= 0) {
         $page = 1;
     }
-    $url = cn_url_modify(array('reset'), 'mod=ranking', 'opt=character','sub='.$sub, 'sort='. strtolower($sort), 'per_page', 'page');
+    $url = cn_url_modify(array('reset'), 'mod=ranking', 'opt=character', 'sub=' . $sub, 'sort=' . strtolower($sort), 'per_page', 'page');
 
     if (request_type('GET')) {
         if (isset($_REQUEST['sub'])) {
@@ -358,9 +358,9 @@ function ranking_character()
 
     cn_assign('opt', 'character');
     cn_assign('class_board, sub, pagination, sort, result_content', $class_board, $sub, $pagination, $sort, zenderDataContent($arrRankingCharater));
-    echoheader('-@my_ranking/style.css@my_ranking/callAjaxRanking.js', "Bảng xếp hạng theo nhân vật");
-    echocomtent_here(exec_tpl('my_ranking/_ranking'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_ranking/style.css@my_ranking/callAjaxRanking.js', "Bảng xếp hạng theo nhân vật");
+    echo_content_here(exec_tpl('my_ranking/_ranking'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function ranking_guild()
@@ -403,9 +403,9 @@ function ranking_guild()
 
     cn_assign('opt', 'guild');
     cn_assign('class_board, sub, pagination, sort, result_content', $class_board, $sub, $pagination, $sort, zenderDataContentGuild($arrRankingCharater));
-    echoheader('-@my_ranking/style.css@my_ranking/callAjaxRanking.js', "Bảng xếp hạng Bang Hội");
-    echocomtent_here(exec_tpl('my_ranking/_ranking'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_ranking/style.css@my_ranking/callAjaxRanking.js', "Bảng xếp hạng Bang Hội");
+    echo_content_here(exec_tpl('my_ranking/_ranking'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function ranking_rickCard()
@@ -454,7 +454,7 @@ function ranking_rickCard()
 
     cn_assign('opt', 'rickCard');
     cn_assign('class_board, sub, pagination, sort, result_content', $class_board, $sub, $pagination, $sort, zenderDataContentCardRich($arrRankingCharater));
-    echoheader('-@my_ranking/style.css@my_ranking/callAjaxRanking.js', "Bảng xếp hạng Phú Hội");
-    echocomtent_here(exec_tpl('my_ranking/_ranking'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_ranking/style.css@my_ranking/callAjaxRanking.js', "Bảng xếp hạng Phú Hội");
+    echo_content_here(exec_tpl('my_ranking/_ranking'), cn_snippet_bc_re());
+    echo_footer_web();
 }

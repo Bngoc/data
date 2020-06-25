@@ -46,9 +46,9 @@ cn_snippet_bc();
                             href="<?php echo cn_url_modify("category_id=$id_vl"); ?>"><?php echo htmlspecialchars($category['name_forum'], ENT_NOQUOTES, "UTF-8"); ?></a>
                     </td>
                     <td><?php echo($category['memo_forum']); ?></td>
-                    <td align="center"><?php if ($category['icon_forum']) echo '<img style="max-width: 128px; max-height: 128px;" src="' . ($category['icon_forum']) . '" />'; else echo '---'; //cn_htmlspecialchars
+                    <td align="center"><?php if ($category['icon_forum']) echo '<img style="max-width: 128px; max-height: 128px;" src="' . ($category['icon_forum']) . '" />'; else echo '---'; //cnHtmlSpecialChars
                         ?></td>
-                    <td align="left"><?php echo cn_htmlspecialchars($category['description_forum']); ?></td>
+                    <td align="left"><?php echo cnHtmlSpecialChars($category['description_forum']); ?></td>
                     <td align="center"><?php echo $acl_message ? $acl_message : '---'; ?></td>
                 </tr>
 
@@ -121,7 +121,7 @@ cn_snippet_bc();
                 <?php foreach ($groups as $id => $name) { ?>
                     <input type="checkbox"
                            name="category_acl[]" <?php if ($category_acl && in_array($id, $category_acl)) echo 'checked'; ?>
-                           value="<?php echo $id; ?>"/> <?php echo cn_htmlspecialchars($name['N']); ?>
+                           value="<?php echo $id; ?>"/> <?php echo cnHtmlSpecialChars($name['N']); ?>
                 <?php } ?>
             </td>
         </tr>

@@ -48,7 +48,7 @@ cn_snippet_bc();
                     <td><?php echo($category['memo_forum']); ?></td>
                     <td align="center"><?php if ($category['icon_forum']) echo '<img style="max-width: 128px; max-height: 128px;" src="' . ($category['icon_forum']) . '" />'; else echo '---'; //cn_htmlspecialchars
                         ?></td>
-                    <td align="left"><?php echo cn_htmlspecialchars($category['description_forum']); ?></td>
+                    <td align="left"><?php echo cnHtmlSpecialChars($category['description_forum']); ?></td>
                     <td align="center"><?php echo $acl_message ? $acl_message : '---'; ?></td>
                 </tr>
 

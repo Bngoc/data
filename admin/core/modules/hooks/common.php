@@ -50,7 +50,7 @@ function cn_extrn_replace($input)
 // Since 2.0: Do replace more fields
 function cn_extrn_morefields($t, $e)
 {
-    //$mb = member_get($e['u']);
+    //$mb = getMember($e['u']);
     $mb = ($e['u']);
 
     // Personal info
@@ -61,7 +61,7 @@ function cn_extrn_morefields($t, $e)
             } else {
                 $r = '';
             }
-            $t = str_replace($v[0], cn_htmlspecialchars($r), $t);
+            $t = str_replace($v[0], cnHtmlSpecialChars($r), $t);
         }
     }
 
@@ -128,19 +128,19 @@ function cn_extrn_init()
     }
 
     // Facebook initialzie
-    if ((getoption('use_fbcomments') || getoption('use_fblike')) && !mcache_get('fb_js_on') && $template != 'rss') {
+    if ((getoption('use_fbcomments') || getoption('use_fblike')) && !getMemcache('fb_js_on') && $template != 'rss') {
         echo str_replace(array('{appID}', '{fbi18n}'), array(getoption('fb_appid'), str_replace('-', '_', $i18n)), read_tpl('fb_comments'));
         mcache_set('fb_js_on', true);
     }
 
     // Definition G+ code uses
-    if (getoption('use_gplus') && !mcache_get('gplus_js_on') && $template != 'rss') {
+    if (getoption('use_gplus') && !getMemcache('gplus_js_on') && $template != 'rss') {
         echo str_replace('{lang}', $i18n, read_tpl('google_plus'));
         mcache_set('gplus_js_on', true);
     }
 
     // First init CN script
-    if (!mcache_get('cn:extr_init')) {
+    if (!getMemcache('cn:extr_init')) {
         echo preg_replace('/\s{2,}/s', ' ', read_tpl('cnscript'));
         mcache_set('cn:extr_init', true);
     }
@@ -162,7 +162,7 @@ function login_guest($keep_data = NULL, $username = NULL)
     // Send new data
     $_SESSION['.CSRF'] = md5(mt_rand());
 
-    if (!member_get()) {
+    if (!getMember()) {
         // Widget's login form
         echo proc_tpl('widgets/personal_login_form',
             "CSRF=" . $_SESSION['.CSRF'],
@@ -197,7 +197,7 @@ if (isset($_POST['widget_personal_keep'])) {
 
             // Get User Session
             $_SESSION['user'] = $login;
-            $user = member_get();
+            $user = getMember();
 
             if ($user['acl'] == ACL_LEVEL_ADMIN) {
                 cn_front_message("Admin login denied from this place", 'login');

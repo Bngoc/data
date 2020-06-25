@@ -78,7 +78,8 @@
 *search
 <form action="{php_self}" method="GET" class="cn_search_form">
     <div>{search_basic} Author: {author} {in_archives} In archives</div>
-    <div>{select=year:from} {select=mon:from} {select=day:from} &ndash; {select=year:to} {select=mon:to} {select=day:to}</div>
+    <div>{select=year:from} {select=mon:from} {select=day:from}
+        &ndash; {select=year:to} {select=mon:to} {select=day:to}</div>
     <div>[submit]Search[/submit]</div>
 </form>
 
@@ -156,7 +157,8 @@
 *search
 <form action="{php_self}" method="GET" class="cn_search_form">
     <div>{search_basic} Author: {author} {in_archives} In archives</div>
-    <div>{select=year:from} {select=mon:from} {select=day:from} &ndash; {select=year:to} {select=mon:to} {select=day:to}</div>
+    <div>{select=year:from} {select=mon:from} {select=day:from}
+        &ndash; {select=year:to} {select=mon:to} {select=day:to}</div>
     <div>[submit]Search[/submit]</div>
 </form>
 

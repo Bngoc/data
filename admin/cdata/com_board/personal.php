@@ -30,14 +30,14 @@ cn_snippet_bc();
         <tr>
             <td align="right">Username</td>
             <td><input type="text" name="username" disabled="disabled" style="background: #f0f0f0; width: 250px;"
-                       value="<?php echo cn_htmlspecialchars($username); ?>"/></td>
+                       value="<?php echo cnHtmlSpecialChars($username); ?>"/></td>
         </tr>
 
         <tr class="row">
             <td align="right">Email</td>
             <td>
                 <input type="text" name="editmail" disabled="disabled" style="background: #f0f0f0; width: 250px;"
-                       value="<?php echo cn_htmlspecialchars($usermail); ?>">
+                       value="<?php echo cnHtmlSpecialChars($usermail); ?>">
                 <input type="checkbox" name="edithidemail" <?php if ($hide_email) {
                     echo 'checked="checked"';
                 } ?>> Hide my e-mail from visitors
@@ -57,7 +57,7 @@ cn_snippet_bc();
         <tr>
             <td align="right">Nickname</td>
             <td><input type=text style="width: 350px;" name="editnickname"
-                       value="<?php echo cn_htmlspecialchars($nickname); ?>"></td>
+                       value="<?php echo cnHtmlSpecialChars($nickname); ?>"></td>
         </tr>
 
         <tr>
@@ -78,10 +78,10 @@ cn_snippet_bc();
                     <td valign="top">
                         <?php if ($pdata['type'] == 'text') { ?>
                             <input type="text" style="width: 500px;" name="more[<?php echo $name; ?>]"
-                                   value="<?= (isset($pdata['value']) ? cn_htmlspecialchars($pdata['value']) : ''); ?>">
+                                   value="<?= (isset($pdata['value']) ? cnHtmlSpecialChars($pdata['value']) : ''); ?>">
                         <?php } elseif ($pdata['type'] == 'textarea') { ?>
                             <textarea style="width: 500px; height: 100px;"
-                                      name="more[<?php echo $name; ?>]"><?= (isset($pdata['value']) ? cn_htmlspecialchars($pdata['value']) : ''); ?></textarea>
+                                      name="more[<?php echo $name; ?>]"><?= (isset($pdata['value']) ? cnHtmlSpecialChars($pdata['value']) : ''); ?></textarea>
                         <?php } ?>
                     </td>
                 </tr>

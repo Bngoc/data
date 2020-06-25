@@ -15,10 +15,12 @@
     float: right;
     display: block;
 }
+
 .bd {
     color: red;
     font-weight: bold;
 }
+
 .callAjaxRanking {
     cursor: pointer !important;
 }

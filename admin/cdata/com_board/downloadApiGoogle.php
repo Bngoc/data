@@ -4,14 +4,19 @@
         <input type="hidden" name="actionUpload" ng-model="drivers.actionUpload">
 
         <button type="button" class="btn btn-danger fa fa-plus" ng-click="open(product);">&nbsp;File Upload</button>
-<!--        <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="open(drivers);">&nbsp;File In Trash</button>-->
+        <!--        <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="open(drivers);">&nbsp;File In Trash</button>-->
         <div class="table-responsive">
             <div class="panel panel-primary">
                 <div class="panel-heading col-lg-12 display-list">
                     <div class="col-sm-7">
-                        <input type="radio" name="checkSort" ng-click="actSort(sort)" id="sort-a" ng-model="sort.sortList" value="a" /><label class="cursor-pointer pd-left5 mg-right10" for="sort-a">↑ ASC</label>
-                        <input type="radio" name="checkSort" ng-click="actSort(sort)" id="sort-d" ng-model="sort.sortList" value="d" class="bd"><label class="cursor-pointer pd-left5 mg-right10" for="sort-d">↓ DESC</label>
-                        <input type="checkbox" ng-click="actTrash()" ng-model="checkInTrash" id="checkInTrash"><label class="cursor-pointer pd-left5" for="checkInTrash">Trash</label>
+                        <input type="radio" name="checkSort" ng-click="actSort(sort)" id="sort-a"
+                               ng-model="sort.sortList" value="a"/><label class="cursor-pointer pd-left5 mg-right10"
+                                                                          for="sort-a">↑ ASC</label>
+                        <input type="radio" name="checkSort" ng-click="actSort(sort)" id="sort-d"
+                               ng-model="sort.sortList" value="d" class="bd"><label
+                            class="cursor-pointer pd-left5 mg-right10" for="sort-d">↓ DESC</label>
+                        <input type="checkbox" ng-click="actTrash()" ng-model="checkInTrash" id="checkInTrash"><label
+                            class="cursor-pointer pd-left5" for="checkInTrash">Trash</label>
                     </div>
                     <div class="sw-search pull-right col-sm-5">
                         <div class="nav-search c-right" id="nav-search">
@@ -50,7 +55,8 @@
                         </td>
                         <td>
                             <button class="ng-binding" ng-class="{'true': 'btn btn-success'}[c.isTrash]"
-                             ng-show="checkInTrash" ng-click="restoreTrash(c)">Restore</button>
+                                    ng-show="checkInTrash" ng-click="restoreTrash(c)">Restore
+                            </button>
                         </td>
                     </tr>
                 </table>

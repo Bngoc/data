@@ -5,7 +5,7 @@
     <div class="panel-body">
         <form role="form" method="post" enctype="multipart/form-data" name="fileinfo"
               ng-submit="uploadFileByMe(drivers, $event)">
-<!--              ng-submit="apiUploadFileDrivers(drivers, $event)">-->
+            <!--              ng-submit="apiUploadFileDrivers(drivers, $event)">-->
             <!--<form role="form" method="post" enctype="multipart/form-data" name="fileinfo" onsubmit="return doUpload();">-->
             <div class="form-group">
                 <label for="myfile">File Upload</label>
@@ -37,7 +37,7 @@
             <div class="modal-footer">
                 <input type="submit" ng-disabled="isDisabled" class="btn btn-default" value="Upload"/>
                 <input type="button" class="btn btn-default" value="Cancle" ng-click="cancel();"/>
-<!--                <input type="button" class="btn btn-default" value="Cancle" onclick="cancleUpload();"/>-->
+                <!--                <input type="button" class="btn btn-default" value="Cancle" onclick="cancleUpload();"/>-->
             </div>
         </form>
     </div>
@@ -99,7 +99,7 @@
 <!--</div>-->
 
 <script type="text/javascript">
-//    $('#myModal').modal({backdrop: 'static', keyboard: false});
+    //    $('#myModal').modal({backdrop: 'static', keyboard: false});
     //document.getElementById("progress-group").classList.add('display-none');
-//    $('#myfile').css({ padding: "20px" });
+    //    $('#myfile').css({ padding: "20px" });
 </script>

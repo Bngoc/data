@@ -240,6 +240,7 @@ if (!defined('_ADODB_LAYER')) {
     //==============================================================================================
     // CLASS ADOFieldObject
     //==============================================================================================
+
     /**
      * Helper class for FetchFields -- holds info on a column
      */
@@ -533,8 +534,8 @@ if (!defined('_ADODB_LAYER')) {
          * These parameters are added to the connection string when connecting,
          * if the driver is coded to use it.
          *
-         * @param    string $parameter The name of the parameter to set
-         * @param    string $value The value of the parameter
+         * @param string $parameter The name of the parameter to set
+         * @param string $value The value of the parameter
          *
          * @return null
          *

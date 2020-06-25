@@ -8,17 +8,17 @@ if ($km_list[1]) {
 } else {
     $km_listOne = explode(',', $km_list[0]);
 
-    if($km_listOne[0]){
+    if ($km_listOne[0]) {
         $strKm = 'Chương trình khuyến mại thẻ nạp VTC: <span class="cRed">' . $km_listOne[0] . ' %</span> cho bất kì mệnh giá nào.';
-    }elseif ($km_listOne[1]){
+    } elseif ($km_listOne[1]) {
         $strKm = 'Chương trình khuyến mại thẻ nạp GATE: <span class="cRed">' . $km_listOne[1] . ' %</span> cho bất kì mệnh giá nào.';
-    }elseif ($km_listOne[2]){
+    } elseif ($km_listOne[2]) {
         $strKm = 'Chương trình khuyến mại thẻ nạp VIETTEL: <span class="cRed">' . $km_listOne[2] . ' %</span> cho bất kì mệnh giá nào.';
-    }elseif ($km_listOne[3]){
+    } elseif ($km_listOne[3]) {
         $strKm = 'Chương trình khuyến mại thẻ nạp MOBI: <span class="cRed">' . $km_listOne[3] . ' %</span> cho bất kì mệnh giá nào.';
-    }elseif ($km_listOne[4]){
+    } elseif ($km_listOne[4]) {
         $strKm = 'Chương trình khuyến mại thẻ nạp VINA: <span class="cRed">' . $km_listOne[4] . ' %</span> cho bất kì mệnh giá nào.';
-    }else{
+    } else {
         $strKm = '';
     }
 }

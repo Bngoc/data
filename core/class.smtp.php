@@ -193,11 +193,11 @@ class SMTP
 
     /**
      * Output debugging info via a user-selected method.
-     * @see SMTP::$Debugoutput
-     * @see SMTP::$do_debug
      * @param string $str Debug string to output
      * @param integer $level The debug level of this message; see DEBUG_* constants
      * @return void
+     * @see SMTP::$do_debug
+     * @see SMTP::$Debugoutput
      */
     protected function edebug($str, $level = 0)
     {
@@ -362,7 +362,6 @@ class SMTP
     /**
      * Perform SMTP authentication.
      * Must be run after hello().
-     * @see hello()
      * @param string $username The user name
      * @param string $password The password
      * @param string $authtype The auth type (PLAIN, LOGIN, NTLM, CRAM-MD5, XOAUTH2)
@@ -370,6 +369,7 @@ class SMTP
      * @param string $workstation The auth workstation for NTLM
      * @param null|OAuth $OAuth An optional OAuth instance (@see PHPMailerOAuth)
      * @return bool True if successfully authenticated.* @access public
+     * @see hello()
      */
     public function authenticate(
         $username,
@@ -595,9 +595,9 @@ class SMTP
     /**
      * Close the socket and clean up the state of the class.
      * Don't use this function without first trying to use QUIT.
+     * @return void
      * @see quit()
      * @access public
-     * @return void
      */
     public function close()
     {
@@ -722,11 +722,11 @@ class SMTP
     /**
      * Send an SMTP HELO or EHLO command.
      * Low-level implementation used by hello()
-     * @see hello()
      * @param string $hello The HELO string
      * @param string $host The hostname to say we are
      * @access protected
      * @return boolean
+     * @see hello()
      */
     protected function sendHello($hello, $host)
     {

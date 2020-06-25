@@ -6,7 +6,7 @@ function cn_db_init()
 {
     //global $db;
     // basic CN db
-    include SERVDIR . '/core/db/coreflat.php';
+    include SERVDIR . '/core/db/flat_web.php';
 }
 
 function UTF8ToEntities($string)
@@ -299,17 +299,17 @@ function UTF8ToEntities($string)
             {
                 return '&#'.((ord($matches[1])&7)<<18 | (ord($matches[2])&63)<<12 |(ord($matches[3])&63)<<6 | (ord($matches[4])&63)).';';
             },
-            $string);    
-        
-        // decode three byte unicode characters        
+            $string);
+
+        // decode three byte unicode characters
         $string = preg_replace_callback(
             "/([\340-\357])([\200-\277])([\200-\277])/",
             function ($matches)
             {
                 return '&#'.((ord($matches[1])&15)<<12 | (ord($matches[2])&63)<<6 | (ord($matches[3])&63)).';';
-            },        
-            $string);       
-            
+            },
+            $string);
+
         // decode two byte unicode characters
         $string = preg_replace_callback(
             "/([\300-\337])([\200-\277])/",
@@ -317,8 +317,8 @@ function UTF8ToEntities($string)
             {
                 return '&#'.((ord($matches[1])&31)<<6 | (ord($matches[2])&63)).';';
             },
-            $string);    
-    
+            $string);
+
         // reject leftover continuation bytes
         $string = preg_replace("/[\200-\277]/", "&#65533;", $string);
     */
@@ -328,7 +328,7 @@ function UTF8ToEntities($string)
 
 function i18n()
 {
-    $i8 = mcache_get('#i18n');
+    $i8 = getMemcache('#i18n');
     $va = func_get_args();
     $ft = array_shift($va);
 
@@ -663,7 +663,7 @@ function REQ($var, $method = 'GETPOST')
 // Since 2.0: Get cached categories with acl test
 function cn_get_categories($is_frontend = FALSE)
 {
-    if ($cc = mcache_get('#categories')) {
+    if ($cc = getMemcache('#categories')) {
         $catgl = $cc;
     } else {
         //$catgl = getoption('#category');
@@ -690,13 +690,13 @@ function cn_get_categories($is_frontend = FALSE)
 // Since 2.0: Test category accessible for current user
 function test_cat($cat)
 {
-    $user = member_get();
+    $user = getMember();
     $grp = getoption('#grp');
 
     if (!$user) return FALSE;
 
     // Get from cache
-    if ($cc = mcache_get('#categories'))
+    if ($cc = getMemcache('#categories'))
         $catgl = $cc;
     else {
         //$catgl = getoption('#category');
@@ -758,7 +758,7 @@ function cn_assign()
 // Since 2.0: Show breadcrumbs
 function cn_snippet_bc($sep = '&gt;')
 {
-    $bc = mcache_get('.breadcrumbs');
+    $bc = getMemcache('.breadcrumbs');
     echo '<div class="cn_breadcrumbs">';
 
     $ls = array();
@@ -778,7 +778,7 @@ function cn_snippet_bc($sep = '&gt;')
 // @Param: type = std (input hidden), a (inline in a)
 function cn_snippet_digital_signature($type = 'std')
 {
-    $member = member_get();
+    $member = getMember();
 
     // Is not member - is fatal error
     if (is_null($member)) die("Exception with generating signature");
@@ -1322,7 +1322,7 @@ function cn_dsi_check()
         unset($_GET['__signature_key'], $_GET['__signature_dsi']);
     }
 
-    $member = member_get();
+    $member = getMember();
     list(, $username) = explode('-', $key, 2);
 
     if ($member['name'] !== $username)
@@ -1428,7 +1428,7 @@ function cn_get_news($opts)
         $day = mysqli_real_escape_string($db, $day);
     }
 
-    // ============================================================================================================== 
+    // ==============================================================================================================
 
     print "F_cn_url_modify 1574 sort: $sort <br>";
     print "F_cn_url_modify 1574 dir: $dir <br>";
@@ -1550,7 +1550,7 @@ function cn_get_news($opts)
         }
     }
 
-//$mysql_tem = $sum_recode_topics . " AND YEAR(topics.date) = '" . $year . "' AND MONTHNAME(topics.date) = '" . $mon . "' AND DAY(topics.date) = '". $day ."' GROUP BY topics.id;";														
+//$mysql_tem = $sum_recode_topics . " AND YEAR(topics.date) = '" . $year . "' AND MONTHNAME(topics.date) = '" . $mon . "' AND DAY(topics.date) = '". $day ."' GROUP BY topics.id;";
 
     $dyear = array();
     $dmon = array();
@@ -1607,7 +1607,7 @@ function cn_get_news($opts)
     /*
     if(count($cfilter) >0 && isset($cfilter)){
         arsort($cfilter);
-        foreach ($cfilter as $id) { 
+        foreach ($cfilter as $id) {
             $myfsql = "SELECT id, name FROM forums WHERE id =" . $id . ";";
             $fresult =$db->query($myfsql);
             if($fresult ->num_rows!=0){
@@ -1616,7 +1616,7 @@ function cn_get_news($opts)
                 }
             }
         }
-    }		
+    }
     */
     if (count($ufilter) > 0 && isset($ufilter)) {
         arsort($ufilter);
@@ -1638,7 +1638,7 @@ function cn_get_news($opts)
 //echo "orderw: <br> " . $orderw . "<br>";
 
     if (!getoption('num_center_pagination'))
-        $adjacents = 3; // num lastpage center	
+        $adjacents = 3; // num lastpage center
     else
         $adjacents = getoption('num_center_pagination');
 
@@ -1719,8 +1719,8 @@ function cn_get_news($opts)
 
                 $pagination .= "<li>...</li>";
 
-                $pagination .= "<li><a href=" . cn_url_modify('mod=editnews', "page=$lpm1") . " class='page-link'>$lpm1</a></li>"; // trang cuoi - 1 
-                $pagination .= "<li><a href=" . cn_url_modify('mod=editnews', "page=$lastpage") . " class='page-link'>$lastpage</a></li>";  // trang cuoi 
+                $pagination .= "<li><a href=" . cn_url_modify('mod=editnews', "page=$lpm1") . " class='page-link'>$lpm1</a></li>"; // trang cuoi - 1
+                $pagination .= "<li><a href=" . cn_url_modify('mod=editnews', "page=$lastpage") . " class='page-link'>$lastpage</a></li>";  // trang cuoi
 
             } //close to end; only hide early pages
             else {
@@ -1932,7 +1932,7 @@ function cn_get_menu()
 }
 
 
-function member_get()
+function getMember()
 {
     // Not authorized
     if (empty($_SESSION['users'])) {
@@ -1940,7 +1940,7 @@ function member_get()
     }
 
     // No in cache
-    if ($member = mcache_get('#member')) {
+    if ($member = getMemcache('#member')) {
         return $member;
     }
 
@@ -2028,14 +2028,14 @@ function cn_login()
                     $member['pass'] = '';
                 }
 
-                //if($numrows >= 1) {	
+                //if($numrows >= 1) {
                 //----------------------------------------------------
                 //$get_ban_time = isset($row['ban']) ? (int)$row['ban'] : 0;
                 //$get_ban_time = $row['ban'];
 
 
                 //$ban_time = isset($row['ban']) ? (int)$row['ban'] : 0;
-                $ban_time = isset($member['ban']) ? (int)$member['ban'] : 0;
+                $ban_time = isset($member['Ban']) ? (int)$member['Ban'] : 0;
 
                 // ban limit
                 if ($ban_time && $ban_time > time()) {
@@ -2120,7 +2120,7 @@ function cn_login()
                         $showtext = "You have tried to log in too many times. Your ban will be removed in {x} minutes (= {y} hours).";
                         msg('error', $ban_title, str_replace(array('{x}', '{y}'), array($minutez, $hourz), $showtext));
                     }
-                    //-----------------------------------------------	
+                    //-----------------------------------------------
                     $numlogin++;
 
                     $myup = "UPDATE `admins` SET `ban`=" . (time() + getoption('ban_attempts')) . ", numlogin = '" . $numlogin . "' WHERE username = '$name';";
@@ -2322,7 +2322,7 @@ function cn_register_form($admin = TRUE)
     }
 
     if (empty($template)) {
-        return FALSE;
+        return false;
     }
 
     if ($admin) {
@@ -2343,7 +2343,7 @@ function cn_register_form($admin = TRUE)
 // Since 2.0: Add message
 function cn_throw_message($msg, $area = 'n')
 {
-    $es = mcache_get('msg:stor');
+    $es = getMemcache('msg:stor');
 
     if (!isset($es[$area])) $es[$area] = array();
     $es[$area][] = i18n($msg);
@@ -2358,7 +2358,7 @@ function cn_throw_message($msg, $area = 'n')
 function cn_get_message($area, $method = 's') // s-show, c-count
 {
 
-    $es = mcache_get('msg:stor');
+    $es = getMemcache('msg:stor');
     if (isset($es[$area])) {
         if ($method == 's') return $es[$area];
         elseif ($method == 'c') return count($es[$area]);
@@ -2501,7 +2501,7 @@ function cn_category_struct($cats, $nc = array(), $parent = 0, $level = 0)
 
             // get childrens nodes
             list($nc, $ch) = cn_category_struct($cats, $nc, $id_xd, $level + 1); // bqn
-            //list($nc, $ch) = cn_category_struct($cats, $nc, $vc['id'], $level + 1); 
+            //list($nc, $ch) = cn_category_struct($cats, $nc, $vc['id'], $level + 1);
 
             // all childrens for node
             $nc[$id_xd]['ac_forum'] = $ch;
@@ -2563,23 +2563,23 @@ function echoheader($image, $header_text, $bread_crumbs = false)
     echo $skin_header;
 }
 
-function echofooter()
-{
-    global $is_loged_in, $skin_footer, $lang_content_type, $skin_menu, $config_adminemail, $config_admin;
-
-    if ($is_loged_in == TRUE)
-        $skin_footer = str_replace("{menu}", $skin_menu, $skin_footer);
-    else $skin_footer = str_replace("{menu}", " &nbsp; ", $skin_footer);
-
-    //$skin_footer = get_skin($skin_footer);
-    //$skin_footer = str_replace("{content-type}", $lang_content_type, $skin_footer);
-    $skin_footer = str_replace("{exec-time}", round(microtime(true) - BQN_MU, 3), $skin_footer);
-    $skin_footer = str_replace("{year-time}", date("Y"), $skin_footer);
-    $skin_footer = str_replace("{email-name}", $config_adminemail, $skin_footer);
-    $skin_footer = str_replace("{byname}", $config_admin, $skin_footer);
-
-    die($skin_footer);
-}
+//function echofooter()
+//{
+//    global $is_loged_in, $skin_footer, $lang_content_type, $skin_menu, $config_adminemail, $config_admin;
+//
+//    if ($is_loged_in == TRUE)
+//        $skin_footer = str_replace("{menu}", $skin_menu, $skin_footer);
+//    else $skin_footer = str_replace("{menu}", " &nbsp; ", $skin_footer);
+//
+//    //$skin_footer = get_skin($skin_footer);
+//    //$skin_footer = str_replace("{content-type}", $lang_content_type, $skin_footer);
+//    $skin_footer = str_replace("{exec-time}", round(microtime(true) - BQN_MU, 3), $skin_footer);
+//    $skin_footer = str_replace("{year-time}", date("Y"), $skin_footer);
+//    $skin_footer = str_replace("{email-name}", $config_adminemail, $skin_footer);
+//    $skin_footer = str_replace("{byname}", $config_admin, $skin_footer);
+//
+//    die($skin_footer);
+//}
 
 
 // Since 2.0: Set GET params
@@ -2667,7 +2667,7 @@ function bd_config($str)
 function read_tpl($tpl = 'index')
 {
     // get from cache
-    $cached = mcache_get("tpl:$tpl");
+    $cached = getMemcache("tpl:$tpl");
     if ($cached) {
         return $cached;
     }
@@ -2724,7 +2724,7 @@ function cn_path_construct()
 // Usage: #level1/level2/.../levelN or 'option_name' from %site
 function getoption($opt_name = '')
 {
-    $cfg = mcache_get('config');
+    $cfg = getMemcache('config');
 
     if ($opt_name === '') {
         return $cfg;
@@ -2755,7 +2755,7 @@ function mcache_set($name, $var)
 
 
 // Since 1.5.3: Get variable from cache
-function mcache_get($name)
+function getMemcache($name)
 {
     global $_CN_SESS_CACHE;
     return isset($_CN_SESS_CACHE[$name]) ? $_CN_SESS_CACHE[$name] : FALSE;
@@ -2766,7 +2766,7 @@ function mcache_get($name)
 // Usage: #level1/level2/.../levelN or 'option_name' from %site
 function setoption($opt_name, $var)
 {
-    $cfg = mcache_get('config');
+    $cfg = getMemcache('config');
 
     if ($opt_name[0] == '#') {
         $c_names = spsep(substr($opt_name, 1), '/');
@@ -2806,7 +2806,7 @@ function cn_translate_active_news($entry, $translate)
     $PHP_SELF = $_bc_PHP_SELF;
 
     // Disable Rewrite (once)
-    mcache_get(':disable_rw', FALSE);
+    getMemcache(':disable_rw', FALSE);
 
     if (empty($translate) || !is_array($translate)) {
         return null;
@@ -2828,7 +2828,7 @@ function cn_translate_active_news($entry, $translate)
             $PHP_SELF = $value;
         }
         if ($ID == ':disable_rw') {
-            mcache_get(':disable_rw', TRUE);
+            getMemcache(':disable_rw', TRUE);
         }
     }
 }
@@ -2836,7 +2836,7 @@ function cn_translate_active_news($entry, $translate)
 // Since 2.0: Add BreadCrumb
 function cn_bc_add($name, $url)
 {
-    $bc = mcache_get('.breadcrumbs');
+    $bc = getMemcache('.breadcrumbs');
     $bc[] = array('name' => $name, 'url' => $url);
     mcache_set('.breadcrumbs', $bc);
 }
@@ -3435,9 +3435,9 @@ function cn_require_install()
 // Since 2.0: Test User ACL. Test for groups [user may consists requested group]
 function test($requested_acl, $requested_user = NULL, $is_self = FALSE)
 {
-    $user = member_get(); // get user menber session
+    $user = getMember(); // get user menber session
 
-    // Deny ANY access of unathorized member
+    // Deny ANY access of unauthorized member
     if (!$user) return FALSE;
 
     $acl = $user['acl'];
@@ -3456,20 +3456,20 @@ function test($requested_acl, $requested_user = NULL, $is_self = FALSE)
     // ----------------------------------
     print "---------------------------------------------------------------<br>";
     foreach ($ra as $r)
-    {    
+    {
         print "F_cn_url_modify 2740 bien ra: $r <br>";
     }
     print "-----------------------------S _gp----------------------------------<br>";
     foreach ($gp as $r)
-    {    
+    {
         print "F_cn_url_modify 2755 bien gp: $r <br>";
     }
     print "-----------------------------S _rc----------------------------------<br>";
     foreach ($rc as $r)
-    {    
+    {
         print "F_cn_url_modify 2759 bien rc: $r <br>";
     }
-    
+
     // ----------------------------------
     */
     // ra la bien truyen vao
@@ -3556,11 +3556,11 @@ function cn_get_more_fields($defined = array())
 }
 
 
-// Since 2.0: @bootstrap Make & load configuration file ==> 
+// Since 2.0: @bootstrap Make & load configuration file ==>
 function cn_config_load()
 {
     global $_CN_access;
-    //checking permission for load config 
+    //checking permission for load config
     $conf_dir = cn_path_construct(SERVDIR, 'cdata');
     if (!is_dir($conf_dir) || !is_writable($conf_dir)) {
         return false;
@@ -3742,7 +3742,7 @@ function cn_config_load()
 function cn_config_save($cfg = null)
 {
     if ($cfg === null) {
-        $cfg = mcache_get('config');
+        $cfg = getMemcache('config');
     }
 
     $fn = cn_path_construct(SERVDIR, 'cdata') . 'conf.php';
@@ -3870,5 +3870,3 @@ function cn_rewrite_load()
         $PHP_SELF = PHP_SELF;
     }
 }
-
-?>

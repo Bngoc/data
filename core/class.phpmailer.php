@@ -693,10 +693,10 @@ class PHPMailer
 
     /**
      * Output debugging info via user-defined method.
-     * Only generates output if SMTP debug output is enabled (@see SMTP::$do_debug).
+     * Only generates output if SMTP debug output is enabled (@param string $str
      * @see PHPMailer::$Debugoutput
      * @see PHPMailer::$SMTPDebug
-     * @param string $str
+     * @see SMTP::$do_debug).
      */
     protected function edebug($str)
     {
@@ -852,9 +852,9 @@ class PHPMailer
      * @param string $kind One of 'to', 'cc', 'bcc', or 'ReplyTo'
      * @param string $address The email address to send, resp. to reply to
      * @param string $name
-     * @throws phpmailerException
      * @return boolean true on success, false if address already used or invalid in some way
      * @access protected
+     * @throws phpmailerException
      */
     protected function addOrEnqueueAnAddress($kind, $address, $name)
     {
@@ -896,9 +896,9 @@ class PHPMailer
      * @param string $kind One of 'to', 'cc', 'bcc', or 'ReplyTo'
      * @param string $address The email address to send, resp. to reply to
      * @param string $name
-     * @throws phpmailerException
      * @return boolean true on success, false if address already used or invalid in some way
      * @access protected
+     * @throws phpmailerException
      */
     protected function addAnAddress($kind, $address, $name = '')
     {
@@ -995,8 +995,8 @@ class PHPMailer
      * @param string $address
      * @param string $name
      * @param boolean $auto Whether to also set the Sender address, defaults to true
-     * @throws phpmailerException
      * @return boolean
+     * @throws phpmailerException
      */
     public function setFrom($address, $name = '', $auto = true)
     {
@@ -1165,9 +1165,9 @@ class PHPMailer
      * - No conversion is necessary (i.e. domain name is not an IDN, or is already in ASCII form)
      * - Conversion to punycode is impossible (e.g. required PHP functions are not available)
      *   or fails for any reason (e.g. domain has characters not allowed in an IDN)
-     * @see PHPMailer::$CharSet
      * @param string $address The email address to convert
      * @return string The encoded address in ASCII form
+     * @see PHPMailer::$CharSet
      */
     public function punyencodeAddress($address)
     {
@@ -1194,8 +1194,8 @@ class PHPMailer
     /**
      * Create a message and send it.
      * Uses the sending method specified by $Mailer.
-     * @throws phpmailerException
      * @return boolean false on error - See the ErrorInfo property for details of the error.
+     * @throws phpmailerException
      */
     public function send()
     {
@@ -1216,8 +1216,8 @@ class PHPMailer
 
     /**
      * Prepare a message for sending.
-     * @throws phpmailerException
      * @return boolean
+     * @throws phpmailerException
      */
     public function preSend()
     {
@@ -1312,8 +1312,8 @@ class PHPMailer
     /**
      * Actually send a message.
      * Send the email via the selected mechanism
-     * @throws phpmailerException
      * @return boolean
+     * @throws phpmailerException
      */
     public function postSend()
     {
@@ -1349,10 +1349,10 @@ class PHPMailer
      * Send mail using the $Sendmail program.
      * @param string $header The message headers
      * @param string $body The message body
-     * @see PHPMailer::$Sendmail
+     * @return boolean
      * @throws phpmailerException
      * @access protected
-     * @return boolean
+     * @see PHPMailer::$Sendmail
      */
     protected function sendmailSend($header, $body)
     {
@@ -1418,10 +1418,10 @@ class PHPMailer
      * Send mail using the PHP mail() function.
      * @param string $header The message headers
      * @param string $body The message body
-     * @link http://www.php.net/manual/en/book.mail.php
+     * @return boolean
      * @throws phpmailerException
      * @access protected
-     * @return boolean
+     * @link http://www.php.net/manual/en/book.mail.php
      */
     protected function mailSend($header, $body)
     {
@@ -1476,13 +1476,13 @@ class PHPMailer
      * Send mail via SMTP.
      * Returns false if there is a bad MAIL FROM, RCPT, or DATA input.
      * Uses the PHPMailerSMTP class by default.
-     * @see  PHPMailer::getSMTPInstance() to use a different class.
      * @param string $header The message headers
      * @param string $body The message body
+     * @return boolean
      * @throws phpmailerException
      * @uses SMTP
      * @access protected
-     * @return boolean
+     * @see  PHPMailer::getSMTPInstance() to use a different class.
      */
     protected function smtpSend($header, $body)
     {
@@ -1542,10 +1542,10 @@ class PHPMailer
      * Initiate a connection to an SMTP server.
      * Returns false if the operation failed.
      * @param array $options An array of options compatible with stream_context_create()
+     * @return boolean
+     * @throws phpmailerException
      * @uses SMTP
      * @access public
-     * @throws phpmailerException
-     * @return boolean
      */
     public function smtpConnect($options = null)
     {
@@ -1769,8 +1769,8 @@ class PHPMailer
             return $this->secureHeader($addr[0]);
         } else {
             return $this->encodeHeader($this->secureHeader($addr[1]), 'phrase') . ' <' . $this->secureHeader(
-                $addr[0]
-            ) . '>';
+                    $addr[0]
+                ) . '>';
         }
     }
 
@@ -2100,9 +2100,9 @@ class PHPMailer
      * Returns the whole MIME message.
      * Includes complete headers and body.
      * Only valid post preSend().
+     * @return string
      * @see PHPMailer::preSend()
      * @access public
-     * @return string
      */
     public function getSentMIMEMessage()
     {
@@ -2113,8 +2113,8 @@ class PHPMailer
      * Assemble the message body.
      * Returns an empty string on failure.
      * @access public
-     * @throws phpmailerException
      * @return string The assembled message body
+     * @throws phpmailerException
      */
     public function createBody()
     {
@@ -2421,8 +2421,8 @@ class PHPMailer
      * @param string $encoding File encoding (see $Encoding).
      * @param string $type File extension (MIME) type.
      * @param string $disposition Disposition to use
-     * @throws phpmailerException
      * @return boolean
+     * @throws phpmailerException
      */
     public function addAttachment($path, $name = '', $encoding = 'base64', $type = '', $disposition = 'attachment')
     {
@@ -2601,9 +2601,9 @@ class PHPMailer
      * Returns an empty string on failure.
      * @param string $path The full path to the file
      * @param string $encoding The encoding to use; one of 'base64', '7bit', '8bit', 'binary', 'quoted-printable'
+     * @return string
      * @throws phpmailerException
      * @access protected
-     * @return string
      */
     protected function encodeFile($path, $encoding = 'base64')
     {
@@ -2834,12 +2834,12 @@ class PHPMailer
 
     /**
      * Backward compatibility wrapper for an old QP encoding function that was removed.
-     * @see PHPMailer::encodeQP()
-     * @access public
      * @param string $string
      * @param integer $line_max
      * @param boolean $space_conv
      * @return string
+     * @see PHPMailer::encodeQP()
+     * @access public
      * @deprecated Use encodeQP instead.
      */
     public function encodeQPphp(
@@ -3312,8 +3312,8 @@ class PHPMailer
      * @param string $message HTML message string
      * @param string $basedir baseline directory for path
      * @param boolean|callable $advanced Whether to use the internal HTML to text converter
-     *    or your own custom converter @see PHPMailer::html2text()
-     * @return string $message
+     *    or your own custom converter @return string $message
+     * @see PHPMailer::html2text()
      */
     public function msgHTML($message, $basedir = '', $advanced = false)
     {
@@ -3682,8 +3682,8 @@ class PHPMailer
      * Generate a DKIM signature.
      * @access public
      * @param string $signHeader
-     * @throws phpmailerException
      * @return string
+     * @throws phpmailerException
      */
     public function DKIM_Sign($signHeader)
     {

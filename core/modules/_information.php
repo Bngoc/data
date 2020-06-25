@@ -44,7 +44,7 @@ function manager_invoke()
         }
     }
 
-    echoheader('-@my_account/style.css', "Manger Account");
+    echo_header_web('-@my_account/style.css', "Manger Account");
 
     $images = array(
         'change_pass' => 'change_pass.png',
@@ -77,15 +77,15 @@ function manager_invoke()
     }
 
     cn_assign('dashboard', $cManger_account);
-    echocomtent_here(exec_tpl('my_account/general'), cn_snippet_bc_re());
-    echofooter();
+    echo_content_here(exec_tpl('my_account/general'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function manager_default()
 {
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@defaults/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('-@defaults/default'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@defaults/style.css', "Error - $name__");
+    echo_content_here(exec_tpl('-@defaults/default'), cn_snippet_bc_re());
+    echo_footer_web();
 }

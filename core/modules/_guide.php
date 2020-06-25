@@ -49,7 +49,7 @@ function guide_invoke()
         }
     }
 
-    echoheader('-@my_guide/style.css', "Manger Account");
+    echo_header_web('-@my_guide/style.css', "Manger Account");
 
     $images = array(
         'change_pass' => 'change_pass.png',
@@ -77,24 +77,24 @@ function guide_invoke()
     }
 
     cn_assign('dashboard', $cManger_account);
-    echocomtent_here(exec_tpl('my_guide/general'), cn_snippet_bc_re());
-    echofooter();
+    echo_content_here(exec_tpl('my_guide/general'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function guide_default()
 {
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@defaults/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('-@defaults/default'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@defaults/style.css', "Error - $name__");
+    echo_content_here(exec_tpl('-@defaults/default'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function guide_cottruyen()
 {
-    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
-    echocomtent_here(exec_tpl('-@my_guide/_cottruyen'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_guide/style.css', "Hướng dẫn cách chơi game");
+    echo_content_here(exec_tpl('-@my_guide/_cottruyen'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function guide_tinhnang()
@@ -136,9 +136,9 @@ function guide_tinhnang()
     $options = $options_list[$sub];
     cn_assign('sub, options, options_list', $sub, $options, $options_list);
 
-    echoheader('-@my_guide/style.css@my_guide/customjs.js', "Hướng dẫn cách chơi game");
-    echocomtent_here(exec_tpl('-@my_guide/_tinhnang'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_guide/style.css@my_guide/customjs.js', "Hướng dẫn cách chơi game");
+    echo_content_here(exec_tpl('-@my_guide/_tinhnang'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function guide_nhanvat()
@@ -167,23 +167,23 @@ function guide_nhanvat()
     }
     cn_assign('sub, options', $sub, $options);
 
-    echoheader('-@my_guide/style.css@my_guide/customjs.js', "Hướng dẫn cách chơi game");
-    echocomtent_here(exec_tpl('-@my_guide/_nhanvat'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_guide/style.css@my_guide/customjs.js', "Hướng dẫn cách chơi game");
+    echo_content_here(exec_tpl('-@my_guide/_nhanvat'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function guide_nhiemvu()
 {
-    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
-    echocomtent_here(exec_tpl('-@my_guide/_nhiemvu'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_guide/style.css', "Hướng dẫn cách chơi game");
+    echo_content_here(exec_tpl('-@my_guide/_nhiemvu'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function guide_thuhotro()
 {
-    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
-    echocomtent_here(exec_tpl('-@my_guide/_thuhotro'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_guide/style.css', "Hướng dẫn cách chơi game");
+    echo_content_here(exec_tpl('-@my_guide/_thuhotro'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function guide_quaivat()
@@ -219,37 +219,37 @@ function guide_quaivat()
     }
     cn_assign('sub, options', $sub, $options);
 
-    echoheader('-@my_guide/style.css@my_guide/customjs.js', "Hướng dẫn cách chơi game");
-    echocomtent_here(exec_tpl('-@my_guide/_quaivat'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_guide/style.css@my_guide/customjs.js', "Hướng dẫn cách chơi game");
+    echo_content_here(exec_tpl('-@my_guide/_quaivat'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function guide_items()
 {
-    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
-    echocomtent_here(exec_tpl('-@my_guide/_items'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_guide/style.css', "Hướng dẫn cách chơi game");
+    echo_content_here(exec_tpl('-@my_guide/_items'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function guide_npc()
 {
-    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
-    echocomtent_here(exec_tpl('-@my_guide/_npc'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_guide/style.css', "Hướng dẫn cách chơi game");
+    echo_content_here(exec_tpl('-@my_guide/_npc'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function guide_thucuoi()
 {
-    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
-    echocomtent_here(exec_tpl('-@my_guide/_thucuoi'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_guide/style.css', "Hướng dẫn cách chơi game");
+    echo_content_here(exec_tpl('-@my_guide/_thucuoi'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function guide_banghoi()
 {
-    echoheader('-@my_guide/style.css', "Hướng dẫn cách chơi game");
-    echocomtent_here(exec_tpl('-@my_guide/_banghoi'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_guide/style.css', "Hướng dẫn cách chơi game");
+    echo_content_here(exec_tpl('-@my_guide/_banghoi'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function guide_sukiengame()
@@ -277,7 +277,7 @@ function guide_sukiengame()
     }
     cn_assign('sub, options', $sub, $options);
 
-    echoheader('-@my_guide/style.css@my_guide/customjs.js', "Hướng dẫn cách chơi game");
-    echocomtent_here(exec_tpl('-@my_guide/_sukiengame'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_guide/style.css@my_guide/customjs.js', "Hướng dẫn cách chơi game");
+    echo_content_here(exec_tpl('-@my_guide/_sukiengame'), cn_snippet_bc_re());
+    echo_footer_web();
 }

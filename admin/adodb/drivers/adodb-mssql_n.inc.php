@@ -75,12 +75,12 @@ class ADODB_mssql_n extends ADODB_mssql
      * in your DB are of type nchar, nvarchar and ntext, but testing seems to indicate that SQL server
      * doesn't seem to care if the statement is used against char etc fields.
      *
-     * @todo This function should raise an ADOdb error if one of the transformations fail
-     *
      * @param mixed $inboundData Either a string containing an SQL statement
      *                           or an array with resources from prepared statements
      *
      * @return mixed
+     * @todo This function should raise an ADOdb error if one of the transformations fail
+     *
      */
     function _appendN($inboundData)
     {
@@ -182,7 +182,7 @@ class ADODB_mssql_n extends ADODB_mssql
                 foreach ($literals as $key => $value) {
                     if (!is_numeric(trim($value, SINGLEQUOTE)))
                         /*
-                        * Non numeric string, prepend our dear N, whilst 
+                        * Non numeric string, prepend our dear N, whilst
                         * Trimming potentially existing previous "N"
                         */
                         $literals[$key] = 'N' . trim($value, 'N');

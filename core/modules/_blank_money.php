@@ -106,26 +106,27 @@ function blank_money_invoke()
     }
 
     cn_assign('dashboard', $blank_money_board);
-    echoheader('-@my_blank_money/style.css', "Ngân hàng - Tiền tệ");
-    echocomtent_here(exec_tpl('my_blank_money/general'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css', "Ngân hàng - Tiền tệ");
+    echo_content_here(exec_tpl('my_blank_money/general'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_default()
 {
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('defaults/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('defaults/style.css', "Error - $name__");
+    echo_content_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
-function show_inventory ($inventory, $moneyInventory = ''){
+function show_inventory($inventory, $moneyInventory = '')
+{
     $show_inventory = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:15px; padding-left:25px; height:305px; background-image: url(/images/inventoryPer.jpg)'>";
-    $show_moneyInventory= "<div class=\"moneyInventory\" align=right style=''>" . number_format($moneyInventory, 0, ',', '.') . "</div>";
+    $show_moneyInventory = "<div class=\"moneyInventory\" align=right style=''>" . number_format($moneyInventory, 0, ',', '.') . "</div>";
 
     if (empty($inventory)) {
-        return $show_inventory .$show_moneyInventory. '</div>';
+        return $show_inventory . $show_moneyInventory . '</div>';
     }
 
     if ($inventory) {
@@ -154,7 +155,7 @@ function show_inventory ($inventory, $moneyInventory = ''){
 
                 $show_inventory .= "<div style='margin-top:" . ((floor($i / 8) * 32)) . "px; margin-left:" . ($x * 32) . "px; position:absolute; width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px; cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>";
 
-                $pathImg = ROOT. '/images/items/' . $item32['image'] . '.gif';
+                $pathImg = ROOT . '/images/items/' . $item32['image'] . '.gif';
 
                 if (file_exists($pathImg)) {
                     $show_inventory .= "<img src='images/items/" . $item32['image'] . ".gif'
@@ -235,7 +236,7 @@ function blank_money_chaos2blank()
             $errors_false = false;
 
             if (empty($countChaos) || $countChaos < 0) {
-                cn_throw_message('Thùng đồ cá nhân '. $sub . ' không có vật phẩm chaos.', 'e');
+                cn_throw_message('Thùng đồ cá nhân ' . $sub . ' không có vật phẩm chaos.', 'e');
                 $errors_false = true;
             }
 
@@ -267,12 +268,12 @@ function blank_money_chaos2blank()
         }
     }
 
-    $strCountItem ='<strong>' . number_format($countChaos, 0, ',', '.') . ' </strong> Chaos';
+    $strCountItem = '<strong>' . number_format($countChaos, 0, ',', '.') . ' </strong> Chaos';
 
     cn_assign('sub, showchar, show_inventory, countItem, option', $sub, $showchar, show_inventory($inventory2, $moneyInventory), $strCountItem, $option);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gửi chaos vào ngân hàng");
-    echocomtent_here(exec_tpl('my_blank_money/jewelToBlank'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gửi chaos vào ngân hàng");
+    echo_content_here(exec_tpl('my_blank_money/jewelToBlank'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_cre2blank()
@@ -308,7 +309,7 @@ function blank_money_cre2blank()
             $errors_false = false;
 
             if (empty($countCre) || $countCre < 0) {
-                cn_throw_message('Thùng đồ cá nhân '. $sub . ' không có vật phẩm Cre.', 'e');
+                cn_throw_message('Thùng đồ cá nhân ' . $sub . ' không có vật phẩm Cre.', 'e');
                 $errors_false = true;
             }
 
@@ -317,7 +318,7 @@ function blank_money_cre2blank()
                 cn_throw_message("Captcah không đúng.", 'e');
                 $errors_false = true;
             }
-            
+
             if (!$errors_false) {
                 //unset($_SESSION['captcha_web']);
                 $newInventory = $inventory1 . $inventory2After . $inventory3;
@@ -335,18 +336,18 @@ function blank_money_cre2blank()
                 'countItem' => '<strong> ' . number_format((!$errors_false ? 0 : $countCre), 0, ',', '.') . ' </strong> Cre',
                 'result' => show_inventory(((!$errors_false) ? $inventory2After : $inventory2), $moneyInventory)
             );
-            
+
             header('Content-Type: application/json');
             return json_encode($resultData);
         }
     }
 
-    $strCountItem ='<strong>' . number_format($countCre, 0, ',', '.') . ' </strong> Cre';
+    $strCountItem = '<strong>' . number_format($countCre, 0, ',', '.') . ' </strong> Cre';
 
     cn_assign('sub, showchar, show_inventory, countItem, option', $sub, $showchar, show_inventory($inventory2, $moneyInventory), $strCountItem, $option);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gửi Cre vào ngân hàng");
-    echocomtent_here(exec_tpl('my_blank_money/jewelToBlank'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gửi Cre vào ngân hàng");
+    echo_content_here(exec_tpl('my_blank_money/jewelToBlank'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_blue2blank()
@@ -382,7 +383,7 @@ function blank_money_blue2blank()
             $errors_false = false;
 
             if (empty($countBlue) || $countBlue < 0) {
-                cn_throw_message('Thùng đồ cá nhân '. $sub . ' không có vật phẩm Blue.', 'e');
+                cn_throw_message('Thùng đồ cá nhân ' . $sub . ' không có vật phẩm Blue.', 'e');
                 $errors_false = true;
             }
 
@@ -393,7 +394,7 @@ function blank_money_blue2blank()
             }
 
             if (!$errors_false) {
-                
+
                 $newInventory = $inventory1 . $inventory2After . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
@@ -415,12 +416,12 @@ function blank_money_blue2blank()
         }
     }
 
-    $strCountItem ='<strong>' . number_format($countBlue, 0, ',', '.') . ' </strong> Blue';
+    $strCountItem = '<strong>' . number_format($countBlue, 0, ',', '.') . ' </strong> Blue';
 
     cn_assign('sub, showchar, show_inventory, countItem, option', $sub, $showchar, show_inventory($inventory2, $moneyInventory), $strCountItem, $option);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gửi Blue vào ngân hàng");
-    echocomtent_here(exec_tpl('my_blank_money/jewelToBlank'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gửi Blue vào ngân hàng");
+    echo_content_here(exec_tpl('my_blank_money/jewelToBlank'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_feather2blank()
@@ -453,7 +454,7 @@ function blank_money_feather2blank()
             $errors_false = false;
 
             if (empty($countFeather) || $countFeather < 0) {
-                cn_throw_message('Thùng đồ cá nhân '. $sub . ' không có vật phẩm Lông vũ.', 'e');
+                cn_throw_message('Thùng đồ cá nhân ' . $sub . ' không có vật phẩm Lông vũ.', 'e');
                 $errors_false = true;
             }
 
@@ -485,12 +486,12 @@ function blank_money_feather2blank()
         }
     }
 
-    $strCountItem ='<strong>' . number_format($countFeather, 0, ',', '.') . ' </strong> Lông vũ';
+    $strCountItem = '<strong>' . number_format($countFeather, 0, ',', '.') . ' </strong> Lông vũ';
 
     cn_assign('sub, showchar, show_inventory, countItem, option', $sub, $showchar, show_inventory($inventory2, $moneyInventory), $strCountItem, $option);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gửi Lông vũ vào ngân hàng");
-    echocomtent_here(exec_tpl('my_blank_money/jewelToBlank'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gửi Lông vũ vào ngân hàng");
+    echo_content_here(exec_tpl('my_blank_money/jewelToBlank'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_zen2blank()
@@ -520,11 +521,11 @@ function blank_money_zen2blank()
             $errors_false = false;
 
             if (empty($moneyInventory) || $moneyInventory < 0) {
-                cn_throw_message('Thùng đồ cá nhân '. $sub . ' không có có Zen.', 'e');
+                cn_throw_message('Thùng đồ cá nhân ' . $sub . ' không có có Zen.', 'e');
                 $errors_false = true;
             }
 
-            if($totalSendBank > $maxBank) {
+            if ($totalSendBank > $maxBank) {
                 cn_throw_message('Tài khoản ' . $accoutID . ' có thể chứa tối đa ' . number_format($maxBank, 0, ',', '.') . ' Zen.', 'e');
                 $errors_false = true;
             }
@@ -546,7 +547,7 @@ function blank_money_zen2blank()
                 'msgAction' => cn_snippet_messages(),
                 'menuTop' => cn_menuTopMoney(true),
                 'countItem' => '',
-                'result' => show_inventory($inventory2, ((!$errors_false) ? 0 :  $moneyInventory))
+                'result' => show_inventory($inventory2, ((!$errors_false) ? 0 : $moneyInventory))
             );
 
             header('Content-Type: application/json');
@@ -554,12 +555,12 @@ function blank_money_zen2blank()
         }
     }
 
-    $strCountItem ='';
+    $strCountItem = '';
 
     cn_assign('sub, showchar, show_inventory, countItem, option', $sub, $showchar, show_inventory($inventory2, $moneyInventory), $strCountItem, $option);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gửi Zen vào ngân hàng");
-    echocomtent_here(exec_tpl('my_blank_money/jewelToBlank'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gửi Zen vào ngân hàng");
+    echo_content_here(exec_tpl('my_blank_money/jewelToBlank'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_vpoint2blank()
@@ -595,7 +596,7 @@ function blank_money_vpoint2blank()
             $errors_false = false;
 
             if (empty($countVpoint) || $countVpoint < 0) {
-                cn_throw_message('Thùng đồ cá nhân '. $sub . ' không có vật phẩm Vpoint.', 'e');
+                cn_throw_message('Thùng đồ cá nhân ' . $sub . ' không có vật phẩm Vpoint.', 'e');
                 $errors_false = true;
             }
 
@@ -623,7 +624,7 @@ function blank_money_vpoint2blank()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $acountID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $showBlank[0]['gc'] . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
                 cn_throw_message("Bạn đã thêm Sl: " . number_format($countVpoint, 0, ",", ".") . " Vpoint vào ngân hàng thành công!");
             }
@@ -640,13 +641,14 @@ function blank_money_vpoint2blank()
         }
     }
 
-    $strCountItem ='<strong>' . number_format($countVpoint, 0, ',', '.') . ' </strong> Vpoint';
+    $strCountItem = '<strong>' . number_format($countVpoint, 0, ',', '.') . ' </strong> Vpoint';
 
     cn_assign('sub, showchar, show_inventory, countItem, option', $sub, $showchar, show_inventory($inventory2, $moneyInventory), $strCountItem, $option);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gửi Vpoint vào ngân hàng");
-    echocomtent_here(exec_tpl('my_blank_money/jewelToBlank'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gửi Vpoint vào ngân hàng");
+    echo_content_here(exec_tpl('my_blank_money/jewelToBlank'), cn_snippet_bc_re());
+    echo_footer_web();
 }
+
 //----------------------------------------------------------------------------
 
 function zenderNumberSelectOption($numberItems, $numberItem = 0)
@@ -765,12 +767,12 @@ function blank_money_blank2chaos()
                 cn_throw_message("Captcah không đúng.", 'e');
                 $errors_false = true;
             }
-            
+
 
             if ($postNumberItem < 10) {
                 $item_code = '0F0000363B7A000000C0000000000000';
                 for ($key = 0; $key < $postNumberItem; $key++) {
-                    $serial = do_select_orther('EXEC WZ_GetItemSerial');
+                    $serial = do_select_other('EXEC WZ_GetItemSerial');
 
                     $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                     $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
@@ -796,7 +798,7 @@ function blank_money_blank2chaos()
                     $item_code = '0F0000363B7A000000C0000000000000';
                 }
 
-                $serial = do_select_orther('EXEC WZ_GetItemSerial');
+                $serial = do_select_other('EXEC WZ_GetItemSerial');
 
                 $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                 $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
@@ -815,7 +817,7 @@ function blank_money_blank2chaos()
             $subChaos = $countChaos;
 
             if (!$errors_false) {
-                
+
                 $newInventory = $inventory1 . $inventory2 . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
@@ -827,7 +829,7 @@ function blank_money_blank2chaos()
                 $subChaos = $countChaos - $postNumberItem;
                 if ($subChaos < $postNumberItem && $subChaos > 0) {
                     $setDefaultNumItem = 1;
-                } elseif($subChaos <= 0) {
+                } elseif ($subChaos <= 0) {
                     $setDefaultNumItem = 0;
                 }
             }
@@ -845,13 +847,13 @@ function blank_money_blank2chaos()
         }
     }
 
-    $strCountItem ='<strong>' . number_format($countChaos, 0, ',', '.') . ' </strong> Chaos';
+    $strCountItem = '<strong>' . number_format($countChaos, 0, ',', '.') . ' </strong> Chaos';
 
     cn_assign('sub, showchar, show_inventory, countItem', $sub, $showchar, show_inventory($inventory2, $moneyInventory), $strCountItem);
     cn_assign('htmlOptionNumItem, numberItem', $htmlOptionNumItem, $numberItem);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Rút Chaos từ ngân hàng");
-    echocomtent_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Rút Chaos từ ngân hàng");
+    echo_content_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_blank2cre()
@@ -891,13 +893,13 @@ function blank_money_blank2cre()
                 cn_throw_message("Captcah không đúng.", 'e');
                 $errors_false = true;
             }
-            
+
 
             if ($postNumberItem < 10) {
 
                 $item_code = '160000363B7A000000E0000000000000';
                 for ($key = 0; $key < $postNumberItem; $key++) {
-                    $serial = do_select_orther('EXEC WZ_GetItemSerial');
+                    $serial = do_select_other('EXEC WZ_GetItemSerial');
 
                     $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                     $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
@@ -923,7 +925,7 @@ function blank_money_blank2cre()
                     $item_code = '160000363B7A000000E0000000000000';
                 }
 
-                $serial = do_select_orther('EXEC WZ_GetItemSerial');
+                $serial = do_select_other('EXEC WZ_GetItemSerial');
 
                 $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                 $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
@@ -941,7 +943,7 @@ function blank_money_blank2cre()
             $setDefaultNumItem = $postNumberItem;
             $subCre = $countCre;
             if (!$errors_false) {
-                
+
                 $newInventory = $inventory1 . $inventory2 . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
@@ -953,7 +955,7 @@ function blank_money_blank2cre()
                 $subCre = $countCre - $postNumberItem;
                 if ($subCre < $postNumberItem && $subCre > 0) {
                     $setDefaultNumItem = 1;
-                } elseif($subCre <= 0) {
+                } elseif ($subCre <= 0) {
                     $setDefaultNumItem = 0;
                 }
             }
@@ -971,13 +973,13 @@ function blank_money_blank2cre()
         }
     }
 
-    $strCountItem ='<strong>' . number_format($countCre, 0, ',', '.') . ' </strong> Cre';
+    $strCountItem = '<strong>' . number_format($countCre, 0, ',', '.') . ' </strong> Cre';
 
     cn_assign('sub, showchar, show_inventory, countItem', $sub, $showchar, show_inventory($inventory2, $moneyInventory), $strCountItem);
     cn_assign('htmlOptionNumItem, numberItem', $htmlOptionNumItem, $numberItem);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Rút Cre từ ngân hàng");
-    echocomtent_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Rút Cre từ ngân hàng");
+    echo_content_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_blank2bule()
@@ -1023,7 +1025,7 @@ function blank_money_blank2bule()
             if ($postNumberItem < 10) {
                 $item_code = '0D0096363B7A000000E0000000000000';
                 for ($key = 0; $key < $postNumberItem; $key++) {
-                    $serial = do_select_orther('EXEC WZ_GetItemSerial');
+                    $serial = do_select_other('EXEC WZ_GetItemSerial');
 
                     $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                     $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
@@ -1049,7 +1051,7 @@ function blank_money_blank2bule()
                     $item_code = '0D0096363B7A000000E0000000000000';
                 }
 
-                $serial = do_select_orther('EXEC WZ_GetItemSerial');
+                $serial = do_select_other('EXEC WZ_GetItemSerial');
 
                 $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                 $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
@@ -1079,7 +1081,7 @@ function blank_money_blank2bule()
                 $subBlue = $countBlue - $postNumberItem;
                 if ($subBlue < $postNumberItem && $subBlue > 0) {
                     $setDefaultNumItem = 1;
-                } elseif($subBlue <= 0) {
+                } elseif ($subBlue <= 0) {
                     $setDefaultNumItem = 0;
                 }
             }
@@ -1101,9 +1103,9 @@ function blank_money_blank2bule()
 
     cn_assign('sub, showchar, show_inventory, countItem', $sub, $showchar, show_inventory($inventory2, $moneyInventory), $strCountItem);
     cn_assign('htmlOptionNumItem, numberItem', $htmlOptionNumItem, $numberItem);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Rút Blue từ ngân hàng");
-    echocomtent_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Rút Blue từ ngân hàng");
+    echo_content_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_blank2feather()
@@ -1148,7 +1150,7 @@ function blank_money_blank2feather()
             $item_code = '0E0000FC1E7A000000D0000000000000';
             if ($postNumberItem < 10) {
                 for ($key = 0; $key < $postNumberItem; $key++) {
-                    $serial = do_select_orther('EXEC WZ_GetItemSerial');
+                    $serial = do_select_other('EXEC WZ_GetItemSerial');
 
                     $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                     $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
@@ -1164,7 +1166,7 @@ function blank_money_blank2feather()
                     }
                 }
             } else {
-                $serial = do_select_orther('EXEC WZ_GetItemSerial');
+                $serial = do_select_other('EXEC WZ_GetItemSerial');
 
                 $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                 $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
@@ -1216,9 +1218,9 @@ function blank_money_blank2feather()
 
     cn_assign('sub, showchar, show_inventory, countItem', $sub, $showchar, show_inventory($inventory2, $moneyInventory), $strCountItem);
     cn_assign('htmlOptionNumItem, numberItem', $htmlOptionNumItem, $numberItem);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Rút Lông vũ từ ngân hàng");
-    echocomtent_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Rút Lông vũ từ ngân hàng");
+    echo_content_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_blank2zen()
@@ -1242,7 +1244,7 @@ function blank_money_blank2zen()
     $maxMoneyStore = MAX_TRANS;
     if ($moneyStoreBank >= $maxMoneyStore && $moneyInventory < $maxMoneyStore) {
         $subMoneyStoreBankNew = $maxMoneyStore - $moneyInventory;
-    } elseif ($moneyInventory < $maxMoneyStore &&  $moneyStoreBank > 0)  {
+    } elseif ($moneyInventory < $maxMoneyStore && $moneyStoreBank > 0) {
         $subRangMoney = $maxMoneyStore - $moneyInventory;
         if ($subRangMoney <= $moneyStoreBank) {
             $subMoneyStoreBankNew = $subRangMoney;
@@ -1293,7 +1295,7 @@ function blank_money_blank2zen()
                 cn_throw_message("Bạn đã rút Sl: " . number_format($postNumberItem, 0, ",", ".") . " Zen từ ngân hàng thành công!");
             }
 
-            if ($moneyStoreBank ) {
+            if ($moneyStoreBank) {
                 $subAction = (!$errors_false) ? 0 : $postNumberItem;
                 $strCountItem = 'SL: Rút <strong> ' . number_format($subAction, 0, ',', '.') . ' </strong> Zen';
             }
@@ -1321,9 +1323,9 @@ function blank_money_blank2zen()
 
     cn_assign('sub, showchar, show_inventory, countItem', $sub, $showchar, show_inventory($inventory2, $moneyInventory), $strCountItem);
     cn_assign('htmlOptionNumItem, numberItem, isZen', $htmlOptionNumItem, $numberItem, $subMoneyStoreBankNew);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Rút Lông vũ từ ngân hàng");
-    echocomtent_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Rút Lông vũ từ ngân hàng");
+    echo_content_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_blank2vpoint()
@@ -1369,7 +1371,7 @@ function blank_money_blank2vpoint()
             if ($postNumberItem < 10) {
                 $item_code = '0C10009044A9000000E0000000000000';
                 for ($key = 0; $key < $postNumberItem; $key++) {
-                    $serial = do_select_orther('EXEC WZ_GetItemSerial');
+                    $serial = do_select_other('EXEC WZ_GetItemSerial');
 
                     $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                     $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
@@ -1393,7 +1395,7 @@ function blank_money_blank2vpoint()
                     $item_code = '0C10009044A9000000E0000000000000';
                 }
 
-                $serial = do_select_orther('EXEC WZ_GetItemSerial');
+                $serial = do_select_other('EXEC WZ_GetItemSerial');
 
                 $str_replace_begin = 6 + (8 - strlen($serial_n = $serial[0]['']));
                 $item_code = substr_replace($item_code, $serial_n, $str_replace_begin, -18);
@@ -1429,7 +1431,7 @@ function blank_money_blank2vpoint()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $acountID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $showBlank[0]['gc'] . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
                 cn_throw_message("Bạn đã rút Sl: " . number_format($postNumberItem, 0, ",", ".") . " Vpoint từ ngân hàng thành công!");
 
@@ -1458,9 +1460,9 @@ function blank_money_blank2vpoint()
 
     cn_assign('sub, showchar, show_inventory, countItem', $sub, $showchar, show_inventory($inventory2, $moneyInventory), $strCountItem);
     cn_assign('htmlOptionNumItem, numberItem', $htmlOptionNumItem, $numberItem);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Rút Vpoint từ ngân hàng");
-    echocomtent_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Rút Vpoint từ ngân hàng");
+    echo_content_here(exec_tpl('my_blank_money/blankToJewel'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
@@ -1481,7 +1483,7 @@ function blank_money_vpoint2gcoin()
 
             $postNumberItem = intval($postNumberItem);
 
-            if ($postNumberItem > MAX_TRANS){
+            if ($postNumberItem > MAX_TRANS) {
                 cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
                 $errors_false = true;
             }
@@ -1496,7 +1498,7 @@ function blank_money_vpoint2gcoin()
             }
 
             if ($postNumberItem > $rootVpoint) {
-                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootVpoint, 0 , ',', '.') . ' Vpoint.', 'e');
+                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootVpoint, 0, ',', '.') . ' Vpoint.', 'e');
                 $errors_false = true;
             }
 
@@ -1527,7 +1529,7 @@ function blank_money_vpoint2gcoin()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
             }
 
             $resultData = array(
@@ -1545,9 +1547,9 @@ function blank_money_vpoint2gcoin()
 
     $showConfigVpoint = '- Tỷ lệ: <strong> 1 Gcoin</strong><i> = </i><strong> 1*' . getoption('vptogc') . '% Vpoint</strong>';
     cn_assign('options, strInfoMoney, showConfigVpoint, optionBuyZen', 'Vpoint', '', $showConfigVpoint, '');
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Money - Chuyển Vpoint sang Gcoin.");
-    echocomtent_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Money - Chuyển Vpoint sang Gcoin.");
+    echo_content_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_gcoin2vpoint()
@@ -1565,7 +1567,7 @@ function blank_money_gcoin2vpoint()
 
             $postNumberItem = intval($postNumberItem);
 
-            if ($postNumberItem > MAX_TRANS){
+            if ($postNumberItem > MAX_TRANS) {
                 cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
                 $errors_false = true;
             }
@@ -1580,7 +1582,7 @@ function blank_money_gcoin2vpoint()
             }
 
             if ($postNumberItem > $rootGcoin) {
-                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootGcoin, 0 , ',', '.') . ' Gcoin.', 'e');
+                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootGcoin, 0, ',', '.') . ' Gcoin.', 'e');
                 $errors_false = true;
             }
 
@@ -1609,7 +1611,7 @@ function blank_money_gcoin2vpoint()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
             }
 
             $resultData = array(
@@ -1626,9 +1628,9 @@ function blank_money_gcoin2vpoint()
     }
     $showConfigVpoint = '- Tỷ lệ: <strong> 1 Gcoin</strong><i> = </i><strong>1 Vpoint</strong>';
     cn_assign('options, strInfoMoney, showConfigVpoint', 'Gcoin', '', $showConfigVpoint);
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gcoin sang Vpoint");
-    echocomtent_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gcoin sang Vpoint");
+    echo_content_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_transgc2wc()
@@ -1647,7 +1649,7 @@ function blank_money_transgc2wc()
             list($postNumberItem) = GET('numberItem', 'GPG');
 
             $postNumberItem = intval($postNumberItem);
-            if ($postNumberItem > MAX_TRANS){
+            if ($postNumberItem > MAX_TRANS) {
                 cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
                 $errors_false = true;
             }
@@ -1661,7 +1663,7 @@ function blank_money_transgc2wc()
             }
 
             if ($postNumberItem > $rootGcoin) {
-                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootGcoin, 0 , ',', '.') . ' Gcoin.', 'e');
+                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootGcoin, 0, ',', '.') . ' Gcoin.', 'e');
                 $errors_false = true;
             }
 
@@ -1709,9 +1711,9 @@ function blank_money_transgc2wc()
 
     $showConfigVpoint = '- Tỷ lệ: <strong> 1 Gcoin</strong><i> = </i><strong>1 Wcoin</strong>';
     cn_assign('options, strInfoMoney, showConfigVpoint, optionBuyZen', 'Gcoin', $strInfoMoney, $showConfigVpoint, '');
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gcoin sang Wcoin");
-    echocomtent_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gcoin sang Wcoin");
+    echo_content_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_transgc2wcp()
@@ -1731,7 +1733,7 @@ function blank_money_transgc2wcp()
 
             $postNumberItem = intval($postNumberItem);
 
-            if ($postNumberItem > MAX_TRANS){
+            if ($postNumberItem > MAX_TRANS) {
                 cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
                 $errors_false = true;
             }
@@ -1745,7 +1747,7 @@ function blank_money_transgc2wcp()
             }
 
             if ($postNumberItem > $rootGcoin) {
-                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootGcoin, 0 , ',', '.') . ' Gcoin.', 'e');
+                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootGcoin, 0, ',', '.') . ' Gcoin.', 'e');
                 $errors_false = true;
             }
 
@@ -1764,7 +1766,7 @@ function blank_money_transgc2wcp()
                 //Ghi vào Log
                 $afterVpoint = $rootVpoint;
                 $afterGcoin = $rootGcoin - $postNumberItem;
-                $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin thành  " . number_format($postNumberItem, 0, ',', '.'). ' WcoinP.';
+                $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin thành  " . number_format($postNumberItem, 0, ',', '.') . ' WcoinP.';
                 $Date = date("h:iA, d/m/Y", ctime());
                 $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/money");
                 if ($checkDir) {
@@ -1774,7 +1776,7 @@ function blank_money_transgc2wcp()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
             }
 
             $showMoney = (!$errors_false) ? ($showBlank[0]['wCoinP'] + $postNumberItem) : $showBlank[0]['wCoinP'];
@@ -1794,9 +1796,9 @@ function blank_money_transgc2wcp()
     $showConfigVpoint = '- Tỷ lệ: <strong> 1 Gcoin</strong><i> = </i><strong>1 WcoinP</strong>';
 
     cn_assign('options, strInfoMoney, showConfigVpoint, optionBuyZen', 'Gcoin', $strInfoMoney, $showConfigVpoint, '');
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gcoin sang WcoinP");
-    echocomtent_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gcoin sang WcoinP");
+    echo_content_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_transgc2gob()
@@ -1825,12 +1827,12 @@ function blank_money_transgc2gob()
                 $errors_false = true;
             }
 
-            if ($postNumberItem > MAX_TRANS){
+            if ($postNumberItem > MAX_TRANS) {
                 cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
                 $errors_false = true;
             }
             if ($postNumberItem > $rootGcoin) {
-                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootGcoin, 0 , ',', '.') . ' Gcoin.', 'e');
+                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootGcoin, 0, ',', '.') . ' Gcoin.', 'e');
                 $errors_false = true;
             }
 
@@ -1849,7 +1851,7 @@ function blank_money_transgc2gob()
                 //Ghi vào Log
                 $afterVpoint = $rootVpoint;
                 $afterGcoin = $rootGcoin - $postNumberItem;
-                $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin thành " . number_format($postNumberItem, 0, ',', '.') .' GoblinCoin.';
+                $content = "$accoutID đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin thành " . number_format($postNumberItem, 0, ',', '.') . ' GoblinCoin.';
                 $Date = date("h:iA, d/m/Y", ctime());
                 $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/money");
                 if ($checkDir) {
@@ -1859,11 +1861,11 @@ function blank_money_transgc2gob()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
 
             }
 
-            $showMoney = (!$errors_false) ? ($showBlank[0]['goblinCoin'] +  $postNumberItem) : $showBlank[0]['goblinCoin'];
+            $showMoney = (!$errors_false) ? ($showBlank[0]['goblinCoin'] + $postNumberItem) : $showBlank[0]['goblinCoin'];
 
             $resultData = array(
                 'msgAction' => cn_snippet_messages(),
@@ -1882,9 +1884,9 @@ function blank_money_transgc2gob()
 
     cn_assign('options, strInfoMoney, showConfigVpoint, optionBuyZen', 'Gcoin', $strInfoMoney, $showConfigVpoint, '');
 
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gcoin sang GoblinCoin");
-    echocomtent_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Gcoin sang GoblinCoin");
+    echo_content_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_muazen()
@@ -1913,7 +1915,7 @@ function blank_money_muazen()
             }
 
             if ($postNumberItem > $rootVpoint) {
-                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootVpoint, 0 , ',', '.') . ' Vpoint.', 'e');
+                cn_throw_message('Tài khoản ' . $accoutID . ' có tối đa ' . number_format($rootVpoint, 0, ',', '.') . ' Vpoint.', 'e');
                 $errors_false = true;
             }
 
@@ -1941,7 +1943,7 @@ function blank_money_muazen()
 
             if (empty($getZen)) {
                 cn_throw_message('Số 0 Zen không thể cập nhập vào ngân hàng', 'e');
-                    $errors_false = true;
+                $errors_false = true;
             }
 
             if ($getZen + $rootBank > MAXBANKZEN) {
@@ -1968,7 +1970,7 @@ function blank_money_muazen()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accoutID . "|" . $content . "|" . $rootGcoin . "_" . $showBlank[0]['vp'] . "|" . $rootGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
                 }
-                    //End Ghi vào Log
+                //End Ghi vào Log
             }
 
             Lable:
@@ -1988,9 +1990,9 @@ function blank_money_muazen()
     $showConfigVpoint = '- Mua Zen bằng Vpoint';
     cn_assign('options, strInfoMoney, showConfigVpoint, optionBuyZen', 'Zen', '', $showConfigVpoint, zenderOptionBuyZen());
 
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Mua Zen bằng Vpoint");
-    echocomtent_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Mua Zen bằng Vpoint");
+    echo_content_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function blank_money_transvpoint()
@@ -2012,7 +2014,7 @@ function blank_money_transvpoint()
             $changeAccount = htmlentities($changeAccount);
             $vpointNew = $configTransVpoint + $postNumberItem;
 
-            $checkResultAccount = do_select_orther("SElECT memb___id FROM MEMB_INFO WHERE memb___id ='$changeAccount'");
+            $checkResultAccount = do_select_other("SElECT memb___id FROM MEMB_INFO WHERE memb___id ='$changeAccount'");
             $newAccount = $checkResultAccount[0]['memb___id'];
 
             if (isset($newAccount) && $newAccount == $accoutID) {
@@ -2088,7 +2090,7 @@ function blank_money_transvpoint()
     $showConfigTransVpoint = '- Phí: <strong> ' . number_format($configTransVpoint, 0, ',', '.') . ' Vpoint </strong><i> / </i><strong> 1L</strong>';
     cn_assign('showConfigTransVpoint', $showConfigTransVpoint);
 
-    echoheader('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Chuyển Vpoint");
-    echocomtent_here(exec_tpl('my_blank_money/transVpoint2Account'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Tiền tệ - Chuyển Vpoint");
+    echo_content_here(exec_tpl('my_blank_money/transVpoint2Account'), cn_snippet_bc_re());
+    echo_footer_web();
 }

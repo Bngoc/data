@@ -30,7 +30,7 @@ list($dashboard, $username, $greeting_message) = _GL('dashboard, username, greet
             datetoday.setTime(timenow);
             var thehour = datetoday.getHours();
 
-            if (thehour < 9)      display = "Morning";
+            if (thehour < 9) display = "Morning";
             else if (thehour < 12) display = "Day";
             else if (thehour < 17) display = "Afternoon";
             else if (thehour < 20) display = "Evening";

@@ -36,7 +36,7 @@ function transaction_invoke()
             }
 
         if (function_exists("transaction_$_token"))
-            cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl,'opt=' . $do, 'token=' . md5($_token . $do)), $do);
+            cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do, 'token=' . md5($_token . $do)), $do);
     }
 
     // Request module
@@ -87,18 +87,18 @@ function transaction_invoke()
 
     cn_assign('dashboard', $_ctrans_board);
 
-    echoheader('-@my_transaction/style.css', "Nap The");
-    echocomtent_here(exec_tpl('my_transaction/general'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_transaction/style.css', "Nap The");
+    echo_content_here(exec_tpl('my_transaction/general'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function transaction_default()
 {
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('defaults/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('defaults/style.css', "Error - $name__");
+    echo_content_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function transaction___buy_gd()
@@ -168,7 +168,7 @@ function transaction___buy_gd()
     }
 
     $accc_ = $_SESSION['user_Gamer'];
-    $showHisrotyPlay = do_select_orther("SELECT [accountID], [Name], [menhgia], [card_type], [card_num], [card_serial], [status], [addvpoint], [timenap], [timeduyet], [teknet_status], [teknet_check_wait], [teknet_check_last], times_tamp FROM CardPhone WHERE accountID='" . $accc_ . "'  ORDER BY stt DESC");
+    $showHisrotyPlay = do_select_other("SELECT [accountID], [Name], [menhgia], [card_type], [card_num], [card_serial], [status], [addvpoint], [timenap], [timeduyet], [teknet_status], [teknet_check_wait], [teknet_check_last], times_tamp FROM CardPhone WHERE accountID='" . $accc_ . "'  ORDER BY stt DESC");
 
     $url = cn_url_modify(array('reset'), 'mod=transaction', 'opt=' . $opt, 'token=' . md5('__buy_gd' . $opt), 'action_historyCard=1', 'page', 'per_page');
 
@@ -392,15 +392,15 @@ function transaction___buy_gd()
         }
     }
 
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name_shop = array_pop($arr_shop)['name'];
 
     cn_assign('list_item, token, opt', $list_item, $token, $opt);
     cn_assign('card_list, strKm, pt_km, show_history', $card_list, $strKm, $pt_km, zenderHtmlTableHistoryCard($showHisrotyPlay, $url, $page));
 
-    echoheader('-@my_transaction/style.css@my_transaction/cardAjax.js', "Giao dịch $name_shop - $name_shop");
-    echocomtent_here(exec_tpl('my_transaction/napthe'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_transaction/style.css@my_transaction/cardAjax.js', "Giao dịch $name_shop - $name_shop");
+    echo_content_here(exec_tpl('my_transaction/napthe'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function zenderHtmlTableHistoryCard($dataHistory, $url, $page)

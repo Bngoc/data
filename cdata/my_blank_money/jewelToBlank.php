@@ -46,10 +46,10 @@ list($sub, $showchar, $show_inventory, $countItem, $option) = _GL('sub, showchar
 </form>
 
 <?php
-    $arrHidden = [
-        'action_sendJewelBlank' => 'jewel2blank',
-        'confrim' => 'Bạn có chắc muốn gửi ' . $option . ' trong thùng đồ cá nhân vào ngân hàng không?'
-    ];
+$arrHidden = [
+    'action_sendJewelBlank' => 'jewel2blank',
+    'confrim' => 'Bạn có chắc muốn gửi ' . $option . ' trong thùng đồ cá nhân vào ngân hàng không?'
+];
 echoFormVerifyAjax($arrHidden, '.updateAction');
 ?>
 

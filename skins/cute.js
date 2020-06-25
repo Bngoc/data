@@ -26,18 +26,15 @@ function DoDiv(id) {
     var item = getId(id);
 
     if (!item) {
-    }
-    else if (item.style) {
+    } else if (item.style) {
         if (arguments.length == 2) {
-            if (arguments[1] == true)  item.style.display = "";
+            if (arguments[1] == true) item.style.display = "";
             else item.style.display = "none";
-        }
-        else {
+        } else {
             if (item.style.display == "none") item.style.display = "";
             else item.style.display = "none";
         }
-    }
-    else item.visibility = "show";
+    } else item.visibility = "show";
 }
 
 function Show_Only(id) {
@@ -68,20 +65,16 @@ function password_strength() {
     if (ln == 0) {
         pid.value = 'Enter password';
         pst.style.backgroundColor = 'red';
-    }
-    else if (disp < 5) {
+    } else if (disp < 5) {
         pid.value = 'Very poor';
         pst.style.backgroundColor = 'red';
-    }
-    else if (disp < 9) {
+    } else if (disp < 9) {
         pid.value = 'Weak';
         pst.style.backgroundColor = '#c08000';
-    }
-    else if (disp < 11) {
+    } else if (disp < 11) {
         pid.value = 'Normal';
         pst.style.backgroundColor = '#f0e080';
-    }
-    else {
+    } else {
         pid.value = 'Strong password';
         pst.style.backgroundColor = '#008000';
     }
@@ -94,7 +87,7 @@ function greeting() {
     datetoday.setTime(timenow);
     thehour = datetoday.getHours();
 
-    if (thehour < 9)      display = "Morning";
+    if (thehour < 9) display = "Morning";
     else if (thehour < 12) display = "Day";
     else if (thehour < 17) display = "Afternoon";
     else if (thehour < 20) display = "Evening";
@@ -117,6 +110,7 @@ function greeting() {
  * Convert a 32-bit number to a hex string with ls-byte first
  */
 var hex_chr = "0123456789abcdef";
+
 function rhex(num) {
     str = "";
     for (j = 0; j <= 3; j++)
@@ -164,15 +158,19 @@ function rol(num, cnt) {
 function cmn(q, a, b, x, s, t) {
     return add(rol(add(add(a, q), add(x, t)), s), b);
 }
+
 function ff(a, b, c, d, x, s, t) {
     return cmn((b & c) | ((~b) & d), a, b, x, s, t);
 }
+
 function gg(a, b, c, d, x, s, t) {
     return cmn((b & d) | (c & (~d)), a, b, x, s, t);
 }
+
 function hh(a, b, c, d, x, s, t) {
     return cmn(b ^ c ^ d, a, b, x, s, t);
 }
+
 function ii(a, b, c, d, x, s, t) {
     return cmn(c ^ (b | (~d)), a, b, x, s, t);
 }
@@ -288,8 +286,7 @@ function insertAtCursor(myField, myValue) {
         var startPos = myField.selectionStart;
         var endPos = myField.selectionEnd;
         myField.value = myField.value.substring(0, startPos) + myValue + myField.value.substring(endPos, myField.value.length);
-    }
-    else {
+    } else {
         myField.value += myValue;
     }
 
@@ -306,8 +303,7 @@ function bb_wrap(id, wrp) {
         src = arguments[2];
         HW = arguments[3];
         W = src.getElementById(id);
-    }
-    else {
+    } else {
         src = document;
         W = getId(id);
     }
@@ -320,8 +316,7 @@ function bb_wrap(id, wrp) {
 
         sel.text = '[' + wrp + (HW ? '=' + HW : '') + ']' + sel.text + '[/' + wrp + ']';
         return true;
-    }
-    else if (W.selectionStart || W.selectionStart == '0') {
+    } else if (W.selectionStart || W.selectionStart == '0') {
         var startPos = W.selectionStart;
         var endPos = W.selectionEnd;
 
@@ -329,10 +324,8 @@ function bb_wrap(id, wrp) {
             var txt = W.value.substring(startPos, endPos);
             W.value = W.value.substring(0, startPos) + '[' + wrp + (HW ? '=' + HW : '') + ']' + txt + '[/' + wrp + ']' + W.value.substring(endPos);
             return true;
-        }
-        else return false;
-    }
-    else return false;
+        } else return false;
+    } else return false;
 }
 
 function notify_auto_hide(id, delay) {
@@ -351,6 +344,7 @@ function refreshCaptcha() {
     var img = document.images['captchaimg'];
     img.src = img.src.substring(0, img.src.lastIndexOf("?")) + "?rand=" + Math.random() * 1000;
 }
+
 /*
  document.addEventListener("DOMContentLoaded", function() {
  var elements = document.getElementsByTagName("INPUT");

@@ -1,6 +1,7 @@
 <?php
 
-class GB_API {
+class GB_API
+{
 
     private $merchant_id;
     private $pin;
@@ -17,164 +18,187 @@ class GB_API {
     /**
      * @return the $merchant_id
      */
-    public function getMerchantId() {
+    public function getMerchantId()
+    {
         return $this->merchant_id;
     }
 
     /**
      * @return the $pin
      */
-    public function getPin() {
+    public function getPin()
+    {
         return $this->pin;
     }
 
     /**
      * @return the $seri
      */
-    public function getSeri() {
+    public function getSeri()
+    {
         return $this->seri;
     }
 
     /**
      * @return the $card_type
      */
-    public function getCardType() {
+    public function getCardType()
+    {
         return $this->card_type;
     }
 
     /**
      * @return the $api_user
      */
-    public function getApiUser() {
+    public function getApiUser()
+    {
         return $this->api_user;
     }
 
     /**
      * @return the $api_password
      */
-    public function getApiPassword() {
+    public function getApiPassword()
+    {
         return $this->api_password;
     }
 
     /**
      * @return the $code
      */
-    public function getCode() {
+    public function getCode()
+    {
         return $this->code;
     }
 
     /**
      * @return the $msg
      */
-    public function getMsg() {
+    public function getMsg()
+    {
         return $this->msg;
     }
 
     /**
      * @return the $info_card
      */
-    public function getInfoCard() {
+    public function getInfoCard()
+    {
         return $this->info_card;
     }
 
     /**
      * @return the $transaction_id
      */
-    public function getTransactionId() {
+    public function getTransactionId()
+    {
         return $this->transaction_id;
     }
 
     /**
      * @return the $note
      */
-    public function getNote() {
+    public function getNote()
+    {
         return $this->note;
     }
 
     /**
      * @param field_type $merchant_id
      */
-    public function setMerchantId($merchant_id) {
+    public function setMerchantId($merchant_id)
+    {
         $this->merchant_id = $merchant_id;
     }
 
     /**
      * @param field_type $pin
      */
-    public function setPin($pin) {
+    public function setPin($pin)
+    {
         $this->pin = $pin;
     }
 
     /**
      * @param field_type $seri
      */
-    public function setSeri($seri) {
+    public function setSeri($seri)
+    {
         $this->seri = $seri;
     }
 
     /**
      * @param field_type $card_type
      */
-    public function setCardType($card_type) {
+    public function setCardType($card_type)
+    {
         $this->card_type = $card_type;
     }
 
     /**
      * @param field_type $api_user
      */
-    public function setApiUser($api_user) {
+    public function setApiUser($api_user)
+    {
         $this->api_user = $api_user;
     }
 
     /**
      * @param field_type $api_password
      */
-    public function setApiPassword($api_password) {
+    public function setApiPassword($api_password)
+    {
         $this->api_password = $api_password;
     }
 
     /**
      * @param field_type $code
      */
-    public function setCode($code) {
+    public function setCode($code)
+    {
         $this->code = $code;
     }
 
     /**
      * @param field_type $msg
      */
-    public function setMsg($msg) {
+    public function setMsg($msg)
+    {
         $this->msg = $msg;
     }
 
     /**
      * @param field_type $info_card
      */
-    public function setInfoCard($info_card) {
+    public function setInfoCard($info_card)
+    {
         $this->info_card = $info_card;
     }
 
     /**
      * @param field_type $transaction_id
      */
-    public function setTransactionId($transaction_id) {
+    public function setTransactionId($transaction_id)
+    {
         $this->transaction_id = $transaction_id;
     }
 
     /**
      * @param field_type $note
      */
-    public function setNote($note) {
+    public function setNote($note)
+    {
         $this->note = $note;
     }
 
-    public function cardCharging() {
-        $result =  file_get_contents("https://sv.gamebank.vn/api/card2?merchant_id=".$this->merchant_id."&api_user=".trim($this->api_user)."&api_password=".trim($this->api_password)."&pin=".trim($this->pin)."&seri=".trim($this->seri)."&card_type=".intval($this->card_type)."&note=".urlencode($this->note)."");
-        $result = str_replace("\xEF\xBB\xBF",'',$result);
+    public function cardCharging()
+    {
+        $result = file_get_contents("https://sv.gamebank.vn/api/card2?merchant_id=" . $this->merchant_id . "&api_user=" . trim($this->api_user) . "&api_password=" . trim($this->api_password) . "&pin=" . trim($this->pin) . "&seri=" . trim($this->seri) . "&card_type=" . intval($this->card_type) . "&note=" . urlencode($this->note) . "");
+        $result = str_replace("\xEF\xBB\xBF", '', $result);
         $result = json_decode($result);
         $this->code = $result->code;
         $this->msg = $result->msg;
-        if($this->code === 0) {
+        if ($this->code === 0) {
             $this->info_card = $result->info_card;
             $this->transaction_id = $result->transaction_id;
         }

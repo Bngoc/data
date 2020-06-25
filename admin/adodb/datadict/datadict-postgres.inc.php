@@ -315,12 +315,12 @@ class ADODB2_postgres extends ADODB_DataDict
      *
      * We also take care to set the values of the sequenz and recreate the indexes.
      * All this is done in a transaction, to not loose the content of the table, if something went wrong!
-     * @internal
      * @param string $tabname table-name
      * @param string $dropflds column-names to drop
      * @param string $tableflds complete defintion of the new table, eg. for postgres
      * @param array /string $tableoptions options for the new table see CreateTableSQL, default ''
      * @return array with SQL strings
+     * @internal
      */
     function _recreate_copy_table($tabname, $dropflds, $tableflds, $tableoptions = '')
     {

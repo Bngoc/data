@@ -29,15 +29,17 @@ define('MAXBANKZEN', 999999999999999);
 define('MAX_TRANS', 2000000000);
 
 // include necessary libs
-require_once ROOT .'/vendor/autoload.php';
+require_once ROOT . '/vendor/autoload.php';
 require_once ROOT . '/core/function/libgarena.php';
+require_once ROOT . '/core/function/initialization.php';
+require_once ROOT . '/core/function/initialization_web.php';
 // libs
-require_once SERVDIR . '/core/cn_core_web.php';
 require_once SERVDIR . '/core/security.php';
 require_once SERVDIR . '/core/db/flat_web.php';
 require_once SERVDIR . '/core/class.phpmailer.php';
 require_once SERVDIR . '/core/class.smtp.php';
 require_once SERVDIR . '/core/cardGB_API.php';
+require_once SERVDIR . '/core/ProcessCoreWeb.php';
 
 //require_once SERVDIR . '/core/simple_html_dom.php'; //libs
 //require_once MODULE_ADM . '/core/captcha/phptextClass.php';
@@ -61,18 +63,19 @@ $_CN_access = array
     'B' => 'Bd,Bs',
 );
 
+$coreWeb = new ProcessCoreWeb();
 // v2.0 init sections
 //$is_config = cn_config_load();
 // set default
-cn_config_load();
+$coreWeb->cn_config_load();
 // get url
-cn_parse_url();
-cn_detect_user_ip();
+$coreWeb->cn_parse_url();
+$coreWeb->cn_detect_user_ip();
 // load session_start
-cn_load_session();
-cn_relocation_db_new();
+$coreWeb->cn_load_session();
+$coreWeb->cn_relocation_db_new();
 // connect to forum
-cn_connect_forum();
+//cn_connect_forum();
 
 // 2.0.3 checking existing configuration
 //if ($is_config)
@@ -86,3 +89,11 @@ cn_connect_forum();
 // load modules
 include SERVDIR . '/core/modules/init.php';
 //hook('init/finally');
+
+//cn_sendheaders();
+// load skin templale
+$coreWeb->cn_load_skin_web();
+$coreWeb->cn_login();
+$coreWeb->cn_register_form();
+
+hook('index/invoke_module', array($_module));

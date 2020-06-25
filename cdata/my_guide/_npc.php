@@ -26,7 +26,7 @@
                 <p>Tọa độ: 182,136</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image008.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image008.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Tiên Nữ Lala</strong>, người có giọng hát thanh thoát như gió hòa quyện cùng tiếng</div>
@@ -39,7 +39,7 @@
                 <p>Tọa độ: 172,124.</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image009.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image009.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Phù thủy Morgana</strong>, cư trú ở tận Devias xa xôi, lạnh giá. Morgana là nhà</div>
@@ -52,7 +52,7 @@
                 <p>Tọa độ: 225,40</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image010.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image010.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Pháp sư Pasi </strong>là nhà nghiên cứu ma thuật học, thiên văn học. Với những</div>
@@ -64,7 +64,7 @@
                 <p>Tọa độ: 119,113.</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image011.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image011.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Người quản lý hội</strong> : NPC này giữa vai trò là nhà quản lý Bang Hội (Guild).</div>
@@ -75,7 +75,7 @@
                 <p>Tọa độ: 215,46</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image012.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image012.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Zienna</strong> một thương gia nổi tiếng khắp 3 miền Lorencia, Noria và Devias. Cô</div>
@@ -89,7 +89,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image013.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image013.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Cô bé bán dạo</strong> đến từ một nơi mà không ai biết. Ngoài bán trái cây và các</div>
@@ -101,7 +101,7 @@
                 <p>Toạn độ: 126,85</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image014.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image014.jpg"
                      width="150"></td>
             <td>
                 <div>Ngôi nhà lớn ở quảng trường Rồng thành Lorencia là quán rượu của</div>
@@ -112,7 +112,7 @@
                 <p>Tọa độ: 123,133</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image015.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image015.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Yêu tinh Ellio</strong> chuyên bán cái loại cung và trang phục cho Tiên Nữ. Lão</div>
@@ -123,7 +123,7 @@
                 <p>Tọa độ: 195,123</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image016.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image016.jpg"
                      width="150"></td>
             <td>
                 <div>NPC<strong> Bas </strong>là người cất giữ các item dư thừa hoặc chưa dùng đến của</div>
@@ -142,7 +142,7 @@
                 <p>Elbeland 50,230</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image017.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image017.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Yêu tinh Chaos </strong>những phủ thủy tạo đồ có tính tình thất thường. Các</div>
@@ -154,7 +154,7 @@
                 <p>Tọa độ: 180,100.</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image018.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image018.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Thompson Kenel</strong> một thương gia chuyên bán vũ khí ở cách cổng phía</div>
@@ -165,7 +165,7 @@
                 <p>Tọa độ: 63,131</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image019.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image019.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Charon</strong> một trong những môn đồ trung thành của Estramus, giữ trọng trách</div>
@@ -178,7 +178,7 @@
                 <p>Tọa độ: 172,105</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image020.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image020.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Nữ tu Sevina</strong> là người sẽ phong tước cho bạn nếu vượt qua những thử</div>
@@ -188,7 +188,7 @@
                 <p>Tọa độ: 183,31.</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image021.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image021.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Người huấn luyện thú</strong> này giúp bạn tái tạo Quạ Tinh và Chiến Mã dùng</div>
@@ -198,7 +198,7 @@
                 <p>Tọa độ: 123,111</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image022.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image022.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Linh hồn tổng thiên sứ</strong>, người sẽ đưa bạn đến Huyết Lâu, nơi cuộc chiến</div>
@@ -211,7 +211,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image023.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image023.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Thống lĩnh Marlon</strong> đi chu du khắc nơi tìm kiếm những anh hùng để trao cho</div>
@@ -231,7 +231,7 @@
                 <p>Atlans 17,25. </p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image024.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image024.jpg"
                      width="150"></td>
             <td><strong>Senator</strong> là người phụ tá cho chủ nhân toà lâu đài hiện giờ của thung <br>
                 lũng Loren. Đảm nhận nâng cấp và chỉnh lý  cho 4 pho tượng giám hộ <br>
@@ -239,7 +239,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image025.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image025.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Linh hồn thánh nữ</strong> là những đại nhân bảo vệ. Họ là  những thiên thần đầu
@@ -252,7 +252,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image027.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image027.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Elpis </strong>: Thể sinh mệnh phức hợp được coi là con cưng của kỹ thuật Công</div>
@@ -264,7 +264,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image028.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image028.jpg"
                      width="150"></td>
             <td>
                 <div>Trong số anh em yêu tinh thì <strong>Osbun</strong> chịu trách nhiệm chế tác ra Đá tinh</div>
@@ -275,7 +275,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image029.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image029.jpg"
                      width="150"></td>
             <td><p>Trong số anh em yêu tinh thì <strong>Jelly</strong> chịu trách nhiệm phá huỷ tính năng Đá </p>
                 <p>tạo hoá. Anh em nhà yêu tinh kỹ thuật  đang tiến hành nghiên cứu về các đá </p>
@@ -284,7 +284,7 @@
                 <p>khí  hay vũ khí chống đỡ và sử dụng sức mạnh của viên đá tạo hoá.</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image030.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image030.jpg"
                      width="150"></td>
             <td><strong>Angela</strong> là NPC cung cấp vật phẩm hỗ trợ Công thành chiến. Nhằm để hỗ trợ cho <br>
                 trận chiến Công thành đang diễn ra trong thung lũng Loren nên đã tạo ra nhân vật <br>
@@ -293,7 +293,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image031.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image031.jpg"
                      width="150"></td>
             <td><strong>Pamella</strong> là NPC cung cấp vật phẩm hỗ trợ Công thành chiến. Nhằm để <br>
                 hỗ trợ cho trận chiến Công thành đang diễn ra trong thung lũng Loren nên đã <br>
@@ -302,7 +302,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image032.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image032.jpg"
                      width="150"></td>
             <td>
                 <div>Giống như nữ tu Sevina thì mục sư <strong>Delbin</strong> là 1 trong 12 mục sư phục vụ <br>
@@ -311,7 +311,7 @@
                 <p>Là NPC  để nhận nhiệm vụ thăng cấp Master.</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image033.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image033.jpg"
                      width="150"></td>
             <td><strong>Người sói Lycan</strong> : Trước đây thuộc phe của Balkasu với hình dạng con sói, <br>
                 và không khác gì một con quái vật, Nhằm để  thoát khỏi sự quản lý của <br>
@@ -319,12 +319,12 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image034.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image034.jpg"
                      width="150"></td>
             <td><strong>Người gác cổng</strong> đứng ở cuối cánh cửa nơi ẩn náu của Balkasu.</td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image035.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image035.jpg"
                      width="150"></td>
             <td><p><strong>Mirage</strong> (Elbeland) là NPC để tham gia vào Bạch long điện, đây  là một học <br>
                     giả nổi tiếng bởi tính liêm khiết và tâm hồn thanh tịnh.  Hanmyongin là một <br>
@@ -333,7 +333,7 @@
                     đã nghiên cứu và tìm hiểu kỷ càng về nước thánh và lá bùa</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image036.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image036.jpg"
                      width="150"></td>
             <td><strong>Natasa</strong> là NPC bán phào bông đã từng đi lang thang khắp chốn trên đại lục<br>
                 địa MU , cô gái tự làm  và bán những cây pháo bông nhằm để chúc phúc <br>
@@ -341,7 +341,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image037.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image037.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Slibia</strong> là chủ tiệm thuốc ở vị trí toạ độ : 44, 230 là  một thương nhân trẻ tuổi
@@ -355,7 +355,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image038.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image038.jpg"
                      width="150"></td>
             <td>Chủ tiệm buôn bán vũ khí trung cấp và vật dụng phòng thủ <strong>Lea</strong> tại địa đểim: <br>
                 30, 236 xuất thân trong con nhà thương nhân từ bao đời nay. Bất chấp mọi <br>
@@ -365,7 +365,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image039.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image039.jpg"
                      width="150"></td>
             <td>
                 <div>Thương nhân ma thuật <strong>Maruse</strong> ở vị tri toạ độ : 37, 218 chuyên bán sách <br>
@@ -376,7 +376,7 @@
                     kỹ năng ảo thuật..</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image040.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image040.jpg"
                      width="150"></td>
             <td>
                 <div>Tại vị trí toạ độ : 46, 243 NPC <strong>Seed Master</strong> đảm trách kết hợp và giải
@@ -387,7 +387,7 @@
                     phương pháp sử dụng và khám phá Ngọc</p></td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image041.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image041.jpg"
                      width="150"></td>
             <td>Ở vị trí toạ độ : 50, 243 là một con <strong>yêu tinh nghiên cứu hạt </strong>các vấn đề<br>
                 liên quan đến Hạt, NPC này đảm trách nhiệm vụ huỷ xiên Hạt và chế tạo <br>
@@ -397,7 +397,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image042.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image042.jpg"
                      width="150"></td>
             <td>Nền văn hoá mậu dịch ngày càng phát triển trên lục địa MU dẫn đến xuất <br>
                 hiện <strong>thương gia Moss</strong>. Họ đi nhiều nơi và bán item,  chế tao và nâng cấp <br>
@@ -410,7 +410,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image043.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image043.jpg"
                      width="150"></td>
             <td><strong>Vệ binh cung thủ</strong> là NPC đại diện cho Binh sỹ dùng giáo và binh sỹ dùng <br>
                 cung, thông qua nó để tiếp sức  vào Công Thành thành công hơn. Đối với <br>
@@ -420,7 +420,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image044.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image044.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Serubisu</strong> là 1 trong những phù thuỷ nghiên cứu về ma lực của các viên <br>
@@ -431,7 +431,7 @@
             </td>
         </tr>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image045.jpg"
+            <td><img height="158" alt="" src="/public/images/guides/npc/image045.jpg"
                      width="150"></td>
             <td>
                 <div>Ở vị trí toạ độ là 7, 19 để đăng nhập vào Kalima 1~ 7. <strong>Leira </strong>được sinh ra <br>

@@ -106,7 +106,7 @@ img.right {
 
 #gp_bar {
     height: 50px;
-    background: url(../images/bg_gpbar.png) repeat-x top center;
+    background: url(../public/images/bg_gpbar.png) repeat-x top center;
     /*background: #2009D0;*/
     top: 0;
     width: 100%;
@@ -257,7 +257,7 @@ img.right {
 }
 
 .down {
-    background: url(../images/up-down.png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: url(../public/images/up-down.png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     float: right;
     height: 15px;
     margin: 6px 0 5px 9px;
@@ -265,7 +265,7 @@ img.right {
 }
 
 .downup {
-    background: url(../images/up-down.png) no-repeat scroll 0 -15px rgba(0, 0, 0, 0);
+    background: url(../public/images/up-down.png) no-repeat scroll 0 -15px rgba(0, 0, 0, 0);
     float: right;
     height: 15px;
     width: 15px;
@@ -402,7 +402,7 @@ div.box_login1 .fotgetPass a:hover span {
 }
 
 #page_wrapper1 {
-    background: url(../images/bgvisual_top.jpg) no-repeat top center;
+    background: url(../public/images/bgvisual_top.jpg) no-repeat top center;
 }
 
 /* top bg for subpage */
@@ -665,13 +665,13 @@ div.box_login1 .fotgetPass a:hover span {
 }
 
 .loginbx_n {
-    background: url(../images/loginbx_n.png) no-repeat top center;
+    background: url(../public/images/loginbx_n.png) no-repeat top center;
     width: 208px;
     height: 12px;
 }
 
 .loginbx_c {
-    background: url(../images/loginbx_c.png) repeat-y top center;
+    background: url(../public/images/loginbx_c.png) repeat-y top center;
     width: 208px;
 }
 
@@ -732,7 +732,7 @@ div.box_login1 .fotgetPass a:hover span {
 }
 
 .loginbx_s {
-    background: url(../images/loginbx_s.png) no-repeat top center;
+    background: url(../public/images/loginbx_s.png) no-repeat top center;
     width: 100%;
     height: 12px;
     background-size: cover;
@@ -748,7 +748,7 @@ div.box_login1 .fotgetPass a:hover span {
 }
 
 .facebook {
-    background: url(../images/facebookbg_allods.png) no-repeat top center;
+    background: url(../public/images/facebookbg_allods.png) no-repeat top center;
     background-size: cover;
     width: 100%;
     min-height: 340px;
@@ -840,7 +840,7 @@ div.box_login1 .fotgetPass a:hover span {
 }
 
 .lmenu_n {
-    background: url(../images/lmenu_n.png) no-repeat top center;
+    background: url(../public/images/lmenu_n.png) no-repeat top center;
     width: 208px;
     height: 43px;
 }
@@ -850,7 +850,7 @@ div.box_login1 .fotgetPass a:hover span {
 }
 
 .lmenu_c {
-    background: url(../images/lmenu_c.png) repeat-y top center;
+    background: url(../public/images/lmenu_c.png) repeat-y top center;
     width: 208px;
 }
 
@@ -861,7 +861,7 @@ div.box_login1 .fotgetPass a:hover span {
 }
 
 .lmenu_s {
-    background: url(../images/lmenu_s.png) no-repeat bottom center;
+    background: url(../public/images/lmenu_s.png) no-repeat bottom center;
     width: 208px;
     height: 25px;
 }
@@ -882,7 +882,7 @@ div.box_login1 .fotgetPass a:hover span {
 #nav a:link, #nav a:visited {
     color: #a7854d;
     text-decoration: none;
-    background: url(../images/lmenu_arrow_off.png) no-repeat;
+    background: url(../public/images/lmenu_arrow_off.png) no-repeat;
     padding-left: 14px;
     padding-top: 3px;
     display: block;
@@ -892,7 +892,7 @@ div.box_login1 .fotgetPass a:hover span {
 #nav a:hover {
     color: #f4b752;
     text-decoration: none;
-    background: url(../images/lmenu_arrow.png) no-repeat;
+    background: url(../public/images/lmenu_arrow.png) no-repeat;
     padding-left: 14px;
     padding-top: 3px;
     display: block;
@@ -906,7 +906,7 @@ div.box_login1 .fotgetPass a:hover span {
 #nav #selected a {
     color: #f4b752;
     text-decoration: none;
-    background: url(../images/lmenu_arrow.png) no-repeat;
+    background: url(../public/images/lmenu_arrow.png) no-repeat;
     padding-left: 14px;
     padding-top: 3px;
     display: block;
@@ -915,7 +915,7 @@ div.box_login1 .fotgetPass a:hover span {
 #nav #selected a:hover {
     color: #f4b752;
     text-decoration: none;
-    background: url(../images/lmenu_arrow.png) no-repeat;
+    background: url(../public/images/lmenu_arrow.png) no-repeat;
     padding-left: 14px;
     padding-top: 3px;
     display: block;
@@ -977,7 +977,7 @@ div.box_login1 .fotgetPass a:hover span {
 }
 
 .footer_line {
-    background: url(../images/footer_line.gif) no-repeat top center;
+    background: url(../public/images/footer_line.gif) no-repeat top center;
     width: 468px;
     height: 1px;
 }
@@ -1197,13 +1197,13 @@ a:hover {
 }
 
 .newsbg_n {
-    background: url(../images/bgmainsub_n.png) no-repeat bottom center;
+    background: url(../public/images/bgmainsub_n.png) no-repeat bottom center;
     width: 748px;
     height: 12px;
 }
 
 .newsbg_c {
-    background: url(../images/bgmainsub_c.png) repeat-y top center;
+    background: url(../public/images/bgmainsub_c.png) repeat-y top center;
     width: 748px;
     height: 800px;
     height: auto !important;
@@ -1211,42 +1211,42 @@ a:hover {
 }
 
 .newsbg_s {
-    background: url(../images/bgmainsub_s.png) no-repeat top center;
+    background: url(../public/images/bgmainsub_s.png) no-repeat top center;
     width: 748px;
     height: 12px;
 }
 
 .contentbg_n {
-    background: url(../images/newsitem_n.png) no-repeat bottom center;
+    background: url(../public/images/newsitem_n.png) no-repeat bottom center;
     width: 505px;
     height: 12px;
 }
 
 .contentbg_c {
-    background: url(../images/newsitem_c.png) repeat-y top left;
+    background: url(../public/images/newsitem_c.png) repeat-y top left;
     width: 505px;
     border: 0px solid blue;
 }
 
 .contentbg_s {
-    background: url(../images/newsitem_s.png) no-repeat top center;
+    background: url(../public/images/newsitem_s.png) no-repeat top center;
     width: 505px;
     height: 12px;
 }
 
 .sidebar_n {
-    background: url(../images/loginbx_n.png) no-repeat bottom center;
+    background: url(../public/images/loginbx_n.png) no-repeat bottom center;
     width: 208px;
     height: 12px;
 }
 
 .sidebar_c {
-    background: url(../images/loginbx_c.png) repeat-y top center;
+    background: url(../public/images/loginbx_c.png) repeat-y top center;
     width: 208px;
 }
 
 .sidebar_s {
-    background: url(../images/loginbx_s.png) no-repeat top center;
+    background: url(../public/images/loginbx_s.png) no-repeat top center;
     width: 208px;
     height: 12px;
 }
@@ -1291,7 +1291,7 @@ a:hover {
     color: #FFF;
     font-weight: bold;
     padding: 1px 2px;
-    background: url(../images/search.jpg) no-repeat bottom center;
+    background: url(../public/images/search.jpg) no-repeat bottom center;
     width: 61px;
     height: 30px;
     border: 0;
@@ -2035,7 +2035,7 @@ a img {
     height: 23px;
     float: left;
     text-align: center;
-    background: url(../images/addsub.png) no-repeat;
+    background: url(../public/images/addsub.png) no-repeat;
 }
 
 .dec {

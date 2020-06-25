@@ -1,4 +1,6 @@
-<?PHP
+<?php
+require_once  ROOT_ADMIN .'/ProcessCoreAdmin.php';
+$coreAdmin = new ProcessCoreAdmin();
 
 global $skin_header, $skin_menu, $skin_footer, $skin_prefix, $digitalSignature;
 
@@ -8,11 +10,14 @@ $skin_prefix = "";
 // Skin MENU
 // ********************************************************************************
 
-$skin_menu = cn_get_menu() . '<div style="clear:both;"></div>';
-$setpath_default = getoption('http_script_dir');    // 	=> http://localhost/bqn/data <=> /bqn/data
-$setpath_root_ = URL_PATH_;                            //	=> /bqn/data
-$setpath_root_admin = URL_PATH;                        //	=> /bqn/data/admin
-$digitalSignature = cn_digital_signature_meta();
+$skin_menu = $coreAdmin->cn_get_menu() . '<div style="clear:both;"></div>';
+// => http://localhost/bqn/data <=> /bqn/data
+$setpath_default = getOption('http_script_dir');
+// => /bqn/data
+$setpath_root_ = URL_PATH_;
+//=> /bqn/data/admin
+$setpath_root_admin = URL_PATH;
+$digitalSignature = cn_digital_signature_meta(getMember());
 // ********************************************************************************
 // Skin HEADER
 // ********************************************************************************
@@ -29,10 +34,10 @@ $skin_header = <<<HTML
 	<link rel="stylesheet" href="/skins/font-awesome.min.css" type="text/css">
 	{signature}
     <style type="text/css"><!-- {CustomStyle} --></style>
-	
+
 	<script type="text/javascript" src="/js/jquery-2.1.0.min.js"></script>
 	<script type="text/javascript" src="/js/clock.js"></script>
-	
+
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.2.min.js"></script>
 	<script type="text/javascript" src="js/angular-route.min.js"></script>
@@ -56,8 +61,8 @@ $skin_header = <<<HTML
 		<div id="contents">
 
 			<div class="breadcrumbs">{breadcrumbs}
-	
-		
+
+
 HTML;
 
 // ********************************************************************************
@@ -70,18 +75,18 @@ $skin_footer = <<<HTML
 	</div>
 </div>
 <!-- FOOTER -->
-<div id="footer" style="float:left"> 
-	<div id="bttop" style="display: block;">BACK TO TOP</div>	
+<div id="footer" style="float:left">
+	<div id="bttop" style="display: block;">BACK TO TOP</div>
 
 	<div style="text-align: center;">
 		<span style="color: #888888; font-size: 15px;">Execution time: {exec-time} s.<br>
 		<span style="color: #888888; font-size: 15px;">Copyright &copy; {year-time}&nbsp; Convert by &nbsp;</span>{convertby}
 	</div>
 </div>
-	<script type="text/javascript" src="/library/wz_tooltip.js"></script>
+	<script type="text/javascript" src="/public/library/wz_tooltip.js"></script>
 	<script type="text/javascript" src="/js/topxTip.js"></script>
     <script type="text/javascript" src="/skins/cute.js"></script>
-    
+
 	<script type="text/javascript">
 		$(function(){
 			$(window).scroll(function(){
@@ -98,8 +103,7 @@ $skin_footer = <<<HTML
 				});
 			});
 		</script>
-		
+
 </body></html>
 HTML;
 
-?>

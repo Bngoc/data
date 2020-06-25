@@ -63,7 +63,7 @@
     </tr>
     <tr>
         <td>Chém lửa</td>
-        <td><img src="/images/guides/mg_FireSlash_02.jpg"></td>
+        <td><img src="/public/images/guides/mg_FireSlash_02.jpg"></td>
         <td>Sức mạnh 596</td>
         <td>15</td>
         <td>20</td>
@@ -76,7 +76,7 @@
     </tr>
     <tr>
         <td>Chém sức mạnh</td>
-        <td><img src="/images/guides/mg_Power-Slash_02.jpg"></td>
+        <td><img src="/public/images/guides/mg_Power-Slash_02.jpg"></td>
         <td>15</td>
         <td>0</td>
         <td>Sức sát thương cơ bản x 200%</td>
@@ -100,7 +100,7 @@
     </tr>
     <tr>
         <td>Phòng thủ</td>
-        <td><img src="/images/guides/imgEFxxxxxxx"></td>
+        <td><img src="/public/images/guides/imgEFxxxxxxx"></td>
         <td>30</td>
         <td>Làm giảm 50% sức sát thương</td>
         <td>Tuyệt chiêu của Khiên</td>
@@ -112,7 +112,7 @@
     </tr>
     <tr>
         <td>Chém xuống</td>
-        <td><img src="/images/guides/imgF2xxxxxxx"></td>
+        <td><img src="/public/images/guides/imgF2xxxxxxx"></td>
         <td>10</td>
         <td>Sức sát thương x2</td>
         <td>Tuyệt chiêu của vũ khí</td>
@@ -124,7 +124,7 @@
     </tr>
     <tr>
         <td>Chém xoay ngang</td>
-        <td><img src="/images/guides/mg_Spiral-Slash_02.jpg"></td>
+        <td><img src="/public/images/guides/mg_Spiral-Slash_02.jpg"></td>
         <td>9</td>
         <td>Sức sát thương x2</td>
         <td>Tuyệt chiêu của vũ khí</td>

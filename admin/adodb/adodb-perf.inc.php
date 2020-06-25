@@ -1024,6 +1024,13 @@ Committed_AS:   348732 kB
      * Reorganise multiple table-indices/statistics/..
      * OptimizeMode could be given by last Parameter
      *
+     * @param string table name of the table to optimize
+     * @param int mode optimization-mode
+     *      <code>ADODB_OPT_HIGH</code> for full optimization
+     *      <code>ADODB_OPT_LOW</code> for CPU-less optimization
+     *      Default is LOW <code>ADODB_OPT_LOW</code>
+     * @return Returns <code>true</code> on success and <code>false</code> on error
+     * @author Markus Staab
      * @example
      *      <pre>
      *          optimizeTables( 'tableA');
@@ -1035,13 +1042,6 @@ Committed_AS:   348732 kB
      *          optimizeTables( 'tableA', 'tableB', ADODB_OPT_LOW);
      *      </pre>
      *
-     * @param string table name of the table to optimize
-     * @param int mode optimization-mode
-     *      <code>ADODB_OPT_HIGH</code> for full optimization
-     *      <code>ADODB_OPT_LOW</code> for CPU-less optimization
-     *      Default is LOW <code>ADODB_OPT_LOW</code>
-     * @author Markus Staab
-     * @return Returns <code>true</code> on success and <code>false</code> on error
      */
     function OptimizeTables()
     {
@@ -1071,8 +1071,8 @@ Committed_AS:   348732 kB
      *      <code>ADODB_OPT_HIGH</code> for full optimization
      *      <code>ADODB_OPT_LOW</code> for CPU-less optimization
      *      Default is LOW <code>ADODB_OPT_LOW</code>
-     * @author Markus Staab
      * @return Returns <code>true</code> on success and <code>false</code> on error
+     * @author Markus Staab
      */
     function OptimizeTable($table, $mode = ADODB_OPT_LOW)
     {
@@ -1085,8 +1085,8 @@ Committed_AS:   348732 kB
      * Default implementation loops over all <code>MetaTables()</code> and
      * optimize each using <code>optmizeTable()</code>
      *
-     * @author Markus Staab
      * @return Returns <code>true</code> on success and <code>false</code> on error
+     * @author Markus Staab
      */
     function optimizeDatabase()
     {

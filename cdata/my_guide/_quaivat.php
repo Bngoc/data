@@ -46,7 +46,7 @@ list($sub, $options) = _GL('sub, options');
                 </td>
             </tr>
             <tr>
-                <td rowspan="4"><img src="/images/guides/quaivat/images/img19.jpg"></td>
+                <td rowspan="4"><img src="/public/images/guides/quaivat/images/img19.jpg"></td>
                 <td colspan="5">Rồng con (Budge Dragon)</td>
             </tr>
             <tr>
@@ -69,7 +69,7 @@ list($sub, $options) = _GL('sub, options');
                 </td>
             </tr>
             <tr>
-                <td rowspan="4"><img src="/images/guides/quaivat/images/img1A.jpg"></td>
+                <td rowspan="4"><img src="/public/images/guides/quaivat/images/img1A.jpg"></td>
                 <td colspan="5">Bò chiến (Bull Fighter)</td>
             </tr>
             <tr>
@@ -92,7 +92,7 @@ list($sub, $options) = _GL('sub, options');
                 </td>
             </tr>
             <tr>
-                <td rowspan="4"><img src="/images/guides/quaivat/images/img1B.jpg"></td>
+                <td rowspan="4"><img src="/public/images/guides/quaivat/images/img1B.jpg"></td>
                 <td colspan="5">Chó Săn (Hound)</td>
             </tr>
             <tr>
@@ -115,7 +115,7 @@ list($sub, $options) = _GL('sub, options');
                 </td>
             </tr>
             <tr>
-                <td rowspan="4"><img src="/images/guides/quaivat/images/img1C.gif"></td>
+                <td rowspan="4"><img src="/public/images/guides/quaivat/images/img1C.gif"></td>
                 <td colspan="5">Bò Quỷ (Elite Bull Fighter)</td>
             </tr>
             <tr>
@@ -138,7 +138,7 @@ list($sub, $options) = _GL('sub, options');
                 </td>
             </tr>
             <tr>
-                <td rowspan="4"><img src="/images/guides/quaivat/images/img1E.jpg"></td>
+                <td rowspan="4"><img src="/public/images/guides/quaivat/images/img1E.jpg"></td>
                 <td colspan="5">Phù thủy lửa (Lich)</td>
             </tr>
             <tr>
@@ -159,7 +159,7 @@ list($sub, $options) = _GL('sub, options');
                 <td colspan="5">Các phù thủy bị nguyền rủa khi chết đi đã qui hàng KunDun và làm tay sai cho hắn.</td>
             </tr>
             <tr>
-                <td rowspan="4"><img src="/images/guides/quaivat/images/img1F.jpg"></td>
+                <td rowspan="4"><img src="/public/images/guides/quaivat/images/img1F.jpg"></td>
                 <td colspan="5">Quỷ khổng lồ (Giant)</td>
             </tr>
             <tr>

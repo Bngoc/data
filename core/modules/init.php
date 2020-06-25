@@ -38,7 +38,7 @@ if (!isset($_init_modules[$_module])) {
 
 
 // Check restrictions, if user is authorized
-//if (($user=member_get()) && defined('AREA') && AREA == 'ADMIN')
+//if (($user=getMember()) && defined('AREA') && AREA == 'ADMIN')
 {
     if (empty($_init_modules[$_module]['acl'])) {
         // Request module
@@ -71,7 +71,7 @@ if (!isset($_init_modules[$_module])) {
                 global $_SESS;
                 $_SESSION = array();
             }
-            msg_info('Section <font color="blue">[' . cn_htmlspecialchars($_module) . '] </font> disabled for you<br><i>Please come back later.</i>', PHP_SELF);
+            msg_info('Section <font color="blue">[' . cnHtmlSpecialChars($_module) . '] </font> disabled for you<br><i>Please come back later.</i>', PHP_SELF);
         }
     }
 }

@@ -139,7 +139,7 @@ cn_snippet_bc();
                         if (preg_match('/^[0-9]+$/', REQ('w_number'))) {
                             echo '    $number = ' . REQ('w_number') . ';' . "\n";
                         } else {
-                            echo '    $number = "' . cn_htmlspecialchars(REQ('w_number')) . '";' . "\n";
+                            echo '    $number = "' . cnHtmlSpecialChars(REQ('w_number')) . '";' . "\n";
                         }
                     }
 
@@ -148,15 +148,15 @@ cn_snippet_bc();
                         if (preg_match('/^[0-9]+$/', REQ('w_start_from'))) {
                             echo '    $start_from = ' . REQ('w_start_from') . ';' . "\n";
                         } else {
-                            echo '    $start_from = "' . cn_htmlspecialchars(REQ('w_start_from')) . '";' . "\n";
+                            echo '    $start_from = "' . cnHtmlSpecialChars(REQ('w_start_from')) . '";' . "\n";
                         }
                     }
 
                     if (REQ('w_template') && REQ('w_template') !== 'default') {
-                        echo '    $template = "' . cn_htmlspecialchars(REQ('w_template')) . '";' . "\n";
+                        echo '    $template = "' . cnHtmlSpecialChars(REQ('w_template')) . '";' . "\n";
                     }
                     if (REQ('w_allcategory') == FALSE && REQ('w_category')) {
-                        echo '    $category = "' . (is_array(REQ('w_category')) ? cn_htmlspecialchars(join(',', REQ('w_category'))) : '') . '";' . "\n";
+                        echo '    $category = "' . (is_array(REQ('w_category')) ? cnHtmlSpecialChars(join(',', REQ('w_category'))) : '') . '";' . "\n";
                     }
                     if (REQ('w_reverse')) {
                         echo '    $reverse = TRUE;' . "\n";
@@ -190,7 +190,7 @@ cn_snippet_bc();
             <tr>
                 <td><b><br>Number of Active News to Display:</b></td>
                 <td rowspan="2" align="center"><input style="text-align: center" name="w_number" size="11"
-                                                      value="<?php echo cn_htmlspecialchars(REQ('w_number')); ?>"></td>
+                                                      value="<?php echo cnHtmlSpecialChars(REQ('w_number')); ?>"></td>
             </tr>
 
             <tr>
@@ -208,7 +208,7 @@ cn_snippet_bc();
                             <option <?php if (REQ('w_template') == $template_id) {
                                 echo 'selected="selected"';
                             } ?>
-                                value="<?php echo $template_id; ?>"><?php echo cn_htmlspecialchars(ucfirst($template)); ?></option>
+                                value="<?php echo $template_id; ?>"><?php echo cnHtmlSpecialChars(ucfirst($template)); ?></option>
                         <?php } ?>
                     </select>
                 </td>
@@ -268,7 +268,7 @@ cn_snippet_bc();
             <tr>
                 <td><b>Start 'Displaying' From...</b></td>
                 <td rowspan="2" align="center"><input name="w_start_from" size="11" style="text-align: center"
-                                                      value="<?php echo cn_htmlspecialchars(REQ('w_start_from')); ?>">
+                                                      value="<?php echo cnHtmlSpecialChars(REQ('w_start_from')); ?>">
                 </td>
             </tr>
 
@@ -374,27 +374,27 @@ cn_snippet_bc();
                 <td width=100% bgcolor="#F7F6F4">&nbsp;<b>URL of the page where you include your news</b><br>&nbsp;<i>example:
                         http://mysite.com/news.php</i><br>&nbsp;<i>or: /example2.php</i></td>
                 <td bgcolor="#F7F6F4" colspan=2><input name="rss_news_include_url"
-                                                       value="<?php echo cn_htmlspecialchars($rss_news_include_url); ?>"
+                                                       value="<?php echo cnHtmlSpecialChars($rss_news_include_url); ?>"
                                                        type=text size=30>
             <tr>
                 <td>Title of the RSS feed</td>
-                <td colspan=2><input name="rss_title" value="<?php echo cn_htmlspecialchars($rss_title); ?>" size=30>
+                <td colspan=2><input name="rss_title" value="<?php echo cnHtmlSpecialChars($rss_title); ?>" size=30>
                 </td>
             </tr>
             <tr>
                 <td bgcolor="#F7F6F4">Character Encoding (default: <i>UTF-8</i>)</td>
                 <td bgcolor="#F7F6F4" colspan=2><input name="rss_encoding"
-                                                       value="<?php echo cn_htmlspecialchars($rss_encoding); ?>"
+                                                       value="<?php echo cnHtmlSpecialChars($rss_encoding); ?>"
                                                        size=20></td>
             </tr>
             <tr>
                 <td>Language (default: <i>en-us</i>)</td>
-                <td><input name="rss_language" value="<?php echo cn_htmlspecialchars($rss_language); ?>" size=5></td>
+                <td><input name="rss_language" value="<?php echo cnHtmlSpecialChars($rss_language); ?>" size=5></td>
             </tr>
             <tr>
                 <td bgcolor="#F7F6F4">Number of articles to be shown in the RSS (default:10):</td>
                 <td bgcolor="#F7F6F4"><input id=number size=5 type="text" size="20" name="rss_number"
-                                             value="<?php echo cn_htmlspecialchars(REQ('rss_number')); ?>"></td>
+                                             value="<?php echo cnHtmlSpecialChars(REQ('rss_number')); ?>"></td>
             </tr>
 
             <tr>

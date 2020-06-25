@@ -10,10 +10,10 @@ define('AREA', "ADMIN");
 
 include dirname(__FILE__) . '/core/init.php';
 
-//cn_sendheaders();
-// load skin templale
-cn_load_skin();
-cn_login();
-cn_register_form();
-
-hook('index/invoke_module', array($_module));
+////cn_sendheaders();
+//// load skin templale
+//cn_load_skin();
+//cn_login();
+//cn_register_form();
+//
+//hook('index/invoke_module', array($_module));

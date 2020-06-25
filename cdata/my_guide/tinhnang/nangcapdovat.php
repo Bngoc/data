@@ -22,7 +22,7 @@ Nâng cấp item từ 0 đến 6 các bạn sử dụng ngọc ước nguyện h
 <br>
 <br>
 <div>
-    <div align="center"><img height="382" src="/images/guides/uplevel10.jpg" width="202">
+    <div align="center"><img height="382" src="/public/images/guides/uplevel10.jpg" width="202">
     </div>
 </div>
 <br>

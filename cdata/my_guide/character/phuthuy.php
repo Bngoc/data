@@ -90,7 +90,7 @@
     </tr>
     <tr>
         <td>Quả cầu năng lượng</td>
-        <td><img src="/images/guides/dw_Energy_Ball_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Energy_Ball_02.jpg"></td>
         <td></td>
         <td>1</td>
         <td>3</td>
@@ -103,7 +103,7 @@
     </tr>
     <tr>
         <td>Quả Cầu Lửa</td>
-        <td><img src="/images/guides/dw_Fire_Ball_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Fire_Ball_02.jpg"></td>
         <td>40 Energy</td>
         <td>3</td>
         <td>0</td>
@@ -116,7 +116,7 @@
     </tr>
     <tr>
         <td>Phép sóng âm</td>
-        <td><img src="/images/guides/dw_Power_Wave_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Power_Wave_02.jpg"></td>
         <td>57 Energy</td>
         <td>5</td>
         <td>0</td>
@@ -129,7 +129,7 @@
     </tr>
     <tr>
         <td>Phép phóng sét</td>
-        <td><img src="/images/guides/dw_Lightning_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Lightning_02.jpg"></td>
         <td>72 Energy</td>
         <td>15</td>
         <td>0</td>
@@ -140,7 +140,7 @@
     </tr>
     <tr>
         <td>Dịch chuyển tức thời</td>
-        <td><img src="/images/guides/dw_Teleport_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Teleport_02.jpg"></td>
         <td>80 Energy</td>
         <td>30</td>
         <td>0</td>
@@ -153,7 +153,7 @@
     </tr>
     <tr>
         <td>Phép thiên thạch</td>
-        <td><img src="/images/guides/dw_Meteorite_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Meteorite_02.jpg"></td>
         <td>104 Energy</td>
         <td>12</td>
         <td>0</td>
@@ -164,7 +164,7 @@
     </tr>
     <tr>
         <td>Phép đóng băng</td>
-        <td><img src="/images/guides/dw_Ice_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Ice_02.jpg"></td>
         <td>120 Energy</td>
         <td>38</td>
         <td>0</td>
@@ -175,7 +175,7 @@
     </tr>
     <tr>
         <td>Phép phóng độc</td>
-        <td><img src="/images/guides/dw_Poison_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Poison_02.jpg"></td>
         <td>140 Energy</td>
         <td>42</td>
         <td>0</td>
@@ -188,7 +188,7 @@
     </tr>
     <tr>
         <td>Phép cột lửa</td>
-        <td><img src="/images/guides/dw_Flame_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Flame_02.jpg"></td>
         <td>160 Energy</td>
         <td>50</td>
         <td>0</td>
@@ -201,7 +201,7 @@
     </tr>
     <tr>
         <td>Phép lốc xoáy</td>
-        <td><img src="/images/guides/dw_Twister_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Twister_02.jpg"></td>
         <td>180 Energy</td>
         <td>60</td>
         <td>0</td>
@@ -214,7 +214,7 @@
     </tr>
     <tr>
         <td>Triệu Tập Linh Hồn</td>
-        <td><img src="/images/guides/dw_Evil Spirits_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Evil Spirits_02.jpg"></td>
         <td>220 Energy</td>
         <td>90</td>
         <td>0</td>
@@ -227,7 +227,7 @@
     </tr>
     <tr>
         <td>Phép lửa địa ngục</td>
-        <td><img src="/images/guides/dw_Hellfire_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Hellfire_02.jpg"></td>
         <td>260 Energy</td>
         <td>160</td>
         <td>0</td>
@@ -240,7 +240,7 @@
     </tr>
     <tr>
         <td>Phép luồng nước xanh</td>
-        <td><img src="/images/guides/dw_Aqua Beam_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Aqua Beam_02.jpg"></td>
         <td>345 Energy</td>
         <td>140</td>
         <td>0</td>
@@ -251,7 +251,7 @@
     </tr>
     <tr>
         <td>Mưa sao băng</td>
-        <td><img src="/images/guides/dw_Cometfall_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Cometfall_02.jpg"></td>
         <td>436 Energy</td>
         <td>140</td>
         <td>0</td>
@@ -262,7 +262,7 @@
     </tr>
     <tr>
         <td>Phép vòng tròn lửa</td>
-        <td><img src="/images/guides/dw_Inferno_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Inferno_02.jpg"></td>
         <td>724 Energy</td>
         <td>200 </td>
         <td>0</td>
@@ -275,7 +275,7 @@
     </tr>
     <tr>
         <td>Dịch Chuyển Đồng Đội</td>
-        <td><img alt="" src="/images/guides/dw_Teleport Ally_02.jpg"></td>
+        <td><img alt="" src="/public/images/guides/dw_Teleport Ally_02.jpg"></td>
         <td>644 Energy</td>
         <td>90</td>
         <td>45</td>
@@ -288,7 +288,7 @@
     </tr>
     <tr>
         <td>Phép vòng năng lượng</td>
-        <td><img src="/images/guides/dw_Soul Barrier_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Soul Barrier_02.jpg"></td>
         <td>509 Energy</td>
         <td>70</td>
         <td>22</td>
@@ -301,7 +301,7 @@
     </tr>
     <tr>
         <td>Mưa độc tố</td>
-        <td><img src="/images/guides/dw_Decay_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Decay_02.jpg"></td>
         <td>Pháp Sư và năng lượng 953</td>
         <td>140</td>
         <td>110</td>
@@ -314,7 +314,7 @@
     </tr>
     <tr>
         <td>Mưa băng tuyết</td>
-        <td><img src="/images/guides/dw_Ice Storm_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Ice Storm_02.jpg"></td>
         <td>Pháp Sư và năng lượng 849</td>
         <td>120</td>
         <td>100</td>
@@ -327,7 +327,7 @@
     </tr>
     <tr>
         <td>Bùng nổ năng lượng</td>
-        <td><img src="/images/guides/dw_Nova_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Nova_02.jpg"></td>
         <td>Pháp Sư và năng lượng 1052</td>
         <td>150</td>
         <td>180</td>
@@ -353,7 +353,7 @@
     </tr>
     <tr>
         <td>Lưỡi phong đao</td>
-        <td><img src="/images/guides/dw_Wind Blades_02.jpg"></td>
+        <td><img src="/public/images/guides/dw_Wind Blades_02.jpg"></td>
         <td>Pháp Sư</td>
         <td>150</td>
         <td>10</td>

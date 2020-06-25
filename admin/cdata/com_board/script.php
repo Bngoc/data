@@ -10,13 +10,13 @@ cn_snippet_bc(); ?>
 
     <?php cn_form_open('mod, opt, sub'); ?>
     <div><textarea name="text"
-                   style="width: 770px; height: 400px;"><?php echo cn_htmlspecialchars($__text); ?></textarea></div>
+                   style="width: 770px; height: 400px;"><?php echo cnHtmlSpecialChars($__text); ?></textarea></div>
     <br/>
     <div class="panel">
         <input type="submit" value="Save changes"/>
 
         <select name="snippet">
-            <?php foreach ($__list as $id => $_t) echo '<option ' . (($id == $__snippet) ? 'selected' : '') . '>' . cn_htmlspecialchars($id) . '</option>'; ?>
+            <?php foreach ($__list as $id => $_t) echo '<option ' . (($id == $__snippet) ? 'selected' : '') . '>' . cnHtmlSpecialChars($id) . '</option>'; ?>
         </select>
 
         <input type="submit" name="select" value="Select"/>

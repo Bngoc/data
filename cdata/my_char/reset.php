@@ -36,7 +36,7 @@ if ($notify_rs_ok) echo $notify_rs_ok;
                         </td>
                     </tr>
                     <?php if ($before_info_re) foreach ($before_info_re as $ke => $val) {
-                        if (isset($val[1])){
+                        if (isset($val[1])) {
                             echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
 									<td class="pd-left10"><strong style="color:#009900">' . $val[1] . '</strong></td>
@@ -304,4 +304,4 @@ if (getoption('hotrotanthu') == 1) { ?>
     </table>
 <?php }
 ?>
-	
+

@@ -69,18 +69,18 @@ function relax_invoke()
     }
 
     cn_assign('dashboard', $relax_board);
-    echoheader('-@my_relax/style.css', "Giải trí");
-    echocomtent_here(exec_tpl('my_relax/general'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_relax/style.css', "Giải trí");
+    echo_content_here(exec_tpl('my_relax/general'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function relax_default()
 {
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('defaults/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('defaults/style.css', "Error - $name__");
+    echo_content_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function relax_baucua()
@@ -197,7 +197,7 @@ function relax_baucua()
 
                 if (!$isActionUpdate) {
                     $update_money = $_blank_var[0]['vp'] + $money;
-                    $statusUpdate = do_select_orther("UPDATE MEMB_INFO SET [vpoint]=$update_money WHERE memb___id='$accc_'");
+                    $statusUpdate = do_select_other("UPDATE MEMB_INFO SET [vpoint]=$update_money WHERE memb___id='$accc_'");
 
                     //Ghi vào Log
                     $content = "$accc_ đã chơi bầu cua, kết quả " . $contLog;
@@ -209,7 +209,7 @@ function relax_baucua()
                         $fileContents = file_get_contents($file);
                         file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $update_money . "|" . $Date . "|\n" . $fileContents);
                     }
-                        //End Ghi vào Log
+                    //End Ghi vào Log
                 }
             }
 
@@ -225,9 +225,9 @@ function relax_baucua()
         }
     }
 
-    echoheader('-@my_relax/style.css@my_relax/relaxAjaxPlay.js', "Giải trí - Bầu Cua");
-    echocomtent_here(exec_tpl('my_relax/baucua'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_relax/style.css@my_relax/relaxAjaxPlay.js', "Giải trí - Bầu Cua");
+    echo_content_here(exec_tpl('my_relax/baucua'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function relax_baicao()
@@ -357,7 +357,7 @@ function relax_baicao()
                         $fileContents = file_get_contents($file);
                         file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $update_money . "|" . $Date . "|\n" . $fileContents);
                     }
-                        //End Ghi vào Log
+                    //End Ghi vào Log
                 }
             }
 
@@ -371,9 +371,9 @@ function relax_baicao()
             return json_encode($resultData);
         }
     }
-    echoheader('-@my_relax/style.css@my_relax/relaxAjaxPlay.js', "Giải trí - Bài Cáo");
-    echocomtent_here(exec_tpl('my_relax/baicao'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_relax/style.css@my_relax/relaxAjaxPlay.js', "Giải trí - Bài Cáo");
+    echo_content_here(exec_tpl('my_relax/baicao'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function baicao_get_card_value($i)
@@ -398,9 +398,9 @@ function relax_xoso()
     $page = intval($page);
     if (empty($page)) $page = 1;
 
-    $showResultDe = do_select_orther("SELECT Top 1 [ResultDe], [timesDe], [OptionResult] FROM ResultDe ORDER BY ID DESC");
-//    $showResultDe = do_select_orther("SELECT [ResultDe], [timesDe], [OptionResult] FROM ResultDe WHERE Convert(Date, timesDe)='$ctime'");
-    $showHisrotyPlay = do_select_orther("SELECT [AccountID],[WriteDe],[timestamp],[Action], [Vpoint],[Result] FROM WriteDe WHERE AccountID='" . $accc_ . "' order by ID DESC");
+    $showResultDe = do_select_other("SELECT Top 1 [ResultDe], [timesDe], [OptionResult] FROM ResultDe ORDER BY ID DESC");
+//    $showResultDe = do_select_other("SELECT [ResultDe], [timesDe], [OptionResult] FROM ResultDe WHERE Convert(Date, timesDe)='$ctime'");
+    $showHisrotyPlay = do_select_other("SELECT [AccountID],[WriteDe],[timestamp],[Action], [Vpoint],[Result] FROM WriteDe WHERE AccountID='" . $accc_ . "' order by ID DESC");
 
     if (request_type('POST')) {
         if (REQ('action_history')) {
@@ -428,7 +428,7 @@ function relax_xoso()
 
             $moneyVpDe = abs(intval($moneyVpDe));
 
-            if ($moneyVpDe > MAX_TRANS){
+            if ($moneyVpDe > MAX_TRANS) {
                 cn_throw_message('Hạn mức giao dịch tối đa là  2 tỷ.', 'e');
                 $errors_false = true;
             }
@@ -469,12 +469,12 @@ function relax_xoso()
             $numberDe = abs(intval($numberDe));
 
             if ($showHisrotyPlay) {
-                foreach ($showHisrotyPlay as $key => $item){
+                foreach ($showHisrotyPlay as $key => $item) {
                     $makerTime = date_create(trim($item['timestamp']));
                     $tempTime = date_format($makerTime, 'Y-m-d');
 
                     if ($item['WriteDe'] == $numberDe && $item['Action'] == 1 && $tempTime == $ctime) {
-                        cn_throw_message('Bạn đã ghi số đề ' . $numberDe .'.', 'e');
+                        cn_throw_message('Bạn đã ghi số đề ' . $numberDe . '.', 'e');
                         $errors_false = true;
                         break;
                     }
@@ -504,7 +504,7 @@ function relax_xoso()
                     $fileContents = file_get_contents($file);
                     file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . '_' . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $moneyAfter . "|" . $Date . "|\n" . $fileContents);
                 }
-                 //End Ghi vào Log
+                //End Ghi vào Log
 
                 cn_throw_message("Bạn đã ghi đề $numberDe với giá tiền " . number_format($moneyVpDe, 0, ',', '.') . " Vpoint.");
 
@@ -537,9 +537,9 @@ function relax_xoso()
     cn_assign('resultPlayDe, timesTampResult', $resultPlayDe, $stuffDateTime);
     cn_assign('show_history', show_historyDe($showHisrotyPlay, $page));
 
-    echoheader('-@my_relax/style.css@my_relax/relaxAjaxPlay.js', "Giải trí - Chơi Đề");
-    echocomtent_here(exec_tpl('my_relax/xoso'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_relax/style.css@my_relax/relaxAjaxPlay.js', "Giải trí - Chơi Đề");
+    echo_content_here(exec_tpl('my_relax/xoso'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function show_historyDe($datahistory, $page)
@@ -567,7 +567,7 @@ function show_historyDe($datahistory, $page)
             $checkResult = $items['Result'];
             if ($checkResult == 1) {
                 $strResult = '<span class="cBlue"> Trúng </span>';
-            } elseif ($checkResult == 2){
+            } elseif ($checkResult == 2) {
                 $strResult = '<span class="cRed"> Không trúng </span>';
             } else {
                 $strResult = '---';

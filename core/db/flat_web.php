@@ -23,12 +23,11 @@ function db_installed_check()
     $result = $db_new->Execute("SELECT * FROM Account_Info WHERE [AdLevel]=1");
     if ($result->RecordCount()) {
         return true;
-    } else {
-        cn_require_install();
     }
+
+    return false;
 }
 
-// bo -- chua dung ???????????
 function view_info_char($account)
 {
     global $db_new;
@@ -87,7 +86,7 @@ function view_character($account)
     if (!empty($account)) {
         kiemtra_acc($account);
 
-        $result = $db_new->Execute($myQuery = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'") or cn_writelog($myQuery, 'e');
+        $result = $db_new->Execute($myQuery = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'") or cn_write_log($myQuery, 'e');
 
         if ($result) {
             if ($result->numrows() != 0) {
@@ -118,7 +117,7 @@ function view_character($account)
     }
 
     if (getoption('debugSql')) {
-        cn_writelog($myQuery);
+        cn_write_log($myQuery);
     }
 
     return isset($info_char_) ? $info_char_ : array();
@@ -149,7 +148,7 @@ function view_bank($account)
     }
 
     if (getoption('debugSql')) {
-        cn_writelog('MEMB_INFO', 'bank,vpoint,jewel_chao,jewel_cre,jewel_blue,gcoin,gcoin_km,jewel_feather,[WCoin],[WCoinP],[GoblinCoin]', "memb___id='$account'", '');
+        cn_write_log('MEMB_INFO', 'bank,vpoint,jewel_chao,jewel_cre,jewel_blue,gcoin,gcoin_km,jewel_feather,[WCoin],[WCoinP],[GoblinCoin]', "memb___id='$account'", '');
     }
 
     return isset($_data) ? $_data : array();
@@ -217,34 +216,38 @@ function db_user_by_name($name)
     }
 
     if (getoption('debugSql')) {
-        cn_writelog('MEMB_INFO', 'memb___id,memb__pwd,tel__numb,phon_numb,mail_addr,fpas_ques,fpas_answ,memb__pwd2,memb__pwdmd5,acl,ban_login,num_login,pass2', "memb___id='$username'");
+        cn_write_log('MEMB_INFO', 'memb___id,memb__pwd,tel__numb,phon_numb,mail_addr,fpas_ques,fpas_answ,memb__pwd2,memb__pwdmd5,acl,ban_login,num_login,pass2', "memb___id='$username'");
     }
 
     return isset($pdata) ? $pdata : array();
 }
 
 /**
- * retrun array mix
+ * @param string $other
+ * @param array $options
+ * @return array|bool
  */
-function do_select_orther($orther = '')
+function do_select_other($other = '', $options = [])
 {
     global $db_new;
-
-    if ($orther) {
-        $orther = trim($orther);
-        $check = $db_new->Execute($orther) or cn_writelog($orther, 'e');
+    $rs_data = [];
+    if ($other) {
+        $other = trim($other);
+        $check = $db_new->Execute($other) or cn_write_log($other, 'e');
         if ($check) {
             while ($row = $check->fetchrow()) {
-                $rs_data[] = $row;
+                array_push( $rs_data, $row);
             }
         }
-    } else return FALSE;
-
-    if (getoption('debugSql')) {
-        cn_writelog($orther);
+    } else{
+        return false;
     }
 
-    return isset($rs_data) ? $rs_data : array();
+    if (isset($options['debugSql']) && $options['debugSql']) {
+        cn_write_log($other);
+    }
+
+    return $rs_data;
 }
 
 /**
@@ -257,11 +260,11 @@ function do_update_orther($orther = '')
 
     if ($orther) {
         $orther = trim($orther);
-        $check = $db_new->Execute($orther) or cn_writelog($orther, 'e');
+        $check = $db_new->Execute($orther) or cn_write_log($orther, 'e');
 
-        if ($check){
+        if ($check) {
             if (getoption('debugSql')) {
-                cn_writelog($orther);
+                cn_write_log($orther);
             }
 
             return true;
@@ -298,7 +301,7 @@ function do_select_character($table, $col, $where = '', $orther = '')
     if ($orther) $orther = trim($orther);
 
     if ($str_col && $table) {
-        $check = $db_new->Execute("SELECT $str_col FROM $table $str_where $orther") or cn_writelog("SELECT $str_col FROM $table $str_where $orther", 'e');
+        $check = $db_new->Execute("SELECT $str_col FROM $table $str_where $orther") or cn_write_log("SELECT $str_col FROM $table $str_where $orther", 'e');
         if ($check) {
             while ($row = $check->fetchrow()) {
                 $rs_data[] = $row;
@@ -307,7 +310,7 @@ function do_select_character($table, $col, $where = '', $orther = '')
     }
 
     if (getoption('debugSql')) {
-        cn_writelog("SELECT $str_col FROM $table $str_where $orther");
+        cn_write_log("SELECT $str_col FROM $table $str_where $orther");
     }
 
     return isset($rs_data) ? $rs_data : array();
@@ -315,7 +318,7 @@ function do_select_character($table, $col, $where = '', $orther = '')
 
 // sign table, mutile cont (abc=abc1,... N)
 //1. table => SQL
-//2: ... n => Col = val 	=> INSERT SQL 
+//2: ... n => Col = val 	=> INSERT SQL
 function do_insert_character()
 {
     global $db_new;
@@ -353,13 +356,13 @@ function do_insert_character()
 
 //        $db_new->BeginTrans();
         //msg_err()
-        $check = $db_new->Execute("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)") or cn_writelog("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)", 'e');
+        $check = $db_new->Execute("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)") or cn_write_log("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)", 'e');
 
         if ($check) {
             $db_new->CompleteTrans();
 
             if (getoption('debugSql')) {
-                cn_writelog("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)");
+                cn_write_log("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)");
             }
 
             return TRUE;
@@ -378,14 +381,14 @@ function do_insert_orther($myQureyInsert)
         return false;
     }
 
-    $check = $db_new->Execute($myQureyInsert) or cn_writelog($myQureyInsert, 'e');
-//        $check = $db_new->Execute("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)") or cn_writelog("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)", 'e');
+    $check = $db_new->Execute($myQureyInsert) or cn_write_log($myQureyInsert, 'e');
+//        $check = $db_new->Execute("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)") or cn_write_log("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)", 'e');
 
     if ($check) {
         $db_new->CompleteTrans();
 
         if (getoption('debugSql')) {
-            cn_writelog($myQureyInsert);
+            cn_write_log($myQureyInsert);
         }
         return true;
     } else {
@@ -434,11 +437,11 @@ function do_update_character()
     if (strlen($gr_cont) > 5) $val_up_cont = substr($gr_cont, 0, -5);
 
     if ($val_up_col && $val_up_cont && $user_table) {
-        $check = $db_new->Execute("UPDATE $user_table SET $val_up_col WHERE $val_up_cont") or cn_writelog("UPDATE $user_table SET $val_up_col WHERE $val_up_cont", 'e');
-        if ($check){
+        $check = $db_new->Execute("UPDATE $user_table SET $val_up_col WHERE $val_up_cont") or cn_write_log("UPDATE $user_table SET $val_up_col WHERE $val_up_cont", 'e');
+        if ($check) {
 
             if (getoption('debugSql')) {
-                cn_writelog("UPDATE $user_table SET $val_up_col WHERE $val_up_cont");
+                cn_write_log("UPDATE $user_table SET $val_up_col WHERE $val_up_cont");
             }
             return true;
         }
@@ -457,10 +460,10 @@ function do_delete_char($myQuery)
 
     if ($myQuery) {
         $myQuery = trim($myQuery);
-        $check = $db_new->Execute($myQuery) or cn_writelog($myQuery, 'e');
+        $check = $db_new->Execute($myQuery) or cn_write_log($myQuery, 'e');
         if ($check) {
             if (getoption('debugSql')) {
-                cn_writelog($myQuery);
+                cn_write_log($myQuery);
             }
             return true;
         }
@@ -471,42 +474,32 @@ function do_delete_char($myQuery)
 
 
 /**
- * @param $clause
- * @param string $colClause
- * @param bool $ischek
+ * @param $requestData
  * @return array|bool|null
  */
-function db_membget_account($clause, $colClause = '[UserAcc]', $ischek = FALSE)
+function db_get_member_account($requestData)
 {
+    $clause = @$requestData["clause"];
+    $isCheck = @$requestData["isCheck"];
+    $options = @$requestData["options"];
     if ($clause) {
-        $usx = do_select_orther("SELECT Top 1 * FROM Account_Info WHERE " . $colClause . "='" . $clause . "' ORDER BY ID DESC");
+        $usx = do_select_other("SELECT Top 1 * FROM Account_Info WHERE " . $clause . " ORDER BY ID DESC", $options);
 
-        if (!is_array($usx) || !$usx) {
+        if (!is_array($usx) || !$usx || !count($usx)) {
             return null;
         }
 
-        if ($ischek) {
+        if ($isCheck) {
             if ($usx) {
                 return true;
             } else {
                 return false;
             }
         }
-        $result = [
-            'id' => $usx[0]['Id'],
-            'user_Account' => trim($usx[0]['UserAcc']),
-            'pass' => $usx[0]['Pwd'],
-            'acl' => $usx[0]['AdLevel'],
-            'ban' => $usx[0]['Ban'],
-            'numLogin' => $usx[0]['NumLogin'],
-            'email' => $usx[0]['Email'],
-            'lastDate' => $usx[0]['Lastdate'],
-            'time_At' => $usx[0]['Time_At'],
-            'hash' => $usx[0]['hash']
-        ];
 
-        return $result;
+        return $usx[0];
     }
+
     return null;
 }
 
@@ -516,7 +509,7 @@ function db_membget_account($clause, $colClause = '[UserAcc]', $ischek = FALSE)
 function rankingCharaterTop()
 {
     $myQueryRankingTop = "SELECT Top 125 [Name] FROM Character ORDER BY relifes DESC, resets DESC, cLevel DESC";
-    $resultRankingTop = do_select_orther($myQueryRankingTop);
+    $resultRankingTop = do_select_other($myQueryRankingTop);
 
     if ($resultRankingTop) {
         do_update_character('Character', 'Top50=0', 'Top50>0');
@@ -526,13 +519,13 @@ function rankingCharaterTop()
         }
         $myQueryUpdate .= ' END';
         $chekUpdate = do_update_orther($myQueryUpdate);
-        //if (!$chekUpdate) cn_writelog($myQueryUpdate, 'e');
+        //if (!$chekUpdate) cn_write_log($myQueryUpdate, 'e');
     }
 }
 
 function onoff_PointCharacter()
 {
-    $checkResultOnOff = do_select_orther("SELECT AccountID, [Name], [Uythac], [uythacoffline_stat], [PhutUyThacOn_dutru], [PhutUyThacOff_dutru], [PointUyThac]  FROM Character WHERE Uythac = 0 OR uythacoffline_stat = 0");
+    $checkResultOnOff = do_select_other("SELECT AccountID, [Name], [Uythac], [uythacoffline_stat], [PhutUyThacOn_dutru], [PhutUyThacOff_dutru], [PointUyThac]  FROM Character WHERE Uythac = 0 OR uythacoffline_stat = 0");
     $itemID = '';
 
     foreach ($checkResultOnOff as $k => $items) {
@@ -761,8 +754,11 @@ function kiemtra_GM($account)
     if (!empty($account)) {
         $sql_gm_check = $db_new->Execute("SELECT * FROM Character WHERE AccountID='$account' AND (CtlCode=8 or CtlCode=32)");
         $gm_check = $sql_gm_check->numrows();
-        if ($gm_check <= 0) return true;        // 'NoGM';
+        if ($gm_check <= 0) {
+            return true;        // 'NoGM';
+        }
     }
+
     return false;                            // 'isGM';
 }
 
@@ -784,6 +780,7 @@ function kiemtra_daily($account)
     global $db_new;
     $sql_daily_check = $db_new->Execute("SELECT * FROM DaiLy WHERE accdl='$account'");
     $daily_check = $sql_daily_check->numrows();
+
     if ($daily_check <= 0) $dl = 'NoDL';
     else $dl = 'isDL';
 }
@@ -793,7 +790,7 @@ function kiemtra_topmonth($character)
     global $db_new;
     $check_month = $db_new->Execute("SELECT * FROM TopMonth WHERE Month='$month' AND Year='$year'");
     $result_check = $check_month->numrows();
-//Begin Nếu chưa có TOP tháng hiện tại thì tạo danh sách TOP mới
+    //Begin Nếu chưa có TOP tháng hiện tại thì tạo danh sách TOP mới
     if ($result_check < 1) {
         $query_topmonth = "SELECT AccountID,Name,NoResetInMonth FROM Character ORDER BY NoResetInMonth DESC, relifes DESC, resets DESC , cLevel DESC";
         $result_topmonth = $db_new->SELECTLimit($query_topmonth, 10, 0);
@@ -809,7 +806,7 @@ function kiemtra_topmonth($character)
         $checktop10 = $query_checktop10->fetchrow();
         $query_checkNoResetInMonth_OfName = $db_new->Execute("SELECT NoResetInMonth FROM Character WHERE Name='$character'");
         $checkNoResetInMonth_OfName = $query_checkNoResetInMonth_OfName->fetchrow();
-//Begin Nếu TOP10 tháng nhỏ hơn nhân vật Reset thì Update TOP
+        //Begin Nếu TOP10 tháng nhỏ hơn nhân vật Reset thì Update TOP
         if ($checktop10[0] < ($checkNoResetInMonth_OfName[0])) {
             $query_topmonth = "SELECT AccountID,Name,NoResetInMonth FROM Character ORDER BY NoResetInMonth DESC, relifes DESC, resets DESC , cLevel DESC";
             $result_topmonth = $db_new->SELECTLimit($query_topmonth, 10, 0);
@@ -826,7 +823,7 @@ function kiemtra_topmonth($character)
             $query_checkNoResetInMonth_TOP1 = "SELECT NoResetInMonth FROM Character ORDER BY NoResetInMonth DESC, relifes DESC, resets DESC , cLevel DESC";
             $result_checkNoResetInMonth_TOP1 = $db_new->SELECTLimit($query_checkNoResetInMonth_TOP1, 1, 0);
             $checkNoResetInMonth_TOP1 = $result_checkNoResetInMonth_TOP1->fetchrow();
-//Begin Nếu TOP1 tháng lớn hơn TOP1 tháng trong Character thì Update TOP
+            //Begin Nếu TOP1 tháng lớn hơn TOP1 tháng trong Character thì Update TOP
             if ($checktop1[0] > $checkNoResetInMonth_TOP1[0]) {
                 $query_topmonth = "SELECT AccountID,Name,NoResetInMonth FROM Character ORDER BY NoResetInMonth DESC, relifes DESC, resets DESC , cLevel DESC";
                 $result_topmonth = $db_new->SELECTLimit($query_topmonth, 10, 0);
@@ -837,29 +834,36 @@ function kiemtra_topmonth($character)
                     $run_updatetop = $db_new->Execute($query_updatetop);
                 }
             }
-//End Nếu TOP1 tháng lớn hơn TOP1 tháng trong Character thì Update TOP
+            // End Nếu TOP1 tháng lớn hơn TOP1 tháng trong Character thì Update TOP
         }
     }
 }
 
 // --------------------------Forum--------------------------------//
 /**
- * @param $orther
+ * @param $other
  * @return array|bool
  */
-function do_select_ortherForum($orther)
+function doSelectOtherForum($other)
 {
-    global $db_Forum;
+    global $DbForum;
 
-    if ($orther) {
-        $orther = trim($orther);
-        $check = $db_Forum->Execute("$orther") or cn_writelog($orther, 'e');
+    if (empty($DbForum)) {
+        return;
+    }
+
+    if ($other) {
+        $other = trim($other);
+        $check = $DbForum->Execute("$other") or cn_write_log($other, 'e');
         if ($check) {
             while ($row = $check->fetchrow()) {
                 $rs_data[] = $row;
             }
         }
-    } else return FALSE;
+    } else {
+        return false;
+    }
+
     return isset($rs_data) ? $rs_data : array();
 }
 
@@ -867,9 +871,14 @@ function do_select_ortherForum($orther)
  * @param $orther
  * @return bool
  */
-function do_update_ortherForum($orther)
+function doUpdateOtherForum($orther)
 {
-    global $db_Forum;
+    global $DbForum;
+
+    if (empty($DbForum)) {
+        return;
+    }
+
     $gr_col = $gr_cont = '';
     $args = func_get_args();            //1.name, 2.email="user_email", 3.nick="$user_nic", 4.pass="24242424ggsgsgs"
     $user_table = array_shift($args);        // get name array frist
@@ -902,7 +911,7 @@ function do_update_ortherForum($orther)
     if (strlen($gr_cont) > 5) $val_up_cont = substr($gr_cont, 0, -5);
 
     if ($val_up_col && $val_up_cont && $user_table) {
-        $check = $db_Forum->Execute("UPDATE $user_table SET $val_up_col WHERE $val_up_cont") or cn_writelog("UPDATE $user_table SET $val_up_col WHERE $val_up_cont", 'e');
+        $check = $DbForum->Execute("UPDATE $user_table SET $val_up_col WHERE $val_up_cont") or cn_write_log("UPDATE $user_table SET $val_up_col WHERE $val_up_cont", 'e');
         if ($check)
             return TRUE;
     }
@@ -913,13 +922,17 @@ function do_update_ortherForum($orther)
  * @param $myQuery
  * @return bool
  */
-function do_delete_ortherForum($myQuery)
+function doDeleteOtherForum($myQuery)
 {
-    global $db_Forum;
+    global $DbForum;
+
+    if (empty($DbForum)) {
+        return;
+    }
 
     if ($myQuery) {
         $myQuery = trim($myQuery);
-        $check = $db_Forum->Execute("$myQuery") or cn_writelog($myQuery, 'e');
+        $check = $DbForum->Execute("$myQuery") or cn_write_log($myQuery, 'e');
         if ($check) {
             return true;
         }
@@ -927,5 +940,3 @@ function do_delete_ortherForum($myQuery)
 
     return false;
 }
-
-?>

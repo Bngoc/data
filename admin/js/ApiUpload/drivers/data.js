@@ -38,17 +38,17 @@ app.factory("Data", ['$http', '$location',
             });
         };
 
-        obj.deleteItemApi = function (cUrl, object ) {
+        obj.deleteItemApi = function (cUrl, object) {
             return $http({
                 method: 'DELETE',
                 url: cUrl,
                 data: object,
-                headers:{
+                headers: {
                     'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
                 }
             }).then(function (done) {
                 return done;
-            },function(response){
+            }, function (response) {
                 //faile
             });
         }
@@ -275,7 +275,7 @@ app.factory("Data", ['$http', '$location',
         function serializeData(data) {
             // If this is not an object, defer to native stringification.
             if (!angular.isObject(data)) {
-                return ( ( data == null ) ? "" : data.toString() );
+                return ((data == null) ? "" : data.toString());
             }
             var buffer = [];
             // Serialize each key in the object.
@@ -284,14 +284,14 @@ app.factory("Data", ['$http', '$location',
                     continue;
                 }
                 var value = data[name];
-                buffer.push(encodeURIComponent(name) + "=" + encodeURIComponent(( value == null ) ? "" : value));
+                buffer.push(encodeURIComponent(name) + "=" + encodeURIComponent((value == null) ? "" : value));
             }
             // Serialize the buffer and clean it up for transportation.
             var source = buffer
-                    .join("&")
-                    .replace(/%20/g, "+")
-                ;
-            return ( source );
+                .join("&")
+                .replace(/%20/g, "+")
+            ;
+            return (source);
         }
 
         return obj;

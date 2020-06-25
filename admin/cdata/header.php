@@ -35,8 +35,7 @@ if (empty($mod)) $mod = 'editconfig';
             $(window).scroll(function () {
                 if ($(this).scrollTop() != 0) {
                     $('#bttop').fadeIn();
-                }
-                else {
+                } else {
                     $('#bttop').fadeOut();
                 }
             });
@@ -80,6 +79,7 @@ if (empty($mod)) $mod = 'editconfig';
         function checkDelete() {
             return confirm('Are you sure to delete?');
         }
+
         // -----------------------------------------------
         // Get ID in misc browser
         function getId(id) {
@@ -107,18 +107,15 @@ if (empty($mod)) $mod = 'editconfig';
             var item = getId(id);
 
             if (!item) {
-            }
-            else if (item.style) {
+            } else if (item.style) {
                 if (arguments.length == 2) {
-                    if (arguments[1] == true)  item.style.display = "";
+                    if (arguments[1] == true) item.style.display = "";
                     else item.style.display = "none";
-                }
-                else {
+                } else {
                     if (item.style.display == "none") item.style.display = "";
                     else item.style.display = "none";
                 }
-            }
-            else item.visibility = "show";
+            } else item.visibility = "show";
         }
 
         function Show_Only(id) {
@@ -149,20 +146,16 @@ if (empty($mod)) $mod = 'editconfig';
             if (ln == 0) {
                 pid.value = 'Enter password';
                 pst.style.backgroundColor = 'red';
-            }
-            else if (disp < 5) {
+            } else if (disp < 5) {
                 pid.value = 'Very poor';
                 pst.style.backgroundColor = 'red';
-            }
-            else if (disp < 9) {
+            } else if (disp < 9) {
                 pid.value = 'Weak';
                 pst.style.backgroundColor = '#c08000';
-            }
-            else if (disp < 11) {
+            } else if (disp < 11) {
                 pid.value = 'Normal';
                 pst.style.backgroundColor = '#f0e080';
-            }
-            else {
+            } else {
                 pid.value = 'Strong password';
                 pst.style.backgroundColor = '#008000';
             }
@@ -175,7 +168,7 @@ if (empty($mod)) $mod = 'editconfig';
             datetoday.setTime(timenow);
             thehour = datetoday.getHours();
 
-            if (thehour < 9)      display = "Morning";
+            if (thehour < 9) display = "Morning";
             else if (thehour < 12) display = "Day";
             else if (thehour < 17) display = "Afternoon";
             else if (thehour < 20) display = "Evening";
@@ -198,6 +191,7 @@ if (empty($mod)) $mod = 'editconfig';
          * Convert a 32-bit number to a hex string with ls-byte first
          */
         var hex_chr = "0123456789abcdef";
+
         function rhex(num) {
             str = "";
             for (j = 0; j <= 3; j++)
@@ -245,15 +239,19 @@ if (empty($mod)) $mod = 'editconfig';
         function cmn(q, a, b, x, s, t) {
             return add(rol(add(add(a, q), add(x, t)), s), b);
         }
+
         function ff(a, b, c, d, x, s, t) {
             return cmn((b & c) | ((~b) & d), a, b, x, s, t);
         }
+
         function gg(a, b, c, d, x, s, t) {
             return cmn((b & d) | (c & (~d)), a, b, x, s, t);
         }
+
         function hh(a, b, c, d, x, s, t) {
             return cmn(b ^ c ^ d, a, b, x, s, t);
         }
+
         function ii(a, b, c, d, x, s, t) {
             return cmn(c ^ (b | (~d)), a, b, x, s, t);
         }
@@ -368,8 +366,7 @@ if (empty($mod)) $mod = 'editconfig';
                 var startPos = myField.selectionStart;
                 var endPos = myField.selectionEnd;
                 myField.value = myField.value.substring(0, startPos) + myValue + myField.value.substring(endPos, myField.value.length);
-            }
-            else {
+            } else {
                 myField.value += myValue;
             }
 
@@ -386,8 +383,7 @@ if (empty($mod)) $mod = 'editconfig';
                 src = arguments[2];
                 HW = arguments[3];
                 W = src.getElementById(id);
-            }
-            else {
+            } else {
                 src = document;
                 W = getId(id);
             }
@@ -400,8 +396,7 @@ if (empty($mod)) $mod = 'editconfig';
 
                 sel.text = '[' + wrp + (HW ? '=' + HW : '') + ']' + sel.text + '[/' + wrp + ']';
                 return true;
-            }
-            else if (W.selectionStart || W.selectionStart == '0') {
+            } else if (W.selectionStart || W.selectionStart == '0') {
                 var startPos = W.selectionStart;
                 var endPos = W.selectionEnd;
 
@@ -409,10 +404,8 @@ if (empty($mod)) $mod = 'editconfig';
                     var txt = W.value.substring(startPos, endPos);
                     W.value = W.value.substring(0, startPos) + '[' + wrp + (HW ? '=' + HW : '') + ']' + txt + '[/' + wrp + ']' + W.value.substring(endPos);
                     return true;
-                }
-                else return false;
-            }
-            else return false;
+                } else return false;
+            } else return false;
         }
 
         function notify_auto_hide(id, delay) {
@@ -426,6 +419,7 @@ if (empty($mod)) $mod = 'editconfig';
 
             return false;
         }
+
         // -----------------------------------------------
 
 
@@ -883,22 +877,22 @@ if (empty($mod)) $mod = 'editconfig';
             </div>
             -->
             <!-- Chen footer
-		
+
 			<div style="width:15%;float: left;">
 				<div id="right-column">
 					<strong class="h">INFO</strong>
 					<div class="box">Detectand eliminate viruses and Trojan horses, even new and unknown ones.Detect and eliminate viruses and Trojan horses, even new and </div>
 				</div>
 			</div>
-		
+
 		</div>
-		
+
 	</div>
 </div>
 
 <!-- --------------------footer--------------------- --
-<div id="footer"> 
-	<div id="bttop" style="display: block;">BACK TO TOP</div>	
+<div id="footer">
+	<div id="bttop" style="display: block;">BACK TO TOP</div>
 	Copyright © 2015 &nbsp; <a href="mailto:jono AT jonobacon DOT org">Jono Bacon</a>
 </div>
 
@@ -910,8 +904,8 @@ if (empty($mod)) $mod = 'editconfig';
 			 // if($(this).attr("href") == pgurl || $(this).attr("href") == '' )
 			//  $(this).addClass("active");
 		// })
-		
-			
+
+
 		var url = new String(window.location);
 		url =  url.substring(url.lastIndexOf("/")+1);
 		alert(url);
@@ -922,23 +916,23 @@ if (empty($mod)) $mod = 'editconfig';
             //}
             ?>
 		/*< ? b php echo ==  < ? = * /
-*/	
+*/
 		<?php //if(isset($_GET['mod'])){
             ?>
 			var mod = "<?php // echo $_GET['mod']?>";
 			mod = "#"+mod;
 			alert(mod);
-			
+
 			//$(".content div").hide(); //Hide all content
 			//$("#cssmenu li").attr("class",""); //Reset id's
 			//$(this).parent().attr("class","active"); // Activate this
 			//$('.' + $(this).attr('name')).fadeIn();
-			
+
 			$("#cssmenu li").removeClass('active');
 			$("#cssmenu li").find("a[href='"+mod+"']").parent().addClass('active');
-			
-			
-			
+
+
+
 		<?php
             //}
             //else{

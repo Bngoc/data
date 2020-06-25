@@ -1,0 +1,62 @@
+About => y
+Bold =>y
+Italic => y
+Strike  => y
+Subscript => y
+Superscript => y
+Underline => y
+Bidiltr => N
+Blockquote => y
+Copy => y
+Cut => y
+Paste => y
+Bgcolor => Y
+Textcolor => y
+Templates =>Y
+Creatediv => N
+Find => y
+Replace => y
+Flash  => y
+Button
+Checkbox
+Form => Y no 
+Hiddenfield => N
+Imagebutton
+Radio
+Select
+Textarea
+Textfield
+Horizontalrule => y
+Iframe => y
+Image => y
+Indent => y
+Outdent => y
+Smiley => y
+Justifyblock => y
+Justifycenter => y
+Justifyleft => y
+Justifyright => y
+Anchor  => y
+Link  => y
+Unlink => y
+Bulletedlist => y
+Numberedlist => y
+Maximize => Y
+Newpage
+
+Pagebreak
+Pastetext => y
+Pastefromword => n
+Preview  => y
+Print  => y
+Removeformat
+Save
+Selectall  => y
+Showblocks
+Source => y
+Specialchar
+Scayt => y
+Table => y
+Redo => y
+Undo => y
+Spellchecker

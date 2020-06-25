@@ -81,7 +81,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Phòng thủ</td>
-        <td><img src="/images/guides/dk_defense_02.jpg"></td>
+        <td><img src="/public/images/guides/dk_defense_02.jpg"></td>
         <td>30</td>
         <td>Làm giảm 50% sức sát thương</td>
         <td>Tuyệt chiêu của Khiên</td>
@@ -93,7 +93,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Chém xuống</td>
-        <td><img src="/images/guides/dk_Falling-Slash_02.jpg"></td>
+        <td><img src="/public/images/guides/dk_Falling-Slash_02.jpg"></td>
         <td>10</td>
         <td>Sức sát thương x2</td>
         <td>Tuyệt chiêu của vũ khí</td>
@@ -105,7 +105,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Chém xoay ngang</td>
-        <td><img src="/images/guides/dk_Cyclone_02.jpg"></td>
+        <td><img src="/public/images/guides/dk_Cyclone_02.jpg"></td>
         <td>9</td>
         <td>Sức sát thương x2</td>
         <td>Tuyệt chiêu của vũ khí</td>
@@ -117,7 +117,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Đâm</td>
-        <td><img src="/images/guides/dk_Lunge_02.jpg"></td>
+        <td><img src="/public/images/guides/dk_Lunge_02.jpg"></td>
         <td>9</td>
         <td>Sức sát thương x2</td>
         <td>Tuyệt chiêu của vũ khí</td>
@@ -127,7 +127,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Chém xoáy lên</td>
-        <td><img src="/images/guides/dk_Uppercut_02.jpg"></td>
+        <td><img src="/public/images/guides/dk_Uppercut_02.jpg"></td>
         <td>10</td>
         <td>Sức sát thương x2</td>
         <td>Tuyệt chiêu của vũ khí</td>
@@ -139,7 +139,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Chém ánh sáng</td>
-        <td><img src="/images/guides/dk_Slash_02.jpg"></td>
+        <td><img src="/public/images/guides/dk_Slash_02.jpg"></td>
         <td>10</td>
         <td>Sức sát thương x2</td>
         <td>Tuyệt chiêu của vũ khí</td>
@@ -166,7 +166,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Phun lửa</td>
-        <td><img src="/images/guides/img116dgdgdgd"></td>
+        <td><img src="/public/images/guides/img116dgdgdgd"></td>
         <td>Cưỡi Quái điểu</td>
         <td>25</td>
         <td>20</td>
@@ -177,7 +177,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Đâm xoáy</td>
-        <td><img src="/images/guides/dk_Impale_02.jpg"></td>
+        <td><img src="/public/images/guides/dk_Impale_02.jpg"></td>
         <td>Cưỡi Kỳ lân hoặc Quái điểu, dùng Giáo và Cấp độ 28</td>
         <td>0</td>
         <td>3</td>
@@ -188,7 +188,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Chém xoáy</td>
-        <td><img src="/images/guides/dk_Twisting-Slash_02.jpg"></td>
+        <td><img src="/public/images/guides/dk_Twisting-Slash_02.jpg"></td>
         <td>Cấp độ 28</td>
         <td>10</td>
         <td>10</td>
@@ -201,7 +201,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Tăng lượng máu</td>
-        <td><img src="/images/guides/dk_Greater-Fortitude_02.jpg"></td>
+        <td><img src="/public/images/guides/dk_Greater-Fortitude_02.jpg"></td>
         <td>Cấp độ 120</td>
         <td>22</td>
         <td>25</td>
@@ -214,7 +214,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Đâm gió</td>
-        <td><img src="/images/guides/dk_Death-Stab_02.jpg"></td>
+        <td><img src="/public/images/guides/dk_Death-Stab_02.jpg"></td>
         <td>Hiệp Sĩ và cấp độ 160</td>
         <td>15</td>
         <td>20</td>
@@ -227,7 +227,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Địa chấn</td>
-        <td><img src="/images/guides/dk_Rageful-Blow_02.jpg"></td>
+        <td><img src="/public/images/guides/dk_Rageful-Blow_02.jpg"></td>
         <td>Hiệp Sĩ và cấp độ 170</td>
         <td>25</td>
         <td>35</td>
@@ -239,7 +239,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Tuyệt chiêu liên hoàn</td>
-        <td><img src="/images/guides/dk_combo.jpg"></td>
+        <td><img src="/public/images/guides/dk_combo.jpg"></td>
         <td>Hoàn thành nhiệm vụ Viên Ngọc Cổ</td>
         <td>-</td>
         <td>-</td>
@@ -265,7 +265,7 @@ Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiế
     </tr>
     <tr>
         <td>Vành trăng khuyết</td>
-        <td><img src="/images/guides/dk_Crescent-Moon-Slash_02.jpg"></td>
+        <td><img src="/public/images/guides/dk_Crescent-Moon-Slash_02.jpg"></td>
         <td>Hiệp Sĩ</td>
         <td>22</td>
         <td>15</td>

@@ -60,7 +60,7 @@ class Auth_Container_ADOdb extends Auth_Container
      *
      * Initate connection to the database via PEAR::ADOdb
      *
-     * @param  string Connection data or DB object
+     * @param string Connection data or DB object
      * @return object Returns an error object if something went wrong
      */
     function __construct($dsn)
@@ -86,7 +86,7 @@ class Auth_Container_ADOdb extends Auth_Container
      * Connect to database by using the given DSN string
      *
      * @access private
-     * @param  string DSN string
+     * @param string DSN string
      * @return mixed  Object on error, otherwise bool
      */
     function _connect($dsn)
@@ -146,7 +146,7 @@ class Auth_Container_ADOdb extends Auth_Container
      * After that the query is passed to the database.
      *
      * @access public
-     * @param  string Query string
+     * @param string Query string
      * @return mixed  a DB_result object or DB_OK on success, a DB
      *                or PEAR error on failure
      */
@@ -186,7 +186,7 @@ class Auth_Container_ADOdb extends Auth_Container
      * Parse options passed to the container class
      *
      * @access private
-     * @param  array
+     * @param array
      */
     function _parseOptions($array)
     {
@@ -217,8 +217,8 @@ class Auth_Container_ADOdb extends Auth_Container
      * and password is found, the function returns true.
      * Otherwise it returns false.
      *
-     * @param   string Username
-     * @param   string Password
+     * @param string Username
+     * @param string Password
      * @return  mixed  Error object or boolean
      */
     function fetchData($username, $password)
@@ -321,9 +321,9 @@ class Auth_Container_ADOdb extends Auth_Container
      * Add user to the storage container
      *
      * @access public
-     * @param  string Username
-     * @param  string Password
-     * @param  mixed  Additional information that are stored in the DB
+     * @param string Username
+     * @param string Password
+     * @param mixed  Additional information that are stored in the DB
      *
      * @return mixed True on success, otherwise error object
      */
@@ -371,7 +371,7 @@ class Auth_Container_ADOdb extends Auth_Container
      * Remove user from the storage container
      *
      * @access public
-     * @param  string Username
+     * @param string Username
      *
      * @return mixed True on success, otherwise error object
      */

@@ -44,7 +44,7 @@ function manager_invoke()
         }
     }
 
-    echoheader('-@my_account/style.css', "Manger Account");
+    echo_header_web('-@my_account/style.css', "Manger Account");
 
     $images = array(
         'change_pass' => 'change_pass.png',
@@ -77,17 +77,17 @@ function manager_invoke()
     }
 
     cn_assign('dashboard', $cManger_account);
-    echocomtent_here(exec_tpl('my_account/general'), cn_snippet_bc_re());
-    echofooter();
+    echo_content_here(exec_tpl('my_account/general'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function manager_default()
 {
-    $arr_shop = mcache_get('.breadcrumbs');
+    $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
-    echoheader('-@defaults/style.css', "Error - $name__");
-    echocomtent_here(exec_tpl('-@defaults/default'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@defaults/style.css', "Error - $name__");
+    echo_content_here(exec_tpl('-@defaults/default'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function manager_change_pass()
@@ -135,9 +135,9 @@ function manager_change_pass()
 
     cn_assign('errors_result', $errors);
 
-    echoheader('-@my_account/style.css', "Thay đổi mật khẩu Game");
-    echocomtent_here(exec_tpl('-@my_account/_changePass'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_account/style.css', "Thay đổi mật khẩu Game");
+    echo_content_here(exec_tpl('-@my_account/_changePass'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function manager_change_tel()
@@ -184,18 +184,18 @@ function manager_change_tel()
     }
 
     cn_assign('errors_result', $errors);
-    echoheader('-@my_account/style.css', "Thay đổi số điện thoại");
-    echocomtent_here(exec_tpl('-@my_account/_changeTel'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_account/style.css', "Thay đổi số điện thoại");
+    echo_content_here(exec_tpl('-@my_account/_changeTel'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function manager_change_email()
 {
 
     //cn_assign('errors_result' , $errors);
-    echoheader('-@my_account/style.css', "Đổi pass-Web");
-    echocomtent_here(exec_tpl('-@my_account/_changeEmail'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_account/style.css', "Đổi pass-Web");
+    echo_content_here(exec_tpl('-@my_account/_changeEmail'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function manager_change_pwd()
@@ -249,9 +249,9 @@ function manager_change_pwd()
 
     cn_assign('isAuthEmail, errors_result', $isAuthEmail, $errors);
 
-    echoheader('-@my_account/style.css', "Thay đổi mật khẩu web");
-    echocomtent_here(exec_tpl('-@my_account/_changePassWeb'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_account/style.css', "Thay đổi mật khẩu web");
+    echo_content_here(exec_tpl('-@my_account/_changePassWeb'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function manager_change_secret()
@@ -296,9 +296,9 @@ function manager_change_secret()
     }
 
     cn_assign('errors_result', $errors);
-    echoheader('-@my_account/style.css', "Thay đổi mã số bí mật");
-    echocomtent_here(exec_tpl('-@my_account/_changeSecret'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_account/style.css', "Thay đổi mã số bí mật");
+    echo_content_here(exec_tpl('-@my_account/_changeSecret'), cn_snippet_bc_re());
+    echo_footer_web();
 }
 
 function manager_change_qa()
@@ -353,7 +353,7 @@ function manager_change_qa()
     }
 
     cn_assign('errors_result, tabActive', $errors, $nameActive);
-    echoheader('-@my_account/style.css@my_account/customjs.js', "Thay đổi câu hỏi - trả lời bí mật");
-    echocomtent_here(exec_tpl('-@my_account/_changeQa'), cn_snippet_bc_re());
-    echofooter();
+    echo_header_web('-@my_account/style.css@my_account/customjs.js', "Thay đổi câu hỏi - trả lời bí mật");
+    echo_content_here(exec_tpl('-@my_account/_changeQa'), cn_snippet_bc_re());
+    echo_footer_web();
 }
