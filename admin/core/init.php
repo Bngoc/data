@@ -41,13 +41,12 @@ require_once ROOT . '/core/class.phpmailer.php';
 require_once ROOT . '/core/class.smtp.php';
 require_once SERVDIR . '/core/ProcessCoreAdmin.php';
 
-
 // create cutenews caches
 $_CN_SESS_CACHE = array();
-/*
+
 $_CN_cache_block_id = array();
 $_CN_cache_block_dt = array();
-*/
+
 // Define ALL privileges and behaviors
 $_CN_access = array
 (
@@ -91,8 +90,6 @@ if (!db_installed_check()) {
 include SERVDIR . '/core/modules/init.php';
 
 //hook('init/finally');
-
-//cn_sendheaders();
 
 $coreAdmin->cn_load_skin();
 $coreAdmin->cn_register_admin_form();

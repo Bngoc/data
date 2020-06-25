@@ -1716,28 +1716,27 @@ class ProcessCoreAdmin extends ProcessCore
 //        return false;
 //    }
 
-//    // Since 2.0: Save whole config
-//    function cn_config_save($cfg = null)
-//    {
-//        if ($cfg === null) {
-//            $cfg = getMemcache('config');
-//        }
-//
-//        $fn = cn_path_construct(ROOT, 'gifnoc') . 'gifnoc.php';
-//        $dest = $fn . '-' . mt_rand() . '.bak';
-//
-//        //save all config
-//        $fx = fopen($dest, 'w+');
-/*        fwrite($fx, "<?php die(); ?>\n" . base64_encode(serialize($cfg)));*/
-//
-//        fclose($fx);
-//        //unlink($fn); // xoa file hien tai
-//        rename($dest, $fn); //bat len .....
-//
-//        setMemcache('config', $cfg);
-//        return $cfg;
-//    }
+    // Since 2.0: Save whole config
+    function cn_config_save($cfg = null)
+    {
+        if ($cfg === null) {
+            $cfg = getMemcache('config');
+        }
 
+        $fn = cn_path_construct(ROOT, 'gifnoc') . 'gifnoc.php';
+        $dest = $fn . '-' . mt_rand() . '.bak';
+
+        //save all config
+        $fx = fopen($dest, 'w+');
+        fwrite($fx, "<?php die(); ?>\n" . base64_encode(serialize($cfg)));
+
+        fclose($fx);
+        //unlink($fn); // xoa file hien tai
+        rename($dest, $fn); //bat len .....
+
+        setMemcache('config', $cfg);
+        return $cfg;
+    }
 
     // Since 2.0: @bootstrap Select DB mechanism
     function cn_db_init()

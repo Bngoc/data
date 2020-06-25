@@ -419,152 +419,151 @@ function board_sysconf()
 
 function board_confChar()
 {
-//
-//    $lng = $grps = $all_skins = array();
-//    $_grps = getOption('#grp');
-//    //$conf_class_ = cn_get_template('class_dw_1_name','config_class');
-//    //$conf_class = cn_get_template_by_array('config_class');
-//
-//    //echo "000000000000000000000 142 =>". $conf_class['class_dw_1_name'] ."<br>";
-//    //echo "000000000000000000000 143 =>". $conf_class_ ."<br>";
-//
-//
-//    /*
-//    // fetch skins
-//    foreach ($skins as $skin)
-//    {
-//        if (preg_match('/(.*)\.skin\.php/i', $skin, $c)) //<=> *.skin.php
-//        {
-//            $all_skins[$c[1]] = $c[1];
-//        }
-//    }
-//
-//    // fetch lang packets
-//    foreach ($langs as  $lf)
-//    {
-//        if (preg_match('/(.*)\.txt/i', $lf, $c))
-//        {
-//            $lng[$c[1]] = $c[1];
-//        }
-//    }
-//*/
-//    // fetch groups
-//    foreach ($_grps as $id => $vn) {
-//        $grps[$id] = ucfirst($vn['N']);
-//    }
-//
-//    $options_list = array
-//    (
-//        // Section
-//        // Option -> 0=Type(text [Y/N] int select), 1=Title|Description, [2=Optional values]
-//        'general' => array
-//        (
-//            '_GENERAL' => array('title', 'General site settings'),
-////            'configLevel' => array('text', 'Set Vpoint level 150 - 220 - 380 |Ex: 2000|3000|5000  =-> 2k Vp <-> Level I; 3k Vp <-> Level II; 5k Vp <-> Level III'),
-//        ),
-//        'xxxxc' => array(
-//            '_GENERAL' => array('title', 'General site settings'),
-//
-//        ),
-//        'x' => array
-//        (),
-//        'xxx' => array
-//        (),
-//        'xxxxx' => array
-//        (),
-//    );
-//
-//
-//    // Static rewrite path
-//    $cfg = getMemcache('config');
-//
-//
-//    // Save cached copy
-//    setMemcache('config', $cfg);
-//
-//    // ------------------
-//    $sub = REQ('sub', "GETPOST");
-//    if (!isset($options_list[$sub])) {
-//        $sub = 'general';
-//    }
-//
-//    // Save data
-//    if (request_type('POST')) {
-//        cn_dsi_check();
-//
-//        $post_cfg = $_POST['config'];
-//        $opt_result = getOption('#%site');
-//        $by_default = $options_list[$sub];
-//
-//        // Detect selfpath
-//        $SN = dirname($_SERVER['SCRIPT_NAME']);
-//        $script_path = "http://" . $_SERVER['SERVER_NAME'] . (($SN == '/' || $SN == '\\') ? '' : $SN);
-//
-//        // Fill empty fields
-//        if (empty($post_cfg['http_script_dir'])) {
-//            $post_cfg['http_script_dir'] = $script_path;
-//        }
-//        if (empty($post_cfg['uploads_dir'])) {
-//            //$post_cfg['uploads_dir'] =  cn_path_construct( SERVDIR , 'uploads');
-//            $post_cfg['uploads_dir'] = cn_path_construct(($SN == DIRECTORY_SEPARATOR) ? SERVDIR : substr(SERVDIR, 0, -strlen($SN)), 'uploads');
-//        }
-//        if (empty($post_cfg['uploads_ext'])) {
-//            $post_cfg['uploads_ext'] = $script_path . '/uploads';
-//        }
-//
-//
-//        // all
-//        foreach ($by_default as $id => $var) {
-//            if ($var[0] == 'text' || $var[0] == 'select') {
-//                $opt_result[$id] = $post_cfg[$id];
-//            } elseif ($var[0] == 'int') {
-//                $opt_result[$id] = intval($post_cfg[$id]);
-//            } elseif ($var[0] == 'password') {
-//                if ($post_cfg[$id]) {
-//                    $opt_result[$id] = $post_cfg[$id];
-//                } else {
-//                    $opt_result[$id] = getOption($id);
-//                }
-//            } elseif ($var[0] == 'Y/N') {
-//                $opt_result[$id] = (isset($post_cfg[$id]) && 'Y' == $post_cfg[$id]) ? 1 : 0;
-//            } elseif (isset($post_cfg[$id])) {
-//                unset($opt_result[$id]);
-//            }
-//        }
-//
-//        setoption('#%site', $opt_result);
-//
-//        cn_load_skin();
-//        cn_throw_message('Saved successfully');
-//    }
-//
-//    $options = $options_list[$sub];
-//    foreach ($options as $id => $vo) {
-//        $options[$id]['var'] = getOption($id);
-//
-//        $text_parths = explode('|', $vo[1], 2);
-//        $title = isset($text_parths[0]) ? $text_parths[0] : '';
-//        $desc = isset($text_parths[1]) ? $text_parths[1] : '';
-//        $options[$id]['title'] = $title;
-//        $options[$id]['desc'] = $desc;
-//        $options[$id]['help'] = isset($help[$id]) ? $help[$id] : '';
-//
-//        unset($options[$id][1]);
-//    }
-//
-//    if (REQ('message', 'GET') == 'saved') {
-//        unset($_GET['message']);
-//        cn_throw_message('Successfully saved');
-//    }
-//
-//
-//    cn_assign('options, sub, options_list', $options, $sub, $options_list);
-//
-//
-//    echo_header_admin('-@com_board/style.css', "System configurations character");
-//    //echo execTemplate('header');
-//    echo execTemplate('com_board/confchar');
-//    echofooter();
+
+    $lng = $grps = $all_skins = array();
+    $_grps = getOption('#grp');
+    //$conf_class_ = cn_get_template('class_dw_1_name','config_class');
+    //$conf_class = cn_get_template_by_array('config_class');
+
+    //echo "000000000000000000000 142 =>". $conf_class['class_dw_1_name'] ."<br>";
+    //echo "000000000000000000000 143 =>". $conf_class_ ."<br>";
+
+
+    /*
+    // fetch skins
+    foreach ($skins as $skin)
+    {
+        if (preg_match('/(.*)\.skin\.php/i', $skin, $c)) //<=> *.skin.php
+        {
+            $all_skins[$c[1]] = $c[1];
+        }
+    }
+
+    // fetch lang packets
+    foreach ($langs as  $lf)
+    {
+        if (preg_match('/(.*)\.txt/i', $lf, $c))
+        {
+            $lng[$c[1]] = $c[1];
+        }
+    }
+*/
+    // fetch groups
+    foreach ($_grps as $id => $vn) {
+        $grps[$id] = ucfirst($vn['N']);
+    }
+
+    $options_list = array
+    (
+        // Section
+        // Option -> 0=Type(text [Y/N] int select), 1=Title|Description, [2=Optional values]
+        'general' => array
+        (
+            '_GENERAL' => array('title', 'General site settings'),
+//            'configLevel' => array('text', 'Set Vpoint level 150 - 220 - 380 |Ex: 2000|3000|5000  =-> 2k Vp <-> Level I; 3k Vp <-> Level II; 5k Vp <-> Level III'),
+        ),
+        'xxxxc' => array(
+            '_GENERAL' => array('title', 'General site settings'),
+        ),
+        'x' => array
+        (),
+        'xxx' => array
+        (),
+        'xxxxx' => array
+        (),
+    );
+
+
+    // Static rewrite path
+    $cfg = getMemcache('config');
+
+
+    // Save cached copy
+    setMemcache('config', $cfg);
+
+    // ------------------
+    $sub = REQ('sub', "GETPOST");
+    if (!isset($options_list[$sub])) {
+        $sub = 'general';
+    }
+
+    // Save data
+    if (request_type('POST')) {
+        cn_dsi_check();
+
+        $post_cfg = $_POST['config'];
+        $opt_result = getOption('#%site');
+        $by_default = $options_list[$sub];
+
+        // Detect selfpath
+        $SN = dirname($_SERVER['SCRIPT_NAME']);
+        $script_path = "http://" . $_SERVER['SERVER_NAME'] . (($SN == '/' || $SN == '\\') ? '' : $SN);
+
+        // Fill empty fields
+        if (empty($post_cfg['http_script_dir'])) {
+            $post_cfg['http_script_dir'] = $script_path;
+        }
+        if (empty($post_cfg['uploads_dir'])) {
+            //$post_cfg['uploads_dir'] =  cn_path_construct( SERVDIR , 'uploads');
+            $post_cfg['uploads_dir'] = cn_path_construct(($SN == DIRECTORY_SEPARATOR) ? SERVDIR : substr(SERVDIR, 0, -strlen($SN)), 'uploads');
+        }
+        if (empty($post_cfg['uploads_ext'])) {
+            $post_cfg['uploads_ext'] = $script_path . '/uploads';
+        }
+
+
+        // all
+        foreach ($by_default as $id => $var) {
+            if ($var[0] == 'text' || $var[0] == 'select') {
+                $opt_result[$id] = $post_cfg[$id];
+            } elseif ($var[0] == 'int') {
+                $opt_result[$id] = intval($post_cfg[$id]);
+            } elseif ($var[0] == 'password') {
+                if ($post_cfg[$id]) {
+                    $opt_result[$id] = $post_cfg[$id];
+                } else {
+                    $opt_result[$id] = getOption($id);
+                }
+            } elseif ($var[0] == 'Y/N') {
+                $opt_result[$id] = (isset($post_cfg[$id]) && 'Y' == $post_cfg[$id]) ? 1 : 0;
+            } elseif (isset($post_cfg[$id])) {
+                unset($opt_result[$id]);
+            }
+        }
+
+        setoption('#%site', $opt_result);
+
+        cn_load_skin();
+        cn_throw_message('Saved successfully');
+    }
+
+    $options = $options_list[$sub];
+    foreach ($options as $id => $vo) {
+        $options[$id]['var'] = getOption($id);
+
+        $text_parths = explode('|', $vo[1], 2);
+        $title = isset($text_parths[0]) ? $text_parths[0] : '';
+        $desc = isset($text_parths[1]) ? $text_parths[1] : '';
+        $options[$id]['title'] = $title;
+        $options[$id]['desc'] = $desc;
+        $options[$id]['help'] = isset($help[$id]) ? $help[$id] : '';
+
+        unset($options[$id][1]);
+    }
+
+    if (REQ('message', 'GET') == 'saved') {
+        unset($_GET['message']);
+        cn_throw_message('Successfully saved');
+    }
+
+
+    cn_assign('options, sub, options_list', $options, $sub, $options_list);
+
+
+    echo_header_admin('-@com_board/style.css', "System configurations character");
+    //echo execTemplate('header');
+    echo execTemplate('com_board/confchar');
+    echofooter();
 }
 
 function board_personal()
@@ -663,11 +662,7 @@ function board_personal()
 
 function board_ischaracter()
 {
-    list($template, $sub) = GET('template, sub', 'GPG'); //bat
-    //$all_temp_basic  = array();
-    // Default templates
-    //$list = cn_template_list();
-    //$acx = cn_template_list();
+    list($template, $sub) = GET('template, sub', 'GPG');
 
     if (!$sub) {
         $sub = 'class';
@@ -912,19 +907,8 @@ function board_ischaracter()
             $options[$id]['id_8_val'] = $acv[$id_8];
             $options[$id]['id_9_val'] = $acv[$id_9];
 
-            //user_config_reset=1 //web
-//cap_reset_max=8 // web
-
-//log_reset=0 // web
-//reset_cap_0=0
-            ///$text_parths=explode('|', $vo[1], 2);
-            //$title=isset($text_parths[0])?$text_parths[0]:'';
-            //$desc =isset($text_parths[1])?$text_parths[1]:'';
-            //$options[$id]['title'] = $title;
-            //$options[$id]['desc']  = $desc;
             $options[$id]['reset_cap_0'] = 0;
             $options[$id]['end'] = $id_10;
-            //unset($options[$id][1]);
         }
 
     } elseif ($sub === 'reset_vip') {
@@ -954,16 +938,7 @@ function board_ischaracter()
             $options[$id]['id_5_val'] = $acv[$id_5];
             $options[$id]['id_6_val'] = $acv[$id_6];
 
-            //user_config_reset=1 //web
-
-            ///$text_parths=explode('|', $vo[1], 2);
-            //$title=isset($text_parths[0])?$text_parths[0]:'';
-            //$desc =isset($text_parths[1])?$text_parths[1]:'';
-            //$options[$id]['title'] = $title;
-            //$options[$id]['desc']  = $desc;
-            //$options[$id]['reset_cap_0']  = 0;
             $options[$id]['end'] = $id_7;
-            //unset($options[$id][1]);
         }
 
     } elseif ($sub === 'thue_point') {
@@ -982,15 +957,7 @@ function board_ischaracter()
             $options[$id]['id_2_val'] = $acv[$id_2];
             $options[$id]['id_3_val'] = $acv[$id_3];
 
-
-            ///$text_parths=explode('|', $vo[1], 2);
-            //$title=isset($text_parths[0])?$text_parths[0]:'';
-            //$desc =isset($text_parths[1])?$text_parths[1]:'';
-            //$options[$id]['title'] = $title;
-            //$options[$id]['desc']  = $desc;
-            //$options[$id]['reset_cap_0']  = 0;
             $options[$id]['end'] = $id_4;
-            //unset($options[$id][1]);
         }
 
     } elseif ($sub === 'hotro_tanthu') {
@@ -1015,15 +982,7 @@ function board_ischaracter()
             $options[$id]['id_4_val'] = $acv[$id_4];
             $options[$id]['id_5_val'] = $acv[$id_5];
 
-
-            ///$text_parths=explode('|', $vo[1], 2);
-            //$title=isset($text_parths[0])?$text_parths[0]:'';
-            //$desc =isset($text_parths[1])?$text_parths[1]:'';
-            //$options[$id]['title'] = $title;
-            //$options[$id]['desc']  = $desc;
-            //$options[$id]['reset_cap_0']  = 0;
             $options[$id]['end'] = $id_6;
-            //unset($options[$id][1]);
         }
 
     } elseif ($sub === 'pk') {
@@ -1032,25 +991,14 @@ function board_ischaracter()
 
             $id_1 = $get_id[0];
             $id_2 = $get_id[1];
-            //$id_3 = $get_id[2];		$id_4 = $get_id[3];		$id_5 = $get_id[4];
             $id_3 = isset($get_id[2]) ? $get_id[2] : false;
 
             $options[$id]['id_1'] = $id_1;
             $options[$id]['id_2'] = $id_2;
-            //$options[$id]['id_3'] = $id_3;		$options[$id]['id_4'] = $id_4;		$options[$id]['id_5'] = $id_5;
             $options[$id]['id_1_val'] = $acv[$id_1];
             $options[$id]['id_2_val'] = $acv[$id_2];
-            //$options[$id]['id_3_val'] = $acv[$id_3];		$options[$id]['id_4_val'] = $acv[$id_4]; 	$options[$id]['id_5_val'] = $acv[$id_5];
 
-//            echo "9222 ------------------- " . $id_2 . $acv[$id_2] . "<br>";
-            ///$text_parths=explode('|', $vo[1], 2);
-            //$title=isset($text_parths[0])?$text_parths[0]:'';
-            //$desc =isset($text_parths[1])?$text_parths[1]:'';
-            //$options[$id]['title'] = $title;
-            //$options[$id]['desc']  = $desc;
-            //$options[$id]['reset_cap_0']  = 0;
             $options[$id]['end'] = $id_3;
-            //unset($options[$id][1]);
         }
 
     } elseif ($sub === 'gioihan_rs') {
@@ -1066,20 +1014,12 @@ function board_ischaracter()
             $options[$id]['id_1'] = $id_1;
             $options[$id]['id_2'] = $id_2;
             $options[$id]['id_3'] = $id_3;
-            $options[$id]['id_4'] = $id_4;        //$options[$id]['id_5'] = $id_5;
+            $options[$id]['id_4'] = $id_4;
 
             $options[$id]['id_1_val'] = $acv[$id_1];
             $options[$id]['id_2_val'] = $acv[$id_2];
             $options[$id]['id_3_val'] = $acv[$id_3];
-            $options[$id]['id_4_val'] = $acv[$id_4];    //$options[$id]['id_5_val'] = $acv[$id_5];
-
-            ///$text_parths=explode('|', $vo[1], 2);
-            //$title=isset($text_parths[0])?$text_parths[0]:'';
-            //$desc =isset($text_parths[1])?$text_parths[1]:'';
-            //$options[$id]['title'] = $title;
-            //$options[$id]['desc']  = $desc;
-
-            //$options[$id]['ResetInDay1']  = $id_5;
+            $options[$id]['id_4_val'] = $acv[$id_4];
 
             $options[$id]['end'] = $id_5;
         }
@@ -1111,24 +1051,16 @@ function board_ischaracter()
 
             $id_1 = $get_id[0];
             $id_2 = $get_id[1];
-            $id_3 = $get_id[2];        //$id_4 = $get_id[3];		//$id_5 = $get_id[4];
+            $id_3 = $get_id[2];
             $id_4 = isset($get_id[3]) ? $get_id[3] : false;
 
             $options[$id]['id_1'] = $id_1;
             $options[$id]['id_2'] = $id_2;
-            $options[$id]['id_3'] = $id_3;        //$options[$id]['id_4'] = $id_4;		//$options[$id]['id_5'] = $id_5;
+            $options[$id]['id_3'] = $id_3;
 
             $options[$id]['id_1_val'] = $acv[$id_1];
             $options[$id]['id_2_val'] = $acv[$id_2];
-            $options[$id]['id_3_val'] = $acv[$id_3];        //$options[$id]['id_4_val'] = $acv[$id_4]; 	//$options[$id]['id_5_val'] = $acv[$id_5];
-
-            ///$text_parths=explode('|', $vo[1], 2);
-            //$title=isset($text_parths[0])?$text_parths[0]:'';
-            //$desc =isset($text_parths[1])?$text_parths[1]:'';
-            //$options[$id]['title'] = $title;
-            //$options[$id]['desc']  = $desc;
-
-            //$options[$id]['ResetInDay1']  = $id_5;
+            $options[$id]['id_3_val'] = $acv[$id_3];
 
             $options[$id]['end'] = $id_4;
         }
@@ -1141,15 +1073,12 @@ function board_ischaracter()
             $id_3 = $get_id[2];
             $id_4 = isset($get_id[3]) ? $get_id[3] : false;
 
-            $options[$id]['id_2'] = $id_2;        //$options[$id]['id_2'] = $id_2;		$options[$id]['id_3'] = $id_3;
-            //$options[$id]['id_4'] = $id_4;		$options[$id]['id_5'] = $id_5;		$options[$id]['id_6'] = $id_6;
-            //$options[$id]['id_7'] = $id_7;		$options[$id]['id_8'] = $id_8;		$options[$id]['id_9'] = $id_9;
+            $options[$id]['id_2'] = $id_2;
 
             $options[$id]['id_1_val'] = $acx['reset'][$id_1];
             $options[$id]['id_2_val'] = $acv[$id_2];
             $options[$id]['id_3_val'] = $acx['reset_vip'][$id_3];
             $options[$id]['id_4_val'] = (int)$acx['reset_vip'][$id_3] * 0.8;
-
 
             $options[$id]['end'] = $id_4;
         }
@@ -1166,9 +1095,7 @@ function board_ischaracter()
             $id_6 = $get_id[5];
             $id_7 = isset($get_id[6]) ? $get_id[6] : false;
 
-            $options[$id]['id_2'] = $id_2;        //$options[$id]['id_2'] = $id_2;		$options[$id]['id_3'] = $id_3;
-            //$options[$id]['id_4'] = $id_4;		$options[$id]['id_5'] = $id_5;		$options[$id]['id_6'] = $id_6;
-            //$options[$id]['id_7'] = $id_7;		$options[$id]['id_8'] = $id_8;		$options[$id]['id_9'] = $id_9;
+            $options[$id]['id_2'] = $id_2;
 
             $options[$id]['id_1_val'] = $acx['reset'][$id_1];
             $options[$id]['id_2_val'] = $acv[$id_2];
@@ -1185,208 +1112,20 @@ function board_ischaracter()
         $template = 'config_class_';
     }
 
-    //exit();
-    // Basic template name and fetch data (user/system)
 
-    /*
-         $rewrite => array
-            (
-                'class_dw_1'         => array('Y/N', "Use rewrite engine"),
-                'class_dw_1_name'       => array('label', ".htaccess real path|Automatic, not modify by user"),
-                'class_dw_2'         => array('text', "Real path to your layout file|e.g. /home/userdir/www/layout.php"),
-                'class_dw_2_name'         => array('text', "Rewrite prefix|e.g. /news/"),
-                'rw_use_shorten'    => array('Y/N', "Disable .html at end of urls"),
-            ),
-
-        */
-
-    /*
-    // Copy default subtemplate, if not exists
-    if (!isset($tuser[$template]))
-    {
-        foreach ($list[$template] as $_sub => $_var)
-        {
-            $tuser[$template][$_sub] = $_var;
-        }
-    }
-
-    // Get all templates, mark it as user/system
-    foreach ($tuser as $id => $vs)
-    {
-        $all_templates[ $id ] = 'User';
-    }
-
-    foreach ($list as $id => $vs)
-    {
-        $all_templates[ $id ] = 'Sys';
-    }
-
-
-    $all_templates  = array();
-    $template_parts = array();
-
-
-    $odata = array();
-    foreach ($tuser[$template] as $id => $subtpl)
-    {
-        if (isset($def_ids[$id]))
-        {
-            $_name = $def_ids[$id];
-        }
-        else
-        {
-            $_name = ucfirst(str_replace('_', ' ', $id));
-        }
-
-        $odata[$id] = $subtpl;
-        $template_parts[$id] = $_name;
-    }
-
-    reset($odata);
-
-    // Get subtmpl by default
-    if (!$sub)
-    {
-        $sub = key($odata);
-    }
-*/
-    // ------------------------------------------------------------------------------------ ACTIONS --------------------
     // save template?
     if (request_type('POST')) {
         cn_dsi_check();
 
-        // ------------------------
-        //if (REQ('select', 'POST'))
-        {
-            //cn_relocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
-        }
-        // ------------------------
-        //elseif (REQ('create') || REQ('template_name'))
-        {
-            //$template_name = trim(strtolower(preg_replace('/[^a-z0-9_]/i', '-', REQ('template_name'))));
-
-            //if (!$template_name)
-            {
-                //cn_throw_message('Enter correct template name', 'e');
-            }
-            //elseif (isset($all_templates[$template_name]))
-            {
-                //cn_throw_message('Template already exists', 'e');
-            }
-            //else
-            {
-                //$tuser[$template][$sub] = REQ('save_template_text', 'POST');
-
-                //setoption("#templates/$template_name", $tuser[$template]);
-                //msg_info('Template ['.$template_name.'] created', cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'template='.$template_name));
-            }
-        }
-        // ------------------------
-        //elseif (REQ('delete'))
-        {
-            //if ($all_templates[ $template ] === 'Sys')
-            {
-                //cn_throw_message("Template '$template' is system template, can't delete", 'e');
-            }
-            //else
-            {
-                //unset($tuser[$template]);
-                //setoption('#templates', $tuser);
-
-                //msg_info('Template ['.$template.'] deleted!', cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt')));
-            }
-        }
-        // ------------------------
-        //elseif (REQ('reset'))
-        {
-            //  if ($all_templates[ $template ] === 'Sys')
-            {
-                //    unset($tuser[$template]);
-                //  setoption("#templates", $tuser);
-
-                //cn_throw_message("Template reset to default");
-            }
-            //else
-            {
-                //cn_throw_message("Template is user template, can't reset", 'e');
-            }
-        }
-        // ------------------------
-        //else
-        {
-            //$tuser[$template][$sub] = REQ('save_template_text', 'POST');
-
             $post_cfg = $_POST['config'];
-            /*
-                foreach ($post_cfg as $s => $f){
-                    $post_cfg_[$s]['id'] = $s;
-                    $post_cfg_[$s]['name'] = $f;
-                    //echo "1271 ==>". $s . "=> $f <br>";
-                }
-
-                //foreach ($post_cfg_ as $s => $f)
-                //echo "1275 ==>".$post_cfg_[$s]['id'] . "<===>".$post_cfg_[$s]['name'] . "<=  <br>";
-
-
-
-                foreach ($acx[$sub] as $id => $val){
-                //foreach ($post_cfg as $id => $val){
-                    //if(isset($acx[$sub][$id])){
-                    if(isset($post_cfg_[$id]['id'])){
-                         $acx[$sub][$id] = $post_cfg_[$id]['name'];
-                    }
-                    //if(isset($post_cfg_[$id]['name'])){
-                        // unset($acx[$sub][$id]);
-                         //$acx[$sub][$id] = $val;
-                    //}
-                    echo "686 => \$post_cfg[\$val]==>$post_cfg[$id]==>". $id . "=> $val <br>";
-                }
-    */
-//            foreach ($post_cfg as $s => $f) {
-            //$post_cfg_[$s]['id'] = $s;
-            //$post_cfg_[$s]['name'] = $f;
-//                echo "1271 POST ==>" . $s . "=> $f <br>";
-//            }
-
-            //foreach ($post_cfg_ as $s => $f)
-            //echo "1275 ==>".$post_cfg_[$s]['id'] . "<===>".$post_cfg_[$s]['name'] . "<=  <br>";
-
-
             foreach ($acx[$sub] as $id => $val) {
-                //foreach ($post_cfg as $id => $val){
-                //if(isset($acx[$sub][$id])){
                 if (isset($post_cfg[$id])) {
                     $acx[$sub][$id] = $post_cfg[$id];
                 }
-                //if(isset($post_cfg[$id])){
-                //unset($acv[$id]);
-                //$acx[$sub][$id] = $val;
-                //}
-                //echo "686 => \$post_cfg[\$val]==>$post_cfg[$id]==>". $acx[$sub][$id] . "==>". $id . "=> $val <br>";
             }
-
-            //foreach ($acv as $id => $val)
-            //echo "717 SAU => ==>". $id . "=> $val <br>";
-            //exit();
-            //echo " 1272 ==>". $post_cfg['class_dw_1'] ."=>".$post_cfg['class_dw_1_name']. "<br>";
-            //echo " 1273 ==>".$acv[$post_cfg] ."=>".$post_cfg['class_dw_1_name']. "<br>";
-            //echo " 1257 ==>". REQ('class_dw_1','class_dw_1_name', 'POST'). "<br>";
-
-            //$opt_re['templates'] =	$opt_result;
-            //setoption("#temp_basic", $acx);
             setoption("#temp_basic", $acx);
             cn_throw_message('Template saved successfully');
-            //cn_relocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
         }
-    }
-    //$get_arr_sub = cn_get_template_by_array($sub);
-
-    if (isset($_POST['template'])) {
-        //$_GET['template'] = $_POST['template'];
-    }
-
-    if (isset($_POST['sub'])) {
-        //$_GET['sub'] = $_POST['sub'];
     }
 
     $get_gh_loai1 = isset($gh_loai1) ? $gh_loai1 : array();
@@ -1394,209 +1133,10 @@ function board_ischaracter()
     $options = isset($options) ? $options : array();
     $all_header_conf = isset($all_header_conf) ? $all_header_conf : array();
 
-
-    // user can't delete system template, only modify
-    //$can_delete = $all_templates[$template] == 'Sys' ? FALSE : TRUE;
-
-    // get template text (may be modified before)
-    //$template_text = isset($tuser[$template][$sub]) ? $tuser[$template][$sub] : (isset($list[$template][$sub]) ? $list[$template][$sub] : '');
-
-    // ----
-    //cn_assign('template_parts, all_templates, template_text, template, sub, can_delete, all_header_conf, set_arr', $template_parts, $acv, $template_text, $template, $sub, $can_delete, $all_header_conf, $options);
     cn_assign('gh_loai1, gh_loai2, sub, all_header_conf, set_arr', $get_gh_loai1, $get_gh_loai2, $sub, $all_header_conf, $options);
     echo_header_admin('-@com_board/style.css', "Config Character");
     echo execTemplate('com_board/classchar');
     echofooter();
-    /*
-    $all_header_conf = array();
-    $all_templates  = array();
-    $template_parts = array();
-
-    $def_ids = array
-    (
-        'congfig_class' => 'Class',
-        'congfig_reset' => 'Reset',
-        'congfig_resetvip' => 'Reset Vip',
-        'congfig_gioihan' => 'Gioi han Reset',
-        'congfig_hotrotanthu' => 'Ho tro tan thu',
-        'congfig_online' => 'Uy thac Online',
-        'congfig_offline' => 'Uy thac Offline',
-        'congfig_uythac_reset' => 'Uy thac Reset',
-        'congfig_uythac_resetvip' => 'Uy thac Reset Vip',
-        'full' => 'Full Story',
-        'comment' => 'Comment',
-        'form' => 'Add comment form',
-        'prev_next' => 'News Pagination',
-        'comments_prev_next' => 'Comments Pagination',
-    );
-
-    list($template, $sub) = GET('template, sub', 'GPG');
-
-    // Default templates
-    $list = cn_template_list();
-
-    // User changes
-    $tuser = getOption('#temp_basic');
-    //list($tuser) = getOption('#temp_basic');
-
-    // Basic template name and fetch data (user/system)
-    if (!$template)
-    {
-        $template = 'config_class';
-    }
-
-
-
-    // Copy default subtemplate, if not exists
-    if (!isset($tuser[$template]))
-    {
-        foreach ($list[$template] as $_sub => $_var)
-        {
-            $tuser[$template][$_sub] = $_var;
-        }
-    }
-
-    // Get all templates, mark it as user/system
-    foreach ($tuser as $id => $vs)
-    {
-        $all_templates[ $id ] = 'User';
-    }
-
-    foreach ($all_templates as $id => $vs)
-    {
-        echo "576 mu_b $id => $vs <br>";
-    }
-
-
-    foreach ($list as $id => $vs)
-    {
-        $all_templates[ $id ] = 'Sys';
-    }
-
-    foreach ($all_templates as $id => $vs)
-    {
-        echo "582 mu_b $id => $vs <br>";
-    }
-
-
-/*
-    $odata = array();
-    foreach ($tuser[$template] as $id => $subtpl)
-    {
-        if (isset($def_ids[$id]))
-        {
-            $_name = $def_ids[$id];
-        }
-        else
-        {
-            $_name = ucfirst(str_replace('_', ' ', $id));
-        }
-
-        $odata[$id] = $subtpl;
-        $template_parts[$id] = $_name;
-    }
-
-    reset($odata);
-*/
-    /*
-        // Get subtmpl by default
-        if (!$sub)
-        {
-            $sub = key($odata);
-        }
-
-        // ------------------------------------------------------------------------------------ ACTIONS --------------------
-        // save template?
-        if (request_type('POST'))
-        {
-            cn_dsi_check();
-
-            // ------------------------
-            if (REQ('select', 'POST'))
-            {
-                cn_relocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'template='.$template));
-            }
-            // ------------------------
-            elseif (REQ('create') || REQ('template_name'))
-            {
-                $template_name = trim(strtolower(preg_replace('/[^a-z0-9_]/i', '-', REQ('template_name'))));
-
-                if (!$template_name)
-                {
-                    cn_throw_message('Enter correct template name', 'e');
-                }
-                elseif (isset($all_templates[$template_name]))
-                {
-                    cn_throw_message('Template already exists', 'e');
-                }
-                else
-                {
-                    $tuser[$template][$sub] = REQ('save_template_text', 'POST');
-
-                    setoption("#templates/$template_name", $tuser[$template]);
-                    msg_info('Template ['.$template_name.'] created', cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'template='.$template_name));
-                }
-            }
-            // ------------------------
-            elseif (REQ('delete'))
-            {
-                if ($all_templates[ $template ] === 'Sys')
-                {
-                    cn_throw_message("Template '$template' is system template, can't delete", 'e');
-                }
-                else
-                {
-                    unset($tuser[$template]);
-                    setoption('#templates', $tuser);
-
-                    msg_info('Template ['.$template.'] deleted!', cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt')));
-                }
-            }
-            // ------------------------
-            elseif (REQ('reset'))
-            {
-                if ($all_templates[ $template ] === 'Sys')
-                {
-                    unset($tuser[$template]);
-                    setoption("#templates", $tuser);
-
-                    cn_throw_message("Template reset to default");
-                }
-                else
-                {
-                    cn_throw_message("Template is user template, can't reset", 'e');
-                }
-            }
-            // ------------------------
-            else
-            {
-                $tuser[$template][$sub] = REQ('save_template_text', 'POST');
-                setoption("#templates", $tuser);
-
-                cn_throw_message('Template saved successfully');
-            }
-        }
-
-        if (isset($_POST['template']))
-        {
-            $_GET['template'] = $_POST['template'];
-        }
-
-        if (isset($_POST['sub']))
-        {
-            $_GET['sub'] = $_POST['sub'];
-        }
-
-        // user can't delete system template, only modify
-        $can_delete = $all_templates[$template] == 'Sys' ? FALSE : TRUE;
-
-        // get template text (may be modified before)
-        $template_text = isset($tuser[$template][$sub]) ? $tuser[$template][$sub] : (isset($list[$template][$sub]) ? $list[$template][$sub] : '');
-
-        // ----
-        cn_assign('template_parts, all_templates, template_text, template, sub, can_delete, tuser', $template_parts, $all_templates, $template_text, $template, $sub, $can_delete, $all_header_conf);
-        echo_header_admin('-@com_board/style.css', "Templates"); echo execTemplate('com_board/template'); echofooter();
-        */
 }
 
 function board_userman()
@@ -1628,8 +1168,9 @@ function board_userman()
                     $is_edit = FALSE;
                     cn_throw_message("User not exists", 'e');
                 }
-            } // Add user
+            }
             else {
+                // Add user
                 // Check user
                 if (!$user_name)
                     cn_throw_message("Fill required field: username", 'e');
@@ -1668,8 +1209,8 @@ function board_userman()
                     } else {
                         cn_throw_message('User info updated');
                     }
-                } // Add user
-                else {
+                }
+                else {// Add user
                     if ($user_id = db_user_add($user_name, $user_acl)) {
                         if (db_user_update($user_name, "email=$user_email", "nick=$user_nick", 'pass=' . SHA256_hash($user_pass), "acl=$user_acl")) {
                             $is_edit = TRUE;
@@ -1704,16 +1245,7 @@ function board_userman()
         $user = db_user_by($id);
         $userlist[$id] = $user;
     }
-    /*
-    // Retrieve info about user
-    if ($user = db_user_by_name($user_name))
-    {
-        $user_nick  =isset($user['nick'])? $user['nick']:'';
-        $user_email =isset($user['email'])? $user['email']:'';
-        $user_acl   =isset($user['acl'])? $user['acl']:'';
-        $is_edit=TRUE;
-    }
-    */
+
     // By default for section
     if (!$user_acl) $user_acl = $section;
 
@@ -1924,50 +1456,50 @@ function board_logs()
 
 function board_statistics()
 {
-//    $list = getOption('#more_list');
-//
-//    $name = REQ('extr_name', "GET");
-//    $remove = REQ('remove');
-//    $type = $desc = $meta = $group = $req = '';
-//
-//    // Apply the changes
-//    if (request_type('POST')) {
-//        cn_dsi_check();
-//
-//        list($type, $name, $desc, $meta, $group, $req) = GET('type, name, desc, meta, group, req', 'POST');
-//
-//        if ($remove) {
-//            unset($list[$name]);
-//
-//            $type = $name = $desc = $meta = $group = $req = '';;
-//            setoption('#more_list', $list);
-//        } else {
-//            if (!preg_match('/^[a-z0-9_-]+$/i', $name))
-//                cn_throw_message('Name invalid - empty or bad chars', 'e');
-//
-//            if ($group && !preg_match('/^[a-z0-9_-]+$/i', $group))
-//                cn_throw_message('Group field consists bad chars', 'e');
-//
-//            $errors = cn_get_message('e', 'c');
-//            if (!$errors) {
-//                $list[$name] = array('grp' => $group, 'type' => $type, 'desc' => $desc, 'meta' => $meta, 'req' => $req);
-//                setoption('#more_list', $list);
-//                cn_throw_message("Field added successfully");
-//            }
-//        }
-//    }
-//
-//    // Request fields
-//    if ($name && $list[$name]) {
-//        $desc = $list[$name]['desc'];
-//        $meta = $list[$name]['meta'];
-//        $type = $list[$name]['type'];
-//        $group = $list[$name]['grp'];
-//        $req = $list[$name]['req'];
-//    }
-//
-//    cn_assign('list', $list);
-//    cn_assign('type, name, desc, meta, group, req', $type, $name, $desc, $meta, $group, $req);
+    $list = getOption('#more_list');
+
+    $name = REQ('extr_name', "GET");
+    $remove = REQ('remove');
+    $type = $desc = $meta = $group = $req = '';
+
+    // Apply the changes
+    if (request_type('POST')) {
+        cn_dsi_check();
+
+        list($type, $name, $desc, $meta, $group, $req) = GET('type, name, desc, meta, group, req', 'POST');
+
+        if ($remove) {
+            unset($list[$name]);
+
+            $type = $name = $desc = $meta = $group = $req = '';;
+            setoption('#more_list', $list);
+        } else {
+            if (!preg_match('/^[a-z0-9_-]+$/i', $name))
+                cn_throw_message('Name invalid - empty or bad chars', 'e');
+
+            if ($group && !preg_match('/^[a-z0-9_-]+$/i', $group))
+                cn_throw_message('Group field consists bad chars', 'e');
+
+            $errors = cn_get_message('e', 'c');
+            if (!$errors) {
+                $list[$name] = array('grp' => $group, 'type' => $type, 'desc' => $desc, 'meta' => $meta, 'req' => $req);
+                setoption('#more_list', $list);
+                cn_throw_message("Field added successfully");
+            }
+        }
+    }
+
+    // Request fields
+    if ($name && $list[$name]) {
+        $desc = $list[$name]['desc'];
+        $meta = $list[$name]['meta'];
+        $type = $list[$name]['type'];
+        $group = $list[$name]['grp'];
+        $req = $list[$name]['req'];
+    }
+
+    cn_assign('list', $list);
+    cn_assign('type, name, desc, meta, group, req', $type, $name, $desc, $meta, $group, $req);
     echo_header_admin('-@com_board/style.css', 'statistics - Thống kê');
     echo execTemplate('com_board/statistics');
     echofooter();
