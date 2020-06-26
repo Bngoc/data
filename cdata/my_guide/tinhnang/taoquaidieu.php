@@ -1,7 +1,7 @@
 <h3>Chế tạo Quái Điểu (Dinorant)</h3>
 <br>
 <div>
-    <div align="center"><img height="200" src="/images/guides/mountsPets.png" width="70%"></div>
+    <div align="center"><img height="200" src="/public/images/web/guides/mountsPets.png" width="70%"></div>
 </div>
 <br>
 <br>

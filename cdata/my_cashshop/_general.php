@@ -11,52 +11,56 @@ list($per_page, $echoPagination) = _GL('per_page, echoPagination');
             <td colspan=4><br></td>
         </tr>
         <tr>
-            <?php if ($list_item) foreach ($list_item as $key => $raw) { ?>
-                <td class="hh-w" valign="top" align="center">
-                    <form method="POST" <?php echo "action=" . PHP_SELF . "\" class=\"form-" . $key; ?>"
-                    onsubmit="return false;">
-                    <?php cn_form_open('mod, token, opt'); ?>
-                    <input type="hidden" name="item" value="<?php echo $key; ?>">
-                    <table style="width: 150px;height: 170px;">
-                        <tr class="h-ww" style="height: 105px;cursor: pointer;">
-                            <td class="h-w" align="middle"
-                                valign="top"><img
-                                    align="middle" <?php if ($raw['image_mh']) echo 'style="width: 80%;"'; else echo 'style=""'; ?>
-                                    src="./images/<?php if ($raw['image_mh']) {
-                                        echo 'shop_' . $opt . '/' . $raw['image_mh'];
-                                    } else {
-                                        echo 'items/' . $raw['image'] . '.gif';
-                                    }
-                                    echo '" title="' . $raw['title'] . '"'; ?> onMouseOut='UnTip()'
+            <?php if ($list_item) {
+                foreach ($list_item as $key => $raw) { ?>
+                    <td class="hh-w" valign="top" align="center">
+                        <form method="POST" <?php echo "action=" . PHP_SELF . "\" class=\"form-" . $key; ?>"
+                        onsubmit="return false;">
+                        <?php cn_form_open('mod, token, opt'); ?>
+                        <input type="hidden" name="item" value="<?php echo $key; ?>">
+                        <table style="width: 150px;height: 170px;">
+                            <tr class="h-ww" style="height: 105px;cursor: pointer;">
+                                <td class="h-w" align="middle"
+                                    valign="top"><img
+                                        align="middle" <?php if ($raw['image_mh']) echo 'style="width: 80%;"'; else echo 'style=""'; ?>
+                                        src="/public/images/web/<?php if ($raw['image_mh']) {
+                                            echo 'shop_' . $opt . '/' . $raw['image_mh'];
+                                        } else {
+                                            echo 'items/' . $raw['image'] . '.gif';
+                                        }
+                                        echo '" title="' . $raw['title'] . '"'; ?> onMouseOut='UnTip()'
                                          onMouseOver=" topxTip(document.getElementById('<?php echo trim($key); ?>
-                                ').innerHTML)" />
-                                <div class="floatcontainer forumbit_nopost" id="<?php echo $key; ?>"
-                                     style="display:none;background: rgba(0, 128, 0, 0.15);"><?php echo $raw['info'] ?></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:center">
-                                <strong class="infoName-<?php echo $key . "\">" . $raw['title']; ?></strong></td>
+                                    ').innerHTML)" />
+                                    <div class="floatcontainer forumbit_nopost" id="<?php echo $key; ?>"
+                                         style="display:none;background: rgba(0, 128, 0, 0.15);"><?php echo $raw['info'] ?></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">
+                                    <strong class="infoName-<?php echo $key . "\">" . $raw['title']; ?></strong></td>
                             </tr>
                             <tr>
                                 <td style=" text-align="center"><strong>Giá : <font color="#FF0000">
                                         <span
                                             class="infoPrice-<?php echo $key; ?>"><?php echo number_format($raw['price'], 0, ',', '.') ?></span>
-                                            V.Point</font></strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:center"><input idItem="<?php echo $key; ?>" class="call-Form-Shop"
-                                                                 type="image" src="/public/images/order.gif" width="80"
-                                                                 height="25"/></td>
-                        </tr>
-                    </table>
-                    </form>
-                </td>
-                <?php if ((++$index) % 4 == 0) {
-                    echo '</tr><tr><td colspan=4><hr><br></td></tr><tr>';
+                                                V.Point</font></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center"><input idItem="<?php echo $key; ?>" class="call-Form-Shop"
+                                                                     type="image" src="/public/images/order.gif" width="80"
+                                                                     height="25"/></td>
+                            </tr>
+                        </table>
+                        </form>
+                    </td>
+                    <?php if ((++$index) % 4 == 0) {
+                        echo '</tr><tr><td colspan=4><hr><br></td></tr><tr>';
+                    }
                 }
-            } ?>
+            } else { ?>
+                <td colspan="100%" align="left">None</td>
+            <?php } ?>
         </tr>
     </table>
 

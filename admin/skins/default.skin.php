@@ -28,20 +28,20 @@ $skin_header = <<<HTML
 	 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>{title}</title>
     <meta name="robots" content="noindex" />
-    <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="/admin/skins/default.css">
-	<link rel="stylesheet" href="/skins/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="/skins/font-awesome.min.css" type="text/css">
+    <link rel="shortcut icon" type="image/ico" href="/public/images/admin/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/public/css/admin/default.css">
+	<link rel="stylesheet" href="/public/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="/public/css/font-awesome.min.css" type="text/css">
 	{signature}
     <style type="text/css"><!-- {CustomStyle} --></style>
 
-	<script type="text/javascript" src="/js/jquery-2.1.0.min.js"></script>
-	<script type="text/javascript" src="/js/clock.js"></script>
+	<script type="text/javascript" src="/public/js/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="/public/js/clock.js"></script>
 
-	<script type="text/javascript" src="js/angular.min.js"></script>
-	<script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.2.min.js"></script>
-	<script type="text/javascript" src="js/angular-route.min.js"></script>
-	<script type="text/javascript" src="js/angular-animate.min.js"></script>
+	<script type="text/javascript" src="/public/js/admin/angular.min.js"></script>
+	<script type="text/javascript" src="/public/js/admin/ui-bootstrap-tpls-0.11.2.min.js"></script>
+	<script type="text/javascript" src="/public/js/admin/angular-route.min.js"></script>
+	<script type="text/javascript" src="/public/js/admin/angular-animate.min.js"></script>
 	<srcipt type="text/javascript">
 	</srcipt>
 	{CustomJS}
@@ -84,8 +84,8 @@ $skin_footer = <<<HTML
 	</div>
 </div>
 	<script type="text/javascript" src="/public/library/wz_tooltip.js"></script>
-	<script type="text/javascript" src="/js/topxTip.js"></script>
-    <script type="text/javascript" src="/skins/cute.js"></script>
+	<script type="text/javascript" src="/public/js/topxTip.js"></script>
+    <script type="text/javascript" src="/public/js/cute.js"></script>
 
 	<script type="text/javascript">
 		$(function(){

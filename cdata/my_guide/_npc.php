@@ -2,7 +2,7 @@
     <table height="" cellspacing="1" cellpadding="1" width="100%" align="center" border="0">
         <tbody>
         <tr>
-            <td><img height="158" alt="" src="/images/guides/npc/image002.jpg"
+            <td><img height="158" alt="" src="/public/images/web//guides/npc/image002.jpg"
                      width="150"></td>
             <td>
                 <div><strong>Thợ rèn Hanzo</strong> với tay nghề điêu luyện, các loại vũ khí và khiên chống đỡ</div>

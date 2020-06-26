@@ -17,7 +17,7 @@ echo cn_snippet_messages();
             <th colspan="2" class="rbg">Thông tin</th>
         </tr>
         <tr class="">
-            <td rowspan="8"><img src="<?php echo URL_PATH_IMG . '/class/' . $val['char_image']; ?>.gif"></td>
+            <td rowspan="8"><img src="<?php echo URL_PATH_IMG . '/web/class/' . $val['char_image']; ?>.gif"></td>
             <td colspan="2"><b>Tên Nhân vật: <font color="blue">
                         <a href="<?php echo cn_url_modify('mod=char_manager', 'opt=reset', 'sub=' . $val['Name']) . '" title="' . $val['Name'] . '">' . $val['Name']; ?> </a></font></b>
             </td>

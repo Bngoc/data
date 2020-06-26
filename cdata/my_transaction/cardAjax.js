@@ -7,7 +7,7 @@ $(document).ready(function () {
             url: 'index.php',
             data: $('form#fromCard').serialize(),
             beforeSend: function () {
-                $('.reload').html('<img width="100%" height="3px" src="/images/load.gif" />');
+                $('.reload').html('<img width="100%" height="3px" src="/public/images/load.gif" />');
             },
             success: function (data) {
                 $('.top-showInfo').remove();
@@ -16,7 +16,7 @@ $(document).ready(function () {
                 $('.show_history_card').html(data['show_history']);
 
                 if (data['resetFrom']) {
-                    $("#capchaWeb").attr("src", "/captcha.php?page=web&r='+Math.random()");
+                    $("#captcha_web").attr("src", "/captcha.php?page=web&r='+Math.random()");
                     $("#verifyCaptcha").val('');
                     $('.changeNumber').val('');
                 }

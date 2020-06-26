@@ -1,29 +1,29 @@
 /*
-.box-phantrang{  
+.box-phantrang{
 	overflow:hidden;
 	float:right;
 	padding-top: 15px;
 }
 .box-phantrang a{
-	width:20px; 
+	width:20px;
 	height:20px;
 }
 .box-phantrang a:link{
-	display:block; 
-	background:#e1e1e1; 
-	color:#000; 
-	border:solid 1px #a9a9a9; 
-	text-align:center; 
+	display:block;
+	background:#e1e1e1;
+	color:#000;
+	border:solid 1px #a9a9a9;
+	text-align:center;
 	line-height:20px;
 	text-decoration:none;
 }
 .box-phantrang a:visited
 {
-	display:block; 
-	background:#e1e1e1; 
-	color:#000; 
-	border:solid 1px #a9a9a9; 
-	text-align:center; 
+	display:block;
+	background:#e1e1e1;
+	color:#000;
+	border:solid 1px #a9a9a9;
+	text-align:center;
 	line-height:20px;
 	text-decoration:none;
 }
@@ -265,7 +265,6 @@ h2 {
 .opt-item {
     float: left;
     height: 90px;
-    width: 100px;
     padding: 3px;
     overflow: hidden;
     text-align: center

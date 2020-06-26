@@ -20,4 +20,3 @@ cn_relocation_db_new();
 rankingCharaterTop();
 // Call excute update point -10% and -5%
 onoff_PointCharacter();
-?>

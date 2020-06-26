@@ -35,13 +35,13 @@ $skin_header_web = <<<HTML
 <meta name="robots" content="{title}" />
 <title>{title}</title>
 
-<link rel="shortcut icon" type="image/ico" href="/images/favicon.ico"/>
-<link rel="stylesheet" href="/skins/style.css" type="text/css" />
-<link rel="stylesheet" href="/skins/main.css" type="text/css"/>
-<link rel="stylesheet" href="/skins/sub.css" type="text/css"/>
-<link rel="stylesheet" href="/bootstrap.min.css" type="text/css"/>
+<link rel="shortcut icon" type="image/ico" href="public/images/web/favicon.ico"/>
+<link rel="stylesheet" href="/public/css/web/style.css" type="text/css" />
+<link rel="stylesheet" href="/public/css/web/main.css" type="text/css"/>
+<link rel="stylesheet" href="/public/css/web/sub.css" type="text/css"/>
+<link rel="stylesheet" href="/public/css/bootstrap.min.css" type="text/css"/>
 
-<script type="text/javascript" src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="/public/js/jquery-2.1.0.min.js"></script>
 
 
     {CustomJS}
@@ -58,7 +58,7 @@ $skin_header_web = <<<HTML
 
     <div id="page_wrapper1">
         <div id="page_wrapper2">
-    		<script language="JavaScript" type="text/javascript" src="/images/stmenu.js"></script>
+    		<script language="JavaScript" type="text/javascript" src="/public/js/web/stmenu.js"></script>
 
 		<div class="clear"></div>
 		<div id="main_header">
@@ -128,9 +128,9 @@ $skin_footer_web = <<<HTML
 	</div>
 </div>
 
-    <script type="text/javascript" src="/skins/cute.js"></script>
+    <script type="text/javascript" src="/public/js/cute.js"></script>
     <script type="text/javascript" src="/public/library/wz_tooltip.js"></script>
-	<script type="text/javascript" src="/js/topxTip.js"></script>
+	<script type="text/javascript" src="/public/js/topxTip.js"></script>
     <script type="text/javascript" src="/public/library/jsCheckForm.js"></script>
 
     <script type="text/javascript">
@@ -287,17 +287,17 @@ $defaultVerifyMyChar = <<<HTML
 
         <tr>
             <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;"
-                    onclick="getId('capchaWeb').src='/captcha.php?page=web&r='+Math.random(); return(false);">
+                    onclick="getId('captcha_web').src='/captcha.php?page=web&r='+Math.random(); return(false);">
                     Refresh code</a></td>
             <td colspan="" class="bizwebform_col_2" style="padding-left:20px;">
-                <div class="vertical-img"><img src="/captcha.php?cap=web"
-                                               id="capchaWeb" alt=""></div>
+                <div class="vertical-img"><img src="/captcha.php?page=web"
+                                               id="captcha_web" alt=""></div>
             </td>
             <td class="bizwebform_col_3"></td>
         </tr>
         <tr>
             <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
-            <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="verifyCaptcha" required autocomplete="off"
+            <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="verifyCaptcha" required autocomplete="on"
                                                 onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
             <td class="bizwebform_col_3" id="msg_Captcha"></td>
         </tr>
@@ -332,17 +332,17 @@ $defaultVerifyAjax = <<<HTML
 
         <tr>
             <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;"
-                    onclick="getId('capchaWeb').src='/captcha.php?page=web&r='+Math.random(); return(false);">
+                    onclick="getId('captcha_web').src='/captcha.php?page=web&r='+Math.random(); return(false);">
                     Refresh code</a></td>
             <td colspan="" class="bizwebform_col_2" style="padding-left:20px;">
-                <div class="vertical-img"><img src="/captcha.php?cap=web"
-                                               id="capchaWeb" alt=""></div>
+                <div class="vertical-img"><img src="/captcha.php?page=web"
+                                               id="captcha_web" alt=""></div>
             </td>
             <td class="bizwebform_col_3"></td>
         </tr>
         <tr>
             <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
-            <td class="bizwebform_col_2"><input id="verifyCaptcha" type="text" class="bizwebform" name="verifyCaptcha" required autocomplete="off"
+            <td class="bizwebform_col_2"><input id="verifyCaptcha" type="text" class="bizwebform" name="verifyCaptcha" required autocomplete="on"
                                                 onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
             <td class="bizwebform_col_3" id="msg_Captcha"></td>
         </tr>

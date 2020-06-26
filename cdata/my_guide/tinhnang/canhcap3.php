@@ -3,7 +3,7 @@
     <p><strong>Thứ I : Tạo lông vũ Condor</strong></p>
     <p> </p>
     <p>Để tạo cánh cấp 3 có 2 giai đoạn:</p>
-    <p align="center"><strong><img alt="" src="/images/guides/YrJaFrY.jpg"
+    <p align="center"><strong><img alt="" src="/public/images/web/guides/YrJaFrY.jpg"
                                    width="60%"> </strong></p>
     <p> </p>
     <p>- Cánh cấp 2 cấp độ +4 và tính năng +4 trở lên</p>
@@ -27,7 +27,7 @@
     <p>   • Condor’s Flame</p>
     <p> </p>
     <p>   • Condor’s Feather</p>
-    <p align="center"><span><img height="300" alt="" src="/images/guides/wing3.2.png" width="70%"></span></p>
+    <p align="center"><span><img height="300" alt="" src="/public/images/web/guides/wing3.2.png" width="70%"></span></p>
     <p align="center"><span><em>Condor’s Feather Condor’s Flame</em></span></p>
     <span></span><span>
   <p> </p>

@@ -62,7 +62,7 @@ $(document).ready(function () {
                 $('.show-history').html(data['show_history']);
 
                 if (data['resetFrom']) {
-                    $("#capchaWeb").attr("src", "/captcha.php?page=web&r='+Math.random()");
+                    $("#captcha_web").attr("src", "/captcha.php?page=web&r='+Math.random()");
                     $("#verifyCaptcha").val('');
                     $('.changeNumber').val('');
                 }

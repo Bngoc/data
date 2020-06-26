@@ -4,7 +4,7 @@ list($member, $acl_write_news, $accesslevel, $personal_more) = _GL('member, acl_
 
 $username = isset($member['name']) ? $member['name'] : '';
 $nickname = isset($member['nick']) ? $member['nick'] : '';
-$avatar_url = isset($member['avatar']) ? (getoption('uploads_ext') ? getoption('uploads_ext') : getoption('http_script_dir') . '/uploads') . '/' . $member['avatar'] : '';
+$avatar_url = isset($member['avatar']) ? (getOption('uploads_ext') ? getOption('uploads_ext') : getOption('http_script_dir') . '/uploads') . '/' . $member['avatar'] : '';
 $usermail = isset($member['email']) ? $member['email'] : '';
 $written_news = isset($member['cnt']) ? $member['cnt'] : 0;
 $register_date = isset($member['id']) ? $member['id'] : 0;

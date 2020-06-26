@@ -1,4 +1,4 @@
-<div align="center"><img src="/images/guides/img_darkWizard.jpg">
+<div align="center"><img src="/public/images/web/guides/img_darkWizard.jpg">
 </div>
 <p>Một số người cố gắng để có những thân thể cường tráng, hoàn hảo. Một số khác hướng về những quy luật của thiên nhiên
     để làm lợi cho chính họ. Pháp Sư có thể dùng các phép thuật để tấn công kẻ thù. Ngoài ra, anh còn ta có thể yêu cầu

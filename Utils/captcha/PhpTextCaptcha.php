@@ -7,16 +7,19 @@ April 26, 2014
 
 class PhpTextCaptcha
 {
-    public function phptext($text, $textColor, $backgroundColor = '', $fontSize, $imgWidth, $imgHeight, $dir, $fileName)
+    public $path_Url = '';
+    public $nameSession = '';
+
+    public function phpText($text, $textColor, $backgroundColor, $fontSize, $imgWidth, $imgHeight, $dir, $fileName)
     {
         /* settings */
-        $font = SERVDIR . '/core/captcha/font/Heineken.ttf';/*define font*/
+        $font = $this->path_Url . '/font/Heineken.ttf';/*define font*/
         $textColor = $this->hexToRGB($textColor);
 
         $im = imagecreatetruecolor($imgWidth, $imgHeight);
         $textColor = imagecolorallocate($im, $textColor['r'], $textColor['g'], $textColor['b']);
-
-        if ($backgroundColor == '') {/*select random color*/
+        /*select random color*/
+        if ($backgroundColor == '') {
             $colorCode = array('#56aad8', '#61c4a8', '#d3ab92');
             $backgroundColor = $this->hexToRGB($colorCode[rand(0, count($colorCode) - 1)]);
             $backgroundColor = imagecolorallocate($im, $backgroundColor['r'], $backgroundColor['g'], $backgroundColor['b']);
@@ -34,11 +37,11 @@ class PhpTextCaptcha
         }
     }
 
-    public function phpcaptcha($textColor, $backgroundColor, $imgWidth, $imgHeight, $noiceLines = 0, $noiceDots = 0, $noiceColor = '#C1E6EF')
+    public function phpCaptcha($textColor, $backgroundColor, $imgWidth, $imgHeight, $noiceLines = 0, $noiceDots = 0, $noiseColor = '#C1E6EF')
     {
         /* Settings */
         $text = $this->random();
-        $font = SERVDIR . '/core/captcha/font/monofont.ttf';/* font */
+        $font = $this->path_Url . '/font/monofont.ttf';/* font */
         $textColor = $this->hexToRGB($textColor);
         $fontSize = $imgHeight * 0.75;
 
@@ -50,18 +53,16 @@ class PhpTextCaptcha
 
         /* generating lines randomly in background of image */
         if ($noiceLines > 0) {
-            $noiceColor = $this->hexToRGB($noiceColor);
-            $noiceColor = imagecolorallocate($im, $noiceColor['r'], $noiceColor['g'], $noiceColor['b']);
+            $noiseColor = $this->hexToRGB($noiseColor);
+            $noiseColor = imagecolorallocate($im, $noiseColor['r'], $noiseColor['g'], $noiseColor['b']);
             for ($i = 0; $i < $noiceLines; $i++) {
-                imageline($im, mt_rand(0, $imgWidth), mt_rand(0, $imgHeight),
-                    mt_rand(0, $imgWidth), mt_rand(0, $imgHeight), $noiceColor);
+                imageline($im, mt_rand(0, $imgWidth), mt_rand(0, $imgHeight), mt_rand(0, $imgWidth), mt_rand(0, $imgHeight), $noiseColor);
             }
         }
 
         if ($noiceDots > 0) {/* generating the dots randomly in background */
             for ($i = 0; $i < $noiceDots; $i++) {
-                imagefilledellipse($im, mt_rand(0, $imgWidth),
-                    mt_rand(0, $imgHeight), 3, 3, $textColor);
+                imagefilledellipse($im, mt_rand(0, $imgWidth), mt_rand(0, $imgHeight), 3, 3, $textColor);
             }
         }
 
@@ -71,10 +72,9 @@ class PhpTextCaptcha
 
         header("Content-type: image/jpeg"); /* defining the image type to be shown in browser widow */
         imagejpeg($im, NULL, 90);/* Showing image */
-//        var_dump($im);die;
         imagedestroy($im);/* Destroying image instance */
         if (isset($_SESSION)) {
-            $_SESSION['captcha_code'] = $text;/* set random text in session for captcha validation*/
+            $_SESSION[$this->nameSession] = $text;/* set random text in session for captcha validation*/
         }
     }
 
@@ -85,7 +85,6 @@ class PhpTextCaptcha
         for ($i = 0; $i < $characters; $i++) {
             $str .= substr($letters, mt_rand(0, strlen($letters) - 1), 1);
         }
-
         return $str;
     }
 

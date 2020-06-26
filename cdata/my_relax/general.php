@@ -11,7 +11,7 @@ list($dashboard) = _GL('dashboard');
 
             <div class="opt-item">
                 <a href="<?php echo cn_url_modify("mod=" . $item['mod'], "opt=" . $item['opt']); ?>">
-                    <div><img src="<?php echo getoption('http_script_dir'); ?>/skins/images/<?php echo $item['img']; ?>"
+                    <div><img src="<?php echo getOption('http_script_dir'); ?>/public/images/<?php echo $item['img']; ?>"
                               width="48"/></div>
                     <div><?php echo $item['name']; ?></div>
                 </a>

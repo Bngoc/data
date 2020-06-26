@@ -48,7 +48,7 @@ function blank_money_invoke()
     foreach ($blank_money_board as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
 
-        //if (test($acl_module) && $dl == $mod && $do == $opt && function_exists("blank_money_$opt")) {
+        //if (testRoleWeb($acl_module) && $dl == $mod && $do == $opt && function_exists("blank_money_$opt")) {
         if ($dl == $mod && $do == $opt && function_exists("blank_money_$opt")) {
             cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt));
             die(call_user_func("blank_money_$opt"));
@@ -90,7 +90,7 @@ function blank_money_invoke()
     foreach ($blank_money_board as $id => $name) {
         list($mod, $opt, $acl) = explode(':', $id, 3);
 
-        //if (!test($acl)) {
+        //if (!testRoleWeb($acl)) {
         // unset($blank_money_board[$id]);
         //continue;
         //}
@@ -122,7 +122,7 @@ function blank_money_default()
 
 function show_inventory($inventory, $moneyInventory = '')
 {
-    $show_inventory = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:15px; padding-left:25px; height:305px; background-image: url(/images/inventoryPer.jpg)'>";
+    $show_inventory = "<div id='warehouse' style='width:282px; margin:0px auto; padding-top:15px; padding-left:25px; height:305px; background-image: url(/public/images/inventoryPer.jpg)'>";
     $show_moneyInventory = "<div class=\"moneyInventory\" align=right style=''>" . number_format($moneyInventory, 0, ',', '.') . "</div>";
 
     if (empty($inventory)) {
@@ -142,7 +142,7 @@ function show_inventory($inventory, $moneyInventory = '')
     if ($itemInfo) {
         foreach ($itemInfo as $i => $item32) {
             //Set item exist
-            mcache_set('#existItem', 1);
+            setMemcache('#existItem', 1);
 
             ++$x;
             if ($x == 8) $x = 0;
@@ -153,19 +153,19 @@ function show_inventory($inventory, $moneyInventory = '')
                 if (!$item32['x']) $itemx = 1;
                 else $itemx = $item32['x'];
 
-                $show_inventory .= "<div style='margin-top:" . ((floor($i / 8) * 32)) . "px; margin-left:" . ($x * 32) . "px; position:absolute; width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px; cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>";
+                $show_inventory .= "<div style='margin-top:" . ((floor($i / 8) * 32)) . "px; margin-left:" . ($x * 32) . "px; position:absolute; width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px; cursor:pointer; background-image: url(/public/images/wh_bg_on.jpg);'>";
 
-                $pathImg = ROOT . '/images/items/' . $item32['image'] . '.gif';
+                $pathImg = ROOT . 'public/images/web/items/' . $item32['image'] . '.gif';
 
                 if (file_exists($pathImg)) {
-                    $show_inventory .= "<img src='images/items/" . $item32['image'] . ".gif'
+                    $show_inventory .= "<img src='/public/images/web/items/" . $item32['image'] . ".gif'
 											style='height:" . (32 * $itemy - $itemy - 1) . "px;
 											 width:" . (32 * $itemx) . "px;'";
 
                     $show_inventory .= ' onMouseOut="UnTip()" onMouseOver="topxTip(document.getElementById(\'iditem' . $i . '\').innerHTML)" /></div>';
                     $show_inventory .= "<div class='floatcontainer forumbit_nopost' id='iditem$i' style='display:none; background: rgba(0, 128, 0, 0.15);'>" . $item32['info'] . "</div>";
                 } else {
-                    $show_inventory .= "<img src='images/items/SinFoto.gif'
+                    $show_inventory .= "<img src='/public/images/web/items/SinFoto.gif'
 											style='height:" . (32 * $itemy - $itemy - 1) . "px;
 											 width:" . (32 * $itemx) . "px;' /></div>";
                 }
@@ -715,7 +715,7 @@ function zenderNumberSelectOptionVpoint($numberItems, $numberItem = 0)
 
 function zenderOptionBuyZen()
 {
-    $optionListZen = explode('|', getoption('configBuyZen'));
+    $optionListZen = explode('|', getOption('configBuyZen'));
     $strHtml = '<select class="" id="bizwebselect" onchange="changeValueNumber(this)">
                     <option value="0">--Chọn số lượng--</option>';
     if ($optionListZen) {
@@ -1510,7 +1510,7 @@ function blank_money_vpoint2gcoin()
 
             if (!$errors_false) {
 
-                $gcoinNew = floor($postNumberItem * getoption('vptogc') / 100);
+                $gcoinNew = floor($postNumberItem * getOption('vptogc') / 100);
                 $acountID = $_SESSION['user_Gamer'];
                 do_update_orther("UPDATE MEMB_INFO SET gcoin=gcoin+$gcoinNew, vpoint=vpoint-$postNumberItem WHERE memb___id='$acountID'");
 
@@ -1545,7 +1545,7 @@ function blank_money_vpoint2gcoin()
         }
     }
 
-    $showConfigVpoint = '- Tỷ lệ: <strong> 1 Gcoin</strong><i> = </i><strong> 1*' . getoption('vptogc') . '% Vpoint</strong>';
+    $showConfigVpoint = '- Tỷ lệ: <strong> 1 Gcoin</strong><i> = </i><strong> 1*' . getOption('vptogc') . '% Vpoint</strong>';
     cn_assign('options, strInfoMoney, showConfigVpoint, optionBuyZen', 'Vpoint', '', $showConfigVpoint, '');
     echo_header_web('-@my_blank_money/style.css@my_blank_money/sendAjaxJewel.js', "Ngân hàng | Money - Chuyển Vpoint sang Gcoin.");
     echo_content_here(exec_tpl('my_blank_money/transBlank'), cn_snippet_bc_re());
@@ -1919,7 +1919,7 @@ function blank_money_muazen()
                 $errors_false = true;
             }
 
-            $arrListZen = explode('|', getoption('configBuyZen'));
+            $arrListZen = explode('|', getOption('configBuyZen'));
 
             if (!in_array($postNumberItem, $arrListZen)) {
                 cn_throw_message('Chức năng không được sử dụng hoặc do vấn đề coder chưa chưa xử lý.', 'e');
@@ -2002,7 +2002,7 @@ function blank_money_transvpoint()
     $rootVpoint = $showBlank[0]['vp'];
     $rootGcoin = $showBlank[0]['gc'];
     $rootBank = $showBlank[0]['bank'];
-    $configTransVpoint = intval(getoption('configTransVpoint'));
+    $configTransVpoint = intval(getOption('configTransVpoint'));
 
     if (request_type('POST')) {
         if (REQ('action_TransVpoint2Account')) {

@@ -357,13 +357,13 @@ cn_snippet_bc();
             ?>
             <div class="notice-form">
                 <div style="float: right"><a target="_blank" title="RSS Feed"
-                                             href="<?php echo getoption('http_script_dir'); ?>/rss.php<?php echo $rss_clause; ?>"><img
-                            src="/skins/images/rss_icon.gif" border=0/></a></div>
+                                             href="<?php echo getOption('http_script_dir'); ?>/rss.php<?php echo $rss_clause; ?>"><img
+                            src="/public/images/admin/rss_icon.gif" border=0/></a></div>
                 <h2>Generated html-code for site</h2>
 
-                <pre>&lt;a title="RSS Feed" href="<?php echo getoption('http_script_dir'); ?>
+                <pre>&lt;a title="RSS Feed" href="<?php echo getOption('http_script_dir'); ?>
                     /rss.php<?php echo $rss_clause; ?>"&gt;
-        &lt;img src="<?php echo getoption('http_script_dir'); ?>/skins/images/rss_icon.gif" border=0 /&gt;
+        &lt;img src="<?php echo getOption('http_script_dir'); ?>/public/images/admin/rss_icon.gif" border=0 /&gt;
     &lt;/a&gt;</pre>
 
             </div>

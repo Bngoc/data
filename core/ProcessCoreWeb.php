@@ -1,60 +1,9 @@
 <?php
 
-class ProcessCoreWeb
+require_once ROOT . '/Utils/ProcessCore.php';
+
+class ProcessCoreWeb extends ProcessCore
 {
-
-    function cn_url_modify()
-    {
-        global $PHP_SELF;
-        $GET = $_GET;
-        $args = func_get_args();
-        $SN = $PHP_SELF;
-
-        // add new params
-        foreach ($args as $ks) {
-            // 1) Control
-            if (is_array($ks)) {
-                foreach ($ks as $vs) {
-                    $id = $val = '';
-
-                    if (strpos($vs, '=') !== false) {
-                        list($id, $var) = explode('=', $vs, 2);
-                    } else {
-                        $id = $vs;
-                    }
-                    if ($id == 'self') {
-                        $SN = $var;
-                    } elseif ($id == 'reset') {
-                        $GET = array();
-                    } elseif ($id == 'group') {
-                        foreach ($vs as $a => $b) {
-                            $GET[$a] = $b;
-                        }
-                    }
-                }
-            } // 2) Subtract
-            elseif (strpos($ks, '=') === false) {
-                $keys = explode(',', $ks);
-
-                foreach ($keys as $key) {
-                    $key = trim($key);
-                    if (isset($GET[$key])) {
-                        unset($GET[$key]);
-                    }
-                }
-            } // 3) Add
-            else {
-                list($k, $v) = explode('=', $ks, 2);
-
-                $GET[$k] = $v;
-                if ($v === '') {
-                    unset($GET[$k]);
-                }
-            }
-        }
-
-        return cn_pack_url($GET, $SN);
-    }
 
 // Since 2.0: Extended extract
     function _GL($v)
@@ -388,97 +337,6 @@ class ProcessCoreWeb
         echo "<script> alert('$str'); </script>";
     }
 
-    function memberf_get()
-    {
-        // Not authorized
-        if (empty($_SESSION['user_Gamer'])) {
-            return null;
-        }
-
-        // No in cache
-        if ($member = getMemcache('#member')) {
-            return $member;
-        }
-
-        setMemcache('#member', $user = db_user_by_name($_SESSION['user_Gamer']));
-
-        return $user;
-    }
-
-// Since 1.5.0: Hash type MD5 and SHA256
-    function hash_generate($password, $md5hash = false)
-    {
-        $md5_ = md5($password);
-        $try = array
-        (
-            0 => $md5_,
-            1 => utf8decrypt($password, $md5hash),
-            2 => SHA256_hash($password),
-            3 => substr($md5_, 10, 10),
-        );
-
-        return $try;
-    }
-
-// Since 1.5.3: UTF8-Cutenews compliant
-    function utf8decrypt($str, $oldhash)
-    {
-        $len = strlen($str) * 3;
-        while ($len >= 16) $len -= 16;
-        $len = floor($len / 2);
-        $salt = substr($oldhash, $len, 10);
-        $pass = SHA256_hash($salt . $str . '`>,');
-        $pass = substr($pass, 0, $len) . $salt . substr($pass, $len);
-        return $pass;
-    }
-
-// Since 2.0: Test User ACL. Test for groups [user may consists requested group]
-    function test($requested_acl, $requested_user = NULL, $is_self = false)
-    {
-        $user = getMember(); // get user menber session
-
-        // Deny ANY access of unauthorized member
-        if (!$user) return false;
-
-        $acl = $user['acl'];
-        $grp = getOption('#grp');
-        $ra = separateString($requested_acl);
-
-        // This group not exists, deny all
-        if (!isset($grp[$acl]))
-            return false;
-
-        // Decode ACL, GRP string
-        $gp = separateString($grp[$acl]['G']);
-        $rc = separateString($grp[$acl]['A']);
-
-
-        // ra la bien truyen vao
-        // If requested acl not match with real allowed, break
-        foreach ($ra as $Ar) {
-            if (!in_array($Ar, $rc)) return false;
-        }
-
-        // Test group or self
-        if ($requested_user) {
-            // if self-check, check name requested user and current user
-            if ($is_self && $requested_user['user_Gamer'] !== $user['name']) // xac ding user truyen vao <=> user hien tai
-                return false;
-
-            // if group check, check: requested uses may be in current user group
-            if (!$is_self) {
-                if ($gp && !in_array($requested_user['acl'], $gp))  //kiem tra user truyen vao user[acl]  <=> phan quyen trong nhom
-                    return false;
-                elseif (!$gp) {
-                    //ko ton tai phan quyen
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
 
 //// Since 2.0: Show login form
 //    function cn_login_form($admin = true)
@@ -489,7 +347,7 @@ class ProcessCoreWeb
     function cn_login()
     {
         if (isset($_SESSION['timeOutLogin']) && $_SESSION['timeOutLogin'] < ctime()) {
-            cn_logout();
+            $this->cn_logout_web();
         }
         if (isset($_SESSION['timeOutLogin'])) {
             $_SESSION['timeOutLogin'] = ctime() + getOption('config_time_logout_web');
@@ -500,7 +358,7 @@ class ProcessCoreWeb
         // Check user exists. If user logged, but not exists, logout now
         //if ($logged_username && !db_user_by_name($logged_username))
         //{
-        //cn_logout();
+        //$this->cn_logout_web();
         //}
 
         $is_logged = false;
@@ -538,16 +396,12 @@ class ProcessCoreWeb
                             if ($ban_time && $ban_time > ctime()) {
                                 msg_info('Too frequent queries. Wait ' . ($ban_time - ctime() . ' sec.'));
                             }
-                            $compares = hash_generate($password);
+                            $compares = $this->hash_generate($password);
 
-                            if (!isset($member['pass_web'])) {
-                                $member['pass_web'] = '';
-                            }
-
-                            if (in_array(trim($member['pass_web']), $compares)) {
+                            if (isset($member['pass_web']) && in_array(trim($member['pass_web']), $compares)) {
                                 $is_logged = true;
 
-                                // set user to session
+                                // Set user to session user web
                                 $_SESSION['user_Gamer'] = $username;
                                 $_SESSION['timeOutLogin'] = ctime() + getOption('config_time_logout_web');
 
@@ -559,7 +413,7 @@ class ProcessCoreWeb
                                 do_update_character('MEMB_INFO', "ip='" . $_SERVER['REMOTE_ADDR'] . "'", 'ban_login=0', "memb___id:'$username'");
                                 // send return header (if exists)
                                 if (isset($_SESSION['RQU'])) {
-                                    cn_relocation($_SESSION['RQU']);
+                                    cnRelocation($_SESSION['RQU']);
                                 }
                             } else {
                                 cn_throw_message("Invalid password or login", 'e');
@@ -579,7 +433,7 @@ class ProcessCoreWeb
 
         if ($action == 'logout') {
             $is_logged = false;
-            cn_logout();
+            $this->cn_logout_web();
         }
 
         // clear require url
@@ -590,8 +444,13 @@ class ProcessCoreWeb
         return $is_logged;
     }
 
-// Since 2.0.3: Logout user and clean session
-    function cn_logout($relocation = PHP_SELF)
+    function cn_cookie_unset()
+    {
+        setcookie('session', '', 0, '/');
+    }
+
+    // Since 2.0.3: Logout user and clean session
+    function cn_logout_web($relocation = PHP_SELF)
     {
         //cn_cookie_unset();
         session_unset();
@@ -638,7 +497,7 @@ class ProcessCoreWeb
                     msg_info('Fail: Tài khoản không được xác thực');
                 }
             }
-            cn_relocation($_SERVER['SERVER_NAME']);
+            cnRelocation($_SERVER['SERVER_NAME']);
         }
 
         // Restore active status
@@ -663,7 +522,7 @@ class ProcessCoreWeb
                     //cn_throw_message('Vui lòng thay đổi mật khẩu', 'e');
                     $_SESSION['user_ChangePwd'] = true;
                     $_SESSION['user_Gamer'] = $d_username;
-                    cn_relocation(cn_url_modify(array('reset'), 'mod=manager_account', 'opt=change_pwd'));
+                    cnRelocation(cn_url_modify(array('reset'), 'mod=manager_account', 'opt=change_pwd'));
                 }
             }
 
@@ -696,10 +555,10 @@ class ProcessCoreWeb
                 <i><em>Lưu ý: Xác nhận trong vòng 24h.</em></i>
             ';
 
-                $strHoderFotgot = '{username}, {url}';
-                $checkemailforgot = cn_send_mail($email, 'Resend activation link', cn_replace_text($tmpHtmlEmailForgrot, $strHoderFotgot, substr($username, 0, -4) . '****', $url));
+                $strHeaderForgot = '{username}, {url}';
+                $checkEmailForgot = cn_send_mail($email, 'Resend activation link', cn_replace_text($tmpHtmlEmailForgrot, $strHeaderForgot, substr($username, 0, -4) . '****', $url));
 
-                if ($checkemailforgot) {
+                if ($checkEmailForgot) {
                     msg_info('Vui lòng kiểm tra lại email', 'index.php');
                 } else {
                     msg_info('Err, Gửi email thất bại, hãy thử lại sau');
@@ -883,19 +742,19 @@ class ProcessCoreWeb
         return true;
     }
 
-// Since 2.0: Replace text with holders
-    function cn_replace_text()
-    {
-        $args = func_get_args();
-        $text = array_shift($args);
-        $replace_holders = explode(',', array_shift($args));
-
-        foreach ($replace_holders as $holder) {
-            $text = str_replace(trim($holder), array_shift($args), $text);
-        }
-
-        return $text;
-    }
+//// Since 2.0: Replace text with holders
+//    function cn_replace_text()
+//    {
+//        $args = func_get_args();
+//        $text = array_shift($args);
+//        $replace_holders = explode(',', array_shift($args));
+//
+//        foreach ($replace_holders as $holder) {
+//            $text = str_replace(trim($holder), array_shift($args), $text);
+//        }
+//
+//        return $text;
+//    }
 
 
 // Since 1.5.0: Send Mail
@@ -982,7 +841,7 @@ class ProcessCoreWeb
             $iconText = isset($var[4]) ? $var[4] : '';
             $infoText = isset($var[5]) ? $var[5] : '';
 
-            //if ($acl && !test($acl))
+            //if ($acl && !testRoleWeb($acl))
             //  continue;
 
             if (isset($title) && $title) $action = '&amp;action=' . $title; else $action = '';
@@ -1046,7 +905,7 @@ class ProcessCoreWeb
             $title = isset($var[2]) ? $var[2] : '';
             $app = isset($var[3]) ? $var[3] : '';
 
-            //if ($acl && !test($acl))
+            //if ($acl && !testRoleWeb($acl))
             //  continue;
 
             if (isset($title) && $title) $action = '&amp;action=' . $title; else $action = '';
@@ -1064,7 +923,7 @@ class ProcessCoreWeb
                 if ($actions) $action .= '&amp;' . join('&amp;', $actions);
             }
 
-            $result .= '<div class="quicklink_item"><a href="' . PHP_SELF . '?mod=' . $mod_key . $action . '"><img src="' . getOption('http_script_dir') . '/images/' . cnHtmlSpecialChars($name) . '" alt="Nạp thẻ VTC" /></a></div>';
+            $result .= '<div class="quicklink_item"><a href="' . PHP_SELF . '?mod=' . $mod_key . $action . '"><img src="' . getOption('http_script_dir') . '/public/images/' . cnHtmlSpecialChars($name) . '" alt="Nạp thẻ VTC" /></a></div>';
         }
 
         $result .= "</div>";
@@ -1267,7 +1126,7 @@ class ProcessCoreWeb
 //
 //        $str_ = '<div class="sub_ranking" align="center" style="color: rgb(36, 36, 36);font-size: 12px;line-height: initial;">
 //				<b><p>' . $title . '</p></b><br>
-//				<p><b><a href=' . $go_back . '><font style="font-size: 16px;" color="#86001E"><img src="images/return.png"/>Quay lại</font></a></b></p>
+//				<p><b><a href=' . $go_back . '><font style="font-size: 16px;" color="#86001E"><img src="/public/images/return.png"/>Quay lại</font></a></b></p>
 //			</div>';
 //
 //        echo_content_here($str_, cn_snippet_bc_re("Home", "error"));
@@ -1453,40 +1312,6 @@ class ProcessCoreWeb
     }
     */
 
-//// Since 2.0: Save option to config
-//// Usage: #level1/level2/.../levelN or 'option_name' from %site
-//    function setoption($opt_name, $var)
-//    {
-//        $cfg = getMemcache('config');
-//
-//        if ($opt_name[0] == '#') {
-//            $c_names = separateString(substr($opt_name, 1), '/');
-//            $cfg = setoption_rc($c_names, $var, $cfg);
-//        } else {
-//            $cfg['%site'][$opt_name] = $var;
-//        }
-//
-//        cn_config_save($cfg);
-//    }
-
-
-//// Since 2.0: @Helper recursive function
-//    function setoption_rc($names, $var, $cfg)
-//    {
-//        $the_name = array_shift($names);
-//
-//        if (count($names) == 0) {
-//            $cfg[$the_name] = $var;
-//        } else {
-//            if (!isset($cfg[$the_name])) {
-//                $cfg[$the_name] = '';
-//            }
-//            $cfg[$the_name] = setoption_rc($names, $var, $cfg[$the_name]);
-//        }
-//
-//        return $cfg;
-//    }
-
 
 //// Since 1.5.1: Simply read template file
 //    function read_tpl($tpl = 'index')
@@ -1632,78 +1457,78 @@ class ProcessCoreWeb
 //        return $result;
 //    }
 
-//information character
-    function cn_character()
-    {
-        $member = getMember();
-        $show_reponse = view_character($member['user_name']);
-        $arr_class = cn_template_class();
-        if (!$arr_class) {
-            die('Err. Bạn chưa thiết lập các thông số nhân vật!');
-        }
-
-        //img character in folder /images/class/ ...gif
-        $img_character = array('dw' => 'DarkWizard', 'dk' => 'DarkKnight', 'elf' => 'FairyElf', 'mg' => 'MagicGladiator', 'dl' => 'DarkLord', 'sum' => 'Summoner', 'rf' => 'RageFighter',);
-        if ($show_reponse) {
-            foreach ($show_reponse as $od => $do) {
-                if (!empty($do['Name'])) {
-                    $ho = array_search($do['Class'], $arr_class);
-                    $Class = '';
-                    $isClass = '';
-                    $Char_Image = 'default';
-                    if ($ho !== false) {
-                        $ho .= '_name';
-                        $Class = $arr_class[$ho];
-                        $char_img = explode("_", $ho);
-                        $isClass = $char_img[1];
-                        if (array_key_exists($char_img[1], $img_character)) $Char_Image = $img_character[$char_img[1]];
-                    }
-
-                    if (date('d', ctime()) != date('d', $do['Resets_Time'])) {
-                        $do['NoResetInDay'] = 0;
-                        //do_update_character('Character','NoResetInDay=0',"Name:'$do[0]'");
-                    }
-
-                    $showchar[$do['Name']] = array(
-                        'char_image' => $Char_Image,
-                        'cclass' => $Class,
-                        //'name' => $do[0],
-                        'class' => $do['Class'],
-                        'level' => $do['cLevel'],
-                        'str' => $do['Strength'],
-                        'dex' => $do['Dexterity'],
-                        'vit' => $do['Vitality'],
-                        'ene' => $do['Energy'],
-                        'com' => $do['Leadership'],
-                        'reset' => $do['Resets'],
-                        'relife' => $do['Relifes'],
-                        'point' => $do['LevelUpPoint'],
-                        'point_dutru' => $do['pointdutru'],
-                        'status_off' => $do['uythacoffline_stat'],
-                        'point_uythac' => $do['PointUyThac'],
-                        'pcpoint' => $do['SCFPCPoints'],
-                        'accountId' => $do['AccountID'],
-                        'resetInDay' => $do['NoResetInDay'],
-                        'money' => $do['Money'],
-                        'top_50' => $do['Top50'],
-                        'Resets_Time' => $do['Resets_Time'],
-                        'status_on' => $do['UyThac'],
-                        'shop_inventory' => $do['image'],
-                        'PkLevel' => $do['PkLevel'],
-                        'PkCount' => $do['PkCount'],
-                        'MapNumber' => $do['MapNumber'],
-                        'IsThuePoint' => $do['IsThuePoint'],
-                        'TimeThuePoint' => $do['TimeThuePoint'],
-                        'isClass' => $isClass,
-                    );
-                }
-            }
-        } else {
-            msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.");
-        }
-
-        return isset($showchar) ? $showchar : array();
-    }
+////information character
+//    function cn_character()
+//    {
+//        $member = getMemberWeb();
+//        $show_reponse = view_character($member['user_name']);
+//        $arr_class = cn_template_class();
+//        if (!$arr_class) {
+//            die('Err. Bạn chưa thiết lập các thông số nhân vật!');
+//        }
+//
+//        //img character in folder /images/class/ ...gif
+//        $img_character = array('dw' => 'DarkWizard', 'dk' => 'DarkKnight', 'elf' => 'FairyElf', 'mg' => 'MagicGladiator', 'dl' => 'DarkLord', 'sum' => 'Summoner', 'rf' => 'RageFighter',);
+//        if ($show_reponse) {
+//            foreach ($show_reponse as $od => $do) {
+//                if (!empty($do['Name'])) {
+//                    $ho = array_search($do['Class'], $arr_class);
+//                    $Class = '';
+//                    $isClass = '';
+//                    $Char_Image = 'default';
+//                    if ($ho !== false) {
+//                        $ho .= '_name';
+//                        $Class = $arr_class[$ho];
+//                        $char_img = explode("_", $ho);
+//                        $isClass = $char_img[1];
+//                        if (array_key_exists($char_img[1], $img_character)) $Char_Image = $img_character[$char_img[1]];
+//                    }
+//
+//                    if (date('d', ctime()) != date('d', $do['Resets_Time'])) {
+//                        $do['NoResetInDay'] = 0;
+//                        //do_update_character('Character','NoResetInDay=0',"Name:'$do[0]'");
+//                    }
+//
+//                    $showchar[$do['Name']] = array(
+//                        'char_image' => $Char_Image,
+//                        'cclass' => $Class,
+//                        //'name' => $do[0],
+//                        'class' => $do['Class'],
+//                        'level' => $do['cLevel'],
+//                        'str' => $do['Strength'],
+//                        'dex' => $do['Dexterity'],
+//                        'vit' => $do['Vitality'],
+//                        'ene' => $do['Energy'],
+//                        'com' => $do['Leadership'],
+//                        'reset' => $do['Resets'],
+//                        'relife' => $do['Relifes'],
+//                        'point' => $do['LevelUpPoint'],
+//                        'point_dutru' => $do['pointdutru'],
+//                        'status_off' => $do['uythacoffline_stat'],
+//                        'point_uythac' => $do['PointUyThac'],
+//                        'pcpoint' => $do['SCFPCPoints'],
+//                        'accountId' => $do['AccountID'],
+//                        'resetInDay' => $do['NoResetInDay'],
+//                        'money' => $do['Money'],
+//                        'top_50' => $do['Top50'],
+//                        'Resets_Time' => $do['Resets_Time'],
+//                        'status_on' => $do['UyThac'],
+//                        'shop_inventory' => $do['image'],
+//                        'PkLevel' => $do['PkLevel'],
+//                        'PkCount' => $do['PkCount'],
+//                        'MapNumber' => $do['MapNumber'],
+//                        'IsThuePoint' => $do['IsThuePoint'],
+//                        'TimeThuePoint' => $do['TimeThuePoint'],
+//                        'isClass' => $isClass,
+//                    );
+//                }
+//            }
+//        } else {
+//            msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.");
+//        }
+//
+//        return isset($showchar) ? $showchar : array();
+//    }
 
 
     /*
@@ -1758,159 +1583,159 @@ class ProcessCoreWeb
         return $options_trustrsvip;
     }
     */
-//BQN Check Point trust
-    function cn_point_trust()
-    {
-        $member = getMember();
-        $accc_ = $member['user_name'];
-
-        $show_reponse = view_character($accc_);
-
-        if ($show_reponse) {
-            foreach ($show_reponse as $od => $do) {
-                if (!empty($sub = $do['Name'])) {
-                    $arr_trust = do_select_character('Character', 'UyThac,uythaconline_time,PhutUyThacOn_dutru,uythacoffline_stat,uythacoffline_time,PhutUyThacOff_dutru,PointUyThac,UyThacOnline_Daily,UyThacOffline_Daily', "Name='$sub'", '');
-
-                    $check_trust = false;
-                    $ctime = ctime();
-                    $status_online = $arr_trust[0]['UyThac'];
-                    $status_offline = $arr_trust[0]['uythacoffline_stat'];
-                    $trust_point = $arr_trust[0]['PointUyThac'];
-                    $_time_on_begin = $arr_trust[0]['uythaconline_time'];
-                    $_time_off_begin = $arr_trust[0]['uythacoffline_time'];
-                    $point_pt_on = $arr_trust[0]['PhutUyThacOn_dutru'];
-                    $point_pt_off = $arr_trust[0]['PhutUyThacOff_dutru'];
-
-                    $time_begin_on = date("Y-M-d", $_time_on_begin);
-                    $time_begin_off = date("Y-M-d", $_time_off_begin);
-                    $_time_ = date("Y-M-d", $ctime);
-                    $set_time = mktime(0, 0, 0, date("m", $ctime), date("d", $ctime), date("Y", $ctime));
-
-                    $_df_on = date_create($time_begin_on);
-                    $_df_off = date_create($time_begin_off);
-                    $_de = date_create($_time_);
-
-                    $count_on = date_diff($_df_on, $_de)->format('%a');
-                    $count_off = date_diff($_df_off, $_de)->format('%a');
-
-                    if ($status_online) {            //Status ON [Online]
-                        if ($time_begin_on < $_time_) {
-                            $inday_begin_on = date("Y-m-d h:i:sa", $_time_on_begin);
-                            $inday_beginon_end = date("Y-m-d", $_time_on_begin); // strtotime
-                            $inday_time_beginon = abs(strtotime($inday_begin_on) - strtotime("$inday_beginon_end 11:59:59pm"));
-
-                            if ($inday_time_beginon >= 43200) $Pf = 720;
-                            else $Pf = floor($inday_time_beginon / 60);
-                            if ($count_on == 1) {
-                                $point_pt_on = floor(0.95 * $Pf);
-                                $point_pt_off = floor(0.95 * $point_pt_off);
-                                //if(date("Y-m-d", $_time_off_begin) != date("Y-m-d",$ctime)) $trust_point = floor($trust_point*0.9);
-                                $trust_point = floor($trust_point * 0.9);
-                            } else if ($count_on >= 2) {
-                                $_bv = floor($Pf * 0.95);
-                                //if(date("Y-m-d", $_time_off_begin) != date("Y-m-d",$ctime)) $trust_point = floor($trust_point*pow(0.9,$count_on));
-                                $point_pt_off = floor($point_pt_off * pow(0.95, $count_on));
-                                $trust_point = floor($trust_point * pow(0.9, $count_on));
-
-                                $do_loop = false;
-
-                                do {
-                                    --$count_on;
-                                    if (!$do_loop) {
-                                        $_bv += 720;
-                                        $do_loop = true;
-                                    } else $_bv = 720 + (isset($point_pt_on) ? $point_pt_on : 0);
-                                    $point_pt_on = floor($_bv * 0.95);
-                                } while ($count_on > 1);
-                            }
-                            $check_trust = true;
-                            do_update_character('Character', 'UyThacOffline_Daily=0', 'UyThacOnline_Daily=0', "PhutUyThacOff_dutru=$point_pt_off", "PhutUyThacOn_dutru=$point_pt_on", "uythacoffline_time=$set_time", "uythaconline_time=$set_time", "PointUyThac=$trust_point", "Name:'$sub'");
-                            //cn_relocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
-                        } else if ($time_begin_off < $_time_) {
-                            $check_trust = true;
-                            do_update_character('Character', 'UyThacOffline_Daily=0', "uythacoffline_time=$set_time", "Name:'$sub'");
-                            //cn_relocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
-                        }
-                    } else if ($status_offline) {        //Starus ON [Offline]
-
-                        if ($time_begin_off < $_time_) {
-                            $inday_begin_off = date("Y-m-d h:i:sa", $_time_off_begin);
-                            $inday_beginoff_end = date("Y-m-d", $_time_off_begin); // strtotime
-                            $inday_time_beginoff = abs(strtotime($inday_begin_off) - strtotime("$inday_beginoff_end 11:59:59pm"));
-
-                            if ($inday_time_beginoff >= 43200) $Pf = 720;
-                            else $Pf = floor($inday_time_beginoff / 60);
-
-                            if ($count_off == 1) {
-                                $point_pt_off = floor(0.95 * $Pf);
-                                $point_pt_on = floor(0.95 * $point_pt_on);
-                                //if(date("Y-m-d", $_time_on_begin) != date("Y-m-d",$ctime)) $trust_point = floor($trust_point*0.9);
-                                $trust_point = floor($trust_point * 0.9);
-                            } else if ($count_off >= 2) {
-                                $_bv = floor($Pf * 0.95);
-                                $point_pt_on = floor(pow(0.95, $count_off) * $point_pt_on);
-                                //if(date("Y-m-d", $_time_on_begin) != date("Y-m-d",$ctime)) $trust_point = floor($trust_point*pow(0.9,$count_off));
-                                $trust_point = floor($trust_point * pow(0.9, $count_off));
-
-                                $do_loop = false;
-
-                                do {
-                                    --$count_off;
-                                    if (!$do_loop) {
-                                        $_bv += 720;
-                                        $do_loop = true;
-                                    } else $_bv = 720 + (isset($point_pt_off) ? $point_pt_off : 0);
-                                    $point_pt_off = floor($_bv * 0.95);
-                                } while ($count_off > 1);
-                            }
-                            $check_trust = true;
-                            do_update_character('Character', 'UyThacOffline_Daily=0', 'UyThacOnline_Daily=0', "PhutUyThacOn_dutru=$point_pt_on", "PhutUyThacOff_dutru=$point_pt_off", "uythaconline_time=$set_time", "uythacoffline_time=$set_time", "PointUyThac=$trust_point", "Name:'$sub'");
-                            //cn_relocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
-                        } else if ($time_begin_on < $_time_) {
-                            $check_trust = true;
-                            do_update_character('Character', 'UyThacOnline_Daily=0', "uythaconline_time=$set_time", "Name:'$sub'");
-                            //cn_relocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
-                        }
-                    } else {
-                        //exit("ko on + off");
-                        $count_min = min($count_on, $count_off);
-                        if ($count_min) {
-
-                            $point_pt_on = floor($point_pt_on * pow(0.95, $count_min));
-                            $point_pt_off = floor($point_pt_off * pow(0.95, $count_min));
-                            $trust_point = floor($trust_point * pow(0.9, $count_min));
-                            $check_trust = true;
-                            do_update_character('Character', 'UyThacOnline_Daily=0', 'UyThacOffline_Daily=0', "PhutUyThacOff_dutru=$point_pt_off", "PhutUyThacOn_dutru=$point_pt_on", "uythaconline_time=$set_time", "uythacoffline_time=$set_time", "PointUyThac=$trust_point", "Name:'$sub'");
-                            //cn_relocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
-                        } else if ($count_on) {
-                            $check_trust = true;
-                            do_update_character('Character', 'UyThacOnline_Daily=0', "uythaconline_time=$set_time", "Name:'$sub'");
-                        } else if ($count_off) {
-                            $check_trust = true;
-                            do_update_character('Character', 'UyThacOffline_Daily=0', "uythacoffline_time=$set_time", "Name:'$sub'");
-                        }
-                    }
-                    if ($check_trust) {
-                        $daily_trust = 0;
-                        $_time_on_begin = $_time_off_begin = $set_time;
-                    }
-                    $trust[$sub]['status_on'] = $status_online;
-                    $trust[$sub]['status_off'] = $status_offline;
-                    $trust[$sub]['time_begin_on'] = $_time_on_begin;
-                    $trust[$sub]['time_begin_off'] = $_time_off_begin;
-                    $trust[$sub]['phut_on_dutru'] = $point_pt_on;
-                    $trust[$sub]['phut_off_dutru'] = $point_pt_off;
-                    $trust[$sub]['pointuythac'] = $trust_point;
-                    $trust[$sub]['online_daily'] = isset($daily_trust) ? $daily_trust : $arr_trust[0]['UyThacOnline_Daily'];
-                    $trust[$sub]['offline_daily'] = isset($daily_trust) ? $daily_trust : $arr_trust[0]['UyThacOffline_Daily'];
-                }
-            }
-        } else {
-            msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.");
-        }
-
-        return isset($trust) ? $trust : array();
-    }
+////BQN Check Point trust
+//    function cn_point_trust()
+//    {
+//        $member = getMemberWeb();
+//        $accc_ = $member['user_name'];
+//
+//        $show_reponse = view_character($accc_);
+//
+//        if ($show_reponse) {
+//            foreach ($show_reponse as $od => $do) {
+//                if (!empty($sub = $do['Name'])) {
+//                    $arr_trust = do_select_character('Character', 'UyThac,uythaconline_time,PhutUyThacOn_dutru,uythacoffline_stat,uythacoffline_time,PhutUyThacOff_dutru,PointUyThac,UyThacOnline_Daily,UyThacOffline_Daily', "Name='$sub'", '');
+//
+//                    $check_trust = false;
+//                    $ctime = ctime();
+//                    $status_online = $arr_trust[0]['UyThac'];
+//                    $status_offline = $arr_trust[0]['uythacoffline_stat'];
+//                    $trust_point = $arr_trust[0]['PointUyThac'];
+//                    $_time_on_begin = $arr_trust[0]['uythaconline_time'];
+//                    $_time_off_begin = $arr_trust[0]['uythacoffline_time'];
+//                    $point_pt_on = $arr_trust[0]['PhutUyThacOn_dutru'];
+//                    $point_pt_off = $arr_trust[0]['PhutUyThacOff_dutru'];
+//
+//                    $time_begin_on = date("Y-M-d", $_time_on_begin);
+//                    $time_begin_off = date("Y-M-d", $_time_off_begin);
+//                    $_time_ = date("Y-M-d", $ctime);
+//                    $set_time = mktime(0, 0, 0, date("m", $ctime), date("d", $ctime), date("Y", $ctime));
+//
+//                    $_df_on = date_create($time_begin_on);
+//                    $_df_off = date_create($time_begin_off);
+//                    $_de = date_create($_time_);
+//
+//                    $count_on = date_diff($_df_on, $_de)->format('%a');
+//                    $count_off = date_diff($_df_off, $_de)->format('%a');
+//
+//                    if ($status_online) {            //Status ON [Online]
+//                        if ($time_begin_on < $_time_) {
+//                            $inday_begin_on = date("Y-m-d h:i:sa", $_time_on_begin);
+//                            $inday_beginon_end = date("Y-m-d", $_time_on_begin); // strtotime
+//                            $inday_time_beginon = abs(strtotime($inday_begin_on) - strtotime("$inday_beginon_end 11:59:59pm"));
+//
+//                            if ($inday_time_beginon >= 43200) $Pf = 720;
+//                            else $Pf = floor($inday_time_beginon / 60);
+//                            if ($count_on == 1) {
+//                                $point_pt_on = floor(0.95 * $Pf);
+//                                $point_pt_off = floor(0.95 * $point_pt_off);
+//                                //if(date("Y-m-d", $_time_off_begin) != date("Y-m-d",$ctime)) $trust_point = floor($trust_point*0.9);
+//                                $trust_point = floor($trust_point * 0.9);
+//                            } else if ($count_on >= 2) {
+//                                $_bv = floor($Pf * 0.95);
+//                                //if(date("Y-m-d", $_time_off_begin) != date("Y-m-d",$ctime)) $trust_point = floor($trust_point*pow(0.9,$count_on));
+//                                $point_pt_off = floor($point_pt_off * pow(0.95, $count_on));
+//                                $trust_point = floor($trust_point * pow(0.9, $count_on));
+//
+//                                $do_loop = false;
+//
+//                                do {
+//                                    --$count_on;
+//                                    if (!$do_loop) {
+//                                        $_bv += 720;
+//                                        $do_loop = true;
+//                                    } else $_bv = 720 + (isset($point_pt_on) ? $point_pt_on : 0);
+//                                    $point_pt_on = floor($_bv * 0.95);
+//                                } while ($count_on > 1);
+//                            }
+//                            $check_trust = true;
+//                            do_update_character('Character', 'UyThacOffline_Daily=0', 'UyThacOnline_Daily=0', "PhutUyThacOff_dutru=$point_pt_off", "PhutUyThacOn_dutru=$point_pt_on", "uythacoffline_time=$set_time", "uythaconline_time=$set_time", "PointUyThac=$trust_point", "Name:'$sub'");
+//                            //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
+//                        } else if ($time_begin_off < $_time_) {
+//                            $check_trust = true;
+//                            do_update_character('Character', 'UyThacOffline_Daily=0', "uythacoffline_time=$set_time", "Name:'$sub'");
+//                            //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
+//                        }
+//                    } else if ($status_offline) {        //Starus ON [Offline]
+//
+//                        if ($time_begin_off < $_time_) {
+//                            $inday_begin_off = date("Y-m-d h:i:sa", $_time_off_begin);
+//                            $inday_beginoff_end = date("Y-m-d", $_time_off_begin); // strtotime
+//                            $inday_time_beginoff = abs(strtotime($inday_begin_off) - strtotime("$inday_beginoff_end 11:59:59pm"));
+//
+//                            if ($inday_time_beginoff >= 43200) $Pf = 720;
+//                            else $Pf = floor($inday_time_beginoff / 60);
+//
+//                            if ($count_off == 1) {
+//                                $point_pt_off = floor(0.95 * $Pf);
+//                                $point_pt_on = floor(0.95 * $point_pt_on);
+//                                //if(date("Y-m-d", $_time_on_begin) != date("Y-m-d",$ctime)) $trust_point = floor($trust_point*0.9);
+//                                $trust_point = floor($trust_point * 0.9);
+//                            } else if ($count_off >= 2) {
+//                                $_bv = floor($Pf * 0.95);
+//                                $point_pt_on = floor(pow(0.95, $count_off) * $point_pt_on);
+//                                //if(date("Y-m-d", $_time_on_begin) != date("Y-m-d",$ctime)) $trust_point = floor($trust_point*pow(0.9,$count_off));
+//                                $trust_point = floor($trust_point * pow(0.9, $count_off));
+//
+//                                $do_loop = false;
+//
+//                                do {
+//                                    --$count_off;
+//                                    if (!$do_loop) {
+//                                        $_bv += 720;
+//                                        $do_loop = true;
+//                                    } else $_bv = 720 + (isset($point_pt_off) ? $point_pt_off : 0);
+//                                    $point_pt_off = floor($_bv * 0.95);
+//                                } while ($count_off > 1);
+//                            }
+//                            $check_trust = true;
+//                            do_update_character('Character', 'UyThacOffline_Daily=0', 'UyThacOnline_Daily=0', "PhutUyThacOn_dutru=$point_pt_on", "PhutUyThacOff_dutru=$point_pt_off", "uythaconline_time=$set_time", "uythacoffline_time=$set_time", "PointUyThac=$trust_point", "Name:'$sub'");
+//                            //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
+//                        } else if ($time_begin_on < $_time_) {
+//                            $check_trust = true;
+//                            do_update_character('Character', 'UyThacOnline_Daily=0', "uythaconline_time=$set_time", "Name:'$sub'");
+//                            //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
+//                        }
+//                    } else {
+//                        //exit("ko on + off");
+//                        $count_min = min($count_on, $count_off);
+//                        if ($count_min) {
+//
+//                            $point_pt_on = floor($point_pt_on * pow(0.95, $count_min));
+//                            $point_pt_off = floor($point_pt_off * pow(0.95, $count_min));
+//                            $trust_point = floor($trust_point * pow(0.9, $count_min));
+//                            $check_trust = true;
+//                            do_update_character('Character', 'UyThacOnline_Daily=0', 'UyThacOffline_Daily=0', "PhutUyThacOff_dutru=$point_pt_off", "PhutUyThacOn_dutru=$point_pt_on", "uythaconline_time=$set_time", "uythacoffline_time=$set_time", "PointUyThac=$trust_point", "Name:'$sub'");
+//                            //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
+//                        } else if ($count_on) {
+//                            $check_trust = true;
+//                            do_update_character('Character', 'UyThacOnline_Daily=0', "uythaconline_time=$set_time", "Name:'$sub'");
+//                        } else if ($count_off) {
+//                            $check_trust = true;
+//                            do_update_character('Character', 'UyThacOffline_Daily=0', "uythacoffline_time=$set_time", "Name:'$sub'");
+//                        }
+//                    }
+//                    if ($check_trust) {
+//                        $daily_trust = 0;
+//                        $_time_on_begin = $_time_off_begin = $set_time;
+//                    }
+//                    $trust[$sub]['status_on'] = $status_online;
+//                    $trust[$sub]['status_off'] = $status_offline;
+//                    $trust[$sub]['time_begin_on'] = $_time_on_begin;
+//                    $trust[$sub]['time_begin_off'] = $_time_off_begin;
+//                    $trust[$sub]['phut_on_dutru'] = $point_pt_on;
+//                    $trust[$sub]['phut_off_dutru'] = $point_pt_off;
+//                    $trust[$sub]['pointuythac'] = $trust_point;
+//                    $trust[$sub]['online_daily'] = isset($daily_trust) ? $daily_trust : $arr_trust[0]['UyThacOnline_Daily'];
+//                    $trust[$sub]['offline_daily'] = isset($daily_trust) ? $daily_trust : $arr_trust[0]['UyThacOffline_Daily'];
+//                }
+//            }
+//        } else {
+//            msg_err("Bạn chưa tạo nhân vật. Vui lòng đăng nhập game trước khi thực hiện tác vụ này.");
+//        }
+//
+//        return isset($trust) ? $trust : array();
+//    }
 
     /*
     // Since 2.0: Save whole config
@@ -1979,15 +1804,7 @@ class ProcessCoreWeb
         }
     }
 
-// Since 1.5.0: Force relocation
-    function cn_relocation($url)
-    {
-        header("Location: $url");
-        echo '<html><head><title>Redirect...</title><meta http-equiv="refresh" content="0;url=' . cnHtmlSpecialChars($url) . '"></head><body>Please wait... Redirecting to "' . cnHtmlSpecialChars($url) . '...<br/><br/></body></html>';
-        die();
-    }
-
-// bqn relocation => $db + server
+    // bqn relocation => $db + server
     function cn_relocation_db_new()
     {
         global $db_new, $config_adminemail, $config_admin;

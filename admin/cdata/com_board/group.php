@@ -34,7 +34,7 @@ cn_snippet_bc();
                 <td><?php
 
                     $ps = array();
-                    $sp = spsep($acl['acl']);
+                    $sp = separateString($acl['acl']);
 
                     foreach ($sp as $name) {
                         $ps[] = '<a href="#" title="' . join('; ', $form_desc[$name]) . '" onclick="return(tiny_msg(this));">' . $name . '</a>';

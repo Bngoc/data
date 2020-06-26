@@ -7,7 +7,7 @@ list($_dateD, $_dateM, $_dateY, $_dateH, $_dateI, $_dateS) = make_postponed_date
 list($morefields) = _GL('morefields');
 list($id) = GET('id', "GETPOST");
 // CKEDITOR INITIALIZE BLOCK
-$CKEDITOR_Active = getoption('use_wysiwyg');
+$CKEDITOR_Active = getOption('use_wysiwyg');
 
 // DRAFT
 if (test('Bd')) {
@@ -50,7 +50,7 @@ if ($preview_html) { ?>
         <input type="hidden" name="id" value="<?php echo intval($id); ?>"/>
 
         <div class="section">
-            <div class="name">Article title<?php if (!getoption('disable_title')) {
+            <div class="name">Article title<?php if (!getOption('disable_title')) {
                     echo ' <span class="req">*</span>';
                 } ?></div>
             <div><input type="text" style="width: 100%" value="<?php echo cnHtmlSpecialChars($vTitle); ?>" name="title"
@@ -66,7 +66,7 @@ if ($preview_html) { ?>
                                                title="Categories help you organize your news">?</a>]
                 </div>
 
-                <?php if (getoption('category_style') == 'select') { ?>
+                <?php if (getOption('category_style') == 'select') { ?>
 
                     <select name="category">
                         <option value="">---</option>
@@ -115,7 +115,7 @@ if ($preview_html) { ?>
         <!-- Short story -->
         <div class="section">
 
-            <div class="name">Short Story<?php if (!getoption('disable_short')) {
+            <div class="name">Short Story<?php if (!getOption('disable_short')) {
                     echo ' <span class="req">*</span>';
                 } ?></div>
             <div><textarea rows="12" cols="74" id="short_story" name="short_story"
@@ -155,7 +155,7 @@ if ($preview_html) { ?>
             <div style="float: right">
                 <?php if ($EDITMODE && test('Nud') && $archive_id == 0) { ?>
                     <input type="button"
-                           onClick="if (confirm('Please confirm')) { window.location = '<?php echo cn_url_modify('action=delete', cn_snippet_digital_signature('a')); ?>'; return true; } else return false;"
+                           onClick="if (confirm('Please confirm')) { window.location = '<?php echo cn_url_modify('action=delete', cn_snippet_digital_signature(getMember(), 'a')); ?>'; return true; } else return false;"
                            value="Delete">
                 <?php } ?>
                 <?php if (empty($_POST['full_story'])) { ?><input type=button onClick="ShowOrHide('full-story','');"

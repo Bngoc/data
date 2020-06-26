@@ -4,150 +4,6 @@ require_once ROOT . '/Utils/ProcessCore.php';
 
 class ProcessCoreAdmin extends ProcessCore
 {
-
-//// Since 2.0: Extended extract
-//    function _GL($v)
-//    {
-//        $vs = explode(',', $v);
-//        $result = array();
-//        foreach ($vs as $vc) {
-//            $el = explode(':', $vc, 2);
-//            $vc = isset($el[0]) ? $el[0] : false;
-//            $func = isset($el[1]) ? $el[1] : false;
-//            $var = false;
-//            if ($vc) $var = isset($GLOBALS[trim($vc)]) ? $GLOBALS[trim($vc)] : false;
-//            if ($func) $var = call_user_func($func, $var);
-//            $result[] = $var;
-//        }
-//
-//        return $result;
-//    }
-//
-//    /*  ---------- Sanitize: get POST vars (default) --------
-//        POST [def] only POST
-//        GET only GET
-//        POSTGET -- or POST or GET
-//        GETPOST -- or GET or POST
-//        REQUEST -- from REQUEST
-//        COOKIES -- from COOKIES
-//        GLOB -- from GLOBALS
-//        + combination (comma separated)
-//    */
-//
-//// Since 1.5.3
-//    function GET($var, $method = 'GETPOST')
-//    {
-//        $result = array();
-//        $vars = separateString($var);
-//        $method = strtoupper($method);
-//
-//        if ($method == 'GETPOST') {
-//            $methods = array('GET', 'POST');
-//        } elseif ($method == 'POSTGET') {
-//            $methods = array('POST', 'GET');
-//        } elseif ($method == 'GPG') {
-//            $methods = array('POST', 'GET', 'GLOB');
-//        } else {
-//            $methods = separateString($method);
-//        }
-//
-//        foreach ($vars as $var) {
-//            $var = trim($var);
-//            $value = null;
-//
-//            foreach ($methods as $method) {
-//                if ($method == 'GLOB' && isset($GLOBALS[$var])) {
-//                    $value = $GLOBALS[$var];
-//                } elseif ($method == 'POST' && isset($_POST[$var])) {
-//                    $value = $_POST[$var];
-//                } elseif ($method == 'GET' && isset($_GET[$var])) {
-//                    $value = $_GET[$var];
-//                } elseif ($method == 'POSTGET') {
-//                    if (isset($_POST[$var])) {
-//                        $value = $_POST[$var];
-//                    } elseif (isset($_GET[$var])) {
-//                        $value = $_GET[$var];
-//                    }
-//                } elseif ($method == 'GETPOST') {
-//                    if (isset($_GET[$var])) {
-//                        $value = $_GET[$var];
-//                    } elseif (isset($_POST[$var])) {
-//                        $value = $_POST[$var];
-//                    }
-//                } elseif ($method == 'REQUEST' && isset($_REQUEST[$var])) {
-//                    $value = $_REQUEST[$var];
-//                } elseif ($method == 'COOKIE' && isset($_COOKIE[$var])) {
-//                    $value = $_COOKIE[$var];
-//                }
-//
-//                if (!is_null($value)) {
-//                    break;
-//                }
-//            }
-//
-//            $result[] = $value;
-//        }
-//        return $result;
-//    }
-//
-//// Since 1.5.0
-//// Separate string to array: imporved "explode" function
-//    function separateString($separated_string, $seps = ',')
-//    {
-//        if (strlen($separated_string) == 0) {
-//            return array();
-//        }
-//        $ss = explode($seps, $separated_string);
-//        return $ss;
-//    }
-//
-//// Since 2.0: Cutenews HtmlSpecialChars
-//    function cn_htmlspecialchars($_str)
-//    {
-//        $key = array('&' => '&amp;', '"' => '&quot;', "'" => '&#039;', '<' => '&lt;', '>' => '&gt;');
-//        $matches = null;
-//        preg_match('/(&amp;)+?/', $_str, $matches);
-//        if (count($matches) != 0) {
-//            array_shift($key);
-//        }
-//        return str_replace(array_keys($key), array_values($key), $_str);
-//    }
-//
-//
-//// Since 1.5.3
-//// GET Helper for single value
-//// $method[0] = * ---> htmlspecialchars ON
-//    function REQ($var, $method = 'GETPOST')
-//    {
-//        if ($method[0] == '*') {
-//            list($value) = (GET($var, substr($method, 1)));
-//            return cn_htmlspecialchars($value);
-//        } else {
-//            list($value) = GET($var, $method);
-//            return $value;
-//        }
-//    }
-//
-//
-//// Since 2.0: Show breadcrumbs
-//    function cn_snippet_bc($sep = '&gt;')
-//    {
-//        $bc = getMemcache('.breadcrumbs');
-//        echo '<div id="mainsub_title" class="cn_breadcrumbs">';
-//
-//        $ls = array();
-//        if (is_array($bc)) {
-//            foreach ($bc as $key => $item) {
-//                if ($key != (count($bc) - 1))
-//                    $ls[] = '<span class="bcitem"><a href="' . $item['url'] . '">' . cn_htmlspecialchars($item['name']) . '</a></span>';
-//                else
-//                    $ls[] .= '<span class="bcitem">' . cn_htmlspecialchars($item['name']) . '</span>';
-//            }
-//        }
-//        echo join(' <span class="bcsep">' . $sep . '</span> ', $ls);
-//        echo '</div>';
-//    }
-
     function cn_load_session()
     {
         session_name('SEXXXXXXXXXXX_SESSION');
@@ -157,76 +13,6 @@ class ProcessCoreAdmin extends ProcessCore
             $_SESSION['mu_Account'] = $users;
         }
     }
-//
-//// Since 1.5.1: Validate email
-//    function check_email($email)
-//    {
-//        return (preg_match("/^[\.A-z0-9_\-\+]+[@][A-z0-9_\-]+([.][A-z0-9_\-]+)+[A-z]{1,4}$/", $email));
-//    }
-//
-//// Since 2.0: Extended assign
-//    function cn_assign()
-//    {
-//        $args = func_get_args();
-//        $keys = explode(',', array_shift($args));
-//
-//        foreach ($args as $id => $arg) {
-//            // Simple assign
-//            if (isset($keys[$id])) {
-//                $KEY = trim($keys[$id]);
-//                $GLOBALS[$KEY] = $arg;
-//            } else // Inline assign
-//            {
-//                list($k, $v) = explode('=', $arg, 2);
-//                $GLOBALS[$k] = $v;
-//            }
-//        }
-//    }
-//
-//// Since 2.0: Get messages
-//    function cn_get_message($area, $method = 's') // s-show, c-count
-//    {
-//        $es = getMemcache('msg:stor');
-//        if (isset($es[$area])) {
-//            if ($method == 's') return $es[$area];
-//            elseif ($method == 'c') return count($es[$area]);
-//        }
-//        return null;
-//    }
-
-    // Since 2.0; HTML show errors
-//    function cn_snippet_messages($area = 'new')
-//    {
-//        $delay = 7500;
-//        $result = '';
-//
-//        for ($i = 0; $i < strlen($area); $i++) {
-//            $messages = cn_get_message($area[$i], 's');
-//
-//            $type = 'notify';
-//            if ($area[$i] == 'e') {
-//                $type = 'error';
-//            } elseif ($area[$i] == 'w') {
-//                $type = 'warnings';
-//            }
-//
-//            if ($messages) {
-//                $result .= '<div class="cn_' . $type . '_list">';
-//                foreach ($messages as $msg) {
-//                    $NID = 'notify_' . ctime() . mt_rand();
-//                    $result .= '<div class="cn_' . $type . '_item" id="' . $NID . '"><div><b>' . date('H:i:s', ctime()) . '</b> ' . $msg . '</div></div>';
-//                    $result .= '<script>notify_auto_hide("' . $NID . '", ' . $delay . ');</script>';
-//
-//                    $delay += 1000;
-//                }
-//                $result .= '</div>';
-//            }
-//        }
-//
-//        if ($result) {
-//            echo '<div class="cn_notify_overall">' . $result . '</div>';
-//        }
-//    }
 
     // Since 2.0: Show login form
     function cn_login_admin_form($admin = true)
@@ -243,26 +29,6 @@ class ProcessCoreAdmin extends ProcessCore
         }
     }
 
-//    function getMember()
-//    {
-//        // Not authorized
-//        if (empty($_SESSION['mu_Account'])) {
-//            return null;
-//        }
-//
-//        // No in cache
-//        if ($member = getMemcache('#member')) {
-//            return $member;
-//        }
-//        $requestData = [
-//            "clause" => "[UserAcc]='" . $_SESSION['mu_Account'] . "'",
-//            "isCheck" => false,
-//            "options" => [],
-//        ];
-//        setMemcache('#member', $user = db_get_member_account($requestData));
-//
-//        return $user;
-//    }
 
 //// Since 1.5.2: Directory scan
 //    function scan_dir($dir, $cond = '')
@@ -276,63 +42,6 @@ class ProcessCoreAdmin extends ProcessCore
 //            }
 //        }
 //        return $files;
-//    }
-
-//    // Since 2.0: Test User ACL. Test for groups [user may consists requested group]
-//    function test($requested_acl, $requested_user = NULL, $is_self = false)
-//    {
-//        // get user menber session
-//        $user = $this->getMember();
-//
-//        // Deny ANY access of unauthorized member
-//        if (!$user) {
-//            return false;
-//        }
-//
-////        $acl = $user['acl'];
-//        $acl = $user['AdLevel'];
-//        $grp = getOption('#grp');
-//
-//        $ra = separateString($requested_acl);
-//
-//        // This group not exists, deny all
-//        if (!isset($grp[$acl])) {
-//            return false;
-//        }
-//
-//        // Decode ACL, GRP string
-//        $gp = separateString($grp[$acl]['G']);
-//        $rc = separateString($grp[$acl]['A']);
-//
-//        // ra la bien truyen vao
-//        // If requested acl not match with real allowed, break
-//        foreach ($ra as $Ar) {
-//            if (!in_array($Ar, $rc)) {
-//                return false;
-//            }
-//        }
-//
-//        // Test group or self
-//        if ($requested_user) {
-//            // if self-check, check name requested user and current user
-//            if ($is_self && $requested_user['user_Account'] !== $user['user_Account']) {
-//                // xac ding user truyen vao <=> user hien tai
-//                return false;
-//            }
-//
-//            // if group check, check: requested uses may be in current user group
-//            if (!$is_self) {
-//                if ($gp && !in_array($requested_user['acl'], $gp)) {
-//                    //kiem tra user truyen vao user[acl]  <=> phan quyen trong nhom
-//                    return false;
-//                } elseif (!$gp) {
-//                    //ko ton tai phan quyen
-//                    return false;
-//                }
-//            }
-//        }
-//
-//        return true;
 //    }
 
 //    function cn_cookie_remember($client = false)
@@ -595,31 +304,31 @@ class ProcessCoreAdmin extends ProcessCore
             if (getOption('allow_registration')) {
                 $Register_OK = false;
                 $errors = array();
-                list($regusername, $regpassword, $confirm, $regemail, $captcha) = GET('regusername, regpassword, confirm, regemail, captcha', "POST");
+                list($userName, $password, $confirm, $email, $captcha) = GET('userName, password, confirm, email, captcha', "POST");
 
                 // Do register
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    if ($regusername === '') $errors[] = "Username field can't be blank";
-                    if ($regemail === '') $errors[] = "Email field can't be blank";
-                    if ($regpassword === '') $errors[] = "Password field can't be blank";
-                    if (!preg_match('/[\w]\@[\w]/i', $regemail)) $errors[] = "Email is invalid";
+                    if ($userName === '') $errors[] = "Username field can't be blank";
+                    if ($email === '') $errors[] = "Email field can't be blank";
+                    if ($password === '') $errors[] = "Password field can't be blank";
+                    if (!preg_match('/[\w]\@[\w]/i', $email)) $errors[] = "Email is invalid";
 
-                    if ($regpassword !== $confirm) $errors[] = "Confirm password not match";
+                    if ($password !== $confirm) $errors[] = "Confirm password not match";
                     if ($captcha !== $_SESSION['captcha_code']) $errors[] = "Captcha not match";
 
-                    if (strlen($regpassword) < 3) $errors[] = 'Too short password';
+                    if (strlen($password) < 3) $errors[] = 'Too short password';
 
                     // Do register
                     if (empty($errors)) {
                         // get real user in index file
                         $requestData = [
-                            "clause" => "[UserAcc]='" . $regusername . "'",
+                            "clause" => "[UserAcc]='" . $userName . "'",
                             "isCheck" => true,
                             "options" => [],
                         ];
                         $user = db_get_member_account($requestData);
                         $requestDataEmail = [
-                            "clause" => "[Email]='" . $regemail . "'",
+                            "clause" => "[Email]='" . $email . "'",
                             "isCheck" => true,
                             "options" => [],
                         ];
@@ -627,10 +336,10 @@ class ProcessCoreAdmin extends ProcessCore
                             $user = db_get_member_account($requestDataEmail);
 
                             if (!$user) {
-                                $pass = SHA256_hash($regpassword);
-                                $acl_groupid_default = intval(getOption('registration_level'));
+                                $pass = SHA256_hash($password);
+                                $aclGroupIdDefault = intval(getOption('registration_level'));
 
-                                do_insert_character('[Account_Info]', 'AdLevel=' . $acl_groupid_default, "UserAcc='" . $regusername . "'", "Pwd='" . $pass . "'", "Email='" . $regemail . "'", "Lastdate=" . ctime(), 'Time_At=GETDATE()', 'Ban=0', 'NumLogin=1');
+                                do_insert_character('[Account_Info]', 'AdLevel=' . $aclGroupIdDefault, "UserAcc='" . $userName . "'", "Pwd='" . $pass . "'", "Email='" . $email . "'", "Lastdate=" . ctime(), 'Time_At=GETDATE()', 'Ban=0', 'NumLogin=1');
 
                                 $Register_OK = true;
                             } else {
@@ -643,7 +352,7 @@ class ProcessCoreAdmin extends ProcessCore
 
                     // Registration OK, authorize user
                     if ($Register_OK === true) {
-                        $_SESSION['mu_Account'] = $regusername;
+                        $_SESSION['mu_Account'] = $userName;
 
                         // Clean old data
                         if (isset($_SESSION['RQU'])) {
@@ -657,7 +366,7 @@ class ProcessCoreAdmin extends ProcessCore
                         // Send notify about register
                         if (getOption('notify_registration')) {
                             $tempRegister = "<html><body><h1>Account Details</h1><p>Thank you for registering on our site, your account details are as follows:<br>Username: %username%<br>Email: %email%</p></body></html>";
-                            $status = cn_send_mail($regemail, 'Welcome to ' . $_SERVER['SERVER_NAME'], cn_replace_text($tempRegister, '%username%, %email%', $regusername, $regemail));
+                            $status = cn_send_mail($email, 'Welcome to ' . $_SERVER['SERVER_NAME'], cn_replace_text($tempRegister, '%username%, %email%', $userName, $email));
                             if ($status)
                                 msg_info('For you send register');
                             else
@@ -667,7 +376,7 @@ class ProcessCoreAdmin extends ProcessCore
                         die();
                     }
                 }
-                cn_assign('errors_result, regusername, regemail', $errors, $regusername, $regemail);
+                cn_assign('errors_result, userName, email', $errors, $userName, $email);
             } else {
                 msg_info('Registration disabled');
             }
@@ -854,74 +563,6 @@ class ProcessCoreAdmin extends ProcessCore
         return $result;
     }
 
-//// Since 2.0: Check server request type
-//    function request_type($type = 'POST')
-//    {
-//        return $_SERVER['REQUEST_METHOD'] === $type ? true : false;
-//    }
-//
-//// Displays header skin
-//// $image = img@custom_style_tpl
-//    function echo_header_admin($image, $header_text, $bread_crumbs = false)
-//    {
-//        global $skin_header, $lang_content_type, $skin_menu, $digitalSignature, $skin_menu_none, $_SESS, $_SERV_SESS;
-//        $header_time = date('H:i:s | d, M, Y', ctime());
-//
-//        $customs = explode("@", $image);
-//        $image = isset($customs[0]) ? $customs[0] : '';
-//        $custom_style = isset($customs[1]) ? $customs[1] : false;
-//        $custom_js = isset($customs[2]) ? $customs[2] : false;
-//
-//        if (isset($_SESSION['mu_Account'])) {
-//            $skin_header = preg_replace("/{menu}/", $skin_menu, $skin_header);
-//        } else {
-//            $skin_header = preg_replace("/{menu}/", "<div style='padding: 5px;'><a href='" . PHP_SELF . "'>" . VERSION_NAME . "</a></div>", $skin_header);
-//        }
-//
-//        //$skin_header = get_skin($skin_header);
-//        $skin_header = str_replace('{title}', ($header_text ? $header_text . ' / ' : '') . 'Admin Dashboard ', $skin_header);
-//        $skin_header = str_replace('{signature}', $digitalSignature, $skin_header);
-//        //$skin_header = str_replace("{image-name}", $skin_prefix.$image, $skin_header);
-//        $skin_header = str_replace("{header-text}", $header_text, $skin_header);
-//        $skin_header = str_replace("{header-time}", $header_time, $skin_header);
-//        $skin_header = str_replace("{content-type}", $lang_content_type, $skin_header);
-//        $skin_header = str_replace("{breadcrumbs}", $bread_crumbs, $skin_header); ///
-//
-//        if ($custom_style) {
-//            $custom_style = read_tpl($custom_style);
-//        }
-//        $skin_header = str_replace("{CustomStyle}", $custom_style, $skin_header);
-//
-//        if ($custom_js) {
-//            $custom_js = '<script type="text/javascript">' . read_tpl($custom_js) . '</script>';
-//        }
-//        $skin_header = str_replace("{CustomJS}", $custom_js, $skin_header);
-//
-//        echo $skin_header;
-//    }
-//
-//    function echoContent($echocomtent, $path_c = '', $bread_crumbs = true)
-//    {
-//        global $abccc;// $path_c;
-//        $abccc = preg_replace("/{paths_c}/", $path_c, $abccc);
-//        $abccc = preg_replace("/{content_here}/", $echocomtent, $abccc);
-//        echo $abccc;
-//    }
-//
-//    function echoFooter()
-//    {
-//        global $skin_footer, $lang_content_type, $skin_menu, $config_adminemail, $config_admin;
-//
-//        //$skin_footer = get_skin($skin_footer);
-//        //$skin_footer = str_replace("{content-type}", $lang_content_type, $skin_footer);
-//        $skin_footer = str_replace("{exec-time}", round(microtime(true) - BQN_MU, 3), $skin_footer);
-//        $skin_footer = str_replace("{year-time}", date("Y"), $skin_footer);
-//        //$skin_footer = str_replace("{email-name}", $config_adminemail, $skin_footer);
-//        $skin_footer = str_replace("{convertby}", cn_user_email_as_site($config_adminemail, $config_admin), $skin_footer);
-//
-//        die($skin_footer);
-//    }
-
 //    // Since 2.0: Short message form
 //    function msg_info($title, $go_back = null)
 //    {
@@ -1007,179 +648,6 @@ class ProcessCoreAdmin extends ProcessCore
         return false;
     }
 
-//// Since 1.5.3: Set cache variable
-//    function setMemcache($name, $var)
-//    {
-//        global $_CN_SESS_CACHE;
-//        $_CN_SESS_CACHE[$name] = $var;
-//    }
-//
-//// Since 1.5.3: Get variable from cache
-//    function getMemcache($name)
-//    {
-//        global $_CN_SESS_CACHE;
-//        return isset($_CN_SESS_CACHE[$name]) ? $_CN_SESS_CACHE[$name] : false;
-//    }
-//
-//// Since 1.5.0: Add hook to system
-//    function add_hook($hook, $func)
-//    {
-//        global $_HOOKS;
-//
-//        $prior = 1;
-//        if ($hook[0] == '+') $hook = substr($hook, 1);
-//        if ($hook[0] == '-') {
-//            $prior = 0;
-//            $hook = substr($hook, 1);
-//        }
-//
-//        if (!isset($_HOOKS[$hook])) $_HOOKS[$hook] = array();
-//
-//        // priority (+/-)
-//        if ($prior) array_unshift($_HOOKS[$hook], $func); else $_HOOKS[$hook][] = $func;
-//    }
-//
-//// Since 1.5.0: Cascade Hooks
-//    function hook($hook, $args = null)
-//    {
-//
-//        global $_HOOKS;
-//
-//        // Plugin hooks
-//        if (!empty($_HOOKS[$hook]) && is_array($_HOOKS[$hook])) {
-//            foreach ($_HOOKS[$hook] as $hookfunc) {
-//                if ($hookfunc[0] == '*') {
-//                    $_args = call_user_func_array(substr($hookfunc, 1), $args);
-//                } else {
-//                    $_args = call_user_func($hookfunc, $args);
-//                }
-//
-//                if (!is_null($_args)) {
-//                    $args = $_args;
-//                }
-//            }
-//        }
-//        return $args;
-//    }
-//
-//// Since 2.0: Add BreadCrumb
-//    function cn_bc_add($name, $url)
-//    {
-//        $bc = getMemcache('.breadcrumbs');
-//
-//        $bc[] = array('name' => $name, 'url' => $url);
-//        setMemcache('.breadcrumbs', $bc);
-//    }
-//
-//// Since 2.0: Pack only required parameters
-//    function cn_pack_url($GET, $URL = PHP_SELF)
-//    {
-//        $url = $result = array();
-//
-//        foreach ($GET as $k => $v) if ($v !== '') $result[$k] = $v;
-//        foreach ($result as $k => $v) if (!is_array($v)) $url[] = "$k=" . urlencode($v);
-//
-//        list($ResURL) = hook('core/url_rewrite', array($URL . ($url ? '?' . join('&', $url) : ''), $URL, $GET));
-//        return $ResURL;
-//    }
-//
-////time
-//    function ctime()
-//    {
-//        date_default_timezone_set("UTC");
-//        return (time() + 3600 * getOption('date_adjust'));
-//    }
-//
-//// Since 1.5.0: Hash type MD5 and SHA256
-//    function hash_generate($password, $md5hash = false)
-//    {
-//        $try = array
-//        (
-//            0 => md5($password),
-//            1 => utf8decrypt($password, $md5hash),
-//            2 => SHA256_hash($password),
-//        );
-//
-//        return $try;
-//    }
-//
-//// Since 1.5.3: UTF8-Cutenews compliant
-//    function utf8decrypt($str, $oldhash)
-//    {
-//        $len = strlen($str) * 3;
-//        while ($len >= 16) $len -= 16;
-//        $len = floor($len / 2);
-//
-//        $salt = substr($oldhash, $len, 10);
-//        $pass = SHA256_hash($salt . $str . '`>,');
-//        $pass = substr($pass, 0, $len) . $salt . substr($pass, $len);
-//
-//        return $pass;
-//    }
-//
-////Since 2.0.3 crossplatform path generator
-//    function cn_path_construct()
-//    {
-//        $args = array();
-//        $arg_list = func_get_args();
-//
-//        foreach ($arg_list as $varg) {
-//            if ($varg !== '') {
-//                $args[] = $varg;
-//            }
-//        }
-//
-//        return implode(DIRECTORY_SEPARATOR, $args) . DIRECTORY_SEPARATOR;
-//    }
-
-//    // Since 2.0: Get option from #CFG or [%site][<opt_name>]
-//    // Usage: #level1/level2/.../levelN or 'option_name' from %site
-//    function getOption($opt_name = '', $var_name = '')
-//    {
-//        $cfg = getMemcache('config');
-//
-//        if ($opt_name === '') {
-//            return $cfg;
-//        }
-//        if ($opt_name[0] == '#') {
-//            $cfn = separateString(substr($opt_name, 1), '/');
-//            foreach ($cfn as $id) {
-//                if (isset($cfg[$id])) {
-//                    $cfg = $cfg[$id];
-//                } else {
-//                    $cfg = array();
-//                    break;
-//                }
-//            }
-//
-//            return $cfg;
-//        } else if ($opt_name[0] == '@') {
-//            if (!empty($var_name)) {
-//
-//                $opt_name_ = substr($opt_name, 1);
-//
-//                return isset($cfg[$opt_name_][$var_name]) ? $cfg[$opt_name_][$var_name] : false;
-//            } else {
-//                //exit();
-//                $opt_name_arr = separateString(substr($opt_name, 1), '/');
-//                foreach ($opt_name_arr as $id) {
-//                    if (isset($cfg[$id])) {
-//                        $cfg = $cfg[$id];
-//                    } else {
-//                        $cfg = array();
-//                        break;
-//                    }
-//                }
-//
-//                return $cfg;
-//            }
-//        } else {
-//            return isset($cfg['%site'][$opt_name]) ? $cfg['%site'][$opt_name] : false;
-//            //else
-//            //return isset($cfg['#'.$var_name_][$opt_name]) ? $cfg['#'.$var_name_][$opt_name] : false;
-//        }
-//    }
-
     // Since 2.0: Save option to config
     // Usage: #level1/level2/.../levelN or 'option_name' from %site
     function setOption($opt_name, $var, $var_name = '')
@@ -1262,40 +730,6 @@ class ProcessCoreAdmin extends ProcessCore
 //        // caching file
 //        setMemcache("tpl:$tpl", $ob);
 //        return $ob;
-//    }
-//
-//// Since 2.0: Execute PHP-template
-//// 1st argument - template name, other - variables ==> mo file
-//    function execTemplate()
-//    {
-//        $args = func_get_args();
-//        $tpl = preg_replace('/[^a-z0-9_\/]/i', '', array_shift($args));
-//
-//        $open = SKIN . '/' . ($tpl ? $tpl : 'default') . '.php';
-//
-//        foreach ($args as $arg) {
-//            if (is_array($arg)) {
-//                foreach ($arg as $k0 => $v) {
-//                    $k = "__$k0";
-//                    $$k = $v;
-//                }
-//            } else {
-//                list($k, $v) = explode('=', $arg, 2);
-//
-//                // <-- make local variable
-//                $k = "__$k";
-//                $$k = $v;
-//            }
-//        }
-//
-//        if (file_exists($open)) {
-//            ob_start();
-//            include $open;
-//            $echo = ob_get_clean();
-//            return $echo;
-//        }
-//
-//        return '';
 //    }
 
     // Since 2.0: @bootstrap
@@ -1400,7 +834,6 @@ class ProcessCoreAdmin extends ProcessCore
             'Use_Event' => 1,
             'Use_XepHang' => 1,
             'Use_ShopTienZen' => 1,
-            'Use_DoiGioiTinh' => 1,
             'Use_ResetVIP' => 1,
             'Use_UyThacOffline' => 1,
             'Use_UyThacOnline' => 1,
@@ -1453,7 +886,7 @@ class ProcessCoreAdmin extends ProcessCore
             'timeResultDe' => '8:00',
             'moneyMinDe' => '5000',
             'url_Result_De' => 'http://ketqua.net/',
-            'id_getResult_De' => 'rs_0_0/',
+            'id_getResult_De' => 'rs_0_0',
             // config Account GameBank.vn
             'Merchant_ID' => '',
             'API_User' => '',
@@ -1541,7 +974,7 @@ class ProcessCoreAdmin extends ProcessCore
         // Set config
         setMemcache('config', $cfg);
 
-        // SET PHAN QUYEN
+        // SET permission
         if (!getOption('#grp')) {
             $this->setOption("#grp", $cfg['grp']);
         }
@@ -1555,27 +988,25 @@ class ProcessCoreAdmin extends ProcessCore
             $this->setOption("#crypt_salt", $salt);
         }
 
-        // ---------------- S_custum by bqn -----
-        // Detect self pathes
+        // ---------------- S_custom by bqn -----
+        // Detect self path
         $SN = dirname($_SERVER['SCRIPT_NAME']);
         $script_path = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? "https" : "http") . "://" . $_SERVER['SERVER_NAME'] . (($SN != '/') ? '' : $SN);
-//    $script_path = "http://" . $_SERVER['SERVER_NAME'];
-        //check http_script_dir
+
+        // Check http_script_dir
         $path_http_script_dir = $script_path;
-        if (getOption('http_script_dir') != $path_http_script_dir)
+        if (getOption('http_script_dir') != $path_http_script_dir){
             $this->setOption('http_script_dir', $path_http_script_dir);
+        }
 
-
-        //check update_dir c://xampp/bqn/d
         $path_update_dir = cn_path_construct(ROOT, 'uploads');
-        if (getOption('uploads_dir') != $path_update_dir)
+        if (getOption('uploads_dir') != $path_update_dir){
             $this->setOption('uploads_dir', $path_update_dir);
+        }
 
-        //check uploads_ext http://localhost/bqn/d
         $path_uploads_ext = URL_PATH . '/uploads';
         if (getOption('uploads_ext') != $path_uploads_ext)
             $this->setOption('uploads_ext', $path_uploads_ext);
-        // ---------------- E_custum by bqn -----
 
         return true;
     }
@@ -1986,11 +1417,5 @@ class ProcessCoreAdmin extends ProcessCore
 //            echo '<div>Disk usage (' . $ds_t . ')</div><div class="a"><div class="b" style="width: ' . $free . '%">' . $free . '%</div></div><div style="clear: left;"></div>';
 //        }
 //        echo '</div>';
-//    }
-//
-//
-//    function zendeHtmlExecute()
-//    {
-//
 //    }
 }

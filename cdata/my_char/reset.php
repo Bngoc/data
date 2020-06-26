@@ -266,7 +266,7 @@ echoFormVerifyChar(['action_rs' => 'reset']);
 		</table>';
 }
 
-if (getoption('hotrotanthu') == 1) { ?>
+if (getOption('hotrotanthu') == 1) { ?>
     <table style="width: 100%" cellpadding="2">
         <tr>
             <td colspan="3" style="padding:15px; text-align:center"></td>

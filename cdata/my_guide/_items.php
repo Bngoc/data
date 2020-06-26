@@ -7,13 +7,13 @@
             <TD>
                 <P style="TEXT-ALIGN: center"><SPAN style="COLOR: rgb(153,204,255)"><IMG
                             height=131 alt=""
-                            src="/images/guides/items/dw/img_setItems_darkWizard_pad.jpg" width=104></SPAN></P>
+                            src="/public/images/guides/items/dw/img_setItems_darkWizard_pad.jpg" width=104></SPAN></P>
                 <P style="TEXT-ALIGN: center"><SPAN style="COLOR: rgb(153,204,255)">Bộ Vải
       Thô</SPAN></P></TD>
             <TD>
                 <P style="TEXT-ALIGN: center"><SPAN style="COLOR: rgb(153,204,255)"><IMG
                             height=131 alt=""
-                            src="/images/guides/items/dw/img_setItems_darkWizard_bone.jpg" width=104></SPAN></P>
+                            src="/public/images/guides/items/dw/img_setItems_darkWizard_bone.jpg" width=104></SPAN></P>
                 <P style="TEXT-ALIGN: center"><SPAN style="COLOR: rgb(153,204,255)">Bộ
       Xương</SPAN></P></TD>
             <TD>

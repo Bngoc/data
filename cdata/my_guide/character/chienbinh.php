@@ -1,4 +1,4 @@
-<p align="center"><img src="/images/guides/img_darkKnight.jpg"></p><br>
+<p align="center"><img src="/public/images/web/guides/img_darkKnight.jpg"></p><br>
 Suốt thời hoàng kim của mình, từng thế hệ Chiến Binh đã chiến đấu để bảo vệ cho những dân tộc của MU. Nhưng thời gian đó đã trôi qua rất lâu rồi. Những cuộc chiến đã làm cho họ mệt mỏi và dần xa rời sứ mệnh. Một số thì lang thang khắp nơi để tự rèn luyện kỹ năng của mình trở nên tuyệt đỉnh, trong khi một số khác vẫn tiếp tục và cố gắng mang lại công lý cho mọi người. Nhưng một điều chắc chắn, Chiến Binh sẽ luôn lao vào các cuộc chiến sinh tử.
 <p>Chiến Binh là hiện thân của sức mạnh và quyền lực. Trong những trận đánh càn, họ có thể giết chết những dòng nhân vật
     khác ngay khi đã bị thương rất nặng. Nhờ khả năng sống còn tuyệt vời, Chiến Binh có khả năng mạo hiểm một mình mà

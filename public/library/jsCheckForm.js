@@ -55,9 +55,9 @@ var totalVal = intVal + upVal + lowVal + etcVal + enterVal;
 
 var totalVal1 = intVal + lowVal;
 var totalVal2 = intVal + upVal + lowVal;
-var notify_img_load = '<div style="padding:2px;"><img src="images/spinner_grey.gif" /></div>';
-var notify_img_apccet = '<img style="margin-right:10px" src="images/checkbullet.gif">';
-var notify_img_deline = '<img style="margin-right:5px" src="images/alert_icon.gif">';
+var notify_img_load = '<div style="padding:2px;"><img src="/public/images/spinner_grey.gif" /></div>';
+var notify_img_apccet = '<img style="margin-right:10px" src="/public/images/checkbullet.gif">';
+var notify_img_deline = '<img style="margin-right:5px" src="/public/images/alert_icon.gif">';
 //var notify_str_deline = 'không hợp lệ';
 var notify_str_xd = 'không xác định.';
 
@@ -597,7 +597,7 @@ function isNumberPhone(value, id) {
     var dff = /(\(\+84\)|0)\d{2,3}[-]\d{4}[-]\d{3}$/;
     var pattern = new RegExp(dff);
     if (pattern.test(value)) {
-        getId(id).innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
+        getId(id).innerHTML = '<img style="margin-right:10px" src="/public/images/checkbullet.gif">';
         arr_error[id] = 0;
         return true;
     } else {
@@ -696,15 +696,15 @@ function checkQuestionTrue(value, id) {
 }
 
 function checkAnswer(value, id) {
-    getId(id).innerHTML = "<div style='padding:2px;'><img src=/images/spinner_grey.gif /></div>"
+    getId(id).innerHTML = "<div style='padding:2px;'><img src=/public/images/spinner_grey.gif /></div>"
     setTimeout("checkAnswerTrue('" + value + "', '" + id + "')", 100);
 }
 function checkAnswerTrue(value, id) {
     arr_error[id] = 1;
     if (value.length < 4) {
-        getId(id).innerHTML = '<img style="margin-right:5px" src="/images/alert_icon.gif"><span style="color:#FF0000">Câu trả lời cần có 4 ký tự</span>';
+        getId(id).innerHTML = '<img style="margin-right:5px" src="/public/images/alert_icon.gif"><span style="color:#FF0000">Câu trả lời cần có 4 ký tự</span>';
     } else if (value.length > 15) {
-        getId(id).innerHTML = '<img style="margin-right:5px" src="/images/alert_icon.gif"><span style="color:#FF0000">Câu trả lời tối đa 15 ký tự</span>';
+        getId(id).innerHTML = '<img style="margin-right:5px" src="/public/images/alert_icon.gif"><span style="color:#FF0000">Câu trả lời tối đa 15 ký tự</span>';
     } else {
         arr_error[id] = 0;
         getId(id).innerHTML = '';
@@ -714,7 +714,7 @@ function checkAnswerTrue(value, id) {
 function checkCaptcha(value, id) {
     arr_error[id] = 1;
     if (value.length == '') {
-        getId(id).innerHTML = '<img style="margin-right:5px" src="/images/alert_icon.gif"><span style="color:#FF0000">Chưa nhập mã Captcha</span>';
+        getId(id).innerHTML = '<img style="margin-right:5px" src="/public/images/alert_icon.gif"><span style="color:#FF0000">Chưa nhập mã Captcha</span>';
     } else {
         arr_error[id] = 0;
         getId(id).innerHTML = '';
@@ -766,7 +766,7 @@ function checkCardSerialTrue(value, opt, idSms) {
 //         else
 //             document.frmnapthe.CardSerial.value = "";
     } else {
-        getId(idSms).innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
+        getId(idSms).innerHTML = '<img style="margin-right:10px" src="/public/images/checkbullet.gif">';
     }
 }
 
@@ -806,7 +806,7 @@ function checkCardCodeTrue(value, opt, idSms) {
         // document.frmnapthe.CardCode.focus();
         // document.frmnapthe.CardCode.value = "";
     } else {
-        getId(idSms).innerHTML = '<img style="margin-right:10px" src="images/checkbullet.gif">';
+        getId(idSms).innerHTML = '<img style="margin-right:10px" src="/public/images/checkbullet.gif">';
     }
 }
 

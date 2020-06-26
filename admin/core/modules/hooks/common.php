@@ -34,11 +34,11 @@ function cn_extrn_raw_template($template, $apply_patch = NULL)
 // Since 2.0: Replace words
 function cn_extrn_replace($input)
 {
-    if (!getoption('use_replacement')) {
+    if (!getOption('use_replacement')) {
         return $input;
     }
 
-    if ($rword = getoption('#rword')) {
+    if ($rword = getOption('#rword')) {
         foreach ($rword as $f => $t) {
             $input = preg_replace('/' . preg_sanitize($f) . '/i', trim($t), $input);
         }
@@ -122,27 +122,27 @@ function cn_extrn_init()
         return;
     }
 
-    $i18n = getoption('i18n');
+    $i18n = getOption('i18n');
     if (!$i18n) {
         $i18n = 'en_US';
     }
 
     // Facebook initialzie
-    if ((getoption('use_fbcomments') || getoption('use_fblike')) && !getMemcache('fb_js_on') && $template != 'rss') {
-        echo str_replace(array('{appID}', '{fbi18n}'), array(getoption('fb_appid'), str_replace('-', '_', $i18n)), read_tpl('fb_comments'));
-        mcache_set('fb_js_on', true);
+    if ((getOption('use_fbcomments') || getOption('use_fblike')) && !getMemcache('fb_js_on') && $template != 'rss') {
+        echo str_replace(array('{appID}', '{fbi18n}'), array(getOption('fb_appid'), str_replace('-', '_', $i18n)), read_tpl('fb_comments'));
+        setMemcache('fb_js_on', true);
     }
 
     // Definition G+ code uses
-    if (getoption('use_gplus') && !getMemcache('gplus_js_on') && $template != 'rss') {
+    if (getOption('use_gplus') && !getMemcache('gplus_js_on') && $template != 'rss') {
         echo str_replace('{lang}', $i18n, read_tpl('google_plus'));
-        mcache_set('gplus_js_on', true);
+        setMemcache('gplus_js_on', true);
     }
 
     // First init CN script
     if (!getMemcache('cn:extr_init')) {
         echo preg_replace('/\s{2,}/s', ' ', read_tpl('cnscript'));
-        mcache_set('cn:extr_init', true);
+        setMemcache('cn:extr_init', true);
     }
 
 }

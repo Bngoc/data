@@ -4,7 +4,7 @@ list($showchar, $options_rs_trust, $before_info_trust) = _GL('showchar, options_
 list($sub) = _GL('sub');
 echo cn_snippet_messages();
 
-$cap_reset_max = getoption('cap_reset_max');
+$cap_reset_max = getOption('cap_reset_max');
 if ($cap_reset_max > 20) $cap_reset_max = 20;
 $ok_loop = false;
 $odd = 0;
@@ -69,7 +69,7 @@ $i = 0;
 echoFormVerifyChar(['action_rsuythac' => 'uythacreset']);
 ?>
 <?php
-if (getoption('user_rs_uythac')) { ?>
+if (getOption('user_rs_uythac')) { ?>
     <div class="sub_ranking">
         <table style="width: 100%" cellpadding="2">
             <tr>

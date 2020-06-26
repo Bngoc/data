@@ -88,7 +88,7 @@ echoFormVerifyChar(['action_deleonline' => 'deleonline']);
         <br>
         - Khi mất Ủy thác có thể <b>kích hoạt lại Ủy thác Trên Web</b>.
         <br>
-        - <b>1 </b>Điểm ủy Thác = <b><?php echo getoption('uythacon_price') ?> </b> Gcoin / <b>1</b> Phút ủy thác<br>
+        - <b>1 </b>Điểm ủy Thác = <b><?php echo getOption('uythacon_price') ?> </b> Gcoin / <b>1</b> Phút ủy thác<br>
         <p align="left">
             <br><b>Lưu ý</b>:
         <ul>

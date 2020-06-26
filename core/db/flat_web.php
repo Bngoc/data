@@ -40,7 +40,7 @@ function view_info_char($account)
             $coun_row = count($row);
             for ($i = 0; $i < $coun_row; $i++) {
                 if (!empty($row[$i])) {
-                    switch (getoption('server_type')) {
+                    switch (getOption('server_type')) {
                         case "scf":
                             $query_info_char = $db_new->Execute("SELECT Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,SCFPCPoints FROM Character WHERE Name='$row[$i]'");
                             if ($query_info_char === false) continue;
@@ -94,7 +94,7 @@ function view_character($account)
 
                 foreach ($row as $i => $vl) {
                     if (!empty($row[$i])) {
-                        switch (getoption('server_type')) {
+                        switch (getOption('server_type')) {
                             case "scf":
                                 $query_info_char = $db_new->Execute("SELECT Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,SCFPCPoints,AccountID,NoResetInDay,Money,Top50,Resets_Time,UyThac,Inventory AS image,PkLevel,PkCount,MapNumber,IsThuePoint,TimeThuePoint FROM Character WHERE Name='$vl'");
                                 if ($query_info_char === false) continue;
@@ -116,7 +116,7 @@ function view_character($account)
         }
     }
 
-    if (getoption('debugSql')) {
+    if (getOption('debugSql')) {
         cn_write_log($myQuery);
     }
 
@@ -147,7 +147,7 @@ function view_bank($account)
         }
     }
 
-    if (getoption('debugSql')) {
+    if (getOption('debugSql')) {
         cn_write_log('MEMB_INFO', 'bank,vpoint,jewel_chao,jewel_cre,jewel_blue,gcoin,gcoin_km,jewel_feather,[WCoin],[WCoinP],[GoblinCoin]', "memb___id='$account'", '');
     }
 
@@ -199,6 +199,7 @@ function db_user_by_name($name)
                 $pdata = Array(
                     'user_name' => $ds['memb___id'],
                     'pass_web' => $ds['memb__pwdmd5'],
+                    'memb__pwdmd5' => $ds['memb__pwdmd5'],
                     'pass_game' => $ds['memb__pwd'],
                     'tel_num' => $ds['tel__numb'],
                     'phon_num' => $ds['phon_numb'],
@@ -215,7 +216,7 @@ function db_user_by_name($name)
         }
     }
 
-    if (getoption('debugSql')) {
+    if (getOption('debugSql')) {
         cn_write_log('MEMB_INFO', 'memb___id,memb__pwd,tel__numb,phon_numb,mail_addr,fpas_ques,fpas_answ,memb__pwd2,memb__pwdmd5,acl,ban_login,num_login,pass2', "memb___id='$username'");
     }
 
@@ -263,7 +264,7 @@ function do_update_orther($orther = '')
         $check = $db_new->Execute($orther) or cn_write_log($orther, 'e');
 
         if ($check) {
-            if (getoption('debugSql')) {
+            if (getOption('debugSql')) {
                 cn_write_log($orther);
             }
 
@@ -279,7 +280,7 @@ function do_select_character($table, $col, $where = '', $orther = '')
     global $db_new;
     if (!$table) return FALSE;
     $table = trim($table);
-    $_col = spsep($col);
+    $_col = separateString($col);
 
     $str_col = $str_where = '';
     foreach ($_col as $var) {
@@ -309,7 +310,7 @@ function do_select_character($table, $col, $where = '', $orther = '')
         }
     }
 
-    if (getoption('debugSql')) {
+    if (getOption('debugSql')) {
         cn_write_log("SELECT $str_col FROM $table $str_where $orther");
     }
 
@@ -361,7 +362,7 @@ function do_insert_character()
         if ($check) {
             $db_new->CompleteTrans();
 
-            if (getoption('debugSql')) {
+            if (getOption('debugSql')) {
                 cn_write_log("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)");
             }
 
@@ -387,7 +388,7 @@ function do_insert_orther($myQureyInsert)
     if ($check) {
         $db_new->CompleteTrans();
 
-        if (getoption('debugSql')) {
+        if (getOption('debugSql')) {
             cn_write_log($myQureyInsert);
         }
         return true;
@@ -440,7 +441,7 @@ function do_update_character()
         $check = $db_new->Execute("UPDATE $user_table SET $val_up_col WHERE $val_up_cont") or cn_write_log("UPDATE $user_table SET $val_up_col WHERE $val_up_cont", 'e');
         if ($check) {
 
-            if (getoption('debugSql')) {
+            if (getOption('debugSql')) {
                 cn_write_log("UPDATE $user_table SET $val_up_col WHERE $val_up_cont");
             }
             return true;
@@ -462,7 +463,7 @@ function do_delete_char($myQuery)
         $myQuery = trim($myQuery);
         $check = $db_new->Execute($myQuery) or cn_write_log($myQuery, 'e');
         if ($check) {
-            if (getoption('debugSql')) {
+            if (getOption('debugSql')) {
                 cn_write_log($myQuery);
             }
             return true;
@@ -496,7 +497,7 @@ function db_get_member_account($requestData)
                 return false;
             }
         }
-
+        $usx[0]['pass']= $usx[0]['Pwd'];
         return $usx[0];
     }
 

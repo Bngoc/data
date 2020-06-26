@@ -2,12 +2,12 @@
 <html>
 <head>
     <title><?php echo $__title; ?></title>
-    <link rel="stylesheet" type="text/css" href="<?php echo getoption('http_script_dir'); ?>/skins/default.css">
-    <script type="text/javascript" src="<?php echo getoption('http_script_dir'); ?>/skins/cute.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo getOption('http_script_dir'); ?>/skins/default.css">
+    <script type="text/javascript" src="<?php echo getOption('http_script_dir'); ?>/skins/cute.js"></script>
     <style>
         <?php if ($__style)
         {
-            $_styles = spsep($__style);
+            $_styles = separateString($__style);
 
             foreach ($_styles as $_style)
             {

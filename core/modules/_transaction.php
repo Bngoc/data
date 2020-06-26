@@ -23,7 +23,7 @@ function transaction_invoke()
 
     cn_bc_add('Giao dịch', cn_url_modify(array('reset'), 'mod=' . $mod));
 
-    list($vtc, $gate, $viettel, $mobi, $vina) = explode(",", getoption('napthe_list'), 5);
+    list($vtc, $gate, $viettel, $mobi, $vina) = explode(",", getOption('napthe_list'), 5);
     $ar_list = array('vtc' => $vtc, 'gate' => $gate, 'viettel' => $viettel, 'mobi' => $mobi, 'vina' => $vina,);
 
     foreach ($ctrans_board as $id => $_t) {
@@ -43,7 +43,7 @@ function transaction_invoke()
     foreach ($ctrans_board as $id => $_t) {
         list($dl, $do, $token_, $acl_module) = explode(':', $id);
         $_token = md5($token_ . $do);
-        if (test($acl_module) && $dl == $mod && $do == $opt && $token == $_token && function_exists("transaction_$token_")) {
+        if (testRoleWeb($acl_module) && $dl == $mod && $do == $opt && $token == $_token && function_exists("transaction_$token_")) {
 //        if ($dl == $mod && $do == $opt && $token == $_token && function_exists("transaction_$token_")) {
             cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt, 'token=' . $_token));
             die(call_user_func("transaction_$token_"));
@@ -69,7 +69,7 @@ function transaction_invoke()
     foreach ($ctrans_board as $id => $name) {
         list($mod, $opt, $token, $acl) = explode(':', $id, 4);
 
-        if (!test($acl)) {
+        if (!testRoleWeb($acl)) {
             unset($ctrans_board[$id]);
             continue;
         }
@@ -107,7 +107,7 @@ function transaction___buy_gd()
 
     $card_list = $list_item = array();
 
-    $km_list = explode('|', getoption('km_list'));
+    $km_list = explode('|', getOption('km_list'));
     $pt_km = 0;
     if ($km_list[1]) {
         $pt_km = $km_list[1];
@@ -134,7 +134,7 @@ function transaction___buy_gd()
     if (empty($page)) $page = 1;
     $pt_km = intval($pt_km);
     $opt = strtolower($opt);
-    list($_10k, $_20k, $_30k, $_50k, $_100k, $_200k, $_300k, $_500k) = explode(",", getoption('napthe_' . $opt), 8);
+    list($_10k, $_20k, $_30k, $_50k, $_100k, $_200k, $_300k, $_500k) = explode(",", getOption('napthe_' . $opt), 8);
     $napthe_list = array('10k' => $_10k, '20k' => $_20k, '30k' => $_30k, '50k' => $_50k, '100k' => $_100k, '200k' => $_200k, '300k' => $_300k, '500k' => $_500k);
 
     $arrTypeCard = [
@@ -198,9 +198,9 @@ function transaction___buy_gd()
             //*Card_type = 5 => VTC
             $ctime = ctime();
             $card_type = $arrTypeCard[$opt];
-            $merchant_id = intval(getoption('Merchant_ID')); // interger
-            $api_user = trim(getoption('API_User')); // string
-            $api_password = trim(getoption('API_Password')); // string
+            $merchant_id = intval(getOption('Merchant_ID')); // interger
+            $api_user = trim(getOption('API_User')); // string
+            $api_password = trim(getOption('API_Password')); // string
 
             list($pin, $seri, $verifyCaptcha) = GET('cardCode, cardSerial, verifyCaptcha', 'GPG');
 
@@ -291,7 +291,7 @@ function transaction___buy_gd()
                     -100 => 'Giao dịch nghi vấn'
                 );
 
-                $gb_api = new GB_API();
+                $gb_api = new CardGameBankAPI();
                 $gb_api->setMerchantId($merchant_id);
                 $gb_api->setApiUser($api_user);
                 $gb_api->setApiPassword($api_password);
@@ -408,7 +408,7 @@ function zenderHtmlTableHistoryCard($dataHistory, $url, $page)
     if (empty($dataHistory)) return '<div class="mg-top15 cRed mg-left15">Bạn chưa nạp thẻ nào. </div>';
     $per_page = 20;
     if (empty($page)) $page = 1;
-    list ($resultShowData, $pagination) = cn_arr_paginaAjax($dataHistory, $url, $page, $per_page);
+    list ($resultShowData, $pagination) = cn_render_pagination_ajax($dataHistory, $url, $page, $per_page);
 
     if (empty($resultShowData)) return '';
 

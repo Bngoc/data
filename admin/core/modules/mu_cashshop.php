@@ -124,10 +124,10 @@ function cashshop_action()
     //if(!$page) $page = 0;
     if (intval($per_page) == 0) $per_page = 25;
 
-    $__data = getoption('#item_shop' . $opt);
+    $__data = getOption('#item_shop' . $opt);
 
     //$files = scan_dir(cn_path_construct(ROOT ,'core','cashshop'), 'txt');
-    //$_grps = getoption('#items_data'); //?
+    //$_grps = getOption('#items_data'); //?
 
     if (REQ('__item', 'GPG') == 'change-item') {
         foreach ($__data as $key => $raw) $s_temp[] = $raw['code32'];
@@ -153,8 +153,8 @@ function cashshop_action()
         cn_throw_message('Delete all Code Item successfully');
     }
     //$s_data=cn_read_file($path = cn_path_construct(ROOT,'core','cashshop').'shop_'.$opt.'.php'); //shop_acient
-    //list($item_read, $get_paging) = cn_arr_pagina($s_data, 'mod=cashshop', $page, $per_page);
-    //list($item_read, $get_paging) = cn_arr_pagina($s_data, cn_url_modify('mod=cashshop', 'do=action', "opt=".$opt), $page, $per_page);
+    //list($item_read, $get_paging) = cn_render_pagination($s_data, 'mod=cashshop', $page, $per_page);
+    //list($item_read, $get_paging) = cn_render_pagination($s_data, cn_url_modify('mod=cashshop', 'do=action', "opt=".$opt), $page, $per_page);
 
     if (request_type('POST')) {
         cn_dsi_check();
@@ -242,7 +242,7 @@ function cashshop_action()
         setOption('#items_data', array_merge($items_data, $item_temp));
     }
 
-    list($item_read, $get_paging) = cn_arr_pagina($set_data, cn_url_modify(array('reset'), 'mod=cashshop', 'do=action', "opt=$opt", '__item', '_id'), $page, $per_page);
+    list($item_read, $get_paging) = cn_render_pagination($set_data, cn_url_modify(array('reset'), 'mod=cashshop', 'do=action', "opt=$opt", '__item', '_id'), $page, $per_page);
 
     if ($_id) {
         $txt_name = $__data[$_id]['name'];
@@ -277,10 +277,10 @@ function cashshop_acient()
     //$skins = scan_dir(cn_path_construct(SERVDIR,'skins'));
     echo "143 opt =============> $opt ROOT =>" . ROOT . ".----." . cn_path_construct(ROOT, 'core', 'cashshop') . "<br>";
     $files = scan_dir(cn_path_construct(ROOT, 'core', 'cashshop'), 'txt');
-    //$_grps = getoption('#items_data'); //?
+    //$_grps = getOption('#items_data'); //?
 
     $s_data = cn_read_file(cn_path_construct(ROOT, 'core', 'cashshop') . 'shop_' . $opt . '.php'); //shop_acient
-    list($item_read, $get_paging) = cn_arr_pagina($s_data, 'mod=cashshop', $page, $per_page);
+    list($item_read, $get_paging) = cn_render_pagination($s_data, 'mod=cashshop', $page, $per_page);
 
     foreach ($item_read as $f => $h)
         echo "162 >>> $f =>" . $h['image'] . " <br>";
@@ -336,10 +336,10 @@ function cashshop_armor()
     //$skins = scan_dir(cn_path_construct(SERVDIR,'skins'));
     //echo "143 opt =============> $opt ROOT =>" . ROOT . ".----." . cn_path_construct(ROOT ,'core','cashshop'). "<br>";
     //$files = scan_dir(cn_path_construct(ROOT ,'core','cashshop'), 'txt');
-    //$_grps = getoption('#items_data'); //?
+    //$_grps = getOption('#items_data'); //?
 
     $s_data = cn_read_file($path = cn_path_construct(ROOT, 'core', 'cashshop') . 'shop_' . $opt . '.php'); //shop_acient
-    list($item_read, $get_paging) = cn_arr_pagina($s_data, 'mod=cashshop', $page, $per_page);
+    list($item_read, $get_paging) = cn_render_pagination($s_data, 'mod=cashshop', $page, $per_page);
 
     foreach ($item_read as $f => $h)
         echo "162 >>> $f =>" . $h['image'] . " <br>";

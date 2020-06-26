@@ -48,17 +48,17 @@ echo cn_snippet_messages();
         <tr>
             <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input id="verifyCaptcha" type="text" class="bizwebform" name="verifyCaptcha"
-                                                required autocomplete="off"
+                                                required autocomplete="on"
                                                 onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
             <td class="bizwebform_col_3" id="msg_Captcha"></td>
         </tr>
         <tr>
             <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;"
-                                            onclick="getId('capchaWeb').src='/captcha.php?page=web&r='+Math.random(); return(false);">
+                                            onclick="getId('captcha_web').src='/captcha.php?page=web&r='+Math.random(); return(false);">
                     Refresh code</a></td>
             <td colspan="" class="bizwebform_col_2" style="padding-left:20px;">
-                <div class="vertical-img"><img src="/captcha.php?cap=web"
-                                               id="capchaWeb" alt=""></div>
+                <div class="vertical-img"><img src="/captcha.php?page=web"
+                                               id="captcha_web" alt=""></div>
             </td>
             <td class="bizwebform_col_3"></td>
         </tr>

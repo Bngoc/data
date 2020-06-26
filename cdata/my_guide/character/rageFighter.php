@@ -10,7 +10,7 @@
 
         </p>
         <center>
-            <img alt="" src="/images/guides/img_ragefighter_1.jpg">
+            <img alt="" src="/public/images/web/guides/img_ragefighter_1.jpg">
             <p></p>
             <div class="table_hasNoline_v2">
                 <table class="tableGuide">

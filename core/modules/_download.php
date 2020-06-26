@@ -14,7 +14,7 @@ function download_invoke()
 
     $arr_downlooadShow = array();
     foreach ($arr_downlooad as $key => $item) {
-        $arr_downlooadShow[$key]['href'] = getoption('download_' . $key);
+        $arr_downlooadShow[$key]['href'] = getOption('download_' . $key);
         $arr_downlooadShow[$key]['name'] = $item;
     }
 

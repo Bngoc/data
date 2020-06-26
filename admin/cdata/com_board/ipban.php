@@ -18,7 +18,7 @@ cn_snippet_bc();
                 <td align="center"><?php echo $item[0]; ?></td>
                 <!-- <td align="center"><?php echo $item[1]; ?></td> -->
                 <td align="center">[<a
-                        href="<?php echo cn_url_modify('unblock=' . $ip, cn_snippet_digital_signature('a')); ?>"
+                        href="<?php echo cn_url_modify('unblock=' . $ip, cn_snippet_digital_signature(getMember(), 'a')); ?>"
                         onclick="return(confirm('Confirm unblock'));">unblock</a>]
                 </td>
             </tr>

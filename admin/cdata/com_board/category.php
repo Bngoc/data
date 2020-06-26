@@ -7,7 +7,7 @@ cn_snippet_bc();
 
 ?>
 <div style="text-align: right;">
-    <img border="0" src="admin/skins/images/help_small.gif" style="vertical-align: middle;">
+    <img border="0" src="/public/images/help_small.gif" style="vertical-align: middle;">
     <a href="#" onclick="<?php echo cn_snippet_open_win(PHP_SELF . '?mod=help&section=categories'); ?>">What are
         categories and How to use them</a>
 </div>
@@ -33,7 +33,7 @@ cn_snippet_bc();
 
             foreach ($categories as $id => $category) {
                 $acl_message = array();
-                $acls = spsep($category['acl_forum']);
+                $acls = separateString($category['acl_forum']);
 
                 foreach ($acls as $grp) $acl_message[] = ucfirst($groups[$grp]['N']);
                 $acl_message = join(', ', $acl_message);

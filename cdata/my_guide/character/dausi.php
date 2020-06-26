@@ -1,4 +1,4 @@
-<p align="center"><img src="/images/guides/img_magicGladiator.jpg"></p><br>
+<p align="center"><img src="/public/images/web/guides/img_magicGladiator.jpg"></p><br>
 <p>Một số người làm chủ quyền năng của phép thuật ở độ tuổi rất nhỏ, một số khác làm chủ quyền năng của các thanh gươm
     và một số ít khác họ có thể lĩnh hội được cả hai quyền năng đó. Họ có thể sử dụng thành thạo cả gươm và gậy phép. Họ
     là những nhà nghiên cứu về hai trường phái sức mạnh và phép thuật. Mọi người gọi họ là Đấu Sĩ. Đấu Sĩ đã tìm ra bí

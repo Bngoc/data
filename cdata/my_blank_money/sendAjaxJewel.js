@@ -35,7 +35,7 @@ $(document).ready(function () {
                         $('.countItem').html(data['countItem']);
                         $('.result-show').html(data['result']);
 
-                        $("#capchaWeb").attr("src", "/captcha.php?page=web&r='+Math.random()");
+                        $("#captcha_web").attr("src", "/captcha.php?page=web&r='+Math.random()");
                         $("#verifyCaptcha").val('');
                     }
                 });
@@ -88,7 +88,7 @@ $(document).ready(function () {
                     $('.countItem').html(data['countItem']);
                     $('.show-NumItem').html(data['htmlOptionNumItem']);
 
-                    $("#capchaWeb").attr("src", "/captcha.php?page=web&r='+Math.random()");
+                    $("#captcha_web").attr("src", "/captcha.php?page=web&r='+Math.random()");
                     $("#verifyCaptcha").val('');
                 }
             });

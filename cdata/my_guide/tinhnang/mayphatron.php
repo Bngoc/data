@@ -1,5 +1,5 @@
 <div>
-    <div align="center"><img height="350" src="/images/guides/npc-Gobin.jpg" width="70%"></div>
+    <div align="center"><img height="350" src="/public/images/web/guides/npc-Gobin.jpg" width="70%"></div>
 </div>
 Được đặt ở Noria, đây là bộ máy đặc biệt được sáng chế và vận hành bởi các yêu tinh (Chaos Goblin). <br>
 <br>
@@ -9,7 +9,7 @@ Hệ thống này chỉ xuất hiện duy nhất trong MU. Bằng cách kết h�
 <br>
 <br>
 <div>
-    <div align="center"><img height="400" src="/images/guides/npc-ChaosGobin.jpg" width="70%">
+    <div align="center"><img height="400" src="/public/images/web/guides/npc-ChaosGobin.jpg" width="70%">
     </div>
 </div>
 <br>

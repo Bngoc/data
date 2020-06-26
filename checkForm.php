@@ -36,10 +36,10 @@ if ($action) {
         $user_col = $user_col = $notify = '';
     }
 
-    //$notify_accept ='<img style="margin-right:10px" src="images/checkbullet.gif">';
+    //$notify_accept ='<img style="margin-right:10px" src="/public/images/checkbullet.gif">';
     $notify_accept = 'OK';
     $notify_deline = $notify;
-    //$notify_deline = '<img style="margin-right:5px" src="images/alert_icon.gif"><span style="color:#FF0000">'.$notify.'</span>';
+    //$notify_deline = '<img style="margin-right:5px" src="/public/images/alert_icon.gif"><span style="color:#FF0000">'.$notify.'</span>';
 
     if ($user_table && $user_cont && $user_col && $id) {
         $xyz = do_select_character($user_table, $user_col, "$user_cont='$id'", '');

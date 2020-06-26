@@ -5,8 +5,7 @@ add_hook('index/invoke_module', '*cshop_invoke');
 //=====================================================================================================================
 function cshop_invoke()
 {
-    $cshop_board = array
-    (
+    $cash_shop_board = array(
         'cash_shop:acient:__buy_s1:Csc' => 'Set thần',
         'cash_shop:armor:__buy_s1:Cp' => 'Giáp trụ',
         'cash_shop:spears:__buy_s1:Ciw' => 'Thương - Giáo',
@@ -24,7 +23,7 @@ function cshop_invoke()
     );
 
     // Call dashboard extend
-    $cshop_board = hook('cshop_board', $cshop_board);
+    $cash_shop_board = hook('cshop_board', $cash_shop_board);
 
     // Exec
     $mod = REQ('mod', 'GETPOST');
@@ -33,14 +32,14 @@ function cshop_invoke()
 
     cn_bc_add('Cash shop', cn_url_modify(array('reset'), 'mod=' . $mod));
 
-    foreach ($cshop_board as $id => $_t) {
+    foreach ($cash_shop_board as $id => $_t) {
         list($dl, $do, $_token, $acl_module) = explode(':', $id);
         if (function_exists("shop_$_token"))
             cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'token=' . md5($_token . $do), 'opt=' . $do), $do);
     }
-    //$token == $_token = md5($_token.$do)
+
     // Request module
-    foreach ($cshop_board as $id => $_t) {
+    foreach ($cash_shop_board as $id => $_t) {
         list($dl, $do, $token_, $acl_module) = explode(':', $id);
         $_token = md5($token_ . $do);
 
@@ -76,10 +75,10 @@ function cshop_invoke()
     // More dashboard images
     $images = hook('extend_dashboard_images', $images);
 
-    foreach ($cshop_board as $id => $name) {
+    foreach ($cash_shop_board as $id => $name) {
         list($mod, $opt, $token, $acl) = explode(':', $id, 4);
 
-        //if (!test($acl)){
+        //if (!testRoleWeb($acl)){
         // unset($cshop_board[$id]);
         //continue;
         //}
@@ -92,10 +91,10 @@ function cshop_invoke()
             'token' => md5($token . $opt),
         );
 
-        $cshop_board[$id] = $item;
+        $cash_shop_board[$id] = $item;
     }
 
-    cn_assign('dashboard', $cshop_board);
+    cn_assign('dashboard', $cash_shop_board);
     echo_header_web('-@my_cashshop/style.css', "Character");
     echo_content_here(exec_tpl('my_cashshop/general'), cn_snippet_bc_re());
     echo_footer_web();
@@ -120,24 +119,22 @@ function shop___buy_s1()
     if ($opt == 'eventticket' || $opt == 'orther') $per_page = 21;
 
     $list_item = array();
-    $item_ = getoption('#item_shop' . $opt);    //'code32' - 'name'  - 'price' - 'image_mh'
+    $item_ = getOption('#item_shop' . $opt);    //'code32' - 'name'  - 'price' - 'image_mh'
 
     if ($item_)
         foreach ($item_ as $key => $var) {
             $list_item[$key] = cn_analysis_code32($var['code32'], $var['name'], $var['price'], $var['image_mh']);
         }
-    $member = getMember();
+    $member = getMemberWeb();
     $accc_ = $member['user_name'];
 
     $warehouse_ = do_select_character('warehouse', $arr_cls = 'Items', "AccountID='$accc_'");
-    $warehouse = substr(strtoupper(bin2hex($warehouse_[0]['Items'])), 0, 3840);
+    $warehouse = count($warehouse_) ? substr(strtoupper(bin2hex($warehouse_[0]['Items'])), 0, 3840) : null;
 
-    /// kiem tra khi character open warehouse => ???????????
-    //if (request_type('POST')) {
+    /// kiem tra khi character open warehouse
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($token == md5('__buy_s1' . $opt) && $id_item = REQ('item')) {
             cn_dsi_check(true);
-
             $errors_false = false;
 
             if (!in_array($id_item, array_keys($list_item))) {
@@ -157,7 +154,7 @@ function shop___buy_s1()
                     cn_throw_message("Bạn đang có $vp_ Vpoint. $name_ giá " . number_format($price_, 0, ",", ".") . " Vpoint. Bạn còn thiếu " . number_format((abs($check)), 0, ",", ".") . " Vpoint", 'e');
                     $errors_false = true;
                 } else {
-                    $items_data = getoption('#items_data');
+                    $items_data = getOption('#items_data');
                     $item_code = $list_item[$id_item]['code32'];
 
                     if ($opt == "armor") {
@@ -247,7 +244,7 @@ function shop___buy_s1()
     $name_shop = array_pop($arr_shop)['name'];
 
 
-    list($list_itemNew, $echoPagination) = cn_arr_pagina($list_item, cn_url_modify(array('reset'), 'mod=cash_shop', "token=$token", "opt=$opt", 'page', "per_page=$per_page"), $page, $per_page);
+    list($list_itemNew, $echoPagination) = cn_render_pagination($list_item, cn_url_modify(array('reset'), 'mod=cash_shop', "token=$token", "opt=$opt", 'page', "per_page=$per_page"), $page, $per_page);
 
     cn_assign('list_item, token, opt', $list_itemNew, $token, $opt);
     cn_assign('per_page, echoPagination', $per_page, $echoPagination);
@@ -259,7 +256,7 @@ function shop___buy_s1()
 
 function shop___what_()
 {
-    $member = getMember();
+    $member = getMemberWeb();
     $accc_ = $member['user_name'];
     $warehouse_ = do_select_character('warehouse', 'Items,Money,pw,AccountID', "AccountID='$accc_'");
 

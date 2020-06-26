@@ -30,7 +30,7 @@ function ranking_invoke()
     // Request module
     foreach ($ranking_board as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
-        //if (test($acl_module) && $dl == $mod && $do == $opt && function_exists("ranking_$do")) {
+        //if (testRoleWeb($acl_module) && $dl == $mod && $do == $opt && function_exists("ranking_$do")) {
         if ($dl == $mod && $do == $opt && function_exists("ranking_$do")) {
             cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt));
             die(call_user_func("ranking_$opt"));
@@ -55,7 +55,7 @@ function ranking_invoke()
     foreach ($ranking_board as $id => $name) {
         list($mod, $act, $acl) = explode(':', $id);
 
-        //if (!test($acl)) {
+        //if (!testRoleWeb($acl)) {
         // unset($relax_board[$id]);
         //continue;
         //}
@@ -116,7 +116,7 @@ function zenderRankingCharacter($class, $url, $page, $optSort = 'DESC')
 
     $dataTop = do_select_other($myQuerydataTop);
 
-    list ($resultShowData, $pagination) = cn_arr_paginaAjax($dataTop, $url, $page, $per_page);
+    list ($resultShowData, $pagination) = cn_render_pagination_ajax($dataTop, $url, $page, $per_page);
 
     foreach ($resultShowData as $key => $item) {
         $getKey = array_search($item['Class'], $tempClass);
@@ -171,7 +171,7 @@ function zenderRankingGuild($sub, $url, $page, $optSort = 'DESC')
         }
 
         if (in_array($item['G_Name'], $arrGuild[$item['G_Name']])) {
-            $arrGuild[$item['G_Name']]['totalReset'] += $item['Resets'];
+            $arrGuild[$item['G_Name']]['totalReset'] = $item['Resets'] + (isset($arrGuild[$item['G_Name']]['totalReset']) ? $arrGuild[$item['G_Name']]['totalReset'] : 0);
             $tempGuild = $item['G_Name'];
 
             if (!$tempRl) {
@@ -202,7 +202,7 @@ function zenderRankingGuild($sub, $url, $page, $optSort = 'DESC')
         }
     }
 
-    list ($resultShowData, $pagination) = cn_arr_paginaAjax($showData, $url, $page, $per_page);
+    list ($resultShowData, $pagination) = cn_render_pagination_ajax($showData, $url, $page, $per_page);
 
     return array($resultShowData, $pagination);
 }
@@ -217,7 +217,7 @@ function zenderRankingCard($opts, $url, $page, $optSort = 'DESC')
     }
     $resultTopCard = do_select_other("select TOP 250 accountID, SUM(menhgia) as total_vnd from muonline.dbo.cardphone $whereOpt group by accountID order by total_vnd $optSort");
 
-    list ($resultShowData, $pagination) = cn_arr_paginaAjax($resultTopCard, $url, $page, $per_page);
+    list ($resultShowData, $pagination) = cn_render_pagination_ajax($resultTopCard, $url, $page, $per_page);
 
     return array($resultShowData, $pagination);
 }
@@ -245,7 +245,7 @@ function zenderDataContent($dataResult)
             $dataTableResult .= '<td>' . $items['totalPoint'] . '</td>';
             $dataTableResult .= '<td>' . $items['showNameClass'] . '</td>';
             $dataTableResult .= '<td>' . (@$items['DGT_Time'] ? date('d-M-Y h:ia', $items['DGT_Time']) : '---') . '</td>';
-            $dataTableResult .= '<td><img src="/images/' . (@$items['statusOnline'] ? 'users_online' : 'users_offline') . '.gif" alt="' . (@$items['ConnectStat'] ? 'Online' : 'Offline') . '"></td></tr>';
+            $dataTableResult .= '<td><img src="/public/images/' . (@$items['statusOnline'] ? 'users_online' : 'users_offline') . '.gif" alt="' . (@$items['ConnectStat'] ? 'Online' : 'Offline') . '"></td></tr>';
         }
     }
 

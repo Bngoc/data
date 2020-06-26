@@ -32,7 +32,7 @@ function event_invoke()
     foreach ($relax_board as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
 
-        //if (test($acl_module) && $dl == $mod && $do == $opt && function_exists("relax_$opt")) {
+        //if (testRoleWeb($acl_module) && $dl == $mod && $do == $opt && function_exists("relax_$opt")) {
         if ($dl == $mod && $do == $opt && function_exists("event_$opt")) {
             cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt));
             die(call_user_func("event_$opt"));
@@ -56,7 +56,7 @@ function event_invoke()
     foreach ($relax_board as $id => $name) {
         list($mod, $opt, $acl) = explode(':', $id, 3);
 
-        //if (!test($acl)) {
+        //if (!testRoleWeb($acl)) {
         // unset($relax_board[$id]);
         //continue;
         //}
@@ -73,7 +73,7 @@ function event_invoke()
 //
     cn_assign('dashboard', $relax_board);
     echo_header_web('-@my_event/style.css', "Sự kiện");
-    echo_comtent_here(exec_tpl('my_event/general'), cn_snippet_bc_re());
+    echo_content_here(exec_tpl('my_event/general'), cn_snippet_bc_re());
     echo_footer_web();
 }
 
@@ -82,7 +82,7 @@ function event_default()
     $arr_shop = getMemcache('.breadcrumbs');
     $name__ = array_pop($arr_shop)['name'];
     echo_header_web('defaults/style.css', "Error - $name__");
-    echo_comtent_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
+    echo_content_here(exec_tpl('defaults/default'), cn_snippet_bc_re());
     echo_footer_web();
 }
 
@@ -138,6 +138,6 @@ function relax_baucua()
     }
 
     echo_header_web('-@my_relax/style.css@my_relax/relaxAjaxPlay.js', "Giải trí - Bầu Cua");
-    echo_comtent_here(exec_tpl('my_relax/baucua'), cn_snippet_bc_re());
+    echo_content_here(exec_tpl('my_relax/baucua'), cn_snippet_bc_re());
     echo_footer_web();
 }

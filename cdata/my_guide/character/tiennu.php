@@ -1,4 +1,4 @@
-<p align="center"><img src="/images/guides/img_fairyElf.jpg"></p>
+<p align="center"><img src="/public/images/web/guides/img_fairyElf.jpg"></p>
 <p>Tiên nữ của vùng Noria là nhân vật thuộc những dòng tộc cổ xưa. Họ cho rằng họ là dòng tộc đầu tiên của MU trước cả
     con người và yêu tinh. Một Tiên nữ ở Noria đã truyền lại rằng họ có một vẽ đẹp huyền ảo và duyên dáng. Tuy họ có vẻ
     tránh né những trận chiến nhưng không thể nói rằng họ nhút nhát. Các Tiên nữ đã dạy cho con người những kỹ năng dùng

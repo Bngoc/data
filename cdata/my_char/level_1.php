@@ -2,7 +2,7 @@
 list($before_info_cn, $sub, $showchar) = _GL('before_info_cn, sub, showchar');
 
 echo cn_snippet_messages();
-$configLevel1 = explode('|', getoption('configLevel'), 2);
+$configLevel1 = explode('|', getOption('configLevel'), 2);
 ?>
 
 <form action="<?php echo PHP_SELF; ?>" method="GET">

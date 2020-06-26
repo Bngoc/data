@@ -1,4 +1,4 @@
-<p align="center"><img src="/images/guides/img_summoner.jpg"> <br>
+<p align="center"><img src="/public/images/web/guides/img_summoner.jpg"> <br>
     Sự xuất hiện của phiên bản Season IV hứa hẹn sẽ đem đến nhiều điều bất ngờ và thú vị cho người chơi MU qua những bản
     đồ mới, boss mới, items mới và những bí mật đang chờ được khám phá. Tuy nhiên, điều nổi bật nhất và đang thu hút sự
     chú ý của toàn thể các chiến binh trên lục địa đó chính là sự ra mắt của một nhân vật (character) mới bên cạnh 5

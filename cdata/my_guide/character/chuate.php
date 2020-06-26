@@ -1,4 +1,4 @@
-<p align="center"><img src="/images/guides/darkLoad.jpg"></p>
+<p align="center"><img src="/public/images/web/guides/darkLoad.jpg"></p>
 <br>
 <p>Chúa Tể có vẻ bề ngoài như nhân vật phục vụ cho KunDun. Họ là dòng dõi của các nhà lãnh đạo, người đã chỉ huy những
     đội quân hùng hậu và thừa hưởng quyền năng của tạo hóa trong thời hoàng kim. Lời đe dọa của KunDun đã mang họ trở về

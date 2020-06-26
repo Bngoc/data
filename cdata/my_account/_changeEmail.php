@@ -42,18 +42,18 @@ if ($errors_result) {
         </tr>
         <tr>
             <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;"
-                                            onclick="getId('capchaWeb').src='<?php echo getoption('http_script_dir'); ?>/captcha.php?page=web&r='+Math.random(); return(false);">
+                                            onclick="getId('captcha_web').src='<?php echo getOption('http_script_dir'); ?>/captcha.php?page=web&r='+Math.random(); return(false);">
                     Refresh code</a></td>
             <td colspan="" class="bizwebform_col_2" style="padding-left:20px;">
-                <div class="vertical-img"><img src="<?php echo getoption('http_script_dir'); ?>/captcha.php?cap=web"
-                                               id="capchaWeb" alt=""></div>
+                <div class="vertical-img"><img src="<?php echo getOption('http_script_dir'); ?>/captcha.php?page=web"
+                                               id="captcha_web" alt=""></div>
             </td>
             <td class="bizwebform_col_3"></td>
         </tr>
         <tr>
             <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="cnameCaptcha" required
-                                                autocomplete="off"
+                                                autocomplete="on"
                                                 onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
             <td class="bizwebform_col_3" id="msg_Captcha"></td>
         </tr>

@@ -334,7 +334,7 @@ function board_sysconf()
     setMemcache('config', $cfg);
 
     // ------------------
-    $sub = REQ('sub', "GETPOST");
+    $sub = trim(strtolower(REQ('sub', "GETPOST")));
     if (!isset($options_list[$sub])) {
         $sub = 'general';
     }
@@ -345,7 +345,7 @@ function board_sysconf()
 
         $post_cfg = $_POST['config'];
         $opt_result = getOption('#%site');
-        $by_default = $options_list[$sub];
+        $by_default = $options_list[strtolower($sub)];
 
         // Detect selfpath
         $SN = dirname($_SERVER['SCRIPT_NAME']);
@@ -388,7 +388,7 @@ function board_sysconf()
         cn_throw_message('Saved successfully');
     }
 
-    $options = $options_list[$sub];
+    $options = $options_list[strtolower($sub)];
     foreach ($options as $id => $vo) {
         $options[$id]['var'] = getOption($id);
 
@@ -407,10 +407,7 @@ function board_sysconf()
         cn_throw_message('Successfully saved');
     }
 
-
     cn_assign('options, sub, options_list', $options, $sub, $options_list);
-
-
     echo_header_admin('-@com_board/style.css', "System configurations");
     //echo execTemplate('header');
     echo execTemplate('com_board/sysconf');
@@ -419,7 +416,6 @@ function board_sysconf()
 
 function board_confChar()
 {
-
     $lng = $grps = $all_skins = array();
     $_grps = getOption('#grp');
     //$conf_class_ = cn_get_template('class_dw_1_name','config_class');
@@ -455,45 +451,63 @@ function board_confChar()
 
     $options_list = array
     (
-        // Section
-        // Option -> 0=Type(text [Y/N] int select), 1=Title|Description, [2=Optional values]
-        'general' => array
+        'cashshop' => array
         (
-            '_GENERAL' => array('title', 'General site settings'),
-//            'configLevel' => array('text', 'Set Vpoint level 150 - 220 - 380 |Ex: 2000|3000|5000  =-> 2k Vp <-> Level I; 3k Vp <-> Level II; 5k Vp <-> Level III'),
+            '_CASHSHOP' => array('title', 'Cashshop settings'),
+            'Use_WebShop' => array('Y/N', 'Sử dụng web shop'),
         ),
-        'xxxxc' => array(
-            '_GENERAL' => array('title', 'General site settings'),
+        'money' => array(
+            '_MONEY' => array('title', 'Money settings'),
+            'Use_NapVpoint' => array('Y/N', 'Sử dụng nạp Vpoint'),
+            'Use_ChuyenVpoint' => array('Y/N', 'Sử dụng chuyển Vpoint'),
+            'Use_Gcoin2VipMoney' => array('Y/N', 'Sử dụng chuyển Gcoin sang VipMoney'),
+            'Use_Gcoin2WCoin' => array('Y/N', 'Sử dụng chuyển Gcoin sang WCoin'),
+            'Use_Gcoin2WCoinP' => array('Y/N', 'Sử dụng chuyển Gcoin sang WCoinP'),
+            'Use_Gcoin2GoblinCoin' => array('Y/N', 'Sử dụng chuyển Vpoint'),
+            'Use_TienTe' => array('Y/N', 'Sử dụng tiền tệ'),
+            'Use_NapThe' => array('Y/N', 'Sử dụng nạp thẻ'),
+            'Use_CardGATE' => array('Y/N', 'Sử dụng card Gate'),
+            'Use_CardVTCOnline' => array('Y/N', 'Sử dụng Card VTC Online'),
+            'Use_CardViettel' => array('Y/N', 'Sử dụng Card Viettel'),
+            'Use_CardMobi' => array('Y/N', 'Sử dụng Card Mobi'),
+            'Use_CardVina' => array('Y/N', 'Sử dụng Card Vina'),
+            'Use_ShopTienZen' => array('Y/N', 'Sử dụng shop Tiền Zen'),
         ),
-        'x' => array
-        (),
-        'xxx' => array
-        (),
-        'xxxxx' => array
-        (),
+        'delegation' => array(
+            '_DELEGATION' => array('title', 'delegation settings'),
+            'Use_ResetVIP' => array('Y/N', 'Sử dụng Reset VIP'),
+            'Use_UyThacOffline' => array('Y/N', 'Sử dụng ủy thác Offline'),
+            'Use_UyThacOnline' => array('Y/N', 'Sử dụng ủy thác Online'),
+            'Use_UyThacResetVIP' => array('Y/N', 'Sử dụng ủy thác reset Vip'),
+        ),
+        'other' => array(
+            '_OTHER' => array('title', 'other settings'),
+//            'Use_Char2AccOther' => array('Y/N', 'Sử dụng chuyển Vpoint'),
+            'Use_Event' => array('Y/N', 'Sử dụng event'),
+            'Use_XepHang' => array('Y/N', 'Sử dụng xếp hạng'),
+            'Use_ChangeName' => array('Y/N', 'Sử dụng chuyển giới tính'),
+        )
     );
-
 
     // Static rewrite path
     $cfg = getMemcache('config');
-
 
     // Save cached copy
     setMemcache('config', $cfg);
 
     // ------------------
-    $sub = REQ('sub', "GETPOST");
+    $sub = trim(strtolower(REQ('sub', "GETPOST")));
     if (!isset($options_list[$sub])) {
-        $sub = 'general';
+        $sub = 'cashshop';
     }
 
     // Save data
     if (request_type('POST')) {
         cn_dsi_check();
 
-        $post_cfg = $_POST['config'];
+        $post_cfg = isset($_POST['config']) ? $_POST['config'] : null;
         $opt_result = getOption('#%site');
-        $by_default = $options_list[$sub];
+        $by_default = $options_list[strtolower($sub)];
 
         // Detect selfpath
         $SN = dirname($_SERVER['SCRIPT_NAME']);
@@ -504,13 +518,11 @@ function board_confChar()
             $post_cfg['http_script_dir'] = $script_path;
         }
         if (empty($post_cfg['uploads_dir'])) {
-            //$post_cfg['uploads_dir'] =  cn_path_construct( SERVDIR , 'uploads');
             $post_cfg['uploads_dir'] = cn_path_construct(($SN == DIRECTORY_SEPARATOR) ? SERVDIR : substr(SERVDIR, 0, -strlen($SN)), 'uploads');
         }
         if (empty($post_cfg['uploads_ext'])) {
             $post_cfg['uploads_ext'] = $script_path . '/uploads';
         }
-
 
         // all
         foreach ($by_default as $id => $var) {
@@ -537,7 +549,7 @@ function board_confChar()
         cn_throw_message('Saved successfully');
     }
 
-    $options = $options_list[$sub];
+    $options = $options_list[strtolower($sub)];
     foreach ($options as $id => $vo) {
         $options[$id]['var'] = getOption($id);
 
@@ -546,7 +558,8 @@ function board_confChar()
         $desc = isset($text_parths[1]) ? $text_parths[1] : '';
         $options[$id]['title'] = $title;
         $options[$id]['desc'] = $desc;
-        $options[$id]['help'] = isset($help[$id]) ? $help[$id] : '';
+
+//        $options[$id]['help'] = isset($help[$id]) ? $help[$id] : '';
 
         unset($options[$id][1]);
     }
@@ -556,12 +569,9 @@ function board_confChar()
         cn_throw_message('Successfully saved');
     }
 
-
     cn_assign('options, sub, options_list', $options, $sub, $options_list);
 
-
     echo_header_admin('-@com_board/style.css', "System configurations character");
-    //echo execTemplate('header');
     echo execTemplate('com_board/confchar');
     echofooter();
 }
@@ -846,10 +856,10 @@ function board_ischaracter()
     switch ($sub) {
         case 'class':
             break;
-
         case 'reset':
             break;
     }
+
     if ($sub === 'class') {
         foreach ($options as $id => $vo) {
             $get_id = explode(':', $id);
@@ -873,7 +883,6 @@ function board_ischaracter()
         }
 
     } elseif ($sub === 'reset') {
-
         foreach ($options as $id => $vo) {
             $get_id = explode(':', $id);
             $id_1 = $get_id[0];
@@ -1024,8 +1033,7 @@ function board_ischaracter()
             $options[$id]['end'] = $id_5;
         }
 
-        $array_gh_loai1 = array
-        (
+        $array_gh_loai1 = array(
             "gioihanrs_top10" => 10,
             "gioihanrs_top20" => 11,
             "gioihanrs_top30" => 12,
@@ -1084,7 +1092,6 @@ function board_ischaracter()
         }
 
     } elseif ($sub === 'uythac_reset') {
-
         foreach ($options as $id => $vo) {
             $get_id = explode(':', $id);
             $id_1 = $get_id[0];
@@ -1112,20 +1119,18 @@ function board_ischaracter()
         $template = 'config_class_';
     }
 
-
     // save template?
     if (request_type('POST')) {
         cn_dsi_check();
 
-            $post_cfg = $_POST['config'];
-            foreach ($acx[$sub] as $id => $val) {
-                if (isset($post_cfg[$id])) {
-                    $acx[$sub][$id] = $post_cfg[$id];
-                }
+        $post_cfg = $_POST['config'];
+        foreach ($acx[$sub] as $id => $val) {
+            if (isset($post_cfg[$id])) {
+                $acx[$sub][$id] = $post_cfg[$id];
             }
-            setoption("#temp_basic", $acx);
-            cn_throw_message('Template saved successfully');
         }
+        setoption("#temp_basic", $acx);
+        cn_throw_message('Template saved successfully');
     }
 
     $get_gh_loai1 = isset($gh_loai1) ? $gh_loai1 : array();
@@ -1137,6 +1142,7 @@ function board_ischaracter()
     echo_header_admin('-@com_board/style.css', "Config Character");
     echo execTemplate('com_board/classchar');
     echofooter();
+
 }
 
 function board_userman()
@@ -1168,8 +1174,7 @@ function board_userman()
                     $is_edit = FALSE;
                     cn_throw_message("User not exists", 'e');
                 }
-            }
-            else {
+            } else {
                 // Add user
                 // Check user
                 if (!$user_name)
@@ -1209,8 +1214,7 @@ function board_userman()
                     } else {
                         cn_throw_message('User info updated');
                     }
-                }
-                else {// Add user
+                } else {// Add user
                     if ($user_id = db_user_add($user_name, $user_acl)) {
                         if (db_user_update($user_name, "email=$user_email", "nick=$user_nick", 'pass=' . SHA256_hash($user_pass), "acl=$user_acl")) {
                             $is_edit = TRUE;

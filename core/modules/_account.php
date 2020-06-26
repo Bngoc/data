@@ -61,7 +61,7 @@ function manager_invoke()
     foreach ($cManger_account as $id => $name) {
         list($mod, $opt, $acl) = explode(':', $id, 3);
 
-        if (!test($acl)) {
+        if (!testRoleWeb($acl)) {
             unset($cManger_account[$id]);
             continue;
         }

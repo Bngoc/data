@@ -9,7 +9,7 @@ list($before_info_rl, $notify_rs_ok) = _GL('before_info_rl, notify_rs_ok');
 list($sub) = _GL('sub');
 
 echo cn_snippet_messages();
-$cap_relife_max = getoption('cap_relife_max');
+$cap_relife_max = getOption('cap_relife_max');
 if ($cap_relife_max > 10) $cap_relife_max = 5;
 
 if ($notify_rs_ok) echo $notify_rs_ok;

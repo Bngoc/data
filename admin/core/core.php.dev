@@ -549,7 +549,7 @@ function test($requested_acl, $requested_user = NULL, $is_self = FALSE)
     if (!$user) return FALSE;
 
     $acl = $user['acl'];
-    $grp = getoption('#grp');
+    $grp = getOption('#grp');
     $ra = spsep($requested_acl);
 
     // This group not exists, deny all
@@ -587,7 +587,7 @@ function test($requested_acl, $requested_user = NULL, $is_self = FALSE)
 function test_cat($cat)
 {
     $user = getMember();
-    $grp = getoption('#grp');
+    $grp = getOption('#grp');
 
     if (!$user) return FALSE;
 
@@ -595,7 +595,7 @@ function test_cat($cat)
     if ($cc = mcache_get('#categories'))
         $catgl = $cc;
     else {
-        $catgl = getoption('#category');
+        $catgl = getOption('#category');
         mcache_set('#categories', $catgl);
     }
 
@@ -961,7 +961,7 @@ function cn_db_init()
 // Since 2.0: Language codes initialize
 function cn_lang_init()
 {
-    $lang = getoption('cn_language');
+    $lang = getOption('cn_language');
     if (!$lang) {
         $lang = 'en';
     }
@@ -1112,12 +1112,12 @@ function cn_config_load()
     mcache_set('config', $cfg);
 
     // Make crypt-salt [after config sync]
-    if (!getoption('#crypt_salt')) {
+    if (!getOption('#crypt_salt')) {
         $salt = SHA256_hash(mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand());
         setoption("#crypt_salt", $salt);
     }
 
-    if (!getoption('#grp')) {
+    if (!getOption('#grp')) {
         setoption("#grp", $cfg['grp']);
     }
 
@@ -1431,7 +1431,7 @@ function cn_get_categories($is_frontend = FALSE)
     if ($cc = mcache_get('#categories')) {
         $catgl = $cc;
     } else {
-        $catgl = getoption('#category');
+        $catgl = getOption('#category');
         mcache_set('#categories', $catgl);
     }
 
@@ -1451,7 +1451,7 @@ function cn_get_categories($is_frontend = FALSE)
 function cn_get_more_fields($defined = array())
 {
     $morefields = array();
-    $mgrp = getoption('#more_list');
+    $mgrp = getOption('#more_list');
 
     foreach ($mgrp as $name => $item) {
         if (!($grp = $item['grp'])) $grp = '#basic';
@@ -1473,7 +1473,7 @@ function cn_more_fields_apply($e, $dt)
 
     if (!$dt) $dt = array();
 
-    $mgrp = getoption('#more_list');
+    $mgrp = getOption('#more_list');
     foreach ($dt as $id => $data) {
         if (!isset($mgrp[$id])) {
             $deny = i18n('Field ID not exists', $id);
@@ -1495,8 +1495,8 @@ function insert_smilies($insert_location, $break_location = FALSE, $admincp = FA
 {
     $i = 0;
     $output = false;
-    $config_http_script_dir = getoption('http_script_dir');
-    $smilies = spsep(getoption('smilies'));
+    $config_http_script_dir = getOption('http_script_dir');
+    $smilies = spsep(getOption('smilies'));
 
     foreach ($smilies as $smile) {
         $i++;
@@ -1505,10 +1505,10 @@ function insert_smilies($insert_location, $break_location = FALSE, $admincp = FA
         if ($admincp) {
             $output .= '<a href="#" onclick="insertAtCursor(document.getElementById(\'' . $insert_location . '\'), \' :' . $smile . ': \'); return false;"><img alt="' . $smile . '" src="skins/emoticons/' . $smile . '.gif" /></a>';
         } else {
-            if (getoption('base64_encode_smile')) {
+            if (getOption('base64_encode_smile')) {
                 $url = "data:image/png;base64," . base64_encode(join('', file(SERVDIR . '/skins/emoticons/' . $smile . '.gif')));
             } else {
-                $url = getoption('http_script_dir') . "/skins/emoticons/" . $smile . ".gif";
+                $url = getOption('http_script_dir') . "/skins/emoticons/" . $smile . ".gif";
             }
             $output .= "<a href='#' onclick='insertext(\":$smile:\", \"$insert_location\"); return false;'><img style=\"border: none;\" alt=\"$smile\" src=\"$url\" /></a>";
         }
@@ -1599,7 +1599,7 @@ function make_postponed_date($gstamp = 0)
     $day = date('j', $gstamp);
     $month = date('n', $gstamp);
     $year = date('Y', $gstamp);
-    $ml = explode(',', getoption('mon_list'));
+    $ml = explode(',', getOption('mon_list'));
 
     for ($i = 1; $i < 32; $i++) {
         if ($day == $i) {
@@ -1762,7 +1762,7 @@ function clever_truncate($html, $ln = 75)
 
 // Since 2.0: Get option from #CFG or [%site][<opt_name>]
 // Usage: #level1/level2/.../levelN or 'option_name' from %site
-function getoption($opt_name = '')
+function getOption($opt_name = '')
 {
     $cfg = mcache_get('config');
 
@@ -1863,7 +1863,7 @@ function request_type($type = 'POST')
 // Since 2.0: Current adjusted time
 function ctime()
 {
-    return time() + 60 * getoption('date_adjust');
+    return time() + 60 * getOption('date_adjust');
 }
 
 /*  ---------- Sanitize: get POST vars (default) --------
@@ -1986,13 +1986,13 @@ function cn_detect_user_ip()
 
     define('CLIENT_IP', $IP);
     // CRYPT_SALT consists an IP
-    define('CRYPT_SALT', (getoption('ipauth') == '1' ? CLIENT_IP : '') . '@' . getoption('#crypt_salt'));
+    define('CRYPT_SALT', (getOption('ipauth') == '1' ? CLIENT_IP : '') . '@' . getOption('#crypt_salt'));
 }
 
 // Since 2.0: @bootstrap
 function cn_load_skin()
 {
-    $config_skin = preg_replace('~[^a-z]~i', '', getoption('skin'));
+    $config_skin = preg_replace('~[^a-z]~i', '', getOption('skin'));
     if (file_exists($skin_file = SERVDIR . "/skins/$config_skin.skin.php")) {
         include($skin_file);
     } else {
@@ -2082,7 +2082,7 @@ function cn_load_session()
 // Since 2.0: Users online
 function cn_online_counter()
 {
-    if ($expire = getoption('client_online')) {
+    if ($expire = getOption('client_online')) {
         $online = cn_touch_get(cn_path_construct(SERVDIR, 'cdata') . 'online.php');
 
         $ct = time();
@@ -2134,7 +2134,7 @@ function cn_sendheaders()
     header('Cache-Control: post-check=0, pre-check=0', false);
     header('Pragma: no-cache');
 
-    if (getoption('useutf8')) {
+    if (getOption('useutf8')) {
         header('Content-Type: text/html; charset=UTF-8', true);
         header('Accept-Charset: UTF-8', true);
     }
@@ -2149,7 +2149,7 @@ function check_direct_including($incln)
 
     $Uri = '//' . dirname($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 
-    if (strpos(getoption('http_script_dir'), $Uri) !== false && strpos($PHP_SELF, $incln) !== false) {
+    if (strpos(getOption('http_script_dir'), $Uri) !== false && strpos($PHP_SELF, $incln) !== false) {
         die(proc_tpl('help/manual/wrong_include', array('category' => REQ('category', 'GPG'))));
     }
 }
@@ -2235,7 +2235,7 @@ function cn_get_requested_cats($category, $ucat = '', $nocategory = '')
 
     // Make aliases
     $_ct_names = array();
-    $cat_conf = getoption('#category');
+    $cat_conf = getOption('#category');
     foreach ($cat_conf as $id => $cn) {
         if ($id !== '#') {
             $_ct_names[$cn['name']] = $id;
@@ -2330,7 +2330,7 @@ function cn_replace_text()
 function cn_template_list()
 {
     $config = file(cn_path_construct(SKIN, 'defaults') . 'templates.tpl');
-    $tbasic = getoption('#templates_basic');
+    $tbasic = getOption('#templates_basic');
     $tbasic['hash'] = isset($tbasic['hash']) ? $tbasic['hash'] : '';
 
     // template file is changed
@@ -2372,7 +2372,7 @@ function cn_template_list()
 // Since 2.0: Get template (if not exists, create from defaults)
 function cn_get_template($subtemplate, $template_name = 'default')
 {
-    $templates = getoption('#templates');
+    $templates = getOption('#templates');
     $template_name = strtolower($template_name);
 
     // User template not exists in config... get from defaults
@@ -2446,9 +2446,9 @@ function entry_make($entry, $template_name, $template_glob = 'default', $section
     list($template) = hook('core/entry_make_end', array($template, $entry, $template_name, $template_glob));
 
     // UTF-8 -- convert to entities on frontend
-    if ($section == 'comm' && getoption('comment_utf8html')) {
+    if ($section == 'comm' && getOption('comment_utf8html')) {
         $template = UTF8ToEntities($template);
-    } elseif (!$section && getoption('utf8html')) {
+    } elseif (!$section && getOption('utf8html')) {
         $template = UTF8ToEntities($template);
     }
 
@@ -2629,8 +2629,8 @@ function cn_get_menu()
         'logout' => array('', 'Logout', 'logout'),
     ));
 
-    if (getoption('main_site'))
-        $modules['my_site'] = getoption('main_site');
+    if (getOption('main_site'))
+        $modules['my_site'] = getOption('main_site');
 
     $result = '';
     $mod = REQ('mod', 'GPG');
@@ -2709,7 +2709,7 @@ function cn_cookie_pack()
 // Since 2.0: Add user log
 function cn_user_log($msg)
 {
-    if (!getoption('userlogs')) {
+    if (!getOption('userlogs')) {
         return;
     }
 
@@ -2913,7 +2913,7 @@ function cn_login()
                     cn_throw_message("Invalid password or login", 'e');
                     cn_user_log('User "' . substr($username, 0, 32) . '" (' . CLIENT_IP . ') login failed');
 
-                    db_user_update($username, 'ban=' . (time() + getoption('ban_attempts')));
+                    db_user_update($username, 'ban=' . (time() + getOption('ban_attempts')));
                 }
             } else {
                 cn_throw_message('Enter login or password', 'e');
@@ -2968,7 +2968,7 @@ function cn_register_form($admin = TRUE)
     // Restore active status
     if (isset($_GET['lostpass']) && $_GET['lostpass']) {
         $d_string = base64_decode($_GET['lostpass']);
-        $d_string = xxtea_decrypt($d_string, MD5(CLIENT_IP) . getoption('#crypt_salt'));
+        $d_string = xxtea_decrypt($d_string, MD5(CLIENT_IP) . getOption('#crypt_salt'));
         $d_string = substr($d_string, 64);
 
         if ($d_string) {
@@ -3002,7 +3002,7 @@ function cn_register_form($admin = TRUE)
 
             $secret = str_replace(' ', '', REQ('secret'));
 
-            $url = getoption('http_script_dir') . '?lostpass=' . urlencode(base64_encode(xxtea_encrypt($rand . $secret . ' ' . REQ('username'), MD5(CLIENT_IP) . getoption('#crypt_salt'))));
+            $url = getOption('http_script_dir') . '?lostpass=' . urlencode(base64_encode(xxtea_encrypt($rand . $secret . ' ' . REQ('username'), MD5(CLIENT_IP) . getOption('#crypt_salt'))));
             cn_send_mail($user['email'], i18n('Resend activation link'), cn_replace_text(cn_get_template('resend_activate_account', 'mail'), '%username%, %url%, %secret%', $user['name'], $url, $secret));
 
             msg_info('For you send activate link');
@@ -3020,7 +3020,7 @@ function cn_register_form($admin = TRUE)
         $Action = 'Lost password';
         $template = 'auth/lost';
     } else {
-        if (getoption('allow_registration')) {
+        if (getOption('allow_registration')) {
             $Register_OK = FALSE;
             $errors = array();
             list($regusername, $regnickname, $regpassword, $confirm, $regemail, $captcha) = GET('regusername, regnickname, regpassword, confirm, regemail, captcha', "POST");
@@ -3047,7 +3047,7 @@ function cn_register_form($admin = TRUE)
 
                         if (is_null($user)) {
                             $pass = SHA256_hash($regpassword);
-                            $acl_groupid_default = intval(getoption('registration_level'));
+                            $acl_groupid_default = intval(getOption('registration_level'));
 
                             db_user_add($regusername, $acl_groupid_default);
                             db_user_update($regusername, "email=$regemail", "name=$regusername", "nick=$regnickname", "pass=$pass", "acl=$acl_groupid_default");
@@ -3075,8 +3075,8 @@ function cn_register_form($admin = TRUE)
                     }
 
                     // Send notify about register
-                    if (getoption('notify_registration')) {
-                        cn_send_mail(getoption('notify_email'), i18n("New registration"), i18n("User %1 (email: %2) registered", $regusername, $regemail));
+                    if (getOption('notify_registration')) {
+                        cn_send_mail(getOption('notify_email'), i18n("New registration"), i18n("User %1 (email: %2) registered", $regusername, $regemail));
                     }
 
                     header('Location: ' . PHP_SELF);
@@ -3183,7 +3183,7 @@ function cn_dsi_check()
         die('CSRF attempt! Username invalid');
 
     // Get signature
-    $signature = MD5($key . $member['pass'] . MD5(getoption('#crypt_salt')));
+    $signature = MD5($key . $member['pass'] . MD5(getOption('#crypt_salt')));
 
     if ($dsi !== $signature)
         die('CSRF attempt! Signatures not match');
@@ -3231,7 +3231,7 @@ function cn_rewrite()
 {
     global $PHP_SELF;
 
-    if (!getoption('rw_engine')) {
+    if (!getOption('rw_engine')) {
         return NULL;
     }
 
@@ -3250,13 +3250,13 @@ function cn_rewrite()
     $plist = explode('|', $to_plist);
 
     // Check manual layout
-    $playo = explode(DIRECTORY_SEPARATOR, getoption('rw_layout'));
+    $playo = explode(DIRECTORY_SEPARATOR, getOption('rw_layout'));
     $plvar = $plist[count($plist) - 1];
     $pyvar = $playo[count($playo) - 1];
 
     // If manual layout and current PHP_SELF is EQU, then use given prefix from config ["rw_prefix"]
     if (!$PHP_SELF || $plvar == $pyvar || $rss_area) {
-        $prefix = dirname(getoption('rw_prefix') . '/.html');
+        $prefix = dirname(getOption('rw_prefix') . '/.html');
     } // Else, use self prefix (aka PHP_SELF)
     else {
         $prefix = array();
@@ -3303,7 +3303,7 @@ function cn_rewrite()
     $postfix = $postfix ? '?' . join('&amp;', $postfix) : '';
 
     // After PageAlias
-    $postfix = getoption('rw_use_shorten') ? $postfix : '.html' . $postfix;
+    $postfix = getOption('rw_use_shorten') ? $postfix : '.html' . $postfix;
 
     // ----
     if ($area == 'full_story') {
@@ -3330,7 +3330,7 @@ function cn_rewrite()
     } elseif ($area == 'archive') {
         return $prefix . '/archive-' . $param . $postfix;
     } elseif ($area == 'rss') {
-        return 'http://' . parse_url(getoption('http_script_dir'), PHP_URL_HOST) . $prefix . '/' . $param . $postfix;
+        return 'http://' . parse_url(getOption('http_script_dir'), PHP_URL_HOST) . $prefix . '/' . $param . $postfix;
     } elseif ($area == 'tag') {
         if ($param2) {
             return $prefix . '/tag-' . urlencode($param) . '/' . $param2 . $postfix;
@@ -3349,7 +3349,7 @@ function cn_rewrite_load()
 
     // rewrite module detected
     if (isset($_GET['cn_rewrite_url']) && ($cn_rewrite_url = $_GET['cn_rewrite_url'])) {
-        $layout = getoption('rw_layout');
+        $layout = getOption('rw_layout');
 
         // Make compatible
         if ($cn_rewrite_url[0] !== '/') {
@@ -3358,7 +3358,7 @@ function cn_rewrite_load()
 
         // Try get target php file
         $request_uri = $_SERVER['REQUEST_URI'];
-        $basedir = dirname(getoption('rw_htaccess')) . DIRECTORY_SEPARATOR;
+        $basedir = dirname(getOption('rw_htaccess')) . DIRECTORY_SEPARATOR;
 
         // Rule matched, test pathes
         if (preg_match('/^(\/[^\?]+)/', $request_uri, $c)) {
@@ -3386,7 +3386,7 @@ function cn_rewrite_load()
             }
         }
 
-        $post_fix = getoption('rw_use_shorten') ? '$' : '\.html';
+        $post_fix = getOption('rw_use_shorten') ? '$' : '\.html';
 
         // --------
         if (preg_match('/\/tag\-(.*)\/([0-9]+)' . $post_fix . '/i', $cn_rewrite_url, $c)) {
@@ -3455,7 +3455,7 @@ function cn_snippet_digital_signature($type = 'std')
 
     // Make signature
     $sign_extr = MD5(time() . mt_rand()) . '-' . $member['name'];
-    $signature = MD5($sign_extr . $member['pass'] . MD5(getoption('#crypt_salt')));
+    $signature = MD5($sign_extr . $member['pass'] . MD5(getOption('#crypt_salt')));
 
     if ($type == 'std') {
         echo '<input type="hidden" name="__signature_key" value="' . cn_htmlspecialchars($sign_extr) . '" />';
@@ -3580,20 +3580,20 @@ function cn_snippet_ckeditor($ids = '')
     // pre-init
     $CKSmiles = $CKBar = array();
     for ($i = 1; $i <= 8; $i++) {
-        $ck_bar = getoption("ck_ln{$i}");
+        $ck_bar = getOption("ck_ln{$i}");
         if ($ck_bar) $CKBar[] = '["' . join('","', explode(',', cn_htmlspecialchars($ck_bar))) . '"]';
     }
 
-    $smiles = explode(',', getoption('smilies'));
+    $smiles = explode(',', getOption('smilies'));
     foreach ($smiles as $smile) $CKSmiles[] = "'$smile.gif'";
 
     $CKSmiles = join(', ', $CKSmiles);
     $CKBar = join(', ', $CKBar);
-    $Cklang = getoption('cklang');
+    $Cklang = getOption('cklang');
     if (empty($Cklang)) $Cklang = 'en';
 
     // show
-    echo '<script src="' . getoption('http_script_dir') . '/core/ckeditor/ckeditor.js"></script>';
+    echo '<script src="' . getOption('http_script_dir') . '/core/ckeditor/ckeditor.js"></script>';
     echo '<script type="text/javascript">' . "\n";
     echo "(function() { var settings = {" . "\n";
     echo "skin: 'moono', width: 'auto', height: 350, customConfig: '', language: '$Cklang', entities_latin: false, entities_greek: false, \n";
@@ -3612,7 +3612,7 @@ function cn_snippet_ckeditor($ids = '')
     echo join(', ', $compound) . '};' . "\n";
 
     // Smilies
-    echo 'CKEDITOR.config.smiley_path = "' . getoption('http_script_dir') . '/skins/emoticons/"; ' . "\n";
+    echo 'CKEDITOR.config.smiley_path = "' . getOption('http_script_dir') . '/skins/emoticons/"; ' . "\n";
     echo 'CKEDITOR.config.smiley_images = [ ' . hook('settings/CKEDITOR_emoticons', $CKSmiles) . ' ];' . "\n";
     echo 'CKEDITOR.config.smiley_descriptions = [];' . "\n";
     echo "CKEDITOR.config.allowedContent = true;";
@@ -3854,7 +3854,7 @@ function cn_snippet_paginate($st, $per_page = 100, $showed = NULL)
 // Since 2.0: Highlight words
 function cn_snippet_search_hl($text, $qhl)
 {
-    if (!getoption('search_hl')) {
+    if (!getOption('search_hl')) {
         return $text;
     }
 

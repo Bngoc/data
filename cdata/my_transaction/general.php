@@ -1,7 +1,7 @@
 <?php
 
 list($dashboard) = _GL('dashboard');
-$km_list = explode('|', getoption('km_list'));
+$km_list = explode('|', getOption('km_list'));
 
 if ($km_list[1]) {
     $strKm = 'Chương trình khuyến mại mọi thẻ nạp: <span class="cRed">' . $km_list[1] . '%</span> cho bất kì mệnh giá nào.';
@@ -34,7 +34,7 @@ if ($km_list[1]) {
         <?php foreach ($dashboard as $id => $item) { ?>
             <div class="opt-item">
                 <a href="<?php echo cn_url_modify("mod=" . $item['mod'], "opt=" . $item['opt'], "token=" . $item['token']); ?>">
-                    <div><img src="<?php echo getoption('http_script_dir'); ?>/skins/images/<?php echo $item['img']; ?>"
+                    <div><img src="<?php echo getOption('http_script_dir'); ?>/public/images/<?php echo $item['img']; ?>"
                               width="48"/></div>
                     <div><?php echo $item['name']; ?></div>
                 </a>

@@ -9,59 +9,6 @@ function cn_bc_add($name, $url)
     setMemcache('.breadcrumbs', $bc);
 }
 
-function cn_url_modify()
-{
-    global $PHP_SELF;
-    $GET = $_GET;
-    $args = func_get_args();
-    $SN = $PHP_SELF;
-
-    // add new params
-    foreach ($args as $ks) {
-        // 1) Control
-        if (is_array($ks)) {
-            foreach ($ks as $vs) {
-                $id = $val = '';
-
-                if (strpos($vs, '=') !== FALSE) {
-                    list($id, $var) = explode('=', $vs, 2);
-                } else {
-                    $id = $vs;
-                }
-                if ($id == 'self') {
-                    $SN = $var;
-                } elseif ($id == 'reset') {
-                    $GET = array();
-                } elseif ($id == 'group') {
-                    foreach ($vs as $a => $b) {
-                        $GET[$a] = $b;
-                    }
-                }
-            }
-        } // 2) Subtract
-        elseif (strpos($ks, '=') === FALSE) {
-            $keys = explode(',', $ks);
-
-            foreach ($keys as $key) {
-                $key = trim($key);
-                if (isset($GET[$key])) {
-                    unset($GET[$key]);
-                }
-            }
-        } // 3) Add
-        else {
-            list($k, $v) = explode('=', $ks, 2);
-
-            $GET[$k] = $v;
-            if ($v === '') {
-                unset($GET[$k]);
-            }
-        }
-    }
-
-    return cn_pack_url($GET, $SN);
-}
-
 // Since 2.0: Get template (if not exists, create from defaults)
 function cn_get_template_by_array($template_name = '', $subtemplate = '')
 {
@@ -276,4 +223,35 @@ function echo_header_admin($image, $header_text, $bread_crumbs = false)
     $skin_header = str_replace("{CustomJS}", $custom_js, $skin_header);
 
     echo $skin_header;
+}
+
+function getMember()
+{
+    // Not authorized
+    if (empty($_SESSION['mu_Account'])) {
+        return null;
+    }
+
+    // No in cache
+    if ($member = getMemcache('#member')) {
+        return $member;
+    }
+    $requestData = [
+        "clause" => "[UserAcc]='" . $_SESSION['mu_Account'] . "'",
+        "isCheck" => false,
+        "options" => [],
+    ];
+    $user = db_get_member_account($requestData);
+    $user['user_Account'] = $user['UserAcc'];
+
+    setMemcache('#member', $user);
+
+    return $user;
+}
+
+/**
+ * Call cn_snippet_digital_signature_admin_or_web
+ */
+function cn_before_digital_signature_admin_or_web() {
+    cn_snippet_digital_signature(getMember());
 }

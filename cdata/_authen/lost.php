@@ -16,7 +16,7 @@
                        name="usernameWeb"/>
             <td><input class="bizwebform" style="width: 150px;" type="email" name="emailWeb" autocomplete="off"
                        required/></td>
-            <td><input type="image" src="/images/sendemail.png"></td>
+            <td><input type="image" src="/public/images/sendemail.png"></td>
         </tr>
     </table>
 </form>

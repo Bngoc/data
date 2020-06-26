@@ -35,7 +35,7 @@ list ($showConfigTransVpoint) = _GL('showConfigTransVpoint');
             </td>
         </tr>
         <tr>
-            <td class="bizwebform_col_1">Chọn số lượng <?php echo $options; ?> <span class="required">*</span></td>
+            <td class="bizwebform_col_1">Chọn số lượng <?php echo @$options; ?> <span class="required">*</span></td>
             <td colspan="" class="bizwebform_col_2">
                 <input type="number" class="bizwebform" id="changeNumber" name="numberItem"
                        value="<?php echo(isset($_REQUEST['numberItem']) ? $_REQUEST['numberItem'] : '') ?>"/>

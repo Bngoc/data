@@ -20,7 +20,7 @@ function cn_helper_category($e)
     $nice = '';
     $cat = cn_get_categories(TRUE);
 
-    $sp = spsep($e['c']);
+    $sp = separateString($e['c']);
     foreach ($sp as $cid)
         if (isset($cat[$cid]))
             $nice[] = $cat[intval($cid)];
@@ -104,8 +104,8 @@ function cn_helper_bb_decode($bb)
 
 function cn_helper_smiles($template)
 {
-    $sml = spsep('smiles');
-    $be = getoption('base64_encode_smile');
+    $sml = separateString('smiles');
+    $be = getOption('base64_encode_smile');
 
     // catch smilies
     if (preg_match_all('/\:([a-z_]+?)\:/i', $template, $ct, PREG_SET_ORDER)) {
@@ -117,7 +117,7 @@ function cn_helper_smiles($template)
             if ($be)
                 $url = "data:image/png;base64," . base64_encode(join('', file(SERVDIR . '/skins/emoticons/' . $c[1] . '.gif')));
             else
-                $url = getoption('http_script_dir') . "/skins/emoticons/" . $c[1] . ".gif";
+                $url = getOption('http_script_dir') . "/skins/emoticons/" . $c[1] . ".gif";
 
             $template = str_replace($c[0], '<img src="' . $url . '" />', $template);
         }
@@ -182,8 +182,8 @@ function cn_modify_s2bb_img($t, $bb)
     $a = isset($bb['alt']) ? ' alt="' . cnHtmlSpecialChars($bb['alt']) . '" ' : '';
 
     // Default upload dir
-    //$upext = getoption('uploads_ext') ?  getoption('uploads_ext') : getoption('http_script_dir') . '/uploads';
-    $upext = getoption('uploads_ext') ? getoption('uploads_ext') : getoption('uploads_ext');
+    //$upext = getOption('uploads_ext') ?  getOption('uploads_ext') : getOption('http_script_dir') . '/uploads';
+    $upext = getOption('uploads_ext') ? getOption('uploads_ext') : getOption('uploads_ext');
 
     if (!preg_match('/https?:\/\//i', $t)) {
         $t = $upext . '/' . str_replace('%2F', '/', urlencode($t));
@@ -259,7 +259,7 @@ function cn_modify_date($e)
     if ($template == 'rss')
         return date('r', $e['id']);
     else
-        //return date(getoption('timestamp_active'), $e['id']);
+        //return date(getOption('timestamp_active'), $e['id']);
         return date("Y-m-d h:ia", strtotime($day));
 }
 
@@ -298,7 +298,7 @@ function cn_modify_avatar($e, $p)
     $result = '';
     if (!is_null($user)) {
         if (isset($user['avatar']) && !empty($user['avatar'])) {
-            $pathtoavatar = (getoption('uploads_ext') ? getoption('uploads_ext') : getoption('http_script_dir') . '/uploads') . '/' . $user['avatar'];
+            $pathtoavatar = (getOption('uploads_ext') ? getOption('uploads_ext') : getOption('http_script_dir') . '/uploads') . '/' . $user['avatar'];
             $w = isset($p[0]) ? $p[0] : 50;
             $h = isset($p[1]) ? $p[1] : 50;
             $result = '<img src="' . $pathtoavatar . '" style="width:' . $w . 'px;height:' . $h . 'px; margin:0px 5px;"/>';
@@ -351,7 +351,7 @@ function cn_modify_month($e)
         $e = array('id' => strtotime(date('Y-' . $e . '-d')));
 
     $mon = intval(date('m', $e['id']));
-    $mons = explode(',', getoption('mon_list'));
+    $mons = explode(',', getOption('mon_list'));
     return $mons[$mon - 1];
 }
 
@@ -359,7 +359,7 @@ function cn_modify_weekday($e)
 {
     $week = intval(date('w', $e['id']));
 
-    $weeks = explode(',', getoption('week_list'));
+    $weeks = explode(',', getOption('week_list'));
     return $weeks[$week];
 }
 
@@ -409,7 +409,7 @@ function cn_modify_tagline($e)
     $tag_extrn = strtolower(trim(REQ('tag')));
 
     $echo = array();
-    $x = isset($e['tg']) ? spsep($e['tg']) : array();
+    $x = isset($e['tg']) ? separateString($e['tg']) : array();
 
     $ix = 1;
     $tc = count($x);
@@ -451,7 +451,7 @@ function cn_modify_tagline($e)
                 unset($_GET['id']);
 
                 $url = cn_url_modify("tag=$tag", array('group' => $group));
-                if (getoption('rw_engine') && !$disable_rw) {
+                if (getOption('rw_engine') && !$disable_rw) {
                     $url = cn_rewrite('tag', $tag, 0, $group);
                 }
 
@@ -493,7 +493,7 @@ function cn_modify_go_back()
 
 function cn_modify_cute_http_path()
 {
-    return getoption('http_script_dir');
+    return getOption('http_script_dir');
 }
 
 function cn_modify_news_id($e)
@@ -515,10 +515,10 @@ function cn_modify_rss_news_include_url($e)
 {
     $id = cn_put_alias($e['id']);
 
-    if (getoption('rw_engine'))
+    if (getOption('rw_engine'))
         return cn_rewrite('rss', $id);
     else
-        return getoption('#rss/news_include_url') . '?id=' . $id;
+        return getOption('#rss/news_include_url') . '?id=' . $id;
 }
 
 function cn_modify_archive_id($e)
@@ -535,8 +535,8 @@ function cn_modify_fb_comments($e)
         return '';
 
     $unique_url = 'http://' . $_SERVER['SERVER_NAME'] . $PHP_SELF . '?id=' . $e['id'];
-    if (getoption('use_fbcomments') && (!$allow_active_news || $allow_active_news && getoption('fb_inactive'))) {
-        return '<div class="fb-comments cutenews-fb-comments" data-href="' . $unique_url . '" data-num-posts="' . getoption('fb_comments') . '" data-width="' . getoption('fb_box_width') . '" data-colorscheme="' . getoption('fbcomments_color') . '"></div>';
+    if (getOption('use_fbcomments') && (!$allow_active_news || $allow_active_news && getOption('fb_inactive'))) {
+        return '<div class="fb-comments cutenews-fb-comments" data-href="' . $unique_url . '" data-num-posts="' . getOption('fb_comments') . '" data-width="' . getOption('fb_box_width') . '" data-colorscheme="' . getOption('fbcomments_color') . '"></div>';
     }
 
     return '';
@@ -549,8 +549,8 @@ function cn_modify_fb_like($e)
         return '';
 
     $unique_url = 'http://' . $_SERVER['SERVER_NAME'] . $PHP_SELF . '?id=' . $e['id'];
-    if (getoption('use_fblike')) {
-        return '<div class="fb-like cutenews-fb-comments" data-href="' . $unique_url . '" data-send="' . (getoption('fblike_send_btn') ? "true" : "false") . '" data-layout="' . getoption('fblike_style') . '" data-width="' . getoption('fblike_width') . '" data-show-faces="' . (getoption('fblike_show_faces') ? "true" : "false") . '" data-font="' . getoption('fblike_font') . '" data-colorscheme="' . getoption('fblike_color') . '" data-action="' . getoption('fblike_verb') . '"></div>';
+    if (getOption('use_fblike')) {
+        return '<div class="fb-like cutenews-fb-comments" data-href="' . $unique_url . '" data-send="' . (getOption('fblike_send_btn') ? "true" : "false") . '" data-layout="' . getOption('fblike_style') . '" data-width="' . getOption('fblike_width') . '" data-show-faces="' . (getOption('fblike_show_faces') ? "true" : "false") . '" data-font="' . getOption('fblike_font') . '" data-colorscheme="' . getOption('fblike_color') . '" data-action="' . getOption('fblike_verb') . '"></div>';
     }
     return '';
 }
@@ -563,19 +563,19 @@ function cn_modify_twitter($e)
         return '';
     }
 
-    if (!getoption('use_twitter')) {
+    if (!getOption('use_twitter')) {
         return '';
     }
 
     $data_href = 'http://' . $_SERVER['SERVER_NAME'] . $PHP_SELF . '?id=' . $e['id'];
-    $twitter_text = getoption('tw_text') ? getoption('tw_text') : cnHtmlSpecialChars($e['t']);
+    $twitter_text = getOption('tw_text') ? getOption('tw_text') : cnHtmlSpecialChars($e['t']);
 
-    $i18n = getoption('i18n');
+    $i18n = getOption('i18n');
     if (!$i18n) {
         $i18n = 'en_US';
     }
 
-    return '<div class="cutenews-twitter-send"><a href="https://twitter.com/share" class="twitter-share-button" data-url="' . trim($data_href) . '" data-text="' . trim($twitter_text) . '" data-via="' . trim(getoption('tw_via')) . '" data-related="' . trim(getoption('tw_recommended')) . '" data-count="' . getoption('tw_show_count') . '" data-hashtags="' . trim(getoption('tw_hashtag')) . '" data-lang="' . str_replace('_', '-', $i18n . '" data-size="' . (getoption('tw_large') ? "large" : "medium")) . '"></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>';
+    return '<div class="cutenews-twitter-send"><a href="https://twitter.com/share" class="twitter-share-button" data-url="' . trim($data_href) . '" data-text="' . trim($twitter_text) . '" data-via="' . trim(getOption('tw_via')) . '" data-related="' . trim(getOption('tw_recommended')) . '" data-count="' . getOption('tw_show_count') . '" data-hashtags="' . trim(getOption('tw_hashtag')) . '" data-lang="' . str_replace('_', '-', $i18n . '" data-size="' . (getOption('tw_large') ? "large" : "medium")) . '"></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>';
 }
 
 function cn_modify_gplus($e)
@@ -585,8 +585,8 @@ function cn_modify_gplus($e)
     if ($template == 'rss')
         return '';
 
-    if (getoption('use_gplus')) {
-        return '<div class="g-plusone" data-href="' . cn_url_modify(array('reset'), 'id=' . $e['id']) . '" data-size="' . getoption('gplus_size') . '" data-annotation="' . getoption('gplus_annotation') . '" data-width="' . getoption('gplus_width') . '"></div>';
+    if (getOption('use_gplus')) {
+        return '<div class="g-plusone" data-href="' . cn_url_modify(array('reset'), 'id=' . $e['id']) . '" data-size="' . getOption('gplus_size') . '" data-annotation="' . getOption('gplus_annotation') . '" data-width="' . getOption('gplus_width') . '"></div>';
     }
 
     return '';
@@ -595,7 +595,7 @@ function cn_modify_gplus($e)
 // Users online sysmod
 function cn_modify_online() // Since 2.0
 {
-    if ($expire = getoption('client_online')) {
+    if ($expire = getOption('client_online')) {
         $online = cn_touch_get(cn_path_construct(SERVDIR, 'cdata') . 'online.php');
         return count($online['%']);
     }
@@ -605,7 +605,7 @@ function cn_modify_online() // Since 2.0
 
 function cn_modify_online_own_hits() // Since 2.0
 {
-    if ($expire = getoption('client_online')) {
+    if ($expire = getOption('client_online')) {
         $online = cn_touch_get(cn_path_construct(SERVDIR, 'cdata') . 'online.php');
         return intval($online['%'][CLIENT_IP]);
     }
@@ -643,7 +643,7 @@ function cn_modify_bb_print($e, $t, $bb)
     $id = ($id);
 
     //if (NULL === ($url = cn_rewrite('print', $id)))
-    $url = getoption('http_script_dir') . '/print.php?id=' . $id;
+    $url = getOption('http_script_dir') . '/print.php?id=' . $id;
 
     return '<a ' . $opts . 'href="' . $url . $anchor . '">' . $t . '</a>';
 }
@@ -662,8 +662,8 @@ function cn_modify_bb_full_link($e, $t, $bb)
     //$id = cn_put_alias($id);
     $id = ($id);
 
-    if (getoption('full_popup')) {
-        return '<a href="#" onclick="window.open(\'' . getoption('http_script_dir') . '/print.php?id=' . $id . $anchor . '&popup=news\', \'Comment news\', \'' . getoption('full_popup_string') . '\'); return false;">' . $t . '</a>';
+    if (getOption('full_popup')) {
+        return '<a href="#" onclick="window.open(\'' . getOption('http_script_dir') . '/print.php?id=' . $id . $anchor . '&popup=news\', \'Comment news\', \'' . getOption('full_popup_string') . '\'); return false;">' . $t . '</a>';
     } else {
         //if (NULL === ($url = cn_rewrite('full_story', $id)))
         {
@@ -680,8 +680,8 @@ function cn_modify_bb_com_link($e, $t, $bb)
     $id = ($id);
     list(, $anchor) = cn_helper_bb_decode($bb);
 
-    if (getoption('comments_popup')) {
-        return '<a href="#" onclick="window.open(\'' . getoption('http_script_dir') . '/print.php?id=' . $id . $anchor . '&popup=comment\', \'Comment news\', \'' . getoption('comments_popup_string') . '\'); return false;">' . $t . '</a>';
+    if (getOption('comments_popup')) {
+        return '<a href="#" onclick="window.open(\'' . getOption('http_script_dir') . '/print.php?id=' . $id . $anchor . '&popup=comment\', \'Comment news\', \'' . getOption('comments_popup_string') . '\'); return false;">' . $t . '</a>';
     } else {
         //if (NULL === ($url = cn_rewrite('comments', $id)))
         {
@@ -698,7 +698,7 @@ function cn_modify_bb_edit($e, $t, $bb)
     list($opts) = cn_helper_bb_decode($bb);
 
     if (test('Cen')) {
-        $URL = getoption('http_script_dir') . '/index.php?mod=editnews&amp;action=editnews&amp;id=' . intval($e['id']);
+        $URL = getOption('http_script_dir') . '/index.php?mod=editnews&amp;action=editnews&amp;id=' . intval($e['id']);
         return '<a ' . $opts . 'href="' . $URL . '">' . $t . '</a>';
     }
 
@@ -725,7 +725,7 @@ function cn_modify_bb_mail($e, $t)
 function cn_modify_bb_cat($e, $t, $c)
 {
     $rc = intval(substr($c, 1));
-    $cw = spsep($e['c']);
+    $cw = separateString($e['c']);
     $c = intval(substr($c, 1)) - 1;
     if (count($cw) == 1) $c = 0;
 
@@ -787,7 +787,7 @@ function cn_modify_comm_author($e)
 
 function cn_modify_comm_date($e)
 {
-    return date(getoption('timestamp_comment'), $e['id']);
+    return date(getOption('timestamp_comment'), $e['id']);
 }
 
 function cn_modify_comm_mail($e)
@@ -881,7 +881,7 @@ function cn_modify_comm_remember_me()
 
 function cn_modify_bb_comm_captcha($e, $t)
 {
-    if (getoption('use_captcha') && !getMember()) {
+    if (getOption('use_captcha') && !getMember()) {
         return $t;
     } else {
         return '';
@@ -891,9 +891,9 @@ function cn_modify_bb_comm_captcha($e, $t)
 function cn_modify_comm_captcha($e)
 {
     $ID = 'cn_comm_captcha_' . $e['id'];
-    $cpath = getoption('http_script_dir') . '/captcha.php';
+    $cpath = getOption('http_script_dir') . '/captcha.php?page=admin';
 
-    if (getoption('hide_captcha') && function_exists('imagecreatetruecolor')) {
+    if (getOption('hide_captcha') && function_exists('imagecreatetruecolor')) {
         // Create obfuscated captcha
         $captcha = new SimpleCaptcha();
         $captcha->imageFormat = 'png';
@@ -986,7 +986,7 @@ function cn_modify_bb_comm_delete($e, $t)
 function cn_modify_bb_comm_edited($e, $t)
 {
     if ($e['ed']) {
-        return str_replace('%edited', date(getoption('timestamp_active'), $e['ed']), $t);
+        return str_replace('%edited', date(getOption('timestamp_active'), $e['ed']), $t);
     }
     return '';
 }

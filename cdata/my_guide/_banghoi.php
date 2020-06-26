@@ -13,7 +13,7 @@
     <p><br>
         • Chủ Hội phải có cấp độ 100 trở lên.</p>
     <p>• Tên Hội phải từ 4 kí tự trở lên </p>
-    <div style="text-align: center"><img align="center" height="200" alt="" src="/images/guides/createGuide.png"
+    <div style="text-align: center"><img align="center" height="200" alt="" src="/public/images/guides/createGuide.png"
                                          width="60%"></div>
     <div><br><strong>Biểu tượng Hội (Guild Mark)</strong></div>
 

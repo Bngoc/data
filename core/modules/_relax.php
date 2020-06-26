@@ -29,7 +29,7 @@ function relax_invoke()
     foreach ($relax_board as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
 
-        //if (test($acl_module) && $dl == $mod && $do == $opt && function_exists("relax_$opt")) {
+        //if (testRoleWeb($acl_module) && $dl == $mod && $do == $opt && function_exists("relax_$opt")) {
         if ($dl == $mod && $do == $opt && function_exists("relax_$opt")) {
             cn_bc_add($_t, cn_url_modify(array('reset'), 'mod=' . $mod, 'opt=' . $opt));
             die(call_user_func("relax_$opt"));
@@ -53,7 +53,7 @@ function relax_invoke()
     foreach ($relax_board as $id => $name) {
         list($mod, $opt, $acl) = explode(':', $id, 3);
 
-        //if (!test($acl)) {
+        //if (!testRoleWeb($acl)) {
         // unset($relax_board[$id]);
         //continue;
         //}
@@ -152,7 +152,7 @@ function relax_baucua()
 
                 for ($i = 0; $i < 3; $i++) {
                     $item = rand(0, 5); // lay 3/6
-                    $bet_item .= "<td><img src='/images/baucua/{$item}.jpg'><br>" . $baucua_list[$item] . "</td>";
+                    $bet_item .= "<td><img src='/public/images/admin/baucua/{$item}.jpg'><br>" . $baucua_list[$item] . "</td>";
 
                     ++$arrTemp[$item];
                     if ($bets[$item] == 1) {
@@ -326,18 +326,18 @@ function relax_baicao()
                             <tr align='middle'>
                                 <td valign='top' class='pd-top10'>
                                     <font color='white' class='info-per'>Máy <b>$com</b> điểm</font> <br>
-                                    <img src='/images/baicao/{$card_num[3]}_{$card_type[3]}.gif' border=0>&nbsp;
-                                    <img src='/images/baicao/{$card_num[4]}_{$card_type[4]}.gif' border=0>&nbsp;
-                                    <img src='/images/baicao/{$card_num[5]}_{$card_type[5]}.gif' border=0>
+                                    <img src='/public/images/admin/baicao/{$card_num[3]}_{$card_type[3]}.gif' border=0>&nbsp;
+                                    <img src='/public/images/admin/baicao/{$card_num[4]}_{$card_type[4]}.gif' border=0>&nbsp;
+                                    <img src='/public/images/admin/baicao/{$card_num[5]}_{$card_type[5]}.gif' border=0>
                                 </td>
                             </tr>
                             <tr align='middle'><td colspan='100' class='pd-top20 pd-bottom20'><b><font class='text-result'>$msg</font><b/></td></tr>
                             <tr align='middle'>
                                 <td valign='bottom' class='pd-top20'>
                                     <font color='white' class='info-per'>Bạn <b>$you</b> điểm</font> <br>
-                                    <img src='/images/baicao/{$card_num[0]}_{$card_type[0]}.gif' border=0>&nbsp;
-                                    <img src='/images/baicao/{$card_num[1]}_{$card_type[1]}.gif' border=0>&nbsp;
-                                    <img src='/images/baicao/{$card_num[2]}_{$card_type[2]}.gif' border=0>
+                                    <img src='/public/images/admin/baicao/{$card_num[0]}_{$card_type[0]}.gif' border=0>&nbsp;
+                                    <img src='/public/images/admin/baicao/{$card_num[1]}_{$card_type[1]}.gif' border=0>&nbsp;
+                                    <img src='/public/images/admin/baicao/{$card_num[2]}_{$card_type[2]}.gif' border=0>
                                 </td>
                             </tr>
                             </table>
@@ -391,7 +391,7 @@ function relax_xoso()
     $ctime = date('Y-m-d', $time);
     $accc_ = $_SESSION['user_Gamer'];
 
-    $limitTimeDe = getoption('timeWriterLimit');
+    $limitTimeDe = getOption('timeWriterLimit');
     $hourTime = date('H:i', ctime());
 
     list ($page) = GET('page', 'GPG');
@@ -461,8 +461,8 @@ function relax_xoso()
                 cn_throw_message("Hết thời gian nhận ghi đề!", 'e');
                 $errors_false = true;
             }
-            if ($moneyVpDe < getoption('moneyMinDe')) {
-                cn_throw_message("Số Vpoint tối thiểu ghi đề là " . number_format(getoption('moneyMinDe'), 0, ',', '.') . ' Vpoint', 'e');
+            if ($moneyVpDe < getOption('moneyMinDe')) {
+                cn_throw_message("Số Vpoint tối thiểu ghi đề là " . number_format(getOption('moneyMinDe'), 0, ',', '.') . ' Vpoint', 'e');
                 $errors_false = true;
             }
 
@@ -548,7 +548,7 @@ function show_historyDe($datahistory, $page)
     $per_page = 20;
     if (empty($page)) $page = 1;
 
-    list ($resultShowData, $pagination) = cn_arr_paginaAjax($datahistory, $url, $page, $per_page);
+    list ($resultShowData, $pagination) = cn_render_pagination_ajax($datahistory, $url, $page, $per_page);
 
     if (empty($resultShowData)) return '';
 

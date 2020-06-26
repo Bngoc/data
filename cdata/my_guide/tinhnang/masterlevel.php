@@ -1,5 +1,5 @@
 <p><strong>Master Level</strong></p>
-<p align="center"><img height="400" alt="" src="/images/guides/20p1thk.png" width="100%"></p>
+<p align="center"><img height="400" alt="" src="/public/images/web/guides/20p1thk.png" width="100%"></p>
 <br>
 <p><strong>Bảng kỹ năng 1</strong></p>
 <table cellspacing="0" cellpadding="0" width="100%" border="1" align="center" id="table-custom">
@@ -32,7 +32,7 @@
         </td>
         <td>
             <div align="center"><img height="38" alt=""
-                                     src="/images/guides/image060.jpg"
+                                     src="/public/images/web/guides/image060.jpg"
                                      width="27"> 
             </div>
         </td>

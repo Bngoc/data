@@ -25,7 +25,7 @@ echo cn_snippet_messages();
                                             <?php
                                             if ($dataNotifyForum) {
                                                 foreach ($dataNotifyForum as $key => $item) {
-                                                    echo '<div class="row-notify"><span class="topx-content-tab"><img src = "/images/post_new.gif" border = "0">&nbsp;';
+                                                    echo '<div class="row-notify"><span class="topx-content-tab"><img src = "/public/images/post_new.gif" border = "0">&nbsp;';
 //                                                    echo '<b class="nofify-Forum">'. $item['keywords'] .'</b>';
                                                     echo '<i class="time-nofify-Forum time-' . $item['nameColor'] . '">' . date('d-m-Y h:i A', $item['lastpost']) . '</i>&nbsp;';
                                                     echo '<a class="overtext" href="' . cn_url_modify(array('reset')) . '/forum/showthread.php?' . $item['threadid'] . '-' . $item['urlForum'] . '&amp;goto=newpost" >' . $item['title'];
@@ -115,7 +115,7 @@ echo cn_snippet_messages();
                     </tr>
                     <?php if ($result_RankingTop10) {
                         foreach ($result_RankingTop10 as $key => $its) {
-                            echo '<tr><td><img src="/images/rankingTop15/' . ($key + 1) . '.gif" alt="' . ($key + 1) . '.gif"></td><td>' . $its['Name'] . '</td><td>' . $its['Relifes'] . '/' . $its['Resets'] . '</td></tr>';
+                            echo '<tr><td><img src="/public/images/web/rankingTop15/' . ($key + 1) . '.gif" alt="' . ($key + 1) . '.gif"></td><td>' . $its['Name'] . '</td><td>' . $its['Relifes'] . '/' . $its['Resets'] . '</td></tr>';
                         }
                     } ?>
                 </table>

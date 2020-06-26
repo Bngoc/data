@@ -80,18 +80,18 @@ echo cn_snippet_messages();
         </tr>
         <tr>
             <td class="bizwebform_col_1"><a href="#" style="border-bottom: 1px dotted #000080;"
-                                            onclick="getId('capchaWeb').src='<?php echo getoption('http_script_dir'); ?>/captcha.php?page=web&r='+Math.random(); return(false);">
+                                            onclick="getId('captcha_web').src='<?php echo getOption('http_script_dir'); ?>/captcha.php?page=web&r='+Math.random(); return(false);">
                     Refresh code</a></td>
             <td colspan="" class="bizwebform_col_2" style="padding-left:20px;">
-                <div class="vertical-img"><img src="<?php echo getoption('http_script_dir'); ?>/captcha.php?cap=web"
-                                               id="capchaWeb" alt=""></div>
+                <div class="vertical-img"><img src="<?php echo getOption('http_script_dir'); ?>/captcha.php?page=web"
+                                               id="captcha_web" alt=""></div>
             </td>
             <td class="bizwebform_col_3"></td>
         </tr>
         <tr>
             <td class="bizwebform_col_1">Nhập mã xác nhận <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input type="text" class="bizwebform" name="verifyCaptcha" required
-                                                autocomplete="off"
+                                                autocomplete="on"
                                                 onchange="checkCaptcha(this.value, 'msg_Captcha');"/></td>
             <td class="bizwebform_col_3" id="msg_Captcha"></td>
         </tr>
@@ -150,8 +150,8 @@ echo cn_snippet_messages();
 </table>
 <em>
     <?php
-    $changeClass = explode(':', getoption('changeClass_str'));
-    echo '<b>Phí: ' . number_format((float)(getoption('vptogc') * $changeClass[0] * 0.01), 0, ",", ".") . ' Gcoin</b> hoặc <b>' . number_format((float)($changeClass[0]), 0, ",", ".") . ' Vpoint </b><br>';
+    $changeClass = explode(':', getOption('changeClass_str'));
+    echo '<b>Phí: ' . number_format((float)(getOption('vptogc') * $changeClass[0] * 0.01), 0, ",", ".") . ' Gcoin</b> hoặc <b>' . number_format((float)($changeClass[0]), 0, ",", ".") . ' Vpoint </b><br>';
     echo '<b>Trừ: ' . $changeClass[1] . ' %</b> số Reset <b></br>';
     echo '<b>Cần: ' . $changeClass[2] . '</b> Reset tối thiểu';
     ?>

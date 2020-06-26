@@ -1,6 +1,6 @@
 <?php
 
-list($errors_result, $regusername, $regemail) = _GL('errors_result, regusername, regemail');
+list($errors_result, $userName, $email) = _GL('errors_result, userName, email');
 
 ?>
 <style>.required {
@@ -19,21 +19,21 @@ list($errors_result, $regusername, $regemail) = _GL('errors_result, regusername,
 
         <tr>
             <td width=85>Username: <span class="required">*</span></td>
-            <td colspan="2"><input tabindex="1" type="text" name=regusername
-                                   value="<?php echo cnHtmlSpecialChars($regusername); ?>" style="width:134px"
+            <td colspan="2"><input tabindex="1" type="text" name="userName"
+                                   value="<?php echo cnHtmlSpecialChars($userName); ?>" style="width:134px"
                                    size="20"></td>
         </tr>
         <tr>
             <td width=85>Email: <span class="required">*</span></td>
-            <td colspan="2"><input tabindex="1" type="text" name="regemail"
-                                   value="<?php echo cnHtmlSpecialChars($regemail); ?>" style="width:134px" size="20">
+            <td colspan="2"><input tabindex="1" type="text" name="email"
+                                   value="<?php echo cnHtmlSpecialChars($email); ?>" style="width:134px" size="20">
             </td>
         </tr>
 
         <tr>
             <td width=85>Password: <span class="required">*</span></td>
             <td>
-                <div><input tabindex="1" type="password" name=regpassword id="regpassword"
+                <div><input tabindex="1" type="password" name=password id="password"
                             onkeyup="password_strength();" style="width:134px" size="20"></div>
                 <div id="password_strength"></div>
             </td>
@@ -48,14 +48,14 @@ list($errors_result, $regusername, $regemail) = _GL('errors_result, regusername,
 
         <tr>
             <td width=85>Captcha: <span class="required">*</span></td>
-            <td colspan="2"><input tabindex="1" type="text" name="captcha" style="width:134px" size="20"></td>
+            <td colspan="2"><input tabindex="1" autocomplete="on" type="text" name="captcha" style="width:134px" size="20"></td>
         </tr>
 
         <tr>
             <td width=85><a href="#" style="border-bottom: 1px dotted #000080;"
-                            onclick="getId('capcha').src='/admin/captcha.php?r='+Math.random(); return(false);">Refresh
+                            onclick="getId('captcha').src='<?php echo getOption('http_script_dir'); ?>/captcha.php?page=admin&r=' +Math.random(); return(false);">Refresh
                     code</a></td>
-            <td colspan="2"><img src="<?php echo getoption('http_script_dir'); ?>/admin/captcha.php" id="capcha" alt="">
+            <td colspan="2"><img src="<?php echo getOption('http_script_dir'); ?>/captcha.php?page=admin" id="captcha" alt="">
             </td>
         </tr>
 

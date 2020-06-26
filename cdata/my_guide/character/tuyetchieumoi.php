@@ -16,8 +16,8 @@
     </tr>
     <tr>
         <td>Chém Băng</td>
-        <td><img src="/images/guides/dk_StrikeofDestruction_02.jpg"></td>
-        <td><img src="/images/guides/img17C.gif"></td>
+        <td><img src="/public/images/web/guides/dk_StrikeofDestruction_02.jpg"></td>
+        <td><img src="/public/images/web/guides/img17C.gif"></td>
         <td>Chiến Binh</td>
         <td>Hòn đá Stroke</td>
         <td>÷</td>
@@ -28,8 +28,8 @@
     </tr>
     <tr>
         <td>Tăng ma lực</td>
-        <td><img src="/images/guides/dw_Expansion-of-Wizardry_02.jpg"></td>
-        <td><img src="/images/guides/img17E.gif"></td>
+        <td><img src="/public/images/webguides/dw_Expansion-of-Wizardry_02.jpg"></td>
+        <td><img src="/public/images/web/guides/img17E.gif"></td>
         <td>Pháp Sư</td>
         <td>Pháp thư tăng ma lực</td>
         <td>Năng lượng: 1058</td>

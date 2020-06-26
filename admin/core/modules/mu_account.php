@@ -105,7 +105,7 @@ function account_invoke()
 //    $lng = $grps = $all_skins = array();
 //    //$skins = scan_dir(cn_path_construct(SERVDIR,'skins'));
 //    //$langs = scan_dir(cn_path_construct(SERVDIR,'core','lang'), 'txt');
-//    $_grps = getoption('#grp');
+//    $_grps = getOption('#grp');
 //    //$conf_class_ = cn_get_template('class_dw_1_name','config_class');
 //    //$conf_class = cn_get_template_byarr('config_class');
 //
@@ -290,7 +290,7 @@ function account_invoke()
 //
 //
 //    // Save cached copy
-//    mcache_set('config', $cfg);
+//    setMemcache('config', $cfg);
 //
 //    // ------------------
 //    $sub = REQ('sub', "GETPOST");
@@ -303,7 +303,7 @@ function account_invoke()
 //        cn_dsi_check();
 //
 //        $post_cfg = $_POST['config'];
-//        $opt_result = getoption('#%site');
+//        $opt_result = getOption('#%site');
 //        $by_default = $options_list[$sub];
 //
 //        // Detect selfpath
@@ -333,7 +333,7 @@ function account_invoke()
 //                if ($post_cfg[$id]) {
 //                    $opt_result[$id] = $post_cfg[$id];
 //                } else {
-//                    $opt_result[$id] = getoption($id);
+//                    $opt_result[$id] = getOption($id);
 //                }
 //            } elseif ($var[0] == 'Y/N') {
 //                $opt_result[$id] = (isset($post_cfg[$id]) && 'Y' == $post_cfg[$id]) ? 1 : 0;
@@ -350,7 +350,7 @@ function account_invoke()
 //
 //    $options = $options_list[$sub];
 //    foreach ($options as $id => $vo) {
-//        $options[$id]['var'] = getoption($id);
+//        $options[$id]['var'] = getOption($id);
 //
 //        $text_parths = explode('|', $vo[1], 2);
 //        $title = isset($text_parths[0]) ? $text_parths[0] : '';
@@ -428,7 +428,7 @@ function account_invoke()
 //        }
 //        // Set an avatar
 //        if (!empty($avatar_file) && $avatar_file['error'] == 0) {
-//            $uploads_dir = getoption('uploads_dir');
+//            $uploads_dir = getOption('uploads_dir');
 //            if ($uploads_dir) {
 //                $file_name = 'avatar_' . $member['name'] . '_' . $avatar_file['name'];
 //                if (isset($member['avatar']) && $member['avatar'] != $file_name) {
@@ -445,7 +445,7 @@ function account_invoke()
 //            db_user_update($member['name'], "nick=$editnickname", "e-hide=$edithidemail");
 //
 //            // Update & Get member from DB
-//            mcache_set('#member', NULL);
+//            setMemcache('#member', NULL);
 //            $member = getMember();
 //
 //            cn_throw_message("User info updated! $clause");
@@ -454,7 +454,7 @@ function account_invoke()
 //        }
 //    }
 //
-//    $grp = getoption('#grp');
+//    $grp = getOption('#grp');
 //    $acl_desc = $grp[$member['acl']]['N'];
 //
 //    // Get info from personal data
@@ -487,8 +487,8 @@ function account_invoke()
 //
 //    $acv = cn_get_template_byarr($sub); // get array $sub
 //    // User changes
-//    //$tuser = getoption('#templates');
-//    $acx = getoption('#temp_basic');// get all
+//    //$tuser = getOption('#templates');
+//    $acx = getOption('#temp_basic');// get all
 //
 //    $options_list = array
 //    (
@@ -1320,8 +1320,8 @@ function account_invoke()
 //    $list = cn_template_list();
 //
 //    // User changes
-//    $tuser = getoption('#temp_basic');
-//    //list($tuser) = getoption('#temp_basic');
+//    $tuser = getOption('#temp_basic');
+//    //list($tuser) = getOption('#temp_basic');
 //
 //    // Basic template name and fetch data (user/system)
 //    if (!$template)
@@ -1494,7 +1494,7 @@ function account_invoke()
 //    $per_page = 100;
 //    $section = intval($section);
 //    $st = intval($st);
-//    $grp = getoption('#grp');
+//    $grp = getOption('#grp');
 //    $is_edit = FALSE; //visability Edit btton
 //
 //    if (request_type('POST')) {
@@ -1624,7 +1624,7 @@ function account_invoke()
 //	/*
 //    $categories = cn_get_categories();
 //
-//    $rss                    = getoption('#rss');
+//    $rss                    = getOption('#rss');
 //    $rss_encoding           =isset($rss['encoding'])? $rss['encoding']:'UTF-8';
 //    $rss_news_include_url   =isset($rss['news_include_url'])? $rss['news_include_url']:'';
 //    $rss_title              =isset($rss['title'])? $rss['title']:'';
@@ -1669,7 +1669,7 @@ function account_invoke()
 //
 //    $all_tpls  = array();
 //    $listsys   = cn_template_list();
-//    $templates = getoption('#templates');
+//    $templates = getOption('#templates');
 //
 //    // Get all templates
 //    foreach ($listsys as $id => $_t)
@@ -1696,7 +1696,7 @@ function account_invoke()
 //function board_iswebshop()
 //{
 //	/*
-//    $ipban = getoption('#ipban');
+//    $ipban = getOption('#ipban');
 //    if (!is_array($ipban))
 //    {
 //        $ipban = array();
@@ -1895,7 +1895,7 @@ function account_invoke()
 ////
 ////        $options = $options_list[$sub];
 ////        foreach ($options as $id => $vo) {
-////            $options[$id]['var'] = getoption($id);
+////            $options[$id]['var'] = getOption($id);
 ////
 ////            $text_parths = explode('|', $vo[1], 2);
 ////            $title = isset($text_parths[0]) ? $text_parths[0] : '';
@@ -1959,7 +1959,7 @@ function account_invoke()
 //
 //function board_statistics()
 //{
-//    $list = getoption('#more_list');
+//    $list = getOption('#more_list');
 //
 //    $name = REQ('extr_name', "GET");
 //    $remove = REQ('remove');
@@ -2039,7 +2039,7 @@ function account_invoke()
 //    list($access_desc, $ATR) = hook('extend_acl_groups', array($access_desc, $ATR));
 //
 //    $grp = array();
-//    $groups = getoption('#grp');
+//    $groups = getOption('#grp');
 //    list($group_name, $group_id, $group_grp, $ACL, $delete_group, $reset_group, $mode) = GET('group_name, group_id, group_grp, acl, delete_group, reset_group,mode');
 //    $is_add_edit = false;
 //
@@ -2134,7 +2134,7 @@ function account_invoke()
 //                    $id = intval($id);
 //
 //                    if ($id == $group_id) {
-//                        $ACL = spsep(($access === '*') ? $_CN_access['C'] . ',' . $_CN_access['N'] . ',' . $_CN_access['M'] : $access);
+//                        $ACL = separateString(($access === '*') ? $_CN_access['C'] . ',' . $_CN_access['N'] . ',' . $_CN_access['M'] : $access);
 //                        $groups[$group_id] = array
 //                        (
 //                            '#' => TRUE,
@@ -2175,7 +2175,7 @@ function account_invoke()
 //
 //    foreach ($groups as $name => $data) {
 //        $_gtext = array();
-//        $G = spsep($data['G']);
+//        $G = separateString($data['G']);
 //
 //        foreach ($G as $id) {
 //            if (isset ($groups[$id])) {
@@ -2198,12 +2198,12 @@ function account_invoke()
 //
 //    // Get user acl data
 //    if ($group_id && $groups[$group_id]) {
-//        $bc = spsep($groups[$group_id]['A']);
+//        $bc = separateString($groups[$group_id]['A']);
 //    }
 //
 //    foreach ($_CN_access as $Gp => $Ex) {
 //        $Gz = array();
-//        $Ex = spsep($Ex);
+//        $Ex = separateString($Ex);
 //        $Tr = $access_desc[$ATR[$Gp]];
 //
 //        foreach ($Ex as $id) {
@@ -2253,7 +2253,7 @@ function account_invoke()
 //function board_wreplace()
 //{
 //    list($word, $replace, $delete) = GET('word, replace, delete');
-//    $wlist = getoption('#rword');
+//    $wlist = getOption('#rword');
 //
 //    if (request_type('POST')) {
 //        cn_dsi_check();
@@ -2274,7 +2274,7 @@ function account_invoke()
 //    if (isset($wlist[$word])) {
 //        $replace = $wlist[$word];
 //    }
-//    $is_replace_opt = getoption('use_replacement');
+//    $is_replace_opt = getOption('use_replacement');
 //    cn_assign('wlist, word, replace, repopt', $wlist, $word, $replace, $is_replace_opt);
 //    echo_header_admin('-@dashboard/style.css', 'Replace words');
 //    echo execTemplate('dashboard/replace');

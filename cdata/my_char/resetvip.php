@@ -177,7 +177,7 @@ echoFormVerifyChar(['action_rsvip' => 'resetvip']);
     <div class="sub_ranking">
 
         <table id="tbl_ranking" class="std-table opt_table">
-            <?php //} 
+            <?php //}
             if ($gh_loai2) foreach ($gh_loai2 as $key => $val) {
                 $count = count($gh_loai2) - 1;
                 if ($ok_loop2) {
@@ -258,7 +258,7 @@ echoFormVerifyChar(['action_rsvip' => 'resetvip']);
 		</table>';
 }
 
-if (getoption('hotrotanthu') == 1) { ?>
+if (getOption('hotrotanthu') == 1) { ?>
     <table style="width: 100%" cellpadding="2">
         <tr>
             <td colspan="3" style="padding:15px; text-align:center"></td>
@@ -296,4 +296,4 @@ if (getoption('hotrotanthu') == 1) { ?>
     </table>
 <?php }
 ?>
-	
+

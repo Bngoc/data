@@ -48,8 +48,8 @@ cn_snippet_bc();
             <th>Hình</th>
             <th>Option</th>
         </tr>
-        <?php //list($arr_item, $get_paging) = cn_arr_pagina($item_read, 'mod=cashshop', $page, $per_page);
-        //$paging = new pagintion_temp(); $paging-> total = count($item_read); $paging-> cn_url_modify = 'mod=cashshop'; $paging-> page = 10; //onMouseOut="hidetip()" onMouseOver="Dshowtip(item[info])"
+        <?php //list($arr_item, $get_paging) = cn_render_pagination($item_read, 'mod=cashshop', $page, $per_page);
+        //$paging = new PaginationTemplate(); $paging-> total = count($item_read); $paging-> cn_url_modify = 'mod=cashshop'; $paging-> page = 10; //onMouseOut="hidetip()" onMouseOver="Dshowtip(item[info])"
         if ($item_read) foreach ($item_read as $i => $var) {
             //for($i=0;$i<$stt;$i++) {
             //<tr <?php if ($odd++%2) echo ' style="background: #f8f8f8;"'; >

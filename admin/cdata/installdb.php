@@ -73,7 +73,7 @@ cn_snippet_messages();
         var fd = 'type_connect=' + type_connect + '&nameLocal=' + nameLocal + '&nameSql=' + nameSql + '&pwdDb=' + pwdDb + '&nameSaveDb=' + nameSaveDb;
         $.ajax({
             type: "POST",
-            url: "<?php echo getoption('http_script_dir') ?>/admin/core/cn_modify_admin.php?name_function=cn_check_conncet",
+            url: "<?php echo getOption('http_script_dir') ?>/admin/core/cn_modify_admin.php?name_function=cn_check_connect",
             data: fd,
             cache: false,
             beforeSend: function () {

@@ -20,4 +20,3 @@ cn_config_load();
 cn_relocation_db_new();
 // Call Excuete update Result De with Task scheduler
 cn_ResultDe();
-?>

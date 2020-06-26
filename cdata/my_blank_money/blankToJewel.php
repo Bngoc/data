@@ -15,9 +15,10 @@ list($htmlOptionNumItem, $isZen) = _GL('htmlOptionNumItem, isZen');
         </tr>
         <tr>
             <td colspan="3">
-                <div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%"
-                                               height="1px"/></div>
-                <br/></td>
+                <div class="vertical-img">
+                    <img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%" height="1px"/></div>
+                <br/>
+            </td>
         </tr>
         <tr align="middle">
             <td colspan="3">

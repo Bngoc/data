@@ -21,7 +21,7 @@ list($sub, $options) = _GL('sub, options');
         <table cellspacing="0" cellpadding="10" align="center" border="1">
             <tbody>
             <tr>
-                <td rowspan="4"><img src="/images/guides/quaivat/images/img11.jpg"></td>
+                <td rowspan="4"><img src="/public/images/web/guides/quaivat/images/img11.jpg"></td>
                 <td colspan="5">Nhện Độc (Hell Spider )</td>
             </tr>
             <tr>
