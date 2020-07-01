@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 //list($errors_result, $regusername, $regnickname, $regemail) = _GL('errors_result, regusername, regnickname, regemail');
 list($errors_result) = _GL('errors_result');
@@ -10,7 +10,9 @@ list($errors_result) = _GL('errors_result');
     <table style="width: 100%" cellpadding="2">
         <tr>
             <td colspan="3"><?php if ($errors_result) { ?>Errors:
-                    <ol><?php foreach ($errors_result as $result) echo "<li style='color: red; font-weight: bold;'>$result</li>"; ?></ol>
+                    <ol><?php foreach ($errors_result as $result) {
+                            echo "<li style='color: red; font-weight: bold;'>$result</li>";
+                        } ?></ol>
                     <hr/><?php } ?></td>
         </tr>
         <tr>

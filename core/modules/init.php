@@ -1,8 +1,11 @@
-<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 $_module = REQ('mod', 'GPG');
 // Loading all modules (internal + external)
-$_init_modules = hook('modules/init_modules',
+$_init_modules = hook(
+    'modules/init_modules',
     array(
         'home' => array('path' => 'home', 'acl' => ''),
         'guide' => array('path' => '_guide', 'acl' => ''),

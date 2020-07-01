@@ -1,4 +1,4 @@
-﻿<?php die('Direct call - access denied'); ?>
+<?php die('Direct call - access denied'); ?>
 118442FC1E7A003F0060000000000000|Khiên Vinh Quang|60000|CrimsonGloryShield_VinhQuang.jpg|
 128442FC1E7A003F0060000000000000|Khiên Giác Đấu|60000|SalamanderShield_GiacDau.jpg|
 130442FC1E7A003F0060000000000000|Khiên Băng Tinh|50000|FrostBarrierShield_BangTinh.jpg|

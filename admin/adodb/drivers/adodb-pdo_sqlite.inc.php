@@ -12,27 +12,27 @@
   Latest version is available at http://adodb.sourceforge.net
 
   Thanks Diogo Toscano (diogo#scriptcase.net) for the code.
-	And also Sid Dunayer [sdunayer#interserv.com] for extensive fixes.
+    And also Sid Dunayer [sdunayer#interserv.com] for extensive fixes.
 */
 
 class ADODB_pdo_sqlite extends ADODB_pdo
 {
-    var $metaTablesSQL = "SELECT name FROM sqlite_master WHERE type='table'";
-    var $sysDate = 'current_date';
-    var $sysTimeStamp = 'current_timestamp';
-    var $nameQuote = '`';
-    var $replaceQuote = "''";
-    var $hasGenID = true;
-    var $_genIDSQL = "UPDATE %s SET id=id+1 WHERE id=%s";
-    var $_genSeqSQL = "CREATE TABLE %s (id integer)";
-    var $_genSeqCountSQL = 'SELECT COUNT(*) FROM %s';
-    var $_genSeq2SQL = 'INSERT INTO %s VALUES(%s)';
-    var $_dropSeqSQL = 'DROP TABLE %s';
-    var $concat_operator = '||';
-    var $pdoDriver = false;
-    var $random = 'abs(random())';
+    public $metaTablesSQL = "SELECT name FROM sqlite_master WHERE type='table'";
+    public $sysDate = 'current_date';
+    public $sysTimeStamp = 'current_timestamp';
+    public $nameQuote = '`';
+    public $replaceQuote = "''";
+    public $hasGenID = true;
+    public $_genIDSQL = "UPDATE %s SET id=id+1 WHERE id=%s";
+    public $_genSeqSQL = "CREATE TABLE %s (id integer)";
+    public $_genSeqCountSQL = 'SELECT COUNT(*) FROM %s';
+    public $_genSeq2SQL = 'INSERT INTO %s VALUES(%s)';
+    public $_dropSeqSQL = 'DROP TABLE %s';
+    public $concat_operator = '||';
+    public $pdoDriver = false;
+    public $random = 'abs(random())';
 
-    function _init($parentDriver)
+    public function _init($parentDriver)
     {
         $this->pdoDriver = $parentDriver;
         $parentDriver->_bindInputArray = true;
@@ -40,7 +40,7 @@ class ADODB_pdo_sqlite extends ADODB_pdo
         $parentDriver->hasInsertID = true;
     }
 
-    function ServerInfo()
+    public function ServerInfo()
     {
         $parent = $this->pdoDriver;
         @($ver = array_pop($parent->GetCol("SELECT sqlite_version()")));
@@ -53,20 +53,21 @@ class ADODB_pdo_sqlite extends ADODB_pdo
         return $arr;
     }
 
-    function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
+    public function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
     {
         $parent = $this->pdoDriver;
         $offsetStr = ($offset >= 0) ? " OFFSET $offset" : '';
         $limitStr = ($nrows >= 0) ? " LIMIT $nrows" : ($offset >= 0 ? ' LIMIT 999999999' : '');
-        if ($secs2cache)
+        if ($secs2cache) {
             $rs = $parent->CacheExecute($secs2cache, $sql . "$limitStr$offsetStr", $inputarr);
-        else
+        } else {
             $rs = $parent->Execute($sql . "$limitStr$offsetStr", $inputarr);
+        }
 
         return $rs;
     }
 
-    function GenID($seq = 'adodbseq', $start = 1)
+    public function GenID($seq = 'adodbseq', $start = 1)
     {
         $parent = $this->pdoDriver;
         // if you have to modify the parameter below, your database is overloaded,
@@ -82,7 +83,9 @@ class ADODB_pdo_sqlite extends ADODB_pdo
                 if (!$cnt) {
                     $ok = $parent->Execute(sprintf($this->_genSeq2SQL, $seq, $start));
                 }
-                if (!$ok) return false;
+                if (!$ok) {
+                    return false;
+                }
             }
             $parent->Execute(sprintf($this->_genIDSQL, $seq, $num));
 
@@ -98,47 +101,61 @@ class ADODB_pdo_sqlite extends ADODB_pdo
         return false;
     }
 
-    function CreateSequence($seqname = 'adodbseq', $start = 1)
+    public function CreateSequence($seqname = 'adodbseq', $start = 1)
     {
         $parent = $this->pdoDriver;
         $ok = $parent->Execute(sprintf($this->_genSeqSQL, $seqname));
-        if (!$ok) return false;
+        if (!$ok) {
+            return false;
+        }
         $start -= 1;
         return $parent->Execute("insert into $seqname values($start)");
     }
 
-    function SetTransactionMode($transaction_mode)
+    public function SetTransactionMode($transaction_mode)
     {
         $parent = $this->pdoDriver;
         $parent->_transmode = strtoupper($transaction_mode);
     }
 
-    function BeginTrans()
+    public function BeginTrans()
     {
         $parent = $this->pdoDriver;
-        if ($parent->transOff) return true;
+        if ($parent->transOff) {
+            return true;
+        }
         $parent->transCnt += 1;
         $parent->_autocommit = false;
         return $parent->Execute("BEGIN {$parent->_transmode}");
     }
 
-    function CommitTrans($ok = true)
+    public function CommitTrans($ok = true)
     {
         $parent = $this->pdoDriver;
-        if ($parent->transOff) return true;
-        if (!$ok) return $parent->RollbackTrans();
-        if ($parent->transCnt) $parent->transCnt -= 1;
+        if ($parent->transOff) {
+            return true;
+        }
+        if (!$ok) {
+            return $parent->RollbackTrans();
+        }
+        if ($parent->transCnt) {
+            $parent->transCnt -= 1;
+        }
         $parent->_autocommit = true;
 
         $ret = $parent->Execute('COMMIT');
         return $ret;
     }
 
-    function RollbackTrans()
+    public function RollbackTrans()
     {
         $parent = $this->pdoDriver;
-        if ($parent->transOff) return true;
-        if ($parent->transCnt) $parent->transCnt -= 1;
+        if ($parent->transOff) {
+            return true;
+        }
+        if ($parent->transCnt) {
+            $parent->transCnt -= 1;
+        }
         $parent->_autocommit = true;
 
         $ret = $parent->Execute('ROLLBACK');
@@ -147,7 +164,7 @@ class ADODB_pdo_sqlite extends ADODB_pdo
 
 
     // mark newnham
-    function MetaColumns($tab, $normalize = true)
+    public function MetaColumns($tab, $normalize = true)
     {
         global $ADODB_FETCH_MODE;
 
@@ -155,9 +172,13 @@ class ADODB_pdo_sqlite extends ADODB_pdo
         $false = false;
         $save = $ADODB_FETCH_MODE;
         $ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
-        if ($parent->fetchMode !== false) $savem = $parent->SetFetchMode(false);
+        if ($parent->fetchMode !== false) {
+            $savem = $parent->SetFetchMode(false);
+        }
         $rs = $parent->Execute("PRAGMA table_info('$tab')");
-        if (isset($savem)) $parent->SetFetchMode($savem);
+        if (isset($savem)) {
+            $parent->SetFetchMode($savem);
+        }
         if (!$rs) {
             $ADODB_FETCH_MODE = $save;
             return $false;
@@ -166,8 +187,9 @@ class ADODB_pdo_sqlite extends ADODB_pdo
         while ($r = $rs->FetchRow()) {
             $type = explode('(', $r['type']);
             $size = '';
-            if (sizeof($type) == 2)
+            if (sizeof($type) == 2) {
                 $size = trim($type[1], ')');
+            }
             $fn = strtoupper($r['name']);
             $fld = new ADOFieldObject;
             $fld->name = $r['name'];
@@ -177,15 +199,18 @@ class ADODB_pdo_sqlite extends ADODB_pdo
             $fld->primary_key = $r['pk'];
             $fld->default_value = $r['dflt_value'];
             $fld->scale = 0;
-            if ($save == ADODB_FETCH_NUM) $arr[] = $fld;
-            else $arr[strtoupper($fld->name)] = $fld;
+            if ($save == ADODB_FETCH_NUM) {
+                $arr[] = $fld;
+            } else {
+                $arr[strtoupper($fld->name)] = $fld;
+            }
         }
         $rs->Close();
         $ADODB_FETCH_MODE = $save;
         return $arr;
     }
 
-    function MetaTables($ttype = false, $showSchema = false, $mask = false)
+    public function MetaTables($ttype = false, $showSchema = false, $mask = false)
     {
         $parent = $this->pdoDriver;
 

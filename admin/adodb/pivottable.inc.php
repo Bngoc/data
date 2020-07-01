@@ -30,20 +30,38 @@
  * @returns			Sql generated
  */
 
-function PivotTableSQL(&$db, $tables, $rowfields, $colfield, $where = false,
-                       $aggfield = false, $sumlabel = 'Sum ', $aggfn = 'SUM', $showcount = true)
+function PivotTableSQL(
+    &$db,
+    $tables,
+    $rowfields,
+    $colfield,
+    $where = false,
+    $aggfield = false,
+    $sumlabel = 'Sum ',
+    $aggfn = 'SUM',
+    $showcount = true
+)
 {
-    if ($aggfield) $hidecnt = true;
-    else $hidecnt = false;
+    if ($aggfield) {
+        $hidecnt = true;
+    } else {
+        $hidecnt = false;
+    }
 
     $iif = strpos($db->databaseType, 'access') !== false;
     // note - vfp 6 still doesn' work even with IIF enabled || $db->databaseType == 'vfp';
 
     //$hidecnt = false;
 
-    if ($where) $where = "\nWHERE $where";
-    if (!is_array($colfield)) $colarr = $db->GetCol("select distinct $colfield from $tables $where order by 1");
-    if (!$aggfield) $hidecnt = false;
+    if ($where) {
+        $where = "\nWHERE $where";
+    }
+    if (!is_array($colfield)) {
+        $colarr = $db->GetCol("select distinct $colfield from $tables $where order by 1");
+    }
+    if (!$aggfield) {
+        $hidecnt = false;
+    }
 
     $sel = "$rowfields, ";
     if (is_array($colfield)) {
@@ -64,10 +82,15 @@ function PivotTableSQL(&$db, $tables, $rowfields, $colfield, $where = false,
         }
     } else {
         foreach ($colarr as $v) {
-            if (!is_numeric($v)) $vq = $db->qstr($v);
-            else $vq = $v;
+            if (!is_numeric($v)) {
+                $vq = $db->qstr($v);
+            } else {
+                $vq = $v;
+            }
             $v = trim($v);
-            if (strlen($v) == 0) $v = 'null';
+            if (strlen($v) == 0) {
+                $v = 'null';
+            }
             if (!$hidecnt) {
                 $sel .= $iif ?
                     "\n\t$aggfn(IIF($colfield=$vq,1,0)) AS \"$v\", "
@@ -75,8 +98,11 @@ function PivotTableSQL(&$db, $tables, $rowfields, $colfield, $where = false,
                     "\n\t$aggfn(CASE WHEN $colfield=$vq THEN 1 ELSE 0 END) AS \"$v\", ";
             }
             if ($aggfield) {
-                if ($hidecnt) $label = $v;
-                else $label = "{$v}_$aggfield";
+                if ($hidecnt) {
+                    $label = $v;
+                } else {
+                    $label = "{$v}_$aggfield";
+                }
                 $sel .= $iif ?
                     "\n\t$aggfn(IIF($colfield=$vq,$aggfield,0)) AS \"$label\", "
                     :
@@ -89,10 +115,11 @@ function PivotTableSQL(&$db, $tables, $rowfields, $colfield, $where = false,
         $sel .= "\n\t$agg as \"$sumlabel$aggfield\", ";
     }
 
-    if ($showcount)
+    if ($showcount) {
         $sel .= "\n\tSUM(1) as Total";
-    else
+    } else {
         $sel = substr($sel, 0, strlen($sel) - 2);
+    }
 
 
     // Strip aliases
@@ -108,11 +135,11 @@ if (0) {
 
 # example1
 #
-# Query the main "product" table
-# Set the rows to CompanyName and QuantityPerUnit
-# and the columns to the Categories
-# and define the joins to link to lookup tables
-# "categories" and "suppliers"
+    # Query the main "product" table
+    # Set the rows to CompanyName and QuantityPerUnit
+    # and the columns to the Categories
+    # and define the joins to link to lookup tables
+    # "categories" and "suppliers"
 #
 
     $sql = PivotTableSQL(
@@ -142,15 +169,15 @@ if (0) {
     FROM products p ,categories c ,suppliers s  WHERE p.CategoryID = c.CategoryID and s.SupplierID= p.SupplierID
     GROUP BY CompanyName,QuantityPerUnit
     */
-//=====================================================================
+    //=====================================================================
 
-# example2
+    # example2
 #
-# Query the main "product" table
-# Set the rows to CompanyName and QuantityPerUnit
-# and the columns to the UnitsInStock for diiferent ranges
-# and define the joins to link to lookup tables
-# "categories" and "suppliers"
+    # Query the main "product" table
+    # Set the rows to CompanyName and QuantityPerUnit
+    # and the columns to the UnitsInStock for diiferent ranges
+    # and define the joins to link to lookup tables
+    # "categories" and "suppliers"
 #
     $sql = PivotTableSQL(
         $gDB,                                        # adodb connection

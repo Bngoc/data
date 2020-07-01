@@ -13,7 +13,6 @@ try {
         $DB = NewADOConnection($dsn) || die("CONNECT FAILED");
         $connstr = $dsn;
     } else {
-
         $DB = NewADOConnection('pdo');
 
         echo "Connect\n";
@@ -39,19 +38,22 @@ try {
         $p = 'test';
 
         $DB->Connect($connstr, $u, $p) || die("CONNECT FAILED");
-
     }
 
     echo "connection string=$connstr\n Execute\n";
 
     //$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
     $rs = $DB->Execute("select * from ADOXYZ where id<3");
-    if ($DB->ErrorNo()) echo "*** errno=" . $DB->ErrorNo() . " " . ($DB->ErrorMsg()) . "\n";
+    if ($DB->ErrorNo()) {
+        echo "*** errno=" . $DB->ErrorNo() . " " . ($DB->ErrorMsg()) . "\n";
+    }
 
 
     //print_r(get_class_methods($DB->_stmt));
 
-    if (!$rs) die("NO RS");
+    if (!$rs) {
+        die("NO RS");
+    }
 
     echo "Meta\n";
     for ($i = 0; $i < $rs->NumCols(); $i++) {
@@ -64,7 +66,9 @@ try {
     while (!$rs->EOF) {
         adodb_pr($rs->fields);
         $rs->MoveNext();
-        if ($cnt++ > 1000) break;
+        if ($cnt++ > 1000) {
+            break;
+        }
     }
 
     echo "<br>--------------------------------------------------------<br>\n\n\n";
@@ -85,7 +89,6 @@ try {
         adodb_pr($arr);
     }
     die("DONE\n");
-
 } catch (exception $e) {
     echo "<pre>";
     echo $e;

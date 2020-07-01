@@ -14,7 +14,9 @@ Set tabs to 4 for best viewing.
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 include(ADODB_DIR . "/drivers/adodb-db2.inc.php");
 
 
@@ -26,7 +28,9 @@ if (!defined('ADODB_DB2OCI')) {
     {
         global $_COLONARR, $_COLONSZ;
         $v = (integer)substr($p, 1);
-        if ($v > $_COLONSZ) return $p;
+        if ($v > $_COLONSZ) {
+            return $p;
+        }
         $_COLONARR[] = $v;
         return '?';
     }
@@ -40,7 +44,9 @@ if (!defined('ADODB_DB2OCI')) {
 
         $sql2 = preg_replace("/(:[0-9]+)/e", "_colontrack('\\1')", $sql);
 
-        if (empty($_COLONARR)) return array($sql, $arr);
+        if (empty($_COLONARR)) {
+            return array($sql, $arr);
+        }
 
         foreach ($_COLONARR as $k => $v) {
             $arr2[] = $arr[$v];
@@ -51,13 +57,15 @@ if (!defined('ADODB_DB2OCI')) {
 
     class ADODB_db2oci extends ADODB_db2
     {
-        var $databaseType = "db2oci";
-        var $sysTimeStamp = 'sysdate';
-        var $sysDate = 'trunc(sysdate)';
+        public $databaseType = "db2oci";
+        public $sysTimeStamp = 'sysdate';
+        public $sysDate = 'trunc(sysdate)';
 
-        function _Execute($sql, $inputarr = false)
+        public function _Execute($sql, $inputarr = false)
         {
-            if ($inputarr) list($sql, $inputarr) = _colonscope($sql, $inputarr);
+            if ($inputarr) {
+                list($sql, $inputarr) = _colonscope($sql, $inputarr);
+            }
             return parent::_Execute($sql, $inputarr);
         }
     }
@@ -65,15 +73,13 @@ if (!defined('ADODB_DB2OCI')) {
     ;
 
 
-    class  ADORecordSet_db2oci extends ADORecordSet_odbc
+    class ADORecordSet_db2oci extends ADORecordSet_odbc
     {
+        public $databaseType = "db2oci";
 
-        var $databaseType = "db2oci";
-
-        function __construct($id, $mode = false)
+        public function __construct($id, $mode = false)
         {
             return parent::__construct($id, $mode);
         }
     }
-
 } //define

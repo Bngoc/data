@@ -3,7 +3,7 @@ list($sub, $options, $options_list) = _GL('sub, options, options_list');
 
 if ($sub == 'old-features') {
     $show = 'nenngoc';
-} else if ($sub == 'new-features') {
+} elseif ($sub == 'new-features') {
     $show = 'khamngoc';
 } else {
     $show = '';
@@ -12,7 +12,9 @@ if ($sub == 'old-features') {
 
 <ul class="sysconf_top">
     <?php foreach ($options_list as $ID => $ol) { ?>
-        <li <?php if ($sub == $ID) echo ' class="selected"'; ?>>
+        <li <?php if ($sub == $ID) {
+            echo ' class="selected"';
+        } ?>>
             <a href="<?php echo cn_url_modify('mod=guide', 'opt=tinhnang', "sub=$ID"); ?>"><?php echo ucfirst($ID); ?></a>
         </li>
     <?php } ?>

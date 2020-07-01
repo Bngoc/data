@@ -1,4 +1,6 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 add_hook('index/invoke_module', '*screenshots_invoke');
 
@@ -24,7 +26,9 @@ function screenshots_invoke()
     foreach ($cscreenshots_ as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
 
-        if (function_exists("screenshots_$do")) cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        if (function_exists("screenshots_$do")) {
+            cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        }
     }
 
     // Request module

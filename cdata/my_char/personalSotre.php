@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 list($sub, $showchar, $show_warehouse, $check_change) = _GL('sub, showchar, show_warehouse, check_change');
 echo cn_snippet_messages();
@@ -29,13 +29,18 @@ echo cn_snippet_messages();
             <td class="bizwebform_col_1 pd-top15 pd-bottom15">Chọn Nhân vật</td>
             <td class="bizwebform_col_2 pd-top15 pd-bottom15">
                 <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
-                    <?php if ($showchar) foreach ($showchar as $name => $val) { ?>
-                        <option
-                            value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>>
-                            <?php echo $name ?>( LV: <?php echo $val['level'] ?> - Reset: <?php echo $val['reset'] ?>
-                            - Đã Relife <?php echo $val['relife'] ?>)
-                        </option>
-                    <?php } ?>
+                    <?php if ($showchar) {
+                        foreach ($showchar as $name => $val) { ?>
+                            <option
+                                value="<?php echo $name; ?>"<?php if ($sub == $name) {
+                                echo 'selected';
+                            } ?>>
+                                <?php echo $name ?>( LV: <?php echo $val['level'] ?> -
+                                Reset: <?php echo $val['reset'] ?>
+                                - Đã Relife <?php echo $val['relife'] ?>)
+                            </option>
+                        <?php }
+                    } ?>
                 </select>
 
             </td>

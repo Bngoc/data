@@ -52,8 +52,9 @@ $person2->Load('id=1');
 $c = $person2->children;
 if (is_array($c) && sizeof($c) == 3 && $c[0]->name_first == 'Jill' && $c[1]->name_first == 'Joan'
     && $c[2]->name_first == 'JAMIE'
-) echo "OK Loaded HasMany</br>";
-else {
+) {
+    echo "OK Loaded HasMany</br>";
+} else {
     var_dump($c);
     echo "error loading hasMany should have 3 array elements Jill Joan Jamie<br>";
 }
@@ -67,17 +68,23 @@ ADODB_Active_Record::TableBelongsTo('children', 'person', 'person_id', 'id');
 $ch = new Child('children', array('id'));
 
 $ch->Load('id=1');
-if ($ch->name_first !== 'Jill') echo "error in Loading Child<br>";
+if ($ch->name_first !== 'Jill') {
+    echo "error in Loading Child<br>";
+}
 
 $p = $ch->person;
-if (!$p || $p->name_first != 'John') echo "Error loading belongsTo<br>";
-else echo "OK loading BelongTo<br>";
+if (!$p || $p->name_first != 'John') {
+    echo "Error loading belongsTo<br>";
+} else {
+    echo "OK loading BelongTo<br>";
+}
 
 if ($p) {
     #$p->HasMany('children','person_id');  ## this is affects all other instances of Person
     $p->LoadRelations('children', 'order by id', 1, 2);
-    if (sizeof($p->children) == 2 && $p->children[1]->name_first == 'JAMIE') echo "OK LoadRelations<br>";
-    else {
+    if (sizeof($p->children) == 2 && $p->children[1]->name_first == 'JAMIE') {
+        echo "OK LoadRelations<br>";
+    } else {
         var_dump($p->children);
         echo "error LoadRelations<br>";
     }
@@ -85,9 +92,10 @@ if ($p) {
     unset($p->children);
     $p->LoadRelations('children', " name_first like 'J%' order by id", 1, 2);
 }
-if ($p)
+if ($p) {
     foreach ($p->children as $c) {
         echo " Saving $c->name_first <br>";
         $c->name_first .= ' K.';
         $c->Save();
     }
+}

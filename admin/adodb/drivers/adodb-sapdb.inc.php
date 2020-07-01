@@ -15,7 +15,9 @@ Set tabs to 4 for best viewing.
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 if (!defined('_ADODB_ODBC_LAYER')) {
     include(ADODB_DIR . "/drivers/adodb-odbc.inc.php");
@@ -25,22 +27,22 @@ if (!defined('ADODB_SAPDB')) {
 
     class ADODB_SAPDB extends ADODB_odbc
     {
-        var $databaseType = "sapdb";
-        var $concat_operator = '||';
-        var $sysDate = 'DATE';
-        var $sysTimeStamp = 'TIMESTAMP';
-        var $fmtDate = "'Y-m-d'";    /// used by DBDate() as the default date format used by the database
-        var $fmtTimeStamp = "'Y-m-d H:i:s'"; /// used by DBTimeStamp as the default timestamp fmt.
-        var $hasInsertId = true;
-        var $_bindInputArray = true;
+        public $databaseType = "sapdb";
+        public $concat_operator = '||';
+        public $sysDate = 'DATE';
+        public $sysTimeStamp = 'TIMESTAMP';
+        public $fmtDate = "'Y-m-d'";    /// used by DBDate() as the default date format used by the database
+        public $fmtTimeStamp = "'Y-m-d H:i:s'"; /// used by DBTimeStamp as the default timestamp fmt.
+        public $hasInsertId = true;
+        public $_bindInputArray = true;
 
-        function __construct()
+        public function __construct()
         {
             //if (strncmp(PHP_OS,'WIN',3) === 0) $this->curmode = SQL_CUR_USE_ODBC;
             parent::__construct();
         }
 
-        function ServerInfo()
+        public function ServerInfo()
         {
             $info = ADODB_odbc::ServerInfo();
             if (!$info['version'] && preg_match('/([0-9.]+)/', $info['description'], $matches)) {
@@ -49,14 +51,14 @@ if (!defined('ADODB_SAPDB')) {
             return $info;
         }
 
-        function MetaPrimaryKeys($table, $owner = false)
+        public function MetaPrimaryKeys($table, $owner = false)
         {
             $table = $this->Quote(strtoupper($table));
 
             return $this->GetCol("SELECT columnname FROM COLUMNS WHERE tablename=$table AND mode='KEY' ORDER BY pos");
         }
 
-        function MetaIndexes($table, $primary = FALSE, $owner = false)
+        public function MetaIndexes($table, $primary = false, $owner = false)
         {
             $table = $this->Quote(strtoupper($table));
 
@@ -67,8 +69,8 @@ if (!defined('ADODB_SAPDB')) {
             global $ADODB_FETCH_MODE;
             $save = $ADODB_FETCH_MODE;
             $ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-            if ($this->fetchMode !== FALSE) {
-                $savem = $this->SetFetchMode(FALSE);
+            if ($this->fetchMode !== false) {
+                $savem = $this->SetFetchMode(false);
             }
 
             $rs = $this->Execute($sql);
@@ -78,7 +80,7 @@ if (!defined('ADODB_SAPDB')) {
             $ADODB_FETCH_MODE = $save;
 
             if (!is_object($rs)) {
-                return FALSE;
+                return false;
             }
 
             $indexes = array();
@@ -88,20 +90,20 @@ if (!defined('ADODB_SAPDB')) {
             }
             if ($primary) {
                 $indexes['SYSPRIMARYKEYINDEX'] = array(
-                    'unique' => True,    // by definition
+                    'unique' => true,    // by definition
                     'columns' => $this->GetCol("SELECT columnname FROM COLUMNS WHERE tablename=$table AND mode='KEY' ORDER BY pos"),
                 );
             }
             return $indexes;
         }
 
-        function MetaColumns($table, $normalize = true)
+        public function MetaColumns($table, $normalize = true)
         {
             global $ADODB_FETCH_MODE;
             $save = $ADODB_FETCH_MODE;
             $ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-            if ($this->fetchMode !== FALSE) {
-                $savem = $this->SetFetchMode(FALSE);
+            if ($this->fetchMode !== false) {
+                $savem = $this->SetFetchMode(false);
             }
             $table = $this->Quote(strtoupper($table));
 
@@ -142,7 +144,7 @@ if (!defined('ADODB_SAPDB')) {
             return $retarr;
         }
 
-        function MetaColumnNames($table, $numIndexes = false, $useattnum = false)
+        public function MetaColumnNames($table, $numIndexes = false, $useattnum = false)
         {
             $table = $this->Quote(strtoupper($table));
 
@@ -150,9 +152,9 @@ if (!defined('ADODB_SAPDB')) {
         }
 
         // unlike it seems, this depends on the db-session and works in a multiuser environment
-        function _insertid($table, $column)
+        public function _insertid($table, $column)
         {
-            return empty($table) ? False : $this->GetOne("SELECT $table.CURRVAL FROM DUAL");
+            return empty($table) ? false : $this->GetOne("SELECT $table.CURRVAL FROM DUAL");
         }
 
         /*
@@ -168,21 +170,18 @@ if (!defined('ADODB_SAPDB')) {
 
             See http://listserv.sap.com/pipermail/sapdb.general/2002-January/010405.html
          */
-
     }
 
     ;
 
 
-    class  ADORecordSet_sapdb extends ADORecordSet_odbc
+    class ADORecordSet_sapdb extends ADORecordSet_odbc
     {
+        public $databaseType = "sapdb";
 
-        var $databaseType = "sapdb";
-
-        function __construct($id, $mode = false)
+        public function __construct($id, $mode = false)
         {
             parent::__construct($id, $mode);
         }
     }
-
 } //define

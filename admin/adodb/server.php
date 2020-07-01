@@ -59,7 +59,6 @@ function undomq(&$m)
         $m = str_replace('\\\\', '\\', $m);
         $m = str_replace('\"', '"', $m);
         $m = str_replace('\\\'', '\'', $m);
-
     }
     return $m;
 }
@@ -70,31 +69,40 @@ function undomq(&$m)
 $remote = $_SERVER["REMOTE_ADDR"];
 
 
-if (!empty($ACCEPTIP))
-    if ($remote != '127.0.0.1' && $remote != $ACCEPTIP)
+if (!empty($ACCEPTIP)) {
+    if ($remote != '127.0.0.1' && $remote != $ACCEPTIP) {
         err("Unauthorised client: '$remote'");
+    }
+}
 
 
-if (empty($_REQUEST['sql'])) err('No SQL');
+if (empty($_REQUEST['sql'])) {
+    err('No SQL');
+}
 
 
 $conn = ADONewConnection($driver);
 
-if (!$conn->Connect($host, $uid, $pwd, $database)) err($conn->ErrorNo() . $sep . $conn->ErrorMsg());
+if (!$conn->Connect($host, $uid, $pwd, $database)) {
+    err($conn->ErrorNo() . $sep . $conn->ErrorMsg());
+}
 $sql = undomq($_REQUEST['sql']);
 
-if (isset($_REQUEST['fetch']))
+if (isset($_REQUEST['fetch'])) {
     $ADODB_FETCH_MODE = $_REQUEST['fetch'];
+}
 
 if (isset($_REQUEST['nrows'])) {
     $nrows = $_REQUEST['nrows'];
     $offset = isset($_REQUEST['offset']) ? $_REQUEST['offset'] : -1;
     $rs = $conn->SelectLimit($sql, $nrows, $offset);
-} else
+} else {
     $rs = $conn->Execute($sql);
+}
 if ($rs) {
     //$rs->timeToLive = 1;
     echo _rs2serialize($rs, $conn, $sql);
     $rs->Close();
-} else
+} else {
     err($conn->ErrorNo() . $sep . $conn->ErrorMsg());
+}

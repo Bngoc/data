@@ -6,7 +6,7 @@
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
-	  Set tabs to 4 for best viewing.
+      Set tabs to 4 for best viewing.
 
   Latest version of ADODB is available at http://php.weblogs.com/adodb
   ======================================================================
@@ -17,23 +17,23 @@ wrapper library.
  Example
  =======
 
-	include('adodb.inc.php');
-	include('adodb-session.php');
-	session_start();
-	session_register('AVAR');
-	$_SESSION['AVAR'] += 1;
-	print "
+    include('adodb.inc.php');
+    include('adodb-session.php');
+    session_start();
+    session_register('AVAR');
+    $_SESSION['AVAR'] += 1;
+    print "
 -- \$_SESSION['AVAR']={$_SESSION['AVAR']}</p>";
 
 To force non-persistent connections, call adodb_session_open first before session_start():
 
-	include('adodb.inc.php');
-	include('adodb-session.php');
-	adodb_sess_open(false,false,false);
-	session_start();
-	session_register('AVAR');
-	$_SESSION['AVAR'] += 1;
-	print "
+    include('adodb.inc.php');
+    include('adodb-session.php');
+    adodb_sess_open(false,false,false);
+    session_start();
+    session_register('AVAR');
+    $_SESSION['AVAR'] += 1;
+    print "
 -- \$_SESSION['AVAR']={$_SESSION['AVAR']}</p>";
 
 
@@ -42,60 +42,60 @@ To force non-persistent connections, call adodb_session_open first before sessio
  1. Create this table in your database (syntax might vary depending on your db):
 
   create table sessions (
-	   SESSKEY char(32) not null,
-	   EXPIRY int(11) unsigned not null,
-	   EXPIREREF varchar(64),
-	   DATA text not null,
-	  primary key (sesskey)
+       SESSKEY char(32) not null,
+       EXPIRY int(11) unsigned not null,
+       EXPIREREF varchar(64),
+       DATA text not null,
+      primary key (sesskey)
   );
 
   For oracle:
     create table sessions (
-	   SESSKEY char(32) not null,
-	   EXPIRY DECIMAL(16)  not null,
-	   EXPIREREF varchar(64),
-	   DATA varchar(4000) not null,
-	  primary key (sesskey)
+       SESSKEY char(32) not null,
+       EXPIRY DECIMAL(16)  not null,
+       EXPIREREF varchar(64),
+       DATA varchar(4000) not null,
+      primary key (sesskey)
   );
 
 
   2. Then define the following parameters. You can either modify
      this file, or define them before this file is included:
 
-  	$ADODB_SESSION_DRIVER='database driver, eg. mysql or ibase';
-	$ADODB_SESSION_CONNECT='server to connect to';
-	$ADODB_SESSION_USER ='user';
-	$ADODB_SESSION_PWD ='password';
-	$ADODB_SESSION_DB ='database';
-	$ADODB_SESSION_TBL = 'sessions'
+    $ADODB_SESSION_DRIVER='database driver, eg. mysql or ibase';
+    $ADODB_SESSION_CONNECT='server to connect to';
+    $ADODB_SESSION_USER ='user';
+    $ADODB_SESSION_PWD ='password';
+    $ADODB_SESSION_DB ='database';
+    $ADODB_SESSION_TBL = 'sessions'
 
   3. Recommended is PHP 4.1.0 or later. There are documented
-	 session bugs in earlier versions of PHP.
+     session bugs in earlier versions of PHP.
 
   4. If you want to receive notifications when a session expires, then
-  	 you can tag a session with an EXPIREREF, and before the session
-	 record is deleted, we can call a function that will pass the EXPIREREF
-	 as the first parameter, and the session key as the second parameter.
+     you can tag a session with an EXPIREREF, and before the session
+     record is deleted, we can call a function that will pass the EXPIREREF
+     as the first parameter, and the session key as the second parameter.
 
-	 To do this, define a notification function, say NotifyFn:
+     To do this, define a notification function, say NotifyFn:
 
-	 	function NotifyFn($expireref, $sesskey)
-	 	{
-	 	}
+         function NotifyFn($expireref, $sesskey)
+         {
+         }
 
-	 Then you need to define a global variable $ADODB_SESSION_EXPIRE_NOTIFY.
-	 This is an array with 2 elements, the first being the name of the variable
-	 you would like to store in the EXPIREREF field, and the 2nd is the
-	 notification function's name.
+     Then you need to define a global variable $ADODB_SESSION_EXPIRE_NOTIFY.
+     This is an array with 2 elements, the first being the name of the variable
+     you would like to store in the EXPIREREF field, and the 2nd is the
+     notification function's name.
 
-	 In this example, we want to be notified when a user's session
-	 has expired, so we store the user id in the global variable $USERID,
-	 store this value in the EXPIREREF field:
+     In this example, we want to be notified when a user's session
+     has expired, so we store the user id in the global variable $USERID,
+     store this value in the EXPIREREF field:
 
-	 	$ADODB_SESSION_EXPIRE_NOTIFY = array('USERID','NotifyFn');
+         $ADODB_SESSION_EXPIRE_NOTIFY = array('USERID','NotifyFn');
 
-	Then when the NotifyFn is called, we are passed the $USERID as the first
-	parameter, eg. NotifyFn($userid, $sesskey).
+    Then when the NotifyFn is called, we are passed the $USERID as the first
+    parameter, eg. NotifyFn($userid, $sesskey).
 */
 
 if (!defined('_ADODB_LAYER')) {
@@ -103,7 +103,6 @@ if (!defined('_ADODB_LAYER')) {
 }
 
 if (!defined('ADODB_SESSION')) {
-
     define('ADODB_SESSION', 1);
 
     /* if database time and system time is difference is greater than this, then give warning */
@@ -115,7 +114,9 @@ if (!defined('ADODB_SESSION')) {
     function adodb_session_regenerate_id()
     {
         $conn = ADODB_Session::_conn();
-        if (!$conn) return false;
+        if (!$conn) {
+            return false;
+        }
 
         $old_id = session_id();
         if (function_exists('session_regenerate_id')) {
@@ -132,7 +133,9 @@ if (!defined('ADODB_SESSION')) {
         /* it is possible that the update statement fails due to a collision */
         if (!$ok) {
             session_id($old_id);
-            if (empty($ck)) $ck = session_get_cookie_params();
+            if (empty($ck)) {
+                $ck = session_get_cookie_params();
+            }
             setcookie(session_name(), session_id(), false, $ck['path'], $ck['domain'], $ck['secure']);
             return false;
         }
@@ -143,7 +146,7 @@ if (!defined('ADODB_SESSION')) {
     /****************************************************************************************\
      * Global definitions
      * \****************************************************************************************/
-    GLOBAL $ADODB_SESSION_CONNECT,
+    global $ADODB_SESSION_CONNECT,
            $ADODB_SESSION_DRIVER,
            $ADODB_SESSION_USER,
            $ADODB_SESSION_PWD,
@@ -205,10 +208,12 @@ if (!defined('ADODB_SESSION')) {
      * \****************************************************************************************/
     function adodb_sess_open($save_path, $session_name, $persist = true)
     {
-        GLOBAL $ADODB_SESS_CONN;
-        if (isset($ADODB_SESS_CONN)) return true;
+        global $ADODB_SESS_CONN;
+        if (isset($ADODB_SESS_CONN)) {
+            return true;
+        }
 
-        GLOBAL $ADODB_SESSION_CONNECT,
+        global $ADODB_SESSION_CONNECT,
                $ADODB_SESSION_DRIVER,
                $ADODB_SESSION_USER,
                $ADODB_SESSION_PWD,
@@ -221,13 +226,26 @@ if (!defined('ADODB_SESSION')) {
             $ADODB_SESS_CONN->debug = true;
             ADOConnection::outp(" conn=$ADODB_SESSION_CONNECT user=$ADODB_SESSION_USER pwd=$ADODB_SESSION_PWD db=$ADODB_SESSION_DB ");
         }
-        if ($persist) $ok = $ADODB_SESS_CONN->PConnect($ADODB_SESSION_CONNECT,
-            $ADODB_SESSION_USER, $ADODB_SESSION_PWD, $ADODB_SESSION_DB);
-        else $ok = $ADODB_SESS_CONN->Connect($ADODB_SESSION_CONNECT,
-            $ADODB_SESSION_USER, $ADODB_SESSION_PWD, $ADODB_SESSION_DB);
+        if ($persist) {
+            $ok = $ADODB_SESS_CONN->PConnect(
+                $ADODB_SESSION_CONNECT,
+                $ADODB_SESSION_USER,
+                $ADODB_SESSION_PWD,
+                $ADODB_SESSION_DB
+            );
+        } else {
+            $ok = $ADODB_SESS_CONN->Connect(
+                $ADODB_SESSION_CONNECT,
+                $ADODB_SESSION_USER,
+                $ADODB_SESSION_PWD,
+                $ADODB_SESSION_DB
+            );
+        }
 
-        if (!$ok) ADOConnection::outp("
+        if (!$ok) {
+            ADOConnection::outp("
 -- Session: connection failed</p>", false);
+        }
     }
 
     /****************************************************************************************\
@@ -237,7 +255,9 @@ if (!defined('ADODB_SESSION')) {
     {
         global $ADODB_SESS_CONN;
 
-        if ($ADODB_SESS_CONN) $ADODB_SESS_CONN->Close();
+        if ($ADODB_SESS_CONN) {
+            $ADODB_SESS_CONN->Close();
+        }
         return true;
     }
 
@@ -252,8 +272,9 @@ if (!defined('ADODB_SESSION')) {
         if ($rs) {
             if ($rs->EOF) {
                 $v = '';
-            } else
+            } else {
                 $v = rawurldecode(reset($rs->fields));
+            }
 
             $rs->Close();
 
@@ -286,8 +307,10 @@ if (!defined('ADODB_SESSION')) {
         // crc32 optimization since adodb 2.1
         // now we only update expiry date, thx to sebastian thom in adodb 2.32
         if ($ADODB_SESSION_CRC !== false && $ADODB_SESSION_CRC == strlen($val) . crc32($val)) {
-            if ($ADODB_SESS_DEBUG) echo "
+            if ($ADODB_SESS_DEBUG) {
+                echo "
 -- Session: Only updating date - crc32 not changed</p>";
+            }
             $qry = "UPDATE $ADODB_SESSION_TBL SET expiry=$expiry WHERE sesskey='$key' AND expiry >= " . time();
             $rs = $ADODB_SESS_CONN->Execute($qry);
             return true;
@@ -300,8 +323,12 @@ if (!defined('ADODB_SESSION')) {
             global $$var;
             $arr['expireref'] = $$var;
         }
-        $rs = $ADODB_SESS_CONN->Replace($ADODB_SESSION_TBL, $arr,
-            'sesskey', $autoQuote = true);
+        $rs = $ADODB_SESS_CONN->Replace(
+            $ADODB_SESSION_TBL,
+            $arr,
+            'sesskey',
+            $autoQuote = true
+        );
 
         if (!$rs) {
             ADOConnection::outp('
@@ -309,8 +336,9 @@ if (!defined('ADODB_SESSION')) {
         } else {
             // bug in access driver (could be odbc?) means that info is not commited
             // properly unless select statement executed in Win2000
-            if ($ADODB_SESS_CONN->databaseType == 'access')
+            if ($ADODB_SESS_CONN->databaseType == 'access') {
                 $rs = $ADODB_SESS_CONN->Execute("select sesskey from $ADODB_SESSION_TBL WHERE sesskey='$key'");
+            }
         }
         return !empty($rs);
     }
@@ -366,14 +394,15 @@ if (!defined('ADODB_SESSION')) {
                 $rs->Close();
 
                 $ADODB_SESS_CONN->CommitTrans();
-
             }
         } else {
             $qry = "DELETE FROM $ADODB_SESSION_TBL WHERE expiry < " . time();
             $ADODB_SESS_CONN->Execute($qry);
 
-            if ($ADODB_SESS_DEBUG) ADOConnection::outp("
+            if ($ADODB_SESS_DEBUG) {
+                ADOConnection::outp("
 -- <b>Garbage Collection</b>: $qry</p>");
+            }
         }
         // suggested by Cameron, "GaM3R" <gamr@outworld.cx>
         if (defined('ADODB_SESSION_OPTIMIZE')) {
@@ -393,24 +422,27 @@ if (!defined('ADODB_SESSION')) {
                 $ADODB_SESS_CONN->Execute($opt_qry);
             }
         }
-        if ($ADODB_SESS_CONN->dataProvider === 'oci8') $sql = 'select  TO_CHAR(' . ($ADODB_SESS_CONN->sysTimeStamp) . ', \'RRRR-MM-DD HH24:MI:SS\') from ' . $ADODB_SESSION_TBL;
-        else $sql = 'select ' . $ADODB_SESS_CONN->sysTimeStamp . ' from ' . $ADODB_SESSION_TBL;
+        if ($ADODB_SESS_CONN->dataProvider === 'oci8') {
+            $sql = 'select  TO_CHAR(' . ($ADODB_SESS_CONN->sysTimeStamp) . ', \'RRRR-MM-DD HH24:MI:SS\') from ' . $ADODB_SESSION_TBL;
+        } else {
+            $sql = 'select ' . $ADODB_SESS_CONN->sysTimeStamp . ' from ' . $ADODB_SESSION_TBL;
+        }
 
         $rs = $ADODB_SESS_CONN->SelectLimit($sql, 1);
         if ($rs && !$rs->EOF) {
-
             $dbts = reset($rs->fields);
             $rs->Close();
             $dbt = $ADODB_SESS_CONN->UnixTimeStamp($dbts);
             $t = time();
 
             if (abs($dbt - $t) >= ADODB_SESSION_SYNCH_SECS) {
-
                 $msg =
                     __FILE__ . ": Server time for webserver {$_SERVER['HTTP_HOST']} not in synch with database: database=$dbt ($dbts), webserver=$t (diff=" . (abs($dbt - $t) / 3600) . " hrs)";
                 error_log($msg);
-                if ($ADODB_SESS_DEBUG) ADOConnection::outp("
+                if ($ADODB_SESS_DEBUG) {
+                    ADOConnection::outp("
 -- $msg</p>");
+                }
             }
         }
 
@@ -424,13 +456,13 @@ if (!defined('ADODB_SESSION')) {
         "adodb_sess_read",
         "adodb_sess_write",
         "adodb_sess_destroy",
-        "adodb_sess_gc");
+        "adodb_sess_gc"
+    );
 }
 
 /*  TEST SCRIPT -- UNCOMMENT */
 
 if (0) {
-
     session_start();
     session_register('AVAR');
     $_SESSION['AVAR'] += 1;

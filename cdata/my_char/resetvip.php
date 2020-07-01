@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $odd = 0;
 $i = 0;
 $ok_loop = false;
@@ -8,7 +8,9 @@ list($cap_reset_max, $use_gioihanrs, $before_info_rsvip, $notify_rs_ok) = _GL('u
 list($sub) = _GL('sub');
 
 echo cn_snippet_messages();
-if ($notify_rs_ok) echo $notify_rs_ok;
+if ($notify_rs_ok) {
+    echo $notify_rs_ok;
+}
 ?>
 
 <form action="<?php echo PHP_SELF; ?>" method="GET">
@@ -34,12 +36,15 @@ if ($notify_rs_ok) echo $notify_rs_ok;
                             <hr>
                         </td>
                     </tr>
-                    <?php if ($before_info_rsvip) foreach ($before_info_rsvip as $ke => $val) {
-                        if (isset($val[1]))
-                            echo '<tr>
+                    <?php if ($before_info_rsvip) {
+                        foreach ($before_info_rsvip as $ke => $val) {
+                            if (isset($val[1])) {
+                                echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
 									<td><strong style="color:#009900">' . $val[1] . '</strong></td>
 								</tr>';
+                            }
+                        }
                     } ?>
 
                 </table>
@@ -51,13 +56,17 @@ if ($notify_rs_ok) echo $notify_rs_ok;
             <td class="bizwebform_col_2">
 
                 <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
-                    <?php if ($showchar) foreach ($showchar as $name => $val) { ?>
-                        <option
-                            value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>><?php echo $name; ?>
-                            ( LV: <?php echo $val['level'] ?> - Reset: <?php echo $val['reset'] ?> - Đã
-                            Reset <?php echo $val['resetInDay'] ?> lần / ngày )
-                        </option>
-                    <?php } ?>
+                    <?php if ($showchar) {
+                        foreach ($showchar as $name => $val) { ?>
+                            <option
+                                value="<?php echo $name; ?>"<?php if ($sub == $name) {
+                                echo 'selected';
+                            } ?>><?php echo $name; ?>
+                                ( LV: <?php echo $val['level'] ?> - Reset: <?php echo $val['reset'] ?> - Đã
+                                Reset <?php echo $val['resetInDay'] ?> lần / ngày )
+                            </option>
+                        <?php }
+                    } ?>
                 </select>
 
             </td>
@@ -105,9 +114,10 @@ echoFormVerifyChar(['action_rsvip' => 'resetvip']);
             foreach ($set_arr_rsvip as $df => $fd) {
                 $lv_rs_f = $ok_loop ? $lv_rs_e : 0;
                 $lv_rs_e = $fd['reset'];
-                $ok_loop = true;
-                ?>
-                <tr <?php if ($odd++ % 2) echo 'style="background: #f8f8f8;"'; ?>>
+                $ok_loop = true; ?>
+                <tr <?php if ($odd++ % 2) {
+                    echo 'style="background: #f8f8f8;"';
+                } ?>>
                     <td align="center"><b>LV <?php echo ++$i; ?></b></td>
                     <td align="center"> <?php echo ++$lv_rs_f . ' &rarr; ' . $fd['reset']; ?></td>
                     <td align="center"><?php echo $fd['level']; ?></td>
@@ -117,7 +127,9 @@ echoFormVerifyChar(['action_rsvip' => 'resetvip']);
                     <td align="center"><?php echo $fd['command']; ?></td>
 
                 </tr>
-                <?php if ($i === $cap_reset_max) break;
+                <?php if ($i === $cap_reset_max) {
+                    break;
+                }
             }
         } ?>
     </table>
@@ -155,9 +167,10 @@ echoFormVerifyChar(['action_rsvip' => 'resetvip']);
                 foreach ($gh_loai1 as $key => $val) {
                     $i_f = $ok_loop2 ? $i_e : 0;
                     $i_e = $i_e + 10;
-                    $ok_loop2 = true;
-                    ?>
-                    <tr <?php if ($odd++ % 2) echo 'style="background: #f8f8f8;"'; ?>>
+                    $ok_loop2 = true; ?>
+                    <tr <?php if ($odd++ % 2) {
+                        echo 'style="background: #f8f8f8;"';
+                    } ?>>
                         <td align="center"><b>TOP <?php if (++$i_f > 50) {
                                     echo ' > ' . --$i_f;
                                 } else {
@@ -166,7 +179,8 @@ echoFormVerifyChar(['action_rsvip' => 'resetvip']);
                         <td align="center">Reset Max <b> <?php echo $val['top']; ?></b> lần / ngày</td>
                     </tr>
 
-                <?php }
+                    <?php
+                }
             } ?>
         </table>
     </div>
@@ -178,16 +192,77 @@ echoFormVerifyChar(['action_rsvip' => 'resetvip']);
 
         <table id="tbl_ranking" class="std-table opt_table">
             <?php //}
-            if ($gh_loai2) foreach ($gh_loai2 as $key => $val) {
-                $count = count($gh_loai2) - 1;
-                if ($ok_loop2) {
-                    $lv_rs_f = $lv_rs_en;
-                    $lv_rs_en = $val['col1'];
-                    if ($key != $count) {
-                        ?>
-                        <tr <?php if ($key % 2) echo 'style="background: #f8f8f8;"'; ?>>
+            if ($gh_loai2) {
+                foreach ($gh_loai2 as $key => $val) {
+                    $count = count($gh_loai2) - 1;
+                    if ($ok_loop2) {
+                        $lv_rs_f = $lv_rs_en;
+                        $lv_rs_en = $val['col1'];
+                        if ($key != $count) {
+                            ?>
+                            <tr <?php if ($key % 2) {
+                                echo 'style="background: #f8f8f8;"';
+                            } ?>>
+                                <td>
+                                    <div align="center"> <?php echo ++$lv_rs_f . ' &rarr; ' . $val['col1']; ?></div>
+                                </td>
+                                <td>
+                                    <div align="center"><?php echo $val['col2']; ?> Vpoint</div>
+                                </td>
+                                <td>
+                                    <div align="center"><?php echo $val['col3']; ?> Vpoint</div>
+                                </td>
+                                <td>
+                                    <div align="center"><?php echo $val['col4']; ?> Vpoint</div>
+                                </td>
+                            </tr>
+                            <?php
+                        } else {
+                            ?>
+                            <tr <?php if ($key % 2) {
+                                echo 'style="background: #f8f8f8;"';
+                            } ?>>
+                                <td>
+                                    <div align="center"> <?php echo '>> ' . $val['col1']; ?></div>
+                                </td>
+                                <td>
+                                    <div align="center"><?php echo $val['col2']; ?> Vpoint</div>
+                                </td>
+                                <td>
+                                    <div align="center"><?php echo $val['col3']; ?> Vpoint</div>
+                                </td>
+                                <td>
+                                    <div align="center"><?php echo $val['col4']; ?> Vpoint</div>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    } else {
+                        $lv_rs_en = $val['col1'];
+                        $ok_loop2 = true; ?>
+                        <tr <?php if ($key % 2) {
+                            echo 'style="background: #f8f8f8;"';
+                        } ?>>
                             <td>
-                                <div align="center"> <?php echo ++$lv_rs_f . ' &rarr; ' . $val['col1']; ?></div>
+                                <div align="center"><b>Reset</b></div>
+                            </td>
+                            <td>
+                                <div align="center"><b>1 &rarr; <?php echo $val['day1']; ?> RS / ngày</b></div>
+                            </td>
+                            <td>
+                                <div align="center"><b><?php echo ++$val['day1']; ?> &rarr; <?php echo $val['day2']; ?>
+                                        RS /
+                                        ngày</b></div>
+                            </td>
+                            <td>
+                                <div align="center"><b> >> <?php echo $val['day2']; ?> RS / ngày</b></div>
+                            </td>
+                        </tr>
+                        <tr <?php if ($key % 2) {
+                            echo 'style="background: #f8f8f8;"';
+                        } ?>>
+                            <td>
+                                <div align="center"> <?php echo 1 . ' &rarr; ' . $lv_rs_en; ?></div>
                             </td>
                             <td>
                                 <div align="center"><?php echo $val['col2']; ?> Vpoint</div>
@@ -199,56 +274,9 @@ echoFormVerifyChar(['action_rsvip' => 'resetvip']);
                                 <div align="center"><?php echo $val['col4']; ?> Vpoint</div>
                             </td>
                         </tr>
-                    <?php } else {
-                        ?>
-                        <tr <?php if ($key % 2) echo 'style="background: #f8f8f8;"'; ?>>
-                            <td>
-                                <div align="center"> <?php echo '>> ' . $val['col1']; ?></div>
-                            </td>
-                            <td>
-                                <div align="center"><?php echo $val['col2']; ?> Vpoint</div>
-                            </td>
-                            <td>
-                                <div align="center"><?php echo $val['col3']; ?> Vpoint</div>
-                            </td>
-                            <td>
-                                <div align="center"><?php echo $val['col4']; ?> Vpoint</div>
-                            </td>
-                        </tr>
-                    <?php }
-                } else {
-                    $lv_rs_en = $val['col1'];
-                    $ok_loop2 = true; ?>
-                    <tr <?php if ($key % 2) echo 'style="background: #f8f8f8;"'; ?>>
-                        <td>
-                            <div align="center"><b>Reset</b></div>
-                        </td>
-                        <td>
-                            <div align="center"><b>1 &rarr; <?php echo $val['day1']; ?> RS / ngày</b></div>
-                        </td>
-                        <td>
-                            <div align="center"><b><?php echo ++$val['day1']; ?> &rarr; <?php echo $val['day2']; ?> RS /
-                                    ngày</b></div>
-                        </td>
-                        <td>
-                            <div align="center"><b> >> <?php echo $val['day2']; ?> RS / ngày</b></div>
-                        </td>
-                    </tr>
-                    <tr <?php if ($key % 2) echo 'style="background: #f8f8f8;"'; ?>>
-                        <td>
-                            <div align="center"> <?php echo 1 . ' &rarr; ' . $lv_rs_en; ?></div>
-                        </td>
-                        <td>
-                            <div align="center"><?php echo $val['col2']; ?> Vpoint</div>
-                        </td>
-                        <td>
-                            <div align="center"><?php echo $val['col3']; ?> Vpoint</div>
-                        </td>
-                        <td>
-                            <div align="center"><?php echo $val['col4']; ?> Vpoint</div>
-                        </td>
-                    </tr>
-                <?php }
+                        <?php
+                    }
+                }
             } ?>
         </table>
     </div>
@@ -258,7 +286,7 @@ echoFormVerifyChar(['action_rsvip' => 'resetvip']);
 		</table>';
 }
 
-if (getOption('hotrotanthu') == 1) { ?>
+if (getOption('support_new_player') == 1) { ?>
     <table style="width: 100%" cellpadding="2">
         <tr>
             <td colspan="3" style="padding:15px; text-align:center"></td>
@@ -282,16 +310,22 @@ if (getOption('hotrotanthu') == 1) { ?>
             <td align="center"><b>Level giảm</b></td>
         </tr>
         <?php $k = 0;
-        if ($options_tanthu) foreach ($options_tanthu as $df => $fd) {
-            ?>
-            <tr <?php if ($odd++ % 2) echo 'style="background: #f8f8f8;"'; ?>>
-                <td align="center"><b>Cấp <?php echo ++$k; ?></b></td>
-                <td align="center"><?php echo $fd['reset_min']; ?> &le; Reset &le; <?php echo $fd['reset_max']; ?></td>
-                <td align="center"><?php echo $fd['relife_min']; ?> &le;
-                    ReLife &le; <?php echo $fd['relife_max']; ?></td>
-                <td align="center"><?php echo $fd['levelgiam']; ?></td>
-            </tr>
-        <?php } ?>
+        if ($options_tanthu) {
+            foreach ($options_tanthu as $df => $fd) {
+                ?>
+                <tr <?php if ($odd++ % 2) {
+                    echo 'style="background: #f8f8f8;"';
+                } ?>>
+                    <td align="center"><b>Cấp <?php echo ++$k; ?></b></td>
+                    <td align="center"><?php echo $fd['reset_min']; ?> &le; Reset
+                        &le; <?php echo $fd['reset_max']; ?></td>
+                    <td align="center"><?php echo $fd['relife_min']; ?> &le;
+                        ReLife &le; <?php echo $fd['relife_max']; ?></td>
+                    <td align="center"><?php echo $fd['levelgiam']; ?></td>
+                </tr>
+                <?php
+            }
+        } ?>
 
     </table>
 <?php }

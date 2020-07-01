@@ -29,18 +29,27 @@ if (0) {
 
         $rs = $db->Execute('select * from atable');
 
-        if (!$rs) die("Empty RS");
-        if ($rs->EOF) die("EOF RS");
+        if (!$rs) {
+            die("Empty RS");
+        }
+        if ($rs->EOF) {
+            die("EOF RS");
+        }
         rs2html($rs);
     }
     $stmt = $db->Prepare('select * from adoxyz where id=?');
     for ($i = 1; $i <= 10; $i++) {
         $rs = $db->Execute(
             $stmt,
-            array($i));
+            array($i)
+        );
 
-        if (!$rs) die("Empty RS");
-        if ($rs->EOF) die("EOF RS");
+        if (!$rs) {
+            die("Empty RS");
+        }
+        if ($rs->EOF) {
+            die("EOF RS");
+        }
         rs2html($rs);
     }
 }
@@ -54,7 +63,9 @@ if (1) {
     $rs = $db->Execute($stmt, array('empno' => 4321, 'ename' => 'John'));
     // prepare not quite ready for prime time
     //$rs = $db->Execute($stmt,array('empno'=>3775,'ename'=>'John'));
-    if (!$rs) die("Empty RS");
+    if (!$rs) {
+        die("Empty RS");
+    }
 
     $db->setfetchmode(ADODB_FETCH_NUM);
 
@@ -68,17 +79,23 @@ if (1) {
         $rs->MoveNext();
     }
     echo " val = $vv";
-
 }
 
 if (0) {
     $db = ADONewConnection('odbc_oracle');
-    if (!$db->PConnect('local_oracle', 'scott', 'tiger')) die('fail connect');
+    if (!$db->PConnect('local_oracle', 'scott', 'tiger')) {
+        die('fail connect');
+    }
     $db->debug = true;
     $rs = $db->Execute(
         'select * from adoxyz where firstname=? and trim(lastname)=?',
-        array('first' => 'Caroline', 'last' => 'Miranda'));
-    if (!$rs) die("Empty RS");
-    if ($rs->EOF) die("EOF RS");
+        array('first' => 'Caroline', 'last' => 'Miranda')
+    );
+    if (!$rs) {
+        die("Empty RS");
+    }
+    if ($rs->EOF) {
+        die("EOF RS");
+    }
     rs2html($rs);
 }

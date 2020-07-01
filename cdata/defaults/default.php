@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //cn_snippet_bc();
 
 ?>

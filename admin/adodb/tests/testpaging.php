@@ -36,7 +36,6 @@ if ($driver == 'ibase') {
     $db = NewADOConnection('ibase');
     $db->PConnect("localhost:e:\\firebird\\examples\\employee.gdb", "sysdba", "masterkey", "");
     $sql = 'select distinct firstname, lastname  from adoxyz  order  by  firstname';
-
 }
 if ($driver == 'mssql') {
     $db = NewADOConnection('mssql');

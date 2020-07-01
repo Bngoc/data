@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $odd = 0;
 $i = 0;
 $ok_loop = false;
@@ -33,12 +33,15 @@ echo cn_snippet_messages();
                             <hr>
                         </td>
                     </tr>
-                    <?php if ($before_info_cn) foreach ($before_info_cn as $ke => $val) {
-                        if (isset($val[1]))
-                            echo '<tr>
+                    <?php if ($before_info_cn) {
+                        foreach ($before_info_cn as $ke => $val) {
+                            if (isset($val[1])) {
+                                echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
 									<td><strong style="color:#009900">' . $val[1] . '</strong></td>
 								</tr>';
+                            }
+                        }
                     } ?>
 
                 </table>
@@ -50,12 +53,16 @@ echo cn_snippet_messages();
             <td class="bizwebform_col_2">
 
                 <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
-                    <?php if ($showchar) foreach ($showchar as $name => $val) { ?>
-                        <option
-                            value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
-                            )
-                        </option>
-                    <?php } ?>
+                    <?php if ($showchar) {
+                        foreach ($showchar as $name => $val) { ?>
+                            <option
+                                value="<?php echo $name; ?>"<?php if ($sub == $name) {
+                                echo 'selected';
+                            } ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
+                                )
+                            </option>
+                        <?php }
+                    } ?>
                 </select>
 
             </td>
@@ -100,7 +107,9 @@ echo cn_snippet_messages();
         <tr>
             <td class="bizwebform_col_1">Tên nhân vật mới <span class="required">*</span></td>
             <td class="bizwebform_col_2">
-                <input class="bizwebform" id="" <?php if ($cn_false) echo 'readonly="readonly"'; ?> type="text"
+                <input class="bizwebform" id="" <?php if ($cn_false) {
+                    echo 'readonly="readonly"';
+                } ?> type="text"
                        required name="c_name" placeholder="abc123">
             </td>
             <td class="bizwebform_col_3"></td>

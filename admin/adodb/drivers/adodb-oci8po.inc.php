@@ -20,29 +20,31 @@
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 include_once(ADODB_DIR . '/drivers/adodb-oci8.inc.php');
 
 class ADODB_oci8po extends ADODB_oci8
 {
-    var $databaseType = 'oci8po';
-    var $dataProvider = 'oci8';
-    var $metaColumnsSQL = "select lower(cname),coltype,width, SCALE, PRECISION, NULLS, DEFAULTVAL from col where tname='%s' order by colno"; //changed by smondino@users.sourceforge. net
-    var $metaTablesSQL = "select lower(table_name),table_type from cat where table_type in ('TABLE','VIEW')";
+    public $databaseType = 'oci8po';
+    public $dataProvider = 'oci8';
+    public $metaColumnsSQL = "select lower(cname),coltype,width, SCALE, PRECISION, NULLS, DEFAULTVAL from col where tname='%s' order by colno"; //changed by smondino@users.sourceforge. net
+    public $metaTablesSQL = "select lower(table_name),table_type from cat where table_type in ('TABLE','VIEW')";
 
-    function __construct()
+    public function __construct()
     {
         $this->_hasOCIFetchStatement = ADODB_PHPVER >= 0x4200;
         # oci8po does not support adodb extension: adodb_movenext()
     }
 
-    function Param($name, $type = 'C')
+    public function Param($name, $type = 'C')
     {
         return '?';
     }
 
-    function Prepare($sql, $cursor = false)
+    public function Prepare($sql, $cursor = false)
     {
         $sqlarr = explode('?', $sql);
         $sql = $sqlarr[0];
@@ -52,13 +54,13 @@ class ADODB_oci8po extends ADODB_oci8
         return ADODB_oci8::Prepare($sql, $cursor);
     }
 
-    function Execute($sql, $inputarr = false)
+    public function Execute($sql, $inputarr = false)
     {
         return ADOConnection::Execute($sql, $inputarr);
     }
 
     // emulate handling of parameters ? ?, replacing with :bind0 :bind1
-    function _query($sql, $inputarr = false)
+    public function _query($sql, $inputarr = false)
     {
         if (is_array($inputarr)) {
             $i = 0;
@@ -90,22 +92,23 @@ class ADODB_oci8po extends ADODB_oci8
 }
 
 /*--------------------------------------------------------------------------------------
-		 Class Name: Recordset
+         Class Name: Recordset
 --------------------------------------------------------------------------------------*/
 
 class ADORecordset_oci8po extends ADORecordset_oci8
 {
+    public $databaseType = 'oci8po';
 
-    var $databaseType = 'oci8po';
-
-    function __construct($queryID, $mode = false)
+    public function __construct($queryID, $mode = false)
     {
         parent::__construct($queryID, $mode);
     }
 
-    function Fields($colname)
+    public function Fields($colname)
     {
-        if ($this->fetchMode & OCI_ASSOC) return $this->fields[$colname];
+        if ($this->fetchMode & OCI_ASSOC) {
+            return $this->fields[$colname];
+        }
 
         if (!$this->bind) {
             $this->bind = array();
@@ -118,7 +121,7 @@ class ADORecordset_oci8po extends ADORecordset_oci8
     }
 
     // lowercase field names...
-    function _FetchField($fieldOffset = -1)
+    public function _FetchField($fieldOffset = -1)
     {
         $fld = new ADOFieldObject;
         $fieldOffset += 1;
@@ -138,7 +141,7 @@ class ADORecordset_oci8po extends ADORecordset_oci8
     }
 
     // 10% speedup to move MoveNext to child class
-    function MoveNext()
+    public function MoveNext()
     {
         if (@OCIfetchinto($this->_queryID, $this->fields, $this->fetchMode)) {
             global $ADODB_ANSI_PADDING_OFF;
@@ -147,7 +150,9 @@ class ADORecordset_oci8po extends ADORecordset_oci8
 
             if (!empty($ADODB_ANSI_PADDING_OFF)) {
                 foreach ($this->fields as $k => $v) {
-                    if (is_string($v)) $this->fields[$k] = rtrim($v);
+                    if (is_string($v)) {
+                        $this->fields[$k] = rtrim($v);
+                    }
                 }
             }
             return true;
@@ -160,17 +165,18 @@ class ADORecordset_oci8po extends ADORecordset_oci8
     }
 
     /* Optimize SelectLimit() by using OCIFetch() instead of OCIFetchInto() */
-    function GetArrayLimit($nrows, $offset = -1)
+    public function GetArrayLimit($nrows, $offset = -1)
     {
         if ($offset <= 0) {
             $arr = $this->GetArray($nrows);
             return $arr;
         }
-        for ($i = 1; $i < $offset; $i++)
+        for ($i = 1; $i < $offset; $i++) {
             if (!@OCIFetch($this->_queryID)) {
                 $arr = array();
                 return $arr;
             }
+        }
         if (!@OCIfetchinto($this->_queryID, $this->fields, $this->fetchMode)) {
             $arr = array();
             return $arr;
@@ -186,7 +192,7 @@ class ADORecordset_oci8po extends ADORecordset_oci8
         return $results;
     }
 
-    function _fetch()
+    public function _fetch()
     {
         global $ADODB_ANSI_PADDING_OFF;
 
@@ -196,11 +202,12 @@ class ADORecordset_oci8po extends ADORecordset_oci8
 
             if (!empty($ADODB_ANSI_PADDING_OFF)) {
                 foreach ($this->fields as $k => $v) {
-                    if (is_string($v)) $this->fields[$k] = rtrim($v);
+                    if (is_string($v)) {
+                        $this->fields[$k] = rtrim($v);
+                    }
                 }
             }
         }
         return $ret;
     }
-
 }

@@ -12,16 +12,17 @@
  */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 class ADODB2_access extends ADODB_DataDict
 {
+    public $databaseType = 'access';
+    public $seqField = false;
 
-    var $databaseType = 'access';
-    var $seqField = false;
 
-
-    function ActualType($meta)
+    public function ActualType($meta)
     {
         switch ($meta) {
             case 'C':
@@ -67,44 +68,55 @@ class ADODB2_access extends ADODB_DataDict
     }
 
     // return string must begin with space
-    function _CreateSuffix($fname, &$ftype, $fnotnull, $fdefault, $fautoinc, $fconstraint, $funsigned)
+    public function _CreateSuffix($fname, &$ftype, $fnotnull, $fdefault, $fautoinc, $fconstraint, $funsigned)
     {
         if ($fautoinc) {
             $ftype = 'COUNTER';
             return '';
         }
-        if (substr($ftype, 0, 7) == 'DECIMAL') $ftype = 'DECIMAL';
+        if (substr($ftype, 0, 7) == 'DECIMAL') {
+            $ftype = 'DECIMAL';
+        }
         $suffix = '';
         if (strlen($fdefault)) {
             //$suffix .= " DEFAULT $fdefault";
-            if ($this->debug) ADOConnection::outp("Warning: Access does not supported DEFAULT values (field $fname)");
+            if ($this->debug) {
+                ADOConnection::outp("Warning: Access does not supported DEFAULT values (field $fname)");
+            }
         }
-        if ($fnotnull) $suffix .= ' NOT NULL';
-        if ($fconstraint) $suffix .= ' ' . $fconstraint;
+        if ($fnotnull) {
+            $suffix .= ' NOT NULL';
+        }
+        if ($fconstraint) {
+            $suffix .= ' ' . $fconstraint;
+        }
         return $suffix;
     }
 
-    function CreateDatabase($dbname, $options = false)
+    public function CreateDatabase($dbname, $options = false)
     {
         return array();
     }
 
 
-    function SetSchema($schema)
+    public function SetSchema($schema)
     {
     }
 
-    function AlterColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
+    public function AlterColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
     {
-        if ($this->debug) ADOConnection::outp("AlterColumnSQL not supported");
+        if ($this->debug) {
+            ADOConnection::outp("AlterColumnSQL not supported");
+        }
         return array();
     }
 
 
-    function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
+    public function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
     {
-        if ($this->debug) ADOConnection::outp("DropColumnSQL not supported");
+        if ($this->debug) {
+            ADOConnection::outp("DropColumnSQL not supported");
+        }
         return array();
     }
-
 }

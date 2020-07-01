@@ -12,16 +12,17 @@
  */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 class ADODB2_ibase extends ADODB_DataDict
 {
+    public $databaseType = 'ibase';
+    public $seqField = false;
 
-    var $databaseType = 'ibase';
-    var $seqField = false;
 
-
-    function ActualType($meta)
+    public function ActualType($meta)
     {
         switch ($meta) {
             case 'C':
@@ -66,17 +67,20 @@ class ADODB2_ibase extends ADODB_DataDict
         }
     }
 
-    function AlterColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
+    public function AlterColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
     {
-        if ($this->debug) ADOConnection::outp("AlterColumnSQL not supported");
+        if ($this->debug) {
+            ADOConnection::outp("AlterColumnSQL not supported");
+        }
         return array();
     }
 
 
-    function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
+    public function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
     {
-        if ($this->debug) ADOConnection::outp("DropColumnSQL not supported");
+        if ($this->debug) {
+            ADOConnection::outp("DropColumnSQL not supported");
+        }
         return array();
     }
-
 }

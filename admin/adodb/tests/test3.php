@@ -33,11 +33,12 @@ try {
         flush();
     }
 
-    if ($i != $cnt) die("actual cnt is $i, cnt should be $cnt\n");
+    if ($i != $cnt) {
+        die("actual cnt is $i, cnt should be $cnt\n");
+    }
 
 
     $rs = $db->Execute("select bad from badder");
-
 } catch (exception $e) {
     adodb_pr($e);
     $e = adodb_backtrace($e->trace);

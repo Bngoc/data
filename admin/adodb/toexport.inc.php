@@ -59,12 +59,16 @@ function rs2tabout(&$rs, $addtitles = true)
 {
     $fp = fopen('php://stdout', 'wb');
     _adodb_export($rs, "\t", ' ', true, $addtitles);
-    if ($fp) fclose($fp);
+    if ($fp) {
+        fclose($fp);
+    }
 }
 
 function _adodb_export(&$rs, $sep, $sepreplace, $fp = false, $addtitles = true, $quote = '"', $escquote = '"', $replaceNewLine = ' ')
 {
-    if (!$rs) return '';
+    if (!$rs) {
+        return '';
+    }
     //----------
     // CONSTANTS
     $NEWLINE = "\r\n";
@@ -78,12 +82,12 @@ function _adodb_export(&$rs, $sep, $sepreplace, $fp = false, $addtitles = true, 
         $i = 0;
         $elements = array();
         while (list(, $o) = each($fieldTypes)) {
-
             $v = ($o) ? $o->name : 'Field' . ($i++);
-            if ($escquote) $v = str_replace($quote, $escquotequote, $v);
+            if ($escquote) {
+                $v = str_replace($quote, $escquotequote, $v);
+            }
             $v = strip_tags(str_replace("\n", $replaceNewLine, str_replace("\r\n", $replaceNewLine, str_replace($sep, $sepreplace, $v))));
             $elements[] = $v;
-
         }
         $s .= implode($sep, $elements) . $NEWLINE;
     }
@@ -99,36 +103,55 @@ function _adodb_export(&$rs, $sep, $sepreplace, $fp = false, $addtitles = true, 
         if ($hasNumIndex) {
             for ($j = 0; $j < $max; $j++) {
                 $v = $rs->fields[$j];
-                if (!is_object($v)) $v = trim($v);
-                else $v = 'Object';
-                if ($escquote) $v = str_replace($quote, $escquotequote, $v);
+                if (!is_object($v)) {
+                    $v = trim($v);
+                } else {
+                    $v = 'Object';
+                }
+                if ($escquote) {
+                    $v = str_replace($quote, $escquotequote, $v);
+                }
                 $v = strip_tags(str_replace("\n", $replaceNewLine, str_replace("\r\n", $replaceNewLine, str_replace($sep, $sepreplace, $v))));
 
-                if (strpos($v, $sep) !== false || strpos($v, $quote) !== false) $elements[] = "$quote$v$quote";
-                else $elements[] = $v;
+                if (strpos($v, $sep) !== false || strpos($v, $quote) !== false) {
+                    $elements[] = "$quote$v$quote";
+                } else {
+                    $elements[] = $v;
+                }
             }
         } else { // ASSOCIATIVE ARRAY
             foreach ($rs->fields as $v) {
-                if ($escquote) $v = str_replace($quote, $escquotequote, trim($v));
+                if ($escquote) {
+                    $v = str_replace($quote, $escquotequote, trim($v));
+                }
                 $v = strip_tags(str_replace("\n", $replaceNewLine, str_replace("\r\n", $replaceNewLine, str_replace($sep, $sepreplace, $v))));
 
-                if (strpos($v, $sep) !== false || strpos($v, $quote) !== false) $elements[] = "$quote$v$quote";
-                else $elements[] = $v;
+                if (strpos($v, $sep) !== false || strpos($v, $quote) !== false) {
+                    $elements[] = "$quote$v$quote";
+                } else {
+                    $elements[] = $v;
+                }
             }
         }
         $s .= implode($sep, $elements) . $NEWLINE;
         $rs->MoveNext();
         $line += 1;
         if ($fp && ($line % $BUFLINES) == 0) {
-            if ($fp === true) echo $s;
-            else fwrite($fp, $s);
+            if ($fp === true) {
+                echo $s;
+            } else {
+                fwrite($fp, $s);
+            }
             $s = '';
         }
     }
 
     if ($fp) {
-        if ($fp === true) echo $s;
-        else fwrite($fp, $s);
+        if ($fp === true) {
+            echo $s;
+        } else {
+            fwrite($fp, $s);
+        }
         $s = '';
     }
 

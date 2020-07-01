@@ -8,7 +8,7 @@
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
-	  Set tabs to 4 for best viewing.
+      Set tabs to 4 for best viewing.
 
 */
 
@@ -24,26 +24,26 @@ class ADODB_Compress_Bzip2
 {
     /**
      */
-    var $_block_size = null;
+    public $_block_size = null;
 
     /**
      */
-    var $_work_level = null;
+    public $_work_level = null;
 
     /**
      */
-    var $_min_length = 1;
+    public $_min_length = 1;
 
     /**
      */
-    function getBlockSize()
+    public function getBlockSize()
     {
         return $this->_block_size;
     }
 
     /**
      */
-    function setBlockSize($block_size)
+    public function setBlockSize($block_size)
     {
         assert('$block_size >= 1');
         assert('$block_size <= 9');
@@ -52,14 +52,14 @@ class ADODB_Compress_Bzip2
 
     /**
      */
-    function getWorkLevel()
+    public function getWorkLevel()
     {
         return $this->_work_level;
     }
 
     /**
      */
-    function setWorkLevel($work_level)
+    public function setWorkLevel($work_level)
     {
         assert('$work_level >= 0');
         assert('$work_level <= 250');
@@ -68,14 +68,14 @@ class ADODB_Compress_Bzip2
 
     /**
      */
-    function getMinLength()
+    public function getMinLength()
     {
         return $this->_min_length;
     }
 
     /**
      */
-    function setMinLength($min_length)
+    public function setMinLength($min_length)
     {
         assert('$min_length >= 0');
         $this->_min_length = (int)$min_length;
@@ -83,7 +83,7 @@ class ADODB_Compress_Bzip2
 
     /**
      */
-    function __construct($block_size = null, $work_level = null, $min_length = null)
+    public function __construct($block_size = null, $work_level = null, $min_length = null)
     {
         if (!is_null($block_size)) {
             $this->setBlockSize($block_size);
@@ -100,7 +100,7 @@ class ADODB_Compress_Bzip2
 
     /**
      */
-    function write($data, $key)
+    public function write($data, $key)
     {
         if (strlen($data) < $this->_min_length) {
             return $data;
@@ -119,11 +119,10 @@ class ADODB_Compress_Bzip2
 
     /**
      */
-    function read($data, $key)
+    public function read($data, $key)
     {
         return $data ? bzdecompress($data) : $data;
     }
-
 }
 
 return 1;

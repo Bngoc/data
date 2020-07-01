@@ -26,7 +26,9 @@ function send2server($url, $sql)
     $url .= '?sql=' . urlencode($sql);
     print "<p>$url</p>";
     $rs = csv2rs($url, $err);
-    if ($err) print $err;
+    if ($err) {
+        print $err;
+    }
     return $rs;
 }
 
@@ -75,7 +77,9 @@ if ($testhttp) {
 
     print "<h3>Test Select</h3>";
     $rs = send2server($serverURL, $sql5);
-    if ($rs) rs2html($rs);
+    if ($rs) {
+        rs2html($rs);
+    }
 
     print "<hr />";
 }
@@ -98,14 +102,18 @@ $rs = $conn->Execute($sql3);
 
 print "<h3>Select SQL</h3>";
 $rs = $conn->Execute($sql5);
-if ($rs) rs2html($rs);
+if ($rs) {
+    rs2html($rs);
+}
 
 print "<h3>Delete SQL</h3>";
 $rs = $conn->Execute($sql4);
 
 print "<h3>Select SQL</h3>";
 $rs = $conn->Execute($sql5);
-if ($rs) rs2html($rs);
+if ($rs) {
+    rs2html($rs);
+}
 
 
 /* EXPECTED RESULTS FOR HTTP TEST:
@@ -115,25 +123,25 @@ http://localhost/php/adodb/server.php?sql=insert+into+products+%28productname%29
 
 adorecordset Object
 (
-	[dataProvider] => native
-	[fields] =>
-	[blobSize] => 64
-	[canSeek] =>
-	[EOF] => 1
-	[emptyTimeStamp] =>
-	[emptyDate] =>
-	[debug] =>
-	[timeToLive] => 0
-	[bind] =>
-	[_numOfRows] => -1
-	[_numOfFields] => 0
-	[_queryID] => 1
-	[_currentRow] => -1
-	[_closed] =>
-	[_inited] =>
-	[sql] => insert into products (productname) values ('testprod')
-	[affectedrows] => 1
-	[insertid] => 81
+    [dataProvider] => native
+    [fields] =>
+    [blobSize] => 64
+    [canSeek] =>
+    [EOF] => 1
+    [emptyTimeStamp] =>
+    [emptyDate] =>
+    [debug] =>
+    [timeToLive] => 0
+    [bind] =>
+    [_numOfRows] => -1
+    [_numOfFields] => 0
+    [_queryID] => 1
+    [_currentRow] => -1
+    [_closed] =>
+    [_inited] =>
+    [sql] => insert into products (productname) values ('testprod')
+    [affectedrows] => 1
+    [insertid] => 81
 )
 
 
@@ -144,25 +152,25 @@ http://localhost/php/adodb/server.php?sql=insert+into+products+%28productname%29
 
 adorecordset Object
 (
-	[dataProvider] => native
-	[fields] =>
-	[blobSize] => 64
-	[canSeek] =>
-	[EOF] => 1
-	[emptyTimeStamp] =>
-	[emptyDate] =>
-	[debug] =>
-	[timeToLive] => 0
-	[bind] =>
-	[_numOfRows] => -1
-	[_numOfFields] => 0
-	[_queryID] => 1
-	[_currentRow] => -1
-	[_closed] =>
-	[_inited] =>
-	[sql] => insert into products (productname) values ('testprod')
-	[affectedrows] => 1
-	[insertid] => 82
+    [dataProvider] => native
+    [fields] =>
+    [blobSize] => 64
+    [canSeek] =>
+    [EOF] => 1
+    [emptyTimeStamp] =>
+    [emptyDate] =>
+    [debug] =>
+    [timeToLive] => 0
+    [bind] =>
+    [_numOfRows] => -1
+    [_numOfFields] => 0
+    [_queryID] => 1
+    [_currentRow] => -1
+    [_closed] =>
+    [_inited] =>
+    [sql] => insert into products (productname) values ('testprod')
+    [affectedrows] => 1
+    [insertid] => 82
 )
 
 
@@ -173,25 +181,25 @@ http://localhost/php/adodb/server.php?sql=delete+from+products+where+productid%3
 
 adorecordset Object
 (
-	[dataProvider] => native
-	[fields] =>
-	[blobSize] => 64
-	[canSeek] =>
-	[EOF] => 1
-	[emptyTimeStamp] =>
-	[emptyDate] =>
-	[debug] =>
-	[timeToLive] => 0
-	[bind] =>
-	[_numOfRows] => -1
-	[_numOfFields] => 0
-	[_queryID] => 1
-	[_currentRow] => -1
-	[_closed] =>
-	[_inited] =>
-	[sql] => delete from products where productid>80
-	[affectedrows] => 2
-	[insertid] => 0
+    [dataProvider] => native
+    [fields] =>
+    [blobSize] => 64
+    [canSeek] =>
+    [EOF] => 1
+    [emptyTimeStamp] =>
+    [emptyDate] =>
+    [debug] =>
+    [timeToLive] => 0
+    [bind] =>
+    [_numOfRows] => -1
+    [_numOfFields] => 0
+    [_queryID] => 1
+    [_currentRow] => -1
+    [_closed] =>
+    [_inited] =>
+    [sql] => delete from products where productid>80
+    [affectedrows] => 2
+    [insertid] => 0
 )
 
 [more stuff deleted]

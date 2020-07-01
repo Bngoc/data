@@ -14,7 +14,9 @@
  */
 include_once('PEAR.php');
 
-if (!defined('ADODB_ERROR_HANDLER')) define('ADODB_ERROR_HANDLER', 'ADODB_Error_PEAR');
+if (!defined('ADODB_ERROR_HANDLER')) {
+    define('ADODB_ERROR_HANDLER', 'ADODB_Error_PEAR');
+}
 
 /*
 * Enabled the following if you want to terminate scripts when an error occurs
@@ -24,7 +26,9 @@ if (!defined('ADODB_ERROR_HANDLER')) define('ADODB_ERROR_HANDLER', 'ADODB_Error_
 /*
 * Name of the PEAR_Error derived class to call.
 */
-if (!defined('ADODB_PEAR_ERROR_CLASS')) define('ADODB_PEAR_ERROR_CLASS', 'PEAR_Error');
+if (!defined('ADODB_PEAR_ERROR_CLASS')) {
+    define('ADODB_PEAR_ERROR_CLASS', 'PEAR_Error');
+}
 
 /*
 * Store the last PEAR_Error object here
@@ -46,7 +50,9 @@ function ADODB_Error_PEAR($dbms, $fn, $errno, $errmsg, $p1 = false, $p2 = false)
 {
     global $ADODB_Last_PEAR_Error;
 
-    if (error_reporting() == 0) return; // obey @ protocol
+    if (error_reporting() == 0) {
+        return;
+    } // obey @ protocol
     switch ($fn) {
         case 'EXECUTE':
             $sql = $p1;
@@ -69,10 +75,13 @@ function ADODB_Error_PEAR($dbms, $fn, $errno, $errmsg, $p1 = false, $p2 = false)
     }
 
     $class = ADODB_PEAR_ERROR_CLASS;
-    $ADODB_Last_PEAR_Error = new $class($s, $errno,
+    $ADODB_Last_PEAR_Error = new $class(
+        $s,
+        $errno,
         $GLOBALS['_PEAR_default_error_mode'],
         $GLOBALS['_PEAR_default_error_options'],
-        $errmsg);
+        $errmsg
+    );
 
     //print "<p>!$s</p>";
 }

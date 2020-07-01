@@ -15,9 +15,13 @@
 
 
 // added Claudio Bustos  clbustos#entelchile.net
-if (!defined('ADODB_ERROR_HANDLER_TYPE')) define('ADODB_ERROR_HANDLER_TYPE', E_USER_ERROR);
+if (!defined('ADODB_ERROR_HANDLER_TYPE')) {
+    define('ADODB_ERROR_HANDLER_TYPE', E_USER_ERROR);
+}
 
-if (!defined('ADODB_ERROR_HANDLER')) define('ADODB_ERROR_HANDLER', 'ADODB_Error_Handler');
+if (!defined('ADODB_ERROR_HANDLER')) {
+    define('ADODB_ERROR_HANDLER', 'ADODB_Error_Handler');
+}
 
 /**
  * Default Error Handler. This will be called with the following params
@@ -32,7 +36,9 @@ if (!defined('ADODB_ERROR_HANDLER')) define('ADODB_ERROR_HANDLER', 'ADODB_Error_
  */
 function ADODB_Error_Handler($dbms, $fn, $errno, $errmsg, $p1, $p2, &$thisConnection)
 {
-    if (error_reporting() == 0) return; // obey @ protocol
+    if (error_reporting() == 0) {
+        return;
+    } // obey @ protocol
     switch ($fn) {
         case 'EXECUTE':
             $sql = $p1;
@@ -68,10 +74,11 @@ function ADODB_Error_Handler($dbms, $fn, $errno, $errmsg, $p1, $p2, &$thisConnec
     */
     if (defined('ADODB_ERROR_LOG_TYPE')) {
         $t = date('Y-m-d H:i:s');
-        if (defined('ADODB_ERROR_LOG_DEST'))
+        if (defined('ADODB_ERROR_LOG_DEST')) {
             error_log("($t) $s", ADODB_ERROR_LOG_TYPE, ADODB_ERROR_LOG_DEST);
-        else
+        } else {
             error_log("($t) $s", ADODB_ERROR_LOG_TYPE);
+        }
     }
 
 

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 list($before_info_cn, $sub, $showchar) = _GL('before_info_cn, sub, showchar');
 
 echo cn_snippet_messages();
@@ -28,12 +28,15 @@ $configLevel1 = explode('|', getOption('configLevel'), 2);
                             <hr>
                         </td>
                     </tr>
-                    <?php if ($before_info_cn) foreach ($before_info_cn as $ke => $val) {
-                        if (isset($val[1]))
-                            echo '<tr>
+                    <?php if ($before_info_cn) {
+                        foreach ($before_info_cn as $ke => $val) {
+                            if (isset($val[1])) {
+                                echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
 									<td class="pd-left10"><strong style="color:#009900">' . $val[1] . '</strong></td>
 								</tr>';
+                            }
+                        }
                     } ?>
 
                 </table>
@@ -45,12 +48,16 @@ $configLevel1 = explode('|', getOption('configLevel'), 2);
             <td class="bizwebform_col_2">
 
                 <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
-                    <?php if ($showchar) foreach ($showchar as $name => $val) { ?>
-                        <option
-                            value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
-                            )
-                        </option>
-                    <?php } ?>
+                    <?php if ($showchar) {
+                        foreach ($showchar as $name => $val) { ?>
+                            <option
+                                value="<?php echo $name; ?>"<?php if ($sub == $name) {
+                                echo 'selected';
+                            } ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
+                                )
+                            </option>
+                        <?php }
+                    } ?>
                 </select>
 
             </td>

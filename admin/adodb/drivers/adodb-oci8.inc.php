@@ -17,7 +17,9 @@
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 /*
 NLS_Date_Format
@@ -61,27 +63,27 @@ function oci_lob_desc($type)
 
 class ADODB_oci8 extends ADOConnection
 {
-    var $databaseType = 'oci8';
-    var $dataProvider = 'oci8';
-    var $replaceQuote = "''"; // string to use to replace quotes
-    var $concat_operator = '||';
-    var $sysDate = "TRUNC(SYSDATE)";
-    var $sysTimeStamp = 'SYSDATE'; // requires oracle 9 or later, otherwise use SYSDATE
-    var $metaDatabasesSQL = "SELECT USERNAME FROM ALL_USERS WHERE USERNAME NOT IN ('SYS','SYSTEM','DBSNMP','OUTLN') ORDER BY 1";
-    var $_stmt;
-    var $_commit = OCI_COMMIT_ON_SUCCESS;
-    var $_initdate = true; // init date to YYYY-MM-DD
-    var $metaTablesSQL = "select table_name,table_type from cat where table_type in ('TABLE','VIEW') and table_name not like 'BIN\$%'"; // bin$ tables are recycle bin tables
-    var $metaColumnsSQL = "select cname,coltype,width, SCALE, PRECISION, NULLS, DEFAULTVAL from col where tname='%s' order by colno"; //changed by smondino@users.sourceforge. net
-    var $metaColumnsSQL2 = "select column_name,data_type,data_length, data_scale, data_precision,
+    public $databaseType = 'oci8';
+    public $dataProvider = 'oci8';
+    public $replaceQuote = "''"; // string to use to replace quotes
+    public $concat_operator = '||';
+    public $sysDate = "TRUNC(SYSDATE)";
+    public $sysTimeStamp = 'SYSDATE'; // requires oracle 9 or later, otherwise use SYSDATE
+    public $metaDatabasesSQL = "SELECT USERNAME FROM ALL_USERS WHERE USERNAME NOT IN ('SYS','SYSTEM','DBSNMP','OUTLN') ORDER BY 1";
+    public $_stmt;
+    public $_commit = OCI_COMMIT_ON_SUCCESS;
+    public $_initdate = true; // init date to YYYY-MM-DD
+    public $metaTablesSQL = "select table_name,table_type from cat where table_type in ('TABLE','VIEW') and table_name not like 'BIN\$%'"; // bin$ tables are recycle bin tables
+    public $metaColumnsSQL = "select cname,coltype,width, SCALE, PRECISION, NULLS, DEFAULTVAL from col where tname='%s' order by colno"; //changed by smondino@users.sourceforge. net
+    public $metaColumnsSQL2 = "select column_name,data_type,data_length, data_scale, data_precision,
     case when nullable = 'Y' then 'NULL'
     else 'NOT NULL' end as nulls,
     data_default from all_tab_cols
   where owner='%s' and table_name='%s' order by column_id"; // when there is a schema
-    var $_bindInputArray = true;
-    var $hasGenID = true;
-    var $_genIDSQL = "SELECT (%s.nextval) FROM DUAL";
-    var $_genSeqSQL = "
+    public $_bindInputArray = true;
+    public $hasGenID = true;
+    public $_genIDSQL = "SELECT (%s.nextval) FROM DUAL";
+    public $_genSeqSQL = "
 DECLARE
 	PRAGMA AUTONOMOUS_TRANSACTION;
 BEGIN
@@ -89,28 +91,28 @@ BEGIN
 END;
 ";
 
-    var $_dropSeqSQL = "DROP SEQUENCE %s";
-    var $hasAffectedRows = true;
-    var $random = "abs(mod(DBMS_RANDOM.RANDOM,10000001)/10000000)";
-    var $noNullStrings = false;
-    var $connectSID = false;
-    var $_bind = false;
-    var $_nestedSQL = true;
-    var $_hasOciFetchStatement = false;
-    var $_getarray = false; // currently not working
-    var $leftOuter = '';  // oracle wierdness, $col = $value (+) for LEFT OUTER, $col (+)= $value for RIGHT OUTER
-    var $session_sharing_force_blob = false; // alter session on updateblob if set to true
-    var $firstrows = true; // enable first rows optimization on SelectLimit()
-    var $selectOffsetAlg1 = 1000; // when to use 1st algorithm of selectlimit.
-    var $NLS_DATE_FORMAT = 'YYYY-MM-DD';  // To include time, use 'RRRR-MM-DD HH24:MI:SS'
-    var $dateformat = 'YYYY-MM-DD'; // DBDate format
-    var $useDBDateFormatForTextInput = false;
-    var $datetime = false; // MetaType('DATE') returns 'D' (datetime==false) or 'T' (datetime == true)
-    var $_refLOBs = array();
+    public $_dropSeqSQL = "DROP SEQUENCE %s";
+    public $hasAffectedRows = true;
+    public $random = "abs(mod(DBMS_RANDOM.RANDOM,10000001)/10000000)";
+    public $noNullStrings = false;
+    public $connectSID = false;
+    public $_bind = false;
+    public $_nestedSQL = true;
+    public $_hasOciFetchStatement = false;
+    public $_getarray = false; // currently not working
+    public $leftOuter = '';  // oracle wierdness, $col = $value (+) for LEFT OUTER, $col (+)= $value for RIGHT OUTER
+    public $session_sharing_force_blob = false; // alter session on updateblob if set to true
+    public $firstrows = true; // enable first rows optimization on SelectLimit()
+    public $selectOffsetAlg1 = 1000; // when to use 1st algorithm of selectlimit.
+    public $NLS_DATE_FORMAT = 'YYYY-MM-DD';  // To include time, use 'RRRR-MM-DD HH24:MI:SS'
+    public $dateformat = 'YYYY-MM-DD'; // DBDate format
+    public $useDBDateFormatForTextInput = false;
+    public $datetime = false; // MetaType('DATE') returns 'D' (datetime==false) or 'T' (datetime == true)
+    public $_refLOBs = array();
 
     // var $ansiOuter = true; // if oracle9
 
-    function __construct()
+    public function __construct()
     {
         $this->_hasOciFetchStatement = ADODB_PHPVER >= 0x4200;
         if (defined('ADODB_EXTENSION')) {
@@ -119,7 +121,7 @@ END;
     }
 
     /*  function MetaColumns($table, $normalize=true) added by smondino@users.sourceforge.net*/
-    function MetaColumns($table, $normalize = true)
+    public function MetaColumns($table, $normalize = true)
     {
         global $ADODB_FETCH_MODE;
 
@@ -176,7 +178,7 @@ END;
         return $retarr;
     }
 
-    function Time()
+    public function Time()
     {
         $rs = $this->Execute("select TO_CHAR($this->sysTimeStamp,'YYYY-MM-DD HH24:MI:SS') from dual");
         if ($rs && !$rs->EOF) {
@@ -212,7 +214,7 @@ END;
      *
      * @return bool
      */
-    function _connect($argHostname, $argUsername, $argPassword, $argDatabasename = null, $mode = 0)
+    public function _connect($argHostname, $argUsername, $argPassword, $argDatabasename = null, $mode = 0)
     {
         if (!function_exists('oci_pconnect')) {
             return null;
@@ -242,9 +244,10 @@ END;
                 if ($this->connectSID) {
                     $argDatabasename = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=" . $argHostname
                         . ")(PORT=$argHostport))(CONNECT_DATA=(SID=$argDatabasename)))";
-                } else
+                } else {
                     $argDatabasename = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=" . $argHostname
                         . ")(PORT=$argHostport))(CONNECT_DATA=(SERVICE_NAME=$argDatabasename)))";
+                }
             }
         }
 
@@ -256,7 +259,7 @@ END;
             if ($this->_connectionID && $this->autoRollback) {
                 oci_rollback($this->_connectionID);
             }
-        } else if ($mode == 2) {
+        } elseif ($mode == 2) {
             $this->_connectionID = ($this->charSet)
                 ? oci_new_connect($argUsername, $argPassword, $argDatabasename, $this->charSet)
                 : oci_new_connect($argUsername, $argPassword, $argDatabasename);
@@ -280,7 +283,7 @@ END;
         return true;
     }
 
-    function ServerInfo()
+    public function ServerInfo()
     {
         $arr['compat'] = $this->GetOne('select value from sys.database_compatible_level');
         $arr['description'] = @oci_server_version($this->_connectionID);
@@ -289,18 +292,18 @@ END;
     }
 
     // returns true or false
-    function _pconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
+    public function _pconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
     {
         return $this->_connect($argHostname, $argUsername, $argPassword, $argDatabasename, 1);
     }
 
     // returns true or false
-    function _nconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
+    public function _nconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
     {
         return $this->_connect($argHostname, $argUsername, $argPassword, $argDatabasename, 2);
     }
 
-    function _affectedrows()
+    public function _affectedrows()
     {
         if (is_resource($this->_stmt)) {
             return @oci_num_rows($this->_stmt);
@@ -308,13 +311,13 @@ END;
         return 0;
     }
 
-    function IfNull($field, $ifNull)
+    public function IfNull($field, $ifNull)
     {
         return " NVL($field, $ifNull) "; // if Oracle
     }
 
     // format and return date string in database date format
-    function DBDate($d, $isfld = false)
+    public function DBDate($d, $isfld = false)
     {
         if (empty($d) && $d !== 0) {
             return 'null';
@@ -338,7 +341,7 @@ END;
         return "TO_DATE(" . $ds . ",'" . $this->dateformat . "')";
     }
 
-    function BindDate($d)
+    public function BindDate($d)
     {
         $d = ADOConnection::DBDate($d);
         if (strncmp($d, "'", 1)) {
@@ -348,7 +351,7 @@ END;
         return substr($d, 1, strlen($d) - 2);
     }
 
-    function BindTimeStamp($ts)
+    public function BindTimeStamp($ts)
     {
         if (empty($ts) && $ts !== 0) {
             return 'null';
@@ -367,7 +370,7 @@ END;
     }
 
     // format and return date string in database timestamp format
-    function DBTimeStamp($ts, $isfld = false)
+    public function DBTimeStamp($ts, $isfld = false)
     {
         if (empty($ts) && $ts !== 0) {
             return 'null';
@@ -388,7 +391,7 @@ END;
         return 'TO_DATE(' . $tss . ",'RRRR-MM-DD, HH24:MI:SS')";
     }
 
-    function RowLock($tables, $where, $col = '1 as adodbignore')
+    public function RowLock($tables, $where, $col = '1 as adodbignore')
     {
         if ($this->autoCommit) {
             $this->BeginTrans();
@@ -396,7 +399,7 @@ END;
         return $this->GetOne("select $col from $tables where $where for update");
     }
 
-    function MetaTables($ttype = false, $showSchema = false, $mask = false)
+    public function MetaTables($ttype = false, $showSchema = false, $mask = false)
     {
         if ($mask) {
             $save = $this->metaTablesSQL;
@@ -412,7 +415,7 @@ END;
     }
 
     // Mark Newnham
-    function MetaIndexes($table, $primary = FALSE, $owner = false)
+    public function MetaIndexes($table, $primary = false, $owner = false)
     {
         // save old fetch mode
         global $ADODB_FETCH_MODE;
@@ -420,8 +423,8 @@ END;
         $save = $ADODB_FETCH_MODE;
         $ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 
-        if ($this->fetchMode !== FALSE) {
-            $savem = $this->SetFetchMode(FALSE);
+        if ($this->fetchMode !== false) {
+            $savem = $this->SetFetchMode(false);
         }
 
         // get index details
@@ -443,7 +446,7 @@ END;
             $primary_key = $row[1]; //constraint_name
         }
 
-        if ($primary == TRUE && $primary_key == '') {
+        if ($primary == true && $primary_key == '') {
             if (isset($savem)) {
                 $this->SetFetchMode($savem);
             }
@@ -490,7 +493,7 @@ END;
         return $indexes;
     }
 
-    function BeginTrans()
+    public function BeginTrans()
     {
         if ($this->transOff) {
             return true;
@@ -508,7 +511,7 @@ END;
         return $ok ? true : false;
     }
 
-    function CommitTrans($ok = true)
+    public function CommitTrans($ok = true)
     {
         if ($this->transOff) {
             return true;
@@ -526,7 +529,7 @@ END;
         return $ret;
     }
 
-    function RollbackTrans()
+    public function RollbackTrans()
     {
         if ($this->transOff) {
             return true;
@@ -541,12 +544,12 @@ END;
     }
 
 
-    function SelectDB($dbName)
+    public function SelectDB($dbName)
     {
         return false;
     }
 
-    function ErrorMsg()
+    public function ErrorMsg()
     {
         if ($this->_errorMsg !== false) {
             return $this->_errorMsg;
@@ -570,7 +573,7 @@ END;
         return $this->_errorMsg;
     }
 
-    function ErrorNo()
+    public function ErrorNo()
     {
         if ($this->_errorCode !== false) {
             return $this->_errorCode;
@@ -598,7 +601,7 @@ END;
     /**
      * Format date column in sql string given an input format that understands Y M D
      */
-    function SQLDate($fmt, $col = false)
+    public function SQLDate($fmt, $col = false)
     {
         if (!$col) {
             $col = $this->sysTimeStamp;
@@ -680,7 +683,7 @@ END;
         return $s . "')";
     }
 
-    function GetRandRow($sql, $arr = false)
+    public function GetRandRow($sql, $arr = false)
     {
         $sql = "SELECT * FROM ($sql ORDER BY dbms_random.value) WHERE rownum = 1";
 
@@ -703,7 +706,7 @@ END;
      * Comment out this function then, and the slower SelectLimit() in the base
      * class will be used.
      */
-    function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
+    public function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
     {
         // seems that oracle only supports 1 hint comment in 8i
         if ($this->firstrows) {
@@ -741,7 +744,6 @@ END;
 
             $rs = ADOConnection::SelectLimit($sql, $nrows, $offset, $inputarr, $secs2cache);
             return $rs;
-
         } else {
             // Algorithm by Tomas V V Cox, from PEAR DB oci8.php
 
@@ -812,7 +814,9 @@ END;
 
             if ($secs2cache > 0) {
                 $rs = $this->CacheExecute($secs2cache, $sql, $inputarr);
-            } else $rs = $this->Execute($sql, $inputarr);
+            } else {
+                $rs = $this->Execute($sql, $inputarr);
+            }
             return $rs;
         }
     }
@@ -835,7 +839,7 @@ END;
      *    $db->Execute('ALTER SESSION SET CURSOR_SHARING=EXACT');
      * before UpdateBlob() then...
      */
-    function UpdateBlob($table, $column, $val, $where, $blobtype = 'BLOB')
+    public function UpdateBlob($table, $column, $val, $where, $blobtype = 'BLOB')
     {
 
         //if (strlen($val) < 4000) return $this->Execute("UPDATE $table SET $column=:blob WHERE $where",array('blob'=>$val)) != false;
@@ -852,10 +856,11 @@ END;
                 break;
         }
 
-        if ($this->databaseType == 'oci8po')
+        if ($this->databaseType == 'oci8po') {
             $sql = "UPDATE $table set $column=EMPTY_{$blobtype}() WHERE $where RETURNING $column INTO ?";
-        else
+        } else {
             $sql = "UPDATE $table set $column=EMPTY_{$blobtype}() WHERE $where RETURNING $column INTO :blob";
+        }
 
         $desc = oci_new_descriptor($this->_connectionID, OCI_D_LOB);
         $arr['blob'] = array($desc, -1, $type);
@@ -887,7 +892,7 @@ END;
     /**
      * Usage:  store file pointed to by $val in a blob
      */
-    function UpdateBlobFile($table, $column, $val, $where, $blobtype = 'BLOB')
+    public function UpdateBlobFile($table, $column, $val, $where, $blobtype = 'BLOB')
     {
         switch (strtoupper($blobtype)) {
             default:
@@ -901,10 +906,11 @@ END;
                 break;
         }
 
-        if ($this->databaseType == 'oci8po')
+        if ($this->databaseType == 'oci8po') {
             $sql = "UPDATE $table set $column=EMPTY_{$blobtype}() WHERE $where RETURNING $column INTO ?";
-        else
+        } else {
             $sql = "UPDATE $table set $column=EMPTY_{$blobtype}() WHERE $where RETURNING $column INTO :blob";
+        }
 
         $desc = oci_new_descriptor($this->_connectionID, OCI_D_LOB);
         $arr['blob'] = array($desc, -1, $type);
@@ -930,7 +936,7 @@ END;
      * @param [inputarr]    holds the input data to bind to. Null elements will be set to null.
      * @return        RecordSet or false
      */
-    function Execute($sql, $inputarr = false)
+    public function Execute($sql, $inputarr = false)
     {
         if ($this->fnExecute) {
             $fn = $this->fnExecute;
@@ -987,7 +993,7 @@ END;
                                 if ((strlen($at) == strlen($str) && $k < sizeof($arr) - 1)) {
                                     $sql .= ':' . $str;
                                     $lastnomatch = $k;
-                                } else if ($lastnomatch == $k - 1) {
+                                } elseif ($lastnomatch == $k - 1) {
                                     $sql .= ':' . $str;
                                 } else {
                                     if (is_null($inputarr[$at])) {
@@ -1006,7 +1012,6 @@ END;
                 }
             }
             $ret = $this->_Execute($sql, $inputarr);
-
         } else {
             $ret = $this->_Execute($sql, false);
         }
@@ -1018,7 +1023,7 @@ END;
      * Example of usage:
      *    $stmt = $this->Prepare('insert into emp (empno, ename) values (:empno, :ename)');
     */
-    function Prepare($sql, $cursor = false)
+    public function Prepare($sql, $cursor = false)
     {
         static $BINDNUM = 0;
 
@@ -1060,11 +1065,13 @@ END;
                 array('VAR1' => 'Mr Bean'));
 
     */
-    function ExecuteCursor($sql, $cursorName = 'rs', $params = false)
+    public function ExecuteCursor($sql, $cursorName = 'rs', $params = false)
     {
         if (is_array($sql)) {
             $stmt = $sql;
-        } else $stmt = ADODB_oci8::Prepare($sql, true); # true to allocate oci_new_cursor
+        } else {
+            $stmt = ADODB_oci8::Prepare($sql, true);
+        } # true to allocate oci_new_cursor
 
         if (is_array($stmt) && sizeof($stmt) >= 5) {
             $hasref = true;
@@ -1075,8 +1082,9 @@ END;
                     $this->Parameter($stmt, $params[$k], $k);
                 }
             }
-        } else
+        } else {
             $hasref = false;
+        }
 
         $rs = $this->Execute($stmt);
         if ($rs) {
@@ -1118,9 +1126,8 @@ END;
      * Note that the order of parameters differs from oci_bind_by_name,
      * because we default the names to :0, :1, :2
      */
-    function Bind(&$stmt, &$var, $size = 4000, $type = false, $name = false, $isOutput = false)
+    public function Bind(&$stmt, &$var, $size = 4000, $type = false, $name = false, $isOutput = false)
     {
-
         if (!is_array($stmt)) {
             return false;
         }
@@ -1136,7 +1143,7 @@ END;
                 $rez = oci_bind_by_name($stmt[1], ":" . $stmt[2], $var, $size); // +1 byte for null terminator
             }
             $stmt[2] += 1;
-        } else if (oci_lob_desc($type)) {
+        } elseif (oci_lob_desc($type)) {
             if ($this->debug) {
                 ADOConnection::outp("<b>Bind</b>: name = $name");
             }
@@ -1164,8 +1171,9 @@ END;
             }
             $rez = $tmp;
         } else {
-            if ($this->debug)
+            if ($this->debug) {
                 ADOConnection::outp("<b>Bind</b>: name = $name");
+            }
 
             if ($type !== false) {
                 $rez = oci_bind_by_name($stmt[1], ":" . $name, $var, $size, $type);
@@ -1177,7 +1185,7 @@ END;
         return $rez;
     }
 
-    function Param($name, $type = 'C')
+    public function Param($name, $type = 'C')
     {
         return ':' . $name;
     }
@@ -1198,7 +1206,7 @@ END;
      *
      * @link http://php.net/oci_bind_by_name
      */
-    function Parameter(&$stmt, &$var, $name, $isOutput = false, $maxLen = 4000, $type = false)
+    public function Parameter(&$stmt, &$var, $name, $isOutput = false, $maxLen = 4000, $type = false)
     {
         if ($this->debug) {
             $prefix = ($isOutput) ? 'Out' : 'In';
@@ -1223,7 +1231,7 @@ END;
      *    $db->bind($stmt,1); $db->bind($stmt,2); $db->bind($stmt,3);
      *    $db->execute($stmt);
      */
-    function _query($sql, $inputarr = false)
+    public function _query($sql, $inputarr = false)
     {
         if (is_array($sql)) { // is prepared sql
             $stmt = $sql[1];
@@ -1274,7 +1282,6 @@ END;
                         } else {
                             echo "name=:$k", ' var=' . $inputarr[$k][0], ' len=' . $v[1], ' type=' . $v[2], '<br>';
                         }
-
                     }
                 } else {
                     $len = -1;
@@ -1293,9 +1300,7 @@ END;
         $this->_errorMsg = false;
         $this->_errorCode = false;
         if (oci_execute($stmt, $this->_commit)) {
-
             if (count($this->_refLOBs) > 0) {
-
                 foreach ($this->_refLOBs as $key => $value) {
                     if ($this->_refLOBs[$key]['TYPE'] == true) {
                         $tmp = $this->_refLOBs[$key]['LOB']->load();
@@ -1336,7 +1341,7 @@ END;
                         return $stmt;
                     }
                     break;
-                default :
+                default:
 
                     return true;
             }
@@ -1345,7 +1350,7 @@ END;
     }
 
     // From Oracle Whitepaper: PHP Scalability and High Availability
-    function IsConnectionError($err)
+    public function IsConnectionError($err)
     {
         switch ($err) {
             case 378: /* buffer pool param incorrect */
@@ -1371,7 +1376,7 @@ END;
     }
 
     // returns true or false
-    function _close()
+    public function _close()
     {
         if (!$this->_connectionID) {
             return;
@@ -1393,7 +1398,7 @@ END;
         $this->_connectionID = false;
     }
 
-    function MetaPrimaryKeys($table, $owner = false, $internalKey = false)
+    public function MetaPrimaryKeys($table, $owner = false, $internalKey = false)
     {
         if ($internalKey) {
             return array('ROWID');
@@ -1425,7 +1430,9 @@ SELECT /*+ RULE */ distinct b.column_name
                 $a[] = reset($v);
             }
             return $a;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -1438,7 +1445,7 @@ SELECT /*+ RULE */ distinct b.column_name
      *
      * @link http://gis.mit.edu/classes/11.521/sqlnotes/referential_integrity.html
      */
-    function MetaForeignKeys($table, $owner = false, $upper = false)
+    public function MetaForeignKeys($table, $owner = false, $upper = false)
     {
         global $ADODB_FETCH_MODE;
 
@@ -1448,8 +1455,9 @@ SELECT /*+ RULE */ distinct b.column_name
         if (!$owner) {
             $owner = $this->user;
             $tabp = 'user_';
-        } else
+        } else {
             $tabp = 'all_';
+        }
 
         $owner = ' and owner=' . $this->qstr(strtoupper($owner));
 
@@ -1467,10 +1475,11 @@ SELECT /*+ RULE */ distinct b.column_name
             $cols = $this->GetArray("select column_name from {$tabp}cons_columns where constraint_name=$cons $owner order by position");
             $tabcol = $this->GetArray("select table_name,column_name from {$tabp}cons_columns where owner=$rowner and constraint_name=$rcons order by position");
 
-            if ($cols && $tabcol)
+            if ($cols && $tabcol) {
                 for ($i = 0, $max = sizeof($cols); $i < $max; $i++) {
                     $arr[$tabcol[$i][0]] = $cols[$i][0] . '=' . $tabcol[$i][1];
                 }
+            }
         }
         $ADODB_FETCH_MODE = $save;
 
@@ -1478,12 +1487,12 @@ SELECT /*+ RULE */ distinct b.column_name
     }
 
 
-    function CharMax()
+    public function CharMax()
     {
         return 4000;
     }
 
-    function TextMax()
+    public function TextMax()
     {
         return 4000;
     }
@@ -1498,7 +1507,7 @@ SELECT /*+ RULE */ distinct b.column_name
      *
      * @return string quoted string to be sent back to database
      */
-    function qstr($s, $magic_quotes = false)
+    public function qstr($s, $magic_quotes = false)
     {
         //$nofixquotes=false;
 
@@ -1521,21 +1530,19 @@ SELECT /*+ RULE */ distinct b.column_name
             return "'" . $s . "'";
         }
     }
-
 }
 
 /*--------------------------------------------------------------------------------------
-	Class Name: Recordset
+    Class Name: Recordset
 --------------------------------------------------------------------------------------*/
 
 class ADORecordset_oci8 extends ADORecordSet
 {
+    public $databaseType = 'oci8';
+    public $bind = false;
+    public $_fieldobjs;
 
-    var $databaseType = 'oci8';
-    var $bind = false;
-    var $_fieldobjs;
-
-    function __construct($queryID, $mode = false)
+    public function __construct($queryID, $mode = false)
     {
         if ($mode === false) {
             global $ADODB_FETCH_MODE;
@@ -1560,7 +1567,7 @@ class ADORecordset_oci8 extends ADORecordSet
     }
 
 
-    function Init()
+    public function Init()
     {
         if ($this->_inited) {
             return;
@@ -1568,12 +1575,13 @@ class ADORecordset_oci8 extends ADORecordSet
 
         $this->_inited = true;
         if ($this->_queryID) {
-
             $this->_currentRow = 0;
             @$this->_initrs();
             if ($this->_numOfFields) {
                 $this->EOF = !$this->_fetch();
-            } else $this->EOF = true;
+            } else {
+                $this->EOF = true;
+            }
 
             /*
             // based on idea by Gaetano Giunta to detect unusual oracle errors
@@ -1596,14 +1604,16 @@ class ADORecordset_oci8 extends ADORecordSet
         }
     }
 
-    function _initrs()
+    public function _initrs()
     {
         $this->_numOfRows = -1;
         $this->_numOfFields = oci_num_fields($this->_queryID);
         if ($this->_numOfFields > 0) {
             $this->_fieldobjs = array();
             $max = $this->_numOfFields;
-            for ($i = 0; $i < $max; $i++) $this->_fieldobjs[] = $this->_FetchField($i);
+            for ($i = 0; $i < $max; $i++) {
+                $this->_fieldobjs[] = $this->_FetchField($i);
+            }
         }
     }
 
@@ -1615,7 +1625,7 @@ class ADORecordset_oci8 extends ADORecordSet
      *
      * @return object containing field information
      */
-    function _FetchField($fieldOffset = -1)
+    public function _FetchField($fieldOffset = -1)
     {
         $fld = new ADOFieldObject;
         $fieldOffset += 1;
@@ -1646,13 +1656,13 @@ class ADORecordset_oci8 extends ADORecordSet
     }
 
     /* For some reason, oci_field_name fails when called after _initrs() so we cache it */
-    function FetchField($fieldOffset = -1)
+    public function FetchField($fieldOffset = -1)
     {
         return $this->_fieldobjs[$fieldOffset];
     }
 
 
-    function MoveNext()
+    public function MoveNext()
     {
         if ($this->fields = @oci_fetch_array($this->_queryID, $this->fetchMode)) {
             $this->_currentRow += 1;
@@ -1667,7 +1677,7 @@ class ADORecordset_oci8 extends ADORecordSet
     }
 
     // Optimize SelectLimit() by using oci_fetch()
-    function GetArrayLimit($nrows, $offset = -1)
+    public function GetArrayLimit($nrows, $offset = -1)
     {
         if ($offset <= 0) {
             $arr = $this->GetArray($nrows);
@@ -1696,7 +1706,7 @@ class ADORecordset_oci8 extends ADORecordSet
 
 
     // Use associative array to get fields array
-    function Fields($colname)
+    public function Fields($colname)
     {
         if (!$this->bind) {
             $this->bind = array();
@@ -1710,12 +1720,12 @@ class ADORecordset_oci8 extends ADORecordSet
     }
 
 
-    function _seek($row)
+    public function _seek($row)
     {
         return false;
     }
 
-    function _fetch()
+    public function _fetch()
     {
         $this->fields = @oci_fetch_array($this->_queryID, $this->fetchMode);
         $this->_updatefields();
@@ -1728,7 +1738,7 @@ class ADORecordset_oci8 extends ADORecordSet
      * memory while your script is running. All associated result memory for the
      * specified result identifier will automatically be freed.
      */
-    function _close()
+    public function _close()
     {
         if ($this->connection->_stmt === $this->_queryID) {
             $this->connection->_stmt = false;
@@ -1750,7 +1760,7 @@ class ADORecordset_oci8 extends ADORecordSet
      * @param bool $fieldobj [optional][discarded]
      * @return    str                    The metatype of the field
      */
-    function MetaType($t, $len = -1, $fieldobj = false)
+    public function MetaType($t, $len = -1, $fieldobj = false)
     {
         if (is_object($t)) {
             $fieldobj = $t;
@@ -1771,6 +1781,7 @@ class ADORecordset_oci8 extends ADORecordSet
                     return 'C';
                 }
 
+                // no break
             case 'NCLOB':
             case 'LONG':
             case 'LONG VARCHAR':
@@ -1802,12 +1813,12 @@ class ADORecordset_oci8 extends ADORecordSet
 
 class ADORecordSet_ext_oci8 extends ADORecordSet_oci8
 {
-    function __construct($queryID, $mode = false)
+    public function __construct($queryID, $mode = false)
     {
         parent::__construct($queryID, $mode);
     }
 
-    function MoveNext()
+    public function MoveNext()
     {
         return adodb_movenext($this);
     }

@@ -1,4 +1,6 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 add_hook('index/invoke_module', '*guide_invoke');
 
@@ -31,7 +33,9 @@ function guide_invoke()
     foreach ($cManger_account as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
 
-        if (function_exists("guide_$do")) cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        if (function_exists("guide_$do")) {
+            cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        }
     }
 
     // Request module
@@ -143,8 +147,7 @@ function guide_tinhnang()
 
 function guide_nhanvat()
 {
-    $options = array
-    (
+    $options = array(
         'chuate' => 'Chúa tể',
         'phuthuy' => 'Phù thủy',
         'tiennu' => 'Tiên nữ',
@@ -188,8 +191,7 @@ function guide_thuhotro()
 
 function guide_quaivat()
 {
-    $options = array
-    (
+    $options = array(
         'lorencia' => 'Lorencia',
         'noria' => 'Noria',
         'devias' => 'Devias',
@@ -254,8 +256,7 @@ function guide_banghoi()
 
 function guide_sukiengame()
 {
-    $options = array
-    (
+    $options = array(
         'blood' => 'Lâu đài máu',
         'devil' => 'Quảng Trường Quỷ',
         'chaoscastle' => 'Hỗn Nguyên Lâu',

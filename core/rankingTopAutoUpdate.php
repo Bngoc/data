@@ -7,7 +7,7 @@ define('ROOT', dirname(dirname(__FILE__)));
 define('MODULE_DIR', SERVDIR . '/core/modules'); // nhan xu li
 define('SKIN', SERVDIR . '/cdata'); // chua html
 define('MODULE_ADM', SERVDIR . '/admin'); // chua ADMIN
-define('CN_DEBUG', FALSE);
+define('CN_DEBUG', false);
 define('URL_PATH', (isset($_SERVER['HTTPS']) ? "https" : "http") . '://' . dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn
 
 require_once ROOT . '/core/function/libgarena.php';

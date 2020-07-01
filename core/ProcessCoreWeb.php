@@ -6,7 +6,7 @@ class ProcessCoreWeb extends ProcessCore
 {
 
 // Since 2.0: Extended extract
-    function _GL($v)
+    public function _GL($v)
     {
         $vs = explode(',', $v);
         $result = array();
@@ -15,8 +15,12 @@ class ProcessCoreWeb extends ProcessCore
             $vc = isset($el[0]) ? $el[0] : false;
             $func = isset($el[1]) ? $el[1] : false;
             $var = false;
-            if ($vc) $var = isset($GLOBALS[trim($vc)]) ? $GLOBALS[trim($vc)] : false;
-            if ($func) $var = call_user_func($func, $var);
+            if ($vc) {
+                $var = isset($GLOBALS[trim($vc)]) ? $GLOBALS[trim($vc)] : false;
+            }
+            if ($func) {
+                $var = call_user_func($func, $var);
+            }
             $result[] = $var;
         }
 
@@ -34,8 +38,8 @@ class ProcessCoreWeb extends ProcessCore
         + combination (comma separated)
     */
 
-// Since 1.5.3
-    function GET($var, $method = 'GETPOST')
+    // Since 1.5.3
+    public function GET($var, $method = 'GETPOST')
     {
         $result = array();
         $vars = separateString($var);
@@ -90,9 +94,9 @@ class ProcessCoreWeb extends ProcessCore
         return $result;
     }
 
-// Since 1.5.0
-// Separate string to array: imporved "explode" function
-    function separateString($separated_string, $seps = ',')
+    // Since 1.5.0
+    // Separate string to array: imporved "explode" function
+    public function separateString($separated_string, $seps = ',')
     {
         if (strlen($separated_string) == 0) {
             return array();
@@ -101,8 +105,8 @@ class ProcessCoreWeb extends ProcessCore
         return $ss;
     }
 
-// Since 2.0: Cutenews HtmlSpecialChars
-    function cnHtmlSpecialChars($_str)
+    // Since 2.0: Cutenews HtmlSpecialChars
+    public function cnHtmlSpecialChars($_str)
     {
         $key = array('&' => '&amp;', '"' => '&quot;', "'" => '&#039;', '<' => '&lt;', '>' => '&gt;');
         $matches = null;
@@ -114,10 +118,10 @@ class ProcessCoreWeb extends ProcessCore
     }
 
 
-// Since 1.5.3
-// GET Helper for single value
-// $method[0] = * ---> htmlspecialchars ON
-    function REQ($var, $method = 'GETPOST')
+    // Since 1.5.3
+    // GET Helper for single value
+    // $method[0] = * ---> htmlspecialchars ON
+    public function REQ($var, $method = 'GETPOST')
     {
         if ($method[0] == '*') {
             list($value) = (GET($var, substr($method, 1)));
@@ -128,14 +132,14 @@ class ProcessCoreWeb extends ProcessCore
         }
     }
 
-// Since 2.0: Check server request type
-    function request_type($type = 'POST')
+    // Since 2.0: Check server request type
+    public function request_type($type = 'POST')
     {
         return $_SERVER['REQUEST_METHOD'] === $type ? true : false;
     }
 
 
-// Since 2.0: Show breadcrumbs
+    // Since 2.0: Show breadcrumbs
 //    function cn_snippet_bc($sep = '&gt;')
 //    {
 //        $bc = getMemcache('.breadcrumbs');
@@ -158,8 +162,8 @@ class ProcessCoreWeb extends ProcessCore
 //        echo '</div>';
 //    }
 
-//// Since 2.0: Show breadcrumbs BY
-//// Home > name
+    //// Since 2.0: Show breadcrumbs BY
+    //// Home > name
 //    function cn_snippet_bc_re($home_ = 'Home', $_name_bread = null, $sep = '&gt;')
 //    {
 //        ////            cnHtmlSpecialChars
@@ -200,19 +204,19 @@ class ProcessCoreWeb extends ProcessCore
 //        return $result;
 //    }
 
-    function cn_load_session()
+    public function cn_load_session()
     {
         @session_start();
     }
 
-// Since 1.5.1: Validate email
-    function check_email($email)
+    // Since 1.5.1: Validate email
+    public function check_email($email)
     {
         return (preg_match("/^[\.A-z0-9_\-\+]+[@][A-z0-9_\-]+([.][A-z0-9_\-]+)+[A-z]{1,4}$/", $email));
     }
 
-// Since 2.0: Extended assign
-    function cn_assign()
+    // Since 2.0: Extended assign
+    public function cn_assign()
     {
         $args = func_get_args();
         $keys = explode(',', array_shift($args));
@@ -222,32 +226,35 @@ class ProcessCoreWeb extends ProcessCore
             if (isset($keys[$id])) {
                 $KEY = trim($keys[$id]);
                 $GLOBALS[$KEY] = $arg;
-            } else // Inline assign
-            {
+            } else { // Inline assign
                 list($k, $v) = explode('=', $arg, 2);
                 $GLOBALS[$k] = $v;
             }
         }
     }
 
-// Since 2.0: Get messages
-    function cn_get_message($area, $method = 's') // s-show, c-count
+    // Since 2.0: Get messages
+    public function cn_get_message($area, $method = 's') // s-show, c-count
     {
         $es = getMemcache('msg:stor');
         if (isset($es[$area])) {
-            if ($method == 's') return $es[$area];
-            elseif ($method == 'c') return count($es[$area]);
+            if ($method == 's') {
+                return $es[$area];
+            } elseif ($method == 'c') {
+                return count($es[$area]);
+            }
         }
         return null;
     }
 
-// Since 2.0; HTML show errors
-    function cn_messages_show($arrNotify, $notify)
+    // Since 2.0; HTML show errors
+    public function cn_messages_show($arrNotify, $notify)
     {
         $delay = 7500;
         $result = '';
-        if (empty($arrNotify))
+        if (empty($arrNotify)) {
             return $result;
+        }
 
         $type = 'notify';
         if ($notify == 'e') {
@@ -273,8 +280,8 @@ class ProcessCoreWeb extends ProcessCore
         }
     }
 
-// Since 2.0; HTML show errors
-    function cn_snippet_messages($area = 'new')
+    // Since 2.0; HTML show errors
+    public function cn_snippet_messages($area = 'new')
     {
         $delay = 7500;
         $result = '';
@@ -307,8 +314,8 @@ class ProcessCoreWeb extends ProcessCore
         }
     }
 
-// Since 2.0: @bootstrap
-    function cn_detect_user_ip()
+    // Since 2.0: @bootstrap
+    public function cn_detect_user_ip()
     {
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $IP = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -332,19 +339,19 @@ class ProcessCoreWeb extends ProcessCore
         define('CRYPT_SALT', (getOption('ipauth') == '1' ? CLIENT_IP : '') . '@' . getOption('#crypt_salt'));
     }
 
-    function alert_message($str)
+    public function alert_message($str)
     {
         echo "<script> alert('$str'); </script>";
     }
 
 
-//// Since 2.0: Show login form
+    //// Since 2.0: Show login form
 //    function cn_login_form($admin = true)
 //    {
 //        return exec_tpl('_authen/login');
 //    }
 
-    function cn_login()
+    public function cn_login()
     {
         if (isset($_SESSION['timeOutLogin']) && $_SESSION['timeOutLogin'] < ctime()) {
             $this->cn_logout_web();
@@ -390,7 +397,6 @@ class ProcessCoreWeb extends ProcessCore
                     if (!$errors_fa) {
                         $member = db_user_by_name($username);
                         if ($member) {
-
                             $ban_time = isset($member['ban_login']) ? (int)$member['ban_login'] : 0;
 
                             if ($ban_time && $ban_time > ctime()) {
@@ -444,13 +450,13 @@ class ProcessCoreWeb extends ProcessCore
         return $is_logged;
     }
 
-    function cn_cookie_unset()
+    public function cn_cookie_unset()
     {
         setcookie('session', '', 0, '/');
     }
 
     // Since 2.0.3: Logout user and clean session
-    function cn_logout_web($relocation = PHP_SELF)
+    public function cn_logout_web($relocation = PHP_SELF)
     {
         //cn_cookie_unset();
         session_unset();
@@ -458,8 +464,8 @@ class ProcessCoreWeb extends ProcessCore
         cnRelocation($relocation);
     }
 
-// Since 2.0: Show register form
-    function cn_register_form($admin = true)
+    // Since 2.0: Show register form
+    public function cn_register_form($admin = true)
     {
         if (isset($_SESSION['user_Gamer'])) {
             return false;
@@ -467,7 +473,6 @@ class ProcessCoreWeb extends ProcessCore
 
         // Active register
         if (isset($_GET['verifiregist']) && $_GET['verifiregist']) {
-
             $d_string = base64_decode($_GET['verifiregist']);
             $d_string = xxtea_decrypt($d_string, MD5(CLIENT_IP) . getOption('#crypt_salt'));
             $newHash = substr($d_string, 0, 64);
@@ -477,8 +482,12 @@ class ProcessCoreWeb extends ProcessCore
                 $user = do_select_character('MEMB_INFO', 'memb___id,token_regist,date_resgit_email,mail_chek', "memb___id='$d_string'");
 
                 if ($user) {
-                    if ($newHash != trim($user[0]['token_regist'])) msg_info('Đường dẫn không hợp lệ.');
-                    if (trim($user[0]['mail_check'])) msg_info('Tài khoản đã được kích hoạt.', 'index.php');
+                    if ($newHash != trim($user[0]['token_regist'])) {
+                        msg_info('Đường dẫn không hợp lệ.');
+                    }
+                    if (trim($user[0]['mail_check'])) {
+                        msg_info('Tài khoản đã được kích hoạt.', 'index.php');
+                    }
 
                     if (ctime() > $user[0]['date_resgit_email']) {
                         $statusDelete = do_delete_char("DELETE FROM MEMB_INFO WHERE memb___id ='" . $d_string . "'");
@@ -502,7 +511,6 @@ class ProcessCoreWeb extends ProcessCore
 
         // Restore active status
         if (isset($_GET['lostpass']) && $_GET['lostpass']) {
-
             $d_string = base64_decode($_GET['lostpass']);
             $d_string = xxtea_decrypt($d_string, MD5(CLIENT_IP) . getOption('#crypt_salt'));
             $d_string = substr($d_string, 64);
@@ -531,7 +539,6 @@ class ProcessCoreWeb extends ProcessCore
 
         // Resend activation
         if (request_type('POST') && isset($_POST['registerweb']) && isset($_POST['lostpassweb'])) {
-
             $username = trim(strtolower(htmlentities(htmlspecialchars(REQ('usernameWeb')))));
             $emailweb = trim(strtolower(htmlentities(REQ('emailWeb'))));
             $user = do_select_character('MEMB_INFO', 'memb___id,mail_addr,memb__pwdmd5', "memb___id='$username'");
@@ -571,8 +578,9 @@ class ProcessCoreWeb extends ProcessCore
         }
 
         // is not registration form
-        if (is_null(REQ('register', 'GET')))
+        if (is_null(REQ('register', 'GET'))) {
             return false;
+        }
 
         // Lost password: disabled registration - no affected
         if (!is_null(REQ('lostpass', 'GET'))) {
@@ -590,28 +598,68 @@ class ProcessCoreWeb extends ProcessCore
 
             // Do register
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                if ($username === '') $errors[] = ucfirst("Chưa nhập tài khoản");
-                if ($pwd === '') $errors[] = ucfirst("Chưa nhập mật khẩu game");
-                if ($ma7code === '') $errors[] = ucfirst("Chưa nhập mã số bí mật");
-                if ($pass_web === '') $errors[] = ucfirst("Chưa nhập mật khẩu đăng nhập web");
-                if ($nameEmail === '') $errors[] = ucfirst("Chưa nhập địa chỉ Email");
-                if ($phoneNumber === '') $errors[] = ucfirst("Chưa nhập số điện thoại");
-                if ($nameAnswer === '') $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật");
-                if ($nameQuestion === '') $errors[] = ucfirst("Chưa chọn câu hỏi bí mật");
-                if ($namecaptcha === '') $errors[] = ucfirst("Chưa nhập mã Captcha");
+                if ($username === '') {
+                    $errors[] = ucfirst("Chưa nhập tài khoản");
+                }
+                if ($pwd === '') {
+                    $errors[] = ucfirst("Chưa nhập mật khẩu game");
+                }
+                if ($ma7code === '') {
+                    $errors[] = ucfirst("Chưa nhập mã số bí mật");
+                }
+                if ($pass_web === '') {
+                    $errors[] = ucfirst("Chưa nhập mật khẩu đăng nhập web");
+                }
+                if ($nameEmail === '') {
+                    $errors[] = ucfirst("Chưa nhập địa chỉ Email");
+                }
+                if ($phoneNumber === '') {
+                    $errors[] = ucfirst("Chưa nhập số điện thoại");
+                }
+                if ($nameAnswer === '') {
+                    $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật");
+                }
+                if ($nameQuestion === '') {
+                    $errors[] = ucfirst("Chưa chọn câu hỏi bí mật");
+                }
+                if ($namecaptcha === '') {
+                    $errors[] = ucfirst("Chưa nhập mã Captcha");
+                }
 
-                if (!preg_match("/(([a-z]{1,}+[0-9]{1,})|([0-9]{1,}+[a-z]{1,}))+[a-z0-9]*/", $username)) $errors[] = ucfirst("Tài khoản chỉ được sử dụng kí tự thường và số.");
-                if (!preg_match("/(\(\+84\)|0)\d{2,3}[-]\d{4}[-]\d{3}$/i", $phoneNumber)) $errors[] = ucfirst("Số di động không hợp lệ.");
-                if (substr_count($username, 'dis') > 0) $errors[] = ucfirst("Tên tài khoản không được phép đăng ký.");
+                if (!preg_match("/(([a-z]{1,}+[0-9]{1,})|([0-9]{1,}+[a-z]{1,}))+[a-z0-9]*/", $username)) {
+                    $errors[] = ucfirst("Tài khoản chỉ được sử dụng kí tự thường và số.");
+                }
+                if (!preg_match("/(\(\+84\)|0)\d{2,3}[-]\d{4}[-]\d{3}$/i", $phoneNumber)) {
+                    $errors[] = ucfirst("Số di động không hợp lệ.");
+                }
+                if (substr_count($username, 'dis') > 0) {
+                    $errors[] = ucfirst("Tên tài khoản không được phép đăng ký.");
+                }
 
-                if (strlen($username) < 4 || strlen($username) > 10) $errors[] = "Tên tài khoản chỉ từ 4-10 kí tự.";
-                if (strlen($re_pwd) < 3) $errors[] = 'Mật khẩu quá ngắn';
-                if ($pwd != $re_pwd) $errors[] = "Mật khẩu Game không giống nhau.";
-                if (strlen($ma7code) != 7) $errors[] = "Mã gồm có 7 chữ số";
-                if ($pass_web != $repass_web) $errors[] = "Mật khẩu web không giống nhau.";
-                if (!preg_match('/[\w]\@[\w]/i', $nameEmail)) $errors[] = ucfirst("$nameEmail không đúng dạng địa chỉ Email.");
-                if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
-                if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
+                if (strlen($username) < 4 || strlen($username) > 10) {
+                    $errors[] = "Tên tài khoản chỉ từ 4-10 kí tự.";
+                }
+                if (strlen($re_pwd) < 3) {
+                    $errors[] = 'Mật khẩu quá ngắn';
+                }
+                if ($pwd != $re_pwd) {
+                    $errors[] = "Mật khẩu Game không giống nhau.";
+                }
+                if (strlen($ma7code) != 7) {
+                    $errors[] = "Mã gồm có 7 chữ số";
+                }
+                if ($pass_web != $repass_web) {
+                    $errors[] = "Mật khẩu web không giống nhau.";
+                }
+                if (!preg_match('/[\w]\@[\w]/i', $nameEmail)) {
+                    $errors[] = ucfirst("$nameEmail không đúng dạng địa chỉ Email.");
+                }
+                if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) {
+                    $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
+                }
+                if ($namecaptcha !== $_SESSION['captcha_web']) {
+                    $errors[] = "Captcha không đúng";
+                }
 
                 // Do register
                 if (empty($errors)) {
@@ -645,20 +693,31 @@ class ProcessCoreWeb extends ProcessCore
 
                             $rand = '';
                             $set = 'qwertyuiop[],./!@#$%^&*()_asdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-                            for ($i = 0; $i < 64; $i++) $rand .= $set[mt_rand() % strlen($set)];
+                            for ($i = 0; $i < 64; $i++) {
+                                $rand .= $set[mt_rand() % strlen($set)];
+                            }
                             $token = urlencode(base64_encode(xxtea_encrypt($rand . ' ' . $username, MD5(CLIENT_IP) . getOption('#crypt_salt'))));
                             $url = getOption('http_script_dir') . '?verifiregist=' . $token;
 
                             $stetemp = cn_replace_text(
                                 $tempRegisterSendEmail,
                                 $strHoder,
-                                $username, $nameEmail, $ma7code, $re_pwd, $repass_web, $phoneNumber, $arr_QA[$nameQuestion - 1] . '?', $nameAnswer, $_SERVER['SERVER_NAME']
+                                $username,
+                                $nameEmail,
+                                $ma7code,
+                                $re_pwd,
+                                $repass_web,
+                                $phoneNumber,
+                                $arr_QA[$nameQuestion - 1] . '?',
+                                $nameAnswer,
+                                $_SERVER['SERVER_NAME']
                             );
 
                             $stetem1 = cn_replace_text(
                                 $tempRegister,
                                 '%nameHome%, %verificationLink%',
-                                $_SERVER['SERVER_NAME'], $url
+                                $_SERVER['SERVER_NAME'],
+                                $url
                             );
 
                             $status = cn_send_mail(
@@ -669,7 +728,7 @@ class ProcessCoreWeb extends ProcessCore
 
                             if ($status) {
                                 $register_OK = true;
-                                //msg_info('For you send register');
+                            //msg_info('For you send register');
                             } else {
                                 msg_info('Err, Xin lỗi không thể gửi email xác nhận tài khoản!');
                             }
@@ -683,7 +742,6 @@ class ProcessCoreWeb extends ProcessCore
 
                 // Registration OK, authorize user
                 if ($register_OK === true) {
-
                     $checkStatusDB = do_insert_character(
                         '[MEMB_INFO]',
                         "memb___id='" . $username . "'",
@@ -742,7 +800,7 @@ class ProcessCoreWeb extends ProcessCore
         return true;
     }
 
-//// Since 2.0: Replace text with holders
+    //// Since 2.0: Replace text with holders
 //    function cn_replace_text()
 //    {
 //        $args = func_get_args();
@@ -757,8 +815,8 @@ class ProcessCoreWeb extends ProcessCore
 //    }
 
 
-// Since 1.5.0: Send Mail
-    function cn_send_mail($to, $subject, $message, $alt_headers = NULL, $addressCC = '')
+    // Since 1.5.0: Send Mail
+    public function cn_send_mail($to, $subject, $message, $alt_headers = null, $addressCC = '')
     {
         $nFrom = $_SERVER['SERVER_NAME'];
         $mFrom = @getOption('config_auth_email') ? getOption('config_auth_email') : false;
@@ -766,8 +824,12 @@ class ProcessCoreWeb extends ProcessCore
 
         if ($mFrom && $mPass) {
             $tos = separateString($to);
-            if (!isset($to)) return false;
-            if (!$to) return false;
+            if (!isset($to)) {
+                return false;
+            }
+            if (!$to) {
+                return false;
+            }
 
             $mail = new PHPMailer();
             $mail->IsSMTP();
@@ -792,7 +854,11 @@ class ProcessCoreWeb extends ProcessCore
             $mail->Subject = $subject;
             $mail->MsgHTML($message);
 
-            foreach ($tos as $v) if ($v) $mail->AddAddress($v, '');
+            foreach ($tos as $v) {
+                if ($v) {
+                    $mail->AddAddress($v, '');
+                }
+            }
 
             $mail->AddReplyTo($mFrom, $nFrom);
 //        $mail->AddAttachment($file, $filename);
@@ -806,23 +872,24 @@ class ProcessCoreWeb extends ProcessCore
         return false;
     }
 
-// Since 2.0: Make 'Top menu'
-    function cn_get_menu()
+    // Since 2.0: Make 'Top menu'
+    public function cn_get_menu()
     {
         // acl	name	title	app
         $modules = hook('core/cn_get_menu', array(
             'char_manager' => array('Cd', 'Nhân Vật', null, null, 'Q', ''),
             'event' => array('Cc', 'Event', null, null, 'q', ''),
             'blank_money' => array('Cc', 'Blank - Money', null, null, ']', ''),
-            'cash_shop' => array('Can', 'Cash Shop', NULL, 'source,year,mon,day,sort,dir', 'D', ''), //can => add; new cvn => view
+            'cash_shop' => array('Can', 'Cash Shop', null, 'source,year,mon,day,sort,dir', 'D', ''), //can => add; new cvn => view
             'relax' => array('Com', 'Giải Trí', null, null, 'M', ''),
             'ranking' => array('', 'Xếp Hạng', null, null, 'R', ''),
             'transaction' => array('Can', 'Giao dịch', null, null, '1', ''),
             'logout' => array('', 'Logout', 'logout', null, 'X', '')
         ));
 
-        if (getOption('main_site'))
+        if (getOption('main_site')) {
             $modules['my_site'] = getOption('main_site');
+        }
 
         $result = '<ul class="ca-menu">';
         $mod = REQ('mod', 'GPG');
@@ -830,7 +897,7 @@ class ProcessCoreWeb extends ProcessCore
 
         foreach ($modules as $mod_key => $var) {
             if (!is_array($var)) {
-                $result .= '<li><a href="' . cnHtmlSpecialChars($var) . '" target="_blank">' . i18n('Visit site') . '</a></li>';
+                $result .= '<li><a href="' . cnHtmlSpecialChars($var) . '" target="_blank">' . __('visit_site') . '</a></li>';
                 continue;
             }
 
@@ -844,19 +911,31 @@ class ProcessCoreWeb extends ProcessCore
             //if ($acl && !testRoleWeb($acl))
             //  continue;
 
-            if (isset($title) && $title) $action = '&amp;action=' . $title; else $action = '';
-            if ($mod == $mod_key) $select = ' active '; else $select = '';
+            if (isset($title) && $title) {
+                $action = '&amp;action=' . $title;
+            } else {
+                $action = '';
+            }
+            if ($mod == $mod_key) {
+                $select = ' active ';
+            } else {
+                $select = '';
+            }
 
             // Append urls for menu (preserve place)
             if (isset($app) && $app) {
                 $actions = array();
                 $mv = separateString($app);
 
-                foreach ($mv as $vx)
-                    if ($dt = REQ($vx))
+                foreach ($mv as $vx) {
+                    if ($dt = REQ($vx)) {
                         $actions[] = "$vx=" . urlencode($dt);
+                    }
+                }
 
-                if ($actions) $action .= '&amp;' . join('&amp;', $actions);
+                if ($actions) {
+                    $action .= '&amp;' . join('&amp;', $actions);
+                }
             }
 
             $result .= '<li class = "' . $select . '"><a href="' . PHP_SELF . '?mod=' . $mod_key . $action . '">
@@ -871,18 +950,22 @@ class ProcessCoreWeb extends ProcessCore
         return $result;
     }
 
-// Since 2.0: Make 'Top menu'
-    function cn_get_menu_none()
+    // Since 2.0: Make 'Top menu'
+    public function cn_get_menu_none()
     {
         // acl	name	title	app
-        $modules = hook('core/cn_get_menu_none',
+        $modules = hook(
+            'core/cn_get_menu_none',
             array(
                 'auto_money' => array('Cd', 'qlink_depoisit.png', 'VTC'),
                 'cash_shop' => array('Cc', 'qlink_cashshop.png', 'shop_orther'),
                 //'acc_manager'   		=> array('Can', 'XXXXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXX', 'source,year,mon,day,sort,dir'), //can => add; new cvn => view
-            ));
+            )
+        );
 
-        if (getOption('main_site')) $modules['my_site'] = getOption('main_site');
+        if (getOption('main_site')) {
+            $modules['my_site'] = getOption('main_site');
+        }
 
         $mod = REQ('mod', 'GPG');
 
@@ -908,7 +991,11 @@ class ProcessCoreWeb extends ProcessCore
             //if ($acl && !testRoleWeb($acl))
             //  continue;
 
-            if (isset($title) && $title) $action = '&amp;action=' . $title; else $action = '';
+            if (isset($title) && $title) {
+                $action = '&amp;action=' . $title;
+            } else {
+                $action = '';
+            }
             //if ($mod == $mod_key) $select = ' active '; else $select = '';
 
             // Append urls for menu (preserve place)
@@ -916,11 +1003,15 @@ class ProcessCoreWeb extends ProcessCore
                 $actions = array();
                 $mv = separateString($app);
 
-                foreach ($mv as $vx)
-                    if ($dt = REQ($vx))
+                foreach ($mv as $vx) {
+                    if ($dt = REQ($vx)) {
                         $actions[] = "$vx=" . urlencode($dt);
+                    }
+                }
 
-                if ($actions) $action .= '&amp;' . join('&amp;', $actions);
+                if ($actions) {
+                    $action .= '&amp;' . join('&amp;', $actions);
+                }
             }
 
             $result .= '<div class="quicklink_item"><a href="' . PHP_SELF . '?mod=' . $mod_key . $action . '"><img src="' . getOption('http_script_dir') . '/public/images/' . cnHtmlSpecialChars($name) . '" alt="Nạp thẻ VTC" /></a></div>';
@@ -1032,8 +1123,8 @@ class ProcessCoreWeb extends ProcessCore
 //        }
 //    }
 
-//// Displays header skin
-//// $image = img@custom_style_tpl
+    //// Displays header skin
+    //// $image = img@custom_style_tpl
 //    function echo_header_web($image, $header_text, $bread_crumbs = false)
 //    {
 //        global $skin_header_web, $lang_content_type, $skin_menu_web, $skin_menu_none, $_SESS, $_SERV_SESS;
@@ -1057,7 +1148,7 @@ class ProcessCoreWeb extends ProcessCore
 //        $skin_header_web = str_replace("{header-text}", $header_text, $skin_header_web);
 //        $skin_header_web = str_replace("{header-time}", $header_time, $skin_header_web);
 //        $skin_header_web = str_replace("{content-type}", $lang_content_type, $skin_header_web);
-////    $skin_header_web = str_replace("{breadcrumbs}", $bread_crumbs, $skin_header_web); ///
+    ////    $skin_header_web = str_replace("{breadcrumbs}", $bread_crumbs, $skin_header_web); ///
 //
 //        if ($custom_style) {
 //            $custom_style = read_tpl($custom_style);
@@ -1072,14 +1163,14 @@ class ProcessCoreWeb extends ProcessCore
 //        echo $skin_header_web;
 //    }
 //
-////    function echo_content_here($echocomtent, $path_c = '', $bread_crumbs = true)
-////    {
-////        global $skin_content_web;// $path_c;;
-////        $skin_content_web = preg_replace("/{paths_c}/", $path_c, $skin_content_web);                // duong dan chi ...
-////        $skin_content_web = preg_replace("/{paths_menu}/", cn_sort_menu(), $skin_content_web);                // duong dan chi ...
-////        $skin_content_web = preg_replace("/{content_here}/", $echocomtent, $skin_content_web);
-////        echo $skin_content_web;
-////    }
+    ////    function echo_content_here($echocomtent, $path_c = '', $bread_crumbs = true)
+    ////    {
+    ////        global $skin_content_web;// $path_c;;
+    ////        $skin_content_web = preg_replace("/{paths_c}/", $path_c, $skin_content_web);                // duong dan chi ...
+    ////        $skin_content_web = preg_replace("/{paths_menu}/", cn_sort_menu(), $skin_content_web);                // duong dan chi ...
+    ////        $skin_content_web = preg_replace("/{content_here}/", $echocomtent, $skin_content_web);
+    ////        echo $skin_content_web;
+    ////    }
 //
 //    function echo_footer_web()
 //    {
@@ -1095,7 +1186,7 @@ class ProcessCoreWeb extends ProcessCore
 //        die($skin_footer_web);
 //    }
 
-//// Since 2.0: Short message form
+    //// Since 2.0: Short message form
 //    function msg_info($title, $go_back = null)
 //    {
 //        include SERVDIR . '/skins/default.skin.php';
@@ -1105,9 +1196,9 @@ class ProcessCoreWeb extends ProcessCore
 //        if (empty($go_back)) $go_back = PHP_SELF;
 //
 //        $str_ = '<div class="sub_ranking" align="center" style="color: rgb(36, 36, 36);font-size: 12px;line-height: initial;">
-//				<b><p>' . $title . '</p></b><br>
-//				<p><b><a href=' . $go_back . '><font size="12" color="red">OK</font></a></b></p>
-//			</div>';
+    //				<b><p>' . $title . '</p></b><br>
+    //				<p><b><a href=' . $go_back . '><font size="12" color="red">OK</font></a></b></p>
+    //			</div>';
 //
 //        echo_content_here($str_, cn_snippet_bc_re("Home", "Permission check"));
 //
@@ -1115,7 +1206,7 @@ class ProcessCoreWeb extends ProcessCore
 //        die();
 //    }
 //
-//// Since 2.0: Short message form
+    //// Since 2.0: Short message form
 //    function msg_err($title, $go_back = null)
 //    {
 //        include SERVDIR . '/skins/default.skin.php';
@@ -1125,9 +1216,9 @@ class ProcessCoreWeb extends ProcessCore
 //        if (empty($go_back)) $go_back = PHP_SELF;
 //
 //        $str_ = '<div class="sub_ranking" align="center" style="color: rgb(36, 36, 36);font-size: 12px;line-height: initial;">
-//				<b><p>' . $title . '</p></b><br>
-//				<p><b><a href=' . $go_back . '><font style="font-size: 16px;" color="#86001E"><img src="/public/images/return.png"/>Quay lại</font></a></b></p>
-//			</div>';
+    //				<b><p>' . $title . '</p></b><br>
+    //				<p><b><a href=' . $go_back . '><font style="font-size: 16px;" color="#86001E"><img src="/public/images/return.png"/>Quay lại</font></a></b></p>
+    //			</div>';
 //
 //        echo_content_here($str_, cn_snippet_bc_re("Home", "error"));
 //
@@ -1135,7 +1226,7 @@ class ProcessCoreWeb extends ProcessCore
 //        die();
 //    }
 
-//// Since 1.5.3: Set cache variable
+    //// Since 1.5.3: Set cache variable
 //    function setMemcache($name, $var)
 //    {
 //        global $_CN_SESS_CACHE;
@@ -1143,14 +1234,14 @@ class ProcessCoreWeb extends ProcessCore
 //    }
 
 //
-//// Since 1.5.3: Get variable from cache
+    //// Since 1.5.3: Get variable from cache
 //    function getMemcache($name)
 //    {
 //        global $_CN_SESS_CACHE;
 //        return isset($_CN_SESS_CACHE[$name]) ? $_CN_SESS_CACHE[$name] : false;
 //    }
 
-//// Since 1.5.0: Add hook to system
+    //// Since 1.5.0: Add hook to system
 //    function add_hook($hook, $func)
 //    {
 //        global $_HOOKS;
@@ -1168,7 +1259,7 @@ class ProcessCoreWeb extends ProcessCore
 //        if ($prior) array_unshift($_HOOKS[$hook], $func); else $_HOOKS[$hook][] = $func;
 //    }
 //
-//// Since 1.5.0: Cascade Hooks
+    //// Since 1.5.0: Cascade Hooks
 //    function hook($hook, $args = null)
 //    {
 //        global $_HOOKS;
@@ -1190,7 +1281,7 @@ class ProcessCoreWeb extends ProcessCore
 //        return $args;
 //    }
 
-//// Since 2.0: Add BreadCrumb
+    //// Since 2.0: Add BreadCrumb
 //    function cn_bc_add($name, $url)
 //    {
 //        $bc = getMemcache('.breadcrumbs');
@@ -1199,8 +1290,8 @@ class ProcessCoreWeb extends ProcessCore
 //
 //    }
 
-// Since 2.0: Grab from $_POST all parameters
-    function cn_parse_url()
+    // Since 2.0: Grab from $_POST all parameters
+    public function cn_parse_url()
     {
         // Decode post data
         $post_data = array();
@@ -1216,7 +1307,11 @@ class ProcessCoreWeb extends ProcessCore
             $_POST['__my_confirm'] = '_confirmed';
 
             // Return additional parameters in POST
-            if (is_array($APPEND)) foreach ($APPEND as $id => $v) $_POST[$id] = $v;
+            if (is_array($APPEND)) {
+                foreach ($APPEND as $id => $v) {
+                    $_POST[$id] = $v;
+                }
+            }
 
             return true;
         } // B. Click "decline"
@@ -1229,9 +1324,15 @@ class ProcessCoreWeb extends ProcessCore
         }
 
         // Set POST required params to GET
-        if (REQ('mod', 'POST')) $_GET['mod'] = REQ('mod', 'POST');
-        if (REQ('opt', 'POST')) $_GET['opt'] = REQ('opt', 'POST');
-        if (REQ('sub', 'POST')) $_GET['sub'] = REQ('sub', 'POST');
+        if (REQ('mod', 'POST')) {
+            $_GET['mod'] = REQ('mod', 'POST');
+        }
+        if (REQ('opt', 'POST')) {
+            $_GET['opt'] = REQ('opt', 'POST');
+        }
+        if (REQ('sub', 'POST')) {
+            $_GET['sub'] = REQ('sub', 'POST');
+        }
 
         // Unset signature dsi
         unset($_GET['__signature_key'], $_GET['__signature_dsi']);
@@ -1240,19 +1341,27 @@ class ProcessCoreWeb extends ProcessCore
     }
 
 
-// Since 2.0: Pack only required parameters
-    function cn_pack_url($GET, $URL = PHP_SELF)
+    // Since 2.0: Pack only required parameters
+    public function cn_pack_url($GET, $URL = PHP_SELF)
     {
         $url = $result = array();
 
-        foreach ($GET as $k => $v) if ($v !== '') $result[$k] = $v;
-        foreach ($result as $k => $v) if (!is_array($v)) $url[] = "$k=" . urlencode($v);
+        foreach ($GET as $k => $v) {
+            if ($v !== '') {
+                $result[$k] = $v;
+            }
+        }
+        foreach ($result as $k => $v) {
+            if (!is_array($v)) {
+                $url[] = "$k=" . urlencode($v);
+            }
+        }
 
         list($ResURL) = hook('core/url_rewrite', array($URL . ($url ? '?' . join('&', $url) : ''), $URL, $GET));
         return $ResURL;
     }
 
-////time
+    ////time
 //    function ctime()
 //    {
 //        date_default_timezone_set("UTC");
@@ -1260,7 +1369,7 @@ class ProcessCoreWeb extends ProcessCore
 //    }
 
 
-////Since 2.0.3 crossplatform path generator
+    ////Since 2.0.3 crossplatform path generator
 //    function cn_path_construct()
 //    {
 //        $args = array();
@@ -1313,7 +1422,7 @@ class ProcessCoreWeb extends ProcessCore
     */
 
 
-//// Since 1.5.1: Simply read template file
+    //// Since 1.5.1: Simply read template file
 //    function read_tpl($tpl = 'index')
 //    {
 //        // get from cache
@@ -1353,8 +1462,8 @@ class ProcessCoreWeb extends ProcessCore
 //        return $ob;
 //    }
 
-//// Since 2.0: Execute PHP-template
-//// 1st argument - template name, other - variables ==> mo file
+    //// Since 2.0: Execute PHP-template
+    //// 1st argument - template name, other - variables ==> mo file
 //    function exec_tpl()
 //    {
 //        $args = func_get_args();
@@ -1388,8 +1497,8 @@ class ProcessCoreWeb extends ProcessCore
 //        return '';
 //    }
 
-// Since 2.0: @bootstrap
-    function cn_load_skin_web()
+    // Since 2.0: @bootstrap
+    public function cn_load_skin_web()
     {
         $config_skin = preg_replace('~[^a-z]~i', '', getOption('skin'));
         //$config_skin = preg_replace('~[^a-z]~i','', 'default');
@@ -1400,8 +1509,8 @@ class ProcessCoreWeb extends ProcessCore
         }
     }
 
-// Since 2.0: @bootstrap Make & load configuration file ==>
-    function cn_config_load()
+    // Since 2.0: @bootstrap Make & load configuration file ==>
+    public function cn_config_load()
     {
         global $_CN_access;
         //checking permission for load config
@@ -1423,12 +1532,11 @@ class ProcessCoreWeb extends ProcessCore
     }
 
 
-    function cn_bc_menu($name, $url, $opt)
+    public function cn_bc_menu($name, $url, $opt)
     {
         $bc = getMemcache('.menu');
         $bc[$opt] = array('name' => $name, 'url' => $url);
         setMemcache('.menu', $bc);
-
     }
 
 //    function cn_sort_menu()
@@ -1457,7 +1565,7 @@ class ProcessCoreWeb extends ProcessCore
 //        return $result;
 //    }
 
-////information character
+    ////information character
 //    function cn_character()
 //    {
 //        $member = getMemberWeb();
@@ -1583,7 +1691,7 @@ class ProcessCoreWeb extends ProcessCore
         return $options_trustrsvip;
     }
     */
-////BQN Check Point trust
+    ////BQN Check Point trust
 //    function cn_point_trust()
 //    {
 //        $member = getMemberWeb();
@@ -1761,9 +1869,9 @@ class ProcessCoreWeb extends ProcessCore
     }
     */
 
-// Since 2.0: Get option from #CFG or [%site][<opt_name>]
-// Usage: #level1/level2/.../levelN or 'option_name' from %site
-    function getOption($opt_name = '', $var_name = '')
+    // Since 2.0: Get option from #CFG or [%site][<opt_name>]
+    // Usage: #level1/level2/.../levelN or 'option_name' from %site
+    public function getOption($opt_name = '', $var_name = '')
     {
         $cfg = getMemcache('config');
 
@@ -1782,7 +1890,7 @@ class ProcessCoreWeb extends ProcessCore
             }
 
             return $cfg;
-        } else if ($opt_name[0] == '@') {
+        } elseif ($opt_name[0] == '@') {
             if (!empty($var_name)) {
                 $opt_name_ = substr($opt_name, 1);
                 return isset($cfg[$opt_name_][$var_name]) ? $cfg[$opt_name_][$var_name] : false;
@@ -1805,7 +1913,7 @@ class ProcessCoreWeb extends ProcessCore
     }
 
     // bqn relocation => $db + server
-    function cn_relocation_db_new()
+    public function cn_relocation_db_new()
     {
         global $db_new, $config_adminemail, $config_admin;
         $type_connect = getOption('type_connect');
@@ -1825,8 +1933,8 @@ class ProcessCoreWeb extends ProcessCore
         $passcard = getOption('passcard');
         $server_type = getOption('server_type');
 
-        $config_admin = "BUI NGOC";
-        $config_adminemail = "ngoctbhy@gmail.com";
+        $config_admin = $this->config["admin_name"];
+        $config_adminemail = $this->config["admin_email"];
 
         include_once(SERVDIR . '/admin/adodb/adodb.inc.php');
 
@@ -1835,14 +1943,21 @@ class ProcessCoreWeb extends ProcessCore
             $database_ = "Driver={SQL Server};Server={$localhost};Database={$d_base}";
             $connect_mssql = $db_new->Connect($database_, $databaseuser, $databsepassword);
             $db_new->SetFetchMode(ADODB_ASSOC_CASE);
-            if (!$connect_mssql) die('Ket noi voi SQL Server loi! Hay kiem tra lai ODBC ton tai hoac User & Pass SQL dung.');
-        } else if ($type_connect == 'mssql') { // config sau
-            if (extension_loaded('mssql')) echo('');
-            else die('Loi! Khong the load thu vien php_mssql.dll. Hay cho phep su dung php_mssql.dll trong php.ini');
+            if (!$connect_mssql) {
+                die('Ket noi voi SQL Server loi! Hay kiem tra lai ODBC ton tai hoac User & Pass SQL dung.');
+            }
+        } elseif ($type_connect == 'mssql') { // config sau
+            if (extension_loaded('mssql')) {
+                echo('');
+            } else {
+                die('Loi! Khong the load thu vien php_mssql.dll. Hay cho phep su dung php_mssql.dll trong php.ini');
+            }
             $db_new = ADONewConnection('mssql');
             $connect_mssql = $db_new->Connect($localhost, $databaseuser, $databsepassword, $d_base);
             $db_new->SetFetchMode(ADODB_ASSOC_CASE);
-            if (!$connect_mssql) die('Loi! Khong the ket noi SQL Server');
+            if (!$connect_mssql) {
+                die('Loi! Khong the ket noi SQL Server');
+            }
             //$conn->ErrorMsg()
         }
     }
@@ -1850,7 +1965,7 @@ class ProcessCoreWeb extends ProcessCore
     /**
      * return global
      */
-    function cn_connect_forum()
+    public function cn_connect_forum()
     {
         @include_once ROOT . '/forum/includes/config.php';
         global $DbForum;
@@ -1865,10 +1980,18 @@ class ProcessCoreWeb extends ProcessCore
             $dbusername = @$config['MasterServer']['username'] ? $config['MasterServer']['username'] : '';
             $dbpassword = @$config['MasterServer']['password'] ? $config['MasterServer']['password'] : '';
 
-            if (!$dbservername) $dbservername = @$config['SlaveServer']['servername'] ? $config['SlaveServer']['servername'] : '';
-            if (!$dbusername) $dbusername = @$config['SlaveServer']['username'] ? $config['SlaveServer']['username'] : '';
-            if (!$dbpassword) $dbpassword = @$config['SlaveServer']['password'] ? $config['SlaveServer']['password'] : '';
-            if (!$dbport) $dbport = @$config['SlaveServer']['port'] ? $config['SlaveServer']['port'] : '';
+            if (!$dbservername) {
+                $dbservername = @$config['SlaveServer']['servername'] ? $config['SlaveServer']['servername'] : '';
+            }
+            if (!$dbusername) {
+                $dbusername = @$config['SlaveServer']['username'] ? $config['SlaveServer']['username'] : '';
+            }
+            if (!$dbpassword) {
+                $dbpassword = @$config['SlaveServer']['password'] ? $config['SlaveServer']['password'] : '';
+            }
+            if (!$dbport) {
+                $dbport = @$config['SlaveServer']['port'] ? $config['SlaveServer']['port'] : '';
+            }
 
             if ($dbservername && $dbname && $dbusername) {
                 switch ($dbType) {
@@ -1880,7 +2003,9 @@ class ProcessCoreWeb extends ProcessCore
                         $DbForum = ADONewConnection('mysqli');
                         //$db->Connect($server, $userid, $password, $database);
                         $connect_mssql = $DbForum->Connect($dbservername, $dbusername, $dbpassword, $dbname);
-                        if (!$connect_mssql) die('Ket noi voi MYSQLI loi! Hay kiem tra lai MYSQLI ton tai hoac User & Pass SQL dung.');
+                        if (!$connect_mssql) {
+                            die('Ket noi voi MYSQLI loi! Hay kiem tra lai MYSQLI ton tai hoac User & Pass SQL dung.');
+                        }
                         break;
                     case 'mysql':
                         if (!extension_loaded('mysql')) {
@@ -1889,13 +2014,17 @@ class ProcessCoreWeb extends ProcessCore
                         $DbForum = ADONewConnection('mysql');
                         //$db->Connect($server, $userid, $password, $database);
                         $connect_mssql = $DbForum->Connect($dbservername, $dbusername, $dbpassword, $dbname);
-                        if (!$connect_mssql) die('Ket noi voi MYSQLI loi! Hay kiem tra lai MYSQLI ton tai hoac User & Pass SQL dung.');
+                        if (!$connect_mssql) {
+                            die('Ket noi voi MYSQLI loi! Hay kiem tra lai MYSQLI ton tai hoac User & Pass SQL dung.');
+                        }
                         break;
                     case 'odbc':
                         $DbForum = ADONewConnection('odbc');
                         $database_ = "Driver={SQL Server};Server={$dbservername};Database={$dbname}";
                         $connect_mssql = $DbForum->Connect($database_, $dbusername, $dbpassword, $dbname);
-                        if (!$connect_mssql) die('Ket noi voi SQL Server loi! Hay kiem tra lai ODBC ton tai hoac User & Pass SQL dung.');
+                        if (!$connect_mssql) {
+                            die('Ket noi voi SQL Server loi! Hay kiem tra lai ODBC ton tai hoac User & Pass SQL dung.');
+                        }
                         break;
                     default:
                         break;
@@ -1904,20 +2033,22 @@ class ProcessCoreWeb extends ProcessCore
         }
     }
 
-// Since 2.0: Add message
-    function cn_throw_message($msg, $area = 'n')
+    // Since 2.0: Add message
+    public function cn_throw_message($msg, $area = 'n')
     {
         $es = getMemcache('msg:stor');
 
-        if (!isset($es[$area])) $es[$area] = array();
+        if (!isset($es[$area])) {
+            $es[$area] = array();
+        }
         $es[$area][] = $msg;
 
         setMemcache('msg:stor', $es);
         return false;
     }
 
-// Since 2.0.3
-    function cn_user_email_as_site($user_email, $username)
+    // Since 2.0.3
+    public function cn_user_email_as_site($user_email, $username)
     {
         if (preg_match('/^www\./i', $user_email)) {
             return '<a target="_blank" href="http://' . cnHtmlSpecialChars($user_email) . '">' . $username . '</a>';

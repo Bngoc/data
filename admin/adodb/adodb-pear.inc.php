@@ -106,11 +106,13 @@ class DB
      * error
      */
 
-    function factory($type)
+    public function factory($type)
     {
         include_once(ADODB_DIR . "/drivers/adodb-$type.inc.php");
         $obj = NewADOConnection($type);
-        if (!is_object($obj)) $obj = new PEAR_Error('Unknown Database Driver: ' . $dsninfo['phptype'], -1);
+        if (!is_object($obj)) {
+            $obj = new PEAR_Error('Unknown Database Driver: ' . $dsninfo['phptype'], -1);
+        }
         return $obj;
     }
 
@@ -133,7 +135,7 @@ class DB
      * @see DB::parseDSN
      * @see DB::isError
      */
-    function connect($dsn, $options = false)
+    public function connect($dsn, $options = false)
     {
         if (is_array($dsn)) {
             $dsninfo = $dsn;
@@ -197,13 +199,21 @@ class DB
             $persist = false;
         }
 
-        if (isset($dsninfo['socket'])) $dsninfo['hostspec'] .= ':' . $dsninfo['socket'];
-        else if (isset($dsninfo['port'])) $dsninfo['hostspec'] .= ':' . $dsninfo['port'];
+        if (isset($dsninfo['socket'])) {
+            $dsninfo['hostspec'] .= ':' . $dsninfo['socket'];
+        } elseif (isset($dsninfo['port'])) {
+            $dsninfo['hostspec'] .= ':' . $dsninfo['port'];
+        }
 
-        if ($persist) $ok = $obj->PConnect($dsninfo['hostspec'], $dsninfo['username'], $dsninfo['password'], $dsninfo['database']);
-        else  $ok = $obj->Connect($dsninfo['hostspec'], $dsninfo['username'], $dsninfo['password'], $dsninfo['database']);
+        if ($persist) {
+            $ok = $obj->PConnect($dsninfo['hostspec'], $dsninfo['username'], $dsninfo['password'], $dsninfo['database']);
+        } else {
+            $ok = $obj->Connect($dsninfo['hostspec'], $dsninfo['username'], $dsninfo['password'], $dsninfo['database']);
+        }
 
-        if (!$ok) $obj = ADODB_PEAR_Error();
+        if (!$ok) {
+            $obj = ADODB_PEAR_Error();
+        }
         return $obj;
     }
 
@@ -212,7 +222,7 @@ class DB
      *
      * @return int the DB API version number
      */
-    function apiVersion()
+    public function apiVersion()
     {
         return 2;
     }
@@ -224,9 +234,11 @@ class DB
      *
      * @return bool whether $value is an error
      */
-    function isError($value)
+    public function isError($value)
     {
-        if (!is_object($value)) return false;
+        if (!is_object($value)) {
+            return false;
+        }
         $class = strtolower(get_class($value));
         return $class == 'pear_error' || is_subclass_of($value, 'pear_error') ||
             $class == 'db_error' || is_subclass_of($value, 'db_error');
@@ -242,7 +254,7 @@ class DB
      *
      * @return bool whether $value is a warning
      */
-    function isWarning($value)
+    public function isWarning($value)
     {
         return false;
         /*
@@ -283,7 +295,7 @@ class DB
      *
      * @author Tomas V.V.Cox <cox@idecnet.com>
      */
-    function parseDSN($dsn)
+    public function parseDSN($dsn)
     {
         if (is_array($dsn)) {
             return $dsn;
@@ -305,7 +317,7 @@ class DB
             $dsn = substr($dsn, $pos + 3);
         } else {
             $str = $dsn;
-            $dsn = NULL;
+            $dsn = null;
         }
 
         // Get phptype and dbsyntax
@@ -342,7 +354,7 @@ class DB
             $dsn = substr($dsn, $pos + 1);
         } else {
             $str = $dsn;
-            $dsn = NULL;
+            $dsn = null;
         }
 
         // Get protocol + hostspec
@@ -374,7 +386,7 @@ class DB
      * @return bool true if the extension was already or successfully
      * loaded, false if it could not be loaded
      */
-    function assertExtension($name)
+    public function assertExtension($name)
     {
         if (!extension_loaded($name)) {
             $dlext = (strncmp(PHP_OS, 'WIN', 3) === 0) ? '.dll' : '.so';

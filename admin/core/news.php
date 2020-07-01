@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BQN_MU')) die('Access restricted');
+if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 // ******************************************************************************************************
 // NEWS MODIFIERS, PARTIAL/FULL REPLACE PLACEHOLDERS IN TEMPLATES
@@ -9,8 +11,11 @@ if (!defined('BQN_MU')) die('Access restricted');
 function cn_bb_decode($bb)
 {
     $result = array();
-    if (preg_match_all('/(\w+)\=([^\s\=]+)/i', $bb, $c, PREG_SET_ORDER))
-        foreach ($c as $k) $result[$k[1]] = $k[2];
+    if (preg_match_all('/(\w+)\=([^\s\=]+)/i', $bb, $c, PREG_SET_ORDER)) {
+        foreach ($c as $k) {
+            $result[$k[1]] = $k[2];
+        }
+    }
 
     return $result;
 }
@@ -18,12 +23,14 @@ function cn_bb_decode($bb)
 function cn_helper_category($e)
 {
     $nice = '';
-    $cat = cn_get_categories(TRUE);
+    $cat = cn_get_categories(true);
 
     $sp = separateString($e['c']);
-    foreach ($sp as $cid)
-        if (isset($cat[$cid]))
+    foreach ($sp as $cid) {
+        if (isset($cat[$cid])) {
             $nice[] = $cat[intval($cid)];
+        }
+    }
 
     return $nice;
 }
@@ -38,15 +45,16 @@ function cn_helper_html_text($e, $p)
         print " F_news bien e: $fs => " . $gd . "<br>";
     }
     print " F_news bien texts: " . $text . "<br>";
-//----------------------------------------------
+    //----------------------------------------------
     // replace word module
     $text = cn_extrn_replace($text);
 
     // html-specialchars
-    if (isset($e['ht']) && $e['ht'])
+    if (isset($e['ht']) && $e['ht']) {
         $text = hook('kses', $text);
-    else
+    } else {
         $text = nl2br(cnHtmlSpecialChars($text));
+    }
 
     // 0) Special
     $text = preg_replace('/\[(\/?)list\]/i', '<\\1ul>', $text);
@@ -60,8 +68,9 @@ function cn_helper_html_text($e, $p)
                 $name = $ci[1];
                 $func = "cn_modify_s2bb_{$name}";
                 print "00000000000000000000000" . $func . "<br>";
-                if (function_exists($func))
+                if (function_exists($func)) {
                     $repl = call_user_func($func, $ci[3], $ci[2], cn_bb_decode($ci[2]));
+                }
 
                 // do replace [bb-tag]...[/bb-tag]
                 $text = str_replace($ci[0], $repl, $text);
@@ -76,8 +85,9 @@ function cn_helper_html_text($e, $p)
             $name = $ci[1];
             $func = "cn_modify_s1bb_{$name}";
 
-            if (function_exists($func))
+            if (function_exists($func)) {
                 $repl = call_user_func($func, $ci[2], cn_bb_decode($ci[2]));
+            }
 
             // do replace [bb-tag]
             $text = str_replace($ci[0], $repl, $text);
@@ -96,8 +106,12 @@ function cn_helper_bb_decode($bb)
     $a_opts = $b_opts = '';
     $bb = cn_bb_decode($bb);
 
-    if (isset($bb['target']) && $bb['target']) $a_opts = 'target="' . cnHtmlSpecialChars($bb['target']) . '" ';
-    if (isset($bb['anchor']) && $bb['anchor']) $b_opts = '#' . cnHtmlSpecialChars($bb['anchor']);
+    if (isset($bb['target']) && $bb['target']) {
+        $a_opts = 'target="' . cnHtmlSpecialChars($bb['target']) . '" ';
+    }
+    if (isset($bb['anchor']) && $bb['anchor']) {
+        $b_opts = '#' . cnHtmlSpecialChars($bb['anchor']);
+    }
 
     return array($a_opts, $b_opts);
 }
@@ -111,13 +125,15 @@ function cn_helper_smiles($template)
     if (preg_match_all('/\:([a-z_]+?)\:/i', $template, $ct, PREG_SET_ORDER)) {
         foreach ($ct as $c) {
             print "F_new 110 ham: " . $c[1] . "<br>";
-            if (!in_array($c[1], $sml))
+            if (!in_array($c[1], $sml)) {
                 continue;
+            }
 
-            if ($be)
+            if ($be) {
                 $url = "data:image/png;base64," . base64_encode(join('', file(SERVDIR . '/skins/emoticons/' . $c[1] . '.gif')));
-            else
+            } else {
                 $url = getOption('http_script_dir') . "/skins/emoticons/" . $c[1] . ".gif";
+            }
 
             $template = str_replace($c[0], '<img src="' . $url . '" />', $template);
         }
@@ -200,7 +216,7 @@ function cn_modify_s2bb_more($t)
 {
     $ID = md5(mt_rand());
 
-    $echo = '<div class="cn_more_button"><a href="#" onclick="cn_more_expand(\'more_link_' . $ID . '\'); return false;">' . i18n("Expand more") . '</a></div>';
+    $echo = '<div class="cn_more_button"><a href="#" onclick="cn_more_expand(\'more_link_' . $ID . '\'); return false;">' . __("expand_more") . '</a></div>';
     $echo .= '<div class="cn_more_link" style="display: none;" id="more_link_' . $ID . '">' . $t . '</div>';
 
     return $echo;
@@ -210,11 +226,13 @@ function cn_modify_s2bb_youtube($t)
 {
     $yt_url = '';
 
-    if (preg_match('/watch.+?v\=([^&]+)/i', $t, $c))
+    if (preg_match('/watch.+?v\=([^&]+)/i', $t, $c)) {
         $yt_url = $c[1];
+    }
 
-    if ($yt_url)
+    if ($yt_url) {
         return '<iframe width="100%" height="360" src="http://www.youtube.com/embed/' . $yt_url . '?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>';
+    }
 
     return $t;
 }
@@ -245,8 +263,9 @@ function cn_modify_full_story($e)
     if (isset($e['cc']) && $e['cc']) {
         $e['f'] = $e['s'] . "\n\n" . $e['f'];
     } // Full story not present, use short
-    elseif (trim($e['f']) === '')
+    elseif (trim($e['f']) === '') {
         $e['f'] = $e['s'];
+    }
 
     return cn_helper_smiles(cn_helper_html_text($e, 'f'));
 }
@@ -256,11 +275,12 @@ function cn_modify_date($e)
 {
     global $template;
     $day = $e['d'];
-    if ($template == 'rss')
+    if ($template == 'rss') {
         return date('r', $e['id']);
-    else
+    } else {
         //return date(getOption('timestamp_active'), $e['id']);
         return date("Y-m-d h:ia", strtotime($day));
+    }
 }
 
 function cn_modify_author($e)
@@ -326,9 +346,11 @@ function cn_modify_category($e)
 {
     $ns = array();
     $cs = cn_helper_category($e);
-    foreach ($cs as $cat)
-        if ($cat['name'])
+    foreach ($cs as $cat) {
+        if ($cat['name']) {
             $ns[] = $cat['name'];
+        }
+    }
 
     return cnHtmlSpecialChars(join(', ', $ns));
 }
@@ -337,9 +359,11 @@ function cn_modify_category_icon($e)
 {
     $ns = array();
     $cs = cn_helper_category($e);
-    foreach ($cs as $cat)
-        if ($cat['icon'])
+    foreach ($cs as $cat) {
+        if ($cat['icon']) {
             $ns[] = '<img src="' . $cat['icon'] . '" />';
+        }
+    }
 
     return join(' ', $ns);
 }
@@ -347,8 +371,9 @@ function cn_modify_category_icon($e)
 function cn_modify_month($e)
 {
     // Convert digit month to name
-    if (!is_array($e))
+    if (!is_array($e)) {
         $e = array('id' => strtotime(date('Y-' . $e . '-d')));
+    }
 
     $mon = intval(date('m', $e['id']));
     $mons = explode(',', getOption('mon_list'));
@@ -392,11 +417,16 @@ function cn_modify_since($e)
 
     $out = time_since_format($diff);
     $res = '';
-    foreach ($out as $id => $v)
-        if ($id != 's') $res[] = "$v $id.";
+    foreach ($out as $id => $v) {
+        if ($id != 's') {
+            $res[] = "$v $id.";
+        }
+    }
 
     // a seconds ago...
-    if (!$res) $res[] = "0 m.";
+    if (!$res) {
+        $res[] = "0 m.";
+    }
 
     return join(' ', $res);
 }
@@ -428,7 +458,7 @@ function cn_modify_tagline($e)
         // get url tag
         if (preg_match_all('/\{url(.*?)\}/i', $esrc, $c, PREG_SET_ORDER)) {
             foreach ($c as $v) {
-                $disable_rw = FALSE;
+                $disable_rw = false;
                 $_phpself = $PHP_SELF; // save php-self
                 $_get = $_GET;
 
@@ -443,7 +473,7 @@ function cn_modify_tagline($e)
 
                 // Manual rewrite disable
                 if (!empty($group[':disable_rw'])) {
-                    $disable_rw = TRUE;
+                    $disable_rw = true;
                     unset($group[':disable_rw']);
                 }
 
@@ -515,10 +545,11 @@ function cn_modify_rss_news_include_url($e)
 {
     $id = cn_put_alias($e['id']);
 
-    if (getOption('rw_engine'))
+    if (getOption('rw_engine')) {
         return cn_rewrite('rss', $id);
-    else
+    } else {
         return getOption('#rss/news_include_url') . '?id=' . $id;
+    }
 }
 
 function cn_modify_archive_id($e)
@@ -531,8 +562,9 @@ function cn_modify_fb_comments($e)
 {
     global $template, $allow_active_news, $PHP_SELF;
 
-    if ($template == 'rss')
+    if ($template == 'rss') {
         return '';
+    }
 
     $unique_url = 'http://' . $_SERVER['SERVER_NAME'] . $PHP_SELF . '?id=' . $e['id'];
     if (getOption('use_fbcomments') && (!$allow_active_news || $allow_active_news && getOption('fb_inactive'))) {
@@ -545,8 +577,9 @@ function cn_modify_fb_comments($e)
 function cn_modify_fb_like($e)
 {
     global $template, $PHP_SELF;
-    if ($template == 'rss')
+    if ($template == 'rss') {
         return '';
+    }
 
     $unique_url = 'http://' . $_SERVER['SERVER_NAME'] . $PHP_SELF . '?id=' . $e['id'];
     if (getOption('use_fblike')) {
@@ -582,8 +615,9 @@ function cn_modify_gplus($e)
 {
     global $template;
 
-    if ($template == 'rss')
+    if ($template == 'rss') {
         return '';
+    }
 
     if (getOption('use_gplus')) {
         return '<div class="g-plusone" data-href="' . cn_url_modify(array('reset'), 'id=' . $e['id']) . '" data-size="' . getOption('gplus_size') . '" data-annotation="' . getOption('gplus_annotation') . '" data-width="' . getOption('gplus_width') . '"></div>';
@@ -635,8 +669,9 @@ function cn_modify_bb_print($e, $t, $bb)
 {
     list($opts, $anchor) = cn_helper_bb_decode($bb);
 
-    if (defined('AREA') && AREA == 'ADMIN')
+    if (defined('AREA') && AREA == 'ADMIN') {
         return $t;
+    }
 
     $id = intval($e['id']);
     //$id = cn_put_alias($id);
@@ -717,7 +752,9 @@ function cn_modify_bb_mail($e, $t)
 {
     $user = db_user_by_name($e['u']);
 
-    if ($user['e-hide']) return $user['name'];
+    if ($user['e-hide']) {
+        return $user['name'];
+    }
     return cn_user_email_as_site($user['email'], $t);
 }
 
@@ -727,10 +764,13 @@ function cn_modify_bb_cat($e, $t, $c)
     $rc = intval(substr($c, 1));
     $cw = separateString($e['c']);
     $c = intval(substr($c, 1)) - 1;
-    if (count($cw) == 1) $c = 0;
+    if (count($cw) == 1) {
+        $c = 0;
+    }
 
-    if (isset($cw[$c]) && $cw[$c] == $rc)
+    if (isset($cw[$c]) && $cw[$c] == $rc) {
         return str_replace('[$catid]', $cw[$c], $t);
+    }
 
     return '';
 }
@@ -738,8 +778,11 @@ function cn_modify_bb_cat($e, $t, $c)
 function cn_modify_bb_loggedin($e, $t)
 {
     $user = getMember();
-    if ($user) return $t;
-    else return '';
+    if ($user) {
+        return $t;
+    } else {
+        return '';
+    }
 }
 
 // --- frontend accessible ---
@@ -764,13 +807,14 @@ function cn_modify_comm_author($e)
     //in comments e-mail mast hide
     $user = db_user_by_name($e['u']);
 
-    if (!$user) $user = array
-    (
+    if (!$user) {
+        $user = array(
         'name' => $e['u'],
         'email' => $e['e'],
         'e-hide' => '',
         'nick' => ''
     );
+    }
 
     // Got nick?
     $username = isset($user['nick']) && !empty($user['nick']) ? $user['nick'] : $user['name'];
@@ -779,10 +823,11 @@ function cn_modify_comm_author($e)
     $username = $user['name'] ? cnHtmlSpecialChars($username) : 'Anonymous';
 
     // user allow to show his email?
-    if ((isset($user['e-hide']) && $user['e-hide']) || empty($user['email']))
+    if ((isset($user['e-hide']) && $user['e-hide']) || empty($user['email'])) {
         return $username;
-    else
+    } else {
         return cn_user_email_as_site($user['email'], $username);
+    }
 }
 
 function cn_modify_comm_date($e)
@@ -864,16 +909,16 @@ function cn_modify_comm_remember_me()
         $name = $user['name'];
     }
 
-    $echo = '<input class="cn_comm_remember" type="checkbox" name="cn_remember_me" value="Y" /> ' . i18n('Remember me') . ' ';
+    $echo = '<input class="cn_comm_remember" type="checkbox" name="cn_remember_me" value="Y" /> ' . __('remember_me') . ' ';
     if ($member_name) {
         $echo .= '<input type="hidden" name="isforgetme" value="" />';
-        $echo .= '<span class="cn_comm_forget"><a href="#" onclick="forget_me(); return false;">' . i18n('Forget me') . '</a></span>';
+        $echo .= '<span class="cn_comm_forget"><a href="#" onclick="forget_me(); return false;">' . __('forget_me') . '</a></span>';
     }
 
     if ($name) {
-        $echo = '<span class="cn_com_logged">' . i18n('Logged as') . ' <b>' . cnHtmlSpecialChars($name) . '</b></span>';
+        $echo = '<span class="cn_com_logged">' . __('logged_as') . ' <b>' . cnHtmlSpecialChars($name) . '</b></span>';
         $echo .= ' <input type="hidden" name="isforgetme" value="" />';
-        $echo .= ' <span class="cn_comm_forget"><a href="#" onclick="forget_me(); return false;">' . i18n('Forget me') . '</a></span>';
+        $echo .= ' <span class="cn_comm_forget"><a href="#" onclick="forget_me(); return false;">' . __('forget_me') . '</a></span>';
     }
 
     return $echo;

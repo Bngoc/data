@@ -13,32 +13,36 @@ Set tabs to 4 for best viewing.
   Oracle support via ODBC. Requires ODBC. Works on Windows.
 */
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 if (!defined('_ADODB_ODBC_LAYER')) {
     include(ADODB_DIR . "/drivers/adodb-odbc.inc.php");
 }
 
 
-class  ADODB_odbc_oracle extends ADODB_odbc
+class ADODB_odbc_oracle extends ADODB_odbc
 {
-    var $databaseType = 'odbc_oracle';
-    var $replaceQuote = "''"; // string to use to replace quotes
-    var $concat_operator = '||';
-    var $fmtDate = "'Y-m-d 00:00:00'";
-    var $fmtTimeStamp = "'Y-m-d h:i:sA'";
-    var $metaTablesSQL = 'select table_name from cat';
-    var $metaColumnsSQL = "select cname,coltype,width from col where tname='%s' order by colno";
-    var $sysDate = "TRUNC(SYSDATE)";
-    var $sysTimeStamp = 'SYSDATE';
+    public $databaseType = 'odbc_oracle';
+    public $replaceQuote = "''"; // string to use to replace quotes
+    public $concat_operator = '||';
+    public $fmtDate = "'Y-m-d 00:00:00'";
+    public $fmtTimeStamp = "'Y-m-d h:i:sA'";
+    public $metaTablesSQL = 'select table_name from cat';
+    public $metaColumnsSQL = "select cname,coltype,width from col where tname='%s' order by colno";
+    public $sysDate = "TRUNC(SYSDATE)";
+    public $sysTimeStamp = 'SYSDATE';
 
     //var $_bindInputArray = false;
 
-    function MetaTables($ttype = false, $showSchema = false, $mask = false)
+    public function MetaTables($ttype = false, $showSchema = false, $mask = false)
     {
         $false = false;
         $rs = $this->Execute($this->metaTablesSQL);
-        if ($rs === false) return $false;
+        if ($rs === false) {
+            return $false;
+        }
         $arr = $rs->GetArray();
         $arr2 = array();
         for ($i = 0; $i < sizeof($arr); $i++) {
@@ -48,7 +52,7 @@ class  ADODB_odbc_oracle extends ADODB_odbc
         return $arr2;
     }
 
-    function MetaColumns($table, $normalize = true)
+    public function MetaColumns($table, $normalize = true)
     {
         global $ADODB_FETCH_MODE;
 
@@ -65,8 +69,11 @@ class  ADODB_odbc_oracle extends ADODB_odbc
             $fld->max_length = $rs->fields[2];
 
 
-            if ($ADODB_FETCH_MODE == ADODB_FETCH_NUM) $retarr[] = $fld;
-            else $retarr[strtoupper($fld->name)] = $fld;
+            if ($ADODB_FETCH_MODE == ADODB_FETCH_NUM) {
+                $retarr[] = $fld;
+            } else {
+                $retarr[strtoupper($fld->name)] = $fld;
+            }
 
             $rs->MoveNext();
         }
@@ -75,7 +82,7 @@ class  ADODB_odbc_oracle extends ADODB_odbc
     }
 
     // returns true or false
-    function _connect($argDSN, $argUsername, $argPassword, $argDatabasename)
+    public function _connect($argDSN, $argUsername, $argPassword, $argDatabasename)
     {
         global $php_errormsg;
 
@@ -89,7 +96,7 @@ class  ADODB_odbc_oracle extends ADODB_odbc
     }
 
     // returns true or false
-    function _pconnect($argDSN, $argUsername, $argPassword, $argDatabasename)
+    public function _pconnect($argDSN, $argUsername, $argPassword, $argDatabasename)
     {
         global $php_errormsg;
         $php_errormsg = '';
@@ -102,12 +109,11 @@ class  ADODB_odbc_oracle extends ADODB_odbc
     }
 }
 
-class  ADORecordSet_odbc_oracle extends ADORecordSet_odbc
+class ADORecordSet_odbc_oracle extends ADORecordSet_odbc
 {
+    public $databaseType = 'odbc_oracle';
 
-    var $databaseType = 'odbc_oracle';
-
-    function __construct($id, $mode = false)
+    public function __construct($id, $mode = false)
     {
         return parent::__construct($id, $mode);
     }

@@ -15,14 +15,15 @@
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 class perf_mysql extends adodb_perf
 {
+    public $tablesSQL = 'show table status';
 
-    var $tablesSQL = 'show table status';
-
-    var $createTableSQL = "CREATE TABLE adodb_logsql (
+    public $createTableSQL = "CREATE TABLE adodb_logsql (
 		  created datetime NOT NULL,
 		  sql0 varchar(250) NOT NULL,
 		  sql1 text NOT NULL,
@@ -31,7 +32,7 @@ class perf_mysql extends adodb_perf
 		  timer decimal(16,6) NOT NULL
 		)";
 
-    var $settings = array(
+    public $settings = array(
         'Ratios',
         'MyISAM cache hit ratio' => array('RATIO',
             '=GetKeyHitRatio',
@@ -84,15 +85,16 @@ class perf_mysql extends adodb_perf
         false
     );
 
-    function __construct(&$conn)
+    public function __construct(&$conn)
     {
         $this->conn = $conn;
     }
 
-    function Explain($sql, $partial = false)
+    public function Explain($sql, $partial = false)
     {
-
-        if (strtoupper(substr(trim($sql), 0, 6)) !== 'SELECT') return '<p>Unable to EXPLAIN non-select statement</p>';
+        if (strtoupper(substr(trim($sql), 0, 6)) !== 'SELECT') {
+            return '<p>Unable to EXPLAIN non-select statement</p>';
+        }
         $save = $this->conn->LogSQL(false);
         if ($partial) {
             $sqlq = $this->conn->qstr($sql . '%');
@@ -100,7 +102,9 @@ class perf_mysql extends adodb_perf
             if ($arr) {
                 foreach ($arr as $row) {
                     $sql = reset($row);
-                    if (crc32($sql) == $partial) break;
+                    if (crc32($sql) == $partial) {
+                        break;
+                    }
                 }
             }
         }
@@ -119,30 +123,40 @@ class perf_mysql extends adodb_perf
         return $s;
     }
 
-    function Tables()
+    public function Tables()
     {
-        if (!$this->tablesSQL) return false;
+        if (!$this->tablesSQL) {
+            return false;
+        }
 
         $rs = $this->conn->Execute($this->tablesSQL);
-        if (!$rs) return false;
+        if (!$rs) {
+            return false;
+        }
 
         $html = rs2html($rs, false, false, false, false);
         return $html;
     }
 
-    function GetReads()
+    public function GetReads()
     {
         global $ADODB_FETCH_MODE;
         $save = $ADODB_FETCH_MODE;
         $ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-        if ($this->conn->fetchMode !== false) $savem = $this->conn->SetFetchMode(false);
+        if ($this->conn->fetchMode !== false) {
+            $savem = $this->conn->SetFetchMode(false);
+        }
 
         $rs = $this->conn->Execute('show status');
 
-        if (isset($savem)) $this->conn->SetFetchMode($savem);
+        if (isset($savem)) {
+            $this->conn->SetFetchMode($savem);
+        }
         $ADODB_FETCH_MODE = $save;
 
-        if (!$rs) return 0;
+        if (!$rs) {
+            return 0;
+        }
         $val = 0;
         while (!$rs->EOF) {
             switch ($rs->fields[0]) {
@@ -159,19 +173,25 @@ class perf_mysql extends adodb_perf
         return $val;
     }
 
-    function GetWrites()
+    public function GetWrites()
     {
         global $ADODB_FETCH_MODE;
         $save = $ADODB_FETCH_MODE;
         $ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-        if ($this->conn->fetchMode !== false) $savem = $this->conn->SetFetchMode(false);
+        if ($this->conn->fetchMode !== false) {
+            $savem = $this->conn->SetFetchMode(false);
+        }
 
         $rs = $this->conn->Execute('show status');
 
-        if (isset($savem)) $this->conn->SetFetchMode($savem);
+        if (isset($savem)) {
+            $this->conn->SetFetchMode($savem);
+        }
         $ADODB_FETCH_MODE = $save;
 
-        if (!$rs) return 0;
+        if (!$rs) {
+            return 0;
+        }
         $val = 0.0;
         while (!$rs->EOF) {
             switch ($rs->fields[0]) {
@@ -194,7 +214,7 @@ class perf_mysql extends adodb_perf
         return $val;
     }
 
-    function FindDBHitRatio()
+    public function FindDBHitRatio()
     {
         // first find out type of table
         //$this->conn->debug=1;
@@ -202,14 +222,20 @@ class perf_mysql extends adodb_perf
         global $ADODB_FETCH_MODE;
         $save = $ADODB_FETCH_MODE;
         $ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-        if ($this->conn->fetchMode !== false) $savem = $this->conn->SetFetchMode(false);
+        if ($this->conn->fetchMode !== false) {
+            $savem = $this->conn->SetFetchMode(false);
+        }
 
         $rs = $this->conn->Execute('show table status');
 
-        if (isset($savem)) $this->conn->SetFetchMode($savem);
+        if (isset($savem)) {
+            $this->conn->SetFetchMode($savem);
+        }
         $ADODB_FETCH_MODE = $save;
 
-        if (!$rs) return '';
+        if (!$rs) {
+            return '';
+        }
         $type = strtoupper($rs->fields[1]);
         $rs->Close();
         switch ($type) {
@@ -221,10 +247,9 @@ class perf_mysql extends adodb_perf
             default:
                 return $type . ' not supported';
         }
-
     }
 
-    function GetQHitRatio()
+    public function GetQHitRatio()
     {
         //Total number of queries = Qcache_inserts + Qcache_hits + Qcache_not_cached
         $hits = $this->_DBParameter(array("show status", "Qcache_hits"));
@@ -232,7 +257,9 @@ class perf_mysql extends adodb_perf
         $total += $this->_DBParameter(array("show status", "Qcache_not_cached"));
 
         $total += $hits;
-        if ($total) return round(($hits * 100) / $total, 2);
+        if ($total) {
+            return round(($hits * 100) / $total, 2);
+        }
         return 0;
     }
 
@@ -248,20 +275,26 @@ class perf_mysql extends adodb_perf
         0.00 reads/s, 0.00 creates/s, 0.00 writes/s
         No buffer pool activity since the last printout
     */
-    function GetInnoDBHitRatio()
+    public function GetInnoDBHitRatio()
     {
         global $ADODB_FETCH_MODE;
 
         $save = $ADODB_FETCH_MODE;
         $ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-        if ($this->conn->fetchMode !== false) $savem = $this->conn->SetFetchMode(false);
+        if ($this->conn->fetchMode !== false) {
+            $savem = $this->conn->SetFetchMode(false);
+        }
 
         $rs = $this->conn->Execute('show engine innodb status');
 
-        if (isset($savem)) $this->conn->SetFetchMode($savem);
+        if (isset($savem)) {
+            $this->conn->SetFetchMode($savem);
+        }
         $ADODB_FETCH_MODE = $save;
 
-        if (!$rs || $rs->EOF) return 0;
+        if (!$rs || $rs->EOF) {
+            return 0;
+        }
         $stat = $rs->fields[0];
         $rs->Close();
         $at = strpos($stat, 'Buffer pool hit rate');
@@ -271,44 +304,52 @@ class perf_mysql extends adodb_perf
             $_SESSION['INNODB_HIT_PCT'] = $val;
             return round($val, 2);
         } else {
-            if (isset($_SESSION['INNODB_HIT_PCT'])) return $_SESSION['INNODB_HIT_PCT'];
+            if (isset($_SESSION['INNODB_HIT_PCT'])) {
+                return $_SESSION['INNODB_HIT_PCT'];
+            }
             return 0;
         }
         return 0;
     }
 
-    function GetKeyHitRatio()
+    public function GetKeyHitRatio()
     {
         $hits = $this->_DBParameter(array("show status", "Key_read_requests"));
         $reqs = $this->_DBParameter(array("show status", "Key_reads"));
-        if ($reqs == 0) return 0;
+        if ($reqs == 0) {
+            return 0;
+        }
 
         return round(($hits / ($reqs + $hits)) * 100, 2);
     }
 
     // start hack
-    var $optimizeTableLow = 'CHECK TABLE %s FAST QUICK';
-    var $optimizeTableHigh = 'OPTIMIZE TABLE %s';
+    public $optimizeTableLow = 'CHECK TABLE %s FAST QUICK';
+    public $optimizeTableHigh = 'OPTIMIZE TABLE %s';
 
     /**
      * @see adodb_perf#optimizeTable
      */
-    function optimizeTable($table, $mode = ADODB_OPT_LOW)
+    public function optimizeTable($table, $mode = ADODB_OPT_LOW)
     {
-        if (!is_string($table)) return false;
+        if (!is_string($table)) {
+            return false;
+        }
 
         $conn = $this->conn;
-        if (!$conn) return false;
+        if (!$conn) {
+            return false;
+        }
 
         $sql = '';
         switch ($mode) {
-            case ADODB_OPT_LOW :
+            case ADODB_OPT_LOW:
                 $sql = $this->optimizeTableLow;
                 break;
-            case ADODB_OPT_HIGH :
+            case ADODB_OPT_HIGH:
                 $sql = $this->optimizeTableHigh;
                 break;
-            default :
+            default:
             {
                 // May dont use __FUNCTION__ constant for BC (__FUNCTION__ Added in PHP 4.3.0)
                 ADOConnection::outp(sprintf("<p>%s: '%s' using of undefined mode '%s'</p>", __CLASS__, __FUNCTION__, $mode));

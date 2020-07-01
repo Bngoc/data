@@ -1,4 +1,4 @@
-﻿<?php die('Direct call - access denied'); ?>
+<?php die('Direct call - access denied'); ?>
 330000FC1E7A000000E0000000000000|Sky Event +5|1400|skyevent.jpg|
 30000AFC1E7A000000D0000000000000|Kalima 7|1000|Kalima.jpg|
 1240FFFC1E7A000000D0000000000000|Áo tàng hình +8|800|VeBC.jpg|

@@ -23,11 +23,12 @@ define('ROOT_ADMIN', __DIR__);
 define('SERVDIR', dirname(dirname(__FILE__)));
 define('ROOT', dirname(dirname(dirname(__FILE__))));
 define('MODULE_DIR', SERVDIR . '/core/modules');
-define('SKIN', SERVDIR . '/cdata');
-define('CN_DEBUG', FALSE);
+define('SKIN', SERVDIR . '/view_admin');
+//define('VIEW_ADMIN', SERVDIR . '/view_admin');
+define('CN_DEBUG', false);
 //define('URL_PATH', 		cn_path_uri());  //custom by bqn
-define('URL_PATH_', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn ===>root
-define('URL_PATH', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . dirname($_SERVER['SCRIPT_NAME']) . '/admin');  //custom by bqn===>admin
+define('URL_PATH_', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . dirname($_SERVER['SCRIPT_NAME']));
+define('URL_PATH', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . dirname($_SERVER['SCRIPT_NAME']) . '/admin');
 define('PHP_SELF', $_SERVER["SCRIPT_NAME"]);
 
 // include necessary libs
@@ -48,8 +49,7 @@ $_CN_cache_block_id = array();
 $_CN_cache_block_dt = array();
 
 // Define ALL privileges and behaviors
-$_CN_access = array
-(
+$_CN_access = array(
     // configs
     'C' => 'Cd,Cvm,Csc,Cp,Cc,Ct,Ciw,Cmm,Cum,Cg,Cb,Ca,Cbi,Caf,Crw,Csl,Cwp,Cmt,Cpc,Can,Cvn,Ccv,Cen,Clc,Csr,Com,Aci,Arm,Win,Rin,Shi,Cro,Wea,Sce,Sta,Spe,Fen,Tic,Ocas',
     // news
@@ -66,25 +66,26 @@ global $coreAdmin;
 // v2.0 init sections
 $is_config = $coreAdmin->cn_config_load();
 
+// Database
+$coreAdmin->cn_db_init();
 
-$coreAdmin->cn_db_init(); //database
 //cn_rewrite_load(); //??
+// Checking existing configuration
+if ($is_config) {
+    cn_lang_init();
+    //cn_load_plugins();
+    //cn_online_counter();
+}
 
 $coreAdmin->cn_parse_url();
 $coreAdmin->cn_detect_user_ip();
 $coreAdmin->cn_load_session();
 $coreAdmin->cn_relocation_db();
 
-// 2.0.3 checking existing configuration
-if ($is_config) {
-    //cn_load_plugins();
-    //cn_online_counter();
-}
-
 //cn_require_install();
 if (!db_installed_check()) {
     $coreAdmin->cn_require_install();
-};
+}
 
 // load modules
 include SERVDIR . '/core/modules/init.php';

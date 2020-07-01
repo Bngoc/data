@@ -25,13 +25,19 @@ if ($errors_result) {
         <tr>
             <td>Thay đổi</td>
             <td colspan=""><label for="radio1"><input id="radio1" type="radio"
-                                                      name="cars" <?php if ($tabActive == 'Q') echo 'checked'; ?>
+                                                      name="cars" <?php if ($tabActive == 'Q') {
+                        echo 'checked';
+                    } ?>
                                                       value="Q"/> Câu hỏi bí mật </label></td>
             <td><label for="radio2"><input id="radio2" type="radio"
-                                           name="cars" <?php if ($tabActive == 'A') echo 'checked'; ?> value="A"/> Câu
+                                           name="cars" <?php if ($tabActive == 'A') {
+                        echo 'checked';
+                    } ?> value="A"/> Câu
                     trả lại bí mật </label></td>
         </tr>
-        <tr id="Cars-Q" class="desc" <?php if ($tabActive != 'Q') echo 'style="display:none"'; ?>>
+        <tr id="Cars-Q" class="desc" <?php if ($tabActive != 'Q') {
+            echo 'style="display:none"';
+        } ?>>
             <td class="bizwebform_col_1">Câu hỏi bí mật mới <span class="required">*</span></td>
             <td class="bizwebform_col_2">
                 <select size="1" name="cnameQuestion" id="bizwebselect"
@@ -48,7 +54,9 @@ if ($errors_result) {
             </td>
             <td class="bizwebform_col_3" id="checkQuestionID"></td>
         </tr>
-        <tr id="Cars-A" class="desc" <?php if ($tabActive != 'A') echo 'style="display:none"'; ?>>
+        <tr id="Cars-A" class="desc" <?php if ($tabActive != 'A') {
+            echo 'style="display:none"';
+        } ?>>
             <td class="bizwebform_col_1">Câu trả lại bí mật mới <span class="required">*</span></td>
             <td class="bizwebform_col_2"><input name="cnameAnswer" class="bizwebform" type="text" maxlength="15"
                                                 autocomplete="off" onchange="checkAnswer(this.value, 'answerID');"

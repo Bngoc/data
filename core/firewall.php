@@ -19,7 +19,9 @@ if (!$_GET['adsess'] || !$bot_safe) {
         if (!empty($destination_ready) && !empty($_SESSION['temp'])) {
             $Domain_Allowed = 0;
             foreach ($Forum_domain as $Domain) {
-                if (strpos($_SERVER['HTTP_REFERER'], $Domain) !== false) $Domain_Allowed++;
+                if (strpos($_SERVER['HTTP_REFERER'], $Domain) !== false) {
+                    $Domain_Allowed++;
+                }
             }
             if ($Domain_Allowed > 0) {
                 $_SESSION['firewall'] = 'ready';
@@ -39,7 +41,9 @@ if (!$_GET['adsess'] || !$bot_safe) {
 function check_cookie()
 {
     if (setcookie("test", "test", time() + 360)) {
-        if (isset ($_COOKIE['test'])) return true;
+        if (isset($_COOKIE['test'])) {
+            return true;
+        }
     }
     return false;
 }
@@ -73,7 +77,9 @@ function check_bot()
         $get_user_agent = $HTTP_SERVER_VARS['HTTP_USER_AGENT'];
     }
     for ($i = 0; $i <= count($apps); $i++) {
-        if (stristr($get_user_agent, $apps[$i]) && check_cookie() == false) return true;
+        if (stristr($get_user_agent, $apps[$i]) && check_cookie() == false) {
+            return true;
+        }
     }
 }
 
@@ -105,10 +111,12 @@ function check_flood($path)
     $pass = 0;
     # Take a small check
     $blocktime = check_log($path . '.lock', 'rb');
-    if ($blocktime == 'banned') print_error("Địa chỉ IP <font color='red'>{$conf['addr']}</font> đã bị khóa do gửi quá nhiều truy cập.<br>Hãy liên hệ BQT để kích hoạt sử dụng.");
-    else if ($blocktime > 0) {
-        if (($conf['now'] - $blocktime) <= $conf['blocktime']) print_error("Phát hiện hành vi tấn công!<br>Hãy đợi ít nhất <font color='red'>{$conf['blocktime']} giây</font> trước khi sử dụng tiếp (Thời gian đã khóa: " . ($conf['now'] - $blocktime) . " giây).");
-        else {
+    if ($blocktime == 'banned') {
+        print_error("Địa chỉ IP <font color='red'>{$conf['addr']}</font> đã bị khóa do gửi quá nhiều truy cập.<br>Hãy liên hệ BQT để kích hoạt sử dụng.");
+    } elseif ($blocktime > 0) {
+        if (($conf['now'] - $blocktime) <= $conf['blocktime']) {
+            print_error("Phát hiện hành vi tấn công!<br>Hãy đợi ít nhất <font color='red'>{$conf['blocktime']} giây</font> trước khi sử dụng tiếp (Thời gian đã khóa: " . ($conf['now'] - $blocktime) . " giây).");
+        } else {
             $pass = 1;
             check_log($path . '.lock');
         }
@@ -122,7 +130,9 @@ function check_flood($path)
             $count = 0;
             $cache = explode(',', $content);
             for ($i = 1; $i <= count($cache); $i++) {
-                if (($cache[$i] - $cache[$i - 1]) <= $conf['interval']) $count++;
+                if (($cache[$i] - $cache[$i - 1]) <= $conf['interval']) {
+                    $count++;
+                }
             }
             if ($count >= $conf['requests']) {
                 # Check the number of attack
@@ -137,10 +147,15 @@ function check_flood($path)
                     exit();
                 }
             }
-        } else $pass = 0;
+        } else {
+            $pass = 0;
+        }
     }
-    if ($pass) check_log($path);
-    else check_log($path, 'a', $conf['now'] . ',');
+    if ($pass) {
+        check_log($path);
+    } else {
+        check_log($path, 'a', $conf['now'] . ',');
+    }
 }
 
 function check_log($path, $mode = 'w', $str = '')
@@ -148,8 +163,12 @@ function check_log($path, $mode = 'w', $str = '')
     $buffer = '';
     if ($FH = @fopen($path, $mode)) {
         if ($mode == 'rb') {
-            while (!@feof($FH)) $buffer .= @fgets($FH, 1024);
-        } else @fwrite($FH, $str);
+            while (!@feof($FH)) {
+                $buffer .= @fgets($FH, 1024);
+            }
+        } else {
+            @fwrite($FH, $str);
+        }
         @fclose($FH);
         @chmod($path, 0777);
     }
@@ -164,7 +183,9 @@ function fetch_ip()
     if ($do_check) {
         foreach (array_reverse(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])) as $x_f) {
             $x_f = trim($x_f);
-            if (preg_match('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/', $x_f)) $addrs[] = $x_f;
+            if (preg_match('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/', $x_f)) {
+                $addrs[] = $x_f;
+            }
         }
         $addrs[] = $_SERVER['HTTP_CLIENT_IP'];
         $addrs[] = $_SERVER['HTTP_PROXY_USER'];
@@ -174,21 +195,32 @@ function fetch_ip()
         if ($v) {
             preg_match("/^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$/", $v, $match);
             $ip = $match[1] . '.' . $match[2] . '.' . $match[3] . '.' . $match[4];
-            if ($ip && $ip != '...') break;
+            if ($ip && $ip != '...') {
+                break;
+            }
         }
     }
-    if (!$ip || $ip == '...') print_error("Không thể xác định địa chỉ IP của bạn.");
+    if (!$ip || $ip == '...') {
+        print_error("Không thể xác định địa chỉ IP của bạn.");
+    }
     return $ip;
 }
 
 function fetch_url()
 {
-    if ($_SERVER['REQUEST_URI'] || $_ENV['REQUEST_URI']) $url = $_SERVER['REQUEST_URI'] ? $_SERVER['REQUEST_URI'] : $_ENV['REQUEST_URI'];
-    else {
-        if ($_SERVER['PATH_INFO'] || $_ENV['PATH_INFO']) $url = $_SERVER['PATH_INFO'] ? $_SERVER['PATH_INFO'] : $_ENV['PATH_INFO'];
-        else if ($_SERVER['REDIRECT_URL'] || $_ENV['REDIRECT_URL']) $url = $_SERVER['REDIRECT_URL'] ? $_SERVER['REDIRECT_URL'] : $_ENV['REDIRECT_URL'];
-        else $url = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_ENV['PHP_SELF'];
-        if ($_SERVER['QUERY_STRING'] || $_ENV['QUERY_STRING']) $url .= '?' . ($_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_ENV['QUERY_STRING']);
+    if ($_SERVER['REQUEST_URI'] || $_ENV['REQUEST_URI']) {
+        $url = $_SERVER['REQUEST_URI'] ? $_SERVER['REQUEST_URI'] : $_ENV['REQUEST_URI'];
+    } else {
+        if ($_SERVER['PATH_INFO'] || $_ENV['PATH_INFO']) {
+            $url = $_SERVER['PATH_INFO'] ? $_SERVER['PATH_INFO'] : $_ENV['PATH_INFO'];
+        } elseif ($_SERVER['REDIRECT_URL'] || $_ENV['REDIRECT_URL']) {
+            $url = $_SERVER['REDIRECT_URL'] ? $_SERVER['REDIRECT_URL'] : $_ENV['REDIRECT_URL'];
+        } else {
+            $url = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_ENV['PHP_SELF'];
+        }
+        if ($_SERVER['QUERY_STRING'] || $_ENV['QUERY_STRING']) {
+            $url .= '?' . ($_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_ENV['QUERY_STRING']);
+        }
     }
     $url = preg_replace('/s=[a-z0-9]{32}?&?/', '', $url);
     $url = preg_replace('/&(?!#[0-9]+;)/si', '&amp;', $url);
@@ -234,5 +266,3 @@ function print_error($msg)
 	</html>";
     exit();
 }
-
-?>

@@ -7,7 +7,9 @@ session_start();
 
 if (isset($_GET)) {
     foreach ($_GET as $k => $v) {
-        if (strncmp($k, 'test', 4) == 0) $_SESSION['_db'] = $k;
+        if (strncmp($k, 'test', 4) == 0) {
+            $_SESSION['_db'] = $k;
+        }
     }
 }
 
@@ -23,7 +25,9 @@ include_once('testdatabases.inc.php');
 
 function testdb($db)
 {
-    if (!$db) return;
+    if (!$db) {
+        return;
+    }
     echo "<font size=1>";
     print_r($db->ServerInfo());
     echo " user=" . $db->user . "</font>";
@@ -46,5 +50,7 @@ function testdb($db)
         die();
     }
 
-    if ($perf) $perf->UI(3);
+    if ($perf) {
+        $perf->UI(3);
+    }
 }

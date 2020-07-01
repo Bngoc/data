@@ -12,16 +12,17 @@
  */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 class ADODB2_informix extends ADODB_DataDict
 {
+    public $databaseType = 'informix';
+    public $seqField = false;
 
-    var $databaseType = 'informix';
-    var $seqField = false;
 
-
-    function ActualType($meta)
+    public function ActualType($meta)
     {
         switch ($meta) {
             case 'C':
@@ -66,31 +67,40 @@ class ADODB2_informix extends ADODB_DataDict
         }
     }
 
-    function AlterColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
+    public function AlterColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
     {
-        if ($this->debug) ADOConnection::outp("AlterColumnSQL not supported");
+        if ($this->debug) {
+            ADOConnection::outp("AlterColumnSQL not supported");
+        }
         return array();
     }
 
 
-    function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
+    public function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
     {
-        if ($this->debug) ADOConnection::outp("DropColumnSQL not supported");
+        if ($this->debug) {
+            ADOConnection::outp("DropColumnSQL not supported");
+        }
         return array();
     }
 
     // return string must begin with space
-    function _CreateSuffix($fname, &$ftype, $fnotnull, $fdefault, $fautoinc, $fconstraint, $funsigned)
+    public function _CreateSuffix($fname, &$ftype, $fnotnull, $fdefault, $fautoinc, $fconstraint, $funsigned)
     {
         if ($fautoinc) {
             $ftype = 'SERIAL';
             return '';
         }
         $suffix = '';
-        if (strlen($fdefault)) $suffix .= " DEFAULT $fdefault";
-        if ($fnotnull) $suffix .= ' NOT NULL';
-        if ($fconstraint) $suffix .= ' ' . $fconstraint;
+        if (strlen($fdefault)) {
+            $suffix .= " DEFAULT $fdefault";
+        }
+        if ($fnotnull) {
+            $suffix .= ' NOT NULL';
+        }
+        if ($fconstraint) {
+            $suffix .= ' ' . $fconstraint;
+        }
         return $suffix;
     }
-
 }

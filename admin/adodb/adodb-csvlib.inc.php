@@ -1,7 +1,9 @@
 <?php
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 global $ADODB_INCLUDED_CSV;
 $ADODB_INCLUDED_CSV = 1;
@@ -37,15 +39,18 @@ function _rs2serialize(&$rs, $conn = false, $sql = '')
 {
     $max = ($rs) ? $rs->FieldCount() : 0;
 
-    if ($sql) $sql = urlencode($sql);
+    if ($sql) {
+        $sql = urlencode($sql);
+    }
     // metadata setup
 
     if ($max <= 0 || $rs->dataProvider == 'empty') { // is insert/update/delete
         if (is_object($conn)) {
             $sql .= ',' . $conn->Affected_Rows();
             $sql .= ',' . $conn->Insert_ID();
-        } else
+        } else {
             $sql .= ',,';
+        }
 
         $text = "====-1,0,$sql\n";
         return $text;
@@ -118,7 +123,6 @@ function csv2rs($url, &$err, $timeout = 0, $rsclass = 'ADORecordSet_array')
         // $meta[1] contains a time
 
         if (strncmp($meta[0], '====', 4) === 0) {
-
             if ($meta[0] == "====-1") {
                 if (sizeof($meta) < 5) {
                     $err = "Corrupt first line for format -1";
@@ -182,7 +186,6 @@ function csv2rs($url, &$err, $timeout = 0, $rsclass = 'ADORecordSet_array')
                                 $err = "Timeout 0";
                                 return $false;
                         } // switch
-
                     } // if check flush cache
                 }// (timeout>0)
                 $ttl = $meta[1];
@@ -201,8 +204,9 @@ function csv2rs($url, &$err, $timeout = 0, $rsclass = 'ADORecordSet_array')
                 }
                 fclose($fp);
                 $rs = unserialize($text);
-                if (is_object($rs)) $rs->timeCreated = $ttl;
-                else {
+                if (is_object($rs)) {
+                    $rs->timeCreated = $ttl;
+                } else {
                     $err = "Unable to unserialize recordset";
                     //echo htmlspecialchars($text),' !--END--!<p>';
                 }
@@ -252,7 +256,9 @@ function csv2rs($url, &$err, $timeout = 0, $rsclass = 'ADORecordSet_array')
     //var_dump($arr);
     if (!is_array($arr)) {
         $err = "Recordset had unexpected EOF (in serialized recordset)";
-        if (get_magic_quotes_runtime()) $err .= ". Magic Quotes Runtime should be disabled!";
+        if (get_magic_quotes_runtime()) {
+            $err .= ". Magic Quotes Runtime should be disabled!";
+        }
         return $false;
     }
     $rs = new $rsclass();
@@ -284,9 +290,14 @@ function adodb_write_file($filename, $contents, $debug = false)
         $mtime = substr(str_replace(' ', '_', microtime()), 2);
         // getmypid() actually returns 0 on Win98 - never mind!
         $tmpname = $filename . uniqid($mtime) . getmypid();
-        if (!($fd = @fopen($tmpname, 'w'))) return false;
-        if (fwrite($fd, $contents)) $ok = true;
-        else $ok = false;
+        if (!($fd = @fopen($tmpname, 'w'))) {
+            return false;
+        }
+        if (fwrite($fd, $contents)) {
+            $ok = true;
+        } else {
+            $ok = false;
+        }
         fclose($fd);
 
         if ($ok) {
@@ -298,20 +309,29 @@ function adodb_write_file($filename, $contents, $debug = false)
                 $ok = 0;
             }
             if (!$ok) {
-                if ($debug) ADOConnection::outp(" Rename $tmpname " . ($ok ? 'ok' : 'failed'));
+                if ($debug) {
+                    ADOConnection::outp(" Rename $tmpname " . ($ok ? 'ok' : 'failed'));
+                }
             }
         }
         return $ok;
     }
-    if (!($fd = @fopen($filename, 'a'))) return false;
+    if (!($fd = @fopen($filename, 'a'))) {
+        return false;
+    }
     if (flock($fd, LOCK_EX) && ftruncate($fd, 0)) {
-        if (fwrite($fd, $contents)) $ok = true;
-        else $ok = false;
+        if (fwrite($fd, $contents)) {
+            $ok = true;
+        } else {
+            $ok = false;
+        }
         fclose($fd);
         @chmod($filename, 0644);
     } else {
         fclose($fd);
-        if ($debug) ADOConnection::outp(" Failed acquiring lock for $filename<br>\n");
+        if ($debug) {
+            ADOConnection::outp(" Failed acquiring lock for $filename<br>\n");
+        }
         $ok = false;
     }
 

@@ -18,27 +18,29 @@
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 class ADODB_sqlite extends ADOConnection
 {
-    var $databaseType = "sqlite";
-    var $replaceQuote = "''"; // string to use to replace quotes
-    var $concat_operator = '||';
-    var $_errorNo = 0;
-    var $hasLimit = true;
-    var $hasInsertID = true;        /// supports autoincrement ID?
-    var $hasAffectedRows = true;    /// supports affected rows for update/delete?
-    var $metaTablesSQL = "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name";
-    var $sysDate = "adodb_date('Y-m-d')";
-    var $sysTimeStamp = "adodb_date('Y-m-d H:i:s')";
-    var $fmtTimeStamp = "'Y-m-d H:i:s'";
+    public $databaseType = "sqlite";
+    public $replaceQuote = "''"; // string to use to replace quotes
+    public $concat_operator = '||';
+    public $_errorNo = 0;
+    public $hasLimit = true;
+    public $hasInsertID = true;        /// supports autoincrement ID?
+    public $hasAffectedRows = true;    /// supports affected rows for update/delete?
+    public $metaTablesSQL = "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name";
+    public $sysDate = "adodb_date('Y-m-d')";
+    public $sysTimeStamp = "adodb_date('Y-m-d H:i:s')";
+    public $fmtTimeStamp = "'Y-m-d H:i:s'";
 
-    function __construct()
+    public function __construct()
     {
     }
 
-    function ServerInfo()
+    public function ServerInfo()
     {
         $arr['version'] = sqlite_libversion();
         $arr['description'] = 'SQLite ';
@@ -46,7 +48,7 @@ class ADODB_sqlite extends ADOConnection
         return $arr;
     }
 
-    function BeginTrans()
+    public function BeginTrans()
     {
         if ($this->transOff) {
             return true;
@@ -56,7 +58,7 @@ class ADODB_sqlite extends ADOConnection
         return true;
     }
 
-    function CommitTrans($ok = true)
+    public function CommitTrans($ok = true)
     {
         if ($this->transOff) {
             return true;
@@ -71,7 +73,7 @@ class ADODB_sqlite extends ADOConnection
         return !empty($ret);
     }
 
-    function RollbackTrans()
+    public function RollbackTrans()
     {
         if ($this->transOff) {
             return true;
@@ -84,7 +86,7 @@ class ADODB_sqlite extends ADOConnection
     }
 
     // mark newnham
-    function MetaColumns($table, $normalize = true)
+    public function MetaColumns($table, $normalize = true)
     {
         global $ADODB_FETCH_MODE;
         $false = false;
@@ -130,23 +132,23 @@ class ADODB_sqlite extends ADOConnection
         return $arr;
     }
 
-    function _init($parentDriver)
+    public function _init($parentDriver)
     {
         $parentDriver->hasTransactions = false;
         $parentDriver->hasInsertID = true;
     }
 
-    function _insertid()
+    public function _insertid()
     {
         return sqlite_last_insert_rowid($this->_connectionID);
     }
 
-    function _affectedrows()
+    public function _affectedrows()
     {
         return sqlite_changes($this->_connectionID);
     }
 
-    function ErrorMsg()
+    public function ErrorMsg()
     {
         if ($this->_logsql) {
             return $this->_errorMsg;
@@ -154,19 +156,19 @@ class ADODB_sqlite extends ADOConnection
         return ($this->_errorNo) ? sqlite_error_string($this->_errorNo) : '';
     }
 
-    function ErrorNo()
+    public function ErrorNo()
     {
         return $this->_errorNo;
     }
 
-    function SQLDate($fmt, $col = false)
+    public function SQLDate($fmt, $col = false)
     {
         $fmt = $this->qstr($fmt);
         return ($col) ? "adodb_date2($fmt,$col)" : "adodb_date($fmt)";
     }
 
 
-    function _createFunctions()
+    public function _createFunctions()
     {
         @sqlite_create_function($this->_connectionID, 'adodb_date', 'adodb_date', 1);
         @sqlite_create_function($this->_connectionID, 'adodb_date2', 'adodb_date2', 2);
@@ -174,7 +176,7 @@ class ADODB_sqlite extends ADOConnection
 
 
     // returns true or false
-    function _connect($argHostname, $argUsername, $argPassword, $argDatabasename)
+    public function _connect($argHostname, $argUsername, $argPassword, $argDatabasename)
     {
         if (!function_exists('sqlite_open')) {
             return null;
@@ -192,7 +194,7 @@ class ADODB_sqlite extends ADOConnection
     }
 
     // returns true or false
-    function _pconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
+    public function _pconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
     {
         if (!function_exists('sqlite_open')) {
             return null;
@@ -210,7 +212,7 @@ class ADODB_sqlite extends ADOConnection
     }
 
     // returns query ID if successful, otherwise false
-    function _query($sql, $inputarr = false)
+    public function _query($sql, $inputarr = false)
     {
         $rez = sqlite_query($sql, $this->_connectionID);
         if (!$rez) {
@@ -225,7 +227,7 @@ class ADODB_sqlite extends ADOConnection
         return $rez;
     }
 
-    function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
+    public function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
     {
         $offsetStr = ($offset >= 0) ? " OFFSET $offset" : '';
         $limitStr = ($nrows >= 0) ? " LIMIT $nrows" : ($offset >= 0 ? ' LIMIT 999999999' : '');
@@ -244,9 +246,9 @@ class ADODB_sqlite extends ADOConnection
 
         Will return false if unable to generate an ID after $MAXLOOPS attempts.
     */
-    var $_genSeqSQL = "create table %s (id integer)";
+    public $_genSeqSQL = "create table %s (id integer)";
 
-    function GenID($seq = 'adodbseq', $start = 1)
+    public function GenID($seq = 'adodbseq', $start = 1)
     {
         // if you have to modify the parameter below, your database is overloaded,
         // or you need to implement generation of id's yourself!
@@ -277,7 +279,7 @@ class ADODB_sqlite extends ADOConnection
         return false;
     }
 
-    function CreateSequence($seqname = 'adodbseq', $start = 1)
+    public function CreateSequence($seqname = 'adodbseq', $start = 1)
     {
         if (empty($this->_genSeqSQL)) {
             return false;
@@ -290,9 +292,9 @@ class ADODB_sqlite extends ADOConnection
         return $this->Execute("insert into $seqname values($start)");
     }
 
-    var $_dropSeqSQL = 'drop table %s';
+    public $_dropSeqSQL = 'drop table %s';
 
-    function DropSequence($seqname = 'adodbseq')
+    public function DropSequence($seqname = 'adodbseq')
     {
         if (empty($this->_dropSeqSQL)) {
             return false;
@@ -301,20 +303,20 @@ class ADODB_sqlite extends ADOConnection
     }
 
     // returns true or false
-    function _close()
+    public function _close()
     {
         return @sqlite_close($this->_connectionID);
     }
 
-    function MetaIndexes($table, $primary = FALSE, $owner = false)
+    public function MetaIndexes($table, $primary = false, $owner = false)
     {
         $false = false;
         // save old fetch mode
         global $ADODB_FETCH_MODE;
         $save = $ADODB_FETCH_MODE;
         $ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-        if ($this->fetchMode !== FALSE) {
-            $savem = $this->SetFetchMode(FALSE);
+        if ($this->fetchMode !== false) {
+            $savem = $this->SetFetchMode(false);
         }
         $SQL = sprintf("SELECT name,sql FROM sqlite_master WHERE type='index' AND tbl_name='%s'", strtolower($table));
         $rs = $this->Execute($SQL);
@@ -354,22 +356,19 @@ class ADODB_sqlite extends ADOConnection
         }
         return $indexes;
     }
-
 }
 
 /*--------------------------------------------------------------------------------------
-		Class Name: Recordset
+        Class Name: Recordset
 --------------------------------------------------------------------------------------*/
 
 class ADORecordset_sqlite extends ADORecordSet
 {
+    public $databaseType = "sqlite";
+    public $bind = false;
 
-    var $databaseType = "sqlite";
-    var $bind = false;
-
-    function __construct($queryID, $mode = false)
+    public function __construct($queryID, $mode = false)
     {
-
         if ($mode === false) {
             global $ADODB_FETCH_MODE;
             $mode = $ADODB_FETCH_MODE;
@@ -405,7 +404,7 @@ class ADORecordset_sqlite extends ADORecordSet
     }
 
 
-    function FetchField($fieldOffset = -1)
+    public function FetchField($fieldOffset = -1)
     {
         $fld = new ADOFieldObject;
         $fld->name = sqlite_field_name($this->_queryID, $fieldOffset);
@@ -414,13 +413,13 @@ class ADORecordset_sqlite extends ADORecordSet
         return $fld;
     }
 
-    function _initrs()
+    public function _initrs()
     {
         $this->_numOfRows = @sqlite_num_rows($this->_queryID);
         $this->_numOfFields = @sqlite_num_fields($this->_queryID);
     }
 
-    function Fields($colname)
+    public function Fields($colname)
     {
         if ($this->fetchMode != SQLITE_NUM) {
             return $this->fields[$colname];
@@ -436,19 +435,18 @@ class ADORecordset_sqlite extends ADORecordSet
         return $this->fields[$this->bind[strtoupper($colname)]];
     }
 
-    function _seek($row)
+    public function _seek($row)
     {
         return sqlite_seek($this->_queryID, $row);
     }
 
-    function _fetch($ignore_fields = false)
+    public function _fetch($ignore_fields = false)
     {
         $this->fields = @sqlite_fetch_array($this->_queryID, $this->fetchMode);
         return !empty($this->fields);
     }
 
-    function _close()
+    public function _close()
     {
     }
-
 }

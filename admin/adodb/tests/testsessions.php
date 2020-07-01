@@ -61,9 +61,14 @@ session_start();
 adodb_session_regenerate_id();
 
 ### SETUP SESSION VARIABLES
-if (empty($_SESSION['MONKEY'])) $_SESSION['MONKEY'] = array(1, 'abc', 44.41);
-else $_SESSION['MONKEY'][0] += 1;
-if (!isset($_GET['nochange'])) @$_SESSION['AVAR'] += 1;
+if (empty($_SESSION['MONKEY'])) {
+    $_SESSION['MONKEY'] = array(1, 'abc', 44.41);
+} else {
+    $_SESSION['MONKEY'][0] += 1;
+}
+if (!isset($_GET['nochange'])) {
+    @$_SESSION['AVAR'] += 1;
+}
 
 
 ### START DISPLAY
@@ -82,7 +87,6 @@ var_dump($_SESSION['MONKEY']);
 ### session.cookie_lifetime and session.gc_probability
 
 if (rand() % 5 == 0) {
-
     print "<hr /><p><b>Garbage Collection</b></p>";
     adodb_sess_gc(10);
 

@@ -18,22 +18,26 @@
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 include_once(ADODB_DIR . "/drivers/adodb-mysql.inc.php");
 
 
 class ADODB_mysqlt extends ADODB_mysql
 {
-    var $databaseType = 'mysqlt';
-    var $ansiOuter = true; // for Version 3.23.17 or later
-    var $hasTransactions = true;
-    var $autoRollback = true; // apparently mysql does not autorollback properly
+    public $databaseType = 'mysqlt';
+    public $ansiOuter = true; // for Version 3.23.17 or later
+    public $hasTransactions = true;
+    public $autoRollback = true; // apparently mysql does not autorollback properly
 
-    function __construct()
+    public function __construct()
     {
         global $ADODB_EXTENSION;
-        if ($ADODB_EXTENSION) $this->rsPrefix .= 'ext_';
+        if ($ADODB_EXTENSION) {
+            $this->rsPrefix .= 'ext_';
+        }
     }
 
     /* set transaction mode
@@ -42,61 +46,78 @@ class ADODB_mysqlt extends ADODB_mysql
 { READ UNCOMMITTED | READ COMMITTED | REPEATABLE READ | SERIALIZABLE }
 
     */
-    function SetTransactionMode($transaction_mode)
+    public function SetTransactionMode($transaction_mode)
     {
         $this->_transmode = $transaction_mode;
         if (empty($transaction_mode)) {
             $this->Execute('SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ');
             return;
         }
-        if (!stristr($transaction_mode, 'isolation')) $transaction_mode = 'ISOLATION LEVEL ' . $transaction_mode;
+        if (!stristr($transaction_mode, 'isolation')) {
+            $transaction_mode = 'ISOLATION LEVEL ' . $transaction_mode;
+        }
         $this->Execute("SET SESSION TRANSACTION " . $transaction_mode);
     }
 
-    function BeginTrans()
+    public function BeginTrans()
     {
-        if ($this->transOff) return true;
+        if ($this->transOff) {
+            return true;
+        }
         $this->transCnt += 1;
         $this->Execute('SET AUTOCOMMIT=0');
         $this->Execute('BEGIN');
         return true;
     }
 
-    function CommitTrans($ok = true)
+    public function CommitTrans($ok = true)
     {
-        if ($this->transOff) return true;
-        if (!$ok) return $this->RollbackTrans();
+        if ($this->transOff) {
+            return true;
+        }
+        if (!$ok) {
+            return $this->RollbackTrans();
+        }
 
-        if ($this->transCnt) $this->transCnt -= 1;
+        if ($this->transCnt) {
+            $this->transCnt -= 1;
+        }
         $ok = $this->Execute('COMMIT');
         $this->Execute('SET AUTOCOMMIT=1');
         return $ok ? true : false;
     }
 
-    function RollbackTrans()
+    public function RollbackTrans()
     {
-        if ($this->transOff) return true;
-        if ($this->transCnt) $this->transCnt -= 1;
+        if ($this->transOff) {
+            return true;
+        }
+        if ($this->transCnt) {
+            $this->transCnt -= 1;
+        }
         $ok = $this->Execute('ROLLBACK');
         $this->Execute('SET AUTOCOMMIT=1');
         return $ok ? true : false;
     }
 
-    function RowLock($tables, $where = '', $col = '1 as adodbignore')
+    public function RowLock($tables, $where = '', $col = '1 as adodbignore')
     {
-        if ($this->transCnt == 0) $this->BeginTrans();
-        if ($where) $where = ' where ' . $where;
+        if ($this->transCnt == 0) {
+            $this->BeginTrans();
+        }
+        if ($where) {
+            $where = ' where ' . $where;
+        }
         $rs = $this->Execute("select $col from $tables $where for update");
         return !empty($rs);
     }
-
 }
 
 class ADORecordSet_mysqlt extends ADORecordSet_mysql
 {
-    var $databaseType = "mysqlt";
+    public $databaseType = "mysqlt";
 
-    function __construct($queryID, $mode = false)
+    public function __construct($queryID, $mode = false)
     {
         if ($mode === false) {
             global $ADODB_FETCH_MODE;
@@ -122,7 +143,7 @@ class ADORecordSet_mysqlt extends ADORecordSet_mysql
         parent::__construct($queryID);
     }
 
-    function MoveNext()
+    public function MoveNext()
     {
         if (@$this->fields = mysql_fetch_array($this->_queryID, $this->fetchMode)) {
             $this->_currentRow += 1;
@@ -138,13 +159,12 @@ class ADORecordSet_mysqlt extends ADORecordSet_mysql
 
 class ADORecordSet_ext_mysqlt extends ADORecordSet_mysqlt
 {
-
-    function ADORecordSet_ext_mysqlt($queryID, $mode = false)
+    public function ADORecordSet_ext_mysqlt($queryID, $mode = false)
     {
         parent::__construct($queryID, $mode);
     }
 
-    function MoveNext()
+    public function MoveNext()
     {
         return adodb_movenext($this);
     }

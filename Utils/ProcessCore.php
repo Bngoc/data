@@ -1,8 +1,14 @@
 <?php
 require_once __DIR__ . '/Core.php';
 
+
 class ProcessCore extends Core
 {
+
+    public function __construct()
+    {
+        parent::getConfig();
+    }
 
     function cn_load_session()
     {
@@ -252,7 +258,7 @@ class ProcessCore extends Core
     // Since 1.5.0: Hash type MD5 and SHA256
     function hash_generate($password, $md5hash = false)
     {
-        return array (
+        return array(
             0 => md5($password),
             1 => $this->utf8decrypt($password, $md5hash),
             2 => SHA256_hash($password),
@@ -273,44 +279,6 @@ class ProcessCore extends Core
         return $pass;
     }
 
-    // Since 2.0: Decode "defaults/templates" to list
-    function cn_template_list()
-    {
-        $config = file($this->cn_path_construct(SKIN, 'defaults') . 'character.tpl');
-
-        foreach ($config as $line) {
-            $line_ = trim($line);
-            $lineComent = substr($line_, 0, 2);
-            if (count($line_) === 0 || $line_ === '' || $lineComent == '//') {// || preg_match('/\s/', $line[0])){
-                continue;
-            }
-
-            if ($line_[0] === '#') {
-                continue;
-            }
-            if ($line_[0] == '*') {
-                $_tpl_var = trim(substr($line_, 1));
-                //if ($_tpl_var) $cfg[$template_vars][$_tpl_var] = ''; // lay ten *
-                if ($_tpl_var) {
-                    if (!isset($templates[$_tpl_var])) $templates[$_tpl_var] = array();
-                    $template_vars_name = $_tpl_var;
-                }
-                continue;
-            } else if ($line_[0] !== '@') {//preg_match('/\s/', $line[0]) && $line_[0] !== ''){
-                list($name_, $value_get) = explode('=', $line_);
-                $value_ = str_replace('_', ' ', $value_get);
-                if (!isset($templates[$_tpl_var][$name_])) {
-                    $templates[$_tpl_var][$name_] = $value_;
-                }
-            } else if ($line_[0] == '@') {
-                continue;
-            }
-        }
-
-        setoption('#temp_basic', $templates);
-
-        return isset($templates) ? $templates : array();
-    }
 
 //// Since 2.0: Read file (or create file)
 //    function cn_read_file($target)
@@ -392,43 +360,43 @@ class ProcessCore extends Core
     }
 
 // bqn relocation => $db + server
-    function cnRelocation_db()
-    {
-        global $db_new, $config_adminemail, $config_admin;
-        $type_connect = $this->getOption('type_connect');
-        $localhost = $this->getOption('localhost');
-        $databaseuser = $this->getOption('databaseuser');
-        $databsepassword = $this->getOption('databsepassword');
-        $d_base = $this->getOption('d_base');
-
-        if (!$type_connect || !$localhost || !$databaseuser || !$databsepassword || !$d_base) {
-            session_unset();
-            session_destroy();
-            $this->cn_db_installed();
-        }
-
-        $config_admin = "BUI NGOC";
-        $config_adminemail = "ngoctbhy@gmail.com";
-
-        include_once(SERVDIR . '/adodb/adodb.inc.php');
-
-        if ($type_connect == 'odbc') {
-            $db_new = ADONewConnection('odbc');
-            $database_ = "Driver={SQL Server};Server={$localhost};Database={$d_base}";
-            $connect_mssql = $db_new->Connect($database_, $databaseuser, $databsepassword);
-            $db_new->SetFetchMode(ADODB_ASSOC_CASE);
-            if (!$connect_mssql) die('Kết nối với SQL Server lỗi!! Hãy kiểm tra lại ODBC tồn tại hoặc User - Pass không đúng.');
-        } else if ($type_connect == 'mssql') {
-            if (extension_loaded('mssql')) echo('');
-            else Die('Lỗi! Không thể load thư viện php_mssql.dll. Hãy cho phép sử dụng php_mssql.dll trong php.ini');
-            $db_new = &ADONewConnection('mssql');
-            $connect_mssql = $db_new->Connect($localhost, $databaseuser, $databsepassword, $d_base);
-            $db_new->SetFetchMode(ADODB_ASSOC_CASE);
-            if (!$connect_mssql) die('Lỗi! Không thể kết nối SQL Server!');
-        } else {
-            die ('Lỗi! Không thể kết nối SQL Server!');
-        }
-    }
+//    function cnRelocation_db()
+//    {
+//        global $db_new, $config_adminemail, $config_admin;
+//        $type_connect = $this->getOption('type_connect');
+//        $localhost = $this->getOption('localhost');
+//        $databaseuser = $this->getOption('databaseuser');
+//        $databsepassword = $this->getOption('databsepassword');
+//        $d_base = $this->getOption('d_base');
+//
+//        if (!$type_connect || !$localhost || !$databaseuser || !$databsepassword || !$d_base) {
+//            session_unset();
+//            session_destroy();
+//            $this->cn_db_installed();
+//        }
+//
+//        $config_admin = $this->config["admin_name"];
+//        $config_adminemail = $this->config["admin_email"];
+//
+//        include_once(SERVDIR . '/adodb/adodb.inc.php');
+//
+//        if ($type_connect == 'odbc') {
+//            $db_new = ADONewConnection('odbc');
+//            $database_ = "Driver={SQL Server};Server={$localhost};Database={$d_base}";
+//            $connect_mssql = $db_new->Connect($database_, $databaseuser, $databsepassword);
+//            $db_new->SetFetchMode(ADODB_ASSOC_CASE);
+//            if (!$connect_mssql) die('Kết nối với SQL Server lỗi!! Hãy kiểm tra lại ODBC tồn tại hoặc User - Pass không đúng.');
+//        } else if ($type_connect == 'mssql') {
+//            if (extension_loaded('mssql')) echo('');
+//            else Die('Lỗi! Không thể load thư viện php_mssql.dll. Hãy cho phép sử dụng php_mssql.dll trong php.ini');
+//            $db_new = &ADONewConnection('mssql');
+//            $connect_mssql = $db_new->Connect($localhost, $databaseuser, $databsepassword, $d_base);
+//            $db_new->SetFetchMode(ADODB_ASSOC_CASE);
+//            if (!$connect_mssql) die('Lỗi! Không thể kết nối SQL Server!');
+//        } else {
+//            die ('Lỗi! Không thể kết nối SQL Server!');
+//        }
+//    }
 
     function cn_check_connect()
     {

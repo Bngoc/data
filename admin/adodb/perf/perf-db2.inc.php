@@ -15,14 +15,16 @@
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 // Simple guide to configuring db2: so-so http://www.devx.com/gethelpon/10MinuteSolution/16575
 
 // SELECT * FROM TABLE(SNAPSHOT_APPL('SAMPLE', -1)) as t
 class perf_db2 extends adodb_perf
 {
-    var $createTableSQL = "CREATE TABLE adodb_logsql (
+    public $createTableSQL = "CREATE TABLE adodb_logsql (
 		  created TIMESTAMP NOT NULL,
 		  sql0 varchar(250) NOT NULL,
 		  sql1 varchar(4000) NOT NULL,
@@ -31,7 +33,7 @@ class perf_db2 extends adodb_perf
 		  timer decimal(16,6) NOT NULL
 		)";
 
-    var $settings = array(
+    public $settings = array(
         'Ratios',
         'data cache hit ratio' => array('RATIO',
             "SELECT
@@ -59,12 +61,12 @@ class perf_db2 extends adodb_perf
     );
 
 
-    function __construct(&$conn)
+    public function __construct(&$conn)
     {
         $this->conn = $conn;
     }
 
-    function Explain($sql, $partial = false)
+    public function Explain($sql, $partial = false)
     {
         $save = $this->conn->LogSQL(false);
         if ($partial) {
@@ -73,17 +75,22 @@ class perf_db2 extends adodb_perf
             if ($arr) {
                 foreach ($arr as $row) {
                     $sql = reset($row);
-                    if (crc32($sql) == $partial) break;
+                    if (crc32($sql) == $partial) {
+                        break;
+                    }
                 }
             }
         }
         $qno = rand();
         $ok = $this->conn->Execute("EXPLAIN PLAN SET QUERYNO=$qno FOR $sql");
         ob_start();
-        if (!$ok) echo "<p>Have EXPLAIN tables been created?</p>";
-        else {
+        if (!$ok) {
+            echo "<p>Have EXPLAIN tables been created?</p>";
+        } else {
             $rs = $this->conn->Execute("select * from explain_statement where queryno=$qno");
-            if ($rs) rs2html($rs);
+            if ($rs) {
+                rs2html($rs);
+            }
         }
         $s = ob_get_contents();
         ob_end_clean();
@@ -99,7 +106,7 @@ class perf_db2 extends adodb_perf
      * @param int $throwaway discarded variable to match the parent method
      * @return string The formatted table list
      */
-    function Tables($throwaway = 0)
+    public function Tables($throwaway = 0)
     {
         $rs = $this->conn->Execute("select tabschema,tabname,card as rows,
 			npages pages_used,fpages pages_allocated, tbspace tablespace

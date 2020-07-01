@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 list($showchar, $mod) = _GL('showchar, mod');
 
@@ -7,7 +7,7 @@ echo cn_snippet_messages();
 
 <!-------------------------------------------------- -->
 <div class="sub_ranking">
-    <?php if ($showchar){
+    <?php if ($showchar) {
     foreach ($showchar
 
     as $kr => $val) { ?>
@@ -64,8 +64,7 @@ echo cn_snippet_messages();
 		</tr>
 	</table>
 <?php }
-                        }
-                        else {
+                        } else {
                             echo '<font color="red"><b>Bạn chưa tạo Nhân vật</b></font>';
                         } ?>
 </div>

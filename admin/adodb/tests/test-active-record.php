@@ -37,7 +37,7 @@ $db->Execute("CREATE TEMPORARY TABLE `children` (
 
 class Person extends ADOdb_Active_Record
 {
-    function ret($v)
+    public function ret($v)
     {
         return $v;
     }
@@ -108,8 +108,9 @@ $person2->save();
 
 if (is_array($c) && sizeof($c) == 3 && $c[0]->name_first == 'Jill' && $c[1]->name_first == 'Joan'
     && $c[2]->name_first == 'JAMIE'
-) echo "OK Loaded HasMany</br>";
-else {
+) {
+    echo "OK Loaded HasMany</br>";
+} else {
     var_dump($c);
     echo "error loading hasMany should have 3 array elements Jill Joan Jamie<br>";
 }
@@ -122,16 +123,24 @@ class Child extends ADOdb_Active_Record
 $ch = new Child('children', array('id'));
 $ch->BelongsTo('person', 'person_id', 'id');
 $ch->Load('id=1');
-if ($ch->name_first !== 'Jill') echo "error in Loading Child<br>";
+if ($ch->name_first !== 'Jill') {
+    echo "error in Loading Child<br>";
+}
 
 $p = $ch->person;
-if ($p->name_first != 'John') echo "Error loading belongsTo<br>";
-else echo "OK loading BelongTo<br>";
+if ($p->name_first != 'John') {
+    echo "Error loading belongsTo<br>";
+} else {
+    echo "OK loading BelongTo<br>";
+}
 
 $p->hasMany('children', 'person_id');
 $p->LoadRelations('children', "	Name_first like 'J%' order by id", 1, 2);
-if (sizeof($p->children) == 2 && $p->children[1]->name_first == 'JAMIE') echo "OK LoadRelations<br>";
-else echo "error LoadRelations<br>";
+if (sizeof($p->children) == 2 && $p->children[1]->name_first == 'JAMIE') {
+    echo "OK LoadRelations<br>";
+} else {
+    echo "error LoadRelations<br>";
+}
 
 $db->Execute("CREATE TEMPORARY TABLE `persons2` (
 	                `id` int(10) unsigned NOT NULL auto_increment,

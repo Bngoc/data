@@ -15,22 +15,25 @@
  */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 include_once(ADODB_DIR . '/drivers/adodb-oci8.inc.php');
 
 class ADODB_oci805 extends ADODB_oci8
 {
-    var $databaseType = "oci805";
-    var $connectSID = true;
+    public $databaseType = "oci805";
+    public $connectSID = true;
 
-    function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
+    public function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
     {
         // seems that oracle only supports 1 hint comment in 8i
-        if (strpos($sql, '/*+') !== false)
+        if (strpos($sql, '/*+') !== false) {
             $sql = str_replace('/*+ ', '/*+FIRST_ROWS ', $sql);
-        else
+        } else {
             $sql = preg_replace('/^[ \t\n]*select/i', 'SELECT /*+FIRST_ROWS*/', $sql);
+        }
 
         /*
             The following is only available from 8.1.5 because order by in inline views not
@@ -49,9 +52,9 @@ class ADODB_oci805 extends ADODB_oci8
 
 class ADORecordset_oci805 extends ADORecordset_oci8
 {
-    var $databaseType = "oci805";
+    public $databaseType = "oci805";
 
-    function __construct($id, $mode = false)
+    public function __construct($id, $mode = false)
     {
         parent::__construct($id, $mode);
     }

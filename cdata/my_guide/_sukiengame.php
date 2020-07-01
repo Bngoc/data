@@ -7,7 +7,9 @@ list($sub, $options) = _GL('sub, options');
 <ul class="sysconf_top">
     <?php foreach ($options as $ID => $ol) { ?>
         <li <?php echo 'id="' . $ID . '"';
-        if ($sub == $ID) echo 'class="selected"'; ?>>
+        if ($sub == $ID) {
+            echo 'class="selected"';
+        } ?>>
             <a id="callAjax" href="javascript:void(0)" idContent="sub-content"
                fhref="<?php echo cn_url_modify('mod=guide', 'opt=sukiengame', "sub=$ID"); ?>"><?php echo ucfirst($ol); ?></a>
         </li>

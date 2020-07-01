@@ -1,4 +1,6 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 add_hook('index/invoke_module', '*cshop_invoke');
 
@@ -34,8 +36,9 @@ function cshop_invoke()
 
     foreach ($cash_shop_board as $id => $_t) {
         list($dl, $do, $_token, $acl_module) = explode(':', $id);
-        if (function_exists("shop_$_token"))
+        if (function_exists("shop_$_token")) {
             cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'token=' . md5($_token . $do), 'opt=' . $do), $do);
+        }
     }
 
     // Request module
@@ -54,8 +57,7 @@ function cshop_invoke()
         }
     }
 
-    $images = array
-    (
+    $images = array(
         'acient' => 'acient.png',
         'armor' => 'armor.png',
         'spears' => 'spears.png',
@@ -114,17 +116,24 @@ function shop___buy_s1()
     list($page, $per_page, $token, $opt, $sub) = GET('page, per_page, token, opt, sub', 'GPG');
 
     $page = intval($page);
-    if (!$page) $page = 0;
-    if (intval($per_page) == 0) $per_page = 12;
-    if ($opt == 'eventticket' || $opt == 'orther') $per_page = 21;
+    if (!$page) {
+        $page = 0;
+    }
+    if (intval($per_page) == 0) {
+        $per_page = 12;
+    }
+    if ($opt == 'eventticket' || $opt == 'orther') {
+        $per_page = 21;
+    }
 
     $list_item = array();
     $item_ = getOption('#item_shop' . $opt);    //'code32' - 'name'  - 'price' - 'image_mh'
 
-    if ($item_)
+    if ($item_) {
         foreach ($item_ as $key => $var) {
             $list_item[$key] = cn_analysis_code32($var['code32'], $var['name'], $var['price'], $var['image_mh']);
         }
+    }
     $member = getMemberWeb();
     $accc_ = $member['user_name'];
 
@@ -277,13 +286,21 @@ function shop___what_()
     if ($ListItemInfo) {
         foreach ($ListItemInfo as $i => $item32) {
             ++$x;
-            if ($x == 8) $x = 0;
+            if ($x == 8) {
+                $x = 0;
+            }
             if (isset($item32['name'])) {
-                if (!$item32['y']) $itemy = 1;
-                else $itemy = $item32['y'];
+                if (!$item32['y']) {
+                    $itemy = 1;
+                } else {
+                    $itemy = $item32['y'];
+                }
 
-                if (!$item32['x']) $itemx = 1;
-                else $itemx = $item32['x'];
+                if (!$item32['x']) {
+                    $itemx = 1;
+                } else {
+                    $itemx = $item32['x'];
+                }
 
                 $show_warehouse .= "<div style='margin-top:" . (floor($i / 8) * 32) . "px;
 											margin-left:" . ($x * 32) . "px; position:absolute;
@@ -306,12 +323,20 @@ function shop___what_()
         }
     }
 
-    if ($password != NULL AND $password != 0) $wwname = "<font color='#A42725'>Hòm đồ (Đóng)</font>";
-    else $wwname = "<font color='#ffffff'>Hòm đồ (Mở)</font>";
-    if ($money < 100000) $color = "#F7DDAA";
-    else if ($money >= 100000 and $money < 1000000) $color = "#3CA445";
-    else if ($money >= 1000000 and $money < 10000000) $color = "#D2A154";
-    else $color = "#A42725";
+    if ($password != null and $password != 0) {
+        $wwname = "<font color='#A42725'>Hòm đồ (Đóng)</font>";
+    } else {
+        $wwname = "<font color='#ffffff'>Hòm đồ (Mở)</font>";
+    }
+    if ($money < 100000) {
+        $color = "#F7DDAA";
+    } elseif ($money >= 100000 and $money < 1000000) {
+        $color = "#3CA445";
+    } elseif ($money >= 1000000 and $money < 10000000) {
+        $color = "#D2A154";
+    } else {
+        $color = "#A42725";
+    }
 
     $show_warehouse .= "<div style='margin-top:-42px; position:absolute; text-align:center; width:256px; border:0px;'>" . $wwname . "</div>";
     $show_warehouse .= "<div id='zzen2' style='margin-top:100px; margin-left:-20px; position:absolute; border:0px; width:0px; height:0px;'></div>";
@@ -319,7 +344,7 @@ function shop___what_()
     $show_warehouse .= "<div style='margin-top:565px; margin-left:36px; position:absolute; width:57px; height:47px;'><img src='images/insert_zen.jpg'></div>";
     $show_warehouse .= "<div style='margin-top:565px; margin-left:100px; position:absolute; width:59px; height:47px;'><img src='images/get_zen.jpg'></div>";
 
-    if ($password != NULL AND $password != 0) {
+    if ($password != null and $password != 0) {
         $imgl = "images/lock_on.jpg";
     } else {
         $imgl = "images/lock_off.jpg";

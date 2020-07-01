@@ -69,9 +69,13 @@
 
 <?php
 
-if ($ADODB_FETCH_MODE != ADODB_FETCH_DEFAULT) print "<h3>FETCH MODE IS NOT ADODB_FETCH_DEFAULT</h3>";
+if ($ADODB_FETCH_MODE != ADODB_FETCH_DEFAULT) {
+    print "<h3>FETCH MODE IS NOT ADODB_FETCH_DEFAULT</h3>";
+}
 
-if (isset($nocountrecs)) $ADODB_COUNTRECS = false;
+if (isset($nocountrecs)) {
+    $ADODB_COUNTRECS = false;
+}
 
 // cannot test databases below, but we include them anyway to check
 // if they parse ok...
@@ -136,26 +140,30 @@ if (!empty($testpostgres9)) {
 }
 
 if (!empty($testpgodbc)) {
-
     $db = ADONewConnection('odbc');
     $db->hasTransactions = false;
     print "<h1>Connecting $db->databaseType...</h1>";
 
     if ($db->PConnect('Postgresql')) {
         $db->hasTransactions = true;
-        testdb($db,
-            "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date) type=innodb");
-    } else print "ERROR: PostgreSQL requires a database called test on server, user tester, password test.<BR>" . $db->ErrorMsg();
+        testdb(
+            $db,
+            "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date) type=innodb"
+        );
+    } else {
+        print "ERROR: PostgreSQL requires a database called test on server, user tester, password test.<BR>" . $db->ErrorMsg();
+    }
 }
 
 if (!empty($testibase)) {
     //$_GET['nolog'] = true;
     $db = ADONewConnection('firebird');
     print "<h1>Connecting $db->databaseType...</h1>";
-    if ($db->PConnect("localhost:d:\\firebird\\151\\examples\\EMPLOYEE.fdb", "sysdba", "masterkey", ""))
+    if ($db->PConnect("localhost:d:\\firebird\\151\\examples\\EMPLOYEE.fdb", "sysdba", "masterkey", "")) {
         testdb($db, "create table ADOXYZ (id integer, firstname char(24), lastname char(24),price numeric(12,2),created date)");
-    else print "ERROR: Interbase test requires a database called employee.gdb" . '<BR>' . $db->ErrorMsg();
-
+    } else {
+        print "ERROR: Interbase test requires a database called employee.gdb" . '<BR>' . $db->ErrorMsg();
+    }
 }
 
 
@@ -171,9 +179,9 @@ if (!empty($testsqlite)) {
     if ($db && $db->PConnect("d:\\inetpub\\adodb\\sqlite.db", "", "", "")) {
         print "<h1>Connecting $db->databaseType...</h1>";
         testdb($db, "create table ADOXYZ (id int, firstname char(24), lastname char(24),created datetime)");
-    } else
+    } else {
         print "ERROR: SQLite";
-
+    }
 }
 
 if (!empty($testpdopgsql)) {
@@ -183,8 +191,10 @@ if (!empty($testpdopgsql)) {
     $db = ADONewConnection('pdo');
     print "<h1>Connecting $db->databaseType...</h1>";
     $db->Connect($connstr, $u, $p) || die("CONNECT FAILED");
-    testdb($db,
-        "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)");
+    testdb(
+        $db,
+        "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)"
+    );
 }
 
 if (!empty($testpdomysql)) {
@@ -195,8 +205,10 @@ if (!empty($testpdomysql)) {
     print "<h1>Connecting $db->databaseType...</h1>";
     $db->Connect($connstr, $u, $p) || die("CONNECT FAILED");
 
-    testdb($db,
-        "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)");
+    testdb(
+        $db,
+        "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)"
+    );
 }
 
 if (!empty($testpdomssql)) {
@@ -207,8 +219,10 @@ if (!empty($testpdomssql)) {
     print "<h1>Connecting $db->databaseType...</h1>";
     $db->Connect($connstr, $u, $p) || die("CONNECT FAILED");
 
-    testdb($db,
-        "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)");
+    testdb(
+        $db,
+        "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)"
+    );
 }
 
 if (!empty($testpdosqlite)) {
@@ -219,8 +233,10 @@ if (!empty($testpdosqlite)) {
     $db->hasTransactions = false;
     print "<h1>Connecting $db->databaseType...</h1>";
     $db->Connect($connstr, $u, $p) || die("CONNECT FAILED");
-    testdb($db,
-        "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)");
+    testdb(
+        $db,
+        "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)"
+    );
 }
 
 if (!empty($testpdoaccess)) {
@@ -231,8 +247,10 @@ if (!empty($testpdoaccess)) {
     $db->hasTransactions = false;
     print "<h1>Connecting $db->databaseType...</h1>";
     $db->Connect($connstr, $u, $p) || die("CONNECT FAILED");
-    testdb($db,
-        "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)");
+    testdb(
+        $db,
+        "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)"
+    );
 }
 
 if (!empty($testpdoora)) {
@@ -243,8 +261,10 @@ if (!empty($testpdoora)) {
     #$db->hasTransactions = false;
     print "<h1>Connecting $db->databaseType...</h1>";
     $db->Connect($connstr, $u, $p) || die("CONNECT FAILED");
-    testdb($db,
-        "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)");
+    testdb(
+        $db,
+        "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)"
+    );
 }
 
 // REQUIRES ODBC DSN CALLED nwind
@@ -256,10 +276,11 @@ if (!empty($testaccess)) {
     $dsn = "Driver={Microsoft Access Driver (*.mdb)};Dbq=$access;Uid=Admin;Pwd=;";
 
     //$dsn =  'Provider=Microsoft.Jet.OLEDB.4.0;DATA SOURCE=' . $access . ';';
-    if ($db->PConnect($dsn, "", "", ""))
+    if ($db->PConnect($dsn, "", "", "")) {
         testdb($db, "create table ADOXYZ (id int, firstname char(24), lastname char(24),created datetime)");
-    else print "ERROR: Access test requires a Windows ODBC DSN=nwind, Access driver";
-
+    } else {
+        print "ERROR: Access test requires a Windows ODBC DSN=nwind, Access driver";
+    }
 }
 
 if (!empty($testaccess) && !empty($testado)) { // ADO ACCESS
@@ -275,8 +296,9 @@ if (!empty($testaccess) && !empty($testado)) { // ADO ACCESS
     if ($db->PConnect($myDSN, "", "", "")) {
         print "ADO version=" . $db->_connectionID->version . "<br>";
         testdb($db, "create table ADOXYZ (id int, firstname char(24), lastname char(24),created datetime)");
-    } else print "ERROR: Access test requires a Access database $access" . '<BR>' . $db->ErrorMsg();
-
+    } else {
+        print "ERROR: Access test requires a Access database $access" . '<BR>' . $db->ErrorMsg();
+    }
 }
 
 if (!empty($testvfp)) { // ODBC
@@ -286,7 +308,9 @@ if (!empty($testvfp)) { // ODBC
 
     if ($db->PConnect("vfp-adoxyz")) {
         testdb($db, "create table d:\\inetpub\\adodb\\ADOXYZ (id int, firstname char(24), lastname char(24),created date)");
-    } else print "ERROR: Visual FoxPro test requires a Windows ODBC DSN=vfp-adoxyz, VFP driver";
+    } else {
+        print "ERROR: Visual FoxPro test requires a Windows ODBC DSN=vfp-adoxyz, VFP driver";
+    }
 
     echo "<hr />";
     $db = ADONewConnection('odbtp');
@@ -295,8 +319,9 @@ if (!empty($testvfp)) { // ODBC
         print "<h1>Connecting $db->databaseType...</h1>";
         flush();
         testdb($db, "create table d:\\inetpub\\adodb\\ADOXYZ (id int, firstname char(24), lastname char(24),created date)");
-    } else print "ERROR: Visual FoxPro odbtp requires a Windows ODBC DSN=vfp-adoxyz, VFP driver";
-
+    } else {
+        print "ERROR: Visual FoxPro odbtp requires a Windows ODBC DSN=vfp-adoxyz, VFP driver";
+    }
 }
 
 
@@ -304,8 +329,11 @@ if (!empty($testvfp)) { // ODBC
 if (!empty($testmysql)) { // MYSQL
 
 
-    if (PHP_VERSION >= 5 || $_SERVER['HTTP_HOST'] == 'localhost') $server = 'localhost';
-    else $server = "mangrove";
+    if (PHP_VERSION >= 5 || $_SERVER['HTTP_HOST'] == 'localhost') {
+        $server = 'localhost';
+    } else {
+        $server = "mangrove";
+    }
     $user = 'root';
     $password = '';
     $database = 'northwind';
@@ -315,9 +343,13 @@ if (!empty($testmysql)) { // MYSQL
     if (true || $db->PConnect($server, "root", "", "northwind")) {
         //$db->Execute("DROP TABLE ADOXYZ") || die('fail drop');
         //$db->debug=1;$db->Execute('drop table ADOXYZ');
-        testdb($db,
-            "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date) Type=InnoDB");
-    } else print "ERROR: MySQL test requires a MySQL server on localhost, userid='admin', password='', database='test'" . '<BR>' . $db->ErrorMsg();
+        testdb(
+            $db,
+            "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date) Type=InnoDB"
+        );
+    } else {
+        print "ERROR: MySQL test requires a MySQL server on localhost, userid='admin', password='', database='test'" . '<BR>' . $db->ErrorMsg();
+    }
 }
 
 // REQUIRES MySQL server at localhost with database 'test'
@@ -325,13 +357,20 @@ if (!empty($testmysqli)) { // MYSQL
 
     $db = ADONewConnection('mysqli');
     print "<h1>Connecting $db->databaseType...</h1>";
-    if (PHP_VERSION >= 5 || $_SERVER['HTTP_HOST'] == 'localhost') $server = 'localhost';
-    else $server = "mangrove";
+    if (PHP_VERSION >= 5 || $_SERVER['HTTP_HOST'] == 'localhost') {
+        $server = 'localhost';
+    } else {
+        $server = "mangrove";
+    }
     if ($db->PConnect($server, "root", "", "northwind")) {
         //$db->debug=1;$db->Execute('drop table ADOXYZ');
-        testdb($db,
-            "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)");
-    } else print "ERROR: MySQL test requires a MySQL server on localhost, userid='admin', password='', database='test'" . '<BR>' . $db->ErrorMsg();
+        testdb(
+            $db,
+            "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)"
+        );
+    } else {
+        print "ERROR: MySQL test requires a MySQL server on localhost, userid='admin', password='', database='test'" . '<BR>' . $db->ErrorMsg();
+    }
 }
 
 
@@ -341,24 +380,36 @@ if (!empty($testmysqlodbc)) { // MYSQL
     $db = ADONewConnection('odbc');
     $db->hasTransactions = false;
     print "<h1>Connecting $db->databaseType...</h1>";
-    if ($_SERVER['HTTP_HOST'] == 'localhost') $server = 'localhost';
-    else $server = "mangrove";
-    if ($db->PConnect('mysql', "root", ""))
-        testdb($db,
-            "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date) type=innodb");
-    else print "ERROR: MySQL test requires a MySQL server on localhost, userid='admin', password='', database='test'" . '<BR>' . $db->ErrorMsg();
+    if ($_SERVER['HTTP_HOST'] == 'localhost') {
+        $server = 'localhost';
+    } else {
+        $server = "mangrove";
+    }
+    if ($db->PConnect('mysql', "root", "")) {
+        testdb(
+            $db,
+            "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date) type=innodb"
+        );
+    } else {
+        print "ERROR: MySQL test requires a MySQL server on localhost, userid='admin', password='', database='test'" . '<BR>' . $db->ErrorMsg();
+    }
 }
 
 if (!empty($testproxy)) {
     $db = ADONewConnection('proxy');
     print "<h1>Connecting $db->databaseType...</h1>";
-    if ($_SERVER['HTTP_HOST'] == 'localhost') $server = 'localhost';
+    if ($_SERVER['HTTP_HOST'] == 'localhost') {
+        $server = 'localhost';
+    }
 
-    if ($db->PConnect('http://localhost/php/phplens/adodb/server.php'))
-        testdb($db,
-            "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date) type=innodb");
-    else print "ERROR: MySQL test requires a MySQL server on localhost, userid='admin', password='', database='test'" . '<BR>' . $db->ErrorMsg();
-
+    if ($db->PConnect('http://localhost/php/phplens/adodb/server.php')) {
+        testdb(
+            $db,
+            "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date) type=innodb"
+        );
+    } else {
+        print "ERROR: MySQL test requires a MySQL server on localhost, userid='admin', password='', database='test'" . '<BR>' . $db->ErrorMsg();
+    }
 }
 
 ADOLoadCode('oci805');
@@ -370,21 +421,21 @@ if (!empty($testoracle)) {
 
     //$db->debug=1;
     print "<h1>Connecting $db->databaseType...</h1>";
-    if ($db->Connect('mobydick', "scott", "natsoft", 'SID=mobydick'))
+    if ($db->Connect('mobydick', "scott", "natsoft", 'SID=mobydick')) {
         testdb($db, "create table ADOXYZ (id int, firstname varchar(24), lastname varchar(24),created date)");
-    else
+    } else {
         print "ERROR: Oracle test requires an Oracle server setup with scott/natsoft" . '<BR>' . $db->ErrorMsg();
-
+    }
 }
 ADOLoadCode("oracle"); // no longer supported
 if (false && !empty($testoracle)) {
-
     $db = ADONewConnection();
     print "<h1>Connecting $db->databaseType...</h1>";
-    if ($db->PConnect("", "scott", "tiger", "natsoft.domain"))
+    if ($db->PConnect("", "scott", "tiger", "natsoft.domain")) {
         testdb($db, "create table ADOXYZ (id int, firstname varchar(24), lastname varchar(24),created date)");
-    else print "ERROR: Oracle test requires an Oracle server setup with scott/tiger" . '<BR>' . $db->ErrorMsg();
-
+    } else {
+        print "ERROR: Oracle test requires an Oracle server setup with scott/tiger" . '<BR>' . $db->ErrorMsg();
+    }
 }
 
 ADOLoadCode("odbc_db2"); // no longer supported
@@ -397,7 +448,9 @@ if (!empty($testdb2)) {
         #$dsn = "driver={IBM db2 odbc DRIVER};Database=test;hostname=localhost;port=50000;protocol=TCPIP; uid=natsoft; pwd=guest";
         if ($db->Connect('localhost', 'natsoft', 'guest', 'test')) {
             testdb($db, "create table ADOXYZ (id int, firstname varchar(24), lastname varchar(24),created date)");
-        } else print "ERROR: DB2 test requires an server setup with odbc data source db2_sample" . '<BR>' . $db->ErrorMsg();
+        } else {
+            print "ERROR: DB2 test requires an server setup with odbc data source db2_sample" . '<BR>' . $db->ErrorMsg();
+        }
     } else {
         $db = ADONewConnection("odbc_db2");
         print "<h1>Connecting $db->databaseType...</h1>";
@@ -407,7 +460,9 @@ if (!empty($testdb2)) {
         #$dsn = "driver={IBM db2 odbc DRIVER};Database=test;hostname=localhost;port=50000;protocol=TCPIP; uid=natsoft; pwd=guest";
         if ($db->Connect($dsn)) {
             testdb($db, "create table ADOXYZ (id int, firstname varchar(24), lastname varchar(24),created date)");
-        } else print "ERROR: DB2 test requires an server setup with odbc data source db2_sample" . '<BR>' . $db->ErrorMsg();
+        } else {
+            print "ERROR: DB2 test requires an server setup with odbc data source db2_sample" . '<BR>' . $db->ErrorMsg();
+        }
     }
     echo "<hr />";
     flush();
@@ -415,7 +470,6 @@ if (!empty($testdb2)) {
 
     $db = ADONewConnection('odbtp');
     if ($db->Connect('127.0.0.1', $dsn)) {
-
         $db->debug = 1;
         $arr = $db->GetArray("||SQLProcedures");
         adodb_pr($arr);
@@ -423,7 +477,9 @@ if (!empty($testdb2)) {
         adodb_pr($arr);
 
         testdb($db, "create table ADOXYZ (id int, firstname varchar(24), lastname varchar(24),created date)");
-    } else echo("ERROR Connection");
+    } else {
+        echo("ERROR Connection");
+    }
     echo $db->ErrorMsg();
 }
 
@@ -443,8 +499,9 @@ if (false && !empty($testmssql)) { // MS SQL Server -- the extension is buggy --
         AutoDetect_MSSQL_Date_Order($db);
         //	$db->Execute('drop table adoxyz');
         testdb($db, "create table ADOXYZ (id int, firstname char(24) null, lastname char(24) null,created datetime null)");
-    } else print "ERROR: MSSQL test 2 requires a MS SQL 7 on a server='$server', userid='adodb', password='natsoft', database='ai'" . '<BR>' . $db->ErrorMsg();
-
+    } else {
+        print "ERROR: MSSQL test 2 requires a MS SQL 7 on a server='$server', userid='adodb', password='natsoft', database='ai'" . '<BR>' . $db->ErrorMsg();
+    }
 }
 
 
@@ -458,8 +515,9 @@ if (!empty($testmssql)) { // MS SQL Server via ODBC
     $dsn = 'condor';
     if ($db->PConnect($dsn, "sa", "natsoft", "")) {
         testdb($db, "create table ADOXYZ (id int, firstname char(24) null, lastname char(24) null,created datetime null)");
-    } else print "ERROR: MSSQL test 1 requires a MS SQL 7 server setup with DSN setup";
-
+    } else {
+        print "ERROR: MSSQL test 1 requires a MS SQL 7 server setup with DSN setup";
+    }
 }
 
 ADOLoadCode("ado_mssql");
@@ -473,10 +531,11 @@ if (!empty($testmssql) && !empty($testado)) { // ADO ACCESS MSSQL -- thru ODBC -
         . "SERVER=$server;DATABASE=NorthWind;UID=adodb;PWD=natsoft;Trusted_Connection=No";
 
 
-    if ($db->PConnect($myDSN, "", "", ""))
+    if ($db->PConnect($myDSN, "", "", "")) {
         testdb($db, "create table ADOXYZ (id int, firstname char(24) null, lastname char(24) null,created datetime null)");
-    else print "ERROR: MSSQL test 2 requires MS SQL 7";
-
+    } else {
+        print "ERROR: MSSQL test 2 requires MS SQL 7";
+    }
 }
 
 if (!empty($testmssql) && !empty($testado)) { // ADO ACCESS MSSQL with OLEDB provider
@@ -487,8 +546,9 @@ if (!empty($testmssql) && !empty($testado)) { // ADO ACCESS MSSQL with OLEDB pro
     $myDSN = "SERVER=localhost;DATABASE=northwind;Trusted_Connection=yes";
     if ($db->PConnect($myDSN, "adodb", "natsoft", 'SQLOLEDB')) {
         testdb($db, "create table ADOXYZ (id int, firstname char(24), lastname char(24),created datetime)");
-    } else print "ERROR: MSSQL test 2 requires a MS SQL 7 on a server='mangrove', userid='sa', password='', database='ai'";
-
+    } else {
+        print "ERROR: MSSQL test 2 requires a MS SQL 7 on a server='mangrove', userid='sa', password='', database='ai'";
+    }
 }
 
 
@@ -500,8 +560,9 @@ if (extension_loaded('odbtp') && !empty($testmssql)) { // MS SQL Server via ODBC
     if ($db->PConnect('localhost', $dsn, "", "")) {
         print "<h1>Connecting $db->databaseType...</h1>";
         testdb($db, "create table ADOXYZ (id int, firstname char(24) null, lastname char(24) null,created datetime null)");
-    } else print "ERROR: MSSQL test 1 requires a MS SQL 7 server setup with DSN setup";
-
+    } else {
+        print "ERROR: MSSQL test 1 requires a MS SQL 7 server setup with DSN setup";
+    }
 }
 
 

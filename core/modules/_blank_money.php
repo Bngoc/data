@@ -1,4 +1,6 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 add_hook('index/invoke_module', '*blank_money_invoke');
 
@@ -40,8 +42,9 @@ function blank_money_invoke()
 
     foreach ($blank_money_board as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
-        if (function_exists("blank_money_$do"))
+        if (function_exists("blank_money_$do")) {
             cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        }
     }
 
     // Request module
@@ -145,13 +148,21 @@ function show_inventory($inventory, $moneyInventory = '')
             setMemcache('#existItem', 1);
 
             ++$x;
-            if ($x == 8) $x = 0;
+            if ($x == 8) {
+                $x = 0;
+            }
             if (isset($item32['name'])) {
-                if (!$item32['y']) $itemy = 1;
-                else $itemy = $item32['y'];
+                if (!$item32['y']) {
+                    $itemy = 1;
+                } else {
+                    $itemy = $item32['y'];
+                }
 
-                if (!$item32['x']) $itemx = 1;
-                else $itemx = $item32['x'];
+                if (!$item32['x']) {
+                    $itemx = 1;
+                } else {
+                    $itemx = $item32['x'];
+                }
 
                 $show_inventory .= "<div style='margin-top:" . ((floor($i / 8) * 32)) . "px; margin-left:" . ($x * 32) . "px; position:absolute; width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px; cursor:pointer; background-image: url(/public/images/wh_bg_on.jpg);'>";
 
@@ -212,7 +223,9 @@ function blank_money_chaos2blank()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     }
 
     $moneyInventory = $showchar[$sub]['money'];
@@ -228,7 +241,7 @@ function blank_money_chaos2blank()
         '8D10' => ['C', 30]
     );
 
-    list ($countChaos, $inventory2After) = countItemZederInventory($chaoItem, $inventory2);
+    list($countChaos, $inventory2After) = countItemZederInventory($chaoItem, $inventory2);
 
     if (request_type('POST')) {
         if (REQ('action_sendJewelBlank')) {
@@ -285,7 +298,9 @@ function blank_money_cre2blank()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     };
 
     $moneyInventory = $showchar[$sub]['money'];
@@ -301,7 +316,7 @@ function blank_money_cre2blank()
         '8910' => ['C', 30]
     );
 
-    list ($countCre, $inventory2After) = countItemZederInventory($creItem, $inventory2);
+    list($countCre, $inventory2After) = countItemZederInventory($creItem, $inventory2);
 
     if (request_type('POST')) {
         if (REQ('action_sendJewelBlank')) {
@@ -359,7 +374,9 @@ function blank_money_blue2blank()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     };
 
     $moneyInventory = $showchar[$sub]['money'];
@@ -375,7 +392,7 @@ function blank_money_blue2blank()
         '1E10' => ['C', 30]
     );
 
-    list ($countBlue, $inventory2After) = countItemZederInventory($blueItem, $inventory2);
+    list($countBlue, $inventory2After) = countItemZederInventory($blueItem, $inventory2);
 
     if (request_type('POST')) {
         if (REQ('action_sendJewelBlank')) {
@@ -394,7 +411,6 @@ function blank_money_blue2blank()
             }
 
             if (!$errors_false) {
-
                 $newInventory = $inventory1 . $inventory2After . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
@@ -433,7 +449,9 @@ function blank_money_feather2blank()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     };
 
     $moneyInventory = $showchar[$sub]['money'];
@@ -446,7 +464,7 @@ function blank_money_feather2blank()
         '0E00' => ['D', 1]
     );
 
-    list ($countFeather, $inventory2After) = countItemZederInventory($featherItem, $inventory2);
+    list($countFeather, $inventory2After) = countItemZederInventory($featherItem, $inventory2);
 
     if (request_type('POST')) {
         if (REQ('action_sendJewelBlank')) {
@@ -505,7 +523,9 @@ function blank_money_zen2blank()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     }
 
     $moneyBlank = $_blank_var[0]['bank'];
@@ -573,7 +593,9 @@ function blank_money_vpoint2blank()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     };
 
     $moneyInventory = $showchar[$sub]['money'];
@@ -588,7 +610,7 @@ function blank_money_vpoint2blank()
         '0F00' => ['E', 50]
     );
 
-    list ($countVpoint, $inventory2After) = countItemZederInventory($featherItem, $inventory2);
+    list($countVpoint, $inventory2After) = countItemZederInventory($featherItem, $inventory2);
 
     if (request_type('POST')) {
         if (REQ('action_sendJewelBlank')) {
@@ -695,7 +717,6 @@ function zenderNumberSelectOptionVpoint($numberItems, $numberItem = 0)
                 $htmlOption .= '<option ' . (($numberItem == $i) ? 'selected' : '') . ' value="' . $i . '"> ' . $i . ' </option>';
             }
         } else {
-
             for ($i = 1; $i <= 9; $i++) {
                 $htmlOption .= '<option ' . (($numberItem == $i) ? 'selected' : '') . ' value="' . $i . '"> ' . $i . ' </option>';
             }
@@ -736,7 +757,9 @@ function blank_money_blank2chaos()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     }
 
     $moneyInventory = $showchar[$sub]['money'];
@@ -817,7 +840,6 @@ function blank_money_blank2chaos()
             $subChaos = $countChaos;
 
             if (!$errors_false) {
-
                 $newInventory = $inventory1 . $inventory2 . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
@@ -863,7 +885,9 @@ function blank_money_blank2cre()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     }
 
     $moneyInventory = $showchar[$sub]['money'];
@@ -896,7 +920,6 @@ function blank_money_blank2cre()
 
 
             if ($postNumberItem < 10) {
-
                 $item_code = '160000363B7A000000E0000000000000';
                 for ($key = 0; $key < $postNumberItem; $key++) {
                     $serial = do_select_other('EXEC WZ_GetItemSerial');
@@ -943,7 +966,6 @@ function blank_money_blank2cre()
             $setDefaultNumItem = $postNumberItem;
             $subCre = $countCre;
             if (!$errors_false) {
-
                 $newInventory = $inventory1 . $inventory2 . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
@@ -989,7 +1011,9 @@ function blank_money_blank2bule()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     }
 
     $moneyInventory = $showchar[$sub]['money'];
@@ -1115,7 +1139,9 @@ function blank_money_blank2feather()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     }
 
     $moneyInventory = $showchar[$sub]['money'];
@@ -1230,7 +1256,9 @@ function blank_money_blank2zen()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     }
 
     $moneyInventory = $showchar[$sub]['money'];
@@ -1335,7 +1363,9 @@ function blank_money_blank2vpoint()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     }
 
     $moneyInventory = $showchar[$sub]['money'];
@@ -1509,7 +1539,6 @@ function blank_money_vpoint2gcoin()
             }
 
             if (!$errors_false) {
-
                 $gcoinNew = floor($postNumberItem * getOption('vptogc') / 100);
                 $acountID = $_SESSION['user_Gamer'];
                 do_update_orther("UPDATE MEMB_INFO SET gcoin=gcoin+$gcoinNew, vpoint=vpoint-$postNumberItem WHERE memb___id='$acountID'");
@@ -1862,7 +1891,6 @@ function blank_money_transgc2gob()
                     file_put_contents($file, $accoutID . "|" . $content . "|" . $showBlank[0]['gc'] . "_" . $showBlank[0]['vp'] . "|" . $afterGcoin . "_" . $afterVpoint . "|" . $Date . "|\n" . $fileContents);
                 }
                 //End Ghi vào Log
-
             }
 
             $showMoney = (!$errors_false) ? ($showBlank[0]['goblinCoin'] + $postNumberItem) : $showBlank[0]['goblinCoin'];

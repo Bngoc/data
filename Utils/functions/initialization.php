@@ -96,7 +96,11 @@ function add_hook($hook, $func)
     if (!isset($_HOOKS[$hook])) $_HOOKS[$hook] = array();
 
     // priority (+/-)
-    if ($prior) array_unshift($_HOOKS[$hook], $func); else $_HOOKS[$hook][] = $func;
+    if ($prior) {
+        array_unshift($_HOOKS[$hook], $func);
+    } else {
+        $_HOOKS[$hook][] = $func;
+    }
 }
 
 // Since 1.5.0: Cascade Hooks
@@ -234,336 +238,24 @@ function cn_throw_message($msg, $area = 'n')
     $es = getMemcache('msg:stor');
 
     if (!isset($es[$area])) $es[$area] = array();
-    $es[$area][] = i18n($msg);
+    $es[$area][] = __($msg);
+//    $es[$area][] = i18n($msg);
 
     setMemcache('msg:stor', $es);
 
     return false;
 }
 
-function i18n()
+function __($text, $args = [])
 {
-    $i8 = getMemcache('#i18n');
-    $va = func_get_args();
-    $ft = array_shift($va);
+    $i18n = getMemcache("#i18n");
+    $text = isset($i18n[trim($text)]) ? $i18n[trim($text)] : $text;
 
-    if (is_array($ft)) list($ft, $sph) = $ft; else $sph = '';
-    $sph .= hi18n($ft);
-
-    // match soundex found
-    if (isset($i8[$sph]))
-        $ft = UTF8ToEntities($i8[$sph]);
-
-    // Replace placeholders
-    foreach ($va as $id => $vs)
-        $ft = str_replace("%" . ($id + 1), $vs, $ft);
-
-    return $ft;
-}
-
-function UTF8ToEntities($string)
-{
-    if (is_array($string)) {
-        return $string;
+    foreach ($args as $value) {
+        $text = preg_replace("/:attribute/gm", $value, $text);
     }
 
-    // @Note May be deprecated in next versions
-    $HTML_SPECIAL_CHARS_UTF8 = array
-    (
-        'c2a1' => '&iexcl;',
-        'c2a2' => '&cent;',
-        'c2a3' => '&pound;',
-        'c2a4' => '&curren;',
-        'c2a5' => '&yen;',
-        'c2a6' => '&brvbar;',
-        'c2a7' => '&sect;',
-        'c2a8' => '&uml;',
-        'c2a9' => '&copy;',
-        'c2aa' => '&ordf;',
-        'c2ab' => '&laquo;',
-        'c2bb' => '&raquo;',
-        'c2ac' => '&not;',
-        'c2ae' => '&reg;',
-        'c2af' => '&macr;',
-        'c2b0' => '&deg;',
-        'c2ba' => '&ordm;',
-        'c2b1' => '&plusmn;',
-        'c2b9' => '&sup1;',
-        'c2b2' => '&sup2;',
-        'c2b3' => '&sup3;',
-        'c2b4' => '&acute;',
-        'c2b7' => '&middot;',
-        'c2b8' => '&cedil;',
-        'c2bc' => '&frac14;',
-        'c2bd' => '&frac12;',
-        'c2be' => '&frac34;',
-        'c2bf' => '&iquest;',
-        'c380' => '&Agrave;',
-        'c381' => '&Aacute;',
-        'c382' => '&Acirc;',
-        'c383' => '&Atilde;',
-        'c384' => '&Auml;',
-        'c385' => '&Aring;',
-        'c386' => '&AElig;',
-        'c387' => '&Ccedil;',
-        'c388' => '&Egrave;',
-        'c389' => '&Eacute;',
-        'c38a' => '&Ecirc;',
-        'c38b' => '&Euml;',
-        'c38c' => '&Igrave;',
-        'c38d' => '&Iacute;',
-        'c38e' => '&Icirc;',
-        'c38f' => '&Iuml;',
-        'c390' => '&ETH;',
-        'c391' => '&Ntilde;',
-        'c392' => '&Ograve;',
-        'c393' => '&Oacute;',
-        'c394' => '&Ocirc;',
-        'c395' => '&Otilde;',
-        'c396' => '&Ouml;',
-        'c397' => '&times;',
-        'c398' => '&Oslash;',
-        'c399' => '&Ugrave;',
-        'c39a' => '&Uacute;',
-        'c39b' => '&Ucirc;',
-        'c39c' => '&Uuml;',
-        'c39d' => '&Yacute;',
-        'c39e' => '&THORN;',
-        'c39f' => '&szlig;',
-        'c3a0' => '&agrave;',
-        'c3a1' => '&aacute;',
-        'c3a2' => '&acirc;',
-        'c3a3' => '&atilde;',
-        'c3a4' => '&auml;',
-        'c3a5' => '&aring;',
-        'c3a6' => '&aelig;',
-        'c3a7' => '&ccedil;',
-        'c3a8' => '&egrave;',
-        'c3a9' => '&eacute;',
-        'c3aa' => '&ecirc;',
-        'c3ab' => '&euml;',
-        'c3ac' => '&igrave;',
-        'c3ad' => '&iacute;',
-        'c3ae' => '&icirc;',
-        'c3af' => '&iuml;',
-        'c3b0' => '&eth;',
-        'c3b1' => '&ntilde;',
-        'c3b2' => '&ograve;',
-        'c3b3' => '&oacute;',
-        'c3b4' => '&ocirc;',
-        'c3b5' => '&otilde;',
-        'c3b6' => '&ouml;',
-        'c3b7' => '&divide;',
-        'c3b8' => '&oslash;',
-        'c3b9' => '&ugrave;',
-        'c3ba' => '&uacute;',
-        'c3bb' => '&ucirc;',
-        'c3bc' => '&uuml;',
-        'c3bd' => '&yacute;',
-        'c3be' => '&thorn;',
-        'c3bf' => '&yuml;',
-        'c592' => '&OElig;',
-        'c593' => '&oelig;',
-        'c5a0' => '&Scaron;',
-        'c5a1' => '&scaron;',
-        'c5b8' => '&Yuml;',
-        'cb86' => '&circ;',
-        'cb9c' => '&tilde;',
-        'c692' => '&fnof;',
-        'ce91' => '&Alpha;',
-        'ce92' => '&Beta;',
-        'ce93' => '&Gamma;',
-        'ce94' => '&Delta;',
-        'ce95' => '&Epsilon;',
-        'ce96' => '&Zeta;',
-        'ce97' => '&Eta;',
-        'ce98' => '&Theta;',
-        'ce99' => '&Iota;',
-        'ce9a' => '&Kappa;',
-        'ce9b' => '&Lambda;',
-        'ce9c' => '&Mu;',
-        'ce9d' => '&Nu;',
-        'ce9e' => '&Xi;',
-        'ce9f' => '&Omicron;',
-        'cea0' => '&Pi;',
-        'cea1' => '&Rho;',
-        'cea3' => '&Sigma;',
-        'cea4' => '&Tau;',
-        'cea5' => '&Upsilon;',
-        'cea6' => '&Phi;',
-        'cea7' => '&Chi;',
-        'cea8' => '&Psi;',
-        'cea9' => '&Omega;',
-        'ceb1' => '&alpha;',
-        'ceb2' => '&beta;',
-        'ceb3' => '&gamma;',
-        'ceb4' => '&delta;',
-        'ceb5' => '&epsilon;',
-        'ceb6' => '&zeta;',
-        'ceb7' => '&eta;',
-        'ceb8' => '&theta;',
-        'ceb9' => '&iota;',
-        'ceba' => '&kappa;',
-        'cebb' => '&lambda;',
-        'cebc' => '&mu;',
-        'cebd' => '&nu;',
-        'cebe' => '&xi;',
-        'cebf' => '&omicron;',
-        'cf80' => '&pi;',
-        'cf81' => '&rho;',
-        'cf82' => '&sigmaf;',
-        'cf83' => '&sigma;',
-        'cf84' => '&tau;',
-        'cf85' => '&upsilon;',
-        'cf86' => '&phi;',
-        'cf87' => '&chi;',
-        'cf88' => '&psi;',
-        'cf89' => '&omega;',
-        'cf91' => '&thetasym;',
-        'cf92' => '&upsih;',
-        'cf96' => '&piv;',
-        'e2809d' => '&rdquo;',
-        'e2809c' => '&ldquo;',
-        'e284a2' => '&trade;',
-        'e28099' => '&rsquo;',
-        'e28098' => '&lsquo;',
-        'e280b0' => '&permil;',
-        'e280a6' => '&hellip;',
-        'e282ac' => '&euro;',
-        'e28093' => '&ndash;',
-        'e28094' => '&mdash;',
-        'e280a0' => '&dagger;',
-        'e280a1' => '&Dagger;',
-        'e280b9' => '&lsaquo;',
-        'e280ba' => '&rsaquo;',
-        'e280b2' => '&prime;',
-        'e280b3' => '&Prime;',
-        'e280be' => '&oline;',
-        'e28498' => '&weierp;',
-        'e28491' => '&image;',
-        'e2849c' => '&real;',
-        'e284b5' => '&alefsym;',
-        'e28690' => '&larr;',
-        'e28691' => '&uarr;',
-        'e28692' => '&rarr;',
-        'e28693' => '&darr;',
-        'e28694' => '&harr;',
-        'e286b5' => '&crarr;',
-        'e28790' => '&lArr;',
-        'e28791' => '&uArr;',
-        'e28792' => '&rArr;',
-        'e28793' => '&dArr;',
-        'e28794' => '&hArr;',
-        'e28880' => '&forall;',
-        'e28882' => '&part;',
-        'e28883' => '&exist;',
-        'e28885' => '&empty;',
-        'e28887' => '&nabla;',
-        'e28888' => '&isin;',
-        'e28889' => '&notin;',
-        'e2888b' => '&ni;',
-        'e2888f' => '&prod;',
-        'e28891' => '&sum;',
-        'e28892' => '&minus;',
-        'e28897' => '&lowast;',
-        'e2889a' => '&radic;',
-        'e2889d' => '&prop;',
-        'e2889e' => '&infin;',
-        'e288a0' => '&ang;',
-        'e288a7' => '&and;',
-        'e288a8' => '&or;',
-        'e288a9' => '&cap;',
-        'e288aa' => '&cup;',
-        'e288ab' => '&int;',
-        'e288b4' => '&there4;',
-        'e288bc' => '&sim;',
-        'e28985' => '&cong;',
-        'e28988' => '&asymp;',
-        'e289a0' => '&ne;',
-        'e289a1' => '&equiv;',
-        'e289a4' => '&le;',
-        'e289a5' => '&ge;',
-        'e28a82' => '&sub;',
-        'e28a83' => '&sup;',
-        'e28a84' => '&nsub;',
-        'e28a86' => '&sube;',
-        'e28a87' => '&supe;',
-        'e28a95' => '&oplus;',
-        'e28a97' => '&otimes;',
-        'e28aa5' => '&perp;',
-        'e28b85' => '&sdot;',
-        'e28c88' => '&lceil;',
-        'e28c89' => '&rceil;',
-        'e28c8a' => '&lfloor;',
-        'e28c8b' => '&rfloor;',
-        'e29fa8' => '&lang;',
-        'e29fa9' => '&rang;',
-        'e2978a' => '&loz;',
-        'e299a0' => '&spades;',
-        'e299a3' => '&clubs;',
-        'e299a5' => '&hearts;',
-        'e299a6' => '&diams;',
-    );
-
-    // Decode UTF-8 code-table
-    $HTML_SPECIAL_CHARS = array();
-    foreach ($HTML_SPECIAL_CHARS_UTF8 as $hex => $html) {
-        $key = '';
-        if (strlen($hex) == 4) {
-            $key = pack("CC", hexdec(substr($hex, 0, 2)), hexdec(substr($hex, 2, 2)));
-        } elseif (strlen($hex) == 6) {
-            $key = pack("CCC", hexdec(substr($hex, 0, 2)), hexdec(substr($hex, 2, 2)), hexdec(substr($hex, 4, 2)));
-        }
-
-        if ($key) {
-            $HTML_SPECIAL_CHARS[$key] = $html;
-        }
-    }
-
-    // Common conversion
-    $string = str_replace(array_keys($HTML_SPECIAL_CHARS), array_values($HTML_SPECIAL_CHARS), $string);
-
-    /* note: apply htmlspecialchars if desired /before/ applying this function
-    /* Only do the slow convert if there are 8-bit characters */
-    /* avoid using 0xA0 (\240) in ereg ranges. RH73 does not like that */
-    if (!preg_match("~[\200-\237]~", $string) and !preg_match("~[\241-\377]~", $string)) {
-        return $string;
-    }
-
-    // reject too-short sequences
-    $string = preg_replace("/[\302-\375]([\001-\177])/", "&#65533;\\1", $string);
-    $string = preg_replace("/[\340-\375].([\001-\177])/", "&#65533;\\1", $string);
-    $string = preg_replace("/[\360-\375]..([\001-\177])/", "&#65533;\\1", $string);
-    $string = preg_replace("/[\370-\375]...([\001-\177])/", "&#65533;\\1", $string);
-    $string = preg_replace("/[\374-\375]....([\001-\177])/", "&#65533;\\1", $string);
-    $string = preg_replace("/[\300-\301]./", "&#65533;", $string);
-    $string = preg_replace("/\364[\220-\277]../", "&#65533;", $string);
-    $string = preg_replace("/[\365-\367].../", "&#65533;", $string);
-    $string = preg_replace("/[\370-\373]..../", "&#65533;", $string);
-    $string = preg_replace("/[\374-\375]...../", "&#65533;", $string);
-    $string = preg_replace("/[\376-\377]/", "&#65533;", $string);
-    $string = preg_replace("/[\302-\364]{2,}/", "&#65533;", $string);
-
-    return $string;
-}
-
-// Since 2.0: Translate phrase to code
-function hi18n($ft)
-{
-    $sph = '';
-
-    $ex = separateString($ft, ' ');
-    foreach ($ex as $w) {
-        $sx = soundex($w);
-        if ($sx[0] === '0') {
-            continue;
-        }
-
-        $sph .= $sx;
-    }
-
-    // long phrases
-    return substr($sph, 0, 32);
+    return $text;
 }
 
 // Since 2.0: Check server request type
@@ -680,8 +372,6 @@ function cn_pack_url($GET, $URL = PHP_SELF)
 function read_tpl($tpl = 'index')
 {
     try {
-
-
         // get from cache
         $cached = getMemcache("tpl:$tpl");
         if ($cached) {
@@ -697,14 +387,14 @@ function read_tpl($tpl = 'index')
 
         // Get plugin path
         if ($tpl[0] == '/') {
-            $open = $this->cn_path_construct(SERVDIR, 'cdata', 'plugins') . substr($tpl, 1) . $fine;
+            $open = cn_path_construct(SERVDIR, 'view_admin', 'skins') . substr($tpl, 1) . $fine;
         } else {
             $open = SKIN . DIRECTORY_SEPARATOR . ($tpl ? $tpl : 'default') . $fine;
         }
 
         // Try open
         $not_open = false;
-        $r = fopen($open, 'r') or $not_open = true;
+        $r = fopen($open, 'rw') or $not_open = true;
         if ($not_open) {
             return false;
         }
@@ -723,23 +413,6 @@ function read_tpl($tpl = 'index')
     }
 }
 
-function echofooter()
-{
-    global $is_loged_in, $skin_footer, $lang_content_type, $skin_menu, $config_adminemail, $config_admin;
-
-    if ($is_loged_in == TRUE)
-        $skin_footer = str_replace("{menu}", $skin_menu, $skin_footer);
-    else $skin_footer = str_replace("{menu}", " &nbsp; ", $skin_footer);
-
-    //$skin_footer = get_skin($skin_footer);
-    //$skin_footer = str_replace("{content-type}", $lang_content_type, $skin_footer);
-    $skin_footer = str_replace("{exec-time}", round(microtime(true) - BQN_MU, 3), $skin_footer);
-    $skin_footer = str_replace("{year-time}", date("Y"), $skin_footer);
-    $skin_footer = str_replace("{email-name}", $config_adminemail, $skin_footer);
-    $skin_footer = str_replace("{byname}", $config_admin, $skin_footer);
-
-    die($skin_footer);
-}
 
 function cn_bc_menu($name, $url, $opt)
 {
@@ -752,16 +425,16 @@ function cn_bc_menu($name, $url, $opt)
 function scan_dir($dir, $cond = '')
 {
     $files = array();
-    if ($dh = opendir($dir)) {
+    if (is_dir($dir) && ($dh = opendir($dir))) {
         while (false !== ($filename = readdir($dh))) {
             if (!in_array($filename, array('.', '..')) && ($cond == '' || $cond && preg_match("/$cond/i", $filename))) {
                 $files[] = $filename;
             }
         }
     }
+
     return $files;
 }
-
 
 // Since 2.0: Test User ACL. Test for groups [user may consists requested group]
 function testRoleAdmin($requested_acl, $requested_user = null, $is_self = false)
@@ -774,8 +447,8 @@ function testRoleAdmin($requested_acl, $requested_user = null, $is_self = false)
         return false;
     }
 
-//        $acl = $user['acl'];
-    $acl = $user['AdLevel'];
+    $acl = $user['acl'];
+//    $acl = $user['AdLevel'];
     $grp = getOption('#grp');
 
     $ra = separateString($requested_acl);
@@ -1006,4 +679,17 @@ function cn_load_skin()
     } else {
         die("Can't load skin $config_skin");
     }
+}
+
+// Since 2.0: Language codes initialize
+function cn_lang_init()
+{
+    $lang = getOption('cn_language');
+    if (!$lang) {
+        $lang = 'vi';
+    }
+
+    $ln = include(SERVDIR . '/core/lang/' . $lang . '.php');
+
+    setMemcache('#i18n', is_array($ln) ? $ln : []);
 }

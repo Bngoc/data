@@ -14,7 +14,9 @@
  */
 
 
-if (!defined("DB_ERROR")) define("DB_ERROR", -1);
+if (!defined("DB_ERROR")) {
+    define("DB_ERROR", -1);
+}
 
 if (!defined("DB_ERROR_SYNTAX")) {
     define("DB_ERROR_SYNTAX", -2);
@@ -52,9 +54,10 @@ function adodb_errormsg($value)
 {
     global $ADODB_LANG, $ADODB_LANG_ARRAY;
 
-    if (empty($ADODB_LANG)) $ADODB_LANG = 'en';
-    if (isset($ADODB_LANG_ARRAY['LANG']) && $ADODB_LANG_ARRAY['LANG'] == $ADODB_LANG) ;
-    else {
+    if (empty($ADODB_LANG)) {
+        $ADODB_LANG = 'en';
+    }
+    if (isset($ADODB_LANG_ARRAY['LANG']) && $ADODB_LANG_ARRAY['LANG'] == $ADODB_LANG) ; else {
         include_once(ADODB_DIR . "/lang/adodb-$ADODB_LANG.inc.php");
     }
     return isset($ADODB_LANG_ARRAY[$value]) ? $ADODB_LANG_ARRAY[$value] : $ADODB_LANG_ARRAY[DB_ERROR];
@@ -63,7 +66,9 @@ function adodb_errormsg($value)
 function adodb_error($provider, $dbType, $errno)
 {
     //var_dump($errno);
-    if (is_numeric($errno) && $errno == 0) return 0;
+    if (is_numeric($errno) && $errno == 0) {
+        return 0;
+    }
     switch ($provider) {
         case 'mysql':
             $map = adodb_error_mysql();
@@ -103,7 +108,9 @@ function adodb_error($provider, $dbType, $errno)
     }
     //print_r($map);
     //var_dump($errno);
-    if (isset($map[$errno])) return $map[$errno];
+    if (isset($map[$errno])) {
+        return $map[$errno];
+    }
     return DB_ERROR;
 }
 
@@ -111,7 +118,9 @@ function adodb_error($provider, $dbType, $errno)
 
 function adodb_error_pg($errormsg)
 {
-    if (is_numeric($errormsg)) return (integer)$errormsg;
+    if (is_numeric($errormsg)) {
+        return (integer)$errormsg;
+    }
     // Postgres has no lock-wait timeout.  The best we could do would be to set a statement timeout.
     static $error_regexps = array(
         '(Table does not exist\.|Relation [\"\'].*[\"\'] does not exist|sequence does not exist|class ".+" not found)$' => DB_ERROR_NOSUCHTABLE,

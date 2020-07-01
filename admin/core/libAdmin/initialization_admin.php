@@ -38,8 +38,12 @@ function msg_info($title, $go_back = null)
     include SERVDIR . '/skins/default.skin.php';
     echo_header_admin('info', "Permission check");
 
-    if ($go_back === null) $go_back = $_POST['__referer'];
-    if (empty($go_back)) $go_back = PHP_SELF;
+    if ($go_back === null) {
+        $go_back = $_POST['__referer'];
+    }
+    if (empty($go_back)) {
+        $go_back = PHP_SELF;
+    }
 
     $str_ = '<div class="sub_ranking" align="center" style="color: rgb(36, 36, 36);font-size: 15px;line-height: initial;">
 				<b><p>' . $title . '</p></b><br>
@@ -59,7 +63,9 @@ function cn_sort_menu($opt)
     foreach ($bc as $key => $item) {
         $check = strpos($item['url'], $opt);
         $result .= '<option value="' . $item['url'] . '"';
-        if ($check !== false) $result .= 'selected';
+        if ($check !== false) {
+            $result .= 'selected';
+        }
         $result .= '>' . cnHtmlSpecialChars($item['name']) . '</option>';
     }
 
@@ -84,7 +90,9 @@ function cn_read_file($target)
             $ctime = substr(md5($val), 3, 11);
             list($code32, $name, $price, $image) = explode("|", $val);
 
-            if (!cn_check_code32(trim($code32))) continue;
+            if (!cn_check_code32(trim($code32))) {
+                continue;
+            }
 
             $data[$ctime] = array(
                 'code32' => trim($code32),
@@ -130,15 +138,15 @@ function setOption($opt_name, $var)// $var_name ='')
         $cfg = setoption_rc($c_names, $var, $cfg);
     } /*
     else if ($opt_name[0] == '@'){
-		$set_n = substr($opt_name, 1);
-		//if(!empty($var_name)){
-			//exit();
-			//$cfg[$set_n][$opt_name] = $var;
-			$cfg[$set_n][$opt_name] = $var;
-			//}
-		//else
-			//$cfg[$set_n][$var_name] = $var;
-	}*/
+        $set_n = substr($opt_name, 1);
+        //if(!empty($var_name)){
+            //exit();
+            //$cfg[$set_n][$opt_name] = $var;
+            $cfg[$set_n][$opt_name] = $var;
+            //}
+        //else
+            //$cfg[$set_n][$var_name] = $var;
+    }*/
     else {
         $cfg['%site'][$opt_name] = $var;
     }
@@ -225,6 +233,26 @@ function echo_header_admin($image, $header_text, $bread_crumbs = false)
     echo $skin_header;
 }
 
+function echofooter()
+{
+    global $is_loged_in, $skin_footer, $lang_content_type, $skin_menu, $config_adminemail, $config_admin;
+
+    if ($is_loged_in == TRUE) {
+        $skin_footer = str_replace("{menu}", $skin_menu, $skin_footer);
+    } else {
+        $skin_footer = str_replace("{menu}", " &nbsp; ", $skin_footer);
+    }
+
+    //$skin_footer = get_skin($skin_footer);
+    //$skin_footer = str_replace("{content-type}", $lang_content_type, $skin_footer);
+    $skin_footer = str_replace("{exec-time}", round(microtime(true) - BQN_MU, 3), $skin_footer);
+    $skin_footer = str_replace("{year-time}", date("Y"), $skin_footer);
+    $skin_footer = str_replace("{email-name}", $config_adminemail, $skin_footer);
+    $skin_footer = str_replace("{byname}", $config_admin, $skin_footer);
+
+    die($skin_footer);
+}
+
 function getMember()
 {
     // Not authorized
@@ -243,6 +271,7 @@ function getMember()
     ];
     $user = db_get_member_account($requestData);
     $user['user_Account'] = $user['UserAcc'];
+    $user['acl'] = $user['AdLevel'];
 
     setMemcache('#member', $user);
 
@@ -252,6 +281,165 @@ function getMember()
 /**
  * Call cn_snippet_digital_signature_admin_or_web
  */
-function cn_before_digital_signature_admin_or_web() {
+function cn_before_digital_signature_admin_or_web()
+{
     cn_snippet_digital_signature(getMember());
+}
+
+// Since 2.0: Get template (if not exists, create from defaults)
+function cn_get_template($subTemplate, $template_name = 'default')
+{
+    $templates = getOption('#templates');
+
+    $template_name = strtolower($template_name);
+
+    // User template not exists in config... get from defaults
+    if (isset($templates[$template_name])) {
+        return $templates[$template_name][$subTemplate];
+    }
+
+    $list = cn_template_list();
+
+    if (isset($list[$template_name][$subTemplate])) {
+        return $list[$template_name][$subTemplate];
+    }
+
+    return false;
+}
+
+// Since 2.0: Decode "defaults/templates" to list
+function cn_template_list()
+{
+    $config = file(cn_path_construct(SKIN, 'defaults') . 'character.tpl');
+
+    foreach ($config as $line) {
+        $line_ = trim($line);
+        $lineComent = substr($line_, 0, 2);
+        if (count($line_) === 0 || $line_ === '' || $lineComent == '//') {// || preg_match('/\s/', $line[0])){
+            continue;
+        }
+
+        if ($line_[0] === '#') {
+            continue;
+        }
+        if ($line_[0] == '*') {
+            $_tpl_var = trim(substr($line_, 1));
+            //if ($_tpl_var) $cfg[$template_vars][$_tpl_var] = ''; // lay ten *
+            if ($_tpl_var) {
+                if (!isset($templates[$_tpl_var])) $templates[$_tpl_var] = array();
+                $template_vars_name = $_tpl_var;
+            }
+            continue;
+        } else if ($line_[0] !== '@') {//preg_match('/\s/', $line[0]) && $line_[0] !== ''){
+            list($name_, $value_get) = explode('=', $line_);
+            $value_ = str_replace('_', ' ', $value_get);
+            if (!isset($templates[$_tpl_var][$name_])) {
+                $templates[$_tpl_var][$name_] = $value_;
+            }
+        } else if ($line_[0] == '@') {
+            continue;
+        }
+    }
+
+    setOption('#temp_basic', $templates);
+
+    return isset($templates) ? $templates : array();
+}
+
+// Since 2.0: Decode "defaults/templates" to list
+function cn_template_list_fail_check()
+{
+    $config = file(cn_path_construct(SKIN, 'defaults') . 'templates.tpl');
+    $basic = getOption('#templates_basic');
+    $basic['hash'] = isset($tbasic['hash']) ? $basic['hash'] : '';
+
+    // template file is changed
+    if ($basic['hash'] !== ($hash = md5(join(',', $config)))) {
+        $templates = array();
+        $current_tpl_name = $_tpl_var = '';
+
+        foreach ($config as $line) {
+            if ($line[0] == '#') {
+                $current_tpl_name = trim(substr($line, 1));
+                $templates[$current_tpl_name] = array();
+                continue;
+            }
+
+            // Sub template markers
+            if ($line[0] == '*') {
+                $_tpl_var = trim(substr($line, 1));
+                if ($_tpl_var) {
+                    $template_vars[$_tpl_var] = '';
+                }
+            } elseif (preg_match('/\s/', $line[0]) || $line[0] === '') {
+                // Subtemplate codes
+                if (isset($templates[$current_tpl_name][$_tpl_var])) {
+                    $templates[$current_tpl_name][$_tpl_var] .= substr($line, 1);
+                } else {
+                    $templates[$current_tpl_name][$_tpl_var] = substr($line, 1);
+                }
+            }
+        }
+
+        // set <change hash> var and parsed templates
+        $basic['hash'] = $hash;
+        $basic['templates'] = $templates;
+
+        //setoption('#templates_basic', $tbasic);
+    }
+
+    return isset($tbasic['templates']) ? $basic['templates'] : array();
+}
+
+// Since 2.0: Simple paginate snippet
+function cn_snippet_paginate($st, $per_page = 100, $showed = NULL)
+{
+    echo '<div class="snippet_paginate">';
+
+    echo '<span class="next">';
+    if ($st - $per_page < 0) echo '&lt;&lt; Prev';
+    else echo '<a href="' . cn_url_modify('st=' . ($st - $per_page)) . '">&lt;&lt; Prev</a> ';
+    echo '</span>';
+
+    echo ' <span class="pages">[page <b>' . intval($st / $per_page) . '</b>]</span> ';
+
+    echo '<span class="next">';
+    if ($showed == $per_page) echo '<a href="' . cn_url_modify('st=' . ($st + $per_page)) . '">Next &gt;&gt;</a>';
+    else echo 'Next &gt;&gt;';
+    echo '</span>';
+
+    echo '</div>';
+}
+
+
+// Since 2.0: Create snippet for open external window
+function cn_snippet_open_win($url, $params = array(), $title = 'CN Window')
+{
+    if (empty($params['w'])) {
+        $params['w'] = 550;
+    }
+    if (empty($params['h'])) {
+        $params['h'] = 500;
+    }
+    if (empty($params['t'])) {
+        $params['t'] = 100;
+    }
+    if (empty($params['l'])) {
+        $params['l'] = 100;
+    }
+    if (empty($params['sb'])) {
+        $params['sb'] = 1;
+    }
+    if (empty($params['rs'])) {
+        $params['rs'] = 1;
+    }
+
+    $echo = '';
+    if ($params['l'] === 'auto') {
+        $echo .= 'var lp=(window.innerWidth - ' . $params['w'] . ') / 2; ';
+    } else {
+        $echo .= 'var lp=' . $params['l'] . '; ';
+    }
+
+    return $echo . "window.open('$url', '$title', 'scrollbars={$params['sb']},resizable={$params['rs']},width={$params['w']},height={$params['h']},left='+lp+',top={$params['t']}'); return false;";
 }

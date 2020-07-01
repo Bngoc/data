@@ -21,8 +21,10 @@ function doloop()
         $db->Param(false);
         $x = (rand() % 10) + 1;
         $db->debug = ($i == 1);
-        $id = $db->GetOne($sql,
-            array('Z%', 'Z%', $x));
+        $id = $db->GetOne(
+            $sql,
+            array('Z%', 'Z%', $x)
+        );
         if ($id != $offset + $x) {
             print "<p>Error at $x";
             break;
@@ -72,8 +74,11 @@ $db->Execute("delete from photos where id=9999");
 
 ### VALIDATION
 
-if ($v !== $val) echo "<b>*** ERROR: Inserted value does not match downloaded val<b>";
-else echo "<b>*** OK: Passed</b>";
+if ($v !== $val) {
+    echo "<b>*** ERROR: Inserted value does not match downloaded val<b>";
+} else {
+    echo "<b>*** OK: Passed</b>";
+}
 
 echo "<pre>";
 echo "INSERTED: ", $enc;

@@ -1,11 +1,12 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 add_hook('index/invoke_module', '*char_invoke');
 
 function char_invoke()
 {
-    $char_board = array
-    (
+    $char_board = array(
         'char_manager:info_char:Csc' => 'Thông tin nhân vật',
         'char_manager:reset:Cp' => 'Reset',
         'char_manager:resetvip:Ct' => 'Reset Vip',
@@ -49,8 +50,9 @@ function char_invoke()
 
     foreach ($char_board as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
-        if (function_exists("char_$do"))
+        if (function_exists("char_$do")) {
             cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        }
     }
 
     // Request module
@@ -138,13 +140,24 @@ function char_info_char()
 
     foreach ($showchar as $od => $do) {
         if (!empty($od)) {
+            if ($do['point'] > 0) {
+                $do_10 = "<a href =" . cn_url_modify('mod=char_manager', 'opt=addpoint', 'sub=' . $od) . " title='cộng Point'>" . number_format($do['point'], 0, ",", ".") . "</a>";
+            } else {
+                $do_10 = $do['point'];
+            }
+            if ($do['point_dutru'] > 0) {
+                $do_11 = "<a href =" . cn_url_modify('mod=char_manager', 'opt=subpoint', 'sub=' . $od) . " title='rút Point'>" . number_format($do['point_dutru'], 0, ",", ".") . "</a>";
+            } else {
+                $do_11 = $do['point_dutru'];
+            }
 
-            if ($do['point'] > 0) $do_10 = "<a href =" . cn_url_modify('mod=char_manager', 'opt=addpoint', 'sub=' . $od) . " title='cộng Point'>" . number_format($do['point'], 0, ",", ".") . "</a>"; else $do_10 = $do['point'];
-            if ($do['point_dutru'] > 0) $do_11 = "<a href =" . cn_url_modify('mod=char_manager', 'opt=subpoint', 'sub=' . $od) . " title='rút Point'>" . number_format($do['point_dutru'], 0, ",", ".") . "</a>"; else $do_11 = $do['point_dutru'];
-
-            if ($do['status_off']) $do_12_20 = "<a href =" . cn_url_modify('mod=char_manager', 'opt=offline', 'sub=' . $od) . " title='Đang ủy thác Offline'><img src='" . URL_PATH_IMG . "/checkbullet.gif'></a>";
-            else if ($do['status_on']) $do_12_20 = "<a href =" . cn_url_modify('mod=char_manager', 'opt=online', 'sub=' . $od) . " title='Đang ủy thác Online'><img src='" . URL_PATH_IMG . "/checkbullet.gif'></a>";
-            else $do_12_20 = "<img src='" . URL_PATH_IMG . "/alert_icon.gif'>";
+            if ($do['status_off']) {
+                $do_12_20 = "<a href =" . cn_url_modify('mod=char_manager', 'opt=offline', 'sub=' . $od) . " title='Đang ủy thác Offline'><img src='" . URL_PATH_IMG . "/checkbullet.gif'></a>";
+            } elseif ($do['status_on']) {
+                $do_12_20 = "<a href =" . cn_url_modify('mod=char_manager', 'opt=online', 'sub=' . $od) . " title='Đang ủy thác Online'><img src='" . URL_PATH_IMG . "/checkbullet.gif'></a>";
+            } else {
+                $do_12_20 = "<img src='" . URL_PATH_IMG . "/alert_icon.gif'>";
+            }
 
             $showchar_[] = array('char_image' => $do['char_image'], 'Name' => $od, 'cclass' => $do['cclass'], 'level' => $do['level'], 'str' => $do['str'], 'dex' => $do['dex'], 'vit' => $do['vit'], 'ene' => $do['ene'], 'com' => $do['com'], 'reset' => $do['reset'], 'relife' => $do['relife'], 'point' => $do_10, 'point_dutru' => $do_11, 'status_uythac' => $do_12_20, 'point_uythac' => $do['point_uythac'], 'pcpoint' => $do['pcpoint']);
         }
@@ -176,7 +189,9 @@ function char_reset()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     };
 
     $zen_acc_char = $showchar[$sub]['money'];
@@ -249,7 +264,7 @@ function char_reset()
         $ml_relifes = isset($ml_relifes) ? $ml_relifes : $options_rl[count($options_rl) - 1]['command'];
     }
 
-    if (getOption('hotrotanthu')) {
+    if (getOption('support_new_player')) {
         if (isset($options_tanthu)) {
             foreach ($options_tanthu as $aq => $qa) {
                 if (($qa['reset_min'] <= $reset_rs && $reset_rs <= $qa['reset_max']) && ($qa['relife_min'] <= $relife_vl && $relife_vl <= $qa['relife_max'])) {
@@ -266,33 +281,45 @@ function char_reset()
 
     $abc_level = $level_acc_char - (isset($level) ? $level : 0);
 
-    if (0 <= $get_zen = $zen_acc_char - (isset($zen) ? $zen : 0)) $str_zen = number_format((float)$zen_acc_char, 0, ",", ".") . " (Đủ Zen)"; else {
+    if (0 <= $get_zen = $zen_acc_char - (isset($zen) ? $zen : 0)) {
+        $str_zen = number_format((float)$zen_acc_char, 0, ",", ".") . " (Đủ Zen)";
+    } else {
         $str_zen = number_format((float)$zen_acc_char, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(abs($get_zen)), 0, ",", ".") . " Zen)</font>";
     }
-    if (0 <= $get_chao = $show_blank_chao - (isset($chao) ? $chao : 0)) $str_chao = $show_blank_chao . " (Đủ Chaos)"; else {
+    if (0 <= $get_chao = $show_blank_chao - (isset($chao) ? $chao : 0)) {
+        $str_chao = $show_blank_chao . " (Đủ Chaos)";
+    } else {
         $str_chao = $show_blank_chao . '<font color =red> (Thiếu ' . abs($get_chao) . ' Chaos)</font>';
     }
-    if (0 <= $get_cre = $show_blank_cre - (isset($cre) ? $cre : 0)) $str_cre = "$show_blank_cre (Đủ Creation)"; else {
+    if (0 <= $get_cre = $show_blank_cre - (isset($cre) ? $cre : 0)) {
+        $str_cre = "$show_blank_cre (Đủ Creation)";
+    } else {
         $str_cre = $show_blank_cre . '<font color =red> (Thiếu ' . abs($get_cre) . ' Creation)</font>';
     }
-    if (0 <= $get_blue = $show_blank_blue - (isset($blue) ? $blue : 0)) $str_blue = "$show_blank_blue (Đủ Blue)"; else {
+    if (0 <= $get_blue = $show_blank_blue - (isset($blue) ? $blue : 0)) {
+        $str_blue = "$show_blank_blue (Đủ Blue)";
+    } else {
         $str_blue = $show_blank_blue . '<font color =red> (Thiếu ' . abs($get_blue) . ' Blue)</font>';
     }
 
-    if (getOption('hotrotanthu')) {
+    if (getOption('support_new_player')) {
         $g_lv = isset($giam_lv) ? $giam_lv : 0;
         if (0 <= $testRoleWeb_vl = $abc_level + $g_lv) {
             $str_lever = "$level_acc_char (Đủ level)";
-            if ($g_lv != 0) $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
+            if ($g_lv != 0) {
+                $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
+            }
         } else {
             $thieu_lever = ABS($testRoleWeb_vl);
             $str_lever = "$level_acc_char <font color =red>(Thiếu " . abs($thieu_lever) . " level)</font>";
-            if ($g_lv != 0) $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
+            if ($g_lv != 0) {
+                $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
+            }
         }
     } else {
-        if (0 <= $testRoleWeb_vl = $abc_level)
+        if (0 <= $testRoleWeb_vl = $abc_level) {
             $str_lever = "$level_acc_char (Đủ level).";
-        else {
+        } else {
             $f_lv = ABS($abc_level);
             $str_lever = "$level_acc_char <font color =red>(Thiếu " . abs($f_lv) . " level)</font>";
         }
@@ -302,15 +329,20 @@ function char_reset()
         $i_frist = 0;
         $i_end = 10;
         foreach ($limit_1 as $df => $fd) {
-            if ($rs_top_50 > $i_frist && $rs_top_50 <= $i_end) $gioihan_rs = $fd['top'];
+            if ($rs_top_50 > $i_frist && $rs_top_50 <= $i_end) {
+                $gioihan_rs = $fd['top'];
+            }
             $i_frist = $i_end;
             $i_end = $i_end + 10;
         }
 
         $gioihan_rs = isset($gioihan_rs) ? $gioihan_rs : $limit_1[count($limit_1) - 1]['top'];
-        if ($gioihan_rs > $rs_inday) $rs_day = "$rs_inday / $gioihan_rs";
-        else $rs_day = "<font color=red> $rs_inday / $gioihan_rs </font>";
-    } else if ($user_type_gh_rs == 2) {
+        if ($gioihan_rs > $rs_inday) {
+            $rs_day = "$rs_inday / $gioihan_rs";
+        } else {
+            $rs_day = "<font color=red> $rs_inday / $gioihan_rs </font>";
+        }
+    } elseif ($user_type_gh_rs == 2) {
         $okloop = false;
 
         if (isset($limit_2)) {
@@ -324,10 +356,10 @@ function char_reset()
                     if (0 <= $rs_inday && $rs_inday <= $val['day1']) {
                         $VpointReset = $val['col2'];
                         break;
-                    } else if ($val['day1'] < $rs_inday && $rs_inday <= $val['day2']) {
+                    } elseif ($val['day1'] < $rs_inday && $rs_inday <= $val['day2']) {
                         $VpointReset = $val['col3'];
                         break;
-                    } else if ($val['day2'] < $rs_inday) {
+                    } elseif ($val['day2'] < $rs_inday) {
                         $VpointReset = $val['col4'];
                         break;
                     }
@@ -338,15 +370,17 @@ function char_reset()
             $abvc = $limit_2[count($limit_2) - 1];
             if (0 <= $rs_inday && $rs_inday <= $abvc['day1']) {
                 $VpointReset = $abvc['col2'];
-            } else if ($abvc['day1'] < $rs_inday && $rs_inday <= $abvc['day2']) {
+            } elseif ($abvc['day1'] < $rs_inday && $rs_inday <= $abvc['day2']) {
                 $VpointReset = $abvc['col3'];
-            } else if ($abvc['day2'] < $rs_inday) {
+            } elseif ($abvc['day2'] < $rs_inday) {
                 $VpointReset = $abvc['col4'];
             }
         }
         $rs_day = "$rs_inday / ---";
         $get_vp = $set_vp - (isset($VpointReset) ? $VpointReset : 0);
-        if ($get_vp >= 0) $str_vp = number_format((float)$set_vp, 0, ",", ".") . "(Đủ Vpoint Reset)"; else {
+        if ($get_vp >= 0) {
+            $str_vp = number_format((float)$set_vp, 0, ",", ".") . "(Đủ Vpoint Reset)";
+        } else {
             $str_vp = number_format((float)$set_vp, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(abs($get_vp)), 0, ",", ".") . " Vpoint Reset)</font>";
         }
     } else {
@@ -423,7 +457,7 @@ function char_reset()
                 cn_throw_message("$sub đang ReLife: $relife_vl - Reset: $reset_rs. Để Reset tiếp bạn cần phải ReLife.", 'e');
                 $errors_false = true;
             }
-            if (($get_blue < 0) OR ($get_cre < 0) OR ($get_chao < 0)) {
+            if (($get_blue < 0) or ($get_cre < 0) or ($get_chao < 0)) {
                 cn_throw_message("Bạn không đủ Jewel trong ngân hàng.", 'e');
                 $errors_false = true;
             }
@@ -459,7 +493,9 @@ function char_reset()
                 $resetmoney = $get_zen;
                 $resetpoint += (isset($point_relifes) ? $point_relifes : 0) + (empty($pointThue[0]['PointThue']) ? 0 : $pointThue[0]['PointThue']);
                 $leadership += (isset($ml_relifes) ? $ml_relifes : 0);
-                if ($leadership > 64000) $leadership = 64000;
+                if ($leadership > 64000) {
+                    $leadership = 64000;
+                }
                 if ($resetpoint > 65000) {
                     $pointup = 65000;
                     $resetpoint -= 65000;
@@ -469,7 +505,9 @@ function char_reset()
                 }
 
                 if (($class_ == $arr_class['class_dl_1']) || ($class_ == $arr_class['class_dl_2'])) {
-                } else $leadership = 0;
+                } else {
+                    $leadership = 0;
+                }
 
                 $_arr_cls = separatestRoleWebring($arr_cls);
                 $get_default_class = zenderColumUpdateCharacter($_arr_cls, $default_class, $class_, $arr_class);
@@ -495,20 +533,20 @@ function char_reset()
 
 
                 /*
-					//Reset Point Master Skill
-					if (($class_ == $arr_class['class_dw_3']) || ($class_ == $arr_class['class_dk_3']) || ($class_ == $arr_class['class_elf_3']) || ($class_ == $arr_class['class_mg_2']) || ($class_ == $arr_class['class_dl_2']) || ($class_ == $arr_class['class_sum_3']) || ($class_ == $arr_class['class_rf_2'])){
-						if(getOption('server_type') == "scf")
-							do_update_character('Character', "SCFMasterPoints=$fg_123_pop_val", "Name:'$sub'");
-								//$sql_reset_master_point = "UPDATE Character SET SCFMasterPoints=$master_check[0] WHERE Name='$character'";
-						else if(getOption('server_type') == "ori")
-							do_update_character('T_MasterLevelSystem', "ML_POINT=$fg_123_pop_val","CHAR_NAME:'$sub'");
-								//$sql_reset_master_point = "UPDATE T_MasterLevelSystem SET ML_POINT=$master_check[0] WHERE CHAR_NAME='$character'";
-						else
-							do_update_character('Character', "SCFMasterPoints=$fg_123_pop_val","Name:'$sub'");
-								//$sql_reset_master_point = "UPDATE Character SET SCFMasterPoints=$master_check[0] WHERE Name='$character'";
-						//$result_reset_master_point = $db->Execute($sql_reset_master_point) or die("Lỗi Query: $sql_reset_master_point");
-					}
-					*/
+                    //Reset Point Master Skill
+                    if (($class_ == $arr_class['class_dw_3']) || ($class_ == $arr_class['class_dk_3']) || ($class_ == $arr_class['class_elf_3']) || ($class_ == $arr_class['class_mg_2']) || ($class_ == $arr_class['class_dl_2']) || ($class_ == $arr_class['class_sum_3']) || ($class_ == $arr_class['class_rf_2'])){
+                        if(getOption('server_type') == "scf")
+                            do_update_character('Character', "SCFMasterPoints=$fg_123_pop_val", "Name:'$sub'");
+                                //$sql_reset_master_point = "UPDATE Character SET SCFMasterPoints=$master_check[0] WHERE Name='$character'";
+                        else if(getOption('server_type') == "ori")
+                            do_update_character('T_MasterLevelSystem', "ML_POINT=$fg_123_pop_val","CHAR_NAME:'$sub'");
+                                //$sql_reset_master_point = "UPDATE T_MasterLevelSystem SET ML_POINT=$master_check[0] WHERE CHAR_NAME='$character'";
+                        else
+                            do_update_character('Character', "SCFMasterPoints=$fg_123_pop_val","Name:'$sub'");
+                                //$sql_reset_master_point = "UPDATE Character SET SCFMasterPoints=$master_check[0] WHERE Name='$character'";
+                        //$result_reset_master_point = $db->Execute($sql_reset_master_point) or die("Lỗi Query: $sql_reset_master_point");
+                    }
+                    */
                 do_update_character(
                     'MEMB_INFO',
                     "jewel_chao=$get_chao",
@@ -519,8 +557,7 @@ function char_reset()
                 );
 
                 //use event top testRoleWeb dd/mm/yy -> dd/mm/yy
-                if ((getOption('event_toprs_on') == 1))// && (strtotime($event_toprs_begin) < $ctime) && (strtotime($event_toprs_end) + 24*60*60 > $ctime))
-                {
+                if ((getOption('event_toprs_on') == 1)) {// && (strtotime($event_toprs_begin) < $ctime) && (strtotime($event_toprs_end) + 24*60*60 > $ctime))
                     //Kiem tra da co du lieu trong data Event_TOP_RS
                     $data___ = do_select_character('Event_TOP_RS', '*', "name='$sub'");
                     if ($data___) {
@@ -546,9 +583,12 @@ function char_reset()
                 //End Ghi vào Log
 
                 if ($user_type_gh_rs == 1) {
-                    if ($gioihan_rs > $CountNoResetInDay) $rs_day_ = "$CountNoResetInDay / $gioihan_rs";
-                    else if ($gioihan_rs == $CountNoResetInDay) $rs_day_ = "<font color=red> $CountNoResetInDay / $gioihan_rs </font>";
-                } else if ($user_type_gh_rs == 2) {
+                    if ($gioihan_rs > $CountNoResetInDay) {
+                        $rs_day_ = "$CountNoResetInDay / $gioihan_rs";
+                    } elseif ($gioihan_rs == $CountNoResetInDay) {
+                        $rs_day_ = "<font color=red> $CountNoResetInDay / $gioihan_rs </font>";
+                    }
+                } elseif ($user_type_gh_rs == 2) {
                     $okloop = false;
                     if (isset($limit_2)) {
                         $lv_rs_en = 0;
@@ -561,10 +601,10 @@ function char_reset()
                                 if (0 <= $CountNoResetInDay && $CountNoResetInDay <= $val['day1']) {
                                     $VpointReset = $val['col2'];
                                     break;
-                                } else if ($val['day1'] < $CountNoResetInDay && $CountNoResetInDay <= $val['day2']) {
+                                } elseif ($val['day1'] < $CountNoResetInDay && $CountNoResetInDay <= $val['day2']) {
                                     $VpointReset = $val['col3'];
                                     break;
-                                } else if ($val['day2'] < $CountNoResetInDay) {
+                                } elseif ($val['day2'] < $CountNoResetInDay) {
                                     $VpointReset = $val['col4'];
                                     break;
                                 }
@@ -575,15 +615,17 @@ function char_reset()
                         $abvc = $limit_2[count($limit_2) - 1];
                         if (0 <= $CountNoResetInDay && $CountNoResetInDay <= $abvc['day1']) {
                             $VpointReset = $abvc['col2'];
-                        } else if ($abvc['day1'] < $CountNoResetInDay && $CountNoResetInDay <= $abvc['day2']) {
+                        } elseif ($abvc['day1'] < $CountNoResetInDay && $CountNoResetInDay <= $abvc['day2']) {
                             $VpointReset = $abvc['col3'];
-                        } else if ($abvc['day2'] < $CountNoResetInDay) {
+                        } elseif ($abvc['day2'] < $CountNoResetInDay) {
                             $VpointReset = $abvc['col4'];
                         }
                     }
 
                     $get_vpup = $vpointnew - (isset($VpointReset) ? $VpointReset : 0);
-                    if ($get_vpup >= 0) $str_vp_ = "$vpointnew (Đủ Vpoint Reset)"; else {
+                    if ($get_vpup >= 0) {
+                        $str_vp_ = "$vpointnew (Đủ Vpoint Reset)";
+                    } else {
                         $str_vp_ = "$vpointnew <font color =red> (Thiếu " . abs($get_vpup) . " Vpoint Reset)</font>";
                     }
                     $rs_day_ = "$CountNoResetInDay / ---";
@@ -591,8 +633,11 @@ function char_reset()
                     $rs_day_ = "$CountNoResetInDay / No limit";
                 }
 
-                if ($rs_index >= count($options_rs) - 1) $rs_index = count($options_rs) - 1;
-                else if ($resetup > $i_e) ++$rs_index;
+                if ($rs_index >= count($options_rs) - 1) {
+                    $rs_index = count($options_rs) - 1;
+                } elseif ($resetup > $i_e) {
+                    ++$rs_index;
+                }
 
                 $level = $options_rs[$rs_index]['level'];
                 $zen = $options_rs[$rs_index]['zen'];
@@ -601,38 +646,51 @@ function char_reset()
                 $blue = $options_rs[$rs_index]['blue'];
 
                 foreach ($options_tanthu as $aq => $qa) {
-                    if (($qa['reset_min'] <= $resetup && $resetup <= $qa['reset_max']) && ($qa['relife_min'] <= $relife_vl && $relife_vl <= $qa['relife_max']))
+                    if (($qa['reset_min'] <= $resetup && $resetup <= $qa['reset_max']) && ($qa['relife_min'] <= $relife_vl && $relife_vl <= $qa['relife_max'])) {
                         $giam_lvup = $qa['levelgiam'];
+                    }
                 }
 
                 $abc_levelup = 1 - (isset($level) ? $level : 0);
-                if (getOption('hotrotanthu')) {
+                if (getOption('support_new_player')) {
                     $g_lvup = isset($giam_lvup) ? $giam_lvup : 0;
                     $testRoleWeb_vlup = $abc_levelup + $g_lvup;
-                    if ($testRoleWeb_vlup >= 0) $str_leverup = "1 (Thiếu level Reset)";
-                    else {
+                    if ($testRoleWeb_vlup >= 0) {
+                        $str_leverup = "1 (Thiếu level Reset)";
+                    } else {
                         $thieu_leverup = ABS($testRoleWeb_vlup);
                         $str_leverup = "1 <font color =red>(Thiếu $thieu_leverup level Reset)</font>";
-                        if ($g_lvup != 0) $str_leverup .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lvup level</i></font>";
+                        if ($g_lvup != 0) {
+                            $str_leverup .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lvup level</i></font>";
+                        }
                     }
                 } else {
                     $testRoleWeb_vlup = $abc_levelup;
-                    if ($testRoleWeb_vl >= 0) $str_leverup = "1 (Thiếu level Reset)";
-                    else {
+                    if ($testRoleWeb_vl >= 0) {
+                        $str_leverup = "1 (Thiếu level Reset)";
+                    } else {
                         $f_lvup = ABS($abc_level);
                         $str_leverup = "1 <font color =red>(Thiếu $f_lvup level Reset)</font>";
                     }
                 }
-                if (($get_zen - $zen) >= 0) $str_zenup = number_format((float)$get_zen, 0, ",", ".") . " (Đủ Zen Reset)"; else {
+                if (($get_zen - $zen) >= 0) {
+                    $str_zenup = number_format((float)$get_zen, 0, ",", ".") . " (Đủ Zen Reset)";
+                } else {
                     $str_zenup = number_format((float)$get_zen, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(ABS($get_zen - $zen)), 0, ",", ".") . " Zen Reset)</font>";
                 }
-                if (($get_chao - $chao) >= 0) $str_chaoup = number_format((float)$get_chao, 0, ",", ".") . " (Đủ Chaos Reset)"; else {
+                if (($get_chao - $chao) >= 0) {
+                    $str_chaoup = number_format((float)$get_chao, 0, ",", ".") . " (Đủ Chaos Reset)";
+                } else {
                     $str_chaoup = number_format((float)$get_chao, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(ABS($get_chao - $chao)), 0, ",", ".") . " Chaos Reset)</font>";
                 }
-                if (($get_cre - $cre) >= 0) $str_creup = number_format((float)$get_cre, 0, ",", ".") . " (Đủ Creation Reset)"; else {
+                if (($get_cre - $cre) >= 0) {
+                    $str_creup = number_format((float)$get_cre, 0, ",", ".") . " (Đủ Creation Reset)";
+                } else {
                     $str_creup = number_format((float)$get_cre, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(ABS($get_cre - $cre)), 0, ",", ".") . " Create Reset)</font>";
                 }
-                if (($get_blue - $blue) >= 0) $str_blueup = number_format((float)$get_blue, 0, ",", ".") . " (Đủ Blue Reset)"; else {
+                if (($get_blue - $blue) >= 0) {
+                    $str_blueup = number_format((float)$get_blue, 0, ",", ".") . " (Đủ Blue Reset)";
+                } else {
                     $str_blueup = number_format((float)$get_blue, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(ABS($get_blue - $blue)), 0, ",", ".") . " Blue Reset)</font>";
                 }
 
@@ -649,8 +707,11 @@ function char_reset()
                 ++$showchar[$sub]['resetInDay'];
 
                 cn_throw_message("$sub Reset lần thứ $resetup thành công!");
-                if ($resetpoint > 0) $str_rutpoint = "Bạn có " . number_format((float)$pointup, 0, ",", ".") . " Point. Vui lòng <a href='" . cn_url_modify('mod=char_manager', 'opt=addpoint', 'sub=' . $sub) . "' title='cộng Point'> cộng Point </a> trước khi <b><a href ='" . cn_url_modify('mod=char_manager', 'opt=subpoint', 'sub=' . $sub) . "' title='rút Point'> rút Point</a></b> còn lại cho nhân vật $sub.";
-                else $str_rutpoint = "Bạn có " . number_format((float)$pointup, 0, ",", ".") . " Point. Vui lòng <a href ='" . cn_url_modify('mod=char_manager', 'opt=addpoint', 'sub=' . $sub) . "'> cộng Point </a> cho nhân vật $sub.";
+                if ($resetpoint > 0) {
+                    $str_rutpoint = "Bạn có " . number_format((float)$pointup, 0, ",", ".") . " Point. Vui lòng <a href='" . cn_url_modify('mod=char_manager', 'opt=addpoint', 'sub=' . $sub) . "' title='cộng Point'> cộng Point </a> trước khi <b><a href ='" . cn_url_modify('mod=char_manager', 'opt=subpoint', 'sub=' . $sub) . "' title='rút Point'> rút Point</a></b> còn lại cho nhân vật $sub.";
+                } else {
+                    $str_rutpoint = "Bạn có " . number_format((float)$pointup, 0, ",", ".") . " Point. Vui lòng <a href ='" . cn_url_modify('mod=char_manager', 'opt=addpoint', 'sub=' . $sub) . "'> cộng Point </a> cho nhân vật $sub.";
+                }
                 $str_rutpoint .= "<br> <font color=red><i><em>Lưu ý</em><i>: Cộng Point mới có Skill!</font>";
             }
         }
@@ -658,7 +719,9 @@ function char_reset()
     //-----------------------------------------------
 
     $user_max_rs = getOption('cap_reset_max');
-    if ($user_max_rs > 20) $user_max_rs = 20;
+    if ($user_max_rs > 20) {
+        $user_max_rs = 20;
+    }
 
     $get_gh_loai1 = isset($limit_1) ? $limit_1 : array();
     $get_gh_loai2 = isset($limit_2) ? $limit_2 : array();
@@ -692,10 +755,12 @@ function char_resetvip()
     $options_rl = cn_template_relife();
     $showchar = cn_character();
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     };
 
     //$zen_acc_char = $showchar[$sub]['money'];
@@ -763,7 +828,7 @@ function char_resetvip()
         $ml_relifes = isset($ml_relifes) ? $ml_relifes : $options_rl[count($options_rl) - 1]['command'];
     }
 
-    if (getOption('hotrotanthu')) {
+    if (getOption('support_new_player')) {
         if (isset($options_tanthu)) {
             foreach ($options_tanthu as $aq => $qa) {
                 if (($qa['reset_min'] <= $reset_rsvip && $reset_rsvip <= $qa['reset_max']) && ($qa['relife_min'] <= $relife_vl && $relife_vl <= $qa['relife_max'])) {
@@ -778,14 +843,14 @@ function char_resetvip()
     if ($blank_gcoin_km >= $kt_gcoin) {
         $get_blank_gkm = $blank_gcoin_km - $kt_gcoin;
         $sms_gckm = " (Đủ Gcoin KM)";
-    } else if ($blank_gcoin >= $kt_gcoin) {
+    } elseif ($blank_gcoin >= $kt_gcoin) {
         $get_blank_g = $blank_gcoin - $kt_gcoin;
         $sms_gc = " (Đủ Gcoin)";
-    } else if ($tong_gcoin >= $kt_gcoin) {
+    } elseif ($tong_gcoin >= $kt_gcoin) {
         $get_blank_g = $blank_gcoin + $blank_gcoin_km - $kt_gcoin;
         $get_blank_gkm = 0;
         $sms_gc = " (Đủ Gcoin)";
-    } else if ($blank_vp >= $kt_vpoint) {
+    } elseif ($blank_vp >= $kt_vpoint) {
         $get_blank_vp = $blank_vp - $kt_vpoint;
         $sms_vp = " (Đủ Vpoint)";
     } else {
@@ -801,22 +866,26 @@ function char_resetvip()
 
     $abc_level = $level_acc_char - (isset($level) ? $level : 0);
 
-    if (getOption('hotrotanthu')) {
+    if (getOption('support_new_player')) {
         $g_lv = isset($giam_lv) ? $giam_lv : 0;
         $testRoleWeb_vl = $abc_level + $g_lv;
         if ($testRoleWeb_vl >= 0) {
             $str_lever = "$level_acc_char (Đủ level)";
-            if ($g_lv != 0) $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
+            if ($g_lv != 0) {
+                $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
+            }
         } else {
             $thieu_lever = ABS($testRoleWeb_vl);
             $str_lever = "$level_acc_char <font color =red>(Thiếu " . abs($thieu_lever) . " level)</font>";
-            if ($g_lv != 0) $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
+            if ($g_lv != 0) {
+                $str_lever .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lv level</i></font>";
+            }
         }
     } else {
         $testRoleWeb_vl = $abc_level;
-        if ($testRoleWeb_vl >= 0)
+        if ($testRoleWeb_vl >= 0) {
             $str_lever = "$level_acc_char (Đủ level).";
-        else {
+        } else {
             $f_lv = ABS($abc_level);
             $str_lever = "$level_acc_char <font color =red>(Thiếu " . abs($f_lv) . " level)</font>";
         }
@@ -826,7 +895,9 @@ function char_resetvip()
         $i_frist = 0;
         $i_end = 10;
         foreach ($options_gh1 as $df => $fd) {
-            if ($rsvip_top_50 > $i_frist && $rsvip_top_50 <= $i_end) $gioihan_rsvip = $fd['top'];
+            if ($rsvip_top_50 > $i_frist && $rsvip_top_50 <= $i_end) {
+                $gioihan_rsvip = $fd['top'];
+            }
             $i_frist = $i_end;
             $i_end = $i_end + 10;
         }
@@ -838,8 +909,7 @@ function char_resetvip()
             $rs_day = "<font color=red> $rsvip_inday / $gioihan_rsvip </font>";
         }
         $get_vp = (isset($get_blank_vp) ? $get_blank_vp : $blank_vp);
-
-    } else if ($user_type_gh_rs == 2) {
+    } elseif ($user_type_gh_rs == 2) {
         $okloop = false;
 
         if (isset($options_gh2)) {
@@ -857,10 +927,10 @@ function char_resetvip()
                     if (0 <= $rsvip_inday && $rsvip_inday <= $val['day1']) {
                         $VpointReset = $val['col2'];
                         break;
-                    } else if ($val['day1'] < $rsvip_inday && $rsvip_inday <= $val['day2']) {
+                    } elseif ($val['day1'] < $rsvip_inday && $rsvip_inday <= $val['day2']) {
                         $VpointReset = $val['col3'];
                         break;
-                    } else if ($val['day2'] < $rsvip_inday) {
+                    } elseif ($val['day2'] < $rsvip_inday) {
                         $VpointReset = $val['col4'];
                         break;
                     }
@@ -872,9 +942,9 @@ function char_resetvip()
             $abvc = $options_gh2[count($options_gh2) - 1];
             if (0 <= $rsvip_inday && $rsvip_inday <= $abvc['day1']) {
                 $VpointReset = $abvc['col2'];
-            } else if ($abvc['day1'] < $rsvip_inday && $rsvip_inday <= $abvc['day2']) {
+            } elseif ($abvc['day1'] < $rsvip_inday && $rsvip_inday <= $abvc['day2']) {
                 $VpointReset = $abvc['col3'];
-            } else if ($abvc['day2'] < $rsvip_inday) {
+            } elseif ($abvc['day2'] < $rsvip_inday) {
                 $VpointReset = $abvc['col4'];
             }
         }
@@ -996,7 +1066,9 @@ function char_resetvip()
                 $CountNoResetInDay = $rsvip_inday + 1;
                 $resetpoint_vip += (isset($point_relifes) ? $point_relifes : 0) + (empty($pointThue[0]['PointThue']) ? 0 : $pointThue[0]['PointThue']);
                 $leadership_vip += (isset($ml_relifes) ? $ml_relifes : 0);
-                if ($leadership_vip > 64000) $leadership_vip = 64000;
+                if ($leadership_vip > 64000) {
+                    $leadership_vip = 64000;
+                }
                 if ($resetpoint_vip > 65000) {
                     $pointup_vip = 65000;
                     $resetpoint_vip -= 65000;
@@ -1007,7 +1079,9 @@ function char_resetvip()
 
                 if ($class_ == $arr_class['class_dl_1'] || $class_ == $arr_class['class_dl_2']) {
                     $leadership = $leadership_vip;
-                } else $leadership = 0;
+                } else {
+                    $leadership = 0;
+                }
 
                 $_arr_cls = separatestRoleWebring($arr_cls);
                 $get_default_class = zenderColumUpdateCharacter($_arr_cls, $default_class, $class_, $arr_class);
@@ -1030,16 +1104,16 @@ function char_resetvip()
                 );
 
                 /*
-					//Reset Point Master Skill
-					if (($class_ == $arr_class['class_dw_3']) || ($class_ == $arr_class['class_dk_3']) || ($class_ == $arr_class['class_elf_3']) || ($class_ == $arr_class['class_mg_2']) || ($class_ == $arr_class['class_dl_2']) || ($class_ == $arr_class['class_sum_3']) || ($class_ == $arr_class['class_rf_2'])){
-						if(getOption('server_type') == "scf")
-							do_update_character('Character', "SCFMasterPoints=$fg_123_pop_val", "Name:'$sub'");
-						else if(getOption('server_type') == "ori")
-							do_update_character('T_MasterLevelSystem', "ML_POINT=$fg_123_pop_val","CHAR_NAME:'$sub'");
-						else
-							do_update_character('Character', "SCFMasterPoints=$fg_123_pop_val","Name:'$sub'");
-					}
-					*/
+                    //Reset Point Master Skill
+                    if (($class_ == $arr_class['class_dw_3']) || ($class_ == $arr_class['class_dk_3']) || ($class_ == $arr_class['class_elf_3']) || ($class_ == $arr_class['class_mg_2']) || ($class_ == $arr_class['class_dl_2']) || ($class_ == $arr_class['class_sum_3']) || ($class_ == $arr_class['class_rf_2'])){
+                        if(getOption('server_type') == "scf")
+                            do_update_character('Character', "SCFMasterPoints=$fg_123_pop_val", "Name:'$sub'");
+                        else if(getOption('server_type') == "ori")
+                            do_update_character('T_MasterLevelSystem', "ML_POINT=$fg_123_pop_val","CHAR_NAME:'$sub'");
+                        else
+                            do_update_character('Character', "SCFMasterPoints=$fg_123_pop_val","Name:'$sub'");
+                    }
+                    */
                 do_update_character(
                     'MEMB_INFO',
                     "gcoin=$gcoin_rsvip",
@@ -1060,11 +1134,14 @@ function char_resetvip()
                 }
 
                 if ($user_type_gh_rs == 1) {
-                    if ($gioihan_rsvip > $CountNoResetInDay) $rs_day_ = "$CountNoResetInDay / $gioihan_rsvip";
-                    else if ($gioihan_rsvip == $CountNoResetInDay) $rs_day_ = "<font color=red> $CountNoResetInDay / $gioihan_rsvip </font>";
-                } else if ($user_type_gh_rs == 2) {
+                    if ($gioihan_rsvip > $CountNoResetInDay) {
+                        $rs_day_ = "$CountNoResetInDay / $gioihan_rsvip";
+                    } elseif ($gioihan_rsvip == $CountNoResetInDay) {
+                        $rs_day_ = "<font color=red> $CountNoResetInDay / $gioihan_rsvip </font>";
+                    }
+                } elseif ($user_type_gh_rs == 2) {
                     $okloop = false;
-                    if (isset($options_gh2))
+                    if (isset($options_gh2)) {
                         foreach ($options_gh2 as $d => $val) {
                             $lv_rs_f = $okloop ? $lv_rs_en : 1;
                             $lv_rs_en = $val['col1'];
@@ -1074,32 +1151,36 @@ function char_resetvip()
                                 if (0 <= $CountNoResetInDay && $CountNoResetInDay <= $val['day1']) {
                                     $VpointReset = $val['col2'];
                                     break;
-                                } else if ($val['day1'] < $CountNoResetInDay && $CountNoResetInDay <= $val['day2']) {
+                                } elseif ($val['day1'] < $CountNoResetInDay && $CountNoResetInDay <= $val['day2']) {
                                     $VpointReset = $val['col3'];
                                     break;
-                                } else if ($val['day2'] < $CountNoResetInDay) {
+                                } elseif ($val['day2'] < $CountNoResetInDay) {
                                     $VpointReset = $val['col4'];
                                     break;
                                 }
                             }
                         }
+                    }
 
                     if ($resetvipup > $options_gh2[count($options_gh2) - 1]['col1']) {
                         $abvc = $options_gh2[count($options_gh2) - 1];
                         if (0 <= $CountNoResetInDay && $CountNoResetInDay <= $abvc['day1']) {
                             $VpointReset = $abvc['col2'];
-                        } else if ($abvc['day1'] < $CountNoResetInDay && $CountNoResetInDay <= $abvc['day2']) {
+                        } elseif ($abvc['day1'] < $CountNoResetInDay && $CountNoResetInDay <= $abvc['day2']) {
                             $VpointReset = $abvc['col3'];
-                        } else if ($abvc['day2'] < $CountNoResetInDay) {
+                        } elseif ($abvc['day2'] < $CountNoResetInDay) {
                             $VpointReset = $abvc['col4'];
                         }
                     }
 
                     $rs_day_ = "$CountNoResetInDay / ---";
                     $get_vp_ = $vpointnew - (isset($VpointReset) ? $VpointReset : 0);
-                    if ($get_vp_ < 0)
+                    if ($get_vp_ < 0) {
                         $str_vp_ = " " . number_format((float)$vpointnew, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(abs($get_vp_)), 0, ",", ".") . " Vpoint Reset Vip)</font>";
-                } else $rs_day_ = "$CountNoResetInDay / No limit";
+                    }
+                } else {
+                    $rs_day_ = "$CountNoResetInDay / No limit";
+                }
 
                 //if($rsvip_index >= count($options_rsvip)-1) $rsvip_index = count($options_rsvip)-1;
                 //else
@@ -1110,31 +1191,39 @@ function char_resetvip()
                     $kt_gcoin = $options_rsvip[$rsvip_index]['gcoin'];
                 }
                 foreach ($options_tanthu as $aq => $qa) {
-                    if (($qa['reset_min'] <= $resetvipup && $resetvipup <= $qa['reset_max']) && ($qa['relife_min'] <= $relife_vl && $relife_vl <= $qa['relife_max']))
+                    if (($qa['reset_min'] <= $resetvipup && $resetvipup <= $qa['reset_max']) && ($qa['relife_min'] <= $relife_vl && $relife_vl <= $qa['relife_max'])) {
                         $giam_lvup = $qa['levelgiam'];
+                    }
                 }
 
                 $abc_levelup = 1 - (isset($level) ? $level : 0);
-                if (getOption('hotrotanthu')) {
+                if (getOption('support_new_player')) {
                     $g_lvup = isset($giam_lvup) ? $giam_lvup : 0;
                     $testRoleWeb_vlup = $abc_levelup + $g_lvup;
-                    if ($testRoleWeb_vlup >= 0) $str_leverup = "1 (Thiếu level)";
-                    else {
+                    if ($testRoleWeb_vlup >= 0) {
+                        $str_leverup = "1 (Thiếu level)";
+                    } else {
                         $thieu_leverup = ABS($testRoleWeb_vlup);
                         $str_leverup = "1 <font color =red>(Thiếu " . abs($thieu_leverup) . " level)</font>";
-                        if ($g_lvup != 0) $str_leverup .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lvup level</i></font>";
+                        if ($g_lvup != 0) {
+                            $str_leverup .= "<font color =#747484><i> Hỗ trợ tân thủ giảm $g_lvup level</i></font>";
+                        }
                     }
                 } else {
                     $testRoleWeb_vlup = $abc_levelup;
-                    if ($testRoleWeb_vl >= 0) $str_leverup = "1 (Thiếu level)";
-                    else {
+                    if ($testRoleWeb_vl >= 0) {
+                        $str_leverup = "1 (Thiếu level)";
+                    } else {
                         $f_lvup = ABS($abc_level);
                         $str_leverup = "1 <font color =red>(Thiếu " . abs($f_lvup) . " level)</font>";
                     }
                 }
                 //>>>>>>>>>>>>>>>>>>>>>> update .... loai 2....
-                if (($gcoin_gkm_rsvip > $kt_gcoin) || ($gcoin_rsvip >= $kt_gcoin) || (($gcoin_gkm_rsvip + $gcoin_rsvip) >= $kt_gcoin) || ((isset($get_vp_) ? $get_vp_ : $vpointnew) >= $kt_vpoint)) $result_rsvip_false = true;
-                else $result_rsvip_false = false;
+                if (($gcoin_gkm_rsvip > $kt_gcoin) || ($gcoin_rsvip >= $kt_gcoin) || (($gcoin_gkm_rsvip + $gcoin_rsvip) >= $kt_gcoin) || ((isset($get_vp_) ? $get_vp_ : $vpointnew) >= $kt_vpoint)) {
+                    $result_rsvip_false = true;
+                } else {
+                    $result_rsvip_false = false;
+                }
 
                 if ($result_rsvip_false) {
                     $result_rs_blank_ = "Đủ để Reset Vip";
@@ -1169,8 +1258,11 @@ function char_resetvip()
                 //End Ghi vào Log
 
                 cn_throw_message("$sub Reset Vip lần thứ $resetvipup thành công!");
-                if ($resetpoint_vip > 0) $str_rutpoint = "Bạn có " . number_format((float)$pointup_vip, 0, ",", ".") . " Point. Vui lòng <a href='" . cn_url_modify('mod=char_manager', 'opt=addpoint', 'sub=' . $sub) . "' title='cộng Point'> cộng Point </a> trước khi <b><a href ='" . cn_url_modify('mod=char_manager', 'opt=subpoint', 'sub=' . $sub) . "' title='rút Point'> rút Point</a></b> còn lại cho nhân vật $sub.";
-                else $str_rutpoint = "Bạn có " . number_format((float)$pointup_vip, 0, ",", ".") . " Point. Vui lòng <a href ='" . cn_url_modify('mod=char_manager', 'opt=addpoint', 'sub=' . $sub) . "'> cộng Point </a> cho nhân vật $sub.";
+                if ($resetpoint_vip > 0) {
+                    $str_rutpoint = "Bạn có " . number_format((float)$pointup_vip, 0, ",", ".") . " Point. Vui lòng <a href='" . cn_url_modify('mod=char_manager', 'opt=addpoint', 'sub=' . $sub) . "' title='cộng Point'> cộng Point </a> trước khi <b><a href ='" . cn_url_modify('mod=char_manager', 'opt=subpoint', 'sub=' . $sub) . "' title='rút Point'> rút Point</a></b> còn lại cho nhân vật $sub.";
+                } else {
+                    $str_rutpoint = "Bạn có " . number_format((float)$pointup_vip, 0, ",", ".") . " Point. Vui lòng <a href ='" . cn_url_modify('mod=char_manager', 'opt=addpoint', 'sub=' . $sub) . "'> cộng Point </a> cho nhân vật $sub.";
+                }
                 $str_rutpoint .= "<br><font color=red><i><em>Lưu ý</em><i>: Cộng Point mới có Skill! </font>";
             }
         }
@@ -1178,7 +1270,9 @@ function char_resetvip()
     //-----------------------------------------------
 
     $user_max_rs = getOption('cap_reset_max');
-    if ($user_max_rs > 20) $user_max_rs = 20;
+    if ($user_max_rs > 20) {
+        $user_max_rs = 20;
+    }
 
     $get_gh_loai1 = isset($options_gh1) ? $options_gh1 : array();
     $get_gh_loai2 = isset($options_gh2) ? $options_gh2 : array();
@@ -1209,10 +1303,12 @@ function char_relife()
     $arr_class = cn_template_class();
     $options_rl = cn_template_relife();
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     };
 
     $level_acc_char = $showchar[$sub]['level'];
@@ -1233,11 +1329,15 @@ function char_relife()
     }
     if (0 < $f_lv = 400 - $level_acc_char) {
         $str_lever = "$level_acc_char <font color =red>(Thiếu " . abs($f_lv) . " level)</font>";
-    } else $str_lever = "$level_acc_char (Đủ level)";
+    } else {
+        $str_lever = "$level_acc_char (Đủ level)";
+    }
 
     if (0 < $relife_rs = $reset_relifes - $reset_rs) {
         $str_rs = "$reset_rs <font color =red>(Thiếu " . abs($relife_rs) . " Reset)</font>";
-    } else $str_rs = "$level_acc_char (Đủ Reset)";
+    } else {
+        $str_rs = "$level_acc_char (Đủ Reset)";
+    }
 
     if (check_online($accc_)) {
         $check_on = true;
@@ -1301,7 +1401,7 @@ function char_relife()
                 $MapPosY = 134;
                 $Mapdir = 0;
                 //Summoner
-                if ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3']) {
+                if ($class_ == $arr_class['class_sum_1'] or $class_ == $arr_class['class_sum_2'] or $class_ == $arr_class['class_sum_3']) {
                     $MapNumber = 3;
                     $MapPosX = 51;
                     $MapPosY = 215;
@@ -1311,13 +1411,15 @@ function char_relife()
                 $CountRelifeup = $relife_vl + 1;
                 $fg_123_pop_val = array_pop($fg_123);
 
-                if ($class_ == $arr_class['class_dl_1'] OR $class_ == $arr_class['class_dl_2']) {
+                if ($class_ == $arr_class['class_dl_1'] or $class_ == $arr_class['class_dl_2']) {
                     $_ml_relifes = $ml_relifes;
                 }
 
                 $rl_ml_relifes = isset($_ml_relifes) ? $_ml_relifes : 0;
 
-                if ($rl_ml_relifes > 64000) $rl_ml_relifes = 64000;
+                if ($rl_ml_relifes > 64000) {
+                    $rl_ml_relifes = 64000;
+                }
                 if ($point_relifes > 65000) {
                     $pointup_rl = 65000;
                     $point_relifes -= 65000;
@@ -1354,7 +1456,7 @@ function char_relife()
                     "Name:'$sub'"
                 );
 
-                if ($class_ == $arr_class['class_dw_3'] OR $class_ == $arr_class['class_dk_3'] OR $class_ == $arr_class['class_elf_3']) {
+                if ($class_ == $arr_class['class_dw_3'] or $class_ == $arr_class['class_dk_3'] or $class_ == $arr_class['class_elf_3']) {
                     do_update_character(
                         'Character',
                         'Quest=0xaaeaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
@@ -1363,38 +1465,42 @@ function char_relife()
                 }
 
                 //Add Xoay kiem cho DK
-                if ($class_ == $arr_class['class_dk_1'] OR $class_ == $arr_class['class_dk_2'] OR $class_ == $arr_class['class_dk_3'])
+                if ($class_ == $arr_class['class_dk_1'] or $class_ == $arr_class['class_dk_2'] or $class_ == $arr_class['class_dk_3']) {
                     do_update_character(
                         'Character',
                         'MagicList=0x2c0000430000440000450000460000470000290000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
                         "name:'$sub'"
                     );
+                }
 
                 //Add Mui ten vo tan cho Elf C3
-                if ($class_ == $arr_class['class_elf_3'])
+                if ($class_ == $arr_class['class_elf_3']) {
                     do_update_character(
                         'Character',
                         'MagicList=0x2e00004300004400004500004600004700004d0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
                         "name:'$sub'"
                     );
+                }
 
                 //Add Skill cho Summoner
-                if ($class_ == $arr_class['class_sum_1'] OR $class_ == $arr_class['class_sum_2'] OR $class_ == $arr_class['class_sum_3'])
+                if ($class_ == $arr_class['class_sum_1'] or $class_ == $arr_class['class_sum_2'] or $class_ == $arr_class['class_sum_3']) {
                     do_update_character(
                         'Character',
                         'MagicList=0xda0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000ff0000',
                         "name:'$sub'"
                     );
+                }
 
 
                 //Reset Point Master Skill
                 if (($class_ == $arr_class['class_dw_3']) || ($class_ == $arr_class['class_dk_3']) || ($class_ == $arr_class['class_elf_3']) || ($class_ == $arr_class['class_mg_2']) || ($class_ == $arr_class['class_dl_2']) || ($class_ == $arr_class['class_sum_3']) || ($class_ == $arr_class['class_rf_2'])) {
-                    if (getOption('server_type') == "scf")
+                    if (getOption('server_type') == "scf") {
                         do_update_character('Character', "SCFMasterPoints=$fg_123_pop_val", "Name:'$sub'");
-                    else if (getOption('server_type') == "ori")
+                    } elseif (getOption('server_type') == "ori") {
                         do_update_character('T_MasterLevelSystem', "ML_POINT=$fg_123_pop_val", "CHAR_NAME:'$sub'");
-                    else
+                    } else {
                         do_update_character('Character', "SCFMasterPoints=$fg_123_pop_val", "Name:'$sub'");
+                    }
                 }
 
                 $before_info_rl[2][1] = $CountRelifeup;
@@ -1415,8 +1521,11 @@ function char_relife()
                 //End Ghi vào Log
 
                 cn_throw_message("$sub ReLife lần thứ $CountRelifeup thành công!");
-                if ($point_relifes > 0) $str_rutpoint = "Bạn có " . number_format((float)$pointup_rl, 0, ",", ".") . " Point. Vui lòng <a href='#' title='cộng Point'> cộng Point </a> trước khi <b><a href ='#' title='rút Point'> rút Point</a></b> còn lại cho nhân vật $sub.";
-                else $str_rutpoint = "Bạn có " . number_format((float)$pointup_rl, 0, ",", ".") . " Point. Vui lòng <a href ='#'> cộng Point </a> cho nhân vật $sub.";
+                if ($point_relifes > 0) {
+                    $str_rutpoint = "Bạn có " . number_format((float)$pointup_rl, 0, ",", ".") . " Point. Vui lòng <a href='#' title='cộng Point'> cộng Point </a> trước khi <b><a href ='#' title='rút Point'> rút Point</a></b> còn lại cho nhân vật $sub.";
+                } else {
+                    $str_rutpoint = "Bạn có " . number_format((float)$pointup_rl, 0, ",", ".") . " Point. Vui lòng <a href ='#'> cộng Point </a> cho nhân vật $sub.";
+                }
             }
         }
     }
@@ -1445,10 +1554,12 @@ function char_online()
     $_map = cn_get_template_by('map');
     $_blank_var = view_bank($accc_);
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
 
     if (getOption('user_delegate') == 0) {
@@ -1471,8 +1582,12 @@ function char_online()
     $check_time = $is_map_on = false;
     if (array_key_exists($MapNumber, $_map)) {
         $local_map = $_map[$MapNumber];
-        if ($MapNumber == 0 || $MapNumber == 3) $is_map_on = true;
-    } else $local_map = 'Chưa xác định MAP';
+        if ($MapNumber == 0 || $MapNumber == 3) {
+            $is_map_on = true;
+        }
+    } else {
+        $local_map = 'Chưa xác định MAP';
+    }
 
     if (check_online($accc_)) {
         $check_on = true;
@@ -1502,9 +1617,9 @@ function char_online()
         }
     } else {
         $str_status_on = '<img src="' . URL_PATH_IMG . '/alert_icon.gif" title="Offline">';            // status off
-        if ($UyThacOnline_Daily < 720)
+        if ($UyThacOnline_Daily < 720) {
             $Pe = 0;
-        else {
+        } else {
             $check_time = true;
             $Pe = 720;
         }
@@ -1561,10 +1676,11 @@ function char_online()
                     //else{
                     //point in date
                     //}
-                    if ($Pe >= 720)
+                    if ($Pe >= 720) {
                         $_time_limt_up = "<font color=red> Thời gian ủy thác Online đã tối đa </font>";
-                    else
+                    } else {
                         $_time_limt_up = "Còn " . abs(720 - $Pe - $UyThacOnline_Daily) . " Phút ủy thác";
+                    }
 
                     $before_info_on[6][1] = '<img src="' . URL_PATH_IMG . '/alert_icon.gif" title="Offline">';
                     $before_info_on[2][1] = number_format(($deleon_point + $minute_to_point), 0, ",", ".");
@@ -1656,10 +1772,12 @@ function char_offline()
     $_blank_var = view_bank($accc_);
     $showchar = cn_character();
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
     $status_online = $trust_off[$sub]['status_on'];
     $status_offline = $trust_off[$sub]['status_off'];
@@ -1765,10 +1883,11 @@ function char_offline()
                     //else{
                     //point in date
                     //}
-                    if ($Pe >= 720)
+                    if ($Pe >= 720) {
                         $_time_limt_up = "<font color=red> Thời gian ủy thác Offline đã tối đa </font>";
-                    else
+                    } else {
                         $_time_limt_up = "Còn " . abs(720 - $Pe - $UyThacOffline_Daily) . " Phút ủy thác";
+                    }
 
                     $before_info_off[6][1] = '<img src="' . URL_PATH_IMG . '/alert_icon.gif" title="Offline">';
                     $before_info_off[2][1] = number_format(($deleoff_point + $minute_to_point), 0, ",", ".");
@@ -1815,7 +1934,6 @@ function char_offline()
                 }
 
                 if (!$errors_false) {
-
                     do_update_character('Character', 'UyThac=0', 'uythacoffline_stat=1', "uythacoffline_time=$ctime", 'CtlCode=1', "Name:'$sub'");
 
                     //Ghi vào Log
@@ -1862,10 +1980,12 @@ function char_rsdelegate()
     $options_uythacrs = cn_template_uythacrs();
     $options_rl = cn_template_relife();
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
 
     $zen_acc_char = $showchar[$sub]['money'];
@@ -1943,19 +2063,29 @@ function char_rsdelegate()
     //$get_blue = $show_blank_blue - (isset($blue) ? $blue: 0);
     //$get_point_uythac = $point_uythac - (isset($point) ? $point: 0);
 
-    if (0 <= $get_point_uythac = $point_uythac - (isset($point) ? $point : 0)) $str_point_uythac = number_format((float)$point_uythac, 0, ",", ".") . " (Đủ Point)"; else {
+    if (0 <= $get_point_uythac = $point_uythac - (isset($point) ? $point : 0)) {
+        $str_point_uythac = number_format((float)$point_uythac, 0, ",", ".") . " (Đủ Point)";
+    } else {
         $str_point_uythac = number_format((float)($point_uythac), 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(abs($get_point_uythac)), 0, ",", ".") . " Point)</font>";
     }
-    if (0 <= $get_zen = $zen_acc_char - (isset($zen) ? $zen : 0)) $str_zen = number_format((float)$zen_acc_char, 0, ",", ".") . " (Đủ Zen)"; else {
+    if (0 <= $get_zen = $zen_acc_char - (isset($zen) ? $zen : 0)) {
+        $str_zen = number_format((float)$zen_acc_char, 0, ",", ".") . " (Đủ Zen)";
+    } else {
         $str_zen = number_format((float)$zen_acc_char, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(ABS($get_zen)), 0, ",", ".") . " Zen)</font>";
     }
-    if (0 <= $get_chao = $show_blank_chao - (isset($chao) ? $chao : 0)) $str_chao = number_format((float)$show_blank_chao, 0, ",", ".") . " (Đủ Chaos)"; else {
+    if (0 <= $get_chao = $show_blank_chao - (isset($chao) ? $chao : 0)) {
+        $str_chao = number_format((float)$show_blank_chao, 0, ",", ".") . " (Đủ Chaos)";
+    } else {
         $str_chao = number_format((float)$show_blank_chao, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(ABS($get_chao)), 0, ",", ".") . " Chaos)</font>";
     }
-    if (0 <= $get_cre = $show_blank_cre - (isset($cre) ? $cre : 0)) $str_cre = number_format((float)$show_blank_cre, 0, ",", ".") . " (Đủ Creation)"; else {
+    if (0 <= $get_cre = $show_blank_cre - (isset($cre) ? $cre : 0)) {
+        $str_cre = number_format((float)$show_blank_cre, 0, ",", ".") . " (Đủ Creation)";
+    } else {
         $str_cre = number_format((float)$show_blank_cre, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(ABS($get_cre)), 0, ",", ".") . " Cre)</font>";
     }
-    if (0 <= $get_blue = $show_blank_blue - (isset($blue) ? $blue : 0)) $str_blue = number_format((float)$show_blank_blue, 0, ",", ".") . " (Đủ Blue)"; else {
+    if (0 <= $get_blue = $show_blank_blue - (isset($blue) ? $blue : 0)) {
+        $str_blue = number_format((float)$show_blank_blue, 0, ",", ".") . " (Đủ Blue)";
+    } else {
         $str_blue = number_format((float)$show_blank_blue, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(ABS($get_blue)), 0, ",", ".") . " Blue)</font>";
     }
 
@@ -1996,9 +2126,9 @@ function char_rsdelegate()
             $ctime = ctime();
             $errors_false = false;
             /*if ($pk_y_n[0] > 0) { //???
-				cn_throw_message( "Bạn đang là Sát thủ. Phải rửa tội trước khi Reset.", 'e');
-				$errors_false = true;
-			}*/
+                cn_throw_message( "Bạn đang là Sát thủ. Phải rửa tội trước khi Reset.", 'e');
+                $errors_false = true;
+            }*/
 
             list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
             if ($verifyCaptcha != $_SESSION['captcha_web']) {
@@ -2019,7 +2149,7 @@ function char_rsdelegate()
                 cn_throw_message("$sub đang ReLife: $relife_vl - Reset: $reset_rs. Để Reset tiếp bạn cần phải ReLife.", 'e');
                 $errors_false = true;
             }
-            if (($get_blue < 0) OR ($get_cre < 0) OR ($get_chao < 0)) {
+            if (($get_blue < 0) or ($get_cre < 0) or ($get_chao < 0)) {
                 cn_throw_message("Bạn không đủ Jewel trong ngân hàng.", 'e');
                 $errors_false = true;
             }
@@ -2037,7 +2167,6 @@ function char_rsdelegate()
                 $errors_false = true;
             }
             if (!$errors_false) {
-
                 do_update_character(
                     'Character',
                     "Money=$get_zen",
@@ -2069,8 +2198,11 @@ function char_rsdelegate()
                 //End Ghi vào Log
 
 
-                if ($rsuythac_index >= count($options_uythacrs) - 1) $rsuythac_index = count($options_uythacrs) - 1;
-                else if ($rsuythac_index > $i_e) ++$rsuythac_index;
+                if ($rsuythac_index >= count($options_uythacrs) - 1) {
+                    $rsuythac_index = count($options_uythacrs) - 1;
+                } elseif ($rsuythac_index > $i_e) {
+                    ++$rsuythac_index;
+                }
 
                 $point = $options_uythacrs[$rsuythac_index]['point'];
                 $zen = $options_uythacrs[$rsuythac_index]['zen'];
@@ -2078,19 +2210,29 @@ function char_rsdelegate()
                 $cre = $options_uythacrs[$rsuythac_index]['cre'];
                 $blue = $options_uythacrs[$rsuythac_index]['blue'];
 
-                if (0 <= $get_point_uythacup = $get_point_uythac - $point) $str_point_uythac = number_format((float)$get_point_uythac, 0, ",", ".") . " (Đủ Point)"; else {
+                if (0 <= $get_point_uythacup = $get_point_uythac - $point) {
+                    $str_point_uythac = number_format((float)$get_point_uythac, 0, ",", ".") . " (Đủ Point)";
+                } else {
                     $str_point_uythac = number_format((float)$get_point_uythac, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(ABS($get_point_uythacup)), 0, ",", ".") . " Point)</font>";
                 }
-                if (0 <= $get_zenup = $get_zen - $zen) $str_zen = number_format((float)$get_zen, 0, ",", ".") . " (Đủ Zen)"; else {
+                if (0 <= $get_zenup = $get_zen - $zen) {
+                    $str_zen = number_format((float)$get_zen, 0, ",", ".") . " (Đủ Zen)";
+                } else {
                     $str_zen = number_format((float)$get_zen, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(ABS($get_zenup)), 0, ",", ".") . " Zen)</font>";
                 }
-                if (0 <= $get_chaoup = $get_chao - $chao) $str_chao = number_format((float)$get_chao, 0, ",", ".") . " (Đủ Chaos)"; else {
+                if (0 <= $get_chaoup = $get_chao - $chao) {
+                    $str_chao = number_format((float)$get_chao, 0, ",", ".") . " (Đủ Chaos)";
+                } else {
                     $str_chao = number_format((float)$get_chao, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(abs($get_chaoup)), 0, ",", ".") . " Chaos)</font>";
                 }
-                if (0 <= $get_creup = $get_cre - $cre) $str_cre = number_format((float)$get_cre, 0, ",", ".") . " (Đủ Creation)"; else {
+                if (0 <= $get_creup = $get_cre - $cre) {
+                    $str_cre = number_format((float)$get_cre, 0, ",", ".") . " (Đủ Creation)";
+                } else {
                     $str_cre = number_format((float)$get_cre, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(ABS($get_creup)), 0, ",", ".") . " Create)</font>";
                 }
-                if (0 <= $get_blueup = $get_blue - $blue) $str_blue = number_format((float)$get_blue, 0, ",", ".") . " (Đủ Blue)"; else {
+                if (0 <= $get_blueup = $get_blue - $blue) {
+                    $str_blue = number_format((float)$get_blue, 0, ",", ".") . " (Đủ Blue)";
+                } else {
                     $str_blue = number_format((float)$get_blue, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(ABS($get_blueup)), 0, ",", ".") . " Blue)</font>";
                 }
 
@@ -2127,10 +2269,12 @@ function char_rsdelegatevip()
     $_blank_var = view_bank($accc_);
     $showchar = cn_character();
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
     $options_rsvip_trust = cn_template_uythacrsvip();
     $options_rl = cn_template_relife();
@@ -2191,7 +2335,7 @@ function char_rsdelegatevip()
     if ($_blank_gcoin >= $_gcoin_trust) {
         $get_blank_g = $_blank_gcoin - $_gcoin_trust;
         $sms_gc = "(Đủ Gcoin)";
-    } else if ($_blank_vpoint >= $_vpoint_trust) {
+    } elseif ($_blank_vpoint >= $_vpoint_trust) {
         $get_blank_vp = $_blank_vpoint - $_vpoint_trust;
         $sms_vp = "(Đủ Vpoint)";
     } else {
@@ -2200,7 +2344,9 @@ function char_rsdelegatevip()
     }
 
     $get_point_uythac = $point_uythac - (isset($_point_trust) ? $_point_trust : 0);
-    if ($get_point_uythac >= 0) $str_point_uythac = number_format((float)$point_uythac, 0, ",", ".") . " (Đủ Point)"; else {
+    if ($get_point_uythac >= 0) {
+        $str_point_uythac = number_format((float)$point_uythac, 0, ",", ".") . " (Đủ Point)";
+    } else {
         $str_point_uythac = number_format((float)$point_uythac, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(abs($get_point_uythac)), 0, ",", ".") . " Point)</font>";
     }
 
@@ -2238,9 +2384,9 @@ function char_rsdelegatevip()
             $ctime = ctime();
             $errors_false = false;
             /*if ($pk_y_n[0] > 0) { //???
-				cn_throw_message( "Bạn đang là Sát thủ. Phải rửa tội trước khi Reset.", 'e');
-				$errors_false = true;
-			}*/
+                cn_throw_message( "Bạn đang là Sát thủ. Phải rửa tội trước khi Reset.", 'e');
+                $errors_false = true;
+            }*/
 
             list($verifyCaptcha) = GET('verifyCaptcha', 'GPG');
             if ($verifyCaptcha != $_SESSION['captcha_web']) {
@@ -2293,20 +2439,26 @@ function char_rsdelegatevip()
                 }
                 //End Ghi vào Log
 
-                if ($rsvipuythac_index >= count($options_rsvip_trust) - 1) $rsvipuythac_index = count($options_rsvip_trust) - 1;
-                else if ($rsvipuythac_index > $i_e) ++$rsvipuythac_index;
+                if ($rsvipuythac_index >= count($options_rsvip_trust) - 1) {
+                    $rsvipuythac_index = count($options_rsvip_trust) - 1;
+                } elseif ($rsvipuythac_index > $i_e) {
+                    ++$rsvipuythac_index;
+                }
 
                 $_point_trust = $options_rsvip_trust[$rsvipuythac_index]['point'];
                 $_vpoint_trust = $options_rsvip_trust[$rsvipuythac_index]['vpoint'];
                 $_gcoin_trust = $options_rsvip_trust[$rsvipuythac_index]['gcoin'];
 
-                if (($gcoin_rsvip >= $_gcoin_trust) || ($vpointnew >= $_vpoint_trust))
+                if (($gcoin_rsvip >= $_gcoin_trust) || ($vpointnew >= $_vpoint_trust)) {
                     $result_rs_blank = "(Đủ để Reset ủy thác Vip)";
-                else
+                } else {
                     $result_rs_blank = "<font color=red>(Thiếu $_vpoint_trust Vpoint)</font>";
+                }
 
                 $get_point_uythacup = $get_point_uythac - (isset($_point_trust) ? $_point_trust : 0);
-                if ($get_point_uythacup >= 0) $str_point_uythacup = number_format((float)$get_point_uythac, 0, ",", ".") . " (Đủ Point)"; else {
+                if ($get_point_uythacup >= 0) {
+                    $str_point_uythacup = number_format((float)$get_point_uythac, 0, ",", ".") . " (Đủ Point)";
+                } else {
                     $str_point_uythacup = number_format((float)$get_point_uythac, 0, ",", ".") . " <font color =red> (Thiếu " . number_format((float)(abs($get_point_uythacup)), 0, ",", ".") . " Point)</font>";
                 }
 
@@ -2340,10 +2492,12 @@ function char_subpoint()
     list($sub) = GET('sub', 'GPG');
     $showchar = cn_character();
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
 
     $point_dutru_false = $point_false65k = $point_false2 = $point_false1 = $point_false = false;
@@ -2360,21 +2514,32 @@ function char_subpoint()
     // [kq] < dt ===> kq
     // [kq] > dt ===> dt
     //p + dt < 65k   ====> dt
-    if (65000 <= $point) $use_point_dt = 0;
+    if (65000 <= $point) {
+        $use_point_dt = 0;
+    }
     //else if(65000 >= $point && $point_dutru >= 65000) $use_point_dt = 65000 - $point;
     //else if(65000 < $point && $point_dutru < 65000){
     //else if(65000 < $point){
     else {
         if (65000 <= $total_val = $point + $point_dutru) {
-            if ($point_dutru > $_tempt = 65000 - $point) $use_point_dt = $_tempt;
-            else  $use_point_dt = $point_dutru;
-        } else $use_point_dt = $point_dutru;
+            if ($point_dutru > $_tempt = 65000 - $point) {
+                $use_point_dt = $_tempt;
+            } else {
+                $use_point_dt = $point_dutru;
+            }
+        } else {
+            $use_point_dt = $point_dutru;
+        }
     }
 
     echo "2410 point =$point use_point_dt =$use_point_dt point_dutru = $point_dutru REQ =====" . REQ('rut_point') . "rut_point = $rut_point <br>";
 
-    if ($rut_point) $point_false1 = true;
-    if ($rut_point <= $point_dutru) $point_false = true;
+    if ($rut_point) {
+        $point_false1 = true;
+    }
+    if ($rut_point <= $point_dutru) {
+        $point_false = true;
+    }
     if (65000 >= $point_set += $rut_point) {
         $point_false2 = true;
         $point_dutru_set -= $rut_point;
@@ -2383,10 +2548,13 @@ function char_subpoint()
     if ($point >= 65000) {
         $_strpoint = number_format((float)$point, 0, ",", ".") . "<a href=" . cn_url_modify('mod=char_manager', 'opt=addpoint', "sub=$sub") . " title='Click add point to $sub'> <font color=red>(Cộng point trước khi rút point dự trự)</font> </a>";
         $point_false65k = true;
-    } else $_strpoint = "<a href=" . cn_url_modify('mod=char_manager', 'opt=addpoint', "sub=$sub") . " title='Click add point to $sub'>" . (string)number_format((float)$point, 0, ",", ".") . "</a>";
+    } else {
+        $_strpoint = "<a href=" . cn_url_modify('mod=char_manager', 'opt=addpoint', "sub=$sub") . " title='Click add point to $sub'>" . (string)number_format((float)$point, 0, ",", ".") . "</a>";
+    }
 
-    if ($point_dutru > 0) $str_point_dutru = number_format((float)$point_dutru, 0, ",", ".");
-    else {
+    if ($point_dutru > 0) {
+        $str_point_dutru = number_format((float)$point_dutru, 0, ",", ".");
+    } else {
         $str_point_dutru = $point_dutru . " <font color=red> (Không đủ point dự trữ để rút) </font>";
         $point_dutru_false = $point_false65k = true;
     }
@@ -2441,16 +2609,18 @@ function char_subpoint()
 
 
             if (!$errors_false) {
-
                 do_update_character('Character', "LevelUpPoint=$point_set", "pointdutru=$point_dutru_set", "name:'$sub'");
 
                 if ($point_set >= 65000) {
                     $_strpointup = "<a href=" . cn_url_modify('mod=char_manager', 'opt=addpoint', "sub=$sub") . " title='Click add point to $sub'><font color=red>" . number_format((float)$point_set, 0, ",", ".") . " (Cộng point trước khi rút point dự trự) </font> </a>";
                     $point_false65k = true;
-                } else $_strpointup = "<a href=" . cn_url_modify('mod=char_manager', 'opt=addpoint', "sub=$sub") . " title='Click add point to $sub'>" . number_format((float)$point_set, 0, ",", ".") . "</a>";
+                } else {
+                    $_strpointup = "<a href=" . cn_url_modify('mod=char_manager', 'opt=addpoint', "sub=$sub") . " title='Click add point to $sub'>" . number_format((float)$point_set, 0, ",", ".") . "</a>";
+                }
 
-                if ($point_dutru_set > 0) $str_point_dutruup = number_format((float)$point_dutru_set, 0, ",", ".");
-                else {
+                if ($point_dutru_set > 0) {
+                    $str_point_dutruup = number_format((float)$point_dutru_set, 0, ",", ".");
+                } else {
                     $str_point_dutruup = $point_dutru_set . " <font color=red> (Không đủ point dự trữ để rút) </font>";
                     $point_false65k = true;
                 }
@@ -2490,10 +2660,12 @@ function char_addpoint()
     $showchar = cn_character();
     $arr_class = cn_template_class();
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
 
     $point = $total_point = $rootPoint = 0;
@@ -2511,23 +2683,30 @@ function char_addpoint()
     $rootPoint = $_str_ + $_agi_ + $_vit_ + $_ene_;
     $total_point = $point_str + $point_agi + $point_vit + $point_ene;
 
-    if ($_class == $arr_class['class_dl_1'] OR $_class == $arr_class['class_dl_2']) {
+    if ($_class == $arr_class['class_dl_1'] or $_class == $arr_class['class_dl_2']) {
         $is_classDl = true;
         $rootPoint += $_cmd_;
         $str_com = number_format((float)$_cmd_, 0, ",", ".");
         $total_point += $point_cmd;
-        if ($_cmd_ < 0) $_cmd_ = 0;
+        if ($_cmd_ < 0) {
+            $_cmd_ = 0;
+        }
 //        $_cmd_ += $point_cmd;
     }
 
     $totalMaxPoint = $point + $rootPoint;
     $pointMaxNew = $totalMaxPoint - $total_point;
 
-    if ($total_point <= ($rootPoint + $point)) $point_false = true;
-    if ($total_point) $point_false1 = true;
+    if ($total_point <= ($rootPoint + $point)) {
+        $point_false = true;
+    }
+    if ($total_point) {
+        $point_false1 = true;
+    }
 
-    if ($point != 0) $_strpoint_dutru = "<a href=" . cn_url_modify('mod=char_manager', 'opt=subpoint', "sub=$sub") . " title='Rút point $sub'>" . number_format((float)$point_dutru, 0, ",", ".") . "</a>";
-    else {
+    if ($point != 0) {
+        $_strpoint_dutru = "<a href=" . cn_url_modify('mod=char_manager', 'opt=subpoint', "sub=$sub") . " title='Rút point $sub'>" . number_format((float)$point_dutru, 0, ",", ".") . "</a>";
+    } else {
         $_strpoint_dutru = 0;//$point_dutru;//"<a href=". cn_url_modify('mod=char_manager', 'opt=subpoint',"sub=$sub")." title='Rút point $sub'><font color=red>". number_format((float)$point_dutru,0,",",".") . "  ..... ko cong dk </font> </a>";
         //$point_false = true;
     }
@@ -2580,7 +2759,6 @@ function char_addpoint()
             }
 
             if (!$errors_false) {
-
                 do_update_character(
                     'Character',
                     "Strength=$point_str",
@@ -2598,7 +2776,9 @@ function char_addpoint()
                 $before_info_addpoint[7][1] = number_format((float)$point_str, 0, ",", ".");
                 $before_info_addpoint[3][1] = number_format((float)$point_agi, 0, ",", ".");
 
-                if ($is_classDl) $before_info_addpoint[6][1] = number_format((float)$_cmd_, 0, ",", ".");
+                if ($is_classDl) {
+                    $before_info_addpoint[6][1] = number_format((float)$_cmd_, 0, ",", ".");
+                }
                 $point = $pointMaxNew;
                 $rootPoint = $total_point;
                 cn_throw_message("$sub đã cộng điểm thành công!");
@@ -2625,10 +2805,12 @@ function char_rspoint()
     $_blank_var = view_bank($accc_ = $member['user_name']);
     $options_rsvip = cn_template_resetvip();
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
 
     $point_false1 = $point_false = false;
@@ -2691,7 +2873,7 @@ function char_rspoint()
     if ($_gcoin >= $_gcoin_testRoleWeb) {
         $get_gc = $_gcoin - $_gcoin_testRoleWeb;
         $sms_gc = " (Đủ Gcoin)";
-    } else if (0 <= $get_vp = $_vpoint - $_vpoint_testRoleWeb) {
+    } elseif (0 <= $get_vp = $_vpoint - $_vpoint_testRoleWeb) {
         $sms_vp = " (Đủ Vpoint)";
     } else {
         $point_false1 = true;
@@ -2752,7 +2934,9 @@ function char_rspoint()
                 if (abs($_point_var) >= 65000) {
                     $lvup_point = 65000;
                     $point_dutru += $_templ = abs($total_point) - 65000;
-                } else $lvup_point = abs($_point_var) + $point;
+                } else {
+                    $lvup_point = abs($_point_var) + $point;
+                }
                 $gcoin_new = isset($get_gc) ? $get_gc : $_gcoin;
                 $vpoint_new = isset($get_vp) ? $get_vp : $_vpoint;
 
@@ -2791,9 +2975,13 @@ function char_rspoint()
                 //End Ghi vào Log
 
 
-                if ($gcoin_new >= $_gcoin_testRoleWeb) $sms_gc = "(Đủ Gcoin)";
-                else if ($vpoint_new >= $_vpoint_testRoleWeb) $sms_vp = "(Đủ Vpoint)";
-                else $sms_vp = "<font color=red>(Thiếu $_vpoint_testRoleWeb Vpoint)</font>";
+                if ($gcoin_new >= $_gcoin_testRoleWeb) {
+                    $sms_gc = "(Đủ Gcoin)";
+                } elseif ($vpoint_new >= $_vpoint_testRoleWeb) {
+                    $sms_vp = "(Đủ Vpoint)";
+                } else {
+                    $sms_vp = "<font color=red>(Thiếu $_vpoint_testRoleWeb Vpoint)</font>";
+                }
 
                 $before_info_rspoint[9][1] = number_format((float)$vpoint_new, 0, ",", ".") . " " . (isset($sms_vp) ? $sms_vp : '');
                 $before_info_rspoint[8][1] = number_format((float)$gcoin_new, 0, ",", ".") . " " . (isset($sms_gc) ? $sms_gc : '');
@@ -2823,10 +3011,12 @@ function char_movemap()
     $showchar = cn_character();
     $_map = cn_get_template_by('map');
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
 
     $no_move = false;
@@ -2835,8 +3025,11 @@ function char_movemap()
     $reset_ = $showchar[$sub]['reset'];
     $MapNumber = $showchar[$sub]['MapNumber'];
 
-    if (array_key_exists($MapNumber, $_map)) $local_map = $_map[$MapNumber];
-    else $local_map = 'Chưa xác định MAP';
+    if (array_key_exists($MapNumber, $_map)) {
+        $local_map = $_map[$MapNumber];
+    } else {
+        $local_map = 'Chưa xác định MAP';
+    }
 
     if (check_changecls($member['user_name'], $sub)) {
         $check_change = true;
@@ -2861,7 +3054,9 @@ function char_movemap()
     );
 
     $set_map = array(0 => 'Lorencia', 3 => 'Noria', 51 => 'Elbeland');
-    if ($move_map == $MapNumber) $no_move = true;
+    if ($move_map == $MapNumber) {
+        $no_move = true;
+    }
 
     if (request_type('POST')) {
         if (REQ('action_movemap')) {
@@ -2884,19 +3079,19 @@ function char_movemap()
             }
 
             if (!$errors_false) {
-
                 $_arr_map = array(
                     0 => array('MapPosX' => 143, 'MapPosY' => 134),
                     3 => array('MapPosX' => 175, 'MapPosY' => 115),
                     51 => array('MapPosX' => 53, 'MapPosY' => 226),
                 );
 
-                foreach ($_arr_map as $key => $val)
+                foreach ($_arr_map as $key => $val) {
                     if ($key == $move_map) {
                         $_Px = $val['MapPosX'];
                         $_Py = $val['MapPosY'];
                         break;
                     }
+                }
                 $_Px = isset($_Px) ? $_Px : 143;
                 $_Py = isset($_Py) ? $_Py : 134;
 
@@ -2929,10 +3124,12 @@ function char_removepk()
 
     $_pk = cn_get_template_by('pk');
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
 
     $is_pk_money = $is_pk_vp = $is_pk = false;
@@ -2960,8 +3157,9 @@ function char_removepk()
     if ($PkCount) {
         $is_pk = true;
         if ($PkCount <= $_pk['pk_zen_vpoint']) {
-            if (0 <= $kttien = $money - $PkCount * $_pk['pk_zen']) $sms_money = " (Đủ Money)";
-            else {
+            if (0 <= $kttien = $money - $PkCount * $_pk['pk_zen']) {
+                $sms_money = " (Đủ Money)";
+            } else {
                 $sms_money = " <font color=red>(Thiếu " . number_format((float)($kttien = abs($kttien)), 0, ",", ".") . " Money)</font>";
                 $is_pk_money = true;
             }
@@ -3075,10 +3273,12 @@ function char_pointtax()
 
     $showchar = cn_character();
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
     // Xu ly NV thue Point
     point_tax($sub);
@@ -3102,11 +3302,15 @@ function char_pointtax()
     );
 
     if (!$IsThuePoint) {
-        if (array_key_exists($_point_tax, $opt_pointtax)) $var_vp = $opt_pointtax[$_point_tax];
-        else $var_vp = $opt_pointtax[$_point_tax = '50k'];
+        if (array_key_exists($_point_tax, $opt_pointtax)) {
+            $var_vp = $opt_pointtax[$_point_tax];
+        } else {
+            $var_vp = $opt_pointtax[$_point_tax = '50k'];
+        }
 
-        if (0 <= $ktvpoint = $vpoint_ - $var_vp) $sms_vp = " (Đủ Vpoint)";
-        else {
+        if (0 <= $ktvpoint = $vpoint_ - $var_vp) {
+            $sms_vp = " (Đủ Vpoint)";
+        } else {
             $is_vp = false;
             $sms_vp = " <font color=red>(Thiếu " . number_format((float)($ktvpoint = abs($ktvpoint)), 0, ",", ".") . " Vpoint)</font>";
         }
@@ -3198,7 +3402,6 @@ function char_pointtax()
     echo_header_web('-@my_char/style.css', "Thuê điểm - $name__");
     echo_content_here(exec_tpl('my_char/pointtax'), cn_snippet_bc_re());
     echo_footer_web();
-
 }
 
 function char_changename()
@@ -3212,10 +3415,12 @@ function char_changename()
     $showchar = cn_character();
     $_array_name = do_select_character('Character', 'Name');
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
 
 
@@ -3226,7 +3431,9 @@ function char_changename()
     $level = $showchar[$sub]['level'];
     $reset_ = $showchar[$sub]['reset'];
 
-    if (!$c_name) $is_cn = true;
+    if (!$c_name) {
+        $is_cn = true;
+    }
     if (preg_match('/\W+/', $c_name)) {
         $is_cname = true;
     }
@@ -3241,7 +3448,7 @@ function char_changename()
     if ($gcoin_ >= $_gcoin_testRoleWeb = round(0.01 * getOption('vptogc') * ($_vpoint_testRoleWeb = getOption('changename_vpoint')))) {
         $get_gc = $gcoin_ - $_gcoin_testRoleWeb;
         $sms_gc = " (Đủ Gcoin)";
-    } else if (0 <= $get_vp = $vpoint_ - $_vpoint_testRoleWeb) {
+    } elseif (0 <= $get_vp = $vpoint_ - $_vpoint_testRoleWeb) {
         $sms_vp = " (Đủ Vpoint)";
     } else {
         $cn_false = true;
@@ -3300,8 +3507,11 @@ function char_changename()
                 $ktgcoin = isset($get_gc) ? $get_gc : $gcoin_;
                 $ktvpoint = isset($get_vp) ? $get_vp : $vpoint_;
 
-                if ($ktvpoint == $vpoint_) $var_vp = @$_gcoin_testRoleWeb . " Gcoin";
-                else $var_vp = @$_vpoint_testRoleWeb . " Vpoint";
+                if ($ktvpoint == $vpoint_) {
+                    $var_vp = @$_gcoin_testRoleWeb . " Gcoin";
+                } else {
+                    $var_vp = @$_vpoint_testRoleWeb . " Vpoint";
+                }
 
                 do_update_character('Character', "Name='$c_name'", "Name:'$sub'");
                 do_update_character('AccountCharacter', "GameID1='$c_name'", "GameID1:'$sub'");
@@ -3367,10 +3577,12 @@ function char_changeclass()
     // kiem chu va so ......????
     $_blank_var = view_bank($accc_ = $member['user_name']);
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
 
     $cn_false = $is_cname = false;
@@ -3400,7 +3612,7 @@ function char_changeclass()
         $sms_reset_ = $reset_ . ' <font color=red>(Thiếu ' . abs($changeClass[2] - $reset_) . ' Reset) </font>';
     }
 
-    list ($get_gc, $sms_gc, $get_vp, $sms_vp, $cn_false) = checkGcoinVpoint($gcoin_, $vpoint_, $changeClass[0]);
+    list($get_gc, $sms_gc, $get_vp, $sms_vp, $cn_false) = checkGcoinVpoint($gcoin_, $vpoint_, $changeClass[0]);
 
     if (check_changecls($member['user_name'], $sub)) {
         $check_change = true;
@@ -3453,8 +3665,11 @@ function char_changeclass()
                 $ktvpoint = $get_vp;
                 $ktgcoin = $get_gc;
                 $newReset = $reset_ - ceil(0.01 * $changeClass[1] * $reset_);
-                if ($ktvpoint == $vpoint_) $var_vp = ($_blank_var[0]['gc'] - $get_gc) . " Gcoin";
-                else $var_vp = ($_blank_var[0]['vp'] - $get_vp) . " Vpoint";
+                if ($ktvpoint == $vpoint_) {
+                    $var_vp = ($_blank_var[0]['gc'] - $get_gc) . " Gcoin";
+                } else {
+                    $var_vp = ($_blank_var[0]['vp'] - $get_vp) . " Vpoint";
+                }
 
                 $_codeClass = $infoClass['class_' . $nameClass . '_1'];
 
@@ -3465,8 +3680,9 @@ function char_changeclass()
                 );
                 $get_default_class = '';
                 $_arr_cls = separatestRoleWebring($arr_cls);
-                foreach ($_arr_cls as $key => $val)
+                foreach ($_arr_cls as $key => $val) {
                     $get_default_class .= "$val=" . $default_class[0][$val] . ",";
+                }
 
                 $get_default_class = substr($get_default_class, 0, -1);
 
@@ -3480,12 +3696,13 @@ function char_changeclass()
 
                 //Reset Point Master Skill
                 if (($class_ == $infoClass['class_dw_3']) || ($class_ == $infoClass['class_dk_3']) || ($class_ == $infoClass['class_elf_3']) || ($class_ == $infoClass['class_mg_2']) || ($class_ == $infoClass['class_dl_2']) || ($class_ == $infoClass['class_sum_3']) || ($class_ == $infoClass['class_rf_2'])) {
-                    if (getOption('server_type') == "scf")
+                    if (getOption('server_type') == "scf") {
                         do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
-                    else if (getOption('server_type') == "ori")
+                    } elseif (getOption('server_type') == "ori") {
                         do_update_character('T_MasterLevelSystem', 'MASTER_LEVEL=0', 'ML_POINT=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
-                    else
+                    } else {
                         do_update_character('Character', 'SCFMasterLevel=0', 'SCFMasterPoints=0', "SCFMasterSkills=CONVERT(varbinary(300), null)", "Name:'$sub'");
+                    }
                 }
 
                 do_update_character('MEMB_INFO', "vpoint = $ktvpoint", "gcoin = $ktgcoin", "memb___id:'$accc_'");
@@ -3536,10 +3753,12 @@ function char_level1()
 
     list($sub) = GET('sub', 'GPG');
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
 
     $is_clevel1 = false;
@@ -3572,7 +3791,7 @@ function char_level1()
         $sms_level = $level . ' <font color=red>(Thiếu ' . abs(150 - $level) . ' Level) </font>';
     }
 
-    list ($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, (int)$config_level[0]);
+    list($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, (int)$config_level[0]);
 
     if (check_changecls($_SESSION['user_Gamer'], $sub)) {
         $check_change = true;
@@ -3657,7 +3876,7 @@ function char_level1()
                 }
                 //End Ghi vào Log
 
-                list ($get_vpNew, $sms_vp, $cn_false) = checkVpoint($get_vp, (int)$config_level[0]);
+                list($get_vpNew, $sms_vp, $cn_false) = checkVpoint($get_vp, (int)$config_level[0]);
                 $before_info_cn[3][1] = number_format((float)$get_vpNew, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '');
 
 //                $temp[$isClass] = [
@@ -3689,10 +3908,12 @@ function char_level2()
 
     list($sub) = GET('sub', 'GPG');
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
 
     $is_level2 = false;
@@ -3716,7 +3937,7 @@ function char_level2()
         $sms_level = $level . ' <font color=red>(Thiếu ' . abs(220 - $level) . ' Level) </font>';
     }
 
-    list ($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, (int)$config_level[1]);
+    list($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, (int)$config_level[1]);
 
     if (check_changecls($_SESSION['user_Gamer'], $sub)) {
         $check_change = true;
@@ -3814,7 +4035,7 @@ function char_level2()
                 }
                 //End Ghi vào Log
 
-                list ($get_vpNew, $sms_vp, $cn_false) = checkVpoint($get_vp, (int)$config_level[1]);
+                list($get_vpNew, $sms_vp, $cn_false) = checkVpoint($get_vp, (int)$config_level[1]);
                 $before_info_cn[3][1] = number_format((float)$get_vpNew, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '');
 
                 cn_throw_message("Nhân vật $sub đã đổi nhiệm vụ cấp (lv.220) thành công.");
@@ -3841,10 +4062,12 @@ function char_level3()
 
     list($sub) = GET('sub', 'GPG');
 
-    if (!$sub) $sub = array_keys($showchar)[0];
-    else {
-        if (!in_array($sub, array_keys($showchar)))
+    if (!$sub) {
+        $sub = array_keys($showchar)[0];
+    } else {
+        if (!in_array($sub, array_keys($showchar))) {
             $sub = array_keys($showchar)[0];
+        }
     }
 
     $is_level2 = false;
@@ -3867,7 +4090,7 @@ function char_level3()
         $sms_level = $level . ' <font color=red>(Thiếu ' . abs(380 - $level) . ' Level) </font>';
     }
 
-    list ($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, (int)$config_level[2]);
+    list($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, (int)$config_level[2]);
 
     if (check_changecls($_SESSION['user_Gamer'], $sub)) {
         $check_change = true;
@@ -3960,7 +4183,7 @@ function char_level3()
                 }
                 //End Ghi vào Log
 
-                list ($get_vpNew, $sms_vp, $cn_false) = checkVpoint($get_vp, (int)$config_level[2]);
+                list($get_vpNew, $sms_vp, $cn_false) = checkVpoint($get_vp, (int)$config_level[2]);
                 $before_info_cn[3][1] = number_format((float)$get_vpNew, 0, ",", ".") . (isset($sms_vp) ? $sms_vp : '');
 
                 cn_throw_message("Nhân vật $sub đã đổi nhiệm vụ cấp 3 (lv.380 master) thành công.");
@@ -3973,7 +4196,6 @@ function char_level3()
     echo_header_web('-@my_char/style.css', "Làm nhiệm vụ (level 380) cấp 3");
     echo_content_here(exec_tpl('my_char/level_3'), cn_snippet_bc_re());
     echo_footer_web();
-
 }
 
 function char_delepersonalSotre()
@@ -3986,7 +4208,9 @@ function char_delepersonalSotre()
     if (!$sub) {
         $sub = array_keys($showchar)[0];
     } else {
-        if (!in_array($sub, array_keys($showchar))) $sub = array_keys($showchar)[0];
+        if (!in_array($sub, array_keys($showchar))) {
+            $sub = array_keys($showchar)[0];
+        }
     }
 
     $inventory = $showchar[$sub]['shop_inventory'];
@@ -4026,7 +4250,9 @@ function char_delepersonalSotre()
 
                 if (!$errors_false) {
                     $changeInventory = '';
-                    for ($id = 0; $id < $ceilInventoryShopPresonal; $id++) $changeInventory .= 'F';
+                    for ($id = 0; $id < $ceilInventoryShopPresonal; $id++) {
+                        $changeInventory .= 'F';
+                    }
 
                     $newInventory = substr($inventoryRaw, 0, (-1) * $ceilInventoryShopPresonal) . $changeInventory;
                     $checkUpdate = do_update_character('Character', "Inventory=0x" . $newInventory, "Name:'" . $sub . "'");
@@ -4061,16 +4287,24 @@ function char_delepersonalSotre()
             setMemcache('#existItem', 1);
 
             ++$x;
-            if ($x == 8) $x = 0;
+            if ($x == 8) {
+                $x = 0;
+            }
             if (isset($item32['name'])) {
-                if (!$item32['y']) $itemy = 1;
-                else $itemy = $item32['y'];
+                if (!$item32['y']) {
+                    $itemy = 1;
+                } else {
+                    $itemy = $item32['y'];
+                }
 
-                if (!$item32['x']) $itemx = 1;
-                else $itemx = $item32['x'];
+                if (!$item32['x']) {
+                    $itemx = 1;
+                } else {
+                    $itemx = $item32['x'];
+                }
 
                 $show_warehouse .= "<div style='margin-top:" . ((floor($i / 8) * 32) + 82) . "px; margin-left:" . ($x * 32) . "px; position:absolute; width:" . ($itemx * 32) . "px; height:" . ($itemy * 32) . "px; cursor:pointer; background-image: url(images/wh_bg_on.jpg);'>";
-//									<img src='images/items/" . $item32['image'] . ".gif' style=\"height:" . (31 * $itemy - $itemy - 1) . "px; width:" . (31 * $itemx) . "px;\"></div>";
+                //									<img src='images/items/" . $item32['image'] . ".gif' style=\"height:" . (31 * $itemy - $itemy - 1) . "px; width:" . (31 * $itemx) . "px;\"></div>";
 
                 if (file_exists(ROOT . '/images/items/' . $item32['image'] . '.gif')) {
                     $show_warehouse .= "<img src='images/items/" . $item32['image'] . ".gif'
@@ -4286,8 +4520,7 @@ function checkGcoinVpoint($gcRoot, $vpRoot, $parVpoint)
     if ($gcRoot >= $_gcoin_testRoleWeb = round(0.01 * getOption('vptogc') * $parVpoint)) {
         $get_gc = $gcRoot - $_gcoin_testRoleWeb;
         $sms_gc = " (Đủ Gcoin)";
-
-    } else if (0 <= $get_vp = $vpRoot - $parVpoint) {
+    } elseif (0 <= $get_vp = $vpRoot - $parVpoint) {
         $sms_vp = " (Đủ Vpoint)";
     } else {
         $cn_false = true;
@@ -4313,4 +4546,3 @@ function checkVpoint($vpRoot, $parVpoint)
 
     return array($get_vp, $sms_vp, $cn_false);
 }
-

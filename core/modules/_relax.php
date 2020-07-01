@@ -1,9 +1,10 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 add_hook('index/invoke_module', '*relax_invoke');
 function relax_invoke()
 {
-    $relax_board = array
-    (
+    $relax_board = array(
         'relax:baucua:Csc' => 'Bầu Cua',
         'relax:baicao:Cp' => 'Bài Cáo',
         'relax:xoso:Ct' => 'Đánh Đề'
@@ -21,8 +22,9 @@ function relax_invoke()
 
     foreach ($relax_board as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
-        if (function_exists("relax_$do"))
+        if (function_exists("relax_$do")) {
             cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        }
     }
 
     // Request module
@@ -101,7 +103,7 @@ function relax_baucua()
             $_blank_var = view_bank($accc_ = $_SESSION['user_Gamer']);
             $vpoint_ = $_blank_var[0]['vp'];
 
-            list ($bet, $bet_0, $bet_1, $bet_2, $bet_3, $bet_4, $bet_5) = GET('bet, bet_0, bet_1, bet_2, bet_3, bet_4, bet_5', 'GPG');
+            list($bet, $bet_0, $bet_1, $bet_2, $bet_3, $bet_4, $bet_5) = GET('bet, bet_0, bet_1, bet_2, bet_3, bet_4, bet_5', 'GPG');
             $bet = abs(intval($bet));
             $bets = array();
             $count = 0;
@@ -139,7 +141,6 @@ function relax_baucua()
             if ($count == 0) {
                 cn_throw_message("Bạn chưa chọn linh vật.", 'e');
                 $errors_false = true;
-
             }
             if ($count * $bet > intval($_blank_var[0]['vp'])) {
                 cn_throw_message("Bạn không đủ tiền!", 'e');
@@ -172,7 +173,7 @@ function relax_baucua()
                         $result .= "<b>";
                         if ($b[$i] > 0) {
                             $result .= "Bạn thắng {$b[$i]} Vpoint";
-                        } else if ($b[$i] < 0) {
+                        } elseif ($b[$i] < 0) {
                             $result .= "Bạn thua " . abs($b[$i]) . " Vpoint";
                         } else {
                             $result .= "Hòa";
@@ -185,7 +186,7 @@ function relax_baucua()
                 if ($money < 0) {
                     $result .= "Bạn thua " . abs($money) . " Vpoint";
                     $contLog = ' thua ' . abs($money) . " Vpoint";
-                } else if ($money > 0) {
+                } elseif ($money > 0) {
                     $result .= "Bạn thắng " . $money . " Vpoint";
                     $contLog = ' thắng ' . $money . " Vpoint";
                 } else {
@@ -239,7 +240,7 @@ function relax_baicao()
             $_blank_var = view_bank($accc_ = $_SESSION['user_Gamer']);
             $vpoint_ = $_blank_var[0]['vp'];
 
-            list ($bet) = GET('bet', 'GPG');
+            list($bet) = GET('bet', 'GPG');
             $bet = abs(intval($bet));
 
             if ((empty($bet)) || (!is_numeric($bet)) || ($bet < 0)) {
@@ -263,7 +264,6 @@ function relax_baicao()
             $cards = $result = "";
 
             if (!$errors_false) {
-
                 for ($i = 0; $i < 6; $i++) {
                     do {
                         $num = rand(1, 52);
@@ -314,7 +314,7 @@ function relax_baicao()
                 if ($you > $com) {
                     $msg = "Bạn thắng " . $bet . " Vpoint";
                     $update_money = $_blank_var[0]['vp'] + $bet;
-                } else if ($you < $com) {
+                } elseif ($you < $com) {
                     $msg = "Bạn thua " . $bet . " Vpoint";
                     $update_money = $_blank_var[0]['vp'] - $bet;
                 } else {
@@ -394,9 +394,11 @@ function relax_xoso()
     $limitTimeDe = getOption('timeWriterLimit');
     $hourTime = date('H:i', ctime());
 
-    list ($page) = GET('page', 'GPG');
+    list($page) = GET('page', 'GPG');
     $page = intval($page);
-    if (empty($page)) $page = 1;
+    if (empty($page)) {
+        $page = 1;
+    }
 
     $showResultDe = do_select_other("SELECT Top 1 [ResultDe], [timesDe], [OptionResult] FROM ResultDe ORDER BY ID DESC");
 //    $showResultDe = do_select_other("SELECT [ResultDe], [timesDe], [OptionResult] FROM ResultDe WHERE Convert(Date, timesDe)='$ctime'");
@@ -404,7 +406,6 @@ function relax_xoso()
 
     if (request_type('POST')) {
         if (REQ('action_history')) {
-
             $resultData = array(
                 'msgAction' => cn_snippet_messages(),
                 'menuTop' => cn_menuTopMoney(true),
@@ -424,7 +425,7 @@ function relax_xoso()
             $_blank_var = view_bank($accc_);
             $vpoint_ = $_blank_var[0]['vp'];
 
-            list ($numberDe, $verifyCaptcha, $moneyVpDe) = GET('numberDe, verifyCaptcha, moneyVpDe', 'GPG');
+            list($numberDe, $verifyCaptcha, $moneyVpDe) = GET('numberDe, verifyCaptcha, moneyVpDe', 'GPG');
 
             $moneyVpDe = abs(intval($moneyVpDe));
 
@@ -546,11 +547,15 @@ function show_historyDe($datahistory, $page)
 {
     $url = cn_url_modify(array('reset'), 'mod=relax', 'opt=xoso', 'action_history=1', 'page', 'per_page');
     $per_page = 20;
-    if (empty($page)) $page = 1;
+    if (empty($page)) {
+        $page = 1;
+    }
 
-    list ($resultShowData, $pagination) = cn_render_pagination_ajax($datahistory, $url, $page, $per_page);
+    list($resultShowData, $pagination) = cn_render_pagination_ajax($datahistory, $url, $page, $per_page);
 
-    if (empty($resultShowData)) return '';
+    if (empty($resultShowData)) {
+        return '';
+    }
 
     $html = '<table align="middle" class="mg-top15 ranking" width="100%">
             <tr >

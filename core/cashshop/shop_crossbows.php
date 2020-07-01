@@ -1,4 +1,4 @@
-﻿<?php die('Direct call - access denied'); ?>
+<?php die('Direct call - access denied'); ?>
 17845FFC1E7A003F0040000000000000|Cung Thiên Vũ|90000|DarkStingerBow_CungThienVu.jpg|
 15846CFC1E7A003F0040000000000000|Cung Thái Bình|90000|B733BB37B8B2_Sylph-wind-Bow.jpg|
 1284D7FC1E7A003F0040000000000000|Nỏ Hỏa Long - Divine|30000|438227A85C31_divine.gif|

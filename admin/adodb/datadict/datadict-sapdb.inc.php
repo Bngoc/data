@@ -14,16 +14,17 @@
  */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 class ADODB2_sapdb extends ADODB_DataDict
 {
+    public $databaseType = 'sapdb';
+    public $seqField = false;
+    public $renameColumn = 'RENAME COLUMN %s.%s TO %s';
 
-    var $databaseType = 'sapdb';
-    var $seqField = false;
-    var $renameColumn = 'RENAME COLUMN %s.%s TO %s';
-
-    function ActualType($meta)
+    public function ActualType($meta)
     {
         switch ($meta) {
             case 'C':
@@ -68,7 +69,7 @@ class ADODB2_sapdb extends ADODB_DataDict
         }
     }
 
-    function MetaType($t, $len = -1, $fieldobj = false)
+    public function MetaType($t, $len = -1, $fieldobj = false)
     {
         if (is_object($t)) {
             $fieldobj = $t;
@@ -93,24 +94,35 @@ class ADODB2_sapdb extends ADODB_DataDict
         if ($t == 'FIXED' && !$fieldobj->scale && ($len == 20 || $len == 3)) {
             $type = $len == 20 ? 'I8' : 'I1';
         }
-        if ($fieldobj->auto_increment) $type = 'R';
+        if ($fieldobj->auto_increment) {
+            $type = 'R';
+        }
 
         return $type;
     }
 
     // return string must begin with space
-    function _CreateSuffix($fname, &$ftype, $fnotnull, $fdefault, $fautoinc, $fconstraint, $funsigned)
+    public function _CreateSuffix($fname, &$ftype, $fnotnull, $fdefault, $fautoinc, $fconstraint, $funsigned)
     {
         $suffix = '';
-        if ($funsigned) $suffix .= ' UNSIGNED';
-        if ($fnotnull) $suffix .= ' NOT NULL';
-        if ($fautoinc) $suffix .= ' DEFAULT SERIAL';
-        elseif (strlen($fdefault)) $suffix .= " DEFAULT $fdefault";
-        if ($fconstraint) $suffix .= ' ' . $fconstraint;
+        if ($funsigned) {
+            $suffix .= ' UNSIGNED';
+        }
+        if ($fnotnull) {
+            $suffix .= ' NOT NULL';
+        }
+        if ($fautoinc) {
+            $suffix .= ' DEFAULT SERIAL';
+        } elseif (strlen($fdefault)) {
+            $suffix .= " DEFAULT $fdefault";
+        }
+        if ($fconstraint) {
+            $suffix .= ' ' . $fconstraint;
+        }
         return $suffix;
     }
 
-    function AddColumnSQL($tabname, $flds)
+    public function AddColumnSQL($tabname, $flds)
     {
         $tabname = $this->TableName($tabname);
         $sql = array();
@@ -118,7 +130,7 @@ class ADODB2_sapdb extends ADODB_DataDict
         return array('ALTER TABLE ' . $tabname . ' ADD (' . implode(', ', $lines) . ')');
     }
 
-    function AlterColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
+    public function AlterColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
     {
         $tabname = $this->TableName($tabname);
         $sql = array();
@@ -126,10 +138,12 @@ class ADODB2_sapdb extends ADODB_DataDict
         return array('ALTER TABLE ' . $tabname . ' MODIFY (' . implode(', ', $lines) . ')');
     }
 
-    function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
+    public function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
     {
         $tabname = $this->TableName($tabname);
-        if (!is_array($flds)) $flds = explode(',', $flds);
+        if (!is_array($flds)) {
+            $flds = explode(',', $flds);
+        }
         foreach ($flds as $k => $v) {
             $flds[$k] = $this->NameQuote($v);
         }

@@ -1,4 +1,6 @@
-<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 require_once  ROOT_ADMIN .'/ProcessCoreAdmin.php';
 $coreAdmin = new ProcessCoreAdmin();
@@ -9,7 +11,7 @@ $_module = REQ('mod', 'GPG');
 $_init_modules = hook(
     'modules/init_modules',
     array(
-        'editconfig' => array('path' => 'mu_board', 'acl' => 'Cd'),
+        'editconfig' => array('path' => 'mu_board', 'acl' => 'Can'),
         //'character'   	=> array('path' => 'mu_character',		'acl' => 'cc'),
         'cashshop' => array('path' => 'mu_cashshop', 'acl' => 'Can'),
         'logout' => array('path' => 'logout', 'acl' => ''),
@@ -18,7 +20,7 @@ $_init_modules = hook(
 
 // Required module not exist
 if (!isset($_init_modules[$_module])) {
-    // external module chk
+    // External module chk
     $_module = hook('modules/init', 'editconfig', $_module);
 }
 

@@ -1,11 +1,13 @@
-﻿<?php
+<?php
 
 list($showchar, $options_rs_trust, $before_info_trust) = _GL('showchar, options_rs_trust, before_info_trust');
 list($sub) = _GL('sub');
 echo cn_snippet_messages();
 
 $cap_reset_max = getOption('cap_reset_max');
-if ($cap_reset_max > 20) $cap_reset_max = 20;
+if ($cap_reset_max > 20) {
+    $cap_reset_max = 20;
+}
 $ok_loop = false;
 $odd = 0;
 $i = 0;
@@ -34,12 +36,15 @@ $i = 0;
                                 <hr>
                             </td>
                         </tr>
-                        <?php if ($before_info_trust) foreach ($before_info_trust as $ke => $val) {
-                            if (isset($val[1]))
-                                echo '<tr>
+                        <?php if ($before_info_trust) {
+                            foreach ($before_info_trust as $ke => $val) {
+                                if (isset($val[1])) {
+                                    echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
 									<td><strong style="color:#009900">' . $val[1] . '</strong></td>
 								</tr>';
+                                }
+                            }
                         } ?>
 
                     </table>
@@ -51,12 +56,16 @@ $i = 0;
                 <td class="bizwebform_col_2">
 
                     <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
-                        <?php if ($showchar) foreach ($showchar as $name => $val) { ?>
-                            <option
-                                value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>><?php echo $name; ?>
-                                ( LV: <?php echo $val['level'] ?> - Reset: <?php echo $val['reset'] ?> )
-                            </option>
-                        <?php } ?>
+                        <?php if ($showchar) {
+                            foreach ($showchar as $name => $val) { ?>
+                                <option
+                                    value="<?php echo $name; ?>"<?php if ($sub == $name) {
+                                    echo 'selected';
+                                } ?>><?php echo $name; ?>
+                                    ( LV: <?php echo $val['level'] ?> - Reset: <?php echo $val['reset'] ?> )
+                                </option>
+                            <?php }
+                        } ?>
                     </select>
 
                 </td>
@@ -96,25 +105,31 @@ if (getOption('user_rs_uythac')) { ?>
                 <td align="center"><b>Blue</b></td>
             </tr>
 
-            <?php if ($options_rs_trust) foreach ($options_rs_trust as $df => $fd) {
-                if ($ok_loop) {
-                    $lv_rs_f = $lv_rs_e;
-                    $lv_rs_e = $fd['reset'];
-                } else {
-                    $lv_rs_f = 0;
-                    $lv_rs_e = $fd['reset'];
-                    $ok_loop = true;
-                } ?>
-                <tr <?php if ($odd++ % 2) echo 'style="background: #f8f8f8;"'; ?>>
-                    <td align="center"> <?php echo ++$lv_rs_f . ' &rarr; ' . $fd['reset']; ?></td>
-                    <td align="center"><?php echo $fd['point']; ?></td>
-                    <td align="center"><?php echo number_format((float)$fd['zen'], 0, ",", "."); ?></td>
-                    <td align="center"><?php echo $fd['chaos']; ?></td>
-                    <td align="center"><?php echo $fd['cre']; ?></td>
-                    <td align="center"><?php echo $fd['blue']; ?></td>
-                </tr>
-                <?php ++$i;
-                if ($i === $cap_reset_max) break;
+            <?php if ($options_rs_trust) {
+                foreach ($options_rs_trust as $df => $fd) {
+                    if ($ok_loop) {
+                        $lv_rs_f = $lv_rs_e;
+                        $lv_rs_e = $fd['reset'];
+                    } else {
+                        $lv_rs_f = 0;
+                        $lv_rs_e = $fd['reset'];
+                        $ok_loop = true;
+                    } ?>
+                    <tr <?php if ($odd++ % 2) {
+                        echo 'style="background: #f8f8f8;"';
+                    } ?>>
+                        <td align="center"> <?php echo ++$lv_rs_f . ' &rarr; ' . $fd['reset']; ?></td>
+                        <td align="center"><?php echo $fd['point']; ?></td>
+                        <td align="center"><?php echo number_format((float)$fd['zen'], 0, ",", "."); ?></td>
+                        <td align="center"><?php echo $fd['chaos']; ?></td>
+                        <td align="center"><?php echo $fd['cre']; ?></td>
+                        <td align="center"><?php echo $fd['blue']; ?></td>
+                    </tr>
+                    <?php ++$i;
+                    if ($i === $cap_reset_max) {
+                        break;
+                    }
+                }
             } ?>
 
         </table>

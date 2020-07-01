@@ -8,9 +8,11 @@ class imgbrowse
     protected $imgext = ['bmp', 'gif', 'jpg', 'jpe', 'jpeg', 'png'];    // allowed image extensions
     protected $imgdr = '';     // current folder (in $root) with images
 
-    function __construct()
+    public function __construct()
     {
-        if (isset($_POST['imgroot'])) $this->root = trim(strip_tags($_POST['imgroot']));
+        if (isset($_POST['imgroot'])) {
+            $this->root = trim(strip_tags($_POST['imgroot']));
+        }
         $this->root = trim($this->root, '/') . '/';
         $this->imgdr = isset($_POST['imgdr']) ? trim(trim(strip_tags($_POST['imgdr'])), '/') . '/' : '';
     }
@@ -34,11 +36,18 @@ class imgbrowse
             $name = $fileobj->getFilename();
 
             // if image file, else, directory (but not . or ..), add data in $re
-            if ($fileobj->isFile() && in_array($fileobj->getExtension(), $this->imgext)) $re['imgs'] .= '<span><img src="' . $site . $this->root . $this->imgdr . $name . '" alt="' . $name . '" height="50" />' . $name . '</span>';
-            else if ($fileobj->isDir() && !$fileobj->isDot()) $re['menu'] .= '<li><span title="' . $this->imgdr . $name . '">' . $name . '</span></li>';
+            if ($fileobj->isFile() && in_array($fileobj->getExtension(), $this->imgext)) {
+                $re['imgs'] .= '<span><img src="' . $site . $this->root . $this->imgdr . $name . '" alt="' . $name . '" height="50" />' . $name . '</span>';
+            } elseif ($fileobj->isDir() && !$fileobj->isDot()) {
+                $re['menu'] .= '<li><span title="' . $this->imgdr . $name . '">' . $name . '</span></li>';
+            }
         }
-        if ($re['menu'] != '') $re['menu'] = '<ul>' . $re['menu'] . '</ul>';
-        if ($re['imgs'] == '') $re['imgs'] = '<h1>No Images</h1>';
+        if ($re['menu'] != '') {
+            $re['menu'] = '<ul>' . $re['menu'] . '</ul>';
+        }
+        if ($re['imgs'] == '') {
+            $re['imgs'] = '<h1>No Images</h1>';
+        }
         return $re;
     }
 }

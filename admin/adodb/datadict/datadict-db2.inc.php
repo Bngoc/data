@@ -11,15 +11,16 @@
  * Set tabs to 4 for best viewing.
  */
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 class ADODB2_db2 extends ADODB_DataDict
 {
+    public $databaseType = 'db2';
+    public $seqField = false;
 
-    var $databaseType = 'db2';
-    var $seqField = false;
-
-    function ActualType($meta)
+    public function ActualType($meta)
     {
         switch ($meta) {
             case 'C':
@@ -66,31 +67,43 @@ class ADODB2_db2 extends ADODB_DataDict
     }
 
     // return string must begin with space
-    function _CreateSuffix($fname, &$ftype, $fnotnull, $fdefault, $fautoinc, $fconstraint, $funsigned)
+    public function _CreateSuffix($fname, &$ftype, $fnotnull, $fdefault, $fautoinc, $fconstraint, $funsigned)
     {
         $suffix = '';
-        if ($fautoinc) return ' GENERATED ALWAYS AS IDENTITY'; # as identity start with
-        if (strlen($fdefault)) $suffix .= " DEFAULT $fdefault";
-        if ($fnotnull) $suffix .= ' NOT NULL';
-        if ($fconstraint) $suffix .= ' ' . $fconstraint;
+        if ($fautoinc) {
+            return ' GENERATED ALWAYS AS IDENTITY';
+        } # as identity start with
+        if (strlen($fdefault)) {
+            $suffix .= " DEFAULT $fdefault";
+        }
+        if ($fnotnull) {
+            $suffix .= ' NOT NULL';
+        }
+        if ($fconstraint) {
+            $suffix .= ' ' . $fconstraint;
+        }
         return $suffix;
     }
 
-    function AlterColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
+    public function AlterColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
     {
-        if ($this->debug) ADOConnection::outp("AlterColumnSQL not supported");
+        if ($this->debug) {
+            ADOConnection::outp("AlterColumnSQL not supported");
+        }
         return array();
     }
 
 
-    function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
+    public function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
     {
-        if ($this->debug) ADOConnection::outp("DropColumnSQL not supported");
+        if ($this->debug) {
+            ADOConnection::outp("DropColumnSQL not supported");
+        }
         return array();
     }
 
 
-    function ChangeTableSQL($tablename, $flds, $tableoptions = false)
+    public function ChangeTableSQL($tablename, $flds, $tableoptions = false)
     {
 
         /**
@@ -124,14 +137,17 @@ class ADODB2_db2 extends ADODB_DataDict
                 // assume that $vargs[0] is the field name.
                 $i = 0;
                 // Find the next non-blank value;
-                for ($i = 1; $i < sizeof($vargs); $i++)
-                    if ($vargs[$i] != '')
+                for ($i = 1; $i < sizeof($vargs); $i++) {
+                    if ($vargs[$i] != '') {
                         break;
+                    }
+                }
 
                 // if $vargs[$i] is one of the following, we are trying to change the
                 // size of the field, if not allowed, simply ignore the request.
-                if (in_array(substr($vargs[$i], 0, 4), $invalidTypes))
+                if (in_array(substr($vargs[$i], 0, 4), $invalidTypes)) {
                     continue;
+                }
                 // insert the appropriate DB2 syntax
                 if (in_array(substr($vargs[$i], 0, 4), $validTypes)) {
                     array_splice($vargs, $i, 0, array('SET', 'DATA', 'TYPE'));
@@ -140,9 +156,11 @@ class ADODB2_db2 extends ADODB_DataDict
                 // Now Look for the NOT NULL statement as this is not allowed in
                 // the ALTER table statement. If it is in there, remove it
                 if (in_array('NOT', $vargs) && in_array('NULL', $vargs)) {
-                    for ($i = 1; $i < sizeof($vargs); $i++)
-                        if ($vargs[$i] == 'NOT')
+                    for ($i = 1; $i < sizeof($vargs); $i++) {
+                        if ($vargs[$i] == 'NOT') {
                             break;
+                        }
+                    }
                     array_splice($vargs, $i, 2, '');
                 }
                 $v = implode(' ', $vargs);
@@ -154,5 +172,4 @@ class ADODB2_db2 extends ADODB_DataDict
 
         return $sql;
     }
-
 }

@@ -12,7 +12,9 @@
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 if (!defined("_ADODB_PROXY_LAYER")) {
     define("_ADODB_PROXY_LAYER", 1);
@@ -20,15 +22,15 @@ if (!defined("_ADODB_PROXY_LAYER")) {
 
     class ADODB_proxy extends ADODB_csv
     {
-        var $databaseType = 'proxy';
-        var $databaseProvider = 'csv';
+        public $databaseType = 'proxy';
+        public $databaseProvider = 'csv';
     }
 
     class ADORecordset_proxy extends ADORecordset_csv
     {
-        var $databaseType = "proxy";
+        public $databaseType = "proxy";
 
-        function __construct($id, $mode = false)
+        public function __construct($id, $mode = false)
         {
             parent::__construct($id, $mode);
         }

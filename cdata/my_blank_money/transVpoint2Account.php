@@ -1,6 +1,6 @@
 <?php
 
-list ($showConfigTransVpoint) = _GL('showConfigTransVpoint');
+list($showConfigTransVpoint) = _GL('showConfigTransVpoint');
 
 ?>
 

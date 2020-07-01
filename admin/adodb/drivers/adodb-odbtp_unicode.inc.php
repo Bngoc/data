@@ -1,8 +1,8 @@
 <?php
 /*
-	@version   v5.20.0  28-Nov-2015
-	@copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
-	@copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
+    @version   v5.20.0  28-Nov-2015
+    @copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+    @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence. See License.txt.
@@ -13,7 +13,9 @@
 // Code contributed by "Robert Twitty" <rtwitty#neutron.ushmm.org>
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 /*
     Because the ODBTP server sends and reads UNICODE text data using UTF-8
@@ -31,6 +33,6 @@ if (!defined('_ADODB_ODBTP_LAYER')) {
 
 class ADODB_odbtp_unicode extends ADODB_odbtp
 {
-    var $databaseType = 'odbtp';
-    var $_useUnicodeSQL = true;
+    public $databaseType = 'odbtp';
+    public $_useUnicodeSQL = true;
 }

@@ -275,7 +275,8 @@
     border: 1px solid gray;
 }
 
-.b { /*float: right;*/
+.b {
+    /*float: right;*/
     background: rgba(87, 173, 55, 0.41);
     height: 16px;
     color: white;

@@ -1,10 +1,11 @@
 <?php
 
+//include(SERVDIR . '/core/config.php');
 require_once ROOT . '/Utils/ProcessCore.php';
 
 class ProcessCoreAdmin extends ProcessCore
 {
-    function cn_load_session()
+    public function cn_load_session()
     {
         session_name('SEXXXXXXXXXXX_SESSION');
         @session_start();
@@ -15,7 +16,7 @@ class ProcessCoreAdmin extends ProcessCore
     }
 
     // Since 2.0: Show login form
-    function cn_login_admin_form($admin = true)
+    public function cn_login_admin_form($admin = true)
     {
         if ($admin) {
             echo_header_admin("user", "Please Login");
@@ -30,7 +31,7 @@ class ProcessCoreAdmin extends ProcessCore
     }
 
 
-//// Since 1.5.2: Directory scan
+    //// Since 1.5.2: Directory scan
 //    function scan_dir($dir, $cond = '')
 //    {
 //        $files = array();
@@ -72,7 +73,7 @@ class ProcessCoreAdmin extends ProcessCore
 //        setcookie('session', '', 0, '/');
 //    }
 //
-//// Since 2.0: Replace text with holders
+    //// Since 2.0: Replace text with holders
 //    function cn_replace_text()
 //    {
 //        $args = func_get_args();
@@ -87,7 +88,7 @@ class ProcessCoreAdmin extends ProcessCore
 //    }
 
     // Since 2.0.3: Logout user and clean session
-    function cn_logout($relocation = PHP_SELF)
+    public function cn_logout($relocation = PHP_SELF)
     {
         $this->cnCookieUnset();
         session_unset();
@@ -96,7 +97,7 @@ class ProcessCoreAdmin extends ProcessCore
     }
 
     // Since 2.0: Cutenews login routines
-    function cn_login_admin()
+    public function cn_login_admin()
     {
         $logged_username = isset($_SESSION['mu_Account']) ? $_SESSION['mu_Account'] : false;
         $last_Login_Time = isset($_SESSION['last_Login_Time']) ? $_SESSION['last_Login_Time'] : false;
@@ -140,6 +141,7 @@ class ProcessCoreAdmin extends ProcessCore
 
                     if (!$member) {
                         cn_throw_message('Account not found', 'e');
+                        return false;
                     }
 
                     $ban_time = isset($member['Ban']) ? (int)$member['Ban'] : 0;
@@ -148,11 +150,10 @@ class ProcessCoreAdmin extends ProcessCore
                         if ($member['user_Account'] == $username) {
                             do_update_character('Account_Info', "NumLogin=1", "UserAcc:'$username'");
                         }
-                        $this->msg_info('Too frequent queries. Wait ' . ($ban_time - ctime() . ' sec.'));
+                        msg_info('Too frequent queries. Wait ' . ($ban_time - ctime() . ' sec.'));
                     }
 
                     if (in_array($member['Pwd'], $compares)) {
-
                         $is_logged = true;
 
                         // set user to session
@@ -174,7 +175,7 @@ class ProcessCoreAdmin extends ProcessCore
                             cnRelocation($_SESSION['RQU']);
                         }
                     } else {
-                        list ($numLogin, $timeBlock) = explode(':', getOption('config_login_ban'));
+                        list($numLogin, $timeBlock) = explode(':', getOption('config_login_ban'));
                         if (++$member['NumLogin'] > (@$numLogin ? $numLogin : 5)) {
                             $timeFutureBan = ctime() + 60 * (@$timeBlock ? $timeBlock : 3);
                         } else {
@@ -185,7 +186,6 @@ class ProcessCoreAdmin extends ProcessCore
                         cn_write_log("'User " . substr($username, 0, 32) . " (" . $_SERVER['REMOTE_ADDR'] . ") login failed");
                         do_update_character('Account_Info', "Lastdate=" . ctime(), 'Ban=' . $timeFutureBan, "NumLogin=NumLogin+1", "UserAcc:'$username'");
                     }
-
                 } else {
                     cn_throw_message('Enter login or password', 'e');
                 }
@@ -208,7 +208,7 @@ class ProcessCoreAdmin extends ProcessCore
     }
 
     // Since 2.0: Show register form
-    function cn_register_admin_form($admin = true)
+    public function cn_register_admin_form($admin = true)
     {
         if (isset($_SESSION['mu_Account'])) {
             return false;
@@ -273,7 +273,9 @@ class ProcessCoreAdmin extends ProcessCore
             if ($user && $email && $email == REQ('email')) {
                 $rand = '';
                 $set = 'qwertyuiop[],./!@#$%^&*()_asdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-                for ($i = 0; $i < 64; $i++) $rand .= $set[mt_rand() % strlen($set)];
+                for ($i = 0; $i < 64; $i++) {
+                    $rand .= $set[mt_rand() % strlen($set)];
+                }
                 $hash = password_hash($rand, PASSWORD_BCRYPT);
                 do_update_character('Account_Info', "[hash]='$hash'", "UserAcc:'" . $user['user_Account'] . "'");
 
@@ -282,22 +284,23 @@ class ProcessCoreAdmin extends ProcessCore
                 $url = getOption('http_script_dir') . '/admin.php?lostpass=' . urlencode(base64_encode(xxtea_encrypt($rand . $ctime . ' ' . REQ('username'), MD5(CLIENT_IP) . getOption('#crypt_salt'))));
 
                 $status = cn_send_mail($user['email'], 'Resend activation link', cn_replace_text($resend_activate_account, '%username%, %url%', $user['user_Account'], $url));
-                if ($status)
+                if ($status) {
                     msg_info('For you send activate link');
-                else
+                } else {
                     msg_info('For you send error after forgot password.');
+                }
             }
 
             msg_info('Enter required field: email');
         }
 
         // is not registration form
-        if (is_null(REQ('register', 'GET')))
+        if (is_null(REQ('register', 'GET'))) {
             return false;
+        }
 
         // Lost password: disabled registration - no affected
         if (!is_null(REQ('lostpass', 'GET'))) {
-
             $Action = 'Lost password';
             $template = 'auth/lost';
         } else {
@@ -308,15 +311,29 @@ class ProcessCoreAdmin extends ProcessCore
 
                 // Do register
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    if ($userName === '') $errors[] = "Username field can't be blank";
-                    if ($email === '') $errors[] = "Email field can't be blank";
-                    if ($password === '') $errors[] = "Password field can't be blank";
-                    if (!preg_match('/[\w]\@[\w]/i', $email)) $errors[] = "Email is invalid";
+                    if ($userName === '') {
+                        $errors[] = "Username field can't be blank";
+                    }
+                    if ($email === '') {
+                        $errors[] = "Email field can't be blank";
+                    }
+                    if ($password === '') {
+                        $errors[] = "Password field can't be blank";
+                    }
+                    if (!preg_match('/[\w]\@[\w]/i', $email)) {
+                        $errors[] = "Email is invalid";
+                    }
 
-                    if ($password !== $confirm) $errors[] = "Confirm password not match";
-                    if ($captcha !== $_SESSION['captcha_code']) $errors[] = "Captcha not match";
+                    if ($password !== $confirm) {
+                        $errors[] = "Confirm password not match";
+                    }
+                    if ($captcha !== $_SESSION['captcha_code']) {
+                        $errors[] = "Captcha not match";
+                    }
 
-                    if (strlen($password) < 3) $errors[] = 'Too short password';
+                    if (strlen($password) < 3) {
+                        $errors[] = 'Too short password';
+                    }
 
                     // Do register
                     if (empty($errors)) {
@@ -367,10 +384,11 @@ class ProcessCoreAdmin extends ProcessCore
                         if (getOption('notify_registration')) {
                             $tempRegister = "<html><body><h1>Account Details</h1><p>Thank you for registering on our site, your account details are as follows:<br>Username: %username%<br>Email: %email%</p></body></html>";
                             $status = cn_send_mail($email, 'Welcome to ' . $_SERVER['SERVER_NAME'], cn_replace_text($tempRegister, '%username%, %email%', $userName, $email));
-                            if ($status)
+                            if ($status) {
                                 msg_info('For you send register');
-                            else
+                            } else {
                                 msg_info('For you send error after register');
+                            }
                         }
                         header('Location: ' . PHP_SELF);
                         die();
@@ -401,32 +419,32 @@ class ProcessCoreAdmin extends ProcessCore
         return true;
     }
 
-//// Since 1.5.0: Send Mail
+    //// Since 1.5.0: Send Mail
 //    function cn_send_mail($to, $subject, $message, $alt_headers = NULL, $addressCC = '')
 //    {
 //
-////    $from1 = "Cutenews <ngoctbhy@gmail.com>";$headers .= "\r\nBcc: her@$herdomain\r\n\r\n";
-////    $from = 'Cutenews <cutenews@' . $_SERVER['SERVER_NAME'] . '>';
-////
-////    $headers = "MIME-Version: 1.0\r\n";
-////    $headers .= "Content-type: text/plain;\r\n";
-////    $headers .= 'From: ' . $from . "\r\n";
-////    $headers .= 'Bcc: ' . $from . "\r\n";
-////    $headers .= 'Reply-to: ' . $from . "\r\n";
-////    $headers .= 'Return-Path: ' . $from . "\r\n";
-////    $headers .= 'Message-ID: <' . md5(uniqid(time())) . '@' . $_SERVER['SERVER_NAME'] . ">\r\n";
-////    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-////    $headers .= "Date: " . date('r', time()) . "\r\n";
-////
-////    if (!is_null($alt_headers)) $headers = $alt_headers;
-////    foreach ($tos as $v) if ($v) mail($v, $subject, $message, $headers);
+    ////    $from1 = "Cutenews <ngoctbhy@gmail.com>";$headers .= "\r\nBcc: her@$herdomain\r\n\r\n";
+    ////    $from = 'Cutenews <cutenews@' . $_SERVER['SERVER_NAME'] . '>';
+    ////
+    ////    $headers = "MIME-Version: 1.0\r\n";
+    ////    $headers .= "Content-type: text/plain;\r\n";
+    ////    $headers .= 'From: ' . $from . "\r\n";
+    ////    $headers .= 'Bcc: ' . $from . "\r\n";
+    ////    $headers .= 'Reply-to: ' . $from . "\r\n";
+    ////    $headers .= 'Return-Path: ' . $from . "\r\n";
+    ////    $headers .= 'Message-ID: <' . md5(uniqid(time())) . '@' . $_SERVER['SERVER_NAME'] . ">\r\n";
+    ////    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+    ////    $headers .= "Date: " . date('r', time()) . "\r\n";
+    ////
+    ////    if (!is_null($alt_headers)) $headers = $alt_headers;
+    ////    foreach ($tos as $v) if ($v) mail($v, $subject, $message, $headers);
 //
-////    return true;
+    ////    return true;
 //
 //
-////    $nFrom = 'Freetuts.net';
-////    $mFrom = 'xxxx@gmail.com';
-////    $mPass = 'passlamatkhua';
+    ////    $nFrom = 'Freetuts.net';
+    ////    $mFrom = 'xxxx@gmail.com';
+    ////    $mPass = 'passlamatkhua';
 //        //sendMail($title, $content, $nTo, $mTo,$diachicc='');
 //        $nFrom = $_SERVER['SERVER_NAME'];
 //        $mFrom = @getOption('config_auth_email') ? getOption('config_auth_email') : false;
@@ -463,7 +481,7 @@ class ProcessCoreAdmin extends ProcessCore
 //            foreach ($tos as $v) if ($v) $mail->AddAddress($v, '');
 //
 //            $mail->AddReplyTo($mFrom, $nFrom);
-////        $mail->AddAttachment($file, $filename);
+    ////        $mail->AddAttachment($file, $filename);
 //            if ($mail->Send()) {
 //                return true;
 //            } else {
@@ -474,7 +492,7 @@ class ProcessCoreAdmin extends ProcessCore
 //        return false;
 //    }
 //
-//// Since 1.5.0: Send Mail
+    //// Since 1.5.0: Send Mail
 //    function cn_send_hd($subject, $message)
 //    {
 //        $nFrom = $_SERVER['SERVER_NAME'];
@@ -500,7 +518,7 @@ class ProcessCoreAdmin extends ProcessCore
 //
 //
 //            $mail->AddReplyTo($mFrom, $nFrom);
-////        $mail->AddAttachment($file, $filename);
+    ////        $mail->AddAttachment($file, $filename);
 //            if ($mail->Send()) {
 //                return true;
 //            } else {
@@ -512,20 +530,20 @@ class ProcessCoreAdmin extends ProcessCore
 //    }
 
     // Since 2.0: Make 'Top menu'
-    function cn_get_menu()
+    public function cn_get_menu()
     {
-        $modules = hook('core/cn_get_menu', array
-        (
-            'editconfig' => array('Cd', 'Cấu hình chung'),
+        $modules = hook('core/cn_get_menu', array(
+            'editconfig' => array('Cd', 'Configuration general'),
             'cashshop' => array('Can', 'Cash Shop'),
             'logout' => array('', 'Logout', 'logout'),
         ));
 
-        if (getOption('main_site'))
+        if (getOption('main_site')) {
             $modules['my_site'] = getOption('main_site');
+        }
 
         $result = '<ul>';
-        $mod = REQ('mod', 'GPG');
+        $mod = strtolower(REQ('mod', 'GPG') ? REQ('mod', 'GPG') : "editconfig");
 
         foreach ($modules as $mod_key => $var) {
             if (!is_array($var)) {
@@ -538,22 +556,35 @@ class ProcessCoreAdmin extends ProcessCore
             $title = isset($var[2]) ? $var[2] : '';
             $app = isset($var[3]) ? $var[3] : '';
 
-            if ($acl && !testRoleAdmin($acl))
+            if ($acl && !testRoleAdmin($acl)) {
                 continue;
+            }
 
-            if (isset($title) && $title) $action = '&amp;action=' . $title; else $action = '';
-            if ($mod == $mod_key) $select = ' active '; else $select = '';
+            if (isset($title) && $title) {
+                $action = '&amp;action=' . $title;
+            } else {
+                $action = '';
+            }
+            if ($mod == $mod_key) {
+                $select = ' active ';
+            } else {
+                $select = '';
+            }
 
             // Append urls for menu (preserve place)
             if (isset($app) && $app) {
                 $actions = array();
                 $mv = separateString($app);
 
-                foreach ($mv as $vx)
-                    if ($dt = REQ($vx))
+                foreach ($mv as $vx) {
+                    if ($dt = REQ($vx)) {
                         $actions[] = "$vx=" . urlencode($dt);
+                    }
+                }
 
-                if ($actions) $action .= '&amp;' . join('&amp;', $actions);
+                if ($actions) {
+                    $action .= '&amp;' . join('&amp;', $actions);
+                }
             }
 
             $result .= '<li class = "' . $select . '"><a href="' . PHP_SELF . '?mod=' . $mod_key . $action . '">' . $name . '</a></li>';
@@ -573,18 +604,18 @@ class ProcessCoreAdmin extends ProcessCore
 //        if (empty($go_back)) $go_back = PHP_SELF;
 //
 //        $str_ = '<div class="sub_ranking" align="center" style="color: rgb(36, 36, 36);font-size: 15px;line-height: initial;">
-//				<b><p>' . $title . '</p></b><br>
-//				<p><b><a href=' . $go_back . '><font size="15" color="red">OK</font></a></b></p>
-//			</div>';
+    //				<b><p>' . $title . '</p></b><br>
+    //				<p><b><a href=' . $go_back . '><font size="15" color="red">OK</font></a></b></p>
+    //			</div>';
 //        echo $str_;
-////    $this->echoContent($str_, cn_snippet_bc_re("Home", "Permission check"));
+    ////    $this->echoContent($str_, cn_snippet_bc_re("Home", "Permission check"));
 //
 //        echofooter();
 //        die();
 //    }
 
     // Since 2.0: @bootstrap
-    function cn_detect_user_ip()
+    public function cn_detect_user_ip()
     {
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $IP = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -609,7 +640,7 @@ class ProcessCoreAdmin extends ProcessCore
     }
 
     // Since 2.0: Grab from $_POST all parameters
-    function cn_parse_url()
+    public function cn_parse_url()
     {
         // Decode post data
         $post_data = array();
@@ -625,7 +656,11 @@ class ProcessCoreAdmin extends ProcessCore
             $_POST['__my_confirm'] = '_confirmed';
 
             // Return additional parameters in POST
-            if (is_array($APPEND)) foreach ($APPEND as $id => $v) $_POST[$id] = $v;
+            if (is_array($APPEND)) {
+                foreach ($APPEND as $id => $v) {
+                    $_POST[$id] = $v;
+                }
+            }
 
             return true;
         } // B. Click "decline"
@@ -638,9 +673,15 @@ class ProcessCoreAdmin extends ProcessCore
         }
 
         // Set POST required params to GET
-        if (REQ('mod', 'POST')) $_GET['mod'] = REQ('mod', 'POST');
-        if (REQ('opt', 'POST')) $_GET['opt'] = REQ('opt', 'POST');
-        if (REQ('sub', 'POST')) $_GET['sub'] = REQ('sub', 'POST');
+        if (REQ('mod', 'POST')) {
+            $_GET['mod'] = REQ('mod', 'POST');
+        }
+        if (REQ('opt', 'POST')) {
+            $_GET['opt'] = REQ('opt', 'POST');
+        }
+        if (REQ('sub', 'POST')) {
+            $_GET['sub'] = REQ('sub', 'POST');
+        }
 
         // Unset signature dsi
         unset($_GET['__signature_key'], $_GET['__signature_dsi']);
@@ -650,7 +691,7 @@ class ProcessCoreAdmin extends ProcessCore
 
     // Since 2.0: Save option to config
     // Usage: #level1/level2/.../levelN or 'option_name' from %site
-    function setOption($opt_name, $var, $var_name = '')
+    public function setOption($opt_name, $var, $var_name = '')
     {
         $cfg = getMemcache('config');
 
@@ -676,7 +717,7 @@ class ProcessCoreAdmin extends ProcessCore
     }
 
     // Since 2.0: @Helper recursive function
-    function setoption_rc($names, $var, $cfg)
+    public function setoption_rc($names, $var, $cfg)
     {
         $the_name = array_shift($names);
 
@@ -692,7 +733,7 @@ class ProcessCoreAdmin extends ProcessCore
         return $cfg;
     }
 
-//// Since 1.5.1: Simply read template file
+    //// Since 1.5.1: Simply read template file
 //    function read_tpl($tpl = 'index')
 //    {
 //        // get from cache
@@ -733,19 +774,19 @@ class ProcessCoreAdmin extends ProcessCore
 //    }
 
     // Since 2.0: @bootstrap
-    function cn_load_skin()
+    public function cn_load_skin()
     {
         $config_skin = preg_replace('~[^a-z]~i', '', getOption('skin'));
         //$config_skin = preg_replace('~[^a-z]~i','', 'default');
-        if (file_exists($skin_file = SERVDIR . "/skins/$config_skin.skin.php")) {
+        if (file_exists($skin_file = SKIN . "/skins/$config_skin.skin.php")) {
             include($skin_file);
         } else {
             die("Can't load skin $config_skin");
         }
     }
 
-// Since 2.0: @bootstrap Make & load configuration file ==>
-    function cn_config_load()
+    // Since 2.0: @bootstrap Make & load configuration file ==>
+    public function cn_config_load()
     {
         global $_CN_access;
 
@@ -775,6 +816,7 @@ class ProcessCoreAdmin extends ProcessCore
 
         $default_conf = array(
             'skin' => 'default',
+            'cn_language' => $this->config['lang'],
             'frontend_encoding' => 'UTF-8',
             'useutf8' => 1,
             'utf8html' => 1,
@@ -789,8 +831,8 @@ class ProcessCoreAdmin extends ProcessCore
             'config_login_ban' => '5:15',
             'ban_attempts' => 3,
             'hd_user_e' => 'Ym95bG92ZS5uZ29jaXRAZ21haWwuY29t',
-            'config_auth_email' => 'ngoctbhy@gmail.com',
-            'config_auth_pass' => '4111601501720',
+            'config_auth_email' => $this->config['config_auth_email'],
+            'config_auth_pass' => $this->config['config_auth_pass'],
 
             'show_comments_with_full' => 1,
             'timestamp_active' => 'd M Y',
@@ -819,8 +861,8 @@ class ProcessCoreAdmin extends ProcessCore
             'Use_ChuyenVpoint' => 1,
             'Use_UyThacResetVIP' => 1,
 
-            'domain_pri' => "192.168.X.X",
-            'home_url' => "http://192.168.X.X/ABC",
+            'domain_pri' => $this->config['domain_pri'],
+            'home_url' => $this->config['home_url'],
 
             "conf['path']" => "Firewall",
             'use_antiddos' => 1,
@@ -850,12 +892,12 @@ class ProcessCoreAdmin extends ProcessCore
             'Use_Gcoin2GoblinCoin' => 1,
 
             'notify_registration' => 1,
-            'napthe_gate' => "0,1,0,1,1,1,0,1",
-            'napthe_mobi' => "0,1,0,1,1,1,0,1",
-            'napthe_viettel' => "1,1,0,1,1,1,0,1",
-            'napthe_vina' => "0,1,0,1,1,1,0,1",
-            'napthe_vtc' => "0,1,0,1,1,1,0,1",
-            'napthe_list' => "1,1,1,1,1",
+            'card_gate' => "0,1,0,1,1,1,0,1",
+            'card_mobi' => "0,1,0,1,1,1,0,1",
+            'card_viettel' => "1,1,0,1,1,1,0,1",
+            'card_vina' => "0,1,0,1,1,1,0,1",
+            'card_vtc' => "0,1,0,1,1,1,0,1",
+            'card_list' => "1,1,1,1,1",
             'km_list' => "0,0,0,0,0|20",
             'vptogc' => 80,
             'changename_vpoint' => 50000,
@@ -865,7 +907,7 @@ class ProcessCoreAdmin extends ProcessCore
             'uythacoff_price' => 10,
             'user_delegate' => 2,
             'event_toprs_on' => 1,
-            'hotrotanthu' => 1,
+            'support_new_player' => 1,
             'cap_relife_max' => 7,
             'cap_reset_max' => 7,
             'use_gioihanrs' => 1,
@@ -950,14 +992,15 @@ class ProcessCoreAdmin extends ProcessCore
         foreach ($Items_Data as $key => $line) {
             $line_ = trim($line);
             $lineComment = substr($line_, 0, 2);
-            if (empty($line_) || $lineComment == '//') continue;
+            if (empty($line_) || $lineComment == '//') {
+                continue;
+            }
 
             list($optImg, $group, $id, $name, $x, $y, $set1, $set2) = explode('|', $line_, 8);
             $key = $group . "." . $id;
             // Is empty row
 
             if (!isset($cfg['items_data'][$key])) {
-
                 $cfg['items_data'][$key] = array(
                     'Image' => $optImg,
                     'G' => $group,
@@ -995,23 +1038,24 @@ class ProcessCoreAdmin extends ProcessCore
 
         // Check http_script_dir
         $path_http_script_dir = $script_path;
-        if (getOption('http_script_dir') != $path_http_script_dir){
+        if (getOption('http_script_dir') != $path_http_script_dir) {
             $this->setOption('http_script_dir', $path_http_script_dir);
         }
 
         $path_update_dir = cn_path_construct(ROOT, 'uploads');
-        if (getOption('uploads_dir') != $path_update_dir){
+        if (getOption('uploads_dir') != $path_update_dir) {
             $this->setOption('uploads_dir', $path_update_dir);
         }
 
         $path_uploads_ext = URL_PATH . '/uploads';
-        if (getOption('uploads_ext') != $path_uploads_ext)
+        if (getOption('uploads_ext') != $path_uploads_ext) {
             $this->setOption('uploads_ext', $path_uploads_ext);
+        }
 
         return true;
     }
 
-//// Since 2.0: Decode "defaults/templates" to list
+    //// Since 2.0: Decode "defaults/templates" to list
 //    function cn_template_list()
 //    {
 //        $config = file(cn_path_construct(SKIN, 'defaults') . 'character.tpl');
@@ -1050,7 +1094,7 @@ class ProcessCoreAdmin extends ProcessCore
 //        return isset($templates) ? $templates : array();
 //    }
 //
-//// Since 2.0: Get template (if not exists, create from defaults)
+    //// Since 2.0: Get template (if not exists, create from defaults)
 //    function cn_get_template_byarr($template_name = '')//$subtemplate='')
 //    {
 //        $templates = getOption('#temp_basic');
@@ -1096,7 +1140,7 @@ class ProcessCoreAdmin extends ProcessCore
 //        echo $result;
 //    }
 //
-//// Since 2.0: Read file (or create file)
+    //// Since 2.0: Read file (or create file)
 //    function cn_read_file($target)
 //    {
 //        $fn = cn_touch($target, true);
@@ -1148,7 +1192,7 @@ class ProcessCoreAdmin extends ProcessCore
 //    }
 
     // Since 2.0: Save whole config
-    function cn_config_save($cfg = null)
+    public function cn_config_save($cfg = null)
     {
         if ($cfg === null) {
             $cfg = getMemcache('config');
@@ -1170,13 +1214,13 @@ class ProcessCoreAdmin extends ProcessCore
     }
 
     // Since 2.0: @bootstrap Select DB mechanism
-    function cn_db_init()
+    public function cn_db_init()
     {
         include ROOT . '/core/db/flat_web.php';
     }
 
     // bqn relocation => $db + server
-    function cn_relocation_db()
+    public function cn_relocation_db()
     {
         global $db_new, $config_adminemail, $config_admin;
 
@@ -1192,8 +1236,8 @@ class ProcessCoreAdmin extends ProcessCore
             $this->cn_db_installed();
         }
 
-        $config_admin = "BUI NGOC";
-        $config_adminemail = "ngoctbhy@gmail.com";
+        $config_admin = $this->config["admin_name"];
+        $config_adminemail = $this->config["admin_email"];
 
         include_once(SERVDIR . '/adodb/adodb.inc.php');
 
@@ -1202,27 +1246,31 @@ class ProcessCoreAdmin extends ProcessCore
             $database_ = "Driver={SQL Server};Server={$localhost};Database={$d_base}";
             $connect_mssql = $db_new->Connect($database_, $databaseuser, $databsepassword);
             $db_new->SetFetchMode(ADODB_ASSOC_CASE);
-            if (!$connect_mssql) die('Kết nối với SQL Server lỗi!! Hãy kiểm tra lại ODBC tồn tại hoặc User - Pass không đúng.');
-        } else if ($type_connect == 'mssql') {
-            if (extension_loaded('mssql')) echo('');
-            else Die('Lỗi! Không thể load thư viện php_mssql.dll. Hãy cho phép sử dụng php_mssql.dll trong php.ini');
+            if (!$connect_mssql) {
+                die('Kết nối với SQL Server lỗi!! Hãy kiểm tra lại ODBC tồn tại hoặc User - Pass không đúng.');
+            }
+        } elseif ($type_connect == 'mssql') {
+            if (extension_loaded('mssql')) {
+                echo('');
+            } else {
+                die('Lỗi! Không thể load thư viện php_mssql.dll. Hãy cho phép sử dụng php_mssql.dll trong php.ini');
+            }
             $db_new = &ADONewConnection('mssql');
             $connect_mssql = $db_new->Connect($localhost, $databaseuser, $databsepassword, $d_base);
             $db_new->SetFetchMode(ADODB_ASSOC_CASE);
-            if (!$connect_mssql) die('Lỗi! Không thể kết nối SQL Server!');
-        } else {
-            die ('Lỗi! Không thể kết nối SQL Server!');
+            if (!$connect_mssql) {
+                die('Lỗi! Không thể kết nối SQL Server!');
+            }
         }
     }
 
-    function cn_db_installed()
+    public function cn_db_installed()
     {
         if (defined('AREA') && AREA == 'ADMIN') {
-            include SERVDIR . '/skins/default.skin.php';
+            include SKIN . '/skins/default.skin.php';
 
             // Submit
             if (request_type('POST')) {
-
                 list($type_connect, $nameLocal, $nameSql, $pwdDb, $nameSaveDb, $server_type, $actionSave) = GET('type_connect, nameLocal, nameSql, pwdDb, nameSaveDb, server_type, actionSave', 'GPG');
 
                 if (!$type_connect) {
@@ -1246,7 +1294,6 @@ class ProcessCoreAdmin extends ProcessCore
 
                 // All OK
                 if ($actionSave && cn_get_message('e', 'c') == 0) {
-
                     $opt_result = getOption('#%site');
 
                     $opt_result['type_connect'] = $type_connect;
@@ -1263,19 +1310,19 @@ class ProcessCoreAdmin extends ProcessCore
                     cnRelocation(getOption('http_script_dir') . '/admin.php');
                 }
             }
-            echo_header_admin('-@../skins/default.css', 'Install Database');
+
+            echo_header_admin('-@/default.css', 'Install Database');
             echo execTemplate('installdb');
             echofooter();
         }
     }
 
-    function cn_check_connect()
+    public function cn_check_connect()
     {
         error_reporting(0);
-        if ($this->request_type('POST')) {
+        if (request_type('POST')) {
             list($type_connect, $localhost, $databaseuser, $databsepassword, $d_base) = GET('type_connect, nameLocal, nameSql, pwdDb, nameSaveDb', 'GPG');
             if ($localhost && $databaseuser && $databsepassword && $d_base) {
-
                 $result = [
                     "status" => 0,
                     "msg" => "Chưa xác định dạng kết nối!"
@@ -1321,7 +1368,7 @@ class ProcessCoreAdmin extends ProcessCore
     }
 
     // Since 2.0: File users.php not exists, call installation script
-    function cn_require_install()
+    public function cn_require_install()
     {
         global $_SESS;
 
@@ -1330,7 +1377,6 @@ class ProcessCoreAdmin extends ProcessCore
             include SERVDIR . '/skins/default.skin.php';
 
             if (request_type('POST')) {
-
                 list($username, $email, $password1, $password2) = GET('username, email, password1, password2', 'GPG');
 
                 if (!$username) {
@@ -1364,13 +1410,13 @@ class ProcessCoreAdmin extends ProcessCore
                 }
             }
 
-            echo_header_admin('-@../skins/default.css', 'Create admin Account');
+            echo_header_admin('-@/default.css', 'Create admin Account');
             echo execTemplate('install');
             echofooter();
         }
     }
 
-//// Since 2.0: Add message
+    //// Since 2.0: Add message
 //    function cn_throw_message($msg, $area = 'n')
 //    {
 //        $es = getMemcache('msg:stor');

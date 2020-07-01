@@ -36,7 +36,7 @@ include("../adodb.inc.php");
 
 function testdb(&$db, $createtab = "create table ADOXYZ (id int, firstname char(24), lastname char(24), created date)")
 {
-    GLOBAL $ADODB_version, $ADODB_FETCH_MODE;
+    global $ADODB_version, $ADODB_FETCH_MODE;
 
     adodb_backtrace();
 

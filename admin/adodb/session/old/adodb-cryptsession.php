@@ -6,8 +6,8 @@
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
-	Made table name configurable - by David Johnson djohnson@inpro.net
-	Encryption by Ari Kuorikoski <ari.kuorikoski@finebyte.com>
+    Made table name configurable - by David Johnson djohnson@inpro.net
+    Encryption by Ari Kuorikoski <ari.kuorikoski@finebyte.com>
 
   Set tabs to 4 for best viewing.
 
@@ -20,14 +20,14 @@ wrapper library.
  Example
  =======
 
-	include('adodb.inc.php');
-	#---------------------------------#
-	include('adodb-cryptsession.php');
-	#---------------------------------#
-	session_start();
-	session_register('AVAR');
-	$_SESSION['AVAR'] += 1;
-	print "
+    include('adodb.inc.php');
+    #---------------------------------#
+    include('adodb-cryptsession.php');
+    #---------------------------------#
+    session_start();
+    session_register('AVAR');
+    $_SESSION['AVAR'] += 1;
+    print "
 -- \$_SESSION['AVAR']={$_SESSION['AVAR']}</p>";
 
 
@@ -37,22 +37,22 @@ wrapper library.
 so:
 
   create table sessions (
-	   SESSKEY char(32) not null,
-	   EXPIRY int(11) unsigned not null,
-	   EXPIREREF varchar(64),
-	   DATA CLOB,
-	  primary key (sesskey)
+       SESSKEY char(32) not null,
+       EXPIRY int(11) unsigned not null,
+       EXPIREREF varchar(64),
+       DATA CLOB,
+      primary key (sesskey)
   );
 
   2. Then define the following parameters. You can either modify
      this file, or define them before this file is included:
 
-  	$ADODB_SESSION_DRIVER='database driver, eg. mysql or ibase';
-	$ADODB_SESSION_CONNECT='server to connect to';
-	$ADODB_SESSION_USER ='user';
-	$ADODB_SESSION_PWD ='password';
-	$ADODB_SESSION_DB ='database';
-	$ADODB_SESSION_TBL = 'sessions'
+    $ADODB_SESSION_DRIVER='database driver, eg. mysql or ibase';
+    $ADODB_SESSION_CONNECT='server to connect to';
+    $ADODB_SESSION_USER ='user';
+    $ADODB_SESSION_PWD ='password';
+    $ADODB_SESSION_DB ='database';
+    $ADODB_SESSION_TBL = 'sessions'
 
   3. Recommended is PHP 4.0.2 or later. There are documented
 session bugs in earlier versions of PHP.
@@ -70,10 +70,9 @@ if (!defined('_ADODB_LAYER')) {
 define('ADODB_SESSION_SYNCH_SECS', 60);
 
 if (!defined('ADODB_SESSION')) {
-
     define('ADODB_SESSION', 1);
 
-    GLOBAL $ADODB_SESSION_CONNECT,
+    global $ADODB_SESSION_CONNECT,
            $ADODB_SESSION_DRIVER,
            $ADODB_SESSION_USER,
            $ADODB_SESSION_PWD,
@@ -122,7 +121,7 @@ if (!defined('ADODB_SESSION')) {
 
     function adodb_sess_open($save_path, $session_name)
     {
-        GLOBAL $ADODB_SESSION_CONNECT,
+        global $ADODB_SESSION_CONNECT,
                $ADODB_SESSION_DRIVER,
                $ADODB_SESSION_USER,
                $ADODB_SESSION_PWD,
@@ -132,23 +131,30 @@ if (!defined('ADODB_SESSION')) {
 
         $ADODB_SESS_INSERT = false;
 
-        if (isset($ADODB_SESS_CONN)) return true;
+        if (isset($ADODB_SESS_CONN)) {
+            return true;
+        }
 
         $ADODB_SESS_CONN = ADONewConnection($ADODB_SESSION_DRIVER);
         if (!empty($ADODB_SESS_DEBUG)) {
             $ADODB_SESS_CONN->debug = true;
             print" conn=$ADODB_SESSION_CONNECT user=$ADODB_SESSION_USER pwd=$ADODB_SESSION_PWD db=$ADODB_SESSION_DB ";
         }
-        return $ADODB_SESS_CONN->PConnect($ADODB_SESSION_CONNECT,
-            $ADODB_SESSION_USER, $ADODB_SESSION_PWD, $ADODB_SESSION_DB);
-
+        return $ADODB_SESS_CONN->PConnect(
+            $ADODB_SESSION_CONNECT,
+            $ADODB_SESSION_USER,
+            $ADODB_SESSION_PWD,
+            $ADODB_SESSION_DB
+        );
     }
 
     function adodb_sess_close()
     {
         global $ADODB_SESS_CONN;
 
-        if ($ADODB_SESS_CONN) $ADODB_SESS_CONN->Close();
+        if ($ADODB_SESS_CONN) {
+            $ADODB_SESS_CONN->Close();
+        }
         return true;
     }
 
@@ -167,7 +173,9 @@ if (!defined('ADODB_SESSION')) {
             }
             $rs->Close();
             return $v;
-        } else $ADODB_SESS_INSERT = true;
+        } else {
+            $ADODB_SESS_INSERT = true;
+        }
 
         return '';
     }
@@ -188,9 +196,12 @@ if (!defined('ADODB_SESSION')) {
             global $$var;
             $arr['expireref'] = $$var;
         }
-        $rs = $ADODB_SESS_CONN->Replace($ADODB_SESSION_TBL,
+        $rs = $ADODB_SESS_CONN->Replace(
+            $ADODB_SESSION_TBL,
             $arr,
-            'sesskey', $autoQuote = true);
+            'sesskey',
+            $autoQuote = true
+        );
 
         if (!$rs) {
             ADOConnection::outp('
@@ -199,7 +210,9 @@ if (!defined('ADODB_SESSION')) {
             // bug in access driver (could be odbc?) means that info is not commited
             // properly unless select statement executed in Win2000
 
-            if ($ADODB_SESS_CONN->databaseType == 'access') $rs = $ADODB_SESS_CONN->Execute("select sesskey from $ADODB_SESSION_TBL WHERE sesskey='$key'");
+            if ($ADODB_SESS_CONN->databaseType == 'access') {
+                $rs = $ADODB_SESS_CONN->Execute("select sesskey from $ADODB_SESSION_TBL WHERE sesskey='$key'");
+            }
         }
         return isset($rs);
     }
@@ -279,12 +292,14 @@ if (!defined('ADODB_SESSION')) {
             }
         }
 
-        if ($ADODB_SESS_CONN->dataProvider === 'oci8') $sql = 'select  TO_CHAR(' . ($ADODB_SESS_CONN->sysTimeStamp) . ', \'RRRR-MM-DD HH24:MI:SS\') from ' . $ADODB_SESSION_TBL;
-        else $sql = 'select ' . $ADODB_SESS_CONN->sysTimeStamp . ' from ' . $ADODB_SESSION_TBL;
+        if ($ADODB_SESS_CONN->dataProvider === 'oci8') {
+            $sql = 'select  TO_CHAR(' . ($ADODB_SESS_CONN->sysTimeStamp) . ', \'RRRR-MM-DD HH24:MI:SS\') from ' . $ADODB_SESSION_TBL;
+        } else {
+            $sql = 'select ' . $ADODB_SESS_CONN->sysTimeStamp . ' from ' . $ADODB_SESSION_TBL;
+        }
 
         $rs = $ADODB_SESS_CONN->SelectLimit($sql, 1);
         if ($rs && !$rs->EOF) {
-
             $dbts = reset($rs->fields);
             $rs->Close();
             $dbt = $ADODB_SESS_CONN->UnixTimeStamp($dbts);
@@ -293,8 +308,10 @@ if (!defined('ADODB_SESSION')) {
                 $msg =
                     __FILE__ . ": Server time for webserver {$_SERVER['HTTP_HOST']} not in synch with database: database=$dbt ($dbts), webserver=$t (diff=" . (abs($dbt - $t) / 3600) . " hrs)";
                 error_log($msg);
-                if ($ADODB_SESS_DEBUG) ADOConnection::outp("
+                if ($ADODB_SESS_DEBUG) {
+                    ADOConnection::outp("
 -- $msg</p>");
+                }
             }
         }
 
@@ -308,17 +325,18 @@ if (!defined('ADODB_SESSION')) {
         "adodb_sess_read",
         "adodb_sess_write",
         "adodb_sess_destroy",
-        "adodb_sess_gc");
+        "adodb_sess_gc"
+    );
 }
 
 /*  TEST SCRIPT -- UNCOMMENT */
 /*
 if (0) {
 
-	session_start();
-	session_register('AVAR');
-	$_SESSION['AVAR'] += 1;
-	print "
+    session_start();
+    session_register('AVAR');
+    $_SESSION['AVAR'] += 1;
+    print "
 -- \$_SESSION['AVAR']={$_SESSION['AVAR']}</p>";
 }
 */

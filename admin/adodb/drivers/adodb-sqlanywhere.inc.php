@@ -12,71 +12,72 @@ Set tabs to 4 for best viewing.
   Latest version is available at http://adodb.sourceforge.net
 
   21.02.2002 - Wade Johnson wade@wadejohnson.de
-			   Extended ODBC class for Sybase SQLAnywhere.
+               Extended ODBC class for Sybase SQLAnywhere.
    1) Added support to retrieve the last row insert ID on tables with
-	  primary key column using autoincrement function.
+      primary key column using autoincrement function.
 
    2) Added blob support.  Usage:
-		 a) create blob variable on db server:
+         a) create blob variable on db server:
 
-		$dbconn->create_blobvar($blobVarName);
+        $dbconn->create_blobvar($blobVarName);
 
-	  b) load blob var from file.  $filename must be complete path
+      b) load blob var from file.  $filename must be complete path
 
-	  $dbcon->load_blobvar_from_file($blobVarName, $filename);
+      $dbcon->load_blobvar_from_file($blobVarName, $filename);
 
-	  c) Use the $blobVarName in SQL insert or update statement in the values
-	  clause:
+      c) Use the $blobVarName in SQL insert or update statement in the values
+      clause:
 
-		$recordSet = $dbconn->Execute('INSERT INTO tabname (idcol, blobcol) '
-		.
-	   'VALUES (\'test\', ' . $blobVarName . ')');
+        $recordSet = $dbconn->Execute('INSERT INTO tabname (idcol, blobcol) '
+        .
+       'VALUES (\'test\', ' . $blobVarName . ')');
 
-	 instead of loading blob from a file, you can also load from
-	  an unformatted (raw) blob variable:
-	  $dbcon->load_blobvar_from_var($blobVarName, $varName);
+     instead of loading blob from a file, you can also load from
+      an unformatted (raw) blob variable:
+      $dbcon->load_blobvar_from_var($blobVarName, $varName);
 
-	  d) drop blob variable on db server to free up resources:
-	  $dbconn->drop_blobvar($blobVarName);
+      d) drop blob variable on db server to free up resources:
+      $dbconn->drop_blobvar($blobVarName);
 
   Sybase_SQLAnywhere data driver. Requires ODBC.
 
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 if (!defined('_ADODB_ODBC_LAYER')) {
     include(ADODB_DIR . "/drivers/adodb-odbc.inc.php");
 }
 
 if (!defined('ADODB_SYBASE_SQLANYWHERE')) {
-
     define('ADODB_SYBASE_SQLANYWHERE', 1);
 
     class ADODB_sqlanywhere extends ADODB_odbc
     {
-        var $databaseType = "sqlanywhere";
-        var $hasInsertID = true;
+        public $databaseType = "sqlanywhere";
+        public $hasInsertID = true;
 
-        function _insertid()
+        public function _insertid()
         {
             return $this->GetOne('select @@identity');
         }
 
-        function create_blobvar($blobVarName)
+        public function create_blobvar($blobVarName)
         {
             $this->Execute("create variable $blobVarName long binary");
             return;
         }
 
-        function drop_blobvar($blobVarName)
+        public function drop_blobvar($blobVarName)
         {
             $this->Execute("drop variable $blobVarName");
             return;
         }
 
-        function load_blobvar_from_file($blobVarName, $filename)
+        public function load_blobvar_from_file($blobVarName, $filename)
         {
             $chunk_size = 1000;
 
@@ -107,7 +108,7 @@ if (!defined('ADODB_SYBASE_SQLANYWHERE')) {
             return;
         }
 
-        function load_blobvar_from_var($blobVarName, &$varName)
+        public function load_blobvar_from_var($blobVarName, &$varName)
         {
             $chunk_size = 1000;
 
@@ -144,7 +145,7 @@ if (!defined('ADODB_SYBASE_SQLANYWHERE')) {
          $conn->Execute('INSERT INTO blobtable (id, blobcol) VALUES (1, null)');
          $conn->UpdateBlob('blobtable','blobcol',$blob,'id=1');
         */
-        function UpdateBlob($table, $column, &$val, $where, $blobtype = 'BLOB')
+        public function UpdateBlob($table, $column, &$val, $where, $blobtype = 'BLOB')
         {
             $blobVarName = 'hold_blob';
             $this->create_blobvar($blobVarName);
@@ -157,20 +158,15 @@ if (!defined('ADODB_SYBASE_SQLANYWHERE')) {
 
     ; //class
 
-    class  ADORecordSet_sqlanywhere extends ADORecordSet_odbc
+    class ADORecordSet_sqlanywhere extends ADORecordSet_odbc
     {
+        public $databaseType = "sqlanywhere";
 
-        var $databaseType = "sqlanywhere";
-
-        function __construct($id, $mode = false)
+        public function __construct($id, $mode = false)
         {
             parent::__construct($id, $mode);
         }
-
-
     }
 
     ; //class
-
-
 } //define

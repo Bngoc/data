@@ -8,7 +8,7 @@ list($htmlOptionNumItem, $isZen) = _GL('htmlOptionNumItem, isZen');
 <div id="msg-Show"></div>
 <form action="<?php echo PHP_SELF; ?>" method="GET">
     <?php echo cn_form_open('mod, opt'); ?>
-    <!--    --><?php //echo cn_form_open('mod, opt, sub, numberItemJewel'); ?>
+    <!--    --><?php //echo cn_form_open('mod, opt, sub, numberItemJewel');?>
     <table style="width: 100%" cellpadding="2" align="middle">
         <tr>
             <td colspan="3" class="">THÔNG TIN HÒM ĐỒ CÁ NHÂN<br/></td>
@@ -41,13 +41,18 @@ list($htmlOptionNumItem, $isZen) = _GL('htmlOptionNumItem, isZen');
             <td class="bizwebform_col_1 pd-top15 pd-bottom15">Chọn Nhân vật</td>
             <td class="bizwebform_col_2 pd-top5 pd-bottom15">
                 <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
-                    <?php if ($showchar) foreach ($showchar as $name => $val) { ?>
-                        <option
-                            value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>>
-                            <?php echo $name ?>( LV: <?php echo $val['level'] ?> - Reset: <?php echo $val['reset'] ?>
-                            - Đã Relife <?php echo $val['relife'] ?>)
-                        </option>
-                    <?php } ?>
+                    <?php if ($showchar) {
+                        foreach ($showchar as $name => $val) { ?>
+                            <option
+                                value="<?php echo $name; ?>"<?php if ($sub == $name) {
+                                echo 'selected';
+                            } ?>>
+                                <?php echo $name ?>( LV: <?php echo $val['level'] ?> -
+                                Reset: <?php echo $val['reset'] ?>
+                                - Đã Relife <?php echo $val['relife'] ?>)
+                            </option>
+                        <?php }
+                    } ?>
                 </select>
 
             </td>

@@ -14,46 +14,48 @@
 /*
 In ADOdb, named quotes for MS SQL Server use ". From the MSSQL Docs:
 
-	Note Delimiters are for identifiers only. Delimiters cannot be used for keywords,
-	whether or not they are marked as reserved in SQL Server.
+    Note Delimiters are for identifiers only. Delimiters cannot be used for keywords,
+    whether or not they are marked as reserved in SQL Server.
 
-	Quoted identifiers are delimited by double quotation marks ("):
-	SELECT * FROM "Blanks in Table Name"
+    Quoted identifiers are delimited by double quotation marks ("):
+    SELECT * FROM "Blanks in Table Name"
 
-	Bracketed identifiers are delimited by brackets ([ ]):
-	SELECT * FROM [Blanks In Table Name]
+    Bracketed identifiers are delimited by brackets ([ ]):
+    SELECT * FROM [Blanks In Table Name]
 
-	Quoted identifiers are valid only when the QUOTED_IDENTIFIER option is set to ON. By default,
-	the Microsoft OLE DB Provider for SQL Server and SQL Server ODBC driver set QUOTED_IDENTIFIER ON
-	when they connect.
+    Quoted identifiers are valid only when the QUOTED_IDENTIFIER option is set to ON. By default,
+    the Microsoft OLE DB Provider for SQL Server and SQL Server ODBC driver set QUOTED_IDENTIFIER ON
+    when they connect.
 
-	In Transact-SQL, the option can be set at various levels using SET QUOTED_IDENTIFIER,
-	the quoted identifier option of sp_dboption, or the user options option of sp_configure.
+    In Transact-SQL, the option can be set at various levels using SET QUOTED_IDENTIFIER,
+    the quoted identifier option of sp_dboption, or the user options option of sp_configure.
 
-	When SET ANSI_DEFAULTS is ON, SET QUOTED_IDENTIFIER is enabled.
+    When SET ANSI_DEFAULTS is ON, SET QUOTED_IDENTIFIER is enabled.
 
-	Syntax
+    Syntax
 
-		SET QUOTED_IDENTIFIER { ON | OFF }
+        SET QUOTED_IDENTIFIER { ON | OFF }
 
 
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 class ADODB2_mssqlnative extends ADODB_DataDict
 {
-    var $databaseType = 'mssqlnative';
-    var $dropIndex = 'DROP INDEX %1$s ON %2$s';
-    var $renameTable = "EXEC sp_rename '%s','%s'";
-    var $renameColumn = "EXEC sp_rename '%s.%s','%s'";
-    var $typeX = 'TEXT';  ## Alternatively, set it to VARCHAR(4000)
-    var $typeXL = 'TEXT';
+    public $databaseType = 'mssqlnative';
+    public $dropIndex = 'DROP INDEX %1$s ON %2$s';
+    public $renameTable = "EXEC sp_rename '%s','%s'";
+    public $renameColumn = "EXEC sp_rename '%s.%s','%s'";
+    public $typeX = 'TEXT';  ## Alternatively, set it to VARCHAR(4000)
+    public $typeXL = 'TEXT';
 
     //var $alterCol = ' ALTER COLUMN ';
 
-    function MetaType($t, $len = -1, $fieldobj = false)
+    public function MetaType($t, $len = -1, $fieldobj = false)
     {
         if (is_object($t)) {
             $fieldobj = $t;
@@ -95,10 +97,9 @@ class ADODB2_mssqlnative extends ADODB_DataDict
         );
 
         return $_typeConversion($t);
-
     }
 
-    function ActualType($meta)
+    public function ActualType($meta)
     {
         $DATE_TYPE = 'DATETIME';
 
@@ -148,7 +149,7 @@ class ADODB2_mssqlnative extends ADODB_DataDict
     }
 
 
-    function AddColumnSQL($tabname, $flds)
+    public function AddColumnSQL($tabname, $flds)
     {
         $tabname = $this->TableName($tabname);
         $f = array();
@@ -186,11 +187,12 @@ class ADODB2_mssqlnative extends ADODB_DataDict
      *
      * @return string  The SQL necessary to drop the column
      */
-    function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
+    public function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
     {
         $tabname = $this->TableName($tabname);
-        if (!is_array($flds))
+        if (!is_array($flds)) {
             $flds = explode(',', $flds);
+        }
         $f = array();
         $s = 'ALTER TABLE ' . $tabname . ' DROP COLUMN ';
         foreach ($flds as $v) {
@@ -203,14 +205,23 @@ class ADODB2_mssqlnative extends ADODB_DataDict
     }
 
     // return string must begin with space
-    function _CreateSuffix($fname, &$ftype, $fnotnull, $fdefault, $fautoinc, $fconstraint, $funsigned)
+    public function _CreateSuffix($fname, &$ftype, $fnotnull, $fdefault, $fautoinc, $fconstraint, $funsigned)
     {
         $suffix = '';
-        if (strlen($fdefault)) $suffix .= " DEFAULT $fdefault";
-        if ($fautoinc) $suffix .= ' IDENTITY(1,1)';
-        if ($fnotnull) $suffix .= ' NOT NULL';
-        else if ($suffix == '') $suffix .= ' NULL';
-        if ($fconstraint) $suffix .= ' ' . $fconstraint;
+        if (strlen($fdefault)) {
+            $suffix .= " DEFAULT $fdefault";
+        }
+        if ($fautoinc) {
+            $suffix .= ' IDENTITY(1,1)';
+        }
+        if ($fnotnull) {
+            $suffix .= ' NOT NULL';
+        } elseif ($suffix == '') {
+            $suffix .= ' NULL';
+        }
+        if ($fconstraint) {
+            $suffix .= ' ' . $fconstraint;
+        }
         return $suffix;
     }
 
@@ -286,29 +297,32 @@ CREATE TABLE
             SORT_IN_TEMPDB
         }
 */
-    function _IndexSQL($idxname, $tabname, $flds, $idxoptions)
+    public function _IndexSQL($idxname, $tabname, $flds, $idxoptions)
     {
         $sql = array();
 
         if (isset($idxoptions['REPLACE']) || isset($idxoptions['DROP'])) {
             $sql[] = sprintf($this->dropIndex, $idxname, $tabname);
-            if (isset($idxoptions['DROP']))
+            if (isset($idxoptions['DROP'])) {
                 return $sql;
+            }
         }
 
-        if (empty ($flds)) {
+        if (empty($flds)) {
             return $sql;
         }
 
         $unique = isset($idxoptions['UNIQUE']) ? ' UNIQUE' : '';
         $clustered = isset($idxoptions['CLUSTERED']) ? ' CLUSTERED' : '';
 
-        if (is_array($flds))
+        if (is_array($flds)) {
             $flds = implode(', ', $flds);
+        }
         $s = 'CREATE' . $unique . $clustered . ' INDEX ' . $idxname . ' ON ' . $tabname . ' (' . $flds . ')';
 
-        if (isset($idxoptions[$this->upperName]))
+        if (isset($idxoptions[$this->upperName])) {
             $s .= $idxoptions[$this->upperName];
+        }
 
 
         $sql[] = $s;
@@ -317,7 +331,7 @@ CREATE TABLE
     }
 
 
-    function _GetSize($ftype, $ty, $fsize, $fprec)
+    public function _GetSize($ftype, $ty, $fsize, $fprec)
     {
         switch ($ftype) {
             case 'INT':
@@ -326,8 +340,9 @@ CREATE TABLE
             case 'BIGINT':
                 return $ftype;
         }
-        if ($ty == 'T') return $ftype;
+        if ($ty == 'T') {
+            return $ftype;
+        }
         return parent::_GetSize($ftype, $ty, $fsize, $fprec);
-
     }
 }

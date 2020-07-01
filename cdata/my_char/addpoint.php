@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $odd = 0;
 $i = 0;
 $ok_loop = false;
@@ -33,12 +33,15 @@ echo cn_snippet_messages();
                             <hr>
                         </td>
                     </tr>
-                    <?php if ($before_info_addpoint) foreach ($before_info_addpoint as $ke => $val) {
-                        if (isset($val[1]))
-                            echo '<tr>
+                    <?php if ($before_info_addpoint) {
+                        foreach ($before_info_addpoint as $ke => $val) {
+                            if (isset($val[1])) {
+                                echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
 									<td class="pd-left10"><strong style="color:#009900">' . $val[1] . '</strong></td>
 								</tr>';
+                            }
+                        }
                     } ?>
 
                 </table>
@@ -50,12 +53,16 @@ echo cn_snippet_messages();
             <td class="bizwebform_col_2">
 
                 <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
-                    <?php if ($showchar) foreach ($showchar as $name => $val) { ?>
-                        <option
-                            value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
-                            )
-                        </option>
-                    <?php } ?>
+                    <?php if ($showchar) {
+                        foreach ($showchar as $name => $val) { ?>
+                            <option
+                                value="<?php echo $name; ?>"<?php if ($sub == $name) {
+                                echo 'selected';
+                            } ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
+                                )
+                            </option>
+                        <?php }
+                    } ?>
                 </select>
 
             </td>
@@ -122,7 +129,8 @@ echo cn_snippet_messages();
                 <div class="inc button">+</div>
             </td>
         </tr>
-        <?php if ($_is_classdl) echo '<tr>
+        <?php if ($_is_classdl) {
+            echo '<tr>
 			<td class="bizwebform_col_1">Mệnh lệnh (cmd)</td>
 			<td class="bizwebform_col_2" class="numbers-row">
 				<div class="dec button">-</div>
@@ -130,6 +138,7 @@ echo cn_snippet_messages();
 				<div class="inc button">+</div>
 			</td>
 		</tr>';
+        }
         ?>
         <tr>
             <td class="bizwebform_col_1">Số dư Point</td>
@@ -170,11 +179,13 @@ echo cn_snippet_messages();
     </table>
 </form>
 
-<?php if ($_is_classdl) echo
-'<table style="width: 100%" cellpadding="2">
+<?php if ($_is_classdl) {
+    echo
+    '<table style="width: 100%" cellpadding="2">
 		<tr><td colspan="3" style="padding:20px; text-align:center"></td></tr>
 		<tr><td colspan="3" class="">CONFIG<br/></td></tr>
 		<tr><td colspan="3"><div class="vertical-img"><img src="<?php echo URL_PATH_IMG; ?>/vertical-separator.jpg" width="100%" height="1px" /></div><br/></td></tr>
 		<tr><td colspan="3">...........................cmd .....</td></tr>
 	</table>';
+}
 ?>

@@ -1,12 +1,13 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 add_hook('index/invoke_module', '*event_invoke');
 
 //=====================================================================================================================
 function event_invoke()
 {
-    $relax_board = array
-    (
+    $relax_board = array(
         'event:xxxxxxxxxxxxxx:Csc' => 'xxxxxxxxxxxxx',
         'event:xxxxxxxxxxxxxxx:Cp' => 'xxxxxxxxxxxxxxxxxx',
         //'event:resetvip:Ct' => 'xxxxxxxxxxxxxxxx'
@@ -24,8 +25,9 @@ function event_invoke()
 
     foreach ($relax_board as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
-        if (function_exists("event_$do"))
+        if (function_exists("event_$do")) {
             cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        }
     }
 
     // Request module
@@ -47,7 +49,7 @@ function event_invoke()
 //    $images = array(
 //        'baucua' => 'baucua.png',
 //        'baicao' => 'baicao.png'
-////        'resetvip' => 'resetvip.png',
+    ////        'resetvip' => 'resetvip.png',
 //    );
 //
 //    // More dashboard images
@@ -88,7 +90,6 @@ function event_default()
 
 function relax_baucua()
 {
-
     if (request_type('POST')) {
         if (REQ('action_playbaucua')) {
             cn_dsi_check(true);

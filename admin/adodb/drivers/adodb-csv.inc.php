@@ -14,11 +14,13 @@
 
   Limitation of url length. For IIS, see MaxClientRequestBuffer registry value.
 
-	  http://support.microsoft.com/default.aspx?scid=kb;en-us;260694
+      http://support.microsoft.com/default.aspx?scid=kb;en-us;260694
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 if (!defined("_ADODB_CSV_LAYER")) {
     define("_ADODB_CSV_LAYER", 1);
@@ -27,62 +29,66 @@ if (!defined("_ADODB_CSV_LAYER")) {
 
     class ADODB_csv extends ADOConnection
     {
-        var $databaseType = 'csv';
-        var $databaseProvider = 'csv';
-        var $hasInsertID = true;
-        var $hasAffectedRows = true;
-        var $fmtTimeStamp = "'Y-m-d H:i:s'";
-        var $_affectedrows = 0;
-        var $_insertid = 0;
-        var $_url;
-        var $replaceQuote = "''"; // string to use to replace quotes
-        var $hasTransactions = false;
-        var $_errorNo = false;
+        public $databaseType = 'csv';
+        public $databaseProvider = 'csv';
+        public $hasInsertID = true;
+        public $hasAffectedRows = true;
+        public $fmtTimeStamp = "'Y-m-d H:i:s'";
+        public $_affectedrows = 0;
+        public $_insertid = 0;
+        public $_url;
+        public $replaceQuote = "''"; // string to use to replace quotes
+        public $hasTransactions = false;
+        public $_errorNo = false;
 
-        function __construct()
+        public function __construct()
         {
         }
 
-        function _insertid()
+        public function _insertid()
         {
             return $this->_insertid;
         }
 
-        function _affectedrows()
+        public function _affectedrows()
         {
             return $this->_affectedrows;
         }
 
-        function MetaDatabases()
+        public function MetaDatabases()
         {
             return false;
         }
 
 
         // returns true or false
-        function _connect($argHostname, $argUsername, $argPassword, $argDatabasename)
+        public function _connect($argHostname, $argUsername, $argPassword, $argDatabasename)
         {
-            if (strtolower(substr($argHostname, 0, 7)) !== 'http://') return false;
+            if (strtolower(substr($argHostname, 0, 7)) !== 'http://') {
+                return false;
+            }
             $this->_url = $argHostname;
             return true;
         }
 
         // returns true or false
-        function _pconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
+        public function _pconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
         {
-            if (strtolower(substr($argHostname, 0, 7)) !== 'http://') return false;
+            if (strtolower(substr($argHostname, 0, 7)) !== 'http://') {
+                return false;
+            }
             $this->_url = $argHostname;
             return true;
         }
 
-        function MetaColumns($table, $normalize = true)
+        public function MetaColumns($table, $normalize = true)
         {
             return false;
         }
 
 
         // parameters use PostgreSQL convention, not MySQL
-        function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
+        public function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
         {
             global $ADODB_FETCH_MODE;
 
@@ -92,7 +98,9 @@ if (!defined("_ADODB_CSV_LAYER")) {
             $err = false;
             $rs = csv2rs($url, $err, false);
 
-            if ($this->debug) print "$url<br><i>$err</i><br>";
+            if ($this->debug) {
+                print "$url<br><i>$err</i><br>";
+            }
 
             $at = strpos($err, '::::');
             if ($at === false) {
@@ -102,13 +110,13 @@ if (!defined("_ADODB_CSV_LAYER")) {
                 $this->_errorMsg = substr($err, $at + 4, 1024);
                 $this->_errorNo = -9999;
             }
-            if ($this->_errorNo)
+            if ($this->_errorNo) {
                 if ($fn = $this->raiseErrorFn) {
                     $fn($this->databaseType, 'EXECUTE', $this->ErrorNo(), $this->ErrorMsg(), $sql, '');
                 }
+            }
 
             if (is_object($rs)) {
-
                 $rs->databaseType = 'csv';
                 $rs->fetchMode = ($this->fetchMode !== false) ? $this->fetchMode : $ADODB_FETCH_MODE;
                 $rs->connection = $this;
@@ -117,7 +125,7 @@ if (!defined("_ADODB_CSV_LAYER")) {
         }
 
         // returns queryID or false
-        function _Execute($sql, $inputarr = false)
+        public function _Execute($sql, $inputarr = false)
         {
             global $ADODB_FETCH_MODE;
 
@@ -126,20 +134,20 @@ if (!defined("_ADODB_CSV_LAYER")) {
                 $sql = '';
                 $i = 0;
                 foreach ($inputarr as $v) {
-
                     $sql .= $sqlarr[$i];
-                    if (gettype($v) == 'string')
+                    if (gettype($v) == 'string') {
                         $sql .= $this->qstr($v);
-                    else if ($v === null)
+                    } elseif ($v === null) {
                         $sql .= 'NULL';
-                    else
+                    } else {
                         $sql .= $v;
+                    }
                     $i += 1;
-
                 }
                 $sql .= $sqlarr[$i];
-                if ($i + 1 != sizeof($sqlarr))
+                if ($i + 1 != sizeof($sqlarr)) {
                     print "Input Array does not match ?: " . htmlspecialchars($sql);
+                }
                 $inputarr = false;
             }
 
@@ -149,7 +157,9 @@ if (!defined("_ADODB_CSV_LAYER")) {
 
 
             $rs = csv2rs($url, $err, false);
-            if ($this->debug) print urldecode($url) . "<br><i>$err</i><br>";
+            if ($this->debug) {
+                print urldecode($url) . "<br><i>$err</i><br>";
+            }
             $at = strpos($err, '::::');
             if ($at === false) {
                 $this->_errorMsg = $err;
@@ -159,10 +169,11 @@ if (!defined("_ADODB_CSV_LAYER")) {
                 $this->_errorNo = -9999;
             }
 
-            if ($this->_errorNo)
+            if ($this->_errorNo) {
                 if ($fn = $this->raiseErrorFn) {
                     $fn($this->databaseType, 'EXECUTE', $this->ErrorNo(), $this->ErrorMsg(), $sql, $inputarr);
                 }
+            }
             if (is_object($rs)) {
                 $rs->fetchMode = ($this->fetchMode !== false) ? $this->fetchMode : $ADODB_FETCH_MODE;
 
@@ -175,19 +186,19 @@ if (!defined("_ADODB_CSV_LAYER")) {
         }
 
         /*	Returns: the last error message from previous database operation	*/
-        function ErrorMsg()
+        public function ErrorMsg()
         {
             return $this->_errorMsg;
         }
 
         /*	Returns: the last error number from previous database operation	*/
-        function ErrorNo()
+        public function ErrorNo()
         {
             return $this->_errorNo;
         }
 
         // returns true or false
-        function _close()
+        public function _close()
         {
             return true;
         }
@@ -195,15 +206,14 @@ if (!defined("_ADODB_CSV_LAYER")) {
 
     class ADORecordset_csv extends ADORecordset
     {
-        function __construct($id, $mode = false)
+        public function __construct($id, $mode = false)
         {
             parent::__construct($id, $mode);
         }
 
-        function _close()
+        public function _close()
         {
             return true;
         }
     }
-
 } // define

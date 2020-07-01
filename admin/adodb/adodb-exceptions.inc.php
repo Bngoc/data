@@ -16,19 +16,21 @@
  */
 
 
-if (!defined('ADODB_ERROR_HANDLER_TYPE')) define('ADODB_ERROR_HANDLER_TYPE', E_USER_ERROR);
+if (!defined('ADODB_ERROR_HANDLER_TYPE')) {
+    define('ADODB_ERROR_HANDLER_TYPE', E_USER_ERROR);
+}
 define('ADODB_ERROR_HANDLER', 'adodb_throw');
 
 class ADODB_Exception extends Exception
 {
-    var $dbms;
-    var $fn;
-    var $sql = '';
-    var $params = '';
-    var $host = '';
-    var $database = '';
+    public $dbms;
+    public $fn;
+    public $sql = '';
+    public $params = '';
+    public $host = '';
+    public $database = '';
 
-    function __construct($dbms, $fn, $errno, $errmsg, $p1, $p2, $thisConnection)
+    public function __construct($dbms, $fn, $errno, $errmsg, $p1, $p2, $thisConnection)
     {
         switch ($fn) {
             case 'EXECUTE':
@@ -55,7 +57,9 @@ class ADODB_Exception extends Exception
         $this->fn = $fn;
         $this->msg = $errmsg;
 
-        if (!is_numeric($errno)) $errno = -1;
+        if (!is_numeric($errno)) {
+            $errno = -1;
+        }
         parent::__construct($s, $errno);
     }
 }
@@ -75,8 +79,13 @@ function adodb_throw($dbms, $fn, $errno, $errmsg, $p1, $p2, $thisConnection)
 {
     global $ADODB_EXCEPTION;
 
-    if (error_reporting() == 0) return; // obey @ protocol
-    if (is_string($ADODB_EXCEPTION)) $errfn = $ADODB_EXCEPTION;
-    else $errfn = 'ADODB_EXCEPTION';
+    if (error_reporting() == 0) {
+        return;
+    } // obey @ protocol
+    if (is_string($ADODB_EXCEPTION)) {
+        $errfn = $ADODB_EXCEPTION;
+    } else {
+        $errfn = 'ADODB_EXCEPTION';
+    }
     throw new $errfn($dbms, $fn, $errno, $errmsg, $p1, $p2, $thisConnection);
 }

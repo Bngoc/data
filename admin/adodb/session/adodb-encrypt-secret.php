@@ -8,7 +8,7 @@
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
-	  Set tabs to 4 for best viewing.
+      Set tabs to 4 for best viewing.
 
 */
 
@@ -33,18 +33,17 @@ class ADODB_Encrypt_Secret
 {
     /**
      */
-    function write($data, $key)
+    public function write($data, $key)
     {
         return Secret::write($key, $data);
     }
 
     /**
      */
-    function read($data, $key)
+    public function read($data, $key)
     {
         return Secret::read($key, $data);
     }
-
 }
 
 return 1;

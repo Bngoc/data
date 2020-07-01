@@ -1,4 +1,6 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 add_hook('index/invoke_module', '*manager_invoke');
 
@@ -26,7 +28,9 @@ function manager_invoke()
     foreach ($cManger_account as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
 
-        if (function_exists("manager_$do")) cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        if (function_exists("manager_$do")) {
+            cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        }
     }
 
     // Request module

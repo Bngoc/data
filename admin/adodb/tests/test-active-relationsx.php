@@ -16,16 +16,18 @@ function notfound($obj, $cond)
 function ar_assert($bool)
 {
     global $err_count;
-    if (!$bool)
+    if (!$bool) {
         $err_count++;
+    }
     return $bool;
 }
 
 define('WEB', true);
 function ar_echo($txt)
 {
-    if (WEB)
+    if (WEB) {
         $txt = str_replace("\n", "<br />\n", $txt);
+    }
     echo $txt;
 }
 
@@ -89,7 +91,7 @@ $db->Execute("insert into songs (recordid, name, artistid) values(2,'American Ga
 // This class _implicitely_ relies on the 'people' table (pluralized form of 'person')
 class Person extends ADOdb_Active_Record
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->hasMany('children');
@@ -99,7 +101,7 @@ class Person extends ADOdb_Active_Record
 // This class _implicitely_ relies on the 'children' table
 class Child extends ADOdb_Active_Record
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->belongsTo('person');
@@ -109,7 +111,7 @@ class Child extends ADOdb_Active_Record
 // This class _explicitely_ relies on the 'children' table and shares its metadata with Child
 class Kid extends ADOdb_Active_Record
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct('children');
         $this->belongsTo('person');
@@ -119,7 +121,7 @@ class Kid extends ADOdb_Active_Record
 // This class _explicitely_ relies on the 'children' table but does not share its metadata
 class Rugrat extends ADOdb_Active_Record
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct('children', false, false, array('new' => true));
     }
@@ -127,7 +129,7 @@ class Rugrat extends ADOdb_Active_Record
 
 class Artist extends ADOdb_Active_Record
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct('artists', array('artistuniqueid'));
         $this->hasMany('songs', 'artistid');
@@ -136,7 +138,7 @@ class Artist extends ADOdb_Active_Record
 
 class Song extends ADOdb_Active_Record
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct('songs', array('recordid'));
         $this->belongsTo('artist', 'artistid');

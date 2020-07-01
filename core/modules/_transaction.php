@@ -1,4 +1,6 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+﻿<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 add_hook('index/invoke_module', '*transaction_invoke');
 
@@ -23,20 +25,22 @@ function transaction_invoke()
 
     cn_bc_add('Giao dịch', cn_url_modify(array('reset'), 'mod=' . $mod));
 
-    list($vtc, $gate, $viettel, $mobi, $vina) = explode(",", getOption('napthe_list'), 5);
+    list($vtc, $gate, $viettel, $mobi, $vina) = explode(",", getOption('card_list'), 5);
     $ar_list = array('vtc' => $vtc, 'gate' => $gate, 'viettel' => $viettel, 'mobi' => $mobi, 'vina' => $vina,);
 
     foreach ($ctrans_board as $id => $_t) {
         list($dl, $do, $_token, $acl_module) = explode(':', $id);
 
-        if (in_array($strkey = strtolower($do), array_keys($ar_list)))
+        if (in_array($strkey = strtolower($do), array_keys($ar_list))) {
             if (empty($ar_list[$strkey])) {
                 unset($ctrans_board[$id]);
                 continue;
             }
+        }
 
-        if (function_exists("transaction_$_token"))
+        if (function_exists("transaction_$_token")) {
             cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do, 'token=' . md5($_token . $do)), $do);
+        }
     }
 
     // Request module
@@ -131,11 +135,13 @@ function transaction___buy_gd()
     }
 
     $page = intval($page);
-    if (empty($page)) $page = 1;
+    if (empty($page)) {
+        $page = 1;
+    }
     $pt_km = intval($pt_km);
     $opt = strtolower($opt);
     list($_10k, $_20k, $_30k, $_50k, $_100k, $_200k, $_300k, $_500k) = explode(",", getOption('napthe_' . $opt), 8);
-    $napthe_list = array('10k' => $_10k, '20k' => $_20k, '30k' => $_30k, '50k' => $_50k, '100k' => $_100k, '200k' => $_200k, '300k' => $_300k, '500k' => $_500k);
+    $card_list_default = array('10k' => $_10k, '20k' => $_20k, '30k' => $_30k, '50k' => $_50k, '100k' => $_100k, '200k' => $_200k, '300k' => $_300k, '500k' => $_500k);
 
     $arrTypeCard = [
         'viettel' => 1,
@@ -145,7 +151,7 @@ function transaction___buy_gd()
         'vtc' => 5
     ];
 
-    foreach ($napthe_list as $key => $var) {
+    foreach ($card_list_default as $key => $var) {
         if ($var) {
             $card_list[$key] = (int)substr($key, 0, -1) . "000";
         }
@@ -154,13 +160,13 @@ function transaction___buy_gd()
     if (empty($pt_km)) {
         if ($opt == 'vtc') {
             $pt_km = $km_listOne[0];
-        } else if ($opt == 'gate') {
+        } elseif ($opt == 'gate') {
             $pt_km = $km_listOne[1];
-        } else if ($opt == 'viettel') {
+        } elseif ($opt == 'viettel') {
             $pt_km = $km_listOne[2];
-        } else if ($opt == 'mobi') {
+        } elseif ($opt == 'mobi') {
             $pt_km = $km_listOne[3];
-        } else if ($opt == 'vina') {
+        } elseif ($opt == 'vina') {
             $pt_km = $km_listOne[4];
         } else {
             $pt_km = 0;
@@ -356,7 +362,7 @@ function transaction___buy_gd()
                     // Ghi vào Log
                     $content = "$accc_ đã nạp thẻ thành công " . ucfirst($opt) . " mệnh giá: " . number_format($info_card, 0, ",", ".") . " VND, Serial: $seri , Số Vpoint: " . number_format($vpointAdd, 0, ",", ".") . " , Tình trạng: <span class=\"cRed\">" . $strInfo . "</span>";
                     $Date = date("h:iA, d/m/Y", $ctime);
-                    $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/napthe");
+                    $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/card");
                     if ($checkDir) {
                         $file = $files . "/log_" . $opt . ".log";
 //                    $file = MODULE_ADM . "/log/modules/log_" . $opt . ".log";
@@ -399,18 +405,24 @@ function transaction___buy_gd()
     cn_assign('card_list, strKm, pt_km, show_history', $card_list, $strKm, $pt_km, zenderHtmlTableHistoryCard($showHisrotyPlay, $url, $page));
 
     echo_header_web('-@my_transaction/style.css@my_transaction/cardAjax.js', "Giao dịch $name_shop - $name_shop");
-    echo_content_here(exec_tpl('my_transaction/napthe'), cn_snippet_bc_re());
+    echo_content_here(exec_tpl('my_transaction/card'), cn_snippet_bc_re());
     echo_footer_web();
 }
 
 function zenderHtmlTableHistoryCard($dataHistory, $url, $page)
 {
-    if (empty($dataHistory)) return '<div class="mg-top15 cRed mg-left15">Bạn chưa nạp thẻ nào. </div>';
+    if (empty($dataHistory)) {
+        return '<div class="mg-top15 cRed mg-left15">Bạn chưa nạp thẻ nào. </div>';
+    }
     $per_page = 20;
-    if (empty($page)) $page = 1;
-    list ($resultShowData, $pagination) = cn_render_pagination_ajax($dataHistory, $url, $page, $per_page);
+    if (empty($page)) {
+        $page = 1;
+    }
+    list($resultShowData, $pagination) = cn_render_pagination_ajax($dataHistory, $url, $page, $per_page);
 
-    if (empty($resultShowData)) return '';
+    if (empty($resultShowData)) {
+        return '';
+    }
 
     $html = '<table class="ranking" width="100%">
             <tr>

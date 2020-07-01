@@ -14,7 +14,9 @@ Set tabs to 4 for best viewing.
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 include(ADODB_DIR . "/drivers/adodb-db2.inc.php");
 
 
@@ -72,7 +74,6 @@ if (!defined('ADODB_DB2OCI')) {
 
 
         while (strlen($ch)) {
-
             switch ($ch) {
                 case '/':
                     if ($state == 'NORM' && $ch2 == '*') {
@@ -96,7 +97,9 @@ if (!defined('ADODB_DB2OCI')) {
 
                 case "\n":
                 case "\r":
-                    if ($state == 'COMMENT2') $state = 'NORM';
+                    if ($state == 'COMMENT2') {
+                        $state = 'NORM';
+                    }
                     break;
 
                 case "'":
@@ -108,7 +111,9 @@ if (!defined('ADODB_DB2OCI')) {
                     break;
 
                 case ':':
-                    if ($state == 'COMMENT' || $state == 'COMMENT2') break;
+                    if ($state == 'COMMENT' || $state == 'COMMENT2') {
+                        break;
+                    }
 
                     //echo "$at=$ch $ch2, ";
                     if ('0' <= $ch2 && $ch2 <= '9') {
@@ -132,7 +137,9 @@ if (!defined('ADODB_DB2OCI')) {
 
                 case '-':
                     if ($state == 'NORM') {
-                        if ($ch2 == '-') $state = 'COMMENT2';
+                        if ($ch2 == '-') {
+                            $state = 'COMMENT2';
+                        }
                         $at += 1;
                         $ch = $ch2;
                         $ch2 = $at < $lensql ? $sql[$at] : '';
@@ -156,18 +163,18 @@ if (!defined('ADODB_DB2OCI')) {
 
     class ADODB_db2oci extends ADODB_db2
     {
-        var $databaseType = "db2oci";
-        var $sysTimeStamp = 'sysdate';
-        var $sysDate = 'trunc(sysdate)';
-        var $_bindInputArray = true;
+        public $databaseType = "db2oci";
+        public $sysTimeStamp = 'sysdate';
+        public $sysDate = 'trunc(sysdate)';
+        public $_bindInputArray = true;
 
-        function Param($name, $type = 'C')
+        public function Param($name, $type = 'C')
         {
             return ':' . $name;
         }
 
 
-        function MetaTables($ttype = false, $schema = false, $mask = false)
+        public function MetaTables($ttype = false, $schema = false, $mask = false)
         {
             global $ADODB_FETCH_MODE;
 
@@ -191,24 +198,36 @@ if (!defined('ADODB_DB2OCI')) {
                 $isview = strncmp($ttype, 'V', 1) === 0;
             }
             for ($i = 0; $i < sizeof($arr); $i++) {
-                if (!$arr[$i][2]) continue;
+                if (!$arr[$i][2]) {
+                    continue;
+                }
                 $type = $arr[$i][3];
                 $schemaval = ($schema) ? $arr[$i][1] . '.' : '';
                 $name = $schemaval . $arr[$i][2];
                 $owner = $arr[$i][1];
-                if (substr($name, 0, 8) == 'EXPLAIN_') continue;
+                if (substr($name, 0, 8) == 'EXPLAIN_') {
+                    continue;
+                }
                 if ($ttype) {
                     if ($isview) {
-                        if (strncmp($type, 'V', 1) === 0) $arr2[] = $name;
-                    } else if (strncmp($type, 'T', 1) === 0 && strncmp($owner, 'SYS', 3) !== 0) $arr2[] = $name;
-                } else if (strncmp($type, 'T', 1) === 0 && strncmp($owner, 'SYS', 3) !== 0) $arr2[] = $name;
+                        if (strncmp($type, 'V', 1) === 0) {
+                            $arr2[] = $name;
+                        }
+                    } elseif (strncmp($type, 'T', 1) === 0 && strncmp($owner, 'SYS', 3) !== 0) {
+                        $arr2[] = $name;
+                    }
+                } elseif (strncmp($type, 'T', 1) === 0 && strncmp($owner, 'SYS', 3) !== 0) {
+                    $arr2[] = $name;
+                }
             }
             return $arr2;
         }
 
-        function _Execute($sql, $inputarr = false)
+        public function _Execute($sql, $inputarr = false)
         {
-            if ($inputarr) list($sql, $inputarr) = _colonparser($sql, $inputarr);
+            if ($inputarr) {
+                list($sql, $inputarr) = _colonparser($sql, $inputarr);
+            }
             return parent::_Execute($sql, $inputarr);
         }
     }
@@ -216,15 +235,13 @@ if (!defined('ADODB_DB2OCI')) {
     ;
 
 
-    class  ADORecordSet_db2oci extends ADORecordSet_db2
+    class ADORecordSet_db2oci extends ADORecordSet_db2
     {
+        public $databaseType = "db2oci";
 
-        var $databaseType = "db2oci";
-
-        function __construct($id, $mode = false)
+        public function __construct($id, $mode = false)
         {
             return parent::__construct($id, $mode);
         }
     }
-
 } //define

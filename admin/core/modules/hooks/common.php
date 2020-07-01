@@ -1,7 +1,7 @@
 <?php
 
 // Since 2.0.1: Raw extends
-function cn_extrn_raw_template($template, $apply_patch = NULL)
+function cn_extrn_raw_template($template, $apply_patch = null)
 {
     global $_raw_md5;
 
@@ -86,7 +86,7 @@ function cn_extrn_if_cond($template)
     for ($i = 0; $i < $MAX_LEVEL; $i++) {
         if (preg_match_all('/\[if (.*?)\](.*)\[\/if\]/i', $template, $cp, PREG_SET_ORDER)) {
             foreach ($cp as $ifc) {
-                $R = TRUE;
+                $R = true;
 
                 $cond = trim($ifc[1]);
                 $cond_s = explode('&&', $cond);
@@ -96,18 +96,20 @@ function cn_extrn_if_cond($template)
                     $cond = trim($cond);
                     if ($cond[0] === '!') {
                         if (substr($cond, 1)) {
-                            $R = FALSE;
+                            $R = false;
                             break;
                         }
                     } elseif (!$cond) {
-                        $R = FALSE;
+                        $R = false;
                         break;
                     }
                 }
 
                 $template = str_replace($ifc[0], $R ? $ifc[2] : '', $template);
             }
-        } else break;
+        } else {
+            break;
+        }
     }
 
     return $template;
@@ -144,11 +146,10 @@ function cn_extrn_init()
         echo preg_replace('/\s{2,}/s', ' ', read_tpl('cnscript'));
         setMemcache('cn:extr_init', true);
     }
-
 }
 
 // hook for widget
-function login_guest($keep_data = NULL, $username = NULL)
+function login_guest($keep_data = null, $username = null)
 {
     global $_SESS;
 
@@ -164,7 +165,8 @@ function login_guest($keep_data = NULL, $username = NULL)
 
     if (!getMember()) {
         // Widget's login form
-        echo proc_tpl('widgets/personal_login_form',
+        echo proc_tpl(
+            'widgets/personal_login_form',
             "CSRF=" . $_SESSION['.CSRF'],
             'KEEP=' . base64_encode(serialize($keep_data)),
             'MSG=' . cn_front_msg_show('login', 'widget_personal_msg'),
@@ -209,7 +211,7 @@ if (isset($_POST['widget_personal_keep'])) {
                     if ($rem) {
                         $_POST['cn_remember_me'] = $rem;
                     }
-                    $_POST['CN_COOKIE_POSTPROCESS'] = TRUE;
+                    $_POST['CN_COOKIE_POSTPROCESS'] = true;
                 } else {
                     $_SESSION['user'] = null;
                     cn_front_message('Invalid login or password', 'login');
@@ -221,6 +223,5 @@ if (isset($_POST['widget_personal_keep'])) {
             cn_front_message("CSRF attempt!", 'login');
             $_SESSION['user'] = null;
         }
-
     }
 }

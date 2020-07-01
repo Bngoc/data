@@ -19,4 +19,3 @@ $res = $db->Execute($sql);
 print_r($res->fields);
 
 print_r($res->GetRowAssoc());
-

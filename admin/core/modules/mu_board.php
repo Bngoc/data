@@ -1,4 +1,6 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 use Dropbox as dbx;
 
@@ -18,31 +20,31 @@ function board_invoke()
     @$opt = $request->opt;
 
     $dashboard = array(
-        'editconfig:sysconf:Csc' => 'Cấu hình Hệ thống',
-        'editconfig:confchar:Ct' => 'Cấu hình chức năng',
-        'editconfig:secure:Can' => 'Cấu hình DDOS',
-        'editconfig:ischaracter:Ciw' => 'Character',
-        'editconfig:personal:Cp' => 'Personal options',
-        'editconfig:userman:Cum' => 'Users manager',
-        'editconfig:group:Cg' => 'Groups',
-        'editconfig:logs:Csl' => 'Logs',
-        'editconfig:statistics:Csl' => 'Thống kê',
-        'editconfig:uploadFileAPIDropBox:Csl' => 'Upload File DropBox API',
-        'editconfig:uploadFileAPIGoogle:Csl' => 'Upload File Google Drivers API',
-        'editconfig:apiDriverdChangeShare:Csl:1' => 'Change share Drivers API',
-        'editconfig:apiDeleteDrivers:Csl:1' => 'Delete item Drivers API',
+        'editconfig:sysconf:Csc' => __('system_configuration'),
+        'editconfig:confchar:Ct' => __('functional_configuration'),
+        'editconfig:secure:Can' => __('configure_DDoS'),
+        'editconfig:ischaracter:Ciw' => __('character'),
+        'editconfig:personal:Cp' => __('personal_options'),
+        'editconfig:userman:Cum' => __('users_manager'),
+        'editconfig:group:Cg' => __('groups'),
+        'editconfig:logs:Csl' => __('logs'),
+        'editconfig:statistics:Csl' => __('statistical'),
+        'editconfig:uploadFileAPIDropBox:Csl' => __('upload_file_dropBox_API'),
+        'editconfig:uploadFileAPIGoogle:Csl' => __('upload_file_google_drivers_API'),
+        'editconfig:apiDriverdChangeShare:Csl:1' => __('change_share_drivers_API'),
+        'editconfig:apiDeleteDrivers:Csl:1' => __('delete_item_drivers_API'),
 
-        'editconfig:select:Ciw' => 'Select',
-        'editconfig:updatemoney:Ciw' => 'Update Money',
-        'editconfig:updateCharater:Ciw' => 'Update Character',
-        'editconfig:update:Ciw' => 'Update Money',
-        'editconfig:insert:Ciw' => 'Insert',
+        'editconfig:select:Ciw' => __('select'),
+//        'editconfig:updatemoney:Ciw' => __('update_money'),
+//        'editconfig:updateCharater:Ciw' => __('update_character'),
+//        'editconfig:update:Ciw' => __('update_money'),
+//        'editconfig:insert:Ciw' => __('insert'),
     );
 
     // Call dashboard extend
     $dashboard = hook('extend_dashboard', $dashboard);
 
-    // Exec
+    // check mod
     if (empty($mod)) {
         $mod = REQ('mod', 'GETPOST');
     }
@@ -51,7 +53,7 @@ function board_invoke()
     }
 
     // Top level (dashboard)
-    cn_bc_add('Cấu hình', cn_url_modify(array('reset'), 'mod=' . $mod));
+    cn_bc_add('Configuration', cn_url_modify(array('reset'), 'mod=' . $mod));
 
     // Request module
     foreach ($dashboard as $id => $_t) {
@@ -101,7 +103,7 @@ function board_invoke()
         $dashboard[$id] = $item;
     }
 
-    $greeting_message = 'Have a nice day!';
+    $greeting_message = __('have_nice_day');
     cn_assign('dashboard, username, greeting_message', $dashboard, (@$_SESSION['mu_Account'] ? $_SESSION['mu_Account'] : ''), $greeting_message);
     echo execTemplate('com_board/general');
     echofooter();
@@ -163,9 +165,6 @@ function board_sysconf()
             'config_auth_pass' => array('password', 'Password account from send email'),
 
             '_COM' => array('title', 'General:'),
-
-//            'i18n' => array('text', 'Language code|by default en_US. See: <a href="http://en.wikipedia.org/wiki/Language_localization#Language_tags_and_codes">codes</a>'),
-
 //            '_FB' => array('title', 'Facebook:'),
             'use_fbcomments' => array('Y/N', 'Use facebook comments for post|if yes, facebook comments will be shown'),
             'fb_inactive' => array('Y/N', 'In active news|Show in active news list'),
@@ -186,24 +185,6 @@ function board_sysconf()
             'fblike_color' => array('select', 'Color scheme|The color scheme of the plugin', array("light" => "Light", "dark" => "Dark")),
             'fblike_verb' => array('select', 'Verb to display|The verb to display in the button', array("like" => "Like", "recommend" => "Recommend")),
 
-//            '_TW' => array('title', 'Twitter button:'),
-//            'use_twitter' => array('Y/N', 'Use twitter button|if yes, twitter button will be shown'),
-//            'tw_url' => array('text', 'Share URL|if empty, use the page URL'),
-//            'tw_text' => array('text', 'Tweet text|if empty, use the title of the page'),
-//            'tw_show_count' => array('Y/N', 'Show count|if yes, count of tweets will be shown near button', array("horisontal" => "Horisontal", "vertical" => "Vertical", "none" => "None")),
-//            'tw_via' => array('text', 'Via @|Screen name of the user to attribute the Tweet to'),
-//            'tw_recommended' => array('text', 'Recommended @|Accounts suggested to the user after tweeting, comma-separated.'),
-//            'tw_hashtag' => array('text', 'Hashtag #|Comma-separated hashtags appended to the tweet text'),
-//            'tw_large' => array('Y/N', 'Large button|if yes, the twitter button will be large'),
-//            'tw_lang' => array('select', 'Language|The language of button text', array("en" => "English", "fr" => "French", "ar" => "Arabic", "ja" => "Japanese", "es" => "Spanish", "de" => "German", "it" => "Italian", "id" => "Indonesian", "pt" => "Portuguese", "ko" => "Korean", "tr" => "Turkish", "ru" => "Russian", "nl" => "Dutch", "fil" => "Filipino", "msa" => "Malay", "zh-tw" => "Traditional Chinese", "zh-cn" => "Simplified Chinese", "hi" => "Hindi", "no" => "Norwegian", "sv" => "Swedish", "fi" => "Finnish", "da" => "Danish", "pl" => "Polish", "hu" => "Hungarian", "fa" => "Farsi", "he" => "Hebrew", "ur" => "Urdu", "th" => "Thai", "uk" => "Ukrainian", "ca" => "Catalan", "el" => "Greek", "eu" => "Basque", "cs" => "Czech", "gl" => "Galician", "ro" => "Romanian")),
-
-            // use_gplus + gplus_i18n
-//            '_G+' => array('title', 'Google+ button:'),
-//            'use_gplus' => array('Y/N', 'Use +1 button'),
-//            'gplus_size' => array('select', 'Button size', array("small" => "Small", "medium" => "Medium", "standard" => "Standard", "tall" => "Tall")),
-//            'gplus_annotation' => array('select', 'Annotation|Sets the annotation to display next to the button.', array('inline' => 'Inline', 'bubble' => 'Bubble', 'none' => 'None')),
-//            'gplus_width' => array('int', 'Box width, in pixels'),
-
             'allowed_extensions' => array('text', 'Allowed extensions|Used by file manager. Enter by comma without space'),
             'uploads_dir' => array('text', 'Server upload dir|Real path on server'),
             'uploads_ext' => array('text', 'Frontend upload dir|Frontend path for uploads'),
@@ -213,18 +194,8 @@ function board_sysconf()
         'websites' => array(
             '_deBugWeb' => array('title', 'USE DEBUG WEB'),
             'debugSql' => array('Y/N', 'Uses have debug| Check is debug Sql'),
-//            'news_title_max_long' => array('int', 'Max. Length of news title in characters|enter <b>0</b> to disable chacking.'),
-//            'active_news_def' => array('int', 'Count active news, by default|If 0, show all list, with archives'),
-//            'reverse_active' => array('Y/N', 'Reverse News|if yes, older news will be shown on the top'),
-//            'full_popup' => array('Y/N', 'Show full story in popup|full Story will be opened in PopUp window'),
-//            'full_popup_string' => array('text', "Settings for full story popup|only if 'Show Full Story In PopUp' is enabled"),
-//            'auto_news_alias' => array('Y/N', 'Autocomplete page alias|Set news title as page alias'),
-//            'show_comments_with_full' => array('Y/N', 'Show comments when showing full story|if yes, comments will be shown under the story'),
-//            'timestamp_active' => array('text', 'Time format for news|view help for time formatting <a href="http://www.php.net/manual/en/function.date.php" target="_blank">here</a>'),
-//            'use_captcha' => array('Y/N', 'Use CAPTCHA|on registration and comments'),
-//            'hide_captcha' => array('Y/N', 'Hide captcha source path from visitors'),
-//            'disable_pagination' => array('Y/N', 'Disable pagination|Use it to disable pagination'),
-//            'mon_list' => array('text', 'Month list|comma separated, 12 variables'),
+            'use_captcha' => array('Y/N', 'Use CAPTCHA|on registration and comments'),
+            'hide_captcha' => array('Y/N', 'Hide captcha source path from visitors'),
 
             '_Web' => array('title', '.............'),
 
@@ -246,7 +217,7 @@ function board_sysconf()
             'user_delegate' => array('select', 'Sử dụng ủy thác|chọn ủy thác với nhu cầu', array(0 => "Offline", 1 => "Online", 2 => "Online + Offline",)),
             'user_resetvip......' => array('Y/N', 'Sử dụng top ResetVip|.........Short story field will not be required'),
             'event_toprs_on' => array('Y/N', 'Sử dụng top reset|.........Short story field will not be required'),
-            'hotrotanthu' => array('Y/N', 'Hỗ trợ tân thủ| nếu sử dụng hỗ trợ tân thủ sẽ được giảm level theo cấp độ (có 5 cấp)'),
+            'support_new_player' => array('Y/N', 'Hỗ trợ tân thủ| nếu sử dụng hỗ trợ tân thủ sẽ được giảm level theo cấp độ (có 5 cấp)'),
             'cap_relife_max' => array('int', 'Số cấp Relife hiển thị dành cho người chơi|Số cấp Relife từ cấp 1 đến cấp 10'),
             'cap_reset_max' => array('int', 'Số cấp Reset hiển thị dành cho người chơi|Số cấp Reset từ cấp 1 đến cấp 20'),
             'use_gioihanrs' => array('select', 'Sử dụng giới hạn Reset|chọn giới hạn reset với nhu cầu', array(0 => "Không sử dụng", 1 => "Loại 1", 2 => "Loại 2",)),
@@ -259,17 +230,17 @@ function board_sysconf()
             'd_base' => array('text', 'Database sử dụng để lưu trữ thông tin MU|enter <b>0</b> or leave empty to disable pagination'),
             'server_type' => array('select', 'Loại Server đang sử dụng|if yes, comments will be shown under the story', array("scf" => "SCF", "original" => "Original")),
         ),
-        'napthe' => array(
+        'card' => array(
             'Merchant_ID' => array('text', 'Merchant_ID|info: https://sv.gamebank.vn; VD: 12345'),
             'API_User' => array('text', 'API User|info: https://sv.gamebank.vn; VD: tukjhji5'),
             'API_Password' => array('text', 'API Password|info: https://sv.gamebank.vn; VD: 98hjhgtyjkjlklbjhgjhgyhfhfhtfdy'),
-            'napthe_list' => array('text', 'Nap the list [VTC - GATE - VIETTEL - MOBI - VINA]| 1 => Yes, 0 => No, VD: 1,1,1,1,1'),
+            'card_list' => array('text', 'Nap the list [VTC - GATE - VIETTEL - MOBI - VINA]| 1 => Yes, 0 => No, VD: 1,1,1,1,1'),
             'km_list' => array('text', 'Khuyen Mai list [VTC - GATE - VIETTEL - MOBI - VINA]| 10% => 10, 0 => No, 20 % => all, VD: 10,0,0,0,0|20'),
-            'napthe_gate' => array('text', 'Card Gate list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
-            'napthe_vtc' => array('text', 'Card Vtc list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
-            'napthe_viettel' => array('text', 'Card Viettel list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
-            'napthe_mobi' => array('text', 'Card Mobi list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
-            'napthe_vina' => array('text', 'Card Vina list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
+            'card_gate' => array('text', 'Card Gate list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
+            'card_vtc' => array('text', 'Card Vtc list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
+            'card_viettel' => array('text', 'Card Viettel list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
+            'card_mobi' => array('text', 'Card Mobi list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
+            'card_vina' => array('text', 'Card Vina list [10k - 20k - 30k - 50k - 100k - 200k - 300k -500k]| 1 => Yes, 0 => No, VD: 0,1,0,1,1,0,1,1'),
         ),
         'money' => array(
             '_MONEY' => array('title', 'Money:'),
@@ -321,9 +292,8 @@ function board_sysconf()
     );
 
     // System help
-    $help = hook('sysconf/helper', array
-    (
-        'http_script_dir' => 'Necessary in order to embed in websites scripts determined where the administrative panel for the correct CN obtaining the necessary resources, such as smilies or images.',
+    $help = hook('sysconf/helper', array(
+        'http_script_dir' => '......',
     ));
 
     // Static rewrite path
@@ -385,16 +355,16 @@ function board_sysconf()
         setoption('#%site', $opt_result);
 
         cn_load_skin();
-        cn_throw_message('Saved successfully');
+        cn_throw_message(__('save_success'));
     }
 
     $options = $options_list[strtolower($sub)];
     foreach ($options as $id => $vo) {
         $options[$id]['var'] = getOption($id);
 
-        $text_parths = explode('|', $vo[1], 2);
-        $title = isset($text_parths[0]) ? $text_parths[0] : '';
-        $desc = isset($text_parths[1]) ? $text_parths[1] : '';
+        $text_paths = explode('|', $vo[1], 2);
+        $title = isset($text_paths[0]) ? $text_paths[0] : '';
+        $desc = isset($text_paths[1]) ? $text_paths[1] : '';
         $options[$id]['title'] = $title;
         $options[$id]['desc'] = $desc;
         $options[$id]['help'] = isset($help[$id]) ? $help[$id] : '';
@@ -402,9 +372,12 @@ function board_sysconf()
         unset($options[$id][1]);
     }
 
+    // TODO
+//    cn_get_template_by_array('class');
+
     if (REQ('message', 'GET') == 'saved') {
         unset($_GET['message']);
-        cn_throw_message('Successfully saved');
+        cn_throw_message(__('save_success'));
     }
 
     cn_assign('options, sub, options_list', $options, $sub, $options_list);
@@ -449,10 +422,8 @@ function board_confChar()
         $grps[$id] = ucfirst($vn['N']);
     }
 
-    $options_list = array
-    (
-        'cashshop' => array
-        (
+    $options_list = array(
+        'cashshop' => array(
             '_CASHSHOP' => array('title', 'Cashshop settings'),
             'Use_WebShop' => array('Y/N', 'Sử dụng web shop'),
         ),
@@ -546,7 +517,7 @@ function board_confChar()
         setoption('#%site', $opt_result);
 
         cn_load_skin();
-        cn_throw_message('Saved successfully');
+        cn_throw_message(__('save_success'));
     }
 
     $options = $options_list[strtolower($sub)];
@@ -566,7 +537,7 @@ function board_confChar()
 
     if (REQ('message', 'GET') == 'saved') {
         unset($_GET['message']);
-        cn_throw_message('Successfully saved');
+        cn_throw_message(__('save_success'));
     }
 
     cn_assign('options, sub, options_list', $options, $sub, $options_list);
@@ -581,8 +552,7 @@ function board_personal()
     $member = getMember();
 
     // Additional fields for user
-    $personal_more = array
-    (
+    $personal_more = array(
         'site' => array('name' => 'Personal site', 'type' => 'text'),
         'about' => array('name' => 'About me', 'type' => 'textarea'),
     );
@@ -591,30 +561,30 @@ function board_personal()
         cn_dsi_check();
 
         $clause = '';
-        $any_changes = FALSE;
+        $any_changes = false;
         list($editpassword, $confirmpassword, $editnickname, $edithidemail, $more) = GET('editpassword, confirmpassword, editnickname, edithidemail, more', 'POST');
         $avatar_file = isset($_FILES['avatar_file']) ? $_FILES['avatar_file'] : null;
 
         if ((!isset($member['nick']) && !empty($editnickname)) || (isset($member['nick']) && $member['nick'] !== $editnickname)) {
-            $any_changes = TRUE;
+            $any_changes = true;
         }
 
         if ((!isset($member['e-hide']) && !empty($edithidemail)) || (isset($member['e-hide']) && $member['e-hide'] !== $edithidemail)) {
-            $any_changes = TRUE;
+            $any_changes = true;
         }
 
         if ($editpassword) {
             if ($editpassword === $confirmpassword) {
-                $any_changes = TRUE;
+                $any_changes = true;
                 db_user_update($member['name'], "pass=" . SHA256_hash($editpassword));
 
                 // Send mail if password changed
                 $notification = cn_replace_text(cn_get_template('password_change', 'mail'), '%username%, %password%', $member['name'], $editpassword);
 
-                $clause = "Check your email.";
-                cn_send_mail($member['email'], i18n("Password was changed"), $notification);
+                $clause = __("check_your_email");
+                cn_send_mail($member['email'], __("pwd_was_changed"), $notification);
             } else {
-                cn_throw_message('Password and confirm do not match', 'e');
+                cn_throw_message(__('pwd_do_not_match'), 'e');
             }
         }
 
@@ -623,7 +593,7 @@ function board_personal()
         $n_more = base64_encode(serialize($more));
 
         if ($o_more !== $n_more) {
-            $any_changes = TRUE;
+            $any_changes = true;
             db_user_update($member['name'], "more=" . $n_more);
         }
         // Set an avatar
@@ -637,7 +607,7 @@ function board_personal()
                 }
                 move_uploaded_file($avatar_file['tmp_name'], $uploads_dir . $file_name);
                 db_user_update($member['name'], "avatar=" . $file_name);
-                $any_changes = TRUE;
+                $any_changes = true;
             }
         }
         // Has changes?
@@ -645,12 +615,12 @@ function board_personal()
             db_user_update($member['name'], "nick=$editnickname", "e-hide=$edithidemail");
 
             // Update & Get member from DB
-            setMemcache('#member', NULL);
+            setMemcache('#member', null);
             $member = getMember();
 
-            cn_throw_message("User info updated! $clause");
+            cn_throw_message(__("user_info_updated", [$clause]));
         } else {
-            cn_throw_message("No changes", 'w');
+            cn_throw_message(__("no_change"), 'w');
         }
     }
 
@@ -664,9 +634,9 @@ function board_personal()
         }
     }
 
-    cn_assign('member, acl_write_news, acl_desc, personal_more', $member, test('Can'), $acl_desc, $personal_more);
-    echo_header_admin('-@dashboard/style.css', "Personal options");
-    echo execTemplate('dashboard/personal');
+    cn_assign('member, acl_write_news, acl_desc, personal_more', $member, testRoleAdmin('Can'), $acl_desc, $personal_more);
+    echo_header_admin('-@com_board/style.css', "Personal options");
+    echo execTemplate('com_board/personal');
     echofooter();
 }
 
@@ -678,10 +648,10 @@ function board_ischaracter()
         $sub = 'class';
     }
 
-    $acv = cn_get_template_by_array($sub); // get array $sub
+    // get array $sub
+    $acv = cn_get_template_by_array($sub);
     // User changes
-    //$tuser = getOption('#templates');
-    $acx = getOption('#temp_basic');// get all
+    $acx = getOption('#temp_basic');
 
     // Option -> 0=Type(text [Y/N] int select), 1=Title|Description, [2=Optional values]
     $options_list = array(
@@ -855,9 +825,46 @@ function board_ischaracter()
 
     switch ($sub) {
         case 'class':
+        {
             break;
+        }
         case 'reset':
+        {
             break;
+        }
+        case 'reset_vip':
+        {
+            break;
+        }
+        case 'thue_point' :
+        {
+            break;
+        }
+        case 'hotro_tanthu':
+        {
+            break;
+        }
+        case 'pk':
+        {
+            break;
+        }
+        case 'gioihan_rs':
+        {
+            break;
+        }
+        case 'relife':
+        {
+            break;
+        }
+        case 'uythac_resetvip':
+        {
+            break;
+        }
+        case 'uythac_reset':
+        {
+            break;
+        }
+        default:
     }
 
     if ($sub === 'class') {
@@ -881,7 +888,6 @@ function board_ischaracter()
 
             //unset($options[$id][1]);
         }
-
     } elseif ($sub === 'reset') {
         foreach ($options as $id => $vo) {
             $get_id = explode(':', $id);
@@ -919,7 +925,6 @@ function board_ischaracter()
             $options[$id]['reset_cap_0'] = 0;
             $options[$id]['end'] = $id_10;
         }
-
     } elseif ($sub === 'reset_vip') {
         foreach ($options as $id => $vo) {
             $get_id = explode(':', $id);
@@ -949,7 +954,6 @@ function board_ischaracter()
 
             $options[$id]['end'] = $id_7;
         }
-
     } elseif ($sub === 'thue_point') {
         foreach ($options as $id => $vo) {
             $get_id = explode(':', $id);
@@ -968,7 +972,6 @@ function board_ischaracter()
 
             $options[$id]['end'] = $id_4;
         }
-
     } elseif ($sub === 'hotro_tanthu') {
         foreach ($options as $id => $vo) {
             $get_id = explode(':', $id);
@@ -993,7 +996,6 @@ function board_ischaracter()
 
             $options[$id]['end'] = $id_6;
         }
-
     } elseif ($sub === 'pk') {
         foreach ($options as $id => $vo) {
             $get_id = explode(':', $id);
@@ -1009,7 +1011,6 @@ function board_ischaracter()
 
             $options[$id]['end'] = $id_3;
         }
-
     } elseif ($sub === 'gioihan_rs') {
         foreach ($options as $id => $vo) {
             $get_id = explode(':', $id);
@@ -1043,8 +1044,9 @@ function board_ischaracter()
         );
         $array_gh_loai2 = array('ResetInDay1:ResetInDay2' => '10:30');
 
-        foreach ($array_gh_loai1 as $e => $vl)
+        foreach ($array_gh_loai1 as $e => $vl) {
             $gh_loai1[$e]['top_gh'] = $acv[$e];
+        }
 
         foreach ($array_gh_loai2 as $key => $vl) {
             $abc_ = explode(":", $key);
@@ -1073,7 +1075,6 @@ function board_ischaracter()
             $options[$id]['end'] = $id_4;
         }
     } elseif ($sub === 'uythac_resetvip') {
-
         foreach ($options as $id => $vo) {
             $get_id = explode(':', $id);
             $id_1 = $get_id[0];
@@ -1090,7 +1091,6 @@ function board_ischaracter()
 
             $options[$id]['end'] = $id_4;
         }
-
     } elseif ($sub === 'uythac_reset') {
         foreach ($options as $id => $vo) {
             $get_id = explode(':', $id);
@@ -1129,8 +1129,8 @@ function board_ischaracter()
                 $acx[$sub][$id] = $post_cfg[$id];
             }
         }
-        setoption("#temp_basic", $acx);
-        cn_throw_message('Template saved successfully');
+        setOption("#temp_basic", $acx);
+        cn_throw_message(__('template_save_success'));
     }
 
     $get_gh_loai1 = isset($gh_loai1) ? $gh_loai1 : array();
@@ -1142,7 +1142,6 @@ function board_ischaracter()
     echo_header_admin('-@com_board/style.css', "Config Character");
     echo execTemplate('com_board/classchar');
     echofooter();
-
 }
 
 function board_userman()
@@ -1154,7 +1153,7 @@ function board_userman()
     $section = intval($section);
     $st = intval($st);
     $grp = getOption('#grp');
-    $is_edit = FALSE; //visability Edit btton
+    $is_edit = false; //visability Edit btton
 
     if (request_type('POST')) {
         cn_dsi_check();
@@ -1162,7 +1161,7 @@ function board_userman()
         // Do Delete
         if ($delete) {
             db_user_delete($user_name);
-            cn_throw_message('User [' . cnHtmlSpecialChars($user_name) . '] deleted');
+            cn_throw_message(__("delete_user", [cnHtmlSpecialChars($user_name)]));
 
             $user_name = $user_nick = $user_email = $user_acl = '';
         } // Add-Edit
@@ -1171,29 +1170,33 @@ function board_userman()
 
             if (REQ('edit')) {
                 if ($user_data === null) {
-                    $is_edit = FALSE;
-                    cn_throw_message("User not exists", 'e');
+                    $is_edit = false;
+                    cn_throw_message(__("user_not_found"), 'e');
                 }
             } else {
                 // Add user
                 // Check user
-                if (!$user_name)
-                    cn_throw_message("Fill required field: username", 'e');
+                if (!$user_name) {
+                    cn_throw_message(__("user_required"), 'e');
+                }
 
-                if (!$user_pass)
-                    cn_throw_message("Fill required field: password", 'e');
+                if (!$user_pass) {
+                    cn_throw_message(__("pwd_required"), 'e');
+                }
 
-                if ($user_data !== null)
-                    cn_throw_message("Username already exist", 'e');
+                if ($user_data !== null) {
+                    cn_throw_message(__("user_exist"), 'e');
+                }
 
-                if ($user_confirm != $user_pass)
-                    cn_throw_message('Confirm not match', 'e');
+                if ($user_confirm != $user_pass) {
+                    cn_throw_message(__("pwd_do_not_match"), 'e');
+                }
                 // Invalid email
                 if (!check_email($user_email)) {
-                    cn_throw_message("Email not valid", "e");
+                    cn_throw_message(__("email_validate"), "e");
                 } // Duplicate email
                 elseif (db_user_by($user_email, 'email')) {
-                    cn_throw_message('Email already exists', 'e');
+                    cn_throw_message(__('email_exist'), 'e');
                 }
             }
 
@@ -1207,9 +1210,9 @@ function board_userman()
                     if ($user_pass) {
                         if ($user_confirm == $user_pass) {
                             db_user_update($user_name, 'pass=' . SHA256_hash($user_pass));
-                            cn_throw_message('User password / user info updated');
+                            cn_throw_message(__('update_success'));
                         } else {
-                            cn_throw_message('Confirm not match', 'e');
+                            cn_throw_message(__("pwd_do_not_match"), 'e');
                         }
                     } else {
                         cn_throw_message('User info updated');
@@ -1217,12 +1220,13 @@ function board_userman()
                 } else {// Add user
                     if ($user_id = db_user_add($user_name, $user_acl)) {
                         if (db_user_update($user_name, "email=$user_email", "nick=$user_nick", 'pass=' . SHA256_hash($user_pass), "acl=$user_acl")) {
-                            $is_edit = TRUE;
-                            cn_throw_message("User created successfully");
-                        } else
-                            cn_throw_message("Can't update user", 'e');
+                            $is_edit = true;
+                            cn_throw_message(__("save_success"));
+                        } else {
+                            cn_throw_message(__("error_update_user"), 'e');
+                        }
                     } else {
-                        cn_throw_message("User not added: internal error", 'e');
+                        cn_throw_message(__("error_add_user"), 'e');
                     }
                 }
             }
@@ -1235,14 +1239,16 @@ function board_userman()
 
     // Get users by ACL from index
     if ($section) {
-        foreach ($userlist as $id => $dt)
-            if ($dt['acl'] != $section)
+        foreach ($userlist as $id => $dt) {
+            if ($dt['acl'] != $section) {
                 unset($userlist[$id]);
+            }
+        }
     }
 
     // Sort by latest & make pagination
     krsort($userlist);
-    $userlist = array_slice($userlist, $st, $per_page, TRUE);
+    $userlist = array_slice($userlist, $st, $per_page, true);
 
     // Fetch estimate user list
     foreach ($userlist as $id => $data) {
@@ -1251,13 +1257,21 @@ function board_userman()
     }
 
     // By default for section
-    if (!$user_acl) $user_acl = $section;
+    if (!$user_acl) {
+        $user_acl = $section;
+    }
 
     cn_assign('users, section, st, per_page, grp', $userlist, $section, $st, $per_page, $grp);
     cn_assign('user_name, user_nick, user_email, user_acl, is_edit', $user_name, $user_nick, $user_email, $user_acl, $is_edit);
 
-    echo_header_admin('-@dashboard/style.css', "Users manager");
-    echo execTemplate('dashboard/users');
+    echo_header_admin('-@com_board/style.css', "Users manager");
+    echo execTemplate('com_board/users');
+    echofooter();
+}
+
+function board_group() {
+    echo_header_admin('-@com_board/style.css', "Group");
+    echo execTemplate('com_board/group');
     echofooter();
 }
 
@@ -1275,7 +1289,9 @@ function board_logs()
         $num = $per_page;
     }
     $n = 0;
-    if ($page < 0) $page = 1;
+    if ($page < 0) {
+        $page = 1;
+    }
     $st = ($page - 1) * $num;
 
     $default_log = array(
@@ -1332,7 +1348,7 @@ function board_logs()
             'muazen' => ['name' => 'Mua Zen bằng V.Point']
 
         ),
-        'napthe' => array(
+        'card' => array(
             'viettel' => ['name' => 'Viettel'],
             'mobi' => ['name' => 'Mobiphone'],
             'vina' => ['name' => 'Vinaphone'],
@@ -1341,7 +1357,9 @@ function board_logs()
         )
     );
 
-    if ($st < 0) $st = 0;
+    if ($st < 0) {
+        $st = 0;
+    }
     $over = $st + $num;
     $log_read = array();
 
@@ -1359,7 +1377,7 @@ function board_logs()
         }
     }
 
-    if (!$section || $section == 'system') {
+    if (!$section || $section === 'system') {
         $_url = cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs');
         $path = cn_path_construct(SERVDIR, 'log/system') . 'error_dump.log';
         $options = $default_log['system'];
@@ -1375,9 +1393,15 @@ function board_logs()
                     $v = trim(fgets($r));
                     $tempLine = str_replace("\t", "|", $v);
 
-                    if (!$tempLine) break;
-                    if ($n <= $st) continue;
-                    if ($n > $over) break;
+                    if (!$tempLine) {
+                        break;
+                    }
+                    if ($n <= $st) {
+                        continue;
+                    }
+                    if ($n > $over) {
+                        break;
+                    }
                     $log_data = explode('|', $tempLine);
 
                     $log_read[] = array(
@@ -1394,7 +1418,7 @@ function board_logs()
             }
         }
     } else {
-        $options = $default_log[$section];
+        $options = $default_log[strtolower($section)];
 
         $logs_ = scan_dir(cn_path_construct(SERVDIR, 'log', 'modules', $section));
         $_url = cn_url_modify('mod=editconfig', 'opt=logs', 'section=' . $section, 'page', 'per_page');
@@ -1422,9 +1446,15 @@ function board_logs()
             do {
                 $n++;
                 $v = trim(fgets($r));
-                if (!$v) break;
-                if ($n <= $st) continue;
-                if ($n >= $over) break;
+                if (!$v) {
+                    break;
+                }
+                if ($n <= $st) {
+                    continue;
+                }
+                if ($n >= $over) {
+                    break;
+                }
 
                 $log_data = explode('|', $v);
                 $tempBefore = explode('_', $log_data[2]);
@@ -1478,11 +1508,13 @@ function board_statistics()
             $type = $name = $desc = $meta = $group = $req = '';;
             setoption('#more_list', $list);
         } else {
-            if (!preg_match('/^[a-z0-9_-]+$/i', $name))
+            if (!preg_match('/^[a-z0-9_-]+$/i', $name)) {
                 cn_throw_message('Name invalid - empty or bad chars', 'e');
+            }
 
-            if ($group && !preg_match('/^[a-z0-9_-]+$/i', $group))
+            if ($group && !preg_match('/^[a-z0-9_-]+$/i', $group)) {
                 cn_throw_message('Group field consists bad chars', 'e');
+            }
 
             $errors = cn_get_message('e', 'c');
             if (!$errors) {
@@ -1530,7 +1562,7 @@ function board_uploadFileAPIDropBox()
 
         $accessTokenDropBox = trim(getOption('accessTokenDropBox'));
         if (empty($accessTokenDropBox)) {
-            list ($code) = GET('code', 'GETPOST');
+            list($code) = GET('code', 'GETPOST');
             if (empty($code)) {
                 $authorizeUrl = $webAuthClone->start();
                 header("Location: $authorizeUrl");
@@ -1567,11 +1599,11 @@ function board_uploadFileAPIDropBox()
 
             if (request_type('POST')) {
                 if ($_REQUEST['actionPost']) {
-
                     cn_dsi_check();
 
-                    if (!empty($_SERVER['CONTENT_LENGTH']) && empty($_FILES) && empty($_POST))
+                    if (!empty($_SERVER['CONTENT_LENGTH']) && empty($_FILES) && empty($_POST)) {
                         echo 'The uploaded zip was too large. You must upload a file smaller than ' . ini_get("upload_max_filesize");
+                    }
 
                     $sFileName = $_FILES['image_file']['name'];
                     if ($sFileName) {
@@ -1596,7 +1628,6 @@ function board_uploadFileAPIDropBox()
             msg_info('No setup or setup failed with dropbox Api.....');
         }
     } else {
-
     }
 
 //    $f = fopen("working-draft.txt", "rb");
@@ -1619,7 +1650,6 @@ function board_uploadFileAPIDropBox()
 
 function getWebAuth($dropbox_config, $configData)
 {
-
     if (empty($dropbox_config['key']) || empty($dropbox_config['secret']) || empty($configData['nameApp']) || empty($configData['redirectUri'])) {
         return;
     }
@@ -1642,7 +1672,7 @@ function board_uploadFileAPIGoogle()
         msg_info('File \'client_secret.json\' does not exist');
     }
 
-    list ($code) = GET('code', 'GETPOST');
+    list($code) = GET('code', 'GETPOST');
     $client = getClient($code);
     $service = new Google_Service_Drive($client);
 
@@ -1658,7 +1688,6 @@ function board_uploadFileAPIGoogle()
 
         @$actionUpload = $request->actionUpload;
         if (isset($_REQUEST['actionUpload']) && $_REQUEST['actionUpload'] || isset($actionUpload) && $actionUpload) {
-
             cn_dsi_check();
 
             $mimes = array(
@@ -1789,13 +1818,11 @@ function board_uploadFileAPIGoogle()
 //                } catch (Exception $e) {
 //                    print "An error occurred: " . $e->getMessage();
 //                }
-
             }
         }
     }
 
     if (isset($_REQUEST['actAng']) && ($_REQUEST['actAng'] == 1)) {
-
         list($sort, $isTrash) = GET('sort, trash', 'GPG');
         $dataResult = selectListFiles($service, $sort, $isTrash);
 
@@ -1910,7 +1937,6 @@ function broad_downloadApiMediafrie()
 //
 
     if (isset($_POST['upload'])) {
-
         $mflib = new mflib($appId, $apiKey);
         $mflib->email = $email;
         $mflib->password = $password;
@@ -1927,7 +1953,6 @@ function broad_downloadApiMediafrie()
 
 function board_select()
 {
-
     list($sub, $sort, $page) = GET('sub, sort, page', "GETPOST");
     $class_board = array();
 
@@ -1954,9 +1979,8 @@ function board_select()
 
     if (request_type('POST')) {
         if (isset($_REQUEST['sub'])) {
-
             cn_checkDisk();
-            list ($arrRankingCharater, $pagination) = zenderRankingCharacter($sub, $url, $page, strtoupper($sort));
+            list($arrRankingCharater, $pagination) = zenderRankingCharacter($sub, $url, $page, strtoupper($sort));
 
             $resultData = array(
                 'id-sub' => $sub,
@@ -2021,7 +2045,6 @@ function board_apiDriverdChangeShare()
             } else {
                 $result['msg'] = 'Error update';
             }
-
         } catch (Exception $ex) {
             $result['msg'] = $ex->getMessage();
         }
@@ -2033,13 +2056,11 @@ function board_apiDriverdChangeShare()
 
 function board_apiRestoreDriver()
 {
-
 }
 
 function board_apiDeleteDrivers()
 {
     if (request_type('POST')) {
-
         $result = array(
             'messgase' => '',
             'status' => 1,
@@ -2078,5 +2099,4 @@ function board_apiDeleteDrivers()
 
 function board_apiEditDrivers()
 {
-
 }

@@ -1,1 +1,1 @@
-<?php die('Direct call - access denied'); ?>
+<?php die('Direct call - access denied');

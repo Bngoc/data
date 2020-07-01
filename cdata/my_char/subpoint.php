@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $odd = 0;
 $i = 0;
 $ok_loop = false;
@@ -8,7 +8,9 @@ list($before_info_subpoint, $sd_pointdutru, $sms_notify) = _GL('before_info_subp
 list($sub, $point_false) = _GL('sub,point_false65k');
 
 echo cn_snippet_messages();
-if ($sms_notify) echo $sms_notify;
+if ($sms_notify) {
+    echo $sms_notify;
+}
 ?>
 
 <form action="<?php echo PHP_SELF; ?>" method="GET">
@@ -35,12 +37,15 @@ if ($sms_notify) echo $sms_notify;
                             <hr>
                         </td>
                     </tr>
-                    <?php if ($before_info_subpoint) foreach ($before_info_subpoint as $ke => $val) {
-                        if (isset($val[1]))
-                            echo '<tr>
+                    <?php if ($before_info_subpoint) {
+                        foreach ($before_info_subpoint as $ke => $val) {
+                            if (isset($val[1])) {
+                                echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
 									<td><strong style="color:#009900">' . $val[1] . '</strong></td>
 								</tr>';
+                            }
+                        }
                     } ?>
 
                 </table>
@@ -52,12 +57,16 @@ if ($sms_notify) echo $sms_notify;
             <td class="bizwebform_col_2">
 
                 <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
-                    <?php if ($showchar) foreach ($showchar as $name => $val) { ?>
-                        <option
-                            value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
-                            )
-                        </option>
-                    <?php } ?>
+                    <?php if ($showchar) {
+                        foreach ($showchar as $name => $val) { ?>
+                            <option
+                                value="<?php echo $name; ?>"<?php if ($sub == $name) {
+                                echo 'selected';
+                            } ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
+                                )
+                            </option>
+                        <?php }
+                    } ?>
                 </select>
 
             </td>
@@ -83,12 +92,16 @@ if ($sms_notify) echo $sms_notify;
             <td class="bizwebform_col_1">Nhập số Point</td>
             <td class="bizwebform_col_2">
                 <!--<div class="dec button">-</div>
-				<button type="button"  id="point_dutrudec" <?php //if(!$point_false) echo 'class="dec button"'; ?>> - </button>-->
-                <input class="formrange" id="point_dutru" <?php if ($point_false) echo 'readonly="readonly"' ?>
+				<button type="button"  id="point_dutrudec" <?php //if(!$point_false) echo 'class="dec button"';?>> - </button>-->
+                <input class="formrange" id="point_dutru" <?php if ($point_false) {
+                    echo 'readonly="readonly"';
+                } ?>
                        type="range" min="0" <?php echo 'max="' . $sd_pointdutru . '"';
-                if ($sd_pointdutru) echo 'value="' . $sd_pointdutru . '"'; ?> name="rut_point">
+                if ($sd_pointdutru) {
+                    echo 'value="' . $sd_pointdutru . '"';
+                } ?> name="rut_point">
                 <!--<div class="inc button">+</div>
-				<button type="button"  id="point_dutruinc" <?php //if(!$point_false) echo 'class="inc button but"'; ?>> + </button></td>-->
+				<button type="button"  id="point_dutruinc" <?php //if(!$point_false) echo 'class="inc button but"';?>> + </button></td>-->
             <td class="bizwebform_col_3" id=""><strong>
                     <output id="rut-point">&nbsp; 0</output>
                 </strong></td>

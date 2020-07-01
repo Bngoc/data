@@ -1,9 +1,9 @@
 <?php
 /*
-	V4.50 6 July 2004
+    V4.50 6 July 2004
 
-	Run multiple copies of this php script at the same time
-	to test unique generation of id's in multiuser mode
+    Run multiple copies of this php script at the same time
+    to test unique generation of id's in multiuser mode
 */
 include_once('../adodb.inc.php');
 $testaccess = true;
@@ -25,8 +25,9 @@ function testdb(&$db, $createtab = "create table ADOXYZ (id int, firstname char(
             print "GenID returned false";
             break;
         }
-        if ($lastnum + 1 == $num) print " $num ";
-        else {
+        if ($lastnum + 1 == $num) {
+            print " $num ";
+        } else {
             print " <font color=red>$num</font> ";
             flush();
         }

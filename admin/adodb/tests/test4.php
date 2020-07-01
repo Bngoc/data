@@ -18,32 +18,30 @@
 error_reporting(E_ALL);
 function testsql()
 {
-
-
     include('../adodb.inc.php');
     include('../tohtml.inc.php');
 
     global $ADODB_FORCE_TYPE;
 
 
-//==========================
-// This code tests an insert
+    //==========================
+    // This code tests an insert
 
     $sql = "
 SELECT *
 FROM ADOXYZ WHERE id = -1";
-// Select an empty record from the database
+    // Select an empty record from the database
 
 
-#$conn = ADONewConnection("mssql");  // create a connection
-#$conn->PConnect("", "sa", "natsoft", "northwind"); // connect to MySQL, testdb
+    #$conn = ADONewConnection("mssql");  // create a connection
+    #$conn->PConnect("", "sa", "natsoft", "northwind"); // connect to MySQL, testdb
 
     $conn = ADONewConnection("mysql");  // create a connection
     $conn->PConnect("localhost", "root", "", "test"); // connect to MySQL, testdb
 
 
 #$conn = ADONewConnection('oci8po');
-#$conn->Connect('','scott','natsoft');
+    #$conn->Connect('','scott','natsoft');
 
     if (PHP_VERSION >= 5) {
         $connstr = "mysql:dbname=northwind";
@@ -52,7 +50,7 @@ FROM ADOXYZ WHERE id = -1";
         $conn = ADONewConnection('pdo');
         $conn->Connect($connstr, $u, $p);
     }
-//$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
+    //$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
 
 
     $conn->debug = 1;
@@ -61,7 +59,9 @@ FROM ADOXYZ WHERE id = -1";
     $rs = $conn->Execute($sql); // Execute the query and get the empty recordset
     $record = array(); // Initialize an array to hold the record data to insert
 
-    if (strpos($conn->databaseType, 'mysql') === false) $record['id'] = 751;
+    if (strpos($conn->databaseType, 'mysql') === false) {
+        $record['id'] = 751;
+    }
     $record["firstname"] = 'Jann';
     $record["lastname"] = "Smitts";
     $record["created"] = time();
@@ -69,53 +69,63 @@ FROM ADOXYZ WHERE id = -1";
     $insertSQL = $conn->GetInsertSQL($rs, $record);
     $conn->Execute($insertSQL); // Insert the record into the database
 
-    if (strpos($conn->databaseType, 'mysql') === false) $record['id'] = 752;
-// Set the values for the fields in the record
+    if (strpos($conn->databaseType, 'mysql') === false) {
+        $record['id'] = 752;
+    }
+    // Set the values for the fields in the record
     $record["firstname"] = 'anull';
     $record["lastname"] = "Smith\$@//";
     $record["created"] = time();
 
-    if (isset($_GET['f'])) $ADODB_FORCE_TYPE = $_GET['f'];
+    if (isset($_GET['f'])) {
+        $ADODB_FORCE_TYPE = $_GET['f'];
+    }
 
-//$record["id"] = -1;
+    //$record["id"] = -1;
 
-// Pass the empty recordset and the array containing the data to insert
-// into the GetInsertSQL function. The function will process the data and return
-// a fully formatted insert sql statement.
+    // Pass the empty recordset and the array containing the data to insert
+    // into the GetInsertSQL function. The function will process the data and return
+    // a fully formatted insert sql statement.
     $insertSQL = $conn->GetInsertSQL($rs, $record);
     $conn->Execute($insertSQL); // Insert the record into the database
 
 
     $insertSQL2 = $conn->GetInsertSQL($table = 'ADOXYZ', $record);
-    if ($insertSQL != $insertSQL2) echo "<p><b>Walt's new stuff failed</b>: $insertSQL2</p>";
-//==========================
-// This code tests an update
+    if ($insertSQL != $insertSQL2) {
+        echo "<p><b>Walt's new stuff failed</b>: $insertSQL2</p>";
+    }
+    //==========================
+    // This code tests an update
 
     $sql = "
 SELECT *
 FROM ADOXYZ WHERE lastname=" . $conn->Param('var') . " ORDER BY 1";
-// Select a record to update
+    // Select a record to update
 
     $varr = array('var' => $record['lastname'] . '');
     $rs = $conn->Execute($sql, $varr); // Execute the query and get the existing record to update
-    if (!$rs || $rs->EOF) print "<p><b>No record found!</b></p>";
+    if (!$rs || $rs->EOF) {
+        print "<p><b>No record found!</b></p>";
+    }
 
     $record = array(); // Initialize an array to hold the record data to update
 
 
-// Set the values for the fields in the record
+    // Set the values for the fields in the record
     $record["firstName"] = "Caroline" . rand();
-//$record["lasTname"] = ""; // Update Caroline's lastname from Miranda to Smith
+    //$record["lasTname"] = ""; // Update Caroline's lastname from Miranda to Smith
     $record["creAted"] = '2002-12-' . (rand() % 30 + 1);
     $record['num'] = '';
-// Pass the single record recordset and the array containing the data to update
-// into the GetUpdateSQL function. The function will process the data and return
-// a fully formatted update sql statement.
-// If the data has not changed, no recordset is returned
+    // Pass the single record recordset and the array containing the data to update
+    // into the GetUpdateSQL function. The function will process the data and return
+    // a fully formatted update sql statement.
+    // If the data has not changed, no recordset is returned
 
     $updateSQL = $conn->GetUpdateSQL($rs, $record);
     $conn->Execute($updateSQL, $varr); // Update the record in the database
-    if ($conn->Affected_Rows() != 1) print "<p><b>Error1 </b>: Rows Affected=" . $conn->Affected_Rows() . ", should be 1</p>";
+    if ($conn->Affected_Rows() != 1) {
+        print "<p><b>Error1 </b>: Rows Affected=" . $conn->Affected_Rows() . ", should be 1</p>";
+    }
 
     $record["firstName"] = "Caroline" . rand();
     $record["lasTname"] = "Smithy Jones"; // Update Caroline's lastname from Miranda to Smith
@@ -123,10 +133,12 @@ FROM ADOXYZ WHERE lastname=" . $conn->Param('var') . " ORDER BY 1";
     $record['num'] = 331;
     $updateSQL = $conn->GetUpdateSQL($rs, $record);
     $conn->Execute($updateSQL, $varr); // Update the record in the database
-    if ($conn->Affected_Rows() != 1) print "<p><b>Error 2</b>: Rows Affected=" . $conn->Affected_Rows() . ", should be 1</p>";
+    if ($conn->Affected_Rows() != 1) {
+        print "<p><b>Error 2</b>: Rows Affected=" . $conn->Affected_Rows() . ", should be 1</p>";
+    }
 
     $rs = $conn->Execute("select * from ADOXYZ where lastname like 'Sm%'");
-//adodb_pr($rs);
+    //adodb_pr($rs);
     rs2html($rs);
 
     $record["firstName"] = "Carol-new-" . rand();
@@ -136,7 +148,7 @@ FROM ADOXYZ WHERE lastname=" . $conn->Param('var') . " ORDER BY 1";
 
     $conn->AutoExecute('ADOXYZ', $record, 'UPDATE', "lastname like 'Sm%'");
     $rs = $conn->Execute("select * from ADOXYZ where lastname like 'Sm%'");
-//adodb_pr($rs);
+    //adodb_pr($rs);
     rs2html($rs);
 }
 

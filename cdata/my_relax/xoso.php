@@ -1,5 +1,5 @@
 <?php
-list ($resultDe, $timesTampResult, $show_history) = _GL('resultPlayDe, timesTampResult, show_history');
+list($resultDe, $timesTampResult, $show_history) = _GL('resultPlayDe, timesTampResult, show_history');
 
 ?>
 <div id="msg-Show"></div>

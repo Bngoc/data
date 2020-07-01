@@ -7,7 +7,9 @@ list($opt) = _GL('opt');
     <?php if ($class_board) {
         foreach ($class_board as $ID => $ol) { ?>
             <li <?php echo 'id="' . $ID . '" title="' . $ID . '"';
-            if ($sub == $ID) echo 'class="selected"'; ?>>
+            if ($sub == $ID) {
+                echo 'class="selected"';
+            } ?>>
                 <a class="callAjaxRanking" id="callAjaxRanking" href="javascript:void(0)"
                    fhref="<?php echo cn_url_modify('mod=ranking', 'opt=' . $opt, "sub=$ID", 'page', 'per_page'); ?>"><?php echo ucfirst($ol); ?></a>
             </li>

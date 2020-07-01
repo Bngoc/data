@@ -10,11 +10,13 @@ Set tabs to 4 for best viewing.
 
   Latest version is available at http://adodb.sourceforge.net
 
-	Microsoft ADO data driver. Requires ADO. Works only on MS Windows.
+    Microsoft ADO data driver. Requires ADO. Works only on MS Windows.
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 define("_ADODB_ADO_LAYER", 1);
 
@@ -24,37 +26,41 @@ define("_ADODB_ADO_LAYER", 1);
 
 class ADODB_ado extends ADOConnection
 {
-    var $databaseType = "ado";
-    var $_bindInputArray = false;
-    var $fmtDate = "'Y-m-d'";
-    var $fmtTimeStamp = "'Y-m-d, h:i:sA'";
-    var $replaceQuote = "''"; // string to use to replace quotes
-    var $dataProvider = "ado";
-    var $hasAffectedRows = true;
-    var $adoParameterType = 201; // 201 = long varchar, 203=long wide varchar, 205 = long varbinary
-    var $_affectedRows = false;
-    var $_thisTransactions;
-    var $_cursor_type = 3; // 3=adOpenStatic,0=adOpenForwardOnly,1=adOpenKeyset,2=adOpenDynamic
-    var $_cursor_location = 3; // 2=adUseServer, 3 = adUseClient;
-    var $_lock_type = -1;
-    var $_execute_option = -1;
-    var $poorAffectedRows = true;
-    var $charPage;
+    public $databaseType = "ado";
+    public $_bindInputArray = false;
+    public $fmtDate = "'Y-m-d'";
+    public $fmtTimeStamp = "'Y-m-d, h:i:sA'";
+    public $replaceQuote = "''"; // string to use to replace quotes
+    public $dataProvider = "ado";
+    public $hasAffectedRows = true;
+    public $adoParameterType = 201; // 201 = long varchar, 203=long wide varchar, 205 = long varbinary
+    public $_affectedRows = false;
+    public $_thisTransactions;
+    public $_cursor_type = 3; // 3=adOpenStatic,0=adOpenForwardOnly,1=adOpenKeyset,2=adOpenDynamic
+    public $_cursor_location = 3; // 2=adUseServer, 3 = adUseClient;
+    public $_lock_type = -1;
+    public $_execute_option = -1;
+    public $poorAffectedRows = true;
+    public $charPage;
 
-    function __construct()
+    public function __construct()
     {
         $this->_affectedRows = new VARIANT;
     }
 
-    function ServerInfo()
+    public function ServerInfo()
     {
-        if (!empty($this->_connectionID)) $desc = $this->_connectionID->provider;
+        if (!empty($this->_connectionID)) {
+            $desc = $this->_connectionID->provider;
+        }
         return array('description' => $desc, 'version' => '');
     }
 
-    function _affectedrows()
+    public function _affectedrows()
     {
-        if (PHP_VERSION >= 5) return $this->_affectedRows;
+        if (PHP_VERSION >= 5) {
+            return $this->_affectedRows;
+        }
 
         return $this->_affectedRows->value;
     }
@@ -62,17 +68,20 @@ class ADODB_ado extends ADOConnection
     // you can also pass a connection string like this:
     //
     // $DB->Connect('USER ID=sa;PASSWORD=pwd;SERVER=mangrove;DATABASE=ai',false,false,'SQLOLEDB');
-    function _connect($argHostname, $argUsername, $argPassword, $argProvider = 'MSDASQL')
+    public function _connect($argHostname, $argUsername, $argPassword, $argProvider = 'MSDASQL')
     {
         $u = 'UID';
         $p = 'PWD';
 
-        if (!empty($this->charPage))
+        if (!empty($this->charPage)) {
             $dbc = new COM('ADODB.Connection', null, $this->charPage);
-        else
+        } else {
             $dbc = new COM('ADODB.Connection');
+        }
 
-        if (!$dbc) return false;
+        if (!$dbc) {
+            return false;
+        }
 
         /* special support if provider is mssql or access */
         if ($argProvider == 'mssql') {
@@ -84,16 +93,27 @@ class ADODB_ado extends ADOConnection
             //if ($argDatabasename) $argHostname .= ";Initial Catalog=$argDatabasename";
 
             //use trusted conection for SQL if username not specified
-            if (!$argUsername) $argHostname .= ";Trusted_Connection=Yes";
-        } else if ($argProvider == 'access')
-            $argProvider = "Microsoft.Jet.OLEDB.4.0"; // Microsoft Jet Provider
+            if (!$argUsername) {
+                $argHostname .= ";Trusted_Connection=Yes";
+            }
+        } elseif ($argProvider == 'access') {
+            $argProvider = "Microsoft.Jet.OLEDB.4.0";
+        } // Microsoft Jet Provider
 
-        if ($argProvider) $dbc->Provider = $argProvider;
+        if ($argProvider) {
+            $dbc->Provider = $argProvider;
+        }
 
-        if ($argUsername) $argHostname .= ";$u=$argUsername";
-        if ($argPassword) $argHostname .= ";$p=$argPassword";
+        if ($argUsername) {
+            $argHostname .= ";$u=$argUsername";
+        }
+        if ($argPassword) {
+            $argHostname .= ";$p=$argPassword";
+        }
 
-        if ($this->debug) ADOConnection::outp("Host=" . $argHostname . "<BR>\n version=$dbc->version");
+        if ($this->debug) {
+            ADOConnection::outp("Host=" . $argHostname . "<BR>\n version=$dbc->version");
+        }
         // @ added below for php 4.0.1 and earlier
         @$dbc->Open((string)$argHostname);
 
@@ -104,7 +124,7 @@ class ADODB_ado extends ADOConnection
     }
 
     // returns true or false
-    function _pconnect($argHostname, $argUsername, $argPassword, $argProvider = 'MSDASQL')
+    public function _pconnect($argHostname, $argUsername, $argPassword, $argProvider = 'MSDASQL')
     {
         return $this->_connect($argHostname, $argUsername, $argPassword, $argProvider);
     }
@@ -148,10 +168,10 @@ class ADODB_ado extends ADOConnection
         adSchemaMeasures	= 36,
         adSchemaProperties	= 37,
         adSchemaMembers	= 38
-    
+
     */
 
-    function MetaTables($ttype = false, $showSchema = false, $mask = false)
+    public function MetaTables($ttype = false, $showSchema = false, $mask = false)
     {
         $arr = array();
         $dbc = $this->_connectionID;
@@ -162,8 +182,9 @@ class ADODB_ado extends ADOConnection
             $t = $adors->Fields(3);//table type
             while (!$adors->EOF) {
                 $tt = substr($t->value, 0, 6);
-                if ($tt != 'SYSTEM' && $tt != 'ACCESS')
+                if ($tt != 'SYSTEM' && $tt != 'ACCESS') {
                     $arr[] = $f->value;
+                }
                 //print $f->value . ' ' . $t->value.'<br>';
                 $adors->MoveNext();
             }
@@ -173,7 +194,7 @@ class ADODB_ado extends ADOConnection
         return $arr;
     }
 
-    function MetaColumns($table, $normalize = true)
+    public function MetaColumns($table, $normalize = true)
     {
         $table = strtoupper($table);
         $arr = array();
@@ -184,10 +205,7 @@ class ADODB_ado extends ADOConnection
         if ($adors) {
             $t = $adors->Fields(2);//table/view name
             while (!$adors->EOF) {
-
-
                 if (strtoupper($t->Value) == $table) {
-
                     $fld = new ADOFieldObject();
                     $c = $adors->Fields(3);
                     $fld->name = $c->Value;
@@ -206,19 +224,18 @@ class ADODB_ado extends ADOConnection
 
 
     /* returns queryID or false */
-    function _query($sql, $inputarr = false)
+    public function _query($sql, $inputarr = false)
     {
-
         $dbc = $this->_connectionID;
         $false = false;
 
         //	return rs
         if ($inputarr) {
-
-            if (!empty($this->charPage))
+            if (!empty($this->charPage)) {
                 $oCmd = new COM('ADODB.Command', null, $this->charPage);
-            else
+            } else {
                 $oCmd = new COM('ADODB.Command');
+            }
             $oCmd->ActiveConnection = $dbc;
             $oCmd->CommandText = $sql;
             $oCmd->CommandType = 1;
@@ -228,18 +245,19 @@ class ADODB_ado extends ADOConnection
             while (list(, $val) = each($inputarr)) {
                 $type = gettype($val);
                 $len = strlen($val);
-                if ($type == 'boolean')
+                if ($type == 'boolean') {
                     $this->adoParameterType = 11;
-                else if ($type == 'integer')
+                } elseif ($type == 'integer') {
                     $this->adoParameterType = 3;
-                else if ($type == 'double')
+                } elseif ($type == 'double') {
                     $this->adoParameterType = 5;
-                elseif ($type == 'string')
+                } elseif ($type == 'string') {
                     $this->adoParameterType = 202;
-                else if (($val === null) || (!defined($val)))
+                } elseif (($val === null) || (!defined($val))) {
                     $len = 1;
-                else
+                } else {
                     $this->adoParameterType = 130;
+                }
 
                 // name, type, direction 1 = input, len,
                 $p = $oCmd->CreateParameter('name', $this->adoParameterType, 1, $len, $val);
@@ -249,14 +267,20 @@ class ADODB_ado extends ADOConnection
             $p = false;
             $rs = $oCmd->Execute();
             $e = $dbc->Errors;
-            if ($dbc->Errors->Count > 0) return $false;
+            if ($dbc->Errors->Count > 0) {
+                return $false;
+            }
             return $rs;
         }
 
         $rs = @$dbc->Execute($sql, $this->_affectedRows, $this->_execute_option);
 
-        if ($dbc->Errors->Count > 0) return $false;
-        if (!$rs) return $false;
+        if ($dbc->Errors->Count > 0) {
+            return $false;
+        }
+        if (!$rs) {
+            return $false;
+        }
 
         if ($rs->State == 0) {
             $true = true;
@@ -266,87 +290,110 @@ class ADODB_ado extends ADOConnection
     }
 
 
-    function BeginTrans()
+    public function BeginTrans()
     {
-        if ($this->transOff) return true;
+        if ($this->transOff) {
+            return true;
+        }
 
-        if (isset($this->_thisTransactions))
-            if (!$this->_thisTransactions) return false;
-            else {
+        if (isset($this->_thisTransactions)) {
+            if (!$this->_thisTransactions) {
+                return false;
+            } else {
                 $o = $this->_connectionID->Properties("Transaction DDL");
                 $this->_thisTransactions = $o ? true : false;
-                if (!$o) return false;
+                if (!$o) {
+                    return false;
+                }
             }
+        }
         @$this->_connectionID->BeginTrans();
         $this->transCnt += 1;
         return true;
     }
 
-    function CommitTrans($ok = true)
+    public function CommitTrans($ok = true)
     {
-        if (!$ok) return $this->RollbackTrans();
-        if ($this->transOff) return true;
+        if (!$ok) {
+            return $this->RollbackTrans();
+        }
+        if ($this->transOff) {
+            return true;
+        }
 
         @$this->_connectionID->CommitTrans();
-        if ($this->transCnt) @$this->transCnt -= 1;
+        if ($this->transCnt) {
+            @$this->transCnt -= 1;
+        }
         return true;
     }
 
-    function RollbackTrans()
+    public function RollbackTrans()
     {
-        if ($this->transOff) return true;
+        if ($this->transOff) {
+            return true;
+        }
         @$this->_connectionID->RollbackTrans();
-        if ($this->transCnt) @$this->transCnt -= 1;
+        if ($this->transCnt) {
+            @$this->transCnt -= 1;
+        }
         return true;
     }
 
     /*	Returns: the last error message from previous database operation	*/
 
-    function ErrorMsg()
+    public function ErrorMsg()
     {
-        if (!$this->_connectionID) return "No connection established";
+        if (!$this->_connectionID) {
+            return "No connection established";
+        }
         $errc = $this->_connectionID->Errors;
-        if (!$errc) return "No Errors object found";
-        if ($errc->Count == 0) return '';
+        if (!$errc) {
+            return "No Errors object found";
+        }
+        if ($errc->Count == 0) {
+            return '';
+        }
         $err = $errc->Item($errc->Count - 1);
         return $err->Description;
     }
 
-    function ErrorNo()
+    public function ErrorNo()
     {
         $errc = $this->_connectionID->Errors;
-        if ($errc->Count == 0) return 0;
+        if ($errc->Count == 0) {
+            return 0;
+        }
         $err = $errc->Item($errc->Count - 1);
         return $err->NativeError;
     }
 
     // returns true or false
-    function _close()
+    public function _close()
     {
-        if ($this->_connectionID) $this->_connectionID->Close();
+        if ($this->_connectionID) {
+            $this->_connectionID->Close();
+        }
         $this->_connectionID = false;
         return true;
     }
-
-
 }
 
 /*--------------------------------------------------------------------------------------
-	 Class Name: Recordset
+     Class Name: Recordset
 --------------------------------------------------------------------------------------*/
 
 class ADORecordSet_ado extends ADORecordSet
 {
+    public $bind = false;
+    public $databaseType = "ado";
+    public $dataProvider = "ado";
+    public $_tarr = false; // caches the types
+    public $_flds; // and field objects
+    public $canSeek = true;
+    public $hideErrors = true;
 
-    var $bind = false;
-    var $databaseType = "ado";
-    var $dataProvider = "ado";
-    var $_tarr = false; // caches the types
-    var $_flds; // and field objects
-    var $canSeek = true;
-    var $hideErrors = true;
-
-    function __construct($id, $mode = false)
+    public function __construct($id, $mode = false)
     {
         if ($mode === false) {
             global $ADODB_FETCH_MODE;
@@ -358,7 +405,7 @@ class ADORecordSet_ado extends ADORecordSet
 
 
     // returns the field object
-    function FetchField($fieldOffset = -1)
+    public function FetchField($fieldOffset = -1)
     {
         $off = $fieldOffset + 1; // offsets begin at 1
 
@@ -376,9 +423,11 @@ class ADORecordSet_ado extends ADORecordSet
     }
 
     /* Use associative array to get fields array */
-    function Fields($colname)
+    public function Fields($colname)
     {
-        if ($this->fetchMode & ADODB_FETCH_ASSOC) return $this->fields[$colname];
+        if ($this->fetchMode & ADODB_FETCH_ASSOC) {
+            return $this->fields[$colname];
+        }
         if (!$this->bind) {
             $this->bind = array();
             for ($i = 0; $i < $this->_numOfFields; $i++) {
@@ -391,7 +440,7 @@ class ADORecordSet_ado extends ADORecordSet
     }
 
 
-    function _initrs()
+    public function _initrs()
     {
         $rs = $this->_queryID;
         $this->_numOfRows = $rs->RecordCount;
@@ -402,20 +451,22 @@ class ADORecordSet_ado extends ADORecordSet
 
 
     // should only be used to move forward as we normally use forward-only cursors
-    function _seek($row)
+    public function _seek($row)
     {
         $rs = $this->_queryID;
         // absoluteposition doesn't work -- my maths is wrong ?
         //	$rs->AbsolutePosition->$row-2;
         //	return true;
-        if ($this->_currentRow > $row) return false;
+        if ($this->_currentRow > $row) {
+            return false;
+        }
         @$rs->Move((integer)$row - $this->_currentRow - 1); //adBookmarkFirst
         return true;
     }
 
     /*
         OLEDB types
-    
+
          enum DBTYPEENUM
         {	DBTYPE_EMPTY	= 0,
         DBTYPE_NULL	= 1,
@@ -451,9 +502,9 @@ class ADORecordSet_ado extends ADORecordSet
         DBTYPE_DBDATE	= 133,
         DBTYPE_DBTIME	= 134,
         DBTYPE_DBTIMESTAMP	= 135
-    
+
         ADO Types
-    
+
            adEmpty	= 0,
         adTinyInt	= 16,
         adSmallInt	= 2,
@@ -495,7 +546,7 @@ class ADORecordSet_ado extends ADORecordSet
         adPropVariant	= 138,
         adVarNumeric	= 139
     */
-    function MetaType($t, $len = -1, $fieldobj = false)
+    public function MetaType($t, $len = -1, $fieldobj = false)
     {
         if (is_object($t)) {
             $fieldobj = $t;
@@ -503,7 +554,9 @@ class ADORecordSet_ado extends ADORecordSet
             $len = $fieldobj->max_length;
         }
 
-        if (!is_numeric($t)) return $t;
+        if (!is_numeric($t)) {
+            return $t;
+        }
 
         switch ($t) {
             case 0:
@@ -516,8 +569,11 @@ class ADORecordSet_ado extends ADORecordSet
             case 128: // bin
             case 204: // varBin
             case 72: // guid
-                if ($len <= $this->blobSize) return 'C';
+                if ($len <= $this->blobSize) {
+                    return 'C';
+                }
 
+                // no break
             case 201:
             case 203:
                 return 'X';
@@ -551,7 +607,7 @@ class ADORecordSet_ado extends ADORecordSet
     }
 
     // time stamp not supported yet
-    function _fetch()
+    public function _fetch()
     {
         $rs = $this->_queryID;
         if (!$rs or $rs->EOF) {
@@ -575,35 +631,47 @@ class ADORecordSet_ado extends ADORecordSet
         $t = reset($this->_tarr);
         $f = reset($this->_flds);
 
-        if ($this->hideErrors) $olde = error_reporting(E_ERROR | E_CORE_ERROR);// sometimes $f->value be null
+        if ($this->hideErrors) {
+            $olde = error_reporting(E_ERROR | E_CORE_ERROR);
+        }// sometimes $f->value be null
         for ($i = 0, $max = $this->_numOfFields; $i < $max; $i++) {
             //echo "<p>",$t,' ';var_dump($f->value); echo '</p>';
             switch ($t) {
                 case 135: // timestamp
-                    if (!strlen((string)$f->value)) $this->fields[] = false;
-                    else {
-                        if (!is_numeric($f->value)) # $val = variant_date_to_timestamp($f->value);
+                    if (!strlen((string)$f->value)) {
+                        $this->fields[] = false;
+                    } else {
+                        if (!is_numeric($f->value)) { # $val = variant_date_to_timestamp($f->value);
                             // VT_DATE stores dates as (float) fractional days since 1899/12/30 00:00:00
                             $val = (float)variant_cast($f->value, VT_R8) * 3600 * 24 - 2209161600;
-                        else
+                        } else {
                             $val = $f->value;
+                        }
                         $this->fields[] = adodb_date('Y-m-d H:i:s', $val);
                     }
                     break;
                 case 133:// A date value (yyyymmdd)
                     if ($val = $f->value) {
                         $this->fields[] = substr($val, 0, 4) . '-' . substr($val, 4, 2) . '-' . substr($val, 6, 2);
-                    } else
+                    } else {
                         $this->fields[] = false;
+                    }
                     break;
                 case 7: // adDate
-                    if (!strlen((string)$f->value)) $this->fields[] = false;
-                    else {
-                        if (!is_numeric($f->value)) $val = variant_date_to_timestamp($f->value);
-                        else $val = $f->value;
+                    if (!strlen((string)$f->value)) {
+                        $this->fields[] = false;
+                    } else {
+                        if (!is_numeric($f->value)) {
+                            $val = variant_date_to_timestamp($f->value);
+                        } else {
+                            $val = $f->value;
+                        }
 
-                        if (($val % 86400) == 0) $this->fields[] = adodb_date('Y-m-d', $val);
-                        else $this->fields[] = adodb_date('Y-m-d H:i:s', $val);
+                        if (($val % 86400) == 0) {
+                            $this->fields[] = adodb_date('Y-m-d', $val);
+                        } else {
+                            $this->fields[] = adodb_date('Y-m-d H:i:s', $val);
+                        }
                     }
                     break;
                 case 1: // null
@@ -616,10 +684,15 @@ class ADORecordSet_ado extends ADORecordSet
                 case 11: //BIT;
                     $val = "";
                     if (is_bool($f->value)) {
-                        if ($f->value == true) $val = 1;
-                        else $val = 0;
+                        if ($f->value == true) {
+                            $val = 1;
+                        } else {
+                            $val = 0;
+                        }
                     }
-                    if (is_null($f->value)) $val = null;
+                    if (is_null($f->value)) {
+                        $val = null;
+                    }
 
                     $this->fields[] = $val;
                     break;
@@ -631,7 +704,9 @@ class ADORecordSet_ado extends ADORecordSet
             $f = next($this->_flds);
             $t = next($this->_tarr);
         } // for
-        if ($this->hideErrors) error_reporting($olde);
+        if ($this->hideErrors) {
+            error_reporting($olde);
+        }
         @$rs->MoveNext(); // @ needed for some versions of PHP!
 
         if ($this->fetchMode & ADODB_FETCH_ASSOC) {
@@ -640,12 +715,14 @@ class ADORecordSet_ado extends ADORecordSet
         return true;
     }
 
-    function NextRecordSet()
+    public function NextRecordSet()
     {
         $rs = $this->_queryID;
         $this->_queryID = $rs->NextRecordSet();
         //$this->_queryID = $this->_QueryId->NextRecordSet();
-        if ($this->_queryID == null) return false;
+        if ($this->_queryID == null) {
+            return false;
+        }
 
         $this->_currentRow = -1;
         $this->_currentPage = -1;
@@ -659,11 +736,10 @@ class ADORecordSet_ado extends ADORecordSet
         return true;
     }
 
-    function _close()
+    public function _close()
     {
         $this->_flds = false;
         @$this->_queryID->Close();// by Pete Dishman (peterd@telephonetics.co.uk)
         $this->_queryID = false;
     }
-
 }

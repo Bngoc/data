@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 list($dataNotifyForum, $get_paging, $result_RankingTop10) = _GL('dataNotifyForum, get_paging, result_RankingTop10');
 echo cn_snippet_messages();

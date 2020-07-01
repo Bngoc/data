@@ -1,4 +1,4 @@
-﻿<?php die('Direct call - access denied'); ?>
+<?php die('Direct call - access denied'); ?>
 2804EBFC1E7A003F00C0000000000000|Mantle Lord|150000|aochoangdevuong.gif|
 2604EBFC1E7A003F00C0000000000000|Illusion Wings|150000|canhaovong.gif|
 2404EBFC1E7A003F00C0000000000000|Storm Wings|150000|canhbaoto.gif|

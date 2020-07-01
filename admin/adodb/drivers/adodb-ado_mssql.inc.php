@@ -18,58 +18,65 @@ Set tabs to 4 for best viewing.
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 if (!defined('_ADODB_ADO_LAYER')) {
-    if (PHP_VERSION >= 5) include(ADODB_DIR . "/drivers/adodb-ado5.inc.php");
-    else include(ADODB_DIR . "/drivers/adodb-ado.inc.php");
+    if (PHP_VERSION >= 5) {
+        include(ADODB_DIR . "/drivers/adodb-ado5.inc.php");
+    } else {
+        include(ADODB_DIR . "/drivers/adodb-ado.inc.php");
+    }
 }
 
 
-class  ADODB_ado_mssql extends ADODB_ado
+class ADODB_ado_mssql extends ADODB_ado
 {
-    var $databaseType = 'ado_mssql';
-    var $hasTop = 'top';
-    var $hasInsertID = true;
-    var $sysDate = 'convert(datetime,convert(char,GetDate(),102),102)';
-    var $sysTimeStamp = 'GetDate()';
-    var $leftOuter = '*=';
-    var $rightOuter = '=*';
-    var $ansiOuter = true; // for mssql7 or later
-    var $substr = "substring";
-    var $length = 'len';
-    var $_dropSeqSQL = "drop table %s";
+    public $databaseType = 'ado_mssql';
+    public $hasTop = 'top';
+    public $hasInsertID = true;
+    public $sysDate = 'convert(datetime,convert(char,GetDate(),102),102)';
+    public $sysTimeStamp = 'GetDate()';
+    public $leftOuter = '*=';
+    public $rightOuter = '=*';
+    public $ansiOuter = true; // for mssql7 or later
+    public $substr = "substring";
+    public $length = 'len';
+    public $_dropSeqSQL = "drop table %s";
 
     //var $_inTransaction = 1; // always open recordsets, so no transaction problems.
 
-    function _insertid()
+    public function _insertid()
     {
         return $this->GetOne('select SCOPE_IDENTITY()');
     }
 
-    function _affectedrows()
+    public function _affectedrows()
     {
         return $this->GetOne('select @@rowcount');
     }
 
-    function SetTransactionMode($transaction_mode)
+    public function SetTransactionMode($transaction_mode)
     {
         $this->_transmode = $transaction_mode;
         if (empty($transaction_mode)) {
             $this->Execute('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
             return;
         }
-        if (!stristr($transaction_mode, 'isolation')) $transaction_mode = 'ISOLATION LEVEL ' . $transaction_mode;
+        if (!stristr($transaction_mode, 'isolation')) {
+            $transaction_mode = 'ISOLATION LEVEL ' . $transaction_mode;
+        }
         $this->Execute("SET TRANSACTION " . $transaction_mode);
     }
 
-    function qstr($s, $magic_quotes = false)
+    public function qstr($s, $magic_quotes = false)
     {
         $s = ADOConnection::qstr($s, $magic_quotes);
         return str_replace("\0", "\\\\000", $s);
     }
 
-    function MetaColumns($table, $normalize = true)
+    public function MetaColumns($table, $normalize = true)
     {
         $table = strtoupper($table);
         $arr = array();
@@ -100,9 +107,8 @@ class  ADODB_ado_mssql extends ADODB_ado
         return empty($arr) ? $false : $arr;
     }
 
-    function CreateSequence($seq = 'adodbseq', $start = 1)
+    public function CreateSequence($seq = 'adodbseq', $start = 1)
     {
-
         $this->Execute('BEGIN TRANSACTION adodbseq');
         $start -= 1;
         $this->Execute("create table $seq (id float(53))");
@@ -115,7 +121,7 @@ class  ADODB_ado_mssql extends ADODB_ado
         return true;
     }
 
-    function GenID($seq = 'adodbseq', $start = 1)
+    public function GenID($seq = 'adodbseq', $start = 1)
     {
         //$this->debug=1;
         $this->Execute('BEGIN TRANSACTION adodbseq');
@@ -137,15 +143,13 @@ class  ADODB_ado_mssql extends ADODB_ado
         // in old implementation, pre 1.90, we returned GUID...
         //return $this->GetOne("SELECT CONVERT(varchar(255), NEWID()) AS 'Char'");
     }
-
 } // end class
 
-class  ADORecordSet_ado_mssql extends ADORecordSet_ado
+class ADORecordSet_ado_mssql extends ADORecordSet_ado
 {
+    public $databaseType = 'ado_mssql';
 
-    var $databaseType = 'ado_mssql';
-
-    function __construct($id, $mode = false)
+    public function __construct($id, $mode = false)
     {
         return parent::__construct($id, $mode);
     }

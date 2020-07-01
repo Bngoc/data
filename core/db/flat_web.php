@@ -17,7 +17,7 @@ function db_installed_check()
     global $db_new;
 
     if (!isset($db_new)) {
-        die ('Không có kết nối đến Server!');
+        return false;
     }
 
     $result = $db_new->Execute("SELECT * FROM Account_Info WHERE [AdLevel]=1");
@@ -34,7 +34,9 @@ function view_info_char($account)
     $str_ = '';
     if (!empty($account)) {
         $result = $db_new->Execute("SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'");
-        if ($result === false) return 'Error';
+        if ($result === false) {
+            return 'Error';
+        }
         if ($result->numrows() != 0) {
             $row = $result->fetchrow();
             $coun_row = count($row);
@@ -43,15 +45,21 @@ function view_info_char($account)
                     switch (getOption('server_type')) {
                         case "scf":
                             $query_info_char = $db_new->Execute("SELECT Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,SCFPCPoints FROM Character WHERE Name='$row[$i]'");
-                            if ($query_info_char === false) continue;
+                            if ($query_info_char === false) {
+                                continue;
+                            }
                             break;
                         case "ori":
                             $query_info_char = $db_new->Execute("SELECT Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,PCPoints FROM Character WHERE Name='$row[$i]'");
-                            if ($query_info_char === false) continue;
+                            if ($query_info_char === false) {
+                                continue;
+                            }
                             break;
                         default:
                             $query_info_char = $db_new->Execute("SELECT Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,SCFPCPoints FROM Character WHERE Name='$row[$i]'");
-                            if ($query_info_char === false) continue;
+                            if ($query_info_char === false) {
+                                continue;
+                            }
                             break;
                     }
                     if ($query_info_char->numrows() != 0) {
@@ -97,15 +105,21 @@ function view_character($account)
                         switch (getOption('server_type')) {
                             case "scf":
                                 $query_info_char = $db_new->Execute("SELECT Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,SCFPCPoints,AccountID,NoResetInDay,Money,Top50,Resets_Time,UyThac,Inventory AS image,PkLevel,PkCount,MapNumber,IsThuePoint,TimeThuePoint FROM Character WHERE Name='$vl'");
-                                if ($query_info_char === false) continue;
+                                if ($query_info_char === false) {
+                                    continue;
+                                }
                                 break;
                             case "ori":
                                 $query_info_char = $db_new->Execute("SELECT Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,PCPoints,AccountID,NoResetInDay,Money,Top50,Resets_Time,UyThac,Inventory AS image,PkLevel,PkCount,MapNumber,IsThuePoint,TimeThuePoint FROM Character WHERE Name='$vl'");
-                                if ($query_info_char === false) continue;
+                                if ($query_info_char === false) {
+                                    continue;
+                                }
                                 break;
                             default:
                                 $query_info_char = $db_new->Execute("SELECT Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,SCFPCPoints,AccountID,NoResetInDay,Money,Top50,Resets_Time,UyThac,Inventory AS image,PkLevel,PkCount,MapNumber,IsThuePoint,TimeThuePoint FROM Character WHERE Name='$vl'");
-                                if ($query_info_char === false) continue;
+                                if ($query_info_char === false) {
+                                    continue;
+                                }
                                 break;
                         }
 
@@ -130,7 +144,7 @@ function view_bank($account)
 
         if ($result) {
             foreach ($result as $key => $var) {
-                $_data[] = Array(
+                $_data[] = array(
                     'bank' => $var['bank'],
                     'vp' => $var['vpoint'],
                     'chaos' => $var['jewel_chao'],
@@ -179,7 +193,9 @@ function point_tax($sub = '')
 
 function mssql_real_escape_string($s)
 {
-    if (get_magic_quotes_gpc()) $s = stripcslashes($s);
+    if (get_magic_quotes_gpc()) {
+        $s = stripcslashes($s);
+    }
     $s = str_replace("'", "''", $s);
     return $s;
 }
@@ -196,7 +212,7 @@ function db_user_by_name($name)
         $result_rows = do_select_character('MEMB_INFO', 'memb___id,memb__pwd,tel__numb,phon_numb,mail_addr,fpas_ques,fpas_answ,memb__pwd2,memb__pwdmd5,acl,ban_login,num_login,pass2', "memb___id='$username'");
         if ($result_rows) {
             foreach ($result_rows as $sd => $ds) {
-                $pdata = Array(
+                $pdata = array(
                     'user_name' => $ds['memb___id'],
                     'pass_web' => $ds['memb__pwdmd5'],
                     'memb__pwdmd5' => $ds['memb__pwdmd5'],
@@ -237,10 +253,10 @@ function do_select_other($other = '', $options = [])
         $check = $db_new->Execute($other) or cn_write_log($other, 'e');
         if ($check) {
             while ($row = $check->fetchrow()) {
-                array_push( $rs_data, $row);
+                array_push($rs_data, $row);
             }
         }
-    } else{
+    } else {
         return false;
     }
 
@@ -270,15 +286,18 @@ function do_update_orther($orther = '')
 
             return true;
         }
-
-    } else return FALSE;
+    } else {
+        return false;
+    }
 }
 
 //'table','abc, abc2, ...','a1=1 and ab = 2 or ad =12,...',' orther ',
 function do_select_character($table, $col, $where = '', $orther = '')
 {
     global $db_new;
-    if (!$table) return FALSE;
+    if (!$table) {
+        return false;
+    }
     $table = trim($table);
     $_col = separateString($col);
 
@@ -292,14 +311,20 @@ function do_select_character($table, $col, $where = '', $orther = '')
             $str_col .= "$var,";
         }
     }
-    if ($str_col[0] != '*') $str_col = substr($str_col, 0, -1);
+    if ($str_col[0] != '*') {
+        $str_col = substr($str_col, 0, -1);
+    }
 
     if ($where) {
         $where = trim($where);
         $str_where = "WHERE $where";
-    } else $str_where = $where;
+    } else {
+        $str_where = $where;
+    }
 
-    if ($orther) $orther = trim($orther);
+    if ($orther) {
+        $orther = trim($orther);
+    }
 
     if ($str_col && $table) {
         $check = $db_new->Execute("SELECT $str_col FROM $table $str_where $orther") or cn_write_log("SELECT $str_col FROM $table $str_where $orther", 'e');
@@ -328,30 +353,38 @@ function do_insert_character()
     $args = func_get_args();
     $user_table = array_shift($args);           // get table array frist
 
-    if (!$user_table)                           //1. name //table update/
-        return FALSE;
+    if (!$user_table) {                           //1. name //table update/
+        return false;
+    }
 
     foreach ($args as $v) {                     //$v = [email=user_email]
         list($a, $b) = explode('=', $v, 2);
-        if ($a)
-            $cp_data[$a] = $b;                  // VD: email = user_email
+        if ($a) {
+            $cp_data[$a] = $b;
+        }                  // VD: email = user_email
     }
 
-    if (!empty($cp_data))
-        $key_ids = array_keys($cp_data);        //get key cp_data
+    if (!empty($cp_data)) {
+        $key_ids = array_keys($cp_data);
+    }        //get key cp_data
 
-    if (!empty($key_ids))
-        foreach ($key_ids as $v)
+    if (!empty($key_ids)) {
+        foreach ($key_ids as $v) {
             $gr_col .= "$v,";
+        }
+    }
 
-    foreach ($cp_data as $key => $val)
+    foreach ($cp_data as $key => $val) {
         $gr_cont .= "$val,";
+    }
 
-    if (strlen($gr_col) > 1)
+    if (strlen($gr_col) > 1) {
         $key_up_col = substr($gr_col, 0, -1);
+    }
 
-    if (strlen($gr_cont) > 1)
+    if (strlen($gr_cont) > 1) {
         $val_up_cont = substr($gr_cont, 0, -1);
+    }
 
     if ($key_up_col && $val_up_cont && $user_table) {
 
@@ -366,13 +399,13 @@ function do_insert_character()
                 cn_write_log("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)");
             }
 
-            return TRUE;
+            return true;
         } else {
             $db_new->RollbackTrans();
         }
     }
 
-    return FALSE;
+    return false;
 }
 
 function do_insert_orther($myQureyInsert)
@@ -410,37 +443,41 @@ function do_update_character()
     $args = func_get_args();                    //1.name, 2.email="user_email", 3.nick="$user_nic", 4.pass="24242424ggsgsgs"
     $user_table = array_shift($args);           // get name array frist
 
-    if (!$user_table)                            //1. name //table update/
+    if (!$user_table) {                            //1. name //table update/
         return false;
+    }
 
     foreach ($args as $v) {                     //$v = [email=user_email] >, >=, <>, <, <=, (= :)
-        if (strpos($v, '=') !== false)
+        if (strpos($v, '=') !== false) {
             $gr_col .= "$v,";
-        elseif (strpos($v, ':') !== false) {
+        } elseif (strpos($v, ':') !== false) {
             $df = str_replace(':', '=', $v);
             $gr_cont .= "$df AND ";
-        } elseif (strpos($v, '>') !== false)
+        } elseif (strpos($v, '>') !== false) {
             $gr_cont .= "$v AND ";
-        elseif (strpos($v, '>=') !== false)
+        } elseif (strpos($v, '>=') !== false) {
             $gr_cont .= "$v AND ";
-        elseif (strpos($v, '<>') !== false)
+        } elseif (strpos($v, '<>') !== false) {
             $gr_cont .= "$v AND ";
-        elseif (strpos($v, '<') !== false)
+        } elseif (strpos($v, '<') !== false) {
             $gr_cont .= "$v AND ";
-        elseif (strpos($v, '<=') !== false)
+        } elseif (strpos($v, '<=') !== false) {
             $gr_cont .= "$df AND ";
+        }
 
         //else continue;
     }
 
-    if (strlen($gr_col) > 1)
+    if (strlen($gr_col) > 1) {
         $val_up_col = substr($gr_col, 0, -1);
-    if (strlen($gr_cont) > 5) $val_up_cont = substr($gr_cont, 0, -5);
+    }
+    if (strlen($gr_cont) > 5) {
+        $val_up_cont = substr($gr_cont, 0, -5);
+    }
 
     if ($val_up_col && $val_up_cont && $user_table) {
         $check = $db_new->Execute("UPDATE $user_table SET $val_up_col WHERE $val_up_cont") or cn_write_log("UPDATE $user_table SET $val_up_col WHERE $val_up_cont", 'e');
         if ($check) {
-
             if (getOption('debugSql')) {
                 cn_write_log("UPDATE $user_table SET $val_up_col WHERE $val_up_cont");
             }
@@ -468,7 +505,9 @@ function do_delete_char($myQuery)
             }
             return true;
         }
-    } else return false;
+    } else {
+        return false;
+    }
 
     return false;
 }
@@ -540,13 +579,13 @@ function onoff_PointCharacter()
             $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=1 THEN ' . (($items['PhutUyThacOn_dutru'] > 0) ? floor($items['PhutUyThacOn_dutru'] * (0.95)) : 0);
             $myQueryUpdate .= ' END, PointUyThac = CASE';
             $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=1 THEN ' . (($items['PointUyThac'] > 0) ? floor($items['PointUyThac'] * (0.9)) : 0);
-        } else if ($items['Uythac'] == 1 && $items['uythacoffline_stat'] == 0) {
+        } elseif ($items['Uythac'] == 1 && $items['uythacoffline_stat'] == 0) {
             //Status ON
             $myQueryUpdate .= ' PhutUyThacOff_dutru = CASE';
             $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=1 AND uythacoffline_stat=0 THEN ' . (($items['PhutUyThacOff_dutru'] > 0) ? floor($items['PhutUyThacOff_dutru'] * (0.95)) : 0);
             $myQueryUpdate .= ' END, PointUyThac = CASE';
             $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=1 AND uythacoffline_stat=0 THEN ' . (($items['PointUyThac'] > 0) ? floor($items['PointUyThac'] * (0.9)) : 0);
-        } else if ($items['Uythac'] == 0 && $items['uythacoffline_stat'] == 0) {
+        } elseif ($items['Uythac'] == 0 && $items['uythacoffline_stat'] == 0) {
             //None
             $myQueryUpdate .= ' PhutUyThacOn_dutru = CASE';
             $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=0 THEN ' . (($items['PhutUyThacOn_dutru'] > 0) ? floor($items['PhutUyThacOn_dutru'] * (0.95)) : 0);
@@ -561,7 +600,9 @@ function onoff_PointCharacter()
         $myQueryUpdate .= ' END WHERE Name =\'' . $items['Name'] . '\'';
         //echo $myQueryUpdate;
         $chekUpdate = do_update_orther($myQueryUpdate);
-        if (!$chekUpdate) echo '--> Err Update - Uy Thac';
+        if (!$chekUpdate) {
+            echo '--> Err Update - Uy Thac';
+        }
     }
 }
 
@@ -621,8 +662,9 @@ function kiemtra_acc($account)
         $username_check = do_select_character('MEMB_INFO', 'memb___id', "memb___id='$account'", '');
         //$username_check = $sql_username_check->numrows();
 
-        if (count($username_check) < 1)
-            return true;            // "Tài khoản không tồn tại.";
+        if (count($username_check) < 1) {
+            return true;
+        }            // "Tài khoản không tồn tại.";
     }
     return false;
 }
@@ -634,8 +676,9 @@ function kiemtra_loggame($account)
     if (!empty($account)) {
         $sql_loggame_check = $db_new->Execute("SELECT * FROM MEMB_STAT WHERE memb___id='$account'");
         $loggame_check = $sql_loggame_check->numrows();
-        if ($loggame_check < 1)
-            return true; //echo "Tài khoản phải vào Game tạo ít nhất 1 nhân vật mới có thể đăng nhập.";
+        if ($loggame_check < 1) {
+            return true;
+        } //echo "Tài khoản phải vào Game tạo ít nhất 1 nhân vật mới có thể đăng nhập.";
     }
     return false;
 }
@@ -646,10 +689,13 @@ function kiemtra_block_acc($account)
 
     if (!empty($account)) {
         $sql_blockacc_check = $db_new->Execute("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$account' AND bloc_code='1'");
-        if (!$sql_blockacc_check) return false;
+        if (!$sql_blockacc_check) {
+            return false;
+        }
         $blockacc_check = $sql_blockacc_check->numrows();
-        if ($blockacc_check > 0)
-            return true;/// "Tài khoản đang bị khóa.";
+        if ($blockacc_check > 0) {
+            return true;
+        }/// "Tài khoản đang bị khóa.";
     }
     return false;
 }
@@ -658,7 +704,9 @@ function kiemtra_ques_ans($account, $question, $answer)
 {
     global $db_new;
     $sql_ques_ans_check = $db_new->Execute("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$account' AND fpas_ques='$question' AND fpas_answ='$answer'");
-    if (!$sql_ques_ans_check) return '';
+    if (!$sql_ques_ans_check) {
+        return '';
+    }
     $ques_ans_check = $sql_ques_ans_check->numrows();
     if ($ques_ans_check <= 0) {
         echo "Câu hỏi hoặc câu trả lời bí mật không đúng.";
@@ -770,7 +818,9 @@ function kiemtra_ranking($account)
     if (!empty($account)) {
         $sql_ranking_check = $db_new->Execute("SELECT * FROM Character WHERE AccountID='$account' AND (Resets>50 or Relifes>0 or cLevel>400)");
         $ranking_check = $sql_ranking_check->numrows();
-        if ($ranking_check <= 0) return true;            //'NoRanking';
+        if ($ranking_check <= 0) {
+            return true;
+        }            //'NoRanking';
     }
     return false;                                        //'isRanking';
 }
@@ -782,8 +832,11 @@ function kiemtra_daily($account)
     $sql_daily_check = $db_new->Execute("SELECT * FROM DaiLy WHERE accdl='$account'");
     $daily_check = $sql_daily_check->numrows();
 
-    if ($daily_check <= 0) $dl = 'NoDL';
-    else $dl = 'isDL';
+    if ($daily_check <= 0) {
+        $dl = 'NoDL';
+    } else {
+        $dl = 'isDL';
+    }
 }
 
 function kiemtra_topmonth($character)
@@ -884,39 +937,45 @@ function doUpdateOtherForum($orther)
     $args = func_get_args();            //1.name, 2.email="user_email", 3.nick="$user_nic", 4.pass="24242424ggsgsgs"
     $user_table = array_shift($args);        // get name array frist
 
-    if (!$user_table) //1. name //table update/
-        return FALSE;
+    if (!$user_table) { //1. name //table update/
+        return false;
+    }
 
     foreach ($args as $v) {  //$v = [email=user_email] >, >=, <>, <, <=, (= :)
-        if (strpos($v, '=') !== false)
+        if (strpos($v, '=') !== false) {
             $gr_col .= "$v,";
-        elseif (strpos($v, ':') !== false) {
+        } elseif (strpos($v, ':') !== false) {
             $df = str_replace(':', '=', $v);
             $gr_cont .= "$df AND ";
-        } elseif (strpos($v, '>') !== false)
+        } elseif (strpos($v, '>') !== false) {
             $gr_cont .= "$v AND ";
-        elseif (strpos($v, '>=') !== false)
+        } elseif (strpos($v, '>=') !== false) {
             $gr_cont .= "$v AND ";
-        elseif (strpos($v, '<>') !== false)
+        } elseif (strpos($v, '<>') !== false) {
             $gr_cont .= "$v AND ";
-        elseif (strpos($v, '<') !== false)
+        } elseif (strpos($v, '<') !== false) {
             $gr_cont .= "$v AND ";
-        elseif (strpos($v, '<=') !== false)
+        } elseif (strpos($v, '<=') !== false) {
             $gr_cont .= "$df AND ";
+        }
 
         //else continue;
     }
 
-    if (strlen($gr_col) > 1)
+    if (strlen($gr_col) > 1) {
         $val_up_col = substr($gr_col, 0, -1);
-    if (strlen($gr_cont) > 5) $val_up_cont = substr($gr_cont, 0, -5);
+    }
+    if (strlen($gr_cont) > 5) {
+        $val_up_cont = substr($gr_cont, 0, -5);
+    }
 
     if ($val_up_col && $val_up_cont && $user_table) {
         $check = $DbForum->Execute("UPDATE $user_table SET $val_up_col WHERE $val_up_cont") or cn_write_log("UPDATE $user_table SET $val_up_col WHERE $val_up_cont", 'e');
-        if ($check)
-            return TRUE;
+        if ($check) {
+            return true;
+        }
     }
-    return FALSE;
+    return false;
 }
 
 /**
@@ -937,7 +996,9 @@ function doDeleteOtherForum($myQuery)
         if ($check) {
             return true;
         }
-    } else return false;
+    } else {
+        return false;
+    }
 
     return false;
 }

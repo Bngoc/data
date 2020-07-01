@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $odd = 0;
 $i = 0;
 $ok_loop = false;
@@ -7,7 +7,9 @@ list($before_info_rspoint, $showchar, $sms_notify) = _GL('before_info_rspoint,sh
 list($sub) = _GL('sub');
 
 echo cn_snippet_messages();
-if ($sms_notify) echo $sms_notify;
+if ($sms_notify) {
+    echo $sms_notify;
+}
 ?>
 
 <form action="<?php echo PHP_SELF; ?>" method="GET">
@@ -33,12 +35,15 @@ if ($sms_notify) echo $sms_notify;
                             <hr>
                         </td>
                     </tr>
-                    <?php if ($before_info_rspoint) foreach ($before_info_rspoint as $ke => $val) {
-                        if (isset($val[1]))
-                            echo '<tr>
+                    <?php if ($before_info_rspoint) {
+                        foreach ($before_info_rspoint as $ke => $val) {
+                            if (isset($val[1])) {
+                                echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
 									<td><strong style="color:#009900">' . $val[1] . '</strong></td>
 								</tr>';
+                            }
+                        }
                     } ?>
 
                 </table>
@@ -50,12 +55,16 @@ if ($sms_notify) echo $sms_notify;
             <td class="bizwebform_col_2">
 
                 <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
-                    <?php if ($showchar) foreach ($showchar as $name => $val) { ?>
-                        <option
-                            value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
-                            )
-                        </option>
-                    <?php } ?>
+                    <?php if ($showchar) {
+                        foreach ($showchar as $name => $val) { ?>
+                            <option
+                                value="<?php echo $name; ?>"<?php if ($sub == $name) {
+                                echo 'selected';
+                            } ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
+                                )
+                            </option>
+                        <?php }
+                    } ?>
                 </select>
 
             </td>

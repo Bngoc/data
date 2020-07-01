@@ -20,36 +20,36 @@
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 include_once(ADODB_DIR . '/drivers/adodb-oci8.inc.php');
 
 class ADODB_oci8quercus extends ADODB_oci8
 {
-    var $databaseType = 'oci8quercus';
-    var $dataProvider = 'oci8';
+    public $databaseType = 'oci8quercus';
+    public $dataProvider = 'oci8';
 
-    function __construct()
+    public function __construct()
     {
     }
-
 }
 
 /*--------------------------------------------------------------------------------------
-		 Class Name: Recordset
+         Class Name: Recordset
 --------------------------------------------------------------------------------------*/
 
 class ADORecordset_oci8quercus extends ADORecordset_oci8
 {
+    public $databaseType = 'oci8quercus';
 
-    var $databaseType = 'oci8quercus';
-
-    function __construct($queryID, $mode = false)
+    public function __construct($queryID, $mode = false)
     {
         parent::__construct($queryID, $mode);
     }
 
-    function _FetchField($fieldOffset = -1)
+    public function _FetchField($fieldOffset = -1)
     {
         global $QUERCUS;
         $fld = new ADOFieldObject;
@@ -78,7 +78,9 @@ class ADORecordset_oci8quercus extends ADORecordset_oci8
             case 'NUMBER':
                 $p = oci_field_precision($this->_queryID, $fieldOffset);
                 $sc = oci_field_scale($this->_queryID, $fieldOffset);
-                if ($p != 0 && $sc == 0) $fld->type = 'INT';
+                if ($p != 0 && $sc == 0) {
+                    $fld->type = 'INT';
+                }
                 $fld->scale = $p;
                 break;
 
@@ -91,5 +93,4 @@ class ADORecordset_oci8quercus extends ADORecordset_oci8
 
         return $fld;
     }
-
 }

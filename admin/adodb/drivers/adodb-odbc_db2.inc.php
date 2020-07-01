@@ -89,7 +89,9 @@ to DB2 full rights to the DB2 SQLLIB directory, and place the user in the DBUSER
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 if (!defined('_ADODB_ODBC_LAYER')) {
     include(ADODB_DIR . "/drivers/adodb-odbc.inc.php");
@@ -99,32 +101,34 @@ if (!defined('ADODB_ODBC_DB2')) {
 
     class ADODB_ODBC_DB2 extends ADODB_odbc
     {
-        var $databaseType = "db2";
-        var $concat_operator = '||';
-        var $sysTime = 'CURRENT TIME';
-        var $sysDate = 'CURRENT DATE';
-        var $sysTimeStamp = 'CURRENT TIMESTAMP';
+        public $databaseType = "db2";
+        public $concat_operator = '||';
+        public $sysTime = 'CURRENT TIME';
+        public $sysDate = 'CURRENT DATE';
+        public $sysTimeStamp = 'CURRENT TIMESTAMP';
         // The complete string representation of a timestamp has the form
         // yyyy-mm-dd-hh.mm.ss.nnnnnn.
-        var $fmtTimeStamp = "'Y-m-d-H.i.s'";
-        var $ansiOuter = true;
-        var $identitySQL = 'values IDENTITY_VAL_LOCAL()';
-        var $_bindInputArray = true;
-        var $hasInsertID = true;
-        var $rsPrefix = 'ADORecordset_odbc_';
+        public $fmtTimeStamp = "'Y-m-d-H.i.s'";
+        public $ansiOuter = true;
+        public $identitySQL = 'values IDENTITY_VAL_LOCAL()';
+        public $_bindInputArray = true;
+        public $hasInsertID = true;
+        public $rsPrefix = 'ADORecordset_odbc_';
 
-        function __construct()
+        public function __construct()
         {
-            if (strncmp(PHP_OS, 'WIN', 3) === 0) $this->curmode = SQL_CUR_USE_ODBC;
+            if (strncmp(PHP_OS, 'WIN', 3) === 0) {
+                $this->curmode = SQL_CUR_USE_ODBC;
+            }
             parent::__construct();
         }
 
-        function IfNull($field, $ifNull)
+        public function IfNull($field, $ifNull)
         {
             return " COALESCE($field, $ifNull) "; // if DB2 UDB
         }
 
-        function ServerInfo()
+        public function ServerInfo()
         {
             //odbc_setoption($this->_connectionID,1,101 /*SQL_ATTR_ACCESS_MODE*/, 1 /*SQL_MODE_READ_ONLY*/);
             $vers = $this->GetOne('select versionnumber from sysibm.sysversions');
@@ -132,18 +136,20 @@ if (!defined('ADODB_ODBC_DB2')) {
             return array('description' => 'DB2 ODBC driver', 'version' => $vers);
         }
 
-        function _insertid()
+        public function _insertid()
         {
             return $this->GetOne($this->identitySQL);
         }
 
-        function RowLock($tables, $where, $col = '1 as adodbignore')
+        public function RowLock($tables, $where, $col = '1 as adodbignore')
         {
-            if ($this->_autocommit) $this->BeginTrans();
+            if ($this->_autocommit) {
+                $this->BeginTrans();
+            }
             return $this->GetOne("select $col from $tables where $where for update");
         }
 
-        function MetaTables($ttype = false, $showSchema = false, $qtable = "%", $qschema = "%")
+        public function MetaTables($ttype = false, $showSchema = false, $qtable = "%", $qschema = "%")
         {
             global $ADODB_FETCH_MODE;
 
@@ -170,42 +176,55 @@ if (!defined('ADODB_ODBC_DB2')) {
                 $isview = strncmp($ttype, 'V', 1) === 0;
             }
             for ($i = 0; $i < sizeof($arr); $i++) {
-
-                if (!$arr[$i][2]) continue;
-                if (strncmp($arr[$i][1], 'SYS', 3) === 0) continue;
+                if (!$arr[$i][2]) {
+                    continue;
+                }
+                if (strncmp($arr[$i][1], 'SYS', 3) === 0) {
+                    continue;
+                }
 
                 $type = $arr[$i][3];
 
-                if ($showSchema) $arr[$i][2] = $arr[$i][1] . '.' . $arr[$i][2];
+                if ($showSchema) {
+                    $arr[$i][2] = $arr[$i][1] . '.' . $arr[$i][2];
+                }
 
                 if ($ttype) {
                     if ($isview) {
-                        if (strncmp($type, 'V', 1) === 0) $arr2[] = $arr[$i][2];
-                    } else if (strncmp($type, 'T', 1) === 0) $arr2[] = $arr[$i][2];
-                } else if (strncmp($type, 'S', 1) !== 0) $arr2[] = $arr[$i][2];
+                        if (strncmp($type, 'V', 1) === 0) {
+                            $arr2[] = $arr[$i][2];
+                        }
+                    } elseif (strncmp($type, 'T', 1) === 0) {
+                        $arr2[] = $arr[$i][2];
+                    }
+                } elseif (strncmp($type, 'S', 1) !== 0) {
+                    $arr2[] = $arr[$i][2];
+                }
             }
             return $arr2;
         }
 
-        function MetaIndexes($table, $primary = FALSE, $owner = false)
+        public function MetaIndexes($table, $primary = false, $owner = false)
         {
             // save old fetch mode
             global $ADODB_FETCH_MODE;
             $save = $ADODB_FETCH_MODE;
             $ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-            if ($this->fetchMode !== FALSE) {
-                $savem = $this->SetFetchMode(FALSE);
+            if ($this->fetchMode !== false) {
+                $savem = $this->SetFetchMode(false);
             }
             $false = false;
             // get index details
             $table = strtoupper($table);
             $SQL = "SELECT NAME, UNIQUERULE, COLNAMES FROM SYSIBM.SYSINDEXES WHERE TBNAME='$table'";
-            if ($primary)
+            if ($primary) {
                 $SQL .= " AND UNIQUERULE='P'";
+            }
             $rs = $this->Execute($SQL);
             if (!is_object($rs)) {
-                if (isset($savem))
+                if (isset($savem)) {
                     $this->SetFetchMode($savem);
+                }
                 $ADODB_FETCH_MODE = $save;
                 return $false;
             }
@@ -227,15 +246,19 @@ if (!defined('ADODB_ODBC_DB2')) {
         }
 
         // Format date column in sql string given an input format that understands Y M D
-        function SQLDate($fmt, $col = false)
+        public function SQLDate($fmt, $col = false)
         {
             // use right() and replace() ?
-            if (!$col) $col = $this->sysDate;
+            if (!$col) {
+                $col = $this->sysDate;
+            }
             $s = '';
 
             $len = strlen($fmt);
             for ($i = 0; $i < $len; $i++) {
-                if ($s) $s .= '||';
+                if ($s) {
+                    $s .= '||';
+                }
                 $ch = $fmt[$i];
                 switch ($ch) {
                     case 'Y':
@@ -254,20 +277,27 @@ if (!defined('ADODB_ODBC_DB2')) {
                         break;
                     case 'H':
                     case 'h':
-                        if ($col != $this->sysDate) $s .= "right(digits(hour($col)),2)";
-                        else $s .= "''";
+                        if ($col != $this->sysDate) {
+                            $s .= "right(digits(hour($col)),2)";
+                        } else {
+                            $s .= "''";
+                        }
                         break;
                     case 'i':
                     case 'I':
-                        if ($col != $this->sysDate)
+                        if ($col != $this->sysDate) {
                             $s .= "right(digits(minute($col)),2)";
-                        else $s .= "''";
+                        } else {
+                            $s .= "''";
+                        }
                         break;
                     case 'S':
                     case 's':
-                        if ($col != $this->sysDate)
+                        if ($col != $this->sysDate) {
                             $s .= "right(digits(second($col)),2)";
-                        else $s .= "''";
+                        } else {
+                            $s .= "''";
+                        }
                         break;
                     default:
                         if ($ch == '\\') {
@@ -281,16 +311,17 @@ if (!defined('ADODB_ODBC_DB2')) {
         }
 
 
-        function SelectLimit($sql, $nrows = -1, $offset = -1, $inputArr = false, $secs2cache = 0)
+        public function SelectLimit($sql, $nrows = -1, $offset = -1, $inputArr = false, $secs2cache = 0)
         {
             $nrows = (integer)$nrows;
             if ($offset <= 0) {
                 // could also use " OPTIMIZE FOR $nrows ROWS "
-                if ($nrows >= 0) $sql .= " FETCH FIRST $nrows ROWS ONLY ";
+                if ($nrows >= 0) {
+                    $sql .= " FETCH FIRST $nrows ROWS ONLY ";
+                }
                 $rs = $this->Execute($sql, $inputArr);
             } else {
-                if ($offset > 0 && $nrows < 0) ;
-                else {
+                if ($offset > 0 && $nrows < 0) ; else {
                     $nrows += $offset;
                     $sql .= " FETCH FIRST $nrows ROWS ONLY ";
                 }
@@ -299,23 +330,21 @@ if (!defined('ADODB_ODBC_DB2')) {
 
             return $rs;
         }
-
     }
 
     ;
 
 
-    class  ADORecordSet_odbc_db2 extends ADORecordSet_odbc
+    class ADORecordSet_odbc_db2 extends ADORecordSet_odbc
     {
+        public $databaseType = "db2";
 
-        var $databaseType = "db2";
-
-        function __construct($id, $mode = false)
+        public function __construct($id, $mode = false)
         {
             parent::__construct($id, $mode);
         }
 
-        function MetaType($t, $len = -1, $fieldobj = false)
+        public function MetaType($t, $len = -1, $fieldobj = false)
         {
             if (is_object($t)) {
                 $fieldobj = $t;
@@ -328,8 +357,11 @@ if (!defined('ADODB_ODBC_DB2')) {
                 case 'CHAR':
                 case 'CHARACTER':
                 case 'C':
-                    if ($len <= $this->blobSize) return 'C';
+                    if ($len <= $this->blobSize) {
+                        return 'C';
+                    }
 
+                    // no break
                 case 'LONGCHAR':
                 case 'TEXT':
                 case 'CLOB':
@@ -370,5 +402,4 @@ if (!defined('ADODB_ODBC_DB2')) {
             }
         }
     }
-
 } //define

@@ -10,8 +10,9 @@ list($dashboard) = _GL('errors_result');
 
             <div class="opt-item">
                 <a href="<?php echo cn_url_modify("mod=" . $item['mod'], "token=" . $item['token'], "opt=" . $item['opt']); ?>">
-                    <div><img src="<?php echo getOption('http_script_dir'); ?>/public/images/<?php echo $item['img']; ?>"
-                              width="48"/></div>
+                    <div><img
+                            src="<?php echo getOption('http_script_dir'); ?>/public/images/<?php echo $item['img']; ?>"
+                            width="48"/></div>
                     <div><?php echo $item['name']; ?></div>
                 </a>
             </div>

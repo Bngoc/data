@@ -20,7 +20,9 @@ foreach (array('sapdb', 'sybase', 'mysql', 'access', 'oci8po', 'odbc_mssql', 'od
     $db = NewADOConnection($dbType);
     $dict = NewDataDictionary($db);
 
-    if (!$dict) continue;
+    if (!$dict) {
+        continue;
+    }
     $dict->debug = 1;
 
     $opts = array('REPLACE', 'mysql' => 'ENGINE=INNODB', 'oci8' => 'TABLESPACE USERS');
@@ -81,18 +83,23 @@ TS_SUBSEC   TS DEFTIMESTAMP
 
     printsqla($dbType, $sqla);
 
-    if (file_exists('d:\inetpub\wwwroot\php\phplens\adodb\adodb.inc.php'))
+    if (file_exists('d:\inetpub\wwwroot\php\phplens\adodb\adodb.inc.php')) {
         if ($dbType == 'mysqlt') {
             $db->Connect('localhost', "root", "", "test");
             $dict->SetSchema('');
             $sqla2 = $dict->ChangeTableSQL('adoxyz', $flds);
-            if ($sqla2) printsqla($dbType, $sqla2);
+            if ($sqla2) {
+                printsqla($dbType, $sqla2);
+            }
         }
+    }
     if ($dbType == 'postgres') {
         if (@$db->Connect('localhost', "tester", "test", "test")) ;
         $dict->SetSchema('');
         $sqla2 = $dict->ChangeTableSQL('adoxyz', $flds);
-        if ($sqla2) printsqla($dbType, $sqla2);
+        if ($sqla2) {
+            printsqla($dbType, $sqla2);
+        }
     }
 
     if ($dbType == 'odbc_mssql') {
@@ -100,14 +107,15 @@ TS_SUBSEC   TS DEFTIMESTAMP
         if (@$db->Connect($dsn, "sa", "natsoft", "test")) ;
         $dict->SetSchema('');
         $sqla2 = $dict->ChangeTableSQL('adoxyz', $flds);
-        if ($sqla2) printsqla($dbType, $sqla2);
+        if ($sqla2) {
+            printsqla($dbType, $sqla2);
+        }
     }
 
 
     adodb_pr($dict->databaseType);
     printsqla($dbType, $dict->DropColumnSQL('table', array('my col', '`col2_with_Quotes`', 'A_col3', 'col3(10)')));
     printsqla($dbType, $dict->ChangeTableSQL('adoxyz', 'LASTNAME varchar(32)'));
-
 }
 
 function printsqla($dbType, $sqla)
@@ -117,7 +125,9 @@ function printsqla($dbType, $sqla)
     foreach ($sqla as $s) {
         $s = htmlspecialchars($s);
         print "$s;\n";
-        if ($dbType == 'oci8') print "/\n";
+        if ($dbType == 'oci8') {
+            print "/\n";
+        }
     }
     print "</pre><hr />";
 }
@@ -245,6 +255,8 @@ function printsqla($dbType, $sqla)
 echo "<h1>Test XML Schema</h1>";
 $ff = file('xmlschema.xml');
 echo "<pre>";
-foreach ($ff as $xml) echo htmlspecialchars($xml);
+foreach ($ff as $xml) {
+    echo htmlspecialchars($xml);
+}
 echo "</pre>";
 include_once('test-xmlschema.php');

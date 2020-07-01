@@ -21,7 +21,7 @@ define('ROOT', dirname(dirname(__FILE__)));
 define('MODULE_DIR', SERVDIR . '/core/modules'); // nhan xu li
 define('SKIN', SERVDIR . '/cdata'); // chua html
 define('MODULE_ADM', SERVDIR . '/admin'); // chua ADMIN
-define('CN_DEBUG', FALSE);
+define('CN_DEBUG', false);
 define('URL_PATH', (isset($_SERVER['HTTPS']) ? "https" : "http") . '://' . dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn
 define('URL_PATH_IMG', '/public/images');
 define('PHP_SELF', $_SERVER["SCRIPT_NAME"]);
@@ -50,8 +50,7 @@ $_CN_cache_block_id = array();
 $_CN_cache_block_dt = array();
 */
 // Define ALL privileges and behaviors
-$_CN_access = array
-(
+$_CN_access = array(
     // configs
     'C' => 'Cd,Cvm,Csc,Cp,Cc,Ct,Ciw,Cmm,Cum,Cg,Cb,Ca,Cbi,Caf,Crw,Csl,Cwp,Cmt,Cpc,Can,Cvn,Ccv,Cen,Clc,Csr,Com',
     // news
@@ -77,7 +76,7 @@ $coreWeb->cn_relocation_db_new();
 
 // 2.0.3 checking existing configuration
 if ($is_config) {
-//cn_load_plugins();
+    //cn_load_plugins();
 //cn_online_counter();
 }
 

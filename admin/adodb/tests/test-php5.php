@@ -19,7 +19,6 @@ include("$path/../adodb.inc.php");
 
 echo "<h3>PHP " . PHP_VERSION . "</h3>\n";
 try {
-
     $dbt = 'oci8po';
 
     try {
@@ -50,7 +49,9 @@ try {
 
     $cnt = $db->GetOne("select count(*) from adoxyz where ?<id and id<?", array(10, 20));
     $stmt = $db->Prepare("select * from adoxyz where ?<id and id<?");
-    if (!$stmt) echo $db->ErrorMsg(), "\n";
+    if (!$stmt) {
+        echo $db->ErrorMsg(), "\n";
+    }
     $rs = $db->Execute($stmt, array(10, 20));
 
     echo "<hr /> Foreach Iterator Test (rand=" . rand() . ")<hr />";
@@ -63,7 +64,9 @@ try {
         if ($s1 != $s2 && !empty($v)) {
             adodb_pr($s1);
             adodb_pr($s2);
-        } else echo "passed<br>";
+        } else {
+            echo "passed<br>";
+        }
         flush();
     }
 
@@ -74,11 +77,13 @@ try {
     }
 
 
-    if ($i != $cnt) die("actual cnt is $i, cnt should be $cnt\n");
-    else echo "Count $i is correct<br>";
+    if ($i != $cnt) {
+        die("actual cnt is $i, cnt should be $cnt\n");
+    } else {
+        echo "Count $i is correct<br>";
+    }
 
     $rs = $db->Execute("select bad from badder");
-
 } catch (exception $e) {
     adodb_pr($e);
     echo "<h3>adodb_backtrace:</h3>\n";
@@ -100,13 +105,11 @@ try {
 
     ;
     $a = new City();
-
 } catch (exception $e) {
     echo $e->getMessage();
 }
 
 try {
-
     $a = new City();
 
     echo "<p>Successfully created City()<br>";

@@ -18,7 +18,6 @@ function tmssql()
     $rs2 = mssql_query('delete from adoxyz', $db);
     $p = mssql_num_rows($rs2);
     mssql_free_result($rs2);
-
 }
 
 function tpear()
@@ -48,7 +47,7 @@ function tadodb()
     print "<h3>ADOdb</h3>";
     $conn = NewADOConnection('mssql');
     $conn->Connect('JAGUAR\vsdotnet', 'adodb', 'natsoft', 'northwind');
-//	$conn->debug=1;
+    //	$conn->debug=1;
     print "date=" . $conn->GetOne('select getdate()') . "<br>";
     $conn->Execute('create table tester (id integer)');
     print "<p>Delete</p>";
@@ -62,9 +61,11 @@ $ACCEPTIP = '127.0.0.1';
 
 $remote = $_SERVER["REMOTE_ADDR"];
 
-if (!empty($ACCEPTIP))
-    if ($remote != '127.0.0.1' && $remote != $ACCEPTIP)
+if (!empty($ACCEPTIP)) {
+    if ($remote != '127.0.0.1' && $remote != $ACCEPTIP) {
         die("Unauthorised client: '$remote'");
+    }
+}
 
 ?>
     <a href=tmssql.php?do=tmssql>mssql</a>

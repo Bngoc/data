@@ -1,4 +1,4 @@
-﻿<?php die('Direct call - access denied'); ?>
+<?php die('Direct call - access denied'); ?>
 1A8469FC1E7A003F0000000000000000|Hỏa Long Kiếm|120000|Flamberge_Sword_Hoa_Long_kiem.jpg|
 1B8469FC1E7A003F0000000000000000|Kiếm Ngọc Bích|120000|Sword_Breaker_KiemNgocBich.jpg|
 198469FC1E7A003F0000000000000000|Hỏa Tinh Kiếm|60000|sworddancer.jpg|

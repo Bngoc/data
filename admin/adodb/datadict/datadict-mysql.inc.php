@@ -12,19 +12,21 @@
  */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 class ADODB2_mysql extends ADODB_DataDict
 {
-    var $databaseType = 'mysql';
-    var $alterCol = ' MODIFY COLUMN';
-    var $alterTableAddIndex = true;
-    var $dropTable = 'DROP TABLE IF EXISTS %s'; // requires mysql 3.22 or later
+    public $databaseType = 'mysql';
+    public $alterCol = ' MODIFY COLUMN';
+    public $alterTableAddIndex = true;
+    public $dropTable = 'DROP TABLE IF EXISTS %s'; // requires mysql 3.22 or later
 
-    var $dropIndex = 'DROP INDEX %s ON %s';
-    var $renameColumn = 'ALTER TABLE %s CHANGE COLUMN %s %s %s';    // needs column-definition!
+    public $dropIndex = 'DROP INDEX %s ON %s';
+    public $renameColumn = 'ALTER TABLE %s CHANGE COLUMN %s %s %s';    // needs column-definition!
 
-    function MetaType($t, $len = -1, $fieldobj = false)
+    public function MetaType($t, $len = -1, $fieldobj = false)
     {
         if (is_object($t)) {
             $fieldobj = $t;
@@ -42,8 +44,11 @@ class ADODB2_mysql extends ADODB_DataDict
             case 'TINYTEXT':
             case 'ENUM':
             case 'SET':
-                if ($len <= $this->blobSize) return 'C';
+                if ($len <= $this->blobSize) {
+                    return 'C';
+                }
 
+                // no break
             case 'TEXT':
             case 'LONGTEXT':
             case 'MEDIUMTEXT':
@@ -86,7 +91,7 @@ class ADODB2_mysql extends ADODB_DataDict
         }
     }
 
-    function ActualType($meta)
+    public function ActualType($meta)
     {
         switch (strtoupper($meta)) {
             case 'C':
@@ -133,14 +138,24 @@ class ADODB2_mysql extends ADODB_DataDict
     }
 
     // return string must begin with space
-    function _CreateSuffix($fname, &$ftype, $fnotnull, $fdefault, $fautoinc, $fconstraint, $funsigned)
+    public function _CreateSuffix($fname, &$ftype, $fnotnull, $fdefault, $fautoinc, $fconstraint, $funsigned)
     {
         $suffix = '';
-        if ($funsigned) $suffix .= ' UNSIGNED';
-        if ($fnotnull) $suffix .= ' NOT NULL';
-        if (strlen($fdefault)) $suffix .= " DEFAULT $fdefault";
-        if ($fautoinc) $suffix .= ' AUTO_INCREMENT';
-        if ($fconstraint) $suffix .= ' ' . $fconstraint;
+        if ($funsigned) {
+            $suffix .= ' UNSIGNED';
+        }
+        if ($fnotnull) {
+            $suffix .= ' NOT NULL';
+        }
+        if (strlen($fdefault)) {
+            $suffix .= " DEFAULT $fdefault";
+        }
+        if ($fautoinc) {
+            $suffix .= ' AUTO_INCREMENT';
+        }
+        if ($fconstraint) {
+            $suffix .= ' ' . $fconstraint;
+        }
         return $suffix;
     }
 
@@ -165,19 +180,23 @@ class ADODB2_mysql extends ADODB_DataDict
         ON tbl_name (col_name[(length)],... )
     */
 
-    function _IndexSQL($idxname, $tabname, $flds, $idxoptions)
+    public function _IndexSQL($idxname, $tabname, $flds, $idxoptions)
     {
         $sql = array();
 
         if (isset($idxoptions['REPLACE']) || isset($idxoptions['DROP'])) {
-            if ($this->alterTableAddIndex) $sql[] = "ALTER TABLE $tabname DROP INDEX $idxname";
-            else $sql[] = sprintf($this->dropIndex, $idxname, $tabname);
+            if ($this->alterTableAddIndex) {
+                $sql[] = "ALTER TABLE $tabname DROP INDEX $idxname";
+            } else {
+                $sql[] = sprintf($this->dropIndex, $idxname, $tabname);
+            }
 
-            if (isset($idxoptions['DROP']))
+            if (isset($idxoptions['DROP'])) {
                 return $sql;
+            }
         }
 
-        if (empty ($flds)) {
+        if (empty($flds)) {
             return $sql;
         }
 
@@ -189,15 +208,21 @@ class ADODB2_mysql extends ADODB_DataDict
             $unique = '';
         }
 
-        if (is_array($flds)) $flds = implode(', ', $flds);
+        if (is_array($flds)) {
+            $flds = implode(', ', $flds);
+        }
 
-        if ($this->alterTableAddIndex) $s = "ALTER TABLE $tabname ADD $unique INDEX $idxname ";
-        else $s = 'CREATE' . $unique . ' INDEX ' . $idxname . ' ON ' . $tabname;
+        if ($this->alterTableAddIndex) {
+            $s = "ALTER TABLE $tabname ADD $unique INDEX $idxname ";
+        } else {
+            $s = 'CREATE' . $unique . ' INDEX ' . $idxname . ' ON ' . $tabname;
+        }
 
         $s .= ' (' . $flds . ')';
 
-        if (isset($idxoptions[$this->upperName]))
+        if (isset($idxoptions[$this->upperName])) {
             $s .= $idxoptions[$this->upperName];
+        }
 
         $sql[] = $s;
 

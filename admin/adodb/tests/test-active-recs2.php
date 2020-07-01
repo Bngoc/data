@@ -13,11 +13,12 @@ $DBMS = @$_GET['db'];
 $DBMS = 'mysql';
 if ($DBMS == 'mysql') {
     $db = NewADOConnection('mysql://root@localhost/northwind');
-} else if ($DBMS == 'postgres') {
+} elseif ($DBMS == 'postgres') {
     $db = NewADOConnection('postgres');
     $db->Connect("localhost", "tester", "test", "test");
-} else
+} else {
     $db = NewADOConnection('oci8://scott:natsoft@/');
+}
 
 
 $arr = $db->ServerInfo();
@@ -27,7 +28,9 @@ $arr = $db->GetActiveRecords('products', ' productid<10');
 adodb_pr($arr);
 
 ADOdb_Active_Record::SetDatabaseAdapter($db);
-if (!$db) die('failed');
+if (!$db) {
+    die('failed');
+}
 
 
 $rec = new ADODB_Active_Record('photos');

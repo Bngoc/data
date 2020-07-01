@@ -14,19 +14,21 @@
 */
 
 // security - hide paths
-if (!defined('ADODB_DIR')) die();
+if (!defined('ADODB_DIR')) {
+    die();
+}
 
 include_once(ADODB_DIR . "/drivers/adodb-postgres64.inc.php");
 
 class ADODB_postgres7 extends ADODB_postgres64
 {
-    var $databaseType = 'postgres7';
-    var $hasLimit = true;    // set to true for pgsql 6.5+ only. support pgsql/mysql SELECT * FROM TABLE LIMIT 10
-    var $ansiOuter = true;
-    var $charSet = true; //set to true for Postgres 7 and above - PG client supports encodings
+    public $databaseType = 'postgres7';
+    public $hasLimit = true;    // set to true for pgsql 6.5+ only. support pgsql/mysql SELECT * FROM TABLE LIMIT 10
+    public $ansiOuter = true;
+    public $charSet = true; //set to true for Postgres 7 and above - PG client supports encodings
 
     // Richard 3/18/2012 - Modified SQL to return SERIAL type correctly AS old driver no longer return SERIAL as data type.
-    var $metaColumnsSQL = "
+    public $metaColumnsSQL = "
 		SELECT
 			a.attname,
 			CASE
@@ -60,7 +62,7 @@ class ADODB_postgres7 extends ADODB_postgres64
 			a.attnum";
 
     // used when schema defined
-    var $metaColumnsSQL1 = "
+    public $metaColumnsSQL1 = "
 		SELECT
 			a.attname,
 			CASE
@@ -96,7 +98,7 @@ class ADODB_postgres7 extends ADODB_postgres64
 		ORDER BY a.attnum";
 
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         if (ADODB_ASSOC_CASE !== ADODB_ASSOC_CASE_NATIVE) {
@@ -108,14 +110,15 @@ class ADODB_postgres7 extends ADODB_postgres64
 
     // the following should be compat with postgresql 7.2,
     // which makes obsolete the LIMIT limit,offset syntax
-    function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
+    public function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
     {
         $offsetStr = ($offset >= 0) ? " OFFSET " . ((integer)$offset) : '';
         $limitStr = ($nrows >= 0) ? " LIMIT " . ((integer)$nrows) : '';
-        if ($secs2cache)
+        if ($secs2cache) {
             $rs = $this->CacheExecute($secs2cache, $sql . "$limitStr$offsetStr", $inputarr);
-        else
+        } else {
             $rs = $this->Execute($sql . "$limitStr$offsetStr", $inputarr);
+        }
 
         return $rs;
     }
@@ -149,7 +152,7 @@ class ADODB_postgres7 extends ADODB_postgres64
     /**
      * @returns assoc array where keys are tables, and values are foreign keys
      */
-    function MetaForeignKeys($table, $owner = false, $upper = false)
+    public function MetaForeignKeys($table, $owner = false, $upper = false)
     {
         # Regex isolates the 2 terms between parenthesis using subexpressions
         $regex = '^.*\((.*)\).*\((.*)\).*$';
@@ -181,7 +184,9 @@ class ADODB_postgres7 extends ADODB_postgres64
 				dep_field";
         $rs = $this->Execute($sql);
 
-        if (!$rs || $rs->EOF) return false;
+        if (!$rs || $rs->EOF) {
+            return false;
+        }
 
         $a = array();
         while (!$rs->EOF) {
@@ -194,11 +199,10 @@ class ADODB_postgres7 extends ADODB_postgres64
         }
 
         return $a;
-
     }
 
     // from  Edward Jaramilla, improved version - works on pg 7.4
-    function _old_MetaForeignKeys($table, $owner = false, $upper = false)
+    public function _old_MetaForeignKeys($table, $owner = false, $upper = false)
     {
         $sql = 'SELECT t.tgargs as args
 		FROM
@@ -214,7 +218,9 @@ class ADODB_postgres7 extends ADODB_postgres64
 
         $rs = $this->Execute($sql);
 
-        if (!$rs || $rs->EOF) return false;
+        if (!$rs || $rs->EOF) {
+            return false;
+        }
 
         $arr = $rs->GetArray();
         $a = array();
@@ -222,16 +228,17 @@ class ADODB_postgres7 extends ADODB_postgres64
             $data = explode(chr(0), $v['args']);
             $size = count($data) - 1; //-1 because the last node is empty
             for ($i = 4; $i < $size; $i++) {
-                if ($upper)
+                if ($upper) {
                     $a[strtoupper($data[2])][] = strtoupper($data[$i] . '=' . $data[++$i]);
-                else
+                } else {
                     $a[$data[2]][] = $data[$i] . '=' . $data[++$i];
+                }
             }
         }
         return $a;
     }
 
-    function _query($sql, $inputarr = false)
+    public function _query($sql, $inputarr = false)
     {
         if (!$this->_bindInputArray) {
             // We don't have native support for parameterized queries, so let's emulate it at the parent
@@ -247,8 +254,11 @@ class ADODB_postgres7 extends ADODB_postgres64
             $i = 1;
             $last = sizeof($sqlarr) - 1;
             foreach ($sqlarr as $v) {
-                if ($last < $i) $sql .= $v;
-                else $sql .= $v . ' $' . $i;
+                if ($last < $i) {
+                    $sql .= $v;
+                } else {
+                    $sql .= $v . ' $' . $i;
+                }
                 $i++;
             }
 
@@ -274,7 +284,7 @@ class ADODB_postgres7 extends ADODB_postgres64
     // the functions should work with Postgres 7.0 and above, the set of charsets supported
     // depends on compile flags of postgres distribution - if no charsets were compiled into the server
     // it will return 'SQL_ANSI' always
-    function GetCharSet()
+    public function GetCharSet()
     {
         //we will use ADO's builtin property charSet
         $this->charSet = @pg_client_encoding($this->_connectionID);
@@ -286,36 +296,38 @@ class ADODB_postgres7 extends ADODB_postgres64
     }
 
     // SetCharSet - switch the client encoding
-    function SetCharSet($charset_name)
+    public function SetCharSet($charset_name)
     {
         $this->GetCharSet();
         if ($this->charSet !== $charset_name) {
             $if = pg_set_client_encoding($this->_connectionID, $charset_name);
             if ($if == "0" & $this->GetCharSet() == $charset_name) {
                 return true;
-            } else return false;
-        } else return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
-
 }
 
 /*--------------------------------------------------------------------------------------
-	Class Name: Recordset
+    Class Name: Recordset
 --------------------------------------------------------------------------------------*/
 
 class ADORecordSet_postgres7 extends ADORecordSet_postgres64
 {
+    public $databaseType = "postgres7";
 
-    var $databaseType = "postgres7";
 
-
-    function __construct($queryID, $mode = false)
+    public function __construct($queryID, $mode = false)
     {
         parent::__construct($queryID, $mode);
     }
 
     // 10% speedup to move MoveNext to child class
-    function MoveNext()
+    public function MoveNext()
     {
         if (!$this->EOF) {
             $this->_currentRow++;
@@ -323,7 +335,9 @@ class ADORecordSet_postgres7 extends ADORecordSet_postgres64
                 $this->fields = @pg_fetch_array($this->_queryID, $this->_currentRow, $this->fetchMode);
 
                 if (is_array($this->fields)) {
-                    if ($this->fields && isset($this->_blobArr)) $this->_fixblobs();
+                    if ($this->fields && isset($this->_blobArr)) {
+                        $this->_fixblobs();
+                    }
                     return true;
                 }
             }
@@ -332,21 +346,19 @@ class ADORecordSet_postgres7 extends ADORecordSet_postgres64
         }
         return false;
     }
-
 }
 
 class ADORecordSet_assoc_postgres7 extends ADORecordSet_postgres64
 {
+    public $databaseType = "postgres7";
 
-    var $databaseType = "postgres7";
 
-
-    function __construct($queryID, $mode = false)
+    public function __construct($queryID, $mode = false)
     {
         parent::__construct($queryID, $mode);
     }
 
-    function _fetch()
+    public function _fetch()
     {
         if ($this->_currentRow >= $this->_numOfRows && $this->_numOfRows >= 0) {
             return false;
@@ -355,14 +367,16 @@ class ADORecordSet_assoc_postgres7 extends ADORecordSet_postgres64
         $this->fields = @pg_fetch_array($this->_queryID, $this->_currentRow, $this->fetchMode);
 
         if ($this->fields) {
-            if (isset($this->_blobArr)) $this->_fixblobs();
+            if (isset($this->_blobArr)) {
+                $this->_fixblobs();
+            }
             $this->_updatefields();
         }
 
         return (is_array($this->fields));
     }
 
-    function MoveNext()
+    public function MoveNext()
     {
         if (!$this->EOF) {
             $this->_currentRow++;
@@ -371,7 +385,9 @@ class ADORecordSet_assoc_postgres7 extends ADORecordSet_postgres64
 
                 if (is_array($this->fields)) {
                     if ($this->fields) {
-                        if (isset($this->_blobArr)) $this->_fixblobs();
+                        if (isset($this->_blobArr)) {
+                            $this->_fixblobs();
+                        }
 
                         $this->_updatefields();
                     }

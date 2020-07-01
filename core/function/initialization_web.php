@@ -17,14 +17,14 @@ function cn_snippet_bc_re($home_ = 'Home', $_name_bread = null, $sep = '&gt;')
         foreach ($bc as $key => $item) {
 
             //if(is_null($_name_bread)){
-            if ($key != $maxs)// && is_null($_name_bread))
+            if ($key != $maxs) {// && is_null($_name_bread))
                 $ls[] = '<span class="bcitem"><a href="' . $item['url'] . '">' . $item['name'] . '</a></span>';
-            else
+            } else {
                 $ls[] .= '<span class="bcitem">' . $item['name'] . '</span>';
+            }
             //}
             //else
             //$ls[] = '<span class="bcitem"><a href="'.$item['url'].'">'.cnHtmlSpecialChars($item['name']).'</a></span>';
-
         }
     }
     //if($ls)
@@ -33,8 +33,9 @@ function cn_snippet_bc_re($home_ = 'Home', $_name_bread = null, $sep = '&gt;')
     //else
     //$result .= '<span class="bcsep"> '.$sep.' </span>';
 
-    if (!is_null($_name_bread) && $_name_bread)
+    if (!is_null($_name_bread) && $_name_bread) {
         $result .= '<span class="bcsep"> ' . $sep . ' </span><span class="bcitem">' . $_name_bread . '</span>';
+    }
 
 
     $result .= "</div>";
@@ -42,17 +43,17 @@ function cn_snippet_bc_re($home_ = 'Home', $_name_bread = null, $sep = '&gt;')
     return $result;
 }
 
-function echo_content_here($echocomtent, $path_c = '', $bread_crumbs = true)
+function echo_content_here($echoContent, $path_c = '', $bread_crumbs = true)
 {
     global $skin_content_web;// $path_c;;
-    $skin_content_web = preg_replace("/{paths_c}/", $path_c, $skin_content_web);                // duong dan chi ...
-    $skin_content_web = preg_replace("/{paths_menu}/", cn_sort_menu(), $skin_content_web);                // duong dan chi ...
-    $skin_content_web = preg_replace("/{content_here}/", $echocomtent, $skin_content_web);
+    $skin_content_web = preg_replace("/{paths_c}/", $path_c, $skin_content_web);
+    $skin_content_web = preg_replace("/{paths_menu}/", cn_sort_menu(), $skin_content_web);
+    $skin_content_web = preg_replace("/{content_here}/", $echoContent, $skin_content_web);
     echo $skin_content_web;
 }
 
 // Since 2.0: Show login form
-function cn_login_form($admin = TRUE)
+function cn_login_form($admin = true)
 {
     return execTemplate('_authen/login');
 }
@@ -133,7 +134,8 @@ function cn_menuTopMoney($opt = '')
         $matches[0] = '<img height="20px" src="' . getOption('http_script_dir') . '/public/images/web/top-menu/icon-1.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['vp']) . ' Vpoint';
         $matches[1] = '<img height="20px" src="' . getOption('http_script_dir') . '/public/images/web/top-menu/icon-2.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['gc']) . ' Gcoin';
         $matches[2] = '<img height="20px" src="' . getOption('http_script_dir') . '/public/images/web/top-menu/icon-3.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['gc_km']) . ' Gcoin KM';
-        $matches[3] = '<img height="20px" src="' . getOption('http_script_dir') . '/public/images/web/top-menu/icon-4.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['blue']) . ' Blue';;
+        $matches[3] = '<img height="20px" src="' . getOption('http_script_dir') . '/public/images/web/top-menu/icon-4.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['blue']) . ' Blue';
+        ;
         $matches[4] = '<img height="20px" src="' . getOption('http_script_dir') . '/public/images/web/top-menu/icon-5.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['chaos']) . ' Chaos';
         $matches[5] = '<img height="20px" src="' . getOption('http_script_dir') . '/public/images/web/top-menu/icon-6.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['cre']) . ' Cre';
         $matches[6] = '<img height="20px" src="' . getOption('http_script_dir') . '/public/images/web/top-menu/icon-7.png" /> ' . cn_zenderMoneyBank($_blank_var[0]['bank']) . ' Zen';
@@ -188,7 +190,6 @@ function echoFormVerifyChar($addOpt = array(), $msgVidateSubmit = '')
     }
     echo $defaultVerifyMyChar;
     echo '</form>';
-
 }
 
 function echoFormVerifyAjax($addOpt = array(), $nameFrom)
@@ -196,7 +197,6 @@ function echoFormVerifyAjax($addOpt = array(), $nameFrom)
     if (empty($nameFrom)) {
         echo '';
     } else {
-
         global $defaultVerifyAjax;
 
         $charFirst = substr($nameFrom, 0, 1);
@@ -227,8 +227,12 @@ function msg_info($title, $go_back = null)
     include SERVDIR . '/skins/default.skin.php';
     echo_header_web('info', "Permission check");
 
-    if ($go_back === null) $go_back = $_POST['__referer'];
-    if (empty($go_back)) $go_back = PHP_SELF;
+    if ($go_back === null) {
+        $go_back = $_POST['__referer'];
+    }
+    if (empty($go_back)) {
+        $go_back = PHP_SELF;
+    }
 
     $str_ = '<div class="sub_ranking" align="center" style="color: rgb(36, 36, 36);font-size: 12px;line-height: initial;">
 				<b><p>' . $title . '</p></b><br>
@@ -247,8 +251,12 @@ function msg_err($title, $go_back = null)
     include SERVDIR . '/skins/default.skin.php';
     echo_header_web('info', 'error');
 
-    if ($go_back === null) $go_back = $_POST['__referer'];
-    if (empty($go_back)) $go_back = PHP_SELF;
+    if ($go_back === null) {
+        $go_back = $_POST['__referer'];
+    }
+    if (empty($go_back)) {
+        $go_back = PHP_SELF;
+    }
 
     $str_ = '<div class="sub_ranking" align="center" style="color: rgb(36, 36, 36);font-size: 12px;line-height: initial;">
 				<b><p>' . $title . '</p></b><br>
@@ -267,7 +275,6 @@ function cn_bc_add($name, $url)
     $bc = getMemcache('.breadcrumbs');
     $bc[] = array('name' => $name, 'url' => $url);
     setMemcache('.breadcrumbs', $bc);
-
 }
 
 //// Since 2.0: Save option to config
@@ -324,9 +331,13 @@ function exec_tpl()
 function cn_sort_menu()
 {
     list($opt, $per_page) = GET('opt, per_page', 'GPG');
-    if (!$opt) return '';
+    if (!$opt) {
+        return '';
+    }
     $get_per_page = '';
-    if ($per_page) $get_per_page = '&per_page=' . $per_page;
+    if ($per_page) {
+        $get_per_page = '&per_page=' . $per_page;
+    }
     $bc = getMemcache('.menu');
 
     if (!$bc) {
@@ -339,7 +350,9 @@ function cn_sort_menu()
         //$check = strpos($item['url'],$opt);
         $result .= '<option value="' . $item['url'] . $get_per_page . '"';
         //if($check !== false) $result .= 'selected';
-        if ($key == $opt) $result .= 'selected';
+        if ($key == $opt) {
+            $result .= 'selected';
+        }
         $result .= '>' . ($item['name']) . '</option>';
     }
     $result .= "</select>";
@@ -374,7 +387,6 @@ function getMemberWeb()
     }
 
     $user = db_user_by_name($_SESSION['user_Gamer']);
-    $user['user_name'] = $user['user_name'];
 
     setMemcache('#memberWeb', $user);
 
@@ -387,7 +399,9 @@ function testRoleWeb($requested_acl, $requested_user = null, $is_self = false)
     $user = getMemberWeb(); // get user menber session
 
     // Deny ANY access of unauthorized member
-    if (!$user) return false;
+    if (!$user) {
+        return false;
+    }
 
     $acl = $user['acl'];
     $grp = getOption('#grp');
@@ -405,7 +419,7 @@ function testRoleWeb($requested_acl, $requested_user = null, $is_self = false)
     // ra la bien truyen vao
     // If requested acl not match with real allowed, break
     foreach ($ra as $Ar) {
-        if (!in_array($Ar, $rc)){
+        if (!in_array($Ar, $rc)) {
             return false;
         }
     }
@@ -419,9 +433,9 @@ function testRoleWeb($requested_acl, $requested_user = null, $is_self = false)
         // if group check, check: requested uses may be in current user group
         if (!$is_self) {
             //kiem tra user truyen vao user[acl]  <=> phan quyen trong nhom
-            if ($gp && !in_array($requested_user['acl'], $gp))
+            if ($gp && !in_array($requested_user['acl'], $gp)) {
                 return false;
-            elseif (!$gp) {
+            } elseif (!$gp) {
                 //ko ton tai phan quyen
                 return false;
             }
@@ -434,7 +448,8 @@ function testRoleWeb($requested_acl, $requested_user = null, $is_self = false)
 /**
  * Call cn_snippet_digital_signature_admin_or_web
  */
-function cn_before_digital_signature_admin_or_web() {
+function cn_before_digital_signature_admin_or_web()
+{
     cn_snippet_digital_signature(getMemberWeb());
 }
 
@@ -445,7 +460,8 @@ function cn_character()
     $show_reponse = view_character($member['user_name']);
     $arr_class = cn_template_class();
     if (!$arr_class) {
-        die('Err. Bạn chưa thiết lập các thông số nhân vật!');
+        msg_err('Err. Bạn chưa thiết lập các thông số nhân vật!');
+        return;
     }
 
     //img character in folder /images/class/ ...gif
@@ -462,7 +478,9 @@ function cn_character()
                     $Class = $arr_class[$ho];
                     $char_img = explode("_", $ho);
                     $isClass = $char_img[1];
-                    if (array_key_exists($char_img[1], $img_character)) $Char_Image = $img_character[$char_img[1]];
+                    if (array_key_exists($char_img[1], $img_character)) {
+                        $Char_Image = $img_character[$char_img[1]];
+                    }
                 }
 
                 if (date('d', ctime()) != date('d', $do['Resets_Time'])) {
@@ -552,14 +570,17 @@ function cn_point_trust()
                         $inday_beginon_end = date("Y-m-d", $_time_on_begin); // strtotime
                         $inday_time_beginon = abs(strtotime($inday_begin_on) - strtotime("$inday_beginon_end 11:59:59pm"));
 
-                        if ($inday_time_beginon >= 43200) $Pf = 720;
-                        else $Pf = floor($inday_time_beginon / 60);
+                        if ($inday_time_beginon >= 43200) {
+                            $Pf = 720;
+                        } else {
+                            $Pf = floor($inday_time_beginon / 60);
+                        }
                         if ($count_on == 1) {
                             $point_pt_on = floor(0.95 * $Pf);
                             $point_pt_off = floor(0.95 * $point_pt_off);
                             //if(date("Y-m-d", $_time_off_begin) != date("Y-m-d",$ctime)) $trust_point = floor($trust_point*0.9);
                             $trust_point = floor($trust_point * 0.9);
-                        } else if ($count_on >= 2) {
+                        } elseif ($count_on >= 2) {
                             $_bv = floor($Pf * 0.95);
                             //if(date("Y-m-d", $_time_off_begin) != date("Y-m-d",$ctime)) $trust_point = floor($trust_point*pow(0.9,$count_on));
                             $point_pt_off = floor($point_pt_off * pow(0.95, $count_on));
@@ -572,34 +593,39 @@ function cn_point_trust()
                                 if (!$do_loop) {
                                     $_bv += 720;
                                     $do_loop = true;
-                                } else $_bv = 720 + (isset($point_pt_on) ? $point_pt_on : 0);
+                                } else {
+                                    $_bv = 720 + (isset($point_pt_on) ? $point_pt_on : 0);
+                                }
                                 $point_pt_on = floor($_bv * 0.95);
                             } while ($count_on > 1);
                         }
                         $check_trust = true;
                         do_update_character('Character', 'UyThacOffline_Daily=0', 'UyThacOnline_Daily=0', "PhutUyThacOff_dutru=$point_pt_off", "PhutUyThacOn_dutru=$point_pt_on", "uythacoffline_time=$set_time", "uythaconline_time=$set_time", "PointUyThac=$trust_point", "Name:'$sub'");
-                        //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
-                    } else if ($time_begin_off < $_time_) {
+                    //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
+                    } elseif ($time_begin_off < $_time_) {
                         $check_trust = true;
                         do_update_character('Character', 'UyThacOffline_Daily=0', "uythacoffline_time=$set_time", "Name:'$sub'");
                         //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
                     }
-                } else if ($status_offline) {        //Starus ON [Offline]
+                } elseif ($status_offline) {        //Starus ON [Offline]
 
                     if ($time_begin_off < $_time_) {
                         $inday_begin_off = date("Y-m-d h:i:sa", $_time_off_begin);
                         $inday_beginoff_end = date("Y-m-d", $_time_off_begin); // strtotime
                         $inday_time_beginoff = abs(strtotime($inday_begin_off) - strtotime("$inday_beginoff_end 11:59:59pm"));
 
-                        if ($inday_time_beginoff >= 43200) $Pf = 720;
-                        else $Pf = floor($inday_time_beginoff / 60);
+                        if ($inday_time_beginoff >= 43200) {
+                            $Pf = 720;
+                        } else {
+                            $Pf = floor($inday_time_beginoff / 60);
+                        }
 
                         if ($count_off == 1) {
                             $point_pt_off = floor(0.95 * $Pf);
                             $point_pt_on = floor(0.95 * $point_pt_on);
                             //if(date("Y-m-d", $_time_on_begin) != date("Y-m-d",$ctime)) $trust_point = floor($trust_point*0.9);
                             $trust_point = floor($trust_point * 0.9);
-                        } else if ($count_off >= 2) {
+                        } elseif ($count_off >= 2) {
                             $_bv = floor($Pf * 0.95);
                             $point_pt_on = floor(pow(0.95, $count_off) * $point_pt_on);
                             //if(date("Y-m-d", $_time_on_begin) != date("Y-m-d",$ctime)) $trust_point = floor($trust_point*pow(0.9,$count_off));
@@ -612,14 +638,16 @@ function cn_point_trust()
                                 if (!$do_loop) {
                                     $_bv += 720;
                                     $do_loop = true;
-                                } else $_bv = 720 + (isset($point_pt_off) ? $point_pt_off : 0);
+                                } else {
+                                    $_bv = 720 + (isset($point_pt_off) ? $point_pt_off : 0);
+                                }
                                 $point_pt_off = floor($_bv * 0.95);
                             } while ($count_off > 1);
                         }
                         $check_trust = true;
                         do_update_character('Character', 'UyThacOffline_Daily=0', 'UyThacOnline_Daily=0', "PhutUyThacOn_dutru=$point_pt_on", "PhutUyThacOff_dutru=$point_pt_off", "uythaconline_time=$set_time", "uythacoffline_time=$set_time", "PointUyThac=$trust_point", "Name:'$sub'");
-                        //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
-                    } else if ($time_begin_on < $_time_) {
+                    //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
+                    } elseif ($time_begin_on < $_time_) {
                         $check_trust = true;
                         do_update_character('Character', 'UyThacOnline_Daily=0', "uythaconline_time=$set_time", "Name:'$sub'");
                         //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
@@ -628,17 +656,16 @@ function cn_point_trust()
                     //exit("ko on + off");
                     $count_min = min($count_on, $count_off);
                     if ($count_min) {
-
                         $point_pt_on = floor($point_pt_on * pow(0.95, $count_min));
                         $point_pt_off = floor($point_pt_off * pow(0.95, $count_min));
                         $trust_point = floor($trust_point * pow(0.9, $count_min));
                         $check_trust = true;
                         do_update_character('Character', 'UyThacOnline_Daily=0', 'UyThacOffline_Daily=0', "PhutUyThacOff_dutru=$point_pt_off", "PhutUyThacOn_dutru=$point_pt_on", "uythaconline_time=$set_time", "uythacoffline_time=$set_time", "PointUyThac=$trust_point", "Name:'$sub'");
-                        //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
-                    } else if ($count_on) {
+                    //cnRelocation(cn_url_modify(array('reset'), 'mod='.REQ('mod'), 'opt='.REQ('opt'), 'sub='.$sub));
+                    } elseif ($count_on) {
                         $check_trust = true;
                         do_update_character('Character', 'UyThacOnline_Daily=0', "uythaconline_time=$set_time", "Name:'$sub'");
-                    } else if ($count_off) {
+                    } elseif ($count_off) {
                         $check_trust = true;
                         do_update_character('Character', 'UyThacOffline_Daily=0', "uythacoffline_time=$set_time", "Name:'$sub'");
                     }

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $odd = 0;
 $i = 0;
 $ok_loop = false;
@@ -32,12 +32,15 @@ echo cn_snippet_messages();
                             <hr>
                         </td>
                     </tr>
-                    <?php if ($before_info_pk) foreach ($before_info_pk as $ke => $val) {
-                        if (isset($val[1]))
-                            echo '<tr>
+                    <?php if ($before_info_pk) {
+                        foreach ($before_info_pk as $ke => $val) {
+                            if (isset($val[1])) {
+                                echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
 									<td><strong style="color:#009900">' . $val[1] . '</strong></td>
 								</tr>';
+                            }
+                        }
                     } ?>
 
                 </table>
@@ -49,12 +52,16 @@ echo cn_snippet_messages();
             <td class="bizwebform_col_2">
 
                 <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
-                    <?php if ($showchar) foreach ($showchar as $name => $val) { ?>
-                        <option
-                            value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
-                            )
-                        </option>
-                    <?php } ?>
+                    <?php if ($showchar) {
+                        foreach ($showchar as $name => $val) { ?>
+                            <option
+                                value="<?php echo $name; ?>"<?php if ($sub == $name) {
+                                echo 'selected';
+                            } ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
+                                )
+                            </option>
+                        <?php }
+                    } ?>
                 </select>
 
             </td>
@@ -92,16 +99,26 @@ echoFormVerifyChar(['action_removepk' => 'removepk']);
             <td align="center"><b>Pk</b></td>
             <td align="center"><b>Phí</b></td>
         </tr>
-        <?php if ($option_pk) foreach ($option_pk as $df => $fd) {
-            echo '<tr';
-            if ($odd++ % 2) echo 'style="background: #f8f8f8;"';
-            echo '><td align="center">Giết';
-            if (!$ok_loop) echo ' &le; '; else echo ' > ';
-            echo $fd['pkcount'] . ' mạng</td><td align="center">' . number_format((float)$fd['pk'], 0, ",", ".");
-            if (!$ok_loop) {
-                echo ' Zen/mạng </td></tr>';
-                $ok_loop = true;
-            } else echo ' V.Point/mạng</td></tr>';
+        <?php if ($option_pk) {
+            foreach ($option_pk as $df => $fd) {
+                echo '<tr';
+                if ($odd++ % 2) {
+                    echo 'style="background: #f8f8f8;"';
+                }
+                echo '><td align="center">Giết';
+                if (!$ok_loop) {
+                    echo ' &le; ';
+                } else {
+                    echo ' > ';
+                }
+                echo $fd['pkcount'] . ' mạng</td><td align="center">' . number_format((float)$fd['pk'], 0, ",", ".");
+                if (!$ok_loop) {
+                    echo ' Zen/mạng </td></tr>';
+                    $ok_loop = true;
+                } else {
+                    echo ' V.Point/mạng</td></tr>';
+                }
+            }
         } ?>
     </table>
 </div>

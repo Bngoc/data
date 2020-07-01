@@ -1,4 +1,6 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 add_hook('index/invoke_module', '*manager_invoke');
 
@@ -26,7 +28,9 @@ function manager_invoke()
     foreach ($cManger_account as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
 
-        if (function_exists("manager_$do")) cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        if (function_exists("manager_$do")) {
+            cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        }
     }
 
     // Request module
@@ -100,15 +104,31 @@ function manager_change_pass()
 
         $nameAnswer = strtolower($nameAnswer);
 
-        if ($pwd === '') $errors[] = ucfirst("Chưa nhập mật khẩu game.");
-        if ($nameAnswer === '') $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật.");
-        if ($nameQuestion === '') $errors[] = ucfirst("Chưa chọn câu hỏi bí mật.");
-        if ($namecaptcha === '') $errors[] = ucfirst("Chưa nhập mã Captcha.");
+        if ($pwd === '') {
+            $errors[] = ucfirst("Chưa nhập mật khẩu game.");
+        }
+        if ($nameAnswer === '') {
+            $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật.");
+        }
+        if ($nameQuestion === '') {
+            $errors[] = ucfirst("Chưa chọn câu hỏi bí mật.");
+        }
+        if ($namecaptcha === '') {
+            $errors[] = ucfirst("Chưa nhập mã Captcha.");
+        }
 
-        if (strlen($re_pwd) < 3) $errors[] = 'Mật khẩu quá ngắn';
-        if ($pwd != $re_pwd) $errors[] = "Mật khẩu Game không giống nhau.";
-        if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
-        if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
+        if (strlen($re_pwd) < 3) {
+            $errors[] = 'Mật khẩu quá ngắn';
+        }
+        if ($pwd != $re_pwd) {
+            $errors[] = "Mật khẩu Game không giống nhau.";
+        }
+        if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) {
+            $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
+        }
+        if ($namecaptcha !== $_SESSION['captcha_web']) {
+            $errors[] = "Captcha không đúng";
+        }
 
 
         $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");
@@ -150,14 +170,28 @@ function manager_change_tel()
 
         $nameAnswer = strtolower($nameAnswer);
 
-        if ($phoneNumber === '') $errors[] = ucfirst("Chưa nhập số điện thoại.");
-        if ($nameAnswer === '') $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật.");
-        if ($nameQuestion === '') $errors[] = ucfirst("Chưa chọn câu hỏi bí mật.");
-        if ($namecaptcha === '') $errors[] = ucfirst("Chưa nhập mã Captcha.");
+        if ($phoneNumber === '') {
+            $errors[] = ucfirst("Chưa nhập số điện thoại.");
+        }
+        if ($nameAnswer === '') {
+            $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật.");
+        }
+        if ($nameQuestion === '') {
+            $errors[] = ucfirst("Chưa chọn câu hỏi bí mật.");
+        }
+        if ($namecaptcha === '') {
+            $errors[] = ucfirst("Chưa nhập mã Captcha.");
+        }
 
-        if (!preg_match("/(\(\+84\)|0)\d{2,3}[-]\d{4}[-]\d{3}$/i", $phoneNumber)) $errors[] = ucfirst("Số di động không hợp lệ.");
-        if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
-        if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
+        if (!preg_match("/(\(\+84\)|0)\d{2,3}[-]\d{4}[-]\d{3}$/i", $phoneNumber)) {
+            $errors[] = ucfirst("Số di động không hợp lệ.");
+        }
+        if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) {
+            $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
+        }
+        if ($namecaptcha !== $_SESSION['captcha_web']) {
+            $errors[] = "Captcha không đúng";
+        }
 
 
         $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");
@@ -208,18 +242,29 @@ function manager_change_pwd()
 
     // Do change pass-web
     if (request_type('POST')) {
-
         list($nameEmail, $pass_web, $repass_web, $namecaptcha) = GET('cnameEmail, cpass_web, crepass_web, cnameCaptcha', "POST");
 
         $nameEmail = strtolower($nameEmail);
 
-        if ($pass_web === '') $errors[] = ucfirst("Chưa nhập mật khẩu đăng nhập web");
-        if ($nameEmail === '' && !$isAuthEmail) $errors[] = ucfirst("Chưa nhập địa chỉ Email");
-        if ($namecaptcha === '') $errors[] = ucfirst("Chưa nhập mã Captcha");
+        if ($pass_web === '') {
+            $errors[] = ucfirst("Chưa nhập mật khẩu đăng nhập web");
+        }
+        if ($nameEmail === '' && !$isAuthEmail) {
+            $errors[] = ucfirst("Chưa nhập địa chỉ Email");
+        }
+        if ($namecaptcha === '') {
+            $errors[] = ucfirst("Chưa nhập mã Captcha");
+        }
 
-        if ($pass_web != $repass_web) $errors[] = "Mật khẩu web không giống nhau.";
-        if (!$isAuthEmail && !preg_match('/[\w]\@[\w]/i', $nameEmail)) $errors[] = ucfirst("$nameEmail không đúng dạng địa chỉ Email.");
-        if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
+        if ($pass_web != $repass_web) {
+            $errors[] = "Mật khẩu web không giống nhau.";
+        }
+        if (!$isAuthEmail && !preg_match('/[\w]\@[\w]/i', $nameEmail)) {
+            $errors[] = ucfirst("$nameEmail không đúng dạng địa chỉ Email.");
+        }
+        if ($namecaptcha !== $_SESSION['captcha_web']) {
+            $errors[] = "Captcha không đúng";
+        }
 
         $user = do_select_character('MEMB_INFO', 'memb___id,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");
 
@@ -264,13 +309,27 @@ function manager_change_secret()
 
         $nameAnswer = strtolower($nameAnswer);
 
-        if ($ma7code === '') $errors[] = ucfirst("Chưa nhập mã số bí mật.");
-        if ($nameAnswer === '') $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật.");
-        if ($nameQuestion === '') $errors[] = ucfirst("Chưa chọn câu hỏi bí mật.");
-        if ($namecaptcha === '') $errors[] = ucfirst("Chưa nhập mã Captcha.");
-        if (strlen($ma7code) != 7) $errors[] = "Mã gồm có 7 chữ số";
-        if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
-        if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
+        if ($ma7code === '') {
+            $errors[] = ucfirst("Chưa nhập mã số bí mật.");
+        }
+        if ($nameAnswer === '') {
+            $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật.");
+        }
+        if ($nameQuestion === '') {
+            $errors[] = ucfirst("Chưa chọn câu hỏi bí mật.");
+        }
+        if ($namecaptcha === '') {
+            $errors[] = ucfirst("Chưa nhập mã Captcha.");
+        }
+        if (strlen($ma7code) != 7) {
+            $errors[] = "Mã gồm có 7 chữ số";
+        }
+        if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) {
+            $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
+        }
+        if ($namecaptcha !== $_SESSION['captcha_web']) {
+            $errors[] = "Captcha không đúng";
+        }
 
 
         $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");
@@ -311,12 +370,24 @@ function manager_change_qa()
 
         $nameAnswer = strtolower(htmlentities($nameAnswer));
 
-        if ($nameAnswer === '') $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật.");
-        if ($nameQuestion === '') $errors[] = ucfirst("Chưa chọn câu hỏi bí mật.");
-        if ($namecaptcha === '') $errors[] = ucfirst("Chưa nhập mã Captcha.");
-        if (!preg_match('/[\w]\@[\w]/i', $nameEmail)) $errors[] = ucfirst("$nameEmail không đúng dạng địa chỉ Email.");
-        if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
-        if ($namecaptcha !== $_SESSION['captcha_web']) $errors[] = "Captcha không đúng";
+        if ($nameAnswer === '') {
+            $errors[] = ucfirst("Chưa trả lời câu hỏi bí mật.");
+        }
+        if ($nameQuestion === '') {
+            $errors[] = ucfirst("Chưa chọn câu hỏi bí mật.");
+        }
+        if ($namecaptcha === '') {
+            $errors[] = ucfirst("Chưa nhập mã Captcha.");
+        }
+        if (!preg_match('/[\w]\@[\w]/i', $nameEmail)) {
+            $errors[] = ucfirst("$nameEmail không đúng dạng địa chỉ Email.");
+        }
+        if (strlen($nameAnswer) < 4 || strlen($nameAnswer) > 15) {
+            $errors[] = "Câu trả lời bí mật chỉ từ 4-15 kí tự.";
+        }
+        if ($namecaptcha !== $_SESSION['captcha_web']) {
+            $errors[] = "Captcha không đúng";
+        }
 
 
         $user = do_select_character('MEMB_INFO', 'memb___id,fpas_ques,fpas_answ,mail_addr', "memb___id='" . $_SESSION['user_Gamer'] . "'");

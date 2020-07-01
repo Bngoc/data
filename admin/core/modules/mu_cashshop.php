@@ -1,4 +1,6 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 add_hook('index/invoke_module', '*cashshop_invoke');
 
@@ -6,8 +8,7 @@ add_hook('index/invoke_module', '*cashshop_invoke');
 
 function cashshop_invoke()
 {
-    $dashboard = array
-    (
+    $dashboard = array(
         'cashshop:acient:action:Aci' => 'Set thần',
         'cashshop:armor:action:Arm' => 'Giáp trụ',
         'cashshop:wings:action:Win' => 'Cánh',
@@ -52,8 +53,7 @@ function cashshop_invoke()
 
     echo_header_admin('-@com_cashshop/style.css', "Cash Shop");
 
-    $images = array
-    (
+    $images = array(
         'acient' => 'acient.png',
         'armor' => 'armor.png',
         'spears' => 'spears.png',
@@ -81,8 +81,7 @@ function cashshop_invoke()
             continue;
         }
 
-        $item = array
-        (
+        $item = array(
             'name' => $name,
             'img' => isset($images[$opt]) ? $images[$opt] : 'home.gif',
             'mod' => $mod,
@@ -118,11 +117,19 @@ function cashshop_action()
 
     $item_temp = $s_temp = $s_data = $set_data = array();
     $page = intval($page);
-    if (!$txt_image) $txt_image = '';
-    if (!$txt_name) $txt_name = '';
-    if (!$txt_price) $txt_price = '1000';
+    if (!$txt_image) {
+        $txt_image = '';
+    }
+    if (!$txt_name) {
+        $txt_name = '';
+    }
+    if (!$txt_price) {
+        $txt_price = '1000';
+    }
     //if(!$page) $page = 0;
-    if (intval($per_page) == 0) $per_page = 25;
+    if (intval($per_page) == 0) {
+        $per_page = 25;
+    }
 
     $__data = getOption('#item_shop' . $opt);
 
@@ -130,14 +137,17 @@ function cashshop_action()
     //$_grps = getOption('#items_data'); //?
 
     if (REQ('__item', 'GPG') == 'change-item') {
-        foreach ($__data as $key => $raw) $s_temp[] = $raw['code32'];
+        foreach ($__data as $key => $raw) {
+            $s_temp[] = $raw['code32'];
+        }
         $s_data = cn_read_file($path = cn_path_construct(ROOT, 'core', 'cashshop') . 'shop_' . $opt . '.php');
 
         /// So sanh code item 32
         if (count($s_data)) {
             foreach ($s_data as $key => $var) {
-                if (array_search(trim($var['code32']), $s_temp) !== false)
+                if (array_search(trim($var['code32']), $s_temp) !== false) {
                     unset($s_data[$key]);
+                }
             }
             $__data = array_merge($s_data, $__data);
 
@@ -147,7 +157,7 @@ function cashshop_action()
             setOption('#item_shop' . $opt, $__data);
             cn_throw_message('Add Code Item successfully');
         }
-    } else if (REQ('__item', 'GPG') == 'del-item') {
+    } elseif (REQ('__item', 'GPG') == 'del-item') {
         unset($__data);
         setOption('#item_shop' . $opt, array());
         cn_throw_message('Delete all Code Item successfully');
@@ -169,7 +179,9 @@ function cashshop_action()
                     foreach ($__data as $key => $value) {
                         //$is_duble=$value['code32']==$txt_code32&&$value['name']==$txt_name;
                         $is_duble = $value['code32'] == $txt_code32;
-                        if ($is_duble) break;
+                        if ($is_duble) {
+                            break;
+                        }
                     }
                 }
 
@@ -217,9 +229,11 @@ function cashshop_action()
         }
     }
 
-    if (isset($__data))
-        foreach ($__data as $key => $raw)
+    if (isset($__data)) {
+        foreach ($__data as $key => $raw) {
             $set_data[$key] = cn_analysis_code32($raw['code32'], $raw['name'], $raw['price'], $raw['image_mh']);
+        }
+    }
 
     $items_data = getOption('#items_data');
     $key_items_data = array_keys($items_data);

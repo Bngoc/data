@@ -9,7 +9,7 @@
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
-	  Set tabs to 4 for best viewing.
+      Set tabs to 4 for best viewing.
 
 */
 
@@ -24,61 +24,61 @@ class ADODB_Encrypt_MCrypt
 {
     /**
      */
-    var $_cipher;
+    public $_cipher;
 
     /**
      */
-    var $_mode;
+    public $_mode;
 
     /**
      */
-    var $_source;
+    public $_source;
 
     /**
      */
-    function getCipher()
+    public function getCipher()
     {
         return $this->_cipher;
     }
 
     /**
      */
-    function setCipher($cipher)
+    public function setCipher($cipher)
     {
         $this->_cipher = $cipher;
     }
 
     /**
      */
-    function getMode()
+    public function getMode()
     {
         return $this->_mode;
     }
 
     /**
      */
-    function setMode($mode)
+    public function setMode($mode)
     {
         $this->_mode = $mode;
     }
 
     /**
      */
-    function getSource()
+    public function getSource()
     {
         return $this->_source;
     }
 
     /**
      */
-    function setSource($source)
+    public function setSource($source)
     {
         $this->_source = $source;
     }
 
     /**
      */
-    function __construct($cipher = null, $mode = null, $source = null)
+    public function __construct($cipher = null, $mode = null, $source = null)
     {
         if (!$cipher) {
             $cipher = MCRYPT_RIJNDAEL_256;
@@ -97,7 +97,7 @@ class ADODB_Encrypt_MCrypt
 
     /**
      */
-    function write($data, $key)
+    public function write($data, $key)
     {
         $iv_size = mcrypt_get_iv_size($this->_cipher, $this->_mode);
         $iv = mcrypt_create_iv($iv_size, $this->_source);
@@ -106,14 +106,13 @@ class ADODB_Encrypt_MCrypt
 
     /**
      */
-    function read($data, $key)
+    public function read($data, $key)
     {
         $iv_size = mcrypt_get_iv_size($this->_cipher, $this->_mode);
         $iv = mcrypt_create_iv($iv_size, $this->_source);
         $rv = mcrypt_decrypt($this->_cipher, $key, $data, $this->_mode, $iv);
         return rtrim($rv, "\0");
     }
-
 }
 
 return 1;

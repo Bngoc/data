@@ -1,4 +1,6 @@
-﻿<?php if (!defined('BQN_MU')) die('Access restricted');
+<?php if (!defined('BQN_MU')) {
+    die('Access restricted');
+}
 
 add_hook('index/invoke_module', '*ranking_invoke');
 
@@ -23,8 +25,9 @@ function ranking_invoke()
 
     foreach ($ranking_board as $id => $_t) {
         list($dl, $do, $acl_module) = explode(':', $id);
-        if (function_exists("ranking_$do"))
+        if (function_exists("ranking_$do")) {
             cn_bc_menu($_t, cn_url_modify(array('reset'), 'mod=' . $dl, 'opt=' . $do), $do);
+        }
     }
 
     // Request module
@@ -116,7 +119,7 @@ function zenderRankingCharacter($class, $url, $page, $optSort = 'DESC')
 
     $dataTop = do_select_other($myQuerydataTop);
 
-    list ($resultShowData, $pagination) = cn_render_pagination_ajax($dataTop, $url, $page, $per_page);
+    list($resultShowData, $pagination) = cn_render_pagination_ajax($dataTop, $url, $page, $per_page);
 
     foreach ($resultShowData as $key => $item) {
         $getKey = array_search($item['Class'], $tempClass);
@@ -202,7 +205,7 @@ function zenderRankingGuild($sub, $url, $page, $optSort = 'DESC')
         }
     }
 
-    list ($resultShowData, $pagination) = cn_render_pagination_ajax($showData, $url, $page, $per_page);
+    list($resultShowData, $pagination) = cn_render_pagination_ajax($showData, $url, $page, $per_page);
 
     return array($resultShowData, $pagination);
 }
@@ -217,7 +220,7 @@ function zenderRankingCard($opts, $url, $page, $optSort = 'DESC')
     }
     $resultTopCard = do_select_other("select TOP 250 accountID, SUM(menhgia) as total_vnd from muonline.dbo.cardphone $whereOpt group by accountID order by total_vnd $optSort");
 
-    list ($resultShowData, $pagination) = cn_render_pagination_ajax($resultTopCard, $url, $page, $per_page);
+    list($resultShowData, $pagination) = cn_render_pagination_ajax($resultTopCard, $url, $page, $per_page);
 
     return array($resultShowData, $pagination);
 }
@@ -339,8 +342,7 @@ function ranking_character()
 
     if (request_type('GET')) {
         if (isset($_REQUEST['sub'])) {
-
-            list ($arrRankingCharater, $pagination) = zenderRankingCharacter($sub, $url, $page, strtoupper($sort));
+            list($arrRankingCharater, $pagination) = zenderRankingCharacter($sub, $url, $page, strtoupper($sort));
 
             $resultData = array(
                 'id-sub' => $sub,
@@ -354,7 +356,7 @@ function ranking_character()
         }
     }
 
-    list ($arrRankingCharater, $pagination) = zenderRankingCharacter($sub, $url, $page, strtoupper($sort));
+    list($arrRankingCharater, $pagination) = zenderRankingCharacter($sub, $url, $page, strtoupper($sort));
 
     cn_assign('opt', 'character');
     cn_assign('class_board, sub, pagination, sort, result_content', $class_board, $sub, $pagination, $sort, zenderDataContent($arrRankingCharater));
@@ -384,8 +386,7 @@ function ranking_guild()
 
     if (request_type('GET')) {
         if (isset($_REQUEST['sub'])) {
-
-            list ($arrRankingCharater, $pagination) = zenderRankingGuild($sub, $url, $page, strtoupper($sort));
+            list($arrRankingCharater, $pagination) = zenderRankingGuild($sub, $url, $page, strtoupper($sort));
 
             $resultData = array(
                 'id-sub' => $sub,
@@ -399,7 +400,7 @@ function ranking_guild()
         }
     }
 
-    list ($arrRankingCharater, $pagination) = zenderRankingGuild($sub, $url, $page, strtoupper($sort));
+    list($arrRankingCharater, $pagination) = zenderRankingGuild($sub, $url, $page, strtoupper($sort));
 
     cn_assign('opt', 'guild');
     cn_assign('class_board, sub, pagination, sort, result_content', $class_board, $sub, $pagination, $sort, zenderDataContentGuild($arrRankingCharater));
@@ -435,8 +436,7 @@ function ranking_rickCard()
 
     if (request_type('GET')) {
         if (isset($_REQUEST['sub'])) {
-
-            list ($arrRankingCharater, $pagination) = zenderRankingCard($sub, $url, $page, strtoupper($sort));
+            list($arrRankingCharater, $pagination) = zenderRankingCard($sub, $url, $page, strtoupper($sort));
 
             $resultData = array(
                 'id-sub' => $sub,
@@ -450,7 +450,7 @@ function ranking_rickCard()
         }
     }
 
-    list ($arrRankingCharater, $pagination) = zenderRankingCard($sub, $url, $page, strtoupper($sort));
+    list($arrRankingCharater, $pagination) = zenderRankingCard($sub, $url, $page, strtoupper($sort));
 
     cn_assign('opt', 'rickCard');
     cn_assign('class_board, sub, pagination, sort, result_content', $class_board, $sub, $pagination, $sort, zenderDataContentCardRich($arrRankingCharater));

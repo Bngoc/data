@@ -1,4 +1,4 @@
-﻿<h2>Quên mật khẩu</h2>
+<h2>Quên mật khẩu</h2>
 <p>Nhập tài tài khoản và địa chỉ email</p>
 <hr><br>
 <form action="<?php echo PHP_SELF; ?>" method="POST">

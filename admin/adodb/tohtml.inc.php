@@ -11,7 +11,7 @@
 */
 
 // specific code for tohtml
-GLOBAL $gSQLMaxRows, $gSQLBlockRows, $ADODB_ROUND;
+global $gSQLMaxRows, $gSQLBlockRows, $ADODB_ROUND;
 
 $ADODB_ROUND = 4; // rounding
 $gSQLMaxRows = 1000; // max no of rows to download
@@ -45,14 +45,16 @@ function rs2html(&$rs, $ztabhtml = false, $zheaderarray = false, $htmlspecialcha
     $s = '';
     $rows = 0;
     $docnt = false;
-    GLOBAL $gSQLMaxRows, $gSQLBlockRows, $ADODB_ROUND;
+    global $gSQLMaxRows, $gSQLBlockRows, $ADODB_ROUND;
 
     if (!$rs) {
         printf(ADODB_BAD_RS, 'rs2html');
         return false;
     }
 
-    if (!$ztabhtml) $ztabhtml = "BORDER='1' WIDTH='98%'";
+    if (!$ztabhtml) {
+        $ztabhtml = "BORDER='1' WIDTH='98%'";
+    }
     //else $docnt = true;
     $typearr = array();
     $ncols = $rs->FieldCount();
@@ -60,30 +62,40 @@ function rs2html(&$rs, $ztabhtml = false, $zheaderarray = false, $htmlspecialcha
     for ($i = 0; $i < $ncols; $i++) {
         $field = $rs->FetchField($i);
         if ($field) {
-            if ($zheaderarray) $fname = $zheaderarray[$i];
-            else $fname = htmlspecialchars($field->name);
+            if ($zheaderarray) {
+                $fname = $zheaderarray[$i];
+            } else {
+                $fname = htmlspecialchars($field->name);
+            }
             $typearr[$i] = $rs->MetaType($field->type, $field->max_length);
-            //print " $field->name $field->type $typearr[$i] ";
+        //print " $field->name $field->type $typearr[$i] ";
         } else {
             $fname = 'Field ' . ($i + 1);
             $typearr[$i] = 'C';
         }
-        if (strlen($fname) == 0) $fname = '&nbsp;';
+        if (strlen($fname) == 0) {
+            $fname = '&nbsp;';
+        }
         $hdr .= "<TH>$fname</TH>";
     }
     $hdr .= "\n</tr>";
-    if ($echo) print $hdr . "\n\n";
-    else $html = $hdr;
+    if ($echo) {
+        print $hdr . "\n\n";
+    } else {
+        $html = $hdr;
+    }
 
     // smart algorithm - handles ADODB_FETCH_MODE's correctly by probing...
     $numoffset = isset($rs->fields[0]) || isset($rs->fields[1]) || isset($rs->fields[2]);
     while (!$rs->EOF) {
-
         $s .= "<TR valign=top>\n";
 
         for ($i = 0; $i < $ncols; $i++) {
-            if ($i === 0) $v = ($numoffset) ? $rs->fields[0] : reset($rs->fields);
-            else $v = ($numoffset) ? $rs->fields[$i] : next($rs->fields);
+            if ($i === 0) {
+                $v = ($numoffset) ? $rs->fields[0] : reset($rs->fields);
+            } else {
+                $v = ($numoffset) ? $rs->fields[$i] : next($rs->fields);
+            }
 
             $type = $typearr[$i];
             switch ($type) {
@@ -98,18 +110,25 @@ function rs2html(&$rs, $ztabhtml = false, $zheaderarray = false, $htmlspecialcha
                         break;
                     }
                 case 'T':
-                    if (empty($v)) $s .= "<TD> &nbsp; </TD>\n";
-                    else $s .= "	<TD>" . $rs->UserTimeStamp($v, "D d, M Y, H:i:s") . "</TD>\n";
+                    if (empty($v)) {
+                        $s .= "<TD> &nbsp; </TD>\n";
+                    } else {
+                        $s .= "	<TD>" . $rs->UserTimeStamp($v, "D d, M Y, H:i:s") . "</TD>\n";
+                    }
                     break;
 
                 case 'N':
-                    if (abs(abs($v) - round($v, 0)) < 0.00000001)
+                    if (abs(abs($v) - round($v, 0)) < 0.00000001) {
                         $v = round($v);
-                    else
+                    } else {
                         $v = round($v, $ADODB_ROUND);
+                    }
+                        // no break
                 case 'I':
                     $vv = stripslashes((trim($v)));
-                    if (strlen($vv) == 0) $vv .= '&nbsp;';
+                    if (strlen($vv) == 0) {
+                        $vv .= '&nbsp;';
+                    }
                     $s .= "	<TD align=right>" . $vv . "</TD>\n";
 
                     break;
@@ -134,9 +153,13 @@ function rs2html(&$rs, $ztabhtml = false, $zheaderarray = false, $htmlspecialcha
                 */
 
                 default:
-                    if ($htmlspecialchars) $v = htmlspecialchars(trim($v));
+                    if ($htmlspecialchars) {
+                        $v = htmlspecialchars(trim($v));
+                    }
                     $v = trim($v);
-                    if (strlen($v) == 0) $v = '&nbsp;';
+                    if (strlen($v) == 0) {
+                        $v = '&nbsp;';
+                    }
                     $s .= "	<TD>" . str_replace("\n", '<br>', stripslashes($v)) . "</TD>\n";
 
             }
@@ -155,16 +178,26 @@ function rs2html(&$rs, $ztabhtml = false, $zheaderarray = false, $htmlspecialcha
         if (!$rs->EOF && $rows % $gSQLBlockRows == 0) {
 
             //if (connection_aborted()) break;// not needed as PHP aborts script, unlike ASP
-            if ($echo) print $s . "</TABLE>\n\n";
-            else $html .= $s . "</TABLE>\n\n";
+            if ($echo) {
+                print $s . "</TABLE>\n\n";
+            } else {
+                $html .= $s . "</TABLE>\n\n";
+            }
             $s = $hdr;
         }
     } // while
 
-    if ($echo) print $s . "</TABLE>\n\n";
-    else $html .= $s . "</TABLE>\n\n";
+    if ($echo) {
+        print $s . "</TABLE>\n\n";
+    } else {
+        $html .= $s . "</TABLE>\n\n";
+    }
 
-    if ($docnt) if ($echo) print "<H2>" . $rows . " Rows</H2>";
+    if ($docnt) {
+        if ($echo) {
+            print "<H2>" . $rows . " Rows</H2>";
+        }
+    }
 
     return ($echo) ? $rows : $html;
 }
@@ -172,7 +205,9 @@ function rs2html(&$rs, $ztabhtml = false, $zheaderarray = false, $htmlspecialcha
 // pass in 2 dimensional array
 function arr2html(&$arr, $ztabhtml = '', $zheaderarray = '')
 {
-    if (!$ztabhtml) $ztabhtml = 'BORDER=1';
+    if (!$ztabhtml) {
+        $ztabhtml = 'BORDER=1';
+    }
 
     $s = "<TABLE $ztabhtml>";//';print_r($arr);
 
@@ -187,15 +222,19 @@ function arr2html(&$arr, $ztabhtml = '', $zheaderarray = '')
     for ($i = 0; $i < sizeof($arr); $i++) {
         $s .= '<TR>';
         $a = $arr[$i];
-        if (is_array($a))
+        if (is_array($a)) {
             for ($j = 0; $j < sizeof($a); $j++) {
                 $val = $a[$j];
-                if (empty($val)) $val = '&nbsp;';
+                if (empty($val)) {
+                    $val = '&nbsp;';
+                }
                 $s .= "	<TD>$val</TD>\n";
             }
-        else if ($a) {
+        } elseif ($a) {
             $s .= '	<TD>' . $a . "</TD>\n";
-        } else $s .= "	<TD>&nbsp;</TD>\n";
+        } else {
+            $s .= "	<TD>&nbsp;</TD>\n";
+        }
         $s .= "\n</TR>\n";
     }
     $s .= '</TABLE>';

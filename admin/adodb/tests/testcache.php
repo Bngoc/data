@@ -23,8 +23,11 @@ if (isset($access)) {
     $db = ADONewConnection('mysql');
     $db->PConnect('mangrove', 'root', '', 'xphplens');
 }
-if (isset($cache)) $rs = $db->CacheExecute(120, 'select * from products');
-else $rs = $db->Execute('select * from products');
+if (isset($cache)) {
+    $rs = $db->CacheExecute(120, 'select * from products');
+} else {
+    $rs = $db->Execute('select * from products');
+}
 
 $arr = $rs->GetArray();
 print sizeof($arr);

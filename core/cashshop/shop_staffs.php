@@ -1,4 +1,4 @@
-﻿<?php die('Direct call - access denied'); ?>
+<?php die('Direct call - access denied'); ?>
 14847D4A8F7A003F0050000000000000|Gậy Đoạt mệnh|90000|GayDoatMenh.jpg|
 2204714A8F7A003F0050000000000000|Gậy Hồng Ngọc|100000|GayHongNgoc.jpg|
 2004CD4A8F7A003F0050000000000000|Gậy Chiêm Tinh|100000|GayChiemTinh.jpg|

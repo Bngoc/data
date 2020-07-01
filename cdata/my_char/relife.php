@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 $odd = 0;
 $i = 0;
@@ -10,9 +10,13 @@ list($sub) = _GL('sub');
 
 echo cn_snippet_messages();
 $cap_relife_max = getOption('cap_relife_max');
-if ($cap_relife_max > 10) $cap_relife_max = 5;
+if ($cap_relife_max > 10) {
+    $cap_relife_max = 5;
+}
 
-if ($notify_rs_ok) echo $notify_rs_ok;
+if ($notify_rs_ok) {
+    echo $notify_rs_ok;
+}
 ?>
 
 <form action="<?php echo PHP_SELF; ?>" method="GET">
@@ -38,12 +42,15 @@ if ($notify_rs_ok) echo $notify_rs_ok;
                             <hr>
                         </td>
                     </tr>
-                    <?php if ($before_info_rl) foreach ($before_info_rl as $ke => $val) {
-                        if (isset($val[1]))
-                            echo '<tr>
+                    <?php if ($before_info_rl) {
+                        foreach ($before_info_rl as $ke => $val) {
+                            if (isset($val[1])) {
+                                echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
 									<td><strong style="color:#009900">' . $val[1] . '</strong></td>
 								</tr>';
+                            }
+                        }
                     } ?>
 
                 </table>
@@ -55,13 +62,17 @@ if ($notify_rs_ok) echo $notify_rs_ok;
             <td class="bizwebform_col_2">
 
                 <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
-                    <?php if ($showchar) foreach ($showchar as $name => $val) { ?>
-                        <option
-                            value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>><?php echo $name ?>
-                            ( LV: <?php echo $val['level'] ?> - Reset: <?php echo $val['reset'] ?> - Đã
-                            Relife <?php echo $val['relife'] ?>)
-                        </option>
-                    <?php } ?>
+                    <?php if ($showchar) {
+                        foreach ($showchar as $name => $val) { ?>
+                            <option
+                                value="<?php echo $name; ?>"<?php if ($sub == $name) {
+                                echo 'selected';
+                            } ?>><?php echo $name ?>
+                                ( LV: <?php echo $val['level'] ?> - Reset: <?php echo $val['reset'] ?> - Đã
+                                Relife <?php echo $val['relife'] ?>)
+                            </option>
+                        <?php }
+                    } ?>
                 </select>
 
             </td>
@@ -98,15 +109,21 @@ echoFormVerifyChar(['action_relife' => 'relife']);
             <td align="center"><b>Point</b></td>
             <td align="center"><b>Command</b></td>
         </tr>
-        <?php if ($options_rl) foreach ($options_rl as $df => $fd) { ?>
-            <tr <?php if ($odd++ % 2) echo 'style="background: #f8f8f8;"'; ?>>
-                <td align="center"><b>LV <?php echo ++$i; ?></b></td>
-                <td align="center"> <?php echo $fd['reset']; ?></td>
-                <td align="center">400</td>
-                <td align="center"><?php echo number_format((float)$fd['point'], 0, ",", "."); ?></td>
-                <td align="center"><?php echo number_format((float)$fd['command'], 0, ",", "."); ?></td>
-            </tr>
-            <?php if ($i === $cap_relife_max) break;
+        <?php if ($options_rl) {
+            foreach ($options_rl as $df => $fd) { ?>
+                <tr <?php if ($odd++ % 2) {
+                    echo 'style="background: #f8f8f8;"';
+                } ?>>
+                    <td align="center"><b>LV <?php echo ++$i; ?></b></td>
+                    <td align="center"> <?php echo $fd['reset']; ?></td>
+                    <td align="center">400</td>
+                    <td align="center"><?php echo number_format((float)$fd['point'], 0, ",", "."); ?></td>
+                    <td align="center"><?php echo number_format((float)$fd['command'], 0, ",", "."); ?></td>
+                </tr>
+                <?php if ($i === $cap_relife_max) {
+                    break;
+                }
+            }
         } ?>
     </table>
 </div>

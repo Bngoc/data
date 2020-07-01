@@ -22,7 +22,11 @@ list($per_page, $echoPagination) = _GL('per_page, echoPagination');
                             <tr class="h-ww" style="height: 105px;cursor: pointer;">
                                 <td class="h-w" align="middle"
                                     valign="top"><img
-                                        align="middle" <?php if ($raw['image_mh']) echo 'style="width: 80%;"'; else echo 'style=""'; ?>
+                                        align="middle" <?php if ($raw['image_mh']) {
+                                            echo 'style="width: 80%;"';
+                                        } else {
+                                            echo 'style=""';
+                                        } ?>
                                         src="/public/images/web/<?php if ($raw['image_mh']) {
                                             echo 'shop_' . $opt . '/' . $raw['image_mh'];
                                         } else {
@@ -48,7 +52,8 @@ list($per_page, $echoPagination) = _GL('per_page, echoPagination');
                             </tr>
                             <tr>
                                 <td style="text-align:center"><input idItem="<?php echo $key; ?>" class="call-Form-Shop"
-                                                                     type="image" src="/public/images/order.gif" width="80"
+                                                                     type="image" src="/public/images/order.gif"
+                                                                     width="80"
                                                                      height="25"/></td>
                             </tr>
                         </table>

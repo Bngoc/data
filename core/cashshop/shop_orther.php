@@ -1,4 +1,4 @@
-﻿<?php die('Direct call - access denied'); ?>
+<?php die('Direct call - access denied'); ?>
 7B0000FC1E7A000000D0000000000000|Pet Xương Rồng|1600|Skeleton.jpg|
 600000FC1E7A000000E0000000000000|Talisman of Chaos Assembly|5000|51_buaKHchaos.jpg|
 5F0000FC1E7A000000E0000000000000|Chaos Card|3000|43_thebaichaos.jpg|

@@ -8,7 +8,6 @@ define('SCOPES', implode(' ', array(
         'https://www.googleapis.com/auth/userinfo.profile'
     )
 ));
-define('SERVICE_ACCOUNT_NAME', 'ngoctbhy@gmail.com');
 
 /*
 	$paging = new PaginationTemplate();
@@ -1571,7 +1570,7 @@ function cn_resetDefaultCharater($accountID)
                 $class_ = $item['Class'];
                 $relife_vl = $item['Relifes'];
 
-                if (getOption('hotrotanthu')) {
+                if (getOption('support_new_player')) {
                     if (isset($options_tanthu)) {
                         foreach ($options_tanthu as $aq => $qa) {
                             if (($qa['reset_min'] <= $reset_rs && $reset_rs <= $qa['reset_max']) && ($qa['relife_min'] <= $relife_vl && $relife_vl <= $qa['relife_max'])) {
@@ -1990,14 +1989,12 @@ function getClient($code = null)
 
 function bytesToSize1024($bytes, $precision = 2)
 {
-
     $unit = array('B', 'KB', 'MB');
     return @round($bytes / pow(1024, ($i = floor(log($bytes, 1024)))), $precision) . ' ' . $unit[$i];
 }
 
 function cn_Rfc3339ToDateTime($timeRfc, $format = 'd-m-Y H:i:s')
 {
-
     if ($timeRfc) {
         $date_source = strtotime($timeRfc);
         return date($format, $date_source);

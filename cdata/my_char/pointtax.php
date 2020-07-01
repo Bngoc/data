@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $odd = 0;
 $i = 0;
 $ok_loop = false;
@@ -33,12 +33,15 @@ echo cn_snippet_messages();
                             <hr>
                         </td>
                     </tr>
-                    <?php if ($before_info_pointtax) foreach ($before_info_pointtax as $ke => $val) {
-                        if (isset($val[1]))
-                            echo '<tr>
+                    <?php if ($before_info_pointtax) {
+                        foreach ($before_info_pointtax as $ke => $val) {
+                            if (isset($val[1])) {
+                                echo '<tr>
 									<td align="right" width="40%">' . $val[0] . ':</td>
 									<td><strong style="color:#009900">' . $val[1] . '</strong></td>
 								</tr>';
+                            }
+                        }
                     } ?>
 
                 </table>
@@ -50,12 +53,16 @@ echo cn_snippet_messages();
             <td class="bizwebform_col_2">
 
                 <select size="1" name="sub" id="bizwebselect" onchange='submit()'>
-                    <?php if ($showchar) foreach ($showchar as $name => $val) { ?>
-                        <option
-                            value="<?php echo $name; ?>"<?php if ($sub == $name) echo 'selected'; ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
-                            )
-                        </option>
-                    <?php } ?>
+                    <?php if ($showchar) {
+                        foreach ($showchar as $name => $val) { ?>
+                            <option
+                                value="<?php echo $name; ?>"<?php if ($sub == $name) {
+                                echo 'selected';
+                            } ?>><?php echo $name . ' (LV:' . $val['level'] . '- Reset: ' . $val['reset'] . ' - Relife: ' . $val['relife']; ?>
+                                )
+                            </option>
+                        <?php }
+                    } ?>
                 </select>
 
             </td>
@@ -65,8 +72,9 @@ echo cn_snippet_messages();
             <td class="bizwebform_col_1">Tỷ giá</td>
             <td class="bizwebform_col_2">
                 <select id="bizwebselect" name="point_tax" onchange='submit()'/>
-                <?php foreach ($opt_taxpoint as $_id => $_var)
+                <?php foreach ($opt_taxpoint as $_id => $_var) {
                     echo '<option size="28" value="' . $_id . '" ' . ($_id == $num_ ? 'selected="selected"' : '') . '>' . number_format((float)$_var, 0, ",", ".") . ' Point = ' . number_format((float)$_var, 0, ",", ".") . ' Vpoint. </option>';
+                }
                 ?>
                 </select>
             </td>

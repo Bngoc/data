@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 // V4.50 6 July 2004
 
@@ -48,5 +48,6 @@ print "</pre>\n";
 
 $db2->debug = 1;
 
-foreach ($sql as $s)
+foreach ($sql as $s) {
     $db2->Execute($s);
+}
