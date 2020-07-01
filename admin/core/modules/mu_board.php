@@ -35,6 +35,9 @@ function board_invoke()
         'editconfig:apiDeleteDrivers:Csl:1' => __('delete_item_drivers_API'),
 
         'editconfig:select:Ciw' => __('select'),
+        'editconfig:iswebshop:Ciw' => __('iswebshop'),
+        'editconfig:iserverz:Ciw' => __('iserverz'),
+        'editconfig:wreplace:Ciw' => __('wreplace'),
 //        'editconfig:updatemoney:Ciw' => __('update_money'),
 //        'editconfig:updateCharater:Ciw' => __('update_character'),
 //        'editconfig:update:Ciw' => __('update_money'),
@@ -79,7 +82,10 @@ function board_invoke()
         'userman' => 'users.gif',
         'group' => 'group.png',
         'statistics' => 'statistic.png',
-        'logs' => 'list.png'
+        'logs' => 'list.png',
+		'iswebshop' => 'list.png',
+        'iserverz' => 'list.png',
+        'wreplace' => 'list.png'
     );
 
     // More dashboard images
@@ -637,6 +643,157 @@ function board_personal()
     cn_assign('member, acl_write_news, acl_desc, personal_more', $member, testRoleAdmin('Can'), $acl_desc, $personal_more);
     echo_header_admin('-@com_board/style.css', "Personal options");
     echo execTemplate('com_board/personal');
+    echofooter();
+}
+
+function board_iswebshop()
+{
+	
+    $ipban = getoption('#ipban');
+    if (!is_array($ipban)) 
+    {
+        $ipban = array();
+    }
+
+    // Submit new IP
+    if (request_type('POST'))
+    {
+        cn_dsi_check();
+
+        $ip = trim(REQ('add_ip'));
+        if(!empty($ip))
+        {
+            // Times blocked : Expire time
+            $ipban[$ip] = array(0, 0);
+
+            setoption('#ipban', $ipban);
+            cn_throw_message('IP or name mask ['.$ip.'] add/replaced');
+        }
+        else
+        {
+            cn_throw_message('IP Address must be filled','w');
+        }
+    }
+    // Unblock IP
+    elseif ($ip = REQ('unblock'))
+    {
+        cn_dsi_check();
+
+        if (isset($ipban[$ip]))
+        {
+            unset($ipban[$ip]);
+        }
+        
+        setoption('#ipban', $ipban);
+    }
+
+    cn_assign('list', $ipban);
+    echo_header_admin('-@com_board/style.css', 'Block IP');
+	echo execTemplate('com_board/ipban');
+	echofooter();
+}
+
+function board_iserverz()
+{
+    $sub = REQ('sub');
+
+    $categories = cn_get_categories();
+
+    $rss                    = getoption('#rss');
+    $rss_encoding           =isset($rss['encoding'])? $rss['encoding']:'UTF-8';
+    $rss_news_include_url   =isset($rss['news_include_url'])? $rss['news_include_url']:'';
+    $rss_title              =isset($rss['title'])? $rss['title']:'';
+    $rss_language           =isset($rss['language'])? $rss['language']:'en-us';
+
+    // Default: view
+    if ($rss_encoding == '') 
+    {
+        $rss_encoding = 'UTF-8';
+    }
+    if ($rss_language == '') 
+    {
+        $rss_language = 'en-us';
+    }
+
+    // Check submit
+    if (request_type('POST'))
+    {
+        cn_dsi_check();
+
+        // Save new configuration
+        if ($sub == 'rss')
+        {
+            $rss['encoding']         = $rss_encoding         = REQ('rss_encoding');
+            $rss['news_include_url'] = $rss_news_include_url = REQ('rss_news_include_url');
+            $rss['title']            = $rss_title            = REQ('rss_title');
+            $rss['language']         = $rss_language         = REQ('rss_language');
+
+            // Default: save
+            if ($rss_encoding == '') 
+            {
+                $rss_encoding = 'UTF-8';
+            }
+            if ($rss_language == '') 
+            {
+                $rss_language = 'en-us';
+            }
+
+            setoption('#rss', $rss);
+        }
+    }
+
+    $all_tpls  = array();
+    $listsys   = cn_template_list();
+    $templates = getoption('#templates');
+
+    // Get all templates
+    foreach ($listsys as $id => $_t) 
+    {
+        $all_tpls[ $id ] = $id;
+    }
+    foreach ($templates as $id => $_t) 
+    {
+        $all_tpls[ $id ] = $id;
+    }
+
+    cn_assign('sub, categories, all_tpls', $sub, $categories, $all_tpls);
+    cn_assign('rss_news_include_url, rss_encoding, rss_language, rss_title', $rss_news_include_url, $rss_encoding, $rss_language, $rss_title);
+
+    echo_header_admin('-@dashboard/style.css', 'Integration Wizard'); 
+	echo execTemplate('dashboard/intwiz');
+	echofooter();
+	
+}
+
+// Since 2.0: Replace words
+function board_wreplace()
+{
+    list($word, $replace, $delete) = GET('word, replace, delete');
+    $wlist = getoption('#rword');
+
+    if (request_type('POST')) {
+        cn_dsi_check();
+
+        if ($delete && $word) {
+            unset($wlist[$word]);
+            cn_throw_message("Word deleted");
+            setoption('#rword', $wlist);
+        } elseif ($word && $replace) {
+            $wlist[$word] = $replace;
+            setoption('#rword', $wlist);
+        } else {
+            cn_throw_message("Can't save");
+        }
+    }
+
+    // Require additional data
+    if (isset($wlist[$word])) {
+        $replace = $wlist[$word];
+    }
+    $is_replace_opt = getoption('use_replacement');
+    cn_assign('wlist, word, replace, repopt', $wlist, $word, $replace, $is_replace_opt);
+    echoheader('-@com_board/style.css', 'Replace words');
+    echo exec_tpl('com_board/replace');
     echofooter();
 }
 
@@ -1269,8 +1426,238 @@ function board_userman()
     echofooter();
 }
 
-function board_group() {
-    echo_header_admin('-@com_board/style.css', "Group");
+function board_group()
+{
+    global $_CN_access;
+
+    $access_desc = array();
+    $form_desc = array();
+
+    $gn = file(SKIN . '/defaults/groups_names.tpl');
+    foreach ($gn as $G) {
+        if (($G = trim($G)) == '') {
+            continue;
+        }
+        list($cc, $xgrp, $name_desc) = explode('|', $G, 3);
+
+        if (!isset($access_desc[$xgrp])) {
+            $access_desc[$xgrp] = array();
+        }
+
+        $access_desc[$xgrp][$cc] = $name_desc;
+        $form_desc[$cc] = explode('|', $name_desc);
+    }
+
+    $ATR = array('C' => 'Configs', 'N' => 'New', 'M' => 'Comment', 'B' => 'Behavior');
+
+    // Extension for access rights
+    list($access_desc, $ATR) = hook('extend_acl_groups', array($access_desc, $ATR));
+
+    $grp = array();
+    $groups = getoption('#grp');
+    list($group_name, $group_id, $group_grp, $ACL, $delete_group, $reset_group, $mode) = GET('group_name, group_id, group_grp, acl, delete_group, reset_group,mode');
+    $is_add_edit = false;
+
+    // -----------
+    if (request_type('POST')) {
+        cn_dsi_check();
+
+        if (!$group_name) {
+            cn_throw_message("Enter group name", 'e');
+        } elseif ($mode == 'edit') {
+            $is_edited = true;
+
+            // Update exists or new group
+            if ($group_id > 1) {
+                if (!empty($groups[$group_id])) {
+                    $is_edited = md5($groups[$group_id]['N'] . $groups[$group_id]['G'] . $groups[$group_id]['A']) != md5($group_name . $group_grp . (!empty($ACL) ? join(',', $ACL) : ''));
+                }
+                if ($is_edited) {
+                    $groups[$group_id] = array
+                    (
+                        '#' => $groups[$group_id]['#'],
+                        'N' => $group_name,
+                        'G' => $group_grp,
+                        'A' => (!empty($ACL) ? join(',', $ACL) : ''),
+                    );
+                }
+            }
+
+            if ($group_id == 1) {
+                cn_throw_message("Can't update admin group", 'e');
+            } elseif ($is_edited) {
+                // Save to config
+                setoption('#grp', $groups);
+                cn_throw_message("Group updated");
+            } else {
+                cn_throw_message("No data for update", 'w');
+            }
+        } elseif ($mode == 'add') {
+            $is_exists = FALSE;
+            // Check group exists
+            foreach ($groups as $id => $dt) {
+                if ($dt['N'] == $group_name) {
+                    $is_exists = TRUE;
+                    break;
+                }
+            }
+
+            $group_id = max(array_keys($groups)) + 1;
+            // Update exists or new group
+            if ($group_id > 1 && !$is_exists) {
+                $groups[$group_id] = array
+                (
+                    '#' => '',
+                    'N' => $group_name,
+                    'G' => $group_grp,
+                    'A' => (!empty($ACL) ? join(',', $ACL) : ''),
+                );
+                // Save to config
+                setoption('#grp', $groups);
+                cn_throw_message("Group added");
+            } elseif ($is_exists) {
+                cn_throw_message("Group with that name already exist", 'e');
+                $group_id = 0;
+            } else {
+                cn_throw_message("Group not added", 'e');
+            }
+        } else {
+            $edit_system = FALSE;
+            $edit_exists = FALSE;
+            $is_add_edit = TRUE;
+            // Check group exists
+            foreach ($groups as $id => $dt) {
+                if ($id == $group_id && $dt['#']) {
+                    $edit_system = TRUE;
+                }
+
+                if ($dt['N'] == $group_name) {
+                    $edit_exists = TRUE;
+                }
+            }
+
+            // Reset group rights
+            if ($reset_group && $group_id) {
+                $cgrp = file(SKIN . '/defaults/groups.tpl');
+                foreach ($cgrp as $G) {
+                    $G = trim($G);
+                    if ($G[0] === '#') {
+                        continue;
+                    }
+
+                    list($id, $name, $group, $access) = explode('|', $G);
+                    $id = intval($id);
+
+                    if ($id == $group_id) {
+                        $ACL = spsep(($access === '*') ? $_CN_access['C'] . ',' . $_CN_access['N'] . ',' . $_CN_access['M'] : $access);
+                        $groups[$group_id] = array
+                        (
+                            '#' => TRUE,
+                            'N' => $name,
+                            'G' => $group,
+                            'A' => (!empty($ACL) ? join(',', $ACL) : ''),
+                        );
+
+                        cn_throw_message("Group reset");
+                    }
+                }
+                $is_add_edit = FALSE;
+            } // Update group
+            elseif ($edit_exists && !$delete_group) {
+                if ($group_id == 1) {
+                    cn_throw_message("Can't update admin group", 'e');
+                } else {
+                    cn_throw_message('Parameters for a group are not correct specified or group already exists', 'e');
+                }
+            } // Unable remove system group
+            elseif ($delete_group && $edit_exists) {
+                if ($edit_system) {
+                    cn_throw_message("Unable remove system group");
+                } else {
+                    unset($groups[$group_id]);
+
+                    $ACL = array();
+                    $group_id = 0;
+
+                    cn_throw_message("Group removed");
+                }
+            }
+
+            // Save to config
+            setoption('#grp', $groups);
+        }
+    }
+
+    foreach ($groups as $name => $data) {
+        $_gtext = array();
+        $G = spsep($data['G']);
+
+        foreach ($G as $id) {
+            if (isset ($groups[$id])) {
+                $_gtext[] = $groups[$id]['N'];
+            }
+        }
+
+        $grp[$name] = array
+        (
+            'system' => $data['#'],
+            'name' => $data['N'],
+            'grp' => $_gtext,
+            'acl' => $data['A'],
+        );
+    }
+
+    // Translate ACL to view
+    $access = array();
+    $bc = array();
+
+    // Get user acl data
+    if ($group_id && $groups[$group_id]) {
+        $bc = spsep($groups[$group_id]['A']);
+    }
+
+    foreach ($_CN_access as $Gp => $Ex) {
+        $Gz = array();
+        $Ex = spsep($Ex);
+        $Tr = $access_desc[$ATR[$Gp]];
+
+        foreach ($Ex as $id) {
+            $trp = explode('|', $Tr[$id]);
+            $d = isset($trp[0]) ? $trp[0] : '';
+            $t = isset($trp[1]) ? $trp[1] : '';
+            $c = in_array($id, $bc);
+            if ($is_add_edit) {
+                $c = FALSE;
+            }
+            $Gz[$id] = array
+            (
+                //'d' => i18n( array($d, 'DS-') ),
+                //'t' => i18n( array($t, 'DS-') ),
+                'd' => array($d, 'DS-'),
+                't' => array($t, 'DS-'),
+                'c' => $c
+            );
+        }
+
+        $access[$ATR[$Gp]] = $Gz;
+    }
+
+    // Group is system
+    $group_system = $group_id && $groups[$group_id]['#'];
+
+
+    if ($group_id) {
+        if (!$is_add_edit) {
+            $group_name = $groups[$group_id]['N'];
+            $group_grp = $groups[$group_id]['G'];
+        } else {
+            $group_name = $group_grp = '';
+            $group_id = 0;
+        }
+    }
+
+    cn_assign('grp, group_name, group_id, group_grp, group_system, access, form_desc', $grp, $group_name, $group_id, $group_grp, $group_system, $access, $form_desc);
+    echoheader('-@com_board/style.css', 'Groups');
     echo execTemplate('com_board/group');
     echofooter();
 }
