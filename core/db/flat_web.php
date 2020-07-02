@@ -92,7 +92,7 @@ function view_character($account)
 {
     global $db_new;
     if (!empty($account)) {
-        kiemtra_acc($account);
+        check_by_account($account);
 
         $result = $db_new->Execute($myQuery = "SELECT GameID1,GameID2,GameID3,GameID4,GameID5 FROM AccountCharacter WHERE Id='$account'") or cn_write_log($myQuery, 'e');
 
@@ -268,20 +268,20 @@ function do_select_other($other = '', $options = [])
 }
 
 /**
- * @param string $orther
+ * @param string $other
  * @return bool
  */
-function do_update_orther($orther = '')
+function do_update_other($other = '')
 {
     global $db_new;
 
-    if ($orther) {
-        $orther = trim($orther);
-        $check = $db_new->Execute($orther) or cn_write_log($orther, 'e');
+    if ($other) {
+        $other = trim($other);
+        $check = $db_new->Execute($other) or cn_write_log($other, 'e');
 
         if ($check) {
             if (getOption('debugSql')) {
-                cn_write_log($orther);
+                cn_write_log($other);
             }
 
             return true;
@@ -292,7 +292,7 @@ function do_update_orther($orther = '')
 }
 
 //'table','abc, abc2, ...','a1=1 and ab = 2 or ad =12,...',' orther ',
-function do_select_character($table, $col, $where = '', $orther = '')
+function do_select_character($table, $col, $where = '', $other = '')
 {
     global $db_new;
     if (!$table) {
@@ -322,12 +322,12 @@ function do_select_character($table, $col, $where = '', $orther = '')
         $str_where = $where;
     }
 
-    if ($orther) {
-        $orther = trim($orther);
+    if ($other) {
+        $other = trim($other);
     }
 
     if ($str_col && $table) {
-        $check = $db_new->Execute("SELECT $str_col FROM $table $str_where $orther") or cn_write_log("SELECT $str_col FROM $table $str_where $orther", 'e');
+        $check = $db_new->Execute("SELECT $str_col FROM $table $str_where $other") or cn_write_log("SELECT $str_col FROM $table $str_where $other", 'e');
         if ($check) {
             while ($row = $check->fetchrow()) {
                 $rs_data[] = $row;
@@ -336,7 +336,7 @@ function do_select_character($table, $col, $where = '', $orther = '')
     }
 
     if (getOption('debugSql')) {
-        cn_write_log("SELECT $str_col FROM $table $str_where $orther");
+        cn_write_log("SELECT $str_col FROM $table $str_where $other");
     }
 
     return isset($rs_data) ? $rs_data : array();
@@ -351,22 +351,25 @@ function do_insert_character()
     $gr_col = $gr_cont = '';
     $cp_data = array();
     $args = func_get_args();
-    $user_table = array_shift($args);           // get table array frist
 
-    if (!$user_table) {                           //1. name //table update/
+    // Get table array first
+    $user_table = array_shift($args);
+    // 1. name table update
+    if (!$user_table) {
         return false;
     }
 
-    foreach ($args as $v) {                     //$v = [email=user_email]
+    // Format $v = [email=user_email]
+    foreach ($args as $v) {
         list($a, $b) = explode('=', $v, 2);
         if ($a) {
             $cp_data[$a] = $b;
-        }                  // VD: email = user_email
+        }
     }
 
     if (!empty($cp_data)) {
         $key_ids = array_keys($cp_data);
-    }        //get key cp_data
+    }
 
     if (!empty($key_ids)) {
         foreach ($key_ids as $v) {
@@ -389,7 +392,6 @@ function do_insert_character()
     if ($key_up_col && $val_up_cont && $user_table) {
 
 //        $db_new->BeginTrans();
-        //msg_err()
         $check = $db_new->Execute("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)") or cn_write_log("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)", 'e');
 
         if ($check) {
@@ -408,21 +410,20 @@ function do_insert_character()
     return false;
 }
 
-function do_insert_orther($myQureyInsert)
+function do_insert_other($myQueryInsert)
 {
     global $db_new;
-    if (empty($myQureyInsert)) {
+    if (empty($myQueryInsert)) {
         return false;
     }
 
-    $check = $db_new->Execute($myQureyInsert) or cn_write_log($myQureyInsert, 'e');
-//        $check = $db_new->Execute("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)") or cn_write_log("INSERT INTO $user_table ($key_up_col) VALUES ($val_up_cont)", 'e');
+    $check = $db_new->Execute($myQueryInsert) or cn_write_log($myQueryInsert, 'e');
 
     if ($check) {
         $db_new->CompleteTrans();
 
         if (getOption('debugSql')) {
-            cn_write_log($myQureyInsert);
+            cn_write_log($myQueryInsert);
         }
         return true;
     } else {
@@ -546,7 +547,7 @@ function db_get_member_account($requestData)
 /**
  * return Query SQL auto update ranking column Top50
  */
-function rankingCharaterTop()
+function ranking_character_top()
 {
     $myQueryRankingTop = "SELECT Top 125 [Name] FROM Character ORDER BY relifes DESC, resets DESC, cLevel DESC";
     $resultRankingTop = do_select_other($myQueryRankingTop);
@@ -558,12 +559,12 @@ function rankingCharaterTop()
             $myQueryUpdate .= ' WHEN \'' . $items['Name'] . '\' THEN ' . ($key + 1);
         }
         $myQueryUpdate .= ' END';
-        $chekUpdate = do_update_orther($myQueryUpdate);
+        $checkUpdate = do_update_other($myQueryUpdate);
         //if (!$chekUpdate) cn_write_log($myQueryUpdate, 'e');
     }
 }
 
-function onoff_PointCharacter()
+function on_off_point_character()
 {
     $checkResultOnOff = do_select_other("SELECT AccountID, [Name], [Uythac], [uythacoffline_stat], [PhutUyThacOn_dutru], [PhutUyThacOff_dutru], [PointUyThac]  FROM Character WHERE Uythac = 0 OR uythacoffline_stat = 0");
     $itemID = '';
@@ -599,8 +600,8 @@ function onoff_PointCharacter()
 
         $myQueryUpdate .= ' END WHERE Name =\'' . $items['Name'] . '\'';
         //echo $myQueryUpdate;
-        $chekUpdate = do_update_orther($myQueryUpdate);
-        if (!$chekUpdate) {
+        $checkUpdate = do_update_other($myQueryUpdate);
+        if (!$checkUpdate) {
             echo '--> Err Update - Uy Thac';
         }
     }
@@ -608,7 +609,7 @@ function onoff_PointCharacter()
 
 
 //-------------------------------------------------------------------------------------------------------------------------------
-function check_changecls($account, $character)
+function check_change_cls($account, $character)
 {
     global $db_new;
     $sql_doinv_check = $db_new->Execute("SELECT * FROM AccountCharacter WHERE Id='$account' AND GameIDC='$character'");
@@ -618,7 +619,7 @@ function check_changecls($account, $character)
     return true;
 }
 
-function kiemtra_cardnumber($card_num)
+function check_card_number($card_num)
 {
     if (preg_match("[^a-zA-Z0-9$]", $card_num)) {
         echo "Du lieu loi : $card_num . Chi duoc su dung ki tu a-z, A-Z va (1-9).";
@@ -626,7 +627,7 @@ function kiemtra_cardnumber($card_num)
     }
 }
 
-function kiemtra_kituso($account)
+function check_symbol_num($account)
 {
     if (preg_match("[^0-9$]", $account)) {
         echo "Du lieu loi : $account . Chi duoc su dung so (1-9).";
@@ -634,7 +635,7 @@ function kiemtra_kituso($account)
     }
 }
 
-function kiemtra_kitudacbiet($account)
+function check_symbol($account)
 {
     if (preg_match("[^a-zA-Z0-9_$]", $account)) {
         echo "Du lieu loi : $account . Chi duoc su dung ki tu a-z, A-Z, so (1-9) va dau _.";
@@ -642,7 +643,7 @@ function kiemtra_kitudacbiet($account)
     }
 }
 
-function kiemtra_email($email)
+function check_email_db($email)
 {
     if (preg_match("[^a-zA-Z0-9\.@_-$]", $email)) {
         echo "Email Khong duoc su dung nhung ky tu dac biet.";
@@ -654,22 +655,18 @@ function kiemtra_email($email)
     }
 }
 
-function kiemtra_acc($account)
+function check_by_account($account)
 {
-    //global $db_new;
-    //exit();
     if (!empty($account)) {
         $username_check = do_select_character('MEMB_INFO', 'memb___id', "memb___id='$account'", '');
-        //$username_check = $sql_username_check->numrows();
-
         if (count($username_check) < 1) {
             return true;
-        }            // "Tài khoản không tồn tại.";
+        }
     }
     return false;
 }
 
-function kiemtra_loggame($account)
+function check_log_game($account)
 {
     global $db_new;
 
@@ -683,7 +680,7 @@ function kiemtra_loggame($account)
     return false;
 }
 
-function kiemtra_block_acc($account)
+function check_block_account($account)
 {
     global $db_new;
 
@@ -700,7 +697,7 @@ function kiemtra_block_acc($account)
     return false;
 }
 
-function kiemtra_ques_ans($account, $question, $answer)
+function check_ques_ans($account, $question, $answer)
 {
     global $db_new;
     $sql_ques_ans_check = $db_new->Execute("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$account' AND fpas_ques='$question' AND fpas_answ='$answer'");
@@ -714,22 +711,7 @@ function kiemtra_ques_ans($account, $question, $answer)
     }
 }
 
-//function kiemtra_pass($account, $password)
-//{
-//    global $db_new;
-//    if ($server_md5 == 1) {
-//        $sql_pw_check = $db_new->Execute("SELECT * FROM MEMB_INFO WHERE memb__pwd=[dbo].[fn_md5]('$password','$account') AND memb___id='$account'");
-//    } else {
-//        $sql_pw_check = $db_new->Execute("SELECT * FROM MEMB_INFO WHERE memb__pwd='$password' AND memb___id='$account'");
-//    }
-//    $pw_check = $sql_pw_check->numrows();
-//    if ($pw_check <= 0) {
-//        echo "Mật khẩu không đúng.";
-//        exit();
-//    }
-//}
-
-function kiemtra_char($account, $character)
+function check_alphabet_character($account, $character)
 {
     global $db_new;
     $sql_name_check = $db_new->Execute("SELECT Name FROM Character WHERE Name='$character' AND AccountID = '$account'");
@@ -740,7 +722,7 @@ function kiemtra_char($account, $character)
     }
 }
 
-function kiemtra_block_char($account, $character)
+function check_block_char($account, $character)
 {
     global $db_new;
     $sql_block_check = $db_new->Execute("SELECT Name FROM Character WHERE Name='$character' AND CtlCode='1' AND AccountID='$account'");
@@ -751,18 +733,7 @@ function kiemtra_block_char($account, $character)
     }
 }
 
-function kiemtra_online($account)
-{
-    global $db_new;
-    $sql_online_check = $db_new->Execute("SELECT * FROM MEMB_STAT WHERE memb___id='$account' AND ConnectStat='1'");
-    $online_check = $sql_online_check->numrows();
-    if ($online_check > 0) {
-        echo "Nhân vật chưa thoát Game. Hãy thoát Game trước khi thực hiện chức năng này.";
-        exit();
-    }
-}
-
-function kiemtra_doinv($account, $character)
+function check_change_account($account, $character)
 {
     global $db_new;
     $sql_doinv_check = $db_new->Execute("SELECT * FROM AccountCharacter WHERE Id='$account' AND GameIDC='$character'");
@@ -784,7 +755,7 @@ function check_online($account)
 }
 
 
-function kiemtra_pass2($login, $pass2)
+function check_pass2($login, $pass2)
 {
     global $db_new;
     $sql_pw_check = $db_new->Execute("SELECT * FROM MEMB_INFO WHERE pass2='$pass2' and memb___id='$login'");
@@ -795,7 +766,7 @@ function kiemtra_pass2($login, $pass2)
     }
 }
 
-function kiemtra_GM($account)
+function check_GM($account)
 {
     //global $gm;
     global $db_new;
@@ -811,7 +782,7 @@ function kiemtra_GM($account)
     return false;                            // 'isGM';
 }
 
-function kiemtra_ranking($account)
+function check_ranking($account)
 {
     //global $ranking;
     global $db_new;
@@ -825,7 +796,7 @@ function kiemtra_ranking($account)
     return false;                                        //'isRanking';
 }
 
-function kiemtra_daily($account)
+function check_daily($account)
 {
     global $dl;
     global $db_new;
@@ -839,7 +810,7 @@ function kiemtra_daily($account)
     }
 }
 
-function kiemtra_topmonth($character)
+function check_top_month($character)
 {
     global $db_new;
     $check_month = $db_new->Execute("SELECT * FROM TopMonth WHERE Month='$month' AND Year='$year'");
@@ -898,7 +869,7 @@ function kiemtra_topmonth($character)
  * @param $other
  * @return array|bool
  */
-function doSelectOtherForum($other)
+function do_select_other_forum($other)
 {
     global $DbForum;
 
@@ -922,10 +893,10 @@ function doSelectOtherForum($other)
 }
 
 /**
- * @param $orther
+ * @param $other
  * @return bool
  */
-function doUpdateOtherForum($orther)
+function doUpdateOtherForum($other)
 {
     global $DbForum;
 
@@ -956,7 +927,7 @@ function doUpdateOtherForum($orther)
         } elseif (strpos($v, '<') !== false) {
             $gr_cont .= "$v AND ";
         } elseif (strpos($v, '<=') !== false) {
-            $gr_cont .= "$df AND ";
+            $gr_cont .= "$v AND ";
         }
 
         //else continue;

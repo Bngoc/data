@@ -363,8 +363,7 @@ class ProcessCoreWeb extends ProcessCore
         $logged_username = isset($_SESSION['user_Gamer']) ? $_SESSION['user_Gamer'] : false;
 
         // Check user exists. If user logged, but not exists, logout now
-        //if ($logged_username && !db_user_by_name($logged_username))
-        //{
+        //if ($logged_username && !db_user_by_name($logged_username)) {
         //$this->cn_logout_web();
         //}
 
@@ -385,11 +384,11 @@ class ProcessCoreWeb extends ProcessCore
                     $errors_fa = false;
                     $username = trim(htmlentities($username));
 
-                    if (kiemtra_acc($username)) {
+                    if (check_by_account($username)) {
                         cn_throw_message("Tài khoản không tồn tại.", 'e');
                         $errors_fa = true;
                     }
-                    if (kiemtra_block_acc($username)) {
+                    if (check_block_account($username)) {
                         cn_throw_message("Tài khoản đang bị khóa.", 'e');
                         $errors_fa = true;
                     }
@@ -699,7 +698,7 @@ class ProcessCoreWeb extends ProcessCore
                             $token = urlencode(base64_encode(xxtea_encrypt($rand . ' ' . $username, MD5(CLIENT_IP) . getOption('#crypt_salt'))));
                             $url = getOption('http_script_dir') . '?verifiregist=' . $token;
 
-                            $stetemp = cn_replace_text(
+                            $strTemp = cn_replace_text(
                                 $tempRegisterSendEmail,
                                 $strHoder,
                                 $username,
@@ -713,7 +712,7 @@ class ProcessCoreWeb extends ProcessCore
                                 $_SERVER['SERVER_NAME']
                             );
 
-                            $stetem1 = cn_replace_text(
+                            $strTemp2 = cn_replace_text(
                                 $tempRegister,
                                 '%nameHome%, %verificationLink%',
                                 $_SERVER['SERVER_NAME'],
@@ -723,7 +722,7 @@ class ProcessCoreWeb extends ProcessCore
                             $status = cn_send_mail(
                                 $nameEmail,
                                 'Welcome to ' . $_SERVER['SERVER_NAME'],
-                                cn_replace_text($stetemp, '%home_url%', $_SERVER['SERVER_NAME']) . $stetem1
+                                cn_replace_text($strTemp, '%home_url%', $_SERVER['SERVER_NAME']) . $strTemp2
                             );
 
                             if ($status) {
@@ -767,10 +766,10 @@ class ProcessCoreWeb extends ProcessCore
                         'ban_login=0',
                         'num_login=1'
                     );
-                    $stetemp = cn_replace_text($stetemp, '%home_url%', 'index.php');
-                    $stetemp .= '<p style="float: left; color: red"><i>Vui lòng check email để xác nhận tài khoản.</i></p>';
+                    $strTemp = cn_replace_text($strTemp, '%home_url%', 'index.php');
+                    $strTemp .= '<p style="float: left; color: red"><i>Vui lòng check email để xác nhận tài khoản.</i></p>';
                     if ($checkStatusDB) {
-                        msg_info($stetemp, 'index.php');
+                        msg_info($strTemp, 'index.php');
                     } else {
                         msg_info('Err, Không thể tạo được tài khoản mới!');
                     }
@@ -877,14 +876,14 @@ class ProcessCoreWeb extends ProcessCore
     {
         // acl	name	title	app
         $modules = hook('core/cn_get_menu', array(
-            'char_manager' => array('Cd', 'Nhân Vật', null, null, 'Q', ''),
-            'event' => array('Cc', 'Event', null, null, 'q', ''),
-            'blank_money' => array('Cc', 'Blank - Money', null, null, ']', ''),
-            'cash_shop' => array('Can', 'Cash Shop', null, 'source,year,mon,day,sort,dir', 'D', ''), //can => add; new cvn => view
-            'relax' => array('Com', 'Giải Trí', null, null, 'M', ''),
-            'ranking' => array('', 'Xếp Hạng', null, null, 'R', ''),
-            'transaction' => array('Can', 'Giao dịch', null, null, '1', ''),
-            'logout' => array('', 'Logout', 'logout', null, 'X', '')
+            'char_manager' => array($this->config['role_router_web']['char_manager'], __('char_manager'), null, null, 'Q', ''),
+            'event' => array($this->config['role_router_web']['event'], __('event'), null, null, 'q', ''),
+            'bank_money' => array($this->config['role_router_web']['bank_money'], __('bank_money'), null, null, ']', ''),
+            'cash_shop' => array($this->config['role_router_web']['cash_shop'], __('cash_shop'), null, 'source,year,mon,day,sort,dir', 'D', ''), //can => add; new cvn => view
+            'relax' => array($this->config['role_router_web']['relax'], __('relax'), null, null, 'M', ''),
+            'ranking' => array($this->config['role_router_web']['ranking'], __('ranking'), null, null, 'R', ''),
+            'transaction' => array($this->config['role_router_web']['transaction'], __('transaction'), null, null, '1', ''),
+            'logout' => array($this->config['role_router_web']['logout'], __('logout'), 'logout', null, 'X', '')
         ));
 
         if (getOption('main_site')) {
@@ -894,7 +893,6 @@ class ProcessCoreWeb extends ProcessCore
         $result = '<ul class="ca-menu">';
         $mod = REQ('mod', 'GPG');
 
-
         foreach ($modules as $mod_key => $var) {
             if (!is_array($var)) {
                 $result .= '<li><a href="' . cnHtmlSpecialChars($var) . '" target="_blank">' . __('visit_site') . '</a></li>';
@@ -903,27 +901,20 @@ class ProcessCoreWeb extends ProcessCore
 
             $acl = isset($var[0]) ? $var[0] : false;
             $name = isset($var[1]) ? $var[1] : '';
-            $title = isset($var[2]) ? $var[2] : '';
+            $sub = isset($var[2]) ? $var[2] : '';
             $app = isset($var[3]) ? $var[3] : '';
             $iconText = isset($var[4]) ? $var[4] : '';
             $infoText = isset($var[5]) ? $var[5] : '';
 
-            //if ($acl && !testRoleWeb($acl))
-            //  continue;
-
-            if (isset($title) && $title) {
-                $action = '&amp;action=' . $title;
-            } else {
-                $action = '';
-            }
-            if ($mod == $mod_key) {
-                $select = ' active ';
-            } else {
-                $select = '';
+            if ($acl && !testRoleWeb($acl)){
+                continue;
             }
 
-            // Append urls for menu (preserve place)
-            if (isset($app) && $app) {
+            $action = (isset($sub) && $sub) ? '&amp;action=' . $sub : '';
+            $select = $mod == $mod_key ? ' active ' : '';
+
+            // Append url for menu (preserve place)
+            if ($app) {
                 $actions = array();
                 $mv = separateString($app);
 
@@ -957,9 +948,8 @@ class ProcessCoreWeb extends ProcessCore
         $modules = hook(
             'core/cn_get_menu_none',
             array(
-                'auto_money' => array('Cd', 'qlink_depoisit.png', 'VTC'),
-                'cash_shop' => array('Cc', 'qlink_cashshop.png', 'shop_orther'),
-                //'acc_manager'   		=> array('Can', 'XXXXXXXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXXXX', 'source,year,mon,day,sort,dir'), //can => add; new cvn => view
+                'auto_money' => array($this->config['role_router_web']['auto_money'], 'qlink_depoisit.png', 'VTC'),
+                'cash_shop' => array($this->config['role_router_web']['cash_shop'], 'qlink_cashshop.png', 'shop_orther'),
             )
         );
 

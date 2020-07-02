@@ -530,12 +530,13 @@ class ProcessCoreAdmin extends ProcessCore
 //    }
 
     // Since 2.0: Make 'Top menu'
-    public function cn_get_menu()
+    public function cn_get_menu_admin()
     {
         $modules = hook('core/cn_get_menu', array(
-            'editconfig' => array('Cd', 'Configuration general'),
-            'cashshop' => array('Can', 'Cash Shop'),
-            'logout' => array('', 'Logout', 'logout'),
+            'editconfig' => array($this->config['role_router_admin']['editconfig'], __('editconfig')),
+            'cashshop' => array($this->config['role_router_admin']['cashshop'], __('cash_shop')),
+            'manager' => array($this->config['role_router_admin']['manager'], __('manager')),
+            'logout' => array($this->config['role_router_admin']['logout'], __('logout'), 'logout'),
         ));
 
         if (getOption('main_site')) {
@@ -547,29 +548,21 @@ class ProcessCoreAdmin extends ProcessCore
 
         foreach ($modules as $mod_key => $var) {
             if (!is_array($var)) {
-                $result .= '<li><a href="' . $this->cnHtmlSpecialChars($var) . '" target="_blank">' . 'Visit site' . '</a></li>';
+                $result .= '<li><a href="' . $this->cnHtmlSpecialChars($var) . '" target="_blank">' . __('visit_site') . '</a></li>';
                 continue;
             }
 
             $acl = isset($var[0]) ? $var[0] : false;
             $name = isset($var[1]) ? $var[1] : '';
-            $title = isset($var[2]) ? $var[2] : '';
+            $sub = isset($var[2]) ? $var[2] : '';
             $app = isset($var[3]) ? $var[3] : '';
 
             if ($acl && !testRoleAdmin($acl)) {
                 continue;
             }
 
-            if (isset($title) && $title) {
-                $action = '&amp;action=' . $title;
-            } else {
-                $action = '';
-            }
-            if ($mod == $mod_key) {
-                $select = ' active ';
-            } else {
-                $select = '';
-            }
+            $action = isset($sub) && $sub ? '&amp;action=' . $sub : '';
+            $select = $mod == $mod_key ? ' active ' : '';
 
             // Append urls for menu (preserve place)
             if (isset($app) && $app) {

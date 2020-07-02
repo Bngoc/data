@@ -62,7 +62,6 @@ cn_snippet_messages();
 </form>
 
 <script>
-
     function checkConnect() {
         type_connect = $('#type_connect option:selected').val();
         nameLocal = $('#nameLocal').val();

@@ -18,14 +18,14 @@ define('VERSION_NAME', 'News v.' . VERSION . 'c');
 
 define('SERVDIR', dirname(dirname(__FILE__)));
 define('ROOT', dirname(dirname(__FILE__)));
-define('MODULE_DIR', SERVDIR . '/core/modules'); // nhan xu li
-define('SKIN', SERVDIR . '/cdata'); // chua html
-define('MODULE_ADM', SERVDIR . '/admin'); // chua ADMIN
+define('MODULE_DIR', SERVDIR . '/core/modules');
+define('SKIN', SERVDIR . '/cdata');
+define('MODULE_ADM', SERVDIR . '/admin');
 define('CN_DEBUG', false);
 define('URL_PATH', (isset($_SERVER['HTTPS']) ? "https" : "http") . '://' . dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn
 define('URL_PATH_IMG', '/public/images');
 define('PHP_SELF', $_SERVER["SCRIPT_NAME"]);
-define('MAXBANKZEN', 999999999999999);
+define('MAX_BANK_ZEN', 999999999999999);
 define('MAX_TRANS', 2000000000);
 
 // include necessary libs
@@ -41,7 +41,7 @@ require_once ROOT . '/Utils/email/class.smtp.php';
 require_once ROOT . '/Utils/GameBank/CardGameBankAPI.php';
 require_once SERVDIR . '/core/ProcessCoreWeb.php';
 
-//require_once SERVDIR . '/core/simple_html_dom.php'; //libs
+//require_once SERVDIR . '/core/simple_html_dom.php';
 
 // Create cutenews caches
 $_CN_SESS_CACHE = array();
@@ -76,6 +76,7 @@ $coreWeb->cn_relocation_db_new();
 
 // 2.0.3 checking existing configuration
 if ($is_config) {
+    cn_lang_init(ROOT);
     //cn_load_plugins();
 //cn_online_counter();
 }

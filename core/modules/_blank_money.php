@@ -8,26 +8,26 @@ add_hook('index/invoke_module', '*blank_money_invoke');
 function blank_money_invoke()
 {
     $blank_money_board = array(
-        'blank_money:chaos2blank:Csc' => 'Chaos &rsaquo;&rsaquo;&rsaquo; Bank',
-        'blank_money:blank2chaos:Csc' => 'Chaos &lsaquo;&lsaquo;&lsaquo; Bank',
-        'blank_money:cre2blank:Cp' => 'Cre &rsaquo;&rsaquo;&rsaquo; Bank',
-        'blank_money:blank2cre:Cp' => 'Cre &lsaquo;&lsaquo;&lsaquo; blank',
-        'blank_money:feather2blank:Cp' => 'Lông vũ &rsaquo;&rsaquo;&rsaquo; Bank',
-        'blank_money:blank2feather:Cp' => 'Lông vũ &lsaquo;&lsaquo;&lsaquo; blank',
-        'blank_money:blue2blank:Cp' => 'Bule &rsaquo;&rsaquo;&rsaquo; Bank',
-        'blank_money:blank2bule:Cp' => 'Bule &lsaquo;&lsaquo;&lsaquo; blank',
-        'blank_money:zen2blank:Cp' => 'Zen &rsaquo;&rsaquo;&rsaquo; Bank',
-        'blank_money:blank2zen:Ct' => 'Zen &lsaquo;&lsaquo;&lsaquo; blank',
-        'blank_money:vpoint2blank:Cp' => 'Vpoint &rsaquo;&rsaquo;&rsaquo; Bank',
-        'blank_money:blank2vpoint:Cp' => 'Vpoint &lsaquo;&lsaquo;&lsaquo; Bank',
+        'bank_money:chaos2blank:Csc' => 'Chaos &rsaquo;&rsaquo;&rsaquo; Bank',
+        'bank_money:blank2chaos:Csc' => 'Chaos &lsaquo;&lsaquo;&lsaquo; Bank',
+        'bank_money:cre2blank:Cp' => 'Cre &rsaquo;&rsaquo;&rsaquo; Bank',
+        'bank_money:blank2cre:Cp' => 'Cre &lsaquo;&lsaquo;&lsaquo; blank',
+        'bank_money:feather2blank:Cp' => 'Lông vũ &rsaquo;&rsaquo;&rsaquo; Bank',
+        'bank_money:blank2feather:Cp' => 'Lông vũ &lsaquo;&lsaquo;&lsaquo; blank',
+        'bank_money:blue2blank:Cp' => 'Bule &rsaquo;&rsaquo;&rsaquo; Bank',
+        'bank_money:blank2bule:Cp' => 'Bule &lsaquo;&lsaquo;&lsaquo; blank',
+        'bank_money:zen2blank:Cp' => 'Zen &rsaquo;&rsaquo;&rsaquo; Bank',
+        'bank_money:blank2zen:Ct' => 'Zen &lsaquo;&lsaquo;&lsaquo; blank',
+        'bank_money:vpoint2blank:Cp' => 'Vpoint &rsaquo;&rsaquo;&rsaquo; Bank',
+        'bank_money:blank2vpoint:Cp' => 'Vpoint &lsaquo;&lsaquo;&lsaquo; Bank',
         //----------------------------------------------------------
-        'blank_money:transvpoint:Cp' => 'Chuyển Vpoint',
-        'blank_money:muazen:Cp' => 'Mua Zen bằng Vpoint',
-        'blank_money:vpoint2gcoin:Cp' => 'Vpoint &rsaquo;&rsaquo;&rsaquo; Gcoin',
-        'blank_money:gcoin2vpoint:Cp' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; Vpoint',
-        'blank_money:transgc2wc:Cp' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; Wcoin',
-        'blank_money:transgc2wcp:Cp' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; WcoinP',
-        'blank_money:transgc2gob:Cp' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; GoblinCoin',
+        'bank_money:transvpoint:Cp' => 'Chuyển Vpoint',
+        'bank_money:muazen:Cp' => 'Mua Zen bằng Vpoint',
+        'bank_money:vpoint2gcoin:Cp' => 'Vpoint &rsaquo;&rsaquo;&rsaquo; Gcoin',
+        'bank_money:gcoin2vpoint:Cp' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; Vpoint',
+        'bank_money:transgc2wc:Cp' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; Wcoin',
+        'bank_money:transgc2wcp:Cp' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; WcoinP',
+        'bank_money:transgc2gob:Cp' => 'Gcoin &rsaquo;&rsaquo;&rsaquo; GoblinCoin',
     );
 
     // Call dashboard extend
@@ -263,8 +263,8 @@ function blank_money_chaos2blank()
                 $newInventory = $inventory1 . $inventory2After . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
-                do_update_orther("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
-                do_update_orther("UPDATE MEMB_INFO SET jewel_chao=jewel_chao+$countChaos WHERE memb___id='$acountID'");
+                do_update_other("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
+                do_update_other("UPDATE MEMB_INFO SET jewel_chao=jewel_chao+$countChaos WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã thêm Sl: " . number_format($countChaos, 0, ",", ".") . " Chaos vào ngân hàng thành công!");
             }
@@ -339,8 +339,8 @@ function blank_money_cre2blank()
                 $newInventory = $inventory1 . $inventory2After . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
-                do_update_orther("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
-                do_update_orther("UPDATE MEMB_INFO SET jewel_cre=jewel_cre+$countCre WHERE memb___id='$acountID'");
+                do_update_other("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
+                do_update_other("UPDATE MEMB_INFO SET jewel_cre=jewel_cre+$countCre WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã thêm Sl: " . number_format($countCre, 0, ",", ".") . " Cre vào ngân hàng thành công!");
             }
@@ -414,8 +414,8 @@ function blank_money_blue2blank()
                 $newInventory = $inventory1 . $inventory2After . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
-                do_update_orther("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
-                do_update_orther("UPDATE MEMB_INFO SET jewel_blue=jewel_blue+$countBlue WHERE memb___id='$acountID'");
+                do_update_other("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
+                do_update_other("UPDATE MEMB_INFO SET jewel_blue=jewel_blue+$countBlue WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã thêm Sl: " . number_format($countBlue, 0, ",", ".") . " Blue vào ngân hàng thành công!");
             }
@@ -486,8 +486,8 @@ function blank_money_feather2blank()
                 $newInventory = $inventory1 . $inventory2After . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
-                do_update_orther("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
-                do_update_orther("UPDATE MEMB_INFO SET jewel_feather=jewel_feather+$countFeather WHERE memb___id='$acountID'");
+                do_update_other("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
+                do_update_other("UPDATE MEMB_INFO SET jewel_feather=jewel_feather+$countFeather WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã thêm Sl: " . number_format($countFeather, 0, ",", ".") . " Lông vũ vào ngân hàng thành công!");
             }
@@ -514,7 +514,7 @@ function blank_money_feather2blank()
 
 function blank_money_zen2blank()
 {
-    $maxBank = MAXBANKZEN;
+    $maxBank = MAX_BANK_ZEN;
     $option = ' Zen';
     $showchar = cn_character();
     $_blank_var = view_bank($accoutID = $_SESSION['user_Gamer']);
@@ -557,8 +557,8 @@ function blank_money_zen2blank()
             }
 
             if (!$errors_false) {
-                do_update_orther("UPDATE Character SET Money=0 WHERE Name='$sub'");
-                do_update_orther("UPDATE MEMB_INFO SET bank=$totalSendBank WHERE memb___id='$accoutID'");
+                do_update_other("UPDATE Character SET Money=0 WHERE Name='$sub'");
+                do_update_other("UPDATE MEMB_INFO SET bank=$totalSendBank WHERE memb___id='$accoutID'");
 
                 cn_throw_message("Bạn đã thêm Sl: " . number_format($moneyInventory, 0, ",", ".") . " Zen vào ngân hàng thành công!");
             }
@@ -631,8 +631,8 @@ function blank_money_vpoint2blank()
             if (!$errors_false) {
                 $newInventory = $inventory1 . $inventory2After . $inventory3;
 
-                do_update_orther("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
-                do_update_orther("UPDATE MEMB_INFO SET vpoint=vpoint+$countVpoint WHERE memb___id='$acountID'");
+                do_update_other("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
+                do_update_other("UPDATE MEMB_INFO SET vpoint=vpoint+$countVpoint WHERE memb___id='$acountID'");
 
                 //Ghi vào Log
                 $afterVpoint = $showBlank[0]['vp'] + $countVpoint;
@@ -843,8 +843,8 @@ function blank_money_blank2chaos()
                 $newInventory = $inventory1 . $inventory2 . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
-                do_update_orther("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
-                do_update_orther("UPDATE MEMB_INFO SET jewel_chao=jewel_chao-$postNumberItem WHERE memb___id='$acountID'");
+                do_update_other("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
+                do_update_other("UPDATE MEMB_INFO SET jewel_chao=jewel_chao-$postNumberItem WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã rút Sl: " . number_format($postNumberItem, 0, ",", ".") . " Chaos từ ngân hàng thành công!");
 
@@ -969,8 +969,8 @@ function blank_money_blank2cre()
                 $newInventory = $inventory1 . $inventory2 . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
-                do_update_orther("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
-                do_update_orther("UPDATE MEMB_INFO SET jewel_cre=jewel_cre-$postNumberItem WHERE memb___id='$acountID'");
+                do_update_other("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
+                do_update_other("UPDATE MEMB_INFO SET jewel_cre=jewel_cre-$postNumberItem WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã rút Sl: " . number_format($postNumberItem, 0, ",", ".") . " Cre từ ngân hàng thành công!");
 
@@ -1097,8 +1097,8 @@ function blank_money_blank2bule()
                 $newInventory = $inventory1 . $inventory2 . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
-                do_update_orther("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
-                do_update_orther("UPDATE MEMB_INFO SET jewel_blue=jewel_blue-$postNumberItem WHERE memb___id='$acountID'");
+                do_update_other("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
+                do_update_other("UPDATE MEMB_INFO SET jewel_blue=jewel_blue-$postNumberItem WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã rút Sl: " . number_format($postNumberItem, 0, ",", ".") . " Blue từ ngân hàng thành công!");
 
@@ -1214,8 +1214,8 @@ function blank_money_blank2feather()
                 $newInventory = $inventory1 . $inventory2 . $inventory3;
                 $acountID = $_SESSION['user_Gamer'];
 
-                do_update_orther("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
-                do_update_orther("UPDATE MEMB_INFO SET jewel_feather=jewel_feather-$postNumberItem WHERE memb___id='$acountID'");
+                do_update_other("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
+                do_update_other("UPDATE MEMB_INFO SET jewel_feather=jewel_feather-$postNumberItem WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã rút Sl: " . number_format($postNumberItem, 0, ",", ".") . " Lông vũ từ ngân hàng thành công!");
 
@@ -1317,8 +1317,8 @@ function blank_money_blank2zen()
             if (!$errors_false) {
                 $acountID = $_SESSION['user_Gamer'];
 
-                do_update_orther("UPDATE Character SET Money=Money+$postNumberItem WHERE Name='$sub'");
-                do_update_orther("UPDATE MEMB_INFO SET bank=bank-$postNumberItem WHERE memb___id='$acountID'");
+                do_update_other("UPDATE Character SET Money=Money+$postNumberItem WHERE Name='$sub'");
+                do_update_other("UPDATE MEMB_INFO SET bank=bank-$postNumberItem WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã rút Sl: " . number_format($postNumberItem, 0, ",", ".") . " Zen từ ngân hàng thành công!");
             }
@@ -1446,8 +1446,8 @@ function blank_money_blank2vpoint()
             if (!$errors_false) {
                 $newInventory = $inventory1 . $inventory2 . $inventory3;
 
-                do_update_orther("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
-                do_update_orther("UPDATE MEMB_INFO SET vpoint=vpoint-$postNumberItem WHERE memb___id='$acountID'");
+                do_update_other("UPDATE Character SET Inventory=0x$newInventory WHERE Name='$sub'");
+                do_update_other("UPDATE MEMB_INFO SET vpoint=vpoint-$postNumberItem WHERE memb___id='$acountID'");
 
                 //Ghi vào Log
                 $afterVpoint = ($showBlank[0]['vp'] - $countVpoint);
@@ -1541,7 +1541,7 @@ function blank_money_vpoint2gcoin()
             if (!$errors_false) {
                 $gcoinNew = floor($postNumberItem * getOption('vptogc') / 100);
                 $acountID = $_SESSION['user_Gamer'];
-                do_update_orther("UPDATE MEMB_INFO SET gcoin=gcoin+$gcoinNew, vpoint=vpoint-$postNumberItem WHERE memb___id='$acountID'");
+                do_update_other("UPDATE MEMB_INFO SET gcoin=gcoin+$gcoinNew, vpoint=vpoint-$postNumberItem WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Vpoint sang " . number_format($gcoinNew, 0, ',', '.') . " Gcoin thành công!");
 
@@ -1623,7 +1623,7 @@ function blank_money_gcoin2vpoint()
 
             if (!$errors_false) {
                 $acountID = $_SESSION['user_Gamer'];
-                do_update_orther("UPDATE MEMB_INFO SET gcoin=gcoin-$postNumberItem, vpoint=vpoint+$postNumberItem WHERE memb___id='$acountID'");
+                do_update_other("UPDATE MEMB_INFO SET gcoin=gcoin-$postNumberItem, vpoint=vpoint+$postNumberItem WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin sang " . number_format($postNumberItem, 0, ',', '.') . " Vpoint thành công!");
 
@@ -1704,7 +1704,7 @@ function blank_money_transgc2wc()
 
             if (!$errors_false) {
                 $acountID = $_SESSION['user_Gamer'];
-                do_update_orther("UPDATE MEMB_INFO SET gcoin=gcoin-$postNumberItem, wCoin=wCoin+$postNumberItem WHERE memb___id='$acountID'");
+                do_update_other("UPDATE MEMB_INFO SET gcoin=gcoin-$postNumberItem, wCoin=wCoin+$postNumberItem WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin sang " . number_format($postNumberItem, 0, ',', '.') . " Wcoin thành công!");
 
@@ -1788,7 +1788,7 @@ function blank_money_transgc2wcp()
 
             if (!$errors_false) {
                 $acountID = $_SESSION['user_Gamer'];
-                do_update_orther("UPDATE MEMB_INFO SET gcoin=gcoin-$postNumberItem, wCoinP=wCoinP+$postNumberItem WHERE memb___id='$acountID'");
+                do_update_other("UPDATE MEMB_INFO SET gcoin=gcoin-$postNumberItem, wCoinP=wCoinP+$postNumberItem WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin sang " . number_format($postNumberItem, 0, ',', '.') . " WcoinP thành công!");
 
@@ -1873,7 +1873,7 @@ function blank_money_transgc2gob()
 
             if (!$errors_false) {
                 $acountID = $_SESSION['user_Gamer'];
-                do_update_orther("UPDATE MEMB_INFO SET gcoin=gcoin-$postNumberItem, goblinCoin=goblinCoin+$postNumberItem WHERE memb___id='$acountID'");
+                do_update_other("UPDATE MEMB_INFO SET gcoin=gcoin-$postNumberItem, goblinCoin=goblinCoin+$postNumberItem WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Gcoin sang " . number_format($postNumberItem, 0, ',', '.') . " GoblinCoin thành công!");
 
@@ -1974,15 +1974,15 @@ function blank_money_muazen()
                 $errors_false = true;
             }
 
-            if ($getZen + $rootBank > MAXBANKZEN) {
-                cn_throw_message('Tài khoản ' . $accoutID . ' có thể chứa tối đa ' . number_format(MAXBANKZEN, 0, ',', '.') . ' Zen.', 'e');
+            if ($getZen + $rootBank > MAX_BANK_ZEN) {
+                cn_throw_message('Tài khoản ' . $accoutID . ' có thể chứa tối đa ' . number_format(MAX_BANK_ZEN, 0, ',', '.') . ' Zen.', 'e');
                 $errors_false = true;
             }
 
 
             if (!$errors_false) {
                 $acountID = $_SESSION['user_Gamer'];
-                do_update_orther("UPDATE MEMB_INFO SET bank=bank+$getZen, vpoint=vpoint-$postNumberItem WHERE memb___id='$acountID'");
+                do_update_other("UPDATE MEMB_INFO SET bank=bank+$getZen, vpoint=vpoint-$postNumberItem WHERE memb___id='$acountID'");
 
                 cn_throw_message("Bạn đã mua " . number_format($getZen, 0, ",", ".") . " Zen với " . number_format($postNumberItem, 0, ',', '.') . " Vpoint thành công!");
 
@@ -2082,8 +2082,8 @@ function blank_money_transvpoint()
             if (!$errors_false) {
                 $acountID = $_SESSION['user_Gamer'];
 
-                do_update_orther("UPDATE MEMB_INFO SET vpoint=vpoint-$vpointNew WHERE memb___id='$acountID'");
-                do_update_orther("UPDATE MEMB_INFO SET vpoint=vpoint+$postNumberItem WHERE memb___id='$newAccount'");
+                do_update_other("UPDATE MEMB_INFO SET vpoint=vpoint-$vpointNew WHERE memb___id='$acountID'");
+                do_update_other("UPDATE MEMB_INFO SET vpoint=vpoint+$postNumberItem WHERE memb___id='$newAccount'");
 
                 cn_throw_message("Bạn đã chuyển " . number_format($postNumberItem, 0, ",", ".") . " Vpoint, phí " . number_format($configTransVpoint, 0, ',', '.') . " Vpoint/1L sang tài khoản $newAccount thành công!");
 

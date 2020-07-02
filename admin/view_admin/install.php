@@ -3,7 +3,6 @@
 cn_snippet_messages();
 ?>
 <form action="<?php echo PHP_SELF; ?>" method="POST">
-
     <table>
         <tr>
             <td valign="top">
@@ -31,9 +30,7 @@ cn_snippet_messages();
                 </table>
             </td>
             <td valign="top" style="padding: 0 0 0 32px; font-size: 18px; color: #888;">
-
             </td>
         </tr>
-
     </table>
 </form>

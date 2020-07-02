@@ -67,8 +67,12 @@ function board_invoke()
             die(call_user_func("board_$opt"));
         }
     }
+    $cfg = getMemcache('config');
+    if (!isset($cfg['temp_basic']) || !count($cfg['temp_basic'])) {
+        cn_get_template_by_array('class');
+    }
 
-    echo_header_admin('-@com_board/style.css', "Mu Online dashboard");
+    echo_header_admin('-@skins/mu_style.css', "Mu Online dashboard");
 
     $images = array(
         'sysconf' => 'options.gif',
@@ -83,7 +87,7 @@ function board_invoke()
         'group' => 'group.png',
         'statistics' => 'statistic.png',
         'logs' => 'list.png',
-		'iswebshop' => 'list.png',
+        'iswebshop' => 'list.png',
         'iserverz' => 'list.png',
         'wreplace' => 'list.png'
     );
@@ -119,30 +123,26 @@ function board_sysconf()
 {
     $lng = $grps = $all_skins = array();
     //$skins = scan_dir(cn_path_construct(SERVDIR,'skins'));
-    //$langs = scan_dir(cn_path_construct(SERVDIR,'core','lang'), 'txt');
+    $langs = scan_dir(cn_path_construct(SERVDIR, 'core', 'lang'), 'php');
     $_grps = getOption('#grp');
-    //$conf_class_ = cn_get_template('class_dw_1_name','config_class');
-    //$conf_class = cn_get_template_by_array('config_class');
 
-    /*
-    // fetch skins
-    foreach ($skins as $skin)
-    {
-        if (preg_match('/(.*)\.skin\.php/i', $skin, $c)) //<=> *.skin.php
-        {
-            $all_skins[$c[1]] = $c[1];
-        }
-    }
 
-    // fetch lang packets
-    foreach ($langs as  $lf)
-    {
-        if (preg_match('/(.*)\.txt/i', $lf, $c))
-        {
+    // Fetch skins
+//    foreach ($skins as $skin)
+//    {
+//        if (preg_match('/(.*)\.skin\.php/i', $skin, $c)) //<=> *.skin.php
+//        {
+//            $all_skins[$c[1]] = $c[1];
+//        }
+//    }
+
+    // Fetch lang packets
+    foreach ($langs as $lf) {
+        if (preg_match('/(.*)\.php/i', $lf, $c)) {
             $lng[$c[1]] = $c[1];
         }
     }
-*/
+
     // fetch groups
     foreach ($_grps as $id => $vn) {
         $grps[$id] = ucfirst($vn['N']);
@@ -204,7 +204,7 @@ function board_sysconf()
             'hide_captcha' => array('Y/N', 'Hide captcha source path from visitors'),
 
             '_Web' => array('title', '.............'),
-
+            'cn_language' => array('select', 'CuteNews internationalization', $lng),
             'configBuyZen' => array('text', 'Buy zen list [500.000.000.000 - 1.000.000.000 - 1.500.000.000 - 2.000.000.000]|Ex: 5000|10000|15000|20000  ==> 5000 Vp <-> 500.000.000.000 Zen, ...'),
             'configLevel' => array('text', 'Set Vpoint level 150 - 220 - 380 |Ex: 2000|3000|5000  =-> 2k Vp <-> Level I; 3k Vp <-> Level II; 5k Vp <-> Level III'),
             'question_answers' => array('text', 'Câu hỏi|Liệt kê các câu hỏi ngăn cách nhau bằng dấu \',\''),
@@ -378,16 +378,13 @@ function board_sysconf()
         unset($options[$id][1]);
     }
 
-    // TODO
-//    cn_get_template_by_array('class');
-
     if (REQ('message', 'GET') == 'saved') {
         unset($_GET['message']);
         cn_throw_message(__('save_success'));
     }
 
     cn_assign('options, sub, options_list', $options, $sub, $options_list);
-    echo_header_admin('-@com_board/style.css', "System configurations");
+    echo_header_admin('-@skins/mu_style.css', "System configurations");
     //echo execTemplate('header');
     echo execTemplate('com_board/sysconf');
     echofooter();
@@ -395,34 +392,9 @@ function board_sysconf()
 
 function board_confChar()
 {
-    $lng = $grps = $all_skins = array();
+    $grps = array();
     $_grps = getOption('#grp');
-    //$conf_class_ = cn_get_template('class_dw_1_name','config_class');
-    //$conf_class = cn_get_template_by_array('config_class');
 
-    //echo "000000000000000000000 142 =>". $conf_class['class_dw_1_name'] ."<br>";
-    //echo "000000000000000000000 143 =>". $conf_class_ ."<br>";
-
-
-    /*
-    // fetch skins
-    foreach ($skins as $skin)
-    {
-        if (preg_match('/(.*)\.skin\.php/i', $skin, $c)) //<=> *.skin.php
-        {
-            $all_skins[$c[1]] = $c[1];
-        }
-    }
-
-    // fetch lang packets
-    foreach ($langs as  $lf)
-    {
-        if (preg_match('/(.*)\.txt/i', $lf, $c))
-        {
-            $lng[$c[1]] = $c[1];
-        }
-    }
-*/
     // fetch groups
     foreach ($_grps as $id => $vn) {
         $grps[$id] = ucfirst($vn['N']);
@@ -536,8 +508,6 @@ function board_confChar()
         $options[$id]['title'] = $title;
         $options[$id]['desc'] = $desc;
 
-//        $options[$id]['help'] = isset($help[$id]) ? $help[$id] : '';
-
         unset($options[$id][1]);
     }
 
@@ -548,7 +518,7 @@ function board_confChar()
 
     cn_assign('options, sub, options_list', $options, $sub, $options_list);
 
-    echo_header_admin('-@com_board/style.css', "System configurations character");
+    echo_header_admin('-@skins/mu_style.css', "System configurations character");
     echo execTemplate('com_board/confchar');
     echofooter();
 }
@@ -641,56 +611,48 @@ function board_personal()
     }
 
     cn_assign('member, acl_write_news, acl_desc, personal_more', $member, testRoleAdmin('Can'), $acl_desc, $personal_more);
-    echo_header_admin('-@com_board/style.css', "Personal options");
+    echo_header_admin('-@skins/mu_style.css', "Personal options");
     echo execTemplate('com_board/personal');
     echofooter();
 }
 
 function board_iswebshop()
 {
-	
+
     $ipban = getoption('#ipban');
-    if (!is_array($ipban)) 
-    {
+    if (!is_array($ipban)) {
         $ipban = array();
     }
 
     // Submit new IP
-    if (request_type('POST'))
-    {
+    if (request_type('POST')) {
         cn_dsi_check();
 
         $ip = trim(REQ('add_ip'));
-        if(!empty($ip))
-        {
+        if (!empty($ip)) {
             // Times blocked : Expire time
             $ipban[$ip] = array(0, 0);
 
             setoption('#ipban', $ipban);
-            cn_throw_message('IP or name mask ['.$ip.'] add/replaced');
+            cn_throw_message('IP or name mask [' . $ip . '] add/replaced');
+        } else {
+            cn_throw_message('IP Address must be filled', 'w');
         }
-        else
-        {
-            cn_throw_message('IP Address must be filled','w');
-        }
-    }
-    // Unblock IP
-    elseif ($ip = REQ('unblock'))
-    {
+    } // Unblock IP
+    elseif ($ip = REQ('unblock')) {
         cn_dsi_check();
 
-        if (isset($ipban[$ip]))
-        {
+        if (isset($ipban[$ip])) {
             unset($ipban[$ip]);
         }
-        
+
         setoption('#ipban', $ipban);
     }
 
     cn_assign('list', $ipban);
-    echo_header_admin('-@com_board/style.css', 'Block IP');
-	echo execTemplate('com_board/ipban');
-	echofooter();
+    echo_header_admin('-@skins/mu_style.css', 'Block IP');
+    echo execTemplate('com_board/ipban');
+    echofooter();
 }
 
 function board_iserverz()
@@ -699,42 +661,36 @@ function board_iserverz()
 
     $categories = cn_get_categories();
 
-    $rss                    = getoption('#rss');
-    $rss_encoding           =isset($rss['encoding'])? $rss['encoding']:'UTF-8';
-    $rss_news_include_url   =isset($rss['news_include_url'])? $rss['news_include_url']:'';
-    $rss_title              =isset($rss['title'])? $rss['title']:'';
-    $rss_language           =isset($rss['language'])? $rss['language']:'en-us';
+    $rss = getoption('#rss');
+    $rss_encoding = isset($rss['encoding']) ? $rss['encoding'] : 'UTF-8';
+    $rss_news_include_url = isset($rss['news_include_url']) ? $rss['news_include_url'] : '';
+    $rss_title = isset($rss['title']) ? $rss['title'] : '';
+    $rss_language = isset($rss['language']) ? $rss['language'] : 'en-us';
 
     // Default: view
-    if ($rss_encoding == '') 
-    {
+    if ($rss_encoding == '') {
         $rss_encoding = 'UTF-8';
     }
-    if ($rss_language == '') 
-    {
+    if ($rss_language == '') {
         $rss_language = 'en-us';
     }
 
     // Check submit
-    if (request_type('POST'))
-    {
+    if (request_type('POST')) {
         cn_dsi_check();
 
         // Save new configuration
-        if ($sub == 'rss')
-        {
-            $rss['encoding']         = $rss_encoding         = REQ('rss_encoding');
+        if ($sub == 'rss') {
+            $rss['encoding'] = $rss_encoding = REQ('rss_encoding');
             $rss['news_include_url'] = $rss_news_include_url = REQ('rss_news_include_url');
-            $rss['title']            = $rss_title            = REQ('rss_title');
-            $rss['language']         = $rss_language         = REQ('rss_language');
+            $rss['title'] = $rss_title = REQ('rss_title');
+            $rss['language'] = $rss_language = REQ('rss_language');
 
             // Default: save
-            if ($rss_encoding == '') 
-            {
+            if ($rss_encoding == '') {
                 $rss_encoding = 'UTF-8';
             }
-            if ($rss_language == '') 
-            {
+            if ($rss_language == '') {
                 $rss_language = 'en-us';
             }
 
@@ -742,27 +698,25 @@ function board_iserverz()
         }
     }
 
-    $all_tpls  = array();
-    $listsys   = cn_template_list();
+    $all_tpls = array();
+    $listsys = cn_template_list();
     $templates = getoption('#templates');
 
     // Get all templates
-    foreach ($listsys as $id => $_t) 
-    {
-        $all_tpls[ $id ] = $id;
+    foreach ($listsys as $id => $_t) {
+        $all_tpls[$id] = $id;
     }
-    foreach ($templates as $id => $_t) 
-    {
-        $all_tpls[ $id ] = $id;
+    foreach ($templates as $id => $_t) {
+        $all_tpls[$id] = $id;
     }
 
     cn_assign('sub, categories, all_tpls', $sub, $categories, $all_tpls);
     cn_assign('rss_news_include_url, rss_encoding, rss_language, rss_title', $rss_news_include_url, $rss_encoding, $rss_language, $rss_title);
 
-    echo_header_admin('-@dashboard/style.css', 'Integration Wizard'); 
-	echo execTemplate('dashboard/intwiz');
-	echofooter();
-	
+    echo_header_admin('-@skins/mu_style.css', 'Integration Wizard');
+    echo execTemplate('com_board/intwiz');
+    echofooter();
+
 }
 
 // Since 2.0: Replace words
@@ -792,7 +746,7 @@ function board_wreplace()
     }
     $is_replace_opt = getoption('use_replacement');
     cn_assign('wlist, word, replace, repopt', $wlist, $word, $replace, $is_replace_opt);
-    echoheader('-@com_board/style.css', 'Replace words');
+    echoheader('-@skins/mu_style.css', 'Replace words');
     echo exec_tpl('com_board/replace');
     echofooter();
 }
@@ -972,8 +926,6 @@ function board_ischaracter()
     );
 
     $options = isset($options_list[$sub]) ? $options_list[$sub] : [];
-
-    //$acv = cn_get_template_by_array($template);
 
     foreach ($acx as $id => $subtpl) {
         $all_header_conf[$id]['id'] = $id;
@@ -1296,7 +1248,7 @@ function board_ischaracter()
     $all_header_conf = isset($all_header_conf) ? $all_header_conf : array();
 
     cn_assign('gh_loai1, gh_loai2, sub, all_header_conf, set_arr', $get_gh_loai1, $get_gh_loai2, $sub, $all_header_conf, $options);
-    echo_header_admin('-@com_board/style.css', "Config Character");
+    echo_header_admin('-@skins/mu_style.css', "Config Character");
     echo execTemplate('com_board/classchar');
     echofooter();
 }
@@ -1421,7 +1373,7 @@ function board_userman()
     cn_assign('users, section, st, per_page, grp', $userlist, $section, $st, $per_page, $grp);
     cn_assign('user_name, user_nick, user_email, user_acl, is_edit', $user_name, $user_nick, $user_email, $user_acl, $is_edit);
 
-    echo_header_admin('-@com_board/style.css', "Users manager");
+    echo_header_admin('-@skins/mu_style.css', "Users manager");
     echo execTemplate('com_board/users');
     echofooter();
 }
@@ -1657,7 +1609,7 @@ function board_group()
     }
 
     cn_assign('grp, group_name, group_id, group_grp, group_system, access, form_desc', $grp, $group_name, $group_id, $group_grp, $group_system, $access, $form_desc);
-    echoheader('-@com_board/style.css', 'Groups');
+    echoheader('-@skins/mu_style.css', 'Groups');
     echo execTemplate('com_board/group');
     echofooter();
 }
@@ -1870,7 +1822,7 @@ function board_logs()
 
     cn_assign('log_read, section, default_log, options, sub', $log_read, $section, $default_log, $options, $sub);
     cn_assign('echoPagination', $echoPagination);
-    echo_header_admin('-@com_board/style.css', 'System logs');
+    echo_header_admin('-@skins/mu_style.css', 'System logs');
     echo execTemplate('com_board/logs');
     echofooter();
 }
@@ -1923,7 +1875,7 @@ function board_statistics()
 
     cn_assign('list', $list);
     cn_assign('type, name, desc, meta, group, req', $type, $name, $desc, $meta, $group, $req);
-    echo_header_admin('-@com_board/style.css', 'statistics - Thống kê');
+    echo_header_admin('-@skins/mu_style.css', 'statistics - Thống kê');
     echo execTemplate('com_board/statistics');
     echofooter();
 }
@@ -2030,7 +1982,7 @@ function board_uploadFileAPIDropBox()
 //    fclose($f);
 //    print_r($fileMetadata);
 
-    echo_header_admin('-@com_board/style.css@com_board/downloadapi_dropbox.js', 'download Api - download');
+    echo_header_admin('-@skins/mu_style.css@com_board/downloadapi_dropbox.js', 'download Api - download');
     echo execTemplate('com_board/downloadApi');
     echofooter();
 }
@@ -2222,7 +2174,7 @@ function board_uploadFileAPIGoogle()
         return json_encode($fileStatus);
     }
 
-    echo_header_admin('-@com_board/style.css@com_board/uploadApiGoogleDrivers.js', 'Api-Upload file to GoogleDrivers');
+    echo_header_admin('-@skins/mu_style.css@com_board/uploadApiGoogleDrivers.js', 'Api-Upload file to GoogleDrivers');
     echo execTemplate('com_board/downloadApiGoogle');
     echofooter();
 }
@@ -2385,7 +2337,7 @@ function board_select()
 
     cn_assign('sub, pagination, sort, result_content', $sub, '', $sort, array());
 
-    echo_header_admin('-@com_board/style.css@com_board/executeSelect.js', "Select");
+    echo_header_admin('-@skins/mu_style.csss@com_board/executeSelect.js', "Select");
     echo execTemplate('com_board/selsect');
     echofooter();
 }
@@ -2422,7 +2374,7 @@ function board_apiDriverdChangeShare()
                 'atcDownload' => $shareDownload
             );
 
-            $isChek = do_update_orther("UPDATE ListFileApiCloud SET shareDownload=$shareDownloadChange WHERE alias='$alias'");
+            $isChek = do_update_other("UPDATE ListFileApiCloud SET shareDownload=$shareDownloadChange WHERE alias='$alias'");
 
 //            $shareDownloadChange = $shareDownload;
             if ($isChek) {
@@ -2465,7 +2417,7 @@ function board_apiDeleteDrivers()
                 $alias = htmlentities(html_entity_decode(trim($request->alias)));
 
                 $service->files->delete($alias);
-                $isChek = do_update_orther("UPDATE ListFileApiCloud SET isDelete=1 WHERE alias='$alias'");
+                $isChek = do_update_other("UPDATE ListFileApiCloud SET isDelete=1 WHERE alias='$alias'");
 
 //            $shareDownloadChange = $shareDownload;
                 if ($isChek) {

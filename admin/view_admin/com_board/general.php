@@ -44,11 +44,11 @@ list($dashboard, $username, $greeting_message) = _GL('dashboard, username, greet
         <?php foreach ($dashboard as $id => $item) {
             if ($item['isHide']) { ?>
                 <div class="opt-item">
-                    <a href="<?php echo cn_url_modify("mod=" . $item['mod'], "opt=" . $item['opt']); ?>">
+                    <a href="<?php echo cn_url_modify("mod=" . @$item['mod'], "opt=" . @$item['opt']); ?>">
                         <div><img
-                                src="<?php echo getOption('http_script_dir') ?>/public/images/admin/<?php echo $item['img']; ?>"
+                                src="<?php echo getOption('http_script_dir') ?>/public/images/admin/<?php echo @$item['img']; ?>"
                                 width="48"/></div>
-                        <div><?php echo $item['name']; ?></div>
+                        <div><?php echo @$item['name']; ?></div>
                     </a>
                 </div>
 

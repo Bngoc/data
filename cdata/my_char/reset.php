@@ -89,7 +89,7 @@ echoFormVerifyChar(['action_rs' => 'reset']);
     </tr>
     <tr>
         <td>Lưu ý: Jewel cần cho Reset phải được gửi trong
-            <a href="<?php echo cn_url_modify(array('reset'), 'mod=blank_money', 'opt', 'sub'); ?>"> ngân hàng!</a></td>
+            <a href="<?php echo cn_url_modify(array('reset'), 'mod=bank_money', 'opt', 'sub'); ?>"> ngân hàng!</a></td>
     </tr>
     <tr>
         <td colspan="3">

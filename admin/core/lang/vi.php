@@ -31,10 +31,20 @@ return [
     'email_validate' => 'Email not valid',
     'error_add_user' => 'User not added: internal error',
     'error_update_user' => 'Can\'t update user',
+
+    'done' => 'Done',
+    'fail' => 'Fail',
+    'process' => 'Process',
+    'renting_point' => 'Renting Point',
+    'none' => 'None',
+    'block' => 'Block',
+    'unblock' => 'Unblock',
+    'normal' => 'Normal',
+    'account' => 'Account',
     //-------------------------------------------
-    "system_configuration" => "System configuration",
-    "functional_configuration" => "Functional configuration",
-    "configure_DDoS" => "Configure DDoS",
+    "system_configuration" => "System",
+    "functional_configuration" => "Functional",
+    "configure_DDoS" => "DDoS",
     "character" => "Character",
     "personal_options" => "Personal options",
     "users_manager" => "Users manager",
@@ -49,6 +59,25 @@ return [
     "update_money" => "Update Money",
     "update_character" => "Update Character",
     "insert" => "Insert",
-    //-------------------------------------------
+    //----------------------ADMIN---------------------
+    'editconfig' => "Configuration",
+    'manager' => "Manager",
+    'card_phone' => "Card phone",
+    'view_card' => "View card",
+    'pc_point' => "Pc point",
+    'v_point' => "Vpoint",
+    'debit_point' => "Debit point",
+    'restart_data' => "Restart data Database",
+    'manager_account' => "Manager account",
+
+    //----------------------WEB---------------------
+    'char_manager' => "Character",
+    'event' => "Event",
+    'bank_money' => "Bank&Money",
+    'cash_shop' => "Cashshop",
+    'relax' => "Relax",
+    'ranking' => "Ranking",
+    'transaction' => "Transaction",
+    'logout' => "Logout",
 
 ];

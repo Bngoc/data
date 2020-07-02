@@ -394,7 +394,7 @@ function char_reset()
         $check_on = false;
         $status = "Offline";
     }
-    if (check_changecls($accc_, $sub)) {
+    if (check_change_cls($accc_, $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -967,7 +967,7 @@ function char_resetvip()
         $check_on = false;
         $status = "Offline";
     }
-    if (check_changecls($accc_, $sub)) {
+    if (check_change_cls($accc_, $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -1346,7 +1346,7 @@ function char_relife()
         $check_on = false;
         $status = "Offline";
     }
-    if (check_changecls($accc_, $sub)) {
+    if (check_change_cls($accc_, $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -1596,7 +1596,7 @@ function char_online()
         $check_on = false;
         $status = "<font color =red>Offline</font>";
     }
-    //if(check_changecls($accc_, $sub)){ $check_change = true; $status_change = "Đã đổi"; }else{ $check_change = false; $status_change = "<font color =red>Chưa đổi</font>";}
+    //if(check_change_cls($accc_, $sub)){ $check_change = true; $status_change = "Đã đổi"; }else{ $check_change = false; $status_change = "<font color =red>Chưa đổi</font>";}
 
     $ctime = ctime();
     $dbegin = date("Y-M-d", $deleon_time);
@@ -1799,7 +1799,7 @@ function char_offline()
         $check_on = false;
         $status = "Offline";
     }
-    if (check_changecls($accc_, $sub)) {
+    if (check_change_cls($accc_, $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -2096,7 +2096,7 @@ function char_rsdelegate()
         $check_on = false;
         $status = "Offline";
     }
-    if (check_changecls($accc_, $sub)) {
+    if (check_change_cls($accc_, $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -2357,7 +2357,7 @@ function char_rsdelegatevip()
         $check_on = false;
         $status = "Offline";
     }
-    if (check_changecls($accc_, $sub)) {
+    if (check_change_cls($accc_, $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -2559,7 +2559,7 @@ function char_subpoint()
         $point_dutru_false = $point_false65k = true;
     }
 
-    if (check_changecls($member['user_name'], $sub)) {
+    if (check_change_cls($member['user_name'], $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -2715,7 +2715,7 @@ function char_addpoint()
     //else{}
 
 
-    if (check_changecls($member['user_name'], $sub)) {
+    if (check_change_cls($member['user_name'], $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -2886,7 +2886,7 @@ function char_rspoint()
     }
 
 
-    if (check_changecls($member['user_name'], $sub)) {
+    if (check_change_cls($member['user_name'], $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -3031,7 +3031,7 @@ function char_movemap()
         $local_map = 'Chưa xác định MAP';
     }
 
-    if (check_changecls($member['user_name'], $sub)) {
+    if (check_change_cls($member['user_name'], $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -3178,7 +3178,7 @@ function char_removepk()
         $sms_pk = " <font color=red>(Không phải sát thủ)</font>";
     }
 
-    if (check_changecls($member['user_name'], $sub)) {
+    if (check_change_cls($member['user_name'], $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -3320,7 +3320,7 @@ function char_pointtax()
         $sms_tax = " (Thuê còn " . date("H:i:s", ($time_tax - ctime())) . ")";
     }
 
-    if (check_changecls($member['user_name'], $sub)) {
+    if (check_change_cls($member['user_name'], $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -3455,7 +3455,7 @@ function char_changename()
         $sms_vp = " <font color=red>(Thiếu " . number_format((float)(abs($get_vp)), 0, ",", ".") . " Vpoint)</font>";
     }
 
-    if (check_changecls($member['user_name'], $sub)) {
+    if (check_change_cls($member['user_name'], $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -3614,7 +3614,7 @@ function char_changeclass()
 
     list($get_gc, $sms_gc, $get_vp, $sms_vp, $cn_false) = checkGcoinVpoint($gcoin_, $vpoint_, $changeClass[0]);
 
-    if (check_changecls($member['user_name'], $sub)) {
+    if (check_change_cls($member['user_name'], $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -3793,7 +3793,7 @@ function char_level1()
 
     list($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, (int)$config_level[0]);
 
-    if (check_changecls($_SESSION['user_Gamer'], $sub)) {
+    if (check_change_cls($_SESSION['user_Gamer'], $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -3939,7 +3939,7 @@ function char_level2()
 
     list($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, (int)$config_level[1]);
 
-    if (check_changecls($_SESSION['user_Gamer'], $sub)) {
+    if (check_change_cls($_SESSION['user_Gamer'], $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -4092,7 +4092,7 @@ function char_level3()
 
     list($get_vp, $sms_vp, $cn_false) = checkVpoint($vpoint_, (int)$config_level[2]);
 
-    if (check_changecls($_SESSION['user_Gamer'], $sub)) {
+    if (check_change_cls($_SESSION['user_Gamer'], $sub)) {
         $check_change = true;
         $status_change = "Đã đổi";
     } else {
@@ -4222,7 +4222,7 @@ function char_delepersonalSotre()
     $inventoryDele = substr($inventoryRaw, (-1) * $ceilInventoryShopPresonal);
 
     $check_change = false;
-    if (check_changecls($_SESSION['user_Gamer'], $sub)) {
+    if (check_change_cls($_SESSION['user_Gamer'], $sub)) {
         $check_change = true;
     }
 
@@ -4404,7 +4404,7 @@ function char_delepersonalSotre()
 //	$sms_tax = " (Thuê còn ". date("H:i:s", ($time_tax - ctime())) .")";
 //	}
 //*/
-//    if (check_changecls($member['user_name'], $sub)) {
+//    if (check_change_cls($member['user_name'], $sub)) {
 //        $check_change = true;
 //        $status_change = "Đã đổi";
 //    } else {

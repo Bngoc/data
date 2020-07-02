@@ -1,12 +1,11 @@
 <?php
 
-list($dashboard, $username, $greeting_message) = _GL('dashboard, username, greeting_message');
+list($dashboard) = _GL('dashboard');
 ?>
 
 <div class="wrapper">
     <div class="options">
         <?php foreach ($dashboard as $id => $item) { ?>
-
             <div class="opt-item">
                 <a href="<?php echo cn_url_modify("mod=" . @$item['mod'], "do=" . @$item['do'], "opt=" . @$item['opt']); ?>">
                     <div>

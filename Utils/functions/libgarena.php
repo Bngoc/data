@@ -1523,6 +1523,7 @@ function cn_get_template_by($template_name = '')
     if (isset($templates[$template_name])) {
         return $templates[$template_name];
     }
+
     return false;
 }
 

@@ -3,29 +3,29 @@
 }
 
 $_module = REQ('mod', 'GPG');
+$role_router_web = $config['role_router_web'];
 // Loading all modules (internal + external)
 $_init_modules = hook(
     'modules/init_modules',
     array(
-        'home' => array('path' => 'home', 'acl' => ''),
-        'guide' => array('path' => '_guide', 'acl' => ''),
+        'home' => array('path' => 'home', 'acl' => $role_router_web['home']),
+        'guide' => array('path' => '_guide', 'acl' => $role_router_web['guide']),
+        'help' => array('path' => 'help', 'acl' => $role_router_web['help']),
+        // 'screenshots' => array('path' => '_screenshots', 'acl' => $role_router_web['screenshots']),
+        // 'information' => array('path' => '_information', 'acl' => $role_router_web['information']),
+        'manager_account' => array('path' => '_account', 'acl' => $role_router_web['manager_account']),
+        'char_manager' => array('path' => '_dashboard', 'acl' => $role_router_web['char_manager']),
+        'cash_shop' => array('path' => '_cashshop', 'acl' => $role_router_web['cash_shop']),
+        'relax' => array('path' => '_relax', 'acl' => $role_router_web['relax']),
+        'bank_money' => array('path' => '_blank_money', 'acl' => $role_router_web['bank_money']),
+        'ranking' => array('path' => '_ranking', 'acl' => $role_router_web['ranking']),
+        'transaction' => array('path' => '_transaction', 'acl' => $role_router_web['transaction']),
+        'download' => array('path' => '_download', 'acl' => $role_router_web['download']),
 
-        // 'screenshots' => array('path' => '_screenshots', 'acl' => ''),
-        // 'information' => array('path' => '_information', 'acl' => ''),
-        'manager_account' => array('path' => '_account', 'acl' => 'Can'),
-        'char_manager' => array('path' => '_dashboard', 'acl' => 'Cd'),
-        'cash_shop' => array('path' => '_cashshop', 'acl' => 'Cd'),
-        'relax' => array('path' => '_relax', 'acl' => 'Cd'),
-        'blank_money' => array('path' => '_blank_money', 'acl' => 'Cd'),
-        'ranking' => array('path' => '_ranking', 'acl' => 'Cd'),
-        'transaction' => array('path' => '_transaction', 'acl' => 'Can'),
-        'download' => array('path' => '_download', 'acl' => ''),
+        'event' => array('path' => '_event', 'acl' => $role_router_web['event']),
+        'auto_money' => array('path' => '_auto_money', 'acl' => $role_router_web['auto_money']),
 
-        'event' => array('path' => '_event', 'acl' => 'Cd'),
-        'auto_money' => array('path' => '_auto_money', 'acl' => ''),
-        'help' => array('path' => 'help', 'acl' => ''),
-
-        'logout' => array('path' => 'logout', 'acl' => '')
+        'logout' => array('path' => 'logout', 'acl' => $role_router_web['logout'])
     )
 );
 

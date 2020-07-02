@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/Core.php';
 
-
 class ProcessCore extends Core
 {
 

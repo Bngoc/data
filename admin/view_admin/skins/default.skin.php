@@ -10,7 +10,7 @@ $skin_prefix = "";
 // Skin MENU
 // ********************************************************************************
 
-$skin_menu = $coreAdmin->cn_get_menu() . '<div style="clear:both;"></div>';
+$skin_menu = $coreAdmin->cn_get_menu_admin() . '<div style="clear:both;"></div>';
 // => http://localhost/bqn/data <=> /bqn/data
 $setpath_default = getOption('http_script_dir');
 // => /bqn/data

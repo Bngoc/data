@@ -682,14 +682,15 @@ function cn_load_skin()
 }
 
 // Since 2.0: Language codes initialize
-function cn_lang_init()
+function cn_lang_init($root)
 {
     $lang = getOption('cn_language');
     if (!$lang) {
         $lang = 'vi';
     }
+    $getLn = getMemcache('#i18n');
 
-    $ln = include(SERVDIR . '/core/lang/' . $lang . '.php');
+    $ln = include($root . '/admin/core/lang/' . $lang . '.php');
 
     setMemcache('#i18n', is_array($ln) ? $ln : []);
 }

@@ -18,7 +18,7 @@ function home_invoke()
         $pageLimit = ($page - 1) * $per_page;
     }
 
-    $result_Count_F = doSelectOtherForum("SELECT COUNT(*) as numCount FROM thread WHERE open = 1 AND postuserid IN (SELECT userid from user where usergroupid in (5,6,7,9))");
+    $result_Count_F = do_select_other_forum("SELECT COUNT(*) as numCount FROM thread WHERE open = 1 AND postuserid IN (SELECT userid from user where usergroupid in (5,6,7,9))");
     $countNotifyForum = count($result_Count_F) ? $result_Count_F[0]['numCount'] : 0;
 
     if ($countNotifyForum > 50) {
@@ -26,7 +26,7 @@ function home_invoke()
     }
     if ($countNotifyForum) {
         $myQuery_F = 'SELECT thread.threadid, thread.title, thread.prefixid, thread.postuserid, thread.postusername, thread.lastpost, thread.keywords, usergroup.title as titleUser  FROM thread, user, usergroup WHERE open = 1 AND postuserid in (select userid from user where usergroupid in (5,6,7,9)) AND thread.postuserid = user.userid AND user.usergroupid = usergroup.usergroupid order by lastpost desc limit ' . $pageLimit . ',' . $per_page . ';';
-        $dataNotifyForum = doSelectOtherForum($myQuery_F);
+        $dataNotifyForum = do_select_other_forum($myQuery_F);
 
         foreach ($dataNotifyForum as $key => $item) {
             $dataNotifyForum[$key]['urlForum'] = cn_ewConvertFromUtf8($item['title']);

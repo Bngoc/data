@@ -140,7 +140,7 @@ function transaction___buy_gd()
     }
     $pt_km = intval($pt_km);
     $opt = strtolower($opt);
-    list($_10k, $_20k, $_30k, $_50k, $_100k, $_200k, $_300k, $_500k) = explode(",", getOption('napthe_' . $opt), 8);
+    list($_10k, $_20k, $_30k, $_50k, $_100k, $_200k, $_300k, $_500k) = explode(",", getOption('card_' . $opt), 8);
     $card_list_default = array('10k' => $_10k, '20k' => $_20k, '30k' => $_30k, '50k' => $_50k, '100k' => $_100k, '200k' => $_200k, '300k' => $_300k, '500k' => $_500k);
 
     $arrTypeCard = [

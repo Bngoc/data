@@ -51,7 +51,7 @@ function cashshop_invoke()
         }
     }
 
-    echo_header_admin('-@com_cashshop/style.css', "Cash Shop");
+    echo_header_admin('-@skins/mu_style.css', "Cash Shop");
 
     $images = array(
         'acient' => 'acient.png',
@@ -92,12 +92,8 @@ function cashshop_invoke()
         $dashboard[$id] = $item;
     }
 
-    $member = getMember();
-
-    $greeting_message = 'Have a nice day!';
-    cn_assign('dashboard, username, greeting_message', $dashboard, $member['UserAcc'], $greeting_message);
+    cn_assign('dashboard', $dashboard);
     echo execTemplate('com_cashshop/general');
-
     echofooter();
 }
 
@@ -270,7 +266,7 @@ function cashshop_action()
     cn_assign('item_read, per_page, pagination, opt, sub', $item_read, $per_page, $get_paging, $opt, $sub);
     cn_assign('_id, _txt_name, _txt_price, _txt_code32, _txt_image', $_id, $txt_name, $txt_price, $txt_code32, $txt_image);
 
-    echo_header_admin('-@com_cashshop/style.css', "Configurations - " . $bc_title[$opt]['name']);
+    echo_header_admin('-@skins/mu_style.css', "Configurations - " . $bc_title[$opt]['name']);
     echo execTemplate('com_cashshop/_armor');
     echofooter();
 }
@@ -328,8 +324,8 @@ function cashshop_acient()
 
     cn_assign('item_read, per_page, pagination, opt, sub', $item_read, $per_page, $get_paging, $opt, $sub);
 
-    //echo_header_admin('-@com_board/style.css', "Templates"); echo execTemplate('com_board/classchar'); echofooter();
-    echo_header_admin('-@com_cashshop/style.css', "Configurations - Set thần");
+    //echo_header_admin('-@skins/mu_style.css', "Templates"); echo execTemplate('com_board/classchar'); echofooter();
+    echo_header_admin('-@skins/mu_style.css', "Configurations - Set thần");
     //echo execTemplate('header');
     echo execTemplate('com_cashshop/_acient');
     echofooter();
@@ -361,8 +357,8 @@ function cashshop_armor()
 
     cn_assign('item_read, per_page, pagination, opt, sub', $item_data, $per_page, $get_paging, $opt, $sub);
 
-    //echo_header_admin('-@com_board/style.css', "Templates"); echo execTemplate('com_board/classchar'); echofooter();
-    echo_header_admin('-@com_cashshop/style.css', "Configurations - Giáp trụ");
+    //echo_header_admin('-@skins/mu_style.css', "Templates"); echo execTemplate('com_board/classchar'); echofooter();
+    echo_header_admin('-@skins/mu_style.css', "Configurations - Giáp trụ");
     //echo execTemplate('header');
     echo execTemplate('com_cashshop/_armor');
     echofooter();

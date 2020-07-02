@@ -432,3 +432,9 @@ table#comparison th {
 .cursor-pointer {
     cursor: pointer;
 }
+
+table.table_wrapper {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}

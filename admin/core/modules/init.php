@@ -6,15 +6,16 @@ require_once  ROOT_ADMIN .'/ProcessCoreAdmin.php';
 $coreAdmin = new ProcessCoreAdmin();
 
 $_module = REQ('mod', 'GPG');
+$role_router_admin = $config['role_router_admin'];
 
 // Loading all modules (internal + external)
 $_init_modules = hook(
     'modules/init_modules',
     array(
-        'editconfig' => array('path' => 'mu_board', 'acl' => 'Can'),
-        //'character'   	=> array('path' => 'mu_character',		'acl' => 'cc'),
-        'cashshop' => array('path' => 'mu_cashshop', 'acl' => 'Can'),
-        'logout' => array('path' => 'logout', 'acl' => ''),
+        'editconfig' => array('path' => 'mu_board', 'acl' => $role_router_admin['editconfig']),
+        'manager' => array('path' => 'mu_manager','acl' => $role_router_admin['manager']),
+        'cashshop' => array('path' => 'mu_cashshop', 'acl' => $role_router_admin['cashshop']),
+        'logout' => array('path' => 'logout', 'acl' => $role_router_admin['logout']),
     )
 );
 

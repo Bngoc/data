@@ -30,6 +30,7 @@ define('CN_DEBUG', false);
 define('URL_PATH_', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . dirname($_SERVER['SCRIPT_NAME']));
 define('URL_PATH', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . dirname($_SERVER['SCRIPT_NAME']) . '/admin');
 define('PHP_SELF', $_SERVER["SCRIPT_NAME"]);
+define('REQUEST_URI', $_SERVER["REQUEST_URI"]);
 
 // include necessary libs
 require_once ROOT . '/vendor/autoload.php';
@@ -72,7 +73,7 @@ $coreAdmin->cn_db_init();
 //cn_rewrite_load(); //??
 // Checking existing configuration
 if ($is_config) {
-    cn_lang_init();
+    cn_lang_init(ROOT);
     //cn_load_plugins();
     //cn_online_counter();
 }

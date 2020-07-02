@@ -10,7 +10,7 @@ function cn_bc_add($name, $url)
 }
 
 // Since 2.0: Get template (if not exists, create from defaults)
-function cn_get_template_by_array($template_name = '', $subtemplate = '')
+function cn_get_template_by_array($template_name = '', $subTemplate = '')
 {
     $templates = getOption('#temp_basic');
 

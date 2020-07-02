@@ -344,7 +344,7 @@ function relax_baicao()
                 ";
 
                 if (!$isActionUpdate) {
-                    do_update_orther("UPDATE MEMB_INFO SET [vpoint]=$update_money WHERE memb___id='$accc_'");
+                    do_update_other("UPDATE MEMB_INFO SET [vpoint]=$update_money WHERE memb___id='$accc_'");
 
                     //Ghi vào Log
                     $content = "$accc_ đã chơi bài cáo, kết quả" . substr($msg, 4);
@@ -492,7 +492,7 @@ function relax_xoso()
                     "[Vpoint]='" . $moneyVpDe . "'",
                     "[Action]=1"
                 );
-                do_update_orther("UPDATE MEMB_INFO SET [vpoint]=$moneyAfter WHERE memb___id='$accc_'");
+                do_update_other("UPDATE MEMB_INFO SET [vpoint]=$moneyAfter WHERE memb___id='$accc_'");
 
                 //Ghi vào Log
                 $content = "$accc_ đã đánh đề số $numberDe, Số Vpoint: " . number_format($moneyVpDe, 0, ',', 0);

@@ -670,7 +670,7 @@ function dashboard_category()
         $category_icon ='';
     if(!empty($category_description_))
         $category_description = UTF8ToEntities($category_description_);
-    else 
+    else
         $category_description = '';
     */
 
@@ -685,12 +685,12 @@ function dashboard_category()
 
     /*	$categories_data = array();
         $categories_call = array();
-        
+
         $gd = $db -> query("SELECT * FROM `forums`;");
         while($catfor = $gd ->fetch_assoc()) //fetch_array //fetch_assoc
             $categories_data[] = $catfor;
-        
-        
+
+
         //-----------------------------------------------------------------
         if(!empty($categories_data)){
             foreach ($categories_data as $cm=> $hh){
@@ -704,7 +704,7 @@ function dashboard_category()
                 $categories_call[$_cm]['level_forum'] = $hh['level_forum'];
                 $categories_call[$_cm]['ac_forum'] = $hh['ac_forum'];
                 $categories_call[$_cm]['description_forum'] = $hh['description_forum'];
-            
+
                 //print "<br>F_dashbroad 000 bien categories_call--------- chi muc------------->" . $categories_call[$_cm]['id']."<----------------<br>";
                 print "F_dashbroad 658 bien set chi muc id = hh[id]----------------------$_cm----------------<br>";
                 //foreach ($hh as $h =>$jh){
@@ -723,19 +723,19 @@ function dashboard_category()
                 print "F_dashbroad 658 bien categories_call: acl_forum=>" .  $hh['acl_forum']."<br>";
                 //print "F_dashbroad 658 bien categories_call: acl_forum=>" .  $acl_acl."<br>";
                 //$_category_acl=!empty($h)?join(',', $h):'';
-    
+
                 print "F_dashbroad 658 bien categories_call: parent_forum=>" . $hh['parent_forum']."<br>";
                 print "F_dashbroad 658 bien categories_call: level_forum=>" .  $hh['level_forum']."<br>";
                 //$_category_level   = $categories_call[$category_id]['level_forum'];
                 //}
             }
-            list($categories_call) = cn_category_struct($categories_call);	
+            list($categories_call) = cn_category_struct($categories_call);
         }
         print "F_dashbroad <br><br><br>";
         //-----------------------------------------------------------------
-        
+
         //list($categories_call) = cn_category_struct_display();
-        
+
         */
     if (!empty($categories_call)) {
         $category_ids = array_keys($categories_call);    //get category_ids
@@ -775,7 +775,7 @@ function dashboard_category()
                     //$categories_call['#']=count($categories_call)!=0?$categories_call['#']+1:1;
                     $categories_call['#'] = time();
                     $category_id = intval($categories_call['#']);
-                    //$category_id = time();             
+                    //$category_id = time();
 
                     $msew = "INSERT INTO `forums`(`id`, `name_forum`, `memo_forum`, `icon_forum`, `acl_forum`, `parent_forum`, `level_forum`, `ac_forum`, `description_forum`) VALUES('"
                         //$addsql = "INSERT INTO `admins`(`id`, `username`, `password`, `email`, `nick`, `e-hide`, `acl_forum` , `avatar`, `ban`, `numlogin`, `lastdate`, `more`) VALUES('"
@@ -893,7 +893,7 @@ function dashboard_category()
             {
                 //list($categories) = cn_category_struct($categories_call);
                 list($categories_call) = cn_category_struct($categories_call);
-                //setoption('#category', $categories); 
+                //setoption('#category', $categories);
                 //$result = $db->query("DELETE FROM `forums`;");
 
                 //----------------------------------------------------
@@ -963,12 +963,12 @@ function dashboard_category()
     }
 
 
-    /*	
+    /*
         $categories_return = array();
         $gdd = $db -> query("SELECT * FROM `forums`;");
         while($catford = $gdd ->fetch_assoc()) //fetch_assoc //fetch_array
             $categories_return[] = $catford;
-            
+
         if(!empty($categories_return)){
             foreach ($categories_return as $cm=> $hh){
                 $_cm = $hh['id'];
@@ -986,10 +986,10 @@ function dashboard_category()
         }
         else
             $categoriesreturn =array();
-    
-        
+
+
         //list($categoriesreturn) = cn_category_struct_display();
-        
+
         if ($category_id && !empty($categoriesreturn)){
         //if ($category_id){
             if(array_key_exists($category_id,$categoriesreturn)){
@@ -2263,7 +2263,7 @@ function dashboard_locale()
         fclose($w);
 
         // Reinitialize skin
-        cn_lang_init();
+        cn_lang_init(ROOT);
         cn_load_skin();
     }
 
