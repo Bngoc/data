@@ -3,6 +3,7 @@
 }
 
 add_hook('index/invoke_module', '*manager_invoke');
+include(ROOT . '/admin/core/services/ServiceMuManager.php');
 
 // =====================================================================================================================
 function manager_invoke()
@@ -84,62 +85,41 @@ function manager_invoke()
 function manager_restart_data()
 {
     $result = [
-        "character" => ['status' => false, 'query' => ''],
-        "quest" => ['status' => false, 'query' => ''],
-        "warehouse" => ['status' => false, 'query' => ''],
-        "memb_info" => ['status' => false, 'query' => ''],
-        "dk" => ['status' => false, 'query' => ''],
-        "dw" => ['status' => false, 'query' => ''],
-        "elf" => ['status' => false, 'query' => ''],
-        "sum" => ['status' => false, 'query' => ''],
-        "mg" => ['status' => false, 'query' => ''],
-        "dl" => ['status' => false, 'query' => ''],
-        "rf" => ['status' => false, 'query' => ''],
+        "character" => ['status' => false, 'query' => "Update Character Set [clevel]='1',[experience]='0',[money]='150000000',[LevelUpPoint]='1500',[pointdutru]='0',[resets]='25',[strength]='26',[dexterity]='26',[vitality]='26',[energy]='26',[Leadership]='26',[Life]='110',[MaxLife]='110',[Mana]='60',[MaxMana]='60',[MapNumber]='0',[MapPosX]='143',[MapPosY]='134',[MapDir]='0',[SCFPCPoints]='0',[MagicList]= CONVERT(varbinary(180), null),[isThuePoint]='0',[NoResetInDay]='0',[NoResetInMonth]='0',[Resets_Time]='0',[Inventory]= 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"],
+        "quest" => ['status' => false, 'query' => "Update Character Set [Quest]=0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"],
+        "warehouse" => ['status' => false, 'query' => "Update warehouse set [Money]='0',[Items]= 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"],
+        "memb_info" => ['status' => false, 'query' => "Update MEMB_INFO Set [bank]='0',[vpoint]='0',[jewel_chao]='0',[jewel_cre]='0',[jewel_blue]='0'"],
+        "dk" => ['status' => false, 'query' => "Update Character SET Class='16' WHERE Class='17' OR Class='18'"],
+        "dw" => ['status' => false, 'query' => "Update Character SET Class='0' WHERE Class='1' OR Class='2'"],
+        "elf" => ['status' => false, 'query' => "Update Character SET Class='32' WHERE Class='33' OR Class='34'"],
+        "sum" => ['status' => false, 'query' => "Update Character SET Class='80' WHERE Class='81' OR Class='82'"],
+        "mg" => ['status' => false, 'query' => "Update Character SET Class='48' WHERE Class='49' OR Class='50'"],
+        "dl" => ['status' => false, 'query' => "Update Character SET Class='64' WHERE Class='65' OR Class='66'"],
+        "rf" => ['status' => false, 'query' => "Update Character SET Class='96' WHERE Class='97' OR Class='98'"],
     ];
 
-    // Update Character
-    $result['character']['query'] = "Update Character Set [clevel]='1',[experience]='0',[money]='150000000',[LevelUpPoint]='1500',[pointdutru]='0',[resets]='25',[strength]='26',[dexterity]='26',[vitality]='26',[energy]='26',[Leadership]='26',[Life]='110',[MaxLife]='110',[Mana]='60',[MaxMana]='60',[MapNumber]='0',[MapPosX]='143',[MapPosY]='134',[MapDir]='0',[SCFPCPoints]='0',[MagicList]= CONVERT(varbinary(180), null),[isThuePoint]='0',[NoResetInDay]='0',[NoResetInMonth]='0',[Resets_Time]='0',[Inventory]= 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
-    $result['character']['status'] = do_insert_other($result['character']['query']);
+    if (request_type('POST')) {
+        list($restart_query) = GET('restart_query', 'GPG');
+        foreach ($result as $k => $val) {
+            $strKey = 'key_' . $k;
+            $statusCheck = isset($_POST[$strKey]) ? $_POST[$strKey] : false;
+            if ($statusCheck && isset($result[$restart_query])) {
+                $result[$k]['status'] = true;
+            }
+        }
 
-    // Update Quest
-    $result['quest']['query'] = "Update Character Set [Quest]=0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
-    $result['quest']['status'] = do_insert_other($result['quest']['query']);
-
-    //  Update warehouse
-    $result['warehouse']['query'] = "Update warehouse set [Money]='0',[Items]= 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
-    $result['warehouse']['status'] = do_insert_other($result['warehouse']['query']);
-
-    // Update MEMB_INFO
-    $result['memb_info']['query'] = "Update MEMB_INFO Set [bank]='0',[vpoint]='0',[jewel_chao]='0',[jewel_cre]='0',[jewel_blue]='0'";
-    $result['memb_info']['status'] = do_insert_other($result['memb_info']['query']);
-
-    // Update Class DW
-    $result['dw']['query'] = "Update Character SET Class='0' WHERE Class='1' OR Class='2'";
-    $result['dw']['status'] = do_insert_other($result['dw']['query']);
-
-    // Update Class DK
-    $result['dk']['query'] = "Update Character SET Class='16' WHERE Class='17' OR Class='18'";
-    $result['dk']['status'] = do_insert_other($result['dk']['query']);
-
-    // Update Class ELF
-    $result['elf']['query'] = "Update Character SET Class='32' WHERE Class='33' OR Class='34'";
-    $result['elf']['status'] = do_insert_other($result['elf']['query']);
-
-    // Update Class Sum
-    $result['sum']['query'] = "Update Character SET Class='80' WHERE Class='81' OR Class='82'";
-    $result['sum']['status'] = do_insert_other($result['sum']['query']);
-
-    // Update Class MG
-    $result['mg']['query'] = "Update Character SET Class='48' WHERE Class='49' OR Class='50'";
-    $result['mg']['status'] = do_insert_other($result['mg']['query']);
-
-    // Update Class DL
-    $result['dl']['query'] = "Update Character SET Class='64' WHERE Class='65' OR Class='66'";
-    $result['dl']['status'] = do_insert_other($result['dl']['query']);
-
-    // Update Class RF
-    $result['rf']['query'] = "Update Character SET Class='96' WHERE Class='97' OR Class='98'";
-    $result['rf']['status'] = do_insert_other($result['rf']['query']);
+        // Update Character
+        if (isset($result[$restart_query]) && $result[$restart_query]['query']) {
+            $check = do_insert_other($result[$restart_query]['query']);
+            $result[$restart_query]['status'] = $check;
+            $msg = 'Updated ' . ($check ? __('done') : __('fail')) . '.';
+            if ($check) {
+                cn_throw_message($msg);
+            } else {
+                cn_throw_message($msg, 'e');
+            }
+        }
+    }
 
     cn_assign('result', $result);
     echo_header_admin('-@skins/mu_style.css', __("restart_data"));
@@ -555,7 +535,7 @@ function manager_account()
     $cre = isset($_POST['cre']) ? (int)$_POST['cre'] : 0;
     $blue = isset($_POST['blue']) ? (int)$_POST['blue'] : 0;
 
-    $class_request = trim(isset($_POST['class']) ? $_POST['class'] : '');
+    $class_post = trim(isset($_POST['class']) ? $_POST['class'] : '');
     $level = trim(isset($_POST['level']) ? $_POST['level'] : 0);
     $str = trim(isset($_POST['str']) ? $_POST['str'] : 0);
     $dex = trim(isset($_POST['dex']) ? $_POST['dex'] : 0);
@@ -568,496 +548,91 @@ function manager_account()
     $pointdutru = trim(isset($_POST['pointdutru']) ? $_POST['pointdutru'] : 0);
     $pcpoint = trim(isset($_POST['pcpoint']) ? $_POST['pcpoint'] : 0);
 
-//    $result_info_0 = $_POST['result_info_0'];
-//    $result_info_1 = $_POST['result_info_1'];
-//    $result_info_2 = $_POST['result_info_2'];
-//    $result_info_3 = $_POST['result_info_3'];
-//    $result_info_4 = $_POST['result_info_4'];
-//    $result_info_5 = $_POST['result_info_5'];
-//    $result_info_6 = $_POST['result_info_6'];
-//    $result_info_7 = $_POST['result_info_7'];
-//    $result_info_8 = $_POST['result_info_8'];
-//    $result_info_9 = $_POST['result_info_9'];
-//    $result_info_10 = $_POST['result_info_10'];
-//    $result_info_11 = $_POST['result_info_11'];
-//    $result_info_12 = $_POST['result_info_12'];
-//    $result_info_13 = $_POST['result_info_13'];
-//    $result_info_14 = $_POST['result_info_14'];
-//    $result_info_15 = $_POST['result_info_15'];
-//    $result_info_16 = $_POST['result_info_16'];
-//    $result_info_17 = $_POST['result_info_17'];
-
     $acx = getOption('#temp_basic');
-    // TODO
     if (empty($acx)) {
         return;
     }
+
     $class = $acx['class'];
+    $muManager = new ServiceMuManager();
     switch ($action) {
         case "search_acc":
-            if (empty($acc)) {
-                $notice = "Chưa điền tên tài khoản vào chỗ trống";
-                $result['search_acc']['notice'] = $notice;
-            } else {
-                $sql_username_check = do_select_other("SELECT memb___id FROM MEMB_INFO WHERE memb___id='" . $acc . "'");
-                if (count($sql_username_check) < 1) {
-                    $notice = "Không tồn tại tài khoản <b>$acc</b>";
-                    $result['search_acc']['notice'] = $notice;
-                } else {
-                    $query = "SELECT memb___id,mail_addr,tel__numb,bloc_code,fpas_ques,fpas_answ,bank,vpoint,jewel_chao,jewel_cre,jewel_blue,memb__pwd FROM MEMB_INFO WHERE memb___id='$acc'";
-                    $resultQuery = do_select_other($query);
-                    $resultData = is_array($resultQuery) ? $resultQuery[0] : [];
-                    $result['search_acc']['data'] = $resultData;
+        {
+            $resultSearchAccount = $muManager->search_account($acc);
 
-                    $block_status = ($resultData['bloc_code'] == "1") ? __("block") : __("normal");
-                    $question = '';
-                    switch ($resultData['fpas_ques']) {
-                        case "myPet":
-                            $question = "Tên con vật yêu thích?";
-                            break;
-                        case "mySchool":
-                            $question = "Trường cấp 1 của bạn tên gì?";
-                            break;
-                        case "bestFriends":
-                            $question = "Người bạn yêu quý nhất?";
-                            break;
-                        case "favorGames":
-                            $question = "Trò chơi bạn thích nhất?";
-                            break;
-                        case "unforgetArea":
-                            $question = "Nơi để lại kỉ niệm khó quên nhất?";
-                            break;
-                    }
-                    $notice = "<b>TÀI KHOẢN</b>: <b>" . $resultData['memb___id'] . "</b>. (<b>$block_status</b>)<br>
-							Địa chỉ Email: <b>" . $resultData['mail_addr'] . "</b>. Mật khẩu: <b>" . $resultData['memb__pwd'] . "</b><br>
-							Số điện thoại: <b>" . $resultData['tel__numb'] . "</b>.<br>
-							Câu hỏi bí mật: <b>$question</b>. Câu trả lời bí mật: <b>" . $resultData['fpas_answ'] . "</b>.<br>
-							<br>
-							<b>NGÂN HÀNG</b>: <br>
-							Zen hiện có: <b>" . $resultData['bank'] . "</b> Zen.<br>
-							V.Point hiện có: <b>" . $resultData['vpoint'] . "</b> V.Point.<br>
-							Ngọc Hỗn Nguyên hiện có: <b>" . $resultData['jewel_chao'] . "</b> Viên.<br>
-							Ngọc Sáng Tạo hiện có: <b>" . $resultData['jewel_cre'] . "</b> Viên.<br>
-							Lông Vũ hiện có: <b>" . $resultData['jewel_blue'] . "</b> Cái.<br>";
-                }
-            }
+            $notice = $resultSearchAccount['notice'];
+            $result['search_acc']['notice'] = $notice;
+            $result['search_acc']['data'] = $resultSearchAccount['data'];
+
             break;
+        }
         case "block_acc":
-            if (empty($acc)) {
-                $notice = "Chưa điền tên tài khoản vào chỗ trống";
-            } else {
-                $username_check = do_select_other("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$acc'");
-                if (count($username_check) < 1) {
-                    $notice = "Không tồn tại tài khoản <b>$acc</b>";
-                } else {
-                    $block_check = do_select_other("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$acc' and bloc_code='1'");
-                    if (count($block_check) > 0) {
-                        $notice = "Tài khoản <b>$acc</b> hiện đang bị Khóa.";
-                    } else {
-                        $sql_block_result = do_update_other("UPDATE MEMB_INFO SET bloc_code='1' WHERE memb___id='$acc'");
-                        $notice = "Đã khóa tài khoản <b>$acc</b> " . ($sql_block_result ? "không " : "") . "thành công.";
-                    }
-                }
-            }
-            break;
-        case "unblock_acc":
-            if (empty($acc)) {
-                $notice = "Chưa điền tên tài khoản vào chỗ trống";
-            } else {
-                $username_check = do_select_other("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$acc'");
-                if (count($username_check) < 1) {
-                    $notice = "Không tồn tại tài khoản <b>$acc</b>";
-                } else {
-                    $block_check = do_select_other("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$acc' and bloc_code='0'");
-                    if (count($block_check) > 0) {
-                        $notice = "Tài khoản <b>$acc</b> hiện đang không bị Khóa.";
-                    } else {
-                        $sql_block_query = do_update_other("UPDATE MEMB_INFO SET bloc_code='0' WHERE memb___id='$acc'");
-                        $notice = "Đã mở khóa tài khoản <b>$acc</b> " . ($sql_block_query ? "không " : "") . "thành công.";
-                    }
-                }
-            }
-            break;
-        case "bank_add":
-            if (empty($acc)) {
-                $notice = "Chưa điền tên tài khoản vào chỗ trống";
-            } else {
-                $username_check = do_select_other("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$acc'");
-                if (count($username_check) < 1) {
-                    $notice = "Không tồn tại tài khoản <b>$acc</b>";
-                } else {
-                    do_update_other("UPDATE MEMB_INFO SET bank=bank+$zen,vpoint=vpoint+$vpoint WHERE memb___id='$acc'");
-                    $notice = "Tài khoản $acc đã cộng thêm $zen Zen và $vpoint V.Point trong Ngân Hàng.";
-                }
-            }
-            break;
-        case "bank_sub":
-            if (empty($acc)) {
-                $notice = "Chưa điền tên tài khoản vào chỗ trống";
-            } else {
-                $username_check = do_select_other("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$acc'");
-                if (count($username_check) < 1) {
-                    $notice = "Không tồn tại tài khoản <b>$acc</b>";
-                } else {
-                    do_update_other("UPDATE MEMB_INFO SET bank=bank-$zen,vpoint=vpoint-$vpoint WHERE memb___id='$acc'");
-                    $notice = "Tài khoản $acc đã trừ đi $zen Zen và $vpoint V.Point trong Ngân Hàng.";
-                }
-            }
-            break;
-        case "bank_jewel":
-            if (empty($acc)) {
-                $notice = "Chưa điền tên tài khoản vào chỗ trống";
-            } else {
-                $username_check = do_select_other("SELECT memb___id FROM MEMB_INFO WHERE memb___id='$acc'");
-                if (count($username_check) < 1) {
-                    $notice = "Không tồn tại tài khoản <b>$acc</b>";
-                } else {
-                    do_update_other("UPDATE MEMB_INFO SET jewel_chao='$chao',jewel_cre='$cre',jewel_blue='$blue' WHERE memb___id='$acc'");
-                    $notice = "Tài khoản $acc đã cập nhật $chao Chaos, $cre Cre, $blue Blue trong Ngân Hàng.";
-                }
-            }
-            break;
-        case "block_char":
-            if (empty($char)) {
-                $notice = "Chưa điền tên tài khoản vào chỗ trống";
-            } else {
-                $username_check = do_select_other("SELECT Name FROM Character WHERE Name='$char'");
-                if (count($username_check) < 1) {
-                    $notice = "Không tồn tại nhân vật <b>$char</b>";
-                } else {
-                    $block_check = do_select_other("SELECT Name FROM Character WHERE Name='$char' and ctlcode='1'");
-                    if (count($block_check) > 0) {
-                        $notice = "Nhân vật <b>$char</b> hiện đang bị Khóa.";
-                    } else {
-                        do_update_other("UPDATE Character SET ctlcode='1' WHERE Name='$char'");
-                        $notice = "Đã khóa nhân vật <b>$char</b> thành công.";
-                    }
-                }
-            }
-            break;
-        case "unblock_char":
-            if (empty($char)) {
-                $notice = "Chưa điền tên tài khoản vào chỗ trống";
-            } else {
-                $char_check = do_select_other("SELECT Name FROM Character WHERE Name='$char'");
-                if (count($char_check) < 1) {
-                    $notice = "Không tồn tại nhân vật <b>$char</b>";
-                } else {
-                    $block_check = do_select_other("SELECT Name FROM Character WHERE Name='$char' and ctlcode='0'");
-                    if (count($block_check) > 0) {
-                        $notice = "Nhân vật <b>$char</b> hiện đang không bị Khóa.";
-                    } else {
-                        do_update_other("UPDATE Character SET ctlcode='0' WHERE Name='$char'");
-                        $notice = "Đã mở khóa nhân vật <b>$char</b> thành công.";
-                    }
-                }
-            }
-            break;
-        case "search_char":
-            if (empty($char)) {
-                $notice = "Chưa điền tên nhân vật vào chỗ trống";
-            } else {
-                $char_check = do_select_other("SELECT Name FROM Character WHERE Name='$char'");
-                if (count($char_check) < 1) {
-                    $notice = "Không tồn tại nhân vật <b>$char</b>";
-                } else {
-                    $query = "SELECT AccountID,Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,SCFPCPoints,PkLevel,PkCount,ctlcode FROM Character WHERE Name='$char'";
-                    switch (getOption('server_type')) {
-                        case "scf":
-                            $query = "SELECT AccountID,Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,SCFPCPoints,PkLevel,PkCount,ctlcode FROM Character WHERE Name='$char'";
-                            break;
-                        case "ori":
-                            $query = "SELECT AccountID,Name,Class,cLevel,Strength,Dexterity,Vitality,Energy,Leadership,Resets,Relifes,LevelUpPoint,pointdutru,uythacoffline_stat,PointUyThac,PCPoints,PkLevel,PkCount,ctlcode FROM Character WHERE Name='$char'";
-                            break;
-                        default:
-                            break;
-                    }
-                    $resultQuery = do_select_other($query);
-                    $row = is_array($resultQuery) ? $resultQuery[0] : [];
-                    $result['search_char']['data'] = $row;
-                    $account = $row['AccountID'];
-                    $name = $row['Name'];
-                    $class_current = (int)$row['Class'];
-                    $class_name = '';
-                    switch ($class_current) {
-                        case (int)$class['class_dw_1']:
-                            $class_name = $class['class_dw_1_name'];
-                            break;
-                        case (int)$class['class_dw_2']:
-                            $class_name = $class['class_dw_2_name'];
-                            break;
-                        case (int)$class['class_dw_3']:
-                            $class_name = $class['class_dw_3_name'];
-                            break;
-                        case (int)$class['class_dk_1']:
-                            $class_name = $class['class_dk_1_name'];
-                            break;
-                        case (int)$class['class_dk_2']:
-                            $class_name = $class['class_dk_2_name'];
-                            break;
-                        case (int)$class['class_dk_3']:
-                            $class_name = $class['class_dk_3_name'];
-                            break;
-                        case (int)$class['class_elf_1']:
-                            $class_name = $class['class_elf_1_name'];
-                            break;
-                        case (int)$class['class_elf_2']:
-                            $class_name = $class['class_elf_2_name'];
-                            break;
-                        case (int)$class['class_elf_3']:
-                            $class_name = $class['class_elf_3_name'];
-                            break;
-                        case (int)$class['class_mg_1']:
-                            $class_name = $class['class_mg_1_name'];
-                            break;
-                        case (int)$class['class_mg_2']:
-                            $class_name = $class['class_mg_2_name'];
-                            break;
-                        case (int)$class['class_dl_1']:
-                            $class_name = $class['class_dl_1_name'];
-                            break;
-                        case (int)$class['class_dl_2']:
-                            $class_name = $class['class_dl_2_name'];
-                            break;
-                        case (int)$class['class_sum_1']:
-                            $class_name = $class['class_sum_1_name'];
-                            break;
-                        case (int)$class['class_sum_2']:
-                            $class_name = $class['class_sum_2_name'];
-                            break;
-                        case (int)$class['class_sum_3']:
-                            $class_name = $class['class_sum_3_name'];
-                            break;
-                        case (int)$class['class_rf_1']:
-                            $class_name = $class['class_rf_1_name'];
-                            break;
-                        case (int)$class['class_rf_2']:
-                            $class_name = $class['class_rf_2_name'];
-                            break;
-                    }
-                    $level = $row['cLevel'];
-                    $str = $row['Strength'];
-                    $dex = $row['Dexterity'];
-                    $vit = $row['Vitality'];
-                    $ene = $row['Energy'];
-                    $com = $row['Leadership'];
-                    $reset = $row['Resets'];
-                    $relife = $row['Relifes'];
-                    $point = $row['LevelUpPoint'];
-                    $pointdutru = $row['pointdutru'];
-                    switch ($row['uythacoffline_stat']) {
-                        case 0:
-                            $uythac = "Không Ủy thác";
-                            break;
-                        case 1:
-                            $uythac = "<font color='green'>Ủy thác</font>";
-                            break;
-                    }
-                    $uythac_point = $row['PointUyThac'];
-                    $pcpoint = isset($row['PCPoints']) ? $row['PCPoints'] : $row['SCFPCPoints'];
-                    switch ($row['PkLevel']) {
-                        case 1 :
-                            $pklevel = "Siêu Anh Hùng";
-                            break;
-                        case 2 :
-                            $pklevel = "Anh Hùng";
-                            break;
-                        case 3 :
-                            $pklevel = "Dân Thường";
-                            break;
-                        case 4 :
-                            $pklevel = "Sát Thủ";
-                            break;
-                        case 5 :
-                            $pklevel = "Sát Thủ Khát Máu";
-                            break;
-                        case 6 :
-                            $pklevel = "Sát Thủ Điên Cuồng";
-                            break;
-                    }
-                    $pkcount = $row['PkCount'];
-                    switch ($row['ctlcode']) {
-                        case 0:
-                            $status = "Bình thường";
-                            break;
-                        case 1:
-                            $status = "Hiện đang bị Khóa";
-                            break;
-                        case 8:
-                            $status = "GameMaster";
-                            break;
-                        case 18:
-                            $status = "Khóa đồ";
-                            break;
-                    }
+        {
+            $resultSearchAccount = $muManager->block_account($acc);
 
-                    $notice = '<table width="100%">
-						<tr>
-							<td><b>TÀI KHOẢN : <font color="blue">' . $account . '</font></b></td>
-							<td><b>TÊN NHÂN VẬT : <font color="blue">' . $name . '</font></b></td>
-						</tr>
-						<tr>
-							<td>Cấp độ : <font color="orange"><b>' . $level . '</b></font></td>
-							<td>Chủng tộc : <font color="brown"><b>' . $class_name . '</b></font></td>
-						</tr>
-						<tr>
-							<td>Sức mạnh : <b>' . number_format($str, 0, ",", ".") . '</b></td>
-							<td>Điểm chưa cộng : <b>' . number_format($point, 0, ",", ".") . '</b></td>
-						</tr>
-						<tr>
-							<td>Nhanh nhẹn : <b>' . number_format($dex, 0, ",", ".") . '</b></td>
-							<td>Điểm dự trữ : <b>' . number_format($pointdutru, 0, ",", ".") . '</b></td>
-						</tr>
-						<tr>
-							<td>Sinh lực : <b>' . number_format($vit, 0, ",", ".") . '</b></td>
-							<td>Điểm Phúc Duyên : <b>' . number_format($pcpoint, 0, ",", ".") . '</b></td>
-						</tr>
-						<tr>
-							<td>Năng lượng : <b>' . number_format($ene, 0, ",", ".") . '</b></td>
-							<td>Reset : <font color="red"><b>' . $reset . '</b></font></td>
-						</tr>
-						<tr>
-							<td>Mệnh lệnh : <b>' . number_format($com, 0, ",", ".") . '</b></td>
-							<td>Relife : <font color="green"><b>' . $relife . '</b></font></td>
-						</tr>
-						<tr>
-							<td>Tình trạng Ủy Thác : <b>' . $uythac . '</b></td>
-							<td>Điểm Ủy Thác : <font color="green"><b>' . number_format($uythac_point, 0, ",", ".") . '</b></font></td>
-						</tr>
-						<tr>
-							<td>Cấp bậc: <font color="green"><b>' . $pklevel . '</b></font></td>
-							<td>Đã giết: <font color="red"><b>' . $pkcount . ' mạng</b></font></td>
-						</tr>
-						<tr>
-							<td>Tình trạng: <font color="orange"><b>' . $status . '</b></font></td>
-						</tr>
-							</table>';
-                }
-            }
+            $notice = $resultSearchAccount['notice'];
             break;
-        case "edit_char":
-            if (empty($char)) {
-                $notice = "Chưa điền tên nhân vật vào chỗ trống";
-            } else {
-                $acc_check = do_select_other("SELECT Name FROM Character WHERE Name='$char'");
-                if (count($acc_check) < 1) {
-                    $notice = "Không tồn tại nhân vật <b>$char</b>";
-                } else {
-                    switch (getOption('server_type')) {
-                        case "scf":
-                            $query = "UPDATE Character SET cLevel='$level',Strength='$str',Dexterity='$dex',Vitality='$vit',Energy='$ene',Leadership='$com',Resets='$reset',Relifes='$relife',LevelUpPoint='$point',pointdutru='$pointdutru',SCFPCPoints='$pcpoint' WHERE Name='$char'";
-//                            $query = "UPDATE Character SET Class='$class_post',cLevel='$level',Strength='$str',Dexterity='$dex',Vitality='$vit',Energy='$ene',Leadership='$com',Resets='$reset',Relifes='$relife',LevelUpPoint='$point',pointdutru='$pointdutru',SCFPCPoints='$pcpoint' WHERE Name='$char'";
-                            break;
-                        case "ori":
-                            $query = "UPDATE Character SET cLevel='$level',Strength='$str',Dexterity='$dex',Vitality='$vit',Energy='$ene',Leadership='$com',Resets='$reset',Relifes='$relife',LevelUpPoint='$point',pointdutru='$pointdutru',PCPoints='$pcpoint' WHERE Name='$char'";
-                            break;
-                        default:
-                            $query = "UPDATE Character SET cLevel='$level',Strength='$str',Dexterity='$dex',Vitality='$vit',Energy='$ene',Leadership='$com',Resets='$reset',Relifes='$relife',LevelUpPoint='$point',pointdutru='$pointdutru',SCFPCPoints='$pcpoint' WHERE Name='$char'";
-                            break;
-                    }
-                    do_update_other($query);
-                    $notice = "Cập nhật thông tin Nhân vật <b>$char</b> thành công";
-                }
-            }
+        }
+        case "unblock_acc":
+        {
+            $resultSearchAccount = $muManager->unblock_account($acc);
+
+            $notice = $resultSearchAccount['notice'];
             break;
+        }
+        case "bank_add":
+        {
+            $notice = $muManager->bank_add($acc, $zen, $vpoint);
+
+            break;
+        }
+        case "bank_sub":
+        {
+            $notice = $muManager->bank_sub($acc, $zen, $vpoint);
+
+            break;
+        }
+        case "bank_jewel":
+        {
+            $notice = $muManager->bank_jewel($acc, $chao, $cre, $blue);
+            break;
+        }
         case "edit_acc":
-            if (empty($acc)) {
-                $notice = "Chưa điền tên tài khoản vào chỗ trống";
-            } else {
-                $acc_check = do_select_other("SELECT memb___id,memb__pwd FROM MEMB_INFO WHERE memb___id='$acc'");
-                if (count($acc_check) < 1) {
-                    $notice = "Không tồn tại tài khoản <b>$acc</b>";
-                } else {
-                    do_update_other("UPDATE MEMB_INFO SET mail_addr='$email',memb__pwd='$pass' WHERE memb___id='$acc'");
-                    $notice = "Cập nhật thông tin Tài khoản <b>$acc</b> thành công";
-                }
-            }
+        {
+            $notice = $muManager->edit_account($acc, $email, $pass);
             break;
-//
-//        case "ketqua_xoso":
-//            $content = $result_info_0."||".$result_info_1."||".$result_info_2."||".$result_info_3."||".$result_info_4."||".$result_info_5."||".$result_info_6."||".$result_info_7."||".$result_info_8."||".$result_info_9."||".$result_info_10."||".$result_info_11."||".$result_info_12."||".$result_info_13."||".$result_info_14."||".$result_info_15."||".$result_info_16."||".$result_info_17;
-//            $fp = fopen("../config/ketquaxoso.txt", "w");
-//            fputs ($fp, $content);
-//            fclose($fp);
-//            $sql_acc_check = $db->Execute("SELECT Account FROM XoSoData");
-//            $n = 0;
-//            $content = "";
-//            while($check_acc = $sql_acc_check->fetchrow()) {
-//                $query = $db->Execute("SELECT * FROM XoSoData WHERE Account='$check_acc[0]'");
-//                $row = $query->fetchrow();
-//                for ($i=1;$i<11;$i++) {
-//                    if (substr($row[$i],4,2) == $result_info_0) {
-//                        $thuong = $giave*$giaithuong1;
-//                        $query2 = "UPDATE MEMB_INFO SET vpoint=vpoint+$thuong WHERE memb___id='$check_acc[0]'";
-//                        $result = $db->Execute($query2) or die("Lỗi Query: $query2");
-//                        $n++;
-//                        $content .= "$check_acc[0] trúng giải 1. ".number_format($thuong,0,",",".")." V.Point\n<br>";
-//                    }
-//                    if (substr($row[$i],3,3) == $result_info_1) {
-//                        $thuong = $giave*$giaithuong2;
-//                        $query2 = "UPDATE MEMB_INFO SET vpoint=vpoint+$thuong WHERE memb___id='$check_acc[0]'";
-//                        $result = $db->Execute($query2) or die("Lỗi Query: $query2");
-//                        $n++;
-//                        $content .= "$check_acc[0] trúng giải 2. ".number_format($thuong,0,",",".")." V.Point\n<br>";
-//                    }
-//                    if (substr($row[$i],2,4) == $result_info_2 || substr($row[$i],2,4) == $result_info_3 || substr($row[$i],2,4) == $result_info_4) {
-//                        $thuong = $giave*$giaithuong3;
-//                        $query2 = "UPDATE MEMB_INFO SET vpoint=vpoint+$thuong WHERE memb___id='$check_acc[0]'";
-//                        $result = $db->Execute($query2) or die("Lỗi Query: $query2");
-//                        $n++;
-//                        $content .= "$check_acc[0] trúng giải 3. ".number_format($thuong,0,",",".")." V.Point\n<br>";
-//                    }
-//                    if (substr($row[$i],2,4) == $result_info_5) {
-//                        $thuong = $giave*$giaithuong4;
-//                        $query2 = "UPDATE MEMB_INFO SET vpoint=vpoint+$thuong WHERE memb___id='$check_acc[0]'";
-//                        $result = $db->Execute($query2) or die("Lỗi Query: $query2");
-//                        $n++;
-//                        $content .= "$check_acc[0] trúng giải 4. ".number_format($thuong,0,",",".")." V.Point\n<br>";
-//                    }
-//                    if (substr($row[$i],1,5) == $result_info_6 || substr($row[$i],1,5) == $result_info_7 || substr($row[$i],1,5) == $result_info_8 || substr($row[$i],1,5) == $result_info_9 || substr($row[$i],1,5) == $result_info_10 || substr($row[$i],1,5) == $result_info_11 || substr($row[$i],1,5) == $result_info_12) {
-//                        $thuong = $giave*$giaithuong5;
-//                        $query2 = "UPDATE MEMB_INFO SET vpoint=vpoint+$thuong WHERE memb___id='$check_acc[0]'";
-//                        $result = $db->Execute($query2) or die("Lỗi Query: $query2");
-//                        $n++;
-//                        $content .= "$check_acc[0] trúng giải 5. ".number_format($thuong,0,",",".")." V.Point\n<br>";
-//                    }
-//                    if (substr($row[$i],1,5) == $result_info_13 || substr($row[$i],1,5) == $result_info_14) {
-//                        $thuong = $giave*$giaithuong6;
-//                        $query2 = "UPDATE MEMB_INFO SET vpoint=vpoint+$thuong WHERE memb___id='$check_acc[0]'";
-//                        $result = $db->Execute($query2) or die("Lỗi Query: $query2");
-//                        $n++;
-//                        $content .= "$check_acc[0] trúng giải 6. ".number_format($thuong,0,",",".")." V.Point\n<br>";
-//                    }
-//                    if (substr($row[$i],1,5) == $result_info_15) {
-//                        $thuong = $giave*$giaithuong7;
-//                        $query2 = "UPDATE MEMB_INFO SET vpoint=vpoint+$thuong WHERE memb___id='$check_acc[0]'";
-//                        $result = $db->Execute($query2) or die("Lỗi Query: $query2");
-//                        $n++;
-//                        $content .= "$check_acc[0] trúng giải 7. ".number_format($thuong,0,",",".")." V.Point\n<br>";
-//                    }
-//                    if (substr($row[$i],1,5) == $result_info_16) {
-//                        $thuong = $giave*$giaithuong8;
-//                        $query2 = "UPDATE MEMB_INFO SET vpoint=vpoint+$thuong WHERE memb___id='$check_acc[0]'";
-//                        $result = $db->Execute($query2) or die("Lỗi Query: $query2");
-//                        $n++;
-//                        $content .= "$check_acc[0] trúng giải 8. ".number_format($thuong,0,",",".")." V.Point\n<br>";
-//                    }
-//                    if (substr($row[$i],0,6) == $result_info_17) {
-//                        $thuong = $giave*$giaithuong9;
-//                        $query2 = "UPDATE MEMB_INFO SET vpoint=vpoint+$thuong WHERE memb___id='$check_acc[0]'";
-//                        $result = $db->Execute($query2) or die("Lỗi Query: $query2");
-//                        $n++;
-//                        $content .= "$check_acc[0] trúng giải 9. ".number_format($thuong,0,",",".")." V.Point\n<br>";
-//                    }
-//                }
-//            }
-//            $notice = "Cập nhật kết quả sổ xố và trao thưởng thành công. Có $n số trúng thưởng.\n<br>".$content;
-//            break;
-//
+        }
+        case "block_char":
+        {
+            $notice = $muManager->block_character($char);
+            break;
+        }
+        case "unblock_char":
+        {
+            $notice = $muManager->unblock_character($char);
+            break;
+        }
+        case "search_char":
+        {
+            $resultSearchAccount = $muManager->search_character($char, $class);
+
+            $notice = $resultSearchAccount['notice'];
+            $result['search_char']['notice'] = $notice;
+            $result['search_char']['data'] = $resultSearchAccount['data'];
+            $class_current = $resultSearchAccount['options']['class_current'];
+            break;
+        }
+        case "edit_char":
+        {
+            $notice = $muManager->edit_character($char, $class_post, $level, $str, $dex, $vit, $ene, $com, $reset, $relife, $point, $pointdutru, $pcpoint);
+            break;
+        }
     }
+
     cn_assign('acc, result, notice, char, class, class_current', $acc, $result, $notice, $char, $class, $class_current);
 
     echo_header_admin('-@skins/mu_style.css', __("view_card"));
     echo execTemplate('com_manager/manager_account');
     echofooter();
 }
+

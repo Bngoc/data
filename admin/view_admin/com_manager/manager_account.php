@@ -1,139 +1,162 @@
 <?php
 
 list($acc, $result, $notice, $char, $class, $class_current) = _GL('acc, result, notice, char, class, class_current');
+
+cn_snippet_messages();
 ?>
 
 <div class="table-responsive">
-    <table class="table" width="100%">
-        <tr>
-            <td><?= __('account') ?>:</td>
-            <td>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="col-sm-4">
+                <?= __('account') ?>
+            </div>
+            <div class="col-sm-8">
                 <form method="post" action="<?php echo REQUEST_URI; ?>">
                     <input type="text" name="acc" id="acc" maxlength="10" size="20" value="<?php echo $acc; ?>">
                     <input type="hidden" name="action" id="action" value="search_acc">
                     <input type="submit" name="Submit" value="Check">
                 </form>
-            </td>
-            <td><?= __('block') ?>:</td>
-            <td>
-                <form method="post" action="">
-                    <input type="text" name="acc" id="acc" maxlength="10" size="20" value="<?php echo $acc; ?>">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="col-sm-4"><?= __('block') ?></div>
+            <div class="col-sm-8">
+                <form method="post" action="<?php echo REQUEST_URI; ?>">
+                    <input required="required" type="text" name="acc" id="acc" maxlength="10" size="20" value="<?php echo $acc; ?>">
                     <input type="hidden" name="action" id="action" value="block_acc">
                     <input type="submit" name="Submit" value="Block">
                 </form>
-            </td>
-            <td><?= __('unblock') ?>:</td>
-            <td>
-                <form method="post" action="">
-                    <input type="text" name="acc" id="acc" maxlength="10" size="20" value="<?php echo $acc; ?>">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="col-sm-4"><?= __('unblock') ?></div>
+            <div class="col-sm-8">
+                <form method="post" action="<?php echo REQUEST_URI; ?>">
+                    <input required="required" type="text" name="acc" id="acc" maxlength="10" size="20" value="<?php echo $acc; ?>">
                     <input type="hidden" name="action" id="action" value="unblock_acc">
                     <input type="submit" name="Submit" value="Unblock">
                 </form>
-            </td>
-        </tr>
-    </table>
-
-    <table class="table" width="100%">
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
         <form name="bank_add" method="post" action="<?php echo REQUEST_URI; ?>">
             <input type="hidden" name="action" id="action" value="bank_add">
-            <tr>
-                <td><?= __('account') ?>:</td>
-                <td>
+            <div class="col-sm-4">
+                <div class="col-sm-4"><?= __('account') ?></div>
+                <div class="col-sm-8">
                     <input type="text" name="acc" id="acc" maxlength="10" size="20" value="<?php echo $acc; ?>">
-                </td>
-                <td>+ Zen Bank:</td>
-                <td>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-4">+ Zen Bank</div>
+                <div class="col-sm-8">
                     <input type="text" name="zen" id="zen" maxlength="10" size="20"
                            value="<?= isset($result['search_acc']['data']['bank']) ? $result['search_acc']['data']['bank'] : 0 ?>">
-                </td>
-                <td>+ V.Point:</td>
-                <td>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-4">+ V.Point</div>
+                <div class="col-sm-8">
                     <input type="text" name="vpoint" id="vpoint" maxlength="10" size="20"
                            value="<?= isset($result['search_acc']['data']['vpoint']) ? $result['search_acc']['data']['vpoint'] : 0 ?>">
-                </td>
-                <td>
                     <input type="submit" name="Submit" value="Add Bank">
-                </td>
-            </tr>
+                </div>
+            </div>
         </form>
-    </table>
+    </div>
+    <hr>
 
-    <table class="table" width="100%">
+    <div class="row">
         <form name="bank_sub" method="post" action="<?php echo REQUEST_URI; ?>">
             <input type="hidden" name="action" id="action" value="bank_sub">
-            <tr>
-                <td><?= __('account') ?></td>
-                <td>
-                    <input type="text" name="acc" id="acc" maxlength="10" size="20" value="<?php echo $acc; ?>">
-                </td>
-                <td>- Zen Bank:</td>
-                <td>
+            <div class="col-sm-4">
+                <div class="col-sm-4"><?= __('account') ?></div>
+                <div class="col-sm-8"><input type="text" name="acc" id="acc" maxlength="10" size="20"
+                                             value="<?php echo $acc; ?>"></div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-4">- Zen Bank</div>
+                <div class="col-sm-8">
                     <input type="text" name="zen" id="zen" maxlength="10" size="20"
                            value="<?= isset($result['search_acc']['data']['bank']) ? $result['search_acc']['data']['bank'] : 0 ?>">
-                </td>
-                <td>- V.Point:</td>
-                <td>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-4">V.Point</div>
+                <div class="col-sm-8">
                     <input type="text" name="vpoint" id="vpoint" maxlength="10" size="20"
                            value="<?= isset($result['search_acc']['data']['vpoint']) ? $result['search_acc']['data']['vpoint'] : 0 ?>">
-                </td>
-                <td><input type="submit" name="Submit" value="Sub Bank"></td>
-            </tr>
+                    <input type="submit" name="Submit" value="Sub Bank">
+                </div>
+            </div>
         </form>
-    </table>
-
-    <table class="table" width="100%">
-        <form name="bank_jewel" method="post" action="<?php echo REQUEST_URI; ?>">
-            <input type="hidden" name="action" id="action" value="bank_jewel">
-            <tr>
-                <td><?= __('account') ?></td>
-                <td><input type="text" name="acc" id="acc" maxlength="10" size="10" value="<?php echo $acc; ?>">
-                </td>
-                <td>Ngọc Hỗn Nguyên:</td>
-                <td>
-                    <input type="text" name="chao" id="chao" maxlength="10" size="10"
-                           value="<?= isset($result['search_acc']['data']['jewel_chao']) ? $result['search_acc']['data']['jewel_chao'] : 0 ?>">
-                </td>
-                <td>Ngọc Sáng Tạo:</td>
-                <td>
-                    <input type="text" name="cre" id="cre" maxlength="10" size="10"
-                           value="<?= isset($result['search_acc']['data']['jewel_cre']) ? $result['search_acc']['data']['jewel_cre'] : 0 ?>">
-                </td>
-                <td>Lông Vũ:</td>
-                <td>
-                    <input type="text" name="blue" id="blue" maxlength="10" size="10"
-                           value="<?= isset($result['search_acc']['data']['jewel_blue']) ? $result['search_acc']['data']['jewel_blue'] : 0 ?>">
-                </td>
-                <td>
-                    <input type="submit" name="Submit" value="Jewel">
-                </td>
-            </tr>
-        </form>
-    </table>
-
-    <table class="table" width="85%" align="center">
+    </div>
+    <hr>
+    <div class="row">
         <form name="edit_acc" method="post" action="<?php echo REQUEST_URI; ?>">
             <input type="hidden" name="action" id="action" value="edit_acc">
-            <tr>
-                <td><?= __('account') ?>:</td>
-                <td>
+            <div class="col-sm-4">
+                <div class="col-sm-4"><?= __('account') ?></div>
+                <div class="col-sm-8">
                     <input type="text" name="acc" id="acc" maxlength="10" size="20" value="<?php echo $acc; ?>">
-                </td>
-                <td>Email:</td>
-                <td>
-                    <input type="text" name="email" id="email" size="35"
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-4">Email</div>
+                <div class="col-sm-8">
+                    <input type="text" name="email" id="email" size="20"
                            value="<?= isset($result['search_acc']['data']['mail_addr']) ? $result['search_acc']['data']['mail_addr'] : "" ?>">
-                </td>
-                <td>Mật khẩu:</td>
-                <td>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-4">Mật khẩu</div>
+                <div class="col-sm-8">
                     <input type="text" name="pass" id="pass" size="20"
                            value="<?= isset($result['search_acc']['data']['memb__pwd']) ? $result['search_acc']['data']['memb__pwd'] : "" ?>">
-                </td>
-                <td>
                     <input type="submit" name="Submit" value="Edit">
-                </td>
-            </tr>
+                </div>
+            </div>
         </form>
-    </table>
+    </div>
+
+    <hr>
+    <div class="row">
+        <form name="bank_jewel" method="post" action="<?php echo REQUEST_URI; ?>">
+            <input type="hidden" name="action" id="action" value="bank_jewel">
+            <div class="col-sm-6 logs-mb-3">
+                <div class="col-sm-4"><?= __('account') ?></div>
+                <div class="col-sm-8">
+                    <input type="text" name="acc" id="acc" maxlength="10" size="20" value="<?php echo $acc; ?>">
+                </div>
+            </div>
+            <div class="col-sm-6 logs-mb-3">
+                <div class="col-sm-4">Ngọc Hỗn Nguyên</div>
+                <div class="col-sm-8">
+                    <input type="text" name="chao" id="chao" maxlength="10" size="20"
+                           value="<?= isset($result['search_acc']['data']['jewel_chao']) ? $result['search_acc']['data']['jewel_chao'] : 0 ?>">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-sm-4">Ngọc Sáng Tạo</div>
+                <div class="col-sm-8">
+                    <input type="text" name="cre" id="cre" maxlength="10" size="20"
+                           value="<?= isset($result['search_acc']['data']['jewel_cre']) ? $result['search_acc']['data']['jewel_cre'] : 0 ?>">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-sm-4">Lông Vũ</div>
+                <div class="col-sm-8">
+                    <input type="text" name="blue" id="blue" maxlength="10" size="20"
+                           value="<?= isset($result['search_acc']['data']['jewel_blue']) ? $result['search_acc']['data']['jewel_blue'] : 0 ?>">
+                    <input type="submit" name="Submit" value="Jewel">
+                </div>
+            </div>
+        </form>
+    </div>
+
     <br>
 
     <?php if (isset($notice) && $notice) { ?>
@@ -145,47 +168,56 @@ list($acc, $result, $notice, $char, $class, $class_current) = _GL('acc, result, 
 
     <br>
 
-    <table class="table" width="100%">
-        <tr>
-            <td>Nhân vật:</td>
-            <td>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="col-sm-4">Nhân vật</div>
+            <div class="col-sm-8">
                 <form method="post" action="<?php echo REQUEST_URI; ?>">
                     <input type="text" name="char" id="char" maxlength="10" size="20" value="<?= $char; ?>">
                     <input type="hidden" name="action" id="action" value="search_char">
                     <input type="submit" name="Submit" value="Check">
                 </form>
-            </td>
-            <td>Khóa:</td>
-            <td>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="col-sm-4">Khóa</div>
+            <div class="col-sm-8">
                 <form method="post" action="">
                     <input type="text" name="char" id="char" maxlength="10" size="20" value="<?= $char; ?>">
                     <input type="hidden" name="action" id="action" value="block_char">
                     <input type="submit" name="Submit" value="block">
                 </form>
-            </td>
-            <td>Bỏ Khóa:</td>
-            <td>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="col-sm-4">Bỏ Khóa</div>
+            <div class="col-sm-8">
                 <form method="post" action="">
                     <input type="text" name="char" id="char" maxlength="10" size="20" value="<?= $char; ?>">
                     <input type="hidden" name="action" id="action" value="unblock_char">
                     <input type="submit" name="Submit" value="unblock">
                 </form>
-            </td>
-        </tr>
-    </table>
-
-    <form method="post" action="<?php echo REQUEST_URI; ?>">
-        <input type="hidden" name="action" id="action" value="edit_char">
-        <table class="table" width="50%" align="center">
-            <tr>
-                <td>Tên Nhân vật :
-                    <input type="text" name="char" id="char" maxlength="10" size="10" value="<?= $char; ?>">
-                </td>
-                <td>Cấp độ :
-                    <input type="text" name="level" id="level" maxlength="5" size="10"
-                           value="<?= isset($result['search_char']['data']['cLevel']) ? $result['search_char']['data']['cLevel'] : "" ?>"></font>
-                </td>
-                <td>Chủng tộc :
+            </div>
+        </div>
+        <hr>
+        <form method="post" action="<?php echo REQUEST_URI; ?>">
+            <input type="hidden" name="action" id="action" value="edit_char">
+            <div class="col-sm-4 logs-mb-3">
+                <div class="col-sm-4">Tên Nhân vật</div>
+                <div class="col-sm-8">
+                    <input type="text" name="char" id="char" maxlength="10" size="20" value="<?= $char; ?>">
+                </div>
+            </div>
+            <div class="col-sm-4 logs-mb-3">
+                <div class="col-sm-4">Cấp độ</div>
+                <div class="col-sm-8">
+                    <input type="text" name="level" id="level" maxlength="5" size="20"
+                           value="<?= isset($result['search_char']['data']['cLevel']) ? $result['search_char']['data']['cLevel'] : "" ?>">
+                </div>
+            </div>
+            <div class="col-sm-4 logs-mb-3">
+                <div class="col-sm-4">Chủng tộc</div>
+                <div class="col-sm-8">
                     <select id="class" name="class">
                         <option value="" selected="selected"> -- Chủng tộc --</option>
                         <option value="<?= $class['class_dw_1'] ?>"
@@ -225,144 +257,80 @@ list($acc, $result, $notice, $char, $class, $class_current) = _GL('acc, result, 
                         <option value="<?= $class['class_rf_2'] ?>"
                                 <?php if ($class_current == $class['class_rf_2']) { ?>selected="selected"<?php } ?>><?= $class['class_rf_2_name'] ?></option>
                     </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Sức mạnh :
-                    <input type="text" name="str" id="str" maxlength="5" size="10"
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="col-sm-4 logs-mb-3">
+                <div class="col-sm-4">Sức mạnh</div>
+                <div class="col-sm-8">
+                    <input type="text" name="str" id="str" maxlength="5" size="20"
                            value="<?= isset($result['search_char']['data']['Strength']) ? $result['search_char']['data']['Strength'] : "" ?>">
-                </td>
-                <td>Điểm chưa cộng :
-                    <input type="point" name="point" id="char" maxlength="5" size="10"
+                </div>
+            </div>
+            <div class="col-sm-4 logs-mb-3">
+                <div class="col-sm-4">Điểm chưa cộng</div>
+                <div class="col-sm-8">
+                    <input type="point" name="point" id="char" maxlength="5" size="20"
                            value="<?= isset($result['search_char']['data']['LevelUpPoint']) ? $result['search_char']['data']['LevelUpPoint'] : "" ?>">
-                </td>
-                <td>Nhanh nhẹn : <input type="text" name="dex" id="dex" maxlength="5" size="10"
-                                        value="<?php echo @$dex; ?>">
-                </td>
-            </tr>
-            <tr>
-                <td>Điểm dự trữ : <input type="text" name="pointdutru" id="pointdutru" maxlength="5" size="10"
-                                         value="<?= isset($result['search_char']['data']['pointdutru']) ? $result['search_char']['data']['pointdutru'] : "" ?>">
-                </td>
-                <td>Sinh lực : <input type="text" name="vit" id="vit" maxlength="5" size="10"
-                                      value="<?= isset($result['search_char']['data']['Vitality']) ? $result['search_char']['data']['Vitality'] : "" ?>">
-                </td>
-                <td>Năng lượng : <input type="text" name="ene" id="ene" maxlength="5" size="10"
-                                        value="<?= isset($result['search_char']['data']['Energy']) ? $result['search_char']['data']['Energy'] : "" ?>">
-                </td>
-            </tr>
-            <tr>
-                <td>Reset : <input type="text" name="reset" id="reset" maxlength="5" size="10"
-                                   value="<?= isset($result['search_char']['data']['Resets']) ? $result['search_char']['data']['Resets'] : "" ?>">
-                </td>
-                <td>Mệnh lệnh : <input type="text" name="com" id="com" maxlength="5" size="10"
-                                       value="<?= isset($result['search_char']['data']['Leadership']) ? $result['search_char']['data']['Leadership'] : "" ?>">
-                </td>
-                <td>Relife : <input type="text" name="relife" id="relife" maxlength="5" size="10"
-                                    value="<?= isset($result['search_char']['data']['Relifes']) ? $result['search_char']['data']['Relifes'] : "" ?>">
-                </td>
-            </tr>
-        </table>
-        <center><input type="submit" name="Submit" value="Submit"></center>
-    </form>
+                </div>
+            </div>
+            <div class="col-sm-4 logs-mb-3">
+                <div class="col-sm-4">Nhanh nhẹn</div>
+                <div class="col-sm-8">
+                    <input type="text" name="dex" id="dex" maxlength="5" size="20"
+                           value="<?= isset($result['search_char']['data']['Dexterity']) ? $result['search_char']['data']['Dexterity'] : "" ?>">
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="col-sm-4 logs-mb-3">
+                <div class="col-sm-4">Điểm dự trữ</div>
+                <div class="col-sm-8">
+                    <input type="text" name="pointdutru" id="pointdutru" maxlength="5" size="20"
+                           value="<?= isset($result['search_char']['data']['pointdutru']) ? $result['search_char']['data']['pointdutru'] : "" ?>">
+                </div>
+            </div>
+            <div class="col-sm-4 logs-mb-3">
+                <div class="col-sm-4">Sinh lực</div>
+                <div class="col-sm-8">
+                    <input type="text" name="vit" id="vit" maxlength="5" size="20"
+                           value="<?= isset($result['search_char']['data']['Vitality']) ? $result['search_char']['data']['Vitality'] : "" ?>">
+                </div>
+            </div>
+            <div class="col-sm-4 logs-mb-3">
+                <div class="col-sm-4">Năng lượng</div>
+                <div class="col-sm-8">
+                    <input type="text" name="ene" id="ene" maxlength="5" size="20"
+                           value="<?= isset($result['search_char']['data']['Energy']) ? $result['search_char']['data']['Energy'] : "" ?>">
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="col-sm-4 logs-mb-3">
+                <div class="col-sm-4">Reset</div>
+                <div class="col-sm-8">
+                    <input type="text" name="reset" id="reset" maxlength="5" size="20"
+                           value="<?= isset($result['search_char']['data']['Resets']) ? $result['search_char']['data']['Resets'] : "" ?>">
+                </div>
+            </div>
+            <div class="col-sm-4 logs-mb-3">
+                <div class="col-sm-4">Mệnh lệnh</div>
+                <div class="col-sm-8">
+                    <input type="text" name="com" id="com" maxlength="5" size="20"
+                           value="<?= isset($result['search_char']['data']['Leadership']) ? $result['search_char']['data']['Leadership'] : "" ?>">
+                </div>
+            </div>
+            <div class="col-sm-4 logs-mb-3">
+                <div class="col-sm-4">Relife</div>
+                <div class="col-sm-8">
+                    <input type="text" name="relife" id="relife" maxlength="5" size="20"
+                           value="<?= isset($result['search_char']['data']['Relifes']) ? $result['search_char']['data']['Relifes'] : "" ?>">
+                </div>
+            </div>
+            <div class="col-sm-12 logs-mb-3 logs-mt-3" align="center">
+                <div class="col-4">
+                    <input type="submit" name="Submit" value="Submit">
+                </div>
+            </div>
+        </form>
 
-    <hr>
-    <form name="ketqua_xoso" method="post" action="">
-        <input type="hidden" name="action" id="action" value="ketqua_xoso">
-        <table align="center" cellpadding="2" cellspacing="5"
-               style="border-color:#d1a151;border-width:2px;border-style:solid;width:55%;border-collapse:collapse;font-size:14px;font-weight:bold;">
-            <tr>
-                <td width="15%" align="center"
-                    style="border-color:#d1a151;border-width:2px;border-style:solid;"><?php echo @$giaithuong1; ?> lần
-                </td>
-                <td width="85%" align="center" style="border-color:#d1a151;border-width:2px;border-style:solid;"><input
-                        name="result_info_0" type="text" maxlength="2" size="2"
-                        value="<?php echo $_POST['result_info_0']; ?>"></td>
-            </tr>
-            <tr>
-                <td align="center"
-                    style="border-color:#d1a151;border-width:2px;border-style:solid;"><?php echo @$giaithuong2; ?> lần
-                </td>
-                <td align="center" style="border-color:#d1a151;border-width:2px;border-style:solid;"><input
-                        name="result_info_1" type="text" maxlength="3" size="3"
-                        value="<?php echo $_POST['result_info_1']; ?>"></td>
-            </tr>
-            <tr>
-                <td align="center"
-                    style="border-color:#d1a151;border-width:2px;border-style:solid;"><?php echo @$giaithuong3; ?> lần
-                </td>
-                <td align="center" style="border-color:#d1a151;border-width:2px;border-style:solid;"><input
-                        name="result_info_2" type="text" maxlength="4" size="4"
-                        value="<?php echo $_POST['result_info_2']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                        name="result_info_3" type="text" maxlength="4" size="4"
-                        value="<?php echo $_POST['result_info_3']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                        name="result_info_4" type="text" maxlength="4" size="4"
-                        value="<?php echo $_POST['result_info_4']; ?>"></td>
-            </tr>
-            <tr>
-                <td align="center"
-                    style="border-color:#d1a151;border-width:2px;border-style:solid;"><?php echo @$giaithuong4; ?> lần
-                </td>
-                <td align="center" style="border-color:#d1a151;border-width:2px;border-style:solid;"><input
-                        name="result_info_5" type="text" maxlength="4" size="4"
-                        value="<?php echo $_POST['result_info_5']; ?>"></td>
-            </tr>
-            <tr>
-                <td align="center"
-                    style="border-color:#d1a151;border-width:2px;border-style:solid;"><?php echo @$giaithuong5; ?> lần
-                </td>
-                <td align="center" style="border-color:#d1a151;border-width:2px;border-style:solid;">
-                    <input name="result_info_6" type="text" maxlength="5" size="5"
-                           value="<?php echo @$_POST['result_info_6']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name="result_info_7" type="text" maxlength="5" size="5"
-                           value="<?php echo @$_POST['result_info_7']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name="result_info_8" type="text" maxlength="5" size="5"
-                           value="<?php echo @$_POST['result_info_8']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name="result_info_9" type="text" maxlength="5" size="5"
-                           value="<?php echo @$_POST['result_info_9']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name="result_info_10" type="text" maxlength="5" size="5"
-                           value="<?php echo @$_POST['result_info_10']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name="result_info_11" type="text" maxlength="5" size="5"
-                           value="<?php echo $_POST['result_info_11']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name="result_info_12" type="text" maxlength="5" size="5"
-                           value="<?php echo @$_POST['result_info_12']; ?>"></td>
-            </tr>
-            <tr>
-                <td align="center"
-                    style="border-color:#d1a151;border-width:2px;border-style:solid;"><?php echo @$giaithuong6; ?> lần
-                </td>
-                <td align="center" style="border-color:#d1a151;border-width:2px;border-style:solid;"><input
-                        name="result_info_13" type="text" maxlength="5" size="5"
-                        value="<?php echo $_POST['result_info_13']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                        name="result_info_14" type="text" maxlength="5" size="5"
-                        value="<?php echo $_POST['result_info_14']; ?>"></td>
-            </tr>
-            <tr>
-                <td align="center"
-                    style="border-color:#d1a151;border-width:2px;border-style:solid;"><?php echo @$giaithuong7; ?> lần
-                </td>
-                <td align="center" style="border-color:#d1a151;border-width:2px;border-style:solid;"><input
-                        name="result_info_15" type="text" maxlength="5" size="5"
-                        value="<?php echo $_POST['result_info_15']; ?>"></td>
-            </tr>
-            <tr>
-                <td align="center"
-                    style="border-color:#d1a151;border-width:2px;border-style:solid;"><?php echo @$giaithuong8; ?> lần
-                </td>
-                <td align="center" style="border-color:#d1a151;border-width:2px;border-style:solid;"><input
-                        name="result_info_16" type="text" maxlength="5" size="5"
-                        value="<?php echo $_POST['result_info_16']; ?>"></td>
-            </tr>
-            <tr>
-                <td align="center"
-                    style="border-color:#d1a151;border-width:2px;border-style:solid;"><?php echo @$giaithuong9; ?> lần
-                </td>
-                <td align="center" style="border-color:#d1a151;border-width:2px;border-style:solid;"><input
-                        name="result_info_17" type="text" maxlength="6" size="6"
-                        value="<?php echo @$_POST['result_info_17']; ?>"></td>
-            </tr>
-        </table>
-        <center><input type="submit" name="Submit" value="Submit"></center>
-    </form>
-
+    </div>
 </div>

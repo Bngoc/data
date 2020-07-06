@@ -239,7 +239,6 @@ function cn_throw_message($msg, $area = 'n')
 
     if (!isset($es[$area])) $es[$area] = array();
     $es[$area][] = __($msg);
-//    $es[$area][] = i18n($msg);
 
     setMemcache('msg:stor', $es);
 
@@ -267,7 +266,6 @@ function request_type($type = 'POST')
 // Since 2.0; HTML show errors
 function cn_snippet_messages($area = 'new')
 {
-    //exit();
     $delay = 7500;
     $result = '';
 
@@ -670,27 +668,13 @@ function cn_url_modify()
     return cn_pack_url($GET, $SN);
 }
 
-// Since 2.0: @bootstrap
-function cn_load_skin()
+function convert_question_answer()
 {
-    $config_skin = preg_replace('~[^a-z]~i', '', getOption('skin'));
-    if (file_exists($skin_file = SERVDIR . "/skins/$config_skin.skin.php")) {
-        include($skin_file);
-    } else {
-        die("Can't load skin $config_skin");
-    }
-}
-
-// Since 2.0: Language codes initialize
-function cn_lang_init($root)
-{
-    $lang = getOption('cn_language');
-    if (!$lang) {
-        $lang = 'vi';
-    }
-    $getLn = getMemcache('#i18n');
-
-    $ln = include($root . '/admin/core/lang/' . $lang . '.php');
-
-    setMemcache('#i18n', is_array($ln) ? $ln : []);
+    return [
+        'qa_1' => getOption('question_answer_1'),
+        'qa_2' => getOption('question_answer_2'),
+        'qa_3' => getOption('question_answer_3'),
+        'qa_4' => getOption('question_answer_4'),
+        'qa_5' => getOption('question_answer_5')
+    ];
 }

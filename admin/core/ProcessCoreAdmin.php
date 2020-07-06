@@ -774,7 +774,7 @@ class ProcessCoreAdmin extends ProcessCore
         if (file_exists($skin_file = SKIN . "/skins/$config_skin.skin.php")) {
             include($skin_file);
         } else {
-            die("Can't load skin $config_skin");
+            die("Admin: Can't load skin $config_skin");
         }
     }
 
@@ -906,7 +906,11 @@ class ProcessCoreAdmin extends ProcessCore
             'use_gioihanrs' => 1,
 
             // CHARACTER Question
-            'question_answers' => 'Tên con vật yêu thích,Trò chơi bạn thích nhất,Tên con vật yêu thích,Trường cấp 1 của bạn tên gì,Người bạn yêu quý nhất,Nơi để lại kỉ niệm khó quên nhất',
+            'question_answer_1' => __($this->config['qa_1']['key_default']),
+            'question_answer_2' => __($this->config['qa_2']['key_default']),
+            'question_answer_3' => __($this->config['qa_3']['key_default']),
+            'question_answer_4' => __($this->config['qa_4']['key_default']),
+            'question_answer_5' => __($this->config['qa_5']['key_default']),
             // Vpoint - level
             'configLevel' => '2000|3000|5000',
             //Relax

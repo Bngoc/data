@@ -123,7 +123,7 @@ function board_sysconf()
 {
     $lng = $grps = $all_skins = array();
     //$skins = scan_dir(cn_path_construct(SERVDIR,'skins'));
-    $langs = scan_dir(cn_path_construct(SERVDIR, 'core', 'lang'), 'php');
+    $langs = scan_dir(cn_path_construct(ROOT, 'Utils', 'lang'), 'php');
     $_grps = getOption('#grp');
 
 
@@ -207,7 +207,12 @@ function board_sysconf()
             'cn_language' => array('select', 'CuteNews internationalization', $lng),
             'configBuyZen' => array('text', 'Buy zen list [500.000.000.000 - 1.000.000.000 - 1.500.000.000 - 2.000.000.000]|Ex: 5000|10000|15000|20000  ==> 5000 Vp <-> 500.000.000.000 Zen, ...'),
             'configLevel' => array('text', 'Set Vpoint level 150 - 220 - 380 |Ex: 2000|3000|5000  =-> 2k Vp <-> Level I; 3k Vp <-> Level II; 5k Vp <-> Level III'),
-            'question_answers' => array('text', 'Câu hỏi|Liệt kê các câu hỏi ngăn cách nhau bằng dấu \',\''),
+            '_QA' => array('title', 'Question answer'),
+            'question_answer_1' => array('text', 'Question answer 1'),
+            'question_answer_2' => array('text', 'Question answer 2'),
+            'question_answer_3' => array('text', 'Question answer 3'),
+            'question_answer_4' => array('text', 'Question answer 4'),
+            'question_answer_5' => array('text', 'Question answer 5'),
 
             'vptogc' => array('int', 'Công thức Gcoin = X% Vpoint|VD: X = 80 => [Gcoin = 80% Vpoint]'),
             //'gctovp'         => array('int', 'Title field will not be required|VD: 1 Vpoint = 1 Gcoin'),
@@ -321,7 +326,7 @@ function board_sysconf()
 
         $post_cfg = $_POST['config'];
         $opt_result = getOption('#%site');
-        $by_default = $options_list[strtolower($sub)];
+        $by_default = isset($options_list[strtolower($sub)]) ? $options_list[strtolower($sub)] : [];
 
         // Detect selfpath
         $SN = dirname($_SERVER['SCRIPT_NAME']);
@@ -341,6 +346,9 @@ function board_sysconf()
 
         // all
         foreach ($by_default as $id => $var) {
+            if (!isset($post_cfg[$id])) {
+                continue;
+            }
             if ($var[0] == 'text' || $var[0] == 'select') {
                 $opt_result[$id] = $post_cfg[$id];
             } elseif ($var[0] == 'int') {
@@ -358,9 +366,8 @@ function board_sysconf()
             }
         }
 
-        setoption('#%site', $opt_result);
+        setOption('#%site', $opt_result);
 
-        cn_load_skin();
         cn_throw_message(__('save_success'));
     }
 
@@ -475,6 +482,10 @@ function board_confChar()
 
         // all
         foreach ($by_default as $id => $var) {
+            if (!isset($post_cfg[$id])) {
+                continue;
+            }
+
             if ($var[0] == 'text' || $var[0] == 'select') {
                 $opt_result[$id] = $post_cfg[$id];
             } elseif ($var[0] == 'int') {
@@ -492,9 +503,8 @@ function board_confChar()
             }
         }
 
-        setoption('#%site', $opt_result);
+        setOption('#%site', $opt_result);
 
-        cn_load_skin();
         cn_throw_message(__('save_success'));
     }
 
@@ -633,7 +643,7 @@ function board_iswebshop()
             // Times blocked : Expire time
             $ipban[$ip] = array(0, 0);
 
-            setoption('#ipban', $ipban);
+            setOption('#ipban', $ipban);
             cn_throw_message('IP or name mask [' . $ip . '] add/replaced');
         } else {
             cn_throw_message('IP Address must be filled', 'w');
@@ -646,7 +656,7 @@ function board_iswebshop()
             unset($ipban[$ip]);
         }
 
-        setoption('#ipban', $ipban);
+        setOption('#ipban', $ipban);
     }
 
     cn_assign('list', $ipban);
@@ -694,7 +704,7 @@ function board_iserverz()
                 $rss_language = 'en-us';
             }
 
-            setoption('#rss', $rss);
+            setOption('#rss', $rss);
         }
     }
 
@@ -731,10 +741,10 @@ function board_wreplace()
         if ($delete && $word) {
             unset($wlist[$word]);
             cn_throw_message("Word deleted");
-            setoption('#rword', $wlist);
+            setOption('#rword', $wlist);
         } elseif ($word && $replace) {
             $wlist[$word] = $replace;
-            setoption('#rword', $wlist);
+            setOption('#rword', $wlist);
         } else {
             cn_throw_message("Can't save");
         }
@@ -746,7 +756,7 @@ function board_wreplace()
     }
     $is_replace_opt = getoption('use_replacement');
     cn_assign('wlist, word, replace, repopt', $wlist, $word, $replace, $is_replace_opt);
-    echoheader('-@skins/mu_style.css', 'Replace words');
+    echo_header_admin('-@skins/mu_style.css', 'Replace words');
     echo exec_tpl('com_board/replace');
     echofooter();
 }
@@ -1234,6 +1244,9 @@ function board_ischaracter()
 
         $post_cfg = $_POST['config'];
         foreach ($acx[$sub] as $id => $val) {
+            if (!isset($post_cfg[$id])) {
+                continue;
+            }
             if (isset($post_cfg[$id])) {
                 $acx[$sub][$id] = $post_cfg[$id];
             }
@@ -1269,6 +1282,7 @@ function board_userman()
 
         // Do Delete
         if ($delete) {
+            // TODO
             db_user_delete($user_name);
             cn_throw_message(__("delete_user", [cnHtmlSpecialChars($user_name)]));
 
@@ -1439,17 +1453,17 @@ function board_group()
                 cn_throw_message("Can't update admin group", 'e');
             } elseif ($is_edited) {
                 // Save to config
-                setoption('#grp', $groups);
+                setOption('#grp', $groups);
                 cn_throw_message("Group updated");
             } else {
                 cn_throw_message("No data for update", 'w');
             }
         } elseif ($mode == 'add') {
-            $is_exists = FALSE;
+            $is_exists = false;
             // Check group exists
             foreach ($groups as $id => $dt) {
                 if ($dt['N'] == $group_name) {
-                    $is_exists = TRUE;
+                    $is_exists = true;
                     break;
                 }
             }
@@ -1457,15 +1471,14 @@ function board_group()
             $group_id = max(array_keys($groups)) + 1;
             // Update exists or new group
             if ($group_id > 1 && !$is_exists) {
-                $groups[$group_id] = array
-                (
+                $groups[$group_id] = array(
                     '#' => '',
                     'N' => $group_name,
                     'G' => $group_grp,
                     'A' => (!empty($ACL) ? join(',', $ACL) : ''),
                 );
                 // Save to config
-                setoption('#grp', $groups);
+                setOption('#grp', $groups);
                 cn_throw_message("Group added");
             } elseif ($is_exists) {
                 cn_throw_message("Group with that name already exist", 'e');
@@ -1474,17 +1487,17 @@ function board_group()
                 cn_throw_message("Group not added", 'e');
             }
         } else {
-            $edit_system = FALSE;
-            $edit_exists = FALSE;
-            $is_add_edit = TRUE;
+            $edit_system = false;
+            $edit_exists = false;
+            $is_add_edit = true;
             // Check group exists
             foreach ($groups as $id => $dt) {
                 if ($id == $group_id && $dt['#']) {
-                    $edit_system = TRUE;
+                    $edit_system = true;
                 }
 
                 if ($dt['N'] == $group_name) {
-                    $edit_exists = TRUE;
+                    $edit_exists = true;
                 }
             }
 
@@ -1501,10 +1514,9 @@ function board_group()
                     $id = intval($id);
 
                     if ($id == $group_id) {
-                        $ACL = spsep(($access === '*') ? $_CN_access['C'] . ',' . $_CN_access['N'] . ',' . $_CN_access['M'] : $access);
-                        $groups[$group_id] = array
-                        (
-                            '#' => TRUE,
+                        $ACL = separateString(($access === '*') ? $_CN_access['C'] . ',' . $_CN_access['N'] . ',' . $_CN_access['M'] : $access);
+                        $groups[$group_id] = array(
+                            '#' => true,
                             'N' => $name,
                             'G' => $group,
                             'A' => (!empty($ACL) ? join(',', $ACL) : ''),
@@ -1513,7 +1525,7 @@ function board_group()
                         cn_throw_message("Group reset");
                     }
                 }
-                $is_add_edit = FALSE;
+                $is_add_edit = false;
             } // Update group
             elseif ($edit_exists && !$delete_group) {
                 if ($group_id == 1) {
@@ -1536,13 +1548,13 @@ function board_group()
             }
 
             // Save to config
-            setoption('#grp', $groups);
+            setOption('#grp', $groups);
         }
     }
 
     foreach ($groups as $name => $data) {
         $_gtext = array();
-        $G = spsep($data['G']);
+        $G = separateString($data['G']);
 
         foreach ($G as $id) {
             if (isset ($groups[$id])) {
@@ -1565,12 +1577,12 @@ function board_group()
 
     // Get user acl data
     if ($group_id && $groups[$group_id]) {
-        $bc = spsep($groups[$group_id]['A']);
+        $bc = separateString($groups[$group_id]['A']);
     }
 
     foreach ($_CN_access as $Gp => $Ex) {
         $Gz = array();
-        $Ex = spsep($Ex);
+        $Ex = separateString($Ex);
         $Tr = $access_desc[$ATR[$Gp]];
 
         foreach ($Ex as $id) {
@@ -1579,7 +1591,7 @@ function board_group()
             $t = isset($trp[1]) ? $trp[1] : '';
             $c = in_array($id, $bc);
             if ($is_add_edit) {
-                $c = FALSE;
+                $c = false;
             }
             $Gz[$id] = array
             (
@@ -1609,7 +1621,7 @@ function board_group()
     }
 
     cn_assign('grp, group_name, group_id, group_grp, group_system, access, form_desc', $grp, $group_name, $group_id, $group_grp, $group_system, $access, $form_desc);
-    echoheader('-@skins/mu_style.css', 'Groups');
+    echo_header_admin('-@skins/mu_style.css', 'Groups');
     echo execTemplate('com_board/group');
     echofooter();
 }
@@ -1845,7 +1857,7 @@ function board_statistics()
             unset($list[$name]);
 
             $type = $name = $desc = $meta = $group = $req = '';;
-            setoption('#more_list', $list);
+            setOption('#more_list', $list);
         } else {
             if (!preg_match('/^[a-z0-9_-]+$/i', $name)) {
                 cn_throw_message('Name invalid - empty or bad chars', 'e');
@@ -1858,7 +1870,7 @@ function board_statistics()
             $errors = cn_get_message('e', 'c');
             if (!$errors) {
                 $list[$name] = array('grp' => $group, 'type' => $type, 'desc' => $desc, 'meta' => $meta, 'req' => $req);
-                setoption('#more_list', $list);
+                setOption('#more_list', $list);
                 cn_throw_message("Field added successfully");
             }
         }
@@ -1909,7 +1921,7 @@ function board_uploadFileAPIDropBox()
                 list($accessTokenDropBox, $userId, $urlState) = $webAuthClone->finish($_GET);
 
                 assert($urlState === null);  // Since we didn't pass anything in start()
-                setoption('accessTokenDropBox', $accessTokenDropBox);
+                setOption('accessTokenDropBox', $accessTokenDropBox);
             }
         }
     } catch (dbx\WebAuthException_BadRequest $ex) {

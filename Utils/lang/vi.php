@@ -1,4 +1,4 @@
-<?php
+`<?php
 
 return [
     "visit_site" => "Visit site",
@@ -39,7 +39,30 @@ return [
     'none' => 'None',
     'block' => 'Block',
     'unblock' => 'Unblock',
+    'normal' => 'Normal',
+    'account' => 'Account',
     //-------------------------------------------
+    'qa_1_default' => 'Tên con vật yêu thích?',
+    'qa_2_default' => 'Trò chơi bạn thích nhất?',
+    'qa_3_default' => 'Trường cấp 1 của bạn tên gì?',
+    'qa_4_default' => 'Người bạn yêu quý nhất?',
+    'qa_5_default' => 'Nơi để lại kỉ niệm khó quên nhất?',
+
+    // define key information character
+    'pk_level_super_hero' => 'Siêu Anh Hùng',
+    'pk_level_hero' => "Anh Hùng",
+    'pK_level_normal' => "Dân Thường",
+    'pk_level_assassin_0' => "Sát Thủ",
+    'pk_level_assassin_1' => "Sát Thủ Khát Máu",
+    'pk_level_assassin_2' => "Sát Thủ Điên Cuồng",
+
+    'ctl_code_normal' => "Bình thường",
+    'ctl_code_block' => "Hiện đang bị Khóa",
+    'ctl_code_game_master_8' => "GameMaster",
+    'ctl_code_game_master_32' => "GameMaster",
+    'ctl_code_block_items' => "Khóa đồ",
+
+//-------------------------------------------
     "system_configuration" => "System",
     "functional_configuration" => "Functional",
     "configure_DDoS" => "DDoS",

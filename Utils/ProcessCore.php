@@ -522,4 +522,17 @@ class ProcessCore extends Core
 
         return $fn;
     }
+
+    function cn_lang_init($root)
+    {
+        $lang = getOption('cn_language');
+        if (!$lang) {
+            $lang = 'vi';
+        }
+        ob_start();
+        $ln = include_once($root . '/Utils/lang/' . $lang . '.php');
+
+        setMemcache('#i18n', is_array($ln) ? $ln : []);
+        ob_end_clean();
+    }
 }

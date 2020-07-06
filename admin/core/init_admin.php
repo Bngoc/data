@@ -34,6 +34,7 @@ define('REQUEST_URI', $_SERVER["REQUEST_URI"]);
 
 // include necessary libs
 require_once ROOT . '/vendor/autoload.php';
+require_once ROOT . '/gifnoc/constant.php';
 require_once ROOT . '/Utils/functions/libgarena.php';
 require_once ROOT . '/Utils/functions/initialization.php';
 require_once SERVDIR . '/core/libAdmin/initialization_admin.php';
@@ -66,6 +67,7 @@ global $coreAdmin;
 
 // v2.0 init sections
 $is_config = $coreAdmin->cn_config_load();
+$coreAdmin->cn_lang_init(ROOT);
 
 // Database
 $coreAdmin->cn_db_init();
@@ -73,7 +75,6 @@ $coreAdmin->cn_db_init();
 //cn_rewrite_load(); //??
 // Checking existing configuration
 if ($is_config) {
-    cn_lang_init(ROOT);
     //cn_load_plugins();
     //cn_online_counter();
 }

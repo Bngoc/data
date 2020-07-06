@@ -65,11 +65,9 @@ if ($errors_result) {
                         onchange="checkQuestion(this.value, 'ccheckQuestionID');">
                     <!--                    <option value="">-- Chọn câu hỏi bí mật --</option>-->
                     <?php
-                    $question_answers = getOption('question_answers');
-                    $arrQA = explode(',', $question_answers);
-                    $fg = isset($_POST['cnameQuestion']) ? $_POST['cnameQuestion'] : null;
+                    $arrQA = convert_question_answer();
                     foreach ($arrQA as $key => $item) {
-                        echo '<option value="' . ($key + 1) . '">' . $item . '? </option>';
+                        echo '<option value="' . $key  . '">' . $item . '</option>';
                     }
                     ?>
                 </select>

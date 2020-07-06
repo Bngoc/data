@@ -1,6 +1,5 @@
 <?php
 
-//list($errors_result, $regusername, $regnickname, $regemail) = _GL('errors_result, regusername, regnickname, regemail');
 list($errors_result) = _GL('errors_result');
 ?>
 
@@ -123,11 +122,10 @@ list($errors_result) = _GL('errors_result');
                         onchange="checkQuestion(this.value, 'checkQuestionID');">
                     <!--                    <option value="">-- Chọn câu hỏi bí mật --</option>-->
                     <?php
-                    $question_answers = getOption('question_answers');
-                    $arrQA = explode(',', $question_answers);
+                    $arrQA = convert_question_answer();
                     $fg = isset($_POST['nameQuestion']) ? $_POST['nameQuestion'] : null;
                     foreach ($arrQA as $key => $item) {
-                        echo '<option ' . ($fg == ($key + 1) ? 'selected' : '') . ' value="' . ($key + 1) . '">' . $item . '? </option>';
+                        echo '<option ' . ($fg === $key  ? 'selected' : '') . ' value="' . $key . '">' . $item . '</option>';
                     }
                     ?>
                 </select>

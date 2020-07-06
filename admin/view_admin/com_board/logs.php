@@ -10,7 +10,6 @@ $i = 0;
 ?>
 
 <ul class="sysconf_top">
-
     <?php foreach ($default_log as $key => $ol) { ?>
         <li <?php if ($section == $key || (empty($section) && $key == 'system')) {
             echo ' class="selected"';
@@ -23,32 +22,41 @@ $i = 0;
     <div style="clear:both;"></div>
     <a style="float: right; margin: 5px;top: 37px; right: 8px; position: absolute;"
        href="<?php echo cn_url_modify('section', 'action=error_dump'); ?>">Xóa Log</a>
-    <table id="comparison" style="overflow-x:auto; border-collapse: collapse; display: table; border: 1px solid blue;"
+    <table id="comparison"
+           style="overflow-x:auto; border-collapse: collapse; display: table; border: 1px solid blue;"
            width="100%" cellspacing="1" cellpadding="3">
-        <th style="border: 1px solid blue; width: 3%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">
+        <th style="border: 1px solid blue; width: 3%; padding: 5px; font-weight: 600;" align="left"
+            bgcolor="#ffffcc">
             #
         </th>
-        <th style="border: 1px solid blue; width: 5%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">
+        <th style="border: 1px solid blue; width: 5%; padding: 5px; font-weight: 600;" align="left"
+            bgcolor="#ffffcc">
             Status
         </th>
-        <th style="border: 1px solid blue; width: 8%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">
+        <th style="border: 1px solid blue; width: 8%; padding: 5px; font-weight: 600;" align="left"
+            bgcolor="#ffffcc">
             Time
         </th>
-        <th style="border: 1px solid blue; width: 8%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">
+        <th style="border: 1px solid blue; width: 8%; padding: 5px; font-weight: 600;" align="left"
+            bgcolor="#ffffcc">
             Name
         </th>
-        <th style="border: 1px solid blue; width: 7%; padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">
+        <th style="border: 1px solid blue; width: 7%; padding: 5px; font-weight: 600;" align="left"
+            bgcolor="#ffffcc">
             IP
         </th>
-        <th style="border: 1px solid blue; width: 15%;padding: 5px; font-weight: 600;" align="left" bgcolor="#ffffcc">
+        <th style="border: 1px solid blue; width: 15%;padding: 5px; font-weight: 600;" align="left"
+            bgcolor="#ffffcc">
             URL
         </th>
-        <th align="left" style="border: 1px solid blue; padding: 5px; font-weight: 600;" bgcolor="#ffffcc">Error</th>
+        <th align="left" style="border: 1px solid blue; padding: 5px; font-weight: 600;" bgcolor="#ffffcc">Error
+        </th>
         <?php
         foreach ($log_read as $k => $item) {
             ?>
             <tr style="background:<?php echo($k % 2 ? '#BFB6B3' : '#FFFFFF'); ?>">
-                <td style="border: 1px solid #ddd; overflow-x: scroll" align="middle"><?php echo $item['id']; ?></td>
+                <td style="border: 1px solid #ddd; overflow-x: scroll"
+                    align="middle"><?php echo $item['id']; ?></td>
                 <td style="border: 1px solid #ddd; overflow-x: scroll"><?php echo $item['status']; ?></td>
                 <td style="border: 1px solid #ddd; overflow-x: scroll"><?php echo $item['time']; ?></td>
                 <td style="border: 1px solid #ddd; overflow-x: scroll"><?php echo $item['name']; ?></td>
@@ -60,21 +68,25 @@ $i = 0;
             <?php
         } ?>
     </table>
-<?php } elseif ($section) {
-    echo ' <table width="100%" cellspacing="1" class="sub-log" cellpadding="3" border="0" bgcolor="#0000ff"><tr>';
-    foreach ($options as $key => $item) {
-        echo '<td class="cust-style" bgcolor="' . (($key == $sub) ? '#c2e9bb' : '#ffffcc') . '" valign="top">';
-        echo '<a href="' . cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs', 'section=' . $section, "sub=$key") . '">' . $item['name'] . '</a>';
-        echo '<hr><div class="xoalog"><a href="' . cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs', 'action', 'section=' . $section, "sub=$key", "action=" . (@$item['log'] ? $item['log'] : '')) . '"><font color="#FF0000">Xóa Log</font></div></td>';
-        $lopIndx++;
-        if ($lopIndx % 7 == 0) {
-            echo '</tr><tr>';
-        } ?>
-
-        <?php
-    }
-    echo '</table>'; ?>
+<?php } elseif ($section) { ?>
+    <div class="table-responsive">
+        <table class="table table_wrapper" width="100%" cellspacing="1" class="sub-log" cellpadding="3" border="0"
+               bgcolor="#0000ff">
+            <tr>
+                <?php foreach ($options as $key => $item) { ?>
+                    <td class="cust-style log-td-width" bgcolor="' . (($key == $sub) ? '#c2e9bb' : '#ffffcc') . '" valign="top">
+                        <a href="<?= cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs', "section=$section", "sub=$key"); ?>"><?= $item['name'] ?></a>
+                        <div class="xoalog">
+                            <a href="<?= cn_url_modify(array('reset'), 'mod=editconfig', 'opt=logs', 'action', 'section=' . $section, "sub=$key", "action=" . (@$item['log'] ? $item['log'] : '')) ?>">
+                                <font color="#FF0000">Xóa Log</font></a>
+                        </div>
+                    </td>
+                <?php } ?>
+            </tr>
+        </table>
+    </div>
     <div style="clear:both;"></div>
+
     <table width="100%" bgcolor="#0000ff">
         <tr>
             <td bgcolor="#ffffff" valign="top">
@@ -108,7 +120,6 @@ $i = 0;
     </table>
     <?php
 } ?>
-
 <div>
     <?php
     echo $echoPagination;

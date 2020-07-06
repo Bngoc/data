@@ -43,11 +43,10 @@ if ($errors_result) {
                 <select size="1" name="cnameQuestion" id="bizwebselect"
                         onchange="checkQuestion(this.value, 'checkQuestionID');">
                     <?php
-                    $question_answers = getOption('question_answers');
-                    $arrQA = explode(',', $question_answers);
+                    $arrQA = convert_question_answer();
                     $fg = isset($_POST['cnameQuestion']) ? $_POST['cnameQuestion'] : null;
                     foreach ($arrQA as $key => $item) {
-                        echo '<option ' . ($fg == ($key + 1) ? 'selected' : '') . ' value="' . ($key + 1) . '">' . $item . '? </option>';
+                        echo '<option ' . ($fg === $key ? 'selected' : '') . ' value="' . $key . '">' . $item . '</option>';
                     }
                     ?>
                 </select>

@@ -2,13 +2,6 @@
     die('Access restricted');
 }
 
-// ACL: basic access control level
-define('ACL_LEVEL_ADMIN', 1);
-define('ACL_LEVEL_EDITOR', 2);
-define('ACL_LEVEL_JOURNALIST', 3);
-define('ACL_LEVEL_COMMENTER', 4);
-define('ACL_LEVEL_BANNED', 5);
-
 /**
  * @return bool
  */
@@ -537,7 +530,7 @@ function db_get_member_account($requestData)
                 return false;
             }
         }
-        $usx[0]['pass']= $usx[0]['Pwd'];
+        $usx[0]['pass'] = $usx[0]['Pwd'];
         return $usx[0];
     }
 
@@ -725,7 +718,7 @@ function check_alphabet_character($account, $character)
 function check_block_char($account, $character)
 {
     global $db_new;
-    $sql_block_check = $db_new->Execute("SELECT Name FROM Character WHERE Name='$character' AND CtlCode='1' AND AccountID='$account'");
+    $sql_block_check = $db_new->Execute("SELECT Name FROM Character WHERE Name='$character' AND CtlCode='" . PK_CTL_CODE_BLOCK . "' AND AccountID='$account'");
     $block_check = $sql_block_check->numrows();
     if ($block_check > 0) {
         echo "Nhân vật đang bị khóa.";
@@ -772,7 +765,7 @@ function check_GM($account)
     global $db_new;
 
     if (!empty($account)) {
-        $sql_gm_check = $db_new->Execute("SELECT * FROM Character WHERE AccountID='$account' AND (CtlCode=8 or CtlCode=32)");
+        $sql_gm_check = $db_new->Execute("SELECT * FROM Character WHERE AccountID='$account' AND (CtlCode=" . PK_CTL_CODE_GAME_MASTER_8 . " or CtlCode=" . PK_CTL_CODE_GAME_MASTER_8 . ")");
         $gm_check = $sql_gm_check->numrows();
         if ($gm_check <= 0) {
             return true;        // 'NoGM';

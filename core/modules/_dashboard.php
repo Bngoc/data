@@ -3139,8 +3139,7 @@ function char_removepk()
     $level = $showchar[$sub]['level'];
     $reset_ = $showchar[$sub]['reset'];
     $money = $showchar[$sub]['money'];
-    $PkLevel = $showchar[$sub]['PkLevel']; //???????????????
-    $PkCount = $showchar[$sub]['PkCount']; //>>>>>>>>>>>>??/
+    $PkCount = $showchar[$sub]['PkCount'];
     $ui = $_pk['pk_zen_vpoint'];
 
     $option_pk = array(
@@ -3229,11 +3228,8 @@ function char_removepk()
 
                 if (!$is_vp) {
                     $ktvpoint = isset($ktvpoint) ? $ktvpoint : $vpoint_;
-                    //$msquery = "UPDATE Character SET [PkLevel] = '3',[PkTime] = '0',[pkcount] = '0' WHERE AccountID = '$account' AND Name = '$character'";
-                    //$msresults= $db->Execute($msquery);
 
                     do_update_character('MEMB_INFO', "vpoint = $ktvpoint", "memb___id:'$accc_'");
-                    //$msresults1= $db->Execute($msquery1);
 
                     //Ghi vào Log
                     $content = "$sub đã rửa tội giết $PkCount mạng với" . @$numVpPK . " V.Point";
@@ -3241,7 +3237,6 @@ function char_removepk()
                     $checkDir = makeDirs($files = MODULE_ADM . "/log/modules/character");
                     if ($checkDir) {
                         $file = $files . "/log_ruatoi.log";
-//                    $file = MODULE_ADM . "/log/modules/character/log_ruatoi.log";
                         cn_touch($file);
                         $fileContents = file_get_contents($file);
                         file_put_contents($file, $accc_ . "|" . $content . "|" . $_blank_var[0]['gc'] . "_" . $vpoint_ . "|" . $_blank_var[0]['gc'] . "_" . $ktvpoint . "|" . $Date . "|\n" . $fileContents);

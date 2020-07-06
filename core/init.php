@@ -30,6 +30,7 @@ define('MAX_TRANS', 2000000000);
 
 // include necessary libs
 require_once ROOT . '/vendor/autoload.php';
+require_once ROOT . '/gifnoc/constant.php';
 require_once ROOT . '/Utils/functions/libgarena.php';
 require_once ROOT . '/Utils/functions/initialization.php';
 require_once ROOT . '/core/function/initialization_web.php';
@@ -64,6 +65,7 @@ $_CN_access = array(
 $coreWeb = new ProcessCoreWeb();
 // v2.0 init sections
 // set default
+$coreWeb->cn_lang_init(ROOT);
 $is_config = $coreWeb->cn_config_load();
 // get url
 $coreWeb->cn_parse_url();
@@ -76,7 +78,6 @@ $coreWeb->cn_relocation_db_new();
 
 // 2.0.3 checking existing configuration
 if ($is_config) {
-    cn_lang_init(ROOT);
     //cn_load_plugins();
 //cn_online_counter();
 }
