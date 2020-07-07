@@ -194,6 +194,45 @@ function mssql_real_escape_string($s)
 }
 
 // Since 2.0: Get user by id
+function db_user_admin_by_name($name)
+{
+    // TODO
+    if ($name) {
+        $name = strtolower($name);
+        $username = strip_tags($name);
+        $username = mssql_real_escape_string($username);
+
+        $result_rows = do_select_character('Account_Info', 'memb___id,memb__pwd,tel__numb,phon_numb,mail_addr,fpas_ques,fpas_answ,memb__pwd2,memb__pwdmd5,acl,ban_login,num_login,pass2', "memb___id='$username'");
+        if ($result_rows) {
+            foreach ($result_rows as $sd => $ds) {
+                $pdata = array(
+                    'user_name' => $ds['memb___id'],
+                    'pass_web' => $ds['memb__pwdmd5'],
+                    'memb__pwdmd5' => $ds['memb__pwdmd5'],
+                    'pass_game' => $ds['memb__pwd'],
+                    'tel_num' => $ds['tel__numb'],
+                    'phon_num' => $ds['phon_numb'],
+                    'email' => $ds['mail_addr'],
+                    'question' => $ds['fpas_ques'],
+                    'answer' => $ds['fpas_answ'],
+                    'pass_verify' => $ds['memb__pwd2'],
+                    'acl' => $ds['acl'],
+                    'ban_login' => $ds['ban_login'],
+                    'num_login' => $ds['num_login'],
+                    'pass2' => $ds['pass2']
+                );
+            }
+        }
+    }
+
+    if (getOption('debugSql')) {
+        cn_write_log('MEMB_INFO', 'memb___id,memb__pwd,tel__numb,phon_numb,mail_addr,fpas_ques,fpas_answ,memb__pwd2,memb__pwdmd5,acl,ban_login,num_login,pass2', "memb___id='$username'");
+    }
+
+    return isset($pdata) ? $pdata : array();
+}
+
+// Since 2.0: Get user by id
 function db_user_by_name($name)
 {
     if ($name) {

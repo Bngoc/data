@@ -298,7 +298,7 @@ function cn_get_template($subTemplate, $template_name = 'default')
         return $templates[$template_name][$subTemplate];
     }
 
-    $list = cn_template_list();
+    $list = cn_format_template_list();
 
     if (isset($list[$template_name][$subTemplate])) {
         return $list[$template_name][$subTemplate];

@@ -118,5 +118,6 @@ return [
     'logout' => "Logout",
     'addnews' => "Add news",
     'editnews' => "Edit news",
+    'news_list' => "News list",
 
 ];

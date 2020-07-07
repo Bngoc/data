@@ -1295,7 +1295,7 @@ function board_userman()
             $user_name = $user_nick = $user_email = $user_acl = '';
         } // Add-Edit
         else {
-            $user_data = db_user_by_name($user_name);
+            $user_data = db_user_admin_by_name($user_name);
 
             if (REQ('edit')) {
                 if ($user_data === null) {

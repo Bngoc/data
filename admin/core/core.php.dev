@@ -1960,7 +1960,7 @@ function getMember()
         return $member;
     }
 
-    mcache_set('#member', $user = db_user_by_name($_SESSION['user']));
+    mcache_set('#member', $user = db_user_admin_by_name($_SESSION['user']));
     return $user;
 }
 
@@ -2857,7 +2857,7 @@ function cn_login()
     $logged_username = isset($_SESSION['user']) ? $_SESSION['user'] : FALSE;
 
     // Check user exists. If user logged, but not exists, logout now
-    if ($logged_username && !db_user_by_name($logged_username)) {
+    if ($logged_username && !db_user_admin_by_name($logged_username)) {
         cn_logout();
     }
 
@@ -2875,7 +2875,7 @@ function cn_login()
 
         if ($action == 'dologin') {
             if ($username && $password) {
-                $member = db_user_by_name($username);
+                $member = db_user_admin_by_name($username);
                 $ban_time = isset($member['ban']) ? (int)$member['ban'] : 0;
 
                 // ban limit
@@ -2986,7 +2986,7 @@ function cn_register_form($admin = TRUE)
 
     // Resend activation
     if (request_type('POST') && isset($_POST['register']) && isset($_POST['lostpass'])) {
-        $user = db_user_by_name(REQ('username'));
+        $user = db_user_admin_by_name(REQ('username'));
 
         if (is_null($user)) {
             msg_info('User not exists');

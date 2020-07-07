@@ -1202,7 +1202,7 @@ function dashboard_userman()
             $user_name = $user_nick = $user_email = $user_acl = '';
         } // Add-Edit
         else {
-            $user_data = db_user_by_name($user_name);
+            $user_data = db_user_admin_by_name($user_name);
 
             if (REQ('edit')) {
                 if ($user_data === null) {
@@ -1286,7 +1286,7 @@ function dashboard_userman()
     }
 
     // Retrieve info about user
-    if ($user = db_user_by_name($user_name)) {
+    if ($user = db_user_admin_by_name($user_name)) {
         $user_nick = isset($user['nick']) ? $user['nick'] : '';
         $user_email = isset($user['email']) ? $user['email'] : '';
         $user_acl = isset($user['acl']) ? $user['acl'] : '';

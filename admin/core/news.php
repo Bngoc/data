@@ -286,7 +286,7 @@ function cn_modify_date($e)
 function cn_modify_author($e)
 {
 
-    //$user = db_user_by_name($e['u']);
+    //$user = db_user_admin_by_name($e['u']);
     $user = ($e['u']);
     print "F_new 242 " . $e['u'] . "<br>";
 
@@ -313,7 +313,7 @@ function cn_modify_author($e)
 
 function cn_modify_avatar($e, $p)
 {
-    //$user = db_user_by_name($e['u']);
+    //$user = db_user_admin_by_name($e['u']);
     $user = $e['u'];
     $result = '';
     if (!is_null($user)) {
@@ -750,7 +750,7 @@ function cn_modify_bb_truncate($e, $t, $o)
 // make mail
 function cn_modify_bb_mail($e, $t)
 {
-    $user = db_user_by_name($e['u']);
+    $user = db_user_admin_by_name($e['u']);
 
     if ($user['e-hide']) {
         return $user['name'];
@@ -805,7 +805,7 @@ function cn_modify_bb_youtube($e, $t)
 function cn_modify_comm_author($e)
 {
     //in comments e-mail mast hide
-    $user = db_user_by_name($e['u']);
+    $user = db_user_admin_by_name($e['u']);
 
     if (!$user) {
         $user = array(
@@ -837,7 +837,7 @@ function cn_modify_comm_date($e)
 
 function cn_modify_comm_mail($e)
 {
-    $user = db_user_by_name($e['u']);
+    $user = db_user_admin_by_name($e['u']);
     return cnHtmlSpecialChars($user['email']);
 }
 
@@ -881,7 +881,7 @@ function cn_modify_comm_input_commentbox($e)
     if (!empty($edit_id)) {
         $username = $e['co'][$edit_id]['u'];
         $member = getMember();
-        $target_user = db_user_by_name($username);
+        $target_user = db_user_admin_by_name($username);
 
         // Check ACL for edit
         if ((test('Mes') && $username == $member['name']) || test('Meg', $target_user) || test('Mea')) {

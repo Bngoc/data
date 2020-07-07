@@ -8,10 +8,15 @@ function edit_news_invoke()
     list($action) = GET('action', 'GPG');
 
     // [DETECT ACTION]
-    if ($action == 'editnews') edit_news_action_edit();
-    elseif ($action == 'massaction') edit_news_action_massaction();
-    elseif ($action == 'delete') edit_news_delete();
-    else edit_news_action_list();
+    if ($action === 'editnews') {
+        edit_news_action_edit();
+    } elseif ($action === 'massaction') {
+        edit_news_action_massaction();
+    } elseif ($action === 'delete') {
+        edit_news_delete();
+    } else {
+        edit_news_action_list();
+    }
 
     die();
 }
@@ -72,12 +77,11 @@ function edit_news_action_list()
         if ($cat_filter !== '-')
             $cfilter = array(intval($cat_filter));
         else
-            $nocat = TRUE;
+            $nocat = true;
     }
 
     // ----------------------------------------------------
-    $opts = array
-    (
+    $opts = array(
         'source' => $source,
         'archive_id' => $archive_id,
         'sort' => $sort,
@@ -87,7 +91,7 @@ function edit_news_action_list()
         'cfilter' => $cfilter,
         'ufilter' => $ufilter,
         'nocat' => $nocat,
-        'nlpros' => TRUE, // load prospected anyway
+        'nlpros' => true, // load prospected anyway
         'by_date' => "$YS-$MS-$DS",
     );
 
@@ -98,14 +102,15 @@ function edit_news_action_list()
         end($entries);
         unset($entries[key($entries)]);
 
-        $has_next = TRUE;
+        $has_next = true;
     }
 
     // Load meta-data (and userlist data)
-    if ($archive_id && $source == 'archive')
-        $meta = db_index_meta_load("archive-$archive_id", TRUE);
-    else
-        $meta = db_index_meta_load($source, TRUE);
+    if ($archive_id && $source == 'archive') {
+        $meta = db_index_meta_load("archive-$archive_id", true);
+    } else {
+        $meta = db_index_meta_load($source, true);
+    }
 
     // Meta-data for draft only
     $meta_draft = db_index_meta_load('draft');
@@ -116,7 +121,6 @@ function edit_news_action_list()
     $found_rows = is_array($meta['locs']) ? intval(array_sum($meta['locs'])) : 0;
     $archives = count(db_get_archives());
 
-    // ---
     // Decode proto tree for list news
     $tree_years = array();
     $tree_mons = array();
@@ -124,42 +128,44 @@ function edit_news_action_list()
 
     // Is draft or active (or prospected)
     if ($source !== 'archive') {
-        if ($ptree) foreach ($ptree as $nloc => $c) {
-            list($Y, $M, $D) = explode('-', $nloc);
-            $tree_years[$Y] += $c;
+        if ($ptree) {
+            foreach ($ptree as $nloc => $c) {
+                list($Y, $M, $D) = explode('-', $nloc);
+                $tree_years[$Y] += $c;
 
-            if ($Y == $YS) {
-                $tree_mons[$M] += $c;
-                if ($M == $MS) $tree_days[$D] = $c;
+                if ($Y == $YS) {
+                    $tree_mons[$M] += $c;
+                    if ($M == $MS) $tree_days[$D] = $c;
+                }
             }
         }
-    } // Is archive
-    else {
+    } else {
+        // Is archive
         $ptree = db_get_archives();
 
         $found_rows = 0;
         if ($archive_id) {
             $found_rows = $ptree[$archive_id]['c'];
         } else {
-            foreach ($ptree as $item)
+            foreach ($ptree as $item) {
                 $found_rows += $item['c'];
+                $entries = array();
+            }
 
-            $entries = array();
+            $nprospect = 0;
         }
-
-        $nprospect = 0;
     }
-
     // ----------------------------------------------------
     foreach ($entries as $id => $entry) {
         $can = false;
-        $nv_user = db_user_by_name($entry['u']);
+        $nv_user = db_user_admin_by_name($entry['u']);
 
         // User not exists, deny, except admins
-        if (!$nv_user && !test('Nva'))
+        if (!$nv_user && !testRoleAdmin('Nva')) {
             $can = false;
-        elseif (test('Nvs', $nv_user, TRUE) || test('Nvg', $nv_user) || test('Nva'))
+        } elseif (testRoleAdmin('Nvs', $nv_user, true) || testRoleAdmin('Nvg', $nv_user) || testRoleAdmin('Nva')) {
             $can = test_category($entry['c']);
+        }
 
         $entries[$id]['user'] = $entry['u'];
         $entries[$id]['date'] = $YS ? date('M, d H:i', $id) : date('M, d Y H:i', $id);
@@ -168,7 +174,7 @@ function edit_news_action_list()
         $entries[$id]['comments'] = count($entry['co']);
         $entries[$id]['title'] = $entry['t'];
         $entries[$id]['cats'] = separateString($entry['c']);
-        $entries[$id]['is_pros'] = $id > $ctime ? TRUE : false;
+        $entries[$id]['is_pros'] = $id > $ctime ? true : false;
         $entries[$id]['can'] = $can;
     }
 
@@ -183,9 +189,10 @@ function edit_news_action_list()
     cn_assign('year_selected, mon_selected, day_selected, TY, TM, TD, ptree', $YS, $MS, $DS, $tree_years, $tree_mons, $tree_days, $ptree);
     cn_assign('nprospect, ndraft, has_next, archives', $nprospect, $ndraft, $has_next, $archives);
 
-    echoheader('editnews@editnews/main.css', 'News list');
-    echo exec_tpl('editnews/list');
+    echo_header_admin("com_news@skins/mu_style.css", __("news_list"));
+    echo cn_execute_template('com_news/list');
     echofooter();
+
 }
 
 // Since 2.0: Edit news section
@@ -201,22 +208,29 @@ function edit_news_action_edit()
     // get news part by day
     $news = db_news_load(db_get_nloc($ID));
 
-    if ($ID == 0)
+    if ($ID == 0) {
         msg_info("Can't edit news without ID");
+    }
 
-    if (!isset($news[$ID]))
+    if (!isset($news[$ID])) {
         msg_info("News entry not found!");
+    }
 
     // load entry
     $entry = $news[$ID];
 
     // disallowed by category
-    if (!test_category($entry['c']))
+    if (!test_category($entry['c'])) {
         msg_info("You can't view entry. Category disallow");
+    }
 
     // set status message
-    if ($status == 'added') cn_throw_message('News was added');
-    if ($status == 'moved') cn_throw_message('Moved to another time');
+    if ($status === 'added') {
+        cn_throw_message('News was added');
+    }
+    if ($status === 'moved') {
+        cn_throw_message('Moved to another time');
+    }
 
     // load more fields
     list($morefields) = cn_get_more_fields($entry['mf']);
@@ -239,15 +253,15 @@ function edit_news_action_edit()
             $page = preg_replace('/[^a-z0-9_]/i', '-', $page);
 
             // current source is archive, active (postponed) or draft news
-            $draft_target = $postpone_draft == 'draft' ? TRUE : false;
+            $draft_target = $postpone_draft == 'draft' ? true : false;
 
             // User can't post active news
-            if (test('Bd') && $draft_target !== 'draft') $draft_target = 'draft';
+            if (testRoleAdmin('Bd') && $draft_target !== 'draft') $draft_target = 'draft';
 
             // if archive_id is present, unable send to draft
             $current_source = $archive_id ? "archive-$archive_id" : ($source == 'draft' ? 'draft' : '');
             $target_source = $archive_id ? "archive-$archive_id" : ($draft_target ? 'draft' : '');
-            $if_use_html = $if_use_html ? TRUE : (getoption('use_wysiwyg') ? TRUE : false);
+            $if_use_html = $if_use_html ? true : (getOption('use_wysiwyg') ? true : false);
 
             $entry['t'] = $title;
             $entry['c'] = is_array($category) ? join(',', $category) : $category;
@@ -256,7 +270,7 @@ function edit_news_action_edit()
             $entry['ht'] = $if_use_html;
             $entry['st'] = $draft_target ? 'd' : '';
             $entry['pg'] = $page;
-            $entry['cc'] = $vConcat ? TRUE : false;
+            $entry['cc'] = $vConcat ? true : false;
             $entry['tg'] = $vTags;
 
             // apply more field (for news & frontend)
@@ -272,18 +286,21 @@ function edit_news_action_edit()
                 $preview_html = entry_make($entry, 'active');
             } elseif (REQ('do_editsave', 'POST')) {
                 // Save new data
-                if (!getoption('disable_title') && empty($title))
+                if (!getOption('disable_title') && empty($title)) {
                     cn_throw_message('The title cannot be blank', 'e');
+                }
 
-                if (!getoption('disable_short') && empty($short_story))
+                if (!getOption('disable_short') && empty($short_story)) {
                     cn_throw_message('The story cannot be blank', 'e');
+                }
 
                 // Check for change alias
                 $pgts = bt_get_id($ID, 'ts_pg');
                 if ($pgts && $pgts !== $page) {
                     if ($page) {
-                        if (bt_get_id($page, 'pg_ts'))
+                        if (bt_get_id($page, 'pg_ts')) {
                             cn_throw_message('For other news page alias already exists!', 'e');
+                        }
                     } else {
                         bt_del_id($pgts, 'pg_ts');
                         bt_del_id($ID, 'ts_pg');
@@ -308,11 +325,17 @@ function edit_news_action_edit()
                             $next[$c_time] = $entry;
 
                             // remove old news [from source / dest]
-                            if (isset($news[$ID])) unset($news[$ID]);
-                            if (isset($next[$ID])) unset($next[$ID]);
+                            if (isset($news[$ID])){
+                                unset($news[$ID]);
+                            }
+                            if (isset($next[$ID])){
+                                unset($next[$ID]);
+                            }
 
                             // remove old index
-                            if (isset($idd[$ID])) unset($idd[$ID]);
+                            if (isset($idd[$ID])){
+                                unset($idd[$ID]);
+                            }
 
                             // Delete old indexes
                             $_ts_id = bt_get_id($ID, 'nts_id');
@@ -353,14 +376,15 @@ function edit_news_action_edit()
                     if (isset($ida[$ID]))
                         unset($ida[$ID]);
 
+                    // TODO
                     // 2) add new index
-                    $idd[$c_time] = db_index_create($entry);
+//                    $idd[$c_time] = db_index_create($entry);
 
                     // 3) sync indexes
-                    db_index_save($ida, $current_source);
-                    db_index_update_overall($current_source);
-                    db_index_save($idd, $target_source);
-                    db_index_update_overall($target_source);
+//                    db_index_save($ida, $current_source);
+//                    db_index_update_overall($current_source);
+//                    db_index_save($idd, $target_source);
+//                    db_index_update_overall($target_source);
                 }
             }
         } else {
@@ -380,9 +404,7 @@ function edit_news_action_edit()
     $vTags = $entry['tg'];
     $if_use_html = $entry['ht'];
 
-    cn_assign
-    (
-        'categories, vCategory, vTitle, vPage, vShort, vFull, vUseHtml, preview_html, gstamp, is_draft, vConcat, vTags, morefields, archive_id',
+    cn_assign('categories, vCategory, vTitle, vPage, vShort, vFull, vUseHtml, preview_html, gstamp, is_draft, vConcat, vTags, morefields, archive_id',
         $categories, $category, $title, $page, $short_story, $full_story, $if_use_html, $preview_html, $ID, $is_draft, $vConcat, $vTags, $morefields, $archive_id
     );
 
@@ -402,18 +424,21 @@ function edit_news_action_massaction()
 
     // Mass Delete
     if ($subaction == 'mass_delete') {
-        if (!test('Nud'))
+        if (!testRoleAdmin('Nud')){
             msg_info("Operation not permitted for you");
+        }
 
         list($selected_news) = GET('selected_news');
 
         $count = count($selected_news);
-        if (confirm_first() && $count == 0)
+        if (confirm_first() && $count == 0){
             msg_info('Error: no none entry selected');
+        }
 
         if (confirm_post("Delete selected news ($count)")) {
-            if ($source == 'archive')
+            if ($source == 'archive'){
                 $source = 'archive-' . intval($archive_id);
+            }
 
             $idx = db_index_load($source);
 
@@ -421,6 +446,7 @@ function edit_news_action_massaction()
             foreach ($selected_news as $id) {
                 $news = db_news_load(db_get_nloc($id));
 
+                // TODO
                 // Delete tags, etc
                 db_update_aux($news[$id], 'delete');
 
@@ -466,7 +492,7 @@ function edit_news_action_massaction()
     elseif ($subaction == 'mass_move_to_cat') {
         cn_assign('catlist', cn_get_categories());
 
-        if (confirm_post(exec_tpl('addedit/changecats'))) {
+        if (confirm_post(cn_execute_template('com_news/changecats'))) {
             cn_dsi_check();
 
             list($news_ids, $cats, $source) = GET('selected_news, cats, source', 'POST');
@@ -479,8 +505,9 @@ function edit_news_action_massaction()
                 $entries = db_news_load($loc);
 
                 // Catch user trick
-                if (!test_category($entries[$id]['c']))
+                if (!test_category($entries[$id]['c'])){
                     msg_info('Not allowed change category for id = ' . $id);
+                }
 
                 $idx[$id][0] = $nc;
                 $entries[$id]['c'] = $nc;
@@ -497,11 +524,13 @@ function edit_news_action_massaction()
         }
     } // Mass approve action
     elseif ($subaction == 'mass_approve') {
-        if (!test('Nua'))
+        if (!testRoleAdmin('Nua')){
             msg_info("Operation not permitted for you");
+        }
 
         list($selected_news) = GET('selected_news');
 
+        // TODO
         $ida = db_index_load('');
         $idd = db_index_load('draft');
 
@@ -535,8 +564,9 @@ function edit_news_delete()
 {
     cn_dsi_check();
 
-    if (!test('Nud'))
+    if (!testRoleAdmin('Nud')){
         msg_info("Unable to delete news: no permission");
+    }
 
     list($id, $source) = GET('id, source', 'GET');
 
@@ -544,6 +574,7 @@ function edit_news_delete()
     $nloc = db_get_nloc($id);
     $db = db_news_load($nloc);
 
+    // TODO
     // update tags, etc
     db_update_aux($db[$id], 'delete');
 
@@ -566,5 +597,5 @@ function edit_news_delete()
     db_index_save($ida, $source);
     db_index_update_overall($source);
 
-    cn_relocation(cn_url_modify(array('reset'), 'mod=editnews', "source=$source"));
+    cnRelocation(cn_url_modify(array('reset'), 'mod=editnews', "source=$source"));
 }

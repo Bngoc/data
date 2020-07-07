@@ -5,3 +5,7 @@
 .htaccess
 web.config
 /setupApi/*.json
+
+/admin/data_db/btree/*
+/admin/data_db/news/*
+/admin/data_db/users/*

@@ -115,12 +115,12 @@ function add_news_invoke()
                 $cnt = intval($member['cnt']) + 1;
 
                 // TODO
-//                db_user_update_admin($member['user_Account'], "cnt=$cnt");
+                db_user_update_admin($member['user_Account'], "cnt=$cnt");
 
                 // do update meta-index
-//                db_index_update_overall_admin($sc);
+                db_index_update_overall_admin($sc);
                 // TODO
-//                db_update_aux_admin($entry, 'add');
+                db_update_aux_admin($entry, 'add');
 
                 // Notify for unapproved
                 if (getOption('notify_status') && getOption('notify_unapproved') && testRoleAdmin('Bs')) {

@@ -294,7 +294,11 @@ function cn_get_news($opts)
     } else {
         // Quick-Get tree structure
         $dirs = scan_dir(SERVDIR . '/data_db/news', '^[\d\-]+\.php$');
-        foreach ($dirs as $tc) if (preg_match('/^([\d\-]+)\.php$/i', $tc, $c)) $qtree[$c[1]] = 0;
+        foreach ($dirs as $tc) {
+            if (preg_match('/^([\d\-]+)\.php$/i', $tc, $c)) {
+                $qtree[$c[1]] = 0;
+            }
+        }
 
         // Empty sort is sort by date
         if ($sort == 'date') {
@@ -306,7 +310,9 @@ function cn_get_news($opts)
         if ($archive_id) {
             $source_id = 'archive';
             $source = "archive-$archive_id";
-        } else $source_id = $source;
+        } else {
+            $source_id = $source;
+        }
 
         // -----
         // Optimize 'date' function, select by date range
@@ -328,7 +334,9 @@ function cn_get_news($opts)
             if ($date_out[1] == 12) {
                 $ty++;
                 $tm = 1;
-            } else $tm++;
+            } else {
+                $tm++;
+            }
 
             $range_fm = strtotime($dy . '-' . $dm . '-01 00:00:00');
             $range_tm = strtotime($ty . '-' . $tm . '-01 00:00:00');
@@ -341,8 +349,12 @@ function cn_get_news($opts)
         }
 
         // Fetch all indexes?
-        if ($sort) $ppsort = TRUE;
-        if ($dir == 'R') $ppsort = TRUE;
+        if ($sort) {
+            $ppsort = true;
+        }
+        if ($dir == 'R') {
+            $ppsort = true;
+        }
 
         // Archives list
         $archive_list = db_get_archives();
@@ -413,20 +425,20 @@ function cn_get_news($opts)
                     $aitem = array_shift($archive_list);
                     $source = 'archive-' . $aitem['id'];
                 } else break;
-            } while (TRUE);
+            } while (true);
         }
 
         // ---
         // R-reverse direction
-        if ($dir == 'R') $ls = array_reverse($ls, TRUE);
+        if ($dir == 'R') $ls = array_reverse($ls, true);
 
         // Sorting, if selected
         if ($ppsort) {
             if ($dir == 'A') asort($ls);
             elseif ($dir == 'D') arsort($ls);
 
-            if ($per_page) $ls = array_slice($ls, $st, $per_page, TRUE);
-            elseif ($st) $ls = array_slice($ls, $st, NULL, TRUE);
+            if ($per_page) $ls = array_slice($ls, $st, $per_page, true);
+            elseif ($st) $ls = array_slice($ls, $st, NULL, true);
         }
     }
 
@@ -648,72 +660,69 @@ function entry_make($entry, $template_name, $template_glob = 'default', $section
 // Since 2.0: Update external (e.g. tags)
 function db_update_aux_admin($entry, $type = 'add', $storent = array())
 {
+    $path = ROOT . '/admin/data_db/news/tagcloud.php';
     // --- do update tags
-    $tags = cn_touch_get('/cdata/news/tagcloud.php');
+    $tags = cn_touch_get($path);
 
-    $tg = spsep($entry['tg']);
+    $tg = separateString($entry['tg']);
     foreach ($tg as $i => $v) $tg[$i] = trim($v);
 
     // Update tags require diffs
-    if ($type == 'update')
-    {
-        $st = spsep($storent['tg']);
-        foreach ($st as $i => $v) $st[$i] = trim($v);
+    if ($type == 'update') {
+        $st = separateString($storent['tg']);
+        foreach ($st as $i => $v) {
+            $st[$i] = trim($v);
+        }
 
         $tdel = array_diff($st, $tg);
         $tadd = array_diff($tg, $st);
 
         // add & delete
-        foreach ($tadd as $tag) $tags[$tag]++;
-        foreach ($tdel as $tag)
-        {
+        foreach ($tadd as $tag) {
+            $tags[$tag]++;
+        }
+        foreach ($tdel as $tag) {
             $tags[$tag]--;
             if ($tags[$tag] <= 0) unset($tags[$tag]);
         }
-    }
-    else
-    {
-        foreach ($tg as $tag)
-        {
+    } else {
+        foreach ($tg as $tag) {
             // Add news
-            if ($type == 'add')
-            {
+            if ($type == 'add') {
                 $tags[$tag]++;
-            }
-            // Delete news
-            elseif ($type == 'delete')
-            {
+            } // Delete news
+            elseif ($type == 'delete') {
                 $tags[$tag]--;
-                if ($tags[$tag] <= 0) unset($tags[$tag]);
+                if ($tags[$tag] <= 0) {
+                    unset($tags[$tag]);
+                }
             }
         }
     }
 
-    cn_fsave('/cdata/news/tagcloud.php', $tags);
+    cn_fsave($path, $tags);
 }
 
 // Since 2.0: Update overall data about index
 function db_index_update_overall_admin($source = '')
 {
     $ct = ctime();
-    $period = 30*24*3600;
+    $period = 30 * 24 * 3600;
 
     $fn = db_index_file_detect($source);
     $ls = file($fn);
 
-    $i = array
-    (
+    $i = array(
         'uids' => array(),
         'locs' => array(),
         'coms' => 0,
         'min_id' => $ct,
     );
 
-    foreach ($ls as $vi)
-    {
-        list($id,,$ui,$co) = explode(':', $vi);
+    foreach ($ls as $vi) {
+        list($id, , $ui, $co) = explode(':', $vi);
 
-        $id  = base_convert($id, 36, 10);
+        $id = base_convert($id, 36, 10);
         $loc = db_get_nloc($id);
 
         $i['uids'][$ui]++;
@@ -725,8 +734,7 @@ function db_index_update_overall_admin($source = '')
     }
 
     // Active news is many, auto archive it (and user is hasn't draft rights)
-    if ($source == '' && $i['min_id'] < $ct - $period && getOption('auto_archive') && !test('Bd'))
-    {
+    if ($source == '' && $i['min_id'] < $ct - $period && getOption('auto_archive') && !test('Bd')) {
         $cc = db_make_archive(0, ctime());
         cn_throw_message('Autoarchive performed');
 
@@ -739,14 +747,17 @@ function db_index_update_overall_admin($source = '')
 
     // save meta-data
     $meta = db_index_file_detect("meta-$source");
-    $w = fopen($meta, "w+"); fwrite($w, serialize($i)); fclose($w);
+    $w = fopen($meta, "w+");
+    fwrite($w, serialize($i));
+    fclose($w);
 
-    return TRUE;
+    return true;
 }
 
 // Since 2.0: if no user diffs, delete user
 function db_user_update_admin()
 {
+    // todo
     $cp = array();
     $args = func_get_args();
     $username = array_shift($args);
@@ -755,8 +766,8 @@ function db_user_update_admin()
         return NULL;
 
     // -------
-    $fn = '/cdata/users/' . substr(md5($username), 0, 2) . '.php';
-    $cu = cn_touch_get($fn, TRUE);
+    $fn = ROOT . '/admin/data_db/users/' . substr(md5($username), 0, 2) . '.php';
+    $cu = cn_touch_get($fn, true);
 
     foreach ($args as $v) {
         list($a, $b) = explode('=', $v, 2);
@@ -764,36 +775,97 @@ function db_user_update_admin()
     }
 
     // Create main block
-    if (!isset($cu['name'])) $cu['name'] = array();
-    if (!isset($cu['name'][$username])) $cu['name'][$username] = array();
+    if (!isset($cu['name'])) {
+        $cu['name'] = array();
+    }
+
+    if (!isset($cu['name'][$username])) {
+        $cu['name'][$username] = array();
+    }
 
     // Update fields
-    foreach ($cp as $i => $v) $cu['name'][$username][$i] = $v;
+    foreach ($cp as $i => $v) {
+        $cu['name'][$username][$i] = $v;
+    }
 
     // Save DB
     cn_fsave($fn, $cu);
 
     // -------
     // Make references
-    if (isset($cp['id'])) // ID -> USERNAME
-    {
-        $cu = cn_touch_get($lc = '/cdata/users/' . substr(md5($cp['id']), 0, 2) . '.php', TRUE);
+    if (isset($cp['id'])) {
+        // ID -> USERNAME
+        $cu = cn_touch_get($lc = ROOT . '/admin/data_db/users/' . substr(md5($cp['id']), 0, 2) . '.php', true);
 
-        if (!isset($cu['id'])) $cu['id'] = array();
+        if (!isset($cu['id'])) {
+            $cu['id'] = array();
+        }
         $cu['id'][$cp['id']] = $username;
         cn_fsave($lc, $cu);
     }
 
-    if (isset($cp['email'])) // EMAIL -> USERNAME
-    {
-        $cu = cn_touch_get($lc = '/cdata/users/' . substr(md5($cp['email']), 0, 2) . '.php', TRUE);
+    if (isset($cp['email'])) {
+        // EMAIL -> USERNAME
+        $cu = cn_touch_get($lc = ROOT . '/admin/data_db/users/' . substr(md5($cp['email']), 0, 2) . '.php', true);
 
-        if (!isset($cu['email'])) $cu['email'] = array();
+        if (!isset($cu['email'])) {
+            $cu['email'] = array();
+        }
+
         $cu['email'][$cp['email']] = $username;
         cn_fsave($lc, $cu);
     }
 
-    return TRUE;
+    return true;
+}
+
+function db_make_archive($id_from, $id_to)
+{
+    $archive_id = ctime();
+
+    $cc = 0;
+    $fc = db_index_file_detect();
+    $fn = db_index_file_detect('archive-' . $archive_id);
+    $al = cn_touch(ROOT . '/admin/data_db/news/archive.txt');
+    $bk = db_make_bk($fc);
+
+    $rs = fopen($fc, 'r');
+    $ws = fopen($bk, 'w+');
+    $as = fopen($fn, 'w+');
+
+    while ($ln = fgets($rs)) {
+        list($id36) = explode(':', $ln);
+        $id = base_convert($id36, 36, 10);
+
+        if ($id >= $id_from && $id <= $id_to) {
+            fwrite($as, $ln);
+            $cc++;
+            continue;
+        }
+
+        fwrite($ws, $ln);
+    }
+
+    fclose($ws);
+    fclose($rs);
+    fclose($as);
+
+    if ($cc) {
+        $a = fopen($al, 'a+');
+        fwrite($a, $archive_id . '|' . $id_from . '|' . $id_to . '|' . $cc . "|\n");
+        fclose($a);
+
+        // finalize
+        rename($bk, $fc);
+
+        // update indexes
+        db_index_update_overall();
+        db_index_update_overall("archive-$archive_id");
+    } else {
+        unlink($fn);
+    }
+
+    return $cc;
 }
 
 // Since 2.0: Make backup file
@@ -808,7 +880,7 @@ function db_index_add($id, $category, $uid, $source = '')
     $fn = db_index_file_detect($source);
     $dest = db_make_bk($fn);
 
-    $i = TRUE;
+    $i = true;
     $s = base_convert($id, 10, 36) . ':' . $category . ":" . base_convert($uid, 10, 36) . ':0::' . "\n";
 
     $r = fopen($fn, 'r');
@@ -842,6 +914,47 @@ function db_news_load($location)
         return array();
 
     return cn_touch_get(ROOT . '/admin/data_db/news/' . $location . '.php');
+}
+
+// Since 2.0: Load index, $source = [|draft|archive]
+function db_index_load($source = '')
+{
+    $ls = array();
+    $rd = fopen(db_index_file_detect($source), 'r');
+    while ($id = trim(fgets($rd))) {
+        // Extract index information
+        list($id, $cid, $ui, $co) = explode(':', $id);
+
+        $id = intval(base_convert($id, 36, 10));
+        $ui = intval(base_convert($ui, 36, 10));
+        $ls[$id] = array($cid, $ui, $co);
+    }
+    fclose($rd);
+
+    return $ls;
+}
+
+// Since 2.0: Save index, $source = [|draft|archive]
+function db_index_save($idx, $source = '')
+{
+    $ls = array();
+    $fn = db_index_file_detect($source);
+
+    foreach ($idx as $id => $ix) {
+        // 0 - category, 1 - user_id, 2 - comments number
+        $ls[$id] = base_convert($id, 10, 36) . ':' . $ix[0] . ':' . base_convert($ix[1], 10, 36) . ':' . $ix[2] . ':' . "\n";
+    }
+
+    // Order by latest
+    krsort($ls);
+
+    $dest = db_make_bk($fn);
+    $w = fopen($dest, 'w+');
+    fwrite($w, join('', $ls));
+    fclose($w);
+
+    // after, set new index
+    return rename($dest, $fn);
 }
 
 // Since 2.0: Load metadata from index
@@ -895,16 +1008,23 @@ function db_index_file_detect($source = '')
     if ($source == 'iactive' || $source == 'postpone' || $source == 'A2')
         $source = '';
 
-    if ($source == '') $fn .= '/iactive.txt';
-    elseif ($source == 'draft') $fn .= '/idraft.txt';
-    elseif (substr($source, 0, 7) == 'archive') $fn .= '/' . $source . '.txt';
-    elseif (substr($source, 0, 4) == 'meta') {
+    if ($source == '') {
+        $fn .= '/iactive.txt';
+    } elseif ($source == 'draft') {
+        $fn .= '/idraft.txt';
+    } elseif (substr($source, 0, 7) == 'archive') {
+        $fn .= '/' . $source . '.txt';
+    } elseif (substr($source, 0, 4) == 'meta') {
         $source = substr($source, 5);
-        if (!$source) $source = 'iactive';
+        if (!$source) {
+            $source = 'iactive';
+        }
         $fn .= '/meta-' . $source . '.txt';
     }
 
-    if (!file_exists($fn)) fclose(fopen($fn, "w+"));
+    if (!file_exists($fn)) {
+        fclose(fopen($fn, "w+"));
+    }
 
     return $fn;
 }
