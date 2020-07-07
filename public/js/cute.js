@@ -31,10 +31,15 @@ function DoDiv(id) {
             if (arguments[1] == true) item.style.display = "";
             else item.style.display = "none";
         } else {
-            if (item.style.display == "none") item.style.display = "";
-            else item.style.display = "none";
+            if (item.style.display == "none") {
+                item.style.display = "";
+            } else {
+                item.style.display = "none";
+            }
         }
-    } else item.visibility = "show";
+    } else {
+        item.visibility = "show";
+    }
 }
 
 function Show_Only(id) {

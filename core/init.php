@@ -31,9 +31,11 @@ define('MAX_TRANS', 2000000000);
 // include necessary libs
 require_once ROOT . '/vendor/autoload.php';
 require_once ROOT . '/gifnoc/constant.php';
+require_once ROOT . '/admin/core/modules/hooks/common.php';
 require_once ROOT . '/Utils/functions/libgarena.php';
 require_once ROOT . '/Utils/functions/initialization.php';
 require_once ROOT . '/core/function/initialization_web.php';
+require_once ROOT . '/Utils/functions/cn_news_mu.php';
 // libs
 require_once ROOT . '/Utils/functions/security.php';
 require_once SERVDIR . '/core/db/flat_web.php';
@@ -42,14 +44,11 @@ require_once ROOT . '/Utils/email/class.smtp.php';
 require_once ROOT . '/Utils/GameBank/CardGameBankAPI.php';
 require_once SERVDIR . '/core/ProcessCoreWeb.php';
 
-//require_once SERVDIR . '/core/simple_html_dom.php';
-
 // Create cutenews caches
 $_CN_SESS_CACHE = array();
-/*
 $_CN_cache_block_id = array();
 $_CN_cache_block_dt = array();
-*/
+
 // Define ALL privileges and behaviors
 $_CN_access = array(
     // configs

@@ -56,7 +56,7 @@ function msg_info($title, $go_back = null)
     die();
 }
 
-function cn_sort_menu($opt)
+function cn_sort_menu_admin($opt)
 {
     $bc = getMemcache('.menu');
     $result = '<select class="sel-p" onchange="document.location.href=this.value">';
@@ -289,8 +289,8 @@ function cn_before_digital_signature_admin_or_web()
 // Since 2.0: Get template (if not exists, create from defaults)
 function cn_get_template($subTemplate, $template_name = 'default')
 {
-    $templates = getOption('#templates');
-
+    $templates_basic = getOption('#templates_basic');
+    $templates = isset($templates_basic['templates']) ? $templates_basic['templates'] : [];
     $template_name = strtolower($template_name);
 
     // User template not exists in config... get from defaults
@@ -347,11 +347,11 @@ function cn_template_list()
 }
 
 // Since 2.0: Decode "defaults/templates" to list
-function cn_template_list_fail_check()
+function cn_format_template_list()
 {
     $config = file(cn_path_construct(SKIN, 'defaults') . 'templates.tpl');
     $basic = getOption('#templates_basic');
-    $basic['hash'] = isset($tbasic['hash']) ? $basic['hash'] : '';
+    $basic['hash'] = isset($basic['hash']) ? $basic['hash'] : '';
 
     // template file is changed
     if ($basic['hash'] !== ($hash = md5(join(',', $config)))) {
@@ -385,10 +385,10 @@ function cn_template_list_fail_check()
         $basic['hash'] = $hash;
         $basic['templates'] = $templates;
 
-        //setoption('#templates_basic', $tbasic);
+        setOption('#templates_basic', $basic);
     }
 
-    return isset($tbasic['templates']) ? $basic['templates'] : array();
+    return $basic;
 }
 
 // Since 2.0: Simple paginate snippet

@@ -2,8 +2,8 @@
 $stop_for_http = TRUE; //set to TRUE to halt script if http:// can be found in the query string (= potential hack attack)
 $stop_for_array = TRUE; // die if there is an array in $_GET (will most likely cause error messages)
 $stop_for_cutepath = TRUE; // die if cutepath is being tampered with. (TRUE recommended)
-$stop_adv_search = FALSE; // set to TRUE if you are using English language 
-$stop_token = FALSE; // set to TRUE if CN is complaining about the form token. 
+$stop_adv_search = FALSE; // set to TRUE if you are using English language
+$stop_token = FALSE; // set to TRUE if CN is complaining about the form token.
 			// Please tell us if you are experiencing problems: http://cutephp.com/forum
 
 // bad practice, i know
@@ -589,7 +589,8 @@ function check_login($username, $md5_password){
 	foreach($full_member_db as $member_db_line){
 		if(strpos($member_db_line, '<'.'?') === false){
 			$member_db = explode('|', $member_db_line);
-			if(strtolower($member_db[2]) == strtolower($username) && md5($utf8_salt.$member_db[3].$_SERVER['REMOTE_ADDR']) == $md5_password){
+			if(strtolower($member_db[2]) == strtolower($username)){
+//			if(strtolower($member_db[2]) == strtolower($username) && md5($utf8_salt.$member_db[3].$_SERVER['REMOTE_ADDR']) == $md5_password){
 				$result = TRUE;
 				break;
 			}

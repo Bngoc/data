@@ -37,6 +37,7 @@ $skin_header = <<<HTML
 
 	<script type="text/javascript" src="/public/js/jquery-2.1.0.min.js"></script>
 	<script type="text/javascript" src="/public/js/clock.js"></script>
+	<script type="text/javascript" src="/public/js/cute.js"></script>
 
 	<script type="text/javascript" src="/public/js/admin/angular.min.js"></script>
 	<script type="text/javascript" src="/public/js/admin/ui-bootstrap-tpls-0.11.2.min.js"></script>

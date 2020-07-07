@@ -53,6 +53,6 @@ function home_invoke()
     cn_assign('dataNotifyForum, get_paging, result_RankingTop10', @$item_read ? $item_read : array(), @$get_paging ? $get_paging : '', $result_RankingTop10);
 
     echo_header_web('-@home/style.css', "Home");
-    echo execTemplate('home/_public');
+    echo cn_execute_template('home/_public');
     echo_footer_web();
 }

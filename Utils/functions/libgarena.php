@@ -1241,6 +1241,7 @@ function cn_snippet_digital_signature($member, $type = 'std')
     if (is_null($member)) die("Exception with generating signature");
 
     // Make signature
+    $sign_extr = $signature = '';
     if (isset($member['user_Account'])) {
         $sign_extr = md5(time() . mt_rand()) . '-' . $member['user_Account'];
         $signature = md5($sign_extr . $member['pass'] . md5(getOption('#crypt_salt')));
@@ -1268,11 +1269,10 @@ function cn_digital_signature_meta($member)
 
     $sign_extr = $signature = '';
     // Make signature
-    if (isset($member['user_Account'])){
+    if (isset($member['user_Account'])) {
         $sign_extr = md5(time() . mt_rand()) . '-' . $member['user_Account'];
         $signature = md5($sign_extr . $member['pass'] . md5(getOption('#crypt_salt')));
-    }
-    else if (isset($member['user_name'])){
+    } else if (isset($member['user_name'])) {
         $sign_extr = md5(time() . mt_rand()) . '-' . $member['user_name'];
         $signature = md5($sign_extr . $member['pass_web'] . md5(getOption('#crypt_salt')));
     }
@@ -1530,7 +1530,7 @@ function cn_get_template_by($template_name = '')
 // Since 2.0: Read serialized array from php-safe file (or create file)
 function cn_touch_get($target)
 {
-    $fn = cn_touch($target, TRUE);
+    $fn = cn_touch($target, true);
     $fc = file($fn);
     unset($fc[0]);
 
@@ -1539,9 +1539,9 @@ function cn_touch_get($target)
     if (!$fc) {
         $fc = array();
     } else {
-        $data = unserialize(base64_decode($fc));
-        if ($data === FALSE) {
-            $fc = unserialize($fc);
+        $data = @unserialize(base64_decode($fc));
+        if ($data === false) {
+            $fc = @unserialize($fc);
         } else {
             $fc = $data;
         }

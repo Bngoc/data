@@ -41,6 +41,7 @@ return [
     'unblock' => 'Unblock',
     'normal' => 'Normal',
     'account' => 'Account',
+    'misc_links' => 'Misc links',
     //-------------------------------------------
     'qa_1_default' => 'Tên con vật yêu thích?',
     'qa_2_default' => 'Trò chơi bạn thích nhất?',
@@ -91,6 +92,21 @@ return [
     'restart_data' => "Restart data Database",
     'manager_account' => "Manager account",
 
+    //----------------------Cashshop---------------------
+    'cash_shop_acient' => 'Set thần',
+    'cash_shop_armor' => 'Giáp trụ',
+    'cash_shop_wings' => 'Cánh',
+    'cash_shop_ringpendants' => 'Trang sức',
+    'cash_shop_shields' => 'Khiên',
+    'cash_shop_crossbows' => 'Cung - Nỏ',
+    'cash_shop_weapons' => 'Đao - Kiếm',
+    'cash_shop_scepters' => 'Quyền trượng',
+    'cash_shop_staffs' => 'Gậy',
+    'cash_shop_spears' => 'Thương - Giáo',
+    'cash_shop_fenrir' => 'Linh hồn Sói Tinh',
+    'cash_shop_eventticket' => 'Vé sự kiện',
+    'cash_shop_orther' => 'Các loại khác',
+    'cash_shop_tft' => 'Thêm dữ liệu',
     //----------------------WEB---------------------
     'char_manager' => "Character",
     'event' => "Event",
@@ -100,5 +116,7 @@ return [
     'ranking' => "Ranking",
     'transaction' => "Transaction",
     'logout' => "Logout",
+    'addnews' => "Add news",
+    'editnews' => "Edit news",
 
 ];

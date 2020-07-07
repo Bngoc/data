@@ -22,7 +22,7 @@ class ProcessCoreAdmin extends ProcessCore
             echo_header_admin("user", "Please Login");
         }
 
-        echo execTemplate('auth/login');
+        echo cn_execute_template('auth/login');
 
         if ($admin) {
             echofooter();
@@ -30,20 +30,6 @@ class ProcessCoreAdmin extends ProcessCore
         }
     }
 
-
-    //// Since 1.5.2: Directory scan
-//    function scan_dir($dir, $cond = '')
-//    {
-//        $files = array();
-//        if ($dh = opendir($dir)) {
-//            while (false !== ($filename = readdir($dh))) {
-//                if (!in_array($filename, array('.', '..')) && ($cond == '' || $cond && preg_match("/$cond/i", $filename))) {
-//                    $files[] = $filename;
-//                }
-//            }
-//        }
-//        return $files;
-//    }
 
 //    function cn_cookie_remember($client = false)
 //    {
@@ -410,7 +396,7 @@ class ProcessCoreAdmin extends ProcessCore
         if ($admin) {
             echo_header_admin('Register', $Action);
         }
-        echo execTemplate($template);
+        echo cn_execute_template($template);
         if ($admin) {
             echofooter();
             die();
@@ -535,6 +521,8 @@ class ProcessCoreAdmin extends ProcessCore
         $modules = hook('core/cn_get_menu', array(
             'editconfig' => array($this->config['role_router_admin']['editconfig'], __('editconfig')),
             'cashshop' => array($this->config['role_router_admin']['cashshop'], __('cash_shop')),
+            'addnews' => array($this->config['role_router_admin']['addnews'], __('addnews')),
+            'editnews' => array($this->config['role_router_admin']['editnews'], __('editnews')),
             'manager' => array($this->config['role_router_admin']['manager'], __('manager')),
             'logout' => array($this->config['role_router_admin']['logout'], __('logout'), 'logout'),
         ));
@@ -586,26 +574,6 @@ class ProcessCoreAdmin extends ProcessCore
         $result .= "</ul>";
         return $result;
     }
-
-//    // Since 2.0: Short message form
-//    function msg_info($title, $go_back = null)
-//    {
-//        include SERVDIR . '/skins/default.skin.php';
-//        echo_header_admin('info', "Permission check");
-//
-//        if ($go_back === null) $go_back = $_POST['__referer'];
-//        if (empty($go_back)) $go_back = PHP_SELF;
-//
-//        $str_ = '<div class="sub_ranking" align="center" style="color: rgb(36, 36, 36);font-size: 15px;line-height: initial;">
-    //				<b><p>' . $title . '</p></b><br>
-    //				<p><b><a href=' . $go_back . '><font size="15" color="red">OK</font></a></b></p>
-    //			</div>';
-//        echo $str_;
-    ////    $this->echoContent($str_, cn_snippet_bc_re("Home", "Permission check"));
-//
-//        echofooter();
-//        die();
-//    }
 
     // Since 2.0: @bootstrap
     public function cn_detect_user_ip()
@@ -813,6 +781,9 @@ class ProcessCoreAdmin extends ProcessCore
             'frontend_encoding' => 'UTF-8',
             'useutf8' => 1,
             'utf8html' => 1,
+            'use_wysiwyg'  => 0,
+            'smilies'                       => 'smile,wink,wassat,tongue,laughing,sad,angry,crying',
+            'category_style' => 'select',
 //        'news_title_max_long' => 100,
 
             'date_adjust' => $time_bias,
@@ -1113,30 +1084,7 @@ class ProcessCoreAdmin extends ProcessCore
 //
 //        return false;
 //    }
-//
-//    function cn_bc_menu($name, $url, $opt)
-//    {
-//        $bc = getMemcache('.menu');
-//        $bc[$opt] = array('name' => $name, 'url' => $url);
-//        setMemcache('.menu', $bc);
-//    }
-//
-//    function cn_sort_menu($opt)
-//    {
-//        $bc = getMemcache('.menu');
-//        $result = '<select class="sel-p" onchange="document.location.href=this.value">';
-//        foreach ($bc as $key => $item) {
-//            $check = strpos($item['url'], $opt);
-//            $result .= '<option value="' . $item['url'] . '"';
-//            if ($check !== false) $result .= 'selected';
-//            $result .= '>' . cn_htmlspecialchars($item['name']) . '</option>';
-//        }
-//
-//        $result .= "</select>";
-//
-//        echo $result;
-//    }
-//
+
     //// Since 2.0: Read file (or create file)
 //    function cn_read_file($target)
 //    {
@@ -1309,7 +1257,7 @@ class ProcessCoreAdmin extends ProcessCore
             }
 
             echo_header_admin('-@/default.css', 'Install Database');
-            echo execTemplate('installdb');
+            echo cn_execute_template('installdb');
             echofooter();
         }
     }
@@ -1408,23 +1356,12 @@ class ProcessCoreAdmin extends ProcessCore
             }
 
             echo_header_admin('-@/default.css', 'Create admin Account');
-            echo execTemplate('install');
+            echo cn_execute_template('install');
             echofooter();
         }
     }
 
-    //// Since 2.0: Add message
-//    function cn_throw_message($msg, $area = 'n')
-//    {
-//        $es = getMemcache('msg:stor');
-//
-//        if (!isset($es[$area])) $es[$area] = array();
-//        $es[$area][] = $msg;
-//
-//        setMemcache('msg:stor', $es);
-//        return false;
-//    }
-//
+
 //// Since 2.0.3
 //    function cn_user_email_as_site($user_email, $username)
 //    {
@@ -1437,28 +1374,4 @@ class ProcessCoreAdmin extends ProcessCore
 //        }
 //    }
 //
-//    /**
-//     * Retrun Hmtl Uses Disk
-//     */
-//    function cn_checkDisk()
-//    {
-//        if (function_exists('disk_total_space') && function_exists('disk_free_space')) {
-//            $ds = disk_total_space("/");
-//            $fs = disk_free_space("/");
-//
-//            $symbols = array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB');
-//            $exp = intval(log($ds) / log(1024));
-//            $ds_t = sprintf('%.2f ' . $symbols[$exp], ($ds / pow(1024, floor($exp))));
-//            $free = intval((1 - $fs / $ds) * 100);
-//        } else {
-//            $free = 0;
-//            $ds_t = 0;
-//        }
-//
-//        echo '<h2>Statistics</h2><div class="options">';
-//        if ($free) {
-//            echo '<div>Disk usage (' . $ds_t . ')</div><div class="a"><div class="b" style="width: ' . $free . '%">' . $free . '%</div></div><div style="clear: left;"></div>';
-//        }
-//        echo '</div>';
-//    }
 }

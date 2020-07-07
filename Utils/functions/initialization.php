@@ -548,14 +548,14 @@ function cnRelocation($url)
 {
     if (!$url) $url = $_SERVER['PHP_SELF'];
     header("Location: $url");
-    echo '<html><head><title>Redirect...</title><meta http-equiv="refresh" content="0;url=' . $this->cnHtmlSpecialChars($url) . '"></head><body>Please wait... Redirecting to "' . $this->cnHtmlSpecialChars($url) . '...<br/><br/></body></html>';
+    echo '<html><head><title>Redirect...</title><meta http-equiv="refresh" content="0;url=' . cnHtmlSpecialChars($url) . '"></head><body>Please wait... Redirecting to "' . cnHtmlSpecialChars($url) . '...<br/><br/></body></html>';
     die();
 }
 
 
 // Since 2.0: Execute PHP-template
 // 1st argument - template name, other - variables ==> mo file
-function execTemplate()
+function cn_execute_template()
 {
     try {
         $args = func_get_args();

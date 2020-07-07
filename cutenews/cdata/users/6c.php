@@ -1,0 +1,2 @@
+<?php die('Direct call - access denied'); ?>
+a:2:{s:4:"name";a:1:{s:10:"buingoc119";a:8:{s:2:"id";s:10:"1594093789";s:4:"name";s:10:"buingoc119";s:3:"acl";s:1:"1";s:5:"email";s:15:"ngocbq02@wru.vn";s:4:"pass";s:64:"abad5bdfdcd93af0a9706235adee272fcb86a1a336517fbc6b360f09cdb03cf3";s:3:"cnt";s:1:"1";s:3:"lts";s:10:"1594107045";s:3:"ban";s:1:"0";}}s:5:"email";a:1:{s:15:"ngocbq02@wru.vn";s:10:"buingoc119";}}

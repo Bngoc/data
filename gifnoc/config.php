@@ -36,6 +36,9 @@ $config['role_router_web']['logout'] = '';
 $config['role_router_admin']['editconfig'] = 'Can';
 $config['role_router_admin']['manager'] = 'Can';
 $config['role_router_admin']['cashshop'] = 'Can';
+$config['role_router_admin']['addnews'] = 'Can';
+$config['role_router_admin']['editnews'] = 'Can';
+$config['role_router_admin']['media'] = 'Can';
 $config['role_router_admin']['logout'] = '';
 
 // Character question

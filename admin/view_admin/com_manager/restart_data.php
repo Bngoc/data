@@ -17,7 +17,7 @@ cn_snippet_messages();
         <?php foreach ($result as $key => $item) { ?>
             <tr>
                 <td align="left"><?= cnHtmlSpecialChars($key) ?></td>
-                <td align="left"><?= cnHtmlSpecialChars($item['status'] ? __('done') : __('fail')) ?></td>
+                <td align="left"><?= cnHtmlSpecialChars($item['status'] ? __('done') : __('none')) ?></td>
                 <td align="left"
                     title="<?= cnHtmlSpecialChars($item['query']) ?>"><?= cnHtmlSpecialChars($item['query']) ?>
                 </td>

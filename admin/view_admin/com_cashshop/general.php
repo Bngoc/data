@@ -1,6 +1,7 @@
 <?php
 
-list($dashboard, $username, $greeting_message) = _GL('dashboard, username, greeting_message');
+list($dashboard) = _GL('dashboard');
+cn_snippet_messages();
 ?>
 
 <div class="wrapper">

@@ -57,6 +57,14 @@ list($dashboard, $username, $greeting_message) = _GL('dashboard, username, greet
     </div>
 
     <div style="clear: both"></div>
+    <h2><?= __('misc_links'); ?></h2>
+    <div class="options">
+        <a href="/admin/docs/readme.html">Readme</a> &middot;
+        <a href="/admin/docs/usage.html">Usage</a> &middot;
+        <a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>" target="_blank"><?= __('visit_site') ?></a>
+
+    </div>
+    <div style="clear: both"></div>
 
     <h2><?php echo 'Statistics'; ?></h2>
     <div class="options">

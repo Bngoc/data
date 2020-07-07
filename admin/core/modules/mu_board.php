@@ -72,6 +72,10 @@ function board_invoke()
         cn_get_template_by_array('class');
     }
 
+    if (!isset($cfg['templates_basic']) || !count($cfg['templates_basic'])) {
+        cn_format_template_list();
+    }
+
     echo_header_admin('-@skins/mu_style.css', "Mu Online dashboard");
 
     $images = array(
@@ -115,7 +119,7 @@ function board_invoke()
 
     $greeting_message = __('have_nice_day');
     cn_assign('dashboard, username, greeting_message', $dashboard, (@$_SESSION['mu_Account'] ? $_SESSION['mu_Account'] : ''), $greeting_message);
-    echo execTemplate('com_board/general');
+    echo cn_execute_template('com_board/general');
     echofooter();
 }
 
@@ -202,6 +206,9 @@ function board_sysconf()
             'debugSql' => array('Y/N', 'Uses have debug| Check is debug Sql'),
             'use_captcha' => array('Y/N', 'Use CAPTCHA|on registration and comments'),
             'hide_captcha' => array('Y/N', 'Hide captcha source path from visitors'),
+            'category_style'        => array('select', 'Category style', array('list' => "Listing", 'select' => 'Drop-down menu')),
+            'smilies'               => array('text', 'Smilies'),
+            'use_wysiwyg' => array('Y/N', 'Use CKEditor in news'),
 
             '_Web' => array('title', '.............'),
             'cn_language' => array('select', 'CuteNews internationalization', $lng),
@@ -392,8 +399,7 @@ function board_sysconf()
 
     cn_assign('options, sub, options_list', $options, $sub, $options_list);
     echo_header_admin('-@skins/mu_style.css', "System configurations");
-    //echo execTemplate('header');
-    echo execTemplate('com_board/sysconf');
+    echo cn_execute_template('com_board/sysconf');
     echofooter();
 }
 
@@ -529,7 +535,7 @@ function board_confChar()
     cn_assign('options, sub, options_list', $options, $sub, $options_list);
 
     echo_header_admin('-@skins/mu_style.css', "System configurations character");
-    echo execTemplate('com_board/confchar');
+    echo cn_execute_template('com_board/confchar');
     echofooter();
 }
 
@@ -622,7 +628,7 @@ function board_personal()
 
     cn_assign('member, acl_write_news, acl_desc, personal_more', $member, testRoleAdmin('Can'), $acl_desc, $personal_more);
     echo_header_admin('-@skins/mu_style.css', "Personal options");
-    echo execTemplate('com_board/personal');
+    echo cn_execute_template('com_board/personal');
     echofooter();
 }
 
@@ -661,7 +667,7 @@ function board_iswebshop()
 
     cn_assign('list', $ipban);
     echo_header_admin('-@skins/mu_style.css', 'Block IP');
-    echo execTemplate('com_board/ipban');
+    echo cn_execute_template('com_board/ipban');
     echofooter();
 }
 
@@ -724,7 +730,7 @@ function board_iserverz()
     cn_assign('rss_news_include_url, rss_encoding, rss_language, rss_title', $rss_news_include_url, $rss_encoding, $rss_language, $rss_title);
 
     echo_header_admin('-@skins/mu_style.css', 'Integration Wizard');
-    echo execTemplate('com_board/intwiz');
+    echo cn_execute_template('com_board/intwiz');
     echofooter();
 
 }
@@ -1262,7 +1268,7 @@ function board_ischaracter()
 
     cn_assign('gh_loai1, gh_loai2, sub, all_header_conf, set_arr', $get_gh_loai1, $get_gh_loai2, $sub, $all_header_conf, $options);
     echo_header_admin('-@skins/mu_style.css', "Config Character");
-    echo execTemplate('com_board/classchar');
+    echo cn_execute_template('com_board/classchar');
     echofooter();
 }
 
@@ -1388,7 +1394,7 @@ function board_userman()
     cn_assign('user_name, user_nick, user_email, user_acl, is_edit', $user_name, $user_nick, $user_email, $user_acl, $is_edit);
 
     echo_header_admin('-@skins/mu_style.css', "Users manager");
-    echo execTemplate('com_board/users');
+    echo cn_execute_template('com_board/users');
     echofooter();
 }
 
@@ -1622,7 +1628,7 @@ function board_group()
 
     cn_assign('grp, group_name, group_id, group_grp, group_system, access, form_desc', $grp, $group_name, $group_id, $group_grp, $group_system, $access, $form_desc);
     echo_header_admin('-@skins/mu_style.css', 'Groups');
-    echo execTemplate('com_board/group');
+    echo cn_execute_template('com_board/group');
     echofooter();
 }
 
@@ -1835,7 +1841,7 @@ function board_logs()
     cn_assign('log_read, section, default_log, options, sub', $log_read, $section, $default_log, $options, $sub);
     cn_assign('echoPagination', $echoPagination);
     echo_header_admin('-@skins/mu_style.css', 'System logs');
-    echo execTemplate('com_board/logs');
+    echo cn_execute_template('com_board/logs');
     echofooter();
 }
 
@@ -1888,7 +1894,7 @@ function board_statistics()
     cn_assign('list', $list);
     cn_assign('type, name, desc, meta, group, req', $type, $name, $desc, $meta, $group, $req);
     echo_header_admin('-@skins/mu_style.css', 'statistics - Thống kê');
-    echo execTemplate('com_board/statistics');
+    echo cn_execute_template('com_board/statistics');
     echofooter();
 }
 
@@ -1995,7 +2001,7 @@ function board_uploadFileAPIDropBox()
 //    print_r($fileMetadata);
 
     echo_header_admin('-@skins/mu_style.css@com_board/downloadapi_dropbox.js', 'download Api - download');
-    echo execTemplate('com_board/downloadApi');
+    echo cn_execute_template('com_board/downloadApi');
     echofooter();
 }
 
@@ -2187,7 +2193,7 @@ function board_uploadFileAPIGoogle()
     }
 
     echo_header_admin('-@skins/mu_style.css@com_board/uploadApiGoogleDrivers.js', 'Api-Upload file to GoogleDrivers');
-    echo execTemplate('com_board/downloadApiGoogle');
+    echo cn_execute_template('com_board/downloadApiGoogle');
     echofooter();
 }
 
@@ -2350,7 +2356,7 @@ function board_select()
     cn_assign('sub, pagination, sort, result_content', $sub, '', $sort, array());
 
     echo_header_admin('-@skins/mu_style.csss@com_board/executeSelect.js', "Select");
-    echo execTemplate('com_board/selsect');
+    echo cn_execute_template('com_board/selsect');
     echofooter();
 }
 

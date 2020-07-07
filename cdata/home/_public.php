@@ -33,6 +33,7 @@ echo cn_snippet_messages();
                                                 }
                                             } else {
                                                 echo '<div class="no-notify-forum">Chưa có thông báo mới nhất từ forum!</div>';
+                                                    include(ROOT ."/cutenews/show_news.php");
                                             } ?>
 
                                         </div>

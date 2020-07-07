@@ -15,6 +15,9 @@ $_init_modules = hook(
         'editconfig' => array('path' => 'mu_board', 'acl' => $role_router_admin['editconfig']),
         'manager' => array('path' => 'mu_manager','acl' => $role_router_admin['manager']),
         'cashshop' => array('path' => 'mu_cashshop', 'acl' => $role_router_admin['cashshop']),
+        'addnews' => array('path' => 'add_news', 'acl' => $role_router_admin['addnews']),
+        'editnews' => array('path' => 'edit_news', 'acl' => $role_router_admin['editnews']),
+        'media' => array('path' => 'edit_news', 'acl' => $role_router_admin['media']),
         'logout' => array('path' => 'logout', 'acl' => $role_router_admin['logout']),
     )
 );

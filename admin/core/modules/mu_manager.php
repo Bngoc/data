@@ -78,7 +78,7 @@ function manager_invoke()
 
     cn_assign('dashboard', $dashManager);
 
-    echo execTemplate('com_manager/general');
+    echo cn_execute_template('com_manager/general');
     echofooter();
 }
 
@@ -123,7 +123,7 @@ function manager_restart_data()
 
     cn_assign('result', $result);
     echo_header_admin('-@skins/mu_style.css', __("restart_data"));
-    echo execTemplate('com_manager/restart_data');
+    echo cn_execute_template('com_manager/restart_data');
     echofooter();
 }
 
@@ -150,7 +150,7 @@ function manager_debit_point()
 
     cn_assign('result', $result);
     echo_header_admin('-@skins/mu_style.css', __("debit_point"));
-    echo execTemplate('com_manager/debit_point');
+    echo cn_execute_template('com_manager/debit_point');
     echofooter();
 }
 
@@ -176,7 +176,7 @@ function manager_vpoint()
     }
     cn_assign('result', $result);
     echo_header_admin('-@skins/mu_style.css', __("vpoint"));
-    echo execTemplate('com_manager/vpoint');
+    echo cn_execute_template('com_manager/vpoint');
     echofooter();
 }
 
@@ -186,7 +186,7 @@ function manager_pc_point()
 
     cn_assign('result', is_array($result) ? $result : []);
     echo_header_admin('-@skins/mu_style.css', __("pc_point"));
-    echo execTemplate('com_manager/pc_point');
+    echo cn_execute_template('com_manager/pc_point');
     echofooter();
 }
 
@@ -502,7 +502,7 @@ function manager_card_phone()
     $doanhthu_hientai = $query_doanhthu_hientai->fetchrow();
 
     echo_header_admin('-@skins/mu_style.css', __("card_phone"));
-    echo execTemplate('com_manager/card_phone');
+    echo cn_execute_template('com_manager/card_phone');
     echofooter();
 }
 
@@ -510,7 +510,7 @@ function manager_view_card()
 {
     // TODO check all function card phone
     echo_header_admin('-@skins/mu_style.css', __("view_card"));
-    echo execTemplate('com_manager/view_card');
+    echo cn_execute_template('com_manager/view_card');
     echofooter();
 }
 
@@ -632,7 +632,7 @@ function manager_account()
     cn_assign('acc, result, notice, char, class, class_current', $acc, $result, $notice, $char, $class, $class_current);
 
     echo_header_admin('-@skins/mu_style.css', __("view_card"));
-    echo execTemplate('com_manager/manager_account');
+    echo cn_execute_template('com_manager/manager_account');
     echofooter();
 }
 

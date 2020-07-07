@@ -966,3 +966,8 @@ function doDeleteOtherForum($myQuery)
 
     return false;
 }
+
+
+function db_user_update() {
+    // TODO
+}

@@ -55,7 +55,7 @@ function echo_content_here($echoContent, $path_c = '', $bread_crumbs = true)
 // Since 2.0: Show login form
 function cn_login_form($admin = true)
 {
-    return execTemplate('_authen/login');
+    return cn_execute_template('_authen/login');
 }
 
 // Displays header skin
@@ -347,9 +347,7 @@ function cn_sort_menu()
     $result = '<select class="sel-p" onchange="document.location.href=this.value">';
 
     foreach ($bc as $key => $item) {
-        //$check = strpos($item['url'],$opt);
         $result .= '<option value="' . $item['url'] . $get_per_page . '"';
-        //if($check !== false) $result .= 'selected';
         if ($key == $opt) {
             $result .= 'selected';
         }

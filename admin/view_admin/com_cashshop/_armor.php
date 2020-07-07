@@ -11,11 +11,11 @@ cn_snippet_bc();
 ?>
 
 <div class="panel">
-    <?php cn_sort_menu($opt);
-    echo '<div style="text-align: right;padding-right: 5px;    padding-top: 7px;">
+    <?php cn_sort_menu_admin($opt);
+    echo '<div style="text-align: right;padding-right: 5px; padding-top: 7px;">
 		Entries on page:';
     foreach (array(5, 10, 15, 25, 30, 50, 75, 100, 250) as $_per_page) {
-        echo ' <a href="' . cn_url_modify('mod=cashshop', 'do=action', "opt=$opt", 'page', '_id', '__item', "per_page=$_per_page") . '" ' . ($per_page == $_per_page ? 'class="b"' : '') . '>' . $_per_page . '</a> ';
+        echo ' <a href="' . cn_url_modify('mod=cashshop', 'do=action', "opt=$opt", 'page', '_id', '__item', "per_page=$_per_page") . '" ' . ($per_page == $_per_page ? 'class="b un-float-left"' : '') . '>' . $_per_page . '</a> ';
     }
     echo ' <a href="' . cn_url_modify('mod=cashshop', 'do=action', "opt=$opt", 'page', '_id', 'per_page', '__item=change-item') . '" title="Read file name \'shop_' . $opt . '.php\'"><b>[+]</b>-Add Item</a> -- <a href="' . cn_url_modify('mod=cashshop', 'do=action', "opt=$opt", 'page', '_id', 'per_page', '__item=del-item') . '" title="Delete all code item"><b>[x]</b>-Del all</a>'; ?>
 </div>
