@@ -683,7 +683,7 @@ function convert_question_answer()
 // If category present (if any), TRUE
 function hlp_check_category($c, $cat)
 {
-    $cats = spsep($c);
+    $cats = separateString($c);
     return array_intersect($cat, $cats);
 }
 

@@ -114,11 +114,11 @@ function edit_news_action_list()
 
     // Meta-data for draft only
     $meta_draft = db_index_meta_load('draft');
-    $ptree = $meta['locs'];
+    $ptree = @$meta['locs'];
     $userlist = $meta['uids'];
     $nprospect = intval($rev['cpostponed']);
     $ndraft = is_array($meta_draft['locs']) ? intval(array_sum($meta_draft['locs'])) : 0;
-    $found_rows = is_array($meta['locs']) ? intval(array_sum($meta['locs'])) : 0;
+    $found_rows = isset($meta['locs']) && is_array($meta['locs']) ? intval(array_sum($meta['locs'])) : 0;
     $archives = count(db_get_archives());
 
     // Decode proto tree for list news

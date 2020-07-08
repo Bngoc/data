@@ -1025,12 +1025,14 @@ function db_index_meta_load($source = '', $load_users = false)
     $uids = array();
 
     if ($load_users) {
-        foreach ($ls['uids'] as $id => $ct) {
-            $id = base_convert($id, 36, 10);
-            $user = db_user_by_admin($id);
+        if (isset($ls['uids'])) {
+            foreach ($ls['uids'] as $id => $ct) {
+                $id = base_convert($id, 36, 10);
+                $user = db_user_by_admin($id);
 
-            if ($user['name'])
-                $uids[$user['name']] = $ct;
+                if ($user['name'])
+                    $uids[$user['name']] = $ct;
+            }
         }
 
         $ls['uids'] = $uids;
