@@ -12,6 +12,12 @@ function add_news_invoke()
 
     $categories = cn_get_categories();
     list($morefields) = cn_get_more_fields($faddm);
+    // flat category to array
+    if ($category == '') {
+        $category = array();
+    } elseif (!is_array($category)) {
+        $category = array($category);
+    }
 
     // Prepare data to add new item
     if (request_type('POST')) {
@@ -23,9 +29,6 @@ function add_news_invoke()
         // create publish time
         $c_time = mktime($from_date_hour, $from_date_minutes, $from_date_seconds, $from_date_month, $from_date_day, $from_date_year);
 
-        // flat category to array
-        if ($category == '') $category = array();
-        elseif (!is_array($category)) $category = array($category);
 
         // article is draft?
         if ($article_type == 'draft') $draft = 1; else $draft = 0;
