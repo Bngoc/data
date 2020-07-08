@@ -92,6 +92,7 @@ return [
     'restart_data' => "Restart data Database",
     'manager_account' => "Manager account",
     'categories' => "Categories",
+    'media' => "Media manager",
 
     //----------------------Cashshop---------------------
     'cash_shop_acient' => 'Set thần',

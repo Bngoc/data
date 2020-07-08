@@ -28,6 +28,7 @@ function board_invoke()
         'editconfig:userman:Cum' => __('users_manager'),
         'editconfig:group:Cg' => __('groups'),
         'editconfig:category:Cg' => __('categories'),
+        'media:media:Cc' => __('media'),
         'editconfig:logs:Csl' => __('logs'),
         'editconfig:statistics:Csl' => __('statistical'),
         'editconfig:uploadFileAPIDropBox:Csl' => __('upload_file_dropBox_API'),
