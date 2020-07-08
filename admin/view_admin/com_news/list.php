@@ -15,15 +15,17 @@ $category = cn_get_categories();
 
 	<div style="float: right;">
 		Entries on page:
-		<?php foreach (array(25, 50, 100, 250) as $_per_page) echo ' <a href="' . cn_url_modify("per_page=$_per_page") . '" ' . ($per_page == $_per_page ? 'class="b"' : '') . '>' . $_per_page . '</a> '; ?>
+		<?php foreach (array(25, 50, 100, 250) as $_per_page) echo ' <a href="' . cn_url_modify("per_page=$_per_page") . '" ' . ($per_page == $_per_page ? 'class="b un-float-left"' : '') . '>' . $_per_page . '</a> '; ?>
 		<a style="color: #008080;" href="#" onclick="DoDiv('filters'); return false;">[Change filters]</a>
 	</div>
 
     <?php
 
-    echo __('Showed <b>%1</b> ', $showed);
-    if ($nprospect) echo __('(postponed <b>%1</b>)', $nprospect);
-    echo __(' from total <b>%1</b> ', $entries_total);
+    echo __('showed', [$showed]);
+    if ($nprospect){
+        echo __('postponed', [$nprospect]);
+    }
+    echo __('from_total', [$entries_total]);
 
     ?>
 
@@ -48,12 +50,12 @@ $category = cn_get_categories();
 	</div>
 
 	Source:
-	<a href="<?php echo cn_url_modify('source,year,mon,day,archive_id,page,cat_filter'); ?>" <?php if ($source == '') echo 'class="b"'; ?>>Active</a>
+	<a href="<?php echo cn_url_modify('source,year,mon,day,archive_id,page,cat_filter'); ?>" <?php if ($source == '') echo 'class="b un-float-left"'; ?>>Active</a>
 	/
     <?php if ($archives) { ?>
-		<a href="<?php echo cn_url_modify('year,mon,day,page,archive_id,cat_filter', 'source=archive'); ?>" <?php if ($source == 'archive') echo 'class="b"'; ?>>
+		<a href="<?php echo cn_url_modify('year,mon,day,page,archive_id,cat_filter', 'source=archive'); ?>" <?php if ($source == 'archive') echo 'class="b un-float-left"'; ?>>
 			Archives (<?php echo $archives; ?>)</a> /<?php } ?>
-	<a href="<?php echo cn_url_modify('year,mon,day,archive_id,page,cat_filter', 'source=draft'); ?>" <?php if ($source == 'draft') echo 'class="b"'; ?>>Draft
+	<a href="<?php echo cn_url_modify('year,mon,day,archive_id,page,cat_filter', 'source=draft'); ?>" <?php if ($source == 'draft') echo 'class="b un-float-left"'; ?>>Draft
 		(<?php echo $ndraft; ?>) </a>
 	<div style="clear:both;"></div>
 
@@ -292,12 +294,12 @@ $category = cn_get_categories();
 				<option value="">-- Choose Action --</option>
                 <?php if ($source == 'draft' && testRoleAdmin('Nua')) { ?>
 					<option title="Approve selected news"
-					        value="mass_approve"><?php echo __('Approve news'); ?></option><?php } ?>
+					        value="mass_approve"><?php echo __('approve_news'); ?></option><?php } ?>
                 <?php if (testRoleAdmin('Nud')) { ?>
 					<option title="Delete all selected news"
-					        value="mass_delete"><?php echo __('Delete news'); ?></option><?php } ?>
+					        value="mass_delete"><?php echo __('delete_news'); ?></option><?php } ?>
 				<option title="Move all selected news to one category"
-				        value="mass_move_to_cat"><?php echo __('Change category'); ?></option>
+				        value="mass_move_to_cat"><?php echo __('change_category'); ?></option>
                 <?php hook('template/editnews/actions'); ?>
 			</select>
 

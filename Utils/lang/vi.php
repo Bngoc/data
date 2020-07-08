@@ -91,6 +91,7 @@ return [
     'debit_point' => "Debit point",
     'restart_data' => "Restart data Database",
     'manager_account' => "Manager account",
+    'categories' => "Categories",
 
     //----------------------Cashshop---------------------
     'cash_shop_acient' => 'Set thần',
@@ -119,5 +120,11 @@ return [
     'addnews' => "Add news",
     'editnews' => "Edit news",
     'news_list' => "News list",
+    'showed' => 'Showed <b> :attribute </b>',
+    'postponed' => '(postponed <b>:attribute</b>)',
+    'from_total' => ' from total <b>:attribute</b> ',
+    'approve_news' => 'Approve news',
+    'delete_news' => 'Delete news',
+    'change_category' => 'Change category',
 
 ];

@@ -251,7 +251,7 @@ function __($text, $args = [])
     $text = isset($i18n[trim($text)]) ? $i18n[trim($text)] : $text;
 
     foreach ($args as $value) {
-        $text = preg_replace("/:attribute/gm", $value, $text);
+        $text = preg_replace("/:attribute/m", $value, $text);
     }
 
     return $text;
@@ -677,4 +677,34 @@ function convert_question_answer()
         'qa_4' => getOption('question_answer_4'),
         'qa_5' => getOption('question_answer_5')
     ];
+}
+
+// Since 2.0: [helper] $c - categories source [string], $cat - check [array]
+// If category present (if any), TRUE
+function hlp_check_category($c, $cat)
+{
+    $cats = spsep($c);
+    return array_intersect($cat, $cats);
+}
+
+// Since 2.0: [helper]
+function hlp_req_cached_nloc($id)
+{
+    global $_CN_cache_block_id;
+    global $_CN_cache_block_dt;
+
+    $nloc = db_get_nloc($id);
+    if (!isset($_CN_cache_block_id["nloc-$nloc"]))
+    {
+        $_CN_cache_block_id["nloc-$nloc"] = TRUE;
+        $_CN_cache_block_dt["nloc"] = db_news_load($nloc);
+    }
+
+    return $_CN_cache_block_dt["nloc"];
+}
+
+// Since 2.0: Check if first request
+function confirm_first()
+{
+    return isset($_POST['__my_confirm']) ? 0 : 1;
 }

@@ -91,7 +91,7 @@
 
     <?php if ($popup_form) { ?>
 
-        <input type="hidden" name="pending" value="<?php echo cn_htmlspecialchars(REQ('do_action', 'POST')); ?>" />
+        <input type="hidden" name="pending" value="<?php echo cnHtmlSpecialChars(REQ('do_action', 'POST')); ?>" />
         <div class="media_popup_form"><?php echo $popup_form; ?> <input type="submit" value="Submit"></div>
 
     <?php } ?>
@@ -113,7 +113,7 @@
             <tr>
                 <td align="center">&nbsp;</td>
                 <td colspan="4"><a href="<?php echo cn_url_modify("folder=$next_folder"); ?>" style="color: #C04000"><b><?php echo $dir['name']; ?></b></a></td>
-                <td align="center"><input type="checkbox" name="rm[]" value="<?php echo cn_htmlspecialchars($dir['name']); ?>" /></td>
+                <td align="center"><input type="checkbox" name="rm[]" value="<?php echo cnHtmlSpecialChars($dir['name']); ?>" /></td>
             </tr>
         <?php } ?>
 
@@ -137,7 +137,7 @@
                 <td align="center"><?php echo $file['w']; ?></td>
                 <td align="center"><?php echo $file['h']; ?></td>
                 <td align="center"><?php echo $file['fs']; ?></td>
-                <td align="center"><input type="checkbox" name="rm[]" value="<?php echo cn_htmlspecialchars($file['name']); ?>" /></td>
+                <td align="center"><input type="checkbox" name="rm[]" value="<?php echo cnHtmlSpecialChars($file['name']); ?>" /></td>
             </tr>
         <?php } if (empty($files)) { ?><tr><td colspan="6" align="center"><b>Files not found</b></td></tr><?php } ?>
 
@@ -175,7 +175,7 @@
             <?php if (!$ckeditor && $inline) { ?>
                 <tr><td>Image width</td><td><input type="text" style="width: 150px;" id="image_width" name="image_width" value="<?php echo intval(REQ('image_width')); ?>" /></td></tr>
                 <tr><td>Image height</td><td><input type="text" style="width: 150px;" id="image_height"  name="image_height" value="<?php echo intval(REQ('image_height')); ?>" /></td></tr>
-                <tr><td>Image alt</td><td><input type="text" style="width: 250px;" id="image_alt" name="image_alt" value="<?php echo cn_htmlspecialchars(REQ('image_alt')); ?>"/></td></tr>
+                <tr><td>Image alt</td><td><input type="text" style="width: 250px;" id="image_alt" name="image_alt" value="<?php echo cnHtmlSpecialChars(REQ('image_alt')); ?>"/></td></tr>
                 <tr><td>Popup</td><td><input type="checkbox" id="image_popup" name="image_popup" <?php echo REQ('image_popup') ? 'checked' : ''; ?> value="Y" /></td></tr>
             <?php } ?>
 

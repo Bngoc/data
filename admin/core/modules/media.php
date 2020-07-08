@@ -1,4 +1,4 @@
-<?php if (!defined('EXEC_TIME')) die('Access restricted');
+<?php if (!defined('BQN_MU')) die('Access restricted');
 
 add_hook('index/invoke_module', '*media_invoke');
 
@@ -13,8 +13,8 @@ function media_invoke()
     if ($folder !== '') $folder = "$folder/";
 
     // Change default uploads dir
-    $udir = getoption('uploads_dir') ? getoption('uploads_dir') : SERVDIR . "/uploads";
-    $edir = getoption('uploads_ext') ? getoption('uploads_ext') : getoption('http_script_dir') . '/uploads';
+    $udir = getOption('uploads_dir') ? getOption('uploads_dir') : SERVDIR . "/uploads";
+    $edir = getOption('uploads_ext') ? getOption('uploads_ext') : getOption('http_script_dir') . '/uploads';
 
     $dfile = "$udir/$folder";
 
@@ -36,7 +36,7 @@ function media_invoke()
         cn_dsi_check();
 
         // Allowed Exts.
-        $AE = separateString(getoption('allowed_extensions'));
+        $AE = separateString(getOption('allowed_extensions'));
 
         // UPLOAD FILES
         if (REQ('upload', 'POST')) {
@@ -97,20 +97,20 @@ function media_invoke()
                     // check file for exist
                     if (file_exists($c_file = $dfile . $name)) {
                         if ($overwrite) {
-                            cn_throw_message('File [' . cn_htmlspecialchars($c_file) . '] overwritten', 'w');
+                            cn_throw_message('File [' . cnHtmlSpecialChars($c_file) . '] overwritten', 'w');
                         } else {
-                            cn_throw_message('File [' . cn_htmlspecialchars($c_file) . '] already exists', 'e');
+                            cn_throw_message('File [' . cnHtmlSpecialChars($c_file) . '] already exists', 'e');
                             continue;
                         }
                     }
 
                     if (move_uploaded_file($_FILES['upload_file']['tmp_name'][$id], $c_file)) {
                         $just_uploaded[$name] = TRUE;
-                        cn_throw_message('File uploaded [<b>' . cn_htmlspecialchars($name) . '</b>]');
+                        cn_throw_message('File uploaded [<b>' . cnHtmlSpecialChars($name) . '</b>]');
                     } else
-                        cn_throw_message('File [' . cn_htmlspecialchars($c_file) . '] not uploaded!', 'e');
+                        cn_throw_message('File [' . cnHtmlSpecialChars($c_file) . '] not uploaded!', 'e');
                 } else
-                    cn_throw_message('File extension [' . cn_htmlspecialchars($ext) . '] not allowed', 'e');
+                    cn_throw_message('File extension [' . cnHtmlSpecialChars($ext) . '] not allowed', 'e');
             }
         } // MAKE ACTION WITH MEDIA FILES
         elseif ($do_action || $pending) {
@@ -127,9 +127,9 @@ function media_invoke()
                     }
 
                     if (file_exists($cfile))
-                        cn_throw_message('File [' . cn_htmlspecialchars($cfile) . '] not deleted!', 'e');
+                        cn_throw_message('File [' . cnHtmlSpecialChars($cfile) . '] not deleted!', 'e');
                     else
-                        cn_throw_message('File [' . cn_htmlspecialchars($file) . '] deleted successfully');
+                        cn_throw_message('File [' . cnHtmlSpecialChars($file) . '] deleted successfully');
                 }
             }
             // --------------------
@@ -150,7 +150,7 @@ function media_invoke()
                     } else {
                         mkdir($cfile);
                         if (!is_dir($cfile))
-                            cn_throw_message('Folder [' . cn_htmlspecialchars($cfile) . ' not created]', 'e');
+                            cn_throw_message('Folder [' . cnHtmlSpecialChars($cfile) . ' not created]', 'e');
                         else
                             cn_throw_message('Folder [' . $new_folder . '] created!');
                     }
@@ -167,7 +167,7 @@ function media_invoke()
                     $popup_form .= '<table>';
 
                     foreach ($rm as $id => $fn) {
-                        $hfn = cn_htmlspecialchars($fn);
+                        $hfn = cnHtmlSpecialChars($fn);
                         $popup_form .= '<tr><td align="right" class="indent"><b>' . $hfn . '</b><td>';
                         $popup_form .= '<td><input type="hidden" name="ids[' . $id . ']" value="' . $hfn . '"/>&rarr;</td>';
                         $popup_form .= '<td><input style="width: 300px;" type="text" name="place[' . $id . ']" value="' . $hfn . '" /> ';
@@ -203,9 +203,9 @@ function media_invoke()
 
                         // do move
                         if (rename($root_dir . '/' . $file, $moveto))
-                            cn_throw_message(i18n('File [%1] moved to [%2]', cn_htmlspecialchars($file), cn_htmlspecialchars($NF . $filename)));
+                            cn_throw_message(i18n('File [%1] moved to [%2]', cnHtmlSpecialChars($file), cnHtmlSpecialChars($NF . $filename)));
                         else
-                            cn_throw_message(i18n('File [%1] not moved', cn_htmlspecialchars($file)), 'e');
+                            cn_throw_message(i18n('File [%1] not moved', cnHtmlSpecialChars($file)), 'e');
                     }
                 }
             } // check for plugin

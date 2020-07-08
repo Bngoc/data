@@ -280,7 +280,7 @@ function cn_get_news($opts)
     $qtree = array();
     $entries = array();
     $ls = array();
-    $ppsort = FALSE;
+    $ppsort = false;
     $nc = -1;
     $ed = $st + $per_page;
     $tc_time = ctime();
@@ -370,7 +370,7 @@ function cn_get_news($opts)
 
                     // Get user name, if needed
                     if ($sort == 'author' || $ufilter)
-                        $user = db_user_by($uid);
+                        $user = db_user_by_admin($uid);
 
                     // Count prospected news
                     if ($id > $tc_time) $cpostponed++;
@@ -390,7 +390,7 @@ function cn_get_news($opts)
                         continue;
 
                     // category test
-                    if ($cfilter && !hlp_check_cat($it['c'], $cfilter))
+                    if ($cfilter && !hlp_check_category($it['c'], $cfilter))
                         continue;
 
                     // user test
@@ -567,7 +567,7 @@ function cn_fsave($dest, $data = array())
 // Since 2.0: Add more fields to entry
 function cn_more_fields_apply($e, $dt)
 {
-    $deny = FALSE;
+    $deny = false;
     $applied = array();
 
     if (!$dt) $dt = array();
@@ -651,6 +651,63 @@ function entry_make($entry, $template_name, $template_glob = 'default', $section
     list($template) = cn_extrn_raw_template($template, $raw_vars);
 
     return $template;
+}
+
+// Since 2.0: Make confirm form with callbacks
+function confirm_post($text, $required = 'mod,action,subaction,source')
+{
+    $sp = spsep($required);
+    $required = array();
+    foreach ($sp as $v) $required[trim($v)] = REQ(trim($v), 'GETPOST');
+
+    if (REQ('__my_confirm') == '_confirmed') return TRUE; // Click "confirm"
+    elseif (REQ('__my_confirm') == '_decline') return FALSE; // Click "decline"
+
+    // Echo message form -----------------------
+    echoheader('question', i18n('Confirm action?'));
+
+    $post = array();
+    foreach ($required as $id => $v) if ($v) $post[] = array('name' => $id, 'var' => cn_htmlspecialchars($v));
+
+    // remove not needed line
+    if (isset($_POST['__post_data'])) unset($_POST['__post_data']);
+    if (isset($_POST['__my_confirm'])) unset($_POST['__my_confirm']);
+
+    $post_data = base64_encode(serialize($_POST));
+
+    echo proc_tpl('confirm', array('text' => $text, 'post' => $post, 'post_data' => $post_data));
+    echofooter();
+    die();
+}
+
+// Since 2.0: Organize category into tree
+function cn_category_struct($cats, $nc = array(), $parent = 0, $level = 0)
+{
+    $ic = array();
+    $lc = array();
+
+    foreach ($cats as $id => $vc) {
+        if ($vc['parent'] == $parent) {
+
+            $nc[$id] = $vc;
+            @$nc[$id]['level'] = $level;
+
+            // get childrens nodes
+            list($nc, $ch) = cn_category_struct($cats, $nc, $id, $level + 1);
+
+            // all childrens for node
+            @$nc[$id]['ac'] = $ch;
+
+
+            // linear child (current)
+            $lc[] = $id;
+
+            // all inner childs
+            $ic = array_unique(array_merge($ic, $ch));
+        }
+    }
+
+    return array($nc, array_merge($ic, $lc));
 }
 
 
@@ -890,7 +947,7 @@ function db_index_add($id, $category, $uid, $source = '')
         list($i36) = explode(':', $a);
 
         if (base_convert($i36, 36, 10) < $id && $i) {
-            $i = FALSE;
+            $i = false;
             fwrite($w, $s);
         }
 
@@ -959,7 +1016,7 @@ function db_index_save($idx, $source = '')
 
 // Since 2.0: Load metadata from index
 // @Return: array $uids, array $locs, int $coms
-function db_index_meta_load($source = '', $load_users = FALSE)
+function db_index_meta_load($source = '', $load_users = false)
 {
     $fn = db_index_file_detect("meta-$source");
     $ls = unserialize(join('', file($fn)));
@@ -970,7 +1027,7 @@ function db_index_meta_load($source = '', $load_users = FALSE)
     if ($load_users) {
         foreach ($ls['uids'] as $id => $ct) {
             $id = base_convert($id, 36, 10);
-            $user = db_user_by($id);
+            $user = db_user_by_admin($id);
 
             if ($user['name'])
                 $uids[$user['name']] = $ct;
@@ -980,6 +1037,53 @@ function db_index_meta_load($source = '', $load_users = FALSE)
     }
 
     return $ls;
+}
+
+// Since 2.0: Get user by any indexed field (id, ...) [x2 slowed, than by_name]
+function db_user_by_admin($eid, $match = 'id')
+{
+    $cu = cn_touch_get(ROOT . '/admin/data_db/users/' . substr(md5($eid), 0, 2) . '.php', TRUE);
+
+    // Translate id -> name [reference]
+    if (!isset($cu[$match][$eid]))
+        return NULL;
+    else
+        return db_user_by_name_admin($cu[$match][$eid]);
+}
+
+// Since 2.0: Get user by id
+function db_user_by_name_admin($name, $index = FALSE)
+{
+    $uex = array();
+
+    // Get from php-serialized array
+    $cu = cn_touch_get(ROOT . '/admin/data_db/users/' . substr(md5($name), 0, 2) . '.php', TRUE);
+
+    // Check at index
+    if ($index) {
+        $rd = fopen(cn_touch(ROOT . '/admin/data_db/users/users.txt'), 'r');
+        while ($a = fgets($rd)) {
+            list($uid) = explode(':', 2);
+            $uex[base_convert($uid, 36, 10)] = TRUE;
+        }
+        fclose($rd);
+
+        // user exists, but not in index
+        if (isset($cu['name'][$name]) && !isset($uex[$cu['name'][$name]['id']]))
+            return NULL;
+    }
+
+    if (!isset($cu['name'][$name]))
+        return NULL;
+
+    // Decode serialized more data
+    $pdata = $cu['name'][$name];
+    if (isset($pdata['more']) && $pdata['more'])
+        $pdata['more'] = unserialize($pdata['more']);
+    else
+        $pdata['more'] = array();
+
+    return $pdata;
 }
 
 // Since 2.0: Get all archives

@@ -131,11 +131,13 @@ function edit_news_action_list()
         if ($ptree) {
             foreach ($ptree as $nloc => $c) {
                 list($Y, $M, $D) = explode('-', $nloc);
-                $tree_years[$Y] += $c;
+                @$tree_years[$Y] += $c;
 
                 if ($Y == $YS) {
-                    $tree_mons[$M] += $c;
-                    if ($M == $MS) $tree_days[$D] = $c;
+                    @$tree_mons[$M] += $c;
+                    if ($M == $MS) {
+                        $tree_days[$D] = $c;
+                    }
                 }
             }
         }
@@ -325,15 +327,15 @@ function edit_news_action_edit()
                             $next[$c_time] = $entry;
 
                             // remove old news [from source / dest]
-                            if (isset($news[$ID])){
+                            if (isset($news[$ID])) {
                                 unset($news[$ID]);
                             }
-                            if (isset($next[$ID])){
+                            if (isset($next[$ID])) {
                                 unset($next[$ID]);
                             }
 
                             // remove old index
-                            if (isset($idd[$ID])){
+                            if (isset($idd[$ID])) {
                                 unset($idd[$ID]);
                             }
 
@@ -424,19 +426,19 @@ function edit_news_action_massaction()
 
     // Mass Delete
     if ($subaction == 'mass_delete') {
-        if (!testRoleAdmin('Nud')){
+        if (!testRoleAdmin('Nud')) {
             msg_info("Operation not permitted for you");
         }
 
         list($selected_news) = GET('selected_news');
 
         $count = count($selected_news);
-        if (confirm_first() && $count == 0){
+        if (confirm_first() && $count == 0) {
             msg_info('Error: no none entry selected');
         }
 
         if (confirm_post("Delete selected news ($count)")) {
-            if ($source == 'archive'){
+            if ($source == 'archive') {
                 $source = 'archive-' . intval($archive_id);
             }
 
@@ -505,7 +507,7 @@ function edit_news_action_massaction()
                 $entries = db_news_load($loc);
 
                 // Catch user trick
-                if (!test_category($entries[$id]['c'])){
+                if (!test_category($entries[$id]['c'])) {
                     msg_info('Not allowed change category for id = ' . $id);
                 }
 
@@ -524,7 +526,7 @@ function edit_news_action_massaction()
         }
     } // Mass approve action
     elseif ($subaction == 'mass_approve') {
-        if (!testRoleAdmin('Nua')){
+        if (!testRoleAdmin('Nua')) {
             msg_info("Operation not permitted for you");
         }
 
@@ -564,7 +566,7 @@ function edit_news_delete()
 {
     cn_dsi_check();
 
-    if (!testRoleAdmin('Nud')){
+    if (!testRoleAdmin('Nud')) {
         msg_info("Unable to delete news: no permission");
     }
 

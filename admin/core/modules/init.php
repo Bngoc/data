@@ -17,7 +17,7 @@ $_init_modules = hook(
         'cashshop' => array('path' => 'mu_cashshop', 'acl' => $role_router_admin['cashshop']),
         'addnews' => array('path' => 'add_news', 'acl' => $role_router_admin['addnews']),
         'editnews' => array('path' => 'edit_news', 'acl' => $role_router_admin['editnews']),
-        'media' => array('path' => 'edit_news', 'acl' => $role_router_admin['media']),
+        'media' => array('path' => 'media', 'acl' => $role_router_admin['media']),
         'logout' => array('path' => 'logout', 'acl' => $role_router_admin['logout']),
     )
 );

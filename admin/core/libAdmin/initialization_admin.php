@@ -270,7 +270,7 @@ function getMember()
         "options" => [],
     ];
     $user = db_get_member_account($requestData);
-    $user['user_Account'] = $user['UserAcc'];
+    $user['user_Account'] = trim($user['UserAcc']);
     $user['acl'] = $user['AdLevel'];
 
     setMemcache('#member', $user);

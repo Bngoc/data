@@ -27,6 +27,7 @@ function board_invoke()
         'editconfig:personal:Cp' => __('personal_options'),
         'editconfig:userman:Cum' => __('users_manager'),
         'editconfig:group:Cg' => __('groups'),
+        'editconfig:category:Cg' => __('categories'),
         'editconfig:logs:Csl' => __('logs'),
         'editconfig:statistics:Csl' => __('statistical'),
         'editconfig:uploadFileAPIDropBox:Csl' => __('upload_file_dropBox_API'),
@@ -89,6 +90,7 @@ function board_invoke()
         'personal' => 'user.gif',
         'userman' => 'users.gif',
         'group' => 'group.png',
+        'category' => 'category.png',
         'statistics' => 'statistic.png',
         'logs' => 'list.png',
         'iswebshop' => 'list.png',
@@ -206,8 +208,8 @@ function board_sysconf()
             'debugSql' => array('Y/N', 'Uses have debug| Check is debug Sql'),
             'use_captcha' => array('Y/N', 'Use CAPTCHA|on registration and comments'),
             'hide_captcha' => array('Y/N', 'Hide captcha source path from visitors'),
-            'category_style'        => array('select', 'Category style', array('list' => "Listing", 'select' => 'Drop-down menu')),
-            'smilies'               => array('text', 'Smilies'),
+            'category_style' => array('select', 'Category style', array('list' => "Listing", 'select' => 'Drop-down menu')),
+            'smilies' => array('text', 'Smilies'),
             'use_wysiwyg' => array('Y/N', 'Use CKEditor in news'),
 
             '_Web' => array('title', '.............'),
@@ -635,7 +637,7 @@ function board_personal()
 function board_iswebshop()
 {
 
-    $ipban = getoption('#ipban');
+    $ipban = getOption('#ipban');
     if (!is_array($ipban)) {
         $ipban = array();
     }
@@ -677,7 +679,7 @@ function board_iserverz()
 
     $categories = cn_get_categories();
 
-    $rss = getoption('#rss');
+    $rss = getOption('#rss');
     $rss_encoding = isset($rss['encoding']) ? $rss['encoding'] : 'UTF-8';
     $rss_news_include_url = isset($rss['news_include_url']) ? $rss['news_include_url'] : '';
     $rss_title = isset($rss['title']) ? $rss['title'] : '';
@@ -716,7 +718,7 @@ function board_iserverz()
 
     $all_tpls = array();
     $listsys = cn_template_list();
-    $templates = getoption('#templates');
+    $templates = getOption('#templates');
 
     // Get all templates
     foreach ($listsys as $id => $_t) {
@@ -739,7 +741,7 @@ function board_iserverz()
 function board_wreplace()
 {
     list($word, $replace, $delete) = GET('word, replace, delete');
-    $wlist = getoption('#rword');
+    $wlist = getOption('#rword');
 
     if (request_type('POST')) {
         cn_dsi_check();
@@ -760,7 +762,7 @@ function board_wreplace()
     if (isset($wlist[$word])) {
         $replace = $wlist[$word];
     }
-    $is_replace_opt = getoption('use_replacement');
+    $is_replace_opt = getOption('use_replacement');
     cn_assign('wlist, word, replace, repopt', $wlist, $word, $replace, $is_replace_opt);
     echo_header_admin('-@skins/mu_style.css', 'Replace words');
     echo exec_tpl('com_board/replace');
@@ -1426,7 +1428,7 @@ function board_group()
     list($access_desc, $ATR) = hook('extend_acl_groups', array($access_desc, $ATR));
 
     $grp = array();
-    $groups = getoption('#grp');
+    $groups = getOption('#grp');
     list($group_name, $group_id, $group_grp, $ACL, $delete_group, $reset_group, $mode) = GET('group_name, group_id, group_grp, acl, delete_group, reset_group,mode');
     $is_add_edit = false;
 
@@ -1627,8 +1629,77 @@ function board_group()
     }
 
     cn_assign('grp, group_name, group_id, group_grp, group_system, access, form_desc', $grp, $group_name, $group_id, $group_grp, $group_system, $access, $form_desc);
-    echo_header_admin('-@skins/mu_style.css', 'Groups');
+    echo_header_admin('-@skins/mu_style.css', __('groups'));
     echo cn_execute_template('com_board/group');
+    echofooter();
+}
+
+// Since 2.0: Category management
+function board_category()
+{
+    list($category_id, $delete_cat, $new_cat) = GET('category_id, delete_cat, new_cat');
+    list($category_name, $category_memo, $category_icon, $category_parent, $category_acl) = GET('category_name, category_memo, category_icon, category_parent, category_acl', "POST");
+
+    $groups = getOption('#grp');
+    $categories = getOption('#category');
+
+    // Do Action
+    if (request_type('POST')) {
+        cn_dsi_check();
+
+        if ($category_name) {
+            // Add category, if not exist is [or if new_cat checkbox]
+            if (!$category_id || $new_cat) {
+                @$categories['#']++;
+                $category_id = intval(@$categories['#']);
+            }
+
+            // Edit any news
+            $categories[$category_id]['name'] = $category_name;
+            $categories[$category_id]['memo'] = $category_memo;
+            $categories[$category_id]['icon'] = $category_icon;
+            $categories[$category_id]['acl'] = @join(',', $category_acl);
+            $categories[$category_id]['parent'] = $category_parent;
+
+            cn_throw_message('Category edited');
+        } else {
+            cn_throw_message('Empty category name', 'e');
+        }
+
+        // Delete checkbox selected
+        if ($delete_cat) {
+            unset($categories[$category_id]);
+
+            cn_throw_message('Category deleted');
+            $category_name = $category_icon = $category_memo = $category_acl = $category_id = '';
+        }
+
+        list($categories) = cn_category_struct($categories);
+        setOption('#category', $categories);
+    }
+
+    // ---
+    if ($category_id) {
+        $category_name = $categories[$category_id]['name'];
+        $category_memo = $categories[$category_id]['memo'];
+        $category_icon = $categories[$category_id]['icon'];
+        $category_parent = $categories[$category_id]['parent'];
+        $category_acl = separateString($categories[$category_id]['acl']);
+    }
+
+    // latest added
+    unset($categories['#']);
+
+    foreach ($groups as $id => $grp) {
+        $e = separateString($grp['A']);
+        if (!in_array('Ncd', $e))
+            unset($groups[$id]);
+    }
+
+    // ---
+    cn_assign('category_id, categories, category_name, category_memo, category_icon, category_acl, category_parent, groups', $category_id, $categories, $category_name, $category_memo, $category_icon, $category_acl, $category_parent, $groups);
+    echo_header_admin('-@skins/mu_style.css', __('categories'));
+    echo cn_execute_template('com_board/category');
     echofooter();
 }
 

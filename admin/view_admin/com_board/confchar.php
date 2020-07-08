@@ -40,7 +40,7 @@ cn_snippet_bc();
                 <td>
                     <div class="o_title">
                         <b><?php echo $opt_vars['title']; ?></b> <?php if (isset($opt_vars['help'])) {
-                            echo '<a href="#" title="' . cn_htmlspecialchars($opt_vars['help']) . '" onclick="return(tiny_msg(this));"><sup>?</sup></a>';
+                            echo '<a href="#" title="' . cnHtmlSpecialChars($opt_vars['help']) . '" onclick="return(tiny_msg(this));"><sup>?</sup></a>';
                         } ?>
                     </div>
                     <div class="o_desc"><?php echo $opt_vars['desc']; ?></div>
