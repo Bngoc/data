@@ -854,37 +854,46 @@ class ProcessCoreAdmin extends ProcessCore
             'cap_reset_max' => 7,
             'use_gioihanrs' => 1,
 
+            // BuyZen
+            'configBuyZen' => '5000|10000|15000|20000',
+
+            // Vpoint
+            'configTransVpoint' => '5000',
+
+            // Vpoint - level
+            'configLevel' => '2000|3000|5000',
+
             // CHARACTER Question
             'question_answer_1' => __($this->config['qa_1']['key_default']),
             'question_answer_2' => __($this->config['qa_2']['key_default']),
             'question_answer_3' => __($this->config['qa_3']['key_default']),
             'question_answer_4' => __($this->config['qa_4']['key_default']),
             'question_answer_5' => __($this->config['qa_5']['key_default']),
-            // Vpoint - level
-            'configLevel' => '2000|3000|5000',
-            //Relax
-            'user_BauCua' => 1,
-            'user_BaiCao' => 1,
-            //configBuyZen
-            'configBuyZen' => '5000|10000|15000|20000',
-            //TransVpoint
-            'configTransVpoint' => '5000',
-            // Time write De
+
+            // Relax
+            'use_elected_crabs' => 1,
+            'use_scratch_card' => 1,
+
+            'use_gambling_lottery' => '1',
             'timeWriterLimit' => '17:45',
             'timeResultDe' => '8:00',
             'moneyMinDe' => '5000',
             'url_Result_De' => 'http://ketqua.net/',
             'id_getResult_De' => 'rs_0_0',
+
             // config Account GameBank.vn
             'Merchant_ID' => '',
             'API_User' => '',
             'API_Password' => '',
+
             //DebugSql
             'debugSql' => 0,
+
             //download
             'download_media' => '',
             'download_onedrive' => '',
             'download_4share' => '',
+
             //Download Api
             'appNameDropBox' => '',
             'keyDropBox' => '',

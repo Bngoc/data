@@ -283,10 +283,11 @@ function board_sysconf()
         ),
         'relax' => array(
             '_RELAX_BCua' => array('title', 'Tro Bau Cua'),
-            'user_BauCua' => array('Y/N', 'Sử dụng trò Bầu Cua'),
+            'use_elected_crabs' => array('Y/N', 'Sử dụng trò Bầu Cua'),
             '_RELAX_BCao' => array('title', 'Tro Bai Cao'),
-            'user_BaiCao' => array('Y/N', 'Relax:Sử dụng trò Bài Cáo'),
+            'use_scratch_card' => array('Y/N', 'Relax:Sử dụng trò Bài Cáo'),
             '_RELAX_XoSo' => array('title', 'Danh De'),
+            'use_gambling_lottery' => array('Y/N', 'Relax:Sử dụng trò đánh lô đề'),
             'url_Result_De' => array('text', 'Trang website kết quả xổ số | VD: http://ketqua.net/'),
             'id_getResult_De' => array('text', 'ID (html) xác nhận kết quả đề của trang website xổ số | VD: rs_0_0'),
             'timeWriterLimit' => array('text', 'Thời gian kết thức nhận ghi đề; Định dạng 24h| VD: 17:45 hàng ngày'),
