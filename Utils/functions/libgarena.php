@@ -1727,9 +1727,16 @@ function cn_touch($fn, $php_safe = false)
     return $fn;
 }
 
-function cn_ResultDe()
+function run_schedule_cn_resultDe()
 {
     $ctimeAction = getOption('timeWriterLimit');
+    if (empty($ctimeAction)) {
+        echo "\n \t----------------------------------------------------------------- \n";
+        echo "\t Loi, I need config after admin login in system \n";
+        echo "\t-----------------------------------------------------------------";
+        die();
+    }
+
     $time = ctime();
     $hourTime = date('H:i', $time);
     $id_getResult_De = trim(getOption('id_getResult_De'));
@@ -1737,7 +1744,6 @@ function cn_ResultDe()
         # Use the Curl extension to query Google and get back a page of results
         $url = trim(getOption('url_Result_De'));// URL_RESULR_DE;
 //        $url = URL_RESULR_DE;
-        $id_getResult_De = $id_getResult_De;
 
         $ch = curl_init();
         $timeout = 5;
@@ -1773,12 +1779,7 @@ function cn_ResultDe()
                 if ($resultPlayDe || $resultPlayDe == 0) {
                     $resultSelect = do_select_other("SELECT count(*) as nameCount FROM ResultDe WHERE Convert(Date, timesDe)='" . $dateTime . "'");
                     if (empty($resultSelect[0]['nameCount'])) {
-                        do_insert_character(
-                            'ResultDe',
-                            'ResultDe=' . $resultPlayDe,
-                            'timesDe=\'' . date('Y-m-d H:i:s', $timeYesterday) . '\'',
-                            'OptionResult=\'' . $timeYesterday . '\''
-                        );
+                        do_insert_character('ResultDe', 'ResultDe=' . $resultPlayDe, 'timesDe=\'' . date('Y-m-d H:i:s', $timeYesterday) . '\'', 'OptionResult=\'' . $timeYesterday . '\'');
 
                         echo "\n \t----------------------------------------------------------------- \n";
                         echo "\t Thanh cong, Ket qua De da duoc cap nhap tu trang web $url \n";
@@ -1788,17 +1789,7 @@ function cn_ResultDe()
                         echo "\t Loi, Ket qua da duoc cap nhap tu trang web $url \n";
                         echo "\t-----------------------------------------------------------------";
                     }
-
                 }
-                //-----------------------------------------------------------------
-                //    $resultPlayDe = $dom->getElementById("rs_0_0")->innertext;
-                //    $resultPlayDe = substr($resultPlayDe, -2);
-
-                //    $df = $html->find('table[class=table table-condensed kqcenter table14force background-border table-kq-hover] td');
-                //   foreach ($df as $f => $dd){
-                //    echo $dd->innertext . '<br>';
-                //}
-                //-----------------------------------------------------------------
             } else {
                 echo "\n \t----------------------------------------------------------------- \n";
                 echo "\t Loi, Khong xac nhan duoc ID (html) lay ket qua de tu trang web $url \n";

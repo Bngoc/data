@@ -5,7 +5,8 @@ if (substr(PHP_VERSION, 0, 5) < '4.1.0') {
     die('PHP Version is ' . PHP_VERSION . ', need great than PHP &gt;= 4.1.0 to start cutenews');
 }
 
-define('DEV_DEBUG', true); // for visual detect errors
+// for visual detect errors
+define('DEV_DEBUG', true);
 if (DEV_DEBUG) {
     ini_set('display_errors', '1');
     error_reporting(E_ALL | E_STRICT);
@@ -27,8 +28,8 @@ define('SKIN', SERVDIR . '/view_admin');
 //define('VIEW_ADMIN', SERVDIR . '/view_admin');
 define('CN_DEBUG', false);
 //define('URL_PATH', 		cn_path_uri());  //custom by bqn
-define('URL_PATH_', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . dirname($_SERVER['SCRIPT_NAME']));
-define('URL_PATH', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . dirname($_SERVER['SCRIPT_NAME']) . '/admin');
+define('URL_PATH_', (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] != 'off' || $_SERVER['HTTPS'] == 1) ? "https" : "http") . "://" . dirname($_SERVER['SCRIPT_NAME']));
+define('URL_PATH', (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] != 'off' || $_SERVER['HTTPS'] == 1) ? "https" : "http") . "://" . dirname($_SERVER['SCRIPT_NAME']) . '/admin');
 define('PHP_SELF', $_SERVER["SCRIPT_NAME"]);
 define('REQUEST_URI', $_SERVER["REQUEST_URI"]);
 
@@ -75,6 +76,7 @@ $coreAdmin->cn_lang_init(ROOT);
 $coreAdmin->cn_db_init();
 
 //cn_rewrite_load(); //??
+
 // Checking existing configuration
 if ($is_config) {
     //cn_load_plugins();

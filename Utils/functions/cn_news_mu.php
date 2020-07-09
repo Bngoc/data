@@ -153,7 +153,7 @@ function cn_snippet_ckeditor($ids = '')
     if (empty($Cklang)) $Cklang = 'en';
 
     // show
-    echo '<script src="' . getOption('http_script_dir') . '/core/ckeditor/ckeditor.js"></script>';
+    echo '<script src="' . getOption('http_script_dir') . '/Utils/ckeditor/ckeditor.js"></script>';
     echo '<script type="text/javascript">' . "\n";
     echo "(function() { var settings = {" . "\n";
     echo "skin: 'moono', width: 'auto', height: 350, customConfig: '', language: '$Cklang', entities_latin: false, entities_greek: false, \n";
@@ -172,7 +172,7 @@ function cn_snippet_ckeditor($ids = '')
     echo join(', ', $compound) . '};' . "\n";
 
     // Smilies
-    echo 'CKEDITOR.config.smiley_path = "' . getOption('http_script_dir') . '/skins/emoticons/"; ' . "\n";
+    echo 'CKEDITOR.config.smiley_path = "' . getOption('http_script_dir') . '/public/images/emoticons/"; ' . "\n";
     echo 'CKEDITOR.config.smiley_images = [ ' . hook('settings/CKEDITOR_emoticons', $CKSmiles) . ' ];' . "\n";
     echo 'CKEDITOR.config.smiley_descriptions = [];' . "\n";
     echo "CKEDITOR.config.allowedContent = true;";

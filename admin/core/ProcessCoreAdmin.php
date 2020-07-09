@@ -694,46 +694,6 @@ class ProcessCoreAdmin extends ProcessCore
         return $cfg;
     }
 
-    //// Since 1.5.1: Simply read template file
-//    function read_tpl($tpl = 'index')
-//    {
-//        // get from cache
-//        $cached = getMemcache("tpl:$tpl");
-//        if ($cached) {
-//            return $cached;
-//        }
-//
-//        // Get asset path
-//        if (preg_match('/\.(css|js)/i', $tpl)) {
-//            $fine = '';
-//        } else {
-//            $fine = '.tpl';
-//        }
-//
-//        // Get plugin path
-//        if ($tpl[0] == '/') {
-//            $open = cn_path_construct(SERVDIR, 'cdata', 'plugins') . substr($tpl, 1) . $fine;
-//        } else {
-//            $open = SKIN . DIRECTORY_SEPARATOR . ($tpl ? $tpl : 'default') . $fine;
-//        }
-//
-//        // Try open
-//        $not_open = false;
-//        $r = fopen($open, 'r') or $not_open = true;
-//        if ($not_open) {
-//            return false;
-//        }
-//
-//        ob_start();
-//        fpassthru($r);
-//        $ob = ob_get_clean();
-//        fclose($r);
-//
-//        // caching file
-//        setMemcache("tpl:$tpl", $ob);
-//        return $ob;
-//    }
-
     // Since 2.0: @bootstrap
     public function cn_load_skin()
     {
@@ -781,10 +741,6 @@ class ProcessCoreAdmin extends ProcessCore
             'frontend_encoding' => 'UTF-8',
             'useutf8' => 1,
             'utf8html' => 1,
-            'use_wysiwyg'  => 0,
-            'smilies'                       => 'smile,wink,wassat,tongue,laughing,sad,angry,crying',
-            'category_style' => 'select',
-//        'news_title_max_long' => 100,
 
             'date_adjust' => $time_bias,
             'num_center_pagination' => 3,
@@ -798,6 +754,10 @@ class ProcessCoreAdmin extends ProcessCore
             'config_auth_email' => $this->config['config_auth_email'],
             'config_auth_pass' => $this->config['config_auth_pass'],
 
+            // News
+            'category_style' => 'select',
+            'use_wysiwyg' => 0,
+            'smilies' => 'smile,wink,wassat,tongue,laughing,sad,angry,crying',
             'show_comments_with_full' => 1,
             'timestamp_active' => 'd M Y',
             'use_captcha' => 1,
@@ -814,6 +774,24 @@ class ProcessCoreAdmin extends ProcessCore
             'timestamp_comment' => 'd M Y h:i a',
             'mon_list' => 'January,February,March,April,May,June,July,August,September,October,November,December',
             'week_list' => 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
+
+            // CKEditor settings
+            'ck_ln1' => "Source,Maximize,Scayt,PasteText,Undo,Redo,Find,Replace,-,SelectAll,RemoveFormat,NumberedList,BulletedList,Outdent,Indent",
+            'ck_ln2' => "Image,Table,HorizontalRule,Smiley",
+            'ck_ln3' => "Link,Unlink,Anchor",
+            'ck_ln4' => "Format,FontSize,TextColor,BGColor",
+            'ck_ln5' => "Bold,Italic,Underline,Strike,Blockquote",
+            'ck_ln6' => "JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock",
+            'ck_ln7' => "",
+            'ck_ln8' => "",
+
+            // Notifications
+            'notify_status' => 0,
+            'notify_registration' => 0,
+            'notify_comment' => 0,
+            'notify_unapproved' => 0,
+            'notify_archive' => 0,
+            'notify_postponed' => 0,
 
             //SEO
             'description' => "Mu Online Season 6, Mu Online Season 6.3",
@@ -855,7 +833,7 @@ class ProcessCoreAdmin extends ProcessCore
             'Use_Gcoin2WCoinP' => 1,
             'Use_Gcoin2GoblinCoin' => 1,
 
-            'notify_registration' => 1,
+            // Card
             'card_gate' => "0,1,0,1,1,1,0,1",
             'card_mobi' => "0,1,0,1,1,1,0,1",
             'card_viettel' => "1,1,0,1,1,1,0,1",
@@ -1002,139 +980,16 @@ class ProcessCoreAdmin extends ProcessCore
         // ---------------- S_custom by bqn -----
         // Detect self path
         $SN = dirname($_SERVER['SCRIPT_NAME']);
-        $script_path = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? "https" : "http") . "://" . $_SERVER['SERVER_NAME'] . (($SN != '/') ? '' : $SN);
-
-        // Check http_script_dir
-        $path_http_script_dir = $script_path;
-        if (getOption('http_script_dir') != $path_http_script_dir) {
-            $this->setOption('http_script_dir', $path_http_script_dir);
-        }
-
+        $script_path = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] != 'off' || $_SERVER['HTTPS'] == 1) ? "https" : "http") . "://" . $_SERVER['SERVER_NAME'] . (($SN != '/') ? '' : $SN);
         $path_update_dir = cn_path_construct(ROOT, 'uploads');
-        if (getOption('uploads_dir') != $path_update_dir) {
-            $this->setOption('uploads_dir', $path_update_dir);
-        }
+        // Check http_script_dir
 
-        $path_uploads_ext = URL_PATH . '/uploads';
-        if (getOption('uploads_ext') != $path_uploads_ext) {
-            $this->setOption('uploads_ext', $path_uploads_ext);
-        }
+        $this->setOption('http_script_dir', $script_path);
+        $this->setOption('uploads_dir', $path_update_dir);
+        $this->setOption('uploads_ext', $script_path . '/uploads');
 
         return true;
     }
-
-    //// Since 2.0: Decode "defaults/templates" to list
-//    function cn_template_list()
-//    {
-//        $config = file(cn_path_construct(SKIN, 'defaults') . 'character.tpl');
-//
-//        foreach ($config as $line) {
-//            $line_ = trim($line);
-//            $lineComent = substr($line_, 0, 2);
-//            if (count($line_) === 0 || $line_ === '' || $lineComent == '//') {// || preg_match('/\s/', $line[0])){
-//                continue;
-//            }
-//
-//            if ($line_[0] === '#') {
-//                continue;
-//            }
-//            if ($line_[0] == '*') {
-//                $_tpl_var = trim(substr($line_, 1));
-//                //if ($_tpl_var) $cfg[$template_vars][$_tpl_var] = ''; // lay ten *
-//                if ($_tpl_var) {
-//                    if (!isset($templates[$_tpl_var])) $templates[$_tpl_var] = array();
-//                    $template_vars_name = $_tpl_var;
-//                }
-//                continue;
-//            } else if ($line_[0] !== '@') {//preg_match('/\s/', $line[0]) && $line_[0] !== ''){
-//                list($name_, $value_get) = explode('=', $line_);
-//                $value_ = str_replace('_', ' ', $value_get);
-//                if (!isset($templates[$_tpl_var][$name_])) {
-//                    $templates[$_tpl_var][$name_] = $value_;
-//                }
-//            } else if ($line_[0] == '@') {
-//                continue;
-//            }
-//        }
-//
-//        setoption('#temp_basic', $templates);
-//
-//        return isset($templates) ? $templates : array();
-//    }
-//
-    //// Since 2.0: Get template (if not exists, create from defaults)
-//    function cn_get_template_byarr($template_name = '')//$subtemplate='')
-//    {
-//        $templates = getOption('#temp_basic');
-//
-//        //if(!empty($template_name) && $template_name){
-//        $template_name = strtolower($template_name);
-//
-//        // User template not exists in config... get from defaults
-//        if (isset($templates[$template_name])) {
-//            return $templates[$template_name];
-//        }
-//
-//        $list = cn_template_list();
-//
-//
-//        if (isset($list[$template_name])) {
-//            return $list[$template_name];
-//        }
-//
-//        return false;
-//    }
-
-    //// Since 2.0: Read file (or create file)
-//    function cn_read_file($target)
-//    {
-//        $fn = cn_touch($target, true);
-//        $fc = file($fn);
-//        unset($fc[0]);
-//
-//        if (!$fc) {
-//            $data = array();
-//        } else {
-//            foreach ($fc as $id => $val) {
-//                $val = trim($val);
-//
-//                $ctime = substr(md5($val), 3, 11);
-//                list($code32, $name, $price, $image) = explode("|", $val);
-//
-//                if (!cn_check_code32(trim($code32))) continue;
-//
-//                $data[$ctime] = array(
-//                    'code32' => trim($code32),
-//                    'name' => $name,
-//                    'price' => $price,
-//                    'image_mh' => $image,
-//                );
-//            }
-//        }
-//
-//        return @$data ? $data : array();
-//    }
-//
-//    /**
-//     * @param $code32
-//     * @return bool
-//     */
-//    function cn_check_code32($code32)
-//    {
-//        if ($code32 == 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF' || $code32 == 'ffffffffffffffffffffffffffffffff' || $code32 == '' || strlen($code32) != 32) {
-//            return false;
-//        }
-//
-//        $items_data = getOption('#items_data');
-//        $id = hexdec(substr($code32, 0, 2));
-//        $group = hexdec(substr($code32, 18, 2)) / 16;
-//
-//        if (isset($items_data[$group . '.' . $id])) {
-//            return true;
-//        }
-//
-//        return false;
-//    }
 
     // Since 2.0: Save whole config
     public function cn_config_save($cfg = null)

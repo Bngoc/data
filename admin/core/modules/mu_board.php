@@ -293,6 +293,39 @@ function board_sysconf()
             'timeResultDe' => array('text', 'Thời gian trả kết quả đề; Định dạng 24h| VD: 8:0 ngày ngày hôm sau, và nhỏ hơn thơi gian kết thức nhận ghi đề'),
             'moneyMinDe' => array('int', 'Số tiền tối thiểu nhận ghi đề (Vpoint)| VD: 5000 Vpoint'),
         ),
+        'ckeditor' => array(
+            '_TIP' => array('title', 'See <a href="http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Toolbar" target="_blank">CKEditor toolbar customization</a>'),
+            'ck_ln1' => array('text', "Row 1|Reqired"),
+            'ck_ln2' => array('text', "Row 2|Optional"),
+            'ck_ln3' => array('text', "Row 3|Optional"),
+            'ck_ln4' => array('text', "Row 4|Optional"),
+            'ck_ln5' => array('text', "Row 5|Reqired"),
+            'ck_ln6' => array('text', "Row 6|Optional"),
+            'ck_ln7' => array('text', "Row 7|Optional"),
+            'ck_ln8' => array('text', "Row 8|Optional"),
+        ),
+        'comments' => array(
+            'reverse_comments' => array('Y/N', 'Reverse comments|newest comments will be shown at the top'),
+            'flood_time' => array('int', 'Comments flood protection|in seconds; 0 = no protection'),
+            'comment_max_long' => array('int', 'Max. Length of comments in characters|enter <b>0</b> to disable checking'),
+            'comments_per_page' => array('int', 'Comments per page (pagination)|enter <b>0</b> or leave empty to disable pagination'),
+            'only_registered_comment' => array('Y/N', 'Only registered users can post comments|if yes, only registered users can post comments'),
+            'allow_url_instead_mail' => array('Y/N', 'Allow mail field to act as URL field|visitors will be able to put their site URL instead of an email'),
+            'comments_popup' => array('Y/N', 'Show comments in popup|comments will be opened in PopUp window'),
+            'comments_popup_string' => array('text', "Settings for comments popup|only if 'Show Comments In PopUp' is enabled"),
+            'show_full_with_comments' => array('Y/N', 'Show full story when showing comments|if yes, comments will be shown under the story'),
+            'timestamp_comment' => array('text', 'Time format for comments|view help for time formatting <a href="http://www.php.net/manual/en/function.date.php" target="_blank">here</a>'),
+        ),
+
+        'notify' => array(
+            'notify_status' => array('Y/N', 'Notifications - Active/Disabled|global status of notifications'),
+            'notify_registration' => array('Y/N', 'Notify of new registrations|automatic registration of new users'),
+            'notify_comment' => array('Y/N', 'Notify of new comments|when new comment is added'),
+            'notify_unapproved' => array('Y/N', 'Notify of unapproved news|when unapproved article is posted (by journalists)'),
+            'notify_archive' => array('Y/N', 'Notify of auto-archiving|when (if) news are auto-archived'),
+            'notify_email' => array('text', 'Email(s)|where the notification will be send, separate multyple emails by comma'),
+        ),
+
         'download' => array(
             '_Download' => array('title', 'Download Game'),
             'download_media' => array('text', 'Download file for mediafire (auto)| VD: http://download1635.mediafire.com/download.php?sz41ac5m7rn'),
@@ -340,14 +373,13 @@ function board_sysconf()
 
         // Detect selfpath
         $SN = dirname($_SERVER['SCRIPT_NAME']);
-        $script_path = "http://" . $_SERVER['SERVER_NAME'] . (($SN == '/' || $SN == '\\') ? '' : $SN);
+        $script_path = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] != 'off' || $_SERVER['HTTPS'] == 1) ? "https" : "http") . "://" . $_SERVER['SERVER_NAME'] . (($SN == '/' || $SN == '\\') ? '' : $SN);
 
         // Fill empty fields
         if (empty($post_cfg['http_script_dir'])) {
             $post_cfg['http_script_dir'] = $script_path;
         }
         if (empty($post_cfg['uploads_dir'])) {
-            //$post_cfg['uploads_dir'] =  cn_path_construct( SERVDIR , 'uploads');
             $post_cfg['uploads_dir'] = cn_path_construct(($SN == DIRECTORY_SEPARATOR) ? SERVDIR : substr(SERVDIR, 0, -strlen($SN)), 'uploads');
         }
         if (empty($post_cfg['uploads_ext'])) {

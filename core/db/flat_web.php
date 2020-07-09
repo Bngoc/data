@@ -579,8 +579,15 @@ function db_get_member_account($requestData)
 /**
  * return Query SQL auto update ranking column Top50
  */
-function ranking_character_top()
+function run_schedule_ranking_character_top()
 {
+    global $db_new;
+    if (empty($db_new)) {
+        echo "\n \t----------------------------------------------------------------- \n";
+        echo "\t Loi, I need config DB after admin login in system \n";
+        echo "\t-----------------------------------------------------------------";
+        return;
+    }
     $myQueryRankingTop = "SELECT Top 125 [Name] FROM Character ORDER BY relifes DESC, resets DESC, cLevel DESC";
     $resultRankingTop = do_select_other($myQueryRankingTop);
 
@@ -596,7 +603,7 @@ function ranking_character_top()
     }
 }
 
-function on_off_point_character()
+function run_schedule_on_off_point_character()
 {
     $checkResultOnOff = do_select_other("SELECT AccountID, [Name], [Uythac], [uythacoffline_stat], [PhutUyThacOn_dutru], [PhutUyThacOff_dutru], [PointUyThac]  FROM Character WHERE Uythac = 0 OR uythacoffline_stat = 0");
     $itemID = '';
@@ -629,7 +636,6 @@ function on_off_point_character()
             $myQueryUpdate .= ' WHEN Name=\'' . $items['Name'] . '\' AND Uythac=0 AND uythacoffline_stat=0 THEN ' . (($items['PointUyThac'] > 0) ? floor($items['PointUyThac'] * (0.9)) : 0);
         }
 
-
         $myQueryUpdate .= ' END WHERE Name =\'' . $items['Name'] . '\'';
         //echo $myQueryUpdate;
         $checkUpdate = do_update_other($myQueryUpdate);
@@ -638,7 +644,6 @@ function on_off_point_character()
         }
     }
 }
-
 
 //-------------------------------------------------------------------------------------------------------------------------------
 function check_change_cls($account, $character)
@@ -825,7 +830,9 @@ function check_ranking($account)
             return true;
         }            //'NoRanking';
     }
-    return false;                                        //'isRanking';
+
+    //'isRanking';
+    return false;
 }
 
 function check_daily($account)
@@ -1007,6 +1014,7 @@ function doDeleteOtherForum($myQuery)
 }
 
 
-function db_user_update() {
+function db_user_update()
+{
     // TODO
 }

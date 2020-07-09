@@ -348,7 +348,7 @@ function user_error_handler($errno, $errmsg, $filename, $linenum, $vars)
 
     // E_NOTICE skip
     if ($errno == E_NOTICE) return;
-    
+
     $out = $errtypes[$errno].': '.$errmsg.'; '.trim($filename).':'.$linenum.";";
     $out = str_replace(array("\n", "\r", "\t"), ' ', $out);
 
@@ -3223,7 +3223,8 @@ function cn_snippet_ckeditor($ids = '')
     $CKBar    = join(', ', $CKBar);
 
     // show
-    echo '<script src="'.getoption('http_script_dir').'/core/ckeditor/ckeditor.js"></script>';
+    echo '<script src="/Utils/ckeditor/ckeditor.js"></script>';
+//    echo '<script src="'. getoption('http_script_dir').'/ckeditor/ckeditor.js"></script>';
     echo '<script type="text/javascript">'."\n";
     echo "(function() { var settings = {"."\n";
     echo "skin: 'moono', width: 'auto', height: 350, customConfig: '', language: 'en', entities_latin: false, entities_greek: false, \n";

@@ -22,7 +22,7 @@ define('MODULE_DIR', SERVDIR . '/core/modules');
 define('SKIN', SERVDIR . '/cdata');
 define('MODULE_ADM', SERVDIR . '/admin');
 define('CN_DEBUG', false);
-define('URL_PATH', (isset($_SERVER['HTTPS']) ? "https" : "http") . '://' . dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn
+define('URL_PATH', (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] != 'off' || $_SERVER['HTTPS'] == 1) ? "https" : "http") . '://' . dirname($_SERVER['SCRIPT_NAME']));  //custom by bqn
 define('URL_PATH_IMG', '/public/images');
 define('PHP_SELF', $_SERVER["SCRIPT_NAME"]);
 define('MAX_BANK_ZEN', 999999999999999);
